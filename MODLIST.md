@@ -1,123 +1,185 @@
-# MDVLCraft — Mod List
+# MDVLCraft — Mod List (v1.1.0)
 
-Trimmed from **The Casket of Reveries 2.2.9.7** (Forge 1.20.1 / Forge 47.4.4). Importable pack: [`MDVLCraft-1.0.0.zip`](MDVLCraft-1.0.0.zip) (CurseForge format: `manifest.json` + `overrides/mods/epic_fight_ponder-1.0.0.jar`).
+Importable pack: [`MDVLCraft-1.1.0.zip`](MDVLCraft-1.1.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
 
-**74 mod files** = 68 kept from the original + Villager Recruits + Cursed Fate + 3 libraries Cursed Fate needs (Photon, LDLib, Kleiders Custom Renderer) + EpicFight-Ponder (extracted from TCR Core, see below).
+v1.1.0 = every mod from your **MDVL** pack merged into MDVLCraft v1.0.0 (newer version kept where both had the mod), plus your MDVL configs/KubeJS folder and the new **MDVLCraft Binder** mod.
 
-No configs, resource packs, shader packs, datapacks, quests or menus are included — mods only.
+**132 files**: 130 CurseForge entries in `manifest.json` (129 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder).
+
+## Changes from merging MDVL
+
+| Change | Detail |
+|---|---|
+| Added from MDVL | 58 mods MDVLCraft didn't have (KubeJS, PonderJS, Village Recruits addon, Workers, Tectonic, Epic Knights, Simple Voice Chat, ImmediatelyFast, BadOptimizations, Clumps, Chunky, AI Improvements, Xaero's maps, Jade, Easy Anvils/Magic/Shulker Boxes, …) |
+| Updated to MDVL's newer version | 17 mods: Cataclysm 3.27→3.31, Iron's Spells 3.15.4→3.16.3, JEI 15.20→15.56, Epic Fight Nightfall 3.4.0→3.4.2, WOM 2.0.15→2.0.171, ModernFix, Entity Culling, Ares HUD 2.0.5, Better Lock On, Combat Evolution, Epic Fight Extra, Avalon, Mimic, AAA Particles, Flerovium, GeckoLib, Lionfish API |
+| Kept from MDVLCraft (not in MDVL) | 28 mods incl. **Cursed Fate** (+Photon, LDLib, Kleiders), Cataclysm Dimensions, Cinematic Cataclysm, Epic Fight Skill Tree, Indestructible, EFN-Enhance, Fancy Trail, VIX, Kill-Cam, JER, Packet Fixer, Structure Layout Optimizer, Chloride, Dynamic Lights, Gnetum. If any of these were removed from MDVL on purpose, tell me and I'll drop them |
+| **Removed: KryptonReforged** | Proven conflict: with Krypton Reno installed the game will not start (`ResolutionException: Modules krypton and velocity._native export package com.velocitypowered.natives.compression`). KryptonReforged is from June 2023; Krypton Reno (Jan 2026) was kept |
+| Forge | 47.4.4 → 47.4.10 (MDVL's version) |
+| Added: MDVLCraft Binder 0.1.0 | Pack glue mod built from `binder/` (see binder/README.md) |
+
+## Server notes
+Remove these **client-only** mods from a dedicated server's `mods` folder — each was verified to crash the server (it loads client-only classes). Players keep them.
+
+| Mod | Evidence |
+|---|---|
+| Oculus | `Failed to create mod instance. ModID: oculus` |
+| Better Lock On | common mixin `LocalPlayerPatchMixin` pulls in `LocalPlayer` |
+| Dynamic Crosshair | `DynamicCrosshairBaseBlock` mixin into `Block` references `LocalPlayer` |
+| Accurate Block Placement | `Failed to create mod instance. ModID: accurateblockplacement` (LocalPlayer) |
+| Legendary Tooltips | `LegendaryTooltipsConfig.<init>` loads `LocalPlayer` |
+
+## Test results (v1.1.0)
+Environment: Linux, OpenJDK 17, Forge 47.4.10, 6 GB heaps; client via portablemc + Xvfb + Mesa llvmpipe (software OpenGL, 4 shared CPU cores).
+
+| Test | Result |
+|---|---|
+| Pack reproducibility | 130 manifest downloads + 2 override jars are **byte-identical (SHA-1)** to the 132 tested files |
+| Dependency check | No duplicate mod IDs, no missing mandatory dependencies, Kotlin language loader present |
+| Dedicated server | Boots (`Done`, ~98–119 s first start); new Tectonic world force-loaded; Cataclysm, Recruits, Iron's, Cursed Fate mobs summoned; Bountiful board placed; 20 TPS; save OK; no crash reports |
+| Client + multiplayer | All 132 files loaded, joined the dedicated server, stayed 3 min; bosses, boss bars, Recruits village, Xaero minimap, Ares HUD rendered (`docs/test-screenshot.png`) |
+| Binder in pack | Server and client logs: `[Cataclysm] 103 entity types registered`, `[Epic Fight] 60 entity types have Epic Fight patches`, `[Iron's Spells] 111 spells registered, mana cost multiplier 1.0` |
+| ⚠ Join stall | On join, JEI rebuilds its recipe index on the client main thread; Iron's Spells' JEI plugin alone took ~20 s here. In one run the total (31.7 s) exceeded the server's keep-alive and the client was disconnected (`Timed out`). Software rendering on 4 shared cores makes this far worse than a normal PC, but slow PCs may see it; the same join succeeded in two later runs (JEI 19 s and 33 s), so it is borderline rather than broken — if it happens, re-join |
+| Remaining log errors | Upstream/harmless: Epic Fight unused-animation JSON warnings, Iron's 1.20.5-only loot functions, Curios slots `earwear/facewear/knees` referenced but not registered, no audio device in container |
 
 ## Final mod list
 
-| # | Mod | Category / why it is kept | File |
-|---|-----|---------------------------|------|
-| 1 | [AAA Particles](https://www.curseforge.com/minecraft/mc-mods/aaa-particles) | AAA Particles | `aaa_particles-forge-1.20.1-2.2.3.jar` |
-| 2 | [AAA Particles: World](https://www.curseforge.com/minecraft/mc-mods/aaa-particles-world) | AAA Particles | `aaa_particles_world-forge-1.20.1-2.0.0.jar` |
-| 3 | [Sodium/Embeddium Dynamic Lights](https://www.curseforge.com/minecraft/mc-mods/dynamiclights-reforged) | Sodium | `sodiumdynamiclights-forge-1.0.10-1.20.1.jar` |
-| 4 | [(Sodium) Chloride](https://www.curseforge.com/minecraft/mc-mods/chloride) | Embeddium | `chloride-FORGE-mc1.20.1-v1.7.5.jar` |
-| 5 | [Embeddium](https://www.curseforge.com/minecraft/mc-mods/embeddium) | Embeddium | `embeddium-0.3.31+mc1.20.1.jar` |
-| 6 | [Flerovium](https://www.curseforge.com/minecraft/mc-mods/flerovium) | Embeddium | `flerovium-forge-1.20.1-1.2.18-all.jar` |
-| 7 | [Oculus](https://www.curseforge.com/minecraft/mc-mods/oculus) | Embeddium | `oculus-mc1.20.1-1.8.0.jar` |
-| 8 | [AttributeFix](https://www.curseforge.com/minecraft/mc-mods/attributefix) | AttributeFix | `AttributeFix-Forge-1.20.1-21.0.5.jar` |
-| 9 | [Bountiful](https://www.curseforge.com/minecraft/mc-mods/bountiful) | Bountiful | `Bountiful-6.0.4+1.20.1-forge.jar` |
-| 10 | [Bountiful Villager](https://www.curseforge.com/minecraft/mc-mods/bountiful-villager) | Bountiful | `bountiful_npc-forge-1.20.1-1.0.6.jar` |
-| 11 | [Cataclysm Dimensions](https://www.curseforge.com/minecraft/mc-mods/cataclysm-dimensions) | Cataclysm | `cataclysm_dimension-forge1.20.1-1.6.2.jar` |
-| 12 | [Cinematic Cataclysm](https://www.curseforge.com/minecraft/mc-mods/cinematic-cataclysm) | Cataclysm | `cinematiccataclysm-1.0.1-1.20.1.jar` |
-| 13 | [L_Ender 's Cataclysm](https://www.curseforge.com/minecraft/mc-mods/lendercataclysm) | Cataclysm | `L_Enders_Cataclysm-3.27-curios-fix.jar` |
-| 14 | [P1nero's Epic X Cataclysm](https://www.curseforge.com/minecraft/mc-mods/p1neros-epic-x-cataclysm) | Cataclysm+Epic Fight | `p1nero_ec-20.14.0.9.jar` |
-| 15 | [Combat Evolution](https://www.curseforge.com/minecraft/mc-mods/combat-evolution) | Epic Fight | `CombatEvolution-2.2.0.jar` |
-| 16 | [EFN-Enhance](https://www.curseforge.com/minecraft/mc-mods/efn-enhance) | Epic Fight | `Nightfall Enhance-1.1.4-all.jar` |
-| 17 | [Epic Fight](https://www.curseforge.com/minecraft/mc-mods/epic-fight-mod) | Epic Fight | `epic-fight-20.14.17-mc1.20.1-forge.jar` |
-| 18 | [Epic Fight - Avalon](https://www.curseforge.com/minecraft/mc-mods/epic-fight-avalon) | Epic Fight | `epic_fight_avalon-20.12.6.4.jar` |
-| 19 | [Epic Fight - Better lock on](https://www.curseforge.com/minecraft/mc-mods/better-lock-on) | Epic Fight | `betterlockon-2.0.11-forge.jar` |
-| 20 | [Epic Fight - Guandao Moveset](https://www.curseforge.com/minecraft/mc-mods/epic-fight-guandao-moveset) | Epic Fight | `falchionmoveset-20.14.0.jar` |
-| 21 | [Epic Fight - Indestructible](https://www.curseforge.com/minecraft/mc-mods/epic-fight-indestructible) | Epic Fight | `indestructible-20.13.0.jar` |
-| 22 | [Epic Fight - Invincible Lib](https://www.curseforge.com/minecraft/mc-mods/epic-fight-invincible) | Epic Fight | `epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar` |
-| 23 | [Epic Fight - Super Golem](https://www.curseforge.com/minecraft/mc-mods/epic-fight-super-golem) | Epic Fight | `super_golem-20.12.2.jar` |
-| 24 | [Epic Fight - Super Warden](https://www.curseforge.com/minecraft/mc-mods/epic-fight-super-warden) | Epic Fight | `super_warden-20.13.0.jar` |
-| 25 | [Epic Fight - Sword Soaring](https://www.curseforge.com/minecraft/mc-mods/sword-soaring) | Epic Fight | `sword_soaring-20.14.2.8-mc1.20.1-forge.jar` |
-| 26 | [Epic Fight - The Arachne](https://www.curseforge.com/minecraft/mc-mods/epic-fight-the-arachne) | Epic Fight | `epicfight_arachne-1.0.0.jar` |
-| 27 | [Epic Fight - The Leonidas](https://www.curseforge.com/minecraft/mc-mods/epic-fight-the-leonidas) | Epic Fight | `epicfight_leonidas-1.0.1.jar` |
-| 28 | [Epic Fight - The Mimic](https://www.curseforge.com/minecraft/mc-mods/epic-fight-the-mimic) | Epic Fight | `mimic-1.0.5.jar` |
-| 29 | [Epic Fight - The Wraithon](https://www.curseforge.com/minecraft/mc-mods/epic-fight-wraithon) | Epic Fight | `wraithon-forge1.20.1-1.1.11.jar` |
-| 30 | [Epic Fight : Dodge Parry Reward](https://www.curseforge.com/minecraft/mc-mods/epic-fight-dodge-parry-reward) | Epic Fight | `dodge_parry_reward-1.20.1forge-20.14.3.jar` |
-| 31 | [Epic Fight: Skill Tree](https://www.curseforge.com/minecraft/mc-mods/epic-fight-skill-tree) | Epic Fight | `epicfight-skilltree-forge-20.2.9-1.20.1.jar` |
-| 32 | [EpicFight-Extra](https://www.curseforge.com/minecraft/mc-mods/epicfight-extra) | Epic Fight | `epicfight-extra-1.2-mc1.20.1-forge-all.jar` |
-| 33 | [EpicFight-Nightfall](https://www.curseforge.com/minecraft/mc-mods/epicfight-nightfall) | Epic Fight | `EpicFight Nightfall-3.4.0.jar` |
-| 34 | [Fancy Trail](https://www.curseforge.com/minecraft/mc-mods/fancy-trail) | Epic Fight | `Fancy-Trail1.20.1-1.2.3-all.jar` |
-| 35 | [GUHAO's VIX](https://www.curseforge.com/minecraft/mc-mods/guhaos-vix) | Epic Fight | `VIX-1.1.0-all.jar` |
-| 36 | [Kill-Cam](https://www.curseforge.com/minecraft/mc-mods/kill-cam) | Epic Fight | `killcam-1.0.3.jar` |
-| 37 | [P1nero's Epic Bow](https://www.curseforge.com/minecraft/mc-mods/p1neros-epic-bow) | Epic Fight | `p1nero_bow-forge1.20.1-20.14.1.6.jar` |
-| 38 | [Weapons of Miracles - epic fight](https://www.curseforge.com/minecraft/mc-mods/weapons-of-miracles-epicfight) | Epic Fight | `WeaponsOfMiracles-2.0.15-mc1.20.1-forge.jar` |
-| 39 | [Ares-HUD](https://www.curseforge.com/minecraft/mc-mods/ares-hud) | Epic Fight+Irons | `ares_hud-1.2.3-all.jar` |
-| 40 | [Iron's Spells 'n Spellbooks](https://www.curseforge.com/minecraft/mc-mods/irons-spells-n-spellbooks) | Iron's Spells | `irons_spellbooks-1.20.1-3.15.4.jar` |
-| 41 | [Iron's Spells 'n Spellbooks - Scroll Description](https://www.curseforge.com/minecraft/mc-mods/irons-spells-n-spellbooks-scroll-description) | Iron's Spells | `iss_scroll_description-1.0.0.jar` |
-| 42 | [Iron's Spells 3D Cast Preview](https://www.curseforge.com/minecraft/mc-mods/irons-spells-3d-cast-preview) | Iron's Spells | `iss_ponder-forge1.20.1-1.0.3-all.jar` |
-| 43 | [Epic Fight Skill - Iron's Spells 'n Spellbooks](https://www.curseforge.com/minecraft/mc-mods/epic-fight-skill-irons-spells-n-spellbooks) | Iron's Spells+Epic Fight | `efs_iss-1.0.3.jar` |
-| 44 | [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) | JEI | `jei-1.20.1-forge-15.20.0.130.jar` |
-| 45 | [Just Enough Resources (JER)](https://www.curseforge.com/minecraft/mc-mods/just-enough-resources-jer) | JEI | `JustEnoughResources-1.20.1-1.4.0.247.jar` |
-| 46 | [Lootr (Forge & NeoForge)](https://www.curseforge.com/minecraft/mc-mods/lootr) | Lootr | `lootr-forge-1.20-0.7.35.94.jar` |
-| 47 | [Entity Culling Fabric/Forge](https://www.curseforge.com/minecraft/mc-mods/entityculling) | Optimisation | `entityculling-forge-1.10.2-mc1.20.1.jar` |
-| 48 | [FerriteCore ((Neo)Forge)](https://www.curseforge.com/minecraft/mc-mods/ferritecore) | Optimisation | `ferritecore-6.0.1-forge.jar` |
-| 49 | [Gnetum](https://www.curseforge.com/minecraft/mc-mods/gnetum) | Optimisation | `gnetum-2.4.3.jar` |
-| 50 | [Krypton Reno](https://www.curseforge.com/minecraft/mc-mods/krypton-fnp) | Optimisation | `Krypton FNP-forge-1.20.1-0.2.28.2-1.20.1.jar` |
-| 51 | [Limited Chunkloading - Chunk cleanup](https://www.curseforge.com/minecraft/mc-mods/limited-chunkloading) | Optimisation | `limitedchunks-1.20.1-4.1.jar` |
-| 52 | [ModernFix](https://www.curseforge.com/minecraft/mc-mods/modernfix) | Optimisation | `modernfix-forge-5.27.66+mc1.20.1.jar` |
-| 53 | [Packet Fixer](https://www.curseforge.com/minecraft/mc-mods/packet-fixer) | Optimisation | `packetfixer-3.3.2-1.18-1.20.4-merged.jar` |
-| 54 | [quick pack](https://www.curseforge.com/minecraft/mc-mods/quick-pack) | Optimisation | `quick-pack-forge-1.3.2+1.20.1-all.jar` |
-| 55 | [Server Performance - Smooth Chunk Save](https://www.curseforge.com/minecraft/mc-mods/smooth-chunk-save) | Optimisation | `smoothchunk-1.20.1-4.1.jar` |
-| 56 | [ServerCore](https://www.curseforge.com/minecraft/mc-mods/servercore) | Optimisation | `servercore-forge-1.5.2+1.20.1.jar` |
-| 57 | [spark](https://www.curseforge.com/minecraft/mc-mods/spark) | Optimisation | `spark-1.10.53-forge.jar` |
-| 58 | [Structure Layout Optimizer](https://www.curseforge.com/minecraft/mc-mods/structure-layout-optimizer) | Optimisation | `structure_layout_optimizer-forge-1.0.11.jar` |
-| 59 | [Jujutsu Kaisen: Cursed Fate](https://www.curseforge.com/minecraft/mc-mods/cursed-fate) | Added (requested) | `cursedfate-1.0.39.jar` |
-| 60 | [Villager Recruits: Claim and Siege Update!](https://www.curseforge.com/minecraft/mc-mods/recruits) | Added (requested) | `recruits-1.20.1-1.15.2.jar` |
-| 61 | [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api) | Library (required by aaa_particles_world) | `architectury-9.2.14-forge.jar` |
-| 62 | [Cupboard](https://www.curseforge.com/minecraft/mc-mods/cupboard) | Library (required by smoothchunk) | `cupboard-1.20.1-3.7.jar` |
-| 63 | [Curios API](https://www.curseforge.com/minecraft/mc-mods/curios) | Library (required by irons_spellbooks) | `curios-forge-5.14.1+1.20.1.jar` |
-| 64 | [FDLib](https://www.curseforge.com/minecraft/mc-mods/fdlib) | Library (required by cinematiccataclysm) | `fdlib-1.0.9-1.20.1.jar` |
-| 65 | [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) | Library (required by irons_spellbooks, cursedfate, efn) | `geckolib-forge-1.20.1-4.8.3.jar` |
-| 66 | [Kambrik](https://www.curseforge.com/minecraft/mc-mods/kambrik) | Library (required by bountiful) | `Kambrik-6.1.1+1.20.1-forge.jar` |
-| 67 | [Kleiders Custom Renderer API](https://www.curseforge.com/minecraft/mc-mods/kleiders-custom-renderer-api) | Library (required by cursedfate) | `kleiders_custom_renderer-7.4.1-forge-1.20.1.jar` |
-| 68 | [Kotlin for Forge](https://www.curseforge.com/minecraft/mc-mods/kotlin-for-forge) | Library (Kotlin language loader required by bountiful, kambrik) | `kotlinforforge-4.12.0-all.jar` |
-| 69 | [LDLib](https://www.curseforge.com/minecraft/mc-mods/ldlib) | Library (required by photon) | `ldlib-forge-1.20.1-1.0.52.a.jar` |
-| 70 | [Lionfish API](https://www.curseforge.com/minecraft/mc-mods/lionfish-api) | Library (required by cataclysm) | `lionfishapi-2.7.jar` |
-| 71 | [Photon](https://www.curseforge.com/minecraft/mc-mods/photon) | Library (required by cursedfate) | `photon-forge-1.20.1-1.1.17.jar` |
-| 72 | [playerAnimator](https://www.curseforge.com/minecraft/mc-mods/playeranimator) | Library (required by irons_spellbooks) | `player-animation-lib-forge-1.0.2-rc1+1.20.jar` |
-| 73 | [Resourceful Config](https://www.curseforge.com/minecraft/mc-mods/resourceful-config) | Library (required by structure_layout_optimizer) | `resourcefulconfig-forge-1.20.1-2.1.3.jar` |
-| 74 | EpicFight-Ponder (Arcad1a, P1nero) | Epic Fight — Ponder scenes for Epic Fight. Only published inside TCR Core, so the jar was extracted unmodified and ships in `overrides/mods` | `epic_fight_ponder-1.0.0.jar` |
+| # | Mod | Source | File |
+|---|---|---|---|
+| 1 | [(Sodium) Chloride](https://www.curseforge.com/minecraft/mc-mods/chloride) | MDVLCraft | `chloride-FORGE-mc1.20.1-v1.7.5.jar` |
+| 2 | [AAA Particles](https://www.curseforge.com/minecraft/mc-mods/aaa-particles) | both (updated from `aaa_particles-forge-1.20.1-2.2.3.jar`) | `aaa_particles-forge-1.20.1-2.3.1.jar` |
+| 3 | [AAA Particles: World](https://www.curseforge.com/minecraft/mc-mods/aaa-particles-world) | both | `aaa_particles_world-forge-1.20.1-2.0.0.jar` |
+| 4 | [Accurate Block Placement Reforked](https://www.curseforge.com/minecraft/mc-mods/accurate-block-placement-reforked) | MDVL | `accurateblockplacement-1.3.0.jar` |
+| 5 | [AI Improvements: Performance Tuning](https://www.curseforge.com/minecraft/mc-mods/ai-improvements) | MDVL | `AI-Improvements-1.20-0.5.2.jar` |
+| 6 | [Architectury API](https://www.curseforge.com/minecraft/mc-mods/architectury-api) | both | `architectury-9.2.14-forge.jar` |
+| 7 | [Ares-HUD](https://www.curseforge.com/minecraft/mc-mods/ares-hud) | both (updated from `ares_hud-1.2.3-all.jar`) | `ares_hud-2.0.5-forge-1.20.1.jar` |
+| 8 | [AttributeFix](https://www.curseforge.com/minecraft/mc-mods/attributefix) | both | `AttributeFix-Forge-1.20.1-21.0.5.jar` |
+| 9 | [BadOptimizations](https://www.curseforge.com/minecraft/mc-mods/badoptimizations) | MDVL | `BadOptimizations-2.4.1-1.20.1.jar` |
+| 10 | [Balm](https://www.curseforge.com/minecraft/mc-mods/balm) | MDVL | `balm-forge-1.20.1-7.3.44.jar` |
+| 11 | [Better Advancements](https://www.curseforge.com/minecraft/mc-mods/better-advancements) | MDVL | `BetterAdvancements-Forge-1.20.1-0.6.0.73.jar` |
+| 12 | [Better Third Person](https://www.curseforge.com/minecraft/mc-mods/better-third-person) | MDVL | `BetterThirdPerson-Forge-1.20-1.9.0.jar` |
+| 13 | [BetterF3](https://www.curseforge.com/minecraft/mc-mods/betterf3) | MDVL | `BetterF3-7.0.2-Forge-1.20.1.jar` |
+| 14 | [Bookshelf](https://www.curseforge.com/minecraft/mc-mods/bookshelf) | MDVL | `Bookshelf-Forge-1.20.1-20.2.15.jar` |
+| 15 | [Bountiful](https://www.curseforge.com/minecraft/mc-mods/bountiful) | both | `Bountiful-6.0.4+1.20.1-forge.jar` |
+| 16 | [Bountiful Villager](https://www.curseforge.com/minecraft/mc-mods/bountiful-villager) | both | `bountiful_npc-forge-1.20.1-1.0.6.jar` |
+| 17 | [Cataclysm Dimensions](https://www.curseforge.com/minecraft/mc-mods/cataclysm-dimensions) | MDVLCraft | `cataclysm_dimension-forge1.20.1-1.6.2.jar` |
+| 18 | [Chat Heads](https://www.curseforge.com/minecraft/mc-mods/chat-heads) | MDVL | `chat_heads-0.15.7-forge-1.20.jar` |
+| 19 | [Chunky (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/chunky-pregenerator-forge) | MDVL | `Chunky-1.3.146.jar` |
+| 20 | [Cinematic Cataclysm](https://www.curseforge.com/minecraft/mc-mods/cinematic-cataclysm) | MDVLCraft | `cinematiccataclysm-1.0.1-1.20.1.jar` |
+| 21 | [Citadel](https://www.curseforge.com/minecraft/mc-mods/citadel) | MDVL | `citadel-2.6.3-1.20.1.jar` |
+| 22 | [Clean Tooltips](https://www.curseforge.com/minecraft/mc-mods/clean-tooltips) | MDVL | `clean_tooltips-1.0-forge-1.20.1.jar` |
+| 23 | [Cloth Config API (Fabric/Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/cloth-config) | MDVL | `cloth-config-11.1.136-forge.jar` |
+| 24 | [Clumps](https://www.curseforge.com/minecraft/mc-mods/clumps) | MDVL | `Clumps-forge-1.20.1-12.0.0.4.jar` |
+| 25 | [Combat Evolution](https://www.curseforge.com/minecraft/mc-mods/combat-evolution) | both (updated from `CombatEvolution-2.2.0.jar`) | `CombatEvolution-2.3.0-Forge-1.20.1.jar` |
+| 26 | [CoroUtil](https://www.curseforge.com/minecraft/mc-mods/coroutil) | MDVL | `coroutil-forge-1.20.1-1.3.7.jar` |
+| 27 | [Cupboard](https://www.curseforge.com/minecraft/mc-mods/cupboard) | MDVLCraft | `cupboard-1.20.1-3.7.jar` |
+| 28 | [Curios API](https://www.curseforge.com/minecraft/mc-mods/curios) | both | `curios-forge-5.14.1+1.20.1.jar` |
+| 29 | [Domestication Innovation](https://www.curseforge.com/minecraft/mc-mods/domestication-innovation) | MDVL | `domesticationinnovation-1.7.1-1.20.1.jar` |
+| 30 | [Dynamic Crosshair](https://www.curseforge.com/minecraft/mc-mods/dynamic-crosshair) | MDVL | `dynamiccrosshair-9.10+1.20.1-forge.jar` |
+| 31 | [Easy Anvils](https://www.curseforge.com/minecraft/mc-mods/easy-anvils) | MDVL | `EasyAnvils-v8.0.2-1.20.1-Forge.jar` |
+| 32 | [Easy Magic](https://www.curseforge.com/minecraft/mc-mods/easy-magic) | MDVL | `EasyMagic-v8.0.1-1.20.1-Forge.jar` |
+| 33 | [Easy Shulker Boxes](https://www.curseforge.com/minecraft/mc-mods/easy-shulker-boxes) | MDVL | `EasyShulkerBoxes-v8.0.2-1.20.1-Forge.jar` |
+| 34 | [EFN-Enhance](https://www.curseforge.com/minecraft/mc-mods/efn-enhance) | MDVLCraft | `Nightfall Enhance-1.1.4-all.jar` |
+| 35 | [Embeddium](https://www.curseforge.com/minecraft/mc-mods/embeddium) | both | `embeddium-0.3.31+mc1.20.1.jar` |
+| 36 | [Enchantment Descriptions](https://www.curseforge.com/minecraft/mc-mods/enchantment-descriptions) | MDVL | `EnchantmentDescriptions-Forge-1.20.1-17.1.21.jar` |
+| 37 | [Entity Culling Fabric/Forge](https://www.curseforge.com/minecraft/mc-mods/entityculling) | both (updated from `entityculling-forge-1.10.2-mc1.20.1.jar`) | `entityculling-forge-1.11.2-mc1.20.1.jar` |
+| 38 | [Epic Fight](https://www.curseforge.com/minecraft/mc-mods/epic-fight-mod) | both | `epic-fight-20.14.17-mc1.20.1-forge.jar` |
+| 39 | [Epic Fight - Avalon](https://www.curseforge.com/minecraft/mc-mods/epic-fight-avalon) | both (updated from `epic_fight_avalon-20.12.6.4.jar`) | `epic_fight_avalon-20.12.6.5.jar` |
+| 40 | [Epic Fight - Better lock on](https://www.curseforge.com/minecraft/mc-mods/better-lock-on) | both (updated from `betterlockon-2.0.11-forge.jar`) | `betterlockon-2.0.14-forge.jar` |
+| 41 | [Epic Fight - Guandao Moveset](https://www.curseforge.com/minecraft/mc-mods/epic-fight-guandao-moveset) | both | `falchionmoveset-20.14.0.jar` |
+| 42 | [Epic Fight - Indestructible](https://www.curseforge.com/minecraft/mc-mods/epic-fight-indestructible) | MDVLCraft | `indestructible-20.13.0.jar` |
+| 43 | [Epic Fight - Invincible Lib](https://www.curseforge.com/minecraft/mc-mods/epic-fight-invincible) | both | `epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar` |
+| 44 | [Epic Fight - Super Golem](https://www.curseforge.com/minecraft/mc-mods/epic-fight-super-golem) | both | `super_golem-20.12.2.jar` |
+| 45 | [Epic Fight - Super Warden](https://www.curseforge.com/minecraft/mc-mods/epic-fight-super-warden) | both | `super_warden-20.13.0.jar` |
+| 46 | [Epic Fight - Sword Soaring](https://www.curseforge.com/minecraft/mc-mods/sword-soaring) | both | `sword_soaring-20.14.2.8-mc1.20.1-forge.jar` |
+| 47 | [Epic Fight - The Arachne](https://www.curseforge.com/minecraft/mc-mods/epic-fight-the-arachne) | both | `epicfight_arachne-1.0.0.jar` |
+| 48 | [Epic Fight - The Leonidas](https://www.curseforge.com/minecraft/mc-mods/epic-fight-the-leonidas) | both | `epicfight_leonidas-1.0.1.jar` |
+| 49 | [Epic Fight - The Mimic](https://www.curseforge.com/minecraft/mc-mods/epic-fight-the-mimic) | both (updated from `mimic-1.0.5.jar`) | `mimic-1.0.7.jar` |
+| 50 | [Epic Fight - The Wraithon](https://www.curseforge.com/minecraft/mc-mods/epic-fight-wraithon) | both | `wraithon-forge1.20.1-1.1.11.jar` |
+| 51 | [Epic Fight : Dodge Parry Reward](https://www.curseforge.com/minecraft/mc-mods/epic-fight-dodge-parry-reward) | both | `dodge_parry_reward-1.20.1forge-20.14.3.jar` |
+| 52 | [Epic Fight Skill - Iron's Spells 'n Spellbooks](https://www.curseforge.com/minecraft/mc-mods/epic-fight-skill-irons-spells-n-spellbooks) | MDVLCraft | `efs_iss-1.0.3.jar` |
+| 53 | [Epic Fight: Skill Tree](https://www.curseforge.com/minecraft/mc-mods/epic-fight-skill-tree) | MDVLCraft | `epicfight-skilltree-forge-20.2.9-1.20.1.jar` |
+| 54 | [Epic Knights: Shields, Armor and Weapons [Fabric/Forge/NeoForge]](https://www.curseforge.com/minecraft/mc-mods/epic-knights-armor-and-weapons) | MDVL | `epic-knights-1.20.1-forge-10.15.jar` |
+| 55 | [EpicFight-Extra](https://www.curseforge.com/minecraft/mc-mods/epicfight-extra) | both (updated from `epicfight-extra-1.2-mc1.20.1-forge-all.jar`) | `epicfight-extra-1.2.1-mc1.20.1-forge-all.jar` |
+| 56 | [EpicFight-Nightfall](https://www.curseforge.com/minecraft/mc-mods/epicfight-nightfall) | both (updated from `EpicFight Nightfall-3.4.0.jar`) | `EpicFight Nightfall-3.4.2-all.jar` |
+| 57 | [Fancy Trail](https://www.curseforge.com/minecraft/mc-mods/fancy-trail) | MDVLCraft | `Fancy-Trail1.20.1-1.2.3-all.jar` |
+| 58 | [Fast IP Ping](https://www.curseforge.com/minecraft/mc-mods/fast-ip-ping) | MDVL | `fast-ip-ping-v1.0.12-mc1.20.4-forge.jar` |
+| 59 | [FDLib](https://www.curseforge.com/minecraft/mc-mods/fdlib) | MDVLCraft | `fdlib-1.0.9-1.20.1.jar` |
+| 60 | [FerriteCore ((Neo)Forge)](https://www.curseforge.com/minecraft/mc-mods/ferritecore) | both | `ferritecore-6.0.1-forge.jar` |
+| 61 | [Flerovium](https://www.curseforge.com/minecraft/mc-mods/flerovium) | both (updated from `flerovium-forge-1.20.1-1.2.18-all.jar`) | `flerovium-forge-1.20.1-1.2.19-all.jar` |
+| 62 | [FlickerFix](https://www.curseforge.com/minecraft/mc-mods/flickerfix) | MDVL | `flickerfix-1.20.1-4.0.1.jar` |
+| 63 | [GeckoLib](https://www.curseforge.com/minecraft/mc-mods/geckolib) | both (updated from `geckolib-forge-1.20.1-4.8.3.jar`) | `geckolib-forge-1.20.1-4.8.4.jar` |
+| 64 | [Gnetum](https://www.curseforge.com/minecraft/mc-mods/gnetum) | MDVLCraft | `gnetum-2.4.3.jar` |
+| 65 | [GUHAO's VIX](https://www.curseforge.com/minecraft/mc-mods/guhaos-vix) | MDVLCraft | `VIX-1.1.0-all.jar` |
+| 66 | [Iceberg [Neo/Forge]](https://www.curseforge.com/minecraft/mc-mods/iceberg) | MDVL | `Iceberg-1.20.1-forge-1.1.25.jar` |
+| 67 | [ImmediatelyFast](https://www.curseforge.com/minecraft/mc-mods/immediatelyfast) | MDVL | `ImmediatelyFast-Forge-1.5.5+1.20.4.jar` |
+| 68 | [Iron's Lib](https://www.curseforge.com/minecraft/mc-mods/irons-lib) | MDVL | `irons_lib-1.20.1-2.2.0.jar` |
+| 69 | [Iron's Spells 'n Spellbooks](https://www.curseforge.com/minecraft/mc-mods/irons-spells-n-spellbooks) | both (updated from `irons_spellbooks-1.20.1-3.15.4.jar`) | `irons_spellbooks-1.20.1-3.16.3.jar` |
+| 70 | [Iron's Spells 'n Spellbooks - Scroll Description](https://www.curseforge.com/minecraft/mc-mods/irons-spells-n-spellbooks-scroll-description) | MDVLCraft | `iss_scroll_description-1.0.0.jar` |
+| 71 | [Iron's Spells 3D Cast Preview](https://www.curseforge.com/minecraft/mc-mods/irons-spells-3d-cast-preview) | both | `iss_ponder-forge1.20.1-1.0.3-all.jar` |
+| 72 | [Item Borders [Neo/Forge]](https://www.curseforge.com/minecraft/mc-mods/item-borders) | MDVL | `ItemBorders-1.20.1-forge-1.2.2.jar` |
+| 73 | [Jade 🔍](https://www.curseforge.com/minecraft/mc-mods/jade) | MDVL | `Jade-1.20.1-Forge-11.13.3.jar` |
+| 74 | [Jujutsu Kaisen: Cursed Fate](https://www.curseforge.com/minecraft/mc-mods/cursed-fate) | MDVLCraft | `cursedfate-1.0.39.jar` |
+| 75 | [Just Enough Items (JEI)](https://www.curseforge.com/minecraft/mc-mods/jei) | both (updated from `jei-1.20.1-forge-15.20.0.130.jar`) | `jei-1.20.1-forge-15.56.0.205.jar` |
+| 76 | [Just Enough Resources (JER)](https://www.curseforge.com/minecraft/mc-mods/just-enough-resources-jer) | MDVLCraft | `JustEnoughResources-1.20.1-1.4.0.247.jar` |
+| 77 | [Kambrik](https://www.curseforge.com/minecraft/mc-mods/kambrik) | both | `Kambrik-6.1.1+1.20.1-forge.jar` |
+| 78 | [Kill-Cam](https://www.curseforge.com/minecraft/mc-mods/kill-cam) | MDVLCraft | `killcam-1.0.3.jar` |
+| 79 | [Kleiders Custom Renderer API](https://www.curseforge.com/minecraft/mc-mods/kleiders-custom-renderer-api) | MDVLCraft | `kleiders_custom_renderer-7.4.1-forge-1.20.1.jar` |
+| 80 | [Kotlin for Forge](https://www.curseforge.com/minecraft/mc-mods/kotlin-for-forge) | both | `kotlinforforge-4.12.0-all.jar` |
+| 81 | [Krypton Reno](https://www.curseforge.com/minecraft/mc-mods/krypton-fnp) | MDVLCraft | `Krypton FNP-forge-1.20.1-0.2.28.2-1.20.1.jar` |
+| 82 | [KubeJS](https://www.curseforge.com/minecraft/mc-mods/kubejs) | MDVL | `kubejs-forge-2001.6.5-build.26.jar` |
+| 83 | [L_Ender 's Cataclysm](https://www.curseforge.com/minecraft/mc-mods/lendercataclysm) | both (updated from `L_Enders_Cataclysm-3.27-curios-fix.jar`) | `L_Enders_Cataclysm-3.31.jar` |
+| 84 | [LDLib](https://www.curseforge.com/minecraft/mc-mods/ldlib) | MDVLCraft | `ldlib-forge-1.20.1-1.0.52.a.jar` |
+| 85 | [Legendary Tooltips [Neo/Forge]](https://www.curseforge.com/minecraft/mc-mods/legendary-tooltips) | MDVL | `LegendaryTooltips-1.20.1-forge-1.4.5.jar` |
+| 86 | [Limited Chunkloading - Chunk cleanup](https://www.curseforge.com/minecraft/mc-mods/limited-chunkloading) | MDVLCraft | `limitedchunks-1.20.1-4.1.jar` |
+| 87 | [Lionfish API](https://www.curseforge.com/minecraft/mc-mods/lionfish-api) | both (updated from `lionfishapi-2.7.jar`) | `lionfishapi-3.0.jar` |
+| 88 | [Lithostitched](https://www.curseforge.com/minecraft/mc-mods/lithostitched) | MDVL | `lithostitched-forge-1.20.1-1.4.11.jar` |
+| 89 | [Lootr (Forge & NeoForge)](https://www.curseforge.com/minecraft/mc-mods/lootr) | both | `lootr-forge-1.20-0.7.35.94.jar` |
+| 90 | [Majrusz Library](https://www.curseforge.com/minecraft/mc-mods/majrusz-library) | MDVL | `majrusz-library-forge-1.20.1-7.0.8.jar` |
+| 91 | [Majrusz's Enchantments](https://www.curseforge.com/minecraft/mc-mods/wonderful-enchantments) | MDVL | `majruszs-enchantments-forge-1.20.1-1.10.8.jar` |
+| 92 | [ModernFix](https://www.curseforge.com/minecraft/mc-mods/modernfix) | both (updated from `modernfix-forge-5.27.66+mc1.20.1.jar`) | `modernfix-forge-5.27.85+mc1.20.1.jar` |
+| 93 | [NetherPortalFix](https://www.curseforge.com/minecraft/mc-mods/netherportalfix) | MDVL | `netherportalfix-forge-1.20-13.0.1.jar` |
+| 94 | [Oculus](https://www.curseforge.com/minecraft/mc-mods/oculus) | both | `oculus-mc1.20.1-1.8.0.jar` |
+| 95 | [P1nero's Dialogue Lib](https://www.curseforge.com/minecraft/mc-mods/p1neros-dialogue-lib) | MDVL | `p1neros-dialogue-lib-2.3.0-mc1.20.1-forge.jar` |
+| 96 | [P1nero's Epic Bow](https://www.curseforge.com/minecraft/mc-mods/p1neros-epic-bow) | both | `p1nero_bow-forge1.20.1-20.14.1.6.jar` |
+| 97 | [P1nero's Epic X Cataclysm](https://www.curseforge.com/minecraft/mc-mods/p1neros-epic-x-cataclysm) | MDVLCraft | `p1nero_ec-20.14.0.9.jar` |
+| 98 | [Packet Fixer](https://www.curseforge.com/minecraft/mc-mods/packet-fixer) | MDVLCraft | `packetfixer-3.3.2-1.18-1.20.4-merged.jar` |
+| 99 | [Photon](https://www.curseforge.com/minecraft/mc-mods/photon) | MDVLCraft | `photon-forge-1.20.1-1.1.17.jar` |
+| 100 | [Pick Up Notifier](https://www.curseforge.com/minecraft/mc-mods/pick-up-notifier) | MDVL | `PickUpNotifier-v8.0.0-1.20.1-Forge.jar` |
+| 101 | [Platform](https://www.curseforge.com/minecraft/mc-mods/platform) | MDVL | `Platform-forge-1.20.1-1.3.4.jar` |
+| 102 | [playerAnimator](https://www.curseforge.com/minecraft/mc-mods/playeranimator) | both | `player-animation-lib-forge-1.0.2-rc1+1.20.jar` |
+| 103 | [Ponder for KubeJS](https://www.curseforge.com/minecraft/mc-mods/ponder) | MDVL | `ponderjs-1.20.1-2.1.0.jar` |
+| 104 | [Prism [Neo/Forge]](https://www.curseforge.com/minecraft/mc-mods/prism-lib) | MDVL | `Prism-1.20.1-forge-1.0.5.jar` |
+| 105 | [Puzzles Lib](https://www.curseforge.com/minecraft/mc-mods/puzzles-lib) | MDVL | `PuzzlesLib-v8.1.33-1.20.1-Forge.jar` |
+| 106 | [quick pack](https://www.curseforge.com/minecraft/mc-mods/quick-pack) | MDVLCraft | `quick-pack-forge-1.3.2+1.20.1-all.jar` |
+| 107 | [Resourceful Config](https://www.curseforge.com/minecraft/mc-mods/resourceful-config) | MDVLCraft | `resourcefulconfig-forge-1.20.1-2.1.3.jar` |
+| 108 | [Rhino](https://www.curseforge.com/minecraft/mc-mods/rhino) | MDVL | `rhino-forge-2001.2.3-build.10.jar` |
+| 109 | [Server Performance - Smooth Chunk Save](https://www.curseforge.com/minecraft/mc-mods/smooth-chunk-save) | MDVLCraft | `smoothchunk-1.20.1-4.1.jar` |
+| 110 | [ServerCore](https://www.curseforge.com/minecraft/mc-mods/servercore) | both | `servercore-forge-1.5.2+1.20.1.jar` |
+| 111 | [Simple Voice Chat](https://www.curseforge.com/minecraft/mc-mods/simple-voice-chat) | MDVL | `voicechat-forge-1.20.1-2.6.22.jar` |
+| 112 | [Sodium/Embeddium Dynamic Lights](https://www.curseforge.com/minecraft/mc-mods/dynamiclights-reforged) | MDVLCraft | `sodiumdynamiclights-forge-1.0.10-1.20.1.jar` |
+| 113 | [Sound Physics Remastered](https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered) | MDVL | `sound-physics-remastered-forge-1.20.1-1.5.1.jar` |
+| 114 | [spark](https://www.curseforge.com/minecraft/mc-mods/spark) | both | `spark-1.10.53-forge.jar` |
+| 115 | [Streams Reflowing](https://www.curseforge.com/minecraft/mc-mods/streams-reflowing) | MDVL | `StreamsReflowing-1.20.1-forge-2.13.8.jar` |
+| 116 | [Structure Layout Optimizer](https://www.curseforge.com/minecraft/mc-mods/structure-layout-optimizer) | MDVLCraft | `structure_layout_optimizer-forge-1.0.11.jar` |
+| 117 | [Tax Free Levels](https://www.curseforge.com/minecraft/mc-mods/tax-free-levels) | MDVL | `TaxFreeLevels-1.4.25-forge-1.20.1.jar` |
+| 118 | [Tectonic](https://www.curseforge.com/minecraft/mc-mods/tectonic) | MDVL | `tectonic-3.0.17-forge-1.20.1.jar` |
+| 119 | [TerraBlender (Forge)](https://www.curseforge.com/minecraft/mc-mods/terrablender) | MDVL | `TerraBlender-forge-1.20.1-3.0.1.10.jar` |
+| 120 | [TuDiGong : Wayfinder](https://www.curseforge.com/minecraft/mc-mods/tudigong-wayfinder) | MDVL | `tudigong-forge1.20.1-1.4.1.jar` |
+| 121 | [Vanilla Backport](https://www.curseforge.com/minecraft/mc-mods/vanillabackport) | MDVL | `VanillaBackport-forge-1.20.1-1.1.7.10.jar` |
+| 122 | [Villager Recruits: Claim and Siege Update!](https://www.curseforge.com/minecraft/mc-mods/recruits) | both | `recruits-1.20.1-1.15.2.jar` |
+| 123 | [Villager Recruits: Village Expansion](https://www.curseforge.com/minecraft/mc-mods/villager-recruits-village-expansion) | MDVL | `village_recruits-1.0.7.93TC-205.jar` |
+| 124 | [Villager Workers 2](https://www.curseforge.com/minecraft/mc-mods/workers) | MDVL | `workers-1.20.1-2.0.3.jar` |
+| 125 | [Weapons of Miracles - epic fight](https://www.curseforge.com/minecraft/mc-mods/weapons-of-miracles-epicfight) | both (updated from `WeaponsOfMiracles-2.0.15-mc1.20.1-forge.jar`) | `WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar` |
+| 126 | [What Are They Up To (Watut)](https://www.curseforge.com/minecraft/mc-mods/what-are-they-up-to) | MDVL | `watut-forge-1.20.1-1.2.3.jar` |
+| 127 | [Xaero's Minimap](https://www.curseforge.com/minecraft/mc-mods/xaeros-minimap) | MDVL | `xaerominimap-forge-1.20.1-26.6.0.jar` |
+| 128 | [Xaero's World Map](https://www.curseforge.com/minecraft/mc-mods/xaeros-world-map) | MDVL | `xaeroworldmap-forge-1.20.1-1.47.0.jar` |
+| 129 | [You Died](https://www.curseforge.com/minecraft/mc-mods/you-died) | MDVL | `YouDied-1.20-3.0.0.17-forge.jar` |
+| 130 | [【epic fight】BD&Hill Reforge the Sword Edge](https://www.curseforge.com/minecraft/texture-packs/epic-fight-bd-hill-reforge-the-sword-edge) | MDVL | `【Released】BDHill Reforge the Sword Edge-2.0_1.20.1.zip` |
+| 131 | EpicFight-Ponder (Arcad1a, P1nero) | MDVLCraft — extracted from TCR Core, ships in `overrides/mods` | `epic_fight_ponder-1.0.0.jar` |
+| 132 | MDVLCraft Binder | this repo (`binder/`), ships in `overrides/mods` | `mdvlcraft-0.1.0.jar` |
 
-### Mods bundled inside other jars (no separate download needed)
-Ponder + Flywheel (inside Iron's Spells 3D Cast Preview), MixinExtras / MixinSquared (many mods), Curios-compatible libs, etc. These were resolved automatically by Forge's Jar-in-Jar loader during testing.
-
-## Server notes
-The dedicated server was tested with every mod **except these client-only mods**, which crash a dedicated server and must be left out of a server's `mods` folder:
-
-| Mod | Why |
-|-----|-----|
-| Oculus | Shader loader, references client-only classes (`Iris` constructor fails on server) |
-| Better Lock On | Its `LocalPlayerPatchMixin` is declared as a common mixin; when Epic Fight Extra loads its skills on a server it pulls in client-only `LocalPlayer` and crashes. It is a pure lock-on-icon cosmetic with no networking, so clients can use it on any server |
-
-All other client-side mods (Embeddium, Chloride, Flerovium, Dynamic Lights, Entity Culling, Gnetum, JEI, etc.) were present on the test server and loaded without issue.
-
-## Decisions worth knowing
-* **Sodium** is Fabric-only; on Forge 1.20.1 its port is **Embeddium**, so the "Sodium" request is covered by Embeddium plus its Sodium-family addons (Chloride options, Flerovium, Sodium/Embeddium Dynamic Lights, Oculus).
-* **Epic Fight + Ponder**: the mod that makes Ponder work with Epic Fight (`epic_fight_ponder`) is only shipped inside *TCR Core*, the pack's own core mod, which drags in Book of Dragons, Battle Towers, Combat Evolution etc. and the pack's custom world. TCR Core was removed and EpicFight-Ponder was extracted as a standalone jar (it only depends on Epic Fight + Ponder). The repo is private; this jar is All-Rights-Reserved, so do not publish the zip publicly.
-* **TheCasketOfRrveriesBosses** was removed: its author states it is *not recommended outside The Casket of Reveries* and it only patches Battle Towers golems.
-* **Cataclysm Dimensions** (kept, Cataclysm addon) moves Cataclysm boss structures into their own dimensions — `/locate structure cataclysm:…` in the Overworld will not find them. Remove it if you want the bosses back in the Overworld.
-* **Kotlin for Forge** is required by Bountiful and Kambrik (language loader, not a normal dependency — the first boot failed without it).
-* **LDLib** is required by Photon at runtime (127 class references) even though Photon's metadata doesn't declare it.
-* **Accelerated Rendering** was dropped: it hard-requires OpenGL 4.6 and crashed the test client on OpenGL 4.5. The original pack only got away with it because its TCR filter mod removed it on unsupported GPUs.
-
-## Test results (mock environment)
-Environment: Linux, OpenJDK 17.0.20, Forge 47.4.4, 6 GB heap; client via portablemc under Xvfb with Mesa llvmpipe (software OpenGL 4.5).
-
-| Test | Result |
-|------|--------|
-| Manifest reproducibility | All 73 manifest entries downloaded from CurseForge + the override jar are **byte-identical (SHA-1)** to the tested 74 jars |
-| Dedicated server boot | `Done (37s)`; 0 fatal errors |
-| Server gameplay | Force-loaded 17×17 chunks; summoned Netherite Monstrosity, Ender Guardian (Cataclysm), Recruit, Bowman (Recruits), Dead King, Cryomancer (Iron's), Rika (Cursed Fate); placed Bountiful board; 20.0 TPS; `save-all` OK; no exceptions, no crash reports |
-| Dimensions registered | Overworld, Nether, End, 8 Cataclysm Dimensions arenas, Iron's pocket dimension, Arachne Nest, Rockwind Ruins (Leonidas), Lethean Sea (Mimic), Sanctum of the Wraithon, ISS Ponder preview |
-| Client boot + multiplayer join | Client (all 74 mods) loaded and joined the dedicated server in 84 s; entities, boss bars, Epic Fight HUD rendered (see `docs/test-screenshot.png`); clean disconnect |
-| Remaining log errors (all upstream, harmless) | 93× Epic Fight "datapack animation reading failed" (unused animation JSONs inside EFN/EFX/Indestructible/etc.; verified no removed mod registered them); Iron's `citadel_tomes` loot table uses a 1.20.5-only function; 2 Cursed Fate block models use an invalid rotation; Avalon item-skin JSON; no sound device / offline auth in the container |
+## v1.0.0 history
+v1.0.0 was trimmed from **The Casket of Reveries 2.2.9.7**. Decisions from that trim still apply: Sodium → Embeddium on Forge; Accelerated Rendering dropped (needs OpenGL 4.6); TheCasketOfRrveriesBosses and TCR Core removed (pack-specific), with EpicFight-Ponder extracted from TCR Core; LDLib is required by Photon; Cataclysm Dimensions moves Cataclysm boss structures into their own dimensions.
 
 ## Original pack contents (all 216 entries)
 | Mod | Status | Reason |

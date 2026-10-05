@@ -1,14 +1,16 @@
 # MDVLCraft
 
-A trimmed Forge **1.20.1** (Forge **47.4.4**) modpack built from *The Casket of Reveries 2.2.9.7*, focused on Epic Fight combat, Iron's Spells, L_Ender's Cataclysm, Bountiful, Lootr, AAA Particles, Embeddium and performance mods, plus Villager Recruits and Jujutsu Kaisen: Cursed Fate.
+A Forge **1.20.1** (Forge **47.4.10**) modpack built around Epic Fight combat, Iron's Spells, L_Ender's Cataclysm, Villager Recruits, Bountiful, Lootr, AAA Particles, Cursed Fate, Embeddium and performance mods — the MDVL pack merged with the trimmed Casket of Reveries base, plus its own binder mod.
 
 | File | What it is |
 |------|------------|
-| [`MDVLCraft-1.0.0.zip`](MDVLCraft-1.0.0.zip) | CurseForge-format pack (import via CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*). 74 mods, no configs/resource packs. |
-| [`MODLIST.md`](MODLIST.md) | Final mod list with the reason each mod is kept, server notes, test results, and the full original 216-entry list with what was removed and why |
-| [`REPORT.md`](REPORT.md) | Research report: addons, performance, JVM arguments, world generation, resource packs, progression, client/server lists |
-| [`docs/test-screenshot.png`](docs/test-screenshot.png) | Screenshot from the automated client test (joined a dedicated server, Cataclysm/Iron's/Recruits entities rendering) |
+| [`MDVLCraft-1.1.0.zip`](MDVLCraft-1.1.0.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*). 130 CurseForge entries + EpicFight-Ponder + MDVLCraft Binder, with your MDVL configs and KubeJS folder |
+| [`MODLIST.md`](MODLIST.md) | Full mod list with source of each mod, merge changes, server notes and test results |
+| [`MDVLCraft-Optimisation-and-Improvement-Mods.docx`](MDVLCraft-Optimisation-and-Improvement-Mods.docx) | Word document: optimisation mods in the pack, optimisation and improvement mods to add, what to avoid |
+| [`REPORT.md`](REPORT.md) | Wider research report: addons, world generation, resource packs, progression, JVM arguments |
+| [`binder/`](binder/) | Forge 1.20.1 dev environment for **MDVLCraft Binder**, the pack's glue mod (`./gradlew build`, `runClient`, `runServer`) — see [`binder/README.md`](binder/README.md) |
+| [`docs/test-screenshot.png`](docs/test-screenshot.png) | Automated client test: joined a dedicated server running the pack |
 
-**Java:** use Java 17. **RAM:** 6–8 GB client. **Server:** remove `oculus` and `betterlockon` from the server's `mods` folder (they crash a dedicated server; see MODLIST.md).
+**Java:** 17. **RAM:** 6–8 GB client. **Dedicated server:** remove Oculus, Better Lock On, Dynamic Crosshair, Accurate Block Placement and Legendary Tooltips from the server's `mods` folder (they crash a server — see MODLIST.md).
 
-> The zip contains `epic_fight_ponder-1.0.0.jar` extracted from TCR Core (All Rights Reserved) — keep this repository private.
+> The pack contains `epic_fight_ponder-1.0.0.jar` extracted from TCR Core (All Rights Reserved) — keep this repository private.

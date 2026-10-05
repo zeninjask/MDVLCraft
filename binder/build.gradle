@@ -1,0 +1,117 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+}
+
+version = mod_version
+group = mod_group_id
+
+base {
+    archivesName = mod_id
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+    copyIdeResources = true
+
+    runs {
+        configureEach {
+            workingDirectory project.file('run')
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+            // Pack mods ship SRG-named mixin refmaps; remap them to dev names so their mixins apply in runClient/runServer.
+            property 'mixin.env.remapRefMap', 'true'
+            property 'mixin.env.refMapRemappingFile', "${projectDir}/build/createSrgToMcp/output.srg"
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+
+        client {
+        }
+
+        server {
+            args '--nogui'
+        }
+
+        data {
+            workingDirectory project.file('run-data')
+            args '--mod', mod_id, '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+        }
+    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+repositories {
+    // CurseMaven serves any CurseForge file as curse.maven:<name>-<projectId>:<fileId>.
+    // Not exclusiveContent: ForgeGradle stores the deobfuscated copies in its own local repo under the same group.
+    maven {
+        url 'https://cursemaven.com'
+        content {
+            includeGroup 'curse.maven'
+        }
+    }
+}
+
+// Resolves a "<projectId>:<fileId>" property from gradle.properties into a CurseMaven coordinate.
+def cf(String name) {
+    def (projectId, fileId) = project.property("${name}_cf").toString().tokenize(':')
+    return "curse.maven:${name}-${projectId}:${fileId}"
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+
+    // Mods the binder integrates with: compiled against and present in runClient/runServer.
+    implementation fg.deobf(cf('epicfight'))
+    implementation fg.deobf(cf('irons_spellbooks'))
+    implementation fg.deobf(cf('cataclysm'))
+
+    // Their required dependencies, only needed at runtime in the dev environment.
+    runtimeOnly fg.deobf(cf('irons_lib'))
+    runtimeOnly fg.deobf(cf('curios'))
+    runtimeOnly fg.deobf(cf('geckolib'))
+    runtimeOnly fg.deobf(cf('playeranimator'))
+    runtimeOnly fg.deobf(cf('lionfishapi'))
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version: minecraft_version, minecraft_version_range: minecraft_version_range,
+            forge_version: forge_version, forge_version_range: forge_version_range,
+            loader_version_range: loader_version_range,
+            mod_id: mod_id, mod_name: mod_name, mod_license: mod_license, mod_version: mod_version,
+            mod_authors: mod_authors, mod_description: mod_description,
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+        expand replaceProperties + [project: project]
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title'     : mod_id,
+                'Specification-Vendor'    : mod_authors,
+                'Specification-Version'   : '1',
+                'Implementation-Title'    : project.name,
+                'Implementation-Version'  : project.jar.archiveVersion,
+                'Implementation-Vendor'   : mod_authors,
+                'Implementation-Timestamp': new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
+        ])
+    }
+    finalizedBy 'reobfJar'
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
