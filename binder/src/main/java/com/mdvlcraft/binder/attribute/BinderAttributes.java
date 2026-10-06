@@ -24,6 +24,10 @@ public final class BinderAttributes {
     public static final RegistryObject<Attribute> KATANA_DAMAGE = fraction("katana_damage", 5);
     /** Samurai: share of max stamina restored by a successful parry. */
     public static final RegistryObject<Attribute> PARRY_STAMINA = fraction("parry_stamina", 1);
+    /** Samurai (Water stance): longer perfect-parry window for Epic Fight's Parrying guard (0.5 = 50% longer). */
+    public static final RegistryObject<Attribute> PARRY_WINDOW = fraction("parry_window", 3);
+    /** Samurai (Wind stance): longer Epic Fight dodges (0.4 = 40% further). Read on the client, which moves the player. */
+    public static final RegistryObject<Attribute> DODGE_DISTANCE = fraction("dodge_distance", 2);
     /** Assassin: melee damage with daggers. */
     public static final RegistryObject<Attribute> DAGGER_DAMAGE = fraction("dagger_damage", 5);
     /** Assassin: melee damage when hitting a target from behind. */

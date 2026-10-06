@@ -45,6 +45,8 @@ public final class AbilityActions {
             castSpell(player, spellAbility.spell(), level);
         } else if (ability.get() instanceof Technique technique) {
             TechniqueRunner.press(player, technique);
+        } else if (ability.get() instanceof StanceAbility) {
+            Stances.press(player);
         }
     }
 

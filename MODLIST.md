@@ -1,10 +1,19 @@
-# MDVLCraft — Mod List (v1.5.0)
+# MDVLCraft — Mod List (v1.6.0)
 
-Importable pack: [`MDVLCraft-1.5.0.zip`](MDVLCraft-1.5.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
+Importable pack: [`MDVLCraft-1.6.0.zip`](MDVLCraft-1.6.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
 
 v1.1.0 = every mod from your **MDVL** pack merged into MDVLCraft v1.0.0 (newer version kept where both had the mod), plus your MDVL configs/KubeJS folder and the new **MDVLCraft Binder** mod.
 
-**143 files**: 141 CurseForge entries in `manifest.json` (140 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.4.0).
+**157 files**: 155 CurseForge entries in `manifest.json` (154 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.5.0).
+
+## v1.6.0 changes
+| Change | Notes |
+|---|---|
+| Added: 13 YUNG mods | YUNG's API, Better Dungeons, Mineshafts, Strongholds, Desert Temples, Ocean Monuments, Witch Huts, Jungle Temples, Nether Fortresses, End Island, Bridges, Extras and Menu Tweaks. Left out as asked, because they change biomes or caves: YUNG's Cave Biomes and Better Caves |
+| Added: Epic Structures: Villages 2.0.0 | Rebuilds vanilla villages as sprawling medieval towns (vanilla blocks only) |
+| Streams Reflowing | Already in the pack since v1.1.0 (from MDVL) |
+| Samurai Stance | New wheel ability (binder 0.5.0): cast to take a stance up or drop it, sneak and cast to change element. Fire +15% attack speed, Wind +40% dodge distance, Water +50% perfect-parry window, Earth +15% attack damage. Weapon trails take the element's colour (Fancy Trail's trails too), and nearby players see it |
+| Malevolent Shrine tooltip | Now describes the toggle (cast to open, cast again to close, up to 20 s) |
 
 ## v1.5.0 changes
 | Change | Notes |
@@ -70,6 +79,17 @@ Remove these **client-only** mods from a dedicated server's `mods` folder — ea
 | Dynamic Crosshair | `DynamicCrosshairBaseBlock` mixin into `Block` references `LocalPlayer` |
 | Accurate Block Placement | `Failed to create mod instance. ModID: accurateblockplacement` (LocalPlayer) |
 | Legendary Tooltips | `LegendaryTooltipsConfig.<init>` loads `LocalPlayer` |
+
+## Test results (v1.6.0)
+| Check | Result |
+|---|---|
+| Compatibility scan | No two jars in the pack (old or new) override the same vanilla structure, structure set, village piece or structure biome tag. Epic Villages replaces village pieces and adjusts which biomes get villages; Villager Recruits' expansion changes village spacing; they combine. YUNG's API is the only dependency of the YUNG mods |
+| Server and client boot | All 14 new mods load with no errors or failed mixins. Only YUNG's Extras' usual missing-refmap notice appears |
+| Structures | `place structure` builds YUNG's skeleton and zombie dungeons and stronghold. `locate` finds YUNG's witch hut, desert temple, jungle temple and ocean monument, and a village. The oak mineshaft, Nether fortress and Cursed Fate graveyard only place in their own biomes |
+| Stance (real keys) | Caps Lock: attack speed 1.60 → 1.84. Shift + Caps Lock to Wind: speed back to 1.60, dodge distance +0.4. Water: parry window +0.5. Earth: attack damage 6.0 → 6.9. Caps Lock again: all back to base |
+| Dodge distance | Epic Fight Step: 2.61 blocks with Wind against 1.86 without (×1.40) |
+| Trail colour | With temporary logging: every uchigatana swing makes a trail; none are recoloured with the stance off, Fire with Fire, Water after switching. Parry-window timing was checked at the attribute level only (it needs frame-perfect timing against a mob) |
+| Release jar | `mdvlcraft-0.5.0.jar` is the tested build without the temporary trail logging |
 
 ## Test results (v1.5.0)
 | Check | Result |
@@ -265,8 +285,22 @@ Environment: Linux, OpenJDK 17, Forge 47.4.10, 6 GB heaps; client via portablemc
 | 139 | EpicFight-Ponder (Arcad1a, P1nero) | MDVLCraft — extracted from TCR Core, ships in `overrides/mods` | `epic_fight_ponder-1.0.0.jar` |
 | 140 | [Pufferfish's Skills](https://www.curseforge.com/minecraft/mc-mods/puffish-skills) | added in v1.3.0 | `puffish_skills-0.19.1-1.20-forge.jar` |
 | 141 | [Pufferfish's Attributes](https://www.curseforge.com/minecraft/mc-mods/puffish-attributes) | added in v1.3.0 | `puffish_attributes-0.8.2-1.20-forge.jar` |
-| 142 | MDVLCraft Binder | this repo (`binder/`), ships in `overrides/mods` | `mdvlcraft-0.4.0.jar` |
+| 142 | MDVLCraft Binder | this repo (`binder/`), ships in `overrides/mods` | `mdvlcraft-0.5.0.jar` |
 | 143 | [Epic Fight x Iron's Spells: Enhanced Animations](https://www.curseforge.com/minecraft/mc-mods/epic-fight-x-irons-spells-enhanced-animations) | added in v1.5.0 | `efiscompat-2.6.0.jar` |
+| 144 | [YUNG's API (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-api) | added in v1.6.0 | `YungsApi-1.20-Forge-4.0.6.jar` |
+| 145 | [YUNG's Better Dungeons (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-dungeons) | added in v1.6.0 | `YungsBetterDungeons-1.20-Forge-4.0.4.jar` |
+| 146 | [YUNG's Better Mineshafts (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-mineshafts-forge) | added in v1.6.0 | `YungsBetterMineshafts-1.20-Forge-4.0.4.jar` |
+| 147 | [YUNG's Better Strongholds (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-strongholds) | added in v1.6.0 | `YungsBetterStrongholds-1.20-Forge-4.0.3.jar` |
+| 148 | [YUNG's Better Desert Temples (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-desert-temples) | added in v1.6.0 | `YungsBetterDesertTemples-1.20-Forge-3.0.3.jar` |
+| 149 | [YUNG's Better Ocean Monuments (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-ocean-monuments) | added in v1.6.0 | `YungsBetterOceanMonuments-1.20-Forge-3.0.4.jar` |
+| 150 | [YUNG's Better Witch Huts (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-witch-huts) | added in v1.6.0 | `YungsBetterWitchHuts-1.20-Forge-3.0.3.jar` |
+| 151 | [YUNG's Better Jungle Temples (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-jungle-temples) | added in v1.6.0 | `YungsBetterJungleTemples-1.20-Forge-2.0.5.jar` |
+| 152 | [YUNG's Better Nether Fortresses (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-nether-fortresses) | added in v1.6.0 | `YungsBetterNetherFortresses-1.20-Forge-2.0.6.jar` |
+| 153 | [YUNG's Better End Island (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-end-island) | added in v1.6.0 | `YungsBetterEndIsland-1.20-Forge-2.0.6.jar` |
+| 154 | [YUNG's Bridges (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-bridges) | added in v1.6.0 | `YungsBridges-1.20-Forge-4.0.3.jar` |
+| 155 | [YUNG's Extras (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-extras) | added in v1.6.0 | `YungsExtras-1.20-Forge-4.0.3.jar` |
+| 156 | [YUNG's Menu Tweaks (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-menu-tweaks) | added in v1.6.0 | `YungsMenuTweaks-1.20.1-Forge-1.0.2.jar` |
+| 157 | [Epic Structures: Villages](https://www.curseforge.com/minecraft/mc-mods/epic-villages) | added in v1.6.0 | `epic-structures-villages-2.0.0.jar` |
 
 ## v1.0.0 history
 v1.0.0 was trimmed from **The Casket of Reveries 2.2.9.7**. Decisions from that trim still apply: Sodium → Embeddium on Forge; Accelerated Rendering dropped (needs OpenGL 4.6); TheCasketOfRrveriesBosses and TCR Core removed (pack-specific), with EpicFight-Ponder extracted from TCR Core; LDLib is required by Photon; Cataclysm Dimensions moves Cataclysm boss structures into their own dimensions.

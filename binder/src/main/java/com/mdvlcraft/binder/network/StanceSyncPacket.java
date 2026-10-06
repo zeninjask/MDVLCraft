@@ -1,0 +1,28 @@
+package com.mdvlcraft.binder.network;
+
+import com.mdvlcraft.binder.ability.StanceElement;
+import com.mdvlcraft.binder.client.ClientStances;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.network.NetworkEvent;
+
+import java.util.function.Supplier;
+
+/** Server to client: a player's Stance element and whether it is active (for that player's weapon trail colour). */
+public record StanceSyncPacket(int entityId, StanceElement element, boolean active) {
+    public static void encode(StanceSyncPacket packet, FriendlyByteBuf buf) {
+        buf.writeVarInt(packet.entityId);
+        buf.writeEnum(packet.element);
+        buf.writeBoolean(packet.active);
+    }
+
+    public static StanceSyncPacket decode(FriendlyByteBuf buf) {
+        return new StanceSyncPacket(buf.readVarInt(), buf.readEnum(StanceElement.class), buf.readBoolean());
+    }
+
+    public static void handle(StanceSyncPacket packet, Supplier<NetworkEvent.Context> context) {
+        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> ClientStances.update(packet.entityId, packet.element, packet.active)));
+        context.get().setPacketHandled(true);
+    }
+}

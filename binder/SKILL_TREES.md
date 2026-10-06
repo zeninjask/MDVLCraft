@@ -78,36 +78,37 @@ Signature maximums: Damage Resistance +14%, Stun Armor +4, Armor Toughness +2.5,
 
 ## Samurai (Warrior)
 
-A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. No spells, just the blade.
+A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. No spells, just the blade and a Stance that channels fire, wind, water or earth.
 
-144 skills (105 of them twigs), 153 points in total (41 available).
+132 skills (92 of them twigs), 142 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Way of the Blade | 1 | +5% Katana Damage |
-| Cutting Edge 1 | 1 | +5% Armor Shred |
 | Retribution 1 | 1 | +3% Damage Reflection |
 | Impact 1 | 1 | +0.1 Impact (stagger power) |
 | Deflection 1 | 1 | +5% Stamina restored on Parry (of max) |
 | Edge 1 | 1 | +5% Katana Damage |
-| Cutting Edge 2 | 1 | +5% Armor Shred |
+| Cutting Edge 1 | 1 | +5% Armor Shred |
+| Stance | 2 | Unlocks Stance on the ability wheel (free): cast to take it up or drop it, sneak and cast to change element. Fire +15% attack speed, Wind +40% dodge distance, Water +50% perfect-parry window, Earth +15% attack damage. Your weapon trail takes the element's colour |
 | Retribution 2 | 1 | +3% Damage Reflection |
 | Impact 2 | 1 | +0.1 Impact (stagger power) |
 | Deflection 2 | 1 | +5% Stamina restored on Parry (of max) |
 | Edge 2 | 1 | +5% Katana Damage |
-| Cutting Edge 3 | 1 | +5% Armor Shred |
+| Cutting Edge 2 | 1 | +5% Armor Shred |
 | Retribution 3 | 1 | +3% Damage Reflection |
 | Impact 3 | 1 | +0.1 Impact (stagger power) |
 | Deflection 3 | 1 | +5% Stamina restored on Parry (of max) |
 | Edge 3 | 1 | +5% Katana Damage |
-| Cutting Edge Mastery | 2 | +10% Armor Shred |
+| Cutting Edge 3 | 1 | +5% Armor Shred |
 | Retribution Mastery | 2 | +6% Damage Reflection |
 | Impact Mastery | 2 | +0.2 Impact (stagger power) |
 | Perfect Parry | 2 | +10% Stamina restored on Parry (of max) |
 | Edge 4 | 1 | +5% Katana Damage |
+| Cutting Edge Mastery | 2 | +10% Armor Shred |
 | Iaijutsu | 2 | +10% Katana Damage |
 
-Signature maximums: Katana Damage +35%, Armor Shred +25%, Damage Reflection +15%, Impact (stagger power) +0.5, Stamina restored on Parry (of max) +25%. Plus the Warrior class spokes.
+Signature maximums: Katana Damage +35%, Damage Reflection +15%, Impact (stagger power) +0.5, Stamina restored on Parry (of max) +25%, Armor Shred +25%. Plus the Warrior class spokes.
 
 ## Berzerker (Warrior)
 

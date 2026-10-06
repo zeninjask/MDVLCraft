@@ -136,7 +136,7 @@ TECHNIQUE_MANA = {"mdvlcraft:dismantle": 20, "mdvlcraft:cleave": 35, "mdvlcraft:
                   "mdvlcraft:boogie_woogie": 15, "mdvlcraft:block_clap": 15}
 # Techniques that keep casting while the cast key is held (Technique.repeatTicks > 0), paying each time.
 HELD_TECHNIQUES = {"mdvlcraft:dismantle", "mdvlcraft:cleave"}
-ABILITY_NAMES = {"mdvlcraft:dismantle": "Dismantle", "mdvlcraft:cleave": "Cleave", "mdvlcraft:malevolent_shrine": "Malevolent Shrine",
+ABILITY_NAMES = {"mdvlcraft:stance": "Stance", "mdvlcraft:dismantle": "Dismantle", "mdvlcraft:cleave": "Cleave", "mdvlcraft:malevolent_shrine": "Malevolent Shrine",
                  "mdvlcraft:boogie_woogie": "Boogie Woogie", "mdvlcraft:block_clap": "Block Clap"}
 
 
@@ -200,6 +200,16 @@ def spell(name, level, cost, icon, title=None):
                 title=title or ability_name("irons_spellbooks:" + name))
 
 
+STANCE_TEXT = ("Unlocks Stance on the ability wheel (free): cast to take it up or drop it, sneak and cast to change element. "
+               "Fire +15% attack speed, Wind +40% dodge distance, Water +50% perfect-parry window, Earth +15% attack damage. "
+               "Your weapon trail takes the element's colour")
+
+
+def stance(cost):
+    """The Samurai's Stance (Stances.java); its effects are in StanceElement.java and STANCE_TEXT."""
+    return dict(kind="ability", ability="mdvlcraft:stance", level=1, cost=cost, icon="texture:mdvlcraft:textures/gui/stance.png", title="Stance")
+
+
 def technique(ability_id, cost, icon, note=None):
     return dict(kind="ability", ability=ability_id, level=1, cost=cost, icon=icon, title=ability_name(ability_id), note=note)
 
@@ -242,7 +252,7 @@ ARCHETYPES = {
                               chain("puffish_attributes:ranged_resistance", "Arrow Guard", "minecraft:arrow", 0.04, 2, 0.07)],
                    abilities=[[spell("shield", 2, 2, "minecraft:shield"), spell("shield", 4, 3, "minecraft:shield", "Aegis (Shield IV)")],
                               [spell("oakskin", 2, 2, "minecraft:oak_log"), spell("oakskin", 4, 3, "minecraft:oak_log", "Barkskin (Oakskin IV)")]]),
-    "samurai": dict(desc="A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. No spells, just the blade.", cls="warrior", title="Samurai", icon="minecraft:netherite_sword", bg="cherry_planks",
+    "samurai": dict(desc="A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. No spells, just the blade and a Stance that channels fire, wind, water or earth.", cls="warrior", title="Samurai", icon="minecraft:netherite_sword", bg="cherry_planks",
                     blurb="Katanas, swift strikes and rewarding parries.",
                     root=dict(title="Way of the Blade", attribute="mdvlcraft:katana_damage", value=0.05),
                     signature=[chain("mdvlcraft:katana_damage", "Edge", "minecraft:netherite_sword", 0.05, 4, 0.10, "Iaijutsu"),
@@ -250,7 +260,7 @@ ARCHETYPES = {
                                chain("puffish_attributes:damage_reflection", "Retribution", "minecraft:cactus", 0.03, 3, 0.06),
                                chain("epicfight:impact", "Impact", "minecraft:anvil", 0.1, 3, 0.2),
                                chain("puffish_attributes:armor_shred", "Cutting Edge", "minecraft:flint", 0.05, 3, 0.10)],
-                    abilities=[]),
+                    abilities=[[stance(2)]]),
     "berzerker": dict(desc="Pure aggression. Berzerkers stack raw attack damage, axe damage and life steal, hit more targets per swing and knock them flying. Fang Strike tears the ground open, and Heartstop lets them ignore death for a few seconds.", cls="warrior", title="Berzerker", icon="minecraft:iron_axe", bg="red_nether_bricks",
                       blurb="Raw damage, axes and bloodlust.",
                       root=dict(title="Bloodrage", attribute="minecraft:generic.attack_damage", value=0.5),
@@ -393,6 +403,8 @@ def fmt(attribute, value):
 
 
 def describe(node):
+    if node["kind"] == "ability" and node["ability"] == "mdvlcraft:stance":
+        return STANCE_TEXT
     if node["kind"] == "stat":
         return f"{fmt(node['attribute'], node['value'])} {ATTRIBUTES[node['attribute']][0]}"
     level = f" (Level {node['level']})" if node["ability"].startswith("irons_spellbooks:") else ""
@@ -409,6 +421,9 @@ def reward(node):
 
 
 def icon(item):
+    """An item ID, or "texture:" followed by a texture path."""
+    if item.startswith("texture:"):
+        return {"type": "texture", "data": {"texture": item[len("texture:"):]}}
     return {"type": "item", "data": {"item": item}}
 
 

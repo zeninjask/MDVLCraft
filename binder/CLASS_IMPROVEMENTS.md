@@ -20,7 +20,7 @@ Every spell and skill below goes to **one** archetype only, so the generator's o
 | Archetype | Has now | Add | Why |
 |---|---|---|---|
 | **Knight** | Shield, Oakskin | **Fortify** (Holy absorption shield) replaces Oakskin, which moves to Druid. Epic Fight **Impact Guard** (guard against magic, fire, explosions and arrows). Epic Fight **Endurance** (stun resistance while winding up) | Makes Knight the guard specialist, not just a stat wall |
-| **Samurai** | Nothing (blade only) | Epic Fight **Parrying** (timed guards cost no stamina, works on arrows). Epic Fight **Technician** (stamina back on perfect dodges). Optional capstone: **Flaming Strike** (a fire slash) | Its tree already rewards parries; Parrying makes that the core skill. It stays spell-free unless you take the optional capstone |
+| **Samurai** | Stance (Fire, Wind, Water, Earth; added in binder 0.5.0) | Epic Fight **Parrying** (timed guards cost no stamina, works on arrows), which the Water stance's longer perfect-parry window builds on. Epic Fight **Technician** (stamina back on perfect dodges), which pairs with Wind. Optional capstone: **Flaming Strike** (a fire slash) | Stance makes timing the core; these skills give each element a matching Epic Fight skill to slot. Still no spells unless you take the optional capstone |
 | **Berzerker** | Fang Strike, Heartstop | Epic Fight **Berserker** (more damage and speed the lower your health). Epic Fight **Forbidden Strength** (spends health when out of stamina). **Burning Dash** (fire gap-closer) and **Stomp** (ground-slam AoE) | Low-health risk/reward plus a way to reach the fight |
 
 ## Mage

@@ -54,7 +54,7 @@ public final class AbilityReward implements Reward {
         int abilityLevel = level.orElseThrow();
         // Spell level caps come from Iron's spell config, which is not built yet while data packs load;
         // tools/generate_skill_trees.py checks them against Iron's defaults instead.
-        int maxLevel = ability.get() instanceof Technique ? 1 : Integer.MAX_VALUE;
+        int maxLevel = ability.get() instanceof SpellAbility ? Integer.MAX_VALUE : 1;
         if (abilityLevel < 1 || abilityLevel > maxLevel) {
             return Result.failure(Problem.message("Level " + abilityLevel + " of `" + abilityId + "` is not allowed"));
         }

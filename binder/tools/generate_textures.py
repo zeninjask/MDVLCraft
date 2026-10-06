@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Draws the medieval skill screen textures: dark oak window and tabs with gold trim and a parchment title bar, node
-frames (iron, bronze, gold and crimson by state) and a parchment background for the Classes tab.
+frames (iron, bronze, gold and crimson by state), a parchment background for the Classes tab, and the Samurai's
+Stance icons.
 
 The window and tabs keep the geometry of the vanilla advancement textures, because Pufferfish's Skills slices them the
 same way (the mixin SkillsScreenMixin swaps them in). Everything is drawn from code; no vanilla pixels are used.
@@ -196,12 +197,65 @@ def parchment():
     im.save(OUT / "parchment.png")
 
 
+ELEMENTS = {"fire": (255, 90, 20), "wind": (168, 255, 210), "water": (46, 134, 255), "earth": (176, 122, 46)}
+
+
+def stance_icons():
+    """16x16 wheel icons for the Samurai's Stance: one per element (flame, gust, droplet, mountain) and a four-part
+    emblem for the skill tree."""
+    out = ROOT / "src/main/resources/assets/mdvlcraft/textures/gui"
+
+    def icon(name, inside, colour):
+        im = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+        px = im.load()
+        for y in range(16):
+            for x in range(16):
+                if inside(x + 0.5, y + 0.5):
+                    light = 40 if x + y < 14 else (-30 if x + y > 20 else 0)
+                    px[x, y] = shade(colour, light)
+        edge = [(x, y) for y in range(16) for x in range(16) if px[x, y][3] == 0 and any(
+            0 <= x + a < 16 and 0 <= y + b < 16 and px[x + a, y + b][3] == 255 for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
+        for x, y in edge:
+            px[x, y] = (12, 8, 5, 255)
+        if name == "fire":
+            for y in range(16):
+                for x in range(16):
+                    if drop(x + 0.5, y + 2.5, 5) and abs(x + 0.5 - 8) < 2.6 and px[x, y][3] == 255:
+                        px[x, y] = (255, 214, 70, 255)
+        im.save(out / f"stance_{name}.png")
+
+    def drop(x, y, tip):
+        # Teardrop: a circle at the bottom narrowing to a point at the top (flipped for nothing else).
+        dx, dy = x - 8, y - 10
+        if dy >= 0:
+            return dx * dx + dy * dy <= 16
+        return abs(dx) <= 4 * (1 + dy / (10 - tip)) and dy >= -(10 - tip)
+
+    icon("fire", lambda x, y: drop(x, y, 1), ELEMENTS["fire"])
+    icon("water", lambda x, y: drop(x, y, 3), ELEMENTS["water"])
+    icon("wind", lambda x, y: any(abs(y - cy) < 0.6 and lo <= x <= hi for cy, lo, hi in ((3.5, 1, 11), (8.5, 3, 14), (13.5, 1, 9)))
+         or abs(math.hypot(x - 11.5, y - 5.5) - 2.2) < 0.6 and y < 5.5, ELEMENTS["wind"])
+    icon("earth", lambda x, y: 14 >= y >= 3 + abs(x - 8) * 1.4 or (y >= 9 + abs(x - 3) * 1.6 and y <= 14), ELEMENTS["earth"])
+
+    im = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
+    px = im.load()
+    order = ["fire", "wind", "water", "earth"]
+    for y in range(16):
+        for x in range(16):
+            r = math.hypot(x + 0.5 - 8, y + 0.5 - 8)
+            if r <= 7.5:
+                quadrant = order[(0 if x < 8 else 1) + (0 if y < 8 else 2)]
+                px[x, y] = (12, 8, 5, 255) if r > 6.4 or abs(x + 0.5 - 8) < 0.6 or abs(y + 0.5 - 8) < 0.6 else shade(ELEMENTS[quadrant], 0)
+    im.save(out / "stance.png")
+
+
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
     window()
     tabs()
     frames()
     parchment()
+    stance_icons()
     print("textures written to", OUT.relative_to(ROOT))
 
 

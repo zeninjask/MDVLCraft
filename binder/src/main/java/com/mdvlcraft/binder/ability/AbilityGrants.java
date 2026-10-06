@@ -36,6 +36,9 @@ public final class AbilityGrants {
             // Eldritch spells must be learned before Iron's lets anyone cast them.
             MagicData.getPlayerMagicData(player).getSyncedData().learnSpell(spellAbility.spell());
         }
+        if (!active && reward.ability == StanceAbility.INSTANCE && level(player, StanceAbility.INSTANCE) == 0) {
+            Stances.deactivate(player);
+        }
         DIRTY.add(player.getUUID());
     }
 

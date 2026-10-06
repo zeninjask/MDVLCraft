@@ -31,5 +31,6 @@ public final class ClientAbilitySetup {
 
     private static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
         ClientAbilities.reset();
+        ClientStances.reset();
     }
 }

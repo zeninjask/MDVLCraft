@@ -9,14 +9,18 @@
     "NetworkHooksMixin",
     "RecipeManagerMixin",
     "ServerAdvancementManagerMixin",
-    "irons.SpellSelectionManagerMixin"
+    "irons.SpellSelectionManagerMixin",
+    "epicfight.ParryingSkillMixin",
+    "epicfight.ParryingSkillAccessor",
+    "epicfight.ActionAnimationMixin"
   ],
   "client": [
     "cursedfate.CursedfateModKeyMappingsMixin",
     "irons.JeiPluginMixin",
     "irons.KeyMappingsMixin",
     "WeaponTypeReloadListenerMixin",
-    "SkillsScreenMixin"
+    "SkillsScreenMixin",
+    "epicfight.AnimationTrailParticleMixin"
   ],
   "injectors": {
     "defaultRequire": 1

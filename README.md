@@ -4,7 +4,7 @@ A Forge **1.20.1** (Forge **47.4.10**) modpack built around Epic Fight combat, c
 
 | File | What it is |
 |------|------------|
-| [`MDVLCraft-1.5.0.zip`](MDVLCraft-1.5.0.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*). 141 CurseForge entries + EpicFight-Ponder + MDVLCraft Binder, with your MDVL configs and KubeJS folder |
+| [`MDVLCraft-1.6.0.zip`](MDVLCraft-1.6.0.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*). 155 CurseForge entries + EpicFight-Ponder + MDVLCraft Binder, with your MDVL configs and KubeJS folder |
 | [`MODLIST.md`](MODLIST.md) | Full mod list with source of each mod, merge changes, server notes and test results |
 | [`MDVLCraft-Optimisation-and-Improvement-Mods.docx`](MDVLCraft-Optimisation-and-Improvement-Mods.docx) | Word document: optimisation mods in the pack, optimisation and improvement mods to add, what to avoid |
 | [`REPORT.md`](REPORT.md) | Wider research report: addons, world generation, resource packs, progression, JVM arguments |
