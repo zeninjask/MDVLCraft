@@ -28,7 +28,7 @@ The HUD shows the selected ability, a mana bar and cast progress in the bottom-r
 
 | What | How |
 |---|---|
-| Forbidden items in creative tabs and JEI | `content/ContentEvents` (creative tabs), `compat/JeiHiddenContent` (JEI). Iron's own JEI plugin stays off (it stalled joins by 20+ s); its crafting-table recipes still show in JEI's crafting category |
+| Forbidden items in creative tabs | `content/ContentEvents` (the pack has no recipe viewer since JEI was removed in 1.8.0) |
 | Recipes | `mixin/RecipeManagerMixin`: recipes that make a forbidden item are not loaded; every other recipe from both mods is |
 | Loot (chests, mob and block drops, fishing, global loot modifiers) | `mixin/ForgeHooksMixin` strips forbidden items from every generated loot roll; `ContentEvents.onLivingDrops` covers code drops |
 | Trades | `ContentEvents.onEntityInteract`: any merchant (villagers, wandering trader, Iron's priests and wizards) drops offers involving a forbidden item before trading |
@@ -56,7 +56,7 @@ epicskill/   EpicSkillReward (Pufferfish reward mdvlcraft:epicfight_skill), Epic
 client/      ClientAbilities, ClientStances, AbilityKeys, AbilityScreen + CombatSkillsPanel, WheelScreen, AbilityHud, MedievalGui, ForeignKeyMappings
 network/     BinderNetwork + SyncAbilitiesPacket, AssignSlotPacket, CastPacket, StanceSyncPacket
 command/     /mdvl (operators): abilities | assign | clear | cast | release
-content/ mixin/ compat/   keeping spells inside the trees (table above)
+content/ mixin/   keeping spells inside the trees (table above)
 data/irons_spellbooks/epicfight_mobpatch/   Epic Fight behaviour for Iron's summons
 mixin/epicfight/   per-player parry window (ParryingSkill), dodge distance (ActionAnimation), stance trail colour (AnimationTrailParticle),
                    equip packet ignored (CPChangeSkill), skill screen key removed (EpicFightKeyMappings)
