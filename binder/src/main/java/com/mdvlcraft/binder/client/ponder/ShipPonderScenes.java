@@ -56,7 +56,7 @@ final class ShipPonderScenes {
         scene.title("rowboat_building", "Building a Rowboat");
         scene.configureBasePlate(0, 0, 6);
         scene.showBasePlate();
-        showBuildArea(scene, util, 6);
+        showBuildArea(scene, util);
         scene.idle(10);
 
         placeFrames(scene, ROWBOAT);
@@ -84,7 +84,7 @@ final class ShipPonderScenes {
         scene.configureBasePlate(0, 0, 11);
         scene.scaleSceneView(0.8F);
         scene.showBasePlate();
-        showBuildArea(scene, util, 11);
+        showBuildArea(scene, util);
         scene.idle(10);
 
         placeFrames(scene, SLOOP);
@@ -116,9 +116,9 @@ final class ShipPonderScenes {
         scene.markAsFinished();
     }
 
-    /** Ponder only draws shown sections; show the (still empty) two layers above the plate the ship is built in. */
-    private static void showBuildArea(SceneBuilder scene, SceneBuildingUtil util, int size) {
-        scene.world().showSection(util.select().fromTo(0, 1, 0, size - 1, 2, size - 1), Direction.DOWN);
+    /** Ponder only draws shown sections inside the plate's bounds; show the (still empty) air layers the ship is built in. */
+    private static void showBuildArea(SceneBuilder scene, SceneBuildingUtil util) {
+        scene.world().showSection(util.select().layersFrom(1), Direction.DOWN);
     }
 
     private static void placeFrames(SceneBuilder scene, List<Frame> frames) {
