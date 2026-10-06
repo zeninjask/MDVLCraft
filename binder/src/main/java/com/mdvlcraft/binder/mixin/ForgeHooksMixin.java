@@ -11,13 +11,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** Strips disabled-mod items from every generated loot roll (chests, mob drops, fishing), after global loot modifiers ran. */
+/** Strips forbidden items from every generated loot roll (chests, mob and block drops, fishing), after global loot modifiers ran. */
 @Mixin(value = ForgeHooks.class, remap = false)
 public abstract class ForgeHooksMixin {
     @Inject(method = "modifyLoot(Lnet/minecraft/resources/ResourceLocation;Lit/unimi/dsi/fastutil/objects/ObjectArrayList;Lnet/minecraft/world/level/storage/loot/LootContext;)Lit/unimi/dsi/fastutil/objects/ObjectArrayList;",
             at = @At("RETURN"))
-    private static void mdvlcraft$stripDisabledLoot(ResourceLocation lootTableId, ObjectArrayList<ItemStack> generatedLoot, LootContext context,
+    private static void mdvlcraft$stripForbiddenLoot(ResourceLocation lootTableId, ObjectArrayList<ItemStack> generatedLoot, LootContext context,
                                                     CallbackInfoReturnable<ObjectArrayList<ItemStack>> cir) {
-        cir.getReturnValue().removeIf(DisabledContent::isDisabled);
+        cir.getReturnValue().removeIf(DisabledContent::isForbidden);
     }
 }

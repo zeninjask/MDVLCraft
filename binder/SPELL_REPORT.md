@@ -28,7 +28,7 @@ Two whole schools have no home: **Ender** has twelve unused spells and **Evocati
 |---|---|---|---|
 | Oakskin | Knight | Druid | It is a Nature spell. Druid already gets nature power, so it would be stronger there and on theme. |
 | Fortify (new) | — | Knight | Takes Oakskin's place: an absorption buff for an armoured tank. |
-| Poison Arrow | Druid (root spell) | Stalker | It is an arrow, and Stalker has only one spell (Arrow Volley). Druid's root spell becomes Root or Acid Orb. |
+| Poison Arrow | Druid (root spell) | Stalker (**done**) | It is an arrow, and Stalker had only one spell (Arrow Volley). Druid's root spell is now Acid Orb. |
 | Counterspell | Wanderer | Arcanist (new, below) or Ice | A spell duel tool doesn't suit a traveller. Ice already leans on warding (magic resistance). |
 | Recall, Summon Ender Chest (new) | — | Wanderer | Replace Counterspell with real travel tools: return home, and portable storage. |
 | Planar Sight | Scout | Warlock (new, below) | It is Eldritch and legendary. Scout keeps Teleport and Haste. |

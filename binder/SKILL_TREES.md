@@ -438,44 +438,46 @@ Signature maximums: Saturation from Food +60%, Pet & Mount Resistance +20%, Moun
 
 ## Stalker (Ranger)
 
-Bows and crossbows. Ranged damage, arrow and bolt speed and evocation power make every shot count, and Arrow Volley rains arrows on a whole area.
+Bows and crossbows. Ranged damage, arrow and bolt speed and evocation power make every shot count. Arrow Volley rains arrows on a whole area and Poison Arrow leaves a lingering toxic cloud.
 
-138 skills (100 of them twigs), 150 points in total (41 available).
+132 skills (92 of them twigs), 146 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Hunter's Eye | 1 | +3% Ranged Damage |
-| Arbalest 1 | 1 | +5% Bolt Speed |
-| Aim 1 | 1 | +3% Ranged Damage |
-| Arrow Volley | 2 | Unlocks Arrow Volley (Level 3) on the ability wheel |
 | Fletcher's Art 1 | 1 | +3% Evocation Spell Power |
 | Longbow 1 | 1 | +5% Arrow Speed |
-| Arbalest 2 | 1 | +5% Bolt Speed |
-| Aim 2 | 1 | +3% Ranged Damage |
-| Rain of Arrows (Arrow Volley V) | 3 | Unlocks Arrow Volley (Level 5) on the ability wheel |
+| Poison Arrow | 2 | Unlocks Poison Arrow (Level 3) on the ability wheel |
+| Arrow Volley | 2 | Unlocks Arrow Volley (Level 3) on the ability wheel |
+| Arbalest 1 | 1 | +5% Bolt Speed |
+| Aim 1 | 1 | +3% Ranged Damage |
 | Fletcher's Art 2 | 1 | +3% Evocation Spell Power |
 | Longbow 2 | 1 | +5% Arrow Speed |
-| Arbalest Mastery | 2 | +10% Bolt Speed |
-| Aim 3 | 1 | +3% Ranged Damage |
+| Thornshot (Poison Arrow V) | 2 | Unlocks Poison Arrow (Level 5) on the ability wheel |
+| Rain of Arrows (Arrow Volley V) | 3 | Unlocks Arrow Volley (Level 5) on the ability wheel |
+| Arbalest 2 | 1 | +5% Bolt Speed |
+| Aim 2 | 1 | +3% Ranged Damage |
 | Fletcher's Art 3 | 1 | +3% Evocation Spell Power |
 | Longbow Mastery | 2 | +10% Arrow Speed |
-| Aim 4 | 1 | +3% Ranged Damage |
+| Arbalest Mastery | 2 | +10% Bolt Speed |
+| Aim 3 | 1 | +3% Ranged Damage |
 | Fletcher's Art Mastery | 2 | +6% Evocation Spell Power |
+| Aim 4 | 1 | +3% Ranged Damage |
 | Aim Mastery | 2 | +6% Ranged Damage |
 
-Signature maximums: Ranged Damage +21%, Bolt Speed +20%, Evocation Spell Power +15%, Arrow Speed +20%. Plus the Ranger class spokes.
+Signature maximums: Ranged Damage +21%, Evocation Spell Power +15%, Arrow Speed +20%, Bolt Speed +20%. Plus the Ranger class spokes.
 
 ## Druid (Ranger)
 
-Nature magic and the land's healing. Nature power and resistance strengthen Poison Arrow, Root, Firefly Swarm, Acid Orb and Earthquake, and standing on natural ground slowly heals you.
+Nature magic and the land's healing. Nature power and resistance strengthen Acid Orb, Root, Firefly Swarm and Earthquake, and standing on natural ground slowly heals you.
 
 143 skills (106 of them twigs), 157 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Wild Growth | 1 | Unlocks Poison Arrow (Level 3) on the ability wheel |
+| Wild Growth | 1 | Unlocks Acid Orb (Level 3) on the ability wheel |
 | Verdance 1 | 1 | +3% Nature Spell Power |
-| Acid Orb | 2 | Unlocks Acid Orb (Level 3) on the ability wheel |
+| Entangle (Root V) | 2 | Unlocks Root (Level 5) on the ability wheel |
 | Barkhide 1 | 1 | +5% Nature Resistance |
 | Root | 2 | Unlocks Root (Level 3) on the ability wheel |
 | Grove 1 | 1 | +0.5 Health per 5 s on natural ground |
@@ -486,7 +488,7 @@ Nature magic and the land's healing. Nature power and resistance strengthen Pois
 | Grove 2 | 1 | +0.5 Health per 5 s on natural ground |
 | Verdance 3 | 1 | +3% Nature Spell Power |
 | Barkhide Mastery | 2 | +10% Nature Resistance |
-| Thornshot (Poison Arrow V) | 2 | Unlocks Poison Arrow (Level 5) on the ability wheel |
+| Corrosion (Acid Orb V) | 2 | Unlocks Acid Orb (Level 5) on the ability wheel |
 | Grove Mastery | 2 | +0.5 Health per 5 s on natural ground |
 | Verdance 4 | 1 | +3% Nature Spell Power |
 | Verdance Mastery | 2 | +6% Nature Spell Power |

@@ -2,7 +2,6 @@ package com.mdvlcraft.binder.content;
 
 import com.mdvlcraft.binder.MDVLBinder;
 import com.mojang.serialization.Codec;
-import cursedfate.procedures.MobDropsProcedure;
 import cursedfate.procedures.OnEntityDeathMProcedure;
 import cursedfate.procedures.OnEntityDeathProcedure;
 import cursedfate.procedures.OpenChestProcedure;
@@ -31,14 +30,14 @@ public final class DisabledContentSetup {
 
     /**
      * Cursed Fate listeners that act on every player: random technique on join, level/mastery XP from kills (levels raise
-     * max health), mob drops, loot added to vanilla chests, quests, the random Reverse Curse Technique unlock at low
-     * health, and an attacker set that is never read or cleared (it holds every attacking entity forever).
+     * max health), Sukuna's fingers added to any opened chest, quests, the random Reverse Curse Technique unlock at low
+     * health, and an attacker set that is never read or cleared (it holds every attacking entity forever). Its mob drops
+     * stay: they are the cloth and residue its recipes need.
      */
     private static final List<Class<?>> CURSED_FATE_LISTENERS = List.of(
             SetTechniqueOnJoinProcedure.class,
             OnEntityDeathProcedure.class,
             OnEntityDeathMProcedure.class,
-            MobDropsProcedure.class,
             OpenChestProcedure.class,
             QuestEntityKilledProcedure.class,
             QuestRightClickedProcedure.class,

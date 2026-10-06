@@ -1,10 +1,20 @@
-# MDVLCraft — Mod List (v1.4.0)
+# MDVLCraft — Mod List (v1.5.0)
 
-Importable pack: [`MDVLCraft-1.4.0.zip`](MDVLCraft-1.4.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
+Importable pack: [`MDVLCraft-1.5.0.zip`](MDVLCraft-1.5.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
 
 v1.1.0 = every mod from your **MDVL** pack merged into MDVLCraft v1.0.0 (newer version kept where both had the mod), plus your MDVL configs/KubeJS folder and the new **MDVLCraft Binder** mod.
 
-**142 files**: 140 CurseForge entries in `manifest.json` (139 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.3.0).
+**143 files**: 141 CurseForge entries in `manifest.json` (140 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.4.0).
+
+## v1.5.0 changes
+| Change | Notes |
+|---|---|
+| Added: Epic Fight x Iron's Spells: Enhanced Animations 2.6.0 | Spell casting animations in Epic Fight mode. The pack already had the other two Epic Fight × Iron's addons: Epic Fight Compat Suite (movesets for Iron's weapons) and Epic Fight Skill - ISS. Iron's first-person arms and items are turned off in `irons_spellbooks-client.toml`, as the addon requires. Five of its 30+ animations (Ascension and the "Gojo" chant variants) fail to load on Epic Fight 20.14.17 and fall back; the rest load |
+| Iron's summons fight Epic Fight style | Summoned zombies, skeletons and vexes use Epic Fight's zombie, skeleton and vex behaviour (binder data) |
+| Iron's Spells and Cursed Fate items, recipes, ores and structures are back | Including their structure mobs and loot, Iron's priest houses in villages, and Cursed Fate's mob drops (cloth and residue for its recipes) |
+| Spells stay in the skill trees | Never obtainable anywhere: spell books, scrolls and eldritch manuscripts (any loot, drop or trade), the scroll forge and inscription table (recipes removed; placed ones do nothing), and cursed shards. Iron's "selected spell" is always empty, so staffs and Epic Fight Skill - ISS's Magic Blade can't cast the spells built into unique weapons. Natural spawns, keybinds, menus and advancements of both mods stay off |
+| Poison Arrow moved to Stalker | Stalker gains Poison Arrow III and Thornshot (V). Druid's root spell is now Acid Orb, with Entangle (Root V) in place of the moved spell |
+| Class improvement report | `binder/CLASS_IMPROVEMENTS.md`: proposed extra spells, Epic Fight skills and Cursed techniques for all 16 archetypes (not applied yet) |
 
 ## v1.4.0 changes
 Same 142 files as v1.3.0, with the binder updated to **0.3.0**:
@@ -60,6 +70,17 @@ Remove these **client-only** mods from a dedicated server's `mods` folder — ea
 | Dynamic Crosshair | `DynamicCrosshairBaseBlock` mixin into `Block` references `LocalPlayer` |
 | Accurate Block Placement | `Failed to create mod instance. ModID: accurateblockplacement` (LocalPlayer) |
 | Legendary Tooltips | `LegendaryTooltipsConfig.<init>` loads `LocalPlayer` |
+
+## Test results (v1.5.0)
+| Check | Result |
+|---|---|
+| Recipes | Arcane Anvil, Graybeard Staff, Mithril Weave, Cursed Cloth and Evolution Shard recipes load; Copper Spell Book, Scroll Forge, Inscription Table and Cursed Shards recipes are gone |
+| Structures | `place structure` generates Iron's Mangrove Hut and Pyromancer Tower and Cursed Fate's Cursed Mummy's Temple (the Graveyard only places in its own biomes). `locate structure` was not usable: on the 2-core test machine it ran past the 60 s server watchdog |
+| Loot | No scrolls in 30 rolls each of Iron's magic treasure and magic bookshelf tables, 40 vanilla dungeon chests (Iron's extra loot still adds arcane essence) or 20 Pyromancer drops; no cursed shards in 40 Cursed Fate graveyard chests |
+| Trades | A Priest offers 3 trades and no spell book |
+| Scroll forge, staff | Right-clicking a placed scroll forge opens nothing; a staff with Magehunter in the off hand casts nothing (mana unchanged) |
+| Stalker | Poison Arrow casts from the wheel (mana 100 → 56); the cast shows the Epic Fight casting pose |
+| Release jar | `mdvlcraft-0.4.0.jar` is the tested build with only its version changed. The recipe, structure, loot and trade checks ran on the build just before the last change (Iron's spell selection emptied instead of only cancelling staff right-clicks); the staff and casting checks ran on the final code |
 
 ## Test results (v1.4.0)
 Same setup as v1.3.0 (dedicated server plus a real client, RCON and keyboard input), with mana regeneration set to 0 so mana changes count casts exactly:
@@ -244,7 +265,8 @@ Environment: Linux, OpenJDK 17, Forge 47.4.10, 6 GB heaps; client via portablemc
 | 139 | EpicFight-Ponder (Arcad1a, P1nero) | MDVLCraft — extracted from TCR Core, ships in `overrides/mods` | `epic_fight_ponder-1.0.0.jar` |
 | 140 | [Pufferfish's Skills](https://www.curseforge.com/minecraft/mc-mods/puffish-skills) | added in v1.3.0 | `puffish_skills-0.19.1-1.20-forge.jar` |
 | 141 | [Pufferfish's Attributes](https://www.curseforge.com/minecraft/mc-mods/puffish-attributes) | added in v1.3.0 | `puffish_attributes-0.8.2-1.20-forge.jar` |
-| 142 | MDVLCraft Binder | this repo (`binder/`), ships in `overrides/mods` | `mdvlcraft-0.2.0.jar` |
+| 142 | MDVLCraft Binder | this repo (`binder/`), ships in `overrides/mods` | `mdvlcraft-0.4.0.jar` |
+| 143 | [Epic Fight x Iron's Spells: Enhanced Animations](https://www.curseforge.com/minecraft/mc-mods/epic-fight-x-irons-spells-enhanced-animations) | added in v1.5.0 | `efiscompat-2.6.0.jar` |
 
 ## v1.0.0 history
 v1.0.0 was trimmed from **The Casket of Reveries 2.2.9.7**. Decisions from that trim still apply: Sodium → Embeddium on Forge; Accelerated Rendering dropped (needs OpenGL 4.6); TheCasketOfRrveriesBosses and TCR Core removed (pack-specific), with EpicFight-Ponder extracted from TCR Core; LDLib is required by Photon; Cataclysm Dimensions moves Cataclysm boss structures into their own dimensions.

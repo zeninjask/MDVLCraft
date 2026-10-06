@@ -2,11 +2,12 @@
 
 The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 
-1. **Switches off Iron's Spells and Cursed Fate as standalone content.** No items, recipes, loot, structures, ores, mob spawns, trades, keybinds, menus or advancements from either mod. Their spells and techniques are only reachable through the skill trees.
-2. **Adds class and archetype skill trees** (Pufferfish's Skills), the Classes tab laid out radially like the *RPG skill tree* packs (hover an archetype for its description). Four classes, 16 archetypes, pick up to two; each archetype tab is a tree of 118–146 skills: boughs at uneven angles fork into limbs (class bonuses, signature bonuses, key abilities) and sprout twigs of small generic bonuses (health, speed, mana, cooldowns, saturation and more, capped per tree). See [`SKILL_TREES.md`](SKILL_TREES.md); ideas for moving spells and adding archetypes are in [`SPELL_REPORT.md`](SPELL_REPORT.md).
+1. **Keeps Iron's Spells and Cursed Fate spells and techniques inside the skill trees.** Their items, recipes, ores, structures (with their mobs and loot) are in the game. What's kept out is anything that hands out spells or traits on its own: spell books, scrolls and eldritch manuscripts (in any loot, drop or trade), the scroll forge and inscription table, Cursed Fate's cursed shards, and Iron's own casting from items (staffs, Magic Blade). Their natural mob spawns, keybinds, menus and advancements stay off. Spells and techniques come only from the skill trees and the ability wheel.
+2. **Adds class and archetype skill trees** (Pufferfish's Skills), the Classes tab laid out radially like the *RPG skill tree* packs (hover an archetype for its description). Four classes, 16 archetypes, pick up to two; each archetype tab is a tree of 118–146 skills: boughs at uneven angles fork into limbs (class bonuses, signature bonuses, key abilities) and sprout twigs of small generic bonuses (health, speed, mana, cooldowns, saturation and more, capped per tree). See [`SKILL_TREES.md`](SKILL_TREES.md); ideas for moving spells and adding archetypes are in [`SPELL_REPORT.md`](SPELL_REPORT.md), and proposed new abilities for the existing archetypes in [`CLASS_IMPROVEMENTS.md`](CLASS_IMPROVEMENTS.md).
 3. **Makes every weapon work with Epic Fight and Ponder.** Weapons that only had Epic Fight's generic fallback get the type that fits them (`data/*/capabilities/weapons/`), and Ponder (hold W over an item) gets a scene for every Epic Fight weapon type, not just Epic Fight's own eight (`client/ponder/`). `/mdvl weapons` writes a report of every weapon and its Epic Fight type.
-4. **Adds the ability wheel.** Spells and Cursed Fate techniques unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
-5. **Gives the skill and ability screens a medieval look:** dark oak and gold window and tabs, a parchment title bar and Classes tab, iron, bronze, gold and crimson node frames by state, and gold lines (`mixin/SkillsScreenMixin`, textures drawn by `tools/generate_textures.py`). The abilities screen, wheel and HUD use the same pieces.
+4. **Epic Fight × Iron's compatibility.** The pack adds *Epic Fight x Iron's Spells: Enhanced Animations* (casting animations in Epic Fight mode; Iron's first-person arms and items are turned off as it requires), and the binder gives Iron's summoned zombies, skeletons and vexes Epic Fight's mob behaviour (`data/irons_spellbooks/epicfight_mobpatch/`).
+5. **Adds the ability wheel.** Spells and Cursed Fate techniques unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
+6. **Gives the skill and ability screens a medieval look:** dark oak and gold window and tabs, a parchment title bar and Classes tab, iron, bronze, gold and crimson node frames by state, and gold lines (`mixin/SkillsScreenMixin`, textures drawn by `tools/generate_textures.py`). The abilities screen, wheel and HUD use the same pieces.
 
 ## Controls (defaults, rebindable under *MDVLCraft Abilities*)
 Every letter key is already used by some mod in the pack, so the defaults avoid letters. The log warns at startup if a binding shares a key with another mod.
@@ -19,19 +20,21 @@ Every letter key is already used by some mod in the pack, so the defaults avoid 
 
 The HUD shows the selected ability, a mana bar and cast progress in the bottom-right corner once you have an ability.
 
-## What "disabled" means in code
-| Content | How |
+## What's kept out, in code
+`content/DisabledContent` decides: **forbidden items** are anything implementing Iron's `ISpellbook` or `IScroll` (any mod's spell books and scrolls), eldritch manuscripts, the scroll forge, the inscription table and `cursedfate:cursed_shards`. **Disabled systems** are those of the `irons_spellbooks` and `cursedfate` namespaces.
+
+| What | How |
 |---|---|
-| Items in creative tabs and JEI | `content/ContentEvents` (creative tabs), `compat/JeiHiddenContent` (JEI items and Iron's code-registered recipe categories) |
-| Recipes | `mixin/RecipeManagerMixin`: recipes in, or producing items from, either mod are not loaded |
-| Loot (chests, mobs, fishing, global loot modifiers) | `mixin/ForgeHooksMixin` strips their items from every generated loot roll; `ContentEvents.onLivingDrops` covers code drops |
-| Structures | `mixin/ChunkGeneratorMixin` never starts their structures; `mixin/irons/VillageAdditionMixin` stops Iron's priest houses in villages |
-| Ores and natural spawns | `content/StripDisabledBiomeModifier` (biome modifier `mdvlcraft:strip_disabled`, REMOVE phase) |
-| Mobs from other paths | `ContentEvents.onFinalizeSpawn` cancels them unless summoned (spells) or spawned by command |
-| Trades | `ContentEvents` filters villager and wandering trader offers |
+| Forbidden items in creative tabs and JEI | `content/ContentEvents` (creative tabs), `compat/JeiHiddenContent` (JEI). Iron's own JEI plugin stays off (it stalled joins by 20+ s); its crafting-table recipes still show in JEI's crafting category |
+| Recipes | `mixin/RecipeManagerMixin`: recipes that make a forbidden item are not loaded; every other recipe from both mods is |
+| Loot (chests, mob and block drops, fishing, global loot modifiers) | `mixin/ForgeHooksMixin` strips forbidden items from every generated loot roll; `ContentEvents.onLivingDrops` covers code drops |
+| Trades | `ContentEvents.onEntityInteract`: any merchant (villagers, wandering trader, Iron's priests and wizards) drops offers involving a forbidden item before trading |
+| Scroll forge and inscription table placed by structures | `ContentEvents.onRightClickBlock`: right-clicking them does nothing |
+| Iron's own casting | `mixin/irons/SpellSelectionManagerMixin`: Iron's "selected spell" (from spell books, held items, armour and curios) is always empty, so staffs, casting implements and Epic Fight Skill - ISS's Magic Blade cast nothing and the spells built into Iron's unique weapons stay unreachable; staffs and gear keep their spell power |
+| Natural spawns | `content/StripDisabledBiomeModifier` (biome modifier `mdvlcraft:strip_disabled`) and `ContentEvents.onFinalizeSpawn` (NATURAL spawn reason). Structure, spawner, spell and command spawns are allowed |
 | Keybinds | `mixin/irons/KeyMappingsMixin`, `mixin/cursedfate/CursedfateModKeyMappingsMixin`: unbound and kept out of the Controls screen |
 | Cursed Fate menus, combat mode, abilities, quests, dash and roll | `mixin/NetworkHooksMixin`: the server drops every client-to-server packet on Cursed Fate's channels; `client/ClientContentSetup` removes the double-tap-Ctrl dash |
-| Cursed Fate progression | `content/DisabledContentSetup` unregisters its listeners for random techniques on join, level/mastery XP (levels raise max health), mob drops, vanilla-chest loot, quests, the random Reverse Curse Technique unlock, and an attacker set that is never cleared |
+| Cursed Fate progression | `content/DisabledContentSetup` unregisters its listeners for random techniques on join, level/mastery XP (levels raise max health), Sukuna's fingers added to opened chests, quests, the random Reverse Curse Technique unlock, and an attacker set that is never cleared. Its mob drops stay (cloth and residue for its recipes) |
 | Advancements | `mixin/ServerAdvancementManagerMixin` removes their display (no toasts or tabs). They are kept because Cursed Fate grants one by ID on join |
 
 Iron's mana, cast-bar, recast and screen-effect overlays stay because the wheel's spells use them. Its spell bar and spell wheel need a spellbook or its keys, so they never show.
@@ -46,7 +49,8 @@ skills/      ArchetypeTabs: class skills auto-unlocked, archetype skill unlocks 
 client/      ClientAbilities, AbilityKeys, AbilityScreen, WheelScreen, AbilityHud, MedievalGui, ForeignKeyMappings
 network/     BinderNetwork + SyncAbilitiesPacket, AssignSlotPacket, CastPacket
 command/     /mdvl (operators): abilities | assign | clear | cast | release
-content/ mixin/ compat/   disabling Iron's and Cursed Fate content (table above)
+content/ mixin/ compat/   keeping spells inside the trees (table above)
+data/irons_spellbooks/epicfight_mobpatch/   Epic Fight behaviour for Iron's summons
 tools/generate_skill_trees.py   writes src/main/resources/data/mdvlcraft/puffish_skills and SKILL_TREES.md
 tools/generate_textures.py      draws the medieval skill screen textures (needs Pillow)
 ```
