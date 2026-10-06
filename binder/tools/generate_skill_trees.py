@@ -475,7 +475,7 @@ def build_classes():
         angle = math.radians(cls["angle"])
         definitions[cls_id] = {"title": cls["title"], "description": cls["blurb"], "icon": icon(cls["icon"]),
                                "frame": frame("challenge"), "size": 1.6, "cost": 0}
-        skills[cls_id] = {"x": round(math.cos(angle) * 72), "y": round(math.sin(angle) * 72), "definition": cls_id, "root": True}
+        skills[cls_id] = {"x": round(math.cos(angle) * 64), "y": round(math.sin(angle) * 64), "definition": cls_id, "root": True}
         members = [a for a, arch in ARCHETYPES.items() if arch["cls"] == cls_id]
         spread = 72
         for i, arch_id in enumerate(members):
@@ -487,7 +487,7 @@ def build_classes():
                                     "extra_description": (f"Key abilities: {', '.join(abilities)}. " if abilities else "")
                                     + f"Opens the {arch['title']} tab. You can pick {ARCHETYPE_LIMIT} archetypes in total.",
                                     "icon": icon(arch["icon"]), "frame": frame("goal"), "size": 1.25, "cost": 1}
-            skills[arch_id] = {"x": round(math.cos(a) * 175), "y": round(math.sin(a) * 175), "definition": arch_id}
+            skills[arch_id] = {"x": round(math.cos(a) * 150), "y": round(math.sin(a) * 150), "definition": arch_id}
             connections.append([cls_id, arch_id])
     check_spacing("classes", skills)
     base = OUT / "categories" / "classes"

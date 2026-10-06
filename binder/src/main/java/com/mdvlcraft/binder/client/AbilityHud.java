@@ -7,7 +7,10 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
-/** Selected wheel ability and mana bar, left of the hotbar. Hidden until the player has an ability. */
+/**
+ * Selected wheel ability, mana bar and cast progress in the bottom-right corner (the pack's HUD mod rearranges the
+ * hotbar area). Hidden until the player has an ability.
+ */
 final class AbilityHud implements IGuiOverlay {
     static final AbilityHud INSTANCE = new AbilityHud();
 
@@ -20,8 +23,8 @@ final class AbilityHud implements IGuiOverlay {
         if (minecraft.options.hideGui || minecraft.player == null || ClientAbilities.granted().isEmpty()) {
             return;
         }
-        int x = screenWidth / 2 - 91 - 29 - (minecraft.player.getOffhandItem().isEmpty() ? 0 : 29);
-        int y = screenHeight - 23;
+        int x = screenWidth - 26;
+        int y = screenHeight - 26;
         graphics.fill(x, y, x + 22, y + 22, 0xFF6B4FA0);
         graphics.fill(x + 1, y + 1, x + 21, y + 21, 0xE0101010);
         ClientAbilities.slot(ClientAbilities.selected()).ifPresent(ability -> {

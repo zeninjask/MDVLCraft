@@ -15,7 +15,7 @@ Every letter key is already used by some mod in the pack, so the defaults avoid 
 | **Caps Lock** | Cast the selected ability. Spells follow Iron's rules (cast time, mana, cooldown; press again to cancel). Hold-type techniques (Cleave, Malevolent Shrine) last while the key is held |
 | **K** | Pufferfish's skill screen (Classes tab plus your archetype tabs) |
 
-The HUD shows the selected ability, a mana bar and cast progress left of the hotbar once you have an ability.
+The HUD shows the selected ability, a mana bar and cast progress in the bottom-right corner once you have an ability.
 
 ## What "disabled" means in code
 | Content | How |
