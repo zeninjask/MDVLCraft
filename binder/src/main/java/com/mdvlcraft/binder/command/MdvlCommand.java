@@ -22,13 +22,19 @@ import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
+import java.io.IOException;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
  * Operator commands for the ability wheel, the same actions the client sends:
  * /mdvl abilities <player>, /mdvl assign <player> <slot> <ability>, /mdvl clear <player> <slot>,
- * /mdvl cast <player> <slot>, /mdvl release <player>. Slots are 1-8.
+ * /mdvl cast <player> <slot>, /mdvl release <player>. Slots are 1-8. /mdvl weapons writes an Epic Fight weapon report.
  */
 @Mod.EventBusSubscriber(modid = MDVLBinder.MOD_ID)
 public final class MdvlCommand {
@@ -50,7 +56,24 @@ public final class MdvlCommand {
                         .then(Commands.argument("slot", IntegerArgumentType.integer(1, Loadout.SLOTS)).executes(MdvlCommand::clear))))
                 .then(Commands.literal("cast").then(Commands.argument("player", EntityArgument.player())
                         .then(Commands.argument("slot", IntegerArgumentType.integer(1, Loadout.SLOTS)).executes(MdvlCommand::cast))))
-                .then(Commands.literal("release").then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::release))));
+                .then(Commands.literal("release").then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::release)))
+                .then(Commands.literal("weapons").executes(MdvlCommand::weapons)));
+    }
+
+    /** Writes weapons.tsv in the server folder: every weapon-like item, its Epic Fight category and weapon type. */
+    private static int weapons(CommandContext<CommandSourceStack> context) {
+        List<WeaponReport.Row> rows = WeaponReport.build();
+        Path file = context.getSource().getServer().getServerDirectory().toPath().resolve("weapons.tsv");
+        List<String> lines = new ArrayList<>(List.of("item\tsupported\tcategory\tweapon_type\tclass"));
+        rows.forEach(row -> lines.add(String.join("\t", row.id().toString(), String.valueOf(row.supported()), row.category(), row.weaponType(), row.itemClass())));
+        try {
+            Files.write(file, lines);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        long unsupported = rows.stream().filter(row -> !row.supported()).count();
+        context.getSource().sendSuccess(() -> Component.literal(rows.size() + " weapons, " + unsupported + " without Epic Fight support; written to " + file), false);
+        return (int) unsupported;
     }
 
     private static int abilities(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

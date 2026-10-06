@@ -27,21 +27,106 @@
     ],
     "cost": 1
   },
-  "shield": {
-    "title": "Shield",
-    "description": "Unlocks Shield (Level 2) on the ability wheel",
+  "knockback_resistance_1": {
+    "title": "Stand Firm 1",
+    "description": "+3% Knockback Resistance",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:shield"
+        "item": "minecraft:anvil"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:shield",
-          "level": 2
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "knockback_resistance_2": {
+    "title": "Stand Firm 2",
+    "description": "+3% Knockback Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:anvil"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "knockback_resistance_3": {
+    "title": "Stand Firm 3",
+    "description": "+3% Knockback Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:anvil"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "knockback_resistance_mastery": {
+    "title": "Stand Firm Mastery",
+    "description": "+6% Knockback Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:anvil"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.06,
+          "operation": "addition"
         }
       }
     ],
@@ -52,50 +137,79 @@
         "frame": "goal"
       }
     },
-    "size": 1.3
+    "size": 1.2,
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
   },
-  "shield_4": {
-    "title": "Aegis (Shield IV)",
-    "description": "Unlocks Shield (Level 4) on the ability wheel",
+  "stun_armor_1": {
+    "title": "Unshakable 1",
+    "description": "+1 Stun Armor",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:shield"
+        "item": "minecraft:obsidian"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:shield",
-          "level": 4
+          "attribute": "epicfight:stun_armor",
+          "value": 1,
+          "operation": "addition"
         }
       }
     ],
-    "cost": 3,
+    "cost": 1,
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "challenge"
+        "frame": "task"
       }
-    },
-    "size": 1.3
+    }
   },
-  "oakskin": {
-    "title": "Oakskin",
-    "description": "Unlocks Oakskin (Level 2) on the ability wheel",
+  "stun_armor_2": {
+    "title": "Unshakable 2",
+    "description": "+1 Stun Armor",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:oak_log"
+        "item": "minecraft:obsidian"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:oakskin",
-          "level": 2
+          "attribute": "epicfight:stun_armor",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "stun_armor_mastery": {
+    "title": "Unshakable Mastery",
+    "description": "+2 Stun Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:obsidian"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stun_armor",
+          "value": 2,
+          "operation": "addition"
         }
       }
     ],
@@ -106,34 +220,116 @@
         "frame": "goal"
       }
     },
-    "size": 1.3
+    "size": 1.2
   },
-  "oakskin_4": {
-    "title": "Barkskin (Oakskin IV)",
-    "description": "Unlocks Oakskin (Level 4) on the ability wheel",
+  "armor_toughness_1": {
+    "title": "Plate Mastery 1",
+    "description": "+0.5 Armor Toughness",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:oak_log"
+        "item": "minecraft:netherite_chestplate"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:oakskin",
-          "level": 4
+          "attribute": "minecraft:generic.armor_toughness",
+          "value": 0.5,
+          "operation": "addition"
         }
       }
     ],
-    "cost": 3,
+    "cost": 1,
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "challenge"
+        "frame": "task"
+      }
+    }
+  },
+  "armor_toughness_2": {
+    "title": "Plate Mastery 2",
+    "description": "+0.5 Armor Toughness",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
       }
     },
-    "size": 1.3
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor_toughness",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "armor_toughness_3": {
+    "title": "Plate Mastery 3",
+    "description": "+0.5 Armor Toughness",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor_toughness",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "armor_toughness_mastery": {
+    "title": "Plate Mastery Mastery",
+    "description": "+1 Armor Toughness",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor_toughness",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
   },
   "resistance_1": {
     "title": "Fortress 1",
@@ -271,103 +467,21 @@
     },
     "size": 1.2
   },
-  "armor_toughness_1": {
-    "title": "Plate Mastery 1",
-    "description": "+0.5 Armor Toughness",
+  "shield": {
+    "title": "Shield",
+    "description": "Unlocks Shield (Level 2) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:netherite_chestplate"
+        "item": "minecraft:shield"
       }
     },
     "rewards": [
       {
-        "type": "puffish_skills:attribute",
+        "type": "mdvlcraft:ability",
         "data": {
-          "attribute": "minecraft:generic.armor_toughness",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "armor_toughness_2": {
-    "title": "Plate Mastery 2",
-    "description": "+0.5 Armor Toughness",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:netherite_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor_toughness",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "armor_toughness_3": {
-    "title": "Plate Mastery 3",
-    "description": "+0.5 Armor Toughness",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:netherite_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor_toughness",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "armor_toughness_mastery": {
-    "title": "Plate Mastery Mastery",
-    "description": "+1 Armor Toughness",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:netherite_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor_toughness",
-          "value": 1,
-          "operation": "addition"
+          "ability": "irons_spellbooks:shield",
+          "level": 2
         }
       }
     ],
@@ -378,225 +492,34 @@
         "frame": "goal"
       }
     },
-    "size": 1.2
+    "size": 1.3
   },
-  "greatsword_damage_1": {
-    "title": "Greatsword 1",
-    "description": "+5% Greatsword Damage",
+  "shield_4": {
+    "title": "Aegis (Shield IV)",
+    "description": "Unlocks Shield (Level 4) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:iron_sword"
+        "item": "minecraft:shield"
       }
     },
     "rewards": [
       {
-        "type": "puffish_skills:attribute",
+        "type": "mdvlcraft:ability",
         "data": {
-          "attribute": "mdvlcraft:greatsword_damage",
-          "value": 0.05,
-          "operation": "addition"
+          "ability": "irons_spellbooks:shield",
+          "level": 4
         }
       }
     ],
-    "cost": 1,
+    "cost": 3,
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "greatsword_damage_2": {
-    "title": "Greatsword 2",
-    "description": "+5% Greatsword Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_sword"
+        "frame": "challenge"
       }
     },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:greatsword_damage",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "greatsword_damage_3": {
-    "title": "Greatsword 3",
-    "description": "+5% Greatsword Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_sword"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:greatsword_damage",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "greatsword_damage_4": {
-    "title": "Greatsword 4",
-    "description": "+5% Greatsword Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_sword"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:greatsword_damage",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "greatsword_damage_mastery": {
-    "title": "Greatsword Mastery",
-    "description": "+10% Greatsword Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_sword"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:greatsword_damage",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "stun_armor_1": {
-    "title": "Unshakable 1",
-    "description": "+1 Stun Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:obsidian"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stun_armor",
-          "value": 1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "stun_armor_2": {
-    "title": "Unshakable 2",
-    "description": "+1 Stun Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:obsidian"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stun_armor",
-          "value": 1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "stun_armor_mastery": {
-    "title": "Unshakable Mastery",
-    "description": "+2 Stun Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:obsidian"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stun_armor",
-          "value": 2,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
+    "size": 1.3
   },
   "ranged_resistance_1": {
     "title": "Arrow Guard 1",
@@ -821,106 +744,21 @@
     "size": 1.2,
     "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
   },
-  "armor_1": {
-    "title": "Bulk 1",
-    "description": "+0.5 Armor",
+  "oakskin": {
+    "title": "Oakskin",
+    "description": "Unlocks Oakskin (Level 2) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:iron_chestplate"
+        "item": "minecraft:oak_log"
       }
     },
     "rewards": [
       {
-        "type": "puffish_skills:attribute",
+        "type": "mdvlcraft:ability",
         "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "armor_2": {
-    "title": "Bulk 2",
-    "description": "+0.5 Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "armor_3": {
-    "title": "Bulk 3",
-    "description": "+0.5 Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "armor_mastery": {
-    "title": "Bulk Mastery",
-    "description": "+1 Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 1,
-          "operation": "addition"
+          "ability": "irons_spellbooks:oakskin",
+          "level": 2
         }
       }
     ],
@@ -931,121 +769,34 @@
         "frame": "goal"
       }
     },
-    "size": 1.2,
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+    "size": 1.3
   },
-  "knockback_resistance_1": {
-    "title": "Stand Firm 1",
-    "description": "+3% Knockback Resistance",
+  "oakskin_4": {
+    "title": "Barkskin (Oakskin IV)",
+    "description": "Unlocks Oakskin (Level 4) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:anvil"
+        "item": "minecraft:oak_log"
       }
     },
     "rewards": [
       {
-        "type": "puffish_skills:attribute",
+        "type": "mdvlcraft:ability",
         "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.03,
-          "operation": "addition"
+          "ability": "irons_spellbooks:oakskin",
+          "level": 4
         }
       }
     ],
-    "cost": 1,
+    "cost": 3,
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "task"
+        "frame": "challenge"
       }
     },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "knockback_resistance_2": {
-    "title": "Stand Firm 2",
-    "description": "+3% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "knockback_resistance_3": {
-    "title": "Stand Firm 3",
-    "description": "+3% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "knockback_resistance_mastery": {
-    "title": "Stand Firm Mastery",
-    "description": "+6% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.06,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+    "size": 1.3
   },
   "natural_regeneration_1": {
     "title": "Second Wind 1",
@@ -1159,5 +910,254 @@
     },
     "size": 1.2,
     "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "armor_1": {
+    "title": "Bulk 1",
+    "description": "+0.5 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "armor_2": {
+    "title": "Bulk 2",
+    "description": "+0.5 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "armor_3": {
+    "title": "Bulk 3",
+    "description": "+0.5 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "armor_mastery": {
+    "title": "Bulk Mastery",
+    "description": "+1 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "greatsword_damage_1": {
+    "title": "Greatsword 1",
+    "description": "+5% Greatsword Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:greatsword_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "greatsword_damage_2": {
+    "title": "Greatsword 2",
+    "description": "+5% Greatsword Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:greatsword_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "greatsword_damage_3": {
+    "title": "Greatsword 3",
+    "description": "+5% Greatsword Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:greatsword_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "greatsword_damage_4": {
+    "title": "Greatsword 4",
+    "description": "+5% Greatsword Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:greatsword_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "greatsword_damage_mastery": {
+    "title": "Greatsword Mastery",
+    "description": "+10% Greatsword Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:greatsword_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
   }
 }

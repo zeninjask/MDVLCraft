@@ -3,6 +3,22 @@
     "unidirectional": [
       [
         "root",
+        "spell_resist_1"
+      ],
+      [
+        "spell_resist_1",
+        "spell_resist_2"
+      ],
+      [
+        "spell_resist_2",
+        "spell_resist_3"
+      ],
+      [
+        "spell_resist_3",
+        "spell_resist_mastery"
+      ],
+      [
+        "root",
         "fire_breath"
       ],
       [
@@ -12,6 +28,90 @@
       [
         "magma_bomb",
         "firebolt"
+      ],
+      [
+        "root",
+        "experience_1"
+      ],
+      [
+        "experience_1",
+        "experience_2"
+      ],
+      [
+        "experience_2",
+        "experience_3"
+      ],
+      [
+        "experience_3",
+        "experience_mastery"
+      ],
+      [
+        "root",
+        "max_mana_1"
+      ],
+      [
+        "max_mana_1",
+        "max_mana_2"
+      ],
+      [
+        "max_mana_2",
+        "max_mana_3"
+      ],
+      [
+        "max_mana_3",
+        "max_mana_4"
+      ],
+      [
+        "max_mana_4",
+        "max_mana_mastery"
+      ],
+      [
+        "root",
+        "cooldown_reduction_1"
+      ],
+      [
+        "cooldown_reduction_1",
+        "cooldown_reduction_2"
+      ],
+      [
+        "cooldown_reduction_2",
+        "cooldown_reduction_3"
+      ],
+      [
+        "cooldown_reduction_3",
+        "cooldown_reduction_mastery"
+      ],
+      [
+        "root",
+        "cast_time_reduction_1"
+      ],
+      [
+        "cast_time_reduction_1",
+        "cast_time_reduction_2"
+      ],
+      [
+        "cast_time_reduction_2",
+        "cast_time_reduction_3"
+      ],
+      [
+        "cast_time_reduction_3",
+        "cast_time_reduction_4"
+      ],
+      [
+        "cast_time_reduction_4",
+        "cast_time_reduction_mastery"
+      ],
+      [
+        "root",
+        "fire_magic_resist_1"
+      ],
+      [
+        "fire_magic_resist_1",
+        "fire_magic_resist_2"
+      ],
+      [
+        "fire_magic_resist_2",
+        "fire_magic_resist_mastery"
       ],
       [
         "root",
@@ -43,54 +143,6 @@
       ],
       [
         "root",
-        "cooldown_reduction_1"
-      ],
-      [
-        "cooldown_reduction_1",
-        "cooldown_reduction_2"
-      ],
-      [
-        "cooldown_reduction_2",
-        "cooldown_reduction_3"
-      ],
-      [
-        "cooldown_reduction_3",
-        "cooldown_reduction_mastery"
-      ],
-      [
-        "root",
-        "fire_magic_resist_1"
-      ],
-      [
-        "fire_magic_resist_1",
-        "fire_magic_resist_2"
-      ],
-      [
-        "fire_magic_resist_2",
-        "fire_magic_resist_mastery"
-      ],
-      [
-        "root",
-        "max_mana_1"
-      ],
-      [
-        "max_mana_1",
-        "max_mana_2"
-      ],
-      [
-        "max_mana_2",
-        "max_mana_3"
-      ],
-      [
-        "max_mana_3",
-        "max_mana_4"
-      ],
-      [
-        "max_mana_4",
-        "max_mana_mastery"
-      ],
-      [
-        "root",
         "mana_regen_1"
       ],
       [
@@ -108,58 +160,24 @@
       [
         "mana_regen_4",
         "mana_regen_mastery"
-      ],
-      [
-        "root",
-        "cast_time_reduction_1"
-      ],
-      [
-        "cast_time_reduction_1",
-        "cast_time_reduction_2"
-      ],
-      [
-        "cast_time_reduction_2",
-        "cast_time_reduction_3"
-      ],
-      [
-        "cast_time_reduction_3",
-        "cast_time_reduction_4"
-      ],
-      [
-        "cast_time_reduction_4",
-        "cast_time_reduction_mastery"
-      ],
-      [
-        "root",
-        "experience_1"
-      ],
+      ]
+    ],
+    "bidirectional": [
       [
         "experience_1",
-        "experience_2"
+        "max_mana_1"
       ],
       [
         "experience_2",
-        "experience_3"
+        "max_mana_2"
       ],
       [
-        "experience_3",
-        "experience_mastery"
+        "experience_2",
+        "max_mana_3"
       ],
       [
-        "root",
-        "spell_resist_1"
-      ],
-      [
-        "spell_resist_1",
-        "spell_resist_2"
-      ],
-      [
-        "spell_resist_2",
-        "spell_resist_3"
-      ],
-      [
-        "spell_resist_3",
-        "spell_resist_mastery"
+        "cast_time_reduction_1",
+        "fire_magic_resist_1"
       ]
     ]
   }

@@ -26,21 +26,106 @@
     ],
     "cost": 1
   },
-  "root_3": {
-    "title": "Root",
-    "description": "Unlocks Root (Level 3) on the ability wheel",
+  "sprinting_speed_1": {
+    "title": "Sprinter 1",
+    "description": "+3% Sprinting Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:mangrove_roots"
+        "item": "minecraft:rabbit_foot"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:root",
-          "level": 3
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_2": {
+    "title": "Sprinter 2",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_3": {
+    "title": "Sprinter 3",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_mastery": {
+    "title": "Sprinter Mastery",
+    "description": "+6% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.06,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -51,23 +136,109 @@
         "frame": "goal"
       }
     },
-    "size": 1.3
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "firefly_swarm": {
-    "title": "Firefly Swarm",
-    "description": "Unlocks Firefly Swarm (Level 3) on the ability wheel",
+  "stamina_1": {
+    "title": "Forager 1",
+    "description": "+5% Stamina (slower hunger)",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:glow_berries"
+        "item": "minecraft:bread"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:firefly_swarm",
-          "level": 3
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_2": {
+    "title": "Forager 2",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_3": {
+    "title": "Forager 3",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_mastery": {
+    "title": "Forager Mastery",
+    "description": "+10% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.1,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -78,23 +249,109 @@
         "frame": "goal"
       }
     },
-    "size": 1.3
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "poison_arrow": {
-    "title": "Thornshot (Poison Arrow V)",
-    "description": "Unlocks Poison Arrow (Level 5) on the ability wheel",
+  "staminar_1": {
+    "title": "Evasion Training 1",
+    "description": "+0.5 Max Stamina",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:sweet_berries"
+        "item": "minecraft:leather_boots"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:poison_arrow",
-          "level": 5
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_2": {
+    "title": "Evasion Training 2",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_3": {
+    "title": "Evasion Training 3",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_mastery": {
+    "title": "Evasion Training Mastery",
+    "description": "+1 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 1,
+          "operation": "addition"
         }
       }
     ],
@@ -105,61 +362,8 @@
         "frame": "goal"
       }
     },
-    "size": 1.3
-  },
-  "acid_orb": {
-    "title": "Acid Orb",
-    "description": "Unlocks Acid Orb (Level 3) on the ability wheel",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:slime_ball"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:acid_orb",
-          "level": 3
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.3
-  },
-  "earthquake": {
-    "title": "Earthquake",
-    "description": "Unlocks Earthquake (Level 2) on the ability wheel",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:cobblestone"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:earthquake",
-          "level": 2
-        }
-      }
-    ],
-    "cost": 3,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "challenge"
-      }
-    },
-    "size": 1.3
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
   "nature_spell_power_1": {
     "title": "Verdance 1",
@@ -297,76 +501,21 @@
     },
     "size": 1.2
   },
-  "nature_regen_1": {
-    "title": "Grove 1",
-    "description": "+0.5 Health per 5 s on natural ground",
+  "acid_orb": {
+    "title": "Acid Orb",
+    "description": "Unlocks Acid Orb (Level 3) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:grass_block"
+        "item": "minecraft:slime_ball"
       }
     },
     "rewards": [
       {
-        "type": "puffish_skills:attribute",
+        "type": "mdvlcraft:ability",
         "data": {
-          "attribute": "mdvlcraft:nature_regen",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "nature_regen_2": {
-    "title": "Grove 2",
-    "description": "+0.5 Health per 5 s on natural ground",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:grass_block"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:nature_regen",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "nature_regen_mastery": {
-    "title": "Grove Mastery",
-    "description": "+0.5 Health per 5 s on natural ground",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:grass_block"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:nature_regen",
-          "value": 0.5,
-          "operation": "addition"
+          "ability": "irons_spellbooks:acid_orb",
+          "level": 3
         }
       }
     ],
@@ -377,202 +526,34 @@
         "frame": "goal"
       }
     },
-    "size": 1.2
+    "size": 1.3
   },
-  "nature_magic_resist_1": {
-    "title": "Barkhide 1",
-    "description": "+5% Nature Resistance",
+  "earthquake": {
+    "title": "Earthquake",
+    "description": "Unlocks Earthquake (Level 2) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:oak_log"
+        "item": "minecraft:cobblestone"
       }
     },
     "rewards": [
       {
-        "type": "puffish_skills:attribute",
+        "type": "mdvlcraft:ability",
         "data": {
-          "attribute": "irons_spellbooks:nature_magic_resist",
-          "value": 0.05,
-          "operation": "addition"
+          "ability": "irons_spellbooks:earthquake",
+          "level": 2
         }
       }
     ],
-    "cost": 1,
+    "cost": 3,
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "nature_magic_resist_2": {
-    "title": "Barkhide 2",
-    "description": "+5% Nature Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:oak_log"
+        "frame": "challenge"
       }
     },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:nature_magic_resist",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "nature_magic_resist_mastery": {
-    "title": "Barkhide Mastery",
-    "description": "+10% Nature Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:oak_log"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:nature_magic_resist",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "sprinting_speed_1": {
-    "title": "Sprinter 1",
-    "description": "+3% Sprinting Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:rabbit_foot"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:sprinting_speed",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "sprinting_speed_2": {
-    "title": "Sprinter 2",
-    "description": "+3% Sprinting Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:rabbit_foot"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:sprinting_speed",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "sprinting_speed_3": {
-    "title": "Sprinter 3",
-    "description": "+3% Sprinting Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:rabbit_foot"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:sprinting_speed",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "sprinting_speed_mastery": {
-    "title": "Sprinter Mastery",
-    "description": "+6% Sprinting Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:rabbit_foot"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:sprinting_speed",
-          "value": 0.06,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+    "size": 1.3
   },
   "jump_1": {
     "title": "Spring 1",
@@ -687,6 +668,251 @@
     "size": 1.2,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
+  "nature_magic_resist_1": {
+    "title": "Barkhide 1",
+    "description": "+5% Nature Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:oak_log"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:nature_magic_resist",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "nature_magic_resist_2": {
+    "title": "Barkhide 2",
+    "description": "+5% Nature Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:oak_log"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:nature_magic_resist",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "nature_magic_resist_mastery": {
+    "title": "Barkhide Mastery",
+    "description": "+10% Nature Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:oak_log"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:nature_magic_resist",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "root_3": {
+    "title": "Root",
+    "description": "Unlocks Root (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:mangrove_roots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:root",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "firefly_swarm": {
+    "title": "Firefly Swarm",
+    "description": "Unlocks Firefly Swarm (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:glow_berries"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:firefly_swarm",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "poison_arrow": {
+    "title": "Thornshot (Poison Arrow V)",
+    "description": "Unlocks Poison Arrow (Level 5) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sweet_berries"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:poison_arrow",
+          "level": 5
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "nature_regen_1": {
+    "title": "Grove 1",
+    "description": "+0.5 Health per 5 s on natural ground",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:grass_block"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:nature_regen",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "nature_regen_2": {
+    "title": "Grove 2",
+    "description": "+0.5 Health per 5 s on natural ground",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:grass_block"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:nature_regen",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "nature_regen_mastery": {
+    "title": "Grove Mastery",
+    "description": "+0.5 Health per 5 s on natural ground",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:grass_block"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:nature_regen",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
   "fall_reduction_1": {
     "title": "Light Foot 1",
     "description": "+5% Fall Damage Reduction",
@@ -785,232 +1011,6 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "puffish_attributes:fall_reduction",
-          "value": 0.1,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "staminar_1": {
-    "title": "Evasion Training 1",
-    "description": "+0.5 Max Stamina",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:leather_boots"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "staminar_2": {
-    "title": "Evasion Training 2",
-    "description": "+0.5 Max Stamina",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:leather_boots"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "staminar_3": {
-    "title": "Evasion Training 3",
-    "description": "+0.5 Max Stamina",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:leather_boots"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "staminar_mastery": {
-    "title": "Evasion Training Mastery",
-    "description": "+1 Max Stamina",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:leather_boots"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "stamina_1": {
-    "title": "Forager 1",
-    "description": "+5% Stamina (slower hunger)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "stamina_2": {
-    "title": "Forager 2",
-    "description": "+5% Stamina (slower hunger)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "stamina_3": {
-    "title": "Forager 3",
-    "description": "+5% Stamina (slower hunger)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "stamina_mastery": {
-    "title": "Forager Mastery",
-    "description": "+10% Stamina (slower hunger)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:stamina",
           "value": 0.1,
           "operation": "multiply_base"
         }

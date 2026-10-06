@@ -83,6 +83,8 @@ dependencies {
     implementation fg.deobf(cf('puffish_skills'))
     implementation fg.deobf(cf('cursedfate'))
     compileOnly fg.deobf(cf('jei'))
+    // Epic Fight Ponder ships in the pack's overrides (not on CurseForge); Ponder is bundled inside it.
+    compileOnly files('libs/epic_fight_ponder-1.0.0.jar', 'libs/Ponder-Forge-1.20.1-1.0.91.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))

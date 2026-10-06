@@ -3,15 +3,67 @@
     "unidirectional": [
       [
         "root",
+        "backstab_damage_1"
+      ],
+      [
+        "backstab_damage_1",
+        "backstab_damage_2"
+      ],
+      [
+        "backstab_damage_2",
+        "backstab_damage_3"
+      ],
+      [
+        "backstab_damage_3",
+        "backstab_damage_mastery"
+      ],
+      [
+        "root",
         "echoing_strikes"
       ],
       [
         "root",
-        "blood_step"
+        "attack_speed_1"
       ],
       [
-        "blood_step",
-        "invisibility"
+        "attack_speed_1",
+        "attack_speed_2"
+      ],
+      [
+        "attack_speed_2",
+        "attack_speed_3"
+      ],
+      [
+        "attack_speed_3",
+        "attack_speed_mastery"
+      ],
+      [
+        "root",
+        "protection_shred_1"
+      ],
+      [
+        "protection_shred_1",
+        "protection_shred_2"
+      ],
+      [
+        "protection_shred_2",
+        "protection_shred_mastery"
+      ],
+      [
+        "root",
+        "armor_negation_1"
+      ],
+      [
+        "armor_negation_1",
+        "armor_negation_2"
+      ],
+      [
+        "armor_negation_2",
+        "armor_negation_3"
+      ],
+      [
+        "armor_negation_3",
+        "armor_negation_mastery"
       ],
       [
         "root",
@@ -35,47 +87,19 @@
       ],
       [
         "root",
-        "backstab_damage_1"
+        "consuming_speed_1"
       ],
       [
-        "backstab_damage_1",
-        "backstab_damage_2"
+        "consuming_speed_1",
+        "consuming_speed_2"
       ],
       [
-        "backstab_damage_2",
-        "backstab_damage_3"
+        "consuming_speed_2",
+        "consuming_speed_3"
       ],
       [
-        "backstab_damage_3",
-        "backstab_damage_mastery"
-      ],
-      [
-        "root",
-        "armor_negation_1"
-      ],
-      [
-        "armor_negation_1",
-        "armor_negation_2"
-      ],
-      [
-        "armor_negation_2",
-        "armor_negation_3"
-      ],
-      [
-        "armor_negation_3",
-        "armor_negation_mastery"
-      ],
-      [
-        "root",
-        "protection_shred_1"
-      ],
-      [
-        "protection_shred_1",
-        "protection_shred_2"
-      ],
-      [
-        "protection_shred_2",
-        "protection_shred_mastery"
+        "consuming_speed_3",
+        "consuming_speed_mastery"
       ],
       [
         "root",
@@ -95,22 +119,6 @@
       ],
       [
         "root",
-        "attack_speed_1"
-      ],
-      [
-        "attack_speed_1",
-        "attack_speed_2"
-      ],
-      [
-        "attack_speed_2",
-        "attack_speed_3"
-      ],
-      [
-        "attack_speed_3",
-        "attack_speed_mastery"
-      ],
-      [
-        "root",
         "stealth_1"
       ],
       [
@@ -127,6 +135,14 @@
       ],
       [
         "root",
+        "blood_step"
+      ],
+      [
+        "blood_step",
+        "invisibility"
+      ],
+      [
+        "root",
         "stamina_regen_1"
       ],
       [
@@ -140,22 +156,48 @@
       [
         "stamina_regen_3",
         "stamina_regen_mastery"
+      ]
+    ],
+    "bidirectional": [
+      [
+        "protection_shred_1",
+        "armor_negation_1"
       ],
       [
-        "root",
+        "protection_shred_2",
+        "armor_negation_1"
+      ],
+      [
+        "protection_shred_2",
+        "armor_negation_2"
+      ],
+      [
+        "protection_shred_2",
+        "armor_negation_3"
+      ],
+      [
+        "armor_negation_1",
+        "dagger_damage_2"
+      ],
+      [
+        "dagger_damage_1",
         "consuming_speed_1"
       ],
       [
-        "consuming_speed_1",
-        "consuming_speed_2"
+        "movement_speed_1",
+        "stealth_2"
       ],
       [
-        "consuming_speed_2",
-        "consuming_speed_3"
+        "movement_speed_2",
+        "stealth_2"
       ],
       [
-        "consuming_speed_3",
-        "consuming_speed_mastery"
+        "movement_speed_2",
+        "stealth_3"
+      ],
+      [
+        "stamina_regen_1",
+        "backstab_damage_1"
       ]
     ]
   }

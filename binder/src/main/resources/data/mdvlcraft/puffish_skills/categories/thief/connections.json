@@ -3,67 +3,7 @@
     "unidirectional": [
       [
         "root",
-        "boogie_woogie"
-      ],
-      [
-        "boogie_woogie",
-        "block_clap"
-      ],
-      [
-        "root",
-        "luck_1"
-      ],
-      [
-        "luck_1",
-        "luck_2"
-      ],
-      [
-        "luck_2",
-        "luck_mastery"
-      ],
-      [
-        "root",
-        "plunder_1"
-      ],
-      [
-        "plunder_1",
-        "plunder_2"
-      ],
-      [
-        "plunder_2",
-        "plunder_3"
-      ],
-      [
-        "plunder_3",
-        "plunder_mastery"
-      ],
-      [
-        "root",
-        "entity_reach_1"
-      ],
-      [
-        "entity_reach_1",
-        "entity_reach_2"
-      ],
-      [
-        "entity_reach_2",
-        "entity_reach_mastery"
-      ],
-      [
-        "root",
         "fortune_mastery"
-      ],
-      [
-        "root",
-        "repair_cost_1"
-      ],
-      [
-        "repair_cost_1",
-        "repair_cost_2"
-      ],
-      [
-        "repair_cost_2",
-        "repair_cost_mastery"
       ],
       [
         "root",
@@ -83,6 +23,74 @@
       ],
       [
         "root",
+        "stealth_1"
+      ],
+      [
+        "stealth_1",
+        "stealth_2"
+      ],
+      [
+        "stealth_2",
+        "stealth_3"
+      ],
+      [
+        "stealth_3",
+        "stealth_mastery"
+      ],
+      [
+        "root",
+        "repair_cost_1"
+      ],
+      [
+        "repair_cost_1",
+        "repair_cost_2"
+      ],
+      [
+        "repair_cost_2",
+        "repair_cost_mastery"
+      ],
+      [
+        "root",
+        "plunder_1"
+      ],
+      [
+        "plunder_1",
+        "plunder_2"
+      ],
+      [
+        "plunder_2",
+        "plunder_3"
+      ],
+      [
+        "plunder_3",
+        "plunder_mastery"
+      ],
+      [
+        "root",
+        "boogie_woogie"
+      ],
+      [
+        "boogie_woogie",
+        "block_clap"
+      ],
+      [
+        "root",
+        "consuming_speed_1"
+      ],
+      [
+        "consuming_speed_1",
+        "consuming_speed_2"
+      ],
+      [
+        "consuming_speed_2",
+        "consuming_speed_3"
+      ],
+      [
+        "consuming_speed_3",
+        "consuming_speed_mastery"
+      ],
+      [
+        "root",
         "attack_speed_1"
       ],
       [
@@ -99,19 +107,15 @@
       ],
       [
         "root",
-        "stealth_1"
+        "luck_1"
       ],
       [
-        "stealth_1",
-        "stealth_2"
+        "luck_1",
+        "luck_2"
       ],
       [
-        "stealth_2",
-        "stealth_3"
-      ],
-      [
-        "stealth_3",
-        "stealth_mastery"
+        "luck_2",
+        "luck_mastery"
       ],
       [
         "root",
@@ -131,19 +135,73 @@
       ],
       [
         "root",
-        "consuming_speed_1"
+        "entity_reach_1"
+      ],
+      [
+        "entity_reach_1",
+        "entity_reach_2"
+      ],
+      [
+        "entity_reach_2",
+        "entity_reach_mastery"
+      ]
+    ],
+    "bidirectional": [
+      [
+        "movement_speed_1",
+        "stealth_1"
+      ],
+      [
+        "movement_speed_1",
+        "stealth_2"
+      ],
+      [
+        "movement_speed_2",
+        "stealth_1"
+      ],
+      [
+        "movement_speed_2",
+        "stealth_2"
+      ],
+      [
+        "stealth_1",
+        "repair_cost_1"
+      ],
+      [
+        "stealth_1",
+        "repair_cost_2"
+      ],
+      [
+        "stealth_2",
+        "repair_cost_1"
+      ],
+      [
+        "stealth_2",
+        "repair_cost_2"
+      ],
+      [
+        "stealth_3",
+        "repair_cost_2"
       ],
       [
         "consuming_speed_1",
-        "consuming_speed_2"
+        "attack_speed_1"
       ],
       [
-        "consuming_speed_2",
-        "consuming_speed_3"
+        "attack_speed_1",
+        "luck_2"
       ],
       [
-        "consuming_speed_3",
-        "consuming_speed_mastery"
+        "attack_speed_2",
+        "luck_2"
+      ],
+      [
+        "attack_speed_3",
+        "luck_2"
+      ],
+      [
+        "luck_1",
+        "stamina_regen_1"
       ]
     ]
   }

@@ -3,47 +3,35 @@
     "unidirectional": [
       [
         "root",
-        "evasion"
+        "movement_speed_1"
       ],
       [
-        "evasion",
-        "evasion_2"
+        "movement_speed_1",
+        "movement_speed_2"
       ],
       [
-        "root",
-        "rapier_damage_1"
+        "movement_speed_2",
+        "movement_speed_3"
       ],
       [
-        "rapier_damage_1",
-        "rapier_damage_2"
-      ],
-      [
-        "rapier_damage_2",
-        "rapier_damage_3"
-      ],
-      [
-        "rapier_damage_3",
-        "rapier_damage_4"
-      ],
-      [
-        "rapier_damage_4",
-        "rapier_damage_mastery"
+        "movement_speed_3",
+        "movement_speed_mastery"
       ],
       [
         "root",
-        "riposte_damage_1"
+        "stealth_1"
       ],
       [
-        "riposte_damage_1",
-        "riposte_damage_2"
+        "stealth_1",
+        "stealth_2"
       ],
       [
-        "riposte_damage_2",
-        "riposte_damage_3"
+        "stealth_2",
+        "stealth_3"
       ],
       [
-        "riposte_damage_3",
-        "riposte_damage_mastery"
+        "stealth_3",
+        "stealth_mastery"
       ],
       [
         "root",
@@ -75,22 +63,6 @@
       ],
       [
         "root",
-        "movement_speed_1"
-      ],
-      [
-        "movement_speed_1",
-        "movement_speed_2"
-      ],
-      [
-        "movement_speed_2",
-        "movement_speed_3"
-      ],
-      [
-        "movement_speed_3",
-        "movement_speed_mastery"
-      ],
-      [
-        "root",
         "attack_speed_1"
       ],
       [
@@ -107,19 +79,19 @@
       ],
       [
         "root",
-        "stealth_1"
+        "riposte_damage_1"
       ],
       [
-        "stealth_1",
-        "stealth_2"
+        "riposte_damage_1",
+        "riposte_damage_2"
       ],
       [
-        "stealth_2",
-        "stealth_3"
+        "riposte_damage_2",
+        "riposte_damage_3"
       ],
       [
-        "stealth_3",
-        "stealth_mastery"
+        "riposte_damage_3",
+        "riposte_damage_mastery"
       ],
       [
         "root",
@@ -139,6 +111,34 @@
       ],
       [
         "root",
+        "evasion"
+      ],
+      [
+        "evasion",
+        "evasion_2"
+      ],
+      [
+        "root",
+        "rapier_damage_1"
+      ],
+      [
+        "rapier_damage_1",
+        "rapier_damage_2"
+      ],
+      [
+        "rapier_damage_2",
+        "rapier_damage_3"
+      ],
+      [
+        "rapier_damage_3",
+        "rapier_damage_4"
+      ],
+      [
+        "rapier_damage_4",
+        "rapier_damage_mastery"
+      ],
+      [
+        "root",
         "consuming_speed_1"
       ],
       [
@@ -152,6 +152,44 @@
       [
         "consuming_speed_3",
         "consuming_speed_mastery"
+      ]
+    ],
+    "bidirectional": [
+      [
+        "stealth_1",
+        "dodge_efficiency_1"
+      ],
+      [
+        "stealth_2",
+        "dodge_efficiency_1"
+      ],
+      [
+        "dodge_efficiency_1",
+        "melee_resistance_shred_1"
+      ],
+      [
+        "dodge_efficiency_2",
+        "melee_resistance_shred_2"
+      ],
+      [
+        "riposte_damage_1",
+        "stamina_regen_1"
+      ],
+      [
+        "riposte_damage_1",
+        "stamina_regen_2"
+      ],
+      [
+        "rapier_damage_1",
+        "consuming_speed_1"
+      ],
+      [
+        "consuming_speed_3",
+        "movement_speed_2"
+      ],
+      [
+        "consuming_speed_3",
+        "movement_speed_3"
       ]
     ]
   }

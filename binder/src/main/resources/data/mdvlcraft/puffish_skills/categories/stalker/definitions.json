@@ -27,21 +27,106 @@
     ],
     "cost": 1
   },
-  "arrow_volley": {
-    "title": "Arrow Volley",
-    "description": "Unlocks Arrow Volley (Level 3) on the ability wheel",
+  "stamina_1": {
+    "title": "Forager 1",
+    "description": "+5% Stamina (slower hunger)",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:arrow"
+        "item": "minecraft:bread"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:arrow_volley",
-          "level": 3
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_2": {
+    "title": "Forager 2",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_3": {
+    "title": "Forager 3",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_mastery": {
+    "title": "Forager Mastery",
+    "description": "+10% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.1,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -52,34 +137,203 @@
         "frame": "goal"
       }
     },
-    "size": 1.3
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "arrow_volley_5": {
-    "title": "Rain of Arrows (Arrow Volley V)",
-    "description": "Unlocks Arrow Volley (Level 5) on the ability wheel",
+  "sprinting_speed_1": {
+    "title": "Sprinter 1",
+    "description": "+3% Sprinting Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:spectral_arrow"
+        "item": "minecraft:rabbit_foot"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:arrow_volley",
-          "level": 5
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
         }
       }
     ],
-    "cost": 3,
+    "cost": 1,
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "challenge"
+        "frame": "task"
       }
     },
-    "size": 1.3
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_2": {
+    "title": "Sprinter 2",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_3": {
+    "title": "Sprinter 3",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_mastery": {
+    "title": "Sprinter Mastery",
+    "description": "+6% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.06,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "crossbow_projectile_speed_1": {
+    "title": "Arbalest 1",
+    "description": "+5% Bolt Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crossbow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:crossbow_projectile_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "crossbow_projectile_speed_2": {
+    "title": "Arbalest 2",
+    "description": "+5% Bolt Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crossbow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:crossbow_projectile_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "crossbow_projectile_speed_mastery": {
+    "title": "Arbalest Mastery",
+    "description": "+10% Bolt Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crossbow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:crossbow_projectile_speed",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
   },
   "ranged_damage_1": {
     "title": "Aim 1",
@@ -217,9 +471,9 @@
     },
     "size": 1.2
   },
-  "bow_projectile_speed_1": {
-    "title": "Longbow 1",
-    "description": "+5% Arrow Speed",
+  "arrow_volley": {
+    "title": "Arrow Volley",
+    "description": "Unlocks Arrow Volley (Level 3) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
@@ -228,9 +482,63 @@
     },
     "rewards": [
       {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:arrow_volley",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "arrow_volley_5": {
+    "title": "Rain of Arrows (Arrow Volley V)",
+    "description": "Unlocks Arrow Volley (Level 5) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spectral_arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:arrow_volley",
+          "level": 5
+        }
+      }
+    ],
+    "cost": 3,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "size": 1.3
+  },
+  "fall_reduction_1": {
+    "title": "Light Foot 1",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:bow_projectile_speed",
+          "attribute": "puffish_attributes:fall_reduction",
           "value": 0.05,
           "operation": "multiply_base"
         }
@@ -242,22 +550,23 @@
       "data": {
         "frame": "task"
       }
-    }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "bow_projectile_speed_2": {
-    "title": "Longbow 2",
-    "description": "+5% Arrow Speed",
+  "fall_reduction_2": {
+    "title": "Light Foot 2",
+    "description": "+5% Fall Damage Reduction",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:arrow"
+        "item": "minecraft:feather"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:bow_projectile_speed",
+          "attribute": "puffish_attributes:fall_reduction",
           "value": 0.05,
           "operation": "multiply_base"
         }
@@ -269,326 +578,52 @@
       "data": {
         "frame": "task"
       }
-    }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "bow_projectile_speed_mastery": {
-    "title": "Longbow Mastery",
-    "description": "+10% Arrow Speed",
+  "fall_reduction_3": {
+    "title": "Light Foot 3",
+    "description": "+5% Fall Damage Reduction",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:arrow"
+        "item": "minecraft:feather"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:bow_projectile_speed",
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_mastery": {
+    "title": "Light Foot Mastery",
+    "description": "+10% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
           "value": 0.1,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "crossbow_projectile_speed_1": {
-    "title": "Arbalest 1",
-    "description": "+5% Bolt Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:crossbow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:crossbow_projectile_speed",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "crossbow_projectile_speed_2": {
-    "title": "Arbalest 2",
-    "description": "+5% Bolt Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:crossbow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:crossbow_projectile_speed",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "crossbow_projectile_speed_mastery": {
-    "title": "Arbalest Mastery",
-    "description": "+10% Bolt Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:crossbow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:crossbow_projectile_speed",
-          "value": 0.1,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "evocation_spell_power_1": {
-    "title": "Fletcher's Art 1",
-    "description": "+3% Evocation Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:spectral_arrow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:evocation_spell_power",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "evocation_spell_power_2": {
-    "title": "Fletcher's Art 2",
-    "description": "+3% Evocation Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:spectral_arrow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:evocation_spell_power",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "evocation_spell_power_3": {
-    "title": "Fletcher's Art 3",
-    "description": "+3% Evocation Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:spectral_arrow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:evocation_spell_power",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "evocation_spell_power_mastery": {
-    "title": "Fletcher's Art Mastery",
-    "description": "+6% Evocation Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:spectral_arrow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:evocation_spell_power",
-          "value": 0.06,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "sprinting_speed_1": {
-    "title": "Sprinter 1",
-    "description": "+3% Sprinting Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:rabbit_foot"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:sprinting_speed",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "sprinting_speed_2": {
-    "title": "Sprinter 2",
-    "description": "+3% Sprinting Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:rabbit_foot"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:sprinting_speed",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "sprinting_speed_3": {
-    "title": "Sprinter 3",
-    "description": "+3% Sprinting Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:rabbit_foot"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:sprinting_speed",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "sprinting_speed_mastery": {
-    "title": "Sprinter Mastery",
-    "description": "+6% Sprinting Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:rabbit_foot"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:sprinting_speed",
-          "value": 0.06,
           "operation": "multiply_base"
         }
       }
@@ -716,20 +751,129 @@
     "size": 1.2,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "fall_reduction_1": {
-    "title": "Light Foot 1",
-    "description": "+5% Fall Damage Reduction",
+  "evocation_spell_power_1": {
+    "title": "Fletcher's Art 1",
+    "description": "+3% Evocation Spell Power",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:feather"
+        "item": "minecraft:spectral_arrow"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:fall_reduction",
+          "attribute": "irons_spellbooks:evocation_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "evocation_spell_power_2": {
+    "title": "Fletcher's Art 2",
+    "description": "+3% Evocation Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spectral_arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:evocation_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "evocation_spell_power_3": {
+    "title": "Fletcher's Art 3",
+    "description": "+3% Evocation Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spectral_arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:evocation_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "evocation_spell_power_mastery": {
+    "title": "Fletcher's Art Mastery",
+    "description": "+6% Evocation Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spectral_arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:evocation_spell_power",
+          "value": 0.06,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "bow_projectile_speed_1": {
+    "title": "Longbow 1",
+    "description": "+5% Arrow Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:bow_projectile_speed",
           "value": 0.05,
           "operation": "multiply_base"
         }
@@ -741,23 +885,22 @@
       "data": {
         "frame": "task"
       }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+    }
   },
-  "fall_reduction_2": {
-    "title": "Light Foot 2",
-    "description": "+5% Fall Damage Reduction",
+  "bow_projectile_speed_2": {
+    "title": "Longbow 2",
+    "description": "+5% Arrow Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:feather"
+        "item": "minecraft:arrow"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:fall_reduction",
+          "attribute": "puffish_attributes:bow_projectile_speed",
           "value": 0.05,
           "operation": "multiply_base"
         }
@@ -769,51 +912,22 @@
       "data": {
         "frame": "task"
       }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+    }
   },
-  "fall_reduction_3": {
-    "title": "Light Foot 3",
-    "description": "+5% Fall Damage Reduction",
+  "bow_projectile_speed_mastery": {
+    "title": "Longbow Mastery",
+    "description": "+10% Arrow Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:feather"
+        "item": "minecraft:arrow"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:fall_reduction",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "fall_reduction_mastery": {
-    "title": "Light Foot Mastery",
-    "description": "+10% Fall Damage Reduction",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:feather"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:fall_reduction",
+          "attribute": "puffish_attributes:bow_projectile_speed",
           "value": 0.1,
           "operation": "multiply_base"
         }
@@ -826,8 +940,7 @@
         "frame": "goal"
       }
     },
-    "size": 1.2,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+    "size": 1.2
   },
   "staminar_1": {
     "title": "Evasion Training 1",
@@ -929,119 +1042,6 @@
           "attribute": "epicfight:staminar",
           "value": 1,
           "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "stamina_1": {
-    "title": "Forager 1",
-    "description": "+5% Stamina (slower hunger)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "stamina_2": {
-    "title": "Forager 2",
-    "description": "+5% Stamina (slower hunger)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "stamina_3": {
-    "title": "Forager 3",
-    "description": "+5% Stamina (slower hunger)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
-  },
-  "stamina_mastery": {
-    "title": "Forager Mastery",
-    "description": "+10% Stamina (slower hunger)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.1,
-          "operation": "multiply_base"
         }
       }
     ],

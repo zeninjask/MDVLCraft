@@ -3,43 +3,19 @@
     "unidirectional": [
       [
         "root",
-        "blood_slash"
+        "experience_1"
       ],
       [
-        "blood_slash",
-        "ray_of_siphoning"
+        "experience_1",
+        "experience_2"
       ],
       [
-        "ray_of_siphoning",
-        "wither_skull"
+        "experience_2",
+        "experience_3"
       ],
       [
-        "root",
-        "raise_dead"
-      ],
-      [
-        "raise_dead",
-        "devour"
-      ],
-      [
-        "root",
-        "blood_spell_power_1"
-      ],
-      [
-        "blood_spell_power_1",
-        "blood_spell_power_2"
-      ],
-      [
-        "blood_spell_power_2",
-        "blood_spell_power_3"
-      ],
-      [
-        "blood_spell_power_3",
-        "blood_spell_power_4"
-      ],
-      [
-        "blood_spell_power_4",
-        "blood_spell_power_mastery"
+        "experience_3",
+        "experience_mastery"
       ],
       [
         "root",
@@ -68,6 +44,46 @@
       [
         "blood_magic_resist_2",
         "blood_magic_resist_mastery"
+      ],
+      [
+        "root",
+        "raise_dead"
+      ],
+      [
+        "raise_dead",
+        "devour"
+      ],
+      [
+        "root",
+        "blood_slash"
+      ],
+      [
+        "blood_slash",
+        "ray_of_siphoning"
+      ],
+      [
+        "ray_of_siphoning",
+        "wither_skull"
+      ],
+      [
+        "root",
+        "blood_spell_power_1"
+      ],
+      [
+        "blood_spell_power_1",
+        "blood_spell_power_2"
+      ],
+      [
+        "blood_spell_power_2",
+        "blood_spell_power_3"
+      ],
+      [
+        "blood_spell_power_3",
+        "blood_spell_power_4"
+      ],
+      [
+        "blood_spell_power_4",
+        "blood_spell_power_mastery"
       ],
       [
         "root",
@@ -131,22 +147,6 @@
       ],
       [
         "root",
-        "experience_1"
-      ],
-      [
-        "experience_1",
-        "experience_2"
-      ],
-      [
-        "experience_2",
-        "experience_3"
-      ],
-      [
-        "experience_3",
-        "experience_mastery"
-      ],
-      [
-        "root",
         "spell_resist_1"
       ],
       [
@@ -160,6 +160,56 @@
       [
         "spell_resist_3",
         "spell_resist_mastery"
+      ]
+    ],
+    "bidirectional": [
+      [
+        "summon_damage_1",
+        "blood_magic_resist_1"
+      ],
+      [
+        "max_mana_2",
+        "mana_regen_2"
+      ],
+      [
+        "max_mana_2",
+        "mana_regen_3"
+      ],
+      [
+        "max_mana_3",
+        "mana_regen_3"
+      ],
+      [
+        "max_mana_4",
+        "mana_regen_3"
+      ],
+      [
+        "max_mana_4",
+        "mana_regen_4"
+      ],
+      [
+        "mana_regen_1",
+        "cast_time_reduction_1"
+      ],
+      [
+        "mana_regen_1",
+        "cast_time_reduction_2"
+      ],
+      [
+        "mana_regen_2",
+        "cast_time_reduction_1"
+      ],
+      [
+        "mana_regen_2",
+        "cast_time_reduction_2"
+      ],
+      [
+        "mana_regen_2",
+        "cast_time_reduction_3"
+      ],
+      [
+        "spell_resist_3",
+        "experience_3"
       ]
     ]
   }

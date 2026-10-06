@@ -27,6 +27,115 @@
     ],
     "cost": 1
   },
+  "backstab_damage_1": {
+    "title": "Backstab 1",
+    "description": "+5% Backstab Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:wither_skeleton_skull"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:backstab_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "backstab_damage_2": {
+    "title": "Backstab 2",
+    "description": "+5% Backstab Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:wither_skeleton_skull"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:backstab_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "backstab_damage_3": {
+    "title": "Backstab 3",
+    "description": "+5% Backstab Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:wither_skeleton_skull"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:backstab_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "backstab_damage_mastery": {
+    "title": "Backstab Mastery",
+    "description": "+15% Backstab Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:wither_skeleton_skull"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:backstab_damage",
+          "value": 0.15,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
   "echoing_strikes": {
     "title": "Echoing Strikes",
     "description": "Unlocks Echoing Strikes (Level 2) on the ability wheel",
@@ -54,21 +163,106 @@
     },
     "size": 1.3
   },
-  "blood_step": {
-    "title": "Blood Step",
-    "description": "Unlocks Blood Step (Level 2) on the ability wheel",
+  "attack_speed_1": {
+    "title": "Quick Hands 1",
+    "description": "+1.5% Attack Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:redstone"
+        "item": "minecraft:feather"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:blood_step",
-          "level": 2
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
+  },
+  "attack_speed_2": {
+    "title": "Quick Hands 2",
+    "description": "+1.5% Attack Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
+  },
+  "attack_speed_3": {
+    "title": "Quick Hands 3",
+    "description": "+1.5% Attack Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
+  },
+  "attack_speed_mastery": {
+    "title": "Quick Hands Mastery",
+    "description": "+3% Attack Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -79,34 +273,199 @@
         "frame": "goal"
       }
     },
-    "size": 1.3
+    "size": 1.2,
+    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
   },
-  "invisibility": {
-    "title": "Invisibility",
-    "description": "Unlocks Invisibility (Level 2) on the ability wheel",
+  "protection_shred_1": {
+    "title": "Rend 1",
+    "description": "+5% Protection Shred",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:glass"
+        "item": "minecraft:enchanted_book"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:invisibility",
-          "level": 2
+          "attribute": "puffish_attributes:protection_shred",
+          "value": 0.05,
+          "operation": "multiply_base"
         }
       }
     ],
-    "cost": 3,
+    "cost": 1,
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "challenge"
+        "frame": "task"
+      }
+    }
+  },
+  "protection_shred_2": {
+    "title": "Rend 2",
+    "description": "+5% Protection Shred",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanted_book"
       }
     },
-    "size": 1.3
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:protection_shred",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "protection_shred_mastery": {
+    "title": "Rend Mastery",
+    "description": "+10% Protection Shred",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanted_book"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:protection_shred",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "armor_negation_1": {
+    "title": "Pierce 1",
+    "description": "+3% Armor Negation",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:armor_negation",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "armor_negation_2": {
+    "title": "Pierce 2",
+    "description": "+3% Armor Negation",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:armor_negation",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "armor_negation_3": {
+    "title": "Pierce 3",
+    "description": "+3% Armor Negation",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:armor_negation",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "armor_negation_mastery": {
+    "title": "Pierce Mastery",
+    "description": "+6% Armor Negation",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:armor_negation",
+          "value": 6,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
   },
   "dagger_damage_1": {
     "title": "Dagger 1",
@@ -244,238 +603,20 @@
     },
     "size": 1.2
   },
-  "backstab_damage_1": {
-    "title": "Backstab 1",
-    "description": "+5% Backstab Damage",
+  "consuming_speed_1": {
+    "title": "Quick Draught 1",
+    "description": "+5% Eating & Drinking Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:wither_skeleton_skull"
+        "item": "minecraft:potion"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:backstab_damage",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "backstab_damage_2": {
-    "title": "Backstab 2",
-    "description": "+5% Backstab Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:wither_skeleton_skull"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:backstab_damage",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "backstab_damage_3": {
-    "title": "Backstab 3",
-    "description": "+5% Backstab Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:wither_skeleton_skull"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:backstab_damage",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "backstab_damage_mastery": {
-    "title": "Backstab Mastery",
-    "description": "+15% Backstab Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:wither_skeleton_skull"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:backstab_damage",
-          "value": 0.15,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "armor_negation_1": {
-    "title": "Pierce 1",
-    "description": "+3% Armor Negation",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:arrow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:armor_negation",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "armor_negation_2": {
-    "title": "Pierce 2",
-    "description": "+3% Armor Negation",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:arrow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:armor_negation",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "armor_negation_3": {
-    "title": "Pierce 3",
-    "description": "+3% Armor Negation",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:arrow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:armor_negation",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "armor_negation_mastery": {
-    "title": "Pierce Mastery",
-    "description": "+6% Armor Negation",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:arrow"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:armor_negation",
-          "value": 6,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "protection_shred_1": {
-    "title": "Rend 1",
-    "description": "+5% Protection Shred",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:enchanted_book"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:protection_shred",
+          "attribute": "puffish_attributes:consuming_speed",
           "value": 0.05,
           "operation": "multiply_base"
         }
@@ -487,22 +628,23 @@
       "data": {
         "frame": "task"
       }
-    }
+    },
+    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
   },
-  "protection_shred_2": {
-    "title": "Rend 2",
-    "description": "+5% Protection Shred",
+  "consuming_speed_2": {
+    "title": "Quick Draught 2",
+    "description": "+5% Eating & Drinking Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:enchanted_book"
+        "item": "minecraft:potion"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:protection_shred",
+          "attribute": "puffish_attributes:consuming_speed",
           "value": 0.05,
           "operation": "multiply_base"
         }
@@ -514,22 +656,51 @@
       "data": {
         "frame": "task"
       }
-    }
+    },
+    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
   },
-  "protection_shred_mastery": {
-    "title": "Rend Mastery",
-    "description": "+10% Protection Shred",
+  "consuming_speed_3": {
+    "title": "Quick Draught 3",
+    "description": "+5% Eating & Drinking Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:enchanted_book"
+        "item": "minecraft:potion"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:protection_shred",
+          "attribute": "puffish_attributes:consuming_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
+  },
+  "consuming_speed_mastery": {
+    "title": "Quick Draught Mastery",
+    "description": "+10% Eating & Drinking Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:potion"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:consuming_speed",
           "value": 0.1,
           "operation": "multiply_base"
         }
@@ -542,7 +713,8 @@
         "frame": "goal"
       }
     },
-    "size": 1.2
+    "size": 1.2,
+    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
   },
   "movement_speed_1": {
     "title": "Fleet 1",
@@ -642,119 +814,6 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "minecraft:generic.movement_speed",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
-  },
-  "attack_speed_1": {
-    "title": "Quick Hands 1",
-    "description": "+1.5% Attack Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:feather"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.015,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
-  },
-  "attack_speed_2": {
-    "title": "Quick Hands 2",
-    "description": "+1.5% Attack Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:feather"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.015,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
-  },
-  "attack_speed_3": {
-    "title": "Quick Hands 3",
-    "description": "+1.5% Attack Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:feather"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.015,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
-  },
-  "attack_speed_mastery": {
-    "title": "Quick Hands Mastery",
-    "description": "+3% Attack Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:feather"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
           "value": 0.03,
           "operation": "multiply_base"
         }
@@ -883,6 +942,60 @@
     "size": 1.2,
     "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
   },
+  "blood_step": {
+    "title": "Blood Step",
+    "description": "Unlocks Blood Step (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:blood_step",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "invisibility": {
+    "title": "Invisibility",
+    "description": "Unlocks Invisibility (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:glass"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:invisibility",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 3,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "size": 1.3
+  },
   "stamina_regen_1": {
     "title": "Recovery 1",
     "description": "+5% Stamina Regen",
@@ -981,119 +1094,6 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "epicfight:stamina_regen",
-          "value": 0.1,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
-  },
-  "consuming_speed_1": {
-    "title": "Quick Draught 1",
-    "description": "+5% Eating & Drinking Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:potion"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:consuming_speed",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
-  },
-  "consuming_speed_2": {
-    "title": "Quick Draught 2",
-    "description": "+5% Eating & Drinking Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:potion"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:consuming_speed",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
-  },
-  "consuming_speed_3": {
-    "title": "Quick Draught 3",
-    "description": "+5% Eating & Drinking Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:potion"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:consuming_speed",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Rogue class bonus (every Rogue archetype has this spoke)."
-  },
-  "consuming_speed_mastery": {
-    "title": "Quick Draught Mastery",
-    "description": "+10% Eating & Drinking Speed",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:potion"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:consuming_speed",
           "value": 0.1,
           "operation": "multiply_base"
         }

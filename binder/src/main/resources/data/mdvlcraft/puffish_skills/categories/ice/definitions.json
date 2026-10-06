@@ -26,6 +26,60 @@
     ],
     "cost": 1
   },
+  "ice_spikes": {
+    "title": "Ice Spikes",
+    "description": "Unlocks Ice Spikes (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:pointed_dripstone"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:ice_spikes",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "blizzard": {
+    "title": "Blizzard",
+    "description": "Unlocks Blizzard (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snow_block"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:blizzard",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 3,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "size": 1.3
+  },
   "cone_of_cold": {
     "title": "Cone Of Cold",
     "description": "Unlocks Cone Of Cold (Level 3) on the ability wheel",
@@ -107,21 +161,103 @@
     },
     "size": 1.3
   },
-  "ice_spikes": {
-    "title": "Ice Spikes",
-    "description": "Unlocks Ice Spikes (Level 3) on the ability wheel",
+  "magic_resistance_1": {
+    "title": "Glacial Ward 1",
+    "description": "+3% Magic Resistance",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:pointed_dripstone"
+        "item": "minecraft:blue_ice"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:ice_spikes",
-          "level": 3
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "magic_resistance_2": {
+    "title": "Glacial Ward 2",
+    "description": "+3% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "magic_resistance_3": {
+    "title": "Glacial Ward 3",
+    "description": "+3% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "magic_resistance_mastery": {
+    "title": "Glacial Ward Mastery",
+    "description": "+5% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.05,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -132,34 +268,120 @@
         "frame": "goal"
       }
     },
-    "size": 1.3
+    "size": 1.2
   },
-  "blizzard": {
-    "title": "Blizzard",
-    "description": "Unlocks Blizzard (Level 2) on the ability wheel",
+  "spell_resist_1": {
+    "title": "Warding 1",
+    "description": "+2% Spell Resistance",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:snow_block"
+        "item": "minecraft:amethyst_shard"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:blizzard",
-          "level": 2
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
         }
       }
     ],
-    "cost": 3,
+    "cost": 1,
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "challenge"
+        "frame": "task"
       }
     },
-    "size": 1.3
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "spell_resist_2": {
+    "title": "Warding 2",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "spell_resist_3": {
+    "title": "Warding 3",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "spell_resist_mastery": {
+    "title": "Warding Mastery",
+    "description": "+4% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
   "ice_spell_power_1": {
     "title": "Winter 1",
@@ -297,115 +519,6 @@
     },
     "size": 1.2
   },
-  "magic_resistance_1": {
-    "title": "Glacial Ward 1",
-    "description": "+3% Magic Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:magic_resistance",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "magic_resistance_2": {
-    "title": "Glacial Ward 2",
-    "description": "+3% Magic Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:magic_resistance",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "magic_resistance_3": {
-    "title": "Glacial Ward 3",
-    "description": "+3% Magic Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:magic_resistance",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "magic_resistance_mastery": {
-    "title": "Glacial Ward Mastery",
-    "description": "+5% Magic Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:magic_resistance",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
   "ice_magic_resist_1": {
     "title": "Cold Blood 1",
     "description": "+5% Ice Resistance",
@@ -487,6 +600,119 @@
       }
     },
     "size": 1.2
+  },
+  "experience_1": {
+    "title": "Scholar 1",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "experience_2": {
+    "title": "Scholar 2",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "experience_3": {
+    "title": "Scholar 3",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "experience_mastery": {
+    "title": "Scholar Mastery",
+    "description": "+10% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
   "max_mana_1": {
     "title": "Mana Well 1",
@@ -896,232 +1122,6 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "irons_spellbooks:cast_time_reduction",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_1": {
-    "title": "Scholar 1",
-    "description": "+5% Experience Gained (enchanting)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:enchanting_table"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_2": {
-    "title": "Scholar 2",
-    "description": "+5% Experience Gained (enchanting)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:enchanting_table"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_3": {
-    "title": "Scholar 3",
-    "description": "+5% Experience Gained (enchanting)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:enchanting_table"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_mastery": {
-    "title": "Scholar Mastery",
-    "description": "+10% Experience Gained (enchanting)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:enchanting_table"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.1,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "spell_resist_1": {
-    "title": "Warding 1",
-    "description": "+2% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "spell_resist_2": {
-    "title": "Warding 2",
-    "description": "+2% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "spell_resist_3": {
-    "title": "Warding 3",
-    "description": "+2% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "spell_resist_mastery": {
-    "title": "Warding Mastery",
-    "description": "+4% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
           "value": 0.04,
           "operation": "addition"
         }

@@ -27,22 +27,22 @@
     ],
     "cost": 1
   },
-  "katana_damage_1": {
-    "title": "Edge 1",
-    "description": "+5% Katana Damage",
+  "armor_shred_1": {
+    "title": "Cutting Edge 1",
+    "description": "+5% Armor Shred",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:netherite_sword"
+        "item": "minecraft:flint"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:katana_damage",
+          "attribute": "puffish_attributes:armor_shred",
           "value": 0.05,
-          "operation": "addition"
+          "operation": "multiply_base"
         }
       }
     ],
@@ -54,22 +54,22 @@
       }
     }
   },
-  "katana_damage_2": {
-    "title": "Edge 2",
-    "description": "+5% Katana Damage",
+  "armor_shred_2": {
+    "title": "Cutting Edge 2",
+    "description": "+5% Armor Shred",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:netherite_sword"
+        "item": "minecraft:flint"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:katana_damage",
+          "attribute": "puffish_attributes:armor_shred",
           "value": 0.05,
-          "operation": "addition"
+          "operation": "multiply_base"
         }
       }
     ],
@@ -81,22 +81,22 @@
       }
     }
   },
-  "katana_damage_3": {
-    "title": "Edge 3",
-    "description": "+5% Katana Damage",
+  "armor_shred_3": {
+    "title": "Cutting Edge 3",
+    "description": "+5% Armor Shred",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:netherite_sword"
+        "item": "minecraft:flint"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:katana_damage",
+          "attribute": "puffish_attributes:armor_shred",
           "value": 0.05,
-          "operation": "addition"
+          "operation": "multiply_base"
         }
       }
     ],
@@ -108,158 +108,22 @@
       }
     }
   },
-  "katana_damage_4": {
-    "title": "Edge 4",
-    "description": "+5% Katana Damage",
+  "armor_shred_mastery": {
+    "title": "Cutting Edge Mastery",
+    "description": "+10% Armor Shred",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:netherite_sword"
+        "item": "minecraft:flint"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:katana_damage",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "katana_damage_mastery": {
-    "title": "Iaijutsu",
-    "description": "+10% Katana Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:netherite_sword"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:katana_damage",
+          "attribute": "puffish_attributes:armor_shred",
           "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "parry_stamina_1": {
-    "title": "Deflection 1",
-    "description": "+5% Stamina restored on Parry (of max)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:shield"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:parry_stamina",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "parry_stamina_2": {
-    "title": "Deflection 2",
-    "description": "+5% Stamina restored on Parry (of max)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:shield"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:parry_stamina",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "parry_stamina_3": {
-    "title": "Deflection 3",
-    "description": "+5% Stamina restored on Parry (of max)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:shield"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:parry_stamina",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "parry_stamina_mastery": {
-    "title": "Perfect Parry",
-    "description": "+10% Stamina restored on Parry (of max)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:shield"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:parry_stamina",
-          "value": 0.1,
-          "operation": "addition"
+          "operation": "multiply_base"
         }
       }
     ],
@@ -490,22 +354,22 @@
     },
     "size": 1.2
   },
-  "armor_shred_1": {
-    "title": "Cutting Edge 1",
-    "description": "+5% Armor Shred",
+  "parry_stamina_1": {
+    "title": "Deflection 1",
+    "description": "+5% Stamina restored on Parry (of max)",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:flint"
+        "item": "minecraft:shield"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:armor_shred",
+          "attribute": "mdvlcraft:parry_stamina",
           "value": 0.05,
-          "operation": "multiply_base"
+          "operation": "addition"
         }
       }
     ],
@@ -517,22 +381,22 @@
       }
     }
   },
-  "armor_shred_2": {
-    "title": "Cutting Edge 2",
-    "description": "+5% Armor Shred",
+  "parry_stamina_2": {
+    "title": "Deflection 2",
+    "description": "+5% Stamina restored on Parry (of max)",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:flint"
+        "item": "minecraft:shield"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:armor_shred",
+          "attribute": "mdvlcraft:parry_stamina",
           "value": 0.05,
-          "operation": "multiply_base"
+          "operation": "addition"
         }
       }
     ],
@@ -544,22 +408,22 @@
       }
     }
   },
-  "armor_shred_3": {
-    "title": "Cutting Edge 3",
-    "description": "+5% Armor Shred",
+  "parry_stamina_3": {
+    "title": "Deflection 3",
+    "description": "+5% Stamina restored on Parry (of max)",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:flint"
+        "item": "minecraft:shield"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:armor_shred",
+          "attribute": "mdvlcraft:parry_stamina",
           "value": 0.05,
-          "operation": "multiply_base"
+          "operation": "addition"
         }
       }
     ],
@@ -571,20 +435,245 @@
       }
     }
   },
-  "armor_shred_mastery": {
-    "title": "Cutting Edge Mastery",
-    "description": "+10% Armor Shred",
+  "parry_stamina_mastery": {
+    "title": "Perfect Parry",
+    "description": "+10% Stamina restored on Parry (of max)",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:flint"
+        "item": "minecraft:shield"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:armor_shred",
+          "attribute": "mdvlcraft:parry_stamina",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "armor_1": {
+    "title": "Bulk 1",
+    "description": "+0.5 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "armor_2": {
+    "title": "Bulk 2",
+    "description": "+0.5 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "armor_3": {
+    "title": "Bulk 3",
+    "description": "+0.5 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "armor_mastery": {
+    "title": "Bulk Mastery",
+    "description": "+1 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "natural_regeneration_1": {
+    "title": "Second Wind 1",
+    "description": "+5% Natural Regeneration",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:glistering_melon_slice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "natural_regeneration_2": {
+    "title": "Second Wind 2",
+    "description": "+5% Natural Regeneration",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:glistering_melon_slice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "natural_regeneration_3": {
+    "title": "Second Wind 3",
+    "description": "+5% Natural Regeneration",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:glistering_melon_slice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "natural_regeneration_mastery": {
+    "title": "Second Wind Mastery",
+    "description": "+10% Natural Regeneration",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:glistering_melon_slice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
           "value": 0.1,
           "operation": "multiply_base"
         }
@@ -597,7 +686,121 @@
         "frame": "goal"
       }
     },
-    "size": 1.2
+    "size": 1.2,
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "knockback_resistance_1": {
+    "title": "Stand Firm 1",
+    "description": "+3% Knockback Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:anvil"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "knockback_resistance_2": {
+    "title": "Stand Firm 2",
+    "description": "+3% Knockback Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:anvil"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "knockback_resistance_3": {
+    "title": "Stand Firm 3",
+    "description": "+3% Knockback Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:anvil"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+  },
+  "knockback_resistance_mastery": {
+    "title": "Stand Firm Mastery",
+    "description": "+6% Knockback Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:anvil"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.06,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
   },
   "max_health_1": {
     "title": "Toughness 1",
@@ -740,248 +943,22 @@
     "size": 1.2,
     "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
   },
-  "armor_1": {
-    "title": "Bulk 1",
-    "description": "+0.5 Armor",
+  "katana_damage_1": {
+    "title": "Edge 1",
+    "description": "+5% Katana Damage",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:iron_chestplate"
+        "item": "minecraft:netherite_sword"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "armor_2": {
-    "title": "Bulk 2",
-    "description": "+0.5 Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "armor_3": {
-    "title": "Bulk 3",
-    "description": "+0.5 Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "armor_mastery": {
-    "title": "Bulk Mastery",
-    "description": "+1 Armor",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_chestplate"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "knockback_resistance_1": {
-    "title": "Stand Firm 1",
-    "description": "+3% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "knockback_resistance_2": {
-    "title": "Stand Firm 2",
-    "description": "+3% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "knockback_resistance_3": {
-    "title": "Stand Firm 3",
-    "description": "+3% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "knockback_resistance_mastery": {
-    "title": "Stand Firm Mastery",
-    "description": "+6% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.06,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
-  },
-  "natural_regeneration_1": {
-    "title": "Second Wind 1",
-    "description": "+5% Natural Regeneration",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:glistering_melon_slice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
+          "attribute": "mdvlcraft:katana_damage",
           "value": 0.05,
-          "operation": "multiply_base"
+          "operation": "addition"
         }
       }
     ],
@@ -991,25 +968,24 @@
       "data": {
         "frame": "task"
       }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+    }
   },
-  "natural_regeneration_2": {
-    "title": "Second Wind 2",
-    "description": "+5% Natural Regeneration",
+  "katana_damage_2": {
+    "title": "Edge 2",
+    "description": "+5% Katana Damage",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:glistering_melon_slice"
+        "item": "minecraft:netherite_sword"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
+          "attribute": "mdvlcraft:katana_damage",
           "value": 0.05,
-          "operation": "multiply_base"
+          "operation": "addition"
         }
       }
     ],
@@ -1019,25 +995,24 @@
       "data": {
         "frame": "task"
       }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+    }
   },
-  "natural_regeneration_3": {
-    "title": "Second Wind 3",
-    "description": "+5% Natural Regeneration",
+  "katana_damage_3": {
+    "title": "Edge 3",
+    "description": "+5% Katana Damage",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:glistering_melon_slice"
+        "item": "minecraft:netherite_sword"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
+          "attribute": "mdvlcraft:katana_damage",
           "value": 0.05,
-          "operation": "multiply_base"
+          "operation": "addition"
         }
       }
     ],
@@ -1047,25 +1022,51 @@
       "data": {
         "frame": "task"
       }
-    },
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+    }
   },
-  "natural_regeneration_mastery": {
-    "title": "Second Wind Mastery",
-    "description": "+10% Natural Regeneration",
+  "katana_damage_4": {
+    "title": "Edge 4",
+    "description": "+5% Katana Damage",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:glistering_melon_slice"
+        "item": "minecraft:netherite_sword"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
+          "attribute": "mdvlcraft:katana_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "katana_damage_mastery": {
+    "title": "Iaijutsu",
+    "description": "+10% Katana Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_sword"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:katana_damage",
           "value": 0.1,
-          "operation": "multiply_base"
+          "operation": "addition"
         }
       }
     ],
@@ -1076,7 +1077,6 @@
         "frame": "goal"
       }
     },
-    "size": 1.2,
-    "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+    "size": 1.2
   }
 }

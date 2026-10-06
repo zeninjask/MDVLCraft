@@ -3,6 +3,14 @@
     "unidirectional": [
       [
         "root",
+        "ice_spikes"
+      ],
+      [
+        "ice_spikes",
+        "blizzard"
+      ],
+      [
+        "root",
         "cone_of_cold"
       ],
       [
@@ -15,11 +23,35 @@
       ],
       [
         "root",
-        "ice_spikes"
+        "magic_resistance_1"
       ],
       [
-        "ice_spikes",
-        "blizzard"
+        "magic_resistance_1",
+        "magic_resistance_2"
+      ],
+      [
+        "magic_resistance_2",
+        "magic_resistance_3"
+      ],
+      [
+        "magic_resistance_3",
+        "magic_resistance_mastery"
+      ],
+      [
+        "root",
+        "spell_resist_1"
+      ],
+      [
+        "spell_resist_1",
+        "spell_resist_2"
+      ],
+      [
+        "spell_resist_2",
+        "spell_resist_3"
+      ],
+      [
+        "spell_resist_3",
+        "spell_resist_mastery"
       ],
       [
         "root",
@@ -43,22 +75,6 @@
       ],
       [
         "root",
-        "magic_resistance_1"
-      ],
-      [
-        "magic_resistance_1",
-        "magic_resistance_2"
-      ],
-      [
-        "magic_resistance_2",
-        "magic_resistance_3"
-      ],
-      [
-        "magic_resistance_3",
-        "magic_resistance_mastery"
-      ],
-      [
-        "root",
         "ice_magic_resist_1"
       ],
       [
@@ -68,6 +84,22 @@
       [
         "ice_magic_resist_2",
         "ice_magic_resist_mastery"
+      ],
+      [
+        "root",
+        "experience_1"
+      ],
+      [
+        "experience_1",
+        "experience_2"
+      ],
+      [
+        "experience_2",
+        "experience_3"
+      ],
+      [
+        "experience_3",
+        "experience_mastery"
       ],
       [
         "root",
@@ -128,38 +160,44 @@
       [
         "cast_time_reduction_4",
         "cast_time_reduction_mastery"
+      ]
+    ],
+    "bidirectional": [
+      [
+        "ice_spell_power_2",
+        "ice_magic_resist_1"
       ],
       [
-        "root",
+        "ice_spell_power_2",
+        "ice_magic_resist_2"
+      ],
+      [
+        "ice_magic_resist_1",
         "experience_1"
       ],
       [
-        "experience_1",
+        "ice_magic_resist_2",
         "experience_2"
       ],
       [
-        "experience_2",
-        "experience_3"
+        "max_mana_1",
+        "mana_regen_1"
       ],
       [
-        "experience_3",
-        "experience_mastery"
+        "max_mana_2",
+        "mana_regen_2"
       ],
       [
-        "root",
-        "spell_resist_1"
+        "max_mana_2",
+        "mana_regen_3"
       ],
       [
-        "spell_resist_1",
-        "spell_resist_2"
+        "max_mana_3",
+        "mana_regen_4"
       ],
       [
-        "spell_resist_2",
-        "spell_resist_3"
-      ],
-      [
-        "spell_resist_3",
-        "spell_resist_mastery"
+        "mana_regen_2",
+        "cast_time_reduction_2"
       ]
     ]
   }

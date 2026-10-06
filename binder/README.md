@@ -3,8 +3,9 @@
 The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 
 1. **Switches off Iron's Spells and Cursed Fate as standalone content.** No items, recipes, loot, structures, ores, mob spawns, trades, keybinds, menus or advancements from either mod. Their spells and techniques are only reachable through the skill trees.
-2. **Adds class and archetype skill trees** (Pufferfish's Skills), laid out radially like the *RPG skill tree* packs. Four classes, 16 archetypes, pick up to two; each archetype tab has around 40 skills (class bonus spokes, signature spokes and key abilities). See [`SKILL_TREES.md`](SKILL_TREES.md).
-3. **Adds the ability wheel.** Spells and Cursed Fate techniques unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
+2. **Adds class and archetype skill trees** (Pufferfish's Skills), the Classes tab laid out radially like the *RPG skill tree* packs (hover an archetype for its description). Four classes, 16 archetypes, pick up to two; each archetype tab is a jumbled web of around 40 skills (class bonus spokes, signature spokes, key abilities and sideways links). See [`SKILL_TREES.md`](SKILL_TREES.md).
+3. **Makes every weapon work with Epic Fight and Ponder.** Weapons that only had Epic Fight's generic fallback get the type that fits them (`data/*/capabilities/weapons/`), and Ponder (hold W over an item) gets a scene for every Epic Fight weapon type, not just Epic Fight's own eight (`client/ponder/`). `/mdvl weapons` writes a report of every weapon and its Epic Fight type.
+4. **Adds the ability wheel.** Spells and Cursed Fate techniques unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
 
 ## Controls (defaults, rebindable under *MDVLCraft Abilities*)
 Every letter key is already used by some mod in the pack, so the defaults avoid letters. The log warns at startup if a binding shares a key with another mod.

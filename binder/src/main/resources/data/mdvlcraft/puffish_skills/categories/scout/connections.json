@@ -3,62 +3,6 @@
     "unidirectional": [
       [
         "root",
-        "teleport"
-      ],
-      [
-        "teleport",
-        "teleport_4"
-      ],
-      [
-        "root",
-        "haste"
-      ],
-      [
-        "haste",
-        "planar_sight"
-      ],
-      [
-        "root",
-        "swim_speed_1"
-      ],
-      [
-        "swim_speed_1",
-        "swim_speed_2"
-      ],
-      [
-        "swim_speed_2",
-        "swim_speed_mastery"
-      ],
-      [
-        "root",
-        "ender_spell_power_1"
-      ],
-      [
-        "ender_spell_power_1",
-        "ender_spell_power_2"
-      ],
-      [
-        "ender_spell_power_2",
-        "ender_spell_power_3"
-      ],
-      [
-        "ender_spell_power_3",
-        "ender_spell_power_mastery"
-      ],
-      [
-        "root",
-        "ender_magic_resist_1"
-      ],
-      [
-        "ender_magic_resist_1",
-        "ender_magic_resist_2"
-      ],
-      [
-        "ender_magic_resist_2",
-        "ender_magic_resist_mastery"
-      ],
-      [
-        "root",
         "breaking_speed_1"
       ],
       [
@@ -72,22 +16,6 @@
       [
         "breaking_speed_3",
         "breaking_speed_mastery"
-      ],
-      [
-        "root",
-        "movement_speed_1"
-      ],
-      [
-        "movement_speed_1",
-        "movement_speed_2"
-      ],
-      [
-        "movement_speed_2",
-        "movement_speed_3"
-      ],
-      [
-        "movement_speed_3",
-        "movement_speed_mastery"
       ],
       [
         "root",
@@ -107,6 +35,14 @@
       ],
       [
         "root",
+        "haste"
+      ],
+      [
+        "haste",
+        "planar_sight"
+      ],
+      [
+        "root",
         "stealth_1"
       ],
       [
@@ -123,19 +59,19 @@
       ],
       [
         "root",
-        "stamina_regen_1"
+        "movement_speed_1"
       ],
       [
-        "stamina_regen_1",
-        "stamina_regen_2"
+        "movement_speed_1",
+        "movement_speed_2"
       ],
       [
-        "stamina_regen_2",
-        "stamina_regen_3"
+        "movement_speed_2",
+        "movement_speed_3"
       ],
       [
-        "stamina_regen_3",
-        "stamina_regen_mastery"
+        "movement_speed_3",
+        "movement_speed_mastery"
       ],
       [
         "root",
@@ -152,6 +88,104 @@
       [
         "consuming_speed_3",
         "consuming_speed_mastery"
+      ],
+      [
+        "root",
+        "ender_magic_resist_1"
+      ],
+      [
+        "ender_magic_resist_1",
+        "ender_magic_resist_2"
+      ],
+      [
+        "ender_magic_resist_2",
+        "ender_magic_resist_mastery"
+      ],
+      [
+        "root",
+        "teleport"
+      ],
+      [
+        "teleport",
+        "teleport_4"
+      ],
+      [
+        "root",
+        "ender_spell_power_1"
+      ],
+      [
+        "ender_spell_power_1",
+        "ender_spell_power_2"
+      ],
+      [
+        "ender_spell_power_2",
+        "ender_spell_power_3"
+      ],
+      [
+        "ender_spell_power_3",
+        "ender_spell_power_mastery"
+      ],
+      [
+        "root",
+        "swim_speed_1"
+      ],
+      [
+        "swim_speed_1",
+        "swim_speed_2"
+      ],
+      [
+        "swim_speed_2",
+        "swim_speed_mastery"
+      ],
+      [
+        "root",
+        "stamina_regen_1"
+      ],
+      [
+        "stamina_regen_1",
+        "stamina_regen_2"
+      ],
+      [
+        "stamina_regen_2",
+        "stamina_regen_3"
+      ],
+      [
+        "stamina_regen_3",
+        "stamina_regen_mastery"
+      ]
+    ],
+    "bidirectional": [
+      [
+        "movement_speed_1",
+        "consuming_speed_2"
+      ],
+      [
+        "movement_speed_2",
+        "consuming_speed_3"
+      ],
+      [
+        "consuming_speed_1",
+        "ender_magic_resist_1"
+      ],
+      [
+        "consuming_speed_1",
+        "ender_magic_resist_2"
+      ],
+      [
+        "ender_spell_power_1",
+        "swim_speed_1"
+      ],
+      [
+        "swim_speed_1",
+        "stamina_regen_1"
+      ],
+      [
+        "swim_speed_2",
+        "stamina_regen_1"
+      ],
+      [
+        "stamina_regen_1",
+        "breaking_speed_1"
       ]
     ]
   }

@@ -3,11 +3,47 @@
     "unidirectional": [
       [
         "root",
-        "arrow_volley"
+        "stamina_1"
       ],
       [
-        "arrow_volley",
-        "arrow_volley_5"
+        "stamina_1",
+        "stamina_2"
+      ],
+      [
+        "stamina_2",
+        "stamina_3"
+      ],
+      [
+        "stamina_3",
+        "stamina_mastery"
+      ],
+      [
+        "root",
+        "sprinting_speed_1"
+      ],
+      [
+        "sprinting_speed_1",
+        "sprinting_speed_2"
+      ],
+      [
+        "sprinting_speed_2",
+        "sprinting_speed_3"
+      ],
+      [
+        "sprinting_speed_3",
+        "sprinting_speed_mastery"
+      ],
+      [
+        "root",
+        "crossbow_projectile_speed_1"
+      ],
+      [
+        "crossbow_projectile_speed_1",
+        "crossbow_projectile_speed_2"
+      ],
+      [
+        "crossbow_projectile_speed_2",
+        "crossbow_projectile_speed_mastery"
       ],
       [
         "root",
@@ -31,75 +67,11 @@
       ],
       [
         "root",
-        "bow_projectile_speed_1"
+        "arrow_volley"
       ],
       [
-        "bow_projectile_speed_1",
-        "bow_projectile_speed_2"
-      ],
-      [
-        "bow_projectile_speed_2",
-        "bow_projectile_speed_mastery"
-      ],
-      [
-        "root",
-        "crossbow_projectile_speed_1"
-      ],
-      [
-        "crossbow_projectile_speed_1",
-        "crossbow_projectile_speed_2"
-      ],
-      [
-        "crossbow_projectile_speed_2",
-        "crossbow_projectile_speed_mastery"
-      ],
-      [
-        "root",
-        "evocation_spell_power_1"
-      ],
-      [
-        "evocation_spell_power_1",
-        "evocation_spell_power_2"
-      ],
-      [
-        "evocation_spell_power_2",
-        "evocation_spell_power_3"
-      ],
-      [
-        "evocation_spell_power_3",
-        "evocation_spell_power_mastery"
-      ],
-      [
-        "root",
-        "sprinting_speed_1"
-      ],
-      [
-        "sprinting_speed_1",
-        "sprinting_speed_2"
-      ],
-      [
-        "sprinting_speed_2",
-        "sprinting_speed_3"
-      ],
-      [
-        "sprinting_speed_3",
-        "sprinting_speed_mastery"
-      ],
-      [
-        "root",
-        "jump_1"
-      ],
-      [
-        "jump_1",
-        "jump_2"
-      ],
-      [
-        "jump_2",
-        "jump_3"
-      ],
-      [
-        "jump_3",
-        "jump_mastery"
+        "arrow_volley",
+        "arrow_volley_5"
       ],
       [
         "root",
@@ -119,6 +91,50 @@
       ],
       [
         "root",
+        "jump_1"
+      ],
+      [
+        "jump_1",
+        "jump_2"
+      ],
+      [
+        "jump_2",
+        "jump_3"
+      ],
+      [
+        "jump_3",
+        "jump_mastery"
+      ],
+      [
+        "root",
+        "evocation_spell_power_1"
+      ],
+      [
+        "evocation_spell_power_1",
+        "evocation_spell_power_2"
+      ],
+      [
+        "evocation_spell_power_2",
+        "evocation_spell_power_3"
+      ],
+      [
+        "evocation_spell_power_3",
+        "evocation_spell_power_mastery"
+      ],
+      [
+        "root",
+        "bow_projectile_speed_1"
+      ],
+      [
+        "bow_projectile_speed_1",
+        "bow_projectile_speed_2"
+      ],
+      [
+        "bow_projectile_speed_2",
+        "bow_projectile_speed_mastery"
+      ],
+      [
+        "root",
         "staminar_1"
       ],
       [
@@ -132,22 +148,24 @@
       [
         "staminar_3",
         "staminar_mastery"
+      ]
+    ],
+    "bidirectional": [
+      [
+        "crossbow_projectile_speed_1",
+        "ranged_damage_1"
       ],
       [
-        "root",
+        "fall_reduction_1",
+        "jump_1"
+      ],
+      [
+        "evocation_spell_power_2",
+        "bow_projectile_speed_2"
+      ],
+      [
+        "staminar_2",
         "stamina_1"
-      ],
-      [
-        "stamina_1",
-        "stamina_2"
-      ],
-      [
-        "stamina_2",
-        "stamina_3"
-      ],
-      [
-        "stamina_3",
-        "stamina_mastery"
       ]
     ]
   }

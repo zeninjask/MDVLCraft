@@ -3,6 +3,22 @@
     "unidirectional": [
       [
         "root",
+        "stamina_1"
+      ],
+      [
+        "stamina_1",
+        "stamina_2"
+      ],
+      [
+        "stamina_2",
+        "stamina_3"
+      ],
+      [
+        "stamina_3",
+        "stamina_mastery"
+      ],
+      [
+        "root",
         "summon_horse"
       ],
       [
@@ -11,23 +27,15 @@
       ],
       [
         "root",
-        "counterspell"
+        "tamed_resistance_1"
       ],
       [
-        "root",
-        "saturation_bonus_1"
+        "tamed_resistance_1",
+        "tamed_resistance_2"
       ],
       [
-        "saturation_bonus_1",
-        "saturation_bonus_2"
-      ],
-      [
-        "saturation_bonus_2",
-        "saturation_bonus_3"
-      ],
-      [
-        "saturation_bonus_3",
-        "saturation_bonus_mastery"
+        "tamed_resistance_2",
+        "tamed_resistance_mastery"
       ],
       [
         "root",
@@ -59,35 +67,19 @@
       ],
       [
         "root",
-        "tamed_resistance_1"
+        "saturation_bonus_1"
       ],
       [
-        "tamed_resistance_1",
-        "tamed_resistance_2"
+        "saturation_bonus_1",
+        "saturation_bonus_2"
       ],
       [
-        "tamed_resistance_2",
-        "tamed_resistance_mastery"
+        "saturation_bonus_2",
+        "saturation_bonus_3"
       ],
       [
-        "root",
-        "step_height_addition_mastery"
-      ],
-      [
-        "root",
-        "sprinting_speed_1"
-      ],
-      [
-        "sprinting_speed_1",
-        "sprinting_speed_2"
-      ],
-      [
-        "sprinting_speed_2",
-        "sprinting_speed_3"
-      ],
-      [
-        "sprinting_speed_3",
-        "sprinting_speed_mastery"
+        "saturation_bonus_3",
+        "saturation_bonus_mastery"
       ],
       [
         "root",
@@ -104,6 +96,10 @@
       [
         "jump_3",
         "jump_mastery"
+      ],
+      [
+        "root",
+        "step_height_addition_mastery"
       ],
       [
         "root",
@@ -139,19 +135,65 @@
       ],
       [
         "root",
-        "stamina_1"
+        "counterspell"
       ],
       [
-        "stamina_1",
+        "root",
+        "sprinting_speed_1"
+      ],
+      [
+        "sprinting_speed_1",
+        "sprinting_speed_2"
+      ],
+      [
+        "sprinting_speed_2",
+        "sprinting_speed_3"
+      ],
+      [
+        "sprinting_speed_3",
+        "sprinting_speed_mastery"
+      ]
+    ],
+    "bidirectional": [
+      [
+        "tamed_resistance_1",
+        "mount_speed_1"
+      ],
+      [
+        "tamed_resistance_2",
+        "mount_speed_3"
+      ],
+      [
+        "mount_speed_1",
+        "tamed_damage_1"
+      ],
+      [
+        "tamed_damage_1",
+        "saturation_bonus_1"
+      ],
+      [
+        "tamed_damage_1",
+        "saturation_bonus_2"
+      ],
+      [
+        "tamed_damage_2",
+        "saturation_bonus_2"
+      ],
+      [
+        "saturation_bonus_1",
+        "jump_2"
+      ],
+      [
+        "saturation_bonus_2",
+        "jump_2"
+      ],
+      [
+        "sprinting_speed_1",
         "stamina_2"
       ],
       [
-        "stamina_2",
-        "stamina_3"
-      ],
-      [
-        "stamina_3",
-        "stamina_mastery"
+        "sprinting_speed_2",
+        "stamina_2"
       ]
     ]
   }
