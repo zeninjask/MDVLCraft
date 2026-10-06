@@ -93,6 +93,7 @@ dependencies {
     runtimeOnly fg.deobf(cf('photon'))
     runtimeOnly fg.deobf(cf('ldlib'))
     runtimeOnly fg.deobf(cf('kleiders'))
+    runtimeOnly fg.deobf(cf('puffish_attributes'))
 }
 
 tasks.named('processResources', ProcessResources).configure {

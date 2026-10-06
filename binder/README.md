@@ -3,7 +3,7 @@
 The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 
 1. **Switches off Iron's Spells and Cursed Fate as standalone content.** No items, recipes, loot, structures, ores, mob spawns, trades, keybinds, menus or advancements from either mod. Their spells and techniques are only reachable through the skill trees.
-2. **Adds class and archetype skill trees** (Pufferfish's Skills). Four classes, 16 archetypes, pick up to two. See [`SKILL_TREES.md`](SKILL_TREES.md).
+2. **Adds class and archetype skill trees** (Pufferfish's Skills), laid out radially like the *RPG skill tree* packs. Four classes, 16 archetypes, pick up to two; each archetype tab has around 40 skills (class bonus spokes, signature spokes and key abilities). See [`SKILL_TREES.md`](SKILL_TREES.md).
 3. **Adds the ability wheel.** Spells and Cursed Fate techniques unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
 
 ## Controls (defaults, rebindable under *MDVLCraft Abilities*)
@@ -38,7 +38,8 @@ Iron's mana, cast-bar, recast and screen-effect overlays stay because the wheel'
 ```
 ability/     Ability (SpellAbility | Technique), AbilityReward (Pufferfish reward mdvlcraft:ability), AbilityGrants,
              Loadout (wheel, saved with the player), AbilityActions (assign/cast/release), TechniqueRunner (Cursed Fate via mana)
-attribute/   BinderAttributes (16 mdvlcraft:* player attributes), AttributeEffects (what they do)
+attribute/   BinderAttributes (12 mdvlcraft:* player attributes not offered by vanilla, Pufferfish's Attributes,
+             Epic Fight or Iron's), AttributeEffects (what they do)
 skills/      ArchetypeTabs: class skills auto-unlocked, archetype skill unlocks its tab, locking erases it
 client/      ClientAbilities, AbilityKeys, AbilityScreen, WheelScreen, AbilityHud, ForeignKeyMappings
 network/     BinderNetwork + SyncAbilitiesPacket, AssignSlotPacket, CastPacket
@@ -48,8 +49,8 @@ tools/generate_skill_trees.py   writes src/main/resources/data/mdvlcraft/puffish
 ```
 
 ## Editing the skill trees
-Edit `tools/generate_skill_trees.py`, then run `python3 tools/generate_skill_trees.py` from this folder. The script fails if:
-- a stat or ability is used by two archetypes;
+Edit `tools/generate_skill_trees.py`, then run `python3 tools/generate_skill_trees.py` from this folder. Bonuses use vanilla, Forge, Epic Fight, Iron's, Pufferfish's Attributes and `mdvlcraft:` attributes. The script fails if:
+- a class bonus is used by two classes, or a signature bonus or ability by two archetypes (or also as a class bonus);
 - a spell level is above Iron's maximum;
 - two skills overlap on screen.
 
@@ -68,6 +69,8 @@ Techniques use `mdvlcraft:dismantle`, `mdvlcraft:cleave`, `mdvlcraft:malevolent_
 | `./gradlew build` | `build/libs/mdvlcraft-<version>.jar` |
 | `./gradlew runClient` / `runServer` | Dev client or server with the binder and the mods it compiles against |
 
-Requires JDK 17. The jar goes in the `mods` folder on the client **and** the server. Hard dependencies: Epic Fight, Iron's Spells, Cataclysm, Pufferfish's Skills, Cursed Fate.
+Requires JDK 17. The jar goes in the `mods` folder on the client **and** the server. Hard dependencies: Epic Fight, Iron's Spells, Cataclysm, Pufferfish's Skills, Pufferfish's Attributes, Cursed Fate.
+
+`data/irons_spellbooks/irons_spellbooks_spell_config/planar_sight.json` lowers Planar Sight's mana cost to 90 (Iron's default 150 is more than the 100-mana pool Scouts have).
 
 To compile against another pack mod, add `<name>_cf=<projectId>:<fileId>` (from the pack manifest) to `gradle.properties` and `implementation fg.deobf(cf('<name>'))` to `build.gradle`. Client-only mixins go in the `client` list of `mdvlcraft.mixins.json`.

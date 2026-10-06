@@ -1,7 +1,7 @@
 {
   "root": {
     "title": "Cursed Body",
-    "description": "+1 Armor Toughness",
+    "description": "+2% Melee Resistance",
     "icon": {
       "type": "item",
       "data": {
@@ -11,170 +11,29 @@
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "goal"
+        "frame": "challenge"
       }
     },
-    "size": 1.5,
+    "size": 1.6,
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.armor_toughness",
-          "value": 1,
-          "operation": "addition"
+          "attribute": "puffish_attributes:melee_resistance",
+          "value": 0.02,
+          "operation": "multiply_base"
         }
       }
     ],
     "cost": 1
-  },
-  "generic.armor_toughness_1": {
-    "title": "Vessel I",
-    "description": "+1 Armor Toughness",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:netherite_chestplate"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor_toughness",
-          "value": 1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1
-  },
-  "generic.armor_toughness_2": {
-    "title": "Vessel II",
-    "description": "+2 Armor Toughness",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:netherite_chestplate"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor_toughness",
-          "value": 2,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
-  },
-  "technique_efficiency_1": {
-    "title": "Cursed Control I",
-    "description": "+10% Technique Mana Cost Reduction",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:technique_efficiency",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1
-  },
-  "technique_efficiency_2": {
-    "title": "Cursed Control II",
-    "description": "+10% Technique Mana Cost Reduction",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:technique_efficiency",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
-  },
-  "technique_efficiency_3": {
-    "title": "Cursed Control III",
-    "description": "+15% Technique Mana Cost Reduction",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:technique_efficiency",
-          "value": 0.15,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
   },
   "dismantle": {
     "title": "Dismantle",
-    "description": "Unlocks Dismantle on the ability wheel (20 mana)",
+    "description": "Unlocks Dismantle (20 mana, no cooldown) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
         "item": "minecraft:shears"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
       }
     },
     "rewards": [
@@ -186,21 +45,22 @@
         }
       }
     ],
-    "cost": 2
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
   },
   "cleave": {
     "title": "Cleave",
-    "description": "Unlocks Cleave on the ability wheel (35 mana)",
+    "description": "Unlocks Cleave (35 mana, no cooldown) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
         "item": "minecraft:iron_axe"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "challenge"
       }
     },
     "rewards": [
@@ -212,21 +72,22 @@
         }
       }
     ],
-    "cost": 3
-  },
-  "shrine": {
-    "title": "Malevolent Shrine",
-    "description": "Unlocks Malevolent Shrine on the ability wheel (150 mana)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:crying_obsidian"
-      }
-    },
+    "cost": 3,
     "frame": {
       "type": "advancement",
       "data": {
         "frame": "challenge"
+      }
+    },
+    "size": 1.3
+  },
+  "malevolent_shrine": {
+    "title": "Malevolent Shrine",
+    "description": "Unlocks Malevolent Shrine (150 mana, no cooldown) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crying_obsidian"
       }
     },
     "rewards": [
@@ -239,6 +100,905 @@
       }
     ],
     "cost": 5,
-    "extra_description": "Your mana pool is 100: take Cursed Control III (-35% cost) to cast it."
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "size": 1.3,
+    "extra_description": "Costs 150 mana: take all of Cursed Control (-35%) to fit your 100-mana pool."
+  },
+  "technique_efficiency_1": {
+    "title": "Cursed Control 1",
+    "description": "+7% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "technique_efficiency_2": {
+    "title": "Cursed Control 2",
+    "description": "+7% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "technique_efficiency_3": {
+    "title": "Cursed Control 3",
+    "description": "+7% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "technique_efficiency_4": {
+    "title": "Cursed Control 4",
+    "description": "+7% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "technique_efficiency_mastery": {
+    "title": "Cursed Control Mastery",
+    "description": "+7% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "melee_resistance_1": {
+    "title": "Vessel 1",
+    "description": "+2% Melee Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:melee_resistance",
+          "value": 0.02,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "melee_resistance_2": {
+    "title": "Vessel 2",
+    "description": "+2% Melee Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:melee_resistance",
+          "value": 0.02,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "melee_resistance_3": {
+    "title": "Vessel 3",
+    "description": "+2% Melee Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:melee_resistance",
+          "value": 0.02,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "melee_resistance_mastery": {
+    "title": "Vessel Mastery",
+    "description": "+4% Melee Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:melee_resistance",
+          "value": 0.04,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "toughness_shred_1": {
+    "title": "Severing 1",
+    "description": "+5% Toughness Shred",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:shears"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:toughness_shred",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "toughness_shred_2": {
+    "title": "Severing 2",
+    "description": "+5% Toughness Shred",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:shears"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:toughness_shred",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "toughness_shred_mastery": {
+    "title": "Severing Mastery",
+    "description": "+10% Toughness Shred",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:shears"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:toughness_shred",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "sprinting_speed_1": {
+    "title": "Sprinter 1",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_2": {
+    "title": "Sprinter 2",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_3": {
+    "title": "Sprinter 3",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_mastery": {
+    "title": "Sprinter Mastery",
+    "description": "+6% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.06,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_1": {
+    "title": "Spring 1",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_2": {
+    "title": "Spring 2",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_3": {
+    "title": "Spring 3",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_mastery": {
+    "title": "Spring Mastery",
+    "description": "+10% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_1": {
+    "title": "Light Foot 1",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_2": {
+    "title": "Light Foot 2",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_3": {
+    "title": "Light Foot 3",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_mastery": {
+    "title": "Light Foot Mastery",
+    "description": "+10% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_1": {
+    "title": "Evasion Training 1",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_2": {
+    "title": "Evasion Training 2",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_3": {
+    "title": "Evasion Training 3",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_mastery": {
+    "title": "Evasion Training Mastery",
+    "description": "+1 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_1": {
+    "title": "Forager 1",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_2": {
+    "title": "Forager 2",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_3": {
+    "title": "Forager 3",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_mastery": {
+    "title": "Forager Mastery",
+    "description": "+10% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   }
 }

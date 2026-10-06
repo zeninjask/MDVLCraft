@@ -11,10 +11,10 @@
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "goal"
+        "frame": "challenge"
       }
     },
-    "size": 1.5,
+    "size": 1.6,
     "rewards": [
       {
         "type": "mdvlcraft:ability",
@@ -26,181 +26,13 @@
     ],
     "cost": 1
   },
-  "ice_spell_power_1": {
-    "title": "Winter I",
-    "description": "+5% Ice Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snowball"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:ice_spell_power",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1
-  },
-  "ice_spell_power_2": {
-    "title": "Winter II",
-    "description": "+5% Ice Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snowball"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:ice_spell_power",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
-  },
-  "ice_spell_power_3": {
-    "title": "Winter III",
-    "description": "+10% Ice Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snowball"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:ice_spell_power",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 3
-  },
-  "spell_resist_1": {
-    "title": "Frost Ward I",
-    "description": "+4% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1
-  },
-  "spell_resist_2": {
-    "title": "Frost Ward II",
-    "description": "+4% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
-  },
-  "spell_resist_3": {
-    "title": "Frost Ward III",
-    "description": "+6% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.06,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
-  },
-  "cone": {
+  "cone_of_cold": {
     "title": "Cone Of Cold",
     "description": "Unlocks Cone Of Cold (Level 3) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
         "item": "minecraft:powder_snow_bucket"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
       }
     },
     "rewards": [
@@ -212,21 +44,22 @@
         }
       }
     ],
-    "cost": 2
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
   },
-  "step": {
+  "frost_step": {
     "title": "Frost Step",
     "description": "Unlocks Frost Step (Level 3) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
         "item": "minecraft:leather_boots"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
       }
     },
     "rewards": [
@@ -238,73 +71,22 @@
         }
       }
     ],
-    "cost": 2
-  },
-  "spikes": {
-    "title": "Ice Spikes",
-    "description": "Unlocks Ice Spikes (Level 3) on the ability wheel",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:pointed_dripstone"
-      }
-    },
+    "cost": 2,
     "frame": {
       "type": "advancement",
       "data": {
         "frame": "goal"
       }
     },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:ice_spikes",
-          "level": 3
-        }
-      }
-    ],
-    "cost": 2
+    "size": 1.3
   },
-  "blizzard": {
-    "title": "Blizzard",
-    "description": "Unlocks Blizzard (Level 2) on the ability wheel",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snow_block"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "challenge"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:blizzard",
-          "level": 2
-        }
-      }
-    ],
-    "cost": 3
-  },
-  "shatter": {
+  "icicle": {
     "title": "Shatter (Icicle V)",
     "description": "Unlocks Icicle (Level 5) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
         "item": "minecraft:ice"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
       }
     },
     "rewards": [
@@ -316,6 +98,1043 @@
         }
       }
     ],
-    "cost": 2
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "ice_spikes": {
+    "title": "Ice Spikes",
+    "description": "Unlocks Ice Spikes (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:pointed_dripstone"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:ice_spikes",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "blizzard": {
+    "title": "Blizzard",
+    "description": "Unlocks Blizzard (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snow_block"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:blizzard",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 3,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "size": 1.3
+  },
+  "ice_spell_power_1": {
+    "title": "Winter 1",
+    "description": "+3% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ice_spell_power_2": {
+    "title": "Winter 2",
+    "description": "+3% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ice_spell_power_3": {
+    "title": "Winter 3",
+    "description": "+3% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ice_spell_power_4": {
+    "title": "Winter 4",
+    "description": "+3% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ice_spell_power_mastery": {
+    "title": "Winter Mastery",
+    "description": "+6% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.06,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "magic_resistance_1": {
+    "title": "Glacial Ward 1",
+    "description": "+3% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "magic_resistance_2": {
+    "title": "Glacial Ward 2",
+    "description": "+3% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "magic_resistance_3": {
+    "title": "Glacial Ward 3",
+    "description": "+3% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "magic_resistance_mastery": {
+    "title": "Glacial Ward Mastery",
+    "description": "+5% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "ice_magic_resist_1": {
+    "title": "Cold Blood 1",
+    "description": "+5% Ice Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:powder_snow_bucket"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_magic_resist",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ice_magic_resist_2": {
+    "title": "Cold Blood 2",
+    "description": "+5% Ice Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:powder_snow_bucket"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_magic_resist",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ice_magic_resist_mastery": {
+    "title": "Cold Blood Mastery",
+    "description": "+10% Ice Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:powder_snow_bucket"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_magic_resist",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "max_mana_1": {
+    "title": "Mana Well 1",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "max_mana_2": {
+    "title": "Mana Well 2",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "max_mana_3": {
+    "title": "Mana Well 3",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "max_mana_4": {
+    "title": "Mana Well 4",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "max_mana_mastery": {
+    "title": "Mana Well Mastery",
+    "description": "+18 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 18,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_1": {
+    "title": "Flow 1",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_2": {
+    "title": "Flow 2",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_3": {
+    "title": "Flow 3",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_4": {
+    "title": "Flow 4",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_mastery": {
+    "title": "Flow Mastery",
+    "description": "+9% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.09,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "cast_time_reduction_1": {
+    "title": "Quick Casting 1",
+    "description": "+2% Cast Time Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cast_time_reduction",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "cast_time_reduction_2": {
+    "title": "Quick Casting 2",
+    "description": "+2% Cast Time Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cast_time_reduction",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "cast_time_reduction_3": {
+    "title": "Quick Casting 3",
+    "description": "+2% Cast Time Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cast_time_reduction",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "cast_time_reduction_4": {
+    "title": "Quick Casting 4",
+    "description": "+2% Cast Time Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cast_time_reduction",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "cast_time_reduction_mastery": {
+    "title": "Quick Casting Mastery",
+    "description": "+4% Cast Time Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cast_time_reduction",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "experience_1": {
+    "title": "Scholar 1",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "experience_2": {
+    "title": "Scholar 2",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "experience_3": {
+    "title": "Scholar 3",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "experience_mastery": {
+    "title": "Scholar Mastery",
+    "description": "+10% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "spell_resist_1": {
+    "title": "Warding 1",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "spell_resist_2": {
+    "title": "Warding 2",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "spell_resist_3": {
+    "title": "Warding 3",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "spell_resist_mastery": {
+    "title": "Warding Mastery",
+    "description": "+4% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   }
 }

@@ -9,21 +9,19 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.food.FoodData;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingDamageEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
-import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.RegistryObject;
+import yesman.epicfight.skill.dodge.DodgeSkill;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
@@ -59,18 +57,9 @@ public final class AttributeEffects {
     public static void onHurt(LivingHurtEvent event) {
         LivingEntity target = event.getEntity();
         DamageSource source = event.getSource();
-        float amount = event.getAmount();
-        if (target instanceof Player victim) {
-            amount *= (float) (1 - value(victim, BinderAttributes.DAMAGE_REDUCTION));
+        if (source.getEntity() instanceof ServerPlayer attacker && isMelee(source, attacker)) {
+            event.setAmount(event.getAmount() * (float) (1 + meleeBonus(attacker, target)));
         }
-        if (source.getEntity() instanceof ServerPlayer attacker) {
-            if (isMelee(source, attacker)) {
-                amount *= (float) (1 + meleeBonus(attacker, target));
-            } else if (source.getDirectEntity() instanceof AbstractArrow) {
-                amount *= (float) (1 + value(attacker, BinderAttributes.RANGED_DAMAGE));
-            }
-        }
-        event.setAmount(amount);
     }
 
     /** Sum of the weapon, backstab and riposte bonuses that apply to this melee hit. */
@@ -82,8 +71,6 @@ public final class AttributeEffects {
             bonus += value(attacker, BinderAttributes.GREATSWORD_DAMAGE);
         } else if (category == CapabilityItem.WeaponCategories.UCHIGATANA || category == CapabilityItem.WeaponCategories.TACHI) {
             bonus += value(attacker, BinderAttributes.KATANA_DAMAGE);
-        } else if (category == CapabilityItem.WeaponCategories.AXE) {
-            bonus += value(attacker, BinderAttributes.AXE_DAMAGE);
         } else if (category == CapabilityItem.WeaponCategories.DAGGER) {
             bonus += value(attacker, BinderAttributes.DAGGER_DAMAGE);
         } else if (category == CapabilityItem.WeaponCategories.SWORD && attacker.getOffhandItem().isEmpty()) {
@@ -99,23 +86,6 @@ public final class AttributeEffects {
             bonus += value(attacker, BinderAttributes.RIPOSTE_DAMAGE);
         }
         return bonus;
-    }
-
-    @SubscribeEvent
-    public static void onDamage(LivingDamageEvent event) {
-        if (event.getSource().getEntity() instanceof ServerPlayer attacker && isMelee(event.getSource(), attacker)) {
-            double lifesteal = value(attacker, BinderAttributes.BLOODLUST);
-            if (lifesteal > 0) {
-                attacker.heal((float) (event.getAmount() * lifesteal));
-            }
-        }
-    }
-
-    @SubscribeEvent
-    public static void onFall(LivingFallEvent event) {
-        if (event.getEntity() instanceof Player player) {
-            event.setDamageMultiplier(event.getDamageMultiplier() * (float) (1 - value(player, BinderAttributes.FALL_REDUCTION)));
-        }
     }
 
     @SubscribeEvent
@@ -156,7 +126,7 @@ public final class AttributeEffects {
         }
     }
 
-    /** Epic Fight parry and dodge results are only available through its per-player event listener. */
+    /** Epic Fight parry, dodge and skill-cost hooks are only available through its per-player event listener. */
     @SubscribeEvent
     public static void onJoinLevel(EntityJoinLevelEvent event) {
         if (!(event.getEntity() instanceof ServerPlayer player)) {
@@ -171,6 +141,11 @@ public final class AttributeEffects {
             double restore = value(player, BinderAttributes.PARRY_STAMINA);
             if (attack.isParried() && restore > 0) {
                 patch.setStamina((float) Math.min(patch.getMaxStamina(), patch.getStamina() + patch.getMaxStamina() * restore));
+            }
+        });
+        patch.getEventListener().addEventListener(PlayerEventListener.EventType.SKILL_CONSUME_EVENT, EPIC_FIGHT_LISTENER, consume -> {
+            if (consume.getSkill() instanceof DodgeSkill) {
+                consume.setAmount(consume.getAmount() * (float) (1 - value(player, BinderAttributes.DODGE_EFFICIENCY)));
             }
         });
         patch.getEventListener().addEventListener(PlayerEventListener.EventType.DODGE_SUCCESS_EVENT, EPIC_FIGHT_LISTENER, dodge -> {

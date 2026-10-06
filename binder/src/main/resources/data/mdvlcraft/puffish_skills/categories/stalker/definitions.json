@@ -1,207 +1,39 @@
 {
   "root": {
     "title": "Hunter's Eye",
-    "description": "+5% Bow & Crossbow Damage",
+    "description": "+3% Ranged Damage",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:bow"
+        "item": "minecraft:crossbow"
       }
     },
     "frame": {
       "type": "advancement",
       "data": {
-        "frame": "goal"
+        "frame": "challenge"
       }
     },
-    "size": 1.5,
+    "size": 1.6,
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:ranged_damage",
-          "value": 0.05,
-          "operation": "addition"
+          "attribute": "puffish_attributes:ranged_damage",
+          "value": 0.03,
+          "operation": "multiply_base"
         }
       }
     ],
     "cost": 1
   },
-  "ranged_damage_1": {
-    "title": "Aim I",
-    "description": "+8% Bow & Crossbow Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bow"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:ranged_damage",
-          "value": 0.08,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1
-  },
-  "ranged_damage_2": {
-    "title": "Aim II",
-    "description": "+8% Bow & Crossbow Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bow"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:ranged_damage",
-          "value": 0.08,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
-  },
-  "ranged_damage_3": {
-    "title": "Aim III",
-    "description": "+12% Bow & Crossbow Damage",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:bow"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:ranged_damage",
-          "value": 0.12,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 3
-  },
-  "evocation_spell_power_1": {
-    "title": "Fletcher's Art I",
-    "description": "+5% Evocation Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:arrow"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:evocation_spell_power",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1
-  },
-  "evocation_spell_power_2": {
-    "title": "Fletcher's Art II",
-    "description": "+5% Evocation Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:arrow"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:evocation_spell_power",
-          "value": 0.05,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
-  },
-  "evocation_spell_power_3": {
-    "title": "Fletcher's Art III",
-    "description": "+10% Evocation Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:arrow"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:evocation_spell_power",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 3
-  },
-  "volley": {
+  "arrow_volley": {
     "title": "Arrow Volley",
     "description": "Unlocks Arrow Volley (Level 3) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
         "item": "minecraft:arrow"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
       }
     },
     "rewards": [
@@ -213,21 +45,22 @@
         }
       }
     ],
-    "cost": 2
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
   },
-  "rain": {
+  "arrow_volley_5": {
     "title": "Rain of Arrows (Arrow Volley V)",
     "description": "Unlocks Arrow Volley (Level 5) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
         "item": "minecraft:spectral_arrow"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "challenge"
       }
     },
     "rewards": [
@@ -239,6 +72,987 @@
         }
       }
     ],
-    "cost": 3
+    "cost": 3,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "size": 1.3
+  },
+  "ranged_damage_1": {
+    "title": "Aim 1",
+    "description": "+3% Ranged Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:ranged_damage",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ranged_damage_2": {
+    "title": "Aim 2",
+    "description": "+3% Ranged Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:ranged_damage",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ranged_damage_3": {
+    "title": "Aim 3",
+    "description": "+3% Ranged Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:ranged_damage",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ranged_damage_4": {
+    "title": "Aim 4",
+    "description": "+3% Ranged Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:ranged_damage",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "ranged_damage_mastery": {
+    "title": "Aim Mastery",
+    "description": "+6% Ranged Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:ranged_damage",
+          "value": 0.06,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "bow_projectile_speed_1": {
+    "title": "Longbow 1",
+    "description": "+5% Arrow Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:bow_projectile_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "bow_projectile_speed_2": {
+    "title": "Longbow 2",
+    "description": "+5% Arrow Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:bow_projectile_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "bow_projectile_speed_mastery": {
+    "title": "Longbow Mastery",
+    "description": "+10% Arrow Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:bow_projectile_speed",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "crossbow_projectile_speed_1": {
+    "title": "Arbalest 1",
+    "description": "+5% Bolt Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crossbow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:crossbow_projectile_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "crossbow_projectile_speed_2": {
+    "title": "Arbalest 2",
+    "description": "+5% Bolt Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crossbow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:crossbow_projectile_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "crossbow_projectile_speed_mastery": {
+    "title": "Arbalest Mastery",
+    "description": "+10% Bolt Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crossbow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:crossbow_projectile_speed",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "evocation_spell_power_1": {
+    "title": "Fletcher's Art 1",
+    "description": "+3% Evocation Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spectral_arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:evocation_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "evocation_spell_power_2": {
+    "title": "Fletcher's Art 2",
+    "description": "+3% Evocation Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spectral_arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:evocation_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "evocation_spell_power_3": {
+    "title": "Fletcher's Art 3",
+    "description": "+3% Evocation Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spectral_arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:evocation_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "evocation_spell_power_mastery": {
+    "title": "Fletcher's Art Mastery",
+    "description": "+6% Evocation Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spectral_arrow"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:evocation_spell_power",
+          "value": 0.06,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "sprinting_speed_1": {
+    "title": "Sprinter 1",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_2": {
+    "title": "Sprinter 2",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_3": {
+    "title": "Sprinter 3",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_mastery": {
+    "title": "Sprinter Mastery",
+    "description": "+6% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.06,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_1": {
+    "title": "Spring 1",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_2": {
+    "title": "Spring 2",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_3": {
+    "title": "Spring 3",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_mastery": {
+    "title": "Spring Mastery",
+    "description": "+10% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_1": {
+    "title": "Light Foot 1",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_2": {
+    "title": "Light Foot 2",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_3": {
+    "title": "Light Foot 3",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_mastery": {
+    "title": "Light Foot Mastery",
+    "description": "+10% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_1": {
+    "title": "Evasion Training 1",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_2": {
+    "title": "Evasion Training 2",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_3": {
+    "title": "Evasion Training 3",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_mastery": {
+    "title": "Evasion Training Mastery",
+    "description": "+1 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_1": {
+    "title": "Forager 1",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_2": {
+    "title": "Forager 2",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_3": {
+    "title": "Forager 3",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_mastery": {
+    "title": "Forager Mastery",
+    "description": "+10% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   }
 }

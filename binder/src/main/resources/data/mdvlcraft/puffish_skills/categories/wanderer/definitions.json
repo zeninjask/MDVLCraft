@@ -1,7 +1,7 @@
 {
   "root": {
     "title": "Long Road",
-    "description": "+25% Saturation from Food",
+    "description": "+10% Saturation from Food",
     "icon": {
       "type": "item",
       "data": {
@@ -11,35 +11,110 @@
     "frame": {
       "type": "advancement",
       "data": {
+        "frame": "challenge"
+      }
+    },
+    "size": 1.6,
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "summon_horse": {
+    "title": "Summon Horse",
+    "description": "Unlocks Summon Horse (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:saddle"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:summon_horse",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
         "frame": "goal"
       }
     },
-    "size": 1.5,
+    "size": 1.3
+  },
+  "summon_horse_5": {
+    "title": "Trusted Steed (Summon Horse V)",
+    "description": "Unlocks Summon Horse (Level 5) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:golden_carrot"
+      }
+    },
     "rewards": [
       {
-        "type": "puffish_skills:attribute",
+        "type": "mdvlcraft:ability",
         "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.25,
-          "operation": "addition"
+          "ability": "irons_spellbooks:summon_horse",
+          "level": 5
         }
       }
     ],
-    "cost": 1
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.3
+  },
+  "counterspell": {
+    "title": "Counterspell",
+    "description": "Unlocks Counterspell (Level 1) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:barrier"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:counterspell",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 3,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "size": 1.3
   },
   "saturation_bonus_1": {
-    "title": "Forager I",
-    "description": "+25% Saturation from Food",
+    "title": "Provisions 1",
+    "description": "+10% Saturation from Food",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
+        "item": "minecraft:cooked_beef"
       }
     },
     "rewards": [
@@ -47,26 +122,26 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.25,
+          "value": 0.1,
           "operation": "addition"
         }
       }
     ],
-    "cost": 1
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
   },
   "saturation_bonus_2": {
-    "title": "Forager II",
-    "description": "+50% Saturation from Food",
+    "title": "Provisions 2",
+    "description": "+10% Saturation from Food",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:bread"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
+        "item": "minecraft:cooked_beef"
       }
     },
     "rewards": [
@@ -74,107 +149,354 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.5,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2
-  },
-  "generic.knockback_resistance_1": {
-    "title": "Steady I",
-    "description": "+10% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
           "value": 0.1,
           "operation": "addition"
         }
       }
     ],
-    "cost": 1
-  },
-  "generic.knockback_resistance_2": {
-    "title": "Steady II",
-    "description": "+10% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
+    "cost": 1,
     "frame": {
       "type": "advancement",
       "data": {
         "frame": "task"
+      }
+    }
+  },
+  "saturation_bonus_3": {
+    "title": "Provisions 3",
+    "description": "+10% Saturation from Food",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:cooked_beef"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
+          "attribute": "mdvlcraft:saturation_bonus",
           "value": 0.1,
           "operation": "addition"
         }
       }
     ],
-    "cost": 2
-  },
-  "generic.knockback_resistance_3": {
-    "title": "Steady III",
-    "description": "+20% Knockback Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:anvil"
-      }
-    },
+    "cost": 1,
     "frame": {
       "type": "advancement",
       "data": {
         "frame": "task"
+      }
+    }
+  },
+  "saturation_bonus_mastery": {
+    "title": "Provisions Mastery",
+    "description": "+20% Saturation from Food",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:cooked_beef"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
+          "attribute": "mdvlcraft:saturation_bonus",
           "value": 0.2,
           "operation": "addition"
         }
       }
     ],
-    "cost": 3
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
   },
-  "step_height_addition_1": {
-    "title": "Sure-footed",
+  "mount_speed_1": {
+    "title": "Rider 1",
+    "description": "+5% Mount Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:saddle"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:mount_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "mount_speed_2": {
+    "title": "Rider 2",
+    "description": "+5% Mount Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:saddle"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:mount_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "mount_speed_3": {
+    "title": "Rider 3",
+    "description": "+5% Mount Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:saddle"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:mount_speed",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "mount_speed_mastery": {
+    "title": "Rider Mastery",
+    "description": "+10% Mount Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:saddle"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:mount_speed",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "tamed_damage_1": {
+    "title": "Pack Leader 1",
+    "description": "+5% Pet & Mount Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bone"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:tamed_damage",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "tamed_damage_2": {
+    "title": "Pack Leader 2",
+    "description": "+5% Pet & Mount Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bone"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:tamed_damage",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "tamed_damage_mastery": {
+    "title": "Pack Leader Mastery",
+    "description": "+10% Pet & Mount Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bone"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:tamed_damage",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "tamed_resistance_1": {
+    "title": "Companion 1",
+    "description": "+5% Pet & Mount Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_horse_armor"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:tamed_resistance",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "tamed_resistance_2": {
+    "title": "Companion 2",
+    "description": "+5% Pet & Mount Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_horse_armor"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:tamed_resistance",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    }
+  },
+  "tamed_resistance_mastery": {
+    "title": "Companion Mastery",
+    "description": "+10% Pet & Mount Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_horse_armor"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:tamed_resistance",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2
+  },
+  "step_height_addition_mastery": {
+    "title": "Sure-footed Mastery",
     "description": "+0.5 Step Height (blocks)",
     "icon": {
       "type": "item",
       "data": {
         "item": "minecraft:oak_stairs"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
       }
     },
     "rewards": [
@@ -187,84 +509,578 @@
         }
       }
     ],
-    "cost": 3
-  },
-  "horse": {
-    "title": "Summon Horse",
-    "description": "Unlocks Summon Horse (Level 3) on the ability wheel",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:saddle"
-      }
-    },
+    "cost": 2,
     "frame": {
       "type": "advancement",
       "data": {
         "frame": "goal"
       }
     },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:summon_horse",
-          "level": 3
-        }
-      }
-    ],
-    "cost": 2
+    "size": 1.2
   },
-  "steed": {
-    "title": "Trusted Steed (Summon Horse V)",
-    "description": "Unlocks Summon Horse (Level 5) on the ability wheel",
+  "sprinting_speed_1": {
+    "title": "Sprinter 1",
+    "description": "+3% Sprinting Speed",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:golden_carrot"
+        "item": "minecraft:rabbit_foot"
       }
     },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_2": {
+    "title": "Sprinter 2",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_3": {
+    "title": "Sprinter 3",
+    "description": "+3% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "sprinting_speed_mastery": {
+    "title": "Sprinter Mastery",
+    "description": "+6% Sprinting Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:sprinting_speed",
+          "value": 0.06,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
     "frame": {
       "type": "advancement",
       "data": {
         "frame": "goal"
       }
     },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:summon_horse",
-          "level": 5
-        }
-      }
-    ],
-    "cost": 2
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "counter": {
-    "title": "Counterspell",
-    "description": "Unlocks Counterspell (Level 1) on the ability wheel",
+  "jump_1": {
+    "title": "Spring 1",
+    "description": "+5% Jump Height",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:barrier"
-      }
-    },
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "challenge"
+        "item": "minecraft:slime_ball"
       }
     },
     "rewards": [
       {
-        "type": "mdvlcraft:ability",
+        "type": "puffish_skills:attribute",
         "data": {
-          "ability": "irons_spellbooks:counterspell",
-          "level": 1
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
         }
       }
     ],
-    "cost": 3
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_2": {
+    "title": "Spring 2",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_3": {
+    "title": "Spring 3",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "jump_mastery": {
+    "title": "Spring Mastery",
+    "description": "+10% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_1": {
+    "title": "Light Foot 1",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_2": {
+    "title": "Light Foot 2",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_3": {
+    "title": "Light Foot 3",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_mastery": {
+    "title": "Light Foot Mastery",
+    "description": "+10% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_1": {
+    "title": "Evasion Training 1",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_2": {
+    "title": "Evasion Training 2",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_3": {
+    "title": "Evasion Training 3",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_mastery": {
+    "title": "Evasion Training Mastery",
+    "description": "+1 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_1": {
+    "title": "Forager 1",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_2": {
+    "title": "Forager 2",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_3": {
+    "title": "Forager 3",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "stamina_mastery": {
+    "title": "Forager Mastery",
+    "description": "+10% Stamina (slower hunger)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   }
 }

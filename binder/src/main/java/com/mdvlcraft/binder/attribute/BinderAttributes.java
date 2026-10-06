@@ -11,24 +11,19 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 /**
- * Player attributes granted by the archetype skill trees (each one belongs to exactly one archetype).
- * All default to 0; fractions are percentages (0.1 = 10%). Their effects live in {@link AttributeEffects}.
+ * Player attributes granted by the archetype skill trees that neither vanilla, Pufferfish's Attributes, Epic Fight nor
+ * Iron's Spells provide (each one belongs to exactly one archetype). All default to 0; fractions are percentages
+ * (0.1 = 10%). Their effects live in {@link AttributeEffects}.
  */
 public final class BinderAttributes {
     private static final DeferredRegister<Attribute> ATTRIBUTES = DeferredRegister.create(ForgeRegistries.ATTRIBUTES, MDVLBinder.MOD_ID);
 
-    /** Knight: incoming damage reduction. */
-    public static final RegistryObject<Attribute> DAMAGE_REDUCTION = fraction("damage_reduction", 0.5);
     /** Knight: melee damage with greatswords. */
     public static final RegistryObject<Attribute> GREATSWORD_DAMAGE = fraction("greatsword_damage", 5);
     /** Samurai: melee damage with uchigatanas and tachis. */
     public static final RegistryObject<Attribute> KATANA_DAMAGE = fraction("katana_damage", 5);
     /** Samurai: share of max stamina restored by a successful parry. */
     public static final RegistryObject<Attribute> PARRY_STAMINA = fraction("parry_stamina", 1);
-    /** Berzerker: melee damage with axes. */
-    public static final RegistryObject<Attribute> AXE_DAMAGE = fraction("axe_damage", 5);
-    /** Berzerker: share of melee damage dealt healed back. */
-    public static final RegistryObject<Attribute> BLOODLUST = fraction("bloodlust", 0.5);
     /** Assassin: melee damage with daggers. */
     public static final RegistryObject<Attribute> DAGGER_DAMAGE = fraction("dagger_damage", 5);
     /** Assassin: melee damage when hitting a target from behind. */
@@ -37,10 +32,8 @@ public final class BinderAttributes {
     public static final RegistryObject<Attribute> RAPIER_DAMAGE = fraction("rapier_damage", 5);
     /** Phantom: bonus damage of the first melee hit within 3 seconds of a successful dodge. */
     public static final RegistryObject<Attribute> RIPOSTE_DAMAGE = fraction("riposte_damage", 5);
-    /** Scout: fall damage reduction. */
-    public static final RegistryObject<Attribute> FALL_REDUCTION = fraction("fall_reduction", 1);
-    /** Stalker: damage of arrows and bolts the player shoots. */
-    public static final RegistryObject<Attribute> RANGED_DAMAGE = fraction("ranged_damage", 5);
+    /** Phantom: stamina cost reduction of Epic Fight dodges. */
+    public static final RegistryObject<Attribute> DODGE_EFFICIENCY = fraction("dodge_efficiency", 0.9);
     /** Wanderer: extra saturation from food. */
     public static final RegistryObject<Attribute> SATURATION_BONUS = fraction("saturation_bonus", 5);
     /** Thief: chance that a killed mob drops one of its items twice. */
