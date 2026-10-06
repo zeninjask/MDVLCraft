@@ -5,7 +5,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
-/** Radial ability wheel: shown while the wheel key is held; releasing it (or clicking) selects the slot under the mouse. */
+/** Radial ability wheel: shown while the wheel key is held; releasing it (or left-clicking) selects the slot under the mouse. */
 public final class WheelScreen extends Screen {
     private static final int RADIUS = 56;
     private static final int DEAD_ZONE = 14;
@@ -82,9 +82,14 @@ public final class WheelScreen extends Screen {
         return super.keyReleased(keyCode, scanCode, modifiers);
     }
 
+    /** Left-click selects the slot under the mouse; right-click opens the abilities screen to edit the wheel. */
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        choose(mouseX, mouseY);
+        if (button == 1) {
+            minecraft.setScreen(new AbilityScreen());
+        } else {
+            choose(mouseX, mouseY);
+        }
         return true;
     }
 }

@@ -67,6 +67,10 @@ MULTIPLY_BASE = {"minecraft:generic.attack_speed", "minecraft:generic.movement_s
 # Iron's default max level of each spell used (Iron's 3.16 spell config defaults).
 SPELL_MAX_LEVEL = {"acid_orb": 8, "arrow_volley": 6, "ball_lightning": 10, "blessing_of_life": 10, "blizzard": 8, "blood_slash": 5, "blood_step": 5, "chain_lightning": 10, "cone_of_cold": 10, "counterspell": 1, "devour": 10, "earthquake": 10, "echoing_strikes": 5, "electrocute": 10, "evasion": 5, "fang_strike": 10, "fire_breath": 10, "fireball": 5, "firebolt": 10, "firefly_swarm": 10, "frost_step": 8, "guiding_bolt": 10, "haste": 4, "heal": 8, "healing_circle": 10, "heartstop": 5, "heat_surge": 6, "ice_spikes": 10, "icicle": 10, "invisibility": 6, "lightning_bolt": 10, "lightning_lance": 10, "magma_bomb": 8, "oakskin": 8, "planar_sight": 3, "poison_arrow": 10, "raise_dead": 6, "ray_of_siphoning": 10, "root": 10, "shield": 10, "summon_horse": 5, "sunbeam": 10, "teleport": 5, "wither_skull": 10}
 
+# Base mana cost of each technique (Technique.java); the 150-mana domain needs Cursed Control III (35% cheaper) to fit a 100-mana pool.
+TECHNIQUE_MANA = {"mdvlcraft:dismantle": 20, "mdvlcraft:cleave": 35, "mdvlcraft:malevolent_shrine": 150,
+                  "mdvlcraft:boogie_woogie": 15, "mdvlcraft:block_clap": 15}
+
 ABILITY_NAMES = {
     "mdvlcraft:dismantle": "Dismantle", "mdvlcraft:cleave": "Cleave", "mdvlcraft:malevolent_shrine": "Malevolent Shrine",
     "mdvlcraft:boogie_woogie": "Boogie Woogie", "mdvlcraft:block_clap": "Block Clap",
@@ -85,12 +89,12 @@ def stat(attribute, *values, title, icon, costs, parent="root"):
                  icon=icon, cost=c) for i, (v, c) in enumerate(zip(values, costs))], parent
 
 
-def ability(ability_id, level, cost, parent, icon, title=None):
+def ability(ability_id, level, cost, parent, icon, title=None, note=None):
     name = ability_id.split(":")[1]
     if ability_id.startswith("irons_spellbooks:") and not 1 <= level <= SPELL_MAX_LEVEL[name]:
         raise SystemExit(f"{ability_id} level {level} is outside 1-{SPELL_MAX_LEVEL[name]}")
     return dict(kind="ability", ability=ability_id, level=level, cost=cost, parent=parent, icon=icon,
-                title=title or ability_name(ability_id))
+                title=title or ability_name(ability_id), note=note)
 
 
 def roman(n):
@@ -250,7 +254,8 @@ ARCHETYPES = {
                           stat("mdvlcraft:technique_efficiency", 0.10, 0.10, 0.15, title="Cursed Control", icon="minecraft:amethyst_shard", costs=[1, 2, 2])],
                    abilities={"dismantle": ability("mdvlcraft:dismantle", 1, 2, "root", "minecraft:shears"),
                               "cleave": ability("mdvlcraft:cleave", 1, 3, "dismantle", "minecraft:iron_axe"),
-                              "shrine": ability("mdvlcraft:malevolent_shrine", 1, 5, ["cleave", "line:mdvlcraft:technique_efficiency:2"], "minecraft:crying_obsidian")}),
+                              "shrine": ability("mdvlcraft:malevolent_shrine", 1, 5, "cleave", "minecraft:crying_obsidian",
+                                                note="Your mana pool is 100: take Cursed Control III (-35% cost) to cast it.")}),
 }
 
 CLASSES = {
@@ -295,7 +300,10 @@ def describe(node):
     if node["kind"] == "stat":
         return f"{fmt(node['attribute'], node['value'])} {ATTRIBUTES[node['attribute']][0]}"
     level = f" (Level {node['level']})" if node["ability"].startswith("irons_spellbooks:") else ""
-    return f"Unlocks {ability_name(node['ability'])}{level} on the ability wheel"
+    text = f"Unlocks {ability_name(node['ability'])}{level} on the ability wheel"
+    if node["ability"] in TECHNIQUE_MANA:
+        text += f" ({TECHNIQUE_MANA[node['ability']]} mana)"
+    return text
 
 
 def experience():
@@ -377,6 +385,8 @@ def build_archetype(arch_id, arch):
         definition = {"title": node["title"], "description": describe(node), "icon": icon(node["icon"]),
                       "frame": frame("challenge" if node["cost"] >= 3 else "goal"),
                       "rewards": [ability_reward(node["ability"], node["level"])], "cost": node["cost"]}
+        if node["note"]:
+            definition["extra_description"] = node["note"]
         if len(parents) > 1:
             definition["required_skills"] = len(parents)
             definition["extra_description"] = "Requires all connected skills."
@@ -460,7 +470,7 @@ def write_doc(all_nodes):
              f"- **Classes tab:** the four classes are unlocked automatically. Pick up to **{ARCHETYPE_LIMIT} archetypes** (any classes). Each opens its own tab.",
              f"- **Archetype tabs:** {STARTING_POINTS} starting point, then 1 point per level up to level {LEVEL_LIMIT} ({points} points). Experience comes from kills: `dropped XP + max health / 5`, at most 20 kills per chunk every 5 minutes. Level n to n+1 costs `40 + 15n` XP (3,650 XP to reach level 20).",
              "- **No overlap:** every attribute and every spell or technique belongs to exactly one archetype (the generator enforces this).",
-             "- **Abilities** go on the 8-slot ability wheel: J opens the abilities screen, hold G for the wheel, V casts. Cursed techniques cost mana and have no cooldown.", ""]
+             "- **Abilities** go on the 8-slot ability wheel: `[` opens the abilities screen, hold `` ` `` for the wheel, Caps Lock casts. Cursed techniques cost mana and have no cooldown.", ""]
     for arch_id, nodes in all_nodes.items():
         arch = ARCHETYPES[arch_id]
         cost = sum(n["cost"] for n in nodes)

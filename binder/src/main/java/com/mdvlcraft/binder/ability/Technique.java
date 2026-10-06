@@ -12,8 +12,8 @@ import java.util.Optional;
  * {@code abilityId} is Cursed Fate's internal ability number (AbilityToCast).
  */
 public enum Technique implements Ability {
-    DISMANTLE("dismantle", 26, 20, "cursedfate:textures/particle/dismantle1.png"),
-    CLEAVE("cleave", 27, 35, "cursedfate:textures/particle/cleave.png"),
+    DISMANTLE("dismantle", 26, 20, "minecraft:textures/item/shears.png"),
+    CLEAVE("cleave", 27, 35, "minecraft:textures/item/iron_axe.png"),
     MALEVOLENT_SHRINE("malevolent_shrine", 31, 150, "cursedfate:textures/particle/malevolentshrine.png"),
     BOOGIE_WOOGIE("boogie_woogie", 32, 15, "minecraft:textures/item/ender_pearl.png"),
     BLOCK_CLAP("block_clap", 33, 15, "minecraft:textures/item/chorus_fruit.png");

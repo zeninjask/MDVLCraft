@@ -14,12 +14,15 @@ import org.lwjgl.glfw.GLFW;
 import java.util.Arrays;
 import java.util.List;
 
-/** Abilities screen, ability wheel (hold) and cast keys. */
+/**
+ * Abilities screen, ability wheel (hold) and cast keys. Every letter key is already taken in the pack, so the defaults
+ * are [, ` and Caps Lock; {@link #logConflicts} warns when a binding shares a key with another mod.
+ */
 public final class AbilityKeys {
     private static final String CATEGORY = "key.categories.mdvlcraft";
-    public static final KeyMapping OPEN_ABILITIES = key("open_abilities", GLFW.GLFW_KEY_J);
-    public static final KeyMapping WHEEL = key("ability_wheel", GLFW.GLFW_KEY_G);
-    public static final KeyMapping CAST = key("cast_ability", GLFW.GLFW_KEY_V);
+    public static final KeyMapping OPEN_ABILITIES = key("open_abilities", GLFW.GLFW_KEY_LEFT_BRACKET);
+    public static final KeyMapping WHEEL = key("ability_wheel", GLFW.GLFW_KEY_GRAVE_ACCENT);
+    public static final KeyMapping CAST = key("cast_ability", GLFW.GLFW_KEY_CAPS_LOCK);
     private static final List<KeyMapping> ALL = List.of(OPEN_ABILITIES, WHEEL, CAST);
 
     private static boolean castDown;

@@ -7,11 +7,12 @@ The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 3. **Adds the ability wheel.** Spells and Cursed Fate techniques unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
 
 ## Controls (defaults, rebindable under *MDVLCraft Abilities*)
+Every letter key is already used by some mod in the pack, so the defaults avoid letters. The log warns at startup if a binding shares a key with another mod.
 | Key | Action |
 |---|---|
-| **J** | Abilities screen: every unlocked spell or technique with its stats. Click an ability, then a wheel slot; right-click a slot to empty it |
-| **G** (hold) | Ability wheel: move the mouse towards a slot and release to select it |
-| **V** | Cast the selected ability. Spells follow Iron's rules (cast time, mana, cooldown; press again to cancel). Hold-type techniques (Cleave, Malevolent Shrine) last while V is held |
+| **[** | Abilities screen (also: right-click inside the wheel): every unlocked spell or technique with its stats. Click an ability, then a wheel slot; right-click a slot to empty it |
+| ``` ` ``` (backtick, hold) | Ability wheel: move the mouse towards a slot and release to select it. Shares its key with two rarely used bindings (Better Lock On joint switch, Ares HUD editing) |
+| **Caps Lock** | Cast the selected ability. Spells follow Iron's rules (cast time, mana, cooldown; press again to cancel). Hold-type techniques (Cleave, Malevolent Shrine) last while the key is held |
 | **K** | Pufferfish's skill screen (Classes tab plus your archetype tabs) |
 
 The HUD shows the selected ability, a mana bar and cast progress left of the hotbar once you have an ability.
