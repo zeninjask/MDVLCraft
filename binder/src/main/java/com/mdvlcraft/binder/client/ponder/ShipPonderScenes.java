@@ -4,6 +4,7 @@ import net.createmod.catnip.math.Pointing;
 import net.createmod.ponder.api.scene.SceneBuilder;
 import net.createmod.ponder.api.scene.SceneBuildingUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -55,6 +56,7 @@ final class ShipPonderScenes {
         scene.title("rowboat_building", "Building a Rowboat");
         scene.configureBasePlate(0, 0, 6);
         scene.showBasePlate();
+        showBuildArea(scene, util, 6);
         scene.idle(10);
 
         placeFrames(scene, ROWBOAT);
@@ -82,6 +84,7 @@ final class ShipPonderScenes {
         scene.configureBasePlate(0, 0, 11);
         scene.scaleSceneView(0.8F);
         scene.showBasePlate();
+        showBuildArea(scene, util, 11);
         scene.idle(10);
 
         placeFrames(scene, SLOOP);
@@ -111,6 +114,11 @@ final class ShipPonderScenes {
                 .pointAt(util.vector().topOf(6, 1, 6)).placeNearTarget();
         scene.idle(130);
         scene.markAsFinished();
+    }
+
+    /** Ponder only draws shown sections; show the (still empty) two layers above the plate the ship is built in. */
+    private static void showBuildArea(SceneBuilder scene, SceneBuildingUtil util, int size) {
+        scene.world().showSection(util.select().fromTo(0, 1, 0, size - 1, 2, size - 1), Direction.DOWN);
     }
 
     private static void placeFrames(SceneBuilder scene, List<Frame> frames) {
