@@ -223,9 +223,9 @@ Signature maximums: Fire Spell Power +18%, Fire Resistance +20%, Cooldown Reduct
 
 ## Lightning (Mage)
 
-A mobile storm caster. Lightning power grows, casting barely slows you down, and grounding resists shocks. Electrocute, Ball Lightning, Chain Lightning, Lightning Lance, Shockwave, Lightning Bolt and Thunderstorm punish anything in reach, while Charge, Thunder Step and Demolition Leap keep you moving.
+A mobile storm caster. Lightning power grows, casting barely slows you down, and grounding resists shocks. Electrocute, Ball Lightning, Chain Lightning, Lightning Lance, Shockwave, Lightning Bolt and Thunderstorm punish anything in reach, while Charge, Volt Strike and Demolition Leap keep you moving.
 
-116 skills (70 of them twigs), 138 points in total (41 available).
+116 skills (70 of them twigs), 137 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
@@ -243,7 +243,7 @@ A mobile storm caster. Lightning power grows, casting barely slows you down, and
 | Swift Current 2 | 1 | +5% Movement Speed while Casting |
 | Storm 2 | 1 | +3% Lightning Spell Power |
 | Grounded 2 | 1 | +5% Lightning Resistance |
-| Thunder Step | 3 | Unlocks Thunder Step (Level 1) on the ability wheel |
+| Volt Strike | 2 | Unlocks Volt Strike (Level 3) on the ability wheel |
 | Lightning Bolt | 3 | Unlocks Lightning Bolt (Level 2) on the ability wheel |
 | Overcharge (Electrocute V) | 2 | Unlocks Electrocute (Level 5) on the ability wheel |
 | Swift Current 3 | 1 | +5% Movement Speed while Casting |
