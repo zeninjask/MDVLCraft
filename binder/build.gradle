@@ -84,6 +84,10 @@ dependencies {
     implementation fg.deobf(cf('cursedfate'))
     // Epic Fight Ponder ships in the pack's overrides (not on CurseForge); Ponder is bundled inside it.
     compileOnly files('libs/epic_fight_ponder-1.0.0.jar', 'libs/Ponder-Forge-1.20.1-1.0.91.jar')
+    // Iron's Spell Scroll Ponder: its spell preview is opened from the abilities screen and skill tree.
+    compileOnly files('libs/iss_ponder-forge1.20.1-1.0.3-all.jar')
+    // Sword Soaring: the Vatansever's flight and the mod's flight keys are switched off (mixin/swordsoaring).
+    compileOnly files('libs/sword_soaring-20.14.2.8-mc1.20.1-forge.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))

@@ -23,9 +23,10 @@ import java.util.UUID;
  * so cursed energy is refilled on every cast, and Cursed Fate's cooldown check (which lives only in its key handler) is
  * never reached. Mastery is reset before each cast so technique damage only grows with gear and the skill tree.
  *
- * Techniques with {@link Technique#repeatTicks} keep casting while the cast key is held (Dismantle and Cleave, e.g.
- * inside the Malevolent Shrine). The Shrine always opens Cursed Fate's open-domain variant, which is a toggle: casting
- * it near your open domain closes it, and closing is free. {@link DomainUpkeep} follows it from wind-up to close.
+ * Techniques with {@link Technique#repeatTicks} keep casting while the cast key is held (Dismantle and Cleave). While
+ * one of them is held the owner's Malevolent Shrine cuts too ({@link #isSlashing}); otherwise the domain stays quiet.
+ * Each Shrine opens its own Cursed Fate domain variant (closed barrier dome or open shrine). Casting either Shrine while
+ * your domain is up closes it, and closing is free. {@link DomainUpkeep} follows a domain from wind-up to close.
  */
 final class TechniqueRunner {
     private record Held(Technique technique, long nextTick) {
@@ -34,6 +35,12 @@ final class TechniqueRunner {
     private static final Map<UUID, Held> HELD = new HashMap<>();
 
     private TechniqueRunner() {
+    }
+
+    /** True while the player holds the cast key on Dismantle or Cleave (and can pay for it). */
+    static boolean isSlashing(ServerPlayer player) {
+        Held held = HELD.get(player.getUUID());
+        return held != null && held.technique().isSlash();
     }
 
     static void press(ServerPlayer player, Technique technique) {
@@ -80,9 +87,15 @@ final class TechniqueRunner {
 
     /** Pays and casts once. Returns false (with the action bar message) if the player cannot afford it. */
     private static boolean cast(ServerPlayer player, Technique technique) {
-        if (technique == Technique.MALEVOLENT_SHRINE && DomainUpkeep.isWindingUp(player)) {
-            // Cursed Fate reads a press during the wind-up as "switch domain variant"; ignore it instead.
-            return false;
+        if (technique.isShrine()) {
+            if (DomainUpkeep.isWindingUp(player)) {
+                // Cursed Fate reads a press during the wind-up as "switch domain variant"; ignore it instead.
+                return false;
+            }
+            // Cursed Fate cannot close a closed domain by recasting; the binder closes it instead.
+            if (DomainUpkeep.closeClosedDomain(player)) {
+                return true;
+            }
         }
         MagicData magic = MagicData.getPlayerMagicData(player);
         int cost = cost(player, technique);
@@ -105,19 +118,19 @@ final class TechniqueRunner {
         variables.holdability = true;
         variables.syncPlayerVariables(player);
         AbilitysProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ(), player);
-        if (technique == Technique.MALEVOLENT_SHRINE && variables.SelectDomainVarient) {
-            // Cursed Fate started its wind-up and reset the variant to its closed barrier domain, which recasting
-            // cannot close. Variant 1 is the open Malevolent Shrine; Cursed Fate reads it when the wind-up ends.
-            variables.DomainVarientNumber = 1;
+        if (technique.isShrine() && variables.SelectDomainVarient) {
+            // Cursed Fate started its wind-up and reset the variant to its closed barrier domain; it reads the
+            // variant again when the wind-up ends.
+            variables.DomainVarientNumber = technique.domainVariant();
             variables.syncPlayerVariables(player);
-            DomainUpkeep.windingUp(player);
+            DomainUpkeep.windingUp(player, technique);
         }
         return true;
     }
 
     private static int cost(ServerPlayer player, Technique technique) {
-        // Cursed Fate closes the domain (or refuses to clash) when the Shrine is cast near an open one; neither costs.
-        if (technique == Technique.MALEVOLENT_SHRINE
+        // Cursed Fate closes the domain (or refuses to clash) when a Shrine is cast near an open one; neither costs.
+        if (technique.isShrine()
                 && ReturnPlayerNearAOpenedDomainProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ())) {
             return 0;
         }

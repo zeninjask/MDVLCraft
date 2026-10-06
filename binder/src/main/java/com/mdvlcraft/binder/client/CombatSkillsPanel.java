@@ -27,10 +27,12 @@ import java.util.Optional;
  * to equip it; right-click a slot to empty it. The server checks every change (EpicSkillEquip).
  */
 final class CombatSkillsPanel {
-    static final int WIDTH = 150;
-    private static final int ROW = 20;
-    private static final int CELL = 20;
-    private static final int COLUMNS = 7;
+    private static final int PAD = AbilityScreen.PAD;
+    private static final int SLOT = AbilityScreen.SLOT;
+    private static final int CELL = AbilityScreen.CELL;
+    private static final int COLUMNS = 6;
+    static final int WIDTH = 2 * PAD + COLUMNS * CELL - 2;
+    private static final int ROW = CELL;
     /** Epic Fight's own learnable slots (the skill trees teach only these); add-ons' extra slots are theirs to fill. */
     private static final List<SkillSlot> SLOTS = Arrays.stream(SkillSlots.values())
             .filter(slot -> slot.category().learnable())
@@ -64,19 +66,19 @@ final class CombatSkillsPanel {
     }
 
     private List<FormattedCharSequence> hint() {
-        return font.split(Component.translatable("screen.mdvlcraft.skills.hint"), WIDTH - 12);
+        return font.split(Component.translatable("screen.mdvlcraft.skills.hint"), WIDTH - 2 * PAD);
     }
 
     private int slotY(int index) {
-        return top + 22 + index * ROW;
+        return top + 28 + index * ROW;
     }
 
     private int choicesTop() {
-        return slotY(SLOTS.size()) + 14;
+        return slotY(SLOTS.size()) + 20;
     }
 
     private int choiceX(int index) {
-        return left + 8 + (index % COLUMNS) * CELL;
+        return left + PAD + (index % COLUMNS) * CELL;
     }
 
     private int choiceY(int index) {
@@ -85,51 +87,50 @@ final class CombatSkillsPanel {
 
     private int hintTop() {
         int rows = Math.max(1, (choices().size() + COLUMNS - 1) / COLUMNS);
-        return choicesTop() + rows * CELL + 4;
+        return choicesTop() + rows * CELL + 8;
     }
 
     int height() {
-        return hintTop() + hint().size() * 10 + 4 - top;
+        return hintTop() + hint().size() * 10 + 6 - top;
     }
 
     void render(GuiGraphics graphics, int height) {
-        MedievalGui.panel(graphics, left, top, WIDTH, height);
-        MedievalGui.centeredInk(graphics, font, Component.translatable("screen.mdvlcraft.skills"), left + WIDTH / 2, top + 8, MedievalGui.INK);
+        SlateGui.panel(graphics, font, Component.translatable("screen.mdvlcraft.skills"), left, top, WIDTH, height);
         CapabilitySkill skills = skills();
         for (int i = 0; i < SLOTS.size(); i++) {
             SkillSlot slot = SLOTS.get(i);
             SkillContainer container = skills.getSkillContainerFor(slot);
             Skill skill = container.getSkill();
-            int x = left + 8;
+            int x = left + PAD;
             int y = slotY(i);
-            MedievalGui.frame(graphics, "task", slot == picked ? "affordable" : skill != null ? "unlocked" : "locked", x - 1, y - 1, 20);
+            SlateGui.slot(graphics, x, y, SLOT, slot == picked ? SlateGui.Slot.PICKED : skill != null ? SlateGui.Slot.FILLED : SlateGui.Slot.EMPTY);
             if (skill != null) {
-                drawIcon(graphics, skill, x + 1, y + 1);
+                drawIcon(graphics, skill, x + 2, y + 2);
             }
-            graphics.drawString(font, Component.literal(SkillSlot.ENUM_MANAGER.toTranslated(slot)), x + 22, y, MedievalGui.INK_FADED, false);
+            graphics.drawString(font, Component.literal(SkillSlot.ENUM_MANAGER.toTranslated(slot)), x + SLOT + 6, y + 1, SlateGui.MUTED, false);
             Component name = skill != null ? Component.translatable(skill.getTranslationKey()) : Component.translatable("screen.mdvlcraft.skills.empty");
-            graphics.drawString(font, name, x + 22, y + 10, skill != null ? MedievalGui.INK : MedievalGui.INK_FADED, false);
+            graphics.drawString(font, name, x + SLOT + 6, y + 11, skill != null ? SlateGui.TEXT : SlateGui.MUTED, false);
             if (container.onReplaceCooldown()) {
                 String seconds = (container.getReplaceCooldown() + 19) / 20 + "s";
-                graphics.drawString(font, seconds, left + WIDTH - 6 - font.width(seconds), y, 0xFF9A1E1E, false);
+                graphics.drawString(font, seconds, left + WIDTH - PAD - font.width(seconds), y + 1, SlateGui.ACCENT, false);
             }
         }
+        SlateGui.rule(graphics, left + PAD, left + WIDTH - PAD, choicesTop() - 18);
         graphics.drawString(font, picked == null ? Component.translatable("screen.mdvlcraft.skills.learned")
                 : Component.translatable("screen.mdvlcraft.skills.learned_for", Component.literal(SkillSlot.ENUM_MANAGER.toTranslated(picked))),
-                left + 8, choicesTop() - 11, MedievalGui.INK, false);
+                left + PAD, choicesTop() - 11, SlateGui.MUTED, false);
         List<Skill> choices = choices();
         if (picked != null && choices.isEmpty()) {
-            graphics.drawString(font, Component.translatable("screen.mdvlcraft.skills.none"), left + 8, choicesTop() + 5, MedievalGui.INK_FADED, false);
+            graphics.drawString(font, Component.translatable("screen.mdvlcraft.skills.none"), left + PAD, choicesTop() + 5, SlateGui.MUTED, false);
         }
         for (int i = 0; i < choices.size(); i++) {
             Skill skill = choices.get(i);
-            MedievalGui.frame(graphics, "task", skills.isEquipping(skill) ? "unlocked" : "available", choiceX(i) - 1, choiceY(i) - 1, 20);
-            drawIcon(graphics, skill, choiceX(i) + 1, choiceY(i) + 1);
+            SlateGui.slot(graphics, choiceX(i), choiceY(i), SLOT, skills.isEquipping(skill) ? SlateGui.Slot.PICKED : SlateGui.Slot.FILLED);
+            drawIcon(graphics, skill, choiceX(i) + 2, choiceY(i) + 2);
         }
         List<FormattedCharSequence> hint = hint();
         for (int line = 0; line < hint.size(); line++) {
-            FormattedCharSequence text = hint.get(line);
-            graphics.drawString(font, text, left + WIDTH / 2 - font.width(text) / 2, hintTop() + line * 10, MedievalGui.INK_FADED, false);
+            graphics.drawString(font, hint.get(line), left + PAD, hintTop() + line * 10, SlateGui.MUTED, false);
         }
     }
 
@@ -152,7 +153,7 @@ final class CombatSkillsPanel {
 
     private Optional<Skill> hovered(double mouseX, double mouseY) {
         for (int i = 0; i < SLOTS.size(); i++) {
-            if (inside(mouseX, mouseY, left + 8, slotY(i))) {
+            if (inside(mouseX, mouseY, left + PAD, slotY(i))) {
                 return Optional.ofNullable(skills().getSkillContainerFor(SLOTS.get(i)).getSkill());
             }
         }
@@ -168,7 +169,7 @@ final class CombatSkillsPanel {
     boolean mouseClicked(double mouseX, double mouseY, int button) {
         for (int i = 0; i < SLOTS.size(); i++) {
             SkillSlot slot = SLOTS.get(i);
-            if (inside(mouseX, mouseY, left + 8, slotY(i))) {
+            if (inside(mouseX, mouseY, left + PAD, slotY(i))) {
                 if (button == 1) {
                     BinderNetwork.sendToServer(new EquipSkillPacket(slot.universalOrdinal(), Optional.empty()));
                 } else {
@@ -189,6 +190,6 @@ final class CombatSkillsPanel {
     }
 
     private static boolean inside(double mouseX, double mouseY, int x, int y) {
-        return mouseX >= x && mouseX < x + 18 && mouseY >= y && mouseY < y + 18;
+        return mouseX >= x && mouseX < x + SLOT && mouseY >= y && mouseY < y + SLOT;
     }
 }

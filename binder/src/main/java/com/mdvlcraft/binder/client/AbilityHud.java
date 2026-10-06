@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.ability.Ability;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.player.ClientMagicData;
 import net.minecraft.client.Minecraft;
@@ -7,12 +8,16 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
+import java.util.Optional;
+
 /**
- * Selected wheel ability, mana bar and cast progress in the bottom-right corner (the pack's HUD mod rearranges the
- * hotbar area). Hidden until the player has an ability.
+ * Selected wheel ability, its slot number, mana bar and cast progress in a small box in the bottom-right corner
+ * (the pack's HUD mod rearranges the hotbar area). Hidden until the player has an ability.
  */
 final class AbilityHud implements IGuiOverlay {
     static final AbilityHud INSTANCE = new AbilityHud();
+    private static final int MIN_WIDTH = 96;
+    private static final int MAX_WIDTH = 180;
 
     private AbilityHud() {
     }
@@ -23,25 +28,30 @@ final class AbilityHud implements IGuiOverlay {
         if (minecraft.options.hideGui || minecraft.player == null || ClientAbilities.granted().isEmpty()) {
             return;
         }
-        int x = screenWidth - 26;
-        int y = screenHeight - 26;
-        MedievalGui.frame(graphics, "challenge", "unlocked", x - 2, y - 2, 26);
-        ClientAbilities.slot(ClientAbilities.selected()).ifPresent(ability -> {
-            AbilityDisplay.drawIcon(graphics, ability, x + 3, y + 3);
-            if (ClientAbilities.level(ability) == 0) {
-                graphics.fill(x + 3, y + 3, x + 19, y + 19, 0xB0300000);
+        Optional<Ability> ability = ClientAbilities.slot(ClientAbilities.selected());
+        String number = String.valueOf(ClientAbilities.selected() + 1);
+        String name = ability.map(a -> a.displayName().getString()).orElse("");
+        // The box fits the name, between MIN_WIDTH and MAX_WIDTH (longer names are cut).
+        int width = Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, 28 + minecraft.font.width(name) + 8 + minecraft.font.width(number) + 6));
+        int x = screenWidth - width - 4;
+        int y = screenHeight - 30;
+        SlateGui.panel(graphics, x, y, width, 26);
+        SlateGui.slot(graphics, x + 3, y + 3, 20, SlateGui.Slot.FILLED);
+        graphics.drawString(minecraft.font, number, x + width - 6 - minecraft.font.width(number), y + 5, SlateGui.MUTED, false);
+        ability.ifPresent(selected -> {
+            AbilityDisplay.drawIcon(graphics, selected, x + 5, y + 5);
+            if (ClientAbilities.level(selected) == 0) {
+                graphics.fill(x + 5, y + 5, x + 21, y + 21, SlateGui.UNAVAILABLE);
             }
+            int nameWidth = width - 28 - 14 - minecraft.font.width(number);
+            graphics.drawString(minecraft.font, minecraft.font.plainSubstrByWidth(name, nameWidth), x + 28, y + 5, SlateGui.TEXT, false);
         });
-        graphics.drawString(minecraft.font, String.valueOf(ClientAbilities.selected() + 1), x - 1, y - 1, 0xFFF0D9A0);
 
         double maxMana = minecraft.player.getAttributeValue(AttributeRegistry.MAX_MANA.get());
-        float filled = maxMana <= 0 ? 0 : (float) Math.min(1, ClientMagicData.getPlayerMana() / maxMana);
-        int barTop = y - 6;
-        graphics.fill(x - 1, barTop - 1, x + 23, barTop + 4, 0xFF4A321E);
-        graphics.fill(x, barTop, x + 22, barTop + 3, 0xFF101030);
-        graphics.fill(x, barTop, x + Math.round(22 * filled), barTop + 3, 0xFF3F8CFF);
+        float mana = maxMana <= 0 ? 0 : (float) Math.min(1, ClientMagicData.getPlayerMana() / maxMana);
+        SlateGui.bar(graphics, x + 28, y + 16, width - 34, 3, mana, SlateGui.MANA);
         if (ClientMagicData.isCasting()) {
-            graphics.fill(x, barTop - 4, x + Math.round(22 * ClientMagicData.getCastCompletionPercent()), barTop - 2, 0xFFD6AA42);
+            SlateGui.bar(graphics, x + 28, y + 20, width - 34, 2, ClientMagicData.getCastCompletionPercent(), SlateGui.CAST);
         }
     }
 }
