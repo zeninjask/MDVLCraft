@@ -1,10 +1,20 @@
-# MDVLCraft — Mod List (v1.3.0)
+# MDVLCraft — Mod List (v1.4.0)
 
-Importable pack: [`MDVLCraft-1.3.0.zip`](MDVLCraft-1.3.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
+Importable pack: [`MDVLCraft-1.4.0.zip`](MDVLCraft-1.4.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
 
 v1.1.0 = every mod from your **MDVL** pack merged into MDVLCraft v1.0.0 (newer version kept where both had the mod), plus your MDVL configs/KubeJS folder and the new **MDVLCraft Binder** mod.
 
-**142 files**: 140 CurseForge entries in `manifest.json` (139 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.2.0).
+**142 files**: 140 CurseForge entries in `manifest.json` (139 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.3.0).
+
+## v1.4.0 changes
+Same 142 files as v1.3.0, with the binder updated to **0.3.0**:
+| Change | Notes |
+|---|---|
+| Bigger archetype trees | Each archetype tab is now a tree of 118–146 skills (was ~40): boughs at uneven angles fork into the class, signature and ability limbs, and twigs of small generic bonuses (health, speed, mana, mana regen, cooldown reduction, saturation, armour, stamina, regeneration, attack speed and damage, knockback and spell resistance, jump) sprout off every branch. Twigs are capped per tree; points stay 41 per archetype (`binder/SKILL_TREES.md`) |
+| Medieval skill screen | Dark oak and gold window and tabs, parchment title bar and Classes tab, iron/bronze/gold/crimson frames by skill state, gold lines. The abilities screen, wheel and HUD match |
+| Malevolent Shrine fixed | In v1.3.0 the domain collapsed about a second after opening: Cursed Fate drains 90–140 cursed energy a second from a pool binder players keep at 100 (the v1.3.0 test only saw that first second's damage). Now it opens Cursed Fate's open Shrine, stays up for up to 20 s, and casting it again closes it (free) |
+| Hold to repeat | Holding the cast key on Dismantle or Cleave keeps casting (each cast pays its mana); a quick tap of the cast key is no longer missed |
+| Spell report | `binder/SPELL_REPORT.md`: spells that would fit other archetypes better, and archetypes worth adding |
 
 ## v1.3.0 changes
 | Change | Why |
@@ -50,6 +60,16 @@ Remove these **client-only** mods from a dedicated server's `mods` folder — ea
 | Dynamic Crosshair | `DynamicCrosshairBaseBlock` mixin into `Block` references `LocalPlayer` |
 | Accurate Block Placement | `Failed to create mod instance. ModID: accurateblockplacement` (LocalPlayer) |
 | Legendary Tooltips | `LegendaryTooltipsConfig.<init>` loads `LocalPlayer` |
+
+## Test results (v1.4.0)
+Same setup as v1.3.0 (dedicated server plus a real client, RCON and keyboard input), with mana regeneration set to 0 so mana changes count casts exactly:
+| Check | Result |
+|---|---|
+| Release jar | `mdvlcraft-0.3.0.jar` is the tested build with only its version number changed |
+| Skill screens | Classes and archetype tabs open with the medieval window, frames and lines; the abilities screen and wheel use the same parchment and frames |
+| Malevolent Shrine | Caps Lock tap opens it (98 mana); a second tap during the 2 s wind-up costs nothing; the domain is still up 9 s later and took three 200 HP husks to about 90 HP; a tap closes it with 20 mana left (free); it closes on its own after 20 s |
+| Hold to repeat | Dismantle held 3 s: 8–9 casts; Cleave held 3 s: 5 casts; also through the real Caps Lock key |
+| Ponder | Hold W opens the scene for Epic Knights' pike, Iron's staff and Autoloader Crossbow, Cataclysm's Cursed Bow, Incinerator and Khopesh, Cursed Fate's Naginata and Split Soul Katana, and WoM's Satsujin |
 
 ## Test results (v1.3.0)
 Dedicated pack server plus a real client (software-rendered, joined over the network), driven by RCON and keyboard input:

@@ -4,14 +4,18 @@
 Layout follows the radial style of the "RPG skill tree" and "More RPG Classes - Skill Tree" packs:
 - Classes tab: the four classes sit in a ring round the centre (unlocked automatically) and each class's archetypes fan
   out in its own quarter. Pick up to two archetypes; each opens its own tab.
-- Archetype tabs: the archetype skill in the centre with a jumbled web around it: shuffled spokes at uneven angles that
-  wander outwards, with sideways links between neighbouring spokes. Each spoke is a chain of small 1-point bonuses
-  ending in a bigger capstone, or a chain of key abilities. Every archetype carries its class's bonus spokes (shared by
-  that class) plus its own signature spokes and abilities (never shared).
+- Archetype tabs: the archetype skill in the centre with a tree growing out of it. A few boughs leave the centre at
+  uneven angles, fork into limbs (the class, signature and ability spokes) and sprout twigs of small generic bonuses,
+  which fork again. Every tree has its own shape and size. Branches never cross.
+- Limbs: chains of small 1-point bonuses ending in a bigger capstone, or chains of key abilities. Every archetype
+  carries its class's spokes (shared by that class) plus its own signature spokes and abilities (never shared).
+- Twigs: tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation...) shared by every archetype. Each is
+  smaller than any class or signature step and capped per tree, so they widen the choices without raising the ceiling.
 
 Run from the binder folder:  python3 tools/generate_skill_trees.py
 It fails if a signature attribute or ability appears in two archetypes, if a class bonus appears in two classes or in a
-signature, if a spell level is above Iron's maximum, or if two skills overlap on screen.
+signature, if a spell level is above Iron's maximum, if a granted spell costs more than the starting mana pool, or if a
+limb cannot be placed.
 """
 import json
 import math
@@ -130,8 +134,47 @@ BASE_MANA = 100
 # Base mana of each technique (Technique.java). The 150-mana domain needs 35% technique efficiency to fit 100 mana.
 TECHNIQUE_MANA = {"mdvlcraft:dismantle": 20, "mdvlcraft:cleave": 35, "mdvlcraft:malevolent_shrine": 150,
                   "mdvlcraft:boogie_woogie": 15, "mdvlcraft:block_clap": 15}
+# Techniques that keep casting while the cast key is held (Technique.repeatTicks > 0), paying each time.
+HELD_TECHNIQUES = {"mdvlcraft:dismantle", "mdvlcraft:cleave"}
 ABILITY_NAMES = {"mdvlcraft:dismantle": "Dismantle", "mdvlcraft:cleave": "Cleave", "mdvlcraft:malevolent_shrine": "Malevolent Shrine",
                  "mdvlcraft:boogie_woogie": "Boogie Woogie", "mdvlcraft:block_clap": "Block Clap"}
+
+
+# Twig bonuses shared by every archetype: (attribute, title, icon, value per node, most nodes per tree). Each value is
+# below the smallest class or signature step for the same stat, and the cap bounds what one tree can give.
+GENERIC = [
+    ("minecraft:generic.max_health", "Vitality", "minecraft:apple", 1, 8),
+    ("minecraft:generic.movement_speed", "Swiftness", "minecraft:sugar", 0.005, 8),
+    ("irons_spellbooks:max_mana", "Attunement", "minecraft:lapis_lazuli", 3, 8),
+    ("irons_spellbooks:mana_regen", "Meditation", "minecraft:prismarine_crystals", 0.01, 8),
+    ("irons_spellbooks:cooldown_reduction", "Focus", "minecraft:clock", 0.005, 8),
+    ("mdvlcraft:saturation_bonus", "Hearty", "minecraft:bread", 0.02, 8),
+    ("minecraft:generic.armor", "Hardened", "minecraft:leather_chestplate", 0.25, 8),
+    ("epicfight:staminar", "Endurance", "minecraft:rabbit_hide", 0.25, 8),
+    ("epicfight:stamina_regen", "Second Breath", "minecraft:honeycomb", 0.01, 8),
+    ("puffish_attributes:natural_regeneration", "Mending", "minecraft:sweet_berries", 0.01, 8),
+    ("minecraft:generic.attack_speed", "Readiness", "minecraft:feather", 0.005, 8),
+    ("minecraft:generic.attack_damage", "Might", "minecraft:iron_ingot", 0.1, 6),
+    ("minecraft:generic.knockback_resistance", "Footing", "minecraft:cobblestone", 0.01, 6),
+    ("irons_spellbooks:spell_resist", "Willpower", "minecraft:amethyst_shard", 0.005, 6),
+    ("puffish_attributes:jump", "Bounce", "minecraft:slime_ball", 0.01, 6),
+]
+# Tree growth: total skills aimed for per archetype (the seed adds up to TREE_SIZE_SPREAD more, so trees differ).
+TREE_SIZE = 115
+TREE_SIZE_SPREAD = 35
+MIN_GAP = 30
+TEXTURES = "mdvlcraft:textures/gui/skills/"
+# Gold, bronze and iron lines on the medieval screen (Pufferfish's category colours).
+COLORS = {
+    "connections": {
+        "locked": {"fill": "#5a4a3a", "stroke": "#140e08"},
+        "available": {"fill": "#a8803c", "stroke": "#1e1208"},
+        "affordable": {"fill": "#f0c860", "stroke": "#2a1a06"},
+        "unlocked": {"fill": "#d8a828", "stroke": "#4a0c0c"},
+        "excluded": {"fill": "#7a2a20", "stroke": "#140808"},
+    },
+    "points": {"fill": "#f0c850", "stroke": "#2a1a06"},
+}
 
 
 def ability_name(ability_id):
@@ -334,7 +377,7 @@ ARCHETYPES = {
                               chain("puffish_attributes:toughness_shred", "Severing", "minecraft:shears", 0.05, 2, 0.10)],
                    abilities=[[technique("mdvlcraft:dismantle", 2, "minecraft:shears"), technique("mdvlcraft:cleave", 3, "minecraft:iron_axe"),
                                technique("mdvlcraft:malevolent_shrine", 5, "minecraft:crying_obsidian",
-                                         note="Costs 150 mana: take all of Cursed Control (-35%) to fit your 100-mana pool.")]]),
+                                         note="Cast once to open the domain and again to close it (closing is free); it lasts up to 20 s. Costs 150 mana: take all of Cursed Control (-35%) or extra mana to afford it.")]]),
 }
 
 
@@ -353,7 +396,8 @@ def describe(node):
         return f"{fmt(node['attribute'], node['value'])} {ATTRIBUTES[node['attribute']][0]}"
     level = f" (Level {node['level']})" if node["ability"].startswith("irons_spellbooks:") else ""
     mana = f" ({TECHNIQUE_MANA[node['ability']]} mana, no cooldown)" if node["ability"] in TECHNIQUE_MANA else ""
-    return f"Unlocks {ability_name(node['ability'])}{level}{mana} on the ability wheel"
+    held = ". Hold the cast key to keep casting" if node["ability"] in HELD_TECHNIQUES else ""
+    return f"Unlocks {ability_name(node['ability'])}{level}{mana} on the ability wheel{held}"
 
 
 def reward(node):
@@ -368,7 +412,9 @@ def icon(item):
 
 
 def frame(kind):
-    return {"type": "advancement", "data": {"frame": kind}}
+    """Medieval frames from tools/generate_textures.py: minor (twig stud), task (tile), goal (shield), challenge (star)."""
+    states = ("locked", "available", "affordable", "unlocked", "excluded")
+    return {"type": "texture", "data": {state: f"{TEXTURES}frame_{kind}_{state}.png" for state in states}}
 
 
 def experience():
@@ -402,36 +448,63 @@ def check_spacing(tab, skills):
                 raise SystemExit(f"{tab}: skills {a} and {b} overlap")
 
 
-def place(rng, skills, x, y, heading, distance, tab, node_id):
-    """Next position along a wandering spoke, nudged until it is at least 32 px from every placed skill."""
-    for attempt in range(60):
-        angle = heading + rng.uniform(-0.5, 0.5) * min(1.0, attempt / 10)
-        reach = distance + rng.uniform(-4, 10) + attempt * 0.8
-        nx, ny = x + math.cos(angle) * reach, y + math.sin(angle) * reach
-        if all(math.hypot(nx - p["x"], ny - p["y"]) >= 32 for p in skills.values()):
-            return nx, ny
-    raise SystemExit(f"{tab}: no free space for {node_id}")
+def segments_cross(p1, p2, p3, p4):
+    def orient(a, b, c):
+        return (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
+    return orient(p3, p4, p1) * orient(p3, p4, p2) < 0 and orient(p1, p2, p3) * orient(p1, p2, p4) < 0
 
 
-def cross_links(rng, skills, spoke_nodes):
-    """Sideways links between nearby small bonus nodes of neighbouring spokes (never abilities or capstones)."""
-    def linkable(node):
-        return node["kind"] == "stat" and not node.get("capstone")
-    links = []
-    for i, spoke in enumerate(spoke_nodes):
-        neighbour = spoke_nodes[(i + 1) % len(spoke_nodes)]
-        for a, node_a in spoke:
-            for b, node_b in neighbour:
-                if not (linkable(node_a) and linkable(node_b)):
-                    continue
-                pa, pb = skills[a], skills[b]
-                if math.hypot(pa["x"] - pb["x"], pa["y"] - pb["y"]) < 64 and rng.random() < 0.45:
-                    links.append([a, b])
-    return links
+def point_segment_distance(p, a, b):
+    ax, ay = b[0] - a[0], b[1] - a[1]
+    t = max(0.0, min(1.0, ((p[0] - a[0]) * ax + (p[1] - a[1]) * ay) / (ax * ax + ay * ay)))
+    return math.hypot(p[0] - a[0] - t * ax, p[1] - a[1] - t * ay)
+
+
+def turn(angle, target, amount):
+    """Rotate `angle` part of the way towards `target`, the short way round."""
+    return angle + amount * ((target - angle + math.pi) % math.tau - math.pi)
+
+
+class Tree:
+    """Grows skills outwards from the root like branches: every new skill keeps clear of the others, and its branch
+    never crosses another branch or runs under a skill."""
+
+    def __init__(self, tab, rng):
+        self.tab, self.rng = tab, rng
+        self.pos = {"root": (0.0, 0.0)}
+        self.heading = {"root": 0.0}
+        self.edges = []
+
+    def free(self, parent, point):
+        start = self.pos[parent]
+        if any(math.hypot(point[0] - x, point[1] - y) < MIN_GAP for x, y in self.pos.values()):
+            return False
+        if any(point_segment_distance(self.pos[n], start, point) < 15 for n in self.pos if n != parent):
+            return False
+        return not any(parent not in edge and segments_cross(start, point, self.pos[edge[0]], self.pos[edge[1]])
+                       for edge in self.edges)
+
+    def grow(self, parent, node_id, heading, step):
+        """Places node_id off parent, roughly along heading; returns False if there is no room nearby."""
+        x, y = self.pos[parent]
+        for attempt in range(72):
+            spread = 0.12 + attempt * 0.03
+            angle = heading + self.rng.uniform(-spread, spread)
+            reach = step + self.rng.uniform(-3, 7) + attempt * 0.5
+            point = (x + math.cos(angle) * reach, y + math.sin(angle) * reach)
+            if self.free(parent, point):
+                self.pos[node_id] = point
+                # Branches drift outwards, away from the trunk, as they grow.
+                self.heading[node_id] = turn(angle, math.atan2(point[1], point[0]), 0.2)
+                self.edges.append((parent, node_id))
+                return True
+        return False
 
 
 def skill_id(node, taken):
-    """Readable IDs for commands: max_mana_3, max_mana_mastery, shield, shield_4."""
+    """Readable IDs for commands: max_mana_3, max_mana_mastery, shield, shield_4, vitality_2."""
+    if node.get("group") == "generic":
+        return node["title"].lower().replace(" ", "_")
     if node["kind"] == "stat":
         base = node["attribute"].split(":")[1].replace("generic.", "")
         suffix = "mastery" if node.get("capstone") else str(int(node["title"].rsplit(" ", 1)[1]))
@@ -440,68 +513,147 @@ def skill_id(node, taken):
     return base if base not in taken else f"{base}_{node['level']}"
 
 
+class Twigs:
+    """Hands out generic twig bonuses, numbered per tree, until each one's per-tree cap is used up."""
+
+    def __init__(self, rng):
+        self.rng = rng
+        self.used = {g[0]: 0 for g in GENERIC}
+
+    def pick(self, avoid):
+        left = [g for g in GENERIC if self.used[g[0]] < g[4] and g[0] != avoid]
+        return self.rng.choice(left) if left else None
+
+    def node(self, generic):
+        attribute, title, item, value, _ = generic
+        self.used[attribute] += 1
+        return dict(kind="stat", attribute=attribute, value=value, cost=1, title=f"{title} {self.used[attribute]}",
+                    icon=item, group="generic")
+
+
+def definition_for(node, cls):
+    definition = {"title": node["title"], "description": describe(node), "icon": icon(node["icon"]),
+                  "rewards": [reward(node)], "cost": node["cost"]}
+    group = node["group"]
+    if node["kind"] == "ability":
+        definition["frame"] = frame("challenge")
+        definition["size"] = 1.3
+    elif group == "generic":
+        definition["frame"] = frame("minor")
+        definition["size"] = 0.8
+        definition["extra_description"] = "Twig bonus (every archetype has a few of these)."
+    elif node.get("capstone"):
+        definition["frame"] = frame("goal")
+        definition["size"] = 1.2
+    else:
+        definition["frame"] = frame("task")
+    if group == "class":
+        definition["extra_description"] = f"{cls['title']} class bonus (every {cls['title']} archetype has this spoke)."
+    if node.get("note"):
+        definition["extra_description"] = node["note"]
+    return definition
+
+
 def build_archetype(arch_id, arch):
-    """Root in the centre; ability spokes on top, signature spokes beside them, class spokes underneath."""
+    """A tree: boughs leave the root at uneven angles, fork into the spoke limbs, and sprout twigs of generic bonuses."""
     cls = CLASSES[arch["cls"]]
     root = arch["root"]
     root_node = dict(root["spell"]) if "spell" in root else dict(kind="stat", attribute=root["attribute"], value=root["value"])
-    root_node.update(id="root", cost=1, title=root["title"], icon=arch["icon"])
+    root_node.update(id="root", cost=1, title=root["title"], icon=arch["icon"], group="root")
     definitions = {"root": {"title": root["title"], "description": describe(root_node), "icon": icon(arch["icon"]),
                             "frame": frame("challenge"), "size": 1.6, "rewards": [reward(root_node)], "cost": 1}}
-    skills = {"root": {"x": 0, "y": 0, "definition": "root", "root": True}}
-    connections = []
-    nodes = [root_node]
+    nodes = {"root": root_node}
+    # Seeded per archetype so a tree keeps its shape between builds.
+    rng = random.Random(arch_id)
+    tree = Tree(arch_id, rng)
+    twigs = Twigs(rng)
+
+    def add(parent, node, heading, step, required):
+        node_id = skill_id(node, nodes)
+        if not tree.grow(parent, node_id, heading, step):
+            if required:
+                raise SystemExit(f"{arch_id}: no room for {node_id}")
+            return None
+        nodes[node_id] = dict(node, id=node_id)
+        return node_id
 
     spokes = [("ability", s) for s in arch["abilities"]] + [("signature", s) for s in arch["signature"]] + [("class", s) for s in cls["pool"]]
-    # A jumbled web rather than a neat wheel: shuffled spokes at uneven angles that wander outwards with uneven steps,
-    # plus sideways links between neighbouring spokes. Seeded per archetype so the layout never changes between builds.
-    rng = random.Random(arch_id)
     rng.shuffle(spokes)
-    count = len(spokes)
-    spoke_nodes = []
-    for index, (group, spoke) in enumerate(spokes):
-        heading = 2 * math.pi * (index + rng.uniform(-0.3, 0.3)) / count
-        x, y = 0.0, 0.0
-        previous = "root"
-        chain_ids = []
-        for step, node in enumerate(spoke):
-            node_id = skill_id(node, skills)
-            heading += rng.gauss(0, 0.22)
-            x, y = place(rng, skills, x, y, heading, (70 if step == 0 else 36), arch_id, node_id)
-            definition = {"title": node["title"], "description": describe(node), "icon": icon(node["icon"]),
-                          "rewards": [reward(node)], "cost": node["cost"]}
-            if node["kind"] == "ability":
-                definition["frame"] = frame("challenge" if node["cost"] >= 3 else "goal")
-                definition["size"] = 1.3
-            else:
-                definition["frame"] = frame("goal" if node.get("capstone") else "task")
-                if node.get("capstone"):
-                    definition["size"] = 1.2
-            if group == "class":
-                definition["extra_description"] = f"{cls['title']} class bonus (every {cls['title']} archetype has this spoke)."
-            if node.get("note"):
-                definition["extra_description"] = node["note"]
-            definitions[node_id] = definition
-            skills[node_id] = {"x": round(x), "y": round(y), "definition": node_id}
-            connections.append([previous, node_id])
-            previous = node_id
-            nodes.append(dict(node, id=node_id, group=group))
-            chain_ids.append((node_id, node))
-        spoke_nodes.append(chain_ids)
-    links = cross_links(rng, skills, spoke_nodes)
+    # Boughs of one to three limbs (more cannot fan out of one fork without touching).
+    boughs = []
+    while len(boughs) < 3 or sum(map(len, boughs)) < len(spokes):
+        taken = sum(map(len, boughs))
+        size = min(rng.choice((1, 2, 2, 3, 3)), len(spokes) - taken)
+        if size == 0:
+            break
+        boughs.append(spokes[taken:taken + size])
+    bough_count = len(boughs)
+    base = rng.uniform(0, math.tau)
+    limbs = []
+    growing = []  # [previous skill, heading, remaining (group, node) pairs] for every limb
+    for b, bough in enumerate(boughs):
+        heading = base + math.tau * (b + rng.uniform(-0.25, 0.25)) / bough_count
+        parent = "root"
+        # A short trunk of twig bonuses before the bough forks into its limbs.
+        for t in range(rng.randint(1, 2)):
+            parent = add(parent, twigs.node(twigs.pick(None)), heading, 64 if t == 0 else 44, True)
+            heading = tree.heading[parent]
+            limbs.append(parent)
+        fan = 0.9 * (len(bough) - 1)
+        for i, (group, spoke) in enumerate(bough):
+            offset = (i / (len(bough) - 1) - 0.5) * fan if len(bough) > 1 else 0
+            growing.append([parent, heading + offset + rng.uniform(-0.15, 0.15), [(group, node) for node in spoke]])
+    # Limbs grow a skill at a time in turn, so each bough claims its own sector before any limb runs long.
+    while any(limb[2] for limb in growing):
+        for limb in growing:
+            if limb[2]:
+                group, node = limb[2].pop(0)
+                limb[0] = add(limb[0], dict(node, group=group), limb[1] + rng.gauss(0, 0.1), 40, True)
+                limb[1] = tree.heading[limb[0]]
+                limbs.append(limb[0])
 
+    # Twigs off the limbs, and smaller twigs off those, until the tree reaches its size or runs out of room.
+    target = TREE_SIZE + rng.randint(0, TREE_SIZE_SPREAD)
+    buds = [(n, 0) for n in limbs]
+    rng.shuffle(buds)
+    while buds and len(nodes) < target:
+        parent, depth = buds.pop(0)
+        if rng.random() > (0.75 if depth == 0 else 0.4):
+            continue
+        generic = twigs.pick(nodes[parent].get("attribute") if nodes[parent].get("group") == "generic" else None)
+        if generic is None:
+            break
+        heading = tree.heading[parent] + rng.choice((-1, 1)) * rng.uniform(0.55, 1.15)
+        previous = parent
+        for _ in range(rng.randint(2, 4) if depth == 0 else rng.randint(1, 3)):
+            if twigs.used[generic[0]] >= generic[4] or len(nodes) >= target:
+                break
+            placed = add(previous, twigs.node(generic), heading + rng.gauss(0, 0.15), 34, False)
+            if placed is None:
+                break
+            previous, heading = placed, tree.heading[placed]
+            if depth < 2:
+                buds.append((placed, depth + 1))
+
+    skills = {"root": {"x": 0, "y": 0, "definition": "root", "root": True}}
+    for node_id, node in nodes.items():
+        if node_id == "root":
+            continue
+        x, y = tree.pos[node_id]
+        definitions[node_id] = definition_for(node, cls)
+        skills[node_id] = {"x": round(x), "y": round(y), "definition": node_id}
     check_spacing(arch_id, skills)
-    base = OUT / "categories" / arch_id
-    write(base / "category.json", {
+    base_dir = OUT / "categories" / arch_id
+    write(base_dir / "category.json", {
         "title": arch["title"], "description": arch["blurb"], "icon": icon(arch["icon"]),
-        "background": f"minecraft:textures/block/{arch['bg']}.png",
+        "background": f"minecraft:textures/block/{arch['bg']}.png", "colors": COLORS,
         "unlocked_by_default": False, "starting_points": STARTING_POINTS,
     })
-    write(base / "definitions.json", definitions)
-    write(base / "skills.json", skills)
-    write(base / "connections.json", {"normal": {"unidirectional": connections, "bidirectional": links}})
-    write(base / "experience.json", experience())
-    return nodes
+    write(base_dir / "definitions.json", definitions)
+    write(base_dir / "skills.json", skills)
+    write(base_dir / "connections.json", {"normal": {"unidirectional": [list(e) for e in tree.edges]}})
+    write(base_dir / "experience.json", experience())
+    return list(nodes.values())
 
 
 def key_abilities(arch):
@@ -541,7 +693,8 @@ def build_classes():
     base = OUT / "categories" / "classes"
     write(base / "category.json", {
         "title": "Classes", "description": f"Pick up to {ARCHETYPE_LIMIT} archetypes.", "icon": icon("minecraft:nether_star"),
-        "background": "minecraft:textures/block/stone_bricks.png", "unlocked_by_default": True,
+        "background": {"texture": TEXTURES + "parchment.png", "width": 64, "height": 64, "position": "tile"}, "colors": COLORS,
+        "unlocked_by_default": True,
         "starting_points": ARCHETYPE_LIMIT, "spent_points_limit": ARCHETYPE_LIMIT,
     })
     write(base / "definitions.json", definitions)
@@ -560,7 +713,7 @@ def check_overlaps(all_nodes):
     owner = {}
     for arch_id, nodes in all_nodes.items():
         for node in nodes:
-            if node.get("group") == "class":
+            if node.get("group") in ("class", "generic"):
                 continue
             key = node.get("attribute") or node.get("ability")
             if key in pool_owner:
@@ -585,10 +738,15 @@ def write_doc(all_nodes):
              "Generated by `tools/generate_skill_trees.py`; edit the script, not this file.", "",
              "Layout follows the radial style of the *RPG skill tree* and *More RPG Classes - Skill Tree* packs.", "",
              f"- **Classes tab:** the four classes sit in a ring round the centre and are unlocked automatically. Their archetypes fan out in each class's quarter; hover one for its full description and key abilities. Pick up to **{ARCHETYPE_LIMIT} archetypes** from any classes; each opens its own tab.",
-             f"- **Archetype tabs:** the archetype skill sits in the centre of a jumbled web: spokes wander out at uneven angles and some neighbouring spokes are linked sideways, so there is more than one way through. Each bonus spoke is a chain of small 1-point bonuses that ends in a 2-point capstone. Ability spokes unlock spells or techniques for the ability wheel.",
+             f"- **Archetype tabs:** the archetype skill sits at the root of a tree. A few boughs leave it at uneven angles and fork into limbs; every tree has its own shape and size, and branches never cross. Each bonus limb is a chain of small 1-point bonuses that ends in a 2-point capstone (shield frame). Ability limbs (star frames) unlock spells or techniques for the ability wheel.",
+             f"- **Twigs:** the small round studs sprouting off every branch are tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation and more; table below). They are smaller than any class or signature step and capped per tree, so they widen your choices without raising the ceiling.",
              f"- **Points:** {STARTING_POINTS} to start, then 1 per level up to level {LEVEL_LIMIT} ({points} per archetype). Every tree costs more than that, so you choose. Experience comes from kills (`dropped XP + max health / 5`, at most 20 kills per chunk every 5 minutes). Level n to n+1 costs `25 + 5n` XP ({xp_total:,} XP to reach level {LEVEL_LIMIT}).",
              "- **Class bonuses** are shared by every archetype of that class. **Signature bonuses and abilities** belong to one archetype only; the generator enforces this.",
-             "- **Controls:** `[` opens the abilities screen, hold `` ` `` for the ability wheel, Caps Lock casts. Cursed techniques cost mana and have no cooldown.", ""]
+             "- **Controls:** `[` opens the abilities screen, hold `` ` `` for the ability wheel, Caps Lock casts. Cursed techniques cost mana and have no cooldown; hold the cast key on Dismantle or Cleave to keep casting, and cast the Malevolent Shrine again to close it (it lasts up to 20 s).", ""]
+    lines += ["## Twig bonuses (every archetype)", "", "| Twig | Per node | Most per tree | Tree maximum |", "|---|---|---|---|"]
+    for attribute, title, _, value, cap in GENERIC:
+        lines.append(f"| {title} | {fmt(attribute, value)} {ATTRIBUTES[attribute][0]} | {cap} | {fmt(attribute, round(value * cap, 4))} |")
+    lines.append("")
     lines += ["## Class bonuses", "", "| Class | Spokes (each spoke: small nodes + capstone, total at the end) |", "|---|---|"]
     for cls in CLASSES.values():
         parts = []
@@ -600,9 +758,10 @@ def write_doc(all_nodes):
     for arch_id, nodes in all_nodes.items():
         arch = ARCHETYPES[arch_id]
         cost = sum(n["cost"] for n in nodes)
-        sig = [n for n in nodes if n.get("group") != "class"]
+        sig = [n for n in nodes if n.get("group") not in ("class", "generic")]
+        twig_count = sum(1 for n in nodes if n.get("group") == "generic")
         lines += [f"## {arch['title']} ({CLASSES[arch['cls']]['title']})", "", arch["desc"], "",
-                  f"{len(nodes)} skills, {cost} points in total ({points} available).", "",
+                  f"{len(nodes)} skills ({twig_count} of them twigs), {cost} points in total ({points} available).", "",
                   "| Skill | Cost | Effect |", "|---|---|---|"]
         for n in sig:
             lines.append(f"| {n['title']} | {n['cost']} | {describe(n)} |")
@@ -621,7 +780,7 @@ def main():
     write(OUT / "config.json", {"version": 3, "categories": ["classes"] + list(ARCHETYPES)})
     write_doc(all_nodes)
     for arch_id, nodes in all_nodes.items():
-        print(f"{arch_id:11s} skills={len(nodes):2d} cost={sum(n['cost'] for n in nodes)} (points {STARTING_POINTS + LEVEL_LIMIT})")
+        print(f"{arch_id:11s} skills={len(nodes):3d} twigs={sum(1 for n in nodes if n.get('group') == 'generic'):3d} cost={sum(n['cost'] for n in nodes)} (points {STARTING_POINTS + LEVEL_LIMIT})")
 
 
 if __name__ == "__main__":

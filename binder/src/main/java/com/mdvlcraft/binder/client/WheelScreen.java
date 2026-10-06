@@ -46,21 +46,26 @@ public final class WheelScreen extends Screen {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         int hovered = hovered(mouseX, mouseY);
         for (int slot = 0; slot < Loadout.SLOTS; slot++) {
-            int x = slotCenterX(slot) - 11;
-            int y = slotCenterY(slot) - 11;
-            int border = slot == hovered ? 0xFFFFD34D : slot == ClientAbilities.selected() ? 0xFF9F7FE0 : 0xFF555555;
-            graphics.fill(x, y, x + 22, y + 22, border);
-            graphics.fill(x + 1, y + 1, x + 21, y + 21, 0xE0101010);
-            int drawX = x + 3;
+            int x = slotCenterX(slot) - 13;
+            int y = slotCenterY(slot) - 13;
+            String state = slot == hovered ? "affordable" : slot == ClientAbilities.selected() ? "unlocked" : "available";
+            MedievalGui.frame(graphics, "challenge", state, x, y, 26);
+            int drawX = x + 5;
+            int drawY = y + 5;
             ClientAbilities.slot(slot).ifPresent(ability -> {
-                AbilityDisplay.drawIcon(graphics, ability, drawX, y + 3);
+                AbilityDisplay.drawIcon(graphics, ability, drawX, drawY);
                 if (ClientAbilities.level(ability) == 0) {
-                    graphics.fill(drawX, y + 3, drawX + 16, y + 19, 0xB0300000);
+                    graphics.fill(drawX, drawY, drawX + 16, drawY + 16, 0xB0300000);
                 }
             });
         }
         int shown = hovered >= 0 ? hovered : ClientAbilities.selected();
-        ClientAbilities.slot(shown).ifPresent(ability -> graphics.drawCenteredString(font, ability.displayName(), width / 2, height / 2 - 4, 0xFFFFFF));
+        ClientAbilities.slot(shown).ifPresent(ability -> {
+            int textWidth = font.width(ability.displayName());
+            int bannerY = height / 2 + RADIUS + 22;
+            MedievalGui.panel(graphics, width / 2 - textWidth / 2 - 4, bannerY - 7, textWidth + 8, 14);
+            MedievalGui.centeredInk(graphics, font, ability.displayName(), width / 2, bannerY - 3, MedievalGui.INK);
+        });
         super.render(graphics, mouseX, mouseY, partialTick);
     }
 

@@ -9,9 +9,13 @@
       }
     },
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "challenge"
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
       }
     },
     "size": 1.6,
@@ -25,6 +29,336 @@
       }
     ],
     "cost": 1
+  },
+  "hardened_1": {
+    "title": "Hardened 1",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_1": {
+    "title": "Footing 1",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_1": {
+    "title": "Bounce 1",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_1": {
+    "title": "Meditation 1",
+    "description": "+1% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_1": {
+    "title": "Swiftness 1",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_2": {
+    "title": "Meditation 2",
+    "description": "+1% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_1": {
+    "title": "Readiness 1",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_1": {
+    "title": "Willpower 1",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_1": {
+    "title": "Second Breath 1",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:honeycomb"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hardened_2": {
+    "title": "Hardened 2",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
   },
   "ice_spikes": {
     "title": "Ice Spikes",
@@ -46,36 +380,13 @@
     ],
     "cost": 2,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.3
-  },
-  "blizzard": {
-    "title": "Blizzard",
-    "description": "Unlocks Blizzard (Level 2) on the ability wheel",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snow_block"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:blizzard",
-          "level": 2
-        }
-      }
-    ],
-    "cost": 3,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "challenge"
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
       }
     },
     "size": 1.3
@@ -100,63 +411,13 @@
     ],
     "cost": 2,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.3
-  },
-  "frost_step": {
-    "title": "Frost Step",
-    "description": "Unlocks Frost Step (Level 3) on the ability wheel",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:leather_boots"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:frost_step",
-          "level": 3
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.3
-  },
-  "icicle": {
-    "title": "Shatter (Icicle V)",
-    "description": "Unlocks Icicle (Level 5) on the ability wheel",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:ice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:icicle",
-          "level": 5
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
       }
     },
     "size": 1.3
@@ -182,93 +443,15 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     }
-  },
-  "magic_resistance_2": {
-    "title": "Glacial Ward 2",
-    "description": "+3% Magic Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:magic_resistance",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "magic_resistance_3": {
-    "title": "Glacial Ward 3",
-    "description": "+3% Magic Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:magic_resistance",
-          "value": 0.03,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "magic_resistance_mastery": {
-    "title": "Glacial Ward Mastery",
-    "description": "+5% Magic Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blue_ice"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:magic_resistance",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
   },
   "spell_resist_1": {
     "title": "Warding 1",
@@ -291,96 +474,15 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "spell_resist_2": {
-    "title": "Warding 2",
-    "description": "+2% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "spell_resist_3": {
-    "title": "Warding 3",
-    "description": "+2% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "spell_resist_mastery": {
-    "title": "Warding Mastery",
-    "description": "+4% Spell Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:amethyst_shard"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
   "ice_spell_power_1": {
@@ -404,120 +506,15 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     }
-  },
-  "ice_spell_power_2": {
-    "title": "Winter 2",
-    "description": "+3% Ice Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snowball"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:ice_spell_power",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "ice_spell_power_3": {
-    "title": "Winter 3",
-    "description": "+3% Ice Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snowball"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:ice_spell_power",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "ice_spell_power_4": {
-    "title": "Winter 4",
-    "description": "+3% Ice Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snowball"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:ice_spell_power",
-          "value": 0.03,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    }
-  },
-  "ice_spell_power_mastery": {
-    "title": "Winter Mastery",
-    "description": "+6% Ice Spell Power",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:snowball"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:ice_spell_power",
-          "value": 0.06,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
   },
   "ice_magic_resist_1": {
     "title": "Cold Blood 1",
@@ -540,9 +537,297 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    }
+  },
+  "experience_1": {
+    "title": "Scholar 1",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "max_mana_1": {
+    "title": "Mana Well 1",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_1": {
+    "title": "Flow 1",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "cast_time_reduction_1": {
+    "title": "Quick Casting 1",
+    "description": "+2% Cast Time Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cast_time_reduction",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "blizzard": {
+    "title": "Blizzard",
+    "description": "Unlocks Blizzard (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snow_block"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:blizzard",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 3,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+      }
+    },
+    "size": 1.3
+  },
+  "frost_step": {
+    "title": "Frost Step",
+    "description": "Unlocks Frost Step (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:frost_step",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+      }
+    },
+    "size": 1.3
+  },
+  "magic_resistance_2": {
+    "title": "Glacial Ward 2",
+    "description": "+3% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    }
+  },
+  "spell_resist_2": {
+    "title": "Warding 2",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "ice_spell_power_2": {
+    "title": "Winter 2",
+    "description": "+3% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     }
   },
@@ -567,67 +852,15 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     }
-  },
-  "ice_magic_resist_mastery": {
-    "title": "Cold Blood Mastery",
-    "description": "+10% Ice Resistance",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:powder_snow_bucket"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:ice_magic_resist",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2
-  },
-  "experience_1": {
-    "title": "Scholar 1",
-    "description": "+5% Experience Gained (enchanting)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:enchanting_table"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
   "experience_2": {
     "title": "Scholar 2",
@@ -650,94 +883,13 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_3": {
-    "title": "Scholar 3",
-    "description": "+5% Experience Gained (enchanting)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:enchanting_table"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_mastery": {
-    "title": "Scholar Mastery",
-    "description": "+10% Experience Gained (enchanting)",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:enchanting_table"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.1,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "max_mana_1": {
-    "title": "Mana Well 1",
-    "description": "+8 Max Mana",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:lapis_lazuli"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 8,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     },
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
@@ -763,122 +915,13 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "max_mana_3": {
-    "title": "Mana Well 3",
-    "description": "+8 Max Mana",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:lapis_lazuli"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 8,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "max_mana_4": {
-    "title": "Mana Well 4",
-    "description": "+8 Max Mana",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:lapis_lazuli"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 8,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "max_mana_mastery": {
-    "title": "Mana Well Mastery",
-    "description": "+18 Max Mana",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:lapis_lazuli"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 18,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "mana_regen_1": {
-    "title": "Flow 1",
-    "description": "+4% Mana Regen",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:prismarine_crystals"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     },
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
@@ -904,122 +947,13 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "mana_regen_3": {
-    "title": "Flow 3",
-    "description": "+4% Mana Regen",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:prismarine_crystals"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "mana_regen_4": {
-    "title": "Flow 4",
-    "description": "+4% Mana Regen",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:prismarine_crystals"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
-      }
-    },
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "mana_regen_mastery": {
-    "title": "Flow Mastery",
-    "description": "+9% Mana Regen",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:prismarine_crystals"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.09,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "goal"
-      }
-    },
-    "size": 1.2,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "cast_time_reduction_1": {
-    "title": "Quick Casting 1",
-    "description": "+2% Cast Time Reduction",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:clock"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cast_time_reduction",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "advancement",
-      "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     },
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
@@ -1045,9 +979,266 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "icicle": {
+    "title": "Shatter (Icicle V)",
+    "description": "Unlocks Icicle (Level 5) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:icicle",
+          "level": 5
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+      }
+    },
+    "size": 1.3
+  },
+  "magic_resistance_3": {
+    "title": "Glacial Ward 3",
+    "description": "+3% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    }
+  },
+  "spell_resist_3": {
+    "title": "Warding 3",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "ice_spell_power_3": {
+    "title": "Winter 3",
+    "description": "+3% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    }
+  },
+  "ice_magic_resist_mastery": {
+    "title": "Cold Blood Mastery",
+    "description": "+10% Ice Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:powder_snow_bucket"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_magic_resist",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+      }
+    },
+    "size": 1.2
+  },
+  "experience_3": {
+    "title": "Scholar 3",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "max_mana_3": {
+    "title": "Mana Well 3",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_3": {
+    "title": "Flow 3",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     },
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
@@ -1073,9 +1264,206 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "magic_resistance_mastery": {
+    "title": "Glacial Ward Mastery",
+    "description": "+5% Magic Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blue_ice"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:magic_resistance",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+      }
+    },
+    "size": 1.2
+  },
+  "spell_resist_mastery": {
+    "title": "Warding Mastery",
+    "description": "+4% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "ice_spell_power_4": {
+    "title": "Winter 4",
+    "description": "+3% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    }
+  },
+  "experience_mastery": {
+    "title": "Scholar Mastery",
+    "description": "+10% Experience Gained (enchanting)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:enchanting_table"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "max_mana_4": {
+    "title": "Mana Well 4",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+      }
+    },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_4": {
+    "title": "Flow 4",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     },
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
@@ -1101,11 +1489,113 @@
     ],
     "cost": 1,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "task"
+        "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
       }
     },
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "ice_spell_power_mastery": {
+    "title": "Winter Mastery",
+    "description": "+6% Ice Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:snowball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:ice_spell_power",
+          "value": 0.06,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+      }
+    },
+    "size": 1.2
+  },
+  "max_mana_mastery": {
+    "title": "Mana Well Mastery",
+    "description": "+18 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 18,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+      }
+    },
+    "size": 1.2,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "mana_regen_mastery": {
+    "title": "Flow Mastery",
+    "description": "+9% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.09,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+      }
+    },
+    "size": 1.2,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
   "cast_time_reduction_mastery": {
@@ -1129,12 +1619,2326 @@
     ],
     "cost": 2,
     "frame": {
-      "type": "advancement",
+      "type": "texture",
       "data": {
-        "frame": "goal"
+        "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
       }
     },
     "size": 1.2,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "vitality_1": {
+    "title": "Vitality 1",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:apple"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_2": {
+    "title": "Vitality 2",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:apple"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_1": {
+    "title": "Endurance 1",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_hide"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_2": {
+    "title": "Endurance 2",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_hide"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_2": {
+    "title": "Bounce 2",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_3": {
+    "title": "Bounce 3",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_4": {
+    "title": "Bounce 4",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_1": {
+    "title": "Focus 1",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_2": {
+    "title": "Focus 2",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_3": {
+    "title": "Focus 3",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_3": {
+    "title": "Meditation 3",
+    "description": "+1% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_4": {
+    "title": "Meditation 4",
+    "description": "+1% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_5": {
+    "title": "Meditation 5",
+    "description": "+1% Mana Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:prismarine_crystals"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_5": {
+    "title": "Bounce 5",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_6": {
+    "title": "Bounce 6",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_3": {
+    "title": "Vitality 3",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:apple"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_4": {
+    "title": "Vitality 4",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:apple"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_5": {
+    "title": "Vitality 5",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:apple"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_6": {
+    "title": "Vitality 6",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:apple"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_7": {
+    "title": "Vitality 7",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:apple"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_8": {
+    "title": "Vitality 8",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:apple"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_2": {
+    "title": "Willpower 2",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_3": {
+    "title": "Willpower 3",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hearty_1": {
+    "title": "Hearty 1",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hearty_2": {
+    "title": "Hearty 2",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hearty_3": {
+    "title": "Hearty 3",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hearty_4": {
+    "title": "Hearty 4",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_4": {
+    "title": "Focus 4",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_6": {
+    "title": "Focus 6",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_7": {
+    "title": "Focus 7",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_1": {
+    "title": "Might 1",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_2": {
+    "title": "Might 2",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_2": {
+    "title": "Second Breath 2",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:honeycomb"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_3": {
+    "title": "Second Breath 3",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:honeycomb"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_4": {
+    "title": "Second Breath 4",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:honeycomb"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_3": {
+    "title": "Endurance 3",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_hide"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_4": {
+    "title": "Endurance 4",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_hide"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_8": {
+    "title": "Focus 8",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:clock"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_5": {
+    "title": "Endurance 5",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_hide"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_6": {
+    "title": "Endurance 6",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_hide"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_7": {
+    "title": "Endurance 7",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_hide"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_2": {
+    "title": "Readiness 2",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_3": {
+    "title": "Readiness 3",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_3": {
+    "title": "Might 3",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_4": {
+    "title": "Might 4",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_5": {
+    "title": "Might 5",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_6": {
+    "title": "Might 6",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_1": {
+    "title": "Attunement 1",
+    "description": "+3 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_2": {
+    "title": "Attunement 2",
+    "description": "+3 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_3": {
+    "title": "Attunement 3",
+    "description": "+3 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_2": {
+    "title": "Swiftness 2",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_3": {
+    "title": "Swiftness 3",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_4": {
+    "title": "Swiftness 4",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hardened_3": {
+    "title": "Hardened 3",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hardened_4": {
+    "title": "Hardened 4",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hardened_5": {
+    "title": "Hardened 5",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_chestplate"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_5": {
+    "title": "Swiftness 5",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_6": {
+    "title": "Swiftness 6",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_1": {
+    "title": "Mending 1",
+    "description": "+1% Natural Regeneration",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sweet_berries"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_2": {
+    "title": "Mending 2",
+    "description": "+1% Natural Regeneration",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sweet_berries"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_4": {
+    "title": "Attunement 4",
+    "description": "+3 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_4": {
+    "title": "Willpower 4",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_5": {
+    "title": "Willpower 5",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_6": {
+    "title": "Attunement 6",
+    "description": "+3 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_7": {
+    "title": "Attunement 7",
+    "description": "+3 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_8": {
+    "title": "Attunement 8",
+    "description": "+3 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hearty_5": {
+    "title": "Hearty 5",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hearty_6": {
+    "title": "Hearty 6",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bread"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_4": {
+    "title": "Readiness 4",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_5": {
+    "title": "Readiness 5",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_minor_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_minor_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_minor_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_minor_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_minor_excluded.png"
+      }
+    },
+    "size": 0.8,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
   }
 }

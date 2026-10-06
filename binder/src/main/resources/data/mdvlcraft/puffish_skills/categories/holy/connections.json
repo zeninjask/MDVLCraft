@@ -3,213 +3,471 @@
     "unidirectional": [
       [
         "root",
+        "mending_1"
+      ],
+      [
+        "mending_1",
+        "bounce_1"
+      ],
+      [
+        "root",
+        "hearty_1"
+      ],
+      [
+        "root",
+        "might_1"
+      ],
+      [
+        "might_1",
+        "attunement_1"
+      ],
+      [
+        "root",
+        "attunement_2"
+      ],
+      [
+        "attunement_2",
+        "meditation_1"
+      ],
+      [
+        "bounce_1",
         "cast_time_reduction_1"
+      ],
+      [
+        "bounce_1",
+        "experience_1"
+      ],
+      [
+        "bounce_1",
+        "heal"
+      ],
+      [
+        "hearty_1",
+        "healing_1"
+      ],
+      [
+        "hearty_1",
+        "mana_regen_1"
+      ],
+      [
+        "attunement_1",
+        "holy_spell_power_1"
+      ],
+      [
+        "attunement_1",
+        "max_mana_1"
+      ],
+      [
+        "attunement_1",
+        "healing_circle"
+      ],
+      [
+        "meditation_1",
+        "spell_resist_1"
+      ],
+      [
+        "meditation_1",
+        "holy_magic_resist_1"
       ],
       [
         "cast_time_reduction_1",
         "cast_time_reduction_2"
       ],
       [
-        "cast_time_reduction_2",
-        "cast_time_reduction_3"
-      ],
-      [
-        "cast_time_reduction_3",
-        "cast_time_reduction_4"
-      ],
-      [
-        "cast_time_reduction_4",
-        "cast_time_reduction_mastery"
-      ],
-      [
-        "root",
-        "experience_1"
-      ],
-      [
         "experience_1",
         "experience_2"
-      ],
-      [
-        "experience_2",
-        "experience_3"
-      ],
-      [
-        "experience_3",
-        "experience_mastery"
-      ],
-      [
-        "root",
-        "heal"
       ],
       [
         "heal",
         "blessing_of_life"
       ],
       [
-        "blessing_of_life",
-        "guiding_bolt"
-      ],
-      [
-        "root",
-        "healing_1"
-      ],
-      [
         "healing_1",
         "healing_2"
-      ],
-      [
-        "healing_2",
-        "healing_3"
-      ],
-      [
-        "healing_3",
-        "healing_mastery"
-      ],
-      [
-        "root",
-        "mana_regen_1"
       ],
       [
         "mana_regen_1",
         "mana_regen_2"
       ],
       [
-        "mana_regen_2",
-        "mana_regen_3"
-      ],
-      [
-        "mana_regen_3",
-        "mana_regen_4"
-      ],
-      [
-        "mana_regen_4",
-        "mana_regen_mastery"
-      ],
-      [
-        "root",
-        "holy_spell_power_1"
-      ],
-      [
         "holy_spell_power_1",
         "holy_spell_power_2"
-      ],
-      [
-        "holy_spell_power_2",
-        "holy_spell_power_3"
-      ],
-      [
-        "holy_spell_power_3",
-        "holy_spell_power_4"
-      ],
-      [
-        "holy_spell_power_4",
-        "holy_spell_power_mastery"
-      ],
-      [
-        "root",
-        "max_mana_1"
       ],
       [
         "max_mana_1",
         "max_mana_2"
       ],
       [
-        "max_mana_2",
-        "max_mana_3"
-      ],
-      [
-        "max_mana_3",
-        "max_mana_4"
-      ],
-      [
-        "max_mana_4",
-        "max_mana_mastery"
-      ],
-      [
-        "root",
-        "healing_circle"
-      ],
-      [
         "healing_circle",
         "sunbeam"
-      ],
-      [
-        "root",
-        "spell_resist_1"
       ],
       [
         "spell_resist_1",
         "spell_resist_2"
       ],
       [
+        "holy_magic_resist_1",
+        "holy_magic_resist_2"
+      ],
+      [
+        "cast_time_reduction_2",
+        "cast_time_reduction_3"
+      ],
+      [
+        "experience_2",
+        "experience_3"
+      ],
+      [
+        "blessing_of_life",
+        "guiding_bolt"
+      ],
+      [
+        "healing_2",
+        "healing_3"
+      ],
+      [
+        "mana_regen_2",
+        "mana_regen_3"
+      ],
+      [
+        "holy_spell_power_2",
+        "holy_spell_power_3"
+      ],
+      [
+        "max_mana_2",
+        "max_mana_3"
+      ],
+      [
         "spell_resist_2",
         "spell_resist_3"
+      ],
+      [
+        "holy_magic_resist_2",
+        "holy_magic_resist_mastery"
+      ],
+      [
+        "cast_time_reduction_3",
+        "cast_time_reduction_4"
+      ],
+      [
+        "experience_3",
+        "experience_mastery"
+      ],
+      [
+        "healing_3",
+        "healing_mastery"
+      ],
+      [
+        "mana_regen_3",
+        "mana_regen_4"
+      ],
+      [
+        "holy_spell_power_3",
+        "holy_spell_power_4"
+      ],
+      [
+        "max_mana_3",
+        "max_mana_4"
       ],
       [
         "spell_resist_3",
         "spell_resist_mastery"
       ],
       [
-        "root",
-        "holy_magic_resist_1"
+        "cast_time_reduction_4",
+        "cast_time_reduction_mastery"
       ],
       [
-        "holy_magic_resist_1",
-        "holy_magic_resist_2"
+        "mana_regen_4",
+        "mana_regen_mastery"
       ],
       [
-        "holy_magic_resist_2",
-        "holy_magic_resist_mastery"
-      ]
-    ],
-    "bidirectional": [
-      [
-        "cast_time_reduction_1",
-        "experience_1"
+        "holy_spell_power_4",
+        "holy_spell_power_mastery"
       ],
       [
-        "healing_1",
-        "mana_regen_1"
+        "max_mana_4",
+        "max_mana_mastery"
       ],
       [
-        "mana_regen_1",
-        "holy_spell_power_2"
+        "spell_resist_2",
+        "bounce_2"
       ],
       [
-        "mana_regen_2",
-        "holy_spell_power_2"
+        "bounce_2",
+        "bounce_3"
       ],
       [
-        "mana_regen_2",
-        "holy_spell_power_3"
+        "heal",
+        "swiftness_1"
       ],
       [
-        "mana_regen_3",
-        "holy_spell_power_3"
+        "swiftness_1",
+        "swiftness_2"
       ],
       [
-        "mana_regen_3",
-        "holy_spell_power_4"
+        "swiftness_2",
+        "swiftness_3"
+      ],
+      [
+        "experience_1",
+        "swiftness_4"
+      ],
+      [
+        "swiftness_4",
+        "swiftness_5"
+      ],
+      [
+        "experience_3",
+        "focus_1"
+      ],
+      [
+        "focus_1",
+        "focus_2"
+      ],
+      [
+        "focus_2",
+        "focus_3"
+      ],
+      [
+        "blessing_of_life",
+        "second_breath_1"
+      ],
+      [
+        "second_breath_1",
+        "second_breath_2"
+      ],
+      [
+        "spell_resist_1",
+        "bounce_4"
+      ],
+      [
+        "bounce_4",
+        "bounce_5"
+      ],
+      [
+        "bounce_5",
+        "bounce_6"
+      ],
+      [
+        "spell_resist_3",
+        "mending_2"
+      ],
+      [
+        "mending_2",
+        "mending_3"
+      ],
+      [
+        "mending_3",
+        "mending_4"
+      ],
+      [
+        "mending_4",
+        "mending_5"
+      ],
+      [
+        "healing_3",
+        "attunement_3"
+      ],
+      [
+        "attunement_3",
+        "attunement_4"
+      ],
+      [
+        "attunement_4",
+        "attunement_5"
+      ],
+      [
+        "max_mana_mastery",
+        "might_2"
+      ],
+      [
+        "might_2",
+        "might_3"
+      ],
+      [
+        "might_1",
+        "hearty_2"
+      ],
+      [
+        "hearty_2",
+        "hearty_3"
+      ],
+      [
+        "hearty_3",
+        "hearty_4"
+      ],
+      [
+        "mana_regen_mastery",
+        "vitality_1"
+      ],
+      [
+        "vitality_1",
+        "vitality_2"
+      ],
+      [
+        "vitality_2",
+        "vitality_3"
+      ],
+      [
+        "hearty_1",
+        "attunement_6"
+      ],
+      [
+        "attunement_6",
+        "attunement_7"
+      ],
+      [
+        "attunement_7",
+        "attunement_8"
       ],
       [
         "holy_spell_power_1",
-        "max_mana_1"
+        "focus_4"
       ],
       [
-        "spell_resist_2",
-        "holy_magic_resist_1"
+        "focus_4",
+        "focus_5"
       ],
       [
-        "spell_resist_2",
-        "holy_magic_resist_2"
+        "focus_5",
+        "focus_6"
+      ],
+      [
+        "cast_time_reduction_3",
+        "endurance_1"
+      ],
+      [
+        "endurance_1",
+        "endurance_2"
+      ],
+      [
+        "endurance_2",
+        "endurance_3"
+      ],
+      [
+        "endurance_3",
+        "endurance_4"
+      ],
+      [
+        "holy_magic_resist_mastery",
+        "swiftness_6"
+      ],
+      [
+        "swiftness_6",
+        "swiftness_7"
+      ],
+      [
+        "mana_regen_3",
+        "swiftness_8"
+      ],
+      [
+        "mana_regen_4",
+        "meditation_2"
+      ],
+      [
+        "meditation_2",
+        "meditation_3"
+      ],
+      [
+        "meditation_3",
+        "meditation_4"
+      ],
+      [
+        "meditation_4",
+        "meditation_5"
+      ],
+      [
+        "attunement_1",
+        "meditation_6"
+      ],
+      [
+        "meditation_6",
+        "meditation_7"
+      ],
+      [
+        "guiding_bolt",
+        "willpower_1"
+      ],
+      [
+        "willpower_1",
+        "willpower_2"
+      ],
+      [
+        "mana_regen_1",
+        "willpower_3"
+      ],
+      [
+        "willpower_3",
+        "willpower_4"
       ],
       [
         "holy_magic_resist_1",
-        "cast_time_reduction_1"
+        "second_breath_3"
       ],
       [
-        "holy_magic_resist_2",
-        "cast_time_reduction_3"
+        "second_breath_3",
+        "second_breath_4"
+      ],
+      [
+        "second_breath_4",
+        "second_breath_5"
+      ],
+      [
+        "healing_mastery",
+        "focus_7"
+      ],
+      [
+        "focus_7",
+        "focus_8"
+      ],
+      [
+        "mana_regen_2",
+        "meditation_8"
+      ],
+      [
+        "spell_resist_mastery",
+        "willpower_5"
+      ],
+      [
+        "willpower_5",
+        "willpower_6"
+      ],
+      [
+        "healing_1",
+        "hearty_5"
+      ],
+      [
+        "hearty_5",
+        "hearty_6"
+      ],
+      [
+        "attunement_2",
+        "hardened_1"
+      ],
+      [
+        "hardened_1",
+        "hardened_2"
+      ],
+      [
+        "holy_spell_power_mastery",
+        "hardened_3"
+      ],
+      [
+        "hardened_3",
+        "hardened_4"
+      ],
+      [
+        "hardened_4",
+        "hardened_5"
+      ],
+      [
+        "max_mana_3",
+        "second_breath_6"
+      ],
+      [
+        "second_breath_6",
+        "second_breath_7"
       ]
     ]
   }

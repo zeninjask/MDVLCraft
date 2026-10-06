@@ -9,24 +9,27 @@ import java.util.Optional;
 
 /**
  * Cursed Fate techniques the skill trees can grant. They cost mana instead of cursed energy and have no cooldown.
- * {@code abilityId} is Cursed Fate's internal ability number (AbilityToCast).
+ * {@code abilityId} is Cursed Fate's internal ability number (AbilityToCast). {@code repeatTicks} &gt; 0 means holding the
+ * cast key casts it again every that many ticks (paying each time); 0 means once per press.
  */
 public enum Technique implements Ability {
-    DISMANTLE("dismantle", 26, 20, "minecraft:textures/item/shears.png"),
-    CLEAVE("cleave", 27, 35, "minecraft:textures/item/iron_axe.png"),
-    MALEVOLENT_SHRINE("malevolent_shrine", 31, 150, "cursedfate:textures/particle/malevolentshrine.png"),
-    BOOGIE_WOOGIE("boogie_woogie", 32, 15, "minecraft:textures/item/ender_pearl.png"),
-    BLOCK_CLAP("block_clap", 33, 15, "minecraft:textures/item/chorus_fruit.png");
+    DISMANTLE("dismantle", 26, 20, 10, "minecraft:textures/item/shears.png"),
+    CLEAVE("cleave", 27, 35, 15, "minecraft:textures/item/iron_axe.png"),
+    MALEVOLENT_SHRINE("malevolent_shrine", 31, 150, 0, "cursedfate:textures/particle/malevolentshrine.png"),
+    BOOGIE_WOOGIE("boogie_woogie", 32, 15, 0, "minecraft:textures/item/ender_pearl.png"),
+    BLOCK_CLAP("block_clap", 33, 15, 0, "minecraft:textures/item/chorus_fruit.png");
 
     private final ResourceLocation id;
     final int abilityId;
     private final int manaCost;
+    final int repeatTicks;
     private final ResourceLocation icon;
 
-    Technique(String name, int abilityId, int manaCost, String icon) {
+    Technique(String name, int abilityId, int manaCost, int repeatTicks, String icon) {
         this.id = ResourceLocation.fromNamespaceAndPath(MDVLBinder.MOD_ID, name);
         this.abilityId = abilityId;
         this.manaCost = manaCost;
+        this.repeatTicks = repeatTicks;
         this.icon = ResourceLocation.parse(icon);
     }
 

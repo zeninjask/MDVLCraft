@@ -7,6 +7,7 @@ import com.mdvlcraft.binder.network.BinderNetwork;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.FormattedCharSequence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,28 +64,32 @@ public final class AbilityScreen extends Screen {
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         renderBackground(graphics);
-        graphics.drawCenteredString(font, title, width / 2, listTop() - 22, 0xFFFFFF);
+        Component hint = Component.translatable(picked == null ? "screen.mdvlcraft.abilities.hint_pick" : "screen.mdvlcraft.abilities.hint_place");
+        List<FormattedCharSequence> hintLines = font.split(hint, PANEL_WIDTH - 12);
+        MedievalGui.panel(graphics, left(), listTop() - 30, PANEL_WIDTH, slotY() + 36 + hintLines.size() * 10 - (listTop() - 30));
+        MedievalGui.centeredInk(graphics, font, title, width / 2, listTop() - 22, MedievalGui.INK);
         List<Ability> abilities = abilities();
         if (abilities.isEmpty()) {
-            graphics.drawCenteredString(font, Component.translatable("screen.mdvlcraft.abilities.none"), width / 2, listTop() + 20, 0xAAAAAA);
+            MedievalGui.centeredInk(graphics, font, Component.translatable("screen.mdvlcraft.abilities.none"), width / 2, listTop() + 20, MedievalGui.INK_FADED);
         }
         for (int i = 0; i < abilities.size(); i++) {
             Ability ability = abilities.get(i);
             int x = abilityX(i);
             int y = abilityY(i);
-            graphics.fill(x, y, x + 18, y + 18, ability == picked ? 0xFFFFD34D : 0xFF3A3A3A);
+            MedievalGui.frame(graphics, "task", ability == picked ? "affordable" : "available", x - 1, y - 1, 20);
             AbilityDisplay.drawIcon(graphics, ability, x + 1, y + 1);
         }
-        graphics.drawString(font, Component.translatable("screen.mdvlcraft.abilities.wheel"), left() + 8, slotY() - 12, 0xFFFFFF);
+        graphics.drawString(font, Component.translatable("screen.mdvlcraft.abilities.wheel"), left() + 8, slotY() - 12, MedievalGui.INK, false);
         for (int slot = 0; slot < Loadout.SLOTS; slot++) {
             int x = slotX(slot);
-            graphics.fill(x, slotY(), x + 18, slotY() + 18, 0xFF6B4FA0);
-            graphics.fill(x + 1, slotY() + 1, x + 17, slotY() + 17, 0xFF1E1E1E);
+            MedievalGui.frame(graphics, "task", ClientAbilities.slot(slot).isPresent() ? "unlocked" : "locked", x - 1, slotY() - 1, 20);
             ClientAbilities.slot(slot).ifPresent(ability -> AbilityDisplay.drawIcon(graphics, ability, x + 1, slotY() + 1));
-            graphics.drawString(font, String.valueOf(slot + 1), x + 1, slotY() + 19, 0x888888);
+            graphics.drawString(font, String.valueOf(slot + 1), x + 7, slotY() + 20, MedievalGui.INK_FADED, false);
         }
-        graphics.drawCenteredString(font, Component.translatable(picked == null ? "screen.mdvlcraft.abilities.hint_pick" : "screen.mdvlcraft.abilities.hint_place"),
-                width / 2, slotY() + 34, 0xAAAAAA);
+        for (int line = 0; line < hintLines.size(); line++) {
+            FormattedCharSequence text = hintLines.get(line);
+            graphics.drawString(font, text, width / 2 - font.width(text) / 2, slotY() + 32 + line * 10, MedievalGui.INK_FADED, false);
+        }
         super.render(graphics, mouseX, mouseY, partialTick);
         hovered(mouseX, mouseY).ifPresent(ability -> graphics.renderComponentTooltip(font, AbilityDisplay.tooltip(ability, ClientAbilities.level(ability)), mouseX, mouseY));
     }

@@ -22,6 +22,8 @@ public final class AbilityEvents {
     public static void onServerTick(TickEvent.ServerTickEvent event) {
         if (event.phase == TickEvent.Phase.END) {
             AbilityGrants.flush(event.getServer());
+            TechniqueRunner.tick(event.getServer());
+            DomainUpkeep.tick(event.getServer());
         }
     }
 }

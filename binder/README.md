@@ -3,9 +3,10 @@
 The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 
 1. **Switches off Iron's Spells and Cursed Fate as standalone content.** No items, recipes, loot, structures, ores, mob spawns, trades, keybinds, menus or advancements from either mod. Their spells and techniques are only reachable through the skill trees.
-2. **Adds class and archetype skill trees** (Pufferfish's Skills), the Classes tab laid out radially like the *RPG skill tree* packs (hover an archetype for its description). Four classes, 16 archetypes, pick up to two; each archetype tab is a jumbled web of around 40 skills (class bonus spokes, signature spokes, key abilities and sideways links). See [`SKILL_TREES.md`](SKILL_TREES.md).
+2. **Adds class and archetype skill trees** (Pufferfish's Skills), the Classes tab laid out radially like the *RPG skill tree* packs (hover an archetype for its description). Four classes, 16 archetypes, pick up to two; each archetype tab is a tree of 118–146 skills: boughs at uneven angles fork into limbs (class bonuses, signature bonuses, key abilities) and sprout twigs of small generic bonuses (health, speed, mana, cooldowns, saturation and more, capped per tree). See [`SKILL_TREES.md`](SKILL_TREES.md); ideas for moving spells and adding archetypes are in [`SPELL_REPORT.md`](SPELL_REPORT.md).
 3. **Makes every weapon work with Epic Fight and Ponder.** Weapons that only had Epic Fight's generic fallback get the type that fits them (`data/*/capabilities/weapons/`), and Ponder (hold W over an item) gets a scene for every Epic Fight weapon type, not just Epic Fight's own eight (`client/ponder/`). `/mdvl weapons` writes a report of every weapon and its Epic Fight type.
 4. **Adds the ability wheel.** Spells and Cursed Fate techniques unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
+5. **Gives the skill and ability screens a medieval look:** dark oak and gold window and tabs, a parchment title bar and Classes tab, iron, bronze, gold and crimson node frames by state, and gold lines (`mixin/SkillsScreenMixin`, textures drawn by `tools/generate_textures.py`). The abilities screen, wheel and HUD use the same pieces.
 
 ## Controls (defaults, rebindable under *MDVLCraft Abilities*)
 Every letter key is already used by some mod in the pack, so the defaults avoid letters. The log warns at startup if a binding shares a key with another mod.
@@ -13,7 +14,7 @@ Every letter key is already used by some mod in the pack, so the defaults avoid 
 |---|---|
 | **[** | Abilities screen (also: right-click inside the wheel): every unlocked spell or technique with its stats. Click an ability, then a wheel slot; right-click a slot to empty it |
 | ``` ` ``` (backtick, hold) | Ability wheel: move the mouse towards a slot and release to select it. Shares its key with two rarely used bindings (Better Lock On joint switch, Ares HUD editing) |
-| **Caps Lock** | Cast the selected ability. Spells follow Iron's rules (cast time, mana, cooldown; press again to cancel). Hold-type techniques (Cleave, Malevolent Shrine) last while the key is held |
+| **Caps Lock** | Cast the selected ability. Spells follow Iron's rules (cast time, mana, cooldown; press again to cancel). Hold it on Dismantle or Cleave to keep casting (each cast pays its mana). Cast the Malevolent Shrine once to open the domain and again to close it (closing is free; it lasts up to 20 s) |
 | **K** | Pufferfish's skill screen (Classes tab plus your archetype tabs) |
 
 The HUD shows the selected ability, a mana bar and cast progress in the bottom-right corner once you have an ability.
@@ -38,22 +39,25 @@ Iron's mana, cast-bar, recast and screen-effect overlays stay because the wheel'
 ## Code layout
 ```
 ability/     Ability (SpellAbility | Technique), AbilityReward (Pufferfish reward mdvlcraft:ability), AbilityGrants,
-             Loadout (wheel, saved with the player), AbilityActions (assign/cast/release), TechniqueRunner (Cursed Fate via mana)
+             Loadout (wheel, saved with the player), AbilityActions (assign/cast/release), TechniqueRunner (Cursed Fate via mana, hold to repeat), DomainUpkeep (keeps the open Shrine up)
 attribute/   BinderAttributes (12 mdvlcraft:* player attributes not offered by vanilla, Pufferfish's Attributes,
              Epic Fight or Iron's), AttributeEffects (what they do)
 skills/      ArchetypeTabs: class skills auto-unlocked, archetype skill unlocks its tab, locking erases it
-client/      ClientAbilities, AbilityKeys, AbilityScreen, WheelScreen, AbilityHud, ForeignKeyMappings
+client/      ClientAbilities, AbilityKeys, AbilityScreen, WheelScreen, AbilityHud, MedievalGui, ForeignKeyMappings
 network/     BinderNetwork + SyncAbilitiesPacket, AssignSlotPacket, CastPacket
 command/     /mdvl (operators): abilities | assign | clear | cast | release
 content/ mixin/ compat/   disabling Iron's and Cursed Fate content (table above)
 tools/generate_skill_trees.py   writes src/main/resources/data/mdvlcraft/puffish_skills and SKILL_TREES.md
+tools/generate_textures.py      draws the medieval skill screen textures (needs Pillow)
 ```
 
 ## Editing the skill trees
 Edit `tools/generate_skill_trees.py`, then run `python3 tools/generate_skill_trees.py` from this folder. Bonuses use vanilla, Forge, Epic Fight, Iron's, Pufferfish's Attributes and `mdvlcraft:` attributes. The script fails if:
-- a class bonus is used by two classes, or a signature bonus or ability by two archetypes (or also as a class bonus);
-- a spell level is above Iron's maximum;
-- two skills overlap on screen.
+- a class bonus is used by two classes, or a signature bonus or ability by two archetypes (or also as a class bonus). Twig bonuses (`GENERIC`) are shared on purpose and capped per tree;
+- a spell level is above Iron's maximum, or a granted spell costs more than the 100-mana starting pool;
+- a limb (class, signature or ability skill) finds no room to grow, or two skills overlap on screen.
+
+Each tree's shape comes from a random generator seeded with the archetype's ID, so it stays the same between runs; `TREE_SIZE` and `TREE_SIZE_SPREAD` set how big trees grow.
 
 The reward format for any Pufferfish tree is:
 ```json

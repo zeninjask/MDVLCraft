@@ -58,8 +58,16 @@ public final class AbilityKeys {
         while (WHEEL.consumeClick()) {
             minecraft.setScreen(new WheelScreen());
         }
+        boolean tapped = false;
+        while (CAST.consumeClick()) {
+            tapped = true;
+        }
         boolean down = CAST.isDown() && minecraft.screen == null;
-        if (down != castDown) {
+        if (tapped && !down && !castDown) {
+            // Pressed and released between two ticks: still a cast (and its release).
+            BinderNetwork.sendToServer(new CastPacket(true, ClientAbilities.selected()));
+            BinderNetwork.sendToServer(new CastPacket(false, ClientAbilities.selected()));
+        } else if (down != castDown) {
             castDown = down;
             BinderNetwork.sendToServer(new CastPacket(down, ClientAbilities.selected()));
         }
