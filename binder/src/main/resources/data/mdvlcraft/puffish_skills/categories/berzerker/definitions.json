@@ -1,0 +1,297 @@
+{
+  "root": {
+    "title": "Bloodrage",
+    "description": "+0.5 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_axe"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.5,
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "generic.attack_damage_1": {
+    "title": "Fury I",
+    "description": "+0.5 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blaze_powder"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "generic.attack_damage_2": {
+    "title": "Fury II",
+    "description": "+0.5 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blaze_powder"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "generic.attack_damage_3": {
+    "title": "Fury III",
+    "description": "+1 Attack Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blaze_powder"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 1.0,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "axe_damage_1": {
+    "title": "Axe I",
+    "description": "+10% Axe Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_axe"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:axe_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "axe_damage_2": {
+    "title": "Axe II",
+    "description": "+15% Axe Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_axe"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:axe_damage",
+          "value": 0.15,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "bloodlust_1": {
+    "title": "Bloodlust I",
+    "description": "+3% Melee Lifesteal",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:bloodlust",
+          "value": 0.03,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "bloodlust_2": {
+    "title": "Bloodlust II",
+    "description": "+4% Melee Lifesteal",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:bloodlust",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "fang": {
+    "title": "Fang Strike",
+    "description": "Unlocks Fang Strike (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:fang_strike",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "fang2": {
+    "title": "Fang Strike V",
+    "description": "Unlocks Fang Strike (Level 5) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:bone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:fang_strike",
+          "level": 5
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "heartstop": {
+    "title": "Heartstop",
+    "description": "Unlocks Heartstop (Level 1) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:fermented_spider_eye"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:heartstop",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 3
+  }
+}

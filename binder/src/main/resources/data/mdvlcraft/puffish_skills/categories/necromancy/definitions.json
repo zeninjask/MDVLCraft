@@ -1,0 +1,321 @@
+{
+  "root": {
+    "title": "Grave Touch",
+    "description": "Unlocks Wither Skull (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:wither_skeleton_skull"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.5,
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:wither_skull",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "blood_spell_power_1": {
+    "title": "Blood I",
+    "description": "+5% Blood Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:blood_spell_power",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "blood_spell_power_2": {
+    "title": "Blood II",
+    "description": "+5% Blood Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:blood_spell_power",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "blood_spell_power_3": {
+    "title": "Blood III",
+    "description": "+10% Blood Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:blood_spell_power",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "summon_damage_1": {
+    "title": "Legion I",
+    "description": "+10% Summon Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:zombie_head"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:summon_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "summon_damage_2": {
+    "title": "Legion II",
+    "description": "+10% Summon Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:zombie_head"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:summon_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "summon_damage_3": {
+    "title": "Legion III",
+    "description": "+15% Summon Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:zombie_head"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:summon_damage",
+          "value": 0.15,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "slash": {
+    "title": "Blood Slash",
+    "description": "Unlocks Blood Slash (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:blood_slash",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "siphon": {
+    "title": "Ray Of Siphoning",
+    "description": "Unlocks Ray Of Siphoning (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:ghast_tear"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:ray_of_siphoning",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "raise": {
+    "title": "Raise Dead",
+    "description": "Unlocks Raise Dead (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:zombie_head"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:raise_dead",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "devour": {
+    "title": "Devour",
+    "description": "Unlocks Devour (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rotten_flesh"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:devour",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "withering": {
+    "title": "Withering (Wither Skull V)",
+    "description": "Unlocks Wither Skull (Level 5) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:wither_rose"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:wither_skull",
+          "level": 5
+        }
+      }
+    ],
+    "cost": 2
+  }
+}

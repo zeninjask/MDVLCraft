@@ -1,0 +1,377 @@
+{
+  "root": {
+    "title": "Pathfinder",
+    "description": "+3% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:leather_boots"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.5,
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "generic.movement_speed_1": {
+    "title": "Stride I",
+    "description": "+3% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.03,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "generic.movement_speed_2": {
+    "title": "Stride II",
+    "description": "+4% Movement Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.04,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "swim_speed_1": {
+    "title": "Current I",
+    "description": "+15% Swim Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:heart_of_the_sea"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "forge:swim_speed",
+          "value": 0.15,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "swim_speed_2": {
+    "title": "Current II",
+    "description": "+15% Swim Speed",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:heart_of_the_sea"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "forge:swim_speed",
+          "value": 0.15,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "fall_reduction_1": {
+    "title": "Featherfall I",
+    "description": "+20% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:fall_reduction",
+          "value": 0.2,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "fall_reduction_2": {
+    "title": "Featherfall II",
+    "description": "+20% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:fall_reduction",
+          "value": 0.2,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "fall_reduction_3": {
+    "title": "Featherfall III",
+    "description": "+30% Fall Damage Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:feather"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:fall_reduction",
+          "value": 0.3,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "max_mana_1": {
+    "title": "Reserves I",
+    "description": "+25 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "max_mana_2": {
+    "title": "Reserves II",
+    "description": "+25 Max Mana",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:lapis_lazuli"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "teleport": {
+    "title": "Teleport",
+    "description": "Unlocks Teleport (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:ender_pearl"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:teleport",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "blink": {
+    "title": "Blink (Teleport IV)",
+    "description": "Unlocks Teleport (Level 4) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:ender_pearl"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:teleport",
+          "level": 4
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "haste": {
+    "title": "Haste",
+    "description": "Unlocks Haste (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sugar"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:haste",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "sight": {
+    "title": "Planar Sight",
+    "description": "Unlocks Planar Sight (Level 1) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:spyglass"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:planar_sight",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 3
+  }
+}

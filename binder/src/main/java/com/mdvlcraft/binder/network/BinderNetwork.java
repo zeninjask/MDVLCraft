@@ -1,0 +1,38 @@
+package com.mdvlcraft.binder.network;
+
+import com.mdvlcraft.binder.MDVLBinder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.NetworkRegistry;
+import net.minecraftforge.network.PacketDistributor;
+import net.minecraftforge.network.simple.SimpleChannel;
+
+import java.util.Optional;
+
+public final class BinderNetwork {
+    private static final String PROTOCOL = "1";
+    private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
+            ResourceLocation.fromNamespaceAndPath(MDVLBinder.MOD_ID, "main"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals);
+
+    private BinderNetwork() {
+    }
+
+    public static void register() {
+        int id = 0;
+        CHANNEL.registerMessage(id++, SyncAbilitiesPacket.class, SyncAbilitiesPacket::encode, SyncAbilitiesPacket::decode,
+                SyncAbilitiesPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(id++, AssignSlotPacket.class, AssignSlotPacket::encode, AssignSlotPacket::decode,
+                AssignSlotPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        CHANNEL.registerMessage(id++, CastPacket.class, CastPacket::encode, CastPacket::decode,
+                CastPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
+    }
+
+    public static void sendTo(ServerPlayer player, Object packet) {
+        CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
+    }
+
+    public static void sendToServer(Object packet) {
+        CHANNEL.sendToServer(packet);
+    }
+}

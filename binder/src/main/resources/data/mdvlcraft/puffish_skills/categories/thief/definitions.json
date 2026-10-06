@@ -1,0 +1,271 @@
+{
+  "root": {
+    "title": "Light Fingers",
+    "description": "+1 Luck",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:gold_nugget"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.5,
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.luck",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "generic.luck_1": {
+    "title": "Fortune I",
+    "description": "+1 Luck",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.luck",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "generic.luck_2": {
+    "title": "Fortune II",
+    "description": "+2 Luck",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:rabbit_foot"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.luck",
+          "value": 2,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "plunder_1": {
+    "title": "Plunder I",
+    "description": "+10% Chance of a Double Drop",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:chest"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:plunder",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "plunder_2": {
+    "title": "Plunder II",
+    "description": "+10% Chance of a Double Drop",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:chest"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:plunder",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "plunder_3": {
+    "title": "Plunder III",
+    "description": "+15% Chance of a Double Drop",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:chest"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:plunder",
+          "value": 0.15,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "entity_reach_1": {
+    "title": "Long Arms I",
+    "description": "+0.5 Melee Reach (blocks)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:stick"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "forge:entity_reach",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "entity_reach_2": {
+    "title": "Long Arms II",
+    "description": "+0.5 Melee Reach (blocks)",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:stick"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "forge:entity_reach",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "clap": {
+    "title": "Boogie Woogie",
+    "description": "Unlocks Boogie Woogie on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:ender_pearl"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "mdvlcraft:boogie_woogie",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "blockclap": {
+    "title": "Block Clap",
+    "description": "Unlocks Block Clap on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:chorus_fruit"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "mdvlcraft:block_clap",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 3
+  }
+}

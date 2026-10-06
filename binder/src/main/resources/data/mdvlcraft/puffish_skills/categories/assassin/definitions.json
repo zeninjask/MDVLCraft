@@ -1,0 +1,324 @@
+{
+  "root": {
+    "title": "Silent Blade",
+    "description": "+5% Dagger Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.5,
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:dagger_damage",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "dagger_damage_1": {
+    "title": "Dagger I",
+    "description": "+10% Dagger Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:dagger_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "dagger_damage_2": {
+    "title": "Dagger II",
+    "description": "+10% Dagger Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:dagger_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "dagger_damage_3": {
+    "title": "Dagger III",
+    "description": "+15% Dagger Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_sword"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:dagger_damage",
+          "value": 0.15,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "armor_negation_1": {
+    "title": "Pierce I",
+    "description": "+5% Armor Negation",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:armor_negation",
+          "value": 5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "armor_negation_2": {
+    "title": "Pierce II",
+    "description": "+5% Armor Negation",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:armor_negation",
+          "value": 5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "armor_negation_3": {
+    "title": "Pierce III",
+    "description": "+10% Armor Negation",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:arrow"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:armor_negation",
+          "value": 10,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "backstab_damage_1": {
+    "title": "Backstab I",
+    "description": "+15% Backstab Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:wither_skeleton_skull"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:backstab_damage",
+          "value": 0.15,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "backstab_damage_2": {
+    "title": "Backstab II",
+    "description": "+20% Backstab Damage",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:wither_skeleton_skull"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:backstab_damage",
+          "value": 0.2,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "echo": {
+    "title": "Echoing Strikes",
+    "description": "Unlocks Echoing Strikes (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:echo_shard"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:echoing_strikes",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "bloodstep": {
+    "title": "Blood Step",
+    "description": "Unlocks Blood Step (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:blood_step",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "invis": {
+    "title": "Invisibility",
+    "description": "Unlocks Invisibility (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:glass"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:invisibility",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 3
+  }
+}

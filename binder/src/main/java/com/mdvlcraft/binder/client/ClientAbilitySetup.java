@@ -1,0 +1,35 @@
+package com.mdvlcraft.binder.client;
+
+import net.minecraft.client.Minecraft;
+import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
+import net.minecraftforge.client.gui.overlay.VanillaGuiOverlay;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
+
+/** Client registration for the ability wheel: keys, HUD, input handling. */
+public final class ClientAbilitySetup {
+    private ClientAbilitySetup() {
+    }
+
+    public static void register(IEventBus modBus) {
+        modBus.addListener(AbilityKeys::onRegisterKeys);
+        modBus.addListener(ClientAbilitySetup::onRegisterOverlays);
+        modBus.addListener(ClientAbilitySetup::onClientSetup);
+        MinecraftForge.EVENT_BUS.addListener(AbilityKeys::onClientTick);
+        MinecraftForge.EVENT_BUS.addListener(ClientAbilitySetup::onLoggingOut);
+    }
+
+    private static void onRegisterOverlays(RegisterGuiOverlaysEvent event) {
+        event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "ability_hud", AbilityHud.INSTANCE);
+    }
+
+    private static void onClientSetup(FMLClientSetupEvent event) {
+        event.enqueueWork(() -> AbilityKeys.logConflicts(Minecraft.getInstance()));
+    }
+
+    private static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
+        ClientAbilities.reset();
+    }
+}

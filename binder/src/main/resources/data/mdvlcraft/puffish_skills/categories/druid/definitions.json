@@ -1,0 +1,321 @@
+{
+  "root": {
+    "title": "Wild Growth",
+    "description": "Unlocks Poison Arrow (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:oak_sapling"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.5,
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:poison_arrow",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "nature_spell_power_1": {
+    "title": "Verdance I",
+    "description": "+5% Nature Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:vine"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:nature_spell_power",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "nature_spell_power_2": {
+    "title": "Verdance II",
+    "description": "+5% Nature Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:vine"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:nature_spell_power",
+          "value": 0.05,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "nature_spell_power_3": {
+    "title": "Verdance III",
+    "description": "+10% Nature Spell Power",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:vine"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:nature_spell_power",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "nature_regen_1": {
+    "title": "Grove I",
+    "description": "+0.5 Health per 5 s on natural ground",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:grass_block"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:nature_regen",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "nature_regen_2": {
+    "title": "Grove II",
+    "description": "+0.5 Health per 5 s on natural ground",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:grass_block"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:nature_regen",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "nature_regen_3": {
+    "title": "Grove III",
+    "description": "+0.5 Health per 5 s on natural ground",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:grass_block"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:nature_regen",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "root_spell": {
+    "title": "Root",
+    "description": "Unlocks Root (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:mangrove_roots"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:root",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "fireflies": {
+    "title": "Firefly Swarm",
+    "description": "Unlocks Firefly Swarm (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:glow_berries"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:firefly_swarm",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "acid": {
+    "title": "Acid Orb",
+    "description": "Unlocks Acid Orb (Level 3) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:slime_ball"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:acid_orb",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "quake": {
+    "title": "Earthquake",
+    "description": "Unlocks Earthquake (Level 2) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:cobblestone"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:earthquake",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "thorns": {
+    "title": "Thornshot (Poison Arrow V)",
+    "description": "Unlocks Poison Arrow (Level 5) on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:sweet_berries"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:poison_arrow",
+          "level": 5
+        }
+      }
+    ],
+    "cost": 2
+  }
+}

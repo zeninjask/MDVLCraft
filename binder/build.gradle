@@ -2,6 +2,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
 }
 
 version = mod_version
@@ -49,6 +50,11 @@ minecraft {
 
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+    config "${mod_id}.mixins.json"
+}
+
 repositories {
     // CurseMaven serves any CurseForge file as curse.maven:<name>-<projectId>:<fileId>.
     // Not exclusiveContent: ForgeGradle stores the deobfuscated copies in its own local repo under the same group.
@@ -68,11 +74,15 @@ def cf(String name) {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
     // Mods the binder integrates with: compiled against and present in runClient/runServer.
     implementation fg.deobf(cf('epicfight'))
     implementation fg.deobf(cf('irons_spellbooks'))
     implementation fg.deobf(cf('cataclysm'))
+    implementation fg.deobf(cf('puffish_skills'))
+    implementation fg.deobf(cf('cursedfate'))
+    compileOnly fg.deobf(cf('jei'))
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))
@@ -80,6 +90,9 @@ dependencies {
     runtimeOnly fg.deobf(cf('geckolib'))
     runtimeOnly fg.deobf(cf('playeranimator'))
     runtimeOnly fg.deobf(cf('lionfishapi'))
+    runtimeOnly fg.deobf(cf('photon'))
+    runtimeOnly fg.deobf(cf('ldlib'))
+    runtimeOnly fg.deobf(cf('kleiders'))
 }
 
 tasks.named('processResources', ProcessResources).configure {

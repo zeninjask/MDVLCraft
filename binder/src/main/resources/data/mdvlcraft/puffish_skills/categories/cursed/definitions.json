@@ -1,0 +1,245 @@
+{
+  "root": {
+    "title": "Cursed Body",
+    "description": "+1 Armor Toughness",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crying_obsidian"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "size": 1.5,
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor_toughness",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "generic.armor_toughness_1": {
+    "title": "Vessel I",
+    "description": "+1 Armor Toughness",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor_toughness",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "generic.armor_toughness_2": {
+    "title": "Vessel II",
+    "description": "+2 Armor Toughness",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:netherite_chestplate"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor_toughness",
+          "value": 2,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "technique_efficiency_1": {
+    "title": "Cursed Control I",
+    "description": "+10% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1
+  },
+  "technique_efficiency_2": {
+    "title": "Cursed Control II",
+    "description": "+10% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "technique_efficiency_3": {
+    "title": "Cursed Control III",
+    "description": "+15% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:amethyst_shard"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "task"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.15,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "dismantle": {
+    "title": "Dismantle",
+    "description": "Unlocks Dismantle on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:shears"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "goal"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "mdvlcraft:dismantle",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 2
+  },
+  "cleave": {
+    "title": "Cleave",
+    "description": "Unlocks Cleave on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:iron_axe"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "mdvlcraft:cleave",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 3
+  },
+  "shrine": {
+    "title": "Malevolent Shrine",
+    "description": "Unlocks Malevolent Shrine on the ability wheel",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:crying_obsidian"
+      }
+    },
+    "frame": {
+      "type": "advancement",
+      "data": {
+        "frame": "challenge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "mdvlcraft:malevolent_shrine",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 5,
+    "required_skills": 2,
+    "extra_description": "Requires all connected skills."
+  }
+}
