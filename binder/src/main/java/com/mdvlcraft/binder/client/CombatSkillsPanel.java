@@ -12,12 +12,13 @@ import net.minecraft.util.FormattedCharSequence;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.skill.SkillContainer;
 import yesman.epicfight.skill.SkillSlot;
+import yesman.epicfight.skill.SkillSlots;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.skill.CapabilitySkill;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,9 +31,10 @@ final class CombatSkillsPanel {
     private static final int ROW = 20;
     private static final int CELL = 20;
     private static final int COLUMNS = 7;
-    private static final List<SkillSlot> SLOTS = SkillSlot.ENUM_MANAGER.universalValues().stream()
+    /** Epic Fight's own learnable slots (the skill trees teach only these); add-ons' extra slots are theirs to fill. */
+    private static final List<SkillSlot> SLOTS = Arrays.stream(SkillSlots.values())
             .filter(slot -> slot.category().learnable())
-            .sorted(Comparator.comparingInt(SkillSlot::universalOrdinal))
+            .map(SkillSlot.class::cast)
             .toList();
 
     private final Font font;
