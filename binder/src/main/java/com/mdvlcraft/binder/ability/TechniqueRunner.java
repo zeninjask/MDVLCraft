@@ -87,6 +87,10 @@ final class TechniqueRunner {
 
     /** Pays and casts once. Returns false (with the action bar message) if the player cannot afford it. */
     private static boolean cast(ServerPlayer player, Technique technique) {
+        if (technique == Technique.FOLLOW_UP_KICK && player.isShiftKeyDown()) {
+            ProjectionSorcery.toggleFlow(player);
+            return false;
+        }
         if (technique.isShrine()) {
             if (DomainUpkeep.isWindingUp(player)) {
                 // Cursed Fate reads a press during the wind-up as "switch domain variant"; ignore it instead.
@@ -117,7 +121,15 @@ final class TechniqueRunner {
         variables.holdability1 = true;
         variables.holdability = true;
         variables.syncPlayerVariables(player);
-        AbilitysProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ(), player);
+        if (technique.projection()) {
+            ProjectionSorcery.prepare(player);
+        }
+        Runnable execute = () -> AbilitysProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ(), player);
+        if (technique.weaponFree()) {
+            WeaponFreeCasts.run(execute);
+        } else {
+            execute.run();
+        }
         if (technique.isShrine() && variables.SelectDomainVarient) {
             // Cursed Fate started its wind-up and reset the variant to its closed barrier domain; it reads the
             // variant again when the wind-up ends.
@@ -129,6 +141,10 @@ final class TechniqueRunner {
     }
 
     private static int cost(ServerPlayer player, Technique technique) {
+        // Sneak and cast on Don't You Have a Heart? only switches its mode (the addon's own toggle); it costs nothing.
+        if (technique == Technique.PROJECTION_DASH && player.isShiftKeyDown()) {
+            return 0;
+        }
         // Cursed Fate closes the domain (or refuses to clash) when a Shrine is cast near an open one; neither costs.
         if (technique.isShrine()
                 && ReturnPlayerNearAOpenedDomainProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ())) {

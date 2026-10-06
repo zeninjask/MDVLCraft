@@ -6,7 +6,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 
-/** Every string GuiGraphics draws passes its colour through SlateRecruits (light labels on Recruits' Slate screens). */
+/** Strings and fills GuiGraphics draws pass their colour through SlateRecruits (Slate colours on Recruits' screens). */
 @Mixin(GuiGraphics.class)
 public abstract class GuiGraphicsMixin {
     @ModifyVariable(method = {
@@ -15,5 +15,10 @@ public abstract class GuiGraphicsMixin {
     }, at = @At("HEAD"), ordinal = 2, argsOnly = true)
     private int mdvlcraft$slateText(int colour) {
         return SlateRecruits.textColour(colour);
+    }
+
+    @ModifyVariable(method = "fill(Lnet/minecraft/client/renderer/RenderType;IIIIII)V", at = @At("HEAD"), ordinal = 5, argsOnly = true)
+    private int mdvlcraft$slateFill(int colour) {
+        return SlateRecruits.fillColour(colour);
     }
 }

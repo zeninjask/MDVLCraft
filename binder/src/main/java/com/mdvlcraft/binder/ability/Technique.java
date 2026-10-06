@@ -12,6 +12,9 @@ import java.util.Optional;
  * {@code abilityId} is Cursed Fate's internal ability number (AbilityToCast). {@code repeatTicks} &gt; 0 means holding the
  * cast key casts it again every that many ticks (paying each time); 0 means once per press. The two Malevolent Shrines
  * are the same Cursed Fate ability with a different domain variant: 0 is the closed barrier domain, 1 the open shrine.
+ * Blitz and Surprise Attack are Heavenly Restriction abilities (cast without the weapon Cursed Fate asks for, see
+ * {@link WeaponFreeCasts}); Follow Up Kick and Don't You Have a Heart? come from the Projection Sorcery addon
+ * ({@link ProjectionSorcery}).
  */
 public enum Technique implements Ability {
     DISMANTLE("dismantle", 26, 20, 10, "minecraft:textures/item/shears.png"),
@@ -19,7 +22,11 @@ public enum Technique implements Ability {
     MALEVOLENT_SHRINE("malevolent_shrine", 31, 150, 0, "cursedfate:textures/screens/closedshrinevarient.png"),
     OPEN_MALEVOLENT_SHRINE("open_malevolent_shrine", 31, 150, 0, "cursedfate:textures/screens/openshrinevarient.png"),
     BOOGIE_WOOGIE("boogie_woogie", 32, 15, 0, "minecraft:textures/item/ender_pearl.png"),
-    BLOCK_CLAP("block_clap", 33, 15, 0, "minecraft:textures/item/chorus_fruit.png");
+    BLOCK_CLAP("block_clap", 33, 15, 0, "minecraft:textures/item/chorus_fruit.png"),
+    BLITZ("blitz", 60, 30, 0, "cursedfate:textures/mob_effect/blitz_effect.png"),
+    SURPRISE_ATTACK("surprise_attack", 66, 25, 0, "mdvlcraft:textures/gui/icons/tab/assassin.png"),
+    FOLLOW_UP_KICK("follow_up_kick", 114, 25, 0, "naoyaaddon:textures/screens/naoyaicon.png"),
+    PROJECTION_DASH("projection_dash", 118, 30, 0, "naoyaaddon:textures/screens/customtechniqueicon.png");
 
     private final ResourceLocation id;
     final int abilityId;
@@ -46,6 +53,16 @@ public enum Technique implements Ability {
             case OPEN_MALEVOLENT_SHRINE -> 1;
             default -> throw new IllegalStateException(this + " is not a domain");
         };
+    }
+
+    /** Heavenly Restriction abilities that Cursed Fate only casts with a sword or axe in hand. */
+    boolean weaponFree() {
+        return this == BLITZ || this == SURPRISE_ATTACK;
+    }
+
+    /** Projection Sorcery abilities: they run while the cast key is held. */
+    boolean projection() {
+        return this == FOLLOW_UP_KICK || this == PROJECTION_DASH;
     }
 
     /** Dismantle and Cleave: while one is held, the owner's Malevolent Shrine cuts. */

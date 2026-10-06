@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.Ability;
+import com.mdvlcraft.binder.ability.SlotSkillAbility;
 import com.mdvlcraft.binder.ability.SpellAbility;
 import com.mdvlcraft.binder.ability.StanceAbility;
 import com.mdvlcraft.binder.ability.StanceElement;
@@ -52,6 +53,10 @@ final class AbilityDisplay {
             lines.add(Component.translatable("ability.mdvlcraft." + technique.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));
             lines.add(Component.translatable("ui.irons_spellbooks.mana_cost", technique.manaCost(level)).withStyle(ChatFormatting.BLUE));
             lines.add(Component.translatable("ability.mdvlcraft.no_cooldown").withStyle(ChatFormatting.BLUE));
+        } else if (ability instanceof SlotSkillAbility slotSkill) {
+            lines.add(slotSkill.displayName().copy().withStyle(ChatFormatting.GOLD));
+            lines.add(Component.translatable("ability.mdvlcraft." + slotSkill.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));
+            lines.add(Component.translatable("ui.irons_spellbooks.mana_cost", slotSkill.manaCost(level)).withStyle(ChatFormatting.BLUE));
         } else if (ability instanceof StanceAbility stance) {
             int self = minecraft.player.getId();
             StanceElement element = ClientStances.element(self);

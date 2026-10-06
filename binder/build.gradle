@@ -88,6 +88,8 @@ dependencies {
     compileOnly files('libs/iss_ponder-forge1.20.1-1.0.3-all.jar')
     // Sword Soaring: the Vatansever's flight and the mod's flight keys are switched off (mixin/swordsoaring).
     compileOnly files('libs/sword_soaring-20.14.2.8-mc1.20.1-forge.jar')
+    // Projection Sorcery (Cursed Fate addon) and Epic Fight Nightfall: abilities cast from the wheel (ability/).
+    compileOnly files('libs/BaldasProjectionSorcery-2.0.1.2.jar', 'libs/EpicFightNightfall-3.4.2-all.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))

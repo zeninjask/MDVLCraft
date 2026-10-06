@@ -56,7 +56,7 @@ public final class EpicSkillEquip {
     }
 
     /** Puts the skill in the container on the server, the player's client and the clients tracking them. */
-    static void apply(ServerPlayerPatch patch, SkillContainer container, @Nullable Skill skill) {
+    public static void apply(ServerPlayerPatch patch, SkillContainer container, @Nullable Skill skill) {
         ServerPlayer player = patch.getOriginal();
         container.setSkill(skill);
         EpicFightNetworkManager.sendToPlayer(new SPChangeSkill(container.getSlot(), player.getId(), skill), player);

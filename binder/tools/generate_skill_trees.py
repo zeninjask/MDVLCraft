@@ -152,12 +152,14 @@ BASE_MANA = 100
 
 # Base mana of each technique (Technique.java). The 150-mana domains need 35% technique efficiency to fit 100 mana.
 TECHNIQUE_MANA = {"mdvlcraft:dismantle": 20, "mdvlcraft:cleave": 35, "mdvlcraft:malevolent_shrine": 150, "mdvlcraft:open_malevolent_shrine": 150,
-                  "mdvlcraft:boogie_woogie": 15, "mdvlcraft:block_clap": 15}
+                  "mdvlcraft:boogie_woogie": 15, "mdvlcraft:block_clap": 15, "mdvlcraft:blitz": 30, "mdvlcraft:surprise_attack": 25,
+                  "mdvlcraft:follow_up_kick": 25, "mdvlcraft:projection_dash": 30, "mdvlcraft:myriad_blades": 60, "mdvlcraft:soul_hunt": 30}
 # Techniques that keep casting while the cast key is held (Technique.repeatTicks > 0), paying each time.
 HELD_TECHNIQUES = {"mdvlcraft:dismantle", "mdvlcraft:cleave"}
 ABILITY_NAMES = {"mdvlcraft:stance": "Stance", "mdvlcraft:dismantle": "Dismantle", "mdvlcraft:cleave": "Cleave", "mdvlcraft:malevolent_shrine": "Malevolent Shrine",
                  "mdvlcraft:open_malevolent_shrine": "Malevolent Shrine: Open",
-                 "mdvlcraft:boogie_woogie": "Boogie Woogie", "mdvlcraft:block_clap": "Block Clap"}
+                 "mdvlcraft:boogie_woogie": "Boogie Woogie", "mdvlcraft:block_clap": "Block Clap",
+                 "mdvlcraft:projection_dash": "Don't You Have a Heart?", "mdvlcraft:myriad_blades": "Myriad Blades Convergence"}
 
 
 # Twig bonuses shared by every archetype: (attribute, title, value per node, most nodes per tree). Each value is
@@ -334,6 +336,9 @@ ARCHETYPES = {
                                chain("epicfight:impact", "Impact", 0.1, 3, 0.2),
                                chain("puffish_attributes:armor_shred", "Cutting Edge", 0.05, 3, 0.10)],
                     abilities=[[stance(2), spell("flaming_strike", 3, 2, "minecraft:blaze_powder")],
+                               [technique("mdvlcraft:blitz", 3, "minecraft:feather", note="Cursed Fate's Heavenly Restriction dash, without its weapon requirement."),
+                                technique("mdvlcraft:surprise_attack", 3, "minecraft:ender_eye", note="Cursed Fate's Heavenly Restriction ambush, without its weapon requirement.")],
+                               [technique("mdvlcraft:myriad_blades", 5, "minecraft:netherite_sword", note="Sword Soaring's sword art on the ability wheel; needs a sword in hand and has its own cooldown.")],
                                [efskill("parrying", 3), efskill("technician", 2)]]),
     "berzerker": dict(desc="Pure aggression. Berzerkers stack raw attack damage, axe damage and life steal, hit more targets per swing and knock them flying. Fang Strike tears the ground open, Burning Dash and Stomp close the gap, Heartstop lets them ignore death for a few seconds, and Berserker and Forbidden Strength turn wounds into power.", cls="warrior", title="Berzerker",
                       blurb="Raw damage, axes and bloodlust.",
@@ -427,6 +432,8 @@ ARCHETYPES = {
                                chain("puffish_attributes:melee_resistance_shred", "Feint", 0.05, 2, 0.10)],
                     abilities=[[spell("evasion", 1, 3, "minecraft:ender_pearl"), spell("evasion", 2, 3, "minecraft:ender_pearl", "Phantasm (Evasion II)")],
                                [spell("slow", 2, 2, "minecraft:cobweb")],
+                               [technique("mdvlcraft:follow_up_kick", 3, "minecraft:leather_boots", note="Projection Sorcery. Sneak and cast to switch between the Normal and Flow forms."),
+                                technique("mdvlcraft:projection_dash", 4, "minecraft:clock", note="Projection Sorcery. Hold to dash, always at full output; sneak and cast to switch Tracing and Continuous. Naobito's style.")],
                                [efskill("step", 2), efskill("catharsis", 3)]]),
     "scout": dict(desc="Speed, range and awareness. Scouts swim faster, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot.", cls="rogue", title="Scout",
                   blurb="Mobility, ender magic and far sight.",
@@ -498,7 +505,8 @@ ARCHETYPES = {
                                          note="Closed domain: a black barrier dome; only what is inside is cut, and only while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Costs 150 mana: take all of Cursed Control (-35%) or extra mana to afford it."),
                                technique("mdvlcraft:open_malevolent_shrine", 4, "minecraft:obsidian",
                                          note="Open domain: no barrier, cuts everything within 45 blocks while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Costs 150 mana.")],
-                              [efskill("swordmaster", 3), efskill("death_harvest", 2)]]),
+                              [efskill("swordmaster", 3), efskill("death_harvest", 2)],
+                              [technique("mdvlcraft:soul_hunt", 4, "minecraft:soul_lantern", note="Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown.")]]),
 }
 
 

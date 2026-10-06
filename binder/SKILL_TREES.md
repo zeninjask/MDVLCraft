@@ -82,38 +82,41 @@ Signature maximums: Damage Resistance +14%, Greatsword Damage +30%, Stun Armor +
 
 A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. A Stance channels fire, wind, water or earth, Flaming Strike sets the blade alight, and Parrying and Technician reward perfect timing.
 
-133 skills (90 of them twigs), 147 points in total (41 available).
+132 skills (86 of them twigs), 154 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Way of the Blade | 1 | +5% Katana Damage |
-| Retribution 1 | 1 | +3% Damage Reflection |
-| Deflection 1 | 1 | +5% Stamina restored on Parry (of max) |
+| Impact 1 | 1 | +0.1 Impact (stagger power) |
 | Cutting Edge 1 | 1 | +5% Armor Shred |
 | Edge 1 | 1 | +5% Katana Damage |
+| Retribution 1 | 1 | +3% Damage Reflection |
+| Myriad Blades Convergence | 5 | Unlocks Myriad Blades Convergence (60 mana, no cooldown) on the ability wheel |
 | Parrying | 3 | Teaches Parrying, an Epic Fight Guard skill: guard just as a hit lands for a perfect parry that costs no stamina; also blocks projectiles. Equip it in the Combat Skills box of the abilities screen |
-| Impact 1 | 1 | +0.1 Impact (stagger power) |
+| Blitz | 3 | Unlocks Blitz (30 mana, no cooldown) on the ability wheel |
+| Deflection 1 | 1 | +5% Stamina restored on Parry (of max) |
 | Stance | 2 | Unlocks Stance on the ability wheel (free): cast to take it up or drop it, sneak and cast to change element. Fire +15% attack speed, Wind +40% dodge distance, Water +50% perfect-parry window, Earth +15% attack damage. Your weapon trail takes the element's colour |
-| Retribution 2 | 1 | +3% Damage Reflection |
-| Deflection 2 | 1 | +5% Stamina restored on Parry (of max) |
+| Impact 2 | 1 | +0.1 Impact (stagger power) |
 | Cutting Edge 2 | 1 | +5% Armor Shred |
 | Edge 2 | 1 | +5% Katana Damage |
+| Retribution 2 | 1 | +3% Damage Reflection |
 | Technician | 2 | Teaches Technician, an Epic Fight Passive skill: dodging just before a hit restores stamina. Equip it in the Combat Skills box of the abilities screen |
-| Impact 2 | 1 | +0.1 Impact (stagger power) |
+| Surprise Attack | 3 | Unlocks Surprise Attack (25 mana, no cooldown) on the ability wheel |
+| Deflection 2 | 1 | +5% Stamina restored on Parry (of max) |
 | Flaming Strike | 2 | Unlocks Flaming Strike (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Retribution 3 | 1 | +3% Damage Reflection |
-| Deflection 3 | 1 | +5% Stamina restored on Parry (of max) |
+| Impact 3 | 1 | +0.1 Impact (stagger power) |
 | Cutting Edge 3 | 1 | +5% Armor Shred |
 | Edge 3 | 1 | +5% Katana Damage |
-| Impact 3 | 1 | +0.1 Impact (stagger power) |
-| Retribution Mastery | 2 | +6% Damage Reflection |
-| Perfect Parry | 2 | +10% Stamina restored on Parry (of max) |
+| Retribution 3 | 1 | +3% Damage Reflection |
+| Deflection 3 | 1 | +5% Stamina restored on Parry (of max) |
+| Impact Mastery | 2 | +0.2 Impact (stagger power) |
 | Cutting Edge Mastery | 2 | +10% Armor Shred |
 | Edge 4 | 1 | +5% Katana Damage |
-| Impact Mastery | 2 | +0.2 Impact (stagger power) |
+| Retribution Mastery | 2 | +6% Damage Reflection |
+| Perfect Parry | 2 | +10% Stamina restored on Parry (of max) |
 | Iaijutsu | 2 | +10% Katana Damage |
 
-Signature maximums: Katana Damage +35%, Damage Reflection +15%, Stamina restored on Parry (of max) +25%, Armor Shred +25%, Impact (stagger power) +0.5. Plus the Warrior class spokes.
+Signature maximums: Katana Damage +35%, Impact (stagger power) +0.5, Armor Shred +25%, Damage Reflection +15%, Stamina restored on Parry (of max) +25%. Plus the Warrior class spokes.
 
 ## Berzerker (Warrior)
 
@@ -359,34 +362,36 @@ Signature maximums: Dagger Damage +35%, Armor Negation +15%, Backstab Damage +30
 
 A rapier duellist built around the dodge. Rapiers (a sword with an empty off hand) grow sharper, dodges cost less stamina, and the first hit after a dodge lands as a riposte. Evasion turns incoming blows into blinks, Slow drags enemies down, Step replaces the roll with a sidestep and Catharsis charges the blade with every dodge.
 
-141 skills (99 of them twigs), 158 points in total (41 available).
+115 skills (71 of them twigs), 137 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Duelist | 1 | +5% Rapier Damage (sword, empty off hand) |
+| Step | 2 | Teaches Step, an Epic Fight Dodge skill: a quick sidestep in place of the roll that evades every attack. Equip it in the Combat Skills box of the abilities screen |
 | Rapier 1 | 1 | +5% Rapier Damage (sword, empty off hand) |
+| Phase Step 1 | 1 | +5% Dodge Stamina Cost Reduction |
 | Riposte 1 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
 | Feint 1 | 1 | +5% Melee Resistance Shred |
-| Phase Step 1 | 1 | +5% Dodge Stamina Cost Reduction |
-| Step | 2 | Teaches Step, an Epic Fight Dodge skill: a quick sidestep in place of the roll that evades every attack. Equip it in the Combat Skills box of the abilities screen |
+| Follow Up Kick | 3 | Unlocks Follow Up Kick (25 mana, no cooldown) on the ability wheel |
 | Evasion | 3 | Unlocks Evasion (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Slow | 2 | Unlocks Slow (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Catharsis | 3 | Teaches Catharsis, an Epic Fight Passive skill: dodging attacks charges your weapon's innate skill. Equip it in the Combat Skills box of the abilities screen |
 | Rapier 2 | 1 | +5% Rapier Damage (sword, empty off hand) |
+| Phase Step 2 | 1 | +5% Dodge Stamina Cost Reduction |
 | Riposte 2 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
 | Feint 2 | 1 | +5% Melee Resistance Shred |
-| Phase Step 2 | 1 | +5% Dodge Stamina Cost Reduction |
-| Catharsis | 3 | Teaches Catharsis, an Epic Fight Passive skill: dodging attacks charges your weapon's innate skill. Equip it in the Combat Skills box of the abilities screen |
+| Don't You Have a Heart? | 4 | Unlocks Don't You Have a Heart? (30 mana, no cooldown) on the ability wheel |
 | Phantasm (Evasion II) | 3 | Unlocks Evasion (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rapier 3 | 1 | +5% Rapier Damage (sword, empty off hand) |
+| Phase Step 3 | 1 | +5% Dodge Stamina Cost Reduction |
 | Riposte 3 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
 | Feint Mastery | 2 | +10% Melee Resistance Shred |
-| Phase Step 3 | 1 | +5% Dodge Stamina Cost Reduction |
 | Rapier 4 | 1 | +5% Rapier Damage (sword, empty off hand) |
-| Riposte Mastery | 2 | +15% Riposte Damage (first hit within 3 s of a dodge) |
 | Phase Step Mastery | 2 | +10% Dodge Stamina Cost Reduction |
+| Riposte Mastery | 2 | +15% Riposte Damage (first hit within 3 s of a dodge) |
 | Rapier Mastery | 2 | +10% Rapier Damage (sword, empty off hand) |
 
-Signature maximums: Rapier Damage (sword, empty off hand) +35%, Riposte Damage (first hit within 3 s of a dodge) +30%, Melee Resistance Shred +20%, Dodge Stamina Cost Reduction +25%. Plus the Rogue class spokes.
+Signature maximums: Rapier Damage (sword, empty off hand) +35%, Dodge Stamina Cost Reduction +25%, Riposte Damage (first hit within 3 s of a dodge) +30%, Melee Resistance Shred +20%. Plus the Rogue class spokes.
 
 ## Scout (Rogue)
 
@@ -555,29 +560,30 @@ Signature maximums: Nature Spell Power +18%, Health per 5 s on natural ground +1
 
 Cursed techniques fuelled by mana instead of cursed energy, with no cooldowns. Dismantle and Cleave cut enemies apart, and the Malevolent Shrine domain, closed and then open, shreds everything around you while you keep cutting. Cursed Control makes techniques cheaper; melee resistance and toughness shred round it out, with Swordmaster and Death Harvest for the blade.
 
-126 skills (87 of them twigs), 146 points in total (41 available).
+144 skills (104 of them twigs), 167 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Cursed Body | 1 | +2% Melee Resistance |
-| Severing 1 | 1 | +5% Toughness Shred |
-| Swordmaster | 3 | Teaches Swordmaster, an Epic Fight Passive skill: bonus attack speed. Equip it in the Combat Skills box of the abilities screen |
 | Vessel 1 | 1 | +2% Melee Resistance |
+| Soul Hunt | 4 | Unlocks Soul Hunt (30 mana, no cooldown) on the ability wheel |
+| Swordmaster | 3 | Teaches Swordmaster, an Epic Fight Passive skill: bonus attack speed. Equip it in the Combat Skills box of the abilities screen |
 | Cursed Control 1 | 1 | +7% Technique Mana Cost Reduction |
 | Dismantle | 2 | Unlocks Dismantle (20 mana, no cooldown) on the ability wheel. Hold the cast key to keep casting |
-| Severing 2 | 1 | +5% Toughness Shred |
-| Death Harvest | 2 | Teaches Death Harvest, an Epic Fight Passive skill: killing an enemy with a weapon innate skill refunds weapon charge. Equip it in the Combat Skills box of the abilities screen |
+| Severing 1 | 1 | +5% Toughness Shred |
 | Vessel 2 | 1 | +2% Melee Resistance |
+| Death Harvest | 2 | Teaches Death Harvest, an Epic Fight Passive skill: killing an enemy with a weapon innate skill refunds weapon charge. Equip it in the Combat Skills box of the abilities screen |
 | Cursed Control 2 | 1 | +7% Technique Mana Cost Reduction |
 | Cleave | 3 | Unlocks Cleave (35 mana, no cooldown) on the ability wheel. Hold the cast key to keep casting |
-| Severing Mastery | 2 | +10% Toughness Shred |
+| Severing 2 | 1 | +5% Toughness Shred |
 | Vessel 3 | 1 | +2% Melee Resistance |
 | Cursed Control 3 | 1 | +7% Technique Mana Cost Reduction |
 | Malevolent Shrine | 4 | Unlocks Malevolent Shrine (150 mana, no cooldown) on the ability wheel |
+| Severing Mastery | 2 | +10% Toughness Shred |
 | Vessel Mastery | 2 | +4% Melee Resistance |
 | Cursed Control 4 | 1 | +7% Technique Mana Cost Reduction |
 | Malevolent Shrine: Open | 4 | Unlocks Malevolent Shrine: Open (150 mana, no cooldown) on the ability wheel |
 | Cursed Control Mastery | 2 | +7% Technique Mana Cost Reduction |
 
-Signature maximums: Melee Resistance +12%, Toughness Shred +20%, Technique Mana Cost Reduction +35%. Plus the Ranger class spokes.
+Signature maximums: Melee Resistance +12%, Technique Mana Cost Reduction +35%, Toughness Shred +20%. Plus the Ranger class spokes.
 

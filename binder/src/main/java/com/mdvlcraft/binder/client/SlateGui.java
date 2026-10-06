@@ -27,18 +27,21 @@ final class SlateGui {
     private static final int TRACK = 0xFF282D36;
     private static final int SLOT = 0xFF1C2027;
     private static final int SLOT_PICKED = 0xFF57302E;
+    private static final int SLOT_HOVERED = 0xFF282D36;
     private static final int SLOT_BORDER = 0xFF3A404A;
     private static final int SLOT_EMPTY_BORDER = 0xFF2C3139;
 
     enum Slot { EMPTY, FILLED, PICKED }
 
+    enum Button { NORMAL, HOVERED, INACTIVE }
+
     private SlateGui() {
     }
 
-    /** Tooltips on the skill screen and the abilities screen get the Slate background and border. */
+    /** Tooltips on the skill screen, the abilities screen and Recruits' screens get the Slate background and border. */
     static void onTooltipColour(RenderTooltipEvent.Color event) {
         Screen screen = Minecraft.getInstance().screen;
-        if (screen instanceof SkillsScreen || screen instanceof AbilityScreen) {
+        if (screen instanceof SkillsScreen || screen instanceof AbilityScreen || screen != null && SlateRecruits.isRecruits(screen)) {
             event.setBackground(TOOLTIP);
             event.setBorderStart(TOOLTIP_BORDER);
             event.setBorderEnd(TOOLTIP_BORDER);
@@ -69,6 +72,14 @@ final class SlateGui {
             case PICKED -> ACCENT;
         };
         box(graphics, x, y, size, size, fill, border);
+    }
+
+    static void button(GuiGraphics graphics, int x, int y, int width, int height, Button state) {
+        switch (state) {
+            case NORMAL -> box(graphics, x, y, width, height, SLOT, SLOT_BORDER);
+            case HOVERED -> box(graphics, x, y, width, height, SLOT_HOVERED, ACCENT);
+            case INACTIVE -> box(graphics, x, y, width, height, PANEL, SLOT_EMPTY_BORDER);
+        }
     }
 
     /** A width x height bar on a dark track, filled from the left by fraction (0-1). */

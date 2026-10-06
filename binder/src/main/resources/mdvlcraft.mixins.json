@@ -17,7 +17,12 @@
     "epicfight.CPChangeSkillMixin",
     "cursedfate.SureHitEffectInDomainAreaProcedureMixin",
     "cursedfate.ShrineOnTickProcedureMixin",
-    "swordsoaring.VatanseverItemMixin"
+    "swordsoaring.VatanseverItemMixin",
+    "cursedfate.HeavenlyRestrictionAbilitiesProcedureMixin",
+    "naoyaaddon.DodgeProcedureMixin",
+    "naoyaaddon.ProjectionDashProcedureMixin",
+    "naoyaaddon.BarrageProcedureMixin",
+    "naoyaaddon.ToggleProjectionStylePacketMixin"
   ],
   "client": [
     "cursedfate.CursedfateModKeyMappingsMixin",
@@ -25,9 +30,12 @@
     "WeaponTypeReloadListenerMixin",
     "SkillsScreenMixin",
     "GuiGraphicsMixin",
+    "AbstractButtonMixin",
     "epicfight.AnimationTrailParticleMixin",
     "epicfight.EpicFightKeyMappingsMixin",
-    "swordsoaring.SwordSoaringKeyMappingsMixin"
+    "swordsoaring.SwordSoaringKeyMappingsMixin",
+    "epicfight.AnimationEventMixin",
+    "efn.EFNKeyMappingsMixin"
   ],
   "injectors": {
     "defaultRequire": 1
