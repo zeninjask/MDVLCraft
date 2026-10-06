@@ -15,17 +15,24 @@ import java.util.Optional;
 
 /**
  * Lists every unlocked spell and technique. Click an ability, then a wheel slot, to put it on the wheel;
- * right-click a slot to empty it.
+ * right-click a slot to empty it. Beside it, in its own box, are the Epic Fight skill slots (CombatSkillsPanel).
  */
 public final class AbilityScreen extends Screen {
     private static final int CELL = 20;
     private static final int COLUMNS = 8;
     private static final int PANEL_WIDTH = COLUMNS * CELL + 16;
+    private static final int GAP = 14;
 
     private Ability picked;
+    private CombatSkillsPanel combatSkills;
 
     public AbilityScreen() {
         super(Component.translatable("screen.mdvlcraft.abilities"));
+    }
+
+    @Override
+    protected void init() {
+        combatSkills = new CombatSkillsPanel(font);
     }
 
     @Override
@@ -38,11 +45,25 @@ public final class AbilityScreen extends Screen {
     }
 
     private int left() {
-        return (width - PANEL_WIDTH) / 2;
+        return (width - PANEL_WIDTH - GAP - CombatSkillsPanel.WIDTH) / 2;
+    }
+
+    /** Both boxes share one height, centred on the screen. */
+    private int panelHeight() {
+        int hintLines = font.split(Component.translatable("screen.mdvlcraft.abilities.hint_pick"), PANEL_WIDTH - 12).size();
+        return Math.max(196 + hintLines * 10, combatSkills.height());
+    }
+
+    private int top() {
+        return (height - panelHeight()) / 2;
+    }
+
+    private void placeCombatSkills() {
+        combatSkills.place(left() + PANEL_WIDTH + GAP, top());
     }
 
     private int listTop() {
-        return height / 2 - 70;
+        return top() + 30;
     }
 
     private int abilityX(int index) {
@@ -58,7 +79,7 @@ public final class AbilityScreen extends Screen {
     }
 
     private int slotY() {
-        return height / 2 + 60;
+        return listTop() + 130;
     }
 
     @Override
@@ -66,11 +87,17 @@ public final class AbilityScreen extends Screen {
         renderBackground(graphics);
         Component hint = Component.translatable(picked == null ? "screen.mdvlcraft.abilities.hint_pick" : "screen.mdvlcraft.abilities.hint_place");
         List<FormattedCharSequence> hintLines = font.split(hint, PANEL_WIDTH - 12);
-        MedievalGui.panel(graphics, left(), listTop() - 30, PANEL_WIDTH, slotY() + 36 + hintLines.size() * 10 - (listTop() - 30));
-        MedievalGui.centeredInk(graphics, font, title, width / 2, listTop() - 22, MedievalGui.INK);
+        placeCombatSkills();
+        int panelHeight = panelHeight();
+        int centerX = left() + PANEL_WIDTH / 2;
+        MedievalGui.panel(graphics, left(), top(), PANEL_WIDTH, panelHeight);
+        MedievalGui.centeredInk(graphics, font, title, centerX, listTop() - 22, MedievalGui.INK);
         List<Ability> abilities = abilities();
         if (abilities.isEmpty()) {
-            MedievalGui.centeredInk(graphics, font, Component.translatable("screen.mdvlcraft.abilities.none"), width / 2, listTop() + 20, MedievalGui.INK_FADED);
+            List<FormattedCharSequence> none = font.split(Component.translatable("screen.mdvlcraft.abilities.none"), PANEL_WIDTH - 12);
+            for (int line = 0; line < none.size(); line++) {
+                graphics.drawString(font, none.get(line), centerX - font.width(none.get(line)) / 2, listTop() + 20 + line * 10, MedievalGui.INK_FADED, false);
+            }
         }
         for (int i = 0; i < abilities.size(); i++) {
             Ability ability = abilities.get(i);
@@ -88,10 +115,12 @@ public final class AbilityScreen extends Screen {
         }
         for (int line = 0; line < hintLines.size(); line++) {
             FormattedCharSequence text = hintLines.get(line);
-            graphics.drawString(font, text, width / 2 - font.width(text) / 2, slotY() + 32 + line * 10, MedievalGui.INK_FADED, false);
+            graphics.drawString(font, text, centerX - font.width(text) / 2, slotY() + 32 + line * 10, MedievalGui.INK_FADED, false);
         }
+        combatSkills.render(graphics, panelHeight);
         super.render(graphics, mouseX, mouseY, partialTick);
         hovered(mouseX, mouseY).ifPresent(ability -> graphics.renderComponentTooltip(font, AbilityDisplay.tooltip(ability, ClientAbilities.level(ability)), mouseX, mouseY));
+        combatSkills.tooltip(mouseX, mouseY).ifPresent(lines -> graphics.renderTooltip(font, lines, mouseX, mouseY));
     }
 
     private Optional<Ability> hovered(double mouseX, double mouseY) {
@@ -132,6 +161,10 @@ public final class AbilityScreen extends Screen {
                 }
                 return true;
             }
+        }
+        placeCombatSkills();
+        if (combatSkills.mouseClicked(mouseX, mouseY, button)) {
+            return true;
         }
         return super.mouseClicked(mouseX, mouseY, button);
     }

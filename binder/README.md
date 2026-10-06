@@ -2,27 +2,28 @@
 
 The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 
-1. **Keeps Iron's Spells and Cursed Fate spells and techniques inside the skill trees.** Their items, recipes, ores, structures (with their mobs and loot) are in the game. What's kept out is anything that hands out spells or traits on its own: spell books, scrolls and eldritch manuscripts (in any loot, drop or trade), the scroll forge and inscription table, Cursed Fate's cursed shards, and Iron's own casting from items (staffs, Magic Blade). Their natural mob spawns, keybinds, menus and advancements stay off. Spells and techniques come only from the skill trees and the ability wheel.
-2. **Adds class and archetype skill trees** (Pufferfish's Skills), the Classes tab laid out radially like the *RPG skill tree* packs (hover an archetype for its description). Four classes, 16 archetypes, pick up to two; each archetype tab is a tree of 118–146 skills: boughs at uneven angles fork into limbs (class bonuses, signature bonuses, key abilities) and sprout twigs of small generic bonuses (health, speed, mana, cooldowns, saturation and more, capped per tree). See [`SKILL_TREES.md`](SKILL_TREES.md); ideas for moving spells and adding archetypes are in [`SPELL_REPORT.md`](SPELL_REPORT.md), and proposed new abilities for the existing archetypes in [`CLASS_IMPROVEMENTS.md`](CLASS_IMPROVEMENTS.md).
+1. **Keeps Iron's Spells and Cursed Fate spells and techniques inside the skill trees.** Their items, recipes, ores, structures (with their mobs and loot) are in the game. What's kept out is anything that hands out spells or traits on its own: spell books, scrolls and eldritch manuscripts (in any loot, drop or trade), the scroll forge and inscription table, Cursed Fate's cursed shards, Epic Fight skill books, and Iron's own casting from items (staffs, Magic Blade). Their natural mob spawns, keybinds, menus and advancements stay off. Spells, techniques and Epic Fight skills come only from the skill trees.
+2. **Adds class and archetype skill trees** (Pufferfish's Skills), the Classes tab laid out radially like the *RPG skill tree* packs (hover an archetype for its description). Four classes, 16 archetypes, pick up to two; each archetype tab is a tree of 115–144 skills: boughs at uneven angles fork into limbs (class bonuses, signature bonuses, key abilities) and sprout twigs of small generic bonuses (health, speed, mana, cooldowns, saturation and more, capped per tree). See [`SKILL_TREES.md`](SKILL_TREES.md); ideas for moving spells and adding archetypes are in [`SPELL_REPORT.md`](SPELL_REPORT.md), and the class improvements (now applied) in [`CLASS_IMPROVEMENTS.md`](CLASS_IMPROVEMENTS.md).
 3. **Makes every weapon work with Epic Fight and Ponder.** Weapons that only had Epic Fight's generic fallback get the type that fits them (`data/*/capabilities/weapons/`), and Ponder (hold W over an item) gets a scene for every Epic Fight weapon type, not just Epic Fight's own eight (`client/ponder/`). `/mdvl weapons` writes a report of every weapon and its Epic Fight type.
 4. **Epic Fight × Iron's compatibility.** The pack adds *Epic Fight x Iron's Spells: Enhanced Animations* (casting animations in Epic Fight mode; Iron's first-person arms and items are turned off as it requires), and the binder gives Iron's summoned zombies, skeletons and vexes Epic Fight's mob behaviour (`data/irons_spellbooks/epicfight_mobpatch/`).
 5. **Adds the ability wheel.** Spells, Cursed Fate techniques and the Samurai's Stance unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
    - **Stance (Samurai).** Cast it to take a stance up or drop it; sneak and cast to change element (an active stance changes with it). One element at a time: **Fire** +15% attack speed, **Wind** +40% dodge distance, **Water** +50% perfect-parry window (Epic Fight's Parrying guard), **Earth** +15% attack damage. Your weapon swing trails take the element's colour (orange, pale green, blue, amber), which nearby players see too. The wheel icon shows your element and is dimmed while the stance is off. Free; it is off again after logging in or respawning (`ability/Stances`, `StanceElement`, `mixin/epicfight/`).
-6. **Gives the skill and ability screens a medieval look:** dark oak and gold window and tabs, a parchment title bar and Classes tab, iron, bronze, gold and crimson node frames by state, and gold lines (`mixin/SkillsScreenMixin`, textures drawn by `tools/generate_textures.py`). The abilities screen, wheel and HUD use the same pieces.
+6. **Teaches Epic Fight skills through the skill trees.** 21 of Epic Fight's dodge, guard, mobility, identity and passive skills sit in the archetype trees (star frames with the skill's icon), each in one archetype only: 6 for Warrior archetypes, 5 each for Mage, Rogue and Ranger (list in [`SKILL_TREES.md`](SKILL_TREES.md)). Unlocking the node teaches the skill; locking it (or erasing the tab) unequips and forgets it. Everyone knows Roll and Guard, which fill empty Dodge and Guard slots. Skills are equipped in the abilities screen's **Combat Skills** box; Epic Fight's own skill screen and its key are gone, and its equip packet is ignored because it would equip any skill the client names (`epicskill/`, `mixin/epicfight/CPChangeSkillMixin`, `EpicFightKeyMappingsMixin`). The *Epic Fight: Skill Tree* mod is no longer in the pack.
+7. **Gives the skill and ability screens a medieval look:** dark oak and gold window and tabs, a parchment title bar and Classes tab, iron, bronze, gold and crimson node frames by state, and gold lines (`mixin/SkillsScreenMixin`, textures drawn by `tools/generate_textures.py`). The abilities screen, wheel and HUD use the same pieces.
 
 ## Controls (defaults, rebindable under *MDVLCraft Abilities*)
 Every letter key is already used by some mod in the pack, so the defaults avoid letters. The log warns at startup if a binding shares a key with another mod.
 | Key | Action |
 |---|---|
-| **[** | Abilities screen (also: right-click inside the wheel): every unlocked spell or technique with its stats. Click an ability, then a wheel slot; right-click a slot to empty it |
+| **[** | Abilities screen (also: right-click inside the wheel). Left box: every unlocked spell or technique with its stats; click an ability, then a wheel slot; right-click a slot to empty it. Right box, **Combat Skills**: Epic Fight's Dodge, Passive 1–3, Guard, Mobility and Identity slots; click a slot, then one of your learned skills of that kind; right-click a slot to empty it. After a change, that slot is locked for Epic Fight's swap cooldown (game rule `skillReplaceCooldown`, 5 minutes in this pack), shown next to it |
 | ``` ` ``` (backtick, hold) | Ability wheel: move the mouse towards a slot and release to select it. Shares its key with two rarely used bindings (Better Lock On joint switch, Ares HUD editing) |
 | **Caps Lock** | Cast the selected ability (with Stance selected: switch it on or off; hold **Shift** while casting to change element). Spells follow Iron's rules (cast time, mana, cooldown; press again to cancel). Hold it on Dismantle or Cleave to keep casting (each cast pays its mana). Cast the Malevolent Shrine once to open the domain and again to close it (closing is free; it lasts up to 20 s) |
-| **K** | Pufferfish's skill screen (Classes tab plus your archetype tabs) |
+| **K** | Pufferfish's skill screen (Classes tab plus your archetype tabs). Epic Fight's skill screen, which also used K, is removed |
 
 The HUD shows the selected ability, a mana bar and cast progress in the bottom-right corner once you have an ability.
 
 ## What's kept out, in code
-`content/DisabledContent` decides: **forbidden items** are anything implementing Iron's `ISpellbook` or `IScroll` (any mod's spell books and scrolls), eldritch manuscripts, the scroll forge, the inscription table and `cursedfate:cursed_shards`. **Disabled systems** are those of the `irons_spellbooks` and `cursedfate` namespaces.
+`content/DisabledContent` decides: **forbidden items** are anything implementing Iron's `ISpellbook` or `IScroll` (any mod's spell books and scrolls), eldritch manuscripts, the scroll forge, the inscription table, `cursedfate:cursed_shards` and Epic Fight skill books (`SkillBookItem`, any mod's). **Disabled systems** are those of the `irons_spellbooks` and `cursedfate` namespaces.
 
 | What | How |
 |---|---|
@@ -33,7 +34,8 @@ The HUD shows the selected ability, a mana bar and cast progress in the bottom-r
 | Scroll forge and inscription table placed by structures | `ContentEvents.onRightClickBlock`: right-clicking them does nothing |
 | Iron's own casting | `mixin/irons/SpellSelectionManagerMixin`: Iron's "selected spell" (from spell books, held items, armour and curios) is always empty, so staffs, casting implements and Epic Fight Skill - ISS's Magic Blade cast nothing and the spells built into Iron's unique weapons stay unreachable; staffs and gear keep their spell power |
 | Natural spawns | `content/StripDisabledBiomeModifier` (biome modifier `mdvlcraft:strip_disabled`) and `ContentEvents.onFinalizeSpawn` (NATURAL spawn reason). Structure, spawner, spell and command spawns are allowed |
-| Keybinds | `mixin/irons/KeyMappingsMixin`, `mixin/cursedfate/CursedfateModKeyMappingsMixin`: unbound and kept out of the Controls screen |
+| Keybinds | `mixin/irons/KeyMappingsMixin`, `mixin/cursedfate/CursedfateModKeyMappingsMixin`, `mixin/epicfight/EpicFightKeyMappingsMixin` (Epic Fight's skill screen key only): unbound and kept out of the Controls screen |
+| Epic Fight's skill equip packet | `mixin/epicfight/CPChangeSkillMixin`: ignored. Equipping goes through the binder's `EquipSkillPacket`, which checks the skill is learned and fits the slot |
 | Cursed Fate menus, combat mode, abilities, quests, dash and roll | `mixin/NetworkHooksMixin`: the server drops every client-to-server packet on Cursed Fate's channels; `client/ClientContentSetup` removes the double-tap-Ctrl dash |
 | Cursed Fate progression | `content/DisabledContentSetup` unregisters its listeners for random techniques on join, level/mastery XP (levels raise max health), Sukuna's fingers added to opened chests, quests, the random Reverse Curse Technique unlock, and an attacker set that is never cleared. Its mob drops stay (cloth and residue for its recipes) |
 | Advancements | `mixin/ServerAdvancementManagerMixin` removes their display (no toasts or tabs). They are kept because Cursed Fate grants one by ID on join |
@@ -48,12 +50,15 @@ ability/     Ability (SpellAbility | Technique), AbilityReward (Pufferfish rewar
 attribute/   BinderAttributes (14 mdvlcraft:* player attributes not offered by vanilla, Pufferfish's Attributes,
              Epic Fight or Iron's), AttributeEffects (what they do)
 skills/      ArchetypeTabs: class skills auto-unlocked, archetype skill unlocks its tab, locking erases it
-client/      ClientAbilities, ClientStances, AbilityKeys, AbilityScreen, WheelScreen, AbilityHud, MedievalGui, ForeignKeyMappings
-network/     BinderNetwork + SyncAbilitiesPacket, AssignSlotPacket, CastPacket
+epicskill/   EpicSkillReward (Pufferfish reward mdvlcraft:epicfight_skill), EpicSkillGrants (learn/forget, Roll and Guard),
+             EpicSkillEquip + EquipSkillPacket (checked equipping from the Combat Skills box)
+client/      ClientAbilities, ClientStances, AbilityKeys, AbilityScreen + CombatSkillsPanel, WheelScreen, AbilityHud, MedievalGui, ForeignKeyMappings
+network/     BinderNetwork + SyncAbilitiesPacket, AssignSlotPacket, CastPacket, StanceSyncPacket
 command/     /mdvl (operators): abilities | assign | clear | cast | release
 content/ mixin/ compat/   keeping spells inside the trees (table above)
 data/irons_spellbooks/epicfight_mobpatch/   Epic Fight behaviour for Iron's summons
-mixin/epicfight/   per-player parry window (ParryingSkill), dodge distance (ActionAnimation), stance trail colour (AnimationTrailParticle)
+mixin/epicfight/   per-player parry window (ParryingSkill), dodge distance (ActionAnimation), stance trail colour (AnimationTrailParticle),
+                   equip packet ignored (CPChangeSkill), skill screen key removed (EpicFightKeyMappings)
 tools/generate_skill_trees.py   writes src/main/resources/data/mdvlcraft/puffish_skills and SKILL_TREES.md
 tools/generate_textures.py      draws the medieval skill screen textures (needs Pillow)
 ```
@@ -71,6 +76,10 @@ The reward format for any Pufferfish tree is:
 {"type": "mdvlcraft:ability", "data": {"ability": "irons_spellbooks:shield", "level": 2}}
 ```
 Techniques use `mdvlcraft:dismantle`, `mdvlcraft:cleave`, `mdvlcraft:malevolent_shrine`, `mdvlcraft:boogie_woogie` and `mdvlcraft:block_clap`, at level 1.
+Epic Fight skills (any learnable dodge, guard, mobility, identity or passive skill) use:
+```json
+{"type": "mdvlcraft:epicfight_skill", "data": {"skill": "epicfight:berserker"}}
+```
 
 ## Operator commands
 `/mdvl abilities <player>` lists unlocked abilities, the wheel and mana. `/mdvl assign <player> <slot> <ability>`, `/mdvl clear <player> <slot>`, `/mdvl cast <player> <slot>` and `/mdvl release <player>` do what the client keys do. Archetypes can be reset with Pufferfish's `/puffish_skills skills lock <player> mdvlcraft:classes <archetype>`, which also erases that archetype's tab.

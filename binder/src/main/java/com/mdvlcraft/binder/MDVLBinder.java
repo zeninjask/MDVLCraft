@@ -5,6 +5,7 @@ import com.mdvlcraft.binder.attribute.BinderAttributes;
 import com.mdvlcraft.binder.client.ClientAbilitySetup;
 import com.mdvlcraft.binder.client.ClientContentSetup;
 import com.mdvlcraft.binder.content.DisabledContentSetup;
+import com.mdvlcraft.binder.epicskill.EpicSkillReward;
 import com.mdvlcraft.binder.integration.CataclysmIntegration;
 import com.mdvlcraft.binder.integration.EpicFightIntegration;
 import com.mdvlcraft.binder.integration.IronsSpellsIntegration;
@@ -54,6 +55,7 @@ public final class MDVLBinder {
         BinderNetwork.register();
         event.enqueueWork(() -> {
             AbilityReward.register();
+            EpicSkillReward.register();
             ArchetypeTabs.register();
         });
     }

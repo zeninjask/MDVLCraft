@@ -1,5 +1,7 @@
 package com.mdvlcraft.binder.network;
 
+import com.mdvlcraft.binder.epicskill.EquipSkillPacket;
+
 import com.mdvlcraft.binder.MDVLBinder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
@@ -11,7 +13,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.util.Optional;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "2";
+    private static final String PROTOCOL = "3";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             ResourceLocation.fromNamespaceAndPath(MDVLBinder.MOD_ID, "main"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals);
 
@@ -26,6 +28,8 @@ public final class BinderNetwork {
                 AssignSlotPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
         CHANNEL.registerMessage(id++, CastPacket.class, CastPacket::encode, CastPacket::decode,
                 CastPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        CHANNEL.registerMessage(id++, EquipSkillPacket.class, EquipSkillPacket::encode, EquipSkillPacket::decode,
+                EquipSkillPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
         CHANNEL.registerMessage(id++, StanceSyncPacket.class, StanceSyncPacket::encode, StanceSyncPacket::decode,
                 StanceSyncPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }

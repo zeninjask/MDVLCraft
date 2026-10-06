@@ -1,6 +1,12 @@
 # Class improvements: proposed abilities and spells
 
-These are the changes I'd make to the 16 existing archetypes. **None of it is applied yet.** Tell me which to keep and I'll build them.
+These were the proposed changes for the 16 existing archetypes. **Binder 0.6.0 (pack 1.7.0) applies the spells and Epic Fight skills**; the trees as built are in [`SKILL_TREES.md`](SKILL_TREES.md). It differs from the proposal below as follows:
+
+- **No Ender or Eldritch spells**, as asked: Wanderer gets Summon Polar Bear and **Gluttony** instead of Recall and Summon Ender Chest, Stalker gets Fire Arrow without Magic Arrow, and Phantom gets **Slow** instead of Shadow Slash. Counterspell stays with Wanderer.
+- **Epic Fight skills for every archetype**, 21 in all, each in one archetype: Warrior 6 (Knight Impact Guard, Endurance; Samurai Parrying, Technician; Berzerker Berserker, Forbidden Strength), Mage 5 (Holy Adaptive Skin, Flame Vengeance, Lightning Demolition Leap, Necromancy Stamina Pillager, Ice Hyper Vitality), Rogue 5 (Assassin Bonebreaker, Phantom Step and Catharsis, Scout Phantom Ascent, Thief Emergency Escape), Ranger 5 (Wanderer Adrenaline Fiend, Stalker Revelation, Druid Meteor Slam, Cursed Swordmaster and Death Harvest). Warriors get one more because they fight with Epic Fight skills alone, while each Mage archetype gains four or five spells. Everyone knows Roll and Guard.
+- **Samurai** takes Flaming Strike as a spell node next to Stance.
+- **Skill books are gone** (no loot, drops or trades) and *Epic Fight: Skill Tree* is removed, so the trees are the only way to learn Epic Fight skills. Skills are equipped in the abilities screen's Combat Skills box.
+- **Not done:** Weapons of Miracles skills and the Cursed Fate techniques Spiderweb and Divine Flame / Fuga (not part of this request).
 
 ## Where the new abilities come from
 
@@ -58,7 +64,7 @@ Every spell and skill below goes to **one** archetype only, so the generator's o
 - **Epic Fight skills only unlock.** Players equip them in Epic Fight's limited dodge, guard and passive slots, so a tree can't stack them.
 - **Testing.** Cursed Fate techniques (Spiderweb, Fuga) get the same in-game check as the Shrine before release, and each Epic Fight skill is checked once it is granted through the new reward.
 
-## Work involved if approved
+## Work involved (as proposed)
 
 1. **Spells:** generator entries only (`tools/generate_skill_trees.py`).
 2. **Epic Fight skills:** a `mdvlcraft:epicfight_skill` reward that teaches (and on reset forgets) an Epic Fight skill, plus generator entries; optionally remove `epicskills`.

@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import yesman.epicfight.world.item.SkillBookItem;
 
 import java.util.Set;
 
@@ -18,7 +19,8 @@ import java.util.Set;
  *
  * Their items, recipes, ores, structures and structure loot are in the game. Forbidden are the items that would hand
  * out spells or traits outside the skill trees: every spell book and scroll (any mod's, through Iron's interfaces),
- * eldritch manuscripts, the scroll forge and inscription table that make and fill them, and Cursed Fate's cursed shards.
+ * eldritch manuscripts, the scroll forge and inscription table that make and fill them, Cursed Fate's cursed shards,
+ * and Epic Fight skill books (any mod's), since Epic Fight skills are taught by the skill trees too.
  * The mods' own systems stay off: natural mob spawns, client-to-server packets (their keybind and menu actions) and
  * advancements, so spells and techniques are only reachable through the skill trees and the ability wheel.
  */
@@ -43,7 +45,7 @@ public final class DisabledContent {
     }
 
     public static boolean isForbidden(Item item) {
-        return item instanceof ISpellbook || item instanceof IScroll || item instanceof EldritchManuscript
+        return item instanceof ISpellbook || item instanceof IScroll || item instanceof EldritchManuscript || item instanceof SkillBookItem
                 || FORBIDDEN_ITEMS.contains(ForgeRegistries.ITEMS.getKey(item));
     }
 
