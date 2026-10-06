@@ -4,7 +4,15 @@ Importable pack: [`MDVLCraft-1.7.0.zip`](MDVLCraft-1.7.0.zip) — CurseForge for
 
 v1.1.0 = every mod from your **MDVL** pack merged into MDVLCraft v1.0.0 (newer version kept where both had the mod), plus your MDVL configs/KubeJS folder and the new **MDVLCraft Binder** mod.
 
-**156 files**: 154 CurseForge entries in `manifest.json` (153 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.6.0).
+**157 files**: 155 CurseForge entries in `manifest.json` (154 mods + the BD&Hill resource pack from MDVL) and 2 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.6.0).
+
+**Modrinth packs** (same version, for the Modrinth App, Prism Launcher or any `.mrpack` installer):
+| File | Contents |
+|---|---|
+| [`MDVLCraft-1.7.0-client.mrpack`](MDVLCraft-1.7.0-client.mrpack) | Everything the client needs, single-player included: all 156 mods, the BD&Hill resource pack, configs, KubeJS and default configs. Java arguments can't be stored in a `.mrpack`; the pack puts `MDVLCraft-Java-Arguments.txt` in the instance folder with the memory (8 GB) and JVM line to paste into the launcher |
+| [`MDVLCraft-1.7.0-server.mrpack`](MDVLCraft-1.7.0-server.mrpack) | A dedicated server's 128 mods (the 28 client-only mods below are left out), the same configs and default configs, and `user_jvm_args.txt` (8 GB, Aikar's flags), which Forge's `run.sh`/`run.bat` read. Install Forge 47.4.10 server first, or use an installer such as `mrpack-install` with the Forge server already in the folder |
+
+111 of the mods download from Modrinth; the 44 files only on CurseForge download from CurseForge's CDN, with their hashes checked against the tested jars. The binder and EpicFight-Ponder are hosted nowhere, so they are inside the packs. Prism Launcher asks once to confirm the non-Modrinth files. Verified: the server pack installed with `mrpack-install` gives exactly the 128 mods and configs the test server ran, and a full client joined that server; the client pack's downloads all match their hashes and give exactly the tested 156 mods.
 
 ## v1.7.0 changes
 | Change | Notes |
@@ -83,7 +91,7 @@ Same 142 files as v1.3.0, with the binder updated to **0.3.0**:
 | Added: MDVLCraft Binder 0.1.0 | Pack glue mod built from `binder/` (see binder/README.md) |
 
 ## Server notes
-Remove these **client-only** mods from a dedicated server's `mods` folder — each was verified to crash the server (it loads client-only classes). Players keep them.
+The server `.mrpack` leaves out 28 client-only mods: the five below, which crash a dedicated server, and 23 that Modrinth lists as unsupported on servers (Embeddium and its add-ons, Entity Culling, ImmediatelyFast, tooltip, HUD and menu mods, Mouse Tweaks, chat heads, PonderJS and others; the list is in the server pack's index). A full client joins that server. For the CurseForge zip, remove at least these **client-only** mods from a dedicated server's `mods` folder — each was verified to crash the server (it loads client-only classes). Players keep them.
 
 | Mod | Evidence |
 |---|---|
@@ -92,6 +100,16 @@ Remove these **client-only** mods from a dedicated server's `mods` folder — ea
 | Dynamic Crosshair | `DynamicCrosshairBaseBlock` mixin into `Block` references `LocalPlayer` |
 | Accurate Block Placement | `Failed to create mod instance. ModID: accurateblockplacement` (LocalPlayer) |
 | Legendary Tooltips | `LegendaryTooltipsConfig.<init>` loads `LocalPlayer` |
+
+## Test results (v1.7.0)
+| Check | Result |
+|---|---|
+| Epic Fight skills | New player knows and has equipped Roll and Guard; unlocking Parrying, Technician and Vengeance teaches them; locking Parrying forgets it; the Combat Skills box equipped Vengeance in Passive 1 (with Epic Fight's swap cooldown), emptied Dodge on right-click, and shows skill tooltips |
+| K key | Opens the skill trees; Epic Fight's skill screen no longer opens |
+| New spells | Flaming Strike, Scorch and Raise Hell cast and cost their mana (Thunder Step replaced by Volt Strike: Iron's 3.16.3 never registers it, which had made Pufferfish reject every tree) |
+| Skill books | None in 17 chest loot rolls (dungeon, stronghold library, desert and jungle temples, mineshaft, ancient city, end city, bastion) or zombie/skeleton drops |
+| Ships | Rowboat and sloop spawn with all parts; player seated in Epic Fight mode renders normally; a recruit stays seated in a ship seat; both Ponder scenes play with every frame, oarlock and cleat |
+| Server pack | A full 156-mod client joined the 128-mod server, cast a spell and saw no channel errors |
 
 ## Test results (v1.6.0)
 | Check | Result |
@@ -313,6 +331,7 @@ Environment: Linux, OpenJDK 17, Forge 47.4.10, 6 GB heaps; client via portablemc
 | 154 | [YUNG's Extras (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-extras) | added in v1.6.0 | `YungsExtras-1.20-Forge-4.0.3.jar` |
 | 155 | [YUNG's Menu Tweaks (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-menu-tweaks) | added in v1.6.0 | `YungsMenuTweaks-1.20.1-Forge-1.0.2.jar` |
 | 156 | [Epic Structures: Villages](https://www.curseforge.com/minecraft/mc-mods/epic-villages) | added in v1.6.0 | `epic-structures-villages-2.0.0.jar` |
+| 157 | [aleki's Nifty Ships](https://www.curseforge.com/minecraft/mc-mods/alekiships) | added in v1.7.0 | `alekiNiftyShips-FORGE-1.20.1-1.0.14.jar` |
 
 ## v1.0.0 history
 v1.0.0 was trimmed from **The Casket of Reveries 2.2.9.7**. Decisions from that trim still apply: Sodium → Embeddium on Forge; Accelerated Rendering dropped (needs OpenGL 4.6); TheCasketOfRrveriesBosses and TCR Core removed (pack-specific), with EpicFight-Ponder extracted from TCR Core; LDLib is required by Photon; Cataclysm Dimensions moves Cataclysm boss structures into their own dimensions.
