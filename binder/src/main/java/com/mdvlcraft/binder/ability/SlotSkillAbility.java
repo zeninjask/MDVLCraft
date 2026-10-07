@@ -29,8 +29,8 @@ import java.util.Optional;
  * own conditions (on the ground, a weapon or sword in hand) and cooldown. Mana is paid only when it runs.
  */
 public enum SlotSkillAbility implements Ability {
-    MYRIAD_BLADES("myriad_blades", "sword_soaring:wan_jian_gui_zong", 60, "sword_soaring:textures/gui/skills/sword_controller/wan_jian_gui_zong.png"),
-    SOUL_HUNT("soul_hunt", "efn:execution", 30, "efn:textures/gui/skills/efn_arts/execution.png");
+    MYRIAD_BLADES("myriad_blades", "sword_soaring:wan_jian_gui_zong", 35, "sword_soaring:textures/gui/skills/sword_controller/wan_jian_gui_zong.png"),
+    SOUL_HUNT("soul_hunt", "efn:execution", 20, "efn:textures/gui/skills/efn_arts/execution.png");
 
     private final ResourceLocation id;
     private final String skillId;

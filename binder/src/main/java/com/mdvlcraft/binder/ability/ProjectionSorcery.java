@@ -17,12 +17,15 @@ import net.minecraft.world.entity.player.Player;
  * the form instead ({@link #flow}, read by DodgeProcedureMixin). Don't You Have a Heart? toggles Tracing and Continuous
  * the addon's own way (sneak and cast).</li>
  * <li>Speed always uses the highest cursed energy output and the continuous dash does not shake the screen
- * (ProjectionDashProcedureMixin, BarrageProcedureMixin).</li>
+ * (BarrageProcedureMixin, ProjectionDashProcedureMixin).</li>
+ * <li>Cursed energy never blocks a cast: the wheel charges mana (BarrageProcedureMixin).</li>
  * </ul>
  */
 public final class ProjectionSorcery {
     /** Cursed Fate's highest output, which the binder's players cannot change. */
     public static final String MAX_OUTPUT = "100";
+    /** More than any ability asks for (the dash's Tracing mode needs 250, above Cursed Fate's default maximum of 100). */
+    public static final String ENOUGH_ENERGY = "1000000";
     private static final String FLOW_KEY = "mdvlcraft:kick_flow";
 
     private ProjectionSorcery() {

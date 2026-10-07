@@ -9,7 +9,7 @@ Layout follows the radial style of the *RPG skill tree* and *More RPG Classes - 
 - **Twigs:** the small frames sprouting off every branch are tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation and more; table below). They are smaller than any class or signature step and capped per tree, so they widen your choices without raising the ceiling.
 - **Points:** 1 to start, then 1 per level up to level 40 (41 per archetype). Every tree costs more than that, so you choose. Experience comes from kills (`dropped XP + max health / 5`, at most 20 kills per chunk every 5 minutes). Level n to n+1 costs `25 + 5n` XP (4,900 XP to reach level 40).
 - **Class bonuses** are shared by every archetype of that class. **Signature bonuses and abilities** belong to one archetype only; the generator enforces this.
-- **Controls:** `[` opens the abilities screen, hold `` ` `` for the ability wheel, Caps Lock casts. Cursed techniques cost mana and have no cooldown; hold the cast key on Dismantle or Cleave to keep casting. The Malevolent Shrine (closed, then open) only cuts while you hold Dismantle or Cleave; cast it again to close it (it lasts up to 20 s).
+- **Controls:** `[` opens the abilities screen, hold `` ` `` for the ability wheel, Caps Lock casts. Spells cost 40% less mana than Iron's defaults and have 50% longer cooldowns. Techniques cost mana and have their own cooldowns; hold the cast key on Dismantle or Cleave to keep casting each time it is ready. The Malevolent Shrine (closed, then open) only cuts while you hold Dismantle or Cleave; cast it again to close it (it lasts up to 20 s).
 
 ## Twig bonuses (every archetype)
 
@@ -17,19 +17,140 @@ Layout follows the radial style of the *RPG skill tree* and *More RPG Classes - 
 |---|---|---|---|
 | Vitality | +1 Max Health | 8 | +8 |
 | Swiftness | +0.5% Movement Speed | 8 | +4% |
-| Attunement | +3 Max Mana | 8 | +24 |
-| Meditation | +1% Mana Regen | 8 | +8% |
+| Attunement | +4 Max Mana | 8 | +32 |
+| Meditation | +1.5% Mana Regen | 8 | +12% |
 | Focus | +0.5% Cooldown Reduction | 8 | +4% |
 | Hearty | +2% Saturation from Food | 8 | +16% |
 | Hardened | +0.25 Armor | 8 | +2 |
 | Endurance | +0.25 Max Stamina | 8 | +2 |
 | Second Breath | +1% Stamina Regen | 8 | +8% |
-| Mending | +1% Natural Regeneration | 8 | +8% |
+| Mending | +1.5% Natural Regeneration | 8 | +12% |
 | Readiness | +0.5% Attack Speed | 8 | +4% |
 | Might | +0.1 Attack Damage | 6 | +0.6 |
 | Footing | +1% Knockback Resistance | 6 | +6% |
 | Willpower | +0.5% Spell Resistance | 6 | +3% |
 | Bounce | +1% Jump Height | 6 | +6% |
+
+## Core bonuses (every archetype)
+
+| Spoke | Total (small nodes + capstone) |
+|---|---|
+| Reservoir | Max Mana +30 |
+| Wellspring | Mana Regen +15% |
+| Renewal | Natural Regeneration +15% |
+| Constitution | Max Health +3 |
+
+## Spells: mana and cooldowns
+
+Every spell the trees grant costs 40% less mana than Iron's default and has a 50% longer cooldown (at least 3 s; cooldowns of 120 s or more are unchanged). Spell power is Iron's own.
+
+| Spell | Archetype (level) | Mana: Iron's -> pack | Cooldown: Iron's -> pack |
+|---|---|---|---|
+| Acid Orb | Druid (3/5) | 60/80 -> 36/48 | 15 s -> 22.5 s |
+| Acupuncture | Assassin (3) | 35 -> 21 | 20 s -> 30 s |
+| Angel Wing | Holy (1) | 80 -> 48 | 120 s -> 120 s |
+| Arrow Volley | Stalker (3/5) | 60/80 -> 36/48 | 15 s -> 22.5 s |
+| Ascension | Scout (3) | 52 -> 31 | 15 s -> 22.5 s |
+| Ball Lightning | Lightning (3) | 28 -> 17 | 1 s -> 3 s |
+| Blaze Storm | Flame (3) | 7 -> 4 | 20 s -> 30 s |
+| Blessing Of Life | Holy (3) | 20 -> 12 | 10 s -> 15 s |
+| Blight | Druid (2) | 80 -> 48 | 90 s -> 135 s |
+| Blizzard | Ice (2) | 50 -> 30 | 22 s -> 33 s |
+| Blood Needles | Necromancy (3) | 35 -> 21 | 10 s -> 15 s |
+| Blood Slash | Necromancy (2) | 30 -> 18 | 10 s -> 15 s |
+| Blood Step | Assassin (2) | 40 -> 24 | 12 s -> 18 s |
+| Burning Dash | Berzerker (3) | 24 -> 14 | 10 s -> 15 s |
+| Chain Creeper | Thief (2) | 50 -> 30 | 15 s -> 22.5 s |
+| Chain Lightning | Lightning (3) | 39 -> 23 | 20 s -> 30 s |
+| Charge | Lightning (1) | 50 -> 30 | 40 s -> 60 s |
+| Cleanse | Holy (1) | 100 -> 60 | 60 s -> 90 s |
+| Cloud Of Regeneration | Holy (3) | 16 -> 10 | 35 s -> 52.5 s |
+| Cone Of Cold | Ice (3) | 7 -> 4 | 12 s -> 18 s |
+| Counterspell | Wanderer (1) | 50 -> 30 | 10 s -> 15 s |
+| Devour | Necromancy (3) | 33 -> 20 | 20 s -> 30 s |
+| Divine Smite | Holy (3) | 60 -> 36 | 15 s -> 22.5 s |
+| Earthquake | Druid (2) | 60 -> 36 | 16 s -> 24 s |
+| Echoing Strikes | Assassin (2) | 60 -> 36 | 60 s -> 90 s |
+| Electrocute | Lightning (3/5) | 5/7 -> 3/4 | 12 s -> 18 s |
+| Evasion | Phantom (1/2) | 40/60 -> 24/36 | 180 s -> 180 s |
+| Fang Strike | Berzerker (3/5) | 36/42 -> 22/25 | 5 s -> 7.5 s |
+| Fang Swirl | Wanderer (3) | 71 -> 43 | 28 s -> 42 s |
+| Fang Ward | Wanderer (3) | 55 -> 33 | 15 s -> 22.5 s |
+| Fire Arrow | Stalker (3) | 50 -> 30 | 8 s -> 12 s |
+| Fire Breath | Flame (3) | 7 -> 4 | 12 s -> 18 s |
+| Fireball | Flame (2) | 75 -> 45 | 25 s -> 37.5 s |
+| Firebolt | Flame (3/5) | 14/18 -> 8/11 | 1 s -> 3 s |
+| Firecracker | Thief (3) | 24 -> 14 | 1.5 s -> 3 s |
+| Firefly Swarm | Druid (3) | 60 -> 36 | 20 s -> 30 s |
+| Flaming Strike | Samurai (3) | 60 -> 36 | 15 s -> 22.5 s |
+| Fortify | Knight (2/3) | 90/100 -> 54/60 | 180 s -> 180 s |
+| Frost Step | Ice (3) | 25 -> 15 | 12 s -> 18 s |
+| Frostbite | Ice (1) | 80 -> 48 | 60 s -> 90 s |
+| Frostwave | Ice (3) | 60 -> 36 | 45 s -> 67.5 s |
+| Gluttony | Wanderer (1) | 35 -> 21 | 90 s -> 135 s |
+| Greater Heal | Holy (1) | 100 -> 60 | 45 s -> 67.5 s |
+| Guiding Bolt | Holy (3/5) | 30/40 -> 18/24 | 8 s -> 12 s |
+| Gust | Scout (3) | 40 -> 24 | 12 s -> 18 s |
+| Haste | Scout (2) | 60 -> 36 | 80 s -> 120 s |
+| Heal | Holy (3) | 60 -> 36 | 30 s -> 45 s |
+| Healing Circle | Holy (3) | 60 -> 36 | 25 s -> 37.5 s |
+| Heartstop | Berzerker (1) | 100 -> 60 | 120 s -> 120 s |
+| Heat Surge | Flame (2) | 60 -> 36 | 45 s -> 67.5 s |
+| Ice Block | Ice (2) | 50 -> 30 | 15 s -> 22.5 s |
+| Ice Spikes | Ice (3) | 50 -> 30 | 15 s -> 22.5 s |
+| Icicle | Ice (3/5) | 14/18 -> 8/11 | 1 s -> 3 s |
+| Invisibility | Assassin (2) | 43 -> 26 | 45 s -> 67.5 s |
+| Lightning Bolt | Lightning (2) | 90 -> 54 | 25 s -> 37.5 s |
+| Lightning Lance | Lightning (3) | 70 -> 42 | 8 s -> 12 s |
+| Lob Creeper | Thief (3) | 24 -> 14 | 2 s -> 3 s |
+| Magma Bomb | Flame (3) | 40 -> 24 | 12 s -> 18 s |
+| Oakskin | Druid (2/4) | 35/55 -> 21/33 | 90 s -> 135 s |
+| Planar Sight | Scout (1) | 150 -> 90 | 200 s -> 200 s |
+| Poison Arrow | Stalker (3/5) | 50/60 -> 30/36 | 15 s -> 22.5 s |
+| Poison Splash | Druid (3) | 60 -> 36 | 20 s -> 30 s |
+| Raise Dead | Necromancy (2) | 60 -> 36 | 150 s -> 150 s |
+| Raise Hell | Flame (1) | 90 -> 54 | 25 s -> 37.5 s |
+| Ray Of Frost | Ice (3) | 55 -> 33 | 15 s -> 22.5 s |
+| Ray Of Siphoning | Necromancy (3) | 10 -> 6 | 15 s -> 22.5 s |
+| Root | Druid (3/5) | 51/57 -> 31/34 | 35 s -> 52.5 s |
+| Sacrifice | Necromancy (3) | 35 -> 21 | 1 s -> 3 s |
+| Scapegoat | Thief (2) | 45 -> 27 | 45 s -> 67.5 s |
+| Scorch | Flame (3) | 60 -> 36 | 12 s -> 18 s |
+| Shield | Knight (2/4) | 40/50 -> 24/30 | 8 s -> 12 s |
+| Shockwave | Lightning (2) | 75 -> 45 | 30 s -> 45 s |
+| Slow | Phantom (2) | 60 -> 36 | 80 s -> 120 s |
+| Spectral Hammer | Wanderer (3) | 25 -> 15 | 2 s -> 3 s |
+| Spider Aspect | Druid (3) | 45 -> 27 | 90 s -> 135 s |
+| Stomp | Berzerker (2) | 60 -> 36 | 16 s -> 24 s |
+| Summon Horse | Wanderer (3/5) | 54/58 -> 32/35 | 20 s -> 30 s |
+| Summon Polar Bear | Wanderer (3) | 70 -> 42 | 180 s -> 180 s |
+| Summon Vex | Necromancy (2) | 60 -> 36 | 150 s -> 150 s |
+| Sunbeam | Holy (3) | 60 -> 36 | 20 s -> 30 s |
+| Teleport | Scout (2/4) | 25/35 -> 15/21 | 6 s -> 9 s |
+| Throw | Assassin (3) | 20 -> 12 | 8 s -> 12 s |
+| Thunderstorm | Lightning (1) | 70 -> 42 | 120 s -> 120 s |
+| Touch Dig | Scout (2) | 15 -> 9 | 0.5 s -> 3 s |
+| Volt Strike | Lightning (3) | 40 -> 24 | 10 s -> 15 s |
+| Wall Of Fire | Flame (3) | 40 -> 24 | 30 s -> 45 s |
+| Wisp | Holy (3) | 19 -> 11 | 3 s -> 4.5 s |
+| Wither Skull | Necromancy (3/5) | 24/28 -> 14/17 | 1 s -> 3 s |
+
+## Techniques: mana and cooldowns
+
+| Technique | Mana | Cooldown |
+|---|---|---|
+| Dismantle | 12 | 1 s |
+| Cleave | 20 | 3 s |
+| Malevolent Shrine | 100 | 120 s |
+| Malevolent Shrine: Open | 100 | 120 s |
+| Boogie Woogie | 10 | 2 s |
+| Block Clap | 10 | 2 s |
+| Blitz | 15 | 8 s |
+| Surprise Attack | 15 | 15 s |
+| Follow Up Kick | 15 | 6 s |
+| Don't You Have a Heart? | 15 | 10 s |
+| Myriad Blades Convergence | 35 | its Epic Fight skill cooldown |
+| Soul Hunt | 20 | its Epic Fight skill cooldown |
 
 ## Class bonuses
 
@@ -38,36 +159,36 @@ Layout follows the radial style of the *RPG skill tree* and *More RPG Classes - 
 | Warrior | Toughness: Max Health +6; Bulk: Armor +2.5; Stand Firm: Knockback Resistance +15%; Second Wind: Natural Regeneration +25% |
 | Mage | Mana Well: Max Mana +50; Flow: Mana Regen +25%; Quick Casting: Cast Time Reduction +12%; Scholar: Experience Gained (enchanting) +25%; Warding: Spell Resistance +10% |
 | Rogue | Fleet: Movement Speed +7.5%; Quick Hands: Attack Speed +7.5%; Shadow: Stealth +25%; Recovery: Stamina Regen +25%; Quick Draught: Eating & Drinking Speed +25% |
-| Ranger | Sprinter: Sprinting Speed +15%; Spring: Jump Height +25%; Light Foot: Fall Damage Reduction +25%; Evasion Training: Max Stamina +2.5; Forager: Stamina (slower hunger) +25% |
+| Ranger | Sprinter: Sprinting Speed +15%; Spring: Jump Height +25%; Light Foot: Fall Damage Reduction +25%; Evasion Training: Max Stamina +2.5; Forager: Stamina (slower hunger) +25%; Predator: Melee Damage +10% |
 
 ## Knight (Warrior)
 
 An armoured wall. Knights soak up hits with damage and projectile resistance, armour toughness and stun armour, and hit back with greatswords. Shield and Fortify let them shrug off fights other classes would run from, Impact Guard blocks almost anything and Endurance keeps them swinging through hits.
 
-133 skills (89 of them twigs), 151 points in total (41 available).
+139 skills (83 of them twigs), 161 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Knight's Oath | 1 | +2% Damage Resistance |
+| Arrow Guard 1 | 1 | +4% Projectile Resistance |
+| Shield | 2 | Unlocks Shield (Level 2) (24 mana, 12 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Greatsword 1 | 1 | +5% Greatsword Damage |
 | Unshakable 1 | 1 | +1 Stun Armor |
-| Arrow Guard 1 | 1 | +4% Projectile Resistance |
 | Impact Guard | 3 | Teaches Impact Guard, an Epic Fight Guard skill: guarding costs less stamina and also blocks explosions, fire, magic and projectiles at reduced damage. Equip it in the Combat Skills box of the abilities screen |
-| Shield | 2 | Unlocks Shield (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Fortress 1 | 1 | +2% Damage Resistance |
-| Fortify | 2 | Unlocks Fortify (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fortify | 2 | Unlocks Fortify (Level 2) (54 mana, 180 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Plate Mastery 1 | 1 | +0.5 Armor Toughness |
+| Arrow Guard 2 | 1 | +4% Projectile Resistance |
+| Aegis (Shield IV) | 3 | Unlocks Shield (Level 4) (30 mana, 12 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Greatsword 2 | 1 | +5% Greatsword Damage |
 | Unshakable 2 | 1 | +1 Stun Armor |
-| Arrow Guard 2 | 1 | +4% Projectile Resistance |
 | Endurance | 2 | Teaches Endurance, an Epic Fight Passive skill: getting hit while winding up an attack grants stun resistance. Equip it in the Combat Skills box of the abilities screen |
-| Aegis (Shield IV) | 3 | Unlocks Shield (Level 4) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Fortress 2 | 1 | +2% Damage Resistance |
-| Bulwark (Fortify III) | 3 | Unlocks Fortify (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Bulwark (Fortify III) | 3 | Unlocks Fortify (Level 3) (60 mana, 180 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Plate Mastery 2 | 1 | +0.5 Armor Toughness |
+| Arrow Guard Mastery | 2 | +7% Projectile Resistance |
 | Greatsword 3 | 1 | +5% Greatsword Damage |
 | Unshakable Mastery | 2 | +2 Stun Armor |
-| Arrow Guard Mastery | 2 | +7% Projectile Resistance |
 | Fortress 3 | 1 | +2% Damage Resistance |
 | Plate Mastery 3 | 1 | +0.5 Armor Toughness |
 | Greatsword 4 | 1 | +5% Greatsword Damage |
@@ -76,146 +197,147 @@ An armoured wall. Knights soak up hits with damage and projectile resistance, ar
 | Greatsword Mastery | 2 | +10% Greatsword Damage |
 | Fortress Mastery | 2 | +4% Damage Resistance |
 
-Signature maximums: Damage Resistance +14%, Greatsword Damage +30%, Stun Armor +4, Projectile Resistance +15%, Armor Toughness +2.5. Plus the Warrior class spokes.
+Signature maximums: Damage Resistance +14%, Projectile Resistance +15%, Greatsword Damage +30%, Stun Armor +4, Armor Toughness +2.5. Plus the Warrior class spokes.
 
 ## Samurai (Warrior)
 
 A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. A Stance channels fire, wind, water or earth, Flaming Strike sets the blade alight, and Parrying and Technician reward perfect timing.
 
-132 skills (86 of them twigs), 154 points in total (41 available).
+135 skills (77 of them twigs), 161 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Way of the Blade | 1 | +5% Katana Damage |
-| Impact 1 | 1 | +0.1 Impact (stagger power) |
-| Cutting Edge 1 | 1 | +5% Armor Shred |
-| Edge 1 | 1 | +5% Katana Damage |
-| Retribution 1 | 1 | +3% Damage Reflection |
-| Myriad Blades Convergence | 5 | Unlocks Myriad Blades Convergence (60 mana, no cooldown) on the ability wheel |
+| Blitz | 3 | Unlocks Blitz (15 mana, 8 s cooldown) on the ability wheel |
 | Parrying | 3 | Teaches Parrying, an Epic Fight Guard skill: guard just as a hit lands for a perfect parry that costs no stamina; also blocks projectiles. Equip it in the Combat Skills box of the abilities screen |
-| Blitz | 3 | Unlocks Blitz (30 mana, no cooldown) on the ability wheel |
-| Deflection 1 | 1 | +5% Stamina restored on Parry (of max) |
 | Stance | 2 | Unlocks Stance on the ability wheel (free): cast to take it up or drop it, sneak and cast to change element. Fire +15% attack speed, Wind +40% dodge distance, Water +50% perfect-parry window, Earth +15% attack damage. Your weapon trail takes the element's colour |
-| Impact 2 | 1 | +0.1 Impact (stagger power) |
-| Cutting Edge 2 | 1 | +5% Armor Shred |
-| Edge 2 | 1 | +5% Katana Damage |
-| Retribution 2 | 1 | +3% Damage Reflection |
+| Edge 1 | 1 | +5% Katana Damage |
+| Myriad Blades Convergence | 5 | Unlocks Myriad Blades Convergence (35 mana, own cooldown) on the ability wheel |
+| Impact 1 | 1 | +0.1 Impact (stagger power) |
+| Deflection 1 | 1 | +5% Stamina restored on Parry (of max) |
+| Cutting Edge 1 | 1 | +5% Armor Shred |
+| Retribution 1 | 1 | +3% Damage Reflection |
+| Surprise Attack | 3 | Unlocks Surprise Attack (15 mana, 15 s cooldown) on the ability wheel |
 | Technician | 2 | Teaches Technician, an Epic Fight Passive skill: dodging just before a hit restores stamina. Equip it in the Combat Skills box of the abilities screen |
-| Surprise Attack | 3 | Unlocks Surprise Attack (25 mana, no cooldown) on the ability wheel |
+| Flaming Strike | 2 | Unlocks Flaming Strike (Level 3) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Edge 2 | 1 | +5% Katana Damage |
+| Impact 2 | 1 | +0.1 Impact (stagger power) |
 | Deflection 2 | 1 | +5% Stamina restored on Parry (of max) |
-| Flaming Strike | 2 | Unlocks Flaming Strike (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Impact 3 | 1 | +0.1 Impact (stagger power) |
-| Cutting Edge 3 | 1 | +5% Armor Shred |
+| Cutting Edge 2 | 1 | +5% Armor Shred |
+| Retribution 2 | 1 | +3% Damage Reflection |
 | Edge 3 | 1 | +5% Katana Damage |
-| Retribution 3 | 1 | +3% Damage Reflection |
+| Impact 3 | 1 | +0.1 Impact (stagger power) |
 | Deflection 3 | 1 | +5% Stamina restored on Parry (of max) |
-| Impact Mastery | 2 | +0.2 Impact (stagger power) |
-| Cutting Edge Mastery | 2 | +10% Armor Shred |
+| Cutting Edge 3 | 1 | +5% Armor Shred |
+| Retribution 3 | 1 | +3% Damage Reflection |
 | Edge 4 | 1 | +5% Katana Damage |
-| Retribution Mastery | 2 | +6% Damage Reflection |
+| Impact Mastery | 2 | +0.2 Impact (stagger power) |
 | Perfect Parry | 2 | +10% Stamina restored on Parry (of max) |
+| Cutting Edge Mastery | 2 | +10% Armor Shred |
+| Retribution Mastery | 2 | +6% Damage Reflection |
 | Iaijutsu | 2 | +10% Katana Damage |
 
-Signature maximums: Katana Damage +35%, Impact (stagger power) +0.5, Armor Shred +25%, Damage Reflection +15%, Stamina restored on Parry (of max) +25%. Plus the Warrior class spokes.
+Signature maximums: Katana Damage +35%, Impact (stagger power) +0.5, Stamina restored on Parry (of max) +25%, Armor Shred +25%, Damage Reflection +15%. Plus the Warrior class spokes.
 
 ## Berzerker (Warrior)
 
 Pure aggression. Berzerkers stack raw attack damage, axe damage and life steal, hit more targets per swing and knock them flying. Fang Strike tears the ground open, Burning Dash and Stomp close the gap, Heartstop lets them ignore death for a few seconds, and Berserker and Forbidden Strength turn wounds into power.
 
-131 skills (88 of them twigs), 149 points in total (41 available).
+149 skills (94 of them twigs), 171 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Bloodrage | 1 | +0.5 Attack Damage |
-| Burning Dash | 2 | Unlocks Burning Dash (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Brutal 1 | 1 | +0.2 Attack Knockback |
-| Rampage Mastery | 2 | +1 Targets Hit per Swing |
-| Axe 1 | 1 | +5% Axe Damage |
 | Fury 1 | 1 | +0.25 Attack Damage |
-| Heartstop | 3 | Unlocks Heartstop (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Fang Strike | 2 | Unlocks Fang Strike (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Brutal 1 | 1 | +0.2 Attack Knockback |
+| Axe 1 | 1 | +5% Axe Damage |
+| Burning Dash | 2 | Unlocks Burning Dash (Level 3) (14 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Rampage Mastery | 2 | +1 Targets Hit per Swing |
+| Heartstop | 3 | Unlocks Heartstop (Level 1) (60 mana, 120 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fang Strike | 2 | Unlocks Fang Strike (Level 3) (22 mana, 7.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Berserker | 3 | Teaches Berserker, an Epic Fight Passive skill: more attack damage and attack speed the more health you are missing. Equip it in the Combat Skills box of the abilities screen |
 | Bloodlust 1 | 1 | +1% Life Steal |
-| Stomp | 2 | Unlocks Stomp (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fury 2 | 1 | +0.25 Attack Damage |
 | Brutal 2 | 1 | +0.2 Attack Knockback |
 | Axe 2 | 1 | +5% Axe Damage |
-| Fury 2 | 1 | +0.25 Attack Damage |
-| Fang Strike V | 2 | Unlocks Fang Strike (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Stomp | 2 | Unlocks Stomp (Level 2) (36 mana, 24 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fang Strike V | 2 | Unlocks Fang Strike (Level 5) (25 mana, 7.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Forbidden Strength | 2 | Teaches Forbidden Strength, an Epic Fight Passive skill: when stamina runs out, actions cost health instead. Equip it in the Combat Skills box of the abilities screen |
 | Bloodlust 2 | 1 | +1% Life Steal |
+| Fury 3 | 1 | +0.25 Attack Damage |
 | Brutal Mastery | 2 | +0.4 Attack Knockback |
 | Axe 3 | 1 | +5% Axe Damage |
-| Fury 3 | 1 | +0.25 Attack Damage |
 | Bloodlust 3 | 1 | +1% Life Steal |
-| Axe 4 | 1 | +5% Axe Damage |
 | Fury 4 | 1 | +0.25 Attack Damage |
+| Axe 4 | 1 | +5% Axe Damage |
 | Bloodlust Mastery | 2 | +2% Life Steal |
-| Axe Mastery | 2 | +10% Axe Damage |
 | Fury Mastery | 2 | +0.5 Attack Damage |
+| Axe Mastery | 2 | +10% Axe Damage |
 
-Signature maximums: Attack Damage +2, Attack Knockback +0.8, Targets Hit per Swing +1, Axe Damage +30%, Life Steal +5%. Plus the Warrior class spokes.
+Signature maximums: Attack Damage +2, Attack Knockback +0.8, Axe Damage +30%, Targets Hit per Swing +1, Life Steal +5%. Plus the Warrior class spokes.
 
 ## Holy (Mage)
 
-A healer and support caster. Holy power strengthens light spells, healing received rises, and holy resistance protects against dark magic. Guiding Bolt, Heal, Greater Heal, Blessing of Life, Healing Circle, Cloud of Regeneration, Wisp, Cleanse, Sunbeam and Angel Wing keep a party alive, and Adaptive Skin hardens against whatever hurts you.
+A healer and support caster. Holy power strengthens light spells, healing received rises, and holy resistance protects against dark magic. Guiding Bolt, Heal, Greater Heal, Blessing of Life, Healing Circle, Cloud of Regeneration, Wisp, Cleanse, Sunbeam and Angel Wing keep a party alive, Divine Smite brings the light down on undead, and Adaptive Skin hardens against whatever hurts you.
 
-128 skills (81 of them twigs), 151 points in total (41 available).
+133 skills (73 of them twigs), 161 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Devotion | 1 | Unlocks Guiding Bolt (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Faith 1 | 1 | +3% Holy Spell Power |
+| Devotion | 1 | Unlocks Guiding Bolt (Level 3) (18 mana, 12 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Angel Wing | 3 | Unlocks Angel Wing (Level 1) (48 mana, 120 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Cloud Of Regeneration | 2 | Unlocks Cloud Of Regeneration (Level 3) (10 mana, 52.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Divine Smite | 2 | Unlocks Divine Smite (Level 3) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Heal | 2 | Unlocks Heal (Level 3) (36 mana, 45 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Mercy 1 | 1 | +5% Healing Received |
-| Sanctity 1 | 1 | +5% Holy Resistance |
-| Heal | 2 | Unlocks Heal (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Angel Wing | 3 | Unlocks Angel Wing (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Cloud Of Regeneration | 2 | Unlocks Cloud Of Regeneration (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Healing Circle | 2 | Unlocks Healing Circle (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Faith 1 | 1 | +3% Holy Spell Power |
+| Healing Circle | 2 | Unlocks Healing Circle (Level 3) (36 mana, 37.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Adaptive Skin | 3 | Teaches Adaptive Skin, an Epic Fight Passive skill: gain stacking resistance to the damage types you have taken recently. Equip it in the Combat Skills box of the abilities screen |
-| Faith 2 | 1 | +3% Holy Spell Power |
+| Sanctity 1 | 1 | +5% Holy Resistance |
+| Greater Heal | 3 | Unlocks Greater Heal (Level 1) (60 mana, 67.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Wisp | 2 | Unlocks Wisp (Level 3) (11 mana, 4.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Blessing Of Life | 2 | Unlocks Blessing Of Life (Level 3) (12 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Mercy 2 | 1 | +5% Healing Received |
+| Faith 2 | 1 | +3% Holy Spell Power |
+| Sunbeam | 3 | Unlocks Sunbeam (Level 3) (36 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Sanctity 2 | 1 | +5% Holy Resistance |
-| Blessing Of Life | 2 | Unlocks Blessing Of Life (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Greater Heal | 3 | Unlocks Greater Heal (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Wisp | 2 | Unlocks Wisp (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Sunbeam | 3 | Unlocks Sunbeam (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Faith 3 | 1 | +3% Holy Spell Power |
+| Cleanse | 2 | Unlocks Cleanse (Level 1) (60 mana, 90 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Radiance (Guiding Bolt V) | 2 | Unlocks Guiding Bolt (Level 5) (24 mana, 12 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Mercy 3 | 1 | +5% Healing Received |
+| Faith 3 | 1 | +3% Holy Spell Power |
 | Sanctity Mastery | 2 | +10% Holy Resistance |
-| Radiance (Guiding Bolt V) | 2 | Unlocks Guiding Bolt (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Cleanse | 2 | Unlocks Cleanse (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Faith 4 | 1 | +3% Holy Spell Power |
 | Mercy Mastery | 2 | +10% Healing Received |
+| Faith 4 | 1 | +3% Holy Spell Power |
 | Faith Mastery | 2 | +6% Holy Spell Power |
 
-Signature maximums: Holy Spell Power +18%, Healing Received +25%, Holy Resistance +20%. Plus the Mage class spokes.
+Signature maximums: Healing Received +25%, Holy Spell Power +18%, Holy Resistance +20%. Plus the Mage class spokes.
 
 ## Flame (Mage)
 
 Burst damage and constant pressure. Fire power and cooldown reduction keep the flames coming, from Firebolt, Fire Breath and Scorch to Magma Bomb, Wall of Fire, Blaze Storm, Heat Surge, Fireball and Raise Hell, while ember skin resists fire and Vengeance burns back at whoever hurt you.
 
-121 skills (75 of them twigs), 142 points in total (41 available).
+146 skills (88 of them twigs), 171 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Kindling | 1 | Unlocks Firebolt (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Fire Breath | 2 | Unlocks Fire Breath (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Kindling | 1 | Unlocks Firebolt (Level 3) (8 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Inferno 1 | 1 | +3% Fire Spell Power |
+| Fire Breath | 2 | Unlocks Fire Breath (Level 3) (4 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Vengeance | 3 | Teaches Vengeance, an Epic Fight Passive skill: bonus damage against whoever last hurt you; killing them grants a fading damage boost. Equip it in the Combat Skills box of the abilities screen |
 | Ember Skin 1 | 1 | +5% Fire Resistance |
-| Blaze Storm | 2 | Unlocks Blaze Storm (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Heat Surge | 2 | Unlocks Heat Surge (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Scorch | 2 | Unlocks Scorch (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Blaze Storm | 2 | Unlocks Blaze Storm (Level 3) (4 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Heat Surge | 2 | Unlocks Heat Surge (Level 2) (36 mana, 67.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Scorch | 2 | Unlocks Scorch (Level 3) (36 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Wildfire 1 | 1 | +2% Cooldown Reduction |
-| Magma Bomb | 2 | Unlocks Magma Bomb (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Inferno 2 | 1 | +3% Fire Spell Power |
+| Magma Bomb | 2 | Unlocks Magma Bomb (Level 3) (24 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Ember Skin 2 | 1 | +5% Fire Resistance |
-| Raise Hell | 3 | Unlocks Raise Hell (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Fireball | 3 | Unlocks Fireball (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Wall Of Fire | 2 | Unlocks Wall Of Fire (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Raise Hell | 3 | Unlocks Raise Hell (Level 1) (54 mana, 37.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fireball | 3 | Unlocks Fireball (Level 2) (45 mana, 37.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Wall Of Fire | 2 | Unlocks Wall Of Fire (Level 3) (24 mana, 45 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Wildfire 2 | 1 | +2% Cooldown Reduction |
-| Blaze (Firebolt V) | 2 | Unlocks Firebolt (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Inferno 3 | 1 | +3% Fire Spell Power |
+| Blaze (Firebolt V) | 2 | Unlocks Firebolt (Level 5) (11 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Ember Skin Mastery | 2 | +10% Fire Resistance |
 | Wildfire 3 | 1 | +2% Cooldown Reduction |
 | Inferno 4 | 1 | +3% Fire Spell Power |
@@ -228,61 +350,61 @@ Signature maximums: Fire Spell Power +18%, Fire Resistance +20%, Cooldown Reduct
 
 A mobile storm caster. Lightning power grows, casting barely slows you down, and grounding resists shocks. Electrocute, Ball Lightning, Chain Lightning, Lightning Lance, Shockwave, Lightning Bolt and Thunderstorm punish anything in reach, while Charge, Volt Strike and Demolition Leap keep you moving.
 
-116 skills (70 of them twigs), 137 points in total (41 available).
+124 skills (66 of them twigs), 149 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Static | 1 | Unlocks Electrocute (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Charge | 2 | Unlocks Charge (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Ball Lightning | 2 | Unlocks Ball Lightning (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Swift Current 1 | 1 | +5% Movement Speed while Casting |
+| Static | 1 | Unlocks Electrocute (Level 3) (3 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Storm 1 | 1 | +3% Lightning Spell Power |
+| Charge | 2 | Unlocks Charge (Level 1) (30 mana, 60 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Swift Current 1 | 1 | +5% Movement Speed while Casting |
 | Grounded 1 | 1 | +5% Lightning Resistance |
+| Ball Lightning | 2 | Unlocks Ball Lightning (Level 3) (17 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Demolition Leap | 3 | Teaches Demolition Leap, an Epic Fight Mobility skill: charge up and launch yourself where you look; halves your next fall damage. Equip it in the Combat Skills box of the abilities screen |
-| Shockwave | 2 | Unlocks Shockwave (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Lightning Lance | 2 | Unlocks Lightning Lance (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Thunderstorm | 3 | Unlocks Thunderstorm (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Chain Lightning | 2 | Unlocks Chain Lightning (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Swift Current 2 | 1 | +5% Movement Speed while Casting |
+| Shockwave | 2 | Unlocks Shockwave (Level 2) (45 mana, 45 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Lightning Lance | 2 | Unlocks Lightning Lance (Level 3) (42 mana, 12 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Storm 2 | 1 | +3% Lightning Spell Power |
+| Thunderstorm | 3 | Unlocks Thunderstorm (Level 1) (42 mana, 120 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Swift Current 2 | 1 | +5% Movement Speed while Casting |
 | Grounded 2 | 1 | +5% Lightning Resistance |
-| Volt Strike | 2 | Unlocks Volt Strike (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Lightning Bolt | 3 | Unlocks Lightning Bolt (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Overcharge (Electrocute V) | 2 | Unlocks Electrocute (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Swift Current 3 | 1 | +5% Movement Speed while Casting |
+| Chain Lightning | 2 | Unlocks Chain Lightning (Level 3) (23 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Volt Strike | 2 | Unlocks Volt Strike (Level 3) (24 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Lightning Bolt | 3 | Unlocks Lightning Bolt (Level 2) (54 mana, 37.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Storm 3 | 1 | +3% Lightning Spell Power |
+| Swift Current 3 | 1 | +5% Movement Speed while Casting |
 | Grounded Mastery | 2 | +10% Lightning Resistance |
-| Swift Current Mastery | 2 | +10% Movement Speed while Casting |
+| Overcharge (Electrocute V) | 2 | Unlocks Electrocute (Level 5) (4 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Storm 4 | 1 | +3% Lightning Spell Power |
+| Swift Current Mastery | 2 | +10% Movement Speed while Casting |
 | Storm Mastery | 2 | +6% Lightning Spell Power |
 
-Signature maximums: Movement Speed while Casting +25%, Lightning Spell Power +18%, Lightning Resistance +20%. Plus the Mage class spokes.
+Signature maximums: Lightning Spell Power +18%, Movement Speed while Casting +25%, Lightning Resistance +20%. Plus the Mage class spokes.
 
 ## Necromancy (Mage)
 
 Blood magic and the risen dead. Blood power and summon damage feed Wither Skull, Blood Slash, Blood Needles, Ray of Siphoning, Devour, Raise Dead, Summon Vex and Sacrifice, and Stamina Pillager feeds on every kill, turning every fight into a war of attrition.
 
-115 skills (70 of them twigs), 134 points in total (41 available).
+133 skills (76 of them twigs), 156 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Grave Touch | 1 | Unlocks Wither Skull (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Blood Needles | 2 | Unlocks Blood Needles (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Grave Touch | 1 | Unlocks Wither Skull (Level 3) (14 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Blood 1 | 1 | +3% Blood Spell Power |
 | Stamina Pillager | 3 | Teaches Stamina Pillager, an Epic Fight Passive skill: killing your target restores part of your missing stamina. Equip it in the Combat Skills box of the abilities screen |
-| Raise Dead | 3 | Unlocks Raise Dead (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Blood Slash | 2 | Unlocks Blood Slash (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Blood Slash | 2 | Unlocks Blood Slash (Level 2) (18 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Blood Needles | 2 | Unlocks Blood Needles (Level 3) (21 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Raise Dead | 3 | Unlocks Raise Dead (Level 2) (36 mana, 150 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Legion 1 | 1 | +5% Summon Damage |
 | Hemomancy 1 | 1 | +5% Blood Resistance |
-| Summon Vex | 2 | Unlocks Summon Vex (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Blood 2 | 1 | +3% Blood Spell Power |
-| Devour | 2 | Unlocks Devour (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Ray Of Siphoning | 2 | Unlocks Ray Of Siphoning (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Ray Of Siphoning | 2 | Unlocks Ray Of Siphoning (Level 3) (6 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Summon Vex | 2 | Unlocks Summon Vex (Level 2) (36 mana, 150 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Devour | 2 | Unlocks Devour (Level 3) (20 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Legion 2 | 1 | +5% Summon Damage |
 | Hemomancy 2 | 1 | +5% Blood Resistance |
-| Sacrifice | 2 | Unlocks Sacrifice (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Blood 3 | 1 | +3% Blood Spell Power |
-| Withering (Wither Skull V) | 2 | Unlocks Wither Skull (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Withering (Wither Skull V) | 2 | Unlocks Wither Skull (Level 5) (17 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Sacrifice | 2 | Unlocks Sacrifice (Level 3) (21 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Legion 3 | 1 | +5% Summon Damage |
 | Hemomancy Mastery | 2 | +10% Blood Resistance |
 | Blood 4 | 1 | +3% Blood Spell Power |
@@ -295,27 +417,27 @@ Signature maximums: Blood Spell Power +18%, Summon Damage +25%, Blood Resistance
 
 Control and protection. Ice power, magic resistance and cold resistance back up Icicle, Cone of Cold, Ray of Frost, Frostwave, Frost Step, Ice Spikes, Ice Block, Frostbite and Blizzard, which slow, freeze and shatter anything that comes close. Hyper Vitality fuels weapon skills with stamina.
 
-122 skills (76 of them twigs), 143 points in total (41 available).
+120 skills (62 of them twigs), 145 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Frostbitten | 1 | Unlocks Icicle (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Ice Block | 2 | Unlocks Ice Block (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Cone Of Cold | 2 | Unlocks Cone Of Cold (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Ice Spikes | 2 | Unlocks Ice Spikes (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Frostbitten | 1 | Unlocks Icicle (Level 3) (8 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Ice Block | 2 | Unlocks Ice Block (Level 2) (30 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Cone Of Cold | 2 | Unlocks Cone Of Cold (Level 3) (4 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Ice Spikes | 2 | Unlocks Ice Spikes (Level 3) (30 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Hyper Vitality | 3 | Teaches Hyper Vitality, an Epic Fight Passive skill: innate skills use stamina when your weapon charge is not full. Equip it in the Combat Skills box of the abilities screen |
-| Frostwave | 2 | Unlocks Frostwave (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Frostwave | 2 | Unlocks Frostwave (Level 3) (36 mana, 67.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Winter 1 | 1 | +3% Ice Spell Power |
 | Glacial Ward 1 | 1 | +3% Magic Resistance |
 | Cold Blood 1 | 1 | +5% Ice Resistance |
-| Frostbite | 3 | Unlocks Frostbite (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Frost Step | 2 | Unlocks Frost Step (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Blizzard | 3 | Unlocks Blizzard (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Ray Of Frost | 2 | Unlocks Ray Of Frost (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Frostbite | 3 | Unlocks Frostbite (Level 1) (48 mana, 90 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Frost Step | 2 | Unlocks Frost Step (Level 3) (15 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Blizzard | 3 | Unlocks Blizzard (Level 2) (30 mana, 33 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Ray Of Frost | 2 | Unlocks Ray Of Frost (Level 3) (33 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Winter 2 | 1 | +3% Ice Spell Power |
 | Glacial Ward 2 | 1 | +3% Magic Resistance |
 | Cold Blood 2 | 1 | +5% Ice Resistance |
-| Shatter (Icicle V) | 2 | Unlocks Icicle (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Shatter (Icicle V) | 2 | Unlocks Icicle (Level 5) (11 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Winter 3 | 1 | +3% Ice Spell Power |
 | Glacial Ward 3 | 1 | +3% Magic Resistance |
 | Cold Blood Mastery | 2 | +10% Ice Resistance |
@@ -327,230 +449,246 @@ Signature maximums: Ice Spell Power +18%, Magic Resistance +14%, Ice Resistance 
 
 ## Assassin (Rogue)
 
-Strike first, strike from behind. Daggers, backstab damage, armour negation and protection shred make every opening lethal. Echoing Strikes, Acupuncture and Bonebreaker punish a single target, while Blood Step and Invisibility get you in and out unseen.
+Strike first, strike from behind. Daggers, backstab damage, armour negation and protection shred make every opening lethal. Echoing Strikes, Acupuncture and Bonebreaker punish a single target, Throw hurls your blade at whatever runs, and Blood Step and Invisibility get you in and out unseen.
 
-130 skills (88 of them twigs), 146 points in total (41 available).
+125 skills (70 of them twigs), 146 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Silent Blade | 1 | +5% Dagger Damage |
-| Dagger 1 | 1 | +5% Dagger Damage |
-| Echoing Strikes | 2 | Unlocks Echoing Strikes (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Pierce 1 | 1 | +3% Armor Negation |
-| Backstab 1 | 1 | +5% Backstab Damage |
-| Blood Step | 2 | Unlocks Blood Step (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Echoing Strikes | 2 | Unlocks Echoing Strikes (Level 2) (36 mana, 90 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rend 1 | 1 | +5% Protection Shred |
+| Throw | 2 | Unlocks Throw (Level 3) (12 mana, 12 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Dagger 1 | 1 | +5% Dagger Damage |
+| Backstab 1 | 1 | +5% Backstab Damage |
+| Blood Step | 2 | Unlocks Blood Step (Level 2) (24 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Pierce 1 | 1 | +3% Armor Negation |
 | Bonebreaker | 3 | Teaches Bonebreaker, an Epic Fight Passive skill: repeated hits on the same target deal stacking bonus damage. Equip it in the Combat Skills box of the abilities screen |
-| Dagger 2 | 1 | +5% Dagger Damage |
-| Acupuncture | 2 | Unlocks Acupuncture (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Pierce 2 | 1 | +3% Armor Negation |
-| Backstab 2 | 1 | +5% Backstab Damage |
-| Invisibility | 3 | Unlocks Invisibility (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Acupuncture | 2 | Unlocks Acupuncture (Level 3) (21 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rend 2 | 1 | +5% Protection Shred |
-| Dagger 3 | 1 | +5% Dagger Damage |
-| Pierce 3 | 1 | +3% Armor Negation |
-| Backstab 3 | 1 | +5% Backstab Damage |
+| Dagger 2 | 1 | +5% Dagger Damage |
+| Backstab 2 | 1 | +5% Backstab Damage |
+| Invisibility | 3 | Unlocks Invisibility (Level 2) (26 mana, 67.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Pierce 2 | 1 | +3% Armor Negation |
 | Rend Mastery | 2 | +10% Protection Shred |
+| Dagger 3 | 1 | +5% Dagger Damage |
+| Backstab 3 | 1 | +5% Backstab Damage |
+| Pierce 3 | 1 | +3% Armor Negation |
 | Dagger 4 | 1 | +5% Dagger Damage |
-| Pierce Mastery | 2 | +6% Armor Negation |
 | Backstab Mastery | 2 | +15% Backstab Damage |
+| Pierce Mastery | 2 | +6% Armor Negation |
 | Dagger Mastery | 2 | +10% Dagger Damage |
 
-Signature maximums: Dagger Damage +35%, Armor Negation +15%, Backstab Damage +30%, Protection Shred +20%. Plus the Rogue class spokes.
+Signature maximums: Dagger Damage +35%, Protection Shred +20%, Backstab Damage +30%, Armor Negation +15%. Plus the Rogue class spokes.
 
 ## Phantom (Rogue)
 
 A rapier duellist built around the dodge. Rapiers (a sword with an empty off hand) grow sharper, dodges cost less stamina, and the first hit after a dodge lands as a riposte. Evasion turns incoming blows into blinks, Slow drags enemies down, Step replaces the roll with a sidestep and Catharsis charges the blade with every dodge.
 
-115 skills (71 of them twigs), 137 points in total (41 available).
+137 skills (81 of them twigs), 163 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Duelist | 1 | +5% Rapier Damage (sword, empty off hand) |
-| Step | 2 | Teaches Step, an Epic Fight Dodge skill: a quick sidestep in place of the roll that evades every attack. Equip it in the Combat Skills box of the abilities screen |
 | Rapier 1 | 1 | +5% Rapier Damage (sword, empty off hand) |
 | Phase Step 1 | 1 | +5% Dodge Stamina Cost Reduction |
-| Riposte 1 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
+| Step | 2 | Teaches Step, an Epic Fight Dodge skill: a quick sidestep in place of the roll that evades every attack. Equip it in the Combat Skills box of the abilities screen |
 | Feint 1 | 1 | +5% Melee Resistance Shred |
-| Follow Up Kick | 3 | Unlocks Follow Up Kick (25 mana, no cooldown) on the ability wheel |
-| Evasion | 3 | Unlocks Evasion (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Slow | 2 | Unlocks Slow (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Catharsis | 3 | Teaches Catharsis, an Epic Fight Passive skill: dodging attacks charges your weapon's innate skill. Equip it in the Combat Skills box of the abilities screen |
+| Riposte 1 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
+| Follow Up Kick | 3 | Unlocks Follow Up Kick (15 mana, 6 s cooldown) on the ability wheel |
+| Evasion | 3 | Unlocks Evasion (Level 1) (24 mana, 180 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Slow | 2 | Unlocks Slow (Level 2) (36 mana, 120 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rapier 2 | 1 | +5% Rapier Damage (sword, empty off hand) |
 | Phase Step 2 | 1 | +5% Dodge Stamina Cost Reduction |
-| Riposte 2 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
+| Catharsis | 3 | Teaches Catharsis, an Epic Fight Passive skill: dodging attacks charges your weapon's innate skill. Equip it in the Combat Skills box of the abilities screen |
 | Feint 2 | 1 | +5% Melee Resistance Shred |
-| Don't You Have a Heart? | 4 | Unlocks Don't You Have a Heart? (30 mana, no cooldown) on the ability wheel |
-| Phantasm (Evasion II) | 3 | Unlocks Evasion (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Riposte 2 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
+| Don't You Have a Heart? | 4 | Unlocks Don't You Have a Heart? (15 mana, 10 s cooldown) on the ability wheel |
+| Phantasm (Evasion II) | 3 | Unlocks Evasion (Level 2) (36 mana, 180 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rapier 3 | 1 | +5% Rapier Damage (sword, empty off hand) |
 | Phase Step 3 | 1 | +5% Dodge Stamina Cost Reduction |
-| Riposte 3 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
 | Feint Mastery | 2 | +10% Melee Resistance Shred |
+| Riposte 3 | 1 | +5% Riposte Damage (first hit within 3 s of a dodge) |
 | Rapier 4 | 1 | +5% Rapier Damage (sword, empty off hand) |
 | Phase Step Mastery | 2 | +10% Dodge Stamina Cost Reduction |
 | Riposte Mastery | 2 | +15% Riposte Damage (first hit within 3 s of a dodge) |
 | Rapier Mastery | 2 | +10% Rapier Damage (sword, empty off hand) |
 
-Signature maximums: Rapier Damage (sword, empty off hand) +35%, Dodge Stamina Cost Reduction +25%, Riposte Damage (first hit within 3 s of a dodge) +30%, Melee Resistance Shred +20%. Plus the Rogue class spokes.
+Signature maximums: Rapier Damage (sword, empty off hand) +35%, Dodge Stamina Cost Reduction +25%, Melee Resistance Shred +20%, Riposte Damage (first hit within 3 s of a dodge) +30%. Plus the Rogue class spokes.
 
 ## Scout (Rogue)
 
-Speed, range and awareness. Scouts swim faster, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot.
+Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Ascension's lightning leap, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, and Touch Dig tunnels through anything.
 
-144 skills (103 of them twigs), 161 points in total (41 available).
+121 skills (62 of them twigs), 145 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Pathfinder | 1 | +10% Swim Speed |
-| Haste | 2 | Unlocks Haste (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Gust | 2 | Unlocks Gust (Level 3) (24 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Void Ward 1 | 1 | +5% Ender Resistance |
-| Current 1 | 1 | +10% Swim Speed |
 | Trailblazer 1 | 1 | +5% Block Breaking Speed |
-| Rift 1 | 1 | +3% Ender Spell Power |
-| Teleport | 2 | Unlocks Teleport (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Haste | 2 | Unlocks Haste (Level 2) (36 mana, 120 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Phantom Ascent | 3 | Teaches Phantom Ascent, an Epic Fight Mobility skill: jump again in mid-air. Equip it in the Combat Skills box of the abilities screen |
-| Gust | 2 | Unlocks Gust (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Planar Sight | 3 | Unlocks Planar Sight (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Current 1 | 1 | +10% Swim Speed |
+| Harpooner 1 | 1 | +5% Trident Damage |
+| Teleport | 2 | Unlocks Teleport (Level 2) (15 mana, 9 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Rift 1 | 1 | +3% Ender Spell Power |
+| Ascension | 2 | Unlocks Ascension (Level 3) (31 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Void Ward 2 | 1 | +5% Ender Resistance |
-| Current 2 | 1 | +10% Swim Speed |
 | Trailblazer 2 | 1 | +5% Block Breaking Speed |
+| Planar Sight | 3 | Unlocks Planar Sight (Level 1) (90 mana, 200 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Current 2 | 1 | +10% Swim Speed |
+| Harpooner 2 | 1 | +5% Trident Damage |
+| Blink (Teleport IV) | 2 | Unlocks Teleport (Level 4) (21 mana, 9 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rift 2 | 1 | +3% Ender Spell Power |
-| Blink (Teleport IV) | 2 | Unlocks Teleport (Level 4) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Touch Dig | 2 | Unlocks Touch Dig (Level 2) (9 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Void Ward Mastery | 2 | +10% Ender Resistance |
-| Current Mastery | 2 | +10% Swim Speed |
 | Trailblazer 3 | 1 | +5% Block Breaking Speed |
+| Current Mastery | 2 | +10% Swim Speed |
+| Harpooner 3 | 1 | +5% Trident Damage |
 | Rift 3 | 1 | +3% Ender Spell Power |
 | Trailblazer Mastery | 2 | +10% Block Breaking Speed |
+| Harpooner Mastery | 2 | +10% Trident Damage |
 | Rift Mastery | 2 | +6% Ender Spell Power |
 
-Signature maximums: Swim Speed +40%, Ender Resistance +20%, Block Breaking Speed +25%, Ender Spell Power +15%. Plus the Rogue class spokes.
+Signature maximums: Swim Speed +40%, Ender Resistance +20%, Block Breaking Speed +25%, Trident Damage +25%, Ender Spell Power +15%. Plus the Rogue class spokes.
 
 ## Thief (Rogue)
 
-Luck and loot. Thieves gain luck, double drops, extra Fortune, longer reach and cheaper anvil repairs. Boogie Woogie claps swap places with creatures or blocks to confuse fights, Scapegoat and Firecracker cover a getaway, and Emergency Escape dodges out of any hit.
+Luck and loot. Thieves gain luck, double drops, extra Fortune, longer reach, cheaper anvil repairs and a cutthroat's sword arm. Boogie Woogie claps swap places with creatures or blocks to confuse fights, Lob Creeper and Chain Creeper blow open a fight, Scapegoat and Firecracker cover a getaway, and Emergency Escape dodges out of any hit.
 
-134 skills (94 of them twigs), 152 points in total (41 available).
+137 skills (79 of them twigs), 162 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Light Fingers | 1 | +1 Luck |
-| Long Arms 1 | 1 | +0.25 Melee Reach (blocks) |
-| Boogie Woogie | 3 | Unlocks Boogie Woogie (15 mana, no cooldown) on the ability wheel |
+| Haggler 1 | 1 | -5% Anvil Repair Cost |
+| Fortune's Favour 1 | 1 | +1 Luck |
+| Lob Creeper | 2 | Unlocks Lob Creeper (Level 3) (14 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Boogie Woogie | 3 | Unlocks Boogie Woogie (10 mana, 2 s cooldown) on the ability wheel |
+| Cutthroat 1 | 1 | +5% Sword Damage |
 | Plunder 1 | 1 | +5% Chance of a Double Drop |
+| Scapegoat | 2 | Unlocks Scapegoat (Level 2) (27 mana, 67.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Long Arms 1 | 1 | +0.25 Melee Reach (blocks) |
 | Emergency Escape | 3 | Teaches Emergency Escape, an Epic Fight Passive skill: dodge even while being hit or out of stamina, and cancel attacks into a dodge. Equip it in the Combat Skills box of the abilities screen |
 | Prospector Mastery | 2 | +1 Fortune Level |
-| Haggler 1 | 1 | -5% Anvil Repair Cost |
-| Scapegoat | 2 | Unlocks Scapegoat (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Fortune's Favour 1 | 1 | +1 Luck |
-| Long Arms 2 | 1 | +0.25 Melee Reach (blocks) |
-| Block Clap | 3 | Unlocks Block Clap (15 mana, no cooldown) on the ability wheel |
-| Plunder 2 | 1 | +5% Chance of a Double Drop |
 | Haggler 2 | 1 | -5% Anvil Repair Cost |
-| Firecracker | 2 | Unlocks Firecracker (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Fortune's Favour 2 | 1 | +1 Luck |
-| Long Arms Mastery | 2 | +0.5 Melee Reach (blocks) |
-| Plunder 3 | 1 | +5% Chance of a Double Drop |
+| Chain Creeper | 2 | Unlocks Chain Creeper (Level 2) (30 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Block Clap | 3 | Unlocks Block Clap (10 mana, 2 s cooldown) on the ability wheel |
+| Cutthroat 2 | 1 | +5% Sword Damage |
+| Plunder 2 | 1 | +5% Chance of a Double Drop |
+| Firecracker | 2 | Unlocks Firecracker (Level 3) (14 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Long Arms 2 | 1 | +0.25 Melee Reach (blocks) |
 | Haggler Mastery | 2 | -10% Anvil Repair Cost |
 | Fortune's Favour Mastery | 2 | +2 Luck |
+| Cutthroat 3 | 1 | +5% Sword Damage |
+| Plunder 3 | 1 | +5% Chance of a Double Drop |
+| Long Arms Mastery | 2 | +0.5 Melee Reach (blocks) |
+| Cutthroat Mastery | 2 | +10% Sword Damage |
 | Plunder Mastery | 2 | +10% Chance of a Double Drop |
 
-Signature maximums: Luck +5, Melee Reach (blocks) +1, Chance of a Double Drop +25%, Fortune Level +1, Anvil Repair Cost -20%. Plus the Rogue class spokes.
+Signature maximums: Luck +5, Anvil Repair Cost -20%, Sword Damage +25%, Chance of a Double Drop +25%, Melee Reach (blocks) +1, Fortune Level +1. Plus the Rogue class spokes.
 
 ## Wanderer (Ranger)
 
-Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, and Adrenaline Fiend gets you back on your feet after every kill.
+Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, Fang Ward and Fang Swirl ring you with evoker fangs, Spectral Hammer clears the way, and Adrenaline Fiend gets you back on your feet after every kill.
 
-139 skills (97 of them twigs), 157 points in total (41 available).
+146 skills (85 of them twigs), 172 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Long Road | 1 | +10% Saturation from Food |
-| Sure-footed Mastery | 2 | +0.5 Step Height (blocks) |
-| Summon Horse | 2 | Unlocks Summon Horse (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fang Ward | 2 | Unlocks Fang Ward (Level 3) (33 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Pack Leader 1 | 1 | +8% Pet & Mount Damage |
 | Adrenaline Fiend | 3 | Teaches Adrenaline Fiend, an Epic Fight Passive skill: stamina starts regenerating at once when you kill a mob. Equip it in the Combat Skills box of the abilities screen |
-| Provisions 1 | 1 | +10% Saturation from Food |
+| Counterspell | 3 | Unlocks Counterspell (Level 1) (30 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Sure-footed Mastery | 2 | +0.5 Step Height (blocks) |
 | Rider 1 | 1 | +5% Mount Speed |
-| Summon Polar Bear | 2 | Unlocks Summon Polar Bear (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Pack Leader 1 | 1 | +5% Pet & Mount Damage |
-| Counterspell | 3 | Unlocks Counterspell (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Summon Horse | 2 | Unlocks Summon Horse (Level 3) (32 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Companion 1 | 1 | +5% Pet & Mount Resistance |
-| Trusted Steed (Summon Horse V) | 2 | Unlocks Summon Horse (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Provisions 2 | 1 | +10% Saturation from Food |
+| Spectral Hammer | 2 | Unlocks Spectral Hammer (Level 3) (15 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Provisions 1 | 1 | +10% Saturation from Food |
+| Summon Polar Bear | 2 | Unlocks Summon Polar Bear (Level 3) (42 mana, 180 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fang Swirl | 2 | Unlocks Fang Swirl (Level 3) (43 mana, 42 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Pack Leader 2 | 1 | +8% Pet & Mount Damage |
 | Rider 2 | 1 | +5% Mount Speed |
-| Gluttony | 2 | Unlocks Gluttony (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Pack Leader 2 | 1 | +5% Pet & Mount Damage |
+| Trusted Steed (Summon Horse V) | 2 | Unlocks Summon Horse (Level 5) (35 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Companion 2 | 1 | +5% Pet & Mount Resistance |
-| Provisions 3 | 1 | +10% Saturation from Food |
+| Provisions 2 | 1 | +10% Saturation from Food |
+| Gluttony | 2 | Unlocks Gluttony (Level 1) (21 mana, 135 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Pack Leader Mastery | 2 | +15% Pet & Mount Damage |
 | Rider 3 | 1 | +5% Mount Speed |
-| Pack Leader Mastery | 2 | +10% Pet & Mount Damage |
 | Companion Mastery | 2 | +10% Pet & Mount Resistance |
-| Provisions Mastery | 2 | +20% Saturation from Food |
+| Provisions 3 | 1 | +10% Saturation from Food |
 | Rider Mastery | 2 | +10% Mount Speed |
+| Provisions Mastery | 2 | +20% Saturation from Food |
 
-Signature maximums: Saturation from Food +60%, Step Height (blocks) +0.5, Mount Speed +25%, Pet & Mount Damage +20%, Pet & Mount Resistance +20%. Plus the Ranger class spokes.
+Signature maximums: Saturation from Food +60%, Pet & Mount Damage +31%, Step Height (blocks) +0.5, Mount Speed +25%, Pet & Mount Resistance +20%. Plus the Ranger class spokes.
 
 ## Stalker (Ranger)
 
 Bows and crossbows. Ranged damage, arrow and bolt speed and evocation power make every shot count. Arrow Volley rains arrows on a whole area, Poison Arrow leaves a lingering toxic cloud, Fire Arrow burns, and Revelation turns well-timed defence into a stunning counter.
 
-122 skills (80 of them twigs), 139 points in total (41 available).
+120 skills (62 of them twigs), 142 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Hunter's Eye | 1 | +3% Ranged Damage |
-| Arbalest 1 | 1 | +5% Bolt Speed |
+| Hunter's Eye | 1 | +5% Ranged Damage |
 | Revelation | 3 | Teaches Revelation, an Epic Fight Identity skill: guarding, parrying and dodging build stacks; at full stacks unleash a stunning counter-attack. Equip it in the Combat Skills box of the abilities screen |
-| Fletcher's Art 1 | 1 | +3% Evocation Spell Power |
-| Poison Arrow | 2 | Unlocks Poison Arrow (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Longbow 1 | 1 | +5% Arrow Speed |
-| Arrow Volley | 2 | Unlocks Arrow Volley (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Aim 1 | 1 | +3% Ranged Damage |
-| Fire Arrow | 2 | Unlocks Fire Arrow (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Arbalest 2 | 1 | +5% Bolt Speed |
-| Fletcher's Art 2 | 1 | +3% Evocation Spell Power |
-| Thornshot (Poison Arrow V) | 2 | Unlocks Poison Arrow (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fletcher's Art 1 | 1 | +3% Evocation Spell Power |
+| Arbalest 1 | 1 | +5% Bolt Speed |
+| Poison Arrow | 2 | Unlocks Poison Arrow (Level 3) (30 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Fire Arrow | 2 | Unlocks Fire Arrow (Level 3) (30 mana, 12 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Arrow Volley | 2 | Unlocks Arrow Volley (Level 3) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Aim 1 | 1 | +5% Ranged Damage |
 | Longbow 2 | 1 | +5% Arrow Speed |
-| Rain of Arrows (Arrow Volley V) | 3 | Unlocks Arrow Volley (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Aim 2 | 1 | +3% Ranged Damage |
-| Arbalest Mastery | 2 | +10% Bolt Speed |
-| Fletcher's Art 3 | 1 | +3% Evocation Spell Power |
+| Fletcher's Art 2 | 1 | +3% Evocation Spell Power |
+| Arbalest 2 | 1 | +5% Bolt Speed |
+| Thornshot (Poison Arrow V) | 2 | Unlocks Poison Arrow (Level 5) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Rain of Arrows (Arrow Volley V) | 3 | Unlocks Arrow Volley (Level 5) (48 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Aim 2 | 1 | +5% Ranged Damage |
 | Longbow Mastery | 2 | +10% Arrow Speed |
-| Aim 3 | 1 | +3% Ranged Damage |
+| Fletcher's Art 3 | 1 | +3% Evocation Spell Power |
+| Arbalest Mastery | 2 | +10% Bolt Speed |
+| Aim 3 | 1 | +5% Ranged Damage |
 | Fletcher's Art Mastery | 2 | +6% Evocation Spell Power |
-| Aim 4 | 1 | +3% Ranged Damage |
-| Aim Mastery | 2 | +6% Ranged Damage |
+| Aim 4 | 1 | +5% Ranged Damage |
+| Aim Mastery | 2 | +10% Ranged Damage |
 
-Signature maximums: Ranged Damage +21%, Bolt Speed +20%, Evocation Spell Power +15%, Arrow Speed +20%. Plus the Ranger class spokes.
+Signature maximums: Ranged Damage +35%, Arrow Speed +20%, Evocation Spell Power +15%, Bolt Speed +20%. Plus the Ranger class spokes.
 
 ## Druid (Ranger)
 
 Nature magic and the land's healing. Nature power and resistance strengthen Acid Orb, Root, Firefly Swarm, Blight, Poison Splash, Spider Aspect, Oakskin and Earthquake, Meteor Slam brings the sky down, and standing on natural ground slowly heals you.
 
-121 skills (78 of them twigs), 143 points in total (41 available).
+139 skills (80 of them twigs), 166 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Wild Growth | 1 | Unlocks Acid Orb (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Wild Growth | 1 | Unlocks Acid Orb (Level 3) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Verdance 1 | 1 | +3% Nature Spell Power |
-| Entangle (Root V) | 2 | Unlocks Root (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Entangle (Root V) | 2 | Unlocks Root (Level 5) (34 mana, 52.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Grove 1 | 1 | +0.5 Health per 5 s on natural ground |
-| Meteor Slam | 3 | Teaches Meteor Slam, an Epic Fight Identity skill: slam into the ground from the air; the higher the fall, the more damage it deals and stamina it costs. Equip it in the Combat Skills box of the abilities screen |
-| Oakskin | 2 | Unlocks Oakskin (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Root | 2 | Unlocks Root (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Blight | 2 | Unlocks Blight (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Barkhide 1 | 1 | +5% Nature Resistance |
+| Meteor Slam | 3 | Teaches Meteor Slam, an Epic Fight Identity skill: slam into the ground from the air; the higher the fall, the more damage it deals and stamina it costs. Equip it in the Combat Skills box of the abilities screen |
+| Oakskin | 2 | Unlocks Oakskin (Level 2) (21 mana, 135 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Root | 2 | Unlocks Root (Level 3) (31 mana, 52.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Blight | 2 | Unlocks Blight (Level 2) (48 mana, 135 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Verdance 2 | 1 | +3% Nature Spell Power |
-| Earthquake | 3 | Unlocks Earthquake (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Earthquake | 3 | Unlocks Earthquake (Level 2) (36 mana, 24 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Grove 2 | 1 | +0.5 Health per 5 s on natural ground |
-| Barkskin (Oakskin IV) | 3 | Unlocks Oakskin (Level 4) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Firefly Swarm | 2 | Unlocks Firefly Swarm (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Poison Splash | 2 | Unlocks Poison Splash (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Barkhide 2 | 1 | +5% Nature Resistance |
+| Barkskin (Oakskin IV) | 3 | Unlocks Oakskin (Level 4) (33 mana, 135 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Firefly Swarm | 2 | Unlocks Firefly Swarm (Level 3) (36 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Poison Splash | 2 | Unlocks Poison Splash (Level 3) (36 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Verdance 3 | 1 | +3% Nature Spell Power |
 | Grove Mastery | 2 | +0.5 Health per 5 s on natural ground |
-| Corrosion (Acid Orb V) | 2 | Unlocks Acid Orb (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Spider Aspect | 2 | Unlocks Spider Aspect (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Barkhide Mastery | 2 | +10% Nature Resistance |
+| Corrosion (Acid Orb V) | 2 | Unlocks Acid Orb (Level 5) (48 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Spider Aspect | 2 | Unlocks Spider Aspect (Level 3) (27 mana, 135 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Verdance 4 | 1 | +3% Nature Spell Power |
 | Verdance Mastery | 2 | +6% Nature Spell Power |
 
@@ -558,31 +696,31 @@ Signature maximums: Nature Spell Power +18%, Health per 5 s on natural ground +1
 
 ## Cursed (Ranger)
 
-Cursed techniques fuelled by mana instead of cursed energy, with no cooldowns. Dismantle and Cleave cut enemies apart, and the Malevolent Shrine domain, closed and then open, shreds everything around you while you keep cutting. Cursed Control makes techniques cheaper; melee resistance and toughness shred round it out, with Swordmaster and Death Harvest for the blade.
+Cursed techniques fuelled by mana instead of cursed energy, each with its own cooldown. Dismantle and Cleave cut enemies apart, and the Malevolent Shrine domain, closed and then open, shreds everything around you while you keep cutting. Cursed Control makes techniques cheaper; melee resistance and toughness shred round it out, with Swordmaster and Death Harvest for the blade.
 
-144 skills (104 of them twigs), 167 points in total (41 available).
+127 skills (71 of them twigs), 155 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Cursed Body | 1 | +2% Melee Resistance |
 | Vessel 1 | 1 | +2% Melee Resistance |
-| Soul Hunt | 4 | Unlocks Soul Hunt (30 mana, no cooldown) on the ability wheel |
+| Soul Hunt | 4 | Unlocks Soul Hunt (20 mana, own cooldown) on the ability wheel |
 | Swordmaster | 3 | Teaches Swordmaster, an Epic Fight Passive skill: bonus attack speed. Equip it in the Combat Skills box of the abilities screen |
 | Cursed Control 1 | 1 | +7% Technique Mana Cost Reduction |
-| Dismantle | 2 | Unlocks Dismantle (20 mana, no cooldown) on the ability wheel. Hold the cast key to keep casting |
+| Dismantle | 2 | Unlocks Dismantle (12 mana, 1 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready |
 | Severing 1 | 1 | +5% Toughness Shred |
 | Vessel 2 | 1 | +2% Melee Resistance |
 | Death Harvest | 2 | Teaches Death Harvest, an Epic Fight Passive skill: killing an enemy with a weapon innate skill refunds weapon charge. Equip it in the Combat Skills box of the abilities screen |
 | Cursed Control 2 | 1 | +7% Technique Mana Cost Reduction |
-| Cleave | 3 | Unlocks Cleave (35 mana, no cooldown) on the ability wheel. Hold the cast key to keep casting |
+| Cleave | 3 | Unlocks Cleave (20 mana, 3 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready |
 | Severing 2 | 1 | +5% Toughness Shred |
 | Vessel 3 | 1 | +2% Melee Resistance |
 | Cursed Control 3 | 1 | +7% Technique Mana Cost Reduction |
-| Malevolent Shrine | 4 | Unlocks Malevolent Shrine (150 mana, no cooldown) on the ability wheel |
+| Malevolent Shrine | 4 | Unlocks Malevolent Shrine (100 mana, 120 s cooldown) on the ability wheel |
 | Severing Mastery | 2 | +10% Toughness Shred |
 | Vessel Mastery | 2 | +4% Melee Resistance |
 | Cursed Control 4 | 1 | +7% Technique Mana Cost Reduction |
-| Malevolent Shrine: Open | 4 | Unlocks Malevolent Shrine: Open (150 mana, no cooldown) on the ability wheel |
+| Malevolent Shrine: Open | 4 | Unlocks Malevolent Shrine: Open (100 mana, 120 s cooldown) on the ability wheel |
 | Cursed Control Mastery | 2 | +7% Technique Mana Cost Reduction |
 
 Signature maximums: Melee Resistance +12%, Technique Mana Cost Reduction +35%, Toughness Shred +20%. Plus the Ranger class spokes.

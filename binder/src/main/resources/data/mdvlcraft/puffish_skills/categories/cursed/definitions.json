@@ -31,21 +31,87 @@
     ],
     "cost": 1
   },
-  "vitality_1": {
-    "title": "Vitality 1",
-    "description": "+1 Max Health",
+  "endurance_1": {
+    "title": "Endurance 1",
+    "description": "+0.25 Max Stamina",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.max_health",
-          "value": 1,
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_1": {
+    "title": "Footing 1",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_1": {
+    "title": "Attunement 1",
+    "description": "+4 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 4,
           "operation": "addition"
         }
       }
@@ -66,7 +132,7 @@
   },
   "meditation_1": {
     "title": "Meditation 1",
-    "description": "+1% Mana Regen",
+    "description": "+1.5% Mana Regen",
     "icon": {
       "type": "texture",
       "data": {
@@ -78,7 +144,7 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
+          "value": 0.015,
           "operation": "addition"
         }
       }
@@ -97,87 +163,54 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "readiness_1": {
-    "title": "Readiness 1",
-    "description": "+0.5% Attack Speed",
+  "mending_1": {
+    "title": "Mending 1",
+    "description": "+1.5% Natural Regeneration",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.attack_speed",
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_1": {
+    "title": "Focus 1",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
           "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_1": {
-    "title": "Bounce 1",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_2": {
-    "title": "Meditation 2",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
           "operation": "addition"
         }
       }
@@ -195,6 +228,237 @@
     },
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_1": {
+    "title": "Might 1",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_2": {
+    "title": "Attunement 2",
+    "description": "+4 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 4,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_1": {
+    "title": "Willpower 1",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_2": {
+    "title": "Focus 2",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_2": {
+    "title": "Endurance 2",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_2": {
+    "title": "Might 2",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "stamina_1": {
+    "title": "Forager 1",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_stamina.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
   "melee_resistance_1": {
     "title": "Vessel 1",
@@ -230,7 +494,7 @@
   },
   "soul_hunt": {
     "title": "Soul Hunt",
-    "description": "Unlocks Soul Hunt (30 mana, no cooldown) on the ability wheel",
+    "description": "Unlocks Soul Hunt (20 mana, own cooldown) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
@@ -259,39 +523,6 @@
     },
     "size": 2.0,
     "extra_description": "Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown."
-  },
-  "fall_reduction_1": {
-    "title": "Light Foot 1",
-    "description": "+5% Fall Damage Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_fall_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:fall_reduction",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
   "sprinting_speed_1": {
     "title": "Sprinter 1",
@@ -326,21 +557,21 @@
     "size": 1.5,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "jump_1": {
-    "title": "Spring 1",
-    "description": "+5% Jump Height",
+  "melee_damage_1": {
+    "title": "Predator 1",
+    "description": "+2% Melee Damage",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_jump.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_melee_damage.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.05,
+          "attribute": "puffish_attributes:melee_damage",
+          "value": 0.02,
           "operation": "multiply_base"
         }
       }
@@ -389,38 +620,6 @@
     },
     "size": 2.0
   },
-  "technique_efficiency_1": {
-    "title": "Cursed Control 1",
-    "description": "+7% Technique Mana Cost Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/mdvlcraft_technique_efficiency.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:technique_efficiency",
-          "value": 0.07,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
-      }
-    },
-    "size": 1.5
-  },
   "staminar_1": {
     "title": "Evasion Training 1",
     "description": "+0.5 Max Stamina",
@@ -454,9 +653,140 @@
     "size": 1.5,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
+  "fall_reduction_1": {
+    "title": "Light Foot 1",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_fall_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "technique_efficiency_1": {
+    "title": "Cursed Control 1",
+    "description": "+7% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/mdvlcraft_technique_efficiency.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5
+  },
+  "jump_1": {
+    "title": "Spring 1",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_jump.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "reservoir_1": {
+    "title": "Reservoir 1",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
   "dismantle": {
     "title": "Dismantle",
-    "description": "Unlocks Dismantle (20 mana, no cooldown) on the ability wheel. Hold the cast key to keep casting",
+    "description": "Unlocks Dismantle (12 mana, 1 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
     "icon": {
       "type": "item",
       "data": {
@@ -485,21 +815,21 @@
     },
     "size": 2.0
   },
-  "stamina_1": {
-    "title": "Forager 1",
-    "description": "+5% Stamina (slower hunger)",
+  "renewal_1": {
+    "title": "Renewal 1",
+    "description": "+4% Natural Regeneration",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_stamina.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_natural_regeneration.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.04,
           "operation": "multiply_base"
         }
       }
@@ -516,7 +846,7 @@
       }
     },
     "size": 1.5,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+    "extra_description": "Core bonus (every archetype has this spoke)."
   },
   "toughness_shred_1": {
     "title": "Severing 1",
@@ -550,6 +880,39 @@
     },
     "size": 1.5
   },
+  "stamina_2": {
+    "title": "Forager 2",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_stamina.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
   "melee_resistance_2": {
     "title": "Vessel 2",
     "description": "+2% Melee Resistance",
@@ -581,39 +944,6 @@
       }
     },
     "size": 1.5
-  },
-  "fall_reduction_2": {
-    "title": "Light Foot 2",
-    "description": "+5% Fall Damage Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_fall_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:fall_reduction",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
   "sprinting_speed_2": {
     "title": "Sprinter 2",
@@ -648,21 +978,21 @@
     "size": 1.5,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "jump_2": {
-    "title": "Spring 2",
-    "description": "+5% Jump Height",
+  "melee_damage_2": {
+    "title": "Predator 2",
+    "description": "+2% Melee Damage",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_jump.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_melee_damage.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.05,
+          "attribute": "puffish_attributes:melee_damage",
+          "value": 0.02,
           "operation": "multiply_base"
         }
       }
@@ -711,38 +1041,6 @@
     },
     "size": 2.0
   },
-  "technique_efficiency_2": {
-    "title": "Cursed Control 2",
-    "description": "+7% Technique Mana Cost Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/mdvlcraft_technique_efficiency.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:technique_efficiency",
-          "value": 0.07,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
-      }
-    },
-    "size": 1.5
-  },
   "staminar_2": {
     "title": "Evasion Training 2",
     "description": "+0.5 Max Stamina",
@@ -776,9 +1074,140 @@
     "size": 1.5,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
+  "fall_reduction_2": {
+    "title": "Light Foot 2",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_fall_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "technique_efficiency_2": {
+    "title": "Cursed Control 2",
+    "description": "+7% Technique Mana Cost Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/mdvlcraft_technique_efficiency.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:technique_efficiency",
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5
+  },
+  "jump_2": {
+    "title": "Spring 2",
+    "description": "+5% Jump Height",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_jump.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "reservoir_2": {
+    "title": "Reservoir 2",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
   "cleave": {
     "title": "Cleave",
-    "description": "Unlocks Cleave (35 mana, no cooldown) on the ability wheel. Hold the cast key to keep casting",
+    "description": "Unlocks Cleave (20 mana, 3 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
     "icon": {
       "type": "item",
       "data": {
@@ -807,21 +1236,21 @@
     },
     "size": 2.0
   },
-  "stamina_2": {
-    "title": "Forager 2",
-    "description": "+5% Stamina (slower hunger)",
+  "renewal_2": {
+    "title": "Renewal 2",
+    "description": "+4% Natural Regeneration",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_stamina.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_natural_regeneration.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.04,
           "operation": "multiply_base"
         }
       }
@@ -838,7 +1267,7 @@
       }
     },
     "size": 1.5,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+    "extra_description": "Core bonus (every archetype has this spoke)."
   },
   "toughness_shred_2": {
     "title": "Severing 2",
@@ -872,6 +1301,39 @@
     },
     "size": 1.5
   },
+  "stamina_3": {
+    "title": "Forager 3",
+    "description": "+5% Stamina (slower hunger)",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_stamina.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
   "melee_resistance_3": {
     "title": "Vessel 3",
     "description": "+2% Melee Resistance",
@@ -903,39 +1365,6 @@
       }
     },
     "size": 1.5
-  },
-  "fall_reduction_3": {
-    "title": "Light Foot 3",
-    "description": "+5% Fall Damage Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_fall_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:fall_reduction",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
   "sprinting_speed_3": {
     "title": "Sprinter 3",
@@ -970,20 +1399,86 @@
     "size": 1.5,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "jump_3": {
-    "title": "Spring 3",
-    "description": "+5% Jump Height",
+  "melee_damage_3": {
+    "title": "Predator 3",
+    "description": "+2% Melee Damage",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_jump.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_melee_damage.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:jump",
+          "attribute": "puffish_attributes:melee_damage",
+          "value": 0.02,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_3": {
+    "title": "Evasion Training 3",
+    "description": "+0.5 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.5,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_3": {
+    "title": "Light Foot 3",
+    "description": "+5% Fall Damage Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_fall_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
           "value": 0.05,
           "operation": "multiply_base"
         }
@@ -1035,22 +1530,22 @@
     },
     "size": 1.5
   },
-  "staminar_3": {
-    "title": "Evasion Training 3",
-    "description": "+0.5 Max Stamina",
+  "jump_3": {
+    "title": "Spring 3",
+    "description": "+5% Jump Height",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/epicfight_staminar.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_jump.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.5,
-          "operation": "addition"
+          "attribute": "puffish_attributes:jump",
+          "value": 0.05,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -1068,9 +1563,42 @@
     "size": 1.5,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
+  "reservoir_mastery": {
+    "title": "Reservoir Mastery",
+    "description": "+14 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 14,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
   "malevolent_shrine": {
     "title": "Malevolent Shrine",
-    "description": "Unlocks Malevolent Shrine (150 mana, no cooldown) on the ability wheel",
+    "description": "Unlocks Malevolent Shrine (100 mana, 120 s cooldown) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
@@ -1098,40 +1626,40 @@
       }
     },
     "size": 2.0,
-    "extra_description": "Closed domain: a black barrier dome; only what is inside is cut, and only while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Costs 150 mana: take all of Cursed Control (-35%) or extra mana to afford it."
+    "extra_description": "Closed domain: a black barrier dome; only what is inside is cut, and only while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it."
   },
-  "stamina_3": {
-    "title": "Forager 3",
-    "description": "+5% Stamina (slower hunger)",
+  "renewal_mastery": {
+    "title": "Renewal Mastery",
+    "description": "+7% Natural Regeneration",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_stamina.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_natural_regeneration.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.05,
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.07,
           "operation": "multiply_base"
         }
       }
     ],
-    "cost": 1,
+    "cost": 2,
     "frame": {
       "type": "texture",
       "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
       }
     },
     "size": 1.5,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+    "extra_description": "Core bonus (every archetype has this spoke)."
   },
   "toughness_shred_mastery": {
     "title": "Severing Mastery",
@@ -1165,6 +1693,39 @@
     },
     "size": 1.5
   },
+  "stamina_mastery": {
+    "title": "Forager Mastery",
+    "description": "+10% Stamina (slower hunger)",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_stamina.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:stamina",
+          "value": 0.1,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
   "melee_resistance_mastery": {
     "title": "Vessel Mastery",
     "description": "+4% Melee Resistance",
@@ -1196,39 +1757,6 @@
       }
     },
     "size": 1.5
-  },
-  "fall_reduction_mastery": {
-    "title": "Light Foot Mastery",
-    "description": "+10% Fall Damage Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_fall_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:fall_reduction",
-          "value": 0.1,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
   "sprinting_speed_mastery": {
     "title": "Sprinter Mastery",
@@ -1263,20 +1791,86 @@
     "size": 1.5,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
-  "jump_mastery": {
-    "title": "Spring Mastery",
-    "description": "+10% Jump Height",
+  "melee_damage_mastery": {
+    "title": "Predator Mastery",
+    "description": "+4% Melee Damage",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_jump.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_melee_damage.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:jump",
+          "attribute": "puffish_attributes:melee_damage",
+          "value": 0.04,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "staminar_mastery": {
+    "title": "Evasion Training Mastery",
+    "description": "+1 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+  },
+  "fall_reduction_mastery": {
+    "title": "Light Foot Mastery",
+    "description": "+10% Fall Damage Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_fall_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:fall_reduction",
           "value": 0.1,
           "operation": "multiply_base"
         }
@@ -1328,22 +1922,22 @@
     },
     "size": 1.5
   },
-  "staminar_mastery": {
-    "title": "Evasion Training Mastery",
-    "description": "+1 Max Stamina",
+  "jump_mastery": {
+    "title": "Spring Mastery",
+    "description": "+10% Jump Height",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/epicfight_staminar.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_jump.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "epicfight:staminar",
-          "value": 1,
-          "operation": "addition"
+          "attribute": "puffish_attributes:jump",
+          "value": 0.1,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -1361,9 +1955,42 @@
     "size": 1.5,
     "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
   },
+  "wellspring_1": {
+    "title": "Wellspring 1",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
   "open_malevolent_shrine": {
     "title": "Malevolent Shrine: Open",
-    "description": "Unlocks Malevolent Shrine: Open (150 mana, no cooldown) on the ability wheel",
+    "description": "Unlocks Malevolent Shrine: Open (100 mana, 120 s cooldown) on the ability wheel",
     "icon": {
       "type": "item",
       "data": {
@@ -1391,40 +2018,40 @@
       }
     },
     "size": 2.0,
-    "extra_description": "Open domain: no barrier, cuts everything within 45 blocks while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Costs 150 mana."
+    "extra_description": "Open domain: no barrier, cuts everything within 45 blocks while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it."
   },
-  "stamina_mastery": {
-    "title": "Forager Mastery",
-    "description": "+10% Stamina (slower hunger)",
+  "constitution_1": {
+    "title": "Constitution 1",
+    "description": "+1 Max Health",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_stamina.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/minecraft_generic_max_health.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:stamina",
-          "value": 0.1,
-          "operation": "multiply_base"
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
         }
       }
     ],
-    "cost": 2,
+    "cost": 1,
     "frame": {
       "type": "texture",
       "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
       }
     },
     "size": 1.5,
-    "extra_description": "Ranger class bonus (every Ranger archetype has this spoke)."
+    "extra_description": "Core bonus (every archetype has this spoke)."
   },
   "technique_efficiency_mastery": {
     "title": "Cursed Control Mastery",
@@ -1458,21 +2085,153 @@
     },
     "size": 1.5
   },
-  "swiftness_1": {
-    "title": "Swiftness 1",
-    "description": "+0.5% Movement Speed",
+  "wellspring_2": {
+    "title": "Wellspring 2",
+    "description": "+4% Mana Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "constitution_2": {
+    "title": "Constitution 2",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/minecraft_generic_max_health.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "wellspring_mastery": {
+    "title": "Wellspring Mastery",
+    "description": "+7% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "constitution_mastery": {
+    "title": "Constitution Mastery",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/minecraft_generic_max_health.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "second_breath_1": {
+    "title": "Second Breath 1",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
           "operation": "multiply_base"
         }
       }
@@ -1491,21 +2250,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "swiftness_2": {
-    "title": "Swiftness 2",
-    "description": "+0.5% Movement Speed",
+  "second_breath_2": {
+    "title": "Second Breath 2",
+    "description": "+1% Stamina Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
           "operation": "multiply_base"
         }
       }
@@ -1524,21 +2283,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "swiftness_3": {
-    "title": "Swiftness 3",
-    "description": "+0.5% Movement Speed",
+  "second_breath_3": {
+    "title": "Second Breath 3",
+    "description": "+1% Stamina Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
           "operation": "multiply_base"
         }
       }
@@ -1557,21 +2316,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "swiftness_4": {
-    "title": "Swiftness 4",
-    "description": "+0.5% Movement Speed",
+  "second_breath_4": {
+    "title": "Second Breath 4",
+    "description": "+1% Stamina Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
           "operation": "multiply_base"
         }
       }
@@ -1590,153 +2349,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "swiftness_5": {
-    "title": "Swiftness 5",
-    "description": "+0.5% Movement Speed",
+  "footing_2": {
+    "title": "Footing 2",
+    "description": "+1% Knockback Resistance",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "swiftness_6": {
-    "title": "Swiftness 6",
-    "description": "+0.5% Movement Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "swiftness_7": {
-    "title": "Swiftness 7",
-    "description": "+0.5% Movement Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "swiftness_8": {
-    "title": "Swiftness 8",
-    "description": "+0.5% Movement Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "willpower_1": {
-    "title": "Willpower 1",
-    "description": "+0.5% Spell Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
           "operation": "addition"
         }
       }
@@ -1755,21 +2382,351 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_2": {
-    "title": "Willpower 2",
-    "description": "+0.5% Spell Resistance",
+  "footing_3": {
+    "title": "Footing 3",
+    "description": "+1% Knockback Resistance",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_5": {
+    "title": "Second Breath 5",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_6": {
+    "title": "Second Breath 6",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_7": {
+    "title": "Second Breath 7",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_4": {
+    "title": "Footing 4",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_5": {
+    "title": "Footing 5",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_6": {
+    "title": "Footing 6",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_3": {
+    "title": "Might 3",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_4": {
+    "title": "Might 4",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_3": {
+    "title": "Endurance 3",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_4": {
+    "title": "Endurance 4",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
           "operation": "addition"
         }
       }
@@ -1920,219 +2877,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "hearty_5": {
-    "title": "Hearty 5",
-    "description": "+2% Saturation from Food",
+  "willpower_2": {
+    "title": "Willpower 2",
+    "description": "+0.5% Spell Resistance",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_6": {
-    "title": "Hearty 6",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_7": {
-    "title": "Hearty 7",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_3": {
-    "title": "Meditation 3",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_4": {
-    "title": "Meditation 4",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "endurance_1": {
-    "title": "Endurance 1",
-    "description": "+0.25 Max Stamina",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "endurance_2": {
-    "title": "Endurance 2",
-    "description": "+0.25 Max Stamina",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.25,
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
           "operation": "addition"
         }
       }
@@ -2184,22 +2943,22 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_4": {
-    "title": "Willpower 4",
-    "description": "+0.5% Spell Resistance",
+  "mending_2": {
+    "title": "Mending 2",
+    "description": "+1.5% Natural Regeneration",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
-          "operation": "addition"
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -2217,22 +2976,22 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_5": {
-    "title": "Willpower 5",
-    "description": "+0.5% Spell Resistance",
+  "bounce_2": {
+    "title": "Bounce 2",
+    "description": "+1% Jump Height",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
-          "operation": "addition"
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -2250,22 +3009,385 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_6": {
-    "title": "Willpower 6",
-    "description": "+0.5% Spell Resistance",
+  "bounce_3": {
+    "title": "Bounce 3",
+    "description": "+1% Jump Height",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_4": {
+    "title": "Bounce 4",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_1": {
+    "title": "Readiness 1",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
           "value": 0.005,
-          "operation": "addition"
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_2": {
+    "title": "Readiness 2",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_4": {
+    "title": "Mending 4",
+    "description": "+1.5% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_5": {
+    "title": "Mending 5",
+    "description": "+1.5% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_6": {
+    "title": "Mending 6",
+    "description": "+1.5% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_7": {
+    "title": "Mending 7",
+    "description": "+1.5% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_1": {
+    "title": "Swiftness 1",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_2": {
+    "title": "Swiftness 2",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_3": {
+    "title": "Swiftness 3",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_4": {
+    "title": "Swiftness 4",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -2382,1392 +3504,6 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "focus_1": {
-    "title": "Focus 1",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_2": {
-    "title": "Focus 2",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_3": {
-    "title": "Focus 3",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_2": {
-    "title": "Readiness 2",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_3": {
-    "title": "Readiness 3",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_1": {
-    "title": "Attunement 1",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_2": {
-    "title": "Attunement 2",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_3": {
-    "title": "Attunement 3",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_1": {
-    "title": "Footing 1",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_2": {
-    "title": "Footing 2",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_3": {
-    "title": "Footing 3",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_4": {
-    "title": "Footing 4",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_5": {
-    "title": "Footing 5",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_6": {
-    "title": "Footing 6",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_4": {
-    "title": "Attunement 4",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_5": {
-    "title": "Attunement 5",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "endurance_3": {
-    "title": "Endurance 3",
-    "description": "+0.25 Max Stamina",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "endurance_4": {
-    "title": "Endurance 4",
-    "description": "+0.25 Max Stamina",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "endurance_5": {
-    "title": "Endurance 5",
-    "description": "+0.25 Max Stamina",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "endurance_6": {
-    "title": "Endurance 6",
-    "description": "+0.25 Max Stamina",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_6": {
-    "title": "Meditation 6",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_7": {
-    "title": "Meditation 7",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_8": {
-    "title": "Meditation 8",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_1": {
-    "title": "Second Breath 1",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_2": {
-    "title": "Second Breath 2",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_1": {
-    "title": "Mending 1",
-    "description": "+1% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_2": {
-    "title": "Mending 2",
-    "description": "+1% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_3": {
-    "title": "Mending 3",
-    "description": "+1% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_4": {
-    "title": "Mending 4",
-    "description": "+1% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_3": {
-    "title": "Second Breath 3",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_4": {
-    "title": "Second Breath 4",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_4": {
-    "title": "Readiness 4",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_5": {
-    "title": "Readiness 5",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_6": {
-    "title": "Readiness 6",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_7": {
-    "title": "Readiness 7",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_8": {
-    "title": "Readiness 8",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_6": {
-    "title": "Attunement 6",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_2": {
-    "title": "Bounce 2",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_8": {
-    "title": "Hearty 8",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_4": {
-    "title": "Focus 4",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_5": {
-    "title": "Focus 5",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_6": {
-    "title": "Focus 6",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
   "hardened_4": {
     "title": "Hardened 4",
     "description": "+0.25 Armor",
@@ -3801,272 +3537,8 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "endurance_7": {
-    "title": "Endurance 7",
-    "description": "+0.25 Max Stamina",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "endurance_8": {
-    "title": "Endurance 8",
-    "description": "+0.25 Max Stamina",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:staminar",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_4": {
-    "title": "Bounce 4",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_5": {
-    "title": "Bounce 5",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_6": {
-    "title": "Bounce 6",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hardened_6": {
-    "title": "Hardened 6",
-    "description": "+0.25 Armor",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hardened_7": {
-    "title": "Hardened 7",
-    "description": "+0.25 Armor",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.25,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_8": {
-    "title": "Attunement 8",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "might_1": {
-    "title": "Might 1",
+  "might_5": {
+    "title": "Might 5",
     "description": "+0.1 Attack Damage",
     "icon": {
       "type": "texture",
@@ -4080,6 +3552,72 @@
         "data": {
           "attribute": "minecraft:generic.attack_damage",
           "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_6": {
+    "title": "Might 6",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_1": {
+    "title": "Vitality 1",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
           "operation": "addition"
         }
       }
@@ -4197,6 +3735,237 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
+  "hardened_5": {
+    "title": "Hardened 5",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hardened_6": {
+    "title": "Hardened 6",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hardened_7": {
+    "title": "Hardened 7",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hardened_8": {
+    "title": "Hardened 8",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_5": {
+    "title": "Swiftness 5",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_6": {
+    "title": "Swiftness 6",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_7": {
+    "title": "Swiftness 7",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
   "vitality_5": {
     "title": "Vitality 5",
     "description": "+1 Max Health",
@@ -4263,21 +4032,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "vitality_7": {
-    "title": "Vitality 7",
-    "description": "+1 Max Health",
+  "attunement_3": {
+    "title": "Attunement 3",
+    "description": "+4 Max Mana",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.max_health",
-          "value": 1,
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 4,
           "operation": "addition"
         }
       }
@@ -4296,21 +4065,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "vitality_8": {
-    "title": "Vitality 8",
-    "description": "+1 Max Health",
+  "attunement_4": {
+    "title": "Attunement 4",
+    "description": "+4 Max Mana",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.max_health",
-          "value": 1,
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 4,
           "operation": "addition"
         }
       }
@@ -4329,21 +4098,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "hardened_8": {
-    "title": "Hardened 8",
-    "description": "+0.25 Armor",
+  "attunement_5": {
+    "title": "Attunement 5",
+    "description": "+4 Max Mana",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.25,
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 4,
           "operation": "addition"
         }
       }
@@ -4362,351 +4131,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "mending_6": {
-    "title": "Mending 6",
-    "description": "+1% Natural Regeneration",
+  "hearty_5": {
+    "title": "Hearty 5",
+    "description": "+2% Saturation from Food",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_7": {
-    "title": "Mending 7",
-    "description": "+1% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_8": {
-    "title": "Focus 8",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_8": {
-    "title": "Mending 8",
-    "description": "+1% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_7": {
-    "title": "Second Breath 7",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_8": {
-    "title": "Second Breath 8",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "might_2": {
-    "title": "Might 2",
-    "description": "+0.1 Attack Damage",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_damage",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "might_3": {
-    "title": "Might 3",
-    "description": "+0.1 Attack Damage",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_damage",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "might_4": {
-    "title": "Might 4",
-    "description": "+0.1 Attack Damage",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_damage",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "might_5": {
-    "title": "Might 5",
-    "description": "+0.1 Attack Damage",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_damage",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "might_6": {
-    "title": "Might 6",
-    "description": "+0.1 Attack Damage",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_damage",
-          "value": 0.1,
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
           "operation": "addition"
         }
       }

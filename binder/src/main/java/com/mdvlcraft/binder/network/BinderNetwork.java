@@ -13,7 +13,7 @@ import net.minecraftforge.network.simple.SimpleChannel;
 import java.util.Optional;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "3";
+    private static final String PROTOCOL = "4";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
             ResourceLocation.fromNamespaceAndPath(MDVLBinder.MOD_ID, "main"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals);
 
@@ -32,6 +32,8 @@ public final class BinderNetwork {
                 EquipSkillPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER));
         CHANNEL.registerMessage(id++, StanceSyncPacket.class, StanceSyncPacket::encode, StanceSyncPacket::decode,
                 StanceSyncPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        CHANNEL.registerMessage(id++, TechniqueCooldownsPacket.class, TechniqueCooldownsPacket::encode, TechniqueCooldownsPacket::decode,
+                TechniqueCooldownsPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 
     public static void sendTo(ServerPlayer player, Object packet) {

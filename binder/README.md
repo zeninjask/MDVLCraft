@@ -6,11 +6,12 @@ The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 2. **Adds class and archetype skill trees** (Pufferfish's Skills), the Classes tab laid out radially like the *RPG skill tree* packs (hover an archetype for its description). Four classes, 16 archetypes, pick up to two; each archetype tab is a tree of 115–144 skills: boughs at uneven angles fork into limbs (class bonuses, signature bonuses, key abilities) and sprout twigs of small generic bonuses (health, speed, mana, cooldowns, saturation and more, capped per tree). See [`SKILL_TREES.md`](SKILL_TREES.md); ideas for moving spells and adding archetypes are in [`SPELL_REPORT.md`](SPELL_REPORT.md), and the class improvements (now applied) in [`CLASS_IMPROVEMENTS.md`](CLASS_IMPROVEMENTS.md).
 3. **Makes every weapon work with Epic Fight and Ponder.** Weapons that only had Epic Fight's generic fallback get the type that fits them (`data/*/capabilities/weapons/`), and Ponder (hold W over an item) gets a scene for every Epic Fight weapon type, not just Epic Fight's own eight (`client/ponder/`). `/mdvl weapons` writes a report of every weapon and its Epic Fight type.
 4. **Epic Fight × Iron's compatibility.** The pack adds *Epic Fight x Iron's Spells: Enhanced Animations* (casting animations in Epic Fight mode; Iron's first-person arms and items are turned off as it requires), and the binder gives Iron's summoned zombies, skeletons and vexes Epic Fight's mob behaviour (`data/irons_spellbooks/epicfight_mobpatch/`).
-5. **Adds the ability wheel.** Spells, Cursed Fate techniques and the Samurai's Stance unlocked in the trees go on an 8-slot wheel. Techniques cost mana and have no cooldown.
+5. **Adds the ability wheel.** Spells, techniques (Cursed Fate, Heavenly Restriction, Projection Sorcery, Sword Soaring's Myriad Blades, Nightfall's Soul Hunt) and the Samurai's Stance unlocked in the trees go on an 8-slot wheel. Spells cost 40% less mana than Iron's defaults and have 50% longer cooldowns (Iron's per-spell config, written by the tree generator). Techniques cost mana and each has its own cooldown (`ability/TechniqueCooldowns`), shaded on the wheel and HUD like a spell's. See [`BALANCE.md`](BALANCE.md).
    - **Stance (Samurai).** Cast it to take a stance up or drop it; sneak and cast to change element (an active stance changes with it). One element at a time: **Fire** +15% attack speed, **Wind** +40% dodge distance, **Water** +50% perfect-parry window (Epic Fight's Parrying guard), **Earth** +15% attack damage. Your weapon swing trails take the element's colour (orange, pale green, blue, amber), which nearby players see too. The wheel icon shows your element and is dimmed while the stance is off. Free; it is off again after logging in or respawning (`ability/Stances`, `StanceElement`, `mixin/epicfight/`).
 6. **Teaches Epic Fight skills through the skill trees.** 21 of Epic Fight's dodge, guard, mobility, identity and passive skills sit in the archetype trees (star frames with the skill's icon), each in one archetype only: 6 for Warrior archetypes, 5 each for Mage, Rogue and Ranger (list in [`SKILL_TREES.md`](SKILL_TREES.md)). Unlocking the node teaches the skill; locking it (or erasing the tab) unequips and forgets it. Everyone knows Roll and Guard, which fill empty Dodge and Guard slots. Skills are equipped in the abilities screen's **Combat Skills** box; Epic Fight's own skill screen and its key are gone, and its equip packet is ignored because it would equip any skill the client names (`epicskill/`, `mixin/epicfight/CPChangeSkillMixin`, `EpicFightKeyMappingsMixin`). The *Epic Fight: Skill Tree* mod is no longer in the pack.
 7. **Explains shipbuilding with Ponder** (aleki's Nifty Ships has only a Patchouli book, and Patchouli is not in the pack): hold W over a watercraft frame, oarlock, oar, cleat or anchor for *Building a Rowboat* and *Building a Sloop* (`client/ponder/ShipPonderPlugin`, `ShipPonderScenes`; plates in `assets/mdvlcraft/ponder/`).
-8. **Gives the skill and ability screens a medieval look:** dark oak and gold window and tabs, a parchment title bar and Classes tab, iron, bronze, gold and crimson node frames by state, and gold lines (`mixin/SkillsScreenMixin`, textures drawn by `tools/generate_textures.py`). The abilities screen, wheel and HUD use the same pieces.
+8. **Gives the skill and ability screens the Slate look:** dark slate panels, line icons tinted by node state and class colour, and thin connection lines (`mixin/SkillsScreenMixin`, `client/SlateGui`, textures and icons drawn by `tools/generate_textures.py` and `tools/icons/`). The abilities screen, wheel and HUD use the same pieces, and Villager Recruits' screens are restyled to match (`client/SlateRecruits`, built-in "MDVLCraft Slate UI" resource pack).
+9. **Fixes other mods' rough edges:** Epic Fight Nightfall's ground-split effects no longer kill a dedicated server (`mixin/efn/EffekUnitsMixin`); Ponder no longer crashes on weapons whose animation events expect a real player (`mixin/epicfight/AnimationEventMixin`); BD&Hill's 3D Uchigatana gets display transforms while that resource pack is on (`client/BdHillFix`, built-in "bdhill_fix" pack); Sword Soaring's Vatansever no longer flies (`mixin/swordsoaring/`); Heavenly Restriction's Blitz and Surprise Attack work without a weapon (`mixin/ItemStackMixin`); Projection Sorcery always uses full output, never blocks on cursed energy and does not shake the screen (`mixin/naoyaaddon/`).
 
 ## Controls (defaults, rebindable under *MDVLCraft Abilities*)
 Every letter key is already used by some mod in the pack, so the defaults avoid letters. The log warns at startup if a binding shares a key with another mod.
@@ -18,7 +19,7 @@ Every letter key is already used by some mod in the pack, so the defaults avoid 
 |---|---|
 | **[** | Abilities screen (also: right-click inside the wheel). Left box: every unlocked spell or technique with its stats; click an ability, then a wheel slot; right-click a slot to empty it. Right box, **Combat Skills**: Epic Fight's Dodge, Passive 1–3, Guard, Mobility and Identity slots; click a slot, then one of your learned skills of that kind; right-click a slot to empty it. After a change, that slot is locked for Epic Fight's swap cooldown (game rule `skillReplaceCooldown`, 5 minutes in this pack), shown next to it |
 | ``` ` ``` (backtick, hold) | Ability wheel: move the mouse towards a slot and release to select it. Shares its key with two rarely used bindings (Better Lock On joint switch, Ares HUD editing) |
-| **Caps Lock** | Cast the selected ability (with Stance selected: switch it on or off; hold **Shift** while casting to change element). Spells follow Iron's rules (cast time, mana, cooldown; press again to cancel). Hold it on Dismantle or Cleave to keep casting (each cast pays its mana). The Malevolent Shrine comes closed (a black barrier dome; only what is inside is cut) and then open (no barrier, 45-block reach). Either one only cuts while you hold Dismantle or Cleave; cast it again to close it (closing is free; it lasts up to 20 s) |
+| **Caps Lock** | Cast the selected ability (with Stance selected: switch it on or off; hold **Shift** while casting to change element). Spells follow Iron's rules (cast time, mana, cooldown; press again to cancel). Hold it on Dismantle or Cleave to keep casting, once each cooldown (each cast pays its mana). The Malevolent Shrine comes closed (a black barrier dome; only what is inside is cut) and then open (no barrier, 45-block reach). Either one only cuts while you hold Dismantle or Cleave; cast it again to close it (closing is free, even during its 120 s cooldown; it lasts up to 20 s). Follow Up Kick: Shift + cast switches Normal/Flow. Don't You Have a Heart?: Shift + cast switches Tracing/Continuous (free) |
 | **K** | Pufferfish's skill screen (Classes tab plus your archetype tabs). Epic Fight's skill screen, which also used K, is removed |
 
 The HUD shows the selected ability, a mana bar and cast progress in the bottom-right corner once you have an ability.
@@ -45,23 +46,26 @@ Iron's mana, cast-bar, recast and screen-effect overlays stay because the wheel'
 
 ## Code layout
 ```
-ability/     Ability (SpellAbility | Technique), AbilityReward (Pufferfish reward mdvlcraft:ability), AbilityGrants,
-             Loadout (wheel, saved with the player), AbilityActions (assign/cast/release), TechniqueRunner (Cursed Fate via mana, hold to repeat), DomainUpkeep (keeps the open Shrine up),
+ability/     Ability (SpellAbility | Technique | SlotSkillAbility | StanceAbility), AbilityReward (Pufferfish reward mdvlcraft:ability), AbilityGrants,
+             Loadout (wheel, saved with the player), AbilityActions (assign/cast/release), TechniqueRunner (Cursed Fate via mana, hold to repeat),
+             TechniqueCooldowns, DomainUpkeep + ShrineSlashes (closed and open Shrines), WeaponFreeCasts, ProjectionSorcery,
              StanceAbility + Stances + StanceElement (the Samurai's Stance)
 attribute/   BinderAttributes (14 mdvlcraft:* player attributes not offered by vanilla, Pufferfish's Attributes,
              Epic Fight or Iron's), AttributeEffects (what they do)
 skills/      ArchetypeTabs: class skills auto-unlocked, archetype skill unlocks its tab, locking erases it
 epicskill/   EpicSkillReward (Pufferfish reward mdvlcraft:epicfight_skill), EpicSkillGrants (learn/forget, Roll and Guard),
              EpicSkillEquip + EquipSkillPacket (checked equipping from the Combat Skills box)
-client/      ClientAbilities, ClientStances, AbilityKeys, AbilityScreen + CombatSkillsPanel, WheelScreen, AbilityHud, MedievalGui, ForeignKeyMappings
-network/     BinderNetwork + SyncAbilitiesPacket, AssignSlotPacket, CastPacket, StanceSyncPacket
+client/      ClientAbilities, ClientStances, ClientTechniqueCooldowns, AbilityKeys, AbilityScreen + CombatSkillsPanel, WheelScreen, AbilityHud,
+             SlateGui, SlateRecruits, BdHillFix, SpellPreviews (hold Ponder on a spell node), ForeignKeyMappings
+network/     BinderNetwork + SyncAbilitiesPacket, AssignSlotPacket, CastPacket, StanceSyncPacket, TechniqueCooldownsPacket
 command/     /mdvl (operators): abilities | assign | clear | cast | release
 content/ mixin/   keeping spells inside the trees (table above)
 data/irons_spellbooks/epicfight_mobpatch/   Epic Fight behaviour for Iron's summons
 mixin/epicfight/   per-player parry window (ParryingSkill), dodge distance (ActionAnimation), stance trail colour (AnimationTrailParticle),
                    equip packet ignored (CPChangeSkill), skill screen key removed (EpicFightKeyMappings)
-tools/generate_skill_trees.py   writes src/main/resources/data/mdvlcraft/puffish_skills and SKILL_TREES.md
-tools/generate_textures.py      draws the medieval skill screen textures (needs Pillow)
+tools/generate_skill_trees.py   writes src/main/resources/data/mdvlcraft/puffish_skills, Iron's spell config
+                                (data/irons_spellbooks/irons_spellbooks_spell_config) and SKILL_TREES.md
+tools/generate_textures.py      draws the Slate skill screen textures (needs Pillow); tools/icons/ draws the line icons
 ```
 
 ## Editing the skill trees
@@ -76,7 +80,7 @@ The reward format for any Pufferfish tree is:
 ```json
 {"type": "mdvlcraft:ability", "data": {"ability": "irons_spellbooks:shield", "level": 2}}
 ```
-Techniques use `mdvlcraft:dismantle`, `mdvlcraft:cleave`, `mdvlcraft:malevolent_shrine`, `mdvlcraft:boogie_woogie` and `mdvlcraft:block_clap`, at level 1.
+Techniques use `mdvlcraft:dismantle`, `mdvlcraft:cleave`, `mdvlcraft:malevolent_shrine`, `mdvlcraft:open_malevolent_shrine`, `mdvlcraft:boogie_woogie`, `mdvlcraft:block_clap`, `mdvlcraft:blitz`, `mdvlcraft:surprise_attack`, `mdvlcraft:follow_up_kick`, `mdvlcraft:projection_dash`, `mdvlcraft:myriad_blades` and `mdvlcraft:soul_hunt`, at level 1.
 Epic Fight skills (any learnable dodge, guard, mobility, identity or passive skill) use:
 ```json
 {"type": "mdvlcraft:epicfight_skill", "data": {"skill": "epicfight:berserker"}}
@@ -91,8 +95,8 @@ Epic Fight skills (any learnable dodge, guard, mobility, identity or passive ski
 | `./gradlew build` | `build/libs/mdvlcraft-<version>.jar` |
 | `./gradlew runClient` / `runServer` | Dev client or server with the binder and the mods it compiles against |
 
-Requires JDK 17. The jar goes in the `mods` folder on the client **and** the server. Hard dependencies: Epic Fight, Iron's Spells, Cataclysm, Pufferfish's Skills, Pufferfish's Attributes, Cursed Fate.
+Requires JDK 17. The jar goes in the `mods` folder on the client **and** the server. Hard dependencies (mods.toml): Epic Fight, Iron's Spells, Cataclysm, Pufferfish's Skills, Pufferfish's Attributes, Cursed Fate, EpicFight-Ponder, aleki's Nifty Ships, ISS Ponder, Sword Soaring, Balda's Projection Sorcery, Epic Fight Nightfall.
 
-`data/irons_spellbooks/irons_spellbooks_spell_config/planar_sight.json` lowers Planar Sight's mana cost to 90 (Iron's default 150 is more than the 100-mana pool Scouts have).
+`data/irons_spellbooks/irons_spellbooks_spell_config/` (generated) sets every granted spell's mana multiplier (0.6) and cooldown; edit `SPELL_MANA_MULTIPLIER` and the cooldown rule in the generator, not the files.
 
 To compile against another pack mod, add `<name>_cf=<projectId>:<fileId>` (from the pack manifest) to `gradle.properties` and `implementation fg.deobf(cf('<name>'))` to `build.gradle`. Client-only mixins go in the `client` list of `mdvlcraft.mixins.json`.

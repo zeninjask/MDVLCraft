@@ -35,7 +35,8 @@ final class AbilityDisplay {
             return;
         }
         graphics.blit(ability.icon(), x, y, 0, 0, 16, 16, 16, 16);
-        float cooldown = ability instanceof SpellAbility spell ? ClientMagicData.getCooldownPercent(spell.spell()) : 0;
+        float cooldown = ability instanceof SpellAbility spell ? ClientMagicData.getCooldownPercent(spell.spell())
+                : ability instanceof Technique technique ? ClientTechniqueCooldowns.percent(technique) : 0;
         if (cooldown > 0) {
             int height = Math.round(16 * cooldown);
             graphics.fill(x, y + 16 - height, x + 16, y + 16, 0xA0000000);
@@ -52,7 +53,7 @@ final class AbilityDisplay {
             lines.add(technique.displayName().copy().withStyle(ChatFormatting.DARK_RED));
             lines.add(Component.translatable("ability.mdvlcraft." + technique.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));
             lines.add(Component.translatable("ui.irons_spellbooks.mana_cost", technique.manaCost(level)).withStyle(ChatFormatting.BLUE));
-            lines.add(Component.translatable("ability.mdvlcraft.no_cooldown").withStyle(ChatFormatting.BLUE));
+            lines.add(Component.translatable("ability.mdvlcraft.cooldown", technique.cooldownTicks() / 20).withStyle(ChatFormatting.BLUE));
         } else if (ability instanceof SlotSkillAbility slotSkill) {
             lines.add(slotSkill.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(Component.translatable("ability.mdvlcraft." + slotSkill.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));

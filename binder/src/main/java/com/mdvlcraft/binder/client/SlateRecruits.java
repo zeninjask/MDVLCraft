@@ -18,8 +18,7 @@ import java.util.Map;
 /**
  * Villager Recruits' screens in the Slate style of the skill screens. Its textures are recoloured by
  * tools/generate_recruits_skin.py into the binder's built-in "MDVLCraft Slate" resource pack, which is always on and
- * on top of every other pack. (The pack also carries display transforms for the BD&Hill resource pack's 3D Uchigatana,
- * whose model has none, so the blade was drawn out of the hand.) While one of its screens (or Village Recruits' screens) renders, vanilla's dark grey
+ * on top of every other pack. While one of its screens (or Village Recruits' screens) renders, vanilla's dark grey
  * labels (0x404040), which would vanish on the dark panels, are drawn light and the plain greys of its list rows and
  * drop-downs become Slate shades (GuiGraphicsMixin), its buttons are drawn as Slate boxes (AbstractButtonMixin) and its
  * tooltips get the Slate colours.

@@ -23,29 +23,33 @@ import java.util.UUID;
  * so cursed energy is refilled on every cast, and Cursed Fate's cooldown check (which lives only in its key handler) is
  * never reached. Mastery is reset before each cast so technique damage only grows with gear and the skill tree.
  *
- * Techniques with {@link Technique#repeatTicks} keep casting while the cast key is held (Dismantle and Cleave). While
- * one of them is held the owner's Malevolent Shrine cuts too ({@link #isSlashing}); otherwise the domain stays quiet.
+ * Every technique has a cooldown ({@link TechniqueCooldowns}). {@link Technique#held} techniques (Dismantle and Cleave)
+ * keep casting while the cast key is held, each time their cooldown ends. While one of them is held the owner's
+ * Malevolent Shrine cuts too ({@link #isSlashing}); otherwise the domain stays quiet.
  * Each Shrine opens its own Cursed Fate domain variant (closed barrier dome or open shrine). Casting either Shrine while
  * your domain is up closes it, and closing is free. {@link DomainUpkeep} follows a domain from wind-up to close.
  */
 final class TechniqueRunner {
-    private record Held(Technique technique, long nextTick) {
-    }
-
-    private static final Map<UUID, Held> HELD = new HashMap<>();
+    private static final Map<UUID, Technique> HELD = new HashMap<>();
 
     private TechniqueRunner() {
     }
 
     /** True while the player holds the cast key on Dismantle or Cleave (and can pay for it). */
     static boolean isSlashing(ServerPlayer player) {
-        Held held = HELD.get(player.getUUID());
-        return held != null && held.technique().isSlash();
+        Technique held = HELD.get(player.getUUID());
+        return held != null && held.isSlash();
     }
 
     static void press(ServerPlayer player, Technique technique) {
-        if (cast(player, technique) && technique.repeatTicks > 0) {
-            HELD.put(player.getUUID(), new Held(technique, player.level().getGameTime() + technique.repeatTicks));
+        if (!technique.held) {
+            cast(player, technique);
+            return;
+        }
+        // Held while cooling down: it casts as soon as the cooldown ends (tick).
+        HELD.put(player.getUUID(), technique);
+        if (TechniqueCooldowns.remaining(player, technique) == 0 && !cast(player, technique)) {
+            HELD.remove(player.getUUID());
         }
     }
 
@@ -62,30 +66,23 @@ final class TechniqueRunner {
         variables.syncPlayerVariables(player);
     }
 
-    /** Server tick: recasts held techniques when due; stops when the player leaves or runs out of mana. */
+    /** Server tick: recasts held techniques when their cooldown ends; stops when the player leaves or runs out of mana. */
     static void tick(MinecraftServer server) {
-        Iterator<Map.Entry<UUID, Held>> entries = HELD.entrySet().iterator();
+        Iterator<Map.Entry<UUID, Technique>> entries = HELD.entrySet().iterator();
         while (entries.hasNext()) {
-            Map.Entry<UUID, Held> entry = entries.next();
+            Map.Entry<UUID, Technique> entry = entries.next();
             ServerPlayer player = server.getPlayerList().getPlayer(entry.getKey());
             if (player == null) {
                 entries.remove();
                 continue;
             }
-            Held held = entry.getValue();
-            long now = player.level().getGameTime();
-            if (now < held.nextTick()) {
-                continue;
-            }
-            if (cast(player, held.technique())) {
-                entry.setValue(new Held(held.technique(), now + held.technique().repeatTicks));
-            } else {
+            if (TechniqueCooldowns.remaining(player, entry.getValue()) == 0 && !cast(player, entry.getValue())) {
                 entries.remove();
             }
         }
     }
 
-    /** Pays and casts once. Returns false (with the action bar message) if the player cannot afford it. */
+    /** Pays, casts once and starts the cooldown. Returns false (with an action bar message) while it is cooling down or unaffordable. */
     private static boolean cast(ServerPlayer player, Technique technique) {
         if (technique == Technique.FOLLOW_UP_KICK && player.isShiftKeyDown()) {
             ProjectionSorcery.toggleFlow(player);
@@ -100,6 +97,12 @@ final class TechniqueRunner {
             if (DomainUpkeep.closeClosedDomain(player)) {
                 return true;
             }
+        }
+        long cooldown = TechniqueCooldowns.remaining(player, technique);
+        if (cooldown > 0) {
+            player.connection.send(new ClientboundSetActionBarTextPacket(Component.translatable("ability.mdvlcraft.on_cooldown",
+                    technique.displayName(), (cooldown + 19) / 20).withStyle(ChatFormatting.RED)));
+            return false;
         }
         MagicData magic = MagicData.getPlayerMagicData(player);
         int cost = cost(player, technique);
@@ -130,6 +133,9 @@ final class TechniqueRunner {
         } else {
             execute.run();
         }
+        if (!modeToggle(player, technique)) {
+            TechniqueCooldowns.start(player, technique);
+        }
         if (technique.isShrine() && variables.SelectDomainVarient) {
             // Cursed Fate started its wind-up and reset the variant to its closed barrier domain; it reads the
             // variant again when the wind-up ends.
@@ -140,9 +146,13 @@ final class TechniqueRunner {
         return true;
     }
 
+    /** Sneak and cast on Don't You Have a Heart? only switches its mode (the addon's own toggle): no mana, no cooldown. */
+    private static boolean modeToggle(ServerPlayer player, Technique technique) {
+        return technique == Technique.PROJECTION_DASH && player.isShiftKeyDown();
+    }
+
     private static int cost(ServerPlayer player, Technique technique) {
-        // Sneak and cast on Don't You Have a Heart? only switches its mode (the addon's own toggle); it costs nothing.
-        if (technique == Technique.PROJECTION_DASH && player.isShiftKeyDown()) {
+        if (modeToggle(player, technique)) {
             return 0;
         }
         // Cursed Fate closes the domain (or refuses to clash) when a Shrine is cast near an open one; neither costs.

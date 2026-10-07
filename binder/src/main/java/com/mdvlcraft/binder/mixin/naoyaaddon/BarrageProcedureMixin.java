@@ -8,13 +8,18 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** Projection Sorcery's shared command helper (Follow Up Kick reads the output through it): always the highest output. */
+/**
+ * Projection Sorcery's shared command helper, through which its abilities read the cursed energy output and cursed
+ * energy: always the highest output, and enough energy, because the binder's wheel charges mana for them instead.
+ */
 @Mixin(value = BarrageProcedure.class, remap = false)
 public abstract class BarrageProcedureMixin {
     @Inject(method = "getCommandResult", at = @At("HEAD"), cancellable = true)
     private static void mdvlcraft$maxOutput(Entity entity, String command, CallbackInfoReturnable<String> cir) {
         if (command.endsWith("@s Output")) {
             cir.setReturnValue(ProjectionSorcery.MAX_OUTPUT);
+        } else if (command.endsWith("@s CursedEnegry")) {
+            cir.setReturnValue(ProjectionSorcery.ENOUGH_ENERGY);
         }
     }
 }

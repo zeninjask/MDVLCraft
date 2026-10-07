@@ -108,6 +108,9 @@ ATTRIBUTES = {
     "puffish_attributes:melee_resistance_shred": ("Melee Resistance Shred", "pct", "multiply_base"),
     "puffish_attributes:breaking_speed": ("Block Breaking Speed", "pct", "multiply_base"),
     "puffish_attributes:repair_cost": ("Anvil Repair Cost", "pct", "multiply_base"),
+    "puffish_attributes:melee_damage": ("Melee Damage", "pct", "multiply_base"),
+    "puffish_attributes:sword_damage": ("Sword Damage", "pct", "multiply_base"),
+    "puffish_attributes:trident_damage": ("Trident Damage", "pct", "multiply_base"),
     "mdvlcraft:greatsword_damage": ("Greatsword Damage", "pct", "addition"),
     "mdvlcraft:katana_damage": ("Katana Damage", "pct", "addition"),
     "mdvlcraft:parry_stamina": ("Stamina restored on Parry (of max)", "pct", "addition"),
@@ -136,9 +139,11 @@ SPELL_MAX_LEVEL = {"acid_orb": 8, "arrow_volley": 6, "ball_lightning": 10, "bles
                    "shockwave": 8, "volt_strike": 10, "charge": 3, "thunderstorm": 8, "blood_needles": 10, "summon_vex": 5,
                    "sacrifice": 5, "frostwave": 8, "ray_of_frost": 5, "ice_block": 6, "frostbite": 5, "acupuncture": 10, "slow": 4,
                    "gust": 10, "scapegoat": 3, "firecracker": 10, "summon_polar_bear": 10, "gluttony": 5, "fire_arrow": 10,
-                   "blight": 8, "poison_splash": 10, "spider_aspect": 8}
+                   "blight": 8, "poison_splash": 10, "spider_aspect": 8,
+                   "divine_smite": 5, "throw": 5, "lob_creeper": 10, "chain_creeper": 6, "ascension": 10, "touch_dig": 3,
+                   "fang_ward": 8, "fang_swirl": 8, "spectral_hammer": 5}
 # Iron's default mana cost (base, per extra level) of each spell used. Every granted level must fit the 100-mana pool
-# everyone starts with; Planar Sight's cost is scaled by the binder's spell config override.
+# everyone starts with, after SPELL_MANA_MULTIPLIER.
 SPELL_MANA = {"blood_slash": (25, 5), "devour": (25, 4), "fire_breath": (5, 1), "haste": (50, 10), "invisibility": (35, 8), "planar_sight": (150, 50), "summon_horse": (50, 2), "arrow_volley": (40, 10), "ball_lightning": (20, 4), "blessing_of_life": (10, 5), "blizzard": (40, 10), "blood_step": (30, 10), "chain_lightning": (25, 7), "cone_of_cold": (5, 1), "counterspell": (50, 1), "earthquake": (50, 10), "echoing_strikes": (50, 10), "electrocute": (3, 1), "evasion": (40, 20), "fang_strike": (30, 3), "fireball": (60, 15), "firebolt": (10, 2), "firefly_swarm": (40, 10), "frost_step": (15, 5), "guiding_bolt": (20, 5), "heal": (30, 15), "healing_circle": (40, 10), "heartstop": (100, 10), "heat_surge": (50, 10), "ice_spikes": (30, 10), "icicle": (10, 2), "lightning_bolt": (75, 15), "lightning_lance": (50, 10), "magma_bomb": (30, 5), "oakskin": (25, 10), "poison_arrow": (40, 5), "raise_dead": (50, 10), "ray_of_siphoning": (8, 1), "root": (45, 3), "shield": (35, 5), "sunbeam": (40, 10), "teleport": (20, 5), "wither_skull": (20, 2), "acid_orb": (40, 10),
               "fortify": (80, 10), "flaming_strike": (30, 15), "burning_dash": (20, 2), "stomp": (50, 10), "greater_heal": (100, 0),
               "cloud_of_regeneration": (10, 3), "wisp": (15, 2), "cleanse": (100, 0), "angel_wing": (80, 20), "scorch": (50, 5),
@@ -146,15 +151,55 @@ SPELL_MANA = {"blood_slash": (25, 5), "devour": (25, 4), "fire_breath": (5, 1), 
               "charge": (50, 25), "thunderstorm": (70, 10), "blood_needles": (25, 5), "summon_vex": (50, 10), "sacrifice": (25, 5),
               "frostwave": (50, 5), "ray_of_frost": (25, 15), "ice_block": (40, 10), "frostbite": (80, 10), "acupuncture": (25, 5),
               "slow": (50, 10), "gust": (30, 5), "scapegoat": (30, 15), "firecracker": (20, 2), "summon_polar_bear": (50, 10),
-              "gluttony": (35, 0), "fire_arrow": (40, 5), "blight": (60, 20), "poison_splash": (40, 10), "spider_aspect": (35, 5)}
-SPELL_MANA_MULTIPLIER = {"planar_sight": 0.6}
+              "gluttony": (35, 0), "fire_arrow": (40, 5), "blight": (60, 20), "poison_splash": (40, 10), "spider_aspect": (35, 5),
+              "divine_smite": (30, 15), "throw": (10, 5), "lob_creeper": (20, 2), "chain_creeper": (40, 10), "ascension": (50, 1),
+              "touch_dig": (15, 0), "fang_ward": (45, 5), "fang_swirl": (55, 8), "spectral_hammer": (15, 5)}
 BASE_MANA = 100
+# Balance policy for every spell the trees grant (written as Iron's per-spell config, data/irons_spellbooks/
+# irons_spellbooks_spell_config/): mana costs 40% lower, cooldowns 50% longer (at least 3 s) so spells are cheap to cast
+# but cannot be spammed. Cooldowns of 120 s or more (once-a-fight spells) stay as they are. Spell power is untouched:
+# Iron's applies it to enemy casters too.
+SPELL_MANA_MULTIPLIER = 0.6
+SPELL_COOLDOWN_MULTIPLIER = 1.5
+SPELL_COOLDOWN_MIN = 3
+SPELL_COOLDOWN_KEEP = 120
+# Iron's default cooldown (seconds) of each spell used.
+SPELL_COOLDOWN = {
+                         "acid_orb": 15, "acupuncture": 20, "angel_wing": 120, "arrow_volley": 15, "ascension": 15,
+                         "ball_lightning": 1, "blaze_storm": 20, "blessing_of_life": 10, "blight": 90, "blizzard":
+                         22, "blood_needles": 10, "blood_slash": 10, "blood_step": 12, "burning_dash": 10,
+                         "chain_creeper": 15, "chain_lightning": 20, "charge": 40, "cleanse": 60,
+                         "cloud_of_regeneration": 35, "cone_of_cold": 12, "counterspell": 10, "devour": 20,
+                         "divine_smite": 15, "earthquake": 16, "echoing_strikes": 60, "electrocute": 12, "evasion":
+                         180, "fang_strike": 5, "fang_swirl": 28, "fang_ward": 15, "fire_arrow": 8, "fire_breath":
+                         12, "fireball": 25, "firebolt": 1, "firecracker": 1.5, "firefly_swarm": 20,
+                         "flaming_strike": 15, "fortify": 180, "frost_step": 12, "frostbite": 60, "frostwave": 45,
+                         "gluttony": 90, "greater_heal": 45, "guiding_bolt": 8, "gust": 12, "haste": 80, "heal": 30,
+                         "healing_circle": 25, "heartstop": 120, "heat_surge": 45, "ice_block": 15, "ice_spikes":
+                         15, "icicle": 1, "invisibility": 45, "lightning_bolt": 25, "lightning_lance": 8,
+                         "lob_creeper": 2, "magma_bomb": 12, "oakskin": 90, "planar_sight": 200, "poison_arrow": 15,
+                         "poison_splash": 20, "raise_dead": 150, "raise_hell": 25, "ray_of_frost": 15,
+                         "ray_of_siphoning": 15, "root": 35, "sacrifice": 1, "scapegoat": 45, "scorch": 12,
+                         "shield": 8, "shockwave": 30, "slow": 80, "spectral_hammer": 2, "spider_aspect": 90,
+                         "stomp": 16, "summon_horse": 20, "summon_polar_bear": 180, "summon_vex": 150, "sunbeam":
+                         20, "teleport": 6, "throw": 8, "thunderstorm": 120, "touch_dig": 0.5, "volt_strike": 10,
+                         "wall_of_fire": 30, "wisp": 3, "wither_skull": 1}
+SPELL_CONFIG = ROOT / "src/main/resources/data/irons_spellbooks/irons_spellbooks_spell_config"
 
-# Base mana of each technique (Technique.java). The 150-mana domains need 35% technique efficiency to fit 100 mana.
-TECHNIQUE_MANA = {"mdvlcraft:dismantle": 20, "mdvlcraft:cleave": 35, "mdvlcraft:malevolent_shrine": 150, "mdvlcraft:open_malevolent_shrine": 150,
-                  "mdvlcraft:boogie_woogie": 15, "mdvlcraft:block_clap": 15, "mdvlcraft:blitz": 30, "mdvlcraft:surprise_attack": 25,
-                  "mdvlcraft:follow_up_kick": 25, "mdvlcraft:projection_dash": 30, "mdvlcraft:myriad_blades": 60, "mdvlcraft:soul_hunt": 30}
-# Techniques that keep casting while the cast key is held (Technique.repeatTicks > 0), paying each time.
+
+def spell_cooldown(name):
+    default = SPELL_COOLDOWN[name]
+    return default if default >= SPELL_COOLDOWN_KEEP else max(SPELL_COOLDOWN_MIN, round(default * SPELL_COOLDOWN_MULTIPLIER, 1))
+
+# Mana and cooldown (seconds) of each technique (Technique.java, SlotSkillAbility.java). Myriad Blades and Soul Hunt
+# use their Epic Fight skill's own cooldown (None here).
+TECHNIQUE_MANA = {"mdvlcraft:dismantle": 12, "mdvlcraft:cleave": 20, "mdvlcraft:malevolent_shrine": 100, "mdvlcraft:open_malevolent_shrine": 100,
+                  "mdvlcraft:boogie_woogie": 10, "mdvlcraft:block_clap": 10, "mdvlcraft:blitz": 15, "mdvlcraft:surprise_attack": 15,
+                  "mdvlcraft:follow_up_kick": 15, "mdvlcraft:projection_dash": 15, "mdvlcraft:myriad_blades": 35, "mdvlcraft:soul_hunt": 20}
+TECHNIQUE_COOLDOWN = {"mdvlcraft:dismantle": 1, "mdvlcraft:cleave": 3, "mdvlcraft:malevolent_shrine": 120, "mdvlcraft:open_malevolent_shrine": 120,
+                      "mdvlcraft:boogie_woogie": 2, "mdvlcraft:block_clap": 2, "mdvlcraft:blitz": 8, "mdvlcraft:surprise_attack": 15,
+                      "mdvlcraft:follow_up_kick": 6, "mdvlcraft:projection_dash": 10, "mdvlcraft:myriad_blades": None, "mdvlcraft:soul_hunt": None}
+# Techniques that keep casting while the cast key is held (Technique.held), each time their cooldown ends, paying each time.
 HELD_TECHNIQUES = {"mdvlcraft:dismantle", "mdvlcraft:cleave"}
 ABILITY_NAMES = {"mdvlcraft:stance": "Stance", "mdvlcraft:dismantle": "Dismantle", "mdvlcraft:cleave": "Cleave", "mdvlcraft:malevolent_shrine": "Malevolent Shrine",
                  "mdvlcraft:open_malevolent_shrine": "Malevolent Shrine: Open",
@@ -167,14 +212,14 @@ ABILITY_NAMES = {"mdvlcraft:stance": "Stance", "mdvlcraft:dismantle": "Dismantle
 GENERIC = [
     ("minecraft:generic.max_health", "Vitality", 1, 8),
     ("minecraft:generic.movement_speed", "Swiftness", 0.005, 8),
-    ("irons_spellbooks:max_mana", "Attunement", 3, 8),
-    ("irons_spellbooks:mana_regen", "Meditation", 0.01, 8),
+    ("irons_spellbooks:max_mana", "Attunement", 4, 8),
+    ("irons_spellbooks:mana_regen", "Meditation", 0.015, 8),
     ("irons_spellbooks:cooldown_reduction", "Focus", 0.005, 8),
     ("mdvlcraft:saturation_bonus", "Hearty", 0.02, 8),
     ("minecraft:generic.armor", "Hardened", 0.25, 8),
     ("epicfight:staminar", "Endurance", 0.25, 8),
     ("epicfight:stamina_regen", "Second Breath", 0.01, 8),
-    ("puffish_attributes:natural_regeneration", "Mending", 0.01, 8),
+    ("puffish_attributes:natural_regeneration", "Mending", 0.015, 8),
     ("minecraft:generic.attack_speed", "Readiness", 0.005, 8),
     ("minecraft:generic.attack_damage", "Might", 0.1, 6),
     ("minecraft:generic.knockback_resistance", "Footing", 0.01, 6),
@@ -234,7 +279,7 @@ def spell(name, level, cost, icon, title=None):
     if not 1 <= level <= SPELL_MAX_LEVEL[name]:
         raise SystemExit(f"{name} level {level} is outside 1-{SPELL_MAX_LEVEL[name]}")
     base, per_level = SPELL_MANA[name]
-    mana = (base + per_level * (level - 1)) * SPELL_MANA_MULTIPLIER.get(name, 1)
+    mana = round((base + per_level * (level - 1)) * SPELL_MANA_MULTIPLIER)
     if mana > BASE_MANA:
         raise SystemExit(f"{name} level {level} costs {mana:g} mana, more than the {BASE_MANA}-mana pool")
     return dict(kind="ability", ability="irons_spellbooks:" + name, level=level, cost=cost, icon=icon,
@@ -288,6 +333,12 @@ def efskill(name, cost):
                 icon=f"texture:epicfight:textures/gui/skills/{category}/{name}.png", title=title)
 
 
+# Core spokes every archetype has: larger mana, mana regen, health regen and health. Each total stays below the Mage
+# (Mana Well +50, Flow +25%) and Warrior (Second Wind +25%, Toughness +6) class spokes for the same stat.
+# Two limbs: mana (Reservoir, then Wellspring) and vitality (Renewal, then Constitution).
+CORE = [chain("irons_spellbooks:max_mana", "Reservoir", 8, 2, 14) + chain("irons_spellbooks:mana_regen", "Wellspring", 0.04, 2, 0.07),
+        chain("puffish_attributes:natural_regeneration", "Renewal", 0.04, 2, 0.07) + chain("minecraft:generic.max_health", "Constitution", 1, 2, 1)]
+
 CLASSES = {
     "warrior": dict(title="Warrior", angle=-135, blurb="Melee combat: armour, weapons and endurance.",
                     pool=[chain("minecraft:generic.max_health", "Toughness", 1, 4, 2),
@@ -306,12 +357,13 @@ CLASSES = {
                         chain("puffish_attributes:stealth", "Shadow", 0.05, 3, 0.10),
                         chain("epicfight:stamina_regen", "Recovery", 0.05, 3, 0.10),
                         chain("puffish_attributes:consuming_speed", "Quick Draught", 0.05, 3, 0.10)]),
-    "ranger": dict(title="Ranger", angle=135, blurb="The wilds: speed, agility, endurance and stranger arts.",
+    "ranger": dict(title="Ranger", angle=135, blurb="The wilds: speed, agility, endurance, a predator's strike and stranger arts.",
                    pool=[chain("puffish_attributes:sprinting_speed", "Sprinter", 0.03, 3, 0.06),
                          chain("puffish_attributes:jump", "Spring", 0.05, 3, 0.10),
                          chain("puffish_attributes:fall_reduction", "Light Foot", 0.05, 3, 0.10),
                          chain("epicfight:staminar", "Evasion Training", 0.5, 3, 1),
-                         chain("puffish_attributes:stamina", "Forager", 0.05, 3, 0.10)]),
+                         chain("puffish_attributes:stamina", "Forager", 0.05, 3, 0.10),
+                         chain("puffish_attributes:melee_damage", "Predator", 0.02, 3, 0.04)]),
 }
 
 # Each archetype: class, title, blurb, root (title + stat or spell), signature spokes, ability spokes.
@@ -352,7 +404,7 @@ ARCHETYPES = {
                                  [spell("heartstop", 1, 3, "minecraft:fermented_spider_eye")],
                                  [spell("burning_dash", 3, 2, "minecraft:fire_charge"), spell("stomp", 2, 2, "minecraft:anvil")],
                                  [efskill("berserker", 3), efskill("forbidden_strength", 2)]]),
-    "holy": dict(desc="A healer and support caster. Holy power strengthens light spells, healing received rises, and holy resistance protects against dark magic. Guiding Bolt, Heal, Greater Heal, Blessing of Life, Healing Circle, Cloud of Regeneration, Wisp, Cleanse, Sunbeam and Angel Wing keep a party alive, and Adaptive Skin hardens against whatever hurts you.", cls="mage", title="Holy",
+    "holy": dict(desc="A healer and support caster. Holy power strengthens light spells, healing received rises, and holy resistance protects against dark magic. Guiding Bolt, Heal, Greater Heal, Blessing of Life, Healing Circle, Cloud of Regeneration, Wisp, Cleanse, Sunbeam and Angel Wing keep a party alive, Divine Smite brings the light down on undead, and Adaptive Skin hardens against whatever hurts you.", cls="mage", title="Holy",
                  blurb="Healing and radiant light.",
                  root=dict(title="Devotion", spell=spell("guiding_bolt", 3, 1, "minecraft:spectral_arrow")),
                  signature=[chain("irons_spellbooks:holy_spell_power", "Faith", 0.03, 4, 0.06),
@@ -364,7 +416,8 @@ ARCHETYPES = {
                             [spell("cloud_of_regeneration", 3, 2, "minecraft:ghast_tear"), spell("wisp", 3, 2, "minecraft:glow_ink_sac"),
                              spell("cleanse", 1, 2, "minecraft:milk_bucket")],
                             [spell("angel_wing", 1, 3, "minecraft:elytra"), spell("greater_heal", 1, 3, "minecraft:enchanted_golden_apple")],
-                            [efskill("adaptive_skin", 3)]]),
+                            [efskill("adaptive_skin", 3)],
+                            [spell("divine_smite", 3, 2, "minecraft:golden_sword")]]),
     "flame": dict(desc="Burst damage and constant pressure. Fire power and cooldown reduction keep the flames coming, from Firebolt, Fire Breath and Scorch to Magma Bomb, Wall of Fire, Blaze Storm, Heat Surge, Fireball and Raise Hell, while ember skin resists fire and Vengeance burns back at whoever hurt you.", cls="mage", title="Flame",
                   blurb="Fire spells and fast cooldowns.",
                   root=dict(title="Kindling", spell=spell("firebolt", 3, 1, "minecraft:blaze_rod")),
@@ -413,7 +466,7 @@ ARCHETYPES = {
                            [spell("frostwave", 3, 2, "minecraft:snowball"), spell("ray_of_frost", 3, 2, "minecraft:prismarine_shard")],
                            [spell("ice_block", 2, 2, "minecraft:packed_ice"), spell("frostbite", 1, 3, "minecraft:blue_ice")],
                            [efskill("hypervitality", 3)]]),
-    "assassin": dict(desc="Strike first, strike from behind. Daggers, backstab damage, armour negation and protection shred make every opening lethal. Echoing Strikes, Acupuncture and Bonebreaker punish a single target, while Blood Step and Invisibility get you in and out unseen.", cls="rogue", title="Assassin",
+    "assassin": dict(desc="Strike first, strike from behind. Daggers, backstab damage, armour negation and protection shred make every opening lethal. Echoing Strikes, Acupuncture and Bonebreaker punish a single target, Throw hurls your blade at whatever runs, and Blood Step and Invisibility get you in and out unseen.", cls="rogue", title="Assassin",
                      blurb="Daggers, backstabs and vanishing acts.",
                      root=dict(title="Silent Blade", attribute="mdvlcraft:dagger_damage", value=0.05),
                      signature=[chain("mdvlcraft:dagger_damage", "Dagger", 0.05, 4, 0.10),
@@ -422,7 +475,8 @@ ARCHETYPES = {
                                 chain("puffish_attributes:protection_shred", "Rend", 0.05, 2, 0.10)],
                      abilities=[[spell("echoing_strikes", 2, 2, "minecraft:echo_shard"), spell("acupuncture", 3, 2, "minecraft:tripwire_hook")],
                                 [efskill("bonebreaker", 3)],
-                                [spell("blood_step", 2, 2, "minecraft:redstone"), spell("invisibility", 2, 3, "minecraft:glass")]]),
+                                [spell("blood_step", 2, 2, "minecraft:redstone"), spell("invisibility", 2, 3, "minecraft:glass")],
+                                [spell("throw", 3, 2, "minecraft:iron_sword")]]),
     "phantom": dict(desc="A rapier duellist built around the dodge. Rapiers (a sword with an empty off hand) grow sharper, dodges cost less stamina, and the first hit after a dodge lands as a riposte. Evasion turns incoming blows into blinks, Slow drags enemies down, Step replaces the roll with a sidestep and Catharsis charges the blade with every dodge.", cls="rogue", title="Phantom",
                     blurb="Rapier duelling, dodges and ripostes.",
                     root=dict(title="Duelist", attribute="mdvlcraft:rapier_damage", value=0.05),
@@ -435,45 +489,51 @@ ARCHETYPES = {
                                [technique("mdvlcraft:follow_up_kick", 3, "minecraft:leather_boots", note="Projection Sorcery. Sneak and cast to switch between the Normal and Flow forms."),
                                 technique("mdvlcraft:projection_dash", 4, "minecraft:clock", note="Projection Sorcery. Hold to dash, always at full output; sneak and cast to switch Tracing and Continuous. Naobito's style.")],
                                [efskill("step", 2), efskill("catharsis", 3)]]),
-    "scout": dict(desc="Speed, range and awareness. Scouts swim faster, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot.", cls="rogue", title="Scout",
+    "scout": dict(desc="Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Ascension's lightning leap, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, and Touch Dig tunnels through anything.", cls="rogue", title="Scout",
                   blurb="Mobility, ender magic and far sight.",
                   root=dict(title="Pathfinder", attribute="forge:swim_speed", value=0.10),
                   signature=[chain("forge:swim_speed", "Current", 0.10, 2, 0.10),
                              chain("irons_spellbooks:ender_spell_power", "Rift", 0.03, 3, 0.06),
                              chain("irons_spellbooks:ender_magic_resist", "Void Ward", 0.05, 2, 0.10),
-                             chain("puffish_attributes:breaking_speed", "Trailblazer", 0.05, 3, 0.10)],
+                             chain("puffish_attributes:breaking_speed", "Trailblazer", 0.05, 3, 0.10),
+                             chain("puffish_attributes:trident_damage", "Harpooner", 0.05, 3, 0.10)],
                   abilities=[[spell("teleport", 2, 2, "minecraft:ender_pearl"), spell("teleport", 4, 2, "minecraft:ender_pearl", "Blink (Teleport IV)")],
                              [spell("haste", 2, 2, "minecraft:sugar"), spell("planar_sight", 1, 3, "minecraft:spyglass")],
                              [spell("gust", 3, 2, "minecraft:feather")],
-                             [efskill("phantom_ascent", 3)]]),
-    "thief": dict(desc="Luck and loot. Thieves gain luck, double drops, extra Fortune, longer reach and cheaper anvil repairs. Boogie Woogie claps swap places with creatures or blocks to confuse fights, Scapegoat and Firecracker cover a getaway, and Emergency Escape dodges out of any hit.", cls="rogue", title="Thief",
+                             [efskill("phantom_ascent", 3)],
+                             [spell("ascension", 3, 2, "minecraft:lightning_rod"), spell("touch_dig", 2, 2, "minecraft:iron_pickaxe")]]),
+    "thief": dict(desc="Luck and loot. Thieves gain luck, double drops, extra Fortune, longer reach, cheaper anvil repairs and a cutthroat's sword arm. Boogie Woogie claps swap places with creatures or blocks to confuse fights, Lob Creeper and Chain Creeper blow open a fight, Scapegoat and Firecracker cover a getaway, and Emergency Escape dodges out of any hit.", cls="rogue", title="Thief",
                   blurb="Luck, plunder and Boogie Woogie swaps.",
                   root=dict(title="Light Fingers", attribute="minecraft:generic.luck", value=1),
                   signature=[chain("minecraft:generic.luck", "Fortune's Favour", 1, 2, 2),
                              chain("mdvlcraft:plunder", "Plunder", 0.05, 3, 0.10),
                              chain("forge:entity_reach", "Long Arms", 0.25, 2, 0.5),
                              chain("puffish_attributes:fortune", "Prospector", 1, 0, 1),
-                             chain("puffish_attributes:repair_cost", "Haggler", -0.05, 2, -0.10)],
+                             chain("puffish_attributes:repair_cost", "Haggler", -0.05, 2, -0.10),
+                             chain("puffish_attributes:sword_damage", "Cutthroat", 0.05, 3, 0.10)],
                   abilities=[[technique("mdvlcraft:boogie_woogie", 3, "minecraft:ender_pearl"),
                               technique("mdvlcraft:block_clap", 3, "minecraft:chorus_fruit")],
                              [spell("scapegoat", 2, 2, "minecraft:lead"), spell("firecracker", 3, 2, "minecraft:firework_rocket")],
-                             [efskill("emergency_escape", 3)]]),
-    "wanderer": dict(desc="Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, and Adrenaline Fiend gets you back on your feet after every kill.", cls="ranger", title="Wanderer",
+                             [efskill("emergency_escape", 3)],
+                             [spell("lob_creeper", 3, 2, "minecraft:tnt"), spell("chain_creeper", 2, 2, "minecraft:creeper_head")]]),
+    "wanderer": dict(desc="Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, Fang Ward and Fang Swirl ring you with evoker fangs, Spectral Hammer clears the way, and Adrenaline Fiend gets you back on your feet after every kill.", cls="ranger", title="Wanderer",
                      blurb="Long journeys: food, sure footing and a loyal horse.",
                      root=dict(title="Long Road", attribute="mdvlcraft:saturation_bonus", value=0.10),
                      signature=[chain("mdvlcraft:saturation_bonus", "Provisions", 0.10, 3, 0.20),
                                 chain("puffish_attributes:mount_speed", "Rider", 0.05, 3, 0.10),
-                                chain("puffish_attributes:tamed_damage", "Pack Leader", 0.05, 2, 0.10),
+                                chain("puffish_attributes:tamed_damage", "Pack Leader", 0.08, 2, 0.15),
                                 chain("puffish_attributes:tamed_resistance", "Companion", 0.05, 2, 0.10),
                                 chain("forge:step_height_addition", "Sure-footed", 0.5, 0, 0.5)],
                      abilities=[[spell("summon_horse", 3, 2, "minecraft:saddle"), spell("summon_horse", 5, 2, "minecraft:golden_carrot", "Trusted Steed (Summon Horse V)")],
                                 [spell("counterspell", 1, 3, "minecraft:barrier")],
                                 [spell("summon_polar_bear", 3, 2, "minecraft:snow_block"), spell("gluttony", 1, 2, "minecraft:cooked_porkchop")],
-                                [efskill("adrenaline_fiend", 3)]]),
+                                [efskill("adrenaline_fiend", 3)],
+                                [spell("fang_ward", 3, 2, "minecraft:emerald"), spell("fang_swirl", 3, 2, "minecraft:totem_of_undying")],
+                                [spell("spectral_hammer", 3, 2, "minecraft:iron_pickaxe")]]),
     "stalker": dict(desc="Bows and crossbows. Ranged damage, arrow and bolt speed and evocation power make every shot count. Arrow Volley rains arrows on a whole area, Poison Arrow leaves a lingering toxic cloud, Fire Arrow burns, and Revelation turns well-timed defence into a stunning counter.", cls="ranger", title="Stalker",
                     blurb="Bows, crossbows, arrow volleys and poison arrows.",
-                    root=dict(title="Hunter's Eye", attribute="puffish_attributes:ranged_damage", value=0.03),
-                    signature=[chain("puffish_attributes:ranged_damage", "Aim", 0.03, 4, 0.06),
+                    root=dict(title="Hunter's Eye", attribute="puffish_attributes:ranged_damage", value=0.05),
+                    signature=[chain("puffish_attributes:ranged_damage", "Aim", 0.05, 4, 0.10),
                                chain("puffish_attributes:bow_projectile_speed", "Longbow", 0.05, 2, 0.10),
                                chain("puffish_attributes:crossbow_projectile_speed", "Arbalest", 0.05, 2, 0.10),
                                chain("irons_spellbooks:evocation_spell_power", "Fletcher's Art", 0.03, 3, 0.06)],
@@ -494,7 +554,7 @@ ARCHETYPES = {
                              [spell("blight", 2, 2, "minecraft:poisonous_potato"), spell("poison_splash", 3, 2, "minecraft:spider_eye"),
                               spell("spider_aspect", 3, 2, "minecraft:cobweb")],
                              [efskill("meteor_slam", 3)]]),
-    "cursed": dict(desc="Cursed techniques fuelled by mana instead of cursed energy, with no cooldowns. Dismantle and Cleave cut enemies apart, and the Malevolent Shrine domain, closed and then open, shreds everything around you while you keep cutting. Cursed Control makes techniques cheaper; melee resistance and toughness shred round it out, with Swordmaster and Death Harvest for the blade.", cls="ranger", title="Cursed",
+    "cursed": dict(desc="Cursed techniques fuelled by mana instead of cursed energy, each with its own cooldown. Dismantle and Cleave cut enemies apart, and the Malevolent Shrine domain, closed and then open, shreds everything around you while you keep cutting. Cursed Control makes techniques cheaper; melee resistance and toughness shred round it out, with Swordmaster and Death Harvest for the blade.", cls="ranger", title="Cursed",
                    blurb="Shrine techniques: Dismantle, Cleave and the Malevolent Shrine (closed, then open).",
                    root=dict(title="Cursed Body", attribute="puffish_attributes:melee_resistance", value=0.02),
                    signature=[chain("mdvlcraft:technique_efficiency", "Cursed Control", 0.07, 4, 0.07),
@@ -502,9 +562,9 @@ ARCHETYPES = {
                               chain("puffish_attributes:toughness_shred", "Severing", 0.05, 2, 0.10)],
                    abilities=[[technique("mdvlcraft:dismantle", 2, "minecraft:shears"), technique("mdvlcraft:cleave", 3, "minecraft:iron_axe"),
                                technique("mdvlcraft:malevolent_shrine", 4, "minecraft:crying_obsidian",
-                                         note="Closed domain: a black barrier dome; only what is inside is cut, and only while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Costs 150 mana: take all of Cursed Control (-35%) or extra mana to afford it."),
+                                         note="Closed domain: a black barrier dome; only what is inside is cut, and only while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it."),
                                technique("mdvlcraft:open_malevolent_shrine", 4, "minecraft:obsidian",
-                                         note="Open domain: no barrier, cuts everything within 45 blocks while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Costs 150 mana.")],
+                                         note="Open domain: no barrier, cuts everything within 45 blocks while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it.")],
                               [efskill("swordmaster", 3), efskill("death_harvest", 2)],
                               [technique("mdvlcraft:soul_hunt", 4, "minecraft:soul_lantern", note="Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown.")]]),
 }
@@ -529,8 +589,15 @@ def describe(node):
         category, title, effect = EF_SKILLS[node["skill"].split(":")[1]]
         return f"Teaches {title}, an Epic Fight {EF_SLOT_NAMES[category]} skill: {effect}. Equip it in the Combat Skills box of the abilities screen"
     level = f" (Level {node['level']})" if node["ability"].startswith("irons_spellbooks:") else ""
-    mana = f" ({TECHNIQUE_MANA[node['ability']]} mana, no cooldown)" if node["ability"] in TECHNIQUE_MANA else ""
-    held = ". Hold the cast key to keep casting" if node["ability"] in HELD_TECHNIQUES else ""
+    mana = ""
+    if node["ability"] in TECHNIQUE_MANA:
+        cooldown = TECHNIQUE_COOLDOWN[node["ability"]]
+        mana = f" ({TECHNIQUE_MANA[node['ability']]} mana, " + (f"{cooldown} s cooldown)" if cooldown else "own cooldown)")
+    elif node["ability"].startswith("irons_spellbooks:"):
+        name = node["ability"].split(":")[1]
+        base, per_level = SPELL_MANA[name]
+        mana = f" ({round((base + per_level * (node['level'] - 1)) * SPELL_MANA_MULTIPLIER)} mana, {spell_cooldown(name):g} s cooldown)"
+    held = ". Hold the cast key to keep casting each time it is ready" if node["ability"] in HELD_TECHNIQUES else ""
     preview = ". Hold the Ponder key (W) here to preview it" if node["ability"].startswith("irons_spellbooks:") else ""
     return f"Unlocks {ability_name(node['ability'])}{level}{mana} on the ability wheel{held}{preview}"
 
@@ -656,7 +723,7 @@ class Tree:
 
 def skill_id(node, taken):
     """Readable IDs for commands: max_mana_3, max_mana_mastery, shield, shield_4, vitality_2."""
-    if node.get("group") == "generic":
+    if node.get("group") in ("generic", "core"):
         return node["title"].lower().replace(" ", "_")
     if node["kind"] == "stat":
         base = node["attribute"].split(":")[1].replace("generic.", "")
@@ -703,12 +770,32 @@ def definition_for(node, cls_id):
         definition.update(frame("task", cls_id))
     if group == "class":
         definition["extra_description"] = f"{cls['title']} class bonus (every {cls['title']} archetype has this spoke)."
+    if group == "core":
+        definition["extra_description"] = "Core bonus (every archetype has this spoke)."
     if node.get("note"):
         definition["extra_description"] = node["note"]
     return definition
 
 
+class NoRoom(Exception):
+    pass
+
+
+LAYOUT_ATTEMPTS = 20
+
+
 def build_archetype(arch_id, arch):
+    """Lays the tree out with the archetype's own seed, then the next seeds in turn if a limb finds no room, so a tree
+    keeps its shape between builds unless its contents change."""
+    for attempt in range(LAYOUT_ATTEMPTS):
+        try:
+            return grow_archetype(arch_id, arch, arch_id if attempt == 0 else f"{arch_id}#{attempt}")
+        except NoRoom as e:
+            last = e
+    raise SystemExit(f"{arch_id}: no layout in {LAYOUT_ATTEMPTS} seeds ({last})")
+
+
+def grow_archetype(arch_id, arch, seed):
     """A tree: boughs leave the root at uneven angles, fork into the spoke limbs, and sprout twigs of generic bonuses."""
     cls = CLASSES[arch["cls"]]
     root = arch["root"]
@@ -718,7 +805,7 @@ def build_archetype(arch_id, arch):
                             **frame("root", arch["cls"]), "rewards": [reward(root_node)], "cost": 1}}
     nodes = {"root": root_node}
     # Seeded per archetype so a tree keeps its shape between builds.
-    rng = random.Random(arch_id)
+    rng = random.Random(seed)
     tree = Tree(arch_id, rng)
     twigs = Twigs(rng)
 
@@ -726,12 +813,13 @@ def build_archetype(arch_id, arch):
         node_id = skill_id(node, nodes)
         if not tree.grow(parent, node_id, heading, step):
             if required:
-                raise SystemExit(f"{arch_id}: no room for {node_id}")
+                raise NoRoom(node_id)
             return None
         nodes[node_id] = dict(node, id=node_id)
         return node_id
 
-    spokes = [("ability", s) for s in arch["abilities"]] + [("signature", s) for s in arch["signature"]] + [("class", s) for s in cls["pool"]]
+    spokes = ([("ability", s) for s in arch["abilities"]] + [("signature", s) for s in arch["signature"]]
+              + [("class", s) for s in cls["pool"]] + [("core", s) for s in CORE])
     rng.shuffle(spokes)
     # Boughs of one to three limbs (more cannot fan out of one fork without touching).
     boughs = []
@@ -762,7 +850,7 @@ def build_archetype(arch_id, arch):
         for limb in growing:
             if limb[2]:
                 group, node = limb[2].pop(0)
-                limb[0] = add(limb[0], dict(node, group=group), limb[1] + rng.gauss(0, 0.1), 40, True)
+                limb[0] = add(limb[0], dict(node, group=group), limb[1] + rng.gauss(0, 0.1), 44, True)
                 limb[1] = tree.heading[limb[0]]
                 limbs.append(limb[0])
 
@@ -870,7 +958,7 @@ def check_overlaps(all_nodes):
     owner = {}
     for arch_id, nodes in all_nodes.items():
         for node in nodes:
-            if node.get("group") in ("class", "generic"):
+            if node.get("group") in ("class", "generic", "core"):
                 continue
             key = node.get("attribute") or node.get("ability") or node.get("skill")
             if key in pool_owner:
@@ -886,6 +974,17 @@ def totals(nodes):
         if node["kind"] == "stat":
             sums[node["attribute"]] = sums.get(node["attribute"], 0) + node["value"]
     return sums
+
+
+def write_spell_config(all_nodes):
+    """Iron's per-spell config for every spell the trees grant: SPELL_MANA_MULTIPLIER and spell_cooldown()."""
+    if SPELL_CONFIG.exists():
+        shutil.rmtree(SPELL_CONFIG)
+    spells = sorted({n["ability"].split(":")[1] for nodes in all_nodes.values() for n in nodes
+                     if n["kind"] == "ability" and n["ability"].startswith("irons_spellbooks:")})
+    for name in spells:
+        write(SPELL_CONFIG / f"{name}.json", {"irons_spellbooks:mana_cost_multiplier": SPELL_MANA_MULTIPLIER,
+                                              "irons_spellbooks:cooldown_in_seconds": spell_cooldown(name)})
 
 
 def write_spell_previews(all_nodes):
@@ -907,10 +1006,38 @@ def write_doc(all_nodes):
              f"- **Twigs:** the small frames sprouting off every branch are tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation and more; table below). They are smaller than any class or signature step and capped per tree, so they widen your choices without raising the ceiling.",
              f"- **Points:** {STARTING_POINTS} to start, then 1 per level up to level {LEVEL_LIMIT} ({points} per archetype). Every tree costs more than that, so you choose. Experience comes from kills (`dropped XP + max health / 5`, at most 20 kills per chunk every 5 minutes). Level n to n+1 costs `25 + 5n` XP ({xp_total:,} XP to reach level {LEVEL_LIMIT}).",
              "- **Class bonuses** are shared by every archetype of that class. **Signature bonuses and abilities** belong to one archetype only; the generator enforces this.",
-             "- **Controls:** `[` opens the abilities screen, hold `` ` `` for the ability wheel, Caps Lock casts. Cursed techniques cost mana and have no cooldown; hold the cast key on Dismantle or Cleave to keep casting. The Malevolent Shrine (closed, then open) only cuts while you hold Dismantle or Cleave; cast it again to close it (it lasts up to 20 s).", ""]
+             "- **Controls:** `[` opens the abilities screen, hold `` ` `` for the ability wheel, Caps Lock casts. Spells cost 40% less mana than Iron's defaults and have 50% longer cooldowns. Techniques cost mana and have their own cooldowns; hold the cast key on Dismantle or Cleave to keep casting each time it is ready. The Malevolent Shrine (closed, then open) only cuts while you hold Dismantle or Cleave; cast it again to close it (it lasts up to 20 s).", ""]
     lines += ["## Twig bonuses (every archetype)", "", "| Twig | Per node | Most per tree | Tree maximum |", "|---|---|---|---|"]
     for attribute, title, value, cap in GENERIC:
         lines.append(f"| {title} | {fmt(attribute, value)} {ATTRIBUTES[attribute][0]} | {cap} | {fmt(attribute, round(value * cap, 4))} |")
+    lines.append("")
+    lines += ["## Core bonuses (every archetype)", "", "| Spoke | Total (small nodes + capstone) |", "|---|---|"]
+    for spoke in CORE:
+        for attribute in dict.fromkeys(n["attribute"] for n in spoke):
+            part = [n for n in spoke if n["attribute"] == attribute]
+            lines.append(f"| {part[0]['title'][:-2]} | {ATTRIBUTES[attribute][0]} {fmt(attribute, round(sum(n['value'] for n in part), 4))} |")
+    lines.append("")
+    lines += ["## Spells: mana and cooldowns", "",
+              f"Every spell the trees grant costs {round((1 - SPELL_MANA_MULTIPLIER) * 100)}% less mana than Iron's default and has a "
+              f"{round((SPELL_COOLDOWN_MULTIPLIER - 1) * 100)}% longer cooldown (at least {SPELL_COOLDOWN_MIN} s; cooldowns of "
+              f"{SPELL_COOLDOWN_KEEP} s or more are unchanged). Spell power is Iron's own.", "",
+              "| Spell | Archetype (level) | Mana: Iron's -> pack | Cooldown: Iron's -> pack |", "|---|---|---|---|"]
+    granted = {}
+    for arch_id, nodes in all_nodes.items():
+        for n in nodes:
+            if n["kind"] == "ability" and n["ability"].startswith("irons_spellbooks:"):
+                granted.setdefault(n["ability"].split(":")[1], []).append((ARCHETYPES[arch_id]["title"], n["level"]))
+    for name in sorted(granted):
+        base, per_level = SPELL_MANA[name]
+        levels = sorted({level for _, level in granted[name]})
+        iron = "/".join(f"{base + per_level * (level - 1)}" for level in levels)
+        pack = "/".join(f"{round((base + per_level * (level - 1)) * SPELL_MANA_MULTIPLIER)}" for level in levels)
+        where = ", ".join(sorted({f"{title} ({'/'.join(str(l) for l in sorted({l for tt, l in granted[name] if tt == title}))})" for title, _ in granted[name]}))
+        lines.append(f"| {ability_name('irons_spellbooks:' + name)} | {where} | {iron} -> {pack} | {SPELL_COOLDOWN[name]:g} s -> {spell_cooldown(name):g} s |")
+    lines += ["", "## Techniques: mana and cooldowns", "", "| Technique | Mana | Cooldown |", "|---|---|---|"]
+    for ability_id, mana in TECHNIQUE_MANA.items():
+        cooldown = TECHNIQUE_COOLDOWN[ability_id]
+        lines.append(f"| {ability_name(ability_id)} | {mana} | {f'{cooldown} s' if cooldown else 'its Epic Fight skill cooldown'} |")
     lines.append("")
     lines += ["## Class bonuses", "", "| Class | Spokes (each spoke: small nodes + capstone, total at the end) |", "|---|---|"]
     for cls in CLASSES.values():
@@ -923,7 +1050,7 @@ def write_doc(all_nodes):
     for arch_id, nodes in all_nodes.items():
         arch = ARCHETYPES[arch_id]
         cost = sum(n["cost"] for n in nodes)
-        sig = [n for n in nodes if n.get("group") not in ("class", "generic")]
+        sig = [n for n in nodes if n.get("group") not in ("class", "generic", "core")]
         twig_count = sum(1 for n in nodes if n.get("group") == "generic")
         lines += [f"## {arch['title']} ({CLASSES[arch['cls']]['title']})", "", arch["desc"], "",
                   f"{len(nodes)} skills ({twig_count} of them twigs), {cost} points in total ({points} available).", "",
@@ -943,6 +1070,7 @@ def main():
     check_overlaps(all_nodes)
     build_classes()
     write_spell_previews(all_nodes)
+    write_spell_config(all_nodes)
     write(OUT / "config.json", {"version": 3, "categories": ["classes"] + list(ARCHETYPES)})
     write_doc(all_nodes)
     for arch_id, nodes in all_nodes.items():

@@ -103,6 +103,9 @@ ATTRIBUTE_ICONS = {
     "puffish_attributes:tamed_damage": ("paw", "power"),
     "puffish_attributes:tamed_resistance": ("paw", "resist"),
     "puffish_attributes:toughness_shred": ("anvil", "shred"),
+    "puffish_attributes:melee_damage": ("fist", "power"),
+    "puffish_attributes:sword_damage": ("slashes", "power"),
+    "puffish_attributes:trident_damage": ("wave", "power"),
 }
 # The twig bonuses (generate_skill_trees.GENERIC) by attribute: 12x12 symbol.
 TWIG_ICONS = {

@@ -22,6 +22,7 @@ public final class ClientAbilitySetup {
         MinecraftForge.EVENT_BUS.addListener(SlateGui::onTooltipColour);
         MinecraftForge.EVENT_BUS.addListener(SpellPreviews::onClientTick);
         modBus.addListener(SlateRecruits::onAddPackFinders);
+        modBus.addListener(BdHillFix::onAddPackFinders);
         MinecraftForge.EVENT_BUS.addListener(SlateRecruits::onRenderPre);
         MinecraftForge.EVENT_BUS.addListener(SlateRecruits::onRenderPost);
     }
@@ -37,5 +38,6 @@ public final class ClientAbilitySetup {
     private static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
         ClientAbilities.reset();
         ClientStances.reset();
+        ClientTechniqueCooldowns.reset();
     }
 }

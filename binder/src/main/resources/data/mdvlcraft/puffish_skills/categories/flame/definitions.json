@@ -1,7 +1,7 @@
 {
   "root": {
     "title": "Kindling",
-    "description": "Unlocks Firebolt (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "description": "Unlocks Firebolt (Level 3) (8 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
     "icon": {
       "type": "texture",
       "data": {
@@ -30,9 +30,141 @@
     ],
     "cost": 1
   },
+  "focus_1": {
+    "title": "Focus 1",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_2": {
+    "title": "Focus 2",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_1": {
+    "title": "Footing 1",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_1": {
+    "title": "Endurance 1",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
   "meditation_1": {
     "title": "Meditation 1",
-    "description": "+1% Mana Regen",
+    "description": "+1.5% Mana Regen",
     "icon": {
       "type": "texture",
       "data": {
@@ -44,7 +176,40 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_2": {
+    "title": "Meditation 2",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
           "operation": "addition"
         }
       }
@@ -96,21 +261,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "meditation_2": {
-    "title": "Meditation 2",
-    "description": "+1% Mana Regen",
+  "hearty_1": {
+    "title": "Hearty 1",
+    "description": "+2% Saturation from Food",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
           "operation": "addition"
         }
       }
@@ -129,54 +294,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "second_breath_1": {
-    "title": "Second Breath 1",
-    "description": "+1% Stamina Regen",
+  "endurance_2": {
+    "title": "Endurance 2",
+    "description": "+0.25 Max Stamina",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_1": {
-    "title": "Footing 1",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
           "operation": "addition"
         }
       }
@@ -195,21 +327,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "meditation_3": {
-    "title": "Meditation 3",
-    "description": "+1% Mana Regen",
+  "vitality_1": {
+    "title": "Vitality 1",
+    "description": "+1 Max Health",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
           "operation": "addition"
         }
       }
@@ -227,235 +359,6 @@
     },
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_4": {
-    "title": "Meditation 4",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_1": {
-    "title": "Readiness 1",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "willpower_1": {
-    "title": "Willpower 1",
-    "description": "+0.5% Spell Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_5": {
-    "title": "Meditation 5",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mana_regen_1": {
-    "title": "Flow 1",
-    "description": "+4% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_1": {
-    "title": "Scholar 1",
-    "description": "+5% Experience Gained (enchanting)",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_experience.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "fire_breath": {
-    "title": "Fire Breath",
-    "description": "Unlocks Fire Breath (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:fire_charge"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:fire_breath",
-          "level": 3
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
-      }
-    },
-    "size": 2.0
   },
   "fire_spell_power_1": {
     "title": "Inferno 1",
@@ -522,22 +425,119 @@
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
-  "spell_resist_1": {
-    "title": "Warding 1",
-    "description": "+2% Spell Resistance",
+  "mana_regen_1": {
+    "title": "Flow 1",
+    "description": "+4% Mana Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.02,
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
           "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "renewal_1": {
+    "title": "Renewal 1",
+    "description": "+4% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.04,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "fire_breath": {
+    "title": "Fire Breath",
+    "description": "Unlocks Fire Breath (Level 3) (4 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:fire_charge"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:fire_breath",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "experience_1": {
+    "title": "Scholar 1",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_experience.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -585,6 +585,39 @@
     },
     "size": 2.0
   },
+  "reservoir_1": {
+    "title": "Reservoir 1",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
   "fire_magic_resist_1": {
     "title": "Ember Skin 1",
     "description": "+5% Fire Resistance",
@@ -619,7 +652,7 @@
   },
   "blaze_storm": {
     "title": "Blaze Storm",
-    "description": "Unlocks Blaze Storm (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "description": "Unlocks Blaze Storm (Level 3) (4 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
     "icon": {
       "type": "item",
       "data": {
@@ -683,7 +716,7 @@
   },
   "heat_surge": {
     "title": "Heat Surge",
-    "description": "Unlocks Heat Surge (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "description": "Unlocks Heat Surge (Level 2) (36 mana, 67.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
     "icon": {
       "type": "item",
       "data": {
@@ -712,9 +745,42 @@
     },
     "size": 2.0
   },
+  "spell_resist_1": {
+    "title": "Warding 1",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
   "scorch": {
     "title": "Scorch",
-    "description": "Unlocks Scorch (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "description": "Unlocks Scorch (Level 3) (36 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
     "icon": {
       "type": "item",
       "data": {
@@ -774,103 +840,6 @@
       }
     },
     "size": 1.5
-  },
-  "mana_regen_2": {
-    "title": "Flow 2",
-    "description": "+4% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_2": {
-    "title": "Scholar 2",
-    "description": "+5% Experience Gained (enchanting)",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_experience.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "magma_bomb": {
-    "title": "Magma Bomb",
-    "description": "Unlocks Magma Bomb (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:magma_cream"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:magma_bomb",
-          "level": 3
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
-      }
-    },
-    "size": 2.0
   },
   "fire_spell_power_2": {
     "title": "Inferno 2",
@@ -937,21 +906,21 @@
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
-  "spell_resist_2": {
-    "title": "Warding 2",
-    "description": "+2% Spell Resistance",
+  "mana_regen_2": {
+    "title": "Flow 2",
+    "description": "+4% Mana Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.02,
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
           "operation": "addition"
         }
       }
@@ -969,6 +938,136 @@
     },
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "renewal_2": {
+    "title": "Renewal 2",
+    "description": "+4% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.04,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "magma_bomb": {
+    "title": "Magma Bomb",
+    "description": "Unlocks Magma Bomb (Level 3) (24 mana, 18 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:magma_cream"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:magma_bomb",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "experience_2": {
+    "title": "Scholar 2",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_experience.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "reservoir_2": {
+    "title": "Reservoir 2",
+    "description": "+8 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 8,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
   },
   "fire_magic_resist_2": {
     "title": "Ember Skin 2",
@@ -1004,7 +1103,7 @@
   },
   "raise_hell": {
     "title": "Raise Hell",
-    "description": "Unlocks Raise Hell (Level 1) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "description": "Unlocks Raise Hell (Level 1) (54 mana, 37.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
     "icon": {
       "type": "item",
       "data": {
@@ -1068,7 +1167,7 @@
   },
   "fireball": {
     "title": "Fireball",
-    "description": "Unlocks Fireball (Level 2) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "description": "Unlocks Fireball (Level 2) (45 mana, 37.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
     "icon": {
       "type": "item",
       "data": {
@@ -1097,9 +1196,42 @@
     },
     "size": 2.0
   },
+  "spell_resist_2": {
+    "title": "Warding 2",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
   "wall_of_fire": {
     "title": "Wall Of Fire",
-    "description": "Unlocks Wall Of Fire (Level 3) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "description": "Unlocks Wall Of Fire (Level 3) (24 mana, 45 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
     "icon": {
       "type": "item",
       "data": {
@@ -1159,103 +1291,6 @@
       }
     },
     "size": 1.5
-  },
-  "mana_regen_3": {
-    "title": "Flow 3",
-    "description": "+4% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_3": {
-    "title": "Scholar 3",
-    "description": "+5% Experience Gained (enchanting)",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_experience.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.05,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "firebolt": {
-    "title": "Blaze (Firebolt V)",
-    "description": "Unlocks Firebolt (Level 5) on the ability wheel. Hold the Ponder key (W) here to preview it",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:blaze_rod"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:firebolt",
-          "level": 5
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
-      }
-    },
-    "size": 2.0
   },
   "fire_spell_power_3": {
     "title": "Inferno 3",
@@ -1322,21 +1357,21 @@
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
-  "spell_resist_3": {
-    "title": "Warding 3",
-    "description": "+2% Spell Resistance",
+  "mana_regen_3": {
+    "title": "Flow 3",
+    "description": "+4% Mana Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.02,
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
           "operation": "addition"
         }
       }
@@ -1354,6 +1389,136 @@
     },
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "renewal_mastery": {
+    "title": "Renewal Mastery",
+    "description": "+7% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.07,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "firebolt": {
+    "title": "Blaze (Firebolt V)",
+    "description": "Unlocks Firebolt (Level 5) (11 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "minecraft:blaze_rod"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "irons_spellbooks:firebolt",
+          "level": 5
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "experience_3": {
+    "title": "Scholar 3",
+    "description": "+5% Experience Gained (enchanting)",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_experience.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.05,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "reservoir_mastery": {
+    "title": "Reservoir Mastery",
+    "description": "+14 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 14,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
   },
   "fire_magic_resist_mastery": {
     "title": "Ember Skin Mastery",
@@ -1420,6 +1585,39 @@
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
+  "spell_resist_3": {
+    "title": "Warding 3",
+    "description": "+2% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
   "cooldown_reduction_3": {
     "title": "Wildfire 3",
     "description": "+2% Cooldown Reduction",
@@ -1451,72 +1649,6 @@
       }
     },
     "size": 1.5
-  },
-  "mana_regen_4": {
-    "title": "Flow 4",
-    "description": "+4% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.04,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
-  },
-  "experience_mastery": {
-    "title": "Scholar Mastery",
-    "description": "+10% Experience Gained (enchanting)",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_experience.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:experience",
-          "value": 0.1,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
   "fire_spell_power_4": {
     "title": "Inferno 4",
@@ -1583,22 +1715,88 @@
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
-  "spell_resist_mastery": {
-    "title": "Warding Mastery",
-    "description": "+4% Spell Resistance",
+  "mana_regen_4": {
+    "title": "Flow 4",
+    "description": "+4% Mana Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
+          "attribute": "irons_spellbooks:mana_regen",
           "value": 0.04,
           "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "constitution_1": {
+    "title": "Constitution 1",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/minecraft_generic_max_health.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "experience_mastery": {
+    "title": "Scholar Mastery",
+    "description": "+10% Experience Gained (enchanting)",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/puffish_attributes_experience.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:experience",
+          "value": 0.1,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -1615,6 +1813,39 @@
     },
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "wellspring_1": {
+    "title": "Wellspring 1",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
   },
   "max_mana_4": {
     "title": "Mana Well 4",
@@ -1644,6 +1875,39 @@
         "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
         "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
         "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "spell_resist_mastery": {
+    "title": "Warding Mastery",
+    "description": "+4% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
       }
     },
     "size": 1.5,
@@ -1680,39 +1944,6 @@
       }
     },
     "size": 1.5
-  },
-  "mana_regen_mastery": {
-    "title": "Flow Mastery",
-    "description": "+9% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.09,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
-      }
-    },
-    "size": 1.5,
-    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
   "fire_spell_power_mastery": {
     "title": "Inferno Mastery",
@@ -1779,6 +2010,105 @@
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
+  "mana_regen_mastery": {
+    "title": "Flow Mastery",
+    "description": "+9% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.09,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+  },
+  "constitution_2": {
+    "title": "Constitution 2",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/minecraft_generic_max_health.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "wellspring_2": {
+    "title": "Wellspring 2",
+    "description": "+4% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.04,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_task_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_task_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_task_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_task_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_task_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
   "max_mana_mastery": {
     "title": "Mana Well Mastery",
     "description": "+18 Max Mana",
@@ -1812,112 +2142,46 @@
     "size": 1.5,
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
-  "mending_1": {
-    "title": "Mending 1",
-    "description": "+1% Natural Regeneration",
+  "constitution_mastery": {
+    "title": "Constitution Mastery",
+    "description": "+1 Max Health",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/minecraft_generic_max_health.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
         }
       }
     ],
-    "cost": 1,
+    "cost": 2,
     "frame": {
       "type": "texture",
       "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
       }
     },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
   },
-  "mending_2": {
-    "title": "Mending 2",
-    "description": "+1% Natural Regeneration",
+  "wellspring_mastery": {
+    "title": "Wellspring Mastery",
+    "description": "+7% Mana Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_3": {
-    "title": "Mending 3",
-    "description": "+1% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_6": {
-    "title": "Meditation 6",
-    "description": "+1% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+        "texture": "mdvlcraft:textures/gui/icons/attribute/irons_spellbooks_mana_regen.png"
       }
     },
     "rewards": [
@@ -1925,7 +2189,40 @@
         "type": "puffish_skills:attribute",
         "data": {
           "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
+          "value": 0.07,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "extra_description": "Core bonus (every archetype has this spoke)."
+  },
+  "hearty_2": {
+    "title": "Hearty 2",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
           "operation": "addition"
         }
       }
@@ -1944,21 +2241,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "meditation_7": {
-    "title": "Meditation 7",
-    "description": "+1% Mana Regen",
+  "hearty_3": {
+    "title": "Hearty 3",
+    "description": "+2% Saturation from Food",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
           "operation": "addition"
         }
       }
@@ -1977,21 +2274,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "meditation_8": {
-    "title": "Meditation 8",
-    "description": "+1% Mana Regen",
+  "hearty_4": {
+    "title": "Hearty 4",
+    "description": "+2% Saturation from Food",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.01,
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
           "operation": "addition"
         }
       }
@@ -2010,54 +2307,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "focus_1": {
-    "title": "Focus 1",
-    "description": "+0.5% Cooldown Reduction",
+  "hearty_5": {
+    "title": "Hearty 5",
+    "description": "+2% Saturation from Food",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_2": {
-    "title": "Focus 2",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
           "operation": "addition"
         }
       }
@@ -2142,20 +2406,1109 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "bounce_1": {
-    "title": "Bounce 1",
-    "description": "+1% Jump Height",
+  "readiness_1": {
+    "title": "Readiness 1",
+    "description": "+0.5% Attack Speed",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:jump",
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_2": {
+    "title": "Readiness 2",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_1": {
+    "title": "Willpower 1",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_2": {
+    "title": "Willpower 2",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_3": {
+    "title": "Readiness 3",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_4": {
+    "title": "Readiness 4",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_5": {
+    "title": "Readiness 5",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_3": {
+    "title": "Endurance 3",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_4": {
+    "title": "Endurance 4",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_5": {
+    "title": "Endurance 5",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_6": {
+    "title": "Endurance 6",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_7": {
+    "title": "Endurance 7",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_8": {
+    "title": "Endurance 8",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_1": {
+    "title": "Mending 1",
+    "description": "+1.5% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_2": {
+    "title": "Mending 2",
+    "description": "+1.5% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_3": {
+    "title": "Mending 3",
+    "description": "+1.5% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "mending_4": {
+    "title": "Mending 4",
+    "description": "+1.5% Natural Regeneration",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_1": {
+    "title": "Might 1",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_2": {
+    "title": "Might 2",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_1": {
+    "title": "Swiftness 1",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_2": {
+    "title": "Swiftness 2",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_3": {
+    "title": "Swiftness 3",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_4": {
+    "title": "Meditation 4",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_5": {
+    "title": "Meditation 5",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_6": {
+    "title": "Meditation 6",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_2": {
+    "title": "Footing 2",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_3": {
+    "title": "Footing 3",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_2": {
+    "title": "Vitality 2",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_4": {
+    "title": "Swiftness 4",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_5": {
+    "title": "Swiftness 5",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_6": {
+    "title": "Swiftness 6",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_7": {
+    "title": "Meditation 7",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_8": {
+    "title": "Meditation 8",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_2": {
+    "title": "Second Breath 2",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
           "value": 0.01,
           "operation": "multiply_base"
         }
@@ -2175,20 +3528,20 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "bounce_2": {
-    "title": "Bounce 2",
-    "description": "+1% Jump Height",
+  "second_breath_3": {
+    "title": "Second Breath 3",
+    "description": "+1% Stamina Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:jump",
+          "attribute": "epicfight:stamina_regen",
           "value": 0.01,
           "operation": "multiply_base"
         }
@@ -2208,21 +3561,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "bounce_3": {
-    "title": "Bounce 3",
-    "description": "+1% Jump Height",
+  "readiness_6": {
+    "title": "Readiness 6",
+    "description": "+0.5% Attack Speed",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
           "operation": "multiply_base"
         }
       }
@@ -2241,22 +3594,88 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "bounce_4": {
-    "title": "Bounce 4",
-    "description": "+1% Jump Height",
+  "readiness_7": {
+    "title": "Readiness 7",
+    "description": "+0.5% Attack Speed",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
           "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_3": {
+    "title": "Willpower 3",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_4": {
+    "title": "Willpower 4",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
         }
       }
     ],
@@ -2373,402 +3792,6 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "focus_8": {
-    "title": "Focus 8",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_2": {
-    "title": "Readiness 2",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_3": {
-    "title": "Readiness 3",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_2": {
-    "title": "Second Breath 2",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_3": {
-    "title": "Second Breath 3",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_4": {
-    "title": "Second Breath 4",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_5": {
-    "title": "Bounce 5",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_6": {
-    "title": "Bounce 6",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_1": {
-    "title": "Attunement 1",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_2": {
-    "title": "Attunement 2",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "might_1": {
-    "title": "Might 1",
-    "description": "+0.1 Attack Damage",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_damage",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "might_2": {
-    "title": "Might 2",
-    "description": "+0.1 Attack Damage",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_damage",
-          "value": 0.1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
   "might_3": {
     "title": "Might 3",
     "description": "+0.1 Attack Damage",
@@ -2802,105 +3825,6 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "hearty_1": {
-    "title": "Hearty 1",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_2": {
-    "title": "Hearty 2",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_3": {
-    "title": "Hearty 3",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
   "might_4": {
     "title": "Might 4",
     "description": "+0.1 Attack Damage",
@@ -2916,6 +3840,39 @@
         "data": {
           "attribute": "minecraft:generic.attack_damage",
           "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_8": {
+    "title": "Focus 8",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
           "operation": "addition"
         }
       }
@@ -3000,21 +3957,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "readiness_4": {
-    "title": "Readiness 4",
-    "description": "+0.5% Attack Speed",
+  "mending_5": {
+    "title": "Mending 5",
+    "description": "+1.5% Natural Regeneration",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
+          "attribute": "puffish_attributes:natural_regeneration",
+          "value": 0.015,
           "operation": "multiply_base"
         }
       }
@@ -3033,22 +3990,22 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "readiness_5": {
-    "title": "Readiness 5",
-    "description": "+0.5% Attack Speed",
+  "hardened_2": {
+    "title": "Hardened 2",
+    "description": "+0.25 Armor",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
         }
       }
     ],
@@ -3066,22 +4023,22 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "readiness_6": {
-    "title": "Readiness 6",
-    "description": "+0.5% Attack Speed",
+  "hardened_3": {
+    "title": "Hardened 3",
+    "description": "+0.25 Armor",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
         }
       }
     ],
@@ -3099,21 +4056,54 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "readiness_7": {
-    "title": "Readiness 7",
-    "description": "+0.5% Attack Speed",
+  "hardened_4": {
+    "title": "Hardened 4",
+    "description": "+0.25 Armor",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_4": {
+    "title": "Second Breath 4",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
           "operation": "multiply_base"
         }
       }
@@ -3198,450 +4188,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "second_breath_7": {
-    "title": "Second Breath 7",
-    "description": "+1% Stamina Regen",
+  "willpower_5": {
+    "title": "Willpower 5",
+    "description": "+0.5% Spell Resistance",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_8": {
-    "title": "Second Breath 8",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_8": {
-    "title": "Readiness 8",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
+          "attribute": "irons_spellbooks:spell_resist",
           "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_2": {
-    "title": "Footing 2",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "footing_3": {
-    "title": "Footing 3",
-    "description": "+1% Knockback Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_4": {
-    "title": "Hearty 4",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_5": {
-    "title": "Hearty 5",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_6": {
-    "title": "Hearty 6",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_3": {
-    "title": "Attunement 3",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "attunement_4": {
-    "title": "Attunement 4",
-    "description": "+3 Max Mana",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:max_mana",
-          "value": 3,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "vitality_1": {
-    "title": "Vitality 1",
-    "description": "+1 Max Health",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.max_health",
-          "value": 1,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_7": {
-    "title": "Hearty 7",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_8": {
-    "title": "Hearty 8",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "vitality_3": {
-    "title": "Vitality 3",
-    "description": "+1 Max Health",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.max_health",
-          "value": 1,
           "operation": "addition"
         }
       }
@@ -3726,20 +4287,185 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "endurance_1": {
-    "title": "Endurance 1",
-    "description": "+0.25 Max Stamina",
+  "footing_5": {
+    "title": "Footing 5",
+    "description": "+1% Knockback Resistance",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "epicfight:staminar",
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_6": {
+    "title": "Footing 6",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_1": {
+    "title": "Attunement 1",
+    "description": "+4 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 4,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_2": {
+    "title": "Attunement 2",
+    "description": "+4 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 4,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "attunement_3": {
+    "title": "Attunement 3",
+    "description": "+4 Max Mana",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_max_mana.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:max_mana",
+          "value": 4,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hardened_5": {
+    "title": "Hardened 5",
+    "description": "+0.25 Armor",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.armor",
           "value": 0.25,
           "operation": "addition"
         }
@@ -3759,20 +4485,20 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "endurance_2": {
-    "title": "Endurance 2",
-    "description": "+0.25 Max Stamina",
+  "hardened_6": {
+    "title": "Hardened 6",
+    "description": "+0.25 Armor",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "epicfight:staminar",
+          "attribute": "minecraft:generic.armor",
           "value": 0.25,
           "operation": "addition"
         }
@@ -3792,21 +4518,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_2": {
-    "title": "Willpower 2",
-    "description": "+0.5% Spell Resistance",
+  "hardened_7": {
+    "title": "Hardened 7",
+    "description": "+0.25 Armor",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
           "operation": "addition"
         }
       }
@@ -3825,21 +4551,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_3": {
-    "title": "Willpower 3",
-    "description": "+0.5% Spell Resistance",
+  "hardened_8": {
+    "title": "Hardened 8",
+    "description": "+0.25 Armor",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
+          "attribute": "minecraft:generic.armor",
+          "value": 0.25,
           "operation": "addition"
         }
       }
@@ -3858,21 +4584,87 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_4": {
-    "title": "Willpower 4",
-    "description": "+0.5% Spell Resistance",
+  "bounce_1": {
+    "title": "Bounce 1",
+    "description": "+1% Jump Height",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_2": {
+    "title": "Bounce 2",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_6": {
+    "title": "Vitality 6",
+    "description": "+1 Max Health",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
           "operation": "addition"
         }
       }
@@ -3891,21 +4683,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_5": {
-    "title": "Willpower 5",
-    "description": "+0.5% Spell Resistance",
+  "vitality_7": {
+    "title": "Vitality 7",
+    "description": "+1 Max Health",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
           "operation": "addition"
         }
       }
@@ -3924,8 +4716,41 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "swiftness_1": {
-    "title": "Swiftness 1",
+  "swiftness_7": {
+    "title": "Swiftness 7",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_8": {
+    "title": "Swiftness 8",
     "description": "+0.5% Movement Speed",
     "icon": {
       "type": "texture",

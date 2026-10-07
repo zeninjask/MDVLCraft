@@ -8,38 +8,45 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * Cursed Fate techniques the skill trees can grant. They cost mana instead of cursed energy and have no cooldown.
- * {@code abilityId} is Cursed Fate's internal ability number (AbilityToCast). {@code repeatTicks} &gt; 0 means holding the
- * cast key casts it again every that many ticks (paying each time); 0 means once per press. The two Malevolent Shrines
- * are the same Cursed Fate ability with a different domain variant: 0 is the closed barrier domain, 1 the open shrine.
+ * Cursed Fate techniques the skill trees can grant. They cost mana instead of cursed energy and have their own cooldown
+ * ({@link TechniqueCooldowns}), which starts when the technique is cast. {@code abilityId} is Cursed Fate's internal
+ * ability number (AbilityToCast). A {@code held} technique keeps casting while the cast key is held, again each time its
+ * cooldown ends (paying each time). The two Malevolent Shrines are the same Cursed Fate ability with a different domain
+ * variant: 0 is the closed barrier domain, 1 the open shrine.
  * Blitz and Surprise Attack are Heavenly Restriction abilities (cast without the weapon Cursed Fate asks for, see
  * {@link WeaponFreeCasts}); Follow Up Kick and Don't You Have a Heart? come from the Projection Sorcery addon
  * ({@link ProjectionSorcery}).
  */
 public enum Technique implements Ability {
-    DISMANTLE("dismantle", 26, 20, 10, "minecraft:textures/item/shears.png"),
-    CLEAVE("cleave", 27, 35, 15, "minecraft:textures/item/iron_axe.png"),
-    MALEVOLENT_SHRINE("malevolent_shrine", 31, 150, 0, "cursedfate:textures/screens/closedshrinevarient.png"),
-    OPEN_MALEVOLENT_SHRINE("open_malevolent_shrine", 31, 150, 0, "cursedfate:textures/screens/openshrinevarient.png"),
-    BOOGIE_WOOGIE("boogie_woogie", 32, 15, 0, "minecraft:textures/item/ender_pearl.png"),
-    BLOCK_CLAP("block_clap", 33, 15, 0, "minecraft:textures/item/chorus_fruit.png"),
-    BLITZ("blitz", 60, 30, 0, "cursedfate:textures/mob_effect/blitz_effect.png"),
-    SURPRISE_ATTACK("surprise_attack", 66, 25, 0, "mdvlcraft:textures/gui/icons/tab/assassin.png"),
-    FOLLOW_UP_KICK("follow_up_kick", 114, 25, 0, "naoyaaddon:textures/screens/naoyaicon.png"),
-    PROJECTION_DASH("projection_dash", 118, 30, 0, "naoyaaddon:textures/screens/customtechniqueicon.png");
+    DISMANTLE("dismantle", 26, 12, 1, true, "minecraft:textures/item/shears.png"),
+    CLEAVE("cleave", 27, 20, 3, true, "minecraft:textures/item/iron_axe.png"),
+    MALEVOLENT_SHRINE("malevolent_shrine", 31, 100, 120, false, "cursedfate:textures/screens/closedshrinevarient.png"),
+    OPEN_MALEVOLENT_SHRINE("open_malevolent_shrine", 31, 100, 120, false, "cursedfate:textures/screens/openshrinevarient.png"),
+    BOOGIE_WOOGIE("boogie_woogie", 32, 10, 2, false, "minecraft:textures/item/ender_pearl.png"),
+    BLOCK_CLAP("block_clap", 33, 10, 2, false, "minecraft:textures/item/chorus_fruit.png"),
+    BLITZ("blitz", 60, 15, 8, false, "cursedfate:textures/mob_effect/blitz_effect.png"),
+    SURPRISE_ATTACK("surprise_attack", 66, 15, 15, false, "mdvlcraft:textures/gui/icons/tab/assassin.png"),
+    FOLLOW_UP_KICK("follow_up_kick", 114, 15, 6, false, "naoyaaddon:textures/screens/naoyaicon.png"),
+    PROJECTION_DASH("projection_dash", 118, 15, 10, false, "naoyaaddon:textures/screens/customtechniqueicon.png");
 
     private final ResourceLocation id;
     final int abilityId;
     private final int manaCost;
-    final int repeatTicks;
+    private final int cooldownTicks;
+    final boolean held;
     private final ResourceLocation icon;
 
-    Technique(String name, int abilityId, int manaCost, int repeatTicks, String icon) {
+    Technique(String name, int abilityId, int manaCost, int cooldownSeconds, boolean held, String icon) {
         this.id = ResourceLocation.fromNamespaceAndPath(MDVLBinder.MOD_ID, name);
         this.abilityId = abilityId;
         this.manaCost = manaCost;
-        this.repeatTicks = repeatTicks;
+        this.cooldownTicks = cooldownSeconds * 20;
+        this.held = held;
         this.icon = ResourceLocation.parse(icon);
+    }
+
+    public int cooldownTicks() {
+        return cooldownTicks;
     }
 
     boolean isShrine() {

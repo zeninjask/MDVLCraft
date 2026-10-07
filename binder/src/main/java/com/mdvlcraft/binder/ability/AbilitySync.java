@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-/** Sends a player their granted abilities and wheel. */
+/** Sends a player their granted abilities, wheel and technique cooldowns. */
 final class AbilitySync {
     private AbilitySync() {
     }
@@ -17,5 +17,6 @@ final class AbilitySync {
         Map<ResourceLocation, Integer> granted = new LinkedHashMap<>();
         AbilityGrants.of(player).forEach((ability, level) -> granted.put(ability.id(), level));
         BinderNetwork.sendTo(player, new SyncAbilitiesPacket(granted, Loadout.get(player)));
+        TechniqueCooldowns.send(player);
     }
 }
