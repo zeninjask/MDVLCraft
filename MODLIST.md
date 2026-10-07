@@ -19,6 +19,7 @@ The BD&Hill resource pack is installed but, as before, off until you turn it on 
 ## v1.8.1 changes
 | Change | Notes |
 |---|---|
+| Chunky back (client and server) | Chunky 1.3.146 returns. It had been removed because Distant Horizons 3.3.3 binds to Chunky on the first chunk update, before Chunky exists (it only starts with a server), and the "Chunky is not loaded" error crashed a dedicated server during spawn preparation and a client joining a server. The binder now holds that binding back until Chunky is loaded (`mixin/distanthorizons/AbstractChunkyAccessorMixin`), so DH still pauses its own generation while Chunky pre-generates |
 | Taken back out | Wanderer: Fang Ward, Fang Swirl and Spectral Hammer. Scout: Ascension. Stalker: Ranged Damage back to +21% (1.8.0 had raised it to +35%, level with the katana bonus). Wanderer keeps the stronger pets, Scout keeps Trident Damage and Touch Dig. Binder 0.7.1 |
 
 ## v1.8.0 changes
