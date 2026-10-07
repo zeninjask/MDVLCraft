@@ -5,8 +5,8 @@ A Forge **1.20.1** (Forge **47.4.10**) modpack built around Epic Fight combat, c
 | File | What it is |
 |------|------------|
 | [`MDVLCraft-1.9.4-test.mrpack`](MDVLCraft-1.9.4-test.mrpack) | Modrinth pack (Modrinth App, Prism Launcher) with **every** mod (169): client-only, server-only and both-sides. For single-player and testing |
-| [`MDVLCraft-1.9.7-client.mrpack`](MDVLCraft-1.9.7-client.mrpack) | Modrinth pack for players: the 153 client-only and both-sides mods, configs and the resource pack. Set 8 GB and the JVM line from `MDVLCraft-Java-Arguments.txt` in the launcher |
-| [`MDVLCraft-1.9.7-server.mrpack`](MDVLCraft-1.9.7-server.mrpack) | Modrinth pack for a dedicated server: the 141 server-only and both-sides mods, configs, and `user_jvm_args.txt` for Forge's start script |
+| [`MDVLCraft-1.9.8-client.mrpack`](MDVLCraft-1.9.8-client.mrpack) | Modrinth pack for players: the 155 client-only and both-sides mods, configs and the resource pack. Set 8 GB and the JVM line from `MDVLCraft-Java-Arguments.txt` in the launcher |
+| [`MDVLCraft-1.9.8-server.mrpack`](MDVLCraft-1.9.8-server.mrpack) | Modrinth pack for a dedicated server: the 141 server-only and both-sides mods, configs, and `user_jvm_args.txt` for Forge's start script |
 | [`MDVLCraft-1.9.4.zip`](MDVLCraft-1.9.4.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*) with every mod: 155 CurseForge mods + 13 jars in overrides (EpicFight-Ponder, MDVLCraft Binder and eleven mods CurseForge doesn't host in the tested version), with your MDVL configs and KubeJS folder |
 | [`MODLIST.md`](MODLIST.md) | Full mod list with source of each mod, merge changes, server notes and test results |
 | [`MDVLCraft-Optimisation-and-Improvement-Mods.docx`](MDVLCraft-Optimisation-and-Improvement-Mods.docx) | Word document: optimisation mods in the pack, optimisation and improvement mods to add, what to avoid |
