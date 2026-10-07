@@ -4,15 +4,16 @@ A Forge **1.20.1** (Forge **47.4.10**) modpack built around Epic Fight combat, c
 
 | File | What it is |
 |------|------------|
-| [`MDVLCraft-1.8.1.zip`](MDVLCraft-1.8.1.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*). 147 CurseForge mods + EpicFight-Ponder + MDVLCraft Binder + Projection Sorcery, with your MDVL configs and KubeJS folder |
-| [`MDVLCraft-1.8.1-client.mrpack`](MDVLCraft-1.8.1-client.mrpack) | Modrinth pack for players (Modrinth App, Prism Launcher): every mod (150), configs and the resource pack. Set 8 GB and the JVM line from `MDVLCraft-Java-Arguments.txt` in the launcher |
-| [`MDVLCraft-1.8.1-server.mrpack`](MDVLCraft-1.8.1-server.mrpack) | Modrinth pack for a dedicated server: the 126 server mods, configs, and `user_jvm_args.txt` for Forge's start script |
+| [`MDVLCraft-1.9.0-test.mrpack`](MDVLCraft-1.9.0-test.mrpack) | Modrinth pack (Modrinth App, Prism Launcher) with **every** mod (167): client-only, server-only and both-sides. For single-player and testing |
+| [`MDVLCraft-1.9.0-client.mrpack`](MDVLCraft-1.9.0-client.mrpack) | Modrinth pack for players: the 152 client-only and both-sides mods, configs and the resource pack. Set 8 GB and the JVM line from `MDVLCraft-Java-Arguments.txt` in the launcher |
+| [`MDVLCraft-1.9.0-server.mrpack`](MDVLCraft-1.9.0-server.mrpack) | Modrinth pack for a dedicated server: the 139 server-only and both-sides mods, configs, and `user_jvm_args.txt` for Forge's start script |
+| [`MDVLCraft-1.9.0.zip`](MDVLCraft-1.9.0.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*) with every mod: 154 CurseForge mods + 13 jars in overrides (EpicFight-Ponder, MDVLCraft Binder and eleven mods CurseForge doesn't host in the tested version), with your MDVL configs and KubeJS folder |
 | [`MODLIST.md`](MODLIST.md) | Full mod list with source of each mod, merge changes, server notes and test results |
 | [`MDVLCraft-Optimisation-and-Improvement-Mods.docx`](MDVLCraft-Optimisation-and-Improvement-Mods.docx) | Word document: optimisation mods in the pack, optimisation and improvement mods to add, what to avoid |
 | [`REPORT.md`](REPORT.md) | Wider research report: addons, world generation, resource packs, progression, JVM arguments |
 | [`binder/`](binder/) | Source of **MDVLCraft Binder**, the pack's own mod: class/archetype skill trees, ability wheel, Epic Fight skills taught by the trees, and Iron's Spells / Cursed Fate spells kept inside the trees (no spell books, scrolls, cursed shards or skill books) — see [`binder/README.md`](binder/README.md), [`binder/SKILL_TREES.md`](binder/SKILL_TREES.md), [`binder/BALANCE.md`](binder/BALANCE.md), [`binder/SPELL_REPORT.md`](binder/SPELL_REPORT.md) and [`binder/CLASS_IMPROVEMENTS.md`](binder/CLASS_IMPROVEMENTS.md) |
 | [`docs/test-screenshot.png`](docs/test-screenshot.png) | Automated client test: joined a dedicated server running the pack |
 
-**Java:** 17. **RAM:** 6–8 GB client. **Dedicated server:** use the server `.mrpack`, or remove Oculus, Better Lock On, Dynamic Crosshair and Legendary Tooltips from the server's `mods` folder (they crash or error on a server — see MODLIST.md).
+**Java:** 17. **RAM:** 6–8 GB client. **Dedicated server:** use the server `.mrpack`, or remove at least Oculus, Better Lock On, Dynamic Crosshair and Legendary Tooltips from the server's `mods` folder (they crash or error on a server — see MODLIST.md).
 
 > The pack contains `epic_fight_ponder-1.0.0.jar` extracted from TCR Core (All Rights Reserved) — keep this repository private.

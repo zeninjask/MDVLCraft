@@ -1,4 +1,4 @@
-# MDVLCraft balance pass (binder 0.7.1, pack 1.8.1)
+# MDVLCraft balance pass (binder 0.7.1, pack 1.9.0)
 
 How the 16 archetypes compare, what changed to even them out, and what keeps bosses hard. Exact numbers live in
 [`SKILL_TREES.md`](SKILL_TREES.md) (generated from `tools/generate_skill_trees.py`).
@@ -73,7 +73,7 @@ comes down to ST, Def and Sus.
   - Cursed had no cooldowns. Held Cleave recast every 0.75 s, and the Shrine could be reopened as soon as it closed.
 - **After:**
   - Thief rises to 3 against bosses. Scout and Wanderer rise less, and Stalker stays where it was: Ascension, Fang Ward,
-    Fang Swirl, Spectral Hammer and the Stalker ranged-damage increase were taken back out in 1.8.1.
+    Fang Swirl, Spectral Hammer and the Stalker ranged-damage increase were taken back out in 1.9.0.
   - Scout, Wanderer and Stalker remain the weakest against bosses (2), against 3–4 for everyone else. The table in the
     next section suggests other ways to raise them.
   - Totals sit in an 11–19 band. The low-total archetypes are specialists: Assassin and Stalker are single-target
