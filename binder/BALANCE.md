@@ -57,7 +57,7 @@ comes down to ST, Def and Sus.
 | Necromancy | 4 | 3 | 2 | 3 | 2 | 3 | 17 | 4 | same spell policy |
 | Ice | 3 | 4 | 3 | 1 | 2 | 3 | 16 | 3 | same spell policy |
 | Assassin | 4 → 5 | 1 | 1 | 1 | 3 | 2 | 12 → 13 | 3 | **Throw** (hurl your blade, weapon damage + spell power) |
-| Phantom | 4 | 2 | 3 | 1 | 5 | 2 | 17 | 4 | Kick 6 s, Dash 10 s cooldowns |
+| Phantom | 4 | 2 | 3 | 1 | 5 | 2 | 17 | 4 | Kick 6 s cooldown; Phantom Movement (dash) has no cooldown but costs 20 mana per dash |
 | Scout | 1 → 2 | 1 | 1 | 1 | 5 | 4 → 5 | 13 → 15 | 1 → 2 | **Trident Damage +25%**, **Touch Dig** |
 | Thief | 1 → 3 | 1 → 3 | 2 | 1 | 3 | 5 | 13 → 17 | 1 → 3 | **Sword Damage +25%**, **Lob Creeper**, **Chain Creeper** |
 | Wanderer | 2 → 3 | 1 | 2 | 2 | 4 | 4 | 15 → 16 | 2 | **Pet & Mount Damage +20% → +31%** |
@@ -127,7 +127,8 @@ and crossbows hit from range, out of reach of most counter-attacks.
   - This is written as Iron's own per-spell config (`data/irons_spellbooks/irons_spellbooks_spell_config/`), so spell
     tooltips show the real cost and cooldown. The full table is in `SKILL_TREES.md`.
 - **Techniques.**
-  - Every technique now has a cooldown (it had none) and a lower mana cost. The wheel and HUD draw a technique's
+  - Every technique except Phantom Movement now has a cooldown (it had none) and a lower mana cost; Phantom Movement
+    is paced by its mana cost alone (20 per dash). The wheel and HUD draw a technique's
     cooldown like a spell's, and the tooltip names it.
   - Held Dismantle or Cleave recasts each time its cooldown ends.
   - Closing a Shrine stays free and works during its cooldown.
@@ -146,7 +147,6 @@ and crossbows hit from range, out of reach of most counter-attacks.
 - **The heaviest hitters now wait:**
   - Shrine: 120 s.
   - Surprise Attack: 15 s.
-  - Dash: 10 s.
   - Blitz: 8 s.
 - **Bosses are untouched.** Their health, damage and AI are as the pack's mods ship them.
 

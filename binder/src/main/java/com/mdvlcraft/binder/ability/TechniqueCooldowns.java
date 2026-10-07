@@ -26,6 +26,9 @@ public final class TechniqueCooldowns {
     }
 
     static void start(ServerPlayer player, Technique technique) {
+        if (technique.cooldownTicks() == 0) {
+            return;
+        }
         CompoundTag ready = player.getPersistentData().getCompound(KEY);
         ready.putLong(technique.id().toString(), player.level().getGameTime() + technique.cooldownTicks());
         player.getPersistentData().put(KEY, ready);

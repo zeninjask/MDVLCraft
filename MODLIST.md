@@ -19,6 +19,10 @@ The BD&Hill resource pack is installed but, as before, off until you turn it on 
 ## v1.8.1 changes
 | Change | Notes |
 |---|---|
+| Skill tree layout | Archetype trees are laid out like Path of Exile's passive tree: meandering paths leave the centre or fork off one another, cross-links close loops, and connections are drawn as curves. Each path mixes several bonuses in turn (no two neighbouring skills give the same bonus) and its abilities sit in the outer part |
+| Classes tab hover | Each archetype's hover text is now its one-line summary plus up to three key abilities (the full descriptions are in `binder/SKILL_TREES.md`) |
+| Phantom Movement | Projection Sorcery's dash ("Don't You Have a Heart?") is renamed Phantom Movement, has no cooldown and costs 20 mana per dash, and has its own line icon |
+| Icons | Every tree, tab and ability icon is centred on what it draws (50 of 140 were 1–3 px off) |
 | Chunky back (client and server) | Chunky 1.3.146 returns. It had been removed because Distant Horizons 3.3.3 binds to Chunky on the first chunk update, before Chunky exists (it only starts with a server), and the "Chunky is not loaded" error crashed a dedicated server during spawn preparation and a client joining a server. The binder now holds that binding back until Chunky is loaded (`mixin/distanthorizons/AbstractChunkyAccessorMixin`), so DH still pauses its own generation while Chunky pre-generates |
 | Taken back out | Wanderer: Fang Ward, Fang Swirl and Spectral Hammer. Scout: Ascension. Stalker: Ranged Damage back to +21% (1.8.0 had raised it to +35%, level with the katana bonus). Wanderer keeps the stronger pets, Scout keeps Trident Damage and Touch Dig. Binder 0.7.1 |
 
@@ -33,7 +37,7 @@ The BD&Hill resource pack is installed but, as before, off until you turn it on 
 | Core tree bonuses | Every archetype tree has a mana limb (Max Mana +30, Mana Regen +15%) and a vitality limb (Natural Regeneration +15%, Max Health +3); the mana, mana regen and health regen twigs are larger |
 | Balance pass | See [`binder/BALANCE.md`](binder/BALANCE.md): comparison tables, what changed and why, what keeps bosses hard, and archetype ideas for missing paths. Scout, Thief, Wanderer and Stalker (the weakest) gain damage stats and abilities (partly taken back in 1.8.1); Holy gets Divine Smite, Assassin Throw; Ranger class gains a Predator (melee damage) spoke. Nothing was removed |
 | Spell costs and cooldowns | Every spell in the trees costs 40% less mana and has a 50% longer cooldown (at least 3 s; cooldowns of 120 s or more unchanged). Spell power is untouched |
-| Technique cooldowns | Every technique now has a cooldown (it had none) and costs less mana. Cursed: Dismantle 1 s, Cleave 3 s, Shrines 120 s; Blitz 8 s, Surprise Attack 15 s, Kick 6 s, Dash 10 s |
+| Technique cooldowns | Every technique now has a cooldown (it had none) and costs less mana. Cursed: Dismantle 1 s, Cleave 3 s, Shrines 120 s; Blitz 8 s, Surprise Attack 15 s, Kick 6 s, Dash 10 s (1.8.1: the dash, now Phantom Movement, has no cooldown) |
 | Sword Soaring | Only its Vatansever weapon is used; its flight is off and its keys unbound, its combos stay |
 | Fixes | Ponder no longer crashes on Antitheus ("weapon of miracle"); Iron's spell previews work again (hold W on a spell node); Cursed Fate never breaks terrain; Epic Fight Nightfall's effects no longer drop players from a dedicated server; BD&Hill's Uchigatana sits in the hand |
 | Checked, no change needed | Iron's staffs, swords and robes still craft and still apply their spell power and mana |
@@ -130,7 +134,7 @@ The server `.mrpack` leaves out 24 client-only mods: the four below, which crash
 | Boot | The 126-mod server and 150-mod client (with Epic Knights back and the five removed mods gone) load and join with no errors from the binder |
 | Blitz / Surprise Attack | Empty-handed on a dedicated server: Blitz dashed 8.6 blocks and hit a husk for 12; Surprise Attack teleported to it and hit for 12 |
 | Follow Up Kick | Teleported to the husk and kicked it for 11, fresh and right after Surprise Attack |
-| Don't You Have a Heart? | Tracing mode carried the player 40 blocks; Shift + cast switched to Continuous, which moved 11 blocks (its screen-shake command is cancelled in code; not checked by eye) |
+| Phantom Movement (then "Don't You Have a Heart?") | Tracing mode carried the player 40 blocks; Shift + cast switched to Continuous, which moved 11 blocks (its screen-shake command is cancelled in code; not checked by eye) |
 | Myriad Blades | 2 convergence entities and 104 flying swords spawned from the carried swords; the husk was killed |
 | Soul Hunt | Hit the husk for 9; the player stayed connected (before the fix the server dropped them) |
 | Technique cooldowns | A second Blitz 1 s after the first was refused; the HUD showed the mana paid (389/400) |

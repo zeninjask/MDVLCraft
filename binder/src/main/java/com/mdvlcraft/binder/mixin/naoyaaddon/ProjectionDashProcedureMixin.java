@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-/** Don't You Have a Heart?'s continuous dash: the screen shake it gives at speed is dropped. */
+/** Phantom Movement's (the addon's "Don't You Have a Heart?") continuous dash: the screen shake it gives at speed is dropped. */
 @Mixin(value = ProjectionDashProcedure.class, remap = false)
 public abstract class ProjectionDashProcedureMixin {
     @Inject(method = "runCommand", at = @At("HEAD"), cancellable = true)

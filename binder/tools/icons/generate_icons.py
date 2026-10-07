@@ -5,6 +5,9 @@
   twig/<name>.png                   12x12  the small generic bonuses on the twigs
   archetype/<id>.png, class/<id>.png 24x24 tree roots and Classes tab nodes
   tab/<id>.png                      16x16  category tabs (Pufferfish draws tab icons at 16 px)
+  ability/<id>.png                  24x24  wheel and tree icons for abilities without a fitting icon of their own
+
+Every icon is centred on what it draws (render.centred).
 
 Run from the binder folder (needs Pillow):  python3 tools/icons/generate_icons.py
 """
@@ -15,7 +18,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).parent))
 from glyphs12 import M  # noqa: E402
-from render import line_icon, mini_icon  # noqa: E402
+from render import centred, line_icon, mini_icon  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / "src/main/resources/assets/mdvlcraft/textures/gui/icons"
@@ -122,6 +125,8 @@ ARCHETYPE_ICONS = {"knight": "shield", "samurai": "katana", "berzerker": "axe", 
                    "scout": "eye", "thief": "loot", "wanderer": "compass", "stalker": "crosshair", "druid": "nature",
                    "cursed": "cursed"}
 CLASS_ICONS = {"warrior": "helmet", "mage": "hat", "rogue": "mask", "ranger": "quiver"}
+# Ability wheel and tree icons for abilities that have no fitting icon of their own: (symbol, modifier badge).
+ABILITY_ICONS = {"phantom_movement": ("ghost", "speed")}
 
 
 def attribute_file(attribute):
@@ -132,11 +137,11 @@ def tab_icon(name):
     """16x16: a 12x12 glyph outline with a 2 px margin."""
     img = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
     img.alpha_composite(mini_icon(M["tab_" + name]), (2, 2))
-    return img
+    return centred(img)
 
 
 def main():
-    for sub in ("attribute", "twig", "archetype", "class", "tab"):
+    for sub in ("attribute", "twig", "archetype", "class", "tab", "ability"):
         (OUT / sub).mkdir(parents=True, exist_ok=True)
     pairs = {}
     for attribute, (symbol, modifier) in ATTRIBUTE_ICONS.items():
@@ -153,8 +158,12 @@ def main():
         line_icon(symbol, None).save(OUT / "class" / f"{cls}.png")
         tab_icon(cls).save(OUT / "tab" / f"{cls}.png")
     tab_icon("classes").save(OUT / "tab" / "classes.png")
+    for ability, (symbol, modifier) in ABILITY_ICONS.items():
+        if (symbol, modifier) in pairs:
+            raise SystemExit(f"ability {ability} and {pairs[(symbol, modifier)]} would share an icon")
+        line_icon(symbol, modifier).save(OUT / "ability" / f"{ability}.png")
     print(f"{len(ATTRIBUTE_ICONS)} attribute, {len(TWIG_ICONS)} twig, {len(ARCHETYPE_ICONS)} archetype, "
-          f"{len(CLASS_ICONS)} class icons")
+          f"{len(CLASS_ICONS)} class, {len(ABILITY_ICONS)} ability icons")
 
 
 if __name__ == "__main__":

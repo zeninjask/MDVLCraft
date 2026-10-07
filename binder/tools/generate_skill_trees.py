@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 """Generates the Pufferfish's Skills data for MDVLCraft and SKILL_TREES.md.
 
-Layout follows the radial style of the "RPG skill tree" and "More RPG Classes - Skill Tree" packs:
 - Classes tab: the four classes sit in a ring round the centre (unlocked automatically) and each class's archetypes fan
   out in its own quarter. Pick up to two archetypes; each opens its own tab.
-- Archetype tabs: the archetype skill in the centre with a tree growing out of it. A few boughs leave the centre at
-  uneven angles, fork into limbs (the class, signature and ability spokes) and sprout twigs of small generic bonuses,
-  which fork again. Every tree has its own shape and size. Branches never cross.
-- Limbs: chains of small 1-point bonuses ending in a bigger capstone, or chains of key abilities. Every archetype
-  carries its class's spokes (shared by that class) plus its own signature spokes and abilities (never shared).
+- Archetype tabs, in the style of Path of Exile's passive tree: meandering paths leave the archetype skill or fork off
+  one another, a few cross-links close loops, and the client draws every connection as a curve
+  (mixin/puffish/ConnectionBatchedRendererMixin). Every tree has its own shape and size; branches never cross.
+- Paths: each mixes several bonus chains (class, signature and core: small 1-point steps, then a bigger capstone) in
+  turn, so no two neighbouring skills give the same bonus, and carries its abilities in its outer part. Every archetype
+  has its class's spokes (shared by that class) plus its own signature spokes and abilities (never shared).
 - Twigs: tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation...) shared by every archetype. Each is
   smaller than any class or signature step and capped per tree, so they widen the choices without raising the ceiling.
 
 Run from the binder folder:  python3 tools/generate_skill_trees.py
 It fails if a signature attribute or ability appears in two archetypes, if a class bonus appears in two classes or in a
 signature, if a spell level is above Iron's maximum, if a granted spell costs more than the starting mana pool, or if a
-limb cannot be placed.
+tree finds no layout.
 """
 import json
 import math
@@ -190,19 +190,19 @@ def spell_cooldown(name):
     return default if default >= SPELL_COOLDOWN_KEEP else max(SPELL_COOLDOWN_MIN, round(default * SPELL_COOLDOWN_MULTIPLIER, 1))
 
 # Mana and cooldown (seconds) of each technique (Technique.java, SlotSkillAbility.java). Myriad Blades and Soul Hunt
-# use their Epic Fight skill's own cooldown (None here).
+# use their Epic Fight skill's own cooldown (None here); Phantom Movement has none (0), each dash costs mana.
 TECHNIQUE_MANA = {"mdvlcraft:dismantle": 12, "mdvlcraft:cleave": 20, "mdvlcraft:malevolent_shrine": 100, "mdvlcraft:open_malevolent_shrine": 100,
                   "mdvlcraft:boogie_woogie": 10, "mdvlcraft:block_clap": 10, "mdvlcraft:blitz": 15, "mdvlcraft:surprise_attack": 15,
-                  "mdvlcraft:follow_up_kick": 15, "mdvlcraft:projection_dash": 15, "mdvlcraft:myriad_blades": 35, "mdvlcraft:soul_hunt": 20}
+                  "mdvlcraft:follow_up_kick": 15, "mdvlcraft:phantom_movement": 20, "mdvlcraft:myriad_blades": 35, "mdvlcraft:soul_hunt": 20}
 TECHNIQUE_COOLDOWN = {"mdvlcraft:dismantle": 1, "mdvlcraft:cleave": 3, "mdvlcraft:malevolent_shrine": 120, "mdvlcraft:open_malevolent_shrine": 120,
                       "mdvlcraft:boogie_woogie": 2, "mdvlcraft:block_clap": 2, "mdvlcraft:blitz": 8, "mdvlcraft:surprise_attack": 15,
-                      "mdvlcraft:follow_up_kick": 6, "mdvlcraft:projection_dash": 10, "mdvlcraft:myriad_blades": None, "mdvlcraft:soul_hunt": None}
+                      "mdvlcraft:follow_up_kick": 6, "mdvlcraft:phantom_movement": 0, "mdvlcraft:myriad_blades": None, "mdvlcraft:soul_hunt": None}
 # Techniques that keep casting while the cast key is held (Technique.held), each time their cooldown ends, paying each time.
 HELD_TECHNIQUES = {"mdvlcraft:dismantle", "mdvlcraft:cleave"}
 ABILITY_NAMES = {"mdvlcraft:stance": "Stance", "mdvlcraft:dismantle": "Dismantle", "mdvlcraft:cleave": "Cleave", "mdvlcraft:malevolent_shrine": "Malevolent Shrine",
                  "mdvlcraft:open_malevolent_shrine": "Malevolent Shrine: Open",
                  "mdvlcraft:boogie_woogie": "Boogie Woogie", "mdvlcraft:block_clap": "Block Clap",
-                 "mdvlcraft:projection_dash": "Don't You Have a Heart?", "mdvlcraft:myriad_blades": "Myriad Blades Convergence"}
+                 "mdvlcraft:phantom_movement": "Phantom Movement", "mdvlcraft:myriad_blades": "Myriad Blades Convergence"}
 
 
 # Twig bonuses shared by every archetype: (attribute, title, value per node, most nodes per tree). Each value is
@@ -259,6 +259,12 @@ def colours(palette):
 
 def background():
     return {"texture": TEXTURES + "canvas.png", "width": 12, "height": 12, "position": "tile"}
+
+
+def cooldown_text(cooldown):
+    if cooldown is None:
+        return "its Epic Fight skill's own cooldown"
+    return f"{cooldown} s cooldown" if cooldown else "no cooldown"
 
 
 def ability_name(ability_id):
@@ -333,9 +339,10 @@ def efskill(name, cost):
 
 # Core spokes every archetype has: larger mana, mana regen, health regen and health. Each total stays below the Mage
 # (Mana Well +50, Flow +25%) and Warrior (Second Wind +25%, Toughness +6) class spokes for the same stat.
-# Two limbs: mana (Reservoir, then Wellspring) and vitality (Renewal, then Constitution).
-CORE = [chain("irons_spellbooks:max_mana", "Reservoir", 8, 2, 14) + chain("irons_spellbooks:mana_regen", "Wellspring", 0.04, 2, 0.07),
-        chain("puffish_attributes:natural_regeneration", "Renewal", 0.04, 2, 0.07) + chain("minecraft:generic.max_health", "Constitution", 1, 2, 1)]
+CORE = [chain("irons_spellbooks:max_mana", "Reservoir", 8, 2, 14),
+        chain("irons_spellbooks:mana_regen", "Wellspring", 0.04, 2, 0.07),
+        chain("puffish_attributes:natural_regeneration", "Renewal", 0.04, 2, 0.07),
+        chain("minecraft:generic.max_health", "Constitution", 1, 2, 1)]
 
 CLASSES = {
     "warrior": dict(title="Warrior", angle=-135, blurb="Melee combat: armour, weapons and endurance.",
@@ -485,7 +492,7 @@ ARCHETYPES = {
                     abilities=[[spell("evasion", 1, 3, "minecraft:ender_pearl"), spell("evasion", 2, 3, "minecraft:ender_pearl", "Phantasm (Evasion II)")],
                                [spell("slow", 2, 2, "minecraft:cobweb")],
                                [technique("mdvlcraft:follow_up_kick", 3, "minecraft:leather_boots", note="Projection Sorcery. Sneak and cast to switch between the Normal and Flow forms."),
-                                technique("mdvlcraft:projection_dash", 4, "minecraft:clock", note="Projection Sorcery. Hold to dash, always at full output; sneak and cast to switch Tracing and Continuous. Naobito's style.")],
+                                technique("mdvlcraft:phantom_movement", 4, "texture:mdvlcraft:textures/gui/icons/ability/phantom_movement.png", note="Projection Sorcery's dash. Hold to dash, always at full output; sneak and cast to switch Tracing and Continuous (free). No cooldown: each dash costs mana. Naobito's style.")],
                                [efskill("step", 2), efskill("catharsis", 3)]]),
     "scout": dict(desc="Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, and Touch Dig tunnels through anything.", cls="rogue", title="Scout",
                   blurb="Mobility, ender magic and far sight.",
@@ -588,7 +595,7 @@ def describe(node):
     mana = ""
     if node["ability"] in TECHNIQUE_MANA:
         cooldown = TECHNIQUE_COOLDOWN[node["ability"]]
-        mana = f" ({TECHNIQUE_MANA[node['ability']]} mana, " + (f"{cooldown} s cooldown)" if cooldown else "own cooldown)")
+        mana = f" ({TECHNIQUE_MANA[node['ability']]} mana, {cooldown_text(cooldown)})"
     elif node["ability"].startswith("irons_spellbooks:"):
         name = node["ability"].split(":")[1]
         base, per_level = SPELL_MANA[name]
@@ -739,7 +746,8 @@ class Twigs:
         self.used = {g[0]: 0 for g in GENERIC}
 
     def pick(self, avoid):
-        left = [g for g in GENERIC if self.used[g[0]] < g[3] and g[0] != avoid]
+        """A twig bonus with room left under its cap and an attribute not in `avoid`."""
+        left = [g for g in GENERIC if self.used[g[0]] < g[3] and g[0] not in avoid]
         return self.rng.choice(left) if left else None
 
     def node(self, generic):
@@ -747,6 +755,20 @@ class Twigs:
         self.used[attribute] += 1
         return dict(kind="stat", attribute=attribute, value=value, cost=1, title=f"{title} {self.used[attribute]}",
                     group="generic")
+
+
+def interleave(chains, twigs, rng):
+    """One node from each chain in turn (each chain keeps its order, capstone last); where only one chain is left, a
+    twig of another bonus goes between its nodes, so no two neighbours share a bonus."""
+    queues = [[(group, node) for node in chain_] for group, chain_ in chains]
+    out = []
+    while any(queues):
+        for queue in [q for q in queues if q]:
+            if out and out[-1][1].get("attribute") == queue[0][1]["attribute"]:
+                out.append(("generic", twigs.node(twigs.pick({queue[0][1]["attribute"]}))))
+            out.append(queue.pop(0))
+        rng.shuffle(queues)
+    return out
 
 
 def definition_for(node, cls_id):
@@ -777,7 +799,9 @@ class NoRoom(Exception):
     pass
 
 
-LAYOUT_ATTEMPTS = 20
+LAYOUT_ATTEMPTS = 80
+# Cross-links per tree (fewest, most).
+CROSS_LINKS = (6, 12)
 
 
 def build_archetype(arch_id, arch):
@@ -792,7 +816,8 @@ def build_archetype(arch_id, arch):
 
 
 def grow_archetype(arch_id, arch, seed):
-    """A tree: boughs leave the root at uneven angles, fork into the spoke limbs, and sprout twigs of generic bonuses."""
+    """A tree in the style of Path of Exile's passive tree: meandering paths of mixed bonuses (abilities in their outer
+    part) leave the root or fork off one another, sprout twigs of generic bonuses, and cross-links close loops."""
     cls = CLASSES[arch["cls"]]
     root = arch["root"]
     root_node = dict(root["spell"]) if "spell" in root else dict(kind="stat", attribute=root["attribute"], value=root["value"])
@@ -814,64 +839,100 @@ def grow_archetype(arch_id, arch, seed):
         nodes[node_id] = dict(node, id=node_id)
         return node_id
 
-    spokes = ([("ability", s) for s in arch["abilities"]] + [("signature", s) for s in arch["signature"]]
-              + [("class", s) for s in cls["pool"]] + [("core", s) for s in CORE])
-    rng.shuffle(spokes)
-    # Boughs of one to three limbs (more cannot fan out of one fork without touching).
-    boughs = []
-    while len(boughs) < 3 or sum(map(len, boughs)) < len(spokes):
-        taken = sum(map(len, boughs))
-        size = min(rng.choice((1, 2, 2, 3, 3)), len(spokes) - taken)
-        if size == 0:
-            break
-        boughs.append(spokes[taken:taken + size])
-    bough_count = len(boughs)
-    base = rng.uniform(0, math.tau)
-    limbs = []
-    growing = []  # [previous skill, heading, remaining (group, node) pairs] for every limb
-    for b, bough in enumerate(boughs):
-        heading = base + math.tau * (b + rng.uniform(-0.25, 0.25)) / bough_count
-        parent = "root"
-        # A short trunk of twig bonuses before the bough forks into its limbs.
-        for t in range(rng.randint(1, 2)):
-            parent = add(parent, twigs.node(twigs.pick(None)), heading, 64 if t == 0 else 44, True)
-            heading = tree.heading[parent]
-            limbs.append(parent)
-        fan = 0.9 * (len(bough) - 1)
-        for i, (group, spoke) in enumerate(bough):
-            offset = (i / (len(bough) - 1) - 0.5) * fan if len(bough) > 1 else 0
-            growing.append([parent, heading + offset + rng.uniform(-0.15, 0.15), [(group, node) for node in spoke]])
-    # Limbs grow a skill at a time in turn, so each bough claims its own sector before any limb runs long.
-    while any(limb[2] for limb in growing):
-        for limb in growing:
-            if limb[2]:
-                group, node = limb[2].pop(0)
-                limb[0] = add(limb[0], dict(node, group=group), limb[1] + rng.gauss(0, 0.1), 44, True)
-                limb[1] = tree.heading[limb[0]]
-                limbs.append(limb[0])
+    # Paths: every bonus chain (signature, class, core) is dealt to a path, and each path interleaves its chains so the
+    # same bonus never comes twice in a row. Ability spokes take the outer part of a path, after an inner run of bonuses.
+    chains = ([("signature", c) for c in arch["signature"]] + [("class", c) for c in cls["pool"]]
+              + [("core", c) for c in CORE])
+    rng.shuffle(chains)
+    ability_spokes = list(arch["abilities"])
+    rng.shuffle(ability_spokes)
+    path_count = len(ability_spokes) + rng.randint(1, 2)
+    dealt = [[] for _ in range(path_count)]
+    for i, chain_ in enumerate(chains):
+        dealt[i % path_count].append(chain_)
+    sequences = []
+    for i in range(path_count):
+        stats = interleave(dealt[i], twigs, rng)
+        spoke = ability_spokes[i] if i < len(ability_spokes) else []
+        inner = max(2, round(len(stats) * rng.uniform(0.25, 0.4))) if spoke else len(stats)
+        sequence, outer = stats[:inner], stats[inner:]
+        for ability in spoke:
+            sequence.append(("ability", ability))
+            if outer:
+                sequence.append(outer.pop(0))
+            elif ability is not spoke[-1]:
+                sequence.append(("generic", twigs.node(twigs.pick({sequence[-1][1].get("attribute")}))))
+        sequences.append(sequence + outer)
+    rng.shuffle(sequences)
 
-    # Twigs off the limbs, and smaller twigs off those, until the tree reaches its size or runs out of room.
+    # Some paths leave the root, the rest fork off an inner node of an earlier path; all meander outwards.
+    path_nodes = []
+    from_root = [i for i in range(path_count) if i == 0 or rng.random() < 0.55]
+    base = rng.uniform(0, math.tau)
+    for i, sequence in enumerate(sequences):
+        if i in from_root:
+            parent = "root"
+            if sequence[0][1].get("attribute") == root_node.get("attribute"):
+                sequence.insert(0, ("generic", twigs.node(twigs.pick({root_node.get("attribute")}))))
+            k = from_root.index(i)
+            heading = base + math.tau * (k + rng.uniform(-0.3, 0.3)) / len(from_root)
+        else:
+            first = sequence[0][1].get("attribute")
+            candidates = [n for donor in path_nodes for n in donor[:max(1, len(donor) // 2)] if nodes[n].get("attribute") != first]
+            parent = rng.choice(candidates)
+            heading = tree.heading[parent] + rng.choice((-1, 1)) * rng.uniform(0.6, 1.1)
+        placed_path = []
+        for n, (group, node) in enumerate(sequence):
+            step = rng.uniform(56, 70) if parent == "root" else rng.uniform(36, 50)
+            parent = add(parent, dict(node, group=group), heading + rng.gauss(0, 0.3), step, True)
+            heading = tree.heading[parent] + rng.gauss(0, 0.2)
+            placed_path.append(parent)
+        path_nodes.append(placed_path)
+    limbs = [n for path in path_nodes for n in path]
+
+    # Twigs off the paths, and smaller twigs off those, until the tree reaches its size or runs out of room. Each twig
+    # differs from the skill before it.
     target = TREE_SIZE + rng.randint(0, TREE_SIZE_SPREAD)
     buds = [(n, 0) for n in limbs]
     rng.shuffle(buds)
     while buds and len(nodes) < target:
         parent, depth = buds.pop(0)
-        if rng.random() > (0.75 if depth == 0 else 0.4):
+        if rng.random() > (0.7 if depth == 0 else 0.4):
             continue
-        generic = twigs.pick(nodes[parent].get("attribute") if nodes[parent].get("group") == "generic" else None)
-        if generic is None:
-            break
-        heading = tree.heading[parent] + rng.choice((-1, 1)) * rng.uniform(0.55, 1.15)
+        heading = tree.heading[parent] + rng.choice((-1, 1)) * rng.uniform(0.55, 1.2)
         previous = parent
         for _ in range(rng.randint(2, 4) if depth == 0 else rng.randint(1, 3)):
-            if twigs.used[generic[0]] >= generic[3] or len(nodes) >= target:
+            generic = twigs.pick({nodes[previous].get("attribute")})
+            if generic is None or len(nodes) >= target:
                 break
-            placed = add(previous, twigs.node(generic), heading + rng.gauss(0, 0.15), 34, False)
+            placed = add(previous, twigs.node(generic), heading + rng.gauss(0, 0.3), rng.uniform(30, 40), False)
             if placed is None:
                 break
             previous, heading = placed, tree.heading[placed]
             if depth < 2:
                 buds.append((placed, depth + 1))
+
+    # Cross-links between nearby skills of different branches close loops, so the tree reads as a web.
+    adjacent = {frozenset(e) for e in tree.edges}
+    pairs = [(a, b) for a in nodes for b in nodes if a < b and frozenset((a, b)) not in adjacent]
+    rng.shuffle(pairs)
+    links = 0
+    wanted = rng.randint(CROSS_LINKS[0], CROSS_LINKS[1])
+    for a, b in pairs:
+        if links >= wanted:
+            break
+        if nodes[a].get("attribute") is not None and nodes[a].get("attribute") == nodes[b].get("attribute"):
+            continue
+        pa, pb = tree.pos[a], tree.pos[b]
+        if not 32 <= math.hypot(pa[0] - pb[0], pa[1] - pb[1]) <= 60:
+            continue
+        if any(point_segment_distance(tree.pos[n], pa, pb) < 15 for n in tree.pos if n not in (a, b)):
+            continue
+        if any(a not in e and b not in e and segments_cross(pa, pb, tree.pos[e[0]], tree.pos[e[1]]) for e in tree.edges):
+            continue
+        tree.edges.append((a, b))
+        adjacent.add(frozenset((a, b)))
+        links += 1
 
     skills = {"root": {"x": 0, "y": 0, "definition": "root", "root": True}}
     for node_id, node in nodes.items():
@@ -924,7 +985,7 @@ def build_classes():
             a = math.radians(cls["angle"] + offset)
             abilities = key_abilities(arch)
             definitions[arch_id] = {"title": arch["title"],
-                                    "description": arch["desc"] + (f" Key abilities: {', '.join(abilities)}." if abilities else ""),
+                                    "description": arch["blurb"] + (f" Key: {', '.join(abilities[:3])}." if abilities else ""),
                                     "extra_description": f"Opens the {arch['title']} tab. You can pick {ARCHETYPE_LIMIT} archetypes in total.",
                                     "icon": own_icon(f"archetype/{arch_id}.png"), **frame("goal", cls_id), "cost": 1}
             radius = 150 * LAYOUT_SCALE
@@ -996,9 +1057,8 @@ def write_doc(all_nodes):
     xp_total = sum(25 + 5 * n for n in range(LEVEL_LIMIT))
     lines = ["# MDVLCraft skill trees", "",
              "Generated by `tools/generate_skill_trees.py`; edit the script, not this file.", "",
-             "Layout follows the radial style of the *RPG skill tree* and *More RPG Classes - Skill Tree* packs.", "",
-             f"- **Classes tab:** the four classes sit in a ring round the centre and are unlocked automatically. Their archetypes fan out in each class's quarter; hover one for its full description and key abilities. Pick up to **{ARCHETYPE_LIMIT} archetypes** from any classes; each opens its own tab.",
-             f"- **Archetype tabs:** the archetype skill sits at the root of a tree. A few boughs leave it at uneven angles and fork into limbs; every tree has its own shape and size, and branches never cross. Each bonus limb is a chain of small 1-point bonuses that ends in a 2-point capstone (double-ringed frame). Ability limbs (the largest frames) unlock spells or techniques for the ability wheel, or teach Epic Fight skills (the skill's own icon), which you equip in the abilities screen's Combat Skills box. Everyone knows Epic Fight's Roll and Guard.",
+             f"- **Classes tab:** the four classes sit in a ring round the centre and are unlocked automatically. Their archetypes fan out in each class's quarter; hover one for a one-line summary and its key abilities. Pick up to **{ARCHETYPE_LIMIT} archetypes** from any classes; each opens its own tab.",
+             f"- **Archetype tabs:** laid out like Path of Exile's passive tree: meandering paths leave the archetype skill at the centre or fork off one another, a few cross-links close loops, and connections are drawn as curves. Each path mixes several bonus chains in turn (small 1-point steps, then a 2-point capstone with a double-ringed frame), so no two neighbouring skills give the same bonus. Abilities (the largest frames) sit in the outer part of the paths: they unlock spells or techniques for the ability wheel, or teach Epic Fight skills (the skill's own icon), which you equip in the abilities screen's Combat Skills box. Everyone knows Epic Fight's Roll and Guard.",
              f"- **Twigs:** the small frames sprouting off every branch are tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation and more; table below). They are smaller than any class or signature step and capped per tree, so they widen your choices without raising the ceiling.",
              f"- **Points:** {STARTING_POINTS} to start, then 1 per level up to level {LEVEL_LIMIT} ({points} per archetype). Every tree costs more than that, so you choose. Experience comes from kills (`dropped XP + max health / 5`, at most 20 kills per chunk every 5 minutes). Level n to n+1 costs `25 + 5n` XP ({xp_total:,} XP to reach level {LEVEL_LIMIT}).",
              "- **Class bonuses** are shared by every archetype of that class. **Signature bonuses and abilities** belong to one archetype only; the generator enforces this.",
@@ -1033,7 +1093,7 @@ def write_doc(all_nodes):
     lines += ["", "## Techniques: mana and cooldowns", "", "| Technique | Mana | Cooldown |", "|---|---|---|"]
     for ability_id, mana in TECHNIQUE_MANA.items():
         cooldown = TECHNIQUE_COOLDOWN[ability_id]
-        lines.append(f"| {ability_name(ability_id)} | {mana} | {f'{cooldown} s' if cooldown else 'its Epic Fight skill cooldown'} |")
+        lines.append(f"| {ability_name(ability_id)} | {mana} | {cooldown_text(cooldown)} |")
     lines.append("")
     lines += ["## Class bonuses", "", "| Class | Spokes (each spoke: small nodes + capstone, total at the end) |", "|---|---|"]
     for cls in CLASSES.values():

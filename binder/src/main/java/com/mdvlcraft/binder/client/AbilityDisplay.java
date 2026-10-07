@@ -53,7 +53,8 @@ final class AbilityDisplay {
             lines.add(technique.displayName().copy().withStyle(ChatFormatting.DARK_RED));
             lines.add(Component.translatable("ability.mdvlcraft." + technique.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));
             lines.add(Component.translatable("ui.irons_spellbooks.mana_cost", technique.manaCost(level)).withStyle(ChatFormatting.BLUE));
-            lines.add(Component.translatable("ability.mdvlcraft.cooldown", technique.cooldownTicks() / 20).withStyle(ChatFormatting.BLUE));
+            lines.add((technique.cooldownTicks() == 0 ? Component.translatable("ability.mdvlcraft.no_cooldown")
+                    : Component.translatable("ability.mdvlcraft.cooldown", technique.cooldownTicks() / 20)).withStyle(ChatFormatting.BLUE));
         } else if (ability instanceof SlotSkillAbility slotSkill) {
             lines.add(slotSkill.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(Component.translatable("ability.mdvlcraft." + slotSkill.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));

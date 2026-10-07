@@ -7,6 +7,20 @@ MOD_COLOURS = {'power': (240, 196, 72), 'resist': (140, 178, 222), 'speed': (86,
                'reduce': (176, 140, 255), 'shred': (236, 92, 84)}
 
 
+def centred(img):
+    """Shifts what is drawn so its bounding box sits in the middle of the texture (glyphs and badges are not centred
+    in their grids)."""
+    box = img.getchannel('A').getbbox()
+    if box is None:
+        raise ValueError('empty icon')
+    w, h = img.size
+    dx = (w - box[0] - box[2]) // 2
+    dy = (h - box[1] - box[3]) // 2
+    out = Image.new('RGBA', img.size, (0, 0, 0, 0))
+    out.alpha_composite(img.crop(box), (box[0] + dx, box[1] + dy))
+    return out
+
+
 def outline(mask, size):
     out = set()
     for y in range(size):
@@ -38,7 +52,7 @@ def line_icon(base, modifier, canvas=24):
         colour = MOD_COLOURS[modifier] + (255,)
         for x, y in outline(m, 7):
             img.putpixel((off + 11 + x, off + 11 + y), colour)
-    return img
+    return centred(img)
 
 
 def mini_icon(mask12):
@@ -46,4 +60,4 @@ def mini_icon(mask12):
     img = Image.new('RGBA', (12, 12), (0, 0, 0, 0))
     for x, y in outline(mask12, 12):
         img.putpixel((x, y), WHITE)
-    return img
+    return centred(img)

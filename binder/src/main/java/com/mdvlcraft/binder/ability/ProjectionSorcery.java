@@ -8,13 +8,13 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 /**
- * The Projection Sorcery addon's abilities on the binder's wheel (Follow Up Kick, Don't You Have a Heart?).
+ * The Projection Sorcery addon's abilities on the binder's wheel (Follow Up Kick, Phantom Movement - the addon's Don't You Have a Heart?).
  * <ul>
  * <li>The addon only runs its abilities for a player whose Cursed Fate technique is its own; before a cast the binder
  * records the player's technique as the addon's, so the cast runs whatever Cursed Fate technique they hold.</li>
  * <li>The projection style is always Naobito's (its style toggle is switched off, see ToggleProjectionStylePacketMixin).</li>
  * <li>Follow Up Kick has a Normal and a Flow form; Cursed Fate's Flow state is not used for it. Sneak and cast toggles
- * the form instead ({@link #flow}, read by DodgeProcedureMixin). Don't You Have a Heart? toggles Tracing and Continuous
+ * the form instead ({@link #flow}, read by DodgeProcedureMixin). Phantom Movement toggles Tracing and Continuous
  * the addon's own way (sneak and cast).</li>
  * <li>Speed always uses the highest cursed energy output and the continuous dash does not shake the screen
  * (BarrageProcedureMixin, ProjectionDashProcedureMixin).</li>

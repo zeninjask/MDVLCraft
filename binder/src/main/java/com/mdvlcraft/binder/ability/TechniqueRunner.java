@@ -146,9 +146,9 @@ final class TechniqueRunner {
         return true;
     }
 
-    /** Sneak and cast on Don't You Have a Heart? only switches its mode (the addon's own toggle): no mana, no cooldown. */
+    /** Sneak and cast on Phantom Movement only switches its mode (the addon's own toggle): no mana. */
     private static boolean modeToggle(ServerPlayer player, Technique technique) {
-        return technique == Technique.PROJECTION_DASH && player.isShiftKeyDown();
+        return technique == Technique.PHANTOM_MOVEMENT && player.isShiftKeyDown();
     }
 
     private static int cost(ServerPlayer player, Technique technique) {
