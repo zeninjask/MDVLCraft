@@ -20,7 +20,9 @@ import java.util.Set;
  * Their items, recipes, ores, structures and structure loot are in the game. Forbidden are the items that would hand
  * out spells or traits outside the skill trees: every spell book and scroll (any mod's, through Iron's interfaces),
  * eldritch manuscripts, the scroll forge and inscription table that make and fill them, Cursed Fate's cursed shards,
- * and Epic Fight skill books (any mod's), since Epic Fight skills are taught by the skill trees too.
+ * and Epic Fight skill books (any mod's), since Epic Fight skills are taught by the skill trees too. Elytras are
+ * forbidden as well (the pack has no flight; Lootr turns the end-ship item frame into a chest, so it goes through the
+ * loot filter like any other chest).
  * The mods' own systems stay off: natural mob spawns, client-to-server packets (their keybind and menu actions) and
  * advancements, so spells and techniques are only reachable through the skill trees and the ability wheel.
  */
@@ -30,7 +32,8 @@ public final class DisabledContent {
     private static final Set<ResourceLocation> FORBIDDEN_ITEMS = Set.of(
             ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "scroll_forge"),
             ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "inscription_table"),
-            ResourceLocation.fromNamespaceAndPath("cursedfate", "cursed_shards"));
+            ResourceLocation.fromNamespaceAndPath("cursedfate", "cursed_shards"),
+            ResourceLocation.fromNamespaceAndPath("minecraft", "elytra"));
 
     private DisabledContent() {
     }

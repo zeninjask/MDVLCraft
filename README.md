@@ -4,10 +4,10 @@ A Forge **1.20.1** (Forge **47.4.10**) modpack built around Epic Fight combat, c
 
 | File | What it is |
 |------|------------|
-| [`MDVLCraft-1.9.1-test.mrpack`](MDVLCraft-1.9.1-test.mrpack) | Modrinth pack (Modrinth App, Prism Launcher) with **every** mod (168): client-only, server-only and both-sides. For single-player and testing |
-| [`MDVLCraft-1.9.1-client.mrpack`](MDVLCraft-1.9.1-client.mrpack) | Modrinth pack for players: the 152 client-only and both-sides mods, configs and the resource pack. Set 8 GB and the JVM line from `MDVLCraft-Java-Arguments.txt` in the launcher |
-| [`MDVLCraft-1.9.1-server.mrpack`](MDVLCraft-1.9.1-server.mrpack) | Modrinth pack for a dedicated server: the 140 server-only and both-sides mods, configs, and `user_jvm_args.txt` for Forge's start script |
-| [`MDVLCraft-1.9.1.zip`](MDVLCraft-1.9.1.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*) with every mod: 155 CurseForge mods + 13 jars in overrides (EpicFight-Ponder, MDVLCraft Binder and eleven mods CurseForge doesn't host in the tested version), with your MDVL configs and KubeJS folder |
+| [`MDVLCraft-1.9.2-test.mrpack`](MDVLCraft-1.9.2-test.mrpack) | Modrinth pack (Modrinth App, Prism Launcher) with **every** mod (167): client-only, server-only and both-sides. For single-player and testing |
+| [`MDVLCraft-1.9.2-client.mrpack`](MDVLCraft-1.9.2-client.mrpack) | Modrinth pack for players: the 151 client-only and both-sides mods, configs and the resource pack. Set 8 GB and the JVM line from `MDVLCraft-Java-Arguments.txt` in the launcher |
+| [`MDVLCraft-1.9.2-server.mrpack`](MDVLCraft-1.9.2-server.mrpack) | Modrinth pack for a dedicated server: the 139 server-only and both-sides mods, configs, and `user_jvm_args.txt` for Forge's start script |
+| [`MDVLCraft-1.9.2.zip`](MDVLCraft-1.9.2.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*) with every mod: 155 CurseForge mods + 13 jars in overrides (EpicFight-Ponder, MDVLCraft Binder and eleven mods CurseForge doesn't host in the tested version), with your MDVL configs and KubeJS folder |
 | [`MODLIST.md`](MODLIST.md) | Full mod list with source of each mod, merge changes, server notes and test results |
 | [`MDVLCraft-Optimisation-and-Improvement-Mods.docx`](MDVLCraft-Optimisation-and-Improvement-Mods.docx) | Word document: optimisation mods in the pack, optimisation and improvement mods to add, what to avoid |
 | [`REPORT.md`](REPORT.md) | Wider research report: addons, world generation, resource packs, progression, JVM arguments |

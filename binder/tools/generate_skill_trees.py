@@ -189,20 +189,20 @@ def spell_cooldown(name):
     default = SPELL_COOLDOWN[name]
     return default if default >= SPELL_COOLDOWN_KEEP else max(SPELL_COOLDOWN_MIN, round(default * SPELL_COOLDOWN_MULTIPLIER, 1))
 
-# Mana and cooldown (seconds) of each technique (Technique.java, SlotSkillAbility.java). Myriad Blades and Soul Hunt
-# use their Epic Fight skill's own cooldown (None here); Phantom Movement has none (0), each dash costs mana.
+# Mana and cooldown (seconds) of each technique (Technique.java, SlotSkillAbility.java). Soul Hunt uses
+# its Epic Fight skill's own cooldown (None here); Phantom Movement has none (0), each dash costs mana.
 TECHNIQUE_MANA = {"mdvlcraft:dismantle": 12, "mdvlcraft:cleave": 20, "mdvlcraft:malevolent_shrine": 100, "mdvlcraft:open_malevolent_shrine": 100,
                   "mdvlcraft:boogie_woogie": 10, "mdvlcraft:block_clap": 10, "mdvlcraft:blitz": 15, "mdvlcraft:surprise_attack": 15,
-                  "mdvlcraft:follow_up_kick": 15, "mdvlcraft:phantom_movement": 20, "mdvlcraft:myriad_blades": 35, "mdvlcraft:soul_hunt": 20}
+                  "mdvlcraft:follow_up_kick": 15, "mdvlcraft:phantom_movement": 20, "mdvlcraft:soul_hunt": 20}
 TECHNIQUE_COOLDOWN = {"mdvlcraft:dismantle": 1, "mdvlcraft:cleave": 3, "mdvlcraft:malevolent_shrine": 120, "mdvlcraft:open_malevolent_shrine": 120,
                       "mdvlcraft:boogie_woogie": 2, "mdvlcraft:block_clap": 2, "mdvlcraft:blitz": 8, "mdvlcraft:surprise_attack": 15,
-                      "mdvlcraft:follow_up_kick": 6, "mdvlcraft:phantom_movement": 0, "mdvlcraft:myriad_blades": None, "mdvlcraft:soul_hunt": None}
+                      "mdvlcraft:follow_up_kick": 6, "mdvlcraft:phantom_movement": 0, "mdvlcraft:soul_hunt": None}
 # Techniques that keep casting while the cast key is held (Technique.held), each time their cooldown ends, paying each time.
 HELD_TECHNIQUES = {"mdvlcraft:dismantle", "mdvlcraft:cleave"}
 ABILITY_NAMES = {"mdvlcraft:stance": "Stance", "mdvlcraft:dismantle": "Dismantle", "mdvlcraft:cleave": "Cleave", "mdvlcraft:malevolent_shrine": "Malevolent Shrine",
                  "mdvlcraft:open_malevolent_shrine": "Malevolent Shrine: Open",
                  "mdvlcraft:boogie_woogie": "Boogie Woogie", "mdvlcraft:block_clap": "Block Clap",
-                 "mdvlcraft:phantom_movement": "Phantom Movement", "mdvlcraft:myriad_blades": "Myriad Blades Convergence"}
+                 "mdvlcraft:phantom_movement": "Phantom Movement"}
 
 
 # Twig bonuses shared by every archetype: (attribute, title, value per node, most nodes per tree). Each value is
@@ -395,7 +395,6 @@ ARCHETYPES = {
                     abilities=[[stance(2), spell("flaming_strike", 3, 2, "minecraft:blaze_powder")],
                                [technique("mdvlcraft:blitz", 3, "minecraft:feather", note="Cursed Fate's Heavenly Restriction dash, without its weapon requirement."),
                                 technique("mdvlcraft:surprise_attack", 3, "minecraft:ender_eye", note="Cursed Fate's Heavenly Restriction ambush, without its weapon requirement.")],
-                               [technique("mdvlcraft:myriad_blades", 5, "minecraft:netherite_sword", note="Sword Soaring's sword art on the ability wheel; needs a sword in hand and has its own cooldown.")],
                                [efskill("parrying", 3), efskill("technician", 2)]]),
     "berzerker": dict(desc="Pure aggression. Berzerkers stack raw attack damage, axe damage and life steal, hit more targets per swing and knock them flying. Fang Strike tears the ground open, Burning Dash and Stomp close the gap, Heartstop lets them ignore death for a few seconds, and Berserker and Forbidden Strength turn wounds into power.", cls="warrior", title="Berzerker",
                       blurb="Raw damage, axes and bloodlust.",

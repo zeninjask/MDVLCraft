@@ -143,7 +143,6 @@ Every spell the trees grant costs 40% less mana than Iron's default and has a 50
 | Surprise Attack | 15 | 15 s cooldown |
 | Follow Up Kick | 15 | 6 s cooldown |
 | Phantom Movement | 20 | no cooldown |
-| Myriad Blades Convergence | 35 | its Epic Fight skill's own cooldown |
 | Soul Hunt | 20 | its Epic Fight skill's own cooldown |
 
 ## Class bonuses
@@ -197,33 +196,32 @@ Signature maximums: Damage Resistance +14%, Projectile Resistance +15%, Greatswo
 
 A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. A Stance channels fire, wind, water or earth, Flaming Strike sets the blade alight, and Parrying and Technician reward perfect timing.
 
-142 skills (84 of them twigs), 168 points in total (41 available).
+119 skills (62 of them twigs), 141 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Way of the Blade | 1 | +5% Katana Damage |
 | Retribution 1 | 1 | +3% Damage Reflection |
 | Edge 1 | 1 | +5% Katana Damage |
-| Myriad Blades Convergence | 5 | Unlocks Myriad Blades Convergence (35 mana, its Epic Fight skill's own cooldown) on the ability wheel |
+| Blitz | 3 | Unlocks Blitz (15 mana, 8 s cooldown) on the ability wheel |
 | Retribution 2 | 1 | +3% Damage Reflection |
+| Surprise Attack | 3 | Unlocks Surprise Attack (15 mana, 15 s cooldown) on the ability wheel |
 | Edge 2 | 1 | +5% Katana Damage |
 | Retribution 3 | 1 | +3% Damage Reflection |
 | Edge 3 | 1 | +5% Katana Damage |
 | Retribution Mastery | 2 | +6% Damage Reflection |
 | Edge 4 | 1 | +5% Katana Damage |
 | Iaijutsu | 2 | +10% Katana Damage |
-| Stance | 2 | Unlocks Stance on the ability wheel (free): cast to take it up or drop it, sneak and cast to change element. Fire +15% attack speed, Wind +40% dodge distance, Water +50% perfect-parry window, Earth +15% attack damage. Your weapon trail takes the element's colour |
-| Flaming Strike | 2 | Unlocks Flaming Strike (Level 3) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Parrying | 3 | Teaches Parrying, an Epic Fight Guard skill: guard just as a hit lands for a perfect parry that costs no stamina; also blocks projectiles. Equip it in the Combat Skills box of the abilities screen |
+| Technician | 2 | Teaches Technician, an Epic Fight Passive skill: dodging just before a hit restores stamina. Equip it in the Combat Skills box of the abilities screen |
 | Deflection 1 | 1 | +5% Stamina restored on Parry (of max) |
-| Blitz | 3 | Unlocks Blitz (15 mana, 8 s cooldown) on the ability wheel |
 | Deflection 2 | 1 | +5% Stamina restored on Parry (of max) |
-| Surprise Attack | 3 | Unlocks Surprise Attack (15 mana, 15 s cooldown) on the ability wheel |
 | Deflection 3 | 1 | +5% Stamina restored on Parry (of max) |
 | Perfect Parry | 2 | +10% Stamina restored on Parry (of max) |
 | Cutting Edge 1 | 1 | +5% Armor Shred |
 | Impact 1 | 1 | +0.1 Impact (stagger power) |
-| Parrying | 3 | Teaches Parrying, an Epic Fight Guard skill: guard just as a hit lands for a perfect parry that costs no stamina; also blocks projectiles. Equip it in the Combat Skills box of the abilities screen |
-| Technician | 2 | Teaches Technician, an Epic Fight Passive skill: dodging just before a hit restores stamina. Equip it in the Combat Skills box of the abilities screen |
+| Stance | 2 | Unlocks Stance on the ability wheel (free): cast to take it up or drop it, sneak and cast to change element. Fire +15% attack speed, Wind +40% dodge distance, Water +50% perfect-parry window, Earth +15% attack damage. Your weapon trail takes the element's colour |
+| Flaming Strike | 2 | Unlocks Flaming Strike (Level 3) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Impact 2 | 1 | +0.1 Impact (stagger power) |
 | Cutting Edge 2 | 1 | +5% Armor Shred |
 | Cutting Edge 3 | 1 | +5% Armor Shred |

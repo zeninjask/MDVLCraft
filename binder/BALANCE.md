@@ -132,7 +132,7 @@ and crossbows hit from range, out of reach of most counter-attacks.
     cooldown like a spell's, and the tooltip names it.
   - Held Dismantle or Cleave recasts each time its cooldown ends.
   - Closing a Shrine stays free and works during its cooldown.
-  - Myriad Blades (35 mana) and Soul Hunt (20 mana) keep their Epic Fight skills' own cooldowns.
+  - Soul Hunt (20 mana) keeps its Epic Fight skill's own cooldown. (Myriad Blades Convergence was taken out of the Samurai tree in pack 1.9.2.)
 
 ## What keeps bosses hard
 

@@ -24,12 +24,11 @@ import java.util.Optional;
 
 /**
  * An Epic Fight skill that lives in an add-on's own skill slot, cast from the ability wheel instead of the add-on's key
- * (those keys are unbound): Sword Soaring's Myriad Blades Convergence and Epic Fight Nightfall's Soul Hunt. Casting
+ * (its key is unbound): Epic Fight Nightfall's Soul Hunt. Casting
  * puts the skill in its slot if it is not there yet, then runs it exactly as the add-on's key would, with the skill's
  * own conditions (on the ground, a weapon or sword in hand) and cooldown. Mana is paid only when it runs.
  */
 public enum SlotSkillAbility implements Ability {
-    MYRIAD_BLADES("myriad_blades", "sword_soaring:wan_jian_gui_zong", 35, "sword_soaring:textures/gui/skills/sword_controller/wan_jian_gui_zong.png"),
     SOUL_HUNT("soul_hunt", "efn:execution", 20, "efn:textures/gui/skills/efn_arts/execution.png");
 
     private final ResourceLocation id;
