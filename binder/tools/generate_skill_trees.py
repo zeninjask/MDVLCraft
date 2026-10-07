@@ -7,13 +7,15 @@
   one another, a few cross-links close loops, and the client draws every connection as a curve
   (mixin/puffish/ConnectionBatchedRendererMixin). Every tree has its own shape and size; branches never cross.
 - Paths: each mixes several bonus chains (class, signature and core: small 1-point steps, then a bigger capstone) in
-  turn, so no two neighbouring skills give the same bonus, and carries its abilities in its outer part. Every archetype
-  has its class's spokes (shared by that class) plus its own signature spokes and abilities (never shared).
+  turn, so no two neighbouring skills give the same bonus, and spreads its abilities from its middle to its end. Every
+  archetype has its class's spokes (shared by that class) plus its own signature spokes (never shared) and abilities.
+- Size: every chain and twig cap is repeated TREE_SCALE times (max health and natural regeneration nodes are worth
+  1/TREE_SCALE each, so their totals stay put). There is no level cap, so every tree can be filled in time.
 - Twigs: tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation...) shared by every archetype. Each is
   smaller than any class or signature step and capped per tree, so they widen the choices without raising the ceiling.
 
 Run from the binder folder:  python3 tools/generate_skill_trees.py
-It fails if a signature attribute or ability appears in two archetypes, if a class bonus appears in two classes or in a
+It fails if a signature attribute appears in two archetypes, if a class bonus appears in two classes or in a
 signature, if a spell level is above Iron's maximum, if a granted spell costs more than the starting mana pool, or if a
 tree finds no layout.
 """
@@ -33,9 +35,17 @@ DOC = ROOT / "SKILL_TREES.md"
 # Category and skill ID -> spell and level, so the client can open Iron's Spell Scroll Ponder's preview from a spell skill.
 SPELL_PREVIEWS = ROOT / "src/main/resources/assets/mdvlcraft/spell_previews.json"
 
-LEVEL_LIMIT = 40
 STARTING_POINTS = 1
 ARCHETYPE_LIMIT = 2
+# Every bonus chain and twig cap is repeated TREE_SCALE times. Max health and natural regeneration nodes are worth
+# 1/TREE_SCALE each instead, so their totals stay as they were.
+TREE_SCALE = 3
+KEEP_TOTAL = {"minecraft:generic.max_health", "puffish_attributes:natural_regeneration"}
+ROMAN = ["I", "II", "III", "IV", "V"]
+
+
+def per_node(attribute, value):
+    return round(value / TREE_SCALE, 4) if attribute in KEEP_TOTAL else value
 
 # Attribute ID -> (display name, unit, operation). Units: pct (fraction shown as %), flat, pctflat (already a percentage).
 ATTRIBUTES = {
@@ -224,9 +234,10 @@ GENERIC = [
     ("irons_spellbooks:spell_resist", "Willpower", 0.005, 6),
     ("puffish_attributes:jump", "Bounce", 0.01, 6),
 ]
+GENERIC = [(attribute, title, per_node(attribute, value), cap * TREE_SCALE) for attribute, title, value, cap in GENERIC]
 # Tree growth: total skills aimed for per archetype (the seed adds up to TREE_SIZE_SPREAD more, so trees differ).
-TREE_SIZE = 115
-TREE_SIZE_SPREAD = 35
+TREE_SIZE = 115 * TREE_SCALE
+TREE_SIZE_SPREAD = 35 * TREE_SCALE
 MIN_GAP = 30
 # Skill positions are grown on a 1-unit grid, then spread out by LAYOUT_SCALE to fit the 1:1 frames.
 LAYOUT_SCALE = 1.25
@@ -272,10 +283,14 @@ def ability_name(ability_id):
 
 
 def chain(attribute, title, step, count, capstone, capstone_title=None):
-    """A spoke of `count` 1-point nodes of `step` each, ending in a 2-point capstone worth `capstone`."""
-    nodes = [dict(kind="stat", attribute=attribute, value=step, cost=1, title=f"{title} {i + 1}") for i in range(count)]
-    nodes.append(dict(kind="stat", attribute=attribute, value=capstone, cost=2, title=capstone_title or f"{title} Mastery",
-                      capstone=True))
+    """A spoke of TREE_SCALE tiers, each `count` 1-point nodes of `step` then a 2-point capstone worth `capstone`
+    (values through per_node)."""
+    nodes = []
+    for tier in range(TREE_SCALE):
+        nodes += [dict(kind="stat", attribute=attribute, value=per_node(attribute, step), cost=1,
+                       title=f"{title} {tier * count + i + 1}") for i in range(count)]
+        nodes.append(dict(kind="stat", attribute=attribute, value=per_node(attribute, capstone), cost=2,
+                          title=f"{capstone_title or title + ' Mastery'} {ROMAN[tier]}", capstone=True, tier=tier + 1))
     return nodes
 
 
@@ -306,35 +321,61 @@ def technique(ability_id, cost, icon, note=None):
 
 # Epic Fight skills the trees teach (EpicSkillReward.java): slot category, name, effect. Everyone knows Roll and Guard.
 EF_SKILLS = {
-    "step": ("dodge", "Step", "a quick sidestep in place of the roll that evades every attack"),
-    "parrying": ("guard", "Parrying", "guard just as a hit lands for a perfect parry that costs no stamina; also blocks projectiles"),
-    "impact_guard": ("guard", "Impact Guard", "guarding costs less stamina and also blocks explosions, fire, magic and projectiles at reduced damage"),
-    "demolition_leap": ("mover", "Demolition Leap", "charge up and launch yourself where you look; halves your next fall damage"),
-    "phantom_ascent": ("mover", "Phantom Ascent", "jump again in mid-air"),
-    "meteor_slam": ("identity", "Meteor Slam", "slam into the ground from the air; the higher the fall, the more damage it deals and stamina it costs"),
-    "revelation": ("identity", "Revelation", "guarding, parrying and dodging build stacks; at full stacks unleash a stunning counter-attack"),
-    "adaptive_skin": ("passive", "Adaptive Skin", "gain stacking resistance to the damage types you have taken recently"),
-    "adrenaline_fiend": ("passive", "Adrenaline Fiend", "stamina starts regenerating at once when you kill a mob"),
-    "berserker": ("passive", "Berserker", "more attack damage and attack speed the more health you are missing"),
-    "bonebreaker": ("passive", "Bonebreaker", "repeated hits on the same target deal stacking bonus damage"),
-    "catharsis": ("passive", "Catharsis", "dodging attacks charges your weapon's innate skill"),
-    "death_harvest": ("passive", "Death Harvest", "killing an enemy with a weapon innate skill refunds weapon charge"),
-    "emergency_escape": ("passive", "Emergency Escape", "dodge even while being hit or out of stamina, and cancel attacks into a dodge"),
-    "endurance": ("passive", "Endurance", "getting hit while winding up an attack grants stun resistance"),
-    "forbidden_strength": ("passive", "Forbidden Strength", "when stamina runs out, actions cost health instead"),
-    "hypervitality": ("passive", "Hyper Vitality", "innate skills use stamina when your weapon charge is not full"),
-    "stamina_pillager": ("passive", "Stamina Pillager", "killing your target restores part of your missing stamina"),
-    "swordmaster": ("passive", "Swordmaster", "bonus attack speed"),
-    "technician": ("passive", "Technician", "dodging just before a hit restores stamina"),
-    "vengeance": ("passive", "Vengeance", "bonus damage against whoever last hurt you; killing them grants a fading damage boost"),
+    "epicfight:step": ("dodge", "Step", "a quick sidestep in place of the roll that evades every attack"),
+    "epicfight:parrying": ("guard", "Parrying", "guard just as a hit lands for a perfect parry that costs no stamina; also blocks projectiles"),
+    "epicfight:impact_guard": ("guard", "Impact Guard", "guarding costs less stamina and also blocks explosions, fire, magic and projectiles at reduced damage"),
+    "epicfight:demolition_leap": ("mover", "Demolition Leap", "charge up and launch yourself where you look; halves your next fall damage"),
+    "epicfight:phantom_ascent": ("mover", "Phantom Ascent", "jump again in mid-air"),
+    "epicfight:meteor_slam": ("identity", "Meteor Slam", "slam into the ground from the air; the higher the fall, the more damage it deals and stamina it costs"),
+    "epicfight:revelation": ("identity", "Revelation", "guarding, parrying and dodging build stacks; at full stacks unleash a stunning counter-attack"),
+    "epicfight:adaptive_skin": ("passive", "Adaptive Skin", "gain stacking resistance to the damage types you have taken recently"),
+    "epicfight:adrenaline_fiend": ("passive", "Adrenaline Fiend", "stamina starts regenerating at once when you kill a mob"),
+    "epicfight:berserker": ("passive", "Berserker", "more attack damage and attack speed the more health you are missing"),
+    "epicfight:bonebreaker": ("passive", "Bonebreaker", "repeated hits on the same target deal stacking bonus damage"),
+    "epicfight:catharsis": ("passive", "Catharsis", "dodging attacks charges your weapon's innate skill"),
+    "epicfight:death_harvest": ("passive", "Death Harvest", "killing an enemy with a weapon innate skill refunds weapon charge"),
+    "epicfight:emergency_escape": ("passive", "Emergency Escape", "dodge even while being hit or out of stamina, and cancel attacks into a dodge"),
+    "epicfight:endurance": ("passive", "Endurance", "getting hit while winding up an attack grants stun resistance"),
+    "epicfight:forbidden_strength": ("passive", "Forbidden Strength", "when stamina runs out, actions cost health instead"),
+    "epicfight:hypervitality": ("passive", "Hyper Vitality", "innate skills use stamina when your weapon charge is not full"),
+    "epicfight:stamina_pillager": ("passive", "Stamina Pillager", "killing your target restores part of your missing stamina"),
+    "epicfight:swordmaster": ("passive", "Swordmaster", "bonus attack speed"),
+    "epicfight:technician": ("passive", "Technician", "dodging just before a hit restores stamina"),
+    "epicfight:vengeance": ("passive", "Vengeance", "bonus damage against whoever last hurt you; killing them grants a fading damage boost"),
+    "epicfightx:combat_mastery_i": ("passive", "Combat Mastery I", "dodge in the middle of an attack, or attack straight out of a dodge"),
+    "epicfightx:combat_mastery_ii": ("passive", "Combat Mastery II", "sprinting just after a dodge enters a Dash, which drains stamina while it lasts"),
+    "efs_iss:against_magic": ("passive", "Magic Immunity", "extremely high magic resistance"),
+    "efs_iss:auto_heal": ("passive", "Auto Heal", "while you have mana, it is spent automatically to restore the same share of your health"),
+    "efs_iss:blood_into_mana": ("passive", "Blood into Mana", "above 20% health, spells cost health instead of mana, in proportion"),
+    "efs_iss:hasty_casting": ("mover", "Hasty Casting", "much faster movement while casting spells"),
+    "efs_iss:rapid_chant": ("passive", "Rapid Chant", "much shorter cast times, and channelled spells last much longer"),
+    "efs_iss:reserve_mana": ("passive", "Reserve Mana", "refills your mana at once when it drops below 10%"),
+    "efs_iss:mana_shield": ("guard", "Mana Shield", "damage taken is paid for with mana, in proportion to the hit against your max health"),
+    "wom:pain_anticipation": ("passive", "Pain Anticipation", "after 2 s without acting, your next action grants 2 s of stun immunity and 40% less damage taken"),
+    "wom:soul_protection": ("guard", "Soul Protection", "you cannot guard; your soul gives 20% damage negation and every second summons a soul worth 1% more; each hit taken removes 3 souls"),
+    "wom:spider_techniques": ("mover", "Spider Techniques", "hold sprint and jump at a wall to run along it, and leap from wall to wall"),
+    "wom:manipulator": ("passive", "Manipulator", "blocking restores stamina: 60% of what you are missing on a perfect block, up to 30% on a normal one"),
+    "wom:dancing_blade": ("passive", "Dancing Blade", "every 4th hit that lands deals 80% more damage"),
+    "wom:dopamine": ("passive", "Dopamine", "damage dealt by a dash attack is turned into stamina (4 s cooldown)"),
+    "wom:vampirize": ("passive", "Essence Extortion", "heal 20% of the damage you deal"),
+    "wom:punishment_kick": ("dodge", "Punishment Kick", "a forceful kick that stuns hard, and knocks out an enemy caught mid-attack"),
+    "wom:lethal_focus": ("passive", "Lethal Focus", "every hit raises your damage up to a cap; after 2 s without acting the bonus drains quickly"),
+    "wom:adrenaline": ("passive", "Adrenaline", "below 20% health, deal 60% more damage and take 40% less"),
+    "wom:voodoo_magic": ("identity", "Voodoo Magic", "losing health restores half as much stamina and losing stamina half as much health; sneak to turn health into stamina; stamina no longer regenerates on its own"),
+    "wom:natural_sprinter": ("mover", "Natural Sprinter", "hold sprint for 1 s to break into a faster run; release it for a burst step, and sprint-jumps carry further"),
+    "wom:ender_obscuris": ("dodge", "Ender Obscuris", "teleport behind the last target you hit within 30 blocks, immune to physical attacks meanwhile"),
+    "wom:ender_step": ("dodge", "Ender Step", "a quick teleport away from danger, immune to physical attacks meanwhile"),
+    "wom:dodge_master": ("dodge", "Dodge Master", "for a moment after casting, dodge out of any hit by instinct, chaining dodges; repeated casts cost double stamina"),
+    "wom:aqua_maneuvre": ("mover", "Aqua Maneuver", "swim faster, and release jump to propel yourself through the water"),
 }
 EF_SLOT_NAMES = {"dodge": "Dodge", "guard": "Guard", "mover": "Mobility", "identity": "Identity", "passive": "Passive"}
 
 
-def efskill(name, cost):
-    category, title, _ = EF_SKILLS[name]
-    return dict(kind="efskill", skill="epicfight:" + name, cost=cost,
-                icon=f"texture:epicfight:textures/gui/skills/{category}/{name}.png", title=title)
+def efskill(skill_id, cost):
+    category, title, _ = EF_SKILLS[skill_id]
+    namespace, name = skill_id.split(":")
+    return dict(kind="efskill", skill=skill_id, cost=cost,
+                icon=f"texture:{namespace}:textures/gui/skills/{category}/{name}.png", title=title)
 
 
 # Core spokes every archetype has: larger mana, mana regen, health regen and health. Each total stays below the Mage
@@ -373,7 +414,7 @@ CLASSES = {
 
 # Each archetype: class, title, blurb, root (title + stat or spell), signature spokes, ability spokes.
 ARCHETYPES = {
-    "knight": dict(desc="An armoured wall. Knights soak up hits with damage and projectile resistance, armour toughness and stun armour, and hit back with greatswords. Shield and Fortify let them shrug off fights other classes would run from, Impact Guard blocks almost anything and Endurance keeps them swinging through hits.", cls="warrior", title="Knight",
+    "knight": dict(desc="An armoured wall. Knights soak up hits with damage and projectile resistance, armour toughness and stun armour, and hit back with greatswords. Shield and Fortify let them shrug off fights other classes would run from, Impact Guard blocks almost anything, Endurance keeps them swinging through hits, Magic Immunity shrugs off spells, Auto Heal turns mana into health, Pain Anticipation braces for the next blow and Combat Mastery weaves dodges into attacks.", cls="warrior", title="Knight",
                    blurb="Heavy armour, resistances and greatswords.",
                    root=dict(title="Knight's Oath", attribute="puffish_attributes:resistance", value=0.02),
                    signature=[chain("puffish_attributes:resistance", "Fortress", 0.02, 4, 0.04),
@@ -383,8 +424,11 @@ ARCHETYPES = {
                               chain("puffish_attributes:ranged_resistance", "Arrow Guard", 0.04, 2, 0.07)],
                    abilities=[[spell("shield", 2, 2, "minecraft:shield"), spell("shield", 4, 3, "minecraft:shield", "Aegis (Shield IV)")],
                               [spell("fortify", 2, 2, "minecraft:golden_apple"), spell("fortify", 3, 3, "minecraft:enchanted_golden_apple", "Bulwark (Fortify III)")],
-                              [efskill("impact_guard", 3), efskill("endurance", 2)]]),
-    "samurai": dict(desc="A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. A Stance channels fire, wind, water or earth, Flaming Strike sets the blade alight, and Parrying and Technician reward perfect timing.", cls="warrior", title="Samurai",
+                              [efskill("epicfight:impact_guard", 3), efskill("epicfight:endurance", 2)],
+                              [efskill("efs_iss:against_magic", 3), efskill("wom:pain_anticipation", 3)],
+                              [efskill("efs_iss:auto_heal", 3)],
+                              [efskill("epicfightx:combat_mastery_i", 2), efskill("epicfightx:combat_mastery_ii", 3)]]),
+    "samurai": dict(desc="A disciplined duellist who lives on timing. Every katana strike hits harder and cuts through armour, every perfect parry refills stamina and reflects damage, and heavy impacts stagger enemies. A Stance channels fire, wind, water or earth, Flaming Strike, Blood Slash and Volt Strike carry the blade further, and Parrying, Technician, Revelation and Manipulator reward perfect timing. Dancing Blade, Dopamine, Hasty Casting, Spider Techniques and Combat Mastery round out a restless fighting style.", cls="warrior", title="Samurai",
                     blurb="Katanas, swift strikes and rewarding parries.",
                     root=dict(title="Way of the Blade", attribute="mdvlcraft:katana_damage", value=0.05),
                     signature=[chain("mdvlcraft:katana_damage", "Edge", 0.05, 4, 0.10, "Iaijutsu"),
@@ -395,8 +439,13 @@ ARCHETYPES = {
                     abilities=[[stance(2), spell("flaming_strike", 3, 2, "minecraft:blaze_powder")],
                                [technique("mdvlcraft:blitz", 3, "minecraft:feather", note="Cursed Fate's Heavenly Restriction dash, without its weapon requirement."),
                                 technique("mdvlcraft:surprise_attack", 3, "minecraft:ender_eye", note="Cursed Fate's Heavenly Restriction ambush, without its weapon requirement.")],
-                               [efskill("parrying", 3), efskill("technician", 2)]]),
-    "berzerker": dict(desc="Pure aggression. Berzerkers stack raw attack damage, axe damage and life steal, hit more targets per swing and knock them flying. Fang Strike tears the ground open, Burning Dash and Stomp close the gap, Heartstop lets them ignore death for a few seconds, and Berserker and Forbidden Strength turn wounds into power.", cls="warrior", title="Berzerker",
+                               [efskill("epicfight:parrying", 3), efskill("epicfight:technician", 2)],
+                               [spell("blood_slash", 2, 2, "minecraft:redstone"), spell("volt_strike", 3, 2, "minecraft:feather")],
+                               [efskill("efs_iss:hasty_casting", 3), efskill("wom:spider_techniques", 3)],
+                               [efskill("epicfight:revelation", 3), efskill("wom:manipulator", 3)],
+                               [efskill("wom:dancing_blade", 3), efskill("wom:dopamine", 2)],
+                               [efskill("epicfightx:combat_mastery_i", 2), efskill("epicfightx:combat_mastery_ii", 3)]]),
+    "berzerker": dict(desc="Pure aggression. Berzerkers stack raw attack damage, axe damage and life steal, hit more targets per swing and knock them flying. Fang Strike tears the ground open, Burning Dash and Stomp close the gap, Heartstop lets them ignore death for a few seconds, and Berserker, Forbidden Strength and Adrenaline turn wounds into power. Essence Extortion heals on every hit, Lethal Focus builds with every blow, Punishment Kick knocks foes out, and Adrenaline Fiend, Hyper Vitality and Combat Mastery keep the onslaught going.", cls="warrior", title="Berzerker",
                       blurb="Raw damage, axes and bloodlust.",
                       root=dict(title="Bloodrage", attribute="minecraft:generic.attack_damage", value=0.5),
                       signature=[chain("minecraft:generic.attack_damage", "Fury", 0.25, 4, 0.5),
@@ -407,8 +456,12 @@ ARCHETYPES = {
                       abilities=[[spell("fang_strike", 3, 2, "minecraft:bone"), spell("fang_strike", 5, 2, "minecraft:bone", "Fang Strike V")],
                                  [spell("heartstop", 1, 3, "minecraft:fermented_spider_eye")],
                                  [spell("burning_dash", 3, 2, "minecraft:fire_charge"), spell("stomp", 2, 2, "minecraft:anvil")],
-                                 [efskill("berserker", 3), efskill("forbidden_strength", 2)]]),
-    "holy": dict(desc="A healer and support caster. Holy power strengthens light spells, healing received rises, and holy resistance protects against dark magic. Guiding Bolt, Heal, Greater Heal, Blessing of Life, Healing Circle, Cloud of Regeneration, Wisp, Cleanse, Sunbeam and Angel Wing keep a party alive, Divine Smite brings the light down on undead, and Adaptive Skin hardens against whatever hurts you.", cls="mage", title="Holy",
+                                 [efskill("epicfight:berserker", 3), efskill("epicfight:forbidden_strength", 2)],
+                                 [efskill("epicfight:adrenaline_fiend", 2), efskill("epicfight:hypervitality", 3)],
+                                 [efskill("wom:vampirize", 3), efskill("wom:lethal_focus", 3)],
+                                 [efskill("wom:punishment_kick", 3), efskill("wom:adrenaline", 3)],
+                                 [efskill("epicfightx:combat_mastery_i", 2), efskill("epicfightx:combat_mastery_ii", 3)]]),
+    "holy": dict(desc="A healer and support caster. Holy power strengthens light spells, healing received rises, and holy resistance protects against dark magic. Guiding Bolt, Heal, Greater Heal, Blessing of Life, Healing Circle, Cloud of Regeneration, Wisp, Cleanse and Sunbeam keep a party alive, Divine Smite brings the light down on undead, Adaptive Skin hardens against whatever hurts you and Mana Shield pays for hits with mana.", cls="mage", title="Holy",
                  blurb="Healing and radiant light.",
                  root=dict(title="Devotion", spell=spell("guiding_bolt", 3, 1, "minecraft:spectral_arrow")),
                  signature=[chain("irons_spellbooks:holy_spell_power", "Faith", 0.03, 4, 0.06),
@@ -419,10 +472,11 @@ ARCHETYPES = {
                             [spell("healing_circle", 3, 2, "minecraft:beacon"), spell("sunbeam", 3, 3, "minecraft:sunflower")],
                             [spell("cloud_of_regeneration", 3, 2, "minecraft:ghast_tear"), spell("wisp", 3, 2, "minecraft:glow_ink_sac"),
                              spell("cleanse", 1, 2, "minecraft:milk_bucket")],
-                            [spell("angel_wing", 1, 3, "minecraft:elytra"), spell("greater_heal", 1, 3, "minecraft:enchanted_golden_apple")],
-                            [efskill("adaptive_skin", 3)],
+                            [spell("greater_heal", 1, 3, "minecraft:enchanted_golden_apple")],
+                            [efskill("epicfight:adaptive_skin", 3)],
+                            [efskill("efs_iss:mana_shield", 3)],
                             [spell("divine_smite", 3, 2, "minecraft:golden_sword")]]),
-    "flame": dict(desc="Burst damage and constant pressure. Fire power and cooldown reduction keep the flames coming, from Firebolt, Fire Breath and Scorch to Magma Bomb, Wall of Fire, Blaze Storm, Heat Surge, Fireball and Raise Hell, while ember skin resists fire and Vengeance burns back at whoever hurt you.", cls="mage", title="Flame",
+    "flame": dict(desc="Burst damage and constant pressure. Fire power and cooldown reduction keep the flames coming, from Firebolt, Fire Breath and Scorch to Magma Bomb, Wall of Fire, Blaze Storm, Heat Surge, Fireball and Raise Hell, while ember skin resists fire, Vengeance burns back at whoever hurt you, Adrenaline flares up near death, Reserve Mana refills an empty pool and Mana Shield pays for hits with mana.", cls="mage", title="Flame",
                   blurb="Fire spells and fast cooldowns.",
                   root=dict(title="Kindling", spell=spell("firebolt", 3, 1, "minecraft:blaze_rod")),
                   signature=[chain("irons_spellbooks:fire_spell_power", "Inferno", 0.03, 4, 0.06),
@@ -433,8 +487,10 @@ ARCHETYPES = {
                              [spell("heat_surge", 2, 2, "minecraft:campfire"), spell("fireball", 2, 3, "minecraft:fire_charge")],
                              [spell("scorch", 3, 2, "minecraft:flint_and_steel"), spell("wall_of_fire", 3, 2, "minecraft:soul_campfire")],
                              [spell("blaze_storm", 3, 2, "minecraft:blaze_rod"), spell("raise_hell", 1, 3, "minecraft:netherrack")],
-                             [efskill("vengeance", 3)]]),
-    "lightning": dict(desc="A mobile storm caster. Lightning power grows, casting barely slows you down, and grounding resists shocks. Electrocute, Ball Lightning, Chain Lightning, Lightning Lance, Shockwave, Lightning Bolt and Thunderstorm punish anything in reach, while Charge, Volt Strike and Demolition Leap keep you moving.", cls="mage", title="Lightning",
+                             [efskill("epicfight:vengeance", 3)],
+                             [efskill("wom:adrenaline", 3), efskill("efs_iss:reserve_mana", 3)],
+                             [efskill("efs_iss:mana_shield", 3)]]),
+    "lightning": dict(desc="A mobile storm caster. Lightning power grows, casting barely slows you down, and grounding resists shocks. Electrocute, Ball Lightning, Chain Lightning, Lightning Lance, Shockwave, Lightning Bolt and Thunderstorm punish anything in reach, while Charge, Volt Strike and Demolition Leap keep you moving. Rapid Chant speeds every cast, Reserve Mana refills an empty pool and Mana Shield pays for hits with mana.", cls="mage", title="Lightning",
                       blurb="Lightning spells and casting on the move.",
                       root=dict(title="Static", spell=spell("electrocute", 3, 1, "minecraft:redstone_torch")),
                       signature=[chain("irons_spellbooks:lightning_spell_power", "Storm", 0.03, 4, 0.06),
@@ -445,8 +501,10 @@ ARCHETYPES = {
                                  [spell("lightning_lance", 3, 2, "minecraft:trident"), spell("lightning_bolt", 2, 3, "minecraft:lightning_rod")],
                                  [spell("shockwave", 2, 2, "minecraft:tnt"), spell("volt_strike", 3, 2, "minecraft:feather")],
                                  [spell("charge", 1, 2, "minecraft:redstone_block"), spell("thunderstorm", 1, 3, "minecraft:trident")],
-                                 [efskill("demolition_leap", 3)]]),
-    "necromancy": dict(desc="Blood magic and the risen dead. Blood power and summon damage feed Wither Skull, Blood Slash, Blood Needles, Ray of Siphoning, Devour, Raise Dead, Summon Vex and Sacrifice, and Stamina Pillager feeds on every kill, turning every fight into a war of attrition.", cls="mage", title="Necromancy",
+                                 [efskill("epicfight:demolition_leap", 3)],
+                                 [efskill("efs_iss:rapid_chant", 3), efskill("efs_iss:reserve_mana", 3)],
+                                 [efskill("efs_iss:mana_shield", 3)]]),
+    "necromancy": dict(desc="Blood magic and the risen dead. Blood power and summon damage feed Wither Skull, Blood Slash, Blood Needles, Ray of Siphoning, Devour, Raise Dead, Summon Vex and Sacrifice, and Stamina Pillager feeds on every kill, turning every fight into a war of attrition. Blood into Mana casts with health, and Soul Protection and Mana Shield ward off blows.", cls="mage", title="Necromancy",
                        blurb="Blood magic and the risen dead.",
                        root=dict(title="Grave Touch", spell=spell("wither_skull", 3, 1, "minecraft:wither_rose")),
                        signature=[chain("irons_spellbooks:blood_spell_power", "Blood", 0.03, 4, 0.06),
@@ -457,8 +515,10 @@ ARCHETYPES = {
                                   [spell("raise_dead", 2, 3, "minecraft:zombie_head"), spell("devour", 3, 2, "minecraft:rotten_flesh")],
                                   [spell("blood_needles", 3, 2, "minecraft:pointed_dripstone"), spell("summon_vex", 2, 2, "minecraft:iron_sword"),
                                    spell("sacrifice", 3, 2, "minecraft:skeleton_skull")],
-                                  [efskill("stamina_pillager", 3)]]),
-    "ice": dict(desc="Control and protection. Ice power, magic resistance and cold resistance back up Icicle, Cone of Cold, Ray of Frost, Frostwave, Frost Step, Ice Spikes, Ice Block, Frostbite and Blizzard, which slow, freeze and shatter anything that comes close. Hyper Vitality fuels weapon skills with stamina.", cls="mage", title="Ice",
+                                  [efskill("epicfight:stamina_pillager", 3)],
+                                  [efskill("efs_iss:blood_into_mana", 3)],
+                                  [efskill("wom:soul_protection", 3), efskill("efs_iss:mana_shield", 3)]]),
+    "ice": dict(desc="Control and protection. Ice power, magic resistance and cold resistance back up Icicle, Cone of Cold, Ray of Frost, Frostwave, Frost Step, Ice Spikes, Ice Block, Frostbite and Blizzard, which slow, freeze and shatter anything that comes close. Hyper Vitality fuels weapon skills with stamina, Aqua Maneuver speeds you through water and Mana Shield pays for hits with mana.", cls="mage", title="Ice",
                 blurb="Frost spells and magical warding.",
                 root=dict(title="Frostbitten", spell=spell("icicle", 3, 1, "minecraft:ice")),
                 signature=[chain("irons_spellbooks:ice_spell_power", "Winter", 0.03, 4, 0.06),
@@ -469,8 +529,9 @@ ARCHETYPES = {
                            [spell("ice_spikes", 3, 2, "minecraft:pointed_dripstone"), spell("blizzard", 2, 3, "minecraft:snow_block")],
                            [spell("frostwave", 3, 2, "minecraft:snowball"), spell("ray_of_frost", 3, 2, "minecraft:prismarine_shard")],
                            [spell("ice_block", 2, 2, "minecraft:packed_ice"), spell("frostbite", 1, 3, "minecraft:blue_ice")],
-                           [efskill("hypervitality", 3)]]),
-    "assassin": dict(desc="Strike first, strike from behind. Daggers, backstab damage, armour negation and protection shred make every opening lethal. Echoing Strikes, Acupuncture and Bonebreaker punish a single target, Throw hurls your blade at whatever runs, and Blood Step and Invisibility get you in and out unseen.", cls="rogue", title="Assassin",
+                           [efskill("epicfight:hypervitality", 3)],
+                           [efskill("wom:aqua_maneuvre", 2), efskill("efs_iss:mana_shield", 3)]]),
+    "assassin": dict(desc="Strike first, strike from behind. Daggers, backstab damage, armour negation and protection shred make every opening lethal. Echoing Strikes, Acupuncture and Bonebreaker punish a single target, Throw hurls your blade at whatever runs, and Blood Step, Invisibility and Ender Obscuris get you in and out unseen.", cls="rogue", title="Assassin",
                      blurb="Daggers, backstabs and vanishing acts.",
                      root=dict(title="Silent Blade", attribute="mdvlcraft:dagger_damage", value=0.05),
                      signature=[chain("mdvlcraft:dagger_damage", "Dagger", 0.05, 4, 0.10),
@@ -478,10 +539,11 @@ ARCHETYPES = {
                                 chain("epicfight:armor_negation", "Pierce", 3, 3, 6),
                                 chain("puffish_attributes:protection_shred", "Rend", 0.05, 2, 0.10)],
                      abilities=[[spell("echoing_strikes", 2, 2, "minecraft:echo_shard"), spell("acupuncture", 3, 2, "minecraft:tripwire_hook")],
-                                [efskill("bonebreaker", 3)],
+                                [efskill("epicfight:bonebreaker", 3)],
                                 [spell("blood_step", 2, 2, "minecraft:redstone"), spell("invisibility", 2, 3, "minecraft:glass")],
-                                [spell("throw", 3, 2, "minecraft:iron_sword")]]),
-    "phantom": dict(desc="A rapier duellist built around the dodge. Rapiers (a sword with an empty off hand) grow sharper, dodges cost less stamina, and the first hit after a dodge lands as a riposte. Evasion turns incoming blows into blinks, Slow drags enemies down, Step replaces the roll with a sidestep and Catharsis charges the blade with every dodge.", cls="rogue", title="Phantom",
+                                [spell("throw", 3, 2, "minecraft:iron_sword")],
+                                [efskill("wom:ender_obscuris", 3)]]),
+    "phantom": dict(desc="A rapier duellist built around the dodge. Rapiers (a sword with an empty off hand) grow sharper, dodges cost less stamina, and the first hit after a dodge lands as a riposte. Evasion turns incoming blows into blinks, Slow drags enemies down, Invisibility hides you, Step, Ender Step, Ender Obscuris and Dodge Master replace the roll, Natural Sprinter lends speed and Catharsis charges the blade with every dodge.", cls="rogue", title="Phantom",
                     blurb="Rapier duelling, dodges and ripostes.",
                     root=dict(title="Duelist", attribute="mdvlcraft:rapier_damage", value=0.05),
                     signature=[chain("mdvlcraft:rapier_damage", "Rapier", 0.05, 4, 0.10),
@@ -489,11 +551,13 @@ ARCHETYPES = {
                                chain("mdvlcraft:dodge_efficiency", "Phase Step", 0.05, 3, 0.10),
                                chain("puffish_attributes:melee_resistance_shred", "Feint", 0.05, 2, 0.10)],
                     abilities=[[spell("evasion", 1, 3, "minecraft:ender_pearl"), spell("evasion", 2, 3, "minecraft:ender_pearl", "Phantasm (Evasion II)")],
-                               [spell("slow", 2, 2, "minecraft:cobweb")],
+                               [spell("slow", 2, 2, "minecraft:cobweb"), spell("invisibility", 2, 3, "minecraft:glass")],
                                [technique("mdvlcraft:follow_up_kick", 3, "minecraft:leather_boots", note="Projection Sorcery. Sneak and cast to switch between the Normal and Flow forms."),
                                 technique("mdvlcraft:phantom_movement", 4, "texture:mdvlcraft:textures/gui/icons/ability/phantom_movement.png", note="Projection Sorcery's dash. Hold to dash, always at full output; sneak and cast to switch Tracing and Continuous (free). No cooldown: each dash costs mana. Naobito's style.")],
-                               [efskill("step", 2), efskill("catharsis", 3)]]),
-    "scout": dict(desc="Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, and Touch Dig tunnels through anything.", cls="rogue", title="Scout",
+                               [efskill("epicfight:step", 2), efskill("epicfight:catharsis", 3)],
+                               [efskill("wom:natural_sprinter", 2), efskill("wom:ender_step", 3)],
+                               [efskill("wom:ender_obscuris", 3), efskill("wom:dodge_master", 3)]]),
+    "scout": dict(desc="Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Haste, Gust, Natural Sprinter, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, Cleanse clears ailments, Dopamine turns dash attacks into stamina and Touch Dig tunnels through anything.", cls="rogue", title="Scout",
                   blurb="Mobility, ender magic and far sight.",
                   root=dict(title="Pathfinder", attribute="forge:swim_speed", value=0.10),
                   signature=[chain("forge:swim_speed", "Current", 0.10, 2, 0.10),
@@ -501,12 +565,13 @@ ARCHETYPES = {
                              chain("irons_spellbooks:ender_magic_resist", "Void Ward", 0.05, 2, 0.10),
                              chain("puffish_attributes:breaking_speed", "Trailblazer", 0.05, 3, 0.10),
                              chain("puffish_attributes:trident_damage", "Harpooner", 0.05, 3, 0.10)],
-                  abilities=[[spell("teleport", 2, 2, "minecraft:ender_pearl"), spell("teleport", 4, 2, "minecraft:ender_pearl", "Blink (Teleport IV)")],
+                  abilities=[[spell("cleanse", 1, 2, "minecraft:milk_bucket")],
                              [spell("haste", 2, 2, "minecraft:sugar"), spell("planar_sight", 1, 3, "minecraft:spyglass")],
                              [spell("gust", 3, 2, "minecraft:feather")],
-                             [efskill("phantom_ascent", 3)],
-                             [spell("touch_dig", 2, 2, "minecraft:iron_pickaxe")]]),
-    "thief": dict(desc="Luck and loot. Thieves gain luck, double drops, extra Fortune, longer reach, cheaper anvil repairs and a cutthroat's sword arm. Boogie Woogie claps swap places with creatures or blocks to confuse fights, Lob Creeper and Chain Creeper blow open a fight, Scapegoat and Firecracker cover a getaway, and Emergency Escape dodges out of any hit.", cls="rogue", title="Thief",
+                             [efskill("epicfight:phantom_ascent", 3)],
+                             [spell("touch_dig", 2, 2, "minecraft:iron_pickaxe")],
+                             [efskill("wom:natural_sprinter", 2), efskill("wom:dopamine", 2)]]),
+    "thief": dict(desc="Luck and loot. Thieves gain luck, double drops, extra Fortune, longer reach, cheaper anvil repairs and a cutthroat's sword arm. Boogie Woogie claps swap places with creatures or blocks to confuse fights, Lob Creeper and Chain Creeper blow open a fight, Scapegoat, Firecracker, Teleport and Natural Sprinter cover a getaway, and Emergency Escape dodges out of any hit.", cls="rogue", title="Thief",
                   blurb="Luck, plunder and Boogie Woogie swaps.",
                   root=dict(title="Light Fingers", attribute="minecraft:generic.luck", value=1),
                   signature=[chain("minecraft:generic.luck", "Fortune's Favour", 1, 2, 2),
@@ -518,9 +583,11 @@ ARCHETYPES = {
                   abilities=[[technique("mdvlcraft:boogie_woogie", 3, "minecraft:ender_pearl"),
                               technique("mdvlcraft:block_clap", 3, "minecraft:chorus_fruit")],
                              [spell("scapegoat", 2, 2, "minecraft:lead"), spell("firecracker", 3, 2, "minecraft:firework_rocket")],
-                             [efskill("emergency_escape", 3)],
-                             [spell("lob_creeper", 3, 2, "minecraft:tnt"), spell("chain_creeper", 2, 2, "minecraft:creeper_head")]]),
-    "wanderer": dict(desc="Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, and Adrenaline Fiend gets you back on your feet after every kill.", cls="ranger", title="Wanderer",
+                             [efskill("epicfight:emergency_escape", 3)],
+                             [spell("lob_creeper", 3, 2, "minecraft:tnt"), spell("chain_creeper", 2, 2, "minecraft:creeper_head")],
+                             [spell("teleport", 2, 2, "minecraft:ender_pearl"), spell("teleport", 4, 2, "minecraft:ender_pearl", "Blink (Teleport IV)")],
+                             [efskill("wom:natural_sprinter", 2)]]),
+    "wanderer": dict(desc="Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, Adrenaline Fiend gets you back on your feet after every kill, Natural Sprinter covers ground and Voodoo Magic trades health and stamina.", cls="ranger", title="Wanderer",
                      blurb="Long journeys: food, sure footing and a loyal horse.",
                      root=dict(title="Long Road", attribute="mdvlcraft:saturation_bonus", value=0.10),
                      signature=[chain("mdvlcraft:saturation_bonus", "Provisions", 0.10, 3, 0.20),
@@ -531,7 +598,8 @@ ARCHETYPES = {
                      abilities=[[spell("summon_horse", 3, 2, "minecraft:saddle"), spell("summon_horse", 5, 2, "minecraft:golden_carrot", "Trusted Steed (Summon Horse V)")],
                                 [spell("counterspell", 1, 3, "minecraft:barrier")],
                                 [spell("summon_polar_bear", 3, 2, "minecraft:snow_block"), spell("gluttony", 1, 2, "minecraft:cooked_porkchop")],
-                                [efskill("adrenaline_fiend", 3)]]),
+                                [efskill("epicfight:adrenaline_fiend", 3)],
+                                [efskill("wom:voodoo_magic", 3), efskill("wom:natural_sprinter", 2)]]),
     "stalker": dict(desc="Bows and crossbows. Ranged damage, arrow and bolt speed and evocation power make every shot count. Arrow Volley rains arrows on a whole area, Poison Arrow leaves a lingering toxic cloud, Fire Arrow burns, and Revelation turns well-timed defence into a stunning counter.", cls="ranger", title="Stalker",
                     blurb="Bows, crossbows, arrow volleys and poison arrows.",
                     root=dict(title="Hunter's Eye", attribute="puffish_attributes:ranged_damage", value=0.03),
@@ -542,7 +610,7 @@ ARCHETYPES = {
                     abilities=[[spell("arrow_volley", 3, 2, "minecraft:arrow"), spell("arrow_volley", 5, 3, "minecraft:spectral_arrow", "Rain of Arrows (Arrow Volley V)")],
                                [spell("poison_arrow", 3, 2, "minecraft:tipped_arrow"), spell("poison_arrow", 5, 2, "minecraft:sweet_berries", "Thornshot (Poison Arrow V)")],
                                [spell("fire_arrow", 3, 2, "minecraft:blaze_powder")],
-                               [efskill("revelation", 3)]]),
+                               [efskill("epicfight:revelation", 3)]]),
     "druid": dict(desc="Nature magic and the land's healing. Nature power and resistance strengthen Acid Orb, Root, Firefly Swarm, Blight, Poison Splash, Spider Aspect, Oakskin and Earthquake, Meteor Slam brings the sky down, and standing on natural ground slowly heals you.", cls="ranger", title="Druid",
                   blurb="Nature magic and the land's healing.",
                   root=dict(title="Wild Growth", spell=spell("acid_orb", 3, 1, "minecraft:slime_ball")),
@@ -555,8 +623,8 @@ ARCHETYPES = {
                              [spell("oakskin", 2, 2, "minecraft:oak_log"), spell("oakskin", 4, 3, "minecraft:oak_log", "Barkskin (Oakskin IV)")],
                              [spell("blight", 2, 2, "minecraft:poisonous_potato"), spell("poison_splash", 3, 2, "minecraft:spider_eye"),
                               spell("spider_aspect", 3, 2, "minecraft:cobweb")],
-                             [efskill("meteor_slam", 3)]]),
-    "cursed": dict(desc="Cursed techniques fuelled by mana instead of cursed energy, each with its own cooldown. Dismantle and Cleave cut enemies apart, and the Malevolent Shrine domain, closed and then open, shreds everything around you while you keep cutting. Cursed Control makes techniques cheaper; melee resistance and toughness shred round it out, with Swordmaster and Death Harvest for the blade.", cls="ranger", title="Cursed",
+                             [efskill("epicfight:meteor_slam", 3)]]),
+    "cursed": dict(desc="Cursed techniques fuelled by mana instead of cursed energy, each with its own cooldown. Dismantle and Cleave cut enemies apart, and the Malevolent Shrine domain, closed and then open, shreds everything around you while you keep cutting. Cursed Control makes techniques cheaper; melee resistance and toughness shred round it out, with Swordmaster and Death Harvest for the blade and Devour to feed on the fallen.", cls="ranger", title="Cursed",
                    blurb="Shrine techniques: Dismantle, Cleave and the Malevolent Shrine (closed, then open).",
                    root=dict(title="Cursed Body", attribute="puffish_attributes:melee_resistance", value=0.02),
                    signature=[chain("mdvlcraft:technique_efficiency", "Cursed Control", 0.07, 4, 0.07),
@@ -567,8 +635,9 @@ ARCHETYPES = {
                                          note="Closed domain: a black barrier dome; only what is inside is cut, and only while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it."),
                                technique("mdvlcraft:open_malevolent_shrine", 4, "minecraft:obsidian",
                                          note="Open domain: no barrier, cuts everything within 45 blocks while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it.")],
-                              [efskill("swordmaster", 3), efskill("death_harvest", 2)],
-                              [technique("mdvlcraft:soul_hunt", 4, "minecraft:soul_lantern", note="Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown.")]]),
+                              [efskill("epicfight:swordmaster", 3), efskill("epicfight:death_harvest", 2)],
+                              [technique("mdvlcraft:soul_hunt", 4, "minecraft:soul_lantern", note="Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown.")],
+                              [spell("devour", 3, 2, "minecraft:rotten_flesh")]]),
 }
 
 
@@ -588,7 +657,7 @@ def describe(node):
     if node["kind"] == "stat":
         return f"{fmt(node['attribute'], node['value'])} {ATTRIBUTES[node['attribute']][0]}"
     if node["kind"] == "efskill":
-        category, title, effect = EF_SKILLS[node["skill"].split(":")[1]]
+        category, title, effect = EF_SKILLS[node["skill"]]
         return f"Teaches {title}, an Epic Fight {EF_SLOT_NAMES[category]} skill: {effect}. Equip it in the Combat Skills box of the abilities screen"
     level = f" (Level {node['level']})" if node["ability"].startswith("irons_spellbooks:") else ""
     mana = ""
@@ -641,7 +710,6 @@ def frame(kind, palette):
 
 def experience():
     return {
-        "level_limit": LEVEL_LIMIT,
         "experience_per_level": {"type": "expression", "data": {"expression": "25 + level * 5"}},
         "sources": [{
             "type": "puffish_skills:kill_entity",
@@ -729,7 +797,7 @@ def skill_id(node, taken):
         return node["title"].lower().replace(" ", "_")
     if node["kind"] == "stat":
         base = node["attribute"].split(":")[1].replace("generic.", "")
-        suffix = "mastery" if node.get("capstone") else str(int(node["title"].rsplit(" ", 1)[1]))
+        suffix = f"mastery_{node['tier']}" if node.get("capstone") else str(int(node["title"].rsplit(" ", 1)[1]))
         return f"{base}_{suffix}"
     if node["kind"] == "efskill":
         return node["skill"].split(":")[1]
@@ -800,7 +868,7 @@ class NoRoom(Exception):
 
 LAYOUT_ATTEMPTS = 80
 # Cross-links per tree (fewest, most).
-CROSS_LINKS = (6, 12)
+CROSS_LINKS = (6 * TREE_SCALE, 12 * TREE_SCALE)
 
 
 def build_archetype(arch_id, arch):
@@ -816,7 +884,7 @@ def build_archetype(arch_id, arch):
 
 def grow_archetype(arch_id, arch, seed):
     """A tree in the style of Path of Exile's passive tree: meandering paths of mixed bonuses (abilities in their outer
-    part) leave the root or fork off one another, sprout twigs of generic bonuses, and cross-links close loops."""
+    half) leave the root or fork off one another, sprout twigs of generic bonuses, and cross-links close loops."""
     cls = CLASSES[arch["cls"]]
     root = arch["root"]
     root_node = dict(root["spell"]) if "spell" in root else dict(kind="stat", attribute=root["attribute"], value=root["value"])
@@ -839,7 +907,7 @@ def grow_archetype(arch_id, arch, seed):
         return node_id
 
     # Paths: every bonus chain (signature, class, core) is dealt to a path, and each path interleaves its chains so the
-    # same bonus never comes twice in a row. Ability spokes take the outer part of a path, after an inner run of bonuses.
+    # same bonus never comes twice in a row. Ability spokes take the outer half of a path, after an inner run of bonuses.
     chains = ([("signature", c) for c in arch["signature"]] + [("class", c) for c in cls["pool"]]
               + [("core", c) for c in CORE])
     rng.shuffle(chains)
@@ -853,12 +921,15 @@ def grow_archetype(arch_id, arch, seed):
     for i in range(path_count):
         stats = interleave(dealt[i], twigs, rng)
         spoke = ability_spokes[i] if i < len(ability_spokes) else []
-        inner = max(2, round(len(stats) * rng.uniform(0.25, 0.4))) if spoke else len(stats)
+        inner = max(2, round(len(stats) * rng.uniform(0.45, 0.6))) if spoke else len(stats)
         sequence, outer = stats[:inner], stats[inner:]
+        # The abilities spread evenly over the outer part, the last one near the end of the path.
+        gap = max(1, len(outer) // max(1, len(spoke)))
         for ability in spoke:
             sequence.append(("ability", ability))
             if outer:
-                sequence.append(outer.pop(0))
+                sequence += outer[:gap]
+                outer = outer[gap:]
             elif ability is not spoke[-1]:
                 sequence.append(("generic", twigs.node(twigs.pick({sequence[-1][1].get("attribute")}))))
         sequences.append(sequence + outer)
@@ -1016,7 +1087,9 @@ def check_overlaps(all_nodes):
         for node in nodes:
             if node.get("group") in ("class", "generic", "core"):
                 continue
-            key = node.get("attribute") or node.get("ability") or node.get("skill")
+            key = node.get("attribute")
+            if key is None:
+                continue
             if key in pool_owner:
                 raise SystemExit(f"Overlap: {arch_id} signature {key} is a {pool_owner[key]} class bonus")
             if key in owner and owner[key] != arch_id:
@@ -1052,15 +1125,13 @@ def write_spell_previews(all_nodes):
 
 
 def write_doc(all_nodes):
-    points = STARTING_POINTS + LEVEL_LIMIT
-    xp_total = sum(25 + 5 * n for n in range(LEVEL_LIMIT))
     lines = ["# MDVLCraft skill trees", "",
              "Generated by `tools/generate_skill_trees.py`; edit the script, not this file.", "",
              f"- **Classes tab:** the four classes sit in a ring round the centre and are unlocked automatically. Their archetypes fan out in each class's quarter; hover one for a one-line summary and its key abilities. Pick up to **{ARCHETYPE_LIMIT} archetypes** from any classes; each opens its own tab.",
-             f"- **Archetype tabs:** laid out like Path of Exile's passive tree: meandering paths leave the archetype skill at the centre or fork off one another, a few cross-links close loops, and connections are drawn as curves. Each path mixes several bonus chains in turn (small 1-point steps, then a 2-point capstone with a double-ringed frame), so no two neighbouring skills give the same bonus. Abilities (the largest frames) sit in the outer part of the paths: they unlock spells or techniques for the ability wheel, or teach Epic Fight skills (the skill's own icon), which you equip in the abilities screen's Combat Skills box. Everyone knows Epic Fight's Roll and Guard.",
+             f"- **Archetype tabs:** laid out like Path of Exile's passive tree: meandering paths leave the archetype skill at the centre or fork off one another, a few cross-links close loops, and connections are drawn as curves. Each path mixes several bonus chains in turn (small 1-point steps, then a 2-point capstone with a double-ringed frame), so no two neighbouring skills give the same bonus. Abilities (the largest frames) sit from the middle to the end of the paths: they unlock spells or techniques for the ability wheel, or teach Epic Fight skills (the skill's own icon), which you equip in the abilities screen's Combat Skills box. Everyone knows Epic Fight's Roll and Guard.",
              f"- **Twigs:** the small frames sprouting off every branch are tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation and more; table below). They are smaller than any class or signature step and capped per tree, so they widen your choices without raising the ceiling.",
-             f"- **Points:** {STARTING_POINTS} to start, then 1 per level up to level {LEVEL_LIMIT} ({points} per archetype). Every tree costs more than that, so you choose. Experience comes from kills (`dropped XP + max health / 5`, at most 20 kills per chunk every 5 minutes). Level n to n+1 costs `25 + 5n` XP ({xp_total:,} XP to reach level {LEVEL_LIMIT}).",
-             "- **Class bonuses** are shared by every archetype of that class. **Signature bonuses and abilities** belong to one archetype only; the generator enforces this.",
+             f"- **Points:** {STARTING_POINTS} to start, then 1 per level with no level cap, so a whole tree can be filled in time. Experience comes from kills (`dropped XP + max health / 5`, at most 20 kills per chunk every 5 minutes). Level n to n+1 costs `25 + 5n` XP.",
+             "- **Class bonuses** are shared by every archetype of that class. **Signature bonuses** belong to one archetype only; the generator enforces this. Abilities and Epic Fight skills can appear in several archetypes.",
              "- **Controls:** `[` opens the abilities screen, hold `` ` `` for the ability wheel, Caps Lock casts. Spells cost 40% less mana than Iron's defaults and have 50% longer cooldowns. Techniques cost mana and have their own cooldowns; hold the cast key on Dismantle or Cleave to keep casting each time it is ready. The Malevolent Shrine (closed, then open) only cuts while you hold Dismantle or Cleave; cast it again to close it (it lasts up to 20 s).", ""]
     lines += ["## Twig bonuses (every archetype)", "", "| Twig | Per node | Most per tree | Tree maximum |", "|---|---|---|---|"]
     for attribute, title, value, cap in GENERIC:
@@ -1108,7 +1179,7 @@ def write_doc(all_nodes):
         sig = [n for n in nodes if n.get("group") not in ("class", "generic", "core")]
         twig_count = sum(1 for n in nodes if n.get("group") == "generic")
         lines += [f"## {arch['title']} ({CLASSES[arch['cls']]['title']})", "", arch["desc"], "",
-                  f"{len(nodes)} skills ({twig_count} of them twigs), {cost} points in total ({points} available).", "",
+                  f"{len(nodes)} skills ({twig_count} of them twigs), {cost} points in total.", "",
                   "| Skill | Cost | Effect |", "|---|---|---|"]
         for n in sig:
             lines.append(f"| {n['title']} | {n['cost']} | {describe(n)} |")
@@ -1129,7 +1200,7 @@ def main():
     write(OUT / "config.json", {"version": 3, "categories": ["classes"] + list(ARCHETYPES)})
     write_doc(all_nodes)
     for arch_id, nodes in all_nodes.items():
-        print(f"{arch_id:11s} skills={len(nodes):3d} twigs={sum(1 for n in nodes if n.get('group') == 'generic'):3d} cost={sum(n['cost'] for n in nodes)} (points {STARTING_POINTS + LEVEL_LIMIT})")
+        print(f"{arch_id:11s} skills={len(nodes):3d} twigs={sum(1 for n in nodes if n.get('group') == 'generic'):3d} cost={sum(n['cost'] for n in nodes)}")
 
 
 if __name__ == "__main__":
