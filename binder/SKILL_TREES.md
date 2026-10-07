@@ -50,7 +50,6 @@ Every spell the trees grant costs 40% less mana than Iron's default and has a 50
 | Acupuncture | Assassin (3) | 35 -> 21 | 20 s -> 30 s |
 | Angel Wing | Holy (1) | 80 -> 48 | 120 s -> 120 s |
 | Arrow Volley | Stalker (3/5) | 60/80 -> 36/48 | 15 s -> 22.5 s |
-| Ascension | Scout (3) | 52 -> 31 | 15 s -> 22.5 s |
 | Ball Lightning | Lightning (3) | 28 -> 17 | 1 s -> 3 s |
 | Blaze Storm | Flame (3) | 7 -> 4 | 20 s -> 30 s |
 | Blessing Of Life | Holy (3) | 20 -> 12 | 10 s -> 15 s |
@@ -74,8 +73,6 @@ Every spell the trees grant costs 40% less mana than Iron's default and has a 50
 | Electrocute | Lightning (3/5) | 5/7 -> 3/4 | 12 s -> 18 s |
 | Evasion | Phantom (1/2) | 40/60 -> 24/36 | 180 s -> 180 s |
 | Fang Strike | Berzerker (3/5) | 36/42 -> 22/25 | 5 s -> 7.5 s |
-| Fang Swirl | Wanderer (3) | 71 -> 43 | 28 s -> 42 s |
-| Fang Ward | Wanderer (3) | 55 -> 33 | 15 s -> 22.5 s |
 | Fire Arrow | Stalker (3) | 50 -> 30 | 8 s -> 12 s |
 | Fire Breath | Flame (3) | 7 -> 4 | 12 s -> 18 s |
 | Fireball | Flame (2) | 75 -> 45 | 25 s -> 37.5 s |
@@ -119,7 +116,6 @@ Every spell the trees grant costs 40% less mana than Iron's default and has a 50
 | Shield | Knight (2/4) | 40/50 -> 24/30 | 8 s -> 12 s |
 | Shockwave | Lightning (2) | 75 -> 45 | 30 s -> 45 s |
 | Slow | Phantom (2) | 60 -> 36 | 80 s -> 120 s |
-| Spectral Hammer | Wanderer (3) | 25 -> 15 | 2 s -> 3 s |
 | Spider Aspect | Druid (3) | 45 -> 27 | 90 s -> 135 s |
 | Stomp | Berzerker (2) | 60 -> 36 | 16 s -> 24 s |
 | Summon Horse | Wanderer (3/5) | 54/58 -> 32/35 | 20 s -> 30 s |
@@ -518,9 +514,9 @@ Signature maximums: Rapier Damage (sword, empty off hand) +35%, Dodge Stamina Co
 
 ## Scout (Rogue)
 
-Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Ascension's lightning leap, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, and Touch Dig tunnels through anything.
+Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, and Touch Dig tunnels through anything.
 
-121 skills (62 of them twigs), 145 points in total (41 available).
+123 skills (65 of them twigs), 146 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
@@ -534,7 +530,7 @@ Speed, range and awareness. Scouts swim faster, hit harder with tridents, break 
 | Harpooner 1 | 1 | +5% Trident Damage |
 | Teleport | 2 | Unlocks Teleport (Level 2) (15 mana, 9 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rift 1 | 1 | +3% Ender Spell Power |
-| Ascension | 2 | Unlocks Ascension (Level 3) (31 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Touch Dig | 2 | Unlocks Touch Dig (Level 2) (9 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Void Ward 2 | 1 | +5% Ender Resistance |
 | Trailblazer 2 | 1 | +5% Block Breaking Speed |
 | Planar Sight | 3 | Unlocks Planar Sight (Level 1) (90 mana, 200 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
@@ -542,7 +538,6 @@ Speed, range and awareness. Scouts swim faster, hit harder with tridents, break 
 | Harpooner 2 | 1 | +5% Trident Damage |
 | Blink (Teleport IV) | 2 | Unlocks Teleport (Level 4) (21 mana, 9 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rift 2 | 1 | +3% Ender Spell Power |
-| Touch Dig | 2 | Unlocks Touch Dig (Level 2) (9 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Void Ward Mastery | 2 | +10% Ender Resistance |
 | Trailblazer 3 | 1 | +5% Block Breaking Speed |
 | Current Mastery | 2 | +10% Swim Speed |
@@ -593,39 +588,36 @@ Signature maximums: Luck +5, Anvil Repair Cost -20%, Sword Damage +25%, Chance o
 
 ## Wanderer (Ranger)
 
-Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, Fang Ward and Fang Swirl ring you with evoker fangs, Spectral Hammer clears the way, and Adrenaline Fiend gets you back on your feet after every kill.
+Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, and Adrenaline Fiend gets you back on your feet after every kill.
 
-146 skills (85 of them twigs), 172 points in total (41 available).
+141 skills (83 of them twigs), 164 points in total (41 available).
 
 | Skill | Cost | Effect |
 |---|---|---|
 | Long Road | 1 | +10% Saturation from Food |
-| Fang Ward | 2 | Unlocks Fang Ward (Level 3) (33 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Pack Leader 1 | 1 | +8% Pet & Mount Damage |
-| Adrenaline Fiend | 3 | Teaches Adrenaline Fiend, an Epic Fight Passive skill: stamina starts regenerating at once when you kill a mob. Equip it in the Combat Skills box of the abilities screen |
-| Counterspell | 3 | Unlocks Counterspell (Level 1) (30 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Sure-footed Mastery | 2 | +0.5 Step Height (blocks) |
-| Rider 1 | 1 | +5% Mount Speed |
-| Summon Horse | 2 | Unlocks Summon Horse (Level 3) (32 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Companion 1 | 1 | +5% Pet & Mount Resistance |
-| Spectral Hammer | 2 | Unlocks Spectral Hammer (Level 3) (15 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Adrenaline Fiend | 3 | Teaches Adrenaline Fiend, an Epic Fight Passive skill: stamina starts regenerating at once when you kill a mob. Equip it in the Combat Skills box of the abilities screen |
+| Sure-footed Mastery | 2 | +0.5 Step Height (blocks) |
 | Provisions 1 | 1 | +10% Saturation from Food |
+| Summon Horse | 2 | Unlocks Summon Horse (Level 3) (32 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Rider 1 | 1 | +5% Mount Speed |
+| Pack Leader 1 | 1 | +8% Pet & Mount Damage |
+| Counterspell | 3 | Unlocks Counterspell (Level 1) (30 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Summon Polar Bear | 2 | Unlocks Summon Polar Bear (Level 3) (42 mana, 180 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Fang Swirl | 2 | Unlocks Fang Swirl (Level 3) (43 mana, 42 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Pack Leader 2 | 1 | +8% Pet & Mount Damage |
-| Rider 2 | 1 | +5% Mount Speed |
-| Trusted Steed (Summon Horse V) | 2 | Unlocks Summon Horse (Level 5) (35 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Companion 2 | 1 | +5% Pet & Mount Resistance |
 | Provisions 2 | 1 | +10% Saturation from Food |
+| Trusted Steed (Summon Horse V) | 2 | Unlocks Summon Horse (Level 5) (35 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
+| Rider 2 | 1 | +5% Mount Speed |
+| Pack Leader 2 | 1 | +8% Pet & Mount Damage |
 | Gluttony | 2 | Unlocks Gluttony (Level 1) (21 mana, 135 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Pack Leader Mastery | 2 | +15% Pet & Mount Damage |
-| Rider 3 | 1 | +5% Mount Speed |
 | Companion Mastery | 2 | +10% Pet & Mount Resistance |
 | Provisions 3 | 1 | +10% Saturation from Food |
-| Rider Mastery | 2 | +10% Mount Speed |
+| Rider 3 | 1 | +5% Mount Speed |
+| Pack Leader Mastery | 2 | +15% Pet & Mount Damage |
 | Provisions Mastery | 2 | +20% Saturation from Food |
+| Rider Mastery | 2 | +10% Mount Speed |
 
-Signature maximums: Saturation from Food +60%, Pet & Mount Damage +31%, Step Height (blocks) +0.5, Mount Speed +25%, Pet & Mount Resistance +20%. Plus the Ranger class spokes.
+Signature maximums: Saturation from Food +60%, Pet & Mount Resistance +20%, Step Height (blocks) +0.5, Mount Speed +25%, Pet & Mount Damage +31%. Plus the Ranger class spokes.
 
 ## Stalker (Ranger)
 
@@ -635,7 +627,7 @@ Bows and crossbows. Ranged damage, arrow and bolt speed and evocation power make
 
 | Skill | Cost | Effect |
 |---|---|---|
-| Hunter's Eye | 1 | +5% Ranged Damage |
+| Hunter's Eye | 1 | +3% Ranged Damage |
 | Revelation | 3 | Teaches Revelation, an Epic Fight Identity skill: guarding, parrying and dodging build stacks; at full stacks unleash a stunning counter-attack. Equip it in the Combat Skills box of the abilities screen |
 | Longbow 1 | 1 | +5% Arrow Speed |
 | Fletcher's Art 1 | 1 | +3% Evocation Spell Power |
@@ -643,22 +635,22 @@ Bows and crossbows. Ranged damage, arrow and bolt speed and evocation power make
 | Poison Arrow | 2 | Unlocks Poison Arrow (Level 3) (30 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Fire Arrow | 2 | Unlocks Fire Arrow (Level 3) (30 mana, 12 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Arrow Volley | 2 | Unlocks Arrow Volley (Level 3) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Aim 1 | 1 | +5% Ranged Damage |
+| Aim 1 | 1 | +3% Ranged Damage |
 | Longbow 2 | 1 | +5% Arrow Speed |
 | Fletcher's Art 2 | 1 | +3% Evocation Spell Power |
 | Arbalest 2 | 1 | +5% Bolt Speed |
 | Thornshot (Poison Arrow V) | 2 | Unlocks Poison Arrow (Level 5) (36 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
 | Rain of Arrows (Arrow Volley V) | 3 | Unlocks Arrow Volley (Level 5) (48 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it |
-| Aim 2 | 1 | +5% Ranged Damage |
+| Aim 2 | 1 | +3% Ranged Damage |
 | Longbow Mastery | 2 | +10% Arrow Speed |
 | Fletcher's Art 3 | 1 | +3% Evocation Spell Power |
 | Arbalest Mastery | 2 | +10% Bolt Speed |
-| Aim 3 | 1 | +5% Ranged Damage |
+| Aim 3 | 1 | +3% Ranged Damage |
 | Fletcher's Art Mastery | 2 | +6% Evocation Spell Power |
-| Aim 4 | 1 | +5% Ranged Damage |
-| Aim Mastery | 2 | +10% Ranged Damage |
+| Aim 4 | 1 | +3% Ranged Damage |
+| Aim Mastery | 2 | +6% Ranged Damage |
 
-Signature maximums: Ranged Damage +35%, Arrow Speed +20%, Evocation Spell Power +15%, Bolt Speed +20%. Plus the Ranger class spokes.
+Signature maximums: Ranged Damage +21%, Arrow Speed +20%, Evocation Spell Power +15%, Bolt Speed +20%. Plus the Ranger class spokes.
 
 ## Druid (Ranger)
 

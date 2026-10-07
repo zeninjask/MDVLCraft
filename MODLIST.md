@@ -1,20 +1,25 @@
-# MDVLCraft — Mod List (v1.8.0)
+# MDVLCraft — Mod List (v1.8.1)
 
-Importable pack: [`MDVLCraft-1.8.0.zip`](MDVLCraft-1.8.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
+Importable pack: [`MDVLCraft-1.8.1.zip`](MDVLCraft-1.8.1.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
 
 v1.1.0 = every mod from your **MDVL** pack merged into MDVLCraft v1.0.0 (newer version kept where both had the mod), plus your MDVL configs/KubeJS folder and the new **MDVLCraft Binder** mod.
 
-**151 files**: 148 CurseForge entries in `manifest.json` (147 mods + the BD&Hill resource pack from MDVL) and 3 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.7.0, and Balda's Projection Sorcery, which is on Modrinth only).
+**151 files**: 148 CurseForge entries in `manifest.json` (147 mods + the BD&Hill resource pack from MDVL) and 3 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.7.1, and Balda's Projection Sorcery, which is on Modrinth only).
 
 **Modrinth packs** (same version, for the Modrinth App, Prism Launcher or any `.mrpack` installer):
 | File | Contents |
 |---|---|
-| [`MDVLCraft-1.8.0-client.mrpack`](MDVLCraft-1.8.0-client.mrpack) | Everything, single-player included: all 150 mods (every mod in the pack; none crashes a client), the BD&Hill resource pack, configs, KubeJS and default configs. Java arguments can't be stored in a `.mrpack`; the pack puts `MDVLCraft-Java-Arguments.txt` in the instance folder with the memory (8 GB) and JVM line to paste into the launcher |
-| [`MDVLCraft-1.8.0-server.mrpack`](MDVLCraft-1.8.0-server.mrpack) | A dedicated server's 126 mods (the 24 client-only mods below are left out), the same configs and default configs, and `user_jvm_args.txt` (8 GB, Aikar's flags), which Forge's `run.sh`/`run.bat` read. Install Forge 47.4.10 server first, or use an installer such as `mrpack-install` with the Forge server already in the folder. Distant Horizons is on the server too, so it can generate distant terrain for players |
+| [`MDVLCraft-1.8.1-client.mrpack`](MDVLCraft-1.8.1-client.mrpack) | Everything, single-player included: all 150 mods (every mod in the pack; none crashes a client), the BD&Hill resource pack, configs, KubeJS and default configs. Java arguments can't be stored in a `.mrpack`; the pack puts `MDVLCraft-Java-Arguments.txt` in the instance folder with the memory (8 GB) and JVM line to paste into the launcher |
+| [`MDVLCraft-1.8.1-server.mrpack`](MDVLCraft-1.8.1-server.mrpack) | A dedicated server's 126 mods (the 24 client-only mods below are left out), the same configs and default configs, and `user_jvm_args.txt` (8 GB, Aikar's flags), which Forge's `run.sh`/`run.bat` read. Install Forge 47.4.10 server first, or use an installer such as `mrpack-install` with the Forge server already in the folder. Distant Horizons is on the server too, so it can generate distant terrain for players |
 
 106 of the mods download from Modrinth; the 43 files only on CurseForge download from CurseForge's CDN, with their hashes checked against the tested jars. The binder and EpicFight-Ponder are hosted nowhere, so they are inside the packs. Prism Launcher asks once to confirm the non-Modrinth files. Verified: both packs list exactly the mods the test client (150) and test server (126) ran, every new download link answers, and a full client joined that server.
 
 The BD&Hill resource pack is installed but, as before, off until you turn it on in *Options → Resource Packs*. With it on, the binder adds its own small fix pack so BD&Hill's 3D Uchigatana sits in the hand.
+
+## v1.8.1 changes
+| Change | Notes |
+|---|---|
+| Taken back out | Wanderer: Fang Ward, Fang Swirl and Spectral Hammer. Scout: Ascension. Stalker: Ranged Damage back to +21% (1.8.0 had raised it to +35%, level with the katana bonus). Wanderer keeps the stronger pets, Scout keeps Trident Damage and Touch Dig. Binder 0.7.1 |
 
 ## v1.8.0 changes
 | Change | Notes |
@@ -25,7 +30,7 @@ The BD&Hill resource pack is installed but, as before, off until you turn it on 
 | Malevolent Shrine | Closed (black barrier dome; only what is inside is cut) unlocks first, then Open. Either cuts only while Dismantle or Cleave is held |
 | New abilities | Samurai: Blitz and Surprise Attack (Heavenly Restriction, no weapon needed), Myriad Blades Convergence (Sword Soaring). Phantom: Follow Up Kick (Shift + cast: Normal/Flow) and Don't You Have a Heart? (Shift + cast: Tracing/Continuous), always at full output, no screen shake, Naobito style only. Cursed: Soul Hunt (Epic Fight Nightfall). All bind to the ability wheel |
 | Core tree bonuses | Every archetype tree has a mana limb (Max Mana +30, Mana Regen +15%) and a vitality limb (Natural Regeneration +15%, Max Health +3); the mana, mana regen and health regen twigs are larger |
-| Balance pass | See [`binder/BALANCE.md`](binder/BALANCE.md): comparison tables, what changed and why, what keeps bosses hard, and archetype ideas for missing paths. Scout, Thief, Wanderer and Stalker (the weakest) gain damage stats and abilities; Holy gets Divine Smite, Assassin Throw; Ranger class gains a Predator (melee damage) spoke. Nothing was removed |
+| Balance pass | See [`binder/BALANCE.md`](binder/BALANCE.md): comparison tables, what changed and why, what keeps bosses hard, and archetype ideas for missing paths. Scout, Thief, Wanderer and Stalker (the weakest) gain damage stats and abilities (partly taken back in 1.8.1); Holy gets Divine Smite, Assassin Throw; Ranger class gains a Predator (melee damage) spoke. Nothing was removed |
 | Spell costs and cooldowns | Every spell in the trees costs 40% less mana and has a 50% longer cooldown (at least 3 s; cooldowns of 120 s or more unchanged). Spell power is untouched |
 | Technique cooldowns | Every technique now has a cooldown (it had none) and costs less mana. Cursed: Dismantle 1 s, Cleave 3 s, Shrines 120 s; Blitz 8 s, Surprise Attack 15 s, Kick 6 s, Dash 10 s |
 | Sword Soaring | Only its Vatansever weapon is used; its flight is off and its keys unbound, its combos stay |
@@ -299,7 +304,7 @@ Environment: Linux, OpenJDK 17, Forge 47.4.10, 6 GB heaps; client via portablemc
 | 91 | [Lootr (Forge & NeoForge)](https://www.curseforge.com/minecraft/mc-mods/lootr) | both | `lootr-forge-1.20-0.7.35.94.jar` |
 | 92 | [Majrusz Library](https://www.curseforge.com/minecraft/mc-mods/majrusz-library) | MDVL | `majrusz-library-forge-1.20.1-7.0.8.jar` |
 | 93 | [Majrusz's Enchantments](https://www.curseforge.com/minecraft/mc-mods/wonderful-enchantments) | MDVL | `majruszs-enchantments-forge-1.20.1-1.10.8.jar` |
-| 94 | MDVLCraft Binder | this repo (`binder/`), ships in `overrides/mods` | `mdvlcraft-0.7.0.jar` |
+| 94 | MDVLCraft Binder | this repo (`binder/`), ships in `overrides/mods` | `mdvlcraft-0.7.1.jar` |
 | 95 | [Model Gap Fix](https://www.curseforge.com/minecraft/mc-mods/model-gap-fix) | added in v1.2.0 | `modelfix-1.15.jar` |
 | 96 | [ModernFix](https://www.curseforge.com/minecraft/mc-mods/modernfix) | both (updated from `modernfix-forge-5.27.66+mc1.20.1.jar`) | `modernfix-forge-5.27.85+mc1.20.1.jar` |
 | 97 | [Mouse Tweaks](https://www.curseforge.com/minecraft/mc-mods/mouse-tweaks) | added in v1.2.0 | `MouseTweaks-forge-mc1.20.1-2.25.1.jar` |

@@ -1,4 +1,4 @@
-# MDVLCraft balance pass (binder 0.7.0, pack 1.8.0)
+# MDVLCraft balance pass (binder 0.7.1, pack 1.8.1)
 
 How the 16 archetypes compare, what changed to even them out, and what keeps bosses hard. Exact numbers live in
 [`SKILL_TREES.md`](SKILL_TREES.md) (generated from `tools/generate_skill_trees.py`).
@@ -58,10 +58,10 @@ comes down to ST, Def and Sus.
 | Ice | 3 | 4 | 3 | 1 | 2 | 3 | 16 | 3 | same spell policy |
 | Assassin | 4 → 5 | 1 | 1 | 1 | 3 | 2 | 12 → 13 | 3 | **Throw** (hurl your blade, weapon damage + spell power) |
 | Phantom | 4 | 2 | 3 | 1 | 5 | 2 | 17 | 4 | Kick 6 s, Dash 10 s cooldowns |
-| Scout | 1 → 3 | 1 → 2 | 1 | 1 | 5 | 4 → 5 | 13 → 17 | 1 → 3 | **Trident Damage +25%**, **Ascension** (lightning leap and strike), **Touch Dig** |
+| Scout | 1 → 2 | 1 | 1 | 1 | 5 | 4 → 5 | 13 → 15 | 1 → 2 | **Trident Damage +25%**, **Touch Dig** |
 | Thief | 1 → 3 | 1 → 3 | 2 | 1 | 3 | 5 | 13 → 17 | 1 → 3 | **Sword Damage +25%**, **Lob Creeper**, **Chain Creeper** |
-| Wanderer | 2 → 3 | 1 → 3 | 2 | 2 | 4 | 4 → 5 | 15 → 19 | 2 → 3 | **Pet & Mount Damage +20% → +31%**, **Fang Ward**, **Fang Swirl**, **Spectral Hammer** |
-| Stalker | 3 → 4 | 3 | 1 | 1 | 2 | 1 | 11 → 12 | 2 → 3 | **Ranged Damage +21% → +35%** (equal to katana, dagger and rapier +35%) |
+| Wanderer | 2 → 3 | 1 | 2 | 2 | 4 | 4 | 15 → 16 | 2 | **Pet & Mount Damage +20% → +31%** |
+| Stalker | 3 | 3 | 1 | 1 | 2 | 1 | 11 | 2 | none (Ranged Damage stays +21%) |
 | Druid | 3 | 4 | 3 | 3 | 1 | 3 | 17 | 4 | same spell policy |
 | Cursed | 5 | 5 | 2 | 1 | 1 | 1 | 15 | 5 → 4 | cooldowns: Dismantle 1 s, Cleave 3 s, both Shrines 120 s; mana Dismantle 20 → 12, Cleave 35 → 20, Shrine 150 → 100 |
 
@@ -72,9 +72,12 @@ comes down to ST, Def and Sus.
     archetype scored 3–5.
   - Cursed had no cooldowns. Held Cleave recast every 0.75 s, and the Shrine could be reopened as soon as it closed.
 - **After:**
-  - Every archetype scores 3–4 against bosses.
-  - Totals sit in a 12–19 band. The low-total archetypes are specialists: Assassin and Stalker are single-target
-    killers, and Flame is pure damage. Their peak ratings make up for the lower total.
+  - Thief rises to 3 against bosses. Scout and Wanderer rise less, and Stalker stays where it was: Ascension, Fang Ward,
+    Fang Swirl, Spectral Hammer and the Stalker ranged-damage increase were taken back out in 1.8.1.
+  - Scout, Wanderer and Stalker remain the weakest against bosses (2), against 3–4 for everyone else. The table in the
+    next section suggests other ways to raise them.
+  - Totals sit in an 11–19 band. The low-total archetypes are specialists: Assassin and Stalker are single-target
+    killers, and Flame is pure damage. Their peak ratings make up for part of the lower total.
   - Samurai keeps the top total (19), held back by the new cooldowns on Blitz and Surprise Attack.
   - Cursed drops from 5 to 4 against bosses:
     - The 120 s cooldown makes the Shrine a once-a-fight finisher instead of a domain that is always up.
@@ -97,21 +100,20 @@ comes down to ST, Def and Sus.
 | Scout | Swim Speed +40%, Ender Spell Power +15%, Ender Resistance +20%, Breaking Speed +25%, **Trident Damage +25%** |
 | Thief | Luck +5, Double Drop +25%, Reach +1, Fortune +1, Repair Cost −20%, **Sword Damage +25%** |
 | Wanderer | Saturation +60%, Mount Speed +25%, **Pet & Mount Damage +31%**, Pet & Mount Resistance +20%, Step Height +0.5 |
-| Stalker | **Ranged Damage +35%**, Arrow Speed +20%, Bolt Speed +20%, Evocation Spell Power +15% |
+| Stalker | Ranged Damage +21%, Arrow Speed +20%, Bolt Speed +20%, Evocation Spell Power +15% |
 | Druid | Nature Spell Power +18%, Health per 5 s on natural ground +1.5, Nature Resistance +20% |
 | Cursed | Melee Resistance +12%, Technique Mana Cost −35%, Toughness Shred +20% |
-
-The four weapon archetypes now match:
 
 | Archetype | Main weapon bonus |
 |---|---|
 | Samurai | Katana +35% |
 | Assassin | Dagger +35% |
 | Phantom | Rapier +35% |
-| Stalker | Ranged +35% |
 | Knight | Greatsword +30% |
+| Stalker | Ranged +21% |
 
-Knight's lower weapon bonus is paid for with the best defence of any archetype.
+Knight's lower weapon bonus is paid for with the best defence of any archetype. Stalker's is the lowest, but bows
+and crossbows hit from range, out of reach of most counter-attacks.
 
 ## Mana and cooldowns
 
@@ -137,8 +139,8 @@ Knight's lower weapon bonus is paid for with the best defence of any archetype.
 - **Cheaper spells come with longer cooldowns,** so damage per minute from spells goes down slightly, not up. Flame and
   Lightning lose the most, because their 1 s bolts now wait 3 s.
 - **Core spokes and twigs only add mana, regen and a little health.** No new damage stat is shared between trees.
-- **The new damage stats are archetype-only and capped at +25–35%,** the same ceiling as the existing weapon bonuses:
-  Ranger Predator +10%, Thief Sword +25%, Scout Trident +25%, Stalker Ranged +35%.
+- **The new damage stats are archetype-only and capped at +10–25%,** below the existing weapon bonuses: Ranger
+  Predator +10%, Thief Sword +25%, Scout Trident +25%.
 - **Points are tight.** 41 points against trees of 142–172 points means a player gets roughly a quarter of what a tree
   offers.
 - **The heaviest hitters now wait:**

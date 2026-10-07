@@ -941,21 +941,21 @@
     },
     "size": 1.5
   },
-  "ascension": {
-    "title": "Ascension",
-    "description": "Unlocks Ascension (Level 3) (31 mana, 22.5 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
+  "touch_dig": {
+    "title": "Touch Dig",
+    "description": "Unlocks Touch Dig (Level 2) (9 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
     "icon": {
       "type": "item",
       "data": {
-        "item": "minecraft:lightning_rod"
+        "item": "minecraft:iron_pickaxe"
       }
     },
     "rewards": [
       {
         "type": "mdvlcraft:ability",
         "data": {
-          "ability": "irons_spellbooks:ascension",
-          "level": 3
+          "ability": "irons_spellbooks:touch_dig",
+          "level": 2
         }
       }
     ],
@@ -1424,37 +1424,6 @@
       }
     },
     "size": 1.5
-  },
-  "touch_dig": {
-    "title": "Touch Dig",
-    "description": "Unlocks Touch Dig (Level 2) (9 mana, 3 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
-    "icon": {
-      "type": "item",
-      "data": {
-        "item": "minecraft:iron_pickaxe"
-      }
-    },
-    "rewards": [
-      {
-        "type": "mdvlcraft:ability",
-        "data": {
-          "ability": "irons_spellbooks:touch_dig",
-          "level": 2
-        }
-      }
-    ],
-    "cost": 2,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_challenge_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_challenge_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_challenge_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_challenge_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_challenge_excluded.png"
-      }
-    },
-    "size": 2.0
   },
   "renewal_mastery": {
     "title": "Renewal Mastery",
@@ -2306,251 +2275,20 @@
     "size": 1.5,
     "extra_description": "Core bonus (every archetype has this spoke)."
   },
-  "readiness_2": {
-    "title": "Readiness 2",
-    "description": "+0.5% Attack Speed",
+  "endurance_2": {
+    "title": "Endurance 2",
+    "description": "+0.25 Max Stamina",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_3": {
-    "title": "Readiness 3",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "readiness_4": {
-    "title": "Readiness 4",
-    "description": "+0.5% Attack Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.attack_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_1": {
-    "title": "Focus 1",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_2": {
-    "title": "Focus 2",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_2": {
-    "title": "Mending 2",
-    "description": "+1.5% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.015,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "mending_3": {
-    "title": "Mending 3",
-    "description": "+1.5% Natural Regeneration",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_natural_regeneration.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:natural_regeneration",
-          "value": 0.015,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hardened_2": {
-    "title": "Hardened 2",
-    "description": "+0.25 Armor",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
+          "attribute": "epicfight:staminar",
           "value": 0.25,
           "operation": "addition"
         }
@@ -2570,383 +2308,20 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "willpower_2": {
-    "title": "Willpower 2",
-    "description": "+0.5% Spell Resistance",
+  "endurance_3": {
+    "title": "Endurance 3",
+    "description": "+0.25 Max Stamina",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "willpower_3": {
-    "title": "Willpower 3",
-    "description": "+0.5% Spell Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "willpower_4": {
-    "title": "Willpower 4",
-    "description": "+0.5% Spell Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "willpower_5": {
-    "title": "Willpower 5",
-    "description": "+0.5% Spell Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "willpower_6": {
-    "title": "Willpower 6",
-    "description": "+0.5% Spell Resistance",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:spell_resist",
-          "value": 0.005,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_1": {
-    "title": "Hearty 1",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_2": {
-    "title": "Hearty 2",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hearty_3": {
-    "title": "Hearty 3",
-    "description": "+2% Saturation from Food",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_2": {
-    "title": "Meditation 2",
-    "description": "+1.5% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.015,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_3": {
-    "title": "Meditation 3",
-    "description": "+1.5% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.015,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "meditation_4": {
-    "title": "Meditation 4",
-    "description": "+1.5% Mana Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:mana_regen",
-          "value": 0.015,
-          "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "hardened_4": {
-    "title": "Hardened 4",
-    "description": "+0.25 Armor",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.armor",
+          "attribute": "epicfight:staminar",
           "value": 0.25,
           "operation": "addition"
         }
@@ -2966,20 +2341,20 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "hardened_5": {
-    "title": "Hardened 5",
-    "description": "+0.25 Armor",
+  "endurance_4": {
+    "title": "Endurance 4",
+    "description": "+0.25 Max Stamina",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.armor",
+          "attribute": "epicfight:staminar",
           "value": 0.25,
           "operation": "addition"
         }
@@ -2999,21 +2374,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "hardened_6": {
-    "title": "Hardened 6",
-    "description": "+0.25 Armor",
+  "vitality_2": {
+    "title": "Vitality 2",
+    "description": "+1 Max Health",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.25,
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
           "operation": "addition"
         }
       }
@@ -3032,21 +2407,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "hardened_7": {
-    "title": "Hardened 7",
-    "description": "+0.25 Armor",
+  "vitality_3": {
+    "title": "Vitality 3",
+    "description": "+1 Max Health",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_armor.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.armor",
-          "value": 0.25,
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
           "operation": "addition"
         }
       }
@@ -3065,186 +2440,21 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "swiftness_2": {
-    "title": "Swiftness 2",
-    "description": "+0.5% Movement Speed",
+  "vitality_4": {
+    "title": "Vitality 4",
+    "description": "+1 Max Health",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "swiftness_3": {
-    "title": "Swiftness 3",
-    "description": "+0.5% Movement Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "swiftness_4": {
-    "title": "Swiftness 4",
-    "description": "+0.5% Movement Speed",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "minecraft:generic.movement_speed",
-          "value": 0.005,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_2": {
-    "title": "Bounce 2",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "bounce_3": {
-    "title": "Bounce 3",
-    "description": "+1% Jump Height",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "puffish_attributes:jump",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "focus_3": {
-    "title": "Focus 3",
-    "description": "+0.5% Cooldown Reduction",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
           "operation": "addition"
         }
       }
@@ -3263,121 +2473,22 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "focus_4": {
-    "title": "Focus 4",
-    "description": "+0.5% Cooldown Reduction",
+  "vitality_5": {
+    "title": "Vitality 5",
+    "description": "+1 Max Health",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "irons_spellbooks:cooldown_reduction",
-          "value": 0.005,
+          "attribute": "minecraft:generic.max_health",
+          "value": 1,
           "operation": "addition"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_2": {
-    "title": "Second Breath 2",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_3": {
-    "title": "Second Breath 3",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
-        }
-      }
-    ],
-    "cost": 1,
-    "frame": {
-      "type": "texture",
-      "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
-      }
-    },
-    "size": 0.75,
-    "extra_description": "Twig bonus (every archetype has a few of these)."
-  },
-  "second_breath_4": {
-    "title": "Second Breath 4",
-    "description": "+1% Stamina Regen",
-    "icon": {
-      "type": "texture",
-      "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
-      }
-    },
-    "rewards": [
-      {
-        "type": "puffish_skills:attribute",
-        "data": {
-          "attribute": "epicfight:stamina_regen",
-          "value": 0.01,
-          "operation": "multiply_base"
         }
       }
     ],
@@ -3494,8 +2605,74 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "vitality_2": {
-    "title": "Vitality 2",
+  "readiness_1": {
+    "title": "Readiness 1",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_2": {
+    "title": "Readiness 2",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "vitality_6": {
+    "title": "Vitality 6",
     "description": "+1 Max Health",
     "icon": {
       "type": "texture",
@@ -3527,8 +2704,8 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "vitality_3": {
-    "title": "Vitality 3",
+  "vitality_8": {
+    "title": "Vitality 8",
     "description": "+1 Max Health",
     "icon": {
       "type": "texture",
@@ -3560,21 +2737,87 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "vitality_4": {
-    "title": "Vitality 4",
-    "description": "+1 Max Health",
+  "endurance_6": {
+    "title": "Endurance 6",
+    "description": "+0.25 Max Stamina",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_max_health.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.max_health",
-          "value": 1,
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_7": {
+    "title": "Endurance 7",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "endurance_8": {
+    "title": "Endurance 8",
+    "description": "+0.25 Max Stamina",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_staminar.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:staminar",
+          "value": 0.25,
           "operation": "addition"
         }
       }
@@ -3725,21 +2968,87 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "footing_6": {
-    "title": "Footing 6",
-    "description": "+1% Knockback Resistance",
+  "hearty_1": {
+    "title": "Hearty 1",
+    "description": "+2% Saturation from Food",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "minecraft:generic.knockback_resistance",
-          "value": 0.01,
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hearty_2": {
+    "title": "Hearty 2",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "hearty_3": {
+    "title": "Hearty 3",
+    "description": "+2% Saturation from Food",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:saturation_bonus",
+          "value": 0.02,
           "operation": "addition"
         }
       }
@@ -3824,21 +3133,54 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "hearty_6": {
-    "title": "Hearty 6",
-    "description": "+2% Saturation from Food",
+  "second_breath_2": {
+    "title": "Second Breath 2",
+    "description": "+1% Stamina Regen",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_2": {
+    "title": "Willpower 2",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
           "operation": "addition"
         }
       }
@@ -3857,22 +3199,286 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "hearty_7": {
-    "title": "Hearty 7",
-    "description": "+2% Saturation from Food",
+  "willpower_3": {
+    "title": "Willpower 3",
+    "description": "+0.5% Spell Resistance",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/mdvlcraft_saturation_bonus.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "mdvlcraft:saturation_bonus",
-          "value": 0.02,
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
           "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "footing_6": {
+    "title": "Footing 6",
+    "description": "+1% Knockback Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_knockback_resistance.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.knockback_resistance",
+          "value": 0.01,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "bounce_2": {
+    "title": "Bounce 2",
+    "description": "+1% Jump Height",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "puffish_attributes:jump",
+          "value": 0.01,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_4": {
+    "title": "Willpower 4",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_5": {
+    "title": "Willpower 5",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_2": {
+    "title": "Swiftness 2",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_3": {
+    "title": "Swiftness 3",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_4": {
+    "title": "Swiftness 4",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "second_breath_4": {
+    "title": "Second Breath 4",
+    "description": "+1% Stamina Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "epicfight:stamina_regen",
+          "value": 0.01,
+          "operation": "multiply_base"
         }
       }
     ],
@@ -3923,22 +3529,484 @@
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
-  "second_breath_6": {
-    "title": "Second Breath 6",
-    "description": "+1% Stamina Regen",
+  "bounce_4": {
+    "title": "Bounce 4",
+    "description": "+1% Jump Height",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/twig/epicfight_stamina_regen.png"
+        "texture": "mdvlcraft:textures/gui/icons/twig/puffish_attributes_jump.png"
       }
     },
     "rewards": [
       {
         "type": "puffish_skills:attribute",
         "data": {
-          "attribute": "epicfight:stamina_regen",
+          "attribute": "puffish_attributes:jump",
           "value": 0.01,
           "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "willpower_6": {
+    "title": "Willpower 6",
+    "description": "+0.5% Spell Resistance",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_spell_resist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:spell_resist",
+          "value": 0.005,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_6": {
+    "title": "Swiftness 6",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_7": {
+    "title": "Swiftness 7",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "swiftness_8": {
+    "title": "Swiftness 8",
+    "description": "+0.5% Movement Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_movement_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.movement_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "might_6": {
+    "title": "Might 6",
+    "description": "+0.1 Attack Damage",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_damage.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_damage",
+          "value": 0.1,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_3": {
+    "title": "Readiness 3",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_4": {
+    "title": "Readiness 4",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_5": {
+    "title": "Readiness 5",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "readiness_6": {
+    "title": "Readiness 6",
+    "description": "+0.5% Attack Speed",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/minecraft_generic_attack_speed.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.attack_speed",
+          "value": 0.005,
+          "operation": "multiply_base"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_2": {
+    "title": "Meditation 2",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_3": {
+    "title": "Meditation 3",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_4": {
+    "title": "Meditation 4",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "meditation_5": {
+    "title": "Meditation 5",
+    "description": "+1.5% Mana Regen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_mana_regen.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:mana_regen",
+          "value": 0.015,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_rogue_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_rogue_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_rogue_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_rogue_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "focus_1": {
+    "title": "Focus 1",
+    "description": "+0.5% Cooldown Reduction",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons/twig/irons_spellbooks_cooldown_reduction.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "irons_spellbooks:cooldown_reduction",
+          "value": 0.005,
+          "operation": "addition"
         }
       }
     ],

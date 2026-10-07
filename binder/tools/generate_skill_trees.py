@@ -140,8 +140,7 @@ SPELL_MAX_LEVEL = {"acid_orb": 8, "arrow_volley": 6, "ball_lightning": 10, "bles
                    "sacrifice": 5, "frostwave": 8, "ray_of_frost": 5, "ice_block": 6, "frostbite": 5, "acupuncture": 10, "slow": 4,
                    "gust": 10, "scapegoat": 3, "firecracker": 10, "summon_polar_bear": 10, "gluttony": 5, "fire_arrow": 10,
                    "blight": 8, "poison_splash": 10, "spider_aspect": 8,
-                   "divine_smite": 5, "throw": 5, "lob_creeper": 10, "chain_creeper": 6, "ascension": 10, "touch_dig": 3,
-                   "fang_ward": 8, "fang_swirl": 8, "spectral_hammer": 5}
+                   "divine_smite": 5, "throw": 5, "lob_creeper": 10, "chain_creeper": 6, "touch_dig": 3}
 # Iron's default mana cost (base, per extra level) of each spell used. Every granted level must fit the 100-mana pool
 # everyone starts with, after SPELL_MANA_MULTIPLIER.
 SPELL_MANA = {"blood_slash": (25, 5), "devour": (25, 4), "fire_breath": (5, 1), "haste": (50, 10), "invisibility": (35, 8), "planar_sight": (150, 50), "summon_horse": (50, 2), "arrow_volley": (40, 10), "ball_lightning": (20, 4), "blessing_of_life": (10, 5), "blizzard": (40, 10), "blood_step": (30, 10), "chain_lightning": (25, 7), "cone_of_cold": (5, 1), "counterspell": (50, 1), "earthquake": (50, 10), "echoing_strikes": (50, 10), "electrocute": (3, 1), "evasion": (40, 20), "fang_strike": (30, 3), "fireball": (60, 15), "firebolt": (10, 2), "firefly_swarm": (40, 10), "frost_step": (15, 5), "guiding_bolt": (20, 5), "heal": (30, 15), "healing_circle": (40, 10), "heartstop": (100, 10), "heat_surge": (50, 10), "ice_spikes": (30, 10), "icicle": (10, 2), "lightning_bolt": (75, 15), "lightning_lance": (50, 10), "magma_bomb": (30, 5), "oakskin": (25, 10), "poison_arrow": (40, 5), "raise_dead": (50, 10), "ray_of_siphoning": (8, 1), "root": (45, 3), "shield": (35, 5), "sunbeam": (40, 10), "teleport": (20, 5), "wither_skull": (20, 2), "acid_orb": (40, 10),
@@ -152,8 +151,8 @@ SPELL_MANA = {"blood_slash": (25, 5), "devour": (25, 4), "fire_breath": (5, 1), 
               "frostwave": (50, 5), "ray_of_frost": (25, 15), "ice_block": (40, 10), "frostbite": (80, 10), "acupuncture": (25, 5),
               "slow": (50, 10), "gust": (30, 5), "scapegoat": (30, 15), "firecracker": (20, 2), "summon_polar_bear": (50, 10),
               "gluttony": (35, 0), "fire_arrow": (40, 5), "blight": (60, 20), "poison_splash": (40, 10), "spider_aspect": (35, 5),
-              "divine_smite": (30, 15), "throw": (10, 5), "lob_creeper": (20, 2), "chain_creeper": (40, 10), "ascension": (50, 1),
-              "touch_dig": (15, 0), "fang_ward": (45, 5), "fang_swirl": (55, 8), "spectral_hammer": (15, 5)}
+              "divine_smite": (30, 15), "throw": (10, 5), "lob_creeper": (20, 2), "chain_creeper": (40, 10),
+              "touch_dig": (15, 0)}
 BASE_MANA = 100
 # Balance policy for every spell the trees grant (written as Iron's per-spell config, data/irons_spellbooks/
 # irons_spellbooks_spell_config/): mana costs 40% lower, cooldowns 50% longer (at least 3 s) so spells are cheap to cast
@@ -165,13 +164,12 @@ SPELL_COOLDOWN_MIN = 3
 SPELL_COOLDOWN_KEEP = 120
 # Iron's default cooldown (seconds) of each spell used.
 SPELL_COOLDOWN = {
-                         "acid_orb": 15, "acupuncture": 20, "angel_wing": 120, "arrow_volley": 15, "ascension": 15,
-                         "ball_lightning": 1, "blaze_storm": 20, "blessing_of_life": 10, "blight": 90, "blizzard":
+                         "acid_orb": 15, "acupuncture": 20, "angel_wing": 120, "arrow_volley": 15, "ball_lightning": 1, "blaze_storm": 20, "blessing_of_life": 10, "blight": 90, "blizzard":
                          22, "blood_needles": 10, "blood_slash": 10, "blood_step": 12, "burning_dash": 10,
                          "chain_creeper": 15, "chain_lightning": 20, "charge": 40, "cleanse": 60,
                          "cloud_of_regeneration": 35, "cone_of_cold": 12, "counterspell": 10, "devour": 20,
                          "divine_smite": 15, "earthquake": 16, "echoing_strikes": 60, "electrocute": 12, "evasion":
-                         180, "fang_strike": 5, "fang_swirl": 28, "fang_ward": 15, "fire_arrow": 8, "fire_breath":
+                         180, "fang_strike": 5, "fire_arrow": 8, "fire_breath":
                          12, "fireball": 25, "firebolt": 1, "firecracker": 1.5, "firefly_swarm": 20,
                          "flaming_strike": 15, "fortify": 180, "frost_step": 12, "frostbite": 60, "frostwave": 45,
                          "gluttony": 90, "greater_heal": 45, "guiding_bolt": 8, "gust": 12, "haste": 80, "heal": 30,
@@ -180,7 +178,7 @@ SPELL_COOLDOWN = {
                          "lob_creeper": 2, "magma_bomb": 12, "oakskin": 90, "planar_sight": 200, "poison_arrow": 15,
                          "poison_splash": 20, "raise_dead": 150, "raise_hell": 25, "ray_of_frost": 15,
                          "ray_of_siphoning": 15, "root": 35, "sacrifice": 1, "scapegoat": 45, "scorch": 12,
-                         "shield": 8, "shockwave": 30, "slow": 80, "spectral_hammer": 2, "spider_aspect": 90,
+                         "shield": 8, "shockwave": 30, "slow": 80, "spider_aspect": 90,
                          "stomp": 16, "summon_horse": 20, "summon_polar_bear": 180, "summon_vex": 150, "sunbeam":
                          20, "teleport": 6, "throw": 8, "thunderstorm": 120, "touch_dig": 0.5, "volt_strike": 10,
                          "wall_of_fire": 30, "wisp": 3, "wither_skull": 1}
@@ -489,7 +487,7 @@ ARCHETYPES = {
                                [technique("mdvlcraft:follow_up_kick", 3, "minecraft:leather_boots", note="Projection Sorcery. Sneak and cast to switch between the Normal and Flow forms."),
                                 technique("mdvlcraft:projection_dash", 4, "minecraft:clock", note="Projection Sorcery. Hold to dash, always at full output; sneak and cast to switch Tracing and Continuous. Naobito's style.")],
                                [efskill("step", 2), efskill("catharsis", 3)]]),
-    "scout": dict(desc="Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Ascension's lightning leap, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, and Touch Dig tunnels through anything.", cls="rogue", title="Scout",
+    "scout": dict(desc="Speed, range and awareness. Scouts swim faster, hit harder with tridents, break through terrain, resist ender magic and empower ender spells. Teleport, Haste, Gust, Phantom Ascent's mid-air jumps and Planar Sight let them reach, flee and see what others cannot, and Touch Dig tunnels through anything.", cls="rogue", title="Scout",
                   blurb="Mobility, ender magic and far sight.",
                   root=dict(title="Pathfinder", attribute="forge:swim_speed", value=0.10),
                   signature=[chain("forge:swim_speed", "Current", 0.10, 2, 0.10),
@@ -501,7 +499,7 @@ ARCHETYPES = {
                              [spell("haste", 2, 2, "minecraft:sugar"), spell("planar_sight", 1, 3, "minecraft:spyglass")],
                              [spell("gust", 3, 2, "minecraft:feather")],
                              [efskill("phantom_ascent", 3)],
-                             [spell("ascension", 3, 2, "minecraft:lightning_rod"), spell("touch_dig", 2, 2, "minecraft:iron_pickaxe")]]),
+                             [spell("touch_dig", 2, 2, "minecraft:iron_pickaxe")]]),
     "thief": dict(desc="Luck and loot. Thieves gain luck, double drops, extra Fortune, longer reach, cheaper anvil repairs and a cutthroat's sword arm. Boogie Woogie claps swap places with creatures or blocks to confuse fights, Lob Creeper and Chain Creeper blow open a fight, Scapegoat and Firecracker cover a getaway, and Emergency Escape dodges out of any hit.", cls="rogue", title="Thief",
                   blurb="Luck, plunder and Boogie Woogie swaps.",
                   root=dict(title="Light Fingers", attribute="minecraft:generic.luck", value=1),
@@ -516,7 +514,7 @@ ARCHETYPES = {
                              [spell("scapegoat", 2, 2, "minecraft:lead"), spell("firecracker", 3, 2, "minecraft:firework_rocket")],
                              [efskill("emergency_escape", 3)],
                              [spell("lob_creeper", 3, 2, "minecraft:tnt"), spell("chain_creeper", 2, 2, "minecraft:creeper_head")]]),
-    "wanderer": dict(desc="Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, Fang Ward and Fang Swirl ring you with evoker fangs, Spectral Hammer clears the way, and Adrenaline Fiend gets you back on your feet after every kill.", cls="ranger", title="Wanderer",
+    "wanderer": dict(desc="Built for long journeys. Food lasts longer, mounts run faster, pets and horses hit harder and survive longer, and you step up full blocks. Summon Horse, Summon Polar Bear, Gluttony and Counterspell keep the road open, and Adrenaline Fiend gets you back on your feet after every kill.", cls="ranger", title="Wanderer",
                      blurb="Long journeys: food, sure footing and a loyal horse.",
                      root=dict(title="Long Road", attribute="mdvlcraft:saturation_bonus", value=0.10),
                      signature=[chain("mdvlcraft:saturation_bonus", "Provisions", 0.10, 3, 0.20),
@@ -527,13 +525,11 @@ ARCHETYPES = {
                      abilities=[[spell("summon_horse", 3, 2, "minecraft:saddle"), spell("summon_horse", 5, 2, "minecraft:golden_carrot", "Trusted Steed (Summon Horse V)")],
                                 [spell("counterspell", 1, 3, "minecraft:barrier")],
                                 [spell("summon_polar_bear", 3, 2, "minecraft:snow_block"), spell("gluttony", 1, 2, "minecraft:cooked_porkchop")],
-                                [efskill("adrenaline_fiend", 3)],
-                                [spell("fang_ward", 3, 2, "minecraft:emerald"), spell("fang_swirl", 3, 2, "minecraft:totem_of_undying")],
-                                [spell("spectral_hammer", 3, 2, "minecraft:iron_pickaxe")]]),
+                                [efskill("adrenaline_fiend", 3)]]),
     "stalker": dict(desc="Bows and crossbows. Ranged damage, arrow and bolt speed and evocation power make every shot count. Arrow Volley rains arrows on a whole area, Poison Arrow leaves a lingering toxic cloud, Fire Arrow burns, and Revelation turns well-timed defence into a stunning counter.", cls="ranger", title="Stalker",
                     blurb="Bows, crossbows, arrow volleys and poison arrows.",
-                    root=dict(title="Hunter's Eye", attribute="puffish_attributes:ranged_damage", value=0.05),
-                    signature=[chain("puffish_attributes:ranged_damage", "Aim", 0.05, 4, 0.10),
+                    root=dict(title="Hunter's Eye", attribute="puffish_attributes:ranged_damage", value=0.03),
+                    signature=[chain("puffish_attributes:ranged_damage", "Aim", 0.03, 4, 0.06),
                                chain("puffish_attributes:bow_projectile_speed", "Longbow", 0.05, 2, 0.10),
                                chain("puffish_attributes:crossbow_projectile_speed", "Arbalest", 0.05, 2, 0.10),
                                chain("irons_spellbooks:evocation_spell_power", "Fletcher's Art", 0.03, 3, 0.06)],
