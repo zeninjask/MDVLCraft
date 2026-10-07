@@ -1,21 +1,69 @@
-# MDVLCraft — Mod List (v1.9.0)
+# MDVLCraft — Mod List (v1.9.1)
 
-Importable pack: [`MDVLCraft-1.9.0.zip`](MDVLCraft-1.9.0.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
+Importable pack: [`MDVLCraft-1.9.1.zip`](MDVLCraft-1.9.1.zip) — CurseForge format, **Minecraft 1.20.1 / Forge 47.4.10**.
 
 v1.1.0 = every mod from your **MDVL** pack merged into MDVLCraft v1.0.0 (newer version kept where both had the mod), plus your MDVL configs/KubeJS folder and the new **MDVLCraft Binder** mod.
 
-**168 files**: 155 CurseForge entries in `manifest.json` (154 mods + the BD&Hill resource pack from MDVL) and 13 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.7.1, and eleven mods CurseForge doesn't host in the exact tested version). The zip holds every mod, like the test pack below.
+**169 files**: 156 CurseForge entries in `manifest.json` (155 mods + the BD&Hill resource pack from MDVL) and 13 jars in `overrides/mods` (EpicFight-Ponder, MDVLCraft Binder 0.7.1, and eleven mods CurseForge doesn't host in the exact tested version). The zip holds every mod, like the test pack below.
 
 **Modrinth packs** (same version, for the Modrinth App, Prism Launcher or any `.mrpack` installer):
 | File | Contents |
 |---|---|
-| [`MDVLCraft-1.9.0-test.mrpack`](MDVLCraft-1.9.0-test.mrpack) | Every mod (167): the client-only, server-only and both-sides mods together, for single-player and testing. Same configs, KubeJS and resource pack as the client pack |
-| [`MDVLCraft-1.9.0-client.mrpack`](MDVLCraft-1.9.0-client.mrpack) | Players joining a server: the 152 client-only and both-sides mods (the 15 server-only mods are left out), the BD&Hill resource pack, configs, KubeJS and default configs. Java arguments can't be stored in a `.mrpack`; the pack puts `MDVLCraft-Java-Arguments.txt` in the instance folder with the memory (8 GB) and JVM line to paste into the launcher |
-| [`MDVLCraft-1.9.0-server.mrpack`](MDVLCraft-1.9.0-server.mrpack) | A dedicated server: the 139 server-only and both-sides mods (the 28 client-only mods are left out), the same configs and default configs, and `user_jvm_args.txt` (8 GB, Aikar's flags), which Forge's `run.sh`/`run.bat` read. Install Forge 47.4.10 server first, or use an installer such as `mrpack-install` with the Forge server already in the folder. Distant Horizons is on the server too, so it can generate distant terrain for players |
+| [`MDVLCraft-1.9.1-test.mrpack`](MDVLCraft-1.9.1-test.mrpack) | Every mod (168): the client-only, server-only and both-sides mods together, for single-player and testing. Same configs, KubeJS and resource pack as the client pack |
+| [`MDVLCraft-1.9.1-client.mrpack`](MDVLCraft-1.9.1-client.mrpack) | Players joining a server: the 152 client-only and both-sides mods (the 16 server-only mods are left out), the BD&Hill resource pack, configs, KubeJS and default configs. Java arguments can't be stored in a `.mrpack`; the pack puts `MDVLCraft-Java-Arguments.txt` in the instance folder with the memory (8 GB) and JVM line to paste into the launcher |
+| [`MDVLCraft-1.9.1-server.mrpack`](MDVLCraft-1.9.1-server.mrpack) | A dedicated server: the 140 server-only and both-sides mods (the 28 client-only mods are left out), the same configs and default configs, and `user_jvm_args.txt` (8 GB, Aikar's flags), which Forge's `run.sh`/`run.bat` read. Install Forge 47.4.10 server first, or use an installer such as `mrpack-install` with the Forge server already in the folder. Distant Horizons is on the server too, so it can generate distant terrain for players |
 
 Mods hosted on Modrinth download from Modrinth; the files only on CurseForge download from CurseForge's CDN, with their hashes checked against the tested jars. The binder and EpicFight-Ponder are hosted nowhere, so they are inside the packs. Prism Launcher asks once to confirm the non-Modrinth files. Verified: the client and server packs list exactly the mods the test client and test server ran, the test pack is exactly both together, and that client joined that server.
 
 The BD&Hill resource pack is installed but, as before, off until you turn it on in *Options → Resource Packs*. With it on, the binder adds its own small fix pack so BD&Hill's 3D Uchigatana sits in the hand.
+
+## v1.9.1 changes
+| Change | Notes |
+|---|---|
+| Added: Sparse Structures 3.0 (server) | Spreads structures out so the world isn't cluttered. Every structure set in the pack (58: vanilla, YUNG's, Cataclysm, Iron's, Cursed Fate, aleki's ships) was given a factor in `config/sparsestructures.json5`; spacing and separation are multiplied by it. Table below |
+| Fast Noise is why AntiXray crashed | Fast Noise's own page: "Anti-Xray is incompatible for now, as it needs to put extra data in minecraft block storage, which breaks fastnoise". That matches the 1.9.0 crash. AntiXray stays out; it could come back only without Fast Noise (slower world generation) |
+
+### Structure spacing (Sparse Structures)
+Default factor **1.5** (about 44% as many). Villages and anything already 50+ chunks apart or needed for progression stay at **1**. Mid-sized structures 40–60 chunks apart get **1.25** (about 65%). The small, frequent clutter gets **2** (a quarter as many).
+
+| Factor | Structure sets |
+|---|---|
+| 1 (unchanged) | Villages, woodland mansions, ancient cities, end cities, bastions, YUNG's nether fortresses, strongholds and ocean monuments, Cataclysm's boss structures (Acropolis, Ancient Factory, Burning Arena, Cursed Pyramid, Frosted Prison, Soul Blacksmith, Sunken City), Iron's Catacombs, Citadel, Evoker Fort, Ice Spider Den, Impaled Icebreaker, Pyromancer Tower, Cursed Fate's Gege Tree |
+| 1.25 | Cataclysm Ruined Citadel, Iron's Mountain Tower, Cursed Fate Graveyard, Fingerbox and Mummy's Temple, YUNG's skeleton/spider/zombie dungeons, witch circles, pillager outposts |
+| 1.5 (default) | YUNG's desert and jungle temples, witch huts and small dungeons, igloos, trail ruins, Cataclysm abandoned and desert structures and amethyst nests, Iron's Ancient Battleground |
+| 2 | Ruined portals, shipwrecks, ocean ruins, aleki's unfinished rowboats and sloops, Iron's mangrove huts |
+
+Villages stay at vanilla spacing on purpose: Villager Recruits treats villages closer than 320 blocks as one (`naturalVillageMinDistance = 320`), and its village separation of 20 chunks is exactly that distance; Sparse Structures scales spacing and separation together, so a factor below 1 would put villages inside each other's 320 blocks. YUNG's mods already turn off the vanilla versions they replace (desert and jungle temples, witch huts, ocean monuments, nether fortresses, mineshafts).
+
+### Config fixes and performance
+| File | Change |
+|---|---|
+| `streamsreflowing-common.toml` | customBanks=false, allWaterBanks=0, bankFeatures=1, allWaterFlora=0 (WWOO keeps its own river/lake/ocean banks and plants) |
+| `servercore/config.yml` | spawn chunks not kept loaded; players can't move into unloaded chunks (no lag spike); items merge within 1.5 blocks, xp orbs 2; villagers stuck in 1x1 tick less; breeding cap on (32 of one type within 64 blocks). Activation range and dynamic view distance stay OFF (they would freeze recruit armies and bosses, and fight Distant Horizons) |
+| `servercore/optimizations.yml` | fast-biome-lookups, cancel-duplicate-fluid-ticks on |
+| `structure_layout_optimizer.jsonc` | deduplicateShuffledTemplatePoolElementList=true (faster jigsaw structures: Epic Structures cities, Recruits villages; only changes layouts vs vanilla seeds) |
+| `DistantHorizons.toml` | auto-updater off (it would replace the tested DH jar); garbage-collector chat/log warning off (the pack's flags use G1 on purpose); LOD render distance 256 -> 128 chunks (players can raise it in the DH menu); numberOfThreads (10, from one PC) and serverId (shared by every server made from the pack) removed so DH sets them per machine / per server |
+| Shipped config clean-up | removed embeddium-fingerprint.json (one PC fingerprint), config/epicfight/native/ServerCommunicationHelper.dll (Epic Fight extracts its own matching DLL), 14 Ares HUD .bak files |
+| `map_atlases-client.toml` | atlas minimap anchored top-right (it sat under Xaero's minimap in the top-left; Map Atlases already shifts down for potion icons there) |
+| `aaa_particles_world-client.toml` | visual-only swamp fireflies off (Naturalist now adds real fireflies there) |
+| `aaa_particles-client.toml` | gc.enabled = true (frees Effekseer effects when the PC runs low on memory) |
+| `sodiumdynamiclights-client.toml` | REALTIME -> FAST (held-torch light updates a few times a second instead of every frame; big FPS saving) |
+| `lendersdelight-common.toml` | enableStat=false (Cataclysm Delight's dishes permanently stacked stats up to +20 armour, +20 attack damage, +20 regen; the dishes keep their normal food effects) |
+| `streamsreflowing-client.toml` | maxStreamParticlesPerTick 1000 -> 400, streamParticleScanRadius 256 -> 96 (the mod's two main client-FPS dials; waterfalls still spray out to 96 blocks) |
+| Update checkers off (Villager Recruits client + server, village_recruits general.toml, Oculus update message) | in a pack they tell players to update single mods, which would break the tested set |
+| `vanillabackport-client.toml` | falling_leaves=false (Vanilla Backport's 1.21 leaf particles doubled up with the Falling Leaves mod) |
+| `fml.toml` | versionCheck=false (Forge's own update check at startup) |
+| `entityculling.json` | 56 effect/boss entities never culled (Cataclysm beams, storms and bosses, Cursed Fate domains and shrines, Iron's beams/breaths/AoEs, Nightfall slashes, Sword Soaring storm) and aleki's ships, their parts and Cursed Fate domains kept ticking when out of view (the mod's page warns magic-mod entities and large models get wrongly hidden) |
+
+### Checked, no change
+| What | Why |
+|---|---|
+| Kill Cam and Epic Fight Nightfall slow-motion | Both only slow time in single-player (they check the player count and refuse on a dedicated server), so they never slow a multiplayer server |
+| ServerCore activation range and dynamic settings | Left off: activation range would freeze Villager Recruits armies and bosses away from players, and dynamic view distance would fight Distant Horizons |
+| ModernFix and FerriteCore options that are off by default | Left off: their own files mark them as compatibility risks (dynamic resources, dynamic entity renderers, faster item rendering, small threading detector) |
+| Particle Rain + AmbientSounds | Particle Rain plays snowstorm and sandstorm loops and sets the vanilla rain volume; AmbientSounds plays wind, wildlife and cave ambience. Different sounds, no shared code |
+| Serene Seasons + Distant Horizons (known issue) | Far terrain from Distant Horizons keeps the colours it was generated with when the season changes. The only fix, "Serene Seasons X Distant Horizons Backport" 0.1.0-ALPHA, registers leftover template blocks and items and its refresh couldn't be confirmed, so it was left out |
+| Simple Voice Chat | Needs UDP port 24454 open on the server (`voicechat-server.properties`) |
 
 ## v1.9.0 changes
 1.8.1 was never built; its changes ship in 1.9.0.
@@ -34,7 +82,7 @@ The BD&Hill resource pack is installed but, as before, off until you turn it on 
 | Added: Naturalist 5.0pre4 | Both. Wildlife: bears, deer, birds, snakes, lions, alligators and more (GeckoLib already in the pack). The newest Forge 1.20.1 build on Modrinth; 5.0 has only pre-release builds |
 | Added: Farmer's Delight compat add-ons | Epic Fight × Farmer's Delight 1.0.0 (knives, cleavers and the skillet get Epic Fight weapon movesets, like every other weapon in the pack); L_Ender's Cataclysm Delight 1.0.10b (dishes from Cataclysm boss and mob drops). No add-on exists for the pack's other mods. The "No More Naturalist Cooked Egg" add-on needs an extra item-viewer mod, so the pack does its job in KubeJS instead (below) |
 | Compat: KubeJS `server_scripts/mdvlcraft_compat.js` | Naturalist's cooked egg and Farmer's Delight's fried egg were both smelted from an egg, so the furnace result was unpredictable: Naturalist's three egg recipes are removed (Farmer's Delight's fried egg is what its own meals use). Serene Seasons doesn't know Farmer's Delight's crops (they would grow all year): cabbages and onions now grow in spring and autumn, tomatoes and rice in summer |
-| Sound mods checked together | AmbientSounds, Particle Rain, Reactive Music, Sound Physics Remastered and Simple Voice Chat: no two patch the same sound code (Reactive Music patches `MusicManager` and `SoundManager.play`; Sound Physics `SoundEngine` and `ChannelAccess`; AmbientSounds and Particle Rain none) and Particle Rain adds no sounds. The one overlap is music: Reactive Music plays its own songs outside the game's music system, so boss and event music from other mods would play on top of it. `config/ReactiveMusic.json5` lists those sounds so Reactive Music goes quiet while they play: L_Ender's Cataclysm boss music, Iron's Dead King and Fire Boss music, Cursed Fate's shrine and jackpot music, Villager Recruits' battle and village music |
+| Sound mods checked together | AmbientSounds, Particle Rain, Reactive Music, Sound Physics Remastered and Simple Voice Chat: no two patch the same sound code (Reactive Music patches `MusicManager` and `SoundManager.play`; Sound Physics `SoundEngine` and `ChannelAccess`; AmbientSounds and Particle Rain none). Particle Rain sets the vanilla rain volume and adds snowstorm and desert sandstorm loops; AmbientSounds adds wind, wildlife and cave ambience, so they layer rather than repeat (1.9.0 said Particle Rain adds no sounds; that was wrong). The one overlap is music: Reactive Music plays its own songs outside the game's music system, so boss and event music from other mods would play on top of it. `config/ReactiveMusic.json5` lists those sounds so Reactive Music goes quiet while they play: L_Ender's Cataclysm boss music, Iron's Dead King and Fire Boss music, Cursed Fate's shrine and jackpot music, Villager Recruits' battle and village music |
 | Removed again: AntiXray | It crashes a client ~10 s after joining ("Missing Palette entry", the chunk data it sends doesn't match its palette), whether it is on the server only or on both sides; without it the same client stays connected. Mod Whitelist still blocks known x-ray and freecam mods |
 | Added: William Wythers' Overhauled Overworld 2.0.0 | Reworked vanilla overworld biomes (vegetation, rocks, features). Checked against every jar in the pack: the only file another mod also overrides is `dimension_type/overworld.json` (Tectonic); both give the same world height, and Tectonic's copy loads after WWOO's, so Tectonic's (piglins still zombify in the overworld) is the one used. Licence CC BY-NC-ND 4.0: ships unmodified in the CurseForge zip's overrides, the Modrinth packs download it from Modrinth |
 | Added: Mod Whitelist 1.1.0 (client and server) | Used in place of ClientID, which needs a Paper/Spigot server plugin and Fabric on the client. Each client sends its mod list; the server kicks anyone missing Mod Whitelist or running a blacklisted mod. `config/mod_whitelist-config.json` blacklists hacked clients (Aristois, BleachHack, Meteor, Wurst, Impact, Inertia, LiquidBounce, RusherHack, Future), freecam mods and x-ray / ore-finder mods; none of the pack's own mod IDs are on it |
@@ -140,7 +188,7 @@ Same 142 files as v1.3.0, with the binder updated to **0.3.0**:
 | Added: MDVLCraft Binder 0.1.0 | Pack glue mod built from `binder/` (see binder/README.md) |
 
 ## Server notes
-The server `.mrpack` leaves out the 28 client-only mods: the four below, which crash a dedicated server, and 24 that Modrinth lists as unsupported on servers (Embeddium and its add-ons, Entity Culling, ImmediatelyFast, tooltip, HUD and menu mods, Mouse Tweaks, chat heads, PonderJS, AmbientSounds, Particle Rain, Reactive Music, Falling Leaves and others; the Side column of the mod list below). The client `.mrpack` leaves out the 15 server-only mods. A client from the client pack joins a server from the server pack. The CurseForge zip holds every mod; for a dedicated server from it, remove at least these **client-only** mods from the server's `mods` folder — each was verified to crash the server (it loads client-only classes). Players keep them.
+The server `.mrpack` leaves out the 28 client-only mods: the four below, which crash a dedicated server, and 24 that Modrinth lists as unsupported on servers (Embeddium and its add-ons, Entity Culling, ImmediatelyFast, tooltip, HUD and menu mods, Mouse Tweaks, chat heads, PonderJS, AmbientSounds, Particle Rain, Reactive Music, Falling Leaves and others; the Side column of the mod list below). The client `.mrpack` leaves out the 16 server-only mods. A client from the client pack joins a server from the server pack. The CurseForge zip holds every mod; for a dedicated server from it, remove at least these **client-only** mods from the server's `mods` folder — each was verified to crash the server (it loads client-only classes). Players keep them.
 
 | Mod | Evidence |
 |---|---|
@@ -148,6 +196,16 @@ The server `.mrpack` leaves out the 28 client-only mods: the four below, which c
 | Better Lock On | common mixin `LocalPlayerPatchMixin` pulls in `LocalPlayer` |
 | Dynamic Crosshair | `DynamicCrosshairBaseBlock` mixin into `Block` references `LocalPlayer` |
 | Legendary Tooltips | `LegendaryTooltipsConfig.<init>` loads `LocalPlayer` |
+
+## Test results (v1.9.1)
+| Check | Result |
+|---|---|
+| Client pack joins server pack | The 152-mod client joined the 140-mod server (Sparse Structures and every config change above in place) and stayed connected; `list` showed the player at the end |
+| Sparse Structures | Loaded with the pack's config; nearest shipwreck from spawn 690 blocks, nearest village 1,918 blocks (villages unchanged; this seed's spawn area has few village biomes) |
+| Distant Horizons | With `numberOfThreads` and `serverId` removed, DH wrote its own values on each side (2 threads on the 4-core test machine; a different server ID for client and server) |
+| KubeJS, Serene Seasons | `season set mid_autumn` turned the foliage autumn red |
+| Entity Culling | Every whitelisted ID was checked against the server's entity registry (`kubejs dump_registry`, 723 entity types) |
+| Packs | Each `.mrpack`'s mods equal its tested folder (test = both), every hash equals the tested jar; the shipped configs no longer contain the Embeddium fingerprint, Epic Fight's DLL or Ares HUD backups |
 
 ## Test results (v1.9.0)
 | Check | Result |
@@ -387,35 +445,36 @@ Side: **client** = client and test packs only, **server** = server and test pack
 | 137 | [Sodium/Embeddium Dynamic Lights](https://www.curseforge.com/minecraft/mc-mods/dynamiclights-reforged) | client | MDVLCraft | `sodiumdynamiclights-forge-1.0.10-1.20.1.jar` |
 | 138 | [Sound Physics Remastered](https://www.curseforge.com/minecraft/mc-mods/sound-physics-remastered) | both | MDVL | `sound-physics-remastered-forge-1.20.1-1.5.1.jar` |
 | 139 | [spark](https://www.curseforge.com/minecraft/mc-mods/spark) | both | both | `spark-1.10.53-forge.jar` |
-| 140 | [Streams Reflowing](https://www.curseforge.com/minecraft/mc-mods/streams-reflowing) | both | MDVL | `StreamsReflowing-1.20.1-forge-2.13.8.jar` |
-| 141 | [Structure Layout Optimizer](https://www.curseforge.com/minecraft/mc-mods/structure-layout-optimizer) | server | MDVLCraft | `structure_layout_optimizer-forge-1.0.11.jar` |
-| 142 | [Tax Free Levels](https://www.curseforge.com/minecraft/mc-mods/tax-free-levels) | both | MDVL | `TaxFreeLevels-1.4.25-forge-1.20.1.jar` |
-| 143 | [Tectonic](https://www.curseforge.com/minecraft/mc-mods/tectonic) | both | MDVL | `tectonic-3.0.17-forge-1.20.1.jar` |
-| 144 | [TerraBlender (Forge)](https://www.curseforge.com/minecraft/mc-mods/terrablender) | both | MDVL | `TerraBlender-forge-1.20.1-3.0.1.10.jar` |
-| 145 | [TuDiGong : Wayfinder](https://www.curseforge.com/minecraft/mc-mods/tudigong-wayfinder) | both | MDVL | `tudigong-forge1.20.1-1.4.1.jar` |
-| 146 | [Vanilla Backport](https://www.curseforge.com/minecraft/mc-mods/vanillabackport) | both | MDVL | `VanillaBackport-forge-1.20.1-1.1.7.10.jar` |
-| 147 | [Villager Recruits: Claim and Siege Update!](https://www.curseforge.com/minecraft/mc-mods/recruits) | both | both | `recruits-1.20.1-1.15.2.jar` |
-| 148 | [Villager Recruits: Village Expansion](https://www.curseforge.com/minecraft/mc-mods/villager-recruits-village-expansion) | both | MDVL | `village_recruits-1.0.7.93TC-205.jar` |
-| 149 | [Villager Workers 2](https://www.curseforge.com/minecraft/mc-mods/workers) | both | MDVL | `workers-1.20.1-2.0.3.jar` |
-| 150 | [Weapons of Miracles - epic fight](https://www.curseforge.com/minecraft/mc-mods/weapons-of-miracles-epicfight) | both | both (updated from `WeaponsOfMiracles-2.0.15-mc1.20.1-forge.jar`) | `WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar` |
-| 151 | [What Are They Up To (Watut)](https://www.curseforge.com/minecraft/mc-mods/what-are-they-up-to) | both | MDVL | `watut-forge-1.20.1-1.2.3.jar` |
-| 152 | [William Wythers' Overhauled Overworld](https://modrinth.com/mod/wwoo) | both | added in v1.9.0 | `WWOO-FABRIC+FORGE+QUILT-2.0.0.jar` |
-| 153 | [Xaero's Minimap](https://www.curseforge.com/minecraft/mc-mods/xaeros-minimap) | both | MDVL | `xaerominimap-forge-1.20.1-26.6.0.jar` |
-| 154 | [Xaero's World Map](https://www.curseforge.com/minecraft/mc-mods/xaeros-world-map) | both | MDVL | `xaeroworldmap-forge-1.20.1-1.47.0.jar` |
-| 155 | [You Died](https://www.curseforge.com/minecraft/mc-mods/you-died) | client | MDVL | `YouDied-1.20-3.0.0.17-forge.jar` |
-| 156 | [YUNG's API (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-api) | both | added in v1.6.0 | `YungsApi-1.20-Forge-4.0.6.jar` |
-| 157 | [YUNG's Better Desert Temples (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-desert-temples) | server | added in v1.6.0 | `YungsBetterDesertTemples-1.20-Forge-3.0.3.jar` |
-| 158 | [YUNG's Better Dungeons (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-dungeons) | server | added in v1.6.0 | `YungsBetterDungeons-1.20-Forge-4.0.4.jar` |
-| 159 | [YUNG's Better End Island (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-end-island) | server | added in v1.6.0 | `YungsBetterEndIsland-1.20-Forge-2.0.6.jar` |
-| 160 | [YUNG's Better Jungle Temples (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-jungle-temples) | server | added in v1.6.0 | `YungsBetterJungleTemples-1.20-Forge-2.0.5.jar` |
-| 161 | [YUNG's Better Mineshafts (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-mineshafts-forge) | server | added in v1.6.0 | `YungsBetterMineshafts-1.20-Forge-4.0.4.jar` |
-| 162 | [YUNG's Better Nether Fortresses (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-nether-fortresses) | server | added in v1.6.0 | `YungsBetterNetherFortresses-1.20-Forge-2.0.6.jar` |
-| 163 | [YUNG's Better Ocean Monuments (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-ocean-monuments) | server | added in v1.6.0 | `YungsBetterOceanMonuments-1.20-Forge-3.0.4.jar` |
-| 164 | [YUNG's Better Strongholds (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-strongholds) | server | added in v1.6.0 | `YungsBetterStrongholds-1.20-Forge-4.0.3.jar` |
-| 165 | [YUNG's Better Witch Huts (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-witch-huts) | server | added in v1.6.0 | `YungsBetterWitchHuts-1.20-Forge-3.0.3.jar` |
-| 166 | [YUNG's Bridges (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-bridges) | server | added in v1.6.0 | `YungsBridges-1.20-Forge-4.0.3.jar` |
-| 167 | [YUNG's Extras (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-extras) | server | added in v1.6.0 | `YungsExtras-1.20-Forge-4.0.3.jar` |
-| 168 | [【epic fight】BD&Hill Reforge the Sword Edge](https://www.curseforge.com/minecraft/texture-packs/epic-fight-bd-hill-reforge-the-sword-edge) | client (resource pack) | MDVL | `【Released】BDHill Reforge the Sword Edge-2.0_1.20.1.zip` |
+| 140 | [Sparse Structures](https://modrinth.com/mod/sparsestructures) | server | added in v1.9.1 | `sparsestructures-forge-1.20.1-3.0.jar` |
+| 141 | [Streams Reflowing](https://www.curseforge.com/minecraft/mc-mods/streams-reflowing) | both | MDVL | `StreamsReflowing-1.20.1-forge-2.13.8.jar` |
+| 142 | [Structure Layout Optimizer](https://www.curseforge.com/minecraft/mc-mods/structure-layout-optimizer) | server | MDVLCraft | `structure_layout_optimizer-forge-1.0.11.jar` |
+| 143 | [Tax Free Levels](https://www.curseforge.com/minecraft/mc-mods/tax-free-levels) | both | MDVL | `TaxFreeLevels-1.4.25-forge-1.20.1.jar` |
+| 144 | [Tectonic](https://www.curseforge.com/minecraft/mc-mods/tectonic) | both | MDVL | `tectonic-3.0.17-forge-1.20.1.jar` |
+| 145 | [TerraBlender (Forge)](https://www.curseforge.com/minecraft/mc-mods/terrablender) | both | MDVL | `TerraBlender-forge-1.20.1-3.0.1.10.jar` |
+| 146 | [TuDiGong : Wayfinder](https://www.curseforge.com/minecraft/mc-mods/tudigong-wayfinder) | both | MDVL | `tudigong-forge1.20.1-1.4.1.jar` |
+| 147 | [Vanilla Backport](https://www.curseforge.com/minecraft/mc-mods/vanillabackport) | both | MDVL | `VanillaBackport-forge-1.20.1-1.1.7.10.jar` |
+| 148 | [Villager Recruits: Claim and Siege Update!](https://www.curseforge.com/minecraft/mc-mods/recruits) | both | both | `recruits-1.20.1-1.15.2.jar` |
+| 149 | [Villager Recruits: Village Expansion](https://www.curseforge.com/minecraft/mc-mods/villager-recruits-village-expansion) | both | MDVL | `village_recruits-1.0.7.93TC-205.jar` |
+| 150 | [Villager Workers 2](https://www.curseforge.com/minecraft/mc-mods/workers) | both | MDVL | `workers-1.20.1-2.0.3.jar` |
+| 151 | [Weapons of Miracles - epic fight](https://www.curseforge.com/minecraft/mc-mods/weapons-of-miracles-epicfight) | both | both (updated from `WeaponsOfMiracles-2.0.15-mc1.20.1-forge.jar`) | `WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar` |
+| 152 | [What Are They Up To (Watut)](https://www.curseforge.com/minecraft/mc-mods/what-are-they-up-to) | both | MDVL | `watut-forge-1.20.1-1.2.3.jar` |
+| 153 | [William Wythers' Overhauled Overworld](https://modrinth.com/mod/wwoo) | both | added in v1.9.0 | `WWOO-FABRIC+FORGE+QUILT-2.0.0.jar` |
+| 154 | [Xaero's Minimap](https://www.curseforge.com/minecraft/mc-mods/xaeros-minimap) | both | MDVL | `xaerominimap-forge-1.20.1-26.6.0.jar` |
+| 155 | [Xaero's World Map](https://www.curseforge.com/minecraft/mc-mods/xaeros-world-map) | both | MDVL | `xaeroworldmap-forge-1.20.1-1.47.0.jar` |
+| 156 | [You Died](https://www.curseforge.com/minecraft/mc-mods/you-died) | client | MDVL | `YouDied-1.20-3.0.0.17-forge.jar` |
+| 157 | [YUNG's API (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-api) | both | added in v1.6.0 | `YungsApi-1.20-Forge-4.0.6.jar` |
+| 158 | [YUNG's Better Desert Temples (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-desert-temples) | server | added in v1.6.0 | `YungsBetterDesertTemples-1.20-Forge-3.0.3.jar` |
+| 159 | [YUNG's Better Dungeons (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-dungeons) | server | added in v1.6.0 | `YungsBetterDungeons-1.20-Forge-4.0.4.jar` |
+| 160 | [YUNG's Better End Island (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-end-island) | server | added in v1.6.0 | `YungsBetterEndIsland-1.20-Forge-2.0.6.jar` |
+| 161 | [YUNG's Better Jungle Temples (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-jungle-temples) | server | added in v1.6.0 | `YungsBetterJungleTemples-1.20-Forge-2.0.5.jar` |
+| 162 | [YUNG's Better Mineshafts (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-mineshafts-forge) | server | added in v1.6.0 | `YungsBetterMineshafts-1.20-Forge-4.0.4.jar` |
+| 163 | [YUNG's Better Nether Fortresses (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-nether-fortresses) | server | added in v1.6.0 | `YungsBetterNetherFortresses-1.20-Forge-2.0.6.jar` |
+| 164 | [YUNG's Better Ocean Monuments (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-ocean-monuments) | server | added in v1.6.0 | `YungsBetterOceanMonuments-1.20-Forge-3.0.4.jar` |
+| 165 | [YUNG's Better Strongholds (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-strongholds) | server | added in v1.6.0 | `YungsBetterStrongholds-1.20-Forge-4.0.3.jar` |
+| 166 | [YUNG's Better Witch Huts (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-better-witch-huts) | server | added in v1.6.0 | `YungsBetterWitchHuts-1.20-Forge-3.0.3.jar` |
+| 167 | [YUNG's Bridges (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-bridges) | server | added in v1.6.0 | `YungsBridges-1.20-Forge-4.0.3.jar` |
+| 168 | [YUNG's Extras (Forge/NeoForge)](https://www.curseforge.com/minecraft/mc-mods/yungs-extras) | server | added in v1.6.0 | `YungsExtras-1.20-Forge-4.0.3.jar` |
+| 169 | [【epic fight】BD&Hill Reforge the Sword Edge](https://www.curseforge.com/minecraft/texture-packs/epic-fight-bd-hill-reforge-the-sword-edge) | client (resource pack) | MDVL | `【Released】BDHill Reforge the Sword Edge-2.0_1.20.1.zip` |
 
 ## v1.0.0 history
 v1.0.0 was trimmed from **The Casket of Reveries 2.2.9.7**. Decisions from that trim still apply: Sodium → Embeddium on Forge; Accelerated Rendering dropped (needs OpenGL 4.6); TheCasketOfRrveriesBosses and TCR Core removed (pack-specific), with EpicFight-Ponder extracted from TCR Core; LDLib is required by Photon; Cataclysm Dimensions moves Cataclysm boss structures into their own dimensions.
