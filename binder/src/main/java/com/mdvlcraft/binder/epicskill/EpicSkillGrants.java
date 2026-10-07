@@ -26,8 +26,8 @@ import java.util.UUID;
  * Rewards only record grants; once per tick the players whose grants changed (or who just logged in) are brought in
  * line: tree skills they were granted are learned, tree skills they lost are unequipped and forgotten. Skills no tree
  * teaches are left alone. Pufferfish clears every reward when a player logs out, but nothing is synced for offline
- * players, so logging out never forgets or unequips anything. Everyone also knows Roll and Guard, Epic Fight's basic
- * dodge and guard, which are equipped when their slot is empty.
+ * players, so logging out never forgets or unequips anything. Everyone also knows Roll, Step, Guard and Parrying, Epic
+ * Fight's basic dodges and guards; Roll and Guard are equipped when their slot is empty.
  */
 public final class EpicSkillGrants {
     private static final Set<Skill> TREE_SKILLS = new HashSet<>();
@@ -90,7 +90,7 @@ public final class EpicSkillGrants {
                 forget(player, patch, skills, skill);
             }
         }
-        for (Skill basic : new Skill[]{EpicFightSkills.ROLL, EpicFightSkills.GUARD}) {
+        for (Skill basic : new Skill[]{EpicFightSkills.ROLL, EpicFightSkills.STEP, EpicFightSkills.GUARD, EpicFightSkills.PARRYING}) {
             if (!skills.hasLearned(basic)) {
                 learn(player, skills, basic);
             }

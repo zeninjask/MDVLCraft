@@ -6,7 +6,7 @@ How the 16 archetypes compare, what changed to even them out, and what keeps bos
 ## Method
 
 - **What a player can have.** Two archetypes (any classes), 1 point to start and 1 per level with no level cap. Every
-  tree costs about 400–485 points, so a whole tree takes a long time to fill. Balance is about what a tree *offers*, at a
+  tree costs about 400–500 points, so a whole tree takes a long time to fill. Balance is about what a tree *offers*, at a
   similar price.
 - **What was compared.** For each archetype:
   - its signature maximums and its class spokes;
@@ -144,7 +144,7 @@ and crossbows hit from range, out of reach of most counter-attacks.
 - **The new damage stats are archetype-only and capped at +10–25%,** below the existing weapon bonuses: Ranger
   Predator +10%, Thief Sword +25%, Scout Trident +25%.
 - **Points come slowly.** There is no level cap, but each level costs more XP than the last (`25 + 5n`), so filling a
-  tree of 400–485 points takes a long time.
+  tree of 400–500 points takes a long time.
 - **The heaviest hitters now wait:**
   - Shrine: 120 s.
   - Surprise Attack: 15 s.

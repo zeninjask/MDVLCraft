@@ -12,7 +12,7 @@ public final class EpicSkillEvents {
     private EpicSkillEvents() {
     }
 
-    /** Roll and Guard are taught on login even when no tree skill is granted. */
+    /** Roll, Step, Guard and Parrying are taught on login even when no tree skill is granted. */
     @SubscribeEvent
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
         EpicSkillGrants.markDirty((ServerPlayer) event.getEntity());
