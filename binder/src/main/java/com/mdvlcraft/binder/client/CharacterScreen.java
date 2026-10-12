@@ -1,0 +1,444 @@
+package com.mdvlcraft.binder.client;
+
+import com.mdvlcraft.binder.mixin.puffish.SkillsClientModAccessor;
+import com.mdvlcraft.binder.skills.Respec;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import io.redspace.ironsspellbooks.player.ClientMagicData;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.DoubleFunction;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.language.I18n;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.damagesource.CombatRules;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.puffish.skillsmod.client.SkillsClientMod;
+import net.puffish.skillsmod.client.data.ClientCategoryData;
+import yesman.epicfight.client.world.capabilites.entitypatch.player.LocalPlayerPatch;
+import yesman.epicfight.world.capabilities.EpicFightCapabilities;
+import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
+
+public class CharacterScreen extends Screen {
+    private static final int W = 440;
+    private static final int H = 254;
+    private static final ResourceLocation SKY = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/skills/astro_sky.png");
+    private static final ResourceLocation ASTROLABE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/character/astrolabe.png");
+    private static final ResourceLocation CLASSES = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "classes");
+    private static final int NAVY = -267249868;
+    private static final int GOLD = -5600176;
+    private static final int GOLD_FAINT = 1621789776;
+    private static final int HEADING = -2047366;
+    private static final int LABEL = -2693889;
+    private static final int VALUE = -1;
+    private static final int MUTED = -7562556;
+    private static final float REFERENCE_HIT = 10.0F;
+    private final Screen parent;
+    private static Method alArmor;
+    private static Method alProtection;
+    private static boolean alLooked;
+
+    public CharacterScreen(Screen parent) {
+        super(Component.translatable("screen.mdvlcraft.character"));
+        this.parent = parent;
+    }
+
+    @Override
+    protected void init() {
+        float scale = this.scale();
+        int right = Math.round((this.width + 440.0F * scale) / 2.0F);
+        int bottom = Math.round((this.height + 254.0F * scale) / 2.0F);
+        this.addRenderableWidget(
+            new AstroGui.Button(
+                right - 66, bottom - 18, 56, 14, Component.translatable("screen.mdvlcraft.menu.back"), () -> Minecraft.getInstance().setScreen(this.parent)
+            )
+        );
+    }
+
+    private float scale() {
+        return Math.min(1.0F, Math.min((this.width - 16) / 440.0F, (this.height - 16) / 254.0F));
+    }
+
+    @Override
+    public boolean isPauseScreen() {
+        return false;
+    }
+
+    @Override
+    public boolean keyPressed(int key, int scan, int modifiers) {
+        if (AbilityKeys.MENU.matches(key, scan)) {
+            this.onClose();
+            return true;
+        } else {
+            return super.keyPressed(key, scan, modifiers);
+        }
+    }
+
+    @Override
+    public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
+        this.renderBackground(g);
+        LocalPlayer player = Minecraft.getInstance().player;
+        if (player != null) {
+            float scale = this.scale();
+            g.pose().pushPose();
+            g.pose().translate((this.width - 440.0F * scale) / 2.0F, (this.height - 254.0F * scale) / 2.0F, 0.0F);
+            g.pose().scale(scale, scale, 1.0F);
+            this.panel(g);
+            Font font = this.font;
+            g.drawString(font, "✦ " + Component.translatable("screen.mdvlcraft.character").getString(), 10, 8, -2047366, false);
+            g.drawString(font, player.getName(), 22, 26, -1, false);
+            g.fill(10, 37, 430, 38, 1621789776);
+            int left = 18;
+            int mid = 160;
+            int right = 302;
+            int colW = 124;
+            Optional<ClientCategoryData> archetype = highestArchetype();
+            int y = 46;
+            y = this.row(
+                g,
+                left,
+                colW,
+                y,
+                Component.translatable("screen.mdvlcraft.character.level"),
+                archetype.<String>map(a -> String.valueOf(a.getCurrentLevel())).orElse("n/a")
+            );
+            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.class"), className());
+            y += 6;
+            y = this.row(
+                g,
+                left,
+                colW,
+                y,
+                Component.translatable("screen.mdvlcraft.character.experience"),
+                archetype.<String>map(a -> String.valueOf(a.getCurrentExperience())).orElse("n/a")
+            );
+            y = this.row(
+                g,
+                left,
+                colW,
+                y,
+                Component.translatable("screen.mdvlcraft.character.next_level"),
+                archetype.<String>map(a -> String.valueOf(a.getExperienceToNextLevel())).orElse("n/a")
+            );
+            y += 14;
+            y = this.heading(g, left, y, "screen.mdvlcraft.character.attributes");
+            y = this.attr(g, player, left, colW, y, "minecraft:generic.attack_damage", v -> fixed(v, 1));
+            y = this.attr(g, player, left, colW, y, "minecraft:generic.attack_speed", v -> fixed(v, 2));
+            y = this.attr(g, player, left, colW, y, "attributeslib:crit_chance", CharacterScreen::percent);
+            y = this.attr(g, player, left, colW, y, "attributeslib:crit_damage", CharacterScreen::percent);
+            y = this.attr(g, player, left, colW, y, "attributeslib:life_steal", CharacterScreen::percent);
+            y = this.attr(g, player, left, colW, y, "irons_spellbooks:spell_power", CharacterScreen::percent);
+            y = this.attr(g, player, left, colW, y, "irons_spellbooks:cooldown_reduction", v -> signedPercent(v - 1.0));
+            y = this.attr(g, player, left, colW, y, "irons_spellbooks:mana_regen", CharacterScreen::percent);
+            this.attr(g, player, left, colW, y, "minecraft:generic.movement_speed", v -> percent(v / 0.1));
+            int var38 = 46;
+            var38 = this.heading(g, mid, var38, "screen.mdvlcraft.character.base_stats");
+            var38 = this.row(
+                g,
+                mid,
+                colW,
+                var38,
+                Component.translatable("screen.mdvlcraft.character.hp"),
+                fixed(player.getHealth(), 0) + " / " + fixed(player.getMaxHealth(), 0)
+            );
+            var38 = this.row(
+                g,
+                mid,
+                colW,
+                var38,
+                Component.translatable("screen.mdvlcraft.character.mana"),
+                ClientMagicData.getPlayerMana() + " / " + fixed(player.getAttributeValue((Attribute)AttributeRegistry.MAX_MANA.get()), 0)
+            );
+            LocalPlayerPatch patch = EpicFightCapabilities.getLocalPlayerPatch(player);
+            var38 = this.row(
+                g,
+                mid,
+                colW,
+                var38,
+                Component.translatable("screen.mdvlcraft.character.stamina"),
+                patch == null ? "–" : fixed(patch.getStamina(), 0) + " / " + fixed(patch.getMaxStamina(), 0)
+            );
+            var38 += 6;
+            var38 = this.row(
+                g,
+                mid,
+                colW,
+                var38,
+                Component.translatable("screen.mdvlcraft.character.poise"),
+                fixed(player.getAttributeValue((Attribute)EpicFightAttributes.STUN_ARMOR.get()), 1)
+            );
+            this.row(g, mid, colW, var38, Component.translatable("screen.mdvlcraft.character.luck"), fixed(player.getAttributeValue(Attributes.LUCK), 1));
+            g.blit(ASTROLABE, mid - 6, 118, 0.0F, 0.0F, 132, 132, 132, 132);
+            int var45 = 46;
+            var45 = this.heading(g, right, var45, "screen.mdvlcraft.character.attack_power");
+            int weapons = 0;
+
+            for (int slot = 0; slot < 9; slot++) {
+                ItemStack stack = player.getInventory().getItem(slot);
+                if (!stack.isEmpty() && !stack.getAttributeModifiers(EquipmentSlot.MAINHAND).get(Attributes.ATTACK_DAMAGE).isEmpty()) {
+                    double damage = valueWith(player, Attributes.ATTACK_DAMAGE, stack);
+                    double speed = valueWith(player, Attributes.ATTACK_SPEED, stack);
+                    String name = slot + 1 + "  " + stack.getHoverName().getString();
+                    var45 = this.row(g, right, colW, var45, Component.literal(this.font.plainSubstrByWidth(name, colW - 34)), fixed(damage * speed, 1));
+                    weapons++;
+                }
+            }
+
+            if (weapons == 0) {
+                g.drawString(font, Component.translatable("screen.mdvlcraft.character.no_weapons"), right + 4, var45, -7562556, false);
+                var45 += 11;
+            }
+
+            var45 += 8;
+            var45 = this.heading(g, right, var45, "screen.mdvlcraft.character.defence");
+            double armor = player.getAttributeValue(Attributes.ARMOR);
+            double toughness = player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+            var45 = this.row(
+                g,
+                right,
+                colW,
+                var45,
+                Component.translatable("screen.mdvlcraft.character.physical"),
+                fixed(armor, 1) + "  /  " + negation(player, player.damageSources().mobAttack(player))
+            );
+            var45 = this.row(g, right, colW, var45, Component.translatable("screen.mdvlcraft.character.toughness"), fixed(toughness, 1));
+            var45 = this.row(
+                g,
+                right,
+                colW,
+                var45,
+                Component.translatable("screen.mdvlcraft.character.projectile"),
+                negation(player, player.damageSources().arrow(null, null))
+            );
+            var45 = this.row(
+                g, right, colW, var45, Component.translatable("screen.mdvlcraft.character.fire"), negation(player, player.damageSources().onFire())
+            );
+            var45 = this.row(
+                g,
+                right,
+                colW,
+                var45,
+                Component.translatable("screen.mdvlcraft.character.blast"),
+                negation(player, player.damageSources().explosion(null, null))
+            );
+            var45 = this.row(g, right, colW, var45, Component.translatable("screen.mdvlcraft.character.fall"), negation(player, player.damageSources().fall()));
+            var45 = this.attr(g, player, right, colW, var45, "minecraft:generic.knockback_resistance", CharacterScreen::percent);
+            this.attr(g, player, right, colW, var45, "attributeslib:dodge_chance", CharacterScreen::percent);
+            g.fill(10, 232, 430, 233, 1621789776);
+            g.drawString(
+                font, Component.translatable("screen.mdvlcraft.character.footer", AbilityKeys.MENU.getTranslatedKeyMessage()), 14, 239, -7562556, false
+            );
+            g.pose().popPose();
+            super.render(g, mouseX, mouseY, partialTick);
+        }
+    }
+
+    private void panel(GuiGraphics g) {
+        g.fill(0, 0, 440, 254, -267249868);
+
+        for (int x = 0; x < 440; x += 128) {
+            for (int y = 0; y < 254; y += 128) {
+                g.blit(SKY, x, y, 0.0F, 0.0F, Math.min(128, 440 - x), Math.min(128, 254 - y), 128, 128);
+            }
+        }
+
+        g.fill(0, 0, 440, 1, -5600176);
+        g.fill(0, 253, 440, 254, -5600176);
+        g.fill(0, 0, 1, 254, -5600176);
+        g.fill(439, 0, 440, 254, -5600176);
+        g.fill(3, 3, 437, 4, 1621789776);
+        g.fill(3, 250, 437, 251, 1621789776);
+        g.fill(3, 3, 4, 251, 1621789776);
+        g.fill(436, 3, 437, 251, 1621789776);
+        g.fill(150, 46, 151, 224, 1621789776);
+        g.fill(292, 46, 293, 224, 1621789776);
+    }
+
+    private int heading(GuiGraphics g, int x, int y, String key) {
+        g.drawString(this.font, "✧ " + Component.translatable(key).getString(), x - 4, y, -2047366, false);
+        return y + 13;
+    }
+
+    private int row(GuiGraphics g, int x, int width, int y, Component label, String value) {
+        int room = width - 4 - this.font.width(value) - 4;
+        String text = label.getString();
+        if (this.font.width(text) > room) {
+            text = this.font.plainSubstrByWidth(text, room - this.font.width(".")) + ".";
+        }
+
+        g.drawString(this.font, text, x + 4, y, -2693889, false);
+        g.drawString(this.font, value, x + width - this.font.width(value), y, -1, false);
+        return y + 11;
+    }
+
+    private int attr(GuiGraphics g, LocalPlayer player, int x, int width, int y, String id, DoubleFunction<String> format) {
+        Attribute attribute = ForgeRegistries.ATTRIBUTES.getValue(ResourceLocation.parse(id));
+        if (attribute != null && player.getAttribute(attribute) != null) {
+            String shortName = "screen.mdvlcraft.character.short." + ResourceLocation.parse(id).getPath();
+            Component label = I18n.exists(shortName) ? Component.translatable(shortName) : Component.translatable(attribute.getDescriptionId());
+            return this.row(g, x, width, y, label, format.apply(player.getAttributeValue(attribute)));
+        } else {
+            return y;
+        }
+    }
+
+    private static String className() {
+        List<ClientCategoryData> picked = pickedArchetypes();
+        if (picked.isEmpty()) {
+            return "n/a";
+        }
+
+        if (picked.size() == 1) {
+            return picked.get(0).getConfig().title().getString();
+        }
+
+        String key = "screen.mdvlcraft.class." + picked.get(0).getConfig().id().getPath() + "." + picked.get(1).getConfig().id().getPath();
+        return I18n.exists(key) ? I18n.get(key) : picked.get(0).getConfig().title().getString() + " / " + picked.get(1).getConfig().title().getString();
+    }
+
+    static List<ClientCategoryData> pickedArchetypes() {
+        return ((SkillsClientModAccessor)SkillsClientMod.getInstance())
+            .mdvlcraft$screenData()
+            .streamCategories()
+            .filter(c -> !c.getConfig().id().equals(CLASSES) && c.hasExperience())
+            .sorted(Comparator.comparingInt(c -> Respec.ARCHETYPES.indexOf(c.getConfig().id().getPath())))
+            .toList();
+    }
+
+    private static Optional<ClientCategoryData> highestArchetype() {
+        return ((SkillsClientModAccessor)SkillsClientMod.getInstance())
+            .mdvlcraft$screenData()
+            .streamCategories()
+            .filter(c -> !c.getConfig().id().equals(CLASSES) && c.hasExperience())
+            .max(Comparator.comparingInt(ClientCategoryData::getCurrentLevel).thenComparingInt(ClientCategoryData::getCurrentExperience));
+    }
+
+    private static double valueWith(LocalPlayer player, Attribute attribute, ItemStack stack) {
+        AttributeInstance instance = player.getAttribute(attribute);
+        if (instance == null) {
+            return 0.0;
+        }
+
+        Set<UUID> held = new HashSet<>();
+        player.getMainHandItem().getAttributeModifiers(EquipmentSlot.MAINHAND).get(attribute).forEach(mx -> held.add(mx.getId()));
+        List<AttributeModifier> modifiers = new ArrayList<>();
+        instance.getModifiers().stream().filter(mx -> !held.contains(mx.getId())).forEach(modifiers::add);
+        Collection<AttributeModifier> item = stack.getAttributeModifiers(EquipmentSlot.MAINHAND).get(attribute);
+        modifiers.addAll(item);
+        double base = instance.getBaseValue();
+
+        for (AttributeModifier m : modifiers) {
+            if (m.getOperation() == Operation.ADDITION) {
+                base += m.getAmount();
+            }
+        }
+
+        double value = base;
+
+        for (AttributeModifier m : modifiers) {
+            if (m.getOperation() == Operation.MULTIPLY_BASE) {
+                value += base * m.getAmount();
+            }
+        }
+
+        for (AttributeModifier m : modifiers) {
+            if (m.getOperation() == Operation.MULTIPLY_TOTAL) {
+                value *= 1.0 + m.getAmount();
+            }
+        }
+
+        return attribute.sanitizeValue(value);
+    }
+
+    private static String negation(LocalPlayer player, DamageSource source) {
+        float armor = (float)player.getAttributeValue(Attributes.ARMOR);
+        float toughness = (float)player.getAttributeValue(Attributes.ARMOR_TOUGHNESS);
+        float amount = 10.0F;
+        if (!source.is(DamageTypeTags.BYPASSES_ARMOR)) {
+            amount = afterArmor(player, source, amount, armor, toughness);
+        }
+
+        int protection = EnchantmentHelper.getDamageProtection(player.getArmorSlots(), source);
+        if (protection > 0 && !source.is(DamageTypeTags.BYPASSES_ENCHANTMENTS)) {
+            amount = afterProtection(player, source, amount, protection);
+        }
+
+        return percent(1.0 - amount / 10.0F);
+    }
+
+    private static void lookUpApothic() {
+        if (!alLooked) {
+            alLooked = true;
+
+            try {
+                Class<?> rules = Class.forName("dev.shadowsoffire.attributeslib.api.ALCombatRules");
+                alArmor = rules.getMethod("getDamageAfterArmor", LivingEntity.class, DamageSource.class, float.class, float.class, float.class);
+                alProtection = rules.getMethod("getDamageAfterProtection", LivingEntity.class, DamageSource.class, float.class, float.class);
+            } catch (ReflectiveOperationException e) {
+                alArmor = null;
+                alProtection = null;
+            }
+        }
+    }
+
+    private static float afterArmor(LocalPlayer player, DamageSource source, float amount, float armor, float toughness) {
+        lookUpApothic();
+
+        try {
+            if (alArmor != null) {
+                return (Float)alArmor.invoke(null, player, source, amount, armor, toughness);
+            }
+        } catch (ReflectiveOperationException var6) {
+        }
+
+        return CombatRules.getDamageAfterAbsorb(amount, armor, toughness);
+    }
+
+    private static float afterProtection(LocalPlayer player, DamageSource source, float amount, int protection) {
+        lookUpApothic();
+
+        try {
+            if (alProtection != null) {
+                return (Float)alProtection.invoke(null, player, source, amount, (float)protection);
+            }
+        } catch (ReflectiveOperationException var5) {
+        }
+
+        return CombatRules.getDamageAfterMagicAbsorb(amount, protection);
+    }
+
+    private static String fixed(double value, int decimals) {
+        return String.format(Locale.ROOT, "%." + decimals + "f", value);
+    }
+
+    private static String percent(double fraction) {
+        return fixed(fraction * 100.0, fraction * 100.0 % 1.0 == 0.0 ? 0 : 1) + "%";
+    }
+
+    private static String signedPercent(double fraction) {
+        return (fraction > 0.0 ? "+" : "") + percent(fraction);
+    }
+}

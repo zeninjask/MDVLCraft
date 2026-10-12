@@ -1,5 +1,7 @@
 # MDVLCraft Binder
 
+> **Source status (0.7.8):** `src/` was recovered by decompiling the binder 0.7.8 jar from the 1.9.19 packs (renamed to Mojang names, then Vineflower) and rebuilds to the same classes (every method signature identical; the few bytecode differences are only reordered branches). Code comments from the original were lost. `tools/generate_skill_trees.py` predates 0.7.8 and refuses to run (it does not define the Monk and Water trees), and `SKILL_TREES.md`, `TREE_TOTALS.md` and `BALANCE.md` describe 0.7.1; the tree data in `src/main/resources/data/mdvlcraft/puffish_skills` is the 0.7.8 data.
+
 The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 
 1. **Keeps Iron's Spells and Cursed Fate spells and techniques inside the skill trees.** Their items, recipes, ores, structures (with their mobs and loot) are in the game. What's kept out is anything that hands out spells or traits on its own: spell books, scrolls and eldritch manuscripts (in any loot, drop or trade), the scroll forge and inscription table, Cursed Fate's cursed shards, Epic Fight skill books, and Iron's own casting from items (staffs, Magic Blade). Their natural mob spawns, keybinds, menus and advancements stay off. Spells, techniques and Epic Fight skills come only from the skill trees.

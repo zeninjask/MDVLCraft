@@ -1,0 +1,36 @@
+package com.mdvlcraft.binder.mixin.wom;
+
+import com.mdvlcraft.binder.compat.wom.EnderObscurisTeleport;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import reascer.wom.gameasset.WOMAnimations;
+import yesman.epicfight.api.animation.property.AnimationParameters;
+import yesman.epicfight.api.asset.AssetAccessor;
+import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
+
+@Pseudo
+@Mixin(targets = "reascer.wom.gameasset.ReuseableEvents", remap = false)
+public abstract class ReuseableEventsMixin {
+    @Inject(method = "lambda$static$23", at = @At("HEAD"), cancellable = true, require = 0)
+    private static void mdvlcraft$enderObscuris(
+        LivingEntityPatch<?> patch, AssetAccessor<?> animation, AnimationParameters<?, ?, ?, ?, ?, ?, ?, ?, ?, ?> params, CallbackInfo ci
+    ) {
+        if (animation != null && animation.registryName().equals(WOMAnimations.ENDERSTEP_OBSCURIS.registryName())) {
+            EnderObscurisTeleport.player(patch);
+            ci.cancel();
+        }
+    }
+
+    @Inject(method = "lambda$static$21", at = @At("HEAD"), cancellable = true, require = 0)
+    private static void mdvlcraft$mobEnderObscuris(
+        LivingEntityPatch<?> patch, AssetAccessor<?> animation, AnimationParameters<?, ?, ?, ?, ?, ?, ?, ?, ?, ?> params, CallbackInfo ci
+    ) {
+        if (animation != null && animation.registryName().equals(WOMAnimations.MOB_ENDERSTEP_OBSCURIS.registryName())) {
+            EnderObscurisTeleport.mob(patch);
+            ci.cancel();
+        }
+    }
+}

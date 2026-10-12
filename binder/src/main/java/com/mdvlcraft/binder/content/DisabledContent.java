@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import io.redspace.ironsspellbooks.api.item.IScroll;
 import io.redspace.ironsspellbooks.api.item.ISpellbook;
 import io.redspace.ironsspellbooks.item.EldritchManuscript;
+import java.util.Set;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -12,33 +13,21 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 import yesman.epicfight.world.item.SkillBookItem;
 
-import java.util.Set;
-
-/**
- * What the binder keeps out of Iron's Spells and Cursed Fate.
- *
- * Their items, recipes, ores, structures and structure loot are in the game. Forbidden are the items that would hand
- * out spells or traits outside the skill trees: every spell book and scroll (any mod's, through Iron's interfaces),
- * eldritch manuscripts, the scroll forge and inscription table that make and fill them, Cursed Fate's cursed shards,
- * and Epic Fight skill books (any mod's), since Epic Fight skills are taught by the skill trees too. Elytras are
- * forbidden as well (the pack has no flight; Lootr turns the end-ship item frame into a chest, so it goes through the
- * loot filter like any other chest).
- * The mods' own systems stay off: natural mob spawns, client-to-server packets (their keybind and menu actions) and
- * advancements, so spells and techniques are only reachable through the skill trees and the ability wheel.
- */
 public final class DisabledContent {
     public static final Set<String> NAMESPACES = Set.of("irons_spellbooks", "cursedfate");
-
+    public static final Set<String> CONTENT_NAMESPACES = Set.of("traveloptics", "alexscaves", "cursedfate_roslon_meimei");
+    private static final Set<String> NO_SPAWN_NAMESPACES = Set.of("cursedfate", "wom", "traveloptics", "alexscaves", "cursedfate_roslon_meimei");
     private static final Set<ResourceLocation> FORBIDDEN_ITEMS = Set.of(
-            ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "scroll_forge"),
-            ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "inscription_table"),
-            ResourceLocation.fromNamespaceAndPath("cursedfate", "cursed_shards"),
-            ResourceLocation.fromNamespaceAndPath("minecraft", "elytra"));
+        ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "scroll_forge"),
+        ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "inscription_table"),
+        ResourceLocation.fromNamespaceAndPath("cursedfate", "cursed_shards"),
+        ResourceLocation.fromNamespaceAndPath("minecraft", "elytra")
+    );
+    private static final Set<ResourceLocation> UNTRADEABLE_ITEMS = Set.of(ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "hither_thither_wand"));
 
     private DisabledContent() {
     }
 
-    /** True for anything registered by a mod whose own systems stay off. */
     public static boolean isDisabled(ResourceLocation id) {
         return id != null && NAMESPACES.contains(id.getNamespace());
     }
@@ -47,30 +36,47 @@ public final class DisabledContent {
         return isDisabled(ForgeRegistries.ENTITY_TYPES.getKey(type));
     }
 
+    public static boolean isSpawnBlocked(EntityType<?> type) {
+        ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
+        return id != null && NO_SPAWN_NAMESPACES.contains(id.getNamespace());
+    }
+
+    public static boolean isContentDisabled(ResourceLocation id) {
+        return id != null && CONTENT_NAMESPACES.contains(id.getNamespace());
+    }
+
     public static boolean isForbidden(Item item) {
-        return item instanceof ISpellbook || item instanceof IScroll || item instanceof EldritchManuscript || item instanceof SkillBookItem
-                || FORBIDDEN_ITEMS.contains(ForgeRegistries.ITEMS.getKey(item));
+        return isContentDisabled(ForgeRegistries.ITEMS.getKey(item))
+            || item instanceof ISpellbook
+            || item instanceof IScroll
+            || item instanceof EldritchManuscript
+            || item instanceof SkillBookItem
+            || FORBIDDEN_ITEMS.contains(ForgeRegistries.ITEMS.getKey(item));
+    }
+
+    public static boolean isUntradeable(ItemStack stack) {
+        return isForbidden(stack) || !stack.isEmpty() && UNTRADEABLE_ITEMS.contains(ForgeRegistries.ITEMS.getKey(stack.getItem()));
     }
 
     public static boolean isForbidden(ItemStack stack) {
         return !stack.isEmpty() && isForbidden(stack.getItem());
     }
 
-    /** True when a recipe JSON's result is a forbidden item. */
     public static boolean producesForbiddenItem(JsonElement recipe) {
-        if (!recipe.isJsonObject() || !recipe.getAsJsonObject().has("result")) {
+        if (recipe.isJsonObject() && recipe.getAsJsonObject().has("result")) {
+            JsonElement result = recipe.getAsJsonObject().get("result");
+            if (result.isJsonPrimitive()) {
+                return isForbiddenId(ResourceLocation.tryParse(result.getAsString()));
+            } else if (result.isJsonObject()) {
+                JsonObject object = result.getAsJsonObject();
+                String key = object.has("item") ? "item" : "id";
+                return object.has(key) && isForbiddenId(ResourceLocation.tryParse(object.get(key).getAsString()));
+            } else {
+                return false;
+            }
+        } else {
             return false;
         }
-        JsonElement result = recipe.getAsJsonObject().get("result");
-        if (result.isJsonPrimitive()) {
-            return isForbiddenId(ResourceLocation.tryParse(result.getAsString()));
-        }
-        if (result.isJsonObject()) {
-            JsonObject object = result.getAsJsonObject();
-            String key = object.has("item") ? "item" : "id";
-            return object.has(key) && isForbiddenId(ResourceLocation.tryParse(object.get(key).getAsString()));
-        }
-        return false;
     }
 
     private static boolean isForbiddenId(ResourceLocation id) {

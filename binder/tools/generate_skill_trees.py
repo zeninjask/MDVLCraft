@@ -1228,6 +1228,11 @@ def write_doc(all_nodes):
 
 
 def main():
+    # The trees in OUT came from binder 0.7.8 (decompiled), which this script predates: refuse to overwrite a tree it
+    # does not define (Monk, Water) until it is brought up to date.
+    unknown = sorted({p.name for p in (OUT / "categories").iterdir()} - set(ARCHETYPES) - {"classes"}) if OUT.exists() else []
+    if unknown:
+        raise SystemExit(f"generator predates the trees in {OUT}: it does not define {unknown}; update it before regenerating")
     if OUT.exists():
         shutil.rmtree(OUT)
     all_nodes = {arch_id: build_archetype(arch_id, arch) for arch_id, arch in ARCHETYPES.items()}

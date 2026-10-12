@@ -1,20 +1,17 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.Ability;
-import com.mdvlcraft.binder.ability.Loadout;
-import net.minecraft.resources.ResourceLocation;
-
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import net.minecraft.resources.ResourceLocation;
 
-/** Client copy of the player's granted abilities and wheel, plus the selected wheel slot (client-only). */
 public final class ClientAbilities {
     private static Map<Ability, Integer> granted = Map.of();
-    private static List<Optional<Ability>> wheel = Collections.nCopies(Loadout.SLOTS, Optional.empty());
+    private static List<Optional<Ability>> wheel = Collections.nCopies(8, Optional.empty());
     private static int selected;
 
     private ClientAbilities() {
@@ -22,17 +19,18 @@ public final class ClientAbilities {
 
     public static void update(Map<ResourceLocation, Integer> grantedIds, List<Optional<ResourceLocation>> loadout) {
         Map<Ability, Integer> resolved = new LinkedHashMap<>();
-        grantedIds.entrySet().stream()
-                .map(entry -> Map.entry(resolve(entry.getKey()), entry.getValue()))
-                .sorted(Comparator.comparing(entry -> entry.getKey().displayName().getString()))
-                .forEach(entry -> resolved.put(entry.getKey(), entry.getValue()));
+        grantedIds.entrySet()
+            .stream()
+            .map(entry -> Map.entry(resolve(entry.getKey()), entry.getValue()))
+            .sorted(Comparator.comparing(entry -> entry.getKey().displayName().getString()))
+            .forEach(entry -> resolved.put(entry.getKey(), entry.getValue()));
         granted = resolved;
         wheel = loadout.stream().map(slot -> slot.map(ClientAbilities::resolve)).toList();
     }
 
     public static void reset() {
         granted = Map.of();
-        wheel = Collections.nCopies(Loadout.SLOTS, Optional.empty());
+        wheel = Collections.nCopies(8, Optional.empty());
         selected = 0;
     }
 

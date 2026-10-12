@@ -10,11 +10,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/**
- * The server ignores every client-to-server packet on a disabled mod's channels. For Cursed Fate these are its ability,
- * menu, combat-mode, output, quest/trade buttons, key-input, left-click, dash and roll packets; its techniques are only
- * started by the binder on the server. Server-to-client sync packets are untouched.
- */
 @Mixin(value = NetworkHooks.class, remap = false)
 public abstract class NetworkHooksMixin {
     @Inject(method = "onCustomPayload", at = @At("HEAD"), cancellable = true)

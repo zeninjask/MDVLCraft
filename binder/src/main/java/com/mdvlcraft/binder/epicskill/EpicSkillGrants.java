@@ -1,7 +1,13 @@
 package com.mdvlcraft.binder.epicskill;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import yesman.epicfight.api.data.reloader.SkillManager;
 import yesman.epicfight.gameasset.EpicFightSkills;
 import yesman.epicfight.network.EpicFightNetworkManager;
 import yesman.epicfight.network.server.SPAddLearnedSkill;
@@ -14,22 +20,10 @@ import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.capabilities.skill.CapabilitySkill;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-/**
- * Which Epic Fight skills each player has learned through the skill trees.
- *
- * Rewards only record grants; once per tick the players whose grants changed (or who just logged in) are brought in
- * line: tree skills they were granted are learned, tree skills they lost are unequipped and forgotten. Skills no tree
- * teaches are left alone. Pufferfish clears every reward when a player logs out, but nothing is synced for offline
- * players, so logging out never forgets or unequips anything. Everyone also knows Roll, Step, Guard and Parrying, Epic
- * Fight's basic dodges and guards; Roll and Guard are equipped when their slot is empty.
- */
 public final class EpicSkillGrants {
+    private static final String SOULSLIKE_DODGE = "efn:efn_dodge";
+    private static final String SOULSLIKE_STEP = "efn:efn_step";
+    private static final String ABSOLUTE_DEFLECTION = "efn:efn_parry";
     private static final Set<Skill> TREE_SKILLS = new HashSet<>();
     private static final Map<UUID, Set<EpicSkillReward>> ACTIVE = new HashMap<>();
     private static final Set<UUID> DIRTY = new HashSet<>();
@@ -46,6 +40,7 @@ public final class EpicSkillGrants {
         if (active ? rewards.add(reward) : rewards.remove(reward)) {
             DIRTY.add(player.getUUID());
         }
+
         if (rewards.isEmpty()) {
             ACTIVE.remove(player.getUUID());
         }
@@ -71,17 +66,20 @@ public final class EpicSkillGrants {
                 sync(player);
             }
         }
+
         DIRTY.clear();
     }
 
     private static void sync(ServerPlayer player) {
-        ServerPlayerPatch patch = EpicFightCapabilities.getEntityPatch(player, ServerPlayerPatch.class);
+        ServerPlayerPatch patch = (ServerPlayerPatch)EpicFightCapabilities.getEntityPatch(player, ServerPlayerPatch.class);
         if (patch == null) {
             throw new IllegalStateException(player.getGameProfile().getName() + " has no Epic Fight player patch");
         }
+
         CapabilitySkill skills = patch.getSkillCapability();
         Set<Skill> granted = new HashSet<>();
         ACTIVE.getOrDefault(player.getUUID(), Set.of()).forEach(reward -> granted.add(reward.skill));
+
         for (Skill skill : TREE_SKILLS) {
             boolean learned = skills.hasLearned(skill);
             if (granted.contains(skill) && !learned) {
@@ -90,18 +88,41 @@ public final class EpicSkillGrants {
                 forget(player, patch, skills, skill);
             }
         }
-        for (Skill basic : new Skill[]{EpicFightSkills.ROLL, EpicFightSkills.STEP, EpicFightSkills.GUARD, EpicFightSkills.PARRYING}) {
-            if (!skills.hasLearned(basic)) {
+
+        Skill dodge = orElse("efn:efn_dodge", EpicFightSkills.ROLL);
+        Skill step = orElse("efn:efn_step", EpicFightSkills.STEP);
+        Skill deflection = SkillManager.getSkill("efn:efn_parry");
+
+        for (Skill basic : new Skill[]{dodge, step, EpicFightSkills.GUARD, EpicFightSkills.PARRYING, deflection}) {
+            if (basic != null && !skills.hasLearned(basic)) {
                 learn(player, skills, basic);
             }
         }
-        equipIfEmpty(patch, SkillSlots.DODGE, EpicFightSkills.ROLL);
+
+        replace(player, patch, skills, granted, EpicFightSkills.ROLL, dodge);
+        replace(player, patch, skills, granted, EpicFightSkills.STEP, step);
+        equipIfEmpty(patch, SkillSlots.DODGE, dodge);
         equipIfEmpty(patch, SkillSlots.GUARD, EpicFightSkills.GUARD);
+    }
+
+    private static Skill orElse(String id, Skill fallback) {
+        Skill skill = SkillManager.getSkill(id);
+        return skill != null ? skill : fallback;
+    }
+
+    private static void replace(ServerPlayer player, ServerPlayerPatch patch, CapabilitySkill skills, Set<Skill> granted, Skill old, Skill replacement) {
+        if (old != replacement && !granted.contains(old) && skills.hasLearned(old)) {
+            SkillContainer equipped = skills.getSkillContainer(old);
+            forget(player, patch, skills, old);
+            if (equipped != null && equipped.getSkill() == null) {
+                EpicSkillEquip.apply(patch, equipped, replacement);
+            }
+        }
     }
 
     private static void learn(ServerPlayer player, CapabilitySkill skills, Skill skill) {
         skills.addLearnedSkill(skill);
-        EpicFightNetworkManager.sendToPlayer(new SPAddLearnedSkill(skill.getRegistryName().toString()), player);
+        EpicFightNetworkManager.sendToPlayer(new SPAddLearnedSkill(new String[]{skill.getRegistryName().toString()}), player, new Object[0]);
     }
 
     private static void forget(ServerPlayer player, ServerPlayerPatch patch, CapabilitySkill skills, Skill skill) {
@@ -110,8 +131,9 @@ public final class EpicSkillGrants {
         if (equipped != null) {
             EpicSkillEquip.apply(patch, equipped, null);
         }
+
         skills.removeLearnedSkill(skill);
-        EpicFightNetworkManager.sendToPlayer(new SPRemoveSkillAndLearn(slot, skill), player);
+        EpicFightNetworkManager.sendToPlayer(new SPRemoveSkillAndLearn(slot, skill), player, new Object[0]);
     }
 
     private static void equipIfEmpty(ServerPlayerPatch patch, SkillSlot slot, Skill skill) {
@@ -122,9 +144,11 @@ public final class EpicSkillGrants {
     }
 
     private static SkillSlot firstSlotFor(Skill skill) {
-        return SkillSlot.ENUM_MANAGER.universalValues().stream()
-                .filter(slot -> slot.category() == skill.getCategory())
-                .findFirst()
-                .orElseThrow(() -> new IllegalStateException("No slot for " + skill.getRegistryName()));
+        return SkillSlot.ENUM_MANAGER
+            .universalValues()
+            .stream()
+            .filter(slot -> slot.category() == skill.getCategory())
+            .findFirst()
+            .orElseThrow(() -> new IllegalStateException("No slot for " + skill.getRegistryName()));
     }
 }

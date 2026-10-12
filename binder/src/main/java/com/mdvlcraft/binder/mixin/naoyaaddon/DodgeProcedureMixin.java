@@ -8,7 +8,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-/** Projection Sorcery's Flow forms follow the binder's Normal/Flow toggle, not Cursed Fate's Flow state (ProjectionSorcery). */
 @Mixin(value = DodgeProcedure.class, remap = false)
 public abstract class DodgeProcedureMixin {
     @Inject(method = "hasFlow", at = @At("HEAD"), cancellable = true)

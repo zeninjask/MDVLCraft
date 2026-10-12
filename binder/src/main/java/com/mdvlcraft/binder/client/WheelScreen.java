@@ -1,12 +1,10 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.Ability;
-import com.mdvlcraft.binder.ability.Loadout;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 
-/** Radial ability wheel: shown while the wheel key is held; releasing it (or left-clicking) selects the slot under the mouse. */
 public final class WheelScreen extends Screen {
     private static final int RADIUS = 56;
     private static final int SLOT = 24;
@@ -22,47 +20,54 @@ public final class WheelScreen extends Screen {
     }
 
     private int slotCenterX(int slot) {
-        return width / 2 + (int) Math.round(RADIUS * Math.cos(angle(slot)));
+        return this.width / 2 + (int)Math.round(56.0 * Math.cos(angle(slot)));
     }
 
     private int slotCenterY(int slot) {
-        return height / 2 + (int) Math.round(RADIUS * Math.sin(angle(slot)));
+        return this.height / 2 + (int)Math.round(56.0 * Math.sin(angle(slot)));
     }
 
     private static double angle(int slot) {
-        return -Math.PI / 2 + slot * 2 * Math.PI / Loadout.SLOTS;
+        return (-Math.PI / 2) + slot * 2 * Math.PI / 8.0;
     }
 
-    /** Slot whose direction from the centre is closest to the mouse, or -1 inside the dead zone. */
     private int hovered(double mouseX, double mouseY) {
-        double dx = mouseX - width / 2.0;
-        double dy = mouseY - height / 2.0;
-        if (dx * dx + dy * dy < DEAD_ZONE * DEAD_ZONE) {
+        double dx = mouseX - this.width / 2.0;
+        double dy = mouseY - this.height / 2.0;
+        if (dx * dx + dy * dy < 196.0) {
             return -1;
         }
-        double turn = (Math.atan2(dy, dx) + Math.PI / 2) / (2 * Math.PI);
-        return Math.floorMod((int) Math.round(turn * Loadout.SLOTS), Loadout.SLOTS);
+
+        double turn = (Math.atan2(dy, dx) + (Math.PI / 2)) / (Math.PI * 2);
+        return Math.floorMod((int)Math.round(turn * 8.0), 8);
     }
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        int hovered = hovered(mouseX, mouseY);
+        int hovered = this.hovered(mouseX, mouseY);
         int shown = hovered >= 0 ? hovered : ClientAbilities.selected();
-        SlateGui.disc(graphics, width / 2, height / 2, RADIUS + SLOT / 2 + 8, false);
-        for (int slot = 0; slot < Loadout.SLOTS; slot++) {
-            int x = slotCenterX(slot) - SLOT / 2;
-            int y = slotCenterY(slot) - SLOT / 2;
-            SlateGui.slot(graphics, x, y, SLOT, slot == shown ? SlateGui.Slot.PICKED
-                    : ClientAbilities.slot(slot).isPresent() ? SlateGui.Slot.FILLED : SlateGui.Slot.EMPTY);
-            ClientAbilities.slot(slot).ifPresent(ability -> drawAbility(graphics, ability, x + (SLOT - 16) / 2, y + (SLOT - 16) / 2));
+        SlateGui.disc(graphics, this.width / 2, this.height / 2, 76, false);
+
+        for (int slot = 0; slot < 8; slot++) {
+            int x = this.slotCenterX(slot) - 12;
+            int y = this.slotCenterY(slot) - 12;
+            SlateGui.slot(
+                graphics,
+                x,
+                y,
+                24,
+                slot == shown ? SlateGui.Slot.PICKED : (ClientAbilities.slot(slot).isPresent() ? SlateGui.Slot.FILLED : SlateGui.Slot.EMPTY)
+            );
+            ClientAbilities.slot(slot).ifPresent(ability -> drawAbility(graphics, ability, x + 4, y + 4));
         }
-        SlateGui.disc(graphics, width / 2, height / 2, 18, true);
+
+        SlateGui.disc(graphics, this.width / 2, this.height / 2, 18, true);
         ClientAbilities.slot(shown).ifPresent(ability -> {
-            drawAbility(graphics, ability, width / 2 - 8, height / 2 - 8);
-            int textWidth = font.width(ability.displayName());
-            int bannerTop = height / 2 + RADIUS + SLOT / 2 + 14;
-            SlateGui.panel(graphics, width / 2 - textWidth / 2 - 6, bannerTop, textWidth + 12, 16);
-            graphics.drawString(font, ability.displayName(), width / 2 - textWidth / 2, bannerTop + 4, SlateGui.TEXT, false);
+            drawAbility(graphics, ability, this.width / 2 - 8, this.height / 2 - 8);
+            int textWidth = this.font.width(ability.displayName());
+            int bannerTop = this.height / 2 + 56 + 12 + 14;
+            SlateGui.panel(graphics, this.width / 2 - textWidth / 2 - 6, bannerTop, textWidth + 12, 16);
+            graphics.drawString(this.font, ability.displayName(), this.width / 2 - textWidth / 2, bannerTop + 4, -1512206, false);
         });
         super.render(graphics, mouseX, mouseY, partialTick);
     }
@@ -70,36 +75,38 @@ public final class WheelScreen extends Screen {
     private static void drawAbility(GuiGraphics graphics, Ability ability, int x, int y) {
         AbilityDisplay.drawIcon(graphics, ability, x, y);
         if (ClientAbilities.level(ability) == 0) {
-            graphics.fill(x, y, x + 16, y + 16, SlateGui.UNAVAILABLE);
+            graphics.fill(x, y, x + 16, y + 16, -1337978864);
         }
     }
 
     private void choose(double mouseX, double mouseY) {
-        int hovered = hovered(mouseX, mouseY);
+        int hovered = this.hovered(mouseX, mouseY);
         if (hovered >= 0) {
             ClientAbilities.select(hovered);
         }
-        onClose();
+
+        this.onClose();
     }
 
     @Override
     public boolean keyReleased(int keyCode, int scanCode, int modifiers) {
         if (AbilityKeys.WHEEL.matches(keyCode, scanCode)) {
-            double scale = (double) minecraft.getWindow().getGuiScaledWidth() / minecraft.getWindow().getScreenWidth();
-            choose(minecraft.mouseHandler.xpos() * scale, minecraft.mouseHandler.ypos() * scale);
+            double scale = (double)this.minecraft.getWindow().getGuiScaledWidth() / this.minecraft.getWindow().getScreenWidth();
+            this.choose(this.minecraft.mouseHandler.xpos() * scale, this.minecraft.mouseHandler.ypos() * scale);
             return true;
+        } else {
+            return super.keyReleased(keyCode, scanCode, modifiers);
         }
-        return super.keyReleased(keyCode, scanCode, modifiers);
     }
 
-    /** Left-click selects the slot under the mouse; right-click opens the abilities screen to edit the wheel. */
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         if (button == 1) {
-            minecraft.setScreen(new AbilityScreen());
+            this.minecraft.setScreen(new AbilityScreen());
         } else {
-            choose(mouseX, mouseY);
+            this.choose(mouseX, mouseY);
         }
+
         return true;
     }
 }

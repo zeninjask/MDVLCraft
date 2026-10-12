@@ -11,6 +11,7 @@
     "RecipeManagerMixin",
     "ServerAdvancementManagerMixin",
     "irons.SpellSelectionManagerMixin",
+    "irons.AbstractSpellCastTimeMixin",
     "epicfight.ParryingSkillMixin",
     "epicfight.ParryingSkillAccessor",
     "epicfight.ActionAnimationMixin",
@@ -26,9 +27,23 @@
     "naoyaaddon.ProjectionDashProcedureMixin",
     "naoyaaddon.SetAbilityCooldownProcedureMixin",
     "naoyaaddon.BarrageProcedureMixin",
-    "naoyaaddon.ToggleProjectionStylePacketMixin"
+    "naoyaaddon.ToggleProjectionStylePacketMixin",
+    "epicfight.ColliderMixin",
+    "wom.ReuseableEventsMixin",
+    "villagerecruits.CityPlanManagerMixin",
+    "villagerecruits.VillageAutoBuilderMixin",
+    "villagerecruits.VillageBuilderManagerMixin",
+    "efn.EFNParryingSkillMixin",
+    "efn.CullableUtilMixin",
+    "efn.YamatoInnateMixin",
+    "efn.RuinsGreatSwordInnateMixin",
+    "efn.MeenLanceInnateMixin",
+    "wom.ShootingStyleSkillMixin",
+    "calio.HolderCodecMixin",
+    "calio.CalioCodecHelperMixin"
   ],
   "client": [
+    "origins.ChooseOriginScreenMixin",
     "cursedfate.CursedfateModKeyMappingsMixin",
     "irons.KeyMappingsMixin",
     "WeaponTypeReloadListenerMixin",
@@ -40,7 +55,14 @@
     "swordsoaring.SwordSoaringKeyMappingsMixin",
     "epicfight.AnimationEventMixin",
     "efn.EFNKeyMappingsMixin",
-    "puffish.ConnectionBatchedRendererMixin"
+    "puffish.ConnectionBatchedRendererMixin",
+    "puffish.SkillsClientModAccessor",
+    "playerrevive.ReviveEventClientMixin",
+    "OptionsAccessor",
+    "KeyMappingAccessor",
+    "epicfight.SkillBookScreenMixin",
+    "efcompat.ArmatureBinderMixin",
+    "invincible.InputManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1

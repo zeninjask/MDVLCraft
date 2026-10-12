@@ -1,22 +1,10 @@
 package com.mdvlcraft.binder.ability;
 
-import com.mdvlcraft.binder.MDVLBinder;
+import java.util.Arrays;
+import java.util.Optional;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-import java.util.Arrays;
-import java.util.Optional;
-
-/**
- * Cursed Fate techniques the skill trees can grant. They cost mana instead of cursed energy and have their own cooldown
- * ({@link TechniqueCooldowns}), which starts when the technique is cast; Phantom Movement has none and is paced by mana alone. {@code abilityId} is Cursed Fate's internal
- * ability number (AbilityToCast). A {@code held} technique keeps casting while the cast key is held, again each time its
- * cooldown ends (paying each time). The two Malevolent Shrines are the same Cursed Fate ability with a different domain
- * variant: 0 is the closed barrier domain, 1 the open shrine.
- * Blitz and Surprise Attack are Heavenly Restriction abilities (cast without the weapon Cursed Fate asks for, see
- * {@link WeaponFreeCasts}); Follow Up Kick and Phantom Movement (the addon's "Don't You Have a Heart?") come from the Projection Sorcery addon
- * ({@link ProjectionSorcery}).
- */
 public enum Technique implements Ability {
     DISMANTLE("dismantle", 26, 12, 1, true, "minecraft:textures/item/shears.png"),
     CLEAVE("cleave", 27, 20, 3, true, "minecraft:textures/item/iron_axe.png"),
@@ -27,7 +15,18 @@ public enum Technique implements Ability {
     BLITZ("blitz", 60, 15, 8, false, "cursedfate:textures/mob_effect/blitz_effect.png"),
     SURPRISE_ATTACK("surprise_attack", 66, 15, 15, false, "mdvlcraft:textures/gui/icons/tab/assassin.png"),
     FOLLOW_UP_KICK("follow_up_kick", 114, 15, 6, false, "naoyaaddon:textures/screens/naoyaicon.png"),
-    PHANTOM_MOVEMENT("phantom_movement", 118, 20, 0, false, "mdvlcraft:textures/gui/icons/ability/phantom_movement.png");
+    PHANTOM_MOVEMENT("phantom_movement", 118, 20, 0, false, "mdvlcraft:textures/gui/icons/ability/phantom_movement.png"),
+    SILENT_APPRAISAL("silent_appraisal", 113, 20, 15, false, "mdvlcraft:textures/gui/icons/ability/silent_appraisal.png"),
+    BLIND_INVESTMENT("blind_investment", 115, 15, 15, false, "mdvlcraft:textures/gui/icons/ability/blind_investment.png"),
+    BIRD_STRIKE("bird_strike", 116, 20, 15, false, "mdvlcraft:textures/gui/icons/ability/bird_strike.png"),
+    CONTROLLED_COLLAPSE("controlled_collapse", 117, 40, 40, false, "mdvlcraft:textures/gui/icons/ability/controlled_collapse.png"),
+    HEAVY_BLOW("heavy_blow", 8, 15, 5, false, "mdvlcraft:textures/gui/icons/ability/heavy_blow.png"),
+    BARRAGE("barrage", 9, 20, 8, true, "mdvlcraft:textures/gui/icons/ability/barrage.png"),
+    UPPERCUT("uppercut", 10, 15, 9, false, "mdvlcraft:textures/gui/icons/ability/uppercut.png"),
+    FOLLOW_UP_PUNCH("follow_up_punch", 11, 20, 15, false, "mdvlcraft:textures/gui/icons/ability/follow_up_punch.png"),
+    LEAPING_CRUSH("leaping_crush", 63, 30, 12, false, "mdvlcraft:textures/gui/icons/ability/leaping_crush.png"),
+    FOCUS("focus", -1, 30, 30, false, "mdvlcraft:textures/gui/icons/ability/focus.png"),
+    KNOCKOUT("knockout", -1, 25, 20, false, "mdvlcraft:textures/gui/icons/ability/knockout.png");
 
     private final ResourceLocation id;
     final int abilityId;
@@ -37,7 +36,7 @@ public enum Technique implements Ability {
     private final ResourceLocation icon;
 
     Technique(String name, int abilityId, int manaCost, int cooldownSeconds, boolean held, String icon) {
-        this.id = ResourceLocation.fromNamespaceAndPath(MDVLBinder.MOD_ID, name);
+        this.id = ResourceLocation.fromNamespaceAndPath("mdvlcraft", name);
         this.abilityId = abilityId;
         this.manaCost = manaCost;
         this.cooldownTicks = cooldownSeconds * 20;
@@ -46,14 +45,13 @@ public enum Technique implements Ability {
     }
 
     public int cooldownTicks() {
-        return cooldownTicks;
+        return this.cooldownTicks;
     }
 
     boolean isShrine() {
         return this == MALEVOLENT_SHRINE || this == OPEN_MALEVOLENT_SHRINE;
     }
 
-    /** Cursed Fate's DomainVarientNumber for a shrine: 0 closed, 1 open. */
     int domainVariant() {
         return switch (this) {
             case MALEVOLENT_SHRINE -> 0;
@@ -62,17 +60,22 @@ public enum Technique implements Ability {
         };
     }
 
-    /** Heavenly Restriction abilities that Cursed Fate only casts with a sword or axe in hand. */
     boolean weaponFree() {
-        return this == BLITZ || this == SURPRISE_ATTACK;
+        return this == BLITZ || this == SURPRISE_ATTACK || this == LEAPING_CRUSH;
     }
 
-    /** Projection Sorcery abilities: they run while the cast key is held. */
+    boolean custom() {
+        return this.abilityId < 0;
+    }
+
     boolean projection() {
         return this == FOLLOW_UP_KICK || this == PHANTOM_MOVEMENT;
     }
 
-    /** Dismantle and Cleave: while one is held, the owner's Malevolent Shrine cuts. */
+    boolean blackBird() {
+        return this == SILENT_APPRAISAL || this == BLIND_INVESTMENT || this == BIRD_STRIKE || this == CONTROLLED_COLLAPSE;
+    }
+
     boolean isSlash() {
         return this == DISMANTLE || this == CLEAVE;
     }
@@ -83,21 +86,21 @@ public enum Technique implements Ability {
 
     @Override
     public ResourceLocation id() {
-        return id;
+        return this.id;
     }
 
     @Override
     public Component displayName() {
-        return Component.translatable("ability.mdvlcraft." + id.getPath());
+        return Component.translatable("ability.mdvlcraft." + this.id.getPath());
     }
 
     @Override
     public ResourceLocation icon() {
-        return icon;
+        return this.icon;
     }
 
     @Override
     public int manaCost(int level) {
-        return manaCost;
+        return this.manaCost;
     }
 }

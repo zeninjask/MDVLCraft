@@ -4,7 +4,6 @@ import com.mdvlcraft.binder.MDVLBinder;
 import net.minecraftforge.eventbus.api.IEventBus;
 import yesman.epicfight.api.forgeevent.EntityPatchRegistryEvent;
 
-/** Glue for Epic Fight. EntityPatchRegistryEvent is where Epic Fight patches for pack mobs (e.g. Recruits) belong. */
 public final class EpicFightIntegration {
     private EpicFightIntegration() {
     }

@@ -1,27 +1,16 @@
 package com.mdvlcraft.binder.command;
 
-import com.mdvlcraft.binder.MDVLBinder;
 import com.mdvlcraft.binder.ability.Ability;
 import com.mdvlcraft.binder.ability.AbilityActions;
 import com.mdvlcraft.binder.ability.AbilityGrants;
 import com.mdvlcraft.binder.ability.Loadout;
 import com.mojang.brigadier.CommandDispatcher;
-import io.redspace.ironsspellbooks.api.magic.MagicData;
-import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
+import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import net.minecraft.commands.CommandSourceStack;
-import net.minecraft.commands.Commands;
-import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.commands.arguments.ResourceLocationArgument;
-import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.RegisterCommandsEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-
+import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
@@ -30,13 +19,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
+import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.commands.arguments.ResourceLocationArgument;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-/**
- * Operator commands for the ability wheel, the same actions the client sends:
- * /mdvl abilities <player>, /mdvl assign <player> <slot> <ability>, /mdvl clear <player> <slot>,
- * /mdvl cast <player> <slot>, /mdvl release <player>. Slots are 1-8. /mdvl weapons writes an Epic Fight weapon report.
- */
-@Mod.EventBusSubscriber(modid = MDVLBinder.MOD_ID)
+@EventBusSubscriber(modid = "mdvlcraft")
 public final class MdvlCommand {
     private MdvlCommand() {
     }
@@ -47,43 +42,76 @@ public final class MdvlCommand {
     }
 
     private static void register(CommandDispatcher<CommandSourceStack> dispatcher) {
-        dispatcher.register(Commands.literal("mdvl").requires(source -> source.hasPermission(2))
-                .then(Commands.literal("abilities").then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::abilities)))
-                .then(Commands.literal("assign").then(Commands.argument("player", EntityArgument.player())
-                        .then(Commands.argument("slot", IntegerArgumentType.integer(1, Loadout.SLOTS))
-                                .then(Commands.argument("ability", ResourceLocationArgument.id()).executes(MdvlCommand::assign)))))
-                .then(Commands.literal("clear").then(Commands.argument("player", EntityArgument.player())
-                        .then(Commands.argument("slot", IntegerArgumentType.integer(1, Loadout.SLOTS)).executes(MdvlCommand::clear))))
-                .then(Commands.literal("cast").then(Commands.argument("player", EntityArgument.player())
-                        .then(Commands.argument("slot", IntegerArgumentType.integer(1, Loadout.SLOTS)).executes(MdvlCommand::cast))))
-                .then(Commands.literal("release").then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::release)))
-                .then(Commands.literal("weapons").executes(MdvlCommand::weapons)));
+        dispatcher.register(
+            (LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)((LiteralArgumentBuilder)Commands.literal(
+                                            "mdvl"
+                                        )
+                                        .requires(source -> source.hasPermission(2)))
+                                    .then(
+                                        Commands.literal("abilities")
+                                            .then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::abilities))
+                                    ))
+                                .then(
+                                    Commands.literal("assign")
+                                        .then(
+                                            Commands.argument("player", EntityArgument.player())
+                                                .then(
+                                                    Commands.argument("slot", IntegerArgumentType.integer(1, 8))
+                                                        .then(Commands.argument("ability", ResourceLocationArgument.id()).executes(MdvlCommand::assign))
+                                                )
+                                        )
+                                ))
+                            .then(
+                                Commands.literal("clear")
+                                    .then(
+                                        Commands.argument("player", EntityArgument.player())
+                                            .then(Commands.argument("slot", IntegerArgumentType.integer(1, 8)).executes(MdvlCommand::clear))
+                                    )
+                            ))
+                        .then(
+                            Commands.literal("cast")
+                                .then(
+                                    Commands.argument("player", EntityArgument.player())
+                                        .then(Commands.argument("slot", IntegerArgumentType.integer(1, 8)).executes(MdvlCommand::cast))
+                                )
+                        ))
+                    .then(Commands.literal("release").then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::release))))
+                .then(Commands.literal("weapons").executes(MdvlCommand::weapons))
+        );
     }
 
-    /** Writes weapons.tsv in the server folder: every weapon-like item, its Epic Fight category and weapon type. */
     private static int weapons(CommandContext<CommandSourceStack> context) {
         List<WeaponReport.Row> rows = WeaponReport.build();
-        Path file = context.getSource().getServer().getServerDirectory().toPath().resolve("weapons.tsv");
+        Path file = ((CommandSourceStack)context.getSource()).getServer().getServerDirectory().toPath().resolve("weapons.tsv");
         List<String> lines = new ArrayList<>(List.of("item\tsupported\tcategory\tweapon_type\tclass"));
-        rows.forEach(row -> lines.add(String.join("\t", row.id().toString(), String.valueOf(row.supported()), row.category(), row.weaponType(), row.itemClass())));
+        rows.forEach(
+            row -> lines.add(String.join("\t", row.id().toString(), String.valueOf(row.supported()), row.category(), row.weaponType(), row.itemClass()))
+        );
+
         try {
             Files.write(file, lines);
-        } catch (IOException e) {
-            throw new UncheckedIOException(e);
+        } catch (IOException var6) {
+            throw new UncheckedIOException(var6);
         }
+
         long unsupported = rows.stream().filter(row -> !row.supported()).count();
-        context.getSource().sendSuccess(() -> Component.literal(rows.size() + " weapons, " + unsupported + " without Epic Fight support; written to " + file), false);
-        return (int) unsupported;
+        ((CommandSourceStack)context.getSource())
+            .sendSuccess(() -> Component.literal(rows.size() + " weapons, " + unsupported + " without Epic Fight support; written to " + file), false);
+        return (int)unsupported;
     }
 
     private static int abilities(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, "player");
-        String granted = AbilityGrants.of(player).entrySet().stream()
-                .map(entry -> entry.getKey().id() + " " + entry.getValue()).collect(Collectors.joining(", "));
+        String granted = AbilityGrants.of(player)
+            .entrySet()
+            .stream()
+            .map(entry -> entry.getKey().id() + " " + entry.getValue())
+            .collect(Collectors.joining(", "));
         String wheel = Loadout.get(player).stream().map(slot -> slot.map(ResourceLocation::toString).orElse("-")).collect(Collectors.joining(", "));
         int mana = Math.round(MagicData.getPlayerMagicData(player).getMana());
-        int maxMana = (int) player.getAttributeValue(AttributeRegistry.MAX_MANA.get());
-        context.getSource().sendSuccess(() -> Component.literal("Granted: [" + granted + "] Wheel: [" + wheel + "] Mana: " + mana + "/" + maxMana), false);
+        int maxMana = (int)player.getAttributeValue((Attribute)AttributeRegistry.MAX_MANA.get());
+        ((CommandSourceStack)context.getSource())
+            .sendSuccess(() -> Component.literal("Granted: [" + granted + "] Wheel: [" + wheel + "] Mana: " + mana + "/" + maxMana), false);
         return AbilityGrants.of(player).size();
     }
 
@@ -91,15 +119,15 @@ public final class MdvlCommand {
         ServerPlayer player = EntityArgument.getPlayer(context, "player");
         ResourceLocation id = ResourceLocationArgument.getId(context, "ability");
         if (Ability.byId(id).isEmpty()) {
-            context.getSource().sendFailure(Component.literal("Unknown ability " + id));
+            ((CommandSourceStack)context.getSource()).sendFailure(Component.literal("Unknown ability " + id));
             return 0;
-        }
-        if (!AbilityActions.assign(player, IntegerArgumentType.getInteger(context, "slot") - 1, Optional.of(id))) {
-            context.getSource().sendFailure(Component.literal(player.getGameProfile().getName() + " has not unlocked " + id));
+        } else if (!AbilityActions.assign(player, IntegerArgumentType.getInteger(context, "slot") - 1, Optional.of(id))) {
+            ((CommandSourceStack)context.getSource()).sendFailure(Component.literal(player.getGameProfile().getName() + " has not unlocked " + id));
             return 0;
+        } else {
+            ((CommandSourceStack)context.getSource()).sendSuccess(() -> Component.literal("Assigned " + id), false);
+            return 1;
         }
-        context.getSource().sendSuccess(() -> Component.literal("Assigned " + id), false);
-        return 1;
     }
 
     private static int clear(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

@@ -92,6 +92,10 @@ dependencies {
     compileOnly files('libs/BaldasProjectionSorcery-2.0.1.2.jar', 'libs/EpicFightNightfall-3.4.2-all.jar')
     // Distant Horizons and Chunky (only the classes the binder touches): DH binds to Chunky only once it is loaded (mixin/distanthorizons).
     compileOnly files('libs/DistantHorizons-3.3.3-chunky-classes.jar', 'libs/Chunky-1.3.146-provider-classes.jar')
+    // Weapons of Miracles, Villager Recruits / Village Recruits, Cursed Fate Meimei and Calio (inside Origins): compat (compat/, mixin/).
+    compileOnly files('libs/WeaponsOfMiracles-2.0.171-mc1.20.1-forge.jar', 'libs/recruits-1.20.1-1.15.2.jar',
+            'libs/village_recruits-1.0.7.93TC-205.jar', 'libs/cursedfate_meimei-1.1.2-forge-1.20.1.jar',
+            'libs/calio-forge-1.20.1-1.11.0.5.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))

@@ -2,13 +2,11 @@ package com.mdvlcraft.binder.ability;
 
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.network.SyncAbilitiesPacket;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-/** Sends a player their granted abilities, wheel and technique cooldowns. */
 final class AbilitySync {
     private AbilitySync() {
     }

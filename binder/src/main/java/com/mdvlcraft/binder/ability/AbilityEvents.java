@@ -1,26 +1,26 @@
 package com.mdvlcraft.binder.ability;
 
-import com.mdvlcraft.binder.MDVLBinder;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.event.TickEvent.Phase;
+import net.minecraftforge.event.TickEvent.ServerTickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-@Mod.EventBusSubscriber(modid = MDVLBinder.MOD_ID)
+@EventBusSubscriber(modid = "mdvlcraft")
 public final class AbilityEvents {
     private AbilityEvents() {
     }
 
     @SubscribeEvent
-    public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        // The wheel must reach the client even when no ability is granted.
-        AbilityGrants.markDirty((ServerPlayer) event.getEntity());
+    public static void onLogin(PlayerLoggedInEvent event) {
+        AbilityGrants.markDirty((ServerPlayer)event.getEntity());
+        BlackBirdManipulation.deactivate((ServerPlayer)event.getEntity());
     }
 
     @SubscribeEvent
-    public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase == TickEvent.Phase.END) {
+    public static void onServerTick(ServerTickEvent event) {
+        if (event.phase == Phase.END) {
             AbilityGrants.flush(event.getServer());
             TechniqueRunner.tick(event.getServer());
             DomainUpkeep.tick(event.getServer());

@@ -5,7 +5,6 @@ import com.mdvlcraft.binder.MDVLBinder;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-/** Glue for L_Ender's Cataclysm. */
 public final class CataclysmIntegration {
     private CataclysmIntegration() {
     }

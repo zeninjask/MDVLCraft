@@ -5,7 +5,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/class/warrior.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/warrior.png"
       }
     },
     "frame": {
@@ -28,7 +28,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/knight.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/knight.png"
       }
     },
     "frame": {
@@ -46,12 +46,12 @@
   },
   "samurai": {
     "title": "Samurai",
-    "description": "Katanas, swift strikes and rewarding parries. Key: Stance, Flaming Strike, Blitz.",
+    "description": "Katanas, swift strikes and rewarding parries. Key: Stance, Blitz, Surprise Attack.",
     "extra_description": "Opens the Samurai tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/samurai.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/samurai.png"
       }
     },
     "frame": {
@@ -74,7 +74,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/berzerker.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/berzerker.png"
       }
     },
     "frame": {
@@ -96,7 +96,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/class/mage.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/mage.png"
       }
     },
     "frame": {
@@ -119,7 +119,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/holy.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/holy.png"
       }
     },
     "frame": {
@@ -142,7 +142,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/flame.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/flame.png"
       }
     },
     "frame": {
@@ -165,7 +165,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/lightning.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/lightning.png"
       }
     },
     "frame": {
@@ -188,7 +188,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/necromancy.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/necromancy.png"
       }
     },
     "frame": {
@@ -211,7 +211,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/ice.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/ice.png"
       }
     },
     "frame": {
@@ -233,7 +233,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/class/rogue.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/rogue.png"
       }
     },
     "frame": {
@@ -252,11 +252,11 @@
   "assassin": {
     "title": "Assassin",
     "description": "Daggers, backstabs and vanishing acts. Key: Echoing Strikes, Acupuncture, Bonebreaker.",
-    "extra_description": "Opens the Assassin tab. You can pick 2 archetypes in total.",
+    "extra_description": "Opens the Assassin tab. You can pick 2 archetypes in total. Also teaches Precise Parry (Epic Fight passive): parrying at the perfect moment grants strong buffs and empowers your next attack.",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/assassin.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/assassin.png"
       }
     },
     "frame": {
@@ -270,16 +270,24 @@
       }
     },
     "size": 1.5,
-    "cost": 1
+    "cost": 1,
+    "rewards": [
+      {
+        "type": "mdvlcraft:epicfight_skill",
+        "data": {
+          "skill": "efn:precise_parry"
+        }
+      }
+    ]
   },
   "phantom": {
     "title": "Phantom",
     "description": "Rapier duelling, dodges and ripostes. Key: Evasion, Slow, Invisibility.",
-    "extra_description": "Opens the Phantom tab. You can pick 2 archetypes in total.",
+    "extra_description": "Opens the Phantom tab. You can pick 2 archetypes in total. Also teaches Precise Parry (Epic Fight passive): parrying at the perfect moment grants strong buffs and empowers your next attack.",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/phantom.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/phantom.png"
       }
     },
     "frame": {
@@ -293,16 +301,24 @@
       }
     },
     "size": 1.5,
-    "cost": 1
+    "cost": 1,
+    "rewards": [
+      {
+        "type": "mdvlcraft:epicfight_skill",
+        "data": {
+          "skill": "efn:precise_parry"
+        }
+      }
+    ]
   },
   "scout": {
     "title": "Scout",
-    "description": "Mobility, ender magic and far sight. Key: Cleanse, Haste, Planar Sight.",
-    "extra_description": "Opens the Scout tab. You can pick 2 archetypes in total.",
+    "description": "Mobility, ender magic, far sight and crows. Key: Cleanse, Haste, Planar Sight.",
+    "extra_description": "Opens the Scout tab. You can pick 2 archetypes in total. Also teaches Precise Parry (Epic Fight passive): parrying at the perfect moment grants strong buffs and empowers your next attack.",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/scout.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/scout.png"
       }
     },
     "frame": {
@@ -316,16 +332,24 @@
       }
     },
     "size": 1.5,
-    "cost": 1
+    "cost": 1,
+    "rewards": [
+      {
+        "type": "mdvlcraft:epicfight_skill",
+        "data": {
+          "skill": "efn:precise_parry"
+        }
+      }
+    ]
   },
   "thief": {
     "title": "Thief",
     "description": "Luck, plunder and Boogie Woogie swaps. Key: Boogie Woogie, Block Clap, Scapegoat.",
-    "extra_description": "Opens the Thief tab. You can pick 2 archetypes in total.",
+    "extra_description": "Opens the Thief tab. You can pick 2 archetypes in total. Also teaches Precise Parry (Epic Fight passive): parrying at the perfect moment grants strong buffs and empowers your next attack.",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/thief.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/thief.png"
       }
     },
     "frame": {
@@ -339,7 +363,15 @@
       }
     },
     "size": 1.5,
-    "cost": 1
+    "cost": 1,
+    "rewards": [
+      {
+        "type": "mdvlcraft:epicfight_skill",
+        "data": {
+          "skill": "efn:precise_parry"
+        }
+      }
+    ]
   },
   "ranger": {
     "title": "Ranger",
@@ -347,7 +379,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/class/ranger.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/ranger.png"
       }
     },
     "frame": {
@@ -366,11 +398,11 @@
   "wanderer": {
     "title": "Wanderer",
     "description": "Long journeys: food, sure footing and a loyal horse. Key: Summon Horse, Counterspell, Summon Polar Bear.",
-    "extra_description": "Opens the Wanderer tab. You can pick 2 archetypes in total.",
+    "extra_description": "Opens the Wanderer tab. You can pick 2 archetypes in total. You can no longer be poisoned or given Hunger.",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/wanderer.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/wanderer.png"
       }
     },
     "frame": {
@@ -384,7 +416,17 @@
       }
     },
     "size": 1.5,
-    "cost": 1
+    "cost": 1,
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:affliction_immunity",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ]
   },
   "stalker": {
     "title": "Stalker",
@@ -393,7 +435,7 @@
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/stalker.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/stalker.png"
       }
     },
     "frame": {
@@ -412,11 +454,44 @@
   "druid": {
     "title": "Druid",
     "description": "Nature magic and the land's healing. Key: Acid Orb, Root, Firefly Swarm.",
-    "extra_description": "Opens the Druid tab. You can pick 2 archetypes in total.",
+    "extra_description": "Opens the Druid tab. You can pick 2 archetypes in total. You can no longer be poisoned or given Hunger.",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/druid.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/druid.png"
+      }
+    },
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "cost": 1,
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "mdvlcraft:affliction_immunity",
+          "value": 1,
+          "operation": "addition"
+        }
+      }
+    ]
+  },
+  "cursed": {
+    "title": "Cursed",
+    "description": "Shrine techniques: Dismantle, Cleave and the Malevolent Shrine (closed, then open). Key: Dismantle, Cleave, Malevolent Shrine.",
+    "extra_description": "Opens the Cursed tab. You can pick 2 archetypes in total.",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/cursed.png"
       }
     },
     "frame": {
@@ -432,24 +507,47 @@
     "size": 1.5,
     "cost": 1
   },
-  "cursed": {
-    "title": "Cursed",
-    "description": "Shrine techniques: Dismantle, Cleave and the Malevolent Shrine (closed, then open). Key: Dismantle, Cleave, Malevolent Shrine.",
-    "extra_description": "Opens the Cursed tab. You can pick 2 archetypes in total.",
+  "water": {
+    "title": "Water",
+    "description": "Tides, torrents and the crushing deep. Key: Tsunami, Vortex Of The Deep, Coral Barrage.",
+    "extra_description": "Opens the Ice tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/icons/archetype/cursed.png"
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/water.png"
       }
     },
     "frame": {
       "type": "texture",
       "data": {
-        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
-        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
-        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
-        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
-        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "cost": 1
+  },
+  "monk": {
+    "title": "Monk",
+    "description": "Unarmed martial arts: fists, gloves and ki. Key: Focus (Black Flash), Knockout, Parry: Absolute Deflection.",
+    "extra_description": "Opens the Knight tab. You can pick 2 archetypes in total.",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/monk.png"
+      }
+    },
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_warrior_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_warrior_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_warrior_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_warrior_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_warrior_goal_excluded.png"
       }
     },
     "size": 1.5,

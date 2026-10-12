@@ -2,6 +2,7 @@ package com.mdvlcraft.binder.mixin;
 
 import com.google.gson.JsonElement;
 import com.mdvlcraft.binder.content.DisabledContent;
+import java.util.Map;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -11,14 +12,15 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.Map;
-
-/** Recipes that make a forbidden item (spell books, scrolls, cursed shards...; see DisabledContent) are not loaded. */
 @Mixin(RecipeManager.class)
 public abstract class RecipeManagerMixin {
-    @Inject(method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V", at = @At("HEAD"))
-    private void mdvlcraft$dropForbiddenRecipes(Map<ResourceLocation, JsonElement> recipes, ResourceManager resourceManager,
-                                               ProfilerFiller profiler, CallbackInfo ci) {
-        recipes.entrySet().removeIf(entry -> DisabledContent.producesForbiddenItem(entry.getValue()));
+    @Inject(
+        method = "apply(Ljava/util/Map;Lnet/minecraft/server/packs/resources/ResourceManager;Lnet/minecraft/util/profiling/ProfilerFiller;)V",
+        at = @At("HEAD")
+    )
+    private void mdvlcraft$dropForbiddenRecipes(
+        Map<ResourceLocation, JsonElement> recipes, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci
+    ) {
+        recipes.entrySet().removeIf(entry -> DisabledContent.isContentDisabled(entry.getKey()) || DisabledContent.producesForbiddenItem(entry.getValue()));
     }
 }
