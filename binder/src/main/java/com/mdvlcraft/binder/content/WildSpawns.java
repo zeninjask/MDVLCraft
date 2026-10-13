@@ -17,6 +17,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
+import net.minecraftforge.event.entity.living.LivingDropsEvent;
+import net.minecraftforge.event.entity.living.LivingExperienceDropEvent;
+import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent.FinalizeSpawn;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,21 +28,23 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Mobs of otherwise spawn-blocked mods that do spawn in the wild (WildSpawnsBiomeModifier, data/mdvlcraft/forge/biome_modifier/wild_spawns.json):
- * Iron's mages and the Aquamancer as rare hostile spawns in the dark, tougher than their structure versions, and the
- * Cursed Fate characters as very rare ones. Every hostile mob also gets {@link #HOSTILE_HEALTH} times its health.
+ * Iron's mages and the Aquamancer as rare hostile spawns in the dark (groups of up to 5), tougher than their structure
+ * versions and worth 10 zombies of experience, and the Cursed Fate characters as very rare ones. Mages never drop
+ * inks (the scroll forge is disabled). Every hostile mob also gets {@link #HOSTILE_HEALTH} times its health and deals
+ * {@link #HOSTILE_DAMAGE} times its damage to players.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class WildSpawns {
     /**
      * Spawn weight in the overworld's monster list, the chance a natural spawn goes ahead, and whether the binder sets its
      * placement rule (dark enough, on the ground). The characters' own mods register theirs, Cursed Fate directly through
-     * SpawnPlacements, which throws on a second registration.
+     * SpawnPlacements, which throws on a second registration. A spawn comes in a group of 1 to maxGroup.
      */
-    record Wild(int weight, double chance, boolean placement) {
+    record Wild(int weight, double chance, boolean placement, int maxGroup) {
     }
 
-    private static final Wild MAGE = new Wild(2, 1.0, true);
-    private static final Wild CHARACTER = new Wild(1, 0.05, false);
+    private static final Wild MAGE = new Wild(2, 1.0, true, 5);
+    private static final Wild CHARACTER = new Wild(1, 0.05, false, 1);
     static final Map<ResourceLocation, Wild> ALLOWED = Map.ofEntries(
         Map.entry(id("irons_spellbooks", "archevoker"), MAGE),
         Map.entry(id("irons_spellbooks", "necromancer"), MAGE),
@@ -60,6 +65,9 @@ public final class WildSpawns {
     private static final double WILD_HEALTH_BONUS = 0.5;
     private static final double WILD_ARMOR_BONUS = 6.0;
     public static final double HOSTILE_HEALTH = 1.2;
+    public static final double HOSTILE_DAMAGE = 1.1;
+    // a zombie drops 5 experience
+    private static final int MAGE_EXPERIENCE = 50;
 
     private WildSpawns() {
     }
@@ -127,6 +135,35 @@ public final class WildSpawns {
                 }
             }
         }
+    }
+
+    @SubscribeEvent
+    public static void onHurt(LivingHurtEvent event) {
+        if (event.getEntity() instanceof Player && event.getSource().getEntity() instanceof Mob mob
+            && (mob.getType().getCategory() == MobCategory.MONSTER || allowed(mob.getType()))) {
+            event.setAmount(event.getAmount() * (float)HOSTILE_DAMAGE);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onExperienceDrop(LivingExperienceDropEvent event) {
+        if (event.getEntity().getPersistentData().getBoolean(WILD) && isMage(event.getEntity().getType())) {
+            event.setDroppedExperience(MAGE_EXPERIENCE);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onDrops(LivingDropsEvent event) {
+        if (isMage(event.getEntity().getType())) {
+            event.getDrops().removeIf(drop -> {
+                ResourceLocation item = ForgeRegistries.ITEMS.getKey(drop.getItem().getItem());
+                return item.getNamespace().equals("irons_spellbooks") && item.getPath().endsWith("_ink");
+            });
+        }
+    }
+
+    private static boolean isMage(EntityType<?> type) {
+        return ALLOWED.get(ForgeRegistries.ENTITY_TYPES.getKey(type)) == MAGE;
     }
 
     private static void addPermanent(AttributeInstance attribute, UUID id, String name, double amount, AttributeModifier.Operation operation) {

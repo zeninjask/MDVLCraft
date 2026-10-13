@@ -32,7 +32,7 @@ public final class WildSpawnsBiomeModifier implements BiomeModifier {
                     throw new IllegalStateException("Wild spawn " + id + " is not registered");
                 }
 
-                builder.getMobSpawnSettings().addSpawn(MobCategory.MONSTER, new SpawnerData(type, wild.weight(), 1, 1));
+                builder.getMobSpawnSettings().addSpawn(MobCategory.MONSTER, new SpawnerData(type, wild.weight(), 1, wild.maxGroup()));
             });
         }
     }
