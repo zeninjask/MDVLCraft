@@ -30,12 +30,16 @@ import net.minecraftforge.registries.ForgeRegistries;
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class WildSpawns {
-    /** Spawn weight in the overworld's monster list, and the chance a placed spawn goes ahead after the dark-enough check. */
-    record Wild(int weight, double chance) {
+    /**
+     * Spawn weight in the overworld's monster list, the chance a natural spawn goes ahead, and whether the binder sets its
+     * placement rule (dark enough, on the ground). The characters' own mods register theirs, Cursed Fate directly through
+     * SpawnPlacements, which throws on a second registration.
+     */
+    record Wild(int weight, double chance, boolean placement) {
     }
 
-    private static final Wild MAGE = new Wild(2, 1.0);
-    private static final Wild CHARACTER = new Wild(1, 0.05);
+    private static final Wild MAGE = new Wild(2, 1.0, true);
+    private static final Wild CHARACTER = new Wild(1, 0.05, false);
     static final Map<ResourceLocation, Wild> ALLOWED = Map.ofEntries(
         Map.entry(id("irons_spellbooks", "archevoker"), MAGE),
         Map.entry(id("irons_spellbooks", "necromancer"), MAGE),
@@ -72,14 +76,17 @@ public final class WildSpawns {
     @SuppressWarnings("unchecked")
     public static void onSpawnPlacements(SpawnPlacementRegisterEvent event) {
         ALLOWED.forEach((id, wild) -> {
+            if (!wild.placement()) {
+                return;
+            }
+
             EntityType<Mob> type = (EntityType<Mob>)ForgeRegistries.ENTITY_TYPES.getValue(id);
             if (type == null || !id.equals(ForgeRegistries.ENTITY_TYPES.getKey(type))) {
                 throw new IllegalStateException("Wild spawn " + id + " is not registered");
             }
 
             event.register(type, SpawnPlacements.Type.ON_GROUND, Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
-                (entityType, level, reason, pos, random) -> random.nextDouble() < wild.chance()
-                    && Monster.isDarkEnoughToSpawn(level, pos, random)
+                (entityType, level, reason, pos, random) -> Monster.isDarkEnoughToSpawn(level, pos, random)
                     && Mob.checkMobSpawnRules(entityType, level, reason, pos, random),
                 SpawnPlacementRegisterEvent.Operation.REPLACE);
         });
@@ -88,7 +95,13 @@ public final class WildSpawns {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onFinalizeSpawn(FinalizeSpawn event) {
         Mob mob = event.getEntity();
-        if (!event.isSpawnCancelled() && event.getSpawnType() == MobSpawnType.NATURAL && allowed(mob.getType())) {
+        Wild wild = ALLOWED.get(ForgeRegistries.ENTITY_TYPES.getKey(mob.getType()));
+        if (!event.isSpawnCancelled() && event.getSpawnType() == MobSpawnType.NATURAL && wild != null) {
+            if (mob.getRandom().nextDouble() >= wild.chance()) {
+                event.setSpawnCancelled(true);
+                return;
+            }
+
             mob.getPersistentData().putBoolean(WILD, true);
             addPermanent(mob.getAttribute(Attributes.MAX_HEALTH), WILD_HEALTH, "Wild spawn health", WILD_HEALTH_BONUS, AttributeModifier.Operation.MULTIPLY_TOTAL);
             addPermanent(mob.getAttribute(Attributes.ARMOR), WILD_ARMOR, "Wild spawn armour", WILD_ARMOR_BONUS, AttributeModifier.Operation.ADDITION);
