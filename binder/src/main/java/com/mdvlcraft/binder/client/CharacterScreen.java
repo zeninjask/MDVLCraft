@@ -1,5 +1,11 @@
 package com.mdvlcraft.binder.client;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mdvlcraft.binder.mixin.puffish.SkillsClientModAccessor;
 import com.mdvlcraft.binder.skills.Respec;
 import io.github.edwinmindcraft.origins.api.OriginsAPI;
@@ -8,7 +14,11 @@ import io.github.edwinmindcraft.origins.api.origin.Origin;
 import io.github.edwinmindcraft.origins.api.origin.OriginLayer;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.player.ClientMagicData;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
@@ -62,6 +72,8 @@ public class CharacterScreen extends Screen {
         JOB_LAYER, "screen.mdvlcraft.character.job"
     );
     private static final int TOOLTIP_WIDTH = 220;
+    private static final String CLASS_DEFINITIONS_PATH = "/data/mdvlcraft/puffish_skills/categories/classes/definitions.json";
+    private static final JsonObject CLASS_DEFINITIONS = readClassDefinitions();
     private static final ResourceLocation SKY = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/skills/astro_sky.png");
     private static final ResourceLocation ASTROLABE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/character/astrolabe.png");
     private static final ResourceLocation EXPERIENCE = ResourceLocation.fromNamespaceAndPath("puffish_attributes", "experience");
@@ -147,12 +159,16 @@ public class CharacterScreen extends Screen {
                 Component.translatable("screen.mdvlcraft.character.level"),
                 archetype.<String>map(a -> String.valueOf(a.getCurrentLevel())).orElse("n/a")
             );
+            List<FormattedCharSequence> tooltip = null;
+            if (!pickedArchetypes().isEmpty() && hovering(localX, localY, left, colW, y)) {
+                tooltip = this.classLines();
+            }
+
             y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.class"), className());
-            Origin hovered = null;
             for (ResourceLocation layer : List.of(RACE_LAYER, MARTIAL_LAYER, JOB_LAYER)) {
                 Origin origin = origin(player, layer);
-                if (origin != null && localX >= left && localX < left + colW && localY >= y - 1 && localY < y + 10) {
-                    hovered = origin;
+                if (origin != null && hovering(localX, localY, left, colW, y)) {
+                    tooltip = this.powerLines(origin);
                 }
 
                 y = this.row(g, left, colW, y, Component.translatable(ROW_KEYS.get(layer)), origin == null ? "n/a" : origin.getName().getString());
@@ -277,8 +293,8 @@ public class CharacterScreen extends Screen {
             );
             g.pose().popPose();
             super.render(g, mouseX, mouseY, partialTick);
-            if (hovered != null) {
-                g.renderTooltip(font, powerLines(hovered), mouseX, mouseY);
+            if (tooltip != null) {
+                g.renderTooltip(font, tooltip, mouseX, mouseY);
             }
         }
     }
@@ -341,6 +357,42 @@ public class CharacterScreen extends Screen {
         }
 
         return OriginsAPI.getOriginsRegistry().get(origin);
+    }
+
+    /** Whether the panel-space mouse position is on the row drawn at y. */
+    private static boolean hovering(int localX, int localY, int x, int width, int y) {
+        return localX >= x && localX < x + width && localY >= y - 1 && localY < y + 10;
+    }
+
+    /** The class name, then each picked archetype with its level and its description from the Classes page. */
+    private List<FormattedCharSequence> classLines() {
+        List<FormattedCharSequence> lines = new ArrayList<>();
+        lines.add(Component.literal(className()).withStyle(ChatFormatting.GOLD).getVisualOrderText());
+        for (ClientCategoryData archetype : pickedArchetypes()) {
+            String id = archetype.getConfig().id().getPath();
+            if (!CLASS_DEFINITIONS.has(id)) {
+                throw new IllegalStateException("Classes page has no definition for " + id);
+            }
+
+            lines.add(Component.translatable("screen.mdvlcraft.respec.level", archetype.getConfig().title(), archetype.getCurrentLevel())
+                .withStyle(ChatFormatting.YELLOW).getVisualOrderText());
+            String description = CLASS_DEFINITIONS.getAsJsonObject(id).get("description").getAsString();
+            lines.addAll(this.font.split(Component.literal(description).withStyle(ChatFormatting.GRAY), TOOLTIP_WIDTH));
+        }
+
+        return lines;
+    }
+
+    private static JsonObject readClassDefinitions() {
+        try (InputStream in = CharacterScreen.class.getResourceAsStream(CLASS_DEFINITIONS_PATH)) {
+            if (in == null) {
+                throw new IllegalStateException("Missing " + CLASS_DEFINITIONS_PATH);
+            }
+
+            return JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
+        } catch (IOException e) {
+            throw new IllegalStateException("Cannot read " + CLASS_DEFINITIONS_PATH, e);
+        }
     }
 
     /** The origin's name, then each visible power's name and description, wrapped for a tooltip. */
