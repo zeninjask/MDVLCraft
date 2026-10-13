@@ -6,6 +6,9 @@ import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 /**
+ * Stamina regenerates 20% faster: the mod's own regen (it replaces Epic Fight's) adds 0.14 a tick times a stance
+ * multiplier, so the base becomes 0.168.
+ *
  * Attacks cost half the stamina. The attack cost is attackDamage * 0.75 + weaponWeight * 1.8 (in the basic-attack
  * listener); halving both factors halves every attack, including weapons the stamina config doesn't list.
  */
@@ -19,5 +22,10 @@ public abstract class StaminaHandlerMixin {
     @ModifyConstant(method = "lambda$ensureEventListenersInitialized$0", constant = @Constant(floatValue = 1.8F), require = 1)
     private static float mdvlcraft$halveWeightFactor(float factor) {
         return 0.9F;
+    }
+
+    @ModifyConstant(method = "onPlayerTick", constant = @Constant(floatValue = 0.14F), require = 1)
+    private static float mdvlcraft$fasterRegen(float baseRegen) {
+        return 0.168F;
     }
 }
