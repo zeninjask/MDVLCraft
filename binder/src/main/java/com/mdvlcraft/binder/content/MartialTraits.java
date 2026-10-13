@@ -37,6 +37,7 @@ import yesman.epicfight.skill.guard.GuardSkill;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem.WeaponCategories;
+import yesman.epicfight.world.capabilities.item.WeaponCategory;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType;
 
 /** The behaviour behind the Martial (combat) classes' marker powers (data/mdvlcraft/powers). */
@@ -147,7 +148,7 @@ public final class MartialTraits {
     }
 
     private static boolean holdingSpear(Player player) {
-        WeaponCategories category = (WeaponCategories)EpicFightCapabilities.getItemStackCapability(player.getMainHandItem()).getWeaponCategory();
+        WeaponCategory category = EpicFightCapabilities.getItemStackCapability(player.getMainHandItem()).getWeaponCategory();
         return category == WeaponCategories.SPEAR || category == WeaponCategories.TRIDENT;
     }
 
