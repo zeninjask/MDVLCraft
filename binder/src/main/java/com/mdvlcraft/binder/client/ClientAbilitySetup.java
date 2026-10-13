@@ -30,10 +30,10 @@ public final class ClientAbilitySetup {
         MinecraftForge.EVENT_BUS.addListener(ClientAbilitySetup::onLoggingOut);
         MinecraftForge.EVENT_BUS.addListener(DqGui::onTooltipColour);
         MinecraftForge.EVENT_BUS.addListener(SpellPreviews::onClientTick);
-        modBus.addListener(DqRecruits::onAddPackFinders);
+        modBus.addListener(DqSkins::onAddPackFinders);
         modBus.addListener(BdHillFix::onAddPackFinders);
-        MinecraftForge.EVENT_BUS.addListener(DqRecruits::onRenderPre);
-        MinecraftForge.EVENT_BUS.addListener(DqRecruits::onRenderPost);
+        MinecraftForge.EVENT_BUS.addListener(DqSkins::onRenderPre);
+        MinecraftForge.EVENT_BUS.addListener(DqSkins::onRenderPost);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, false, Pre.class, TrueInvisibilityRender::onRenderLiving);
     }
 
