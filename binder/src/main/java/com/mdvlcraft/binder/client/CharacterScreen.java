@@ -242,7 +242,9 @@ public class CharacterScreen extends Screen {
                     double damage = valueWith(player, Attributes.ATTACK_DAMAGE, stack);
                     double speed = valueWith(player, Attributes.ATTACK_SPEED, stack);
                     String name = slot + 1 + "  " + stack.getHoverName().getString();
-                    var45 = this.row(g, right, colW, var45, Component.literal(this.font.plainSubstrByWidth(name, colW - 34)), fixed(damage * speed, 1));
+                    double enchanted = EnchantedDamage.bestCase(stack, damage);
+                    String dps = fixed(damage * speed, 1) + (enchanted > damage + 0.05 ? " (" + fixed(enchanted * speed, 1) + ")" : "");
+                    var45 = this.row(g, right, colW, var45, Component.literal(name), dps);
                     weapons++;
                 }
             }
