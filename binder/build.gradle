@@ -105,6 +105,10 @@ dependencies {
     compileOnly files('libs/origins-forge-1.20.1-1.10.0.9-all.jar')
     // Bountiful: BountyLean leans new board bounties toward nearby players' Job and Martial decrees
     compileOnly files('libs/Bountiful-6.0.4+1.20.1-forge.jar', 'libs/Kambrik-6.1.1+1.20.1-forge.jar')
+    // Stamina Interactions Reworked: StaminaMonitorMixin softens the out-of-stamina effects
+    compileOnly files('libs/stamina_interactions_reworked-2.3.jar')
+    // Parties: PartiesBufferMixin fixes its ghost rendering crash on enchanted items
+    compileOnly files('libs/Parties-1.20.1-2.2.0.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))
