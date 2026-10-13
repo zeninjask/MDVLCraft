@@ -1,0 +1,12 @@
+{
+  "type": "origins:modify_damage_dealt",
+  "name": "Sun-dulled",
+  "description": "By day you deal 10% less damage.",
+  "condition": {
+    "type": "origins:daytime"
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": -0.1
+  }
+}
