@@ -138,24 +138,15 @@ public class CharacterScreen extends Screen {
             y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.race"), originName(player, RACE_LAYER));
             y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.martial"), originName(player, MARTIAL_LAYER));
             y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.job"), originName(player, JOB_LAYER));
-            y += 6;
             y = this.row(
                 g,
                 left,
                 colW,
                 y,
                 Component.translatable("screen.mdvlcraft.character.experience"),
-                archetype.<String>map(a -> String.valueOf(a.getCurrentExperience())).orElse("n/a")
+                archetype.<String>map(a -> a.getCurrentExperience() + " / " + (a.getCurrentExperience() + a.getExperienceToNextLevel())).orElse("n/a")
             );
-            y = this.row(
-                g,
-                left,
-                colW,
-                y,
-                Component.translatable("screen.mdvlcraft.character.next_level"),
-                archetype.<String>map(a -> String.valueOf(a.getExperienceToNextLevel())).orElse("n/a")
-            );
-            y += 14;
+            y += 8;
             y = this.heading(g, left, y, "screen.mdvlcraft.character.attributes");
             y = this.attr(g, player, left, colW, y, "minecraft:generic.attack_damage", v -> fixed(v, 1));
             y = this.attr(g, player, left, colW, y, "minecraft:generic.attack_speed", v -> fixed(v, 2));
