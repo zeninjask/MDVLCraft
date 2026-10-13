@@ -16,11 +16,6 @@ public record SpellAbility(AbstractSpell spell) implements Ability {
     }
 
     @Override
-    public ResourceLocation icon() {
-        return this.spell.getSpellIconResource();
-    }
-
-    @Override
     public int manaCost(int level) {
         return this.spell.getManaCost(level);
     }

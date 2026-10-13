@@ -14,7 +14,7 @@ public enum StanceAbility implements Ability {
     }
 
     public static ResourceLocation icon(StanceElement element) {
-        return ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/stance_" + element.name().toLowerCase() + ".png");
+        return AbilityIcons.ability(ResourceLocation.fromNamespaceAndPath("mdvlcraft", "stance_" + element.name().toLowerCase()));
     }
 
     @Override
@@ -25,11 +25,6 @@ public enum StanceAbility implements Ability {
     @Override
     public Component displayName() {
         return Component.translatable("ability.mdvlcraft.stance");
-    }
-
-    @Override
-    public ResourceLocation icon() {
-        return ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/stance.png");
     }
 
     @Override

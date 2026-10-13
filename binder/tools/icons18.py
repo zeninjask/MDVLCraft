@@ -391,11 +391,11 @@ def m_shield(P, A):
 
 
 def m_heart(P, A):
-    IC.shade(heart_cells(13, 13.5, 9.6), P)
+    IC.shade(heart_cells(13, 14.2, 8.6), P)
 
 
 def m_heal(P, A):
-    IC.shade(heart_cells(13, 13.5, 9.6), P)
+    IC.shade(heart_cells(13, 14.2, 8.6), P)
     IC.shade(poly([(11.5, 8), (14.5, 8), (14.5, 18), (11.5, 18)]) | poly([(8, 11.5), (18, 11.5), (18, 14.5), (8, 14.5)]), RAMPS['white'], hi=False)
 
 
@@ -720,11 +720,14 @@ def m_drop(P, A):
 
 
 def m_fangs(P, A):
-    mouth = region(lambda x, y: math.hypot(x - 13, y - 6) <= 15 and math.hypot(x - 13, y - 2) > 13 and y > 10)
-    IC.shade(mouth, P, hi=False)
-    for cx in (8, 18):
-        IC.shade(poly([(cx - 2.5, 13), (cx + 2.5, 13), (cx, 22)]), RAMPS['white'], hi=False)
-    IC.fill(poly([(4, 7), (22, 7), (20, 10), (6, 10)]), P[2])
+    """An open jaw: dark mouth, two long fangs above and two below."""
+    IC.shade(ellipse(13, 13, 10, 8), P)
+    IC.fill(ellipse(13, 13.5, 7.5, 4.6), RAMPS['shadow'][0])
+    W = RAMPS['white']
+    for cx in (8.5, 17.5):
+        IC.shade(poly([(cx - 2.2, 9), (cx + 2.2, 9), (cx, 16)]), W, hi=False)
+    for cx in (11, 15):
+        IC.shade(poly([(cx - 1.6, 18), (cx + 1.6, 18), (cx, 13.5)]), W, hi=False)
 
 
 def m_waves(P, A):
@@ -935,7 +938,8 @@ MOTIFS = {k[2:]: v for k, v in globals().items() if k.startswith('m_')}
 # -- keyword rules (first match wins; order matters) ----------------------------------------------------------------------
 RULES = [
     # specific nouns first, element words last
-    (r'myriad', 'blades_ring'),
+    (r'myriad|armory', 'blades_ring'),
+    (r'celestial', 'star'),
     (r'dancing', 'sword_trail'),
     (r'stance', 'stance_katana'),
     (r'magic blade: enchant|enchant slash', 'sword_sparkle'),
@@ -944,6 +948,15 @@ RULES = [
     (r'magic blade: element|element slash', 'element_slash'),
     (r'iron slash', 'slash'),
     (r'surprise', 'exclaim'),
+    (r'greatbow|bow\b', 'bow'),
+    (r'marked|mark\b', 'target'),
+    (r'volley|barrage volley|auto arrow', 'arrows'),
+    (r'arrow', 'arrow'),
+    (r'roll\b', 'vortex'),
+    (r'jump|leap\b|ascent', 'up'),
+    (r'haste|speedup|sprint|tailwind', 'feather'),
+    (r'kick', 'stomp'),
+    (r'ender step|ender\b', 'portal'),
     (r'soulfall', 'comet'),
     (r'heartstop|heart|adrenaline|dopamine|vitality|hyper', 'heart'),
     (r'heal|regenerat|blessing of life|life tap|vigor|cleanse|devotion|lullaby|comfort', 'heal'),
@@ -957,7 +970,7 @@ RULES = [
     (r'bird|crow|winged|wing', 'wings'),
     (r'firefly|swarm|flies|nocturnal|cysts|bees', 'swarm'),
     (r'grab|grasp|manipulat|hand|touch dig', 'hand'),
-    (r'verse|ledger|knowledge|lore|wisdom|grimoire|tome|book', 'book'),
+    (r'verse|ledger|knowledge|lore\b|wisdom|grimoire|tome|book', 'book'),
     (r'casting|chant|time|stasis|dilated|slow|debt|sand|hourglass|clock', 'hourglass'),
     (r'shield|barrier|bastion|guard|fortify|oakskin|plate|ward|parry|bulwark|block|custodia|immunity', 'shield'),
     (r'skin|hide|endurance', 'chestplate'),

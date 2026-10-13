@@ -16,7 +16,10 @@ public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbilit
 
     Component displayName();
 
-    ResourceLocation icon();
+    /** The ability's 18x18 icon (tools/icons18.py). */
+    default ResourceLocation icon() {
+        return AbilityIcons.ability(this.id());
+    }
 
     int manaCost(int var1);
 

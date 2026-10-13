@@ -27,12 +27,12 @@ final class AbilityDisplay {
     static void drawIcon(GuiGraphics graphics, Ability ability, int x, int y) {
         if (ability instanceof StanceAbility) {
             int self = Minecraft.getInstance().player.getId();
-            graphics.blit(StanceAbility.icon(ClientStances.element(self)), x, y, 0.0F, 0.0F, 16, 16, 16, 16);
+            graphics.blit(StanceAbility.icon(ClientStances.element(self)), x, y, 16, 16, 0.0F, 0.0F, 18, 18, 18, 18);
             if (ClientStances.active(self).isEmpty()) {
                 graphics.fill(x, y, x + 16, y + 16, -1879048192);
             }
         } else {
-            graphics.blit(ability.icon(), x, y, 0.0F, 0.0F, 16, 16, 16, 16);
+            graphics.blit(ability.icon(), x, y, 16, 16, 0.0F, 0.0F, 18, 18, 18, 18);
             float cooldown = ability instanceof SpellAbility spell
                 ? ClientMagicData.getCooldownPercent(spell.spell())
                 : (ability instanceof Technique technique ? ClientTechniqueCooldowns.percent(technique) : 0.0F);

@@ -7,7 +7,6 @@ public enum DoppelgangerAbility implements Ability {
     INSTANCE;
 
     private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "doppelganger");
-    private static final ResourceLocation ICON = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/icons/ability/doppelganger.png");
 
     @Override
     public ResourceLocation id() {
@@ -19,10 +18,6 @@ public enum DoppelgangerAbility implements Ability {
         return Component.translatable("ability.mdvlcraft.doppelganger");
     }
 
-    @Override
-    public ResourceLocation icon() {
-        return ICON;
-    }
 
     @Override
     public int manaCost(int level) {

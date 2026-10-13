@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.ability.AbilityIcons;
 import com.mdvlcraft.binder.epicskill.EquipSkillPacket;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -139,7 +140,7 @@ final class CombatSkillsPanel {
 
     private static void drawIcon(GuiGraphics graphics, Skill skill, int x, int y) {
         RenderSystem.enableBlend();
-        graphics.blit(skill.getSkillTexture(), x, y, 16, 16, 0.0F, 0.0F, 128, 128, 128, 128);
+        graphics.blit(AbilityIcons.skill(skill.getRegistryName()), x, y, 16, 16, 0.0F, 0.0F, 18, 18, 18, 18);
     }
 
     Optional<List<FormattedCharSequence>> tooltip(double mouseX, double mouseY) {

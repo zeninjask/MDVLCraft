@@ -21,22 +21,20 @@ import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 
 public enum SlotSkillAbility implements Ability {
-    MYRIAD_BLADES("myriad_blades", "sword_soaring:wan_jian_gui_zong", 35, "sword_soaring:textures/gui/skills/sword_controller/wan_jian_gui_zong.png"),
-    BABYLONIAN_ARMORY("babylonian_armory", "sword_soaring:babylon", 35, "sword_soaring:textures/gui/skills/sword_controller/babylon.png"),
-    CELESTIAL_ARRAY("celestial_array", "sword_soaring:rain_sword", 30, "sword_soaring:textures/gui/skills/sword_controller/rain_sword.png"),
-    SOUL_HUNT("soul_hunt", "efn:execution", 20, "efn:textures/gui/skills/efn_arts/execution.png"),
-    GRAVITY_STOMP("gravity_stomp", "efn:stomp", 15, "efn:textures/gui/skills/efn_arts/stomp.png");
+    MYRIAD_BLADES("myriad_blades", "sword_soaring:wan_jian_gui_zong", 35),
+    BABYLONIAN_ARMORY("babylonian_armory", "sword_soaring:babylon", 35),
+    CELESTIAL_ARRAY("celestial_array", "sword_soaring:rain_sword", 30),
+    SOUL_HUNT("soul_hunt", "efn:execution", 20),
+    GRAVITY_STOMP("gravity_stomp", "efn:stomp", 15);
 
     private final ResourceLocation id;
     private final String skillId;
     private final int manaCost;
-    private final ResourceLocation icon;
 
-    SlotSkillAbility(String name, String skillId, int manaCost, String icon) {
+    SlotSkillAbility(String name, String skillId, int manaCost) {
         this.id = ResourceLocation.fromNamespaceAndPath("mdvlcraft", name);
         this.skillId = skillId;
         this.manaCost = Math.round(manaCost * Ability.MANA_SCALE);
-        this.icon = ResourceLocation.parse(icon);
     }
 
     public static Optional<SlotSkillAbility> byId(ResourceLocation id) {
@@ -51,11 +49,6 @@ public enum SlotSkillAbility implements Ability {
     @Override
     public Component displayName() {
         return Component.translatable("ability.mdvlcraft." + this.id.getPath());
-    }
-
-    @Override
-    public ResourceLocation icon() {
-        return this.icon;
     }
 
     @Override

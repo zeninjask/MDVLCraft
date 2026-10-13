@@ -6,47 +6,45 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public enum Technique implements Ability {
-    DISMANTLE("dismantle", 26, 12, 1, true, "minecraft:textures/item/shears.png"),
-    CLEAVE("cleave", 27, 20, 3, true, "minecraft:textures/item/iron_axe.png"),
-    MALEVOLENT_SHRINE("malevolent_shrine", 31, 100, 120, false, "cursedfate:textures/screens/closedshrinevarient.png"),
-    OPEN_MALEVOLENT_SHRINE("open_malevolent_shrine", 31, 100, 120, false, "cursedfate:textures/screens/openshrinevarient.png"),
-    BOOGIE_WOOGIE("boogie_woogie", 32, 10, 2, false, "minecraft:textures/item/ender_pearl.png"),
-    BLOCK_CLAP("block_clap", 33, 10, 2, false, "minecraft:textures/item/chorus_fruit.png"),
-    BLITZ("blitz", 60, 15, 8, false, "cursedfate:textures/mob_effect/blitz_effect.png"),
-    SURPRISE_ATTACK("surprise_attack", 66, 15, 15, false, "mdvlcraft:textures/gui/icons/tab/assassin.png"),
-    FOLLOW_UP_KICK("follow_up_kick", 114, 15, 6, false, "naoyaaddon:textures/screens/naoyaicon.png"),
-    PHANTOM_MOVEMENT("phantom_movement", 118, 20, 0, false, "mdvlcraft:textures/gui/icons/ability/phantom_movement.png"),
-    SILENT_APPRAISAL("silent_appraisal", 113, 20, 15, false, "mdvlcraft:textures/gui/icons/ability/silent_appraisal.png"),
-    BLIND_INVESTMENT("blind_investment", 115, 15, 15, false, "mdvlcraft:textures/gui/icons/ability/blind_investment.png"),
-    BIRD_STRIKE("bird_strike", 116, 20, 15, false, "mdvlcraft:textures/gui/icons/ability/bird_strike.png"),
-    CONTROLLED_COLLAPSE("controlled_collapse", 117, 40, 40, false, "mdvlcraft:textures/gui/icons/ability/controlled_collapse.png"),
-    HEAVY_BLOW("heavy_blow", 8, 15, 5, false, "mdvlcraft:textures/gui/icons/ability/heavy_blow.png"),
-    BARRAGE("barrage", 9, 20, 8, true, "mdvlcraft:textures/gui/icons/ability/barrage.png"),
-    UPPERCUT("uppercut", 10, 15, 9, false, "mdvlcraft:textures/gui/icons/ability/uppercut.png"),
-    FOLLOW_UP_PUNCH("follow_up_punch", 11, 20, 15, false, "mdvlcraft:textures/gui/icons/ability/follow_up_punch.png"),
-    LEAPING_CRUSH("leaping_crush", 63, 30, 12, false, "mdvlcraft:textures/gui/icons/ability/leaping_crush.png"),
-    FOCUS("focus", -1, 30, 30, false, "mdvlcraft:textures/gui/icons/ability/focus.png"),
-    KNOCKOUT("knockout", -1, 25, 20, false, "mdvlcraft:textures/gui/icons/ability/knockout.png"),
-    BLOOD_METEORITE("blood_meteorite", 87, 20, 3, false, "cursedfate:textures/particle/bloodorb2.png"),
-    SLICING_EXORCISM("slicing_exorcism", 88, 30, 10, false, "cursedfate:textures/particle/bloodslash.png"),
-    CONVERGENCE("convergence", 90, 25, 20, false, "cursedfate:textures/mob_effect/convergence.png"),
-    PIERCING_BLOOD("piercing_blood", 92, 15, 2, true, "cursedfate:textures/screens/bloodmanipulationicon.png"),
-    CRIMSON_BINDING("crimson_binding", 93, 25, 12, false, "cursedfate:textures/screens/crimsonbindingability.png");
+    DISMANTLE("dismantle", 26, 12, 1, true),
+    CLEAVE("cleave", 27, 20, 3, true),
+    MALEVOLENT_SHRINE("malevolent_shrine", 31, 100, 120, false),
+    OPEN_MALEVOLENT_SHRINE("open_malevolent_shrine", 31, 100, 120, false),
+    BOOGIE_WOOGIE("boogie_woogie", 32, 10, 2, false),
+    BLOCK_CLAP("block_clap", 33, 10, 2, false),
+    BLITZ("blitz", 60, 15, 8, false),
+    SURPRISE_ATTACK("surprise_attack", 66, 15, 15, false),
+    FOLLOW_UP_KICK("follow_up_kick", 114, 15, 6, false),
+    PHANTOM_MOVEMENT("phantom_movement", 118, 20, 0, false),
+    SILENT_APPRAISAL("silent_appraisal", 113, 20, 15, false),
+    BLIND_INVESTMENT("blind_investment", 115, 15, 15, false),
+    BIRD_STRIKE("bird_strike", 116, 20, 15, false),
+    CONTROLLED_COLLAPSE("controlled_collapse", 117, 40, 40, false),
+    HEAVY_BLOW("heavy_blow", 8, 15, 5, false),
+    BARRAGE("barrage", 9, 20, 8, true),
+    UPPERCUT("uppercut", 10, 15, 9, false),
+    FOLLOW_UP_PUNCH("follow_up_punch", 11, 20, 15, false),
+    LEAPING_CRUSH("leaping_crush", 63, 30, 12, false),
+    FOCUS("focus", -1, 30, 30, false),
+    KNOCKOUT("knockout", -1, 25, 20, false),
+    BLOOD_METEORITE("blood_meteorite", 87, 20, 3, false),
+    SLICING_EXORCISM("slicing_exorcism", 88, 30, 10, false),
+    CONVERGENCE("convergence", 90, 25, 20, false),
+    PIERCING_BLOOD("piercing_blood", 92, 15, 2, true),
+    CRIMSON_BINDING("crimson_binding", 93, 25, 12, false);
 
     private final ResourceLocation id;
     final int abilityId;
     private final int manaCost;
     private final int cooldownTicks;
     final boolean held;
-    private final ResourceLocation icon;
 
-    Technique(String name, int abilityId, int manaCost, int cooldownSeconds, boolean held, String icon) {
+    Technique(String name, int abilityId, int manaCost, int cooldownSeconds, boolean held) {
         this.id = ResourceLocation.fromNamespaceAndPath("mdvlcraft", name);
         this.abilityId = abilityId;
         this.manaCost = Math.round(manaCost * Ability.MANA_SCALE);
         this.cooldownTicks = cooldownSeconds * 20;
         this.held = held;
-        this.icon = ResourceLocation.parse(icon);
     }
 
     public int cooldownTicks() {
@@ -99,10 +97,6 @@ public enum Technique implements Ability {
         return Component.translatable("ability.mdvlcraft." + this.id.getPath());
     }
 
-    @Override
-    public ResourceLocation icon() {
-        return this.icon;
-    }
 
     @Override
     public int manaCost(int level) {

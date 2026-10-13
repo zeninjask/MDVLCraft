@@ -24,6 +24,8 @@ EMBLEMS = {
     'wanderer': ('compass', 'wood'), 'stalker': ('arrows', 'forest'), 'druid': ('leaf', 'nature'), 'cursed': ('rune', 'cursed'),
     'bloodborn': ('drop', 'blood'), 'magehunter': ('greatsword', 'anti_magic', 'rune', 'anti_magic'), 'classes': ('star', 'gold'),
 }
+# abilities the binder defines that no tree grants (still need a menu icon)
+UNTREED = {'mdvlcraft:babylonian_armory': ('Babylonian Armory', 'samurai'), 'mdvlcraft:celestial_array': ('Celestial Array', 'samurai')}
 STANCES = {'fire': ('flame', 'fire'), 'wind': ('tornado', 'wind'), 'water': ('wave', 'aqua'), 'earth': ('spikes', 'wood')}
 
 
@@ -67,6 +69,8 @@ def main():
                 inv.setdefault(a, dict(kind='bonus', name=name))
     for cat in [os.path.basename(os.path.dirname(p)) for p in glob.glob(os.path.join(CATEGORIES, '*/category.json'))]:
         inv['tab:' + cat] = emblem('tab', cat, EMBLEMS[cat])
+    for iid, (name, cat) in UNTREED.items():
+        inv.setdefault(iid, dict(kind='technique', name=name, school='', cats=[cat]))
     for element, spec in STANCES.items():
         inv['mdvlcraft:stance_' + element] = emblem('ability', 'Stance ' + element, spec)
     json.dump(inv, open(sys.argv[1], 'w'), indent=1)

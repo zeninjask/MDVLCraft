@@ -19,7 +19,6 @@ public enum SustenanceAbility implements Ability {
     public static final int FOOD = 2;
     public static final float SATURATION_MODIFIER = 1.0F;
     private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "arcane_sustenance");
-    private static final ResourceLocation ICON = ResourceLocation.fromNamespaceAndPath("minecraft", "textures/mob_effect/saturation.png");
 
     @Override
     public ResourceLocation id() {
@@ -31,10 +30,6 @@ public enum SustenanceAbility implements Ability {
         return Component.translatable("ability.mdvlcraft.arcane_sustenance");
     }
 
-    @Override
-    public ResourceLocation icon() {
-        return ICON;
-    }
 
     @Override
     public int manaCost(int level) {

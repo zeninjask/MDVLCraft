@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.ability.AbilityIcons;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.network.RespecPacket;
 import com.mdvlcraft.binder.skills.Respec;
@@ -192,7 +193,7 @@ public class RespecScreen extends Screen {
 
         IconButton(int x, int y, int w, int h, Component label, String archetype, Runnable action) {
             super(x, y, w, h, label, action);
-            this.icon = archetype == null ? null : ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/astro/tab/" + archetype + ".png");
+            this.icon = archetype == null ? null : AbilityIcons.tab(archetype);
             this.labelOffset = archetype == null ? 0 : 8;
         }
 
@@ -200,7 +201,7 @@ public class RespecScreen extends Screen {
         protected void renderWidget(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
             super.renderWidget(g, mouseX, mouseY, partialTick);
             if (this.icon != null) {
-                g.blit(this.icon, this.getX() + 3, this.getY() + (this.height - 16) / 2, 0.0F, 0.0F, 16, 16, 16, 16);
+                g.blit(this.icon, this.getX() + 3, this.getY() + (this.height - 16) / 2, 16, 16, 0.0F, 0.0F, 18, 18, 18, 18);
             }
         }
     }
