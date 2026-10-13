@@ -103,6 +103,8 @@ dependencies {
     compileOnly files('libs/apoli-forge-1.20.1-2.9.0.8.jar')
     // Origins: the status page shows the player's race, Martial class and job (client/CharacterScreen).
     compileOnly files('libs/origins-forge-1.20.1-1.10.0.9-all.jar')
+    // Bountiful: BountyLean leans new board bounties toward nearby players' Job and Martial decrees
+    compileOnly files('libs/Bountiful-6.0.4+1.20.1-forge.jar', 'libs/Kambrik-6.1.1+1.20.1-forge.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))
