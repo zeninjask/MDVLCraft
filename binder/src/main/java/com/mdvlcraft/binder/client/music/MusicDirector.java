@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.client.music;
 
 import com.mdvlcraft.binder.music.Jingle;
+import com.mojang.logging.LogUtils;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.ConnectScreen;
@@ -26,6 +27,7 @@ import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import org.slf4j.Logger;
 
 /**
  * The pack's music: picks a pool from where the player is (menus, villages by day and night, caves, oceans, the wilds),
@@ -34,6 +36,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  */
 @EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
 public final class MusicDirector {
+    private static final Logger LOGGER = LogUtils.getLogger();
     static final float VOLUME = 0.35F;
     private static final float DUCKED = 0.06F;
     private static final float JINGLE_VOLUME = 0.6F;
@@ -103,6 +106,7 @@ public final class MusicDirector {
             current = new MusicTrack(pool, pick(pool.tracks));
             lastTrack = current.track;
             sounds.play(current);
+            LOGGER.info("Music: {} playing {} (active {})", pool, current.track, sounds.isActive(current));
         }
     }
 
