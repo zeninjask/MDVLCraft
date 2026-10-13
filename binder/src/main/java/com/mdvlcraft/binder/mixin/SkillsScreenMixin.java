@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.mixin;
 
+import com.mdvlcraft.binder.client.DqGui;
 import com.mdvlcraft.binder.client.SpellPreviews;
 import java.util.Optional;
 import javax.annotation.Nullable;
@@ -41,8 +42,6 @@ public abstract class SkillsScreenMixin {
     private static final Vector4fc mdvlcraft$AFFORDABLE = new Vector4f(0.94F, 0.95F, 1.0F, 1.0F);
     @Unique
     private static final Vector4fc mdvlcraft$EXCLUDED = new Vector4f(0.24F, 0.26F, 0.4F, 1.0F);
-    @Unique
-    private static final int mdvlcraft$TITLE_TEXT = -1512206;
     @Shadow
     @Final
     @Mutable
@@ -111,7 +110,7 @@ public abstract class SkillsScreenMixin {
 
     @ModifyConstant(method = {"drawWindow", "drawWindowWithCategory"}, constant = @Constant(intValue = -12566464))
     private int mdvlcraft$titleText(int colour) {
-        return -1512206;
+        return DqGui.TEXT;
     }
 
     @Redirect(

@@ -132,7 +132,7 @@ public class MenuScreen extends Screen {
 
             int y = this.panelY + 40 + i / columns * 26;
             String more = !door.key().equals("recruits") && !door.key().equals("map") ? "" : "  ›";
-            AstroGui.Button button = new AstroGui.Button(
+            DqGui.Button button = new DqGui.Button(
                 x, y, 150, 20, Component.literal(Component.translatable("screen.mdvlcraft.menu." + door.key()).getString() + more), door.open()
             );
             button.active = door.available();
@@ -140,7 +140,7 @@ public class MenuScreen extends Screen {
         }
 
         this.addRenderableWidget(
-            new AstroGui.Button(
+            new DqGui.Button(
                 this.panelX + (this.panelW - 80) / 2,
                 this.panelY + this.panelH - 28,
                 80,
@@ -164,9 +164,9 @@ public class MenuScreen extends Screen {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(g);
-        AstroGui.panel(g, this.panelX, this.panelY, this.panelW, this.panelH);
-        g.drawString(this.font, "✦ " + this.title.getString(), this.panelX + 12, this.panelY + 12, -2047366, false);
-        g.fill(this.panelX + 10, this.panelY + 28, this.panelX + this.panelW - 10, this.panelY + 29, 1621789776);
+        DqGui.window(g, this.panelX, this.panelY, this.panelW, this.panelH);
+        g.drawString(this.font, "✦ " + this.title.getString(), this.panelX + 12, this.panelY + 12, DqGui.TEXT, false);
+        DqGui.rule(g, this.panelX + 3, this.panelX + this.panelW - 3, this.panelY + 28);
         super.render(g, mouseX, mouseY, partialTick);
     }
 

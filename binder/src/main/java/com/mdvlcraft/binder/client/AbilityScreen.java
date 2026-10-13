@@ -94,13 +94,13 @@ public final class AbilityScreen extends Screen {
         this.placeCombatSkills();
         int panelHeight = this.panelHeight();
         int textX = this.left() + 10;
-        SlateGui.panel(graphics, this.font, this.title, this.left(), this.top(), 194, panelHeight);
+        DqGui.panel(graphics, this.font, this.title, this.left(), this.top(), 194, panelHeight);
         List<Ability> abilities = this.abilities();
         if (abilities.isEmpty()) {
             List<FormattedCharSequence> none = this.font.split(Component.translatable("screen.mdvlcraft.abilities.none"), 174);
 
             for (int line = 0; line < none.size(); line++) {
-                graphics.drawString(this.font, none.get(line), textX, this.listTop() + 4 + line * 10, -7826784, false);
+                graphics.drawString(this.font, none.get(line), textX, this.listTop() + 4 + line * 10, DqGui.MUTED, false);
             }
         }
 
@@ -108,24 +108,24 @@ public final class AbilityScreen extends Screen {
             Ability ability = abilities.get(i);
             int x = this.abilityX(i);
             int y = this.abilityY(i);
-            SlateGui.slot(graphics, x, y, 20, ability == this.picked ? SlateGui.Slot.PICKED : SlateGui.Slot.FILLED);
+            DqGui.slot(graphics, x, y, 20, ability == this.picked ? DqGui.Slot.PICKED : DqGui.Slot.FILLED);
             AbilityDisplay.drawIcon(graphics, ability, x + 2, y + 2);
         }
 
-        graphics.drawString(this.font, Component.translatable("screen.mdvlcraft.abilities.wheel"), textX, this.slotY() - 12, -7826784, false);
+        graphics.drawString(this.font, Component.translatable("screen.mdvlcraft.abilities.wheel"), textX, this.slotY() - 12, DqGui.MUTED, false);
 
         for (int slot = 0; slot < 8; slot++) {
             int x = this.slotX(slot);
-            SlateGui.slot(graphics, x, this.slotY(), 20, ClientAbilities.slot(slot).isPresent() ? SlateGui.Slot.FILLED : SlateGui.Slot.EMPTY);
+            DqGui.slot(graphics, x, this.slotY(), 20, ClientAbilities.slot(slot).isPresent() ? DqGui.Slot.FILLED : DqGui.Slot.EMPTY);
             ClientAbilities.slot(slot).ifPresent(ability -> AbilityDisplay.drawIcon(graphics, ability, x + 2, this.slotY() + 2));
             String number = String.valueOf(slot + 1);
-            graphics.drawString(this.font, number, x + (20 - this.font.width(number)) / 2 + 1, this.slotY() + 20 + 3, -7826784, false);
+            graphics.drawString(this.font, number, x + (20 - this.font.width(number)) / 2 + 1, this.slotY() + 20 + 3, DqGui.MUTED, false);
         }
 
-        SlateGui.rule(graphics, textX, this.left() + 194 - 10, this.hintTop() - 6);
+        DqGui.rule(graphics, textX, this.left() + 194 - 10, this.hintTop() - 6);
 
         for (int line = 0; line < hintLines.size(); line++) {
-            graphics.drawString(this.font, hintLines.get(line), textX, this.hintTop() + line * 10, -7826784, false);
+            graphics.drawString(this.font, hintLines.get(line), textX, this.hintTop() + line * 10, DqGui.MUTED, false);
         }
 
         this.combatSkills.render(graphics, panelHeight);

@@ -29,7 +29,7 @@ final class AbilityHud implements IGuiOverlay {
             int x = screenWidth - width - 4;
             int y = screenHeight - 30;
             SlateGui.panel(graphics, x, y, width, 26);
-            SlateGui.slot(graphics, x + 3, y + 3, 20, SlateGui.Slot.FILLED);
+            SlateGui.slot(graphics, x + 3, y + 3, 20);
             graphics.drawString(minecraft.font, number, x + width - 6 - minecraft.font.width(number), y + 5, -7826784, false);
             ability.ifPresent(selected -> {
                 AbilityDisplay.drawIcon(graphics, selected, x + 5, y + 5);

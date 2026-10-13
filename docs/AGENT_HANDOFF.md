@@ -72,12 +72,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 
 ## Unfinished work
 
-- **Bountiful boards lean toward nearby players' origins.** It's committed on the branch but hasn't been boot-tested yet. The pieces are `content/BountyLean.java`, `mixin/bountiful/BoardBlockEntityMixin.java` (a `@ModifyArg` on `BoardBlockEntity.randomlyUpdateBoard` → `BountyCreator$Companion.createBountyItem`, argument 2), a new `mdvlcraft_hunter` decree and kill-objective pool under `src/main/resources/data/bountiful/`, and the compile-only jars `binder/libs/Bountiful-*.jar` and `Kambrik-*.jar`. Next step: boot a server and confirm the mixin applies and Bountiful loads the decree.
-- **Not yet in any pack:**
-  - The guide book replaces the KubeJS first-join Book and Quill. Remove the "A Book and Quill for notes, once." block from `base/{client,server}/overrides/kubejs/server_scripts/mdvlcraft_start.js` when you recreate the base.
-  - The status page origin tooltips.
-  - The 30-second to 3-minute gap between music tracks.
-  - The Bountiful work above.
-
-  All of these go out in 1.9.25.
+- **Branch `seb-agent`** (another agent's branch, merged into the development branch by the agent who releases): the Spectral Rondo pose-stack crash fix and the Dragon Quest IX look for every menu (font, `client/DqGui`, button and slider mixins, skill screen textures, Recruits and Origins skins; see `binder/README.md` item 8). Everything ships in the binder jar except one pack setting:
+  - `base/client/overrides/options.txt`: `darkMojangStudiosBackground:true` (black loading screens, Forge's early window included). The file has CRLF line endings.
 - **Known intermittent issue:** one test client start crashed inside VanillaBackport with "Registry is already frozen". Blackgear Platform unfreezes and refreezes the root registry. It couldn't be reproduced, so it's left alone.
+- **Client tests here:** the full client needs about 10 GB and is OOM-killed next to a server. Move JEI out of both the test client's and the test server's mods folders (its recipe loading is the spike; the server refuses a client without it).
