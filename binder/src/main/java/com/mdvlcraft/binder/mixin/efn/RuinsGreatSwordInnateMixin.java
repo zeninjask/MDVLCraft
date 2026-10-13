@@ -1,14 +1,36 @@
 package com.mdvlcraft.binder.mixin.efn;
 
+import com.hm.efn.gameasset.EFNSKillDataKeys;
 import com.hm.efn.gameasset.animations.EFNGreatSwordAnimations;
 import com.hm.efn.skill.weapon_innate.RuinsGreatSwordInnate;
+import com.mdvlcraft.binder.client.RuinsChargeInput;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import yesman.epicfight.api.animation.AnimationManager.AnimationAccessor;
+import yesman.epicfight.skill.SkillContainer;
 
 @Mixin(value = RuinsGreatSwordInnate.class, remap = false)
 public abstract class RuinsGreatSwordInnateMixin {
+    /** The container handleClientInput is reading input for (client thread only). */
+    @Unique
+    private SkillContainer mdvlcraft$inputContainer;
+
+    @Inject(method = "handleClientInput", at = @At("HEAD"))
+    private void mdvlcraft$captureContainer(SkillContainer container, CallbackInfo ci) {
+        this.mdvlcraft$inputContainer = container;
+    }
+
+    /** Right-click alone charges Barbarian Arts (RuinsChargeInput). */
+    @Redirect(method = "handleClientInput", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwGetMouseButton(JI)I"), require = 2)
+    private int mdvlcraft$chargeOnRightClick(long window, int button) {
+        boolean charging = this.mdvlcraft$inputContainer.getDataManager().getDataValue(EFNSKillDataKeys.IS_PRESSING.get());
+        return RuinsChargeInput.mouseButton(window, button, charging);
+    }
+
     @Redirect(
         method = {
                 "forceReleaseDueToLowStamina",
