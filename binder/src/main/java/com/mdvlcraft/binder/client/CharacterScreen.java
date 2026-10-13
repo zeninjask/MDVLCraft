@@ -15,10 +15,12 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.DoubleFunction;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
@@ -29,6 +31,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.damagesource.CombatRules;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -53,6 +56,12 @@ public class CharacterScreen extends Screen {
     private static final ResourceLocation RACE_LAYER = ResourceLocation.fromNamespaceAndPath("origins", "origin");
     private static final ResourceLocation MARTIAL_LAYER = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "martial");
     private static final ResourceLocation JOB_LAYER = ResourceLocation.fromNamespaceAndPath("origins-classes", "class");
+    private static final Map<ResourceLocation, String> ROW_KEYS = Map.of(
+        RACE_LAYER, "screen.mdvlcraft.character.race",
+        MARTIAL_LAYER, "screen.mdvlcraft.character.martial",
+        JOB_LAYER, "screen.mdvlcraft.character.job"
+    );
+    private static final int TOOLTIP_WIDTH = 220;
     private static final ResourceLocation SKY = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/skills/astro_sky.png");
     private static final ResourceLocation ASTROLABE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/character/astrolabe.png");
     private static final ResourceLocation EXPERIENCE = ResourceLocation.fromNamespaceAndPath("puffish_attributes", "experience");
@@ -112,8 +121,12 @@ public class CharacterScreen extends Screen {
         LocalPlayer player = Minecraft.getInstance().player;
         if (player != null) {
             float scale = this.scale();
+            float originX = (this.width - 440.0F * scale) / 2.0F;
+            float originY = (this.height - 254.0F * scale) / 2.0F;
+            int localX = Math.round((mouseX - originX) / scale);
+            int localY = Math.round((mouseY - originY) / scale);
             g.pose().pushPose();
-            g.pose().translate((this.width - 440.0F * scale) / 2.0F, (this.height - 254.0F * scale) / 2.0F, 0.0F);
+            g.pose().translate(originX, originY, 0.0F);
             g.pose().scale(scale, scale, 1.0F);
             this.panel(g);
             Font font = this.font;
@@ -135,9 +148,16 @@ public class CharacterScreen extends Screen {
                 archetype.<String>map(a -> String.valueOf(a.getCurrentLevel())).orElse("n/a")
             );
             y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.class"), className());
-            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.race"), originName(player, RACE_LAYER));
-            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.martial"), originName(player, MARTIAL_LAYER));
-            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.job"), originName(player, JOB_LAYER));
+            Origin hovered = null;
+            for (ResourceLocation layer : List.of(RACE_LAYER, MARTIAL_LAYER, JOB_LAYER)) {
+                Origin origin = origin(player, layer);
+                if (origin != null && localX >= left && localX < left + colW && localY >= y - 1 && localY < y + 10) {
+                    hovered = origin;
+                }
+
+                y = this.row(g, left, colW, y, Component.translatable(ROW_KEYS.get(layer)), origin == null ? "n/a" : origin.getName().getString());
+            }
+
             y = this.row(
                 g,
                 left,
@@ -257,6 +277,9 @@ public class CharacterScreen extends Screen {
             );
             g.pose().popPose();
             super.render(g, mouseX, mouseY, partialTick);
+            if (hovered != null) {
+                g.renderTooltip(font, powerLines(hovered), mouseX, mouseY);
+            }
         }
     }
 
@@ -309,15 +332,26 @@ public class CharacterScreen extends Screen {
         }
     }
 
-    /** The player's pick on an Origins layer, by the origin's display name. */
-    private static String originName(LocalPlayer player, ResourceLocation layerId) {
+    /** The player's pick on an Origins layer, or null before they have picked one. */
+    private static Origin origin(LocalPlayer player, ResourceLocation layerId) {
         ResourceKey<OriginLayer> layer = ResourceKey.create(OriginsAPI.getLayersRegistry().key(), layerId);
         ResourceKey<Origin> origin = IOriginContainer.get(player).map(container -> container.getOrigin(layer)).orElse(null);
         if (origin == null || !OriginsAPI.getOriginsRegistry().containsKey(origin)) {
-            return "n/a";
+            return null;
         }
 
-        return OriginsAPI.getOriginsRegistry().get(origin).getName().getString();
+        return OriginsAPI.getOriginsRegistry().get(origin);
+    }
+
+    /** The origin's name, then each visible power's name and description, wrapped for a tooltip. */
+    private List<FormattedCharSequence> powerLines(Origin origin) {
+        List<FormattedCharSequence> lines = new ArrayList<>();
+        lines.add(origin.getName().copy().withStyle(ChatFormatting.GOLD).getVisualOrderText());
+        origin.getValidPowers().map(holder -> holder.value().getData()).filter(power -> !power.hidden()).forEach(power -> {
+            lines.add(power.getName().copy().withStyle(ChatFormatting.YELLOW).getVisualOrderText());
+            lines.addAll(this.font.split(power.getDescription().copy().withStyle(ChatFormatting.GRAY), TOOLTIP_WIDTH));
+        });
+        return lines;
     }
 
     private static String className() {
