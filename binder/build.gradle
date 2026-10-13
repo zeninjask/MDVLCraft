@@ -109,6 +109,8 @@ dependencies {
     compileOnly files('libs/stamina_interactions_reworked-2.3.jar')
     // Parties: PartiesBufferMixin fixes its ghost rendering crash on enchanted items
     compileOnly files('libs/Parties-1.20.1-2.2.0.jar')
+    // Somakespells: SpectralRondoPlayerRenderHandlerMixin keeps Spectral Rondo's pose push and pop paired
+    compileOnly files('libs/somakespells-1.0.9-1.20.1-fixaltar.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))
