@@ -4,8 +4,8 @@ A Forge **1.20.1** (Forge **47.4.10**) modpack built around Epic Fight combat, c
 
 | File | What it is |
 |------|------------|
-| [`MDVLCraft-1.9.22-client.mrpack`](MDVLCraft-1.9.22-client.mrpack) | Client Modrinth pack (Modrinth App, Prism Launcher). Set 8 GB and the JVM line from [`MDVLCraft-1.9.22-Client-Java-Arguments.txt`](MDVLCraft-1.9.22-Client-Java-Arguments.txt) in the launcher |
-| [`MDVLCraft-1.9.22-Skill-Trees.pdf`](MDVLCraft-1.9.22-Skill-Trees.pdf) | Every archetype's stats, abilities, Epic Fight skills and bonuses, and every Origins race, Martial class and Job with their powers |
+| [`MDVLCraft-1.9.23-client.mrpack`](MDVLCraft-1.9.23-client.mrpack) | Client Modrinth pack (Modrinth App, Prism Launcher). Set 8 GB and the JVM line from [`MDVLCraft-1.9.23-Client-Java-Arguments.txt`](MDVLCraft-1.9.23-Client-Java-Arguments.txt) in the launcher |
+| [`MDVLCraft-1.9.23-Skill-Trees.pdf`](MDVLCraft-1.9.23-Skill-Trees.pdf) | Every archetype's stats, abilities, Epic Fight skills and bonuses, and every Origins race, Martial class and Job with their powers |
 
 ## Origin selection
 
