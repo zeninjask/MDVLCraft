@@ -37,9 +37,9 @@ import org.slf4j.Logger;
 @EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
 public final class MusicDirector {
     private static final Logger LOGGER = LogUtils.getLogger();
-    static final float VOLUME = 0.35F;
-    private static final float DUCKED = 0.06F;
-    private static final float JINGLE_VOLUME = 0.6F;
+    static final float VOLUME = 0.7F;
+    private static final float DUCKED = 0.12F;
+    private static final float JINGLE_VOLUME = 1.0F;
     private static final int GAP_TICKS = 60;
     private static final String ALCHEMY_SCREEN = "dev.obscuria.elixirum.client.screen.alchemy.AlchemyScreen";
     private static final RandomSource RANDOM = RandomSource.create();
