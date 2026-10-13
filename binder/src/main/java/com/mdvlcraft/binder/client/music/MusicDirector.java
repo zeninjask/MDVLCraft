@@ -31,7 +31,8 @@ import org.slf4j.Logger;
 
 /**
  * The pack's music: picks a pool from where the player is (menus, villages by day and night, caves, oceans, the wilds),
- * plays a random track from it that is never the one just played, cross-fades when the pool changes, ducks under the
+ * plays a random track from it that is never the one just played, waits 30 seconds to 3 minutes between tracks,
+ * cross-fades straight to the new pool when the pool changes, ducks under the
  * skill / class / sleep jingles, and silences every other music source.
  */
 @EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
@@ -40,7 +41,9 @@ public final class MusicDirector {
     static final float VOLUME = 0.7F;
     private static final float DUCKED = 0.12F;
     private static final float JINGLE_VOLUME = 1.0F;
-    private static final int GAP_TICKS = 60;
+    /** Silence after a track ends, before the next one: 30 seconds to 3 minutes. */
+    private static final int MIN_GAP_TICKS = 30 * 20;
+    private static final int MAX_GAP_TICKS = 180 * 20;
     private static final String ALCHEMY_SCREEN = "dev.obscuria.elixirum.client.screen.alchemy.AlchemyScreen";
     private static final RandomSource RANDOM = RandomSource.create();
     private static boolean inVillage;
@@ -100,7 +103,7 @@ public final class MusicDirector {
         }
         if (current != null && !sounds.isActive(current)) {
             current = null;
-            gap = GAP_TICKS;
+            gap = MIN_GAP_TICKS + RANDOM.nextInt(MAX_GAP_TICKS - MIN_GAP_TICKS + 1);
         }
         if (current == null && !pool.tracks.isEmpty() && gap-- <= 0) {
             current = new MusicTrack(pool, pick(pool.tracks));
