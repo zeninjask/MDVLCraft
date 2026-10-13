@@ -20,6 +20,7 @@ import com.mdvlcraft.binder.monk.UnarmedParry;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.music.Jingles;
 import com.mdvlcraft.binder.skills.ArchetypeTabs;
+import com.mdvlcraft.binder.skills.ClassTitles;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -68,6 +69,7 @@ public final class MDVLBinder {
             EpicSkillReward.register();
             ArchetypeTabs.register();
             Jingles.register();
+            ClassTitles.register();
         });
     }
 }
