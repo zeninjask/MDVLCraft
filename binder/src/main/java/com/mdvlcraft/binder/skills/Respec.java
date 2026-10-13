@@ -1,6 +1,8 @@
 package com.mdvlcraft.binder.skills;
 
 import com.mdvlcraft.binder.ability.AbilityActions;
+import com.mdvlcraft.binder.music.Jingle;
+import com.mdvlcraft.binder.music.Jingles;
 import java.util.List;
 import java.util.Optional;
 import net.minecraft.network.chat.Component;
@@ -49,6 +51,7 @@ public final class Respec {
                 tab.resetSkills(player);
                 AbilityActions.dropUngranted(player);
                 player.displayClientMessage(Component.translatable("message.mdvlcraft.respec.reset", title(archetype)), false);
+                Jingles.send(player, Jingle.JOB_CHANGE);
                 tab.openScreen(player);
             });
         }

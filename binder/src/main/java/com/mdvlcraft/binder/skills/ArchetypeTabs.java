@@ -25,8 +25,13 @@ public final class ArchetypeTabs {
         SkillsAPI.registerSkillLockEvent((player, categoryId, skillId) -> archetypeTab(categoryId, skillId).ifPresent(tab -> tab.erase(player)));
     }
 
+    /** A Classes-page node that picks an archetype (the four class nodes are unlocked for everyone on login). */
+    public static boolean isArchetype(String skillId) {
+        return !CLASS_SKILLS.contains(skillId);
+    }
+
     private static Optional<Category> archetypeTab(ResourceLocation categoryId, String skillId) {
-        return categoryId.equals(CLASSES) && !CLASS_SKILLS.contains(skillId)
+        return categoryId.equals(CLASSES) && isArchetype(skillId)
             ? Optional.of(
                 (Category)SkillsAPI.getCategory(ResourceLocation.fromNamespaceAndPath("mdvlcraft", skillId))
                     .orElseThrow(() -> new IllegalStateException("Archetype " + skillId + " has no skill tab"))

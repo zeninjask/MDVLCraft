@@ -10,9 +10,9 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "5";
+    private static final String PROTOCOL = "6";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-        ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "5", "5"::equals, "5"::equals
+        ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "6", "6"::equals, "6"::equals
     );
 
     private BinderNetwork() {
@@ -65,6 +65,17 @@ public final class BinderNetwork {
         );
         CHANNEL.registerMessage(
             id++, RespecPacket.class, RespecPacket::encode, RespecPacket::decode, RespecPacket::handle, Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+        CHANNEL.registerMessage(
+            id++, JinglePacket.class, JinglePacket::encode, JinglePacket::decode, JinglePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++,
+            MusicPlacePacket.class,
+            MusicPlacePacket::encode,
+            MusicPlacePacket::decode,
+            MusicPlacePacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
     }
 

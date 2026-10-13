@@ -18,6 +18,7 @@ import com.mdvlcraft.binder.integration.CataclysmIntegration;
 import com.mdvlcraft.binder.integration.EpicFightIntegration;
 import com.mdvlcraft.binder.monk.UnarmedParry;
 import com.mdvlcraft.binder.network.BinderNetwork;
+import com.mdvlcraft.binder.music.Jingles;
 import com.mdvlcraft.binder.skills.ArchetypeTabs;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
@@ -66,6 +67,7 @@ public final class MDVLBinder {
             AbilityReward.register();
             EpicSkillReward.register();
             ArchetypeTabs.register();
+            Jingles.register();
         });
     }
 }
