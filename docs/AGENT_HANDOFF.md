@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` agent builds releases and pushes to `main`, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 1.9.24, so the next is 1.9.25.
+   - Every rebuild bumps the patch version. The latest is 1.9.26, so the next is 1.9.27.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -74,12 +74,5 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 
 ## Unfinished work
 
-- **Bountiful boards lean toward nearby players' origins.** It's committed on `liam-agent` but hasn't been boot-tested yet. The pieces are `content/BountyLean.java`, `mixin/bountiful/BoardBlockEntityMixin.java` (a `@ModifyArg` on `BoardBlockEntity.randomlyUpdateBoard` → `BountyCreator$Companion.createBountyItem`, argument 2), a new `mdvlcraft_hunter` decree and kill-objective pool under `src/main/resources/data/bountiful/`, and the compile-only jars `binder/libs/Bountiful-*.jar` and `Kambrik-*.jar`. Next step: boot a server and confirm the mixin applies and Bountiful loads the decree.
-- **Not yet in any pack:**
-  - The guide book replaces the KubeJS first-join Book and Quill. Remove the "A Book and Quill for notes, once." block from `base/{client,server}/overrides/kubejs/server_scripts/mdvlcraft_start.js` when you recreate the base.
-  - The status page tooltips on the Class, Race, Martial and Job rows.
-  - The 30-second to 3-minute gap between music tracks.
-  - The Bountiful work above.
-
-  All of these go out in 1.9.25.
+- Nothing is pending as of 1.9.26. That release contains the Bountiful lean, the guide book, the status page tooltips (Class, Race, Martial, Job), the music gap, the stamina and Parties fixes, and the Spectral Rondo pose-stack crash fix.
 - **Known intermittent issue:** one test client start crashed inside VanillaBackport with "Registry is already frozen". Blackgear Platform unfreezes and refreezes the root registry. It couldn't be reproduced, so it's left alone.
