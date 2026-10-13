@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` agent builds releases and pushes to `main`, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 1.9.26, so the next is 1.9.27.
+   - Every rebuild bumps the patch version. The latest is 1.9.27, so the next is 1.9.28.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -74,5 +74,5 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 
 ## Unfinished work
 
-- Nothing is pending as of 1.9.26. That release contains the Bountiful lean, the guide book, the status page tooltips (Class, Race, Martial, Job), the music gap, the stamina and Parties fixes, and the Spectral Rondo pose-stack crash fix.
+- Nothing is pending as of 1.9.27. Releases up to it contain the Bountiful lean, the guide book, the status page tooltips (Class, Race, Martial, Job), the music gap, the stamina and Parties fixes, and the Spectral Rondo pose-stack crash fix.
 - **Known intermittent issue:** one test client start crashed inside VanillaBackport with "Registry is already frozen". Blackgear Platform unfreezes and refreezes the root registry. It couldn't be reproduced, so it's left alone.
