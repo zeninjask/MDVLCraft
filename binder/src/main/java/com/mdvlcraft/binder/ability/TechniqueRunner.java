@@ -25,19 +25,33 @@ final class TechniqueRunner {
     private TechniqueRunner() {
     }
 
+    /** Whether the player is holding the cast key on their open Malevolent Shrine (it only cuts then). */
     static boolean isSlashing(ServerPlayer player) {
         Technique held = HELD.get(player.getUUID());
-        return held != null && held.isSlash();
+        return held != null && held.isShrine();
     }
 
     static void press(ServerPlayer player, Technique technique) {
-        if (!technique.held) {
+        if (technique.isShrine()) {
+            pressShrine(player, technique);
+        } else if (!technique.held) {
             cast(player, technique);
         } else {
             HELD.put(player.getUUID(), technique);
             if (TechniqueCooldowns.remaining(player, technique) == 0L && !cast(player, technique)) {
                 HELD.remove(player.getUUID());
             }
+        }
+    }
+
+    /** Malevolent Shrine: cast to open it, hold while it stands to cut, sneak and cast to close it. */
+    private static void pressShrine(ServerPlayer player, Technique shrine) {
+        if (!DomainUpkeep.isActive(player)) {
+            cast(player, shrine);
+        } else if (player.isShiftKeyDown()) {
+            DomainUpkeep.close(player);
+        } else {
+            HELD.put(player.getUUID(), shrine);
         }
     }
 
@@ -61,6 +75,10 @@ final class TechniqueRunner {
             ServerPlayer player = server.getPlayerList().getPlayer(entry.getKey());
             if (player == null) {
                 entries.remove();
+            } else if (entry.getValue().isShrine()) {
+                if (!DomainUpkeep.isActive(player)) {
+                    entries.remove();
+                }
             } else if (TechniqueCooldowns.remaining(player, entry.getValue()) == 0L && !cast(player, entry.getValue())) {
                 entries.remove();
             }
@@ -71,16 +89,6 @@ final class TechniqueRunner {
         if (technique == Technique.FOLLOW_UP_KICK && player.isShiftKeyDown()) {
             ProjectionSorcery.toggleFlow(player);
             return false;
-        }
-
-        if (technique.isShrine()) {
-            if (DomainUpkeep.isWindingUp(player)) {
-                return false;
-            }
-
-            if (DomainUpkeep.closeClosedDomain(player)) {
-                return true;
-            }
         }
 
         long cooldown = TechniqueCooldowns.remaining(player, technique);
@@ -120,7 +128,9 @@ final class TechniqueRunner {
             return true;
         } else {
             if (!player.isCreative()) {
-                if (magic.getMana() < cost) {
+                // The shrine is paid for while it stands (DomainUpkeep); opening needs its first second.
+                float needed = technique.isShrine() ? DomainUpkeep.MANA_PER_SECOND : cost;
+                if (magic.getMana() < needed) {
                     player.connection
                         .send(
                             new ClientboundSetActionBarTextPacket(
@@ -130,8 +140,10 @@ final class TechniqueRunner {
                     return false;
                 }
 
-                magic.setMana(magic.getMana() - cost);
-                PacketDistributor.sendToPlayer(player, new SyncManaPacket(magic));
+                if (!technique.isShrine()) {
+                    magic.setMana(magic.getMana() - cost);
+                    PacketDistributor.sendToPlayer(player, new SyncManaPacket(magic));
+                }
             }
 
             PlayerVariables variables = variables(player);
@@ -163,9 +175,7 @@ final class TechniqueRunner {
                 execute.run();
             }
 
-            if (!modeToggle(player, technique)) {
-                TechniqueCooldowns.start(player, technique);
-            }
+            TechniqueCooldowns.start(player, technique);
 
             if (technique.isShrine() && variables.SelectDomainVarient) {
                 variables.DomainVarientNumber = technique.domainVariant();
@@ -177,18 +187,10 @@ final class TechniqueRunner {
         }
     }
 
-    private static boolean modeToggle(ServerPlayer player, Technique technique) {
-        return technique == Technique.PHANTOM_MOVEMENT && player.isShiftKeyDown();
-    }
-
     private static int cost(ServerPlayer player, Technique technique) {
-        if (modeToggle(player, technique)) {
-            return 0;
-        } else {
-            return technique.isShrine() && ReturnPlayerNearAOpenedDomainProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ())
-                ? 0
-                : Math.round(technique.manaCost(1) * (float)(1.0 - player.getAttributeValue(BinderAttributes.TECHNIQUE_EFFICIENCY.get())));
-        }
+        return technique.isShrine() && ReturnPlayerNearAOpenedDomainProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ())
+            ? 0
+            : Math.round(technique.manaCost(1) * (float)(1.0 - player.getAttributeValue(BinderAttributes.TECHNIQUE_EFFICIENCY.get())));
     }
 
     static PlayerVariables variables(ServerPlayer player) {

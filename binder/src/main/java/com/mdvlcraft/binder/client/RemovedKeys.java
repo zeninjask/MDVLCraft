@@ -13,17 +13,29 @@ import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 
 final class RemovedKeys {
-    static final Set<String> NAMES = Set.of(
+    private static final Set<String> NAMES = Set.of(
         "key.advancements",
         "key.puffish_skills.open",
         "key.origins.view_origin",
         "key.elixirum.collection",
         "key.recruits.team_screen_key",
         "key.recruits.map_screen_key",
-        "key.voice_chat",
-        "gui.xaero_open_settings",
-        "gui.xaero_minimap_settings"
+        "key.entityculling.toggle",
+        "key.epicfight.config",
+        "key.epicfight.switch_vanilla_model_debug"
     );
+    /** Every key of these categories goes, except the KEEP ones. */
+    private static final Set<String> CATEGORIES = Set.of(
+        "key.categories.puzzleslib",
+        "key.categories.voicechat",
+        "fdlib.key_category",
+        "key.categories.placebo",
+        "key.betterlockon.category",
+        "key.category.invmove.main"
+    );
+    /** Every key whose name starts with one of these goes, except the KEEP ones. */
+    private static final Set<String> PREFIXES = Set.of("key.shouldersurfing.", "gui.xaero_", "key.betterlockon.", "key.jade.", "keybind.invmove.");
+    private static final Set<String> KEEP = Set.of("key.push_to_talk", "key.shouldersurfing.swap_shoulder", "gui.xaero_open_map");
     private static KeyMapping[] pruned;
 
     private RemovedKeys() {
@@ -37,15 +49,21 @@ final class RemovedKeys {
     }
 
     private static void prune(Options options) {
-        KeyMapping[] kept = Arrays.stream(options.keyMappings).filter(key -> !NAMES.contains(key.getName())).toArray(KeyMapping[]::new);
+        KeyMapping[] kept = Arrays.stream(options.keyMappings).filter(key -> !removed(key)).toArray(KeyMapping[]::new);
         if (kept.length != options.keyMappings.length) {
-            Arrays.stream(options.keyMappings).filter(key -> NAMES.contains(key.getName())).forEach(key -> key.setKey(InputConstants.UNKNOWN));
+            Arrays.stream(options.keyMappings).filter(RemovedKeys::removed).forEach(key -> key.setKey(InputConstants.UNKNOWN));
             ((OptionsAccessor)options).mdvlcraft$setKeyMappings(kept);
-            KeyMappingAccessor.mdvlcraft$all().keySet().removeIf(NAMES::contains);
+            KeyMappingAccessor.mdvlcraft$all().values().removeIf(RemovedKeys::removed);
             KeyMapping.resetMapping();
             MDVLBinder.LOGGER.debug("Removed {} keys now opened from the MDVLCraft menu", options.keyMappings.length - kept.length);
         }
 
         pruned = options.keyMappings;
+    }
+
+    static boolean removed(KeyMapping key) {
+        String name = key.getName();
+        return NAMES.contains(name)
+            || !KEEP.contains(name) && (CATEGORIES.contains(key.getCategory()) || PREFIXES.stream().anyMatch(name::startsWith));
     }
 }

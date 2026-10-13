@@ -35,7 +35,7 @@ public enum SlotSkillAbility implements Ability {
     SlotSkillAbility(String name, String skillId, int manaCost, String icon) {
         this.id = ResourceLocation.fromNamespaceAndPath("mdvlcraft", name);
         this.skillId = skillId;
-        this.manaCost = manaCost;
+        this.manaCost = Math.round(manaCost * Ability.MANA_SCALE);
         this.icon = ResourceLocation.parse(icon);
     }
 

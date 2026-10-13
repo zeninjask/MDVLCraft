@@ -49,7 +49,7 @@ public final class UnarmedParry {
 
     private static void add(GuardSkill skill, List<?> parryMotions) {
         try {
-            motions(skill, "guardMotions").put(WeaponCategories.FIST, (item, player) -> monk(player) ? Animations.SWORD_GUARD_HIT : null);
+            motions(skill, "guardMotions").put(WeaponCategories.FIST, (item, player) -> monk(player) ? Animations.SWORD_DUAL_GUARD_HIT : null);
             motions(skill, "guardBreakMotions").put(WeaponCategories.FIST, (item, player) -> monk(player) ? Animations.BIPED_COMMON_NEUTRALIZED : null);
             if (parryMotions != null) {
                 motions(skill, "advancedGuardMotions").put(WeaponCategories.FIST, (item, player) -> monk(player) ? parryMotions : null);

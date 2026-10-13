@@ -47,6 +47,7 @@ public class CharacterScreen extends Screen {
     private static final int H = 254;
     private static final ResourceLocation SKY = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/skills/astro_sky.png");
     private static final ResourceLocation ASTROLABE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/character/astrolabe.png");
+    private static final ResourceLocation EXPERIENCE = ResourceLocation.fromNamespaceAndPath("puffish_attributes", "experience");
     private static final ResourceLocation CLASSES = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "classes");
     private static final int NAVY = -267249868;
     private static final int GOLD = -5600176;
@@ -190,8 +191,9 @@ public class CharacterScreen extends Screen {
                 Component.translatable("screen.mdvlcraft.character.poise"),
                 fixed(player.getAttributeValue((Attribute)EpicFightAttributes.STUN_ARMOR.get()), 1)
             );
-            this.row(g, mid, colW, var38, Component.translatable("screen.mdvlcraft.character.luck"), fixed(player.getAttributeValue(Attributes.LUCK), 1));
-            g.blit(ASTROLABE, mid - 6, 118, 0.0F, 0.0F, 132, 132, 132, 132);
+            var38 = this.row(g, mid, colW, var38, Component.translatable("screen.mdvlcraft.character.luck"), fixed(player.getAttributeValue(Attributes.LUCK), 1));
+            this.row(g, mid, colW, var38, Component.translatable("screen.mdvlcraft.character.experience_gain"), signedPercent(experienceBonus(player)));
+            g.blit(ASTROLABE, mid, 130, 120, 120, 0.0F, 0.0F, 132, 132, 132, 132);
             int var45 = 46;
             var45 = this.heading(g, right, var45, "screen.mdvlcraft.character.attack_power");
             int weapons = 0;
@@ -432,6 +434,22 @@ public class CharacterScreen extends Screen {
 
     private static String fixed(double value, int decimals) {
         return String.format(Locale.ROOT, "%." + decimals + "f", value);
+    }
+
+    /** Puffish's experience attribute is dynamic: it multiplies dropped experience the way DynamicModification.applyTo does, so read its modifiers. */
+    private static double experienceBonus(LocalPlayer player) {
+        AttributeInstance instance = player.getAttribute(ForgeRegistries.ATTRIBUTES.getValue(EXPERIENCE));
+        if (instance == null) {
+            throw new IllegalStateException("puffish_attributes:experience is missing on the player");
+        }
+
+        double initial = 1.0 + instance.getModifiers(Operation.ADDITION).stream().mapToDouble(AttributeModifier::getAmount).sum();
+        double result = initial * (1.0 + instance.getModifiers(Operation.MULTIPLY_BASE).stream().mapToDouble(AttributeModifier::getAmount).sum());
+        for (AttributeModifier modifier : instance.getModifiers(Operation.MULTIPLY_TOTAL)) {
+            result *= 1.0 + modifier.getAmount();
+        }
+
+        return result - 1.0;
     }
 
     private static String percent(double fraction) {

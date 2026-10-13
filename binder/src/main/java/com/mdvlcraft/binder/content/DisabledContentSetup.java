@@ -50,5 +50,6 @@ public final class DisabledContentSetup {
 
     static {
         BIOME_MODIFIERS.register("strip_disabled", () -> StripDisabledBiomeModifier.CODEC);
+        BIOME_MODIFIERS.register("wild_spawns", () -> WildSpawnsBiomeModifier.CODEC);
     }
 }

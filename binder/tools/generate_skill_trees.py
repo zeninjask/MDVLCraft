@@ -565,7 +565,7 @@ ARCHETYPES = {
                     abilities=[[spell("evasion", 1, 3, "minecraft:ender_pearl"), spell("evasion", 2, 3, "minecraft:ender_pearl", "Phantasm (Evasion II)")],
                                [spell("slow", 2, 2, "minecraft:cobweb"), spell("invisibility", 2, 3, "minecraft:glass")],
                                [technique("mdvlcraft:follow_up_kick", 3, "minecraft:leather_boots", note="Projection Sorcery. Sneak and cast to switch between the Normal and Flow forms."),
-                                technique("mdvlcraft:phantom_movement", 4, "texture:mdvlcraft:textures/gui/icons/ability/phantom_movement.png", note="Projection Sorcery's dash. Hold to dash, always at full output; sneak and cast to switch Tracing and Continuous (free). No cooldown: each dash costs mana. Naobito's style.")],
+                                technique("mdvlcraft:phantom_movement", 4, "texture:mdvlcraft:textures/gui/icons/ability/phantom_movement.png", note="Projection Sorcery's dash. Hold to map a path, release to dash along it, always at full output. No cooldown: each dash costs mana. Naobito's style.")],
                                [efskill("epicfight:catharsis", 3), efskill("epicfight:technician", 2)],
                                [efskill("epicfight:phantom_ascent", 3), efskill("epicfight:stamina_pillager", 3), efskill("epicfight:swordmaster", 3)],
                                [technique("mdvlcraft:babylonian_armory", 5, "texture:sword_soaring:textures/gui/skills/sword_controller/babylon.png",

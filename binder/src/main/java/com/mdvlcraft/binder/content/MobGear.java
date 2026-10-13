@@ -38,7 +38,9 @@ public final class MobGear {
         Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("mdvlcraft", "armoured_mobs")
     );
     private static final Set<String> WEAPON_MODS = Set.of("epicfight", "magistuarmory");
-    private static final Set<String> ARMOR_MODS = Set.of("minecraft", "magistuarmory");
+    private static final Set<String> ARMOR_MODS = Set.of("minecraft", "magistuarmory", "fantasy_armor");
+    /** Fantasy Armour's pieces are set to iron's values in its config (fantasy_armor-armor_attributes.toml), not on the item. */
+    private static final String IRON_BY_CONFIG = "fantasy_armor";
     private static final String PENDING = "mdvlcraft.gear_pending";
     private static final EquipmentSlot[] ARMOR_SLOTS = new EquipmentSlot[]{EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET};
     private static List<Item> weapons;
@@ -164,6 +166,11 @@ public final class MobGear {
     }
 
     private static boolean upToIron(ArmorItem piece) {
+        ResourceLocation id = ForgeRegistries.ITEMS.getKey(piece);
+        if (id != null && IRON_BY_CONFIG.equals(id.getNamespace())) {
+            return true;
+        }
+
         return piece.getDefense() <= ArmorMaterials.IRON.getDefenseForType(piece.getType())
             && piece.getToughness() <= ArmorMaterials.IRON.getToughness()
             && piece.getMaterial().getKnockbackResistance() <= ArmorMaterials.IRON.getKnockbackResistance();

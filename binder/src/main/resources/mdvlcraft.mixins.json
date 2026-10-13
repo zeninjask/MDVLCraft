@@ -7,15 +7,22 @@
   "mixins": [
     "ForgeHooksMixin",
     "LevelMixin",
+    "EntityTypeMixin",
     "NetworkHooksMixin",
     "RecipeManagerMixin",
     "ServerAdvancementManagerMixin",
     "irons.SpellSelectionManagerMixin",
     "irons.AbstractSpellCastTimeMixin",
+    "irons.MagicDataMixin",
+    "irons.MagicManagerMixin",
     "epicfight.ParryingSkillMixin",
     "epicfight.ParryingSkillAccessor",
     "epicfight.ActionAnimationMixin",
     "epicfight.CPChangeSkillMixin",
+    "epicfight.SkillCooldownMixin",
+    "CombatRulesMixin",
+    "epicfight.EmptyHandGuardPoseMixin",
+    "epicfight.BehaviorSeriesMixin",
     "cursedfate.SureHitEffectInDomainAreaProcedureMixin",
     "cursedfate.ShrineOnTickProcedureMixin",
     "swordsoaring.VatanseverItemMixin",
@@ -28,11 +35,14 @@
     "naoyaaddon.SetAbilityCooldownProcedureMixin",
     "naoyaaddon.BarrageProcedureMixin",
     "naoyaaddon.ToggleProjectionStylePacketMixin",
+    "naoyaaddon.PlayerTicksProcedureMixin",
     "epicfight.ColliderMixin",
     "wom.ReuseableEventsMixin",
     "villagerecruits.CityPlanManagerMixin",
     "villagerecruits.VillageAutoBuilderMixin",
     "villagerecruits.VillageBuilderManagerMixin",
+    "villagerecruits.LoginMessagesMixin",
+    "villagerecruits.VillageJoinGuideMixin",
     "efn.EFNParryingSkillMixin",
     "efn.CullableUtilMixin",
     "efn.YamatoInnateMixin",
@@ -40,7 +50,8 @@
     "efn.MeenLanceInnateMixin",
     "wom.ShootingStyleSkillMixin",
     "calio.HolderCodecMixin",
-    "calio.CalioCodecHelperMixin"
+    "calio.CalioCodecHelperMixin",
+    "majrusz.EntityHelperMixin"
   ],
   "client": [
     "origins.ChooseOriginScreenMixin",
@@ -62,7 +73,9 @@
     "KeyMappingAccessor",
     "epicfight.SkillBookScreenMixin",
     "efcompat.ArmatureBinderMixin",
-    "invincible.InputManagerMixin"
+    "invincible.InputManagerMixin",
+    "killcam.KillCamOverlayMixin",
+    "irons.JeiPluginMixin"
   ],
   "injectors": {
     "defaultRequire": 1

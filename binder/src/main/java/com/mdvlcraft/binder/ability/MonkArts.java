@@ -1,9 +1,12 @@
 package com.mdvlcraft.binder.ability;
 
 import com.mdvlcraft.binder.attribute.BinderAttributes;
+import com.mdvlcraft.binder.compat.wom.WomBlackout;
 import com.mdvlcraft.binder.monk.Fists;
+import cursedfate.CursedfateMod;
 import cursedfate.init.CursedfateModMobEffects;
 import cursedfate.init.CursedfateModParticleTypes;
+import cursedfate.network.CursedfateModVariables;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,9 +52,7 @@ public final class MonkArts {
     static final float BLACK_FLASH_MULTIPLIER = 2.5F;
     static final int KNOCKOUT_WINDOW_TICKS = 12;
     static final float KNOCKOUT_MULTIPLIER = 1.5F;
-    static final int BLACKOUT_TICKS = 120;
     private static final double REACH = 4.0;
-    private static final ResourceLocation BLACKOUT = ResourceLocation.fromNamespaceAndPath("traveloptics", "blackout");
     private static final ResourceLocation CURSED_FATE_MELEE = ResourceLocation.fromNamespaceAndPath("cursedfate", "normal_damage");
     private static final Map<UUID, Long> FOCUSED = new HashMap<>();
     private static final Map<UUID, MonkArts.Art> ARTS = new HashMap<>();
@@ -186,12 +187,7 @@ public final class MonkArts {
             if (knockout != null && (knockout.forced || now <= knockout.until) && event.getSource().is(DamageTypes.PLAYER_ATTACK)) {
                 knockout.landed = true;
                 event.setAmount(event.getAmount() * 1.5F);
-                MobEffect blackout = ForgeRegistries.MOB_EFFECTS.getValue(BLACKOUT);
-                if (blackout != null) {
-                    target.addEffect(new MobEffectInstance(blackout, 120, 0), player);
-                }
-
-                play(target, SoundEvents.ANVIL_LAND, 0.4F, 1.6F);
+                WomBlackout.strike(player, target);
             }
 
             Long focused = FOCUSED.get(player.getUUID());
@@ -204,10 +200,12 @@ public final class MonkArts {
         }
     }
 
+    /** The Soul Shrine charged punch landed inside its domain (SoulpunchStopProcedure), without the music. */
     private static void blackFlash(ServerPlayer player, LivingEntity target, LivingHurtEvent event) {
         event.setAmount(event.getAmount() * 2.5F);
         target.addEffect(new MobEffectInstance((MobEffect)CursedfateModMobEffects.MOVEMENT_STUN.get(), 23, 1, false, false), player);
-        play(target, sound("cursedfate", "yutablackflash", SoundEvents.GENERIC_EXPLODE), 1.2F, 1.0F);
+        play(target, sound("cursedfate", "blackflash", SoundEvents.GENERIC_EXPLODE), 1.0F, 1.0F);
+        play(target, SoundEvents.METAL_BREAK, 1.3F, 0.8F);
         if (player.level() instanceof ServerLevel level) {
             level.sendParticles(
                 (SimpleParticleType)CursedfateModParticleTypes.BLACK_FLASH_SPARK.get(),
@@ -220,15 +218,30 @@ public final class MonkArts {
                 0.5,
                 0.2
             );
-            MinecraftServer server = level.getServer();
-            server.getCommands()
-                .performPrefixedCommand(
-                    player.createCommandSourceStack().withSuppressedOutput().withPermission(4),
-                    "photon fx photon:blackflashfinalspark entity @s 0 1.6 0 0 0 0 1 1 1 0 true true look"
-                );
+            for (String fx : List.of("bloodspill", "blackflash", "soulpunchhitdomain", "soulshrinecut")) {
+                level.getServer()
+                    .getCommands()
+                    .performPrefixedCommand(
+                        target.createCommandSourceStack().withSuppressedOutput().withPermission(4),
+                        "photon fx photon:" + fx + " entity @s 0 1 0 0 0 0 0 false true"
+                    );
+            }
         }
 
+        screenFlash(player, 1);
         actionBar(player, Component.translatable("ability.mdvlcraft.focus.black_flash").withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
+    }
+
+    /** Cursed Fate's three black flash screen frames, one a tick. */
+    private static void screenFlash(ServerPlayer player, int frame) {
+        player.getCapability(CursedfateModVariables.PLAYER_VARIABLES_CAPABILITY).ifPresent(variables -> {
+            variables.BlackFlashBool = frame <= 3;
+            variables.BlackFlashScreenNum = frame;
+            variables.syncPlayerVariables(player);
+        });
+        if (frame <= 3) {
+            CursedfateMod.queueServerWork(1, () -> screenFlash(player, frame + 1));
+        }
     }
 
     @SubscribeEvent

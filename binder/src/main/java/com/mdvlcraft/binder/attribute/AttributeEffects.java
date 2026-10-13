@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.attribute;
 
+import com.mdvlcraft.binder.ability.ManaRegen;
 import com.mdvlcraft.binder.combat.KatanaWeapons;
 import com.mdvlcraft.binder.monk.Fists;
 import java.util.HashMap;
@@ -189,5 +190,8 @@ public final class AttributeEffects {
     @SubscribeEvent
     public static void onLogout(PlayerLoggedOutEvent event) {
         RIPOSTE_UNTIL.remove(event.getEntity().getUUID());
+        if (event.getEntity() instanceof ServerPlayer player) {
+            ManaRegen.forget(player);
+        }
     }
 }

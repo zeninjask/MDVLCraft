@@ -7,6 +7,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbility, StanceAbility, DoppelgangerAbility, SustenanceAbility {
+    /** Multiplier on every ability's base mana cost (Iron's spells get it through their spell config instead). */
+    float MANA_SCALE = 1.2F;
+    /** Multiplier on technique damage (combat/TechniqueScaling); Iron's spells get it through power_multiplier. */
+    float DAMAGE_SCALE = 1.1F;
+
     ResourceLocation id();
 
     Component displayName();

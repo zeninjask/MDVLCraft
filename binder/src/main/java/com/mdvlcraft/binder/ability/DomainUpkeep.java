@@ -2,6 +2,9 @@ package com.mdvlcraft.binder.ability;
 
 import cursedfate.entity.DomainExpansionEntityEntity;
 import cursedfate.network.CursedfateModVariables.PlayerVariables;
+import io.redspace.ironsspellbooks.api.magic.MagicData;
+import io.redspace.ironsspellbooks.network.SyncManaPacket;
+import io.redspace.ironsspellbooks.setup.PacketDistributor;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -15,8 +18,13 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistries;
 
+/**
+ * Follows a binder player's Malevolent Shrine (closed or open) from cast to close. While it stands it costs
+ * {@link #MANA_PER_SECOND} mana a second and Cursed Fate's cursed energy is kept topped up; it closes when the owner
+ * sneak-casts it again ({@link #close}) or cannot pay the next second.
+ */
 final class DomainUpkeep {
-    static final int MAX_TICKS = 400;
+    static final float MANA_PER_SECOND = 10.0F;
     private static final int WIND_UP_TICKS = 100;
     private static final double DOMAIN_RADIUS = 27.0;
     private static final ResourceLocation OPEN_SHRINE = ResourceLocation.fromNamespaceAndPath("cursedfate", "shrine");
@@ -29,20 +37,26 @@ final class DomainUpkeep {
         DOMAINS.put(player.getUUID(), new DomainUpkeep.Domain(shrine, player.level().getGameTime(), -1L));
     }
 
-    static boolean isWindingUp(ServerPlayer player) {
-        DomainUpkeep.Domain domain = DOMAINS.get(player.getUUID());
-        return domain != null && domain.openedTick() < 0L;
+    static boolean isActive(ServerPlayer player) {
+        return DOMAINS.containsKey(player.getUUID());
     }
 
-    static boolean closeClosedDomain(ServerPlayer player) {
-        List<DomainExpansionEntityEntity> domains = ownedClosedDomains(player);
-        if (domains.isEmpty()) {
-            return false;
+    /** Closes the player's shrine: the closed dome through Cursed Fate's force-stop, the open shrine by letting its cursed energy run out. */
+    static void close(ServerPlayer player) {
+        DomainUpkeep.Domain domain = DOMAINS.remove(player.getUUID());
+        if (domain != null) {
+            shut(player, domain);
         }
+    }
 
-        domains.forEach(domain -> domain.getPersistentData().putBoolean("forcestopdomain", true));
-        DOMAINS.remove(player.getUUID());
-        return true;
+    private static void shut(ServerPlayer player, DomainUpkeep.Domain domain) {
+        if (domain.shrine() == Technique.MALEVOLENT_SHRINE) {
+            ownedClosedDomains(player).forEach(entity -> entity.getPersistentData().putBoolean("forcestopdomain", true));
+        } else {
+            PlayerVariables variables = TechniqueRunner.variables(player);
+            variables.CursedEnegry = 0.0;
+            variables.syncPlayerVariables(player);
+        }
     }
 
     static void tick(MinecraftServer server) {
@@ -63,7 +77,13 @@ final class DomainUpkeep {
                     } else if (now - domain.castTick() > 100L) {
                         entries.remove();
                     }
-                } else if (up && now - domain.openedTick() < 400L) {
+                } else if (up) {
+                    if ((now - domain.openedTick()) % 20L == 0L && !pay(player)) {
+                        entries.remove();
+                        shut(player, domain);
+                        continue;
+                    }
+
                     PlayerVariables variables = TechniqueRunner.variables(player);
                     double needed = player.getPersistentData().getDouble("DomainCECost") + variables.CursedEnegryMax;
                     if (variables.CursedEnegry < needed) {
@@ -75,6 +95,22 @@ final class DomainUpkeep {
                 }
             }
         }
+    }
+
+    /** Takes one second of upkeep; false when the player cannot pay it. */
+    private static boolean pay(ServerPlayer player) {
+        if (player.isCreative()) {
+            return true;
+        }
+
+        MagicData magic = MagicData.getPlayerMagicData(player);
+        if (magic.getMana() < MANA_PER_SECOND) {
+            return false;
+        }
+
+        magic.setMana(magic.getMana() - MANA_PER_SECOND);
+        PacketDistributor.sendToPlayer(player, new SyncManaPacket(magic));
+        return true;
     }
 
     private static List<DomainExpansionEntityEntity> ownedClosedDomains(ServerPlayer player) {

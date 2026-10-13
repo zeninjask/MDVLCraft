@@ -22,6 +22,7 @@ public final class ClientAbilitySetup {
         DoppelgangerClientSetup.register(modBus);
         MinecraftForge.EVENT_BUS.addListener(AbilityKeys::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(RemovedKeys::onClientTick);
+        MinecraftForge.EVENT_BUS.addListener(TracingDashAnimation::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(MenuNav::onScreenInit);
         MinecraftForge.EVENT_BUS.addListener(MenuNav::onScreenRender);
         MinecraftForge.EVENT_BUS.addListener(MenuNav::onMouseClicked);

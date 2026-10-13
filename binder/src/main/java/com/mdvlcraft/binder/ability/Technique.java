@@ -38,7 +38,7 @@ public enum Technique implements Ability {
     Technique(String name, int abilityId, int manaCost, int cooldownSeconds, boolean held, String icon) {
         this.id = ResourceLocation.fromNamespaceAndPath("mdvlcraft", name);
         this.abilityId = abilityId;
-        this.manaCost = manaCost;
+        this.manaCost = Math.round(manaCost * Ability.MANA_SCALE);
         this.cooldownTicks = cooldownSeconds * 20;
         this.held = held;
         this.icon = ResourceLocation.parse(icon);

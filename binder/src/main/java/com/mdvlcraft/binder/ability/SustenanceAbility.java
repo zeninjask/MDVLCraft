@@ -15,7 +15,7 @@ import net.minecraft.world.food.FoodData;
 public enum SustenanceAbility implements Ability {
     INSTANCE;
 
-    public static final int MANA_COST = 50;
+    public static final int MANA_COST = Math.round(50 * Ability.MANA_SCALE);
     public static final int FOOD = 2;
     public static final float SATURATION_MODIFIER = 1.0F;
     private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "arcane_sustenance");
@@ -38,7 +38,7 @@ public enum SustenanceAbility implements Ability {
 
     @Override
     public int manaCost(int level) {
-        return 50;
+        return MANA_COST;
     }
 
     void cast(ServerPlayer player) {
@@ -48,12 +48,12 @@ public enum SustenanceAbility implements Ability {
         } else {
             MagicData magic = MagicData.getPlayerMagicData(player);
             if (!player.isCreative()) {
-                if (magic.getMana() < 50.0F) {
+                if (magic.getMana() < MANA_COST) {
                     actionBar(player, Component.translatable("ui.irons_spellbooks.cast_error_mana", this.displayName()));
                     return;
                 }
 
-                magic.setMana(magic.getMana() - 50.0F);
+                magic.setMana(magic.getMana() - MANA_COST);
                 PacketDistributor.sendToPlayer(player, new SyncManaPacket(magic));
             }
 

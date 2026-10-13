@@ -47,6 +47,7 @@ public final class MDVLBinder {
         UnarmedParry.register(modBus);
         AddItemModifier.register(modBus);
         modBus.addListener(MDVLBinder::onCommonSetup);
+        modBus.addListener(com.mdvlcraft.binder.content.WildSpawns::onSpawnPlacements);
         if (FMLEnvironment.dist == Dist.CLIENT) {
             ClientContentSetup.register(modBus);
             ClientAbilitySetup.register(modBus);

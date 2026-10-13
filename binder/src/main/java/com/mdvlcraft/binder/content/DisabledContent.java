@@ -5,7 +5,10 @@ import com.google.gson.JsonObject;
 import io.redspace.ironsspellbooks.api.item.IScroll;
 import io.redspace.ironsspellbooks.api.item.ISpellbook;
 import io.redspace.ironsspellbooks.item.EldritchManuscript;
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
@@ -15,8 +18,13 @@ import yesman.epicfight.world.item.SkillBookItem;
 
 public final class DisabledContent {
     public static final Set<String> NAMESPACES = Set.of("irons_spellbooks", "cursedfate");
-    public static final Set<String> CONTENT_NAMESPACES = Set.of("traveloptics", "alexscaves", "cursedfate_roslon_meimei");
-    private static final Set<String> NO_SPAWN_NAMESPACES = Set.of("cursedfate", "wom", "traveloptics", "alexscaves", "cursedfate_roslon_meimei");
+    // Spell addons: no recipes, loot, trades, drops or creative-tab items (their spells and spell summons still work).
+    private static final String[] SPELL_ADDONS = {
+        "esoteric_spell", "iss_elden_ring", "legendary_monsters", "iss_magicfromtheeast", "cursed_school", "somakespells", "iss_csw",
+        "irons_chronomancy", "wind_spellbooks", "antimagic", "hazennstuff"
+    };
+    public static final Set<String> CONTENT_NAMESPACES = with(SPELL_ADDONS, "traveloptics", "alexscaves", "cursedfate_roslon_meimei");
+    private static final Set<String> NO_SPAWN_NAMESPACES = with(SPELL_ADDONS, "cursedfate", "wom", "traveloptics", "alexscaves", "cursedfate_roslon_meimei");
     private static final Set<ResourceLocation> FORBIDDEN_ITEMS = Set.of(
         ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "scroll_forge"),
         ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "inscription_table"),
@@ -28,17 +36,21 @@ public final class DisabledContent {
     private DisabledContent() {
     }
 
+    private static Set<String> with(String[] base, String... more) {
+        return Stream.concat(Arrays.stream(base), Arrays.stream(more)).collect(Collectors.toUnmodifiableSet());
+    }
+
     public static boolean isDisabled(ResourceLocation id) {
         return id != null && NAMESPACES.contains(id.getNamespace());
     }
 
     public static boolean isDisabled(EntityType<?> type) {
-        return isDisabled(ForgeRegistries.ENTITY_TYPES.getKey(type));
+        return !WildSpawns.allowed(type) && isDisabled(ForgeRegistries.ENTITY_TYPES.getKey(type));
     }
 
     public static boolean isSpawnBlocked(EntityType<?> type) {
         ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
-        return id != null && NO_SPAWN_NAMESPACES.contains(id.getNamespace());
+        return id != null && NO_SPAWN_NAMESPACES.contains(id.getNamespace()) && !WildSpawns.allowed(type);
     }
 
     public static boolean isContentDisabled(ResourceLocation id) {

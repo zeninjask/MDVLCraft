@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.combat;
 
+import com.mdvlcraft.binder.ability.Ability;
 import com.mdvlcraft.binder.ability.MonkArts;
 import com.mdvlcraft.binder.config.BinderConfig;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,8 +19,9 @@ public final class TechniqueScaling {
     public static void onHurt(LivingHurtEvent event) {
         if (event.getSource().getEntity() instanceof ServerPlayer caster
             && event.getSource().typeHolder().unwrapKey().map(key -> key.location().getNamespace().equals("cursedfate")).orElse(false)
-            && !MonkArts.artActive(caster)) {
-            event.setAmount(event.getAmount() * factor(caster, event));
+) {
+            float factor = MonkArts.artActive(caster) ? 1.0F : factor(caster, event);
+            event.setAmount(event.getAmount() * factor * Ability.DAMAGE_SCALE);
         }
     }
 
