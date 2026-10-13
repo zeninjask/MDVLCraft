@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Draws the Slate skill screen textures: a charcoal window and flat tabs with hairline borders, rounded node frames
-in each class's accent colour (one set per class plus a neutral set for the Classes tab), the dotted canvas tile behind
+with white outlines (one set for every tree), the dotted canvas tile behind
 the trees, and the Samurai's Stance icons.
 
 The window and tabs keep the geometry of the vanilla advancement textures, because Pufferfish's Skills slices them the
@@ -27,11 +27,9 @@ BORDER = (50, 56, 66)
 INNER = (38, 43, 51)
 CANVAS = (14, 16, 20)
 DOT = (32, 36, 44)
-LOCKED_FILL, LOCKED_LINE = (26, 29, 35), (54, 60, 70)
-AVAILABLE_FILL, AVAILABLE_LINE = (30, 34, 41), (104, 112, 124)
+LOCKED_FILL, AVAILABLE_FILL = (26, 29, 35), (30, 34, 41)
 EXCLUDED_FILL, EXCLUDED_LINE = (19, 21, 25), (40, 44, 52)
-ACCENTS = {"warrior": (226, 84, 64), "mage": (78, 140, 255), "rogue": (164, 104, 240), "ranger": (78, 196, 122),
-           "neutral": (184, 192, 204)}
+WHITE = (255, 255, 255)
 # kind: (texture size, box size, border width, inner ring)
 KINDS = {"twig": (20, 14, 1, False), "task": (40, 28, 1, False), "goal": (40, 30, 1, True),
          "challenge": (52, 36, 1, False), "root": (40, 34, 2, False)}
@@ -101,37 +99,36 @@ def tabs():
 
 
 def frames():
-    for cls, accent in ACCENTS.items():
-        for kind, (size, box, line, ring) in KINDS.items():
-            for state in ("locked", "available", "affordable", "unlocked", "excluded"):
-                fill, edge = {
-                    "locked": (LOCKED_FILL, LOCKED_LINE),
-                    "available": (AVAILABLE_FILL, AVAILABLE_LINE),
-                    "affordable": (AVAILABLE_FILL, accent),
-                    "unlocked": (mix(LOCKED_FILL, accent, 0.30), accent),
-                    "excluded": (EXCLUDED_FILL, EXCLUDED_LINE),
-                }[state]
-                im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
-                px = im.load()
-                o = (size - box) // 2
-                if state in ("unlocked", "affordable"):
-                    # soft halo: two fading rings outside the box
-                    for i, alpha in ((1, 90 if state == "unlocked" else 45), (2, 40 if state == "unlocked" else 0)):
-                        if alpha == 0:
-                            continue
-                        for y in range(size):
-                            for x in range(size):
-                                if rounded(x, y, o - i, o - i, box + 2 * i, box + 2 * i) and not rounded(x, y, o - i + 1, o - i + 1, box + 2 * i - 2, box + 2 * i - 2):
-                                    px[x, y] = accent + (alpha,)
-                for y in range(size):
-                    for x in range(size):
-                        if not rounded(x, y, o, o, box, box):
-                            continue
-                        inner = rounded(x, y, o + line, o + line, box - 2 * line, box - 2 * line)
-                        px[x, y] = (fill if inner else edge) + (255,)
-                        if ring and inner and not rounded(x, y, o + line + 1, o + line + 1, box - 2 * line - 2, box - 2 * line - 2):
-                            px[x, y] = mix(fill, edge, 0.45) + (255,)
-                im.save(OUT / f"frame_{cls}_{kind}_{state}.png")
+    for kind, (size, box, line, ring) in KINDS.items():
+        for state in ("locked", "available", "affordable", "unlocked", "excluded"):
+            fill, edge = {
+                "locked": (LOCKED_FILL, WHITE),
+                "available": (AVAILABLE_FILL, WHITE),
+                "affordable": (AVAILABLE_FILL, WHITE),
+                "unlocked": (mix(LOCKED_FILL, WHITE, 0.30), WHITE),
+                "excluded": (EXCLUDED_FILL, EXCLUDED_LINE),
+            }[state]
+            im = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+            px = im.load()
+            o = (size - box) // 2
+            if state in ("unlocked", "affordable"):
+                # soft halo: two fading rings outside the box
+                for i, alpha in ((1, 90 if state == "unlocked" else 45), (2, 40 if state == "unlocked" else 0)):
+                    if alpha == 0:
+                        continue
+                    for y in range(size):
+                        for x in range(size):
+                            if rounded(x, y, o - i, o - i, box + 2 * i, box + 2 * i) and not rounded(x, y, o - i + 1, o - i + 1, box + 2 * i - 2, box + 2 * i - 2):
+                                px[x, y] = WHITE + (alpha,)
+            for y in range(size):
+                for x in range(size):
+                    if not rounded(x, y, o, o, box, box):
+                        continue
+                    inner = rounded(x, y, o + line, o + line, box - 2 * line, box - 2 * line)
+                    px[x, y] = (fill if inner else edge) + (255,)
+                    if ring and inner and not rounded(x, y, o + line + 1, o + line + 1, box - 2 * line - 2, box - 2 * line - 2):
+                        px[x, y] = mix(fill, edge, 0.45) + (255,)
+            im.save(OUT / f"frame_{kind}_{state}.png")
 
 
 def canvas_tile():

@@ -63,16 +63,13 @@ class Tree:
         self.defs = json.loads((self.dir / "definitions.json").read_text())
         self.skills = json.loads((self.dir / "skills.json").read_text())
         self.conns = json.loads((self.dir / "connections.json").read_text())
-        root = next(v for v in self.skills.values() if v["x"] == 0 and v["y"] == 0)
-        root_frame = self.defs[root["definition"]]["frame"]["data"]["locked"]
-        self.cls = re.search(r"frame_([a-z]+)_root_locked", root_frame).group(1)
 
     def save(self):
         for name, data in (("definitions", self.defs), ("skills", self.skills), ("connections", self.conns)):
             (self.dir / f"{name}.json").write_text(json.dumps(data, indent=2) + "\n")
 
     def frame(self, kind):
-        return {"type": "texture", "data": {state: f"mdvlcraft:textures/gui/skills/frame_{self.cls}_{kind}_{state}.png"
+        return {"type": "texture", "data": {state: f"mdvlcraft:textures/gui/skills/frame_{kind}_{state}.png"
                                             for state in ("locked", "available", "affordable", "unlocked", "excluded")}}
 
     def find(self, reward_id):

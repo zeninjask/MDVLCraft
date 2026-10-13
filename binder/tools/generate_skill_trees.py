@@ -719,10 +719,10 @@ def stat_icon(node):
     return own_icon(f"{folder}/{attribute_file(node['attribute'])}.png")
 
 
-def frame(kind, palette):
+def frame(kind):
     """Slate frames from tools/generate_textures.py, with the skill size that draws them 1:1."""
     states = ("locked", "available", "affordable", "unlocked", "excluded")
-    return {"frame": {"type": "texture", "data": {state: f"{TEXTURES}frame_{palette}_{kind}_{state}.png" for state in states}},
+    return {"frame": {"type": "texture", "data": {state: f"{TEXTURES}frame_{kind}_{state}.png" for state in states}},
             "size": SIZES[kind]}
 
 
@@ -863,14 +863,14 @@ def definition_for(node, cls_id):
                   "rewards": [reward(node)], "cost": node["cost"]}
     group = node["group"]
     if not stat:
-        definition.update(frame("challenge", cls_id))
+        definition.update(frame("challenge"))
     elif group == "generic":
-        definition.update(frame("twig", cls_id))
+        definition.update(frame("twig"))
         definition["extra_description"] = "Twig bonus (every archetype has a few of these)."
     elif node.get("capstone"):
-        definition.update(frame("goal", cls_id))
+        definition.update(frame("goal"))
     else:
-        definition.update(frame("task", cls_id))
+        definition.update(frame("task"))
     if group == "class":
         definition["extra_description"] = f"{cls['title']} class bonus (every {cls['title']} archetype has this spoke)."
     if group == "core":
@@ -911,7 +911,7 @@ def grow_archetype(arch_id, arch, seed):
     root_node = dict(root["spell"]) if "spell" in root else dict(kind="stat", attribute=root["attribute"], value=root["value"])
     root_node.update(id="root", cost=1, title=root["title"], group="root")
     definitions = {"root": {"title": root["title"], "description": describe(root_node), "icon": own_icon(f"archetype/{arch_id}.png"),
-                            **frame("root", arch["cls"]), "rewards": [reward(root_node)], "cost": 1}}
+                            **frame("root"), "rewards": [reward(root_node)], "cost": 1}}
     nodes = {"root": root_node}
     # Seeded per archetype so a tree keeps its shape between builds.
     rng = random.Random(seed)
@@ -1082,7 +1082,7 @@ def build_classes():
     for cls_id, cls in CLASSES.items():
         angle = math.radians(cls["angle"])
         definitions[cls_id] = {"title": cls["title"], "description": cls["blurb"], "icon": own_icon(f"class/{cls_id}.png"),
-                               **frame("root", cls_id), "cost": 0}
+                               **frame("root"), "cost": 0}
         radius = 64 * LAYOUT_SCALE
         skills[cls_id] = {"x": round(math.cos(angle) * radius), "y": round(math.sin(angle) * radius), "definition": cls_id, "root": True}
         members = [a for a, arch in ARCHETYPES.items() if arch["cls"] == cls_id]
@@ -1095,7 +1095,7 @@ def build_classes():
             definitions[arch_id] = {"title": arch["title"],
                                     "description": arch["blurb"] + (f" Key: {', '.join(abilities[:3])}." if abilities else ""),
                                     "extra_description": f"Opens the {arch['title']} tab. You can pick {ARCHETYPE_LIMIT} archetypes in total.",
-                                    "icon": own_icon(f"archetype/{arch_id}.png"), **frame("goal", cls_id), "cost": 1}
+                                    "icon": own_icon(f"archetype/{arch_id}.png"), **frame("goal"), "cost": 1}
             radius = 150 * LAYOUT_SCALE
             skills[arch_id] = {"x": round(math.cos(a) * radius), "y": round(math.sin(a) * radius), "definition": arch_id}
             connections.append([cls_id, arch_id])
