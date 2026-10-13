@@ -26,8 +26,11 @@ EMBLEMS = {
 }
 # abilities the binder defines that no tree grants (still need a menu icon)
 UNTREED = {'mdvlcraft:babylonian_armory': ('Babylonian Armory', 'samurai'), 'mdvlcraft:celestial_array': ('Celestial Array', 'samurai')}
-# Epic Fight skills every player has without a tree (still need a Combat Skills icon)
-ALWAYS_EF = {'efclash_blade:clash_blade': 'Clash Blade'}
+# Epic Fight skills a player has without a tree (still need a Combat Skills icon): EpicSkillGrants' defaults, Clash
+# Blade and the Classes tab's Precise Parry
+ALWAYS_EF = {'efclash_blade:clash_blade': 'Clash Blade', 'epicfight:roll': 'Roll', 'epicfight:step': 'Step',
+             'epicfight:guard': 'Guard', 'epicfight:parrying': 'Parrying', 'efn:efn_dodge': 'Souls Dodge',
+             'efn:efn_step': 'Souls Step', 'efn:efn_parry': 'Absolute Deflection', 'efn:precise_parry': 'Precise Parry'}
 STANCES = {'fire': ('flame', 'fire'), 'wind': ('tornado', 'wind'), 'water': ('wave', 'aqua'), 'earth': ('spikes', 'wood')}
 
 

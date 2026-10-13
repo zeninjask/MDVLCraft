@@ -1138,6 +1138,14 @@ PINNED = {
     'irons_spellbooks:fang_swirl': ('vortex', 'eldritch'),
     'esoteric_spell:immunity_aura': ('burst', 'barrier'),
     'wom:bull_charge': ('horse', 'ember', 'up', 'gold'),
+    'epicfight:roll': ('vortex', 'steel'),
+    'epicfight:step': ('boot', 'steel'),
+    'epicfight:guard': ('shield', 'wood', 'plus', 'gold'),
+    'epicfight:parrying': ('crossed_swords', 'wood'),
+    'efn:efn_dodge': ('vortex', 'shadow'),
+    'efn:efn_step': ('boot', 'shadow'),
+    'efn:efn_parry': ('crossed_swords', 'holy', 'sparkle', 'gold'),
+    'efn:precise_parry': ('target', 'crimson'),
 }
 
 
