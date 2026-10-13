@@ -1,0 +1,12 @@
+{
+  "type": "origins:modify_damage_taken",
+  "name": "Arrow Ward",
+  "description": "Projectiles deal 20% less damage to you.",
+  "damage_condition": {
+    "type": "origins:projectile"
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": -0.2
+  }
+}

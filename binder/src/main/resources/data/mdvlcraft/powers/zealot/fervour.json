@@ -1,0 +1,17 @@
+{
+  "type": "origins:conditioned_attribute",
+  "name": "Fervour",
+  "description": "Below half health, your stamina regenerates 10% faster.",
+  "condition": {
+    "type": "origins:relative_health",
+    "comparison": "<",
+    "compare_to": 0.5
+  },
+  "modifiers": [
+    {
+      "attribute": "epicfight:stamina_regen",
+      "operation": "multiply_base",
+      "value": 0.1
+    }
+  ]
+}

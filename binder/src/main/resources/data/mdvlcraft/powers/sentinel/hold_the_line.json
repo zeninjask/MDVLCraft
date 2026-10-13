@@ -1,0 +1,55 @@
+{
+  "type": "origins:multiple",
+  "name": "Hold the Line",
+  "description": "Standing still for 2 seconds grants Resistance I.",
+  "still": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 40,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "count": {
+    "type": "origins:action_over_time",
+    "interval": 5,
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:moving"
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "mdvlcraft:sentinel/hold_the_line_still",
+        "change": 0,
+        "operation": "set"
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "mdvlcraft:sentinel/hold_the_line_still",
+        "change": 5
+      }
+    }
+  },
+  "guard": {
+    "type": "origins:action_over_time",
+    "interval": 10,
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mdvlcraft:sentinel/hold_the_line_still",
+      "comparison": ">=",
+      "compare_to": 40
+    },
+    "entity_action": {
+      "type": "origins:apply_effect",
+      "effect": {
+        "effect": "minecraft:resistance",
+        "duration": 20,
+        "amplifier": 0,
+        "show_particles": false,
+        "show_icon": true
+      }
+    }
+  }
+}

@@ -2,6 +2,10 @@ package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.mixin.puffish.SkillsClientModAccessor;
 import com.mdvlcraft.binder.skills.Respec;
+import io.github.edwinmindcraft.origins.api.OriginsAPI;
+import io.github.edwinmindcraft.origins.api.capabilities.IOriginContainer;
+import io.github.edwinmindcraft.origins.api.origin.Origin;
+import io.github.edwinmindcraft.origins.api.origin.OriginLayer;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.player.ClientMagicData;
 import java.lang.reflect.Method;
@@ -22,6 +26,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.resources.language.I18n;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.world.damagesource.CombatRules;
@@ -45,6 +50,9 @@ import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 public class CharacterScreen extends Screen {
     private static final int W = 440;
     private static final int H = 254;
+    private static final ResourceLocation RACE_LAYER = ResourceLocation.fromNamespaceAndPath("origins", "origin");
+    private static final ResourceLocation MARTIAL_LAYER = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "martial");
+    private static final ResourceLocation JOB_LAYER = ResourceLocation.fromNamespaceAndPath("origins-classes", "class");
     private static final ResourceLocation SKY = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/skills/astro_sky.png");
     private static final ResourceLocation ASTROLABE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/character/astrolabe.png");
     private static final ResourceLocation EXPERIENCE = ResourceLocation.fromNamespaceAndPath("puffish_attributes", "experience");
@@ -127,6 +135,9 @@ public class CharacterScreen extends Screen {
                 archetype.<String>map(a -> String.valueOf(a.getCurrentLevel())).orElse("n/a")
             );
             y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.class"), className());
+            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.race"), originName(player, RACE_LAYER));
+            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.martial"), originName(player, MARTIAL_LAYER));
+            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.job"), originName(player, JOB_LAYER));
             y += 6;
             y = this.row(
                 g,
@@ -305,6 +316,17 @@ public class CharacterScreen extends Screen {
         } else {
             return y;
         }
+    }
+
+    /** The player's pick on an Origins layer, by the origin's display name. */
+    private static String originName(LocalPlayer player, ResourceLocation layerId) {
+        ResourceKey<OriginLayer> layer = ResourceKey.create(OriginsAPI.getLayersRegistry().key(), layerId);
+        ResourceKey<Origin> origin = IOriginContainer.get(player).map(container -> container.getOrigin(layer)).orElse(null);
+        if (origin == null || !OriginsAPI.getOriginsRegistry().containsKey(origin)) {
+            return "n/a";
+        }
+
+        return OriginsAPI.getOriginsRegistry().get(origin).getName().getString();
     }
 
     private static String className() {

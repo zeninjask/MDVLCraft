@@ -1,0 +1,17 @@
+{
+  "type": "origins:attribute",
+  "name": "Stone Skin",
+  "description": "Your body is living stone: +4 armour and you cannot be knocked back.",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.armor",
+      "operation": "addition",
+      "value": 4.0
+    },
+    {
+      "attribute": "minecraft:generic.knockback_resistance",
+      "operation": "addition",
+      "value": 1.0
+    }
+  ]
+}

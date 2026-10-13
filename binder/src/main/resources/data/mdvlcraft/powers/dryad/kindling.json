@@ -1,0 +1,13 @@
+{
+  "type": "origins:modify_damage_taken",
+  "name": "Kindling",
+  "description": "You take 50% more damage from fire.",
+  "damage_condition": {
+    "type": "origins:in_tag",
+    "tag": "minecraft:is_fire"
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.5
+  }
+}

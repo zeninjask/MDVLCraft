@@ -247,6 +247,25 @@ def m_longbow(P, A):
     I.MOTIFS['bow'](RAMPS['steel'], A)
 
 
+def m_fish(P, A):
+    body = ellipse(11, 13, 7, 4.2)
+    ic().shade(body, RAMPS['aqua'])
+    ic().shade(poly([(17, 13), (23, 8), (22, 13), (23, 18)]), RAMPS['aqua'], hi=False)
+    ic().fill(disc(7, 12, 1.0), RAMPS['steel'][0])
+    ic().fill(path([(13, 4), (13, 9), (11, 10)], 0.9), RAMPS['steel'][1])
+
+
+def m_anchor(P, A):
+    M = RAMPS['steel']
+    ic().shade(ring(13, 5, 2.2, 3.4), M)
+    lit_seg(13, 8, 13, 21, 2.0, M)
+    lit_seg(8, 11, 18, 11, 1.6, M)
+    ic().shade(path([(5, 15), (7, 20), (13, 22), (19, 20), (21, 15)], 1.8), M)
+    ic().fill(poly([(4, 13), (7, 15.5), (4.5, 17)]), M[2])
+    ic().fill(poly([(22, 13), (19, 15.5), (21.5, 17)]), M[2])
+    ic().fill(path([(14.5, 9), (16, 13), (15, 17)], 0.9), RAMPS['wood'][1])
+
+
 ICONS = {
     'origins:human': 'apple', 'origins:feline': 'yarn', 'origins:merling': 'trident',
     'medievalorigins:arachnae': 'web_spider', 'medievalorigins:dwarf': 'ale', 'medievalorigins:wood_elf': 'leaf_arrow',
@@ -258,7 +277,25 @@ ICONS = {
     'origins-classes:rancher': 'milk', 'origins-classes:rogue': 'rogue_dagger', 'origins-classes:archer': 'longbow',
     'origins-classes:beastmaster': 'bone', 'origins-classes:nitwit': 'jester', 'origins-classes:cleric': 'potion',
     'origins-classes:cook': 'stew', 'origins-classes:explorer': 'map',
+    # the pack's own races, jobs and Martial classes: (motif, colour ramp)
+    'mdvlcraft:stoneborn': ('wall', 'steel'), 'mdvlcraft:infernal': ('flame', 'ember'), 'mdvlcraft:dryad': ('vine', 'forest'),
+    'mdvlcraft:orc': ('fangs', 'bone'), 'mdvlcraft:kobold': ('breath', 'fire'), 'mdvlcraft:revenant': ('coffin', 'shadow'),
+    'mdvlcraft:alchemist': ('flask', 'teal'), 'mdvlcraft:sailor': 'anchor', 'mdvlcraft:fisher': 'fish',
+    'mdvlcraft:bard': ('note', 'gold'), 'mdvlcraft:cavalry': ('horse', 'wood'), 'mdvlcraft:herbalist': ('clover', 'nature'),
+    'mdvlcraft:beekeeper': ('swarm', 'amber'), 'mdvlcraft:gravedigger': ('lantern', 'gold'),
+    'mdvlcraft:duelist': ('crossed_swords', 'steel'), 'mdvlcraft:guardian': ('shield', 'steel'), 'mdvlcraft:skirmisher': ('boot', 'teal'),
+    'mdvlcraft:crossbowman': ('arrows', 'wood'), 'mdvlcraft:spearman': ('spear', 'steel'), 'mdvlcraft:monster_hunter': ('skull', 'bone'),
+    'mdvlcraft:bounty_hunter': ('coin', 'gold'), 'mdvlcraft:battle_mage': ('sword_sparkle', 'glintstone'), 'mdvlcraft:sentinel': ('helmet', 'steel'),
+    'mdvlcraft:paladin': ('cross', 'holy'), 'mdvlcraft:corsair': ('slash', 'crimson'), 'mdvlcraft:zealot': ('burst', 'blood'),
 }
+# CustomModelData of the pack's own origins on mdvlcraft:origin_icon (the origin JSONs in data/mdvlcraft/origins use these)
+OWN_CMD = {oid: 30 + i for i, oid in enumerate([
+    'mdvlcraft:stoneborn', 'mdvlcraft:infernal', 'mdvlcraft:dryad', 'mdvlcraft:orc', 'mdvlcraft:kobold', 'mdvlcraft:revenant',
+    'mdvlcraft:alchemist', 'mdvlcraft:sailor', 'mdvlcraft:fisher', 'mdvlcraft:bard', 'mdvlcraft:cavalry', 'mdvlcraft:herbalist',
+    'mdvlcraft:beekeeper', 'mdvlcraft:gravedigger', 'mdvlcraft:duelist', 'mdvlcraft:guardian', 'mdvlcraft:skirmisher',
+    'mdvlcraft:crossbowman', 'mdvlcraft:spearman', 'mdvlcraft:monster_hunter', 'mdvlcraft:bounty_hunter', 'mdvlcraft:battle_mage',
+    'mdvlcraft:sentinel', 'mdvlcraft:paladin', 'mdvlcraft:corsair', 'mdvlcraft:zealot'])}
+MODELS = os.path.join(I.ROOT, 'src/main/resources/assets/mdvlcraft/models/item')
 
 
 def file_for(oid):
@@ -269,10 +306,29 @@ def main():
     I.MOTIFS.update({k[2:]: v for k, v in globals().items() if k.startswith('m_')})
     for oid, motif in ICONS.items():
         path_ = file_for(oid)
-        if not os.path.exists(path_):
+        if oid not in OWN_CMD and not os.path.exists(path_):
             raise SystemExit(f'no existing texture for {oid}: {path_}')
-        I.draw(motif, RAMPS['steel'], None, None).save(path_)
+        name, ramp = motif if isinstance(motif, tuple) else (motif, 'steel')
+        I.draw(name, RAMPS[ramp], None, None).save(path_)
+    write_models()
     print(len(ICONS), 'origin icons')
+
+
+def write_models():
+    """Item models for the pack's own origins and their CustomModelData overrides on mdvlcraft:origin_icon."""
+    import json
+    icon_model = os.path.join(MODELS, 'origin_icon.json')
+    model = json.load(open(icon_model))
+    model['overrides'] = [o for o in model['overrides'] if o['predicate']['custom_model_data'] not in OWN_CMD.values()]
+    for oid, cmd in OWN_CMD.items():
+        name = oid.replace(':', '_').replace('-', '_')
+        with open(os.path.join(MODELS, 'origin', name + '.json'), 'w') as f:
+            json.dump({"parent": "minecraft:item/generated", "textures": {"layer0": f"mdvlcraft:item/origin/{name}"}}, f, indent=2)
+            f.write('\n')
+        model['overrides'].append({"predicate": {"custom_model_data": cmd}, "model": f"mdvlcraft:item/origin/{name}"})
+    with open(icon_model, 'w') as f:
+        json.dump(model, f, indent=2)
+        f.write('\n')
 
 
 if __name__ == '__main__':

@@ -212,7 +212,7 @@ def main():
                          + f"<td class='num'>{len(r['abilities'])}</td><td class='num'>{len(r['efskills'])}</td></tr>")
     parts.append("</table><p class='lead'>Everyone knows Guard, Parrying, Parry – Absolute Deflection and the souls-like dodge and step, and always has "
                  "Clash Blade equipped. Assassin, Phantom, Scout and Thief also get Precise Parry. Hostile mobs have 20% more health and deal 10% more "
-                 "damage. Players also pick a race and a class (Origins) on first joining; these are listed at the end and are separate from the "
+                 "damage. Players also pick a race, a Martial class and a job (Origins) on first joining; these are listed at the end and are separate from the "
                  "archetype trees.</p>")
 
     for cls in CLASS_NODES:
@@ -235,8 +235,9 @@ def main():
     pack = Pack(mods_dir, kubejs_dir)
     parts.append("<div class='page'><h2>Origins</h2><p class='lead'>Picked on first joining, separately from the archetype trees: one race and one "
                  "class. A race or class can be changed later with an Orb of Origin (an enchanted golden apple surrounded by eight gold ingots).</p>")
-    for heading, (ns, path) in (('Races', ('origins', 'origin')), ('Classes', ('origins-classes', 'class'))):
-        parts.append(f"<h3>{heading}</h3><table class='origins'><tr><th>{heading[:-2] if heading == 'Classes' else 'Race'}</th><th>Powers</th></tr>")
+    for heading, column, (ns, path) in (('Races', 'Race', ('origins', 'origin')), ('Martial classes', 'Martial', ('mdvlcraft', 'martial')),
+                                        ('Jobs', 'Job', ('origins-classes', 'class'))):
+        parts.append(f"<h3>{heading}</h3><table class='origins'><tr><th>{column}</th><th>Powers</th></tr>")
         for name, powers in origin_rows(pack, ns, path):
             body = "<br>".join(f"<b>{e(n)}</b> {e(d)}" for n, d in powers) or "–"
             parts.append(f"<tr><td>{e(name)}</td><td>{body}</td></tr>")

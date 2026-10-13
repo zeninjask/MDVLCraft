@@ -1,0 +1,59 @@
+{
+  "type": "origins:multiple",
+  "name": "Iron Lungs",
+  "description": "You cannot drown for your first 15 seconds underwater.",
+  "under": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 300,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "count": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:if_else",
+      "condition": {
+        "type": "origins:submerged_in",
+        "fluid": "minecraft:water"
+      },
+      "if_action": {
+        "type": "origins:change_resource",
+        "resource": "mdvlcraft:corsair/iron_lungs_under",
+        "change": 1
+      },
+      "else_action": {
+        "type": "origins:change_resource",
+        "resource": "mdvlcraft:corsair/iron_lungs_under",
+        "change": 0,
+        "operation": "set"
+      }
+    }
+  },
+  "breath": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "condition": {
+      "type": "origins:and",
+      "conditions": [
+        {
+          "type": "origins:submerged_in",
+          "fluid": "minecraft:water"
+        },
+        {
+          "type": "origins:resource",
+          "resource": "mdvlcraft:corsair/iron_lungs_under",
+          "comparison": "<",
+          "compare_to": 300
+        }
+      ]
+    },
+    "entity_action": {
+      "type": "origins:gain_air",
+      "value": 1
+    }
+  }
+}

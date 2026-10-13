@@ -1,0 +1,48 @@
+{
+  "type": "origins:multiple",
+  "name": "Hit and Run",
+  "description": "Landing a hit makes you 10% faster for 3 seconds.",
+  "timer": {
+    "type": "origins:resource",
+    "min": 0,
+    "max": 60,
+    "start_value": 0,
+    "hud_render": {
+      "should_render": false
+    }
+  },
+  "trigger": {
+    "type": "origins:self_action_on_hit",
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mdvlcraft:skirmisher/hit_and_run_timer",
+      "change": 60,
+      "operation": "set"
+    }
+  },
+  "tick": {
+    "type": "origins:action_over_time",
+    "interval": 1,
+    "entity_action": {
+      "type": "origins:change_resource",
+      "resource": "mdvlcraft:skirmisher/hit_and_run_timer",
+      "change": -1
+    }
+  },
+  "speed": {
+    "type": "origins:conditioned_attribute",
+    "condition": {
+      "type": "origins:resource",
+      "resource": "mdvlcraft:skirmisher/hit_and_run_timer",
+      "comparison": ">",
+      "compare_to": 0
+    },
+    "modifiers": [
+      {
+        "attribute": "minecraft:generic.movement_speed",
+        "operation": "multiply_base",
+        "value": 0.1
+      }
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "type": "origins:modify_jump",
+  "name": "Grounded",
+  "description": "You are too heavy to jump while sprinting.",
+  "condition": {
+    "type": "origins:command",
+    "command": "execute if entity @s[predicate=mdvlcraft:sprinting]",
+    "comparison": ">=",
+    "compare_to": 1
+  },
+  "modifier": {
+    "operation": "multiply_total",
+    "value": -1.0
+  }
+}

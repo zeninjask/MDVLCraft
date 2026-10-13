@@ -1,0 +1,13 @@
+{
+  "type": "origins:modify_damage_dealt",
+  "name": "Smite the Dead",
+  "description": "You deal 10% more damage to undead.",
+  "target_condition": {
+    "type": "origins:entity_group",
+    "group": "undead"
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.1
+  }
+}

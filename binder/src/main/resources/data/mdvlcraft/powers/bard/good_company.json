@@ -1,0 +1,15 @@
+{
+  "type": "origins:modify_xp_gain",
+  "name": "Good Company",
+  "description": "You gain 10% more experience while another player is within 16 blocks.",
+  "condition": {
+    "type": "origins:command",
+    "command": "execute if entity @a[distance=0.1..16]",
+    "comparison": ">=",
+    "compare_to": 1
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.1
+  }
+}

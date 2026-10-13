@@ -1,0 +1,12 @@
+{
+  "type": "origins:invulnerability",
+  "name": "Steady Seat",
+  "description": "You take no fall damage while mounted.",
+  "condition": {
+    "type": "origins:riding"
+  },
+  "damage_condition": {
+    "type": "origins:in_tag",
+    "tag": "minecraft:is_fall"
+  }
+}

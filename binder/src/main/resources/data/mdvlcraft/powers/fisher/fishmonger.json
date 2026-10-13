@@ -1,0 +1,41 @@
+{
+  "type": "origins:modify_food",
+  "name": "Fishmonger",
+  "description": "Cooked fish and fish dishes restore 2 more hunger.",
+  "item_condition": {
+    "type": "origins:ingredient",
+    "ingredient": [
+      {
+        "item": "minecraft:cooked_cod"
+      },
+      {
+        "item": "minecraft:cooked_salmon"
+      },
+      {
+        "item": "farmersdelight:cooked_cod_slice"
+      },
+      {
+        "item": "farmersdelight:cooked_salmon_slice"
+      },
+      {
+        "item": "farmersdelight:fish_stew"
+      },
+      {
+        "item": "farmersdelight:baked_cod_stew"
+      },
+      {
+        "item": "farmersdelight:grilled_salmon"
+      },
+      {
+        "item": "farmersdelight:salmon_roll"
+      },
+      {
+        "item": "farmersdelight:cod_roll"
+      }
+    ]
+  },
+  "food_modifier": {
+    "operation": "addition",
+    "value": 2
+  }
+}

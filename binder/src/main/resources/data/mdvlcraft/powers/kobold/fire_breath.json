@@ -1,0 +1,35 @@
+{
+  "type": "origins:active_self",
+  "name": "Fire Breath",
+  "description": "Breathe a cone of fire in front of you, burning and damaging what it hits (30 second cooldown).",
+  "cooldown": 600,
+  "hud_render": {
+    "should_render": true,
+    "sprite_location": "origins:textures/gui/resource_bar.png",
+    "bar_index": 3
+  },
+  "key": {
+    "key": "key.origins.primary_active"
+  },
+  "entity_action": {
+    "type": "origins:and",
+    "actions": [
+      {
+        "type": "origins:execute_command",
+        "command": "particle minecraft:flame ^ ^1.4 ^2 0.6 0.4 0.6 0.03 70"
+      },
+      {
+        "type": "origins:execute_command",
+        "command": "playsound minecraft:entity.blaze.shoot player @a ~ ~ ~ 1 0.8"
+      },
+      {
+        "type": "origins:execute_command",
+        "command": "execute anchored eyes positioned ^ ^ ^2.5 as @e[distance=..2.5,type=!minecraft:player,type=!minecraft:item] run damage @s 5 minecraft:on_fire"
+      },
+      {
+        "type": "origins:execute_command",
+        "command": "execute anchored eyes positioned ^ ^ ^2.5 as @e[distance=..2.5,type=!minecraft:player,type=!minecraft:item] run data merge entity @s {Fire:80s}"
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "origins:modify_damage_dealt",
+  "name": "Slayer",
+  "description": "You deal 15% more damage to undead and arthropods.",
+  "target_condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:entity_group",
+        "group": "undead"
+      },
+      {
+        "type": "origins:entity_group",
+        "group": "arthropod"
+      }
+    ]
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.15
+  }
+}

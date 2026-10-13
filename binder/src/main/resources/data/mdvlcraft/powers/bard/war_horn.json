@@ -1,0 +1,47 @@
+{
+  "type": "origins:action_on_item_use",
+  "name": "Rallying Horn",
+  "description": "Sounding a goat horn gives you and nearby players Speed and Regeneration for 10 seconds.",
+  "item_condition": {
+    "type": "origins:ingredient",
+    "ingredient": {
+      "item": "minecraft:goat_horn"
+    }
+  },
+  "entity_action": {
+    "type": "origins:area_of_effect",
+    "radius": 12,
+    "include_target": true,
+    "bientity_condition": {
+      "type": "origins:target_condition",
+      "condition": {
+        "type": "origins:entity_type",
+        "entity_type": "minecraft:player"
+      }
+    },
+    "bientity_action": {
+      "type": "origins:target_action",
+      "action": {
+        "type": "origins:and",
+        "actions": [
+          {
+            "type": "origins:apply_effect",
+            "effect": {
+              "effect": "minecraft:speed",
+              "duration": 200,
+              "amplifier": 0
+            }
+          },
+          {
+            "type": "origins:apply_effect",
+            "effect": {
+              "effect": "minecraft:regeneration",
+              "duration": 200,
+              "amplifier": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}

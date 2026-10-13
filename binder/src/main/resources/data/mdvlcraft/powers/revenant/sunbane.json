@@ -1,0 +1,19 @@
+{
+  "type": "origins:action_over_time",
+  "name": "Sunbane",
+  "description": "Direct sunlight saps your strength (Weakness II).",
+  "interval": 20,
+  "condition": {
+    "type": "origins:exposed_to_sun"
+  },
+  "entity_action": {
+    "type": "origins:apply_effect",
+    "effect": {
+      "effect": "minecraft:weakness",
+      "duration": 40,
+      "amplifier": 1,
+      "show_particles": false,
+      "show_icon": true
+    }
+  }
+}

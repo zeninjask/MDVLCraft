@@ -1,0 +1,22 @@
+{
+  "type": "origins:modify_damage_dealt",
+  "name": "Outlaw Hunter",
+  "description": "You deal 10% more damage to illagers and witches.",
+  "target_condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:entity_group",
+        "group": "illager"
+      },
+      {
+        "type": "origins:entity_type",
+        "entity_type": "minecraft:witch"
+      }
+    ]
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.1
+  }
+}
