@@ -63,7 +63,8 @@ class Tree:
         self.defs = json.loads((self.dir / "definitions.json").read_text())
         self.skills = json.loads((self.dir / "skills.json").read_text())
         self.conns = json.loads((self.dir / "connections.json").read_text())
-        root_frame = self.defs[self.skills["root"]["definition"]]["frame"]["data"]["locked"]
+        root = next(v for v in self.skills.values() if v["x"] == 0 and v["y"] == 0)
+        root_frame = self.defs[root["definition"]]["frame"]["data"]["locked"]
         self.cls = re.search(r"frame_([a-z]+)_root_locked", root_frame).group(1)
 
     def save(self):

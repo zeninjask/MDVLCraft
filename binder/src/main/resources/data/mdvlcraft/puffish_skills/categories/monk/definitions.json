@@ -12549,5 +12549,36 @@
     },
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "fire_fist": {
+    "title": "Fire Fist",
+    "description": "Unlocks Fire Fist (Level 3) (65 mana, 30 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "alshanex_familiars:textures/gui/spell_icons/fire_fist.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "alshanex_familiars:fire_fist",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_warrior_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_warrior_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_warrior_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_warrior_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_warrior_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
   }
 }
