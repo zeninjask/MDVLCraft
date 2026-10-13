@@ -26,7 +26,12 @@ public enum Technique implements Ability {
     FOLLOW_UP_PUNCH("follow_up_punch", 11, 20, 15, false, "mdvlcraft:textures/gui/icons/ability/follow_up_punch.png"),
     LEAPING_CRUSH("leaping_crush", 63, 30, 12, false, "mdvlcraft:textures/gui/icons/ability/leaping_crush.png"),
     FOCUS("focus", -1, 30, 30, false, "mdvlcraft:textures/gui/icons/ability/focus.png"),
-    KNOCKOUT("knockout", -1, 25, 20, false, "mdvlcraft:textures/gui/icons/ability/knockout.png");
+    KNOCKOUT("knockout", -1, 25, 20, false, "mdvlcraft:textures/gui/icons/ability/knockout.png"),
+    BLOOD_METEORITE("blood_meteorite", 87, 20, 3, false, "cursedfate:textures/particle/bloodorb2.png"),
+    SLICING_EXORCISM("slicing_exorcism", 88, 30, 10, false, "cursedfate:textures/particle/bloodslash.png"),
+    CONVERGENCE("convergence", 90, 25, 20, false, "cursedfate:textures/mob_effect/convergence.png"),
+    PIERCING_BLOOD("piercing_blood", 92, 15, 2, true, "cursedfate:textures/screens/bloodmanipulationicon.png"),
+    CRIMSON_BINDING("crimson_binding", 93, 25, 12, false, "cursedfate:textures/screens/crimsonbindingability.png");
 
     private final ResourceLocation id;
     final int abilityId;

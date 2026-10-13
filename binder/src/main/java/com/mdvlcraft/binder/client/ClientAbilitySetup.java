@@ -20,6 +20,7 @@ public final class ClientAbilitySetup {
         modBus.addListener(ClientAbilitySetup::onRegisterOverlays);
         modBus.addListener(ClientAbilitySetup::onClientSetup);
         DoppelgangerClientSetup.register(modBus);
+        com.mdvlcraft.binder.client.antimagic.DemonicAssimilationLayers.register(modBus);
         MinecraftForge.EVENT_BUS.addListener(AbilityKeys::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(RemovedKeys::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(TracingDashAnimation::onClientTick);

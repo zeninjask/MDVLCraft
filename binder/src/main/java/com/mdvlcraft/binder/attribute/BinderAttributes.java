@@ -17,6 +17,8 @@ public final class BinderAttributes {
     public static final RegistryObject<Attribute> PARRY_WINDOW = fraction("parry_window", 3.0);
     public static final RegistryObject<Attribute> DODGE_DISTANCE = fraction("dodge_distance", 2.0);
     public static final RegistryObject<Attribute> DAGGER_DAMAGE = fraction("dagger_damage", 5.0);
+    public static final RegistryObject<Attribute> STAFF_DAMAGE = fraction("staff_damage", 5.0);
+    public static final RegistryObject<Attribute> SPEAR_DAMAGE = fraction("spear_damage", 5.0);
     public static final RegistryObject<Attribute> BACKSTAB_DAMAGE = fraction("backstab_damage", 5.0);
     public static final RegistryObject<Attribute> RAPIER_DAMAGE = fraction("rapier_damage", 5.0);
     public static final RegistryObject<Attribute> RIPOSTE_DAMAGE = fraction("riposte_damage", 5.0);

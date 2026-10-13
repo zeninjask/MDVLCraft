@@ -14550,5 +14550,286 @@
     },
     "size": 0.75,
     "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "blessing": {
+    "title": "Blessing",
+    "description": "Unlocks Blessing (Level 3) (72 mana, 60 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/blessing.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:blessing",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "custodia_caeli": {
+    "title": "Custodia Caeli",
+    "description": "Unlocks Custodia Caeli (Level 1) (108 mana, 180 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/custodia_caeli.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:custodia_caeli",
+          "level": 1
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "blessed_connection": {
+    "title": "Vitality 11",
+    "description": "+0.3333 Max Health",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/astro/bonus/12/minecraft_generic_max_health.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "minecraft:generic.max_health",
+          "value": 0.3333,
+          "operation": "addition"
+        }
+      }
+    ],
+    "cost": 1,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_twig_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_twig_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_twig_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_twig_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_twig_excluded.png"
+      }
+    },
+    "size": 0.75,
+    "extra_description": "Twig bonus (every archetype has a few of these)."
+  },
+  "comforting_lullaby": {
+    "title": "Comforting Lullaby",
+    "description": "Unlocks Comforting Lullaby (Level 3) (4 mana, 39 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/comforting_lullaby.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:comforting_lullaby",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "bless_barrier": {
+    "title": "Bless Barrier",
+    "description": "Unlocks Bless Barrier (Level 3) (43 mana, 45 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "esoteric_spell:textures/gui/spell_icons/bless_barrier.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "esoteric_spell:bless_barrier",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "gloria_barrier": {
+    "title": "Gloria Barrier",
+    "description": "Unlocks Gloria Barrier (Level 3) (58 mana, 67.5 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "esoteric_spell:textures/gui/spell_icons/gloria_barrier.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "esoteric_spell:gloria_barrier",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "cannon_magic": {
+    "title": "Magic Cannon",
+    "description": "Unlocks Magic Cannon (Level 3) (0 mana, 180 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "esoteric_spell:textures/gui/spell_icons/cannon_magic.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "esoteric_spell:cannon_magic",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "time_sand": {
+    "title": "Sacred Time Sand",
+    "description": "Unlocks Sacred Time Sand (Level 3) (0 mana, 15 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "iss_csw:textures/gui/spell_icons/time_sand.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "iss_csw:time_sand",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "pale_lantern": {
+    "title": "Pale Lantern",
+    "description": "Unlocks Pale Lantern (Level 3) (7 mana, 3 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "cursed_school:textures/gui/spell_icons/pale_lantern.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "cursed_school:pale_lantern",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
   }
 }

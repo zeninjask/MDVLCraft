@@ -2392,19 +2392,19 @@
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
   "blood_slash": {
-    "title": "Blood Slash",
-    "description": "Unlocks Blood Slash (Level 2) (22 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "title": "Vigor Siphon",
+    "description": "Unlocks Vigor Siphon (Level 2) (79 mana, 300 s cooldown) on the ability wheel",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/astro/spell/32/irons_spellbooks_blood_slash.png"
+        "texture": "traveloptics:textures/gui/spell_icons/vigor_siphon.png"
       }
     },
     "rewards": [
       {
         "type": "mdvlcraft:ability",
         "data": {
-          "ability": "irons_spellbooks:blood_slash",
+          "ability": "traveloptics:vigor_siphon",
           "level": 2
         }
       }
@@ -6280,19 +6280,19 @@
     "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
   },
   "blood_needles": {
-    "title": "Blood Needles",
-    "description": "Unlocks Blood Needles (Level 3) (25 mana, 15 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "title": "Summon Drowned",
+    "description": "Unlocks Summon Drowned (Level 3) (50 mana, 90 s cooldown) on the ability wheel",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/astro/spell/32/irons_spellbooks_blood_needles.png"
+        "texture": "somakespells:textures/gui/spell_icons/summon_drowned.png"
       }
     },
     "rewards": [
       {
         "type": "mdvlcraft:ability",
         "data": {
-          "ability": "irons_spellbooks:blood_needles",
+          "ability": "somakespells:summon_drowned",
           "level": 3
         }
       }
@@ -7460,19 +7460,19 @@
     "extra_description": "Twig bonus (every archetype has a few of these)."
   },
   "devour": {
-    "title": "Devour",
-    "description": "Unlocks Devour (Level 3) (24 mana, 30 s cooldown) on the ability wheel. Hold the Ponder key (W) here to preview it",
+    "title": "Nocturnal Swarm",
+    "description": "Unlocks Nocturnal Swarm (Level 3) (54 mana, 150 s cooldown) on the ability wheel",
     "icon": {
       "type": "texture",
       "data": {
-        "texture": "mdvlcraft:textures/gui/astro/spell/32/irons_spellbooks_devour.png"
+        "texture": "traveloptics:textures/gui/spell_icons/nocturnal_swarm.png"
       }
     },
     "rewards": [
       {
         "type": "mdvlcraft:ability",
         "data": {
-          "ability": "irons_spellbooks:devour",
+          "ability": "traveloptics:nocturnal_swarm",
           "level": 3
         }
       }
@@ -12424,6 +12424,595 @@
       }
     ],
     "cost": 4,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "blood_rush": {
+    "title": "Blood Rush",
+    "description": "Unlocks Blood Rush (Level 3) (72 mana, 60 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/blood_rush.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:blood_rush",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "bloodmark": {
+    "title": "Bloodmark",
+    "description": "Unlocks Bloodmark (Level 3) (19 mana, 27 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/bloodmark.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:bloodmark",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "fragmented_requiem": {
+    "title": "Fragmented Requiem",
+    "description": "Unlocks Fragmented Requiem (Level 3) (37 mana, 24 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/fragmented_requiem.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:fragmented_requiem",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "withered_rose_vortex": {
+    "title": "Withered Rose Vortex",
+    "description": "Unlocks Withered Rose Vortex (Level 3) (73 mana, 36 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/withered_rose_vortex.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:withered_rose_vortex",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "funeral_bloom": {
+    "title": "Funeral Bloom",
+    "description": "Unlocks Funeral Bloom (Level 2) (96 mana, 63 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/funeral_bloom.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:funeral_bloom",
+          "level": 2
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "damned_demomans": {
+    "title": "Damned Demoman's",
+    "description": "Unlocks Damned Demoman's (Level 3) (65 mana, 90 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/damned_demomans.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:damned_demomans",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "abyssal_burn": {
+    "title": "Abyssal Burn",
+    "description": "Unlocks Abyssal Burn (Level 3) (58 mana, 30 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/abyssal_burn.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:abyssal_burn",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "fire_orbs": {
+    "title": "Fire Orbs",
+    "description": "Unlocks Fire Orbs (Level 3) (29 mana, 15 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/fire_orbs.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:fire_orbs",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "procession_of_souls": {
+    "title": "Procession of Souls",
+    "description": "Unlocks Procession of Souls (Level 3) (33 mana, 21 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/procession_of_souls.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:procession_of_souls",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "grave_sigil": {
+    "title": "Grave Sigil",
+    "description": "Unlocks Grave Sigil (Level 3) (40 mana, 27 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/grave_sigil.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:grave_sigil",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "spirit_empowerment": {
+    "title": "Spirit Empowerment",
+    "description": "Unlocks Spirit Empowerment (Level 3) (72 mana, 60 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "somakespells:textures/gui/spell_icons/spirit_empowerment.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "somakespells:spirit_empowerment",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "hemovaporize": {
+    "title": "Hemovaporize",
+    "description": "Unlocks Hemovaporize (Level 3) (4 mana, 22.5 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "iss_csw:textures/gui/spell_icons/hemovaporize.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "iss_csw:hemovaporize",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "totem_rite": {
+    "title": "Totem Rite",
+    "description": "Unlocks Totem Rite (Level 3) (14 mana, 4.5 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "iss_csw:textures/gui/spell_icons/totem_rite.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "iss_csw:totem_rite",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "grave_dust": {
+    "title": "Grave Dust",
+    "description": "Unlocks Grave Dust (Level 3) (14 mana, 9 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "cursed_school:textures/gui/spell_icons/grave_dust.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "cursed_school:grave_dust",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "ash_guard": {
+    "title": "Ash Guard",
+    "description": "Unlocks Ash Guard (Level 3) (23 mana, 24 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "cursed_school:textures/gui/spell_icons/ash_guard.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "cursed_school:ash_guard",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "umbral_coffin": {
+    "title": "Umbral Coffin",
+    "description": "Unlocks Umbral Coffin (Level 3) (47 mana, 36 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "cursed_school:textures/gui/spell_icons/umbral_coffin.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "cursed_school:umbral_coffin",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "choir_of_flies": {
+    "title": "Choir of Flies",
+    "description": "Unlocks Choir of Flies (Level 3) (12 mana, 7.5 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "cursed_school:textures/gui/spell_icons/choir_of_flies.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "cursed_school:choir_of_flies",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "issue_invoice": {
+    "title": "Issue Invoice",
+    "description": "Unlocks Issue Invoice (Level 3) (45 mana, 150 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "cursed_school:textures/gui/spell_icons/issue_invoice.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "cursed_school:issue_invoice",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
+  },
+  "jiangshi_invoke": {
+    "title": "Jiangshi Invoke",
+    "description": "Unlocks Jiangshi Invoke (Level 3) (36 mana, 150 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "iss_magicfromtheeast:textures/gui/spell_icons/jiangshi_invoke.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "iss_magicfromtheeast:jiangshi_invoke",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
     "frame": {
       "type": "texture",
       "data": {

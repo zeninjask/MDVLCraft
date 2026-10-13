@@ -69,7 +69,7 @@
   },
   "berzerker": {
     "title": "Berzerker",
-    "description": "Raw damage, axes and bloodlust. Key: Fang Strike, Heartstop, Burning Dash.",
+    "description": "Raw damage, axes and bloodlust. Key: Fang Strike, Spectral Rondo, Burning Dash.",
     "extra_description": "Opens the Berzerker tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
@@ -183,7 +183,7 @@
   },
   "necromancy": {
     "title": "Necromancy",
-    "description": "Blood magic and the risen dead. Key: Wither Skull, Blood Slash, Ray Of Siphoning.",
+    "description": "Blood magic and the risen dead. Key: Wither Skull, Vigor Siphon, Nocturnal Swarm.",
     "extra_description": "Opens the Necromancy tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
@@ -252,7 +252,7 @@
   "assassin": {
     "title": "Assassin",
     "description": "Daggers, backstabs and vanishing acts. Key: Echoing Strikes, Acupuncture, Bonebreaker.",
-    "extra_description": "Opens the Assassin tab. You can pick 2 archetypes in total. Also teaches Precise Parry (Epic Fight passive): parrying at the perfect moment grants strong buffs and empowers your next attack.",
+    "extra_description": "Opens the Assassin tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
@@ -283,7 +283,7 @@
   "phantom": {
     "title": "Phantom",
     "description": "Rapier duelling, dodges and ripostes. Key: Evasion, Slow, Invisibility.",
-    "extra_description": "Opens the Phantom tab. You can pick 2 archetypes in total. Also teaches Precise Parry (Epic Fight passive): parrying at the perfect moment grants strong buffs and empowers your next attack.",
+    "extra_description": "Opens the Phantom tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
@@ -314,7 +314,7 @@
   "scout": {
     "title": "Scout",
     "description": "Mobility, ender magic, far sight and crows. Key: Cleanse, Haste, Planar Sight.",
-    "extra_description": "Opens the Scout tab. You can pick 2 archetypes in total. Also teaches Precise Parry (Epic Fight passive): parrying at the perfect moment grants strong buffs and empowers your next attack.",
+    "extra_description": "Opens the Scout tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
@@ -345,7 +345,7 @@
   "thief": {
     "title": "Thief",
     "description": "Luck, plunder and Boogie Woogie swaps. Key: Boogie Woogie, Block Clap, Scapegoat.",
-    "extra_description": "Opens the Thief tab. You can pick 2 archetypes in total. Also teaches Precise Parry (Epic Fight passive): parrying at the perfect moment grants strong buffs and empowers your next attack.",
+    "extra_description": "Opens the Thief tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
@@ -398,7 +398,7 @@
   "wanderer": {
     "title": "Wanderer",
     "description": "Long journeys: food, sure footing and a loyal horse. Key: Summon Horse, Counterspell, Summon Polar Bear.",
-    "extra_description": "Opens the Wanderer tab. You can pick 2 archetypes in total. You can no longer be poisoned or given Hunger.",
+    "extra_description": "Opens the Wanderer tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
@@ -454,7 +454,7 @@
   "druid": {
     "title": "Druid",
     "description": "Nature magic and the land's healing. Key: Acid Orb, Root, Firefly Swarm.",
-    "extra_description": "Opens the Druid tab. You can pick 2 archetypes in total. You can no longer be poisoned or given Hunger.",
+    "extra_description": "Opens the Druid tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
@@ -510,7 +510,7 @@
   "water": {
     "title": "Water",
     "description": "Tides, torrents and the crushing deep. Key: Tsunami, Vortex Of The Deep, Coral Barrage.",
-    "extra_description": "Opens the Ice tab. You can pick 2 archetypes in total.",
+    "extra_description": "Opens the Water tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
@@ -533,11 +533,80 @@
   "monk": {
     "title": "Monk",
     "description": "Unarmed martial arts: fists, gloves and ki. Key: Focus (Black Flash), Knockout, Parry: Absolute Deflection.",
-    "extra_description": "Opens the Knight tab. You can pick 2 archetypes in total.",
+    "extra_description": "Opens the Monk tab. You can pick 2 archetypes in total.",
     "icon": {
       "type": "texture",
       "data": {
         "texture": "mdvlcraft:textures/gui/astro/archetype/24/monk.png"
+      }
+    },
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_warrior_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_warrior_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_warrior_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_warrior_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_warrior_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "cost": 1
+  },
+  "warlock": {
+    "title": "Warlock",
+    "description": "Eldritch pacts: sculk, sound and the abyss. Key: Eldritch Blast, Sculk Tentacles, Abyssal Blast.",
+    "extra_description": "Opens the Warlock tab. You can pick 2 archetypes in total.",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/warlock.png"
+      }
+    },
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_mage_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_mage_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_mage_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_mage_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_mage_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "cost": 1
+  },
+  "bloodborn": {
+    "title": "Bloodborn",
+    "description": "Blood as a weapon: daggers, leeches and crimson arts. Key: Piercing Blood, Crimson Binding, Bloodbound Blade.",
+    "extra_description": "Opens the Bloodborn tab. You can pick 2 archetypes in total.",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/bloodborn.png"
+      }
+    },
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_ranger_goal_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_ranger_goal_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_ranger_goal_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_ranger_goal_excluded.png"
+      }
+    },
+    "size": 1.5,
+    "cost": 1
+  },
+  "magehunter": {
+    "title": "Mage Hunter",
+    "description": "Anti-magic greatswords and demonic power. Key: Summon Demon-Slayer Sword, Demonic Assimilation, Spellbreak Burst.",
+    "extra_description": "Opens the Mage Hunter tab. You can pick 2 archetypes in total.",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/astro/archetype/24/magehunter.png"
       }
     },
     "frame": {

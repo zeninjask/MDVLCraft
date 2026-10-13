@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.attribute;
 import com.mdvlcraft.binder.ability.ManaRegen;
 import com.mdvlcraft.binder.combat.KatanaWeapons;
 import com.mdvlcraft.binder.monk.Fists;
+import io.redspace.ironsspellbooks.item.weapons.StaffItem;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -102,6 +103,10 @@ public final class AttributeEffects {
             bonus += value(attacker, BinderAttributes.KATANA_DAMAGE);
         } else if (category == WeaponCategories.DAGGER) {
             bonus += value(attacker, BinderAttributes.DAGGER_DAMAGE);
+        } else if (category == WeaponCategories.SPEAR) {
+            bonus += value(attacker, BinderAttributes.SPEAR_DAMAGE);
+        } else if (attacker.getMainHandItem().getItem() instanceof StaffItem) {
+            bonus += value(attacker, BinderAttributes.STAFF_DAMAGE);
         } else if (category == WeaponCategories.SWORD && attacker.getOffhandItem().isEmpty()) {
             bonus += value(attacker, BinderAttributes.RAPIER_DAMAGE);
         } else if (Fists.fisted(attacker)) {

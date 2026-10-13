@@ -1,0 +1,954 @@
+{
+ "acgbattlescytherevived:execution": {
+  "name": "Execution",
+  "tooltip": "A technique that sucks the souls of the enemies upon killing them."
+ },
+ "cdmoveset:bloodwolf": {
+  "name": "Blood Wolf",
+  "tooltip": "When the wolf howls, it is time for a counterattack. Gain the protection of the wolf god by dodging and defeating enemies. When the skill level reaches 10, you will gain the protection of the wolf god, enhancing your attacks and having a chance to interrupt enemy attacks."
+ },
+ "cdmoveset:bstep": {
+  "name": "Better Step",
+  "tooltip": "Better Step.\n\n(Stamina: %d)"
+ },
+ "cdmoveset:cdparryskill": {
+  "name": "New version technical update, this skill is useless",
+  "tooltip": "Specially made parry, I don't know how to make it, don't ask"
+ },
+ "cdmoveset:dual_slash": {
+  "name": "Edge Dance",
+  "tooltip": "Edge Dance"
+ },
+ "cdmoveset:ex_yamato_step": {
+  "name": "Yamato step (cannot be learned)",
+  "tooltip": "Exclusive dodge skill for Yamato  (Without Yamato, you cannot use this skill. When holding the Yamato , and dodge is set to Phantom, this skill will activate automatically)"
+ },
+ "cdmoveset:fatalfalsh": {
+  "name": "Fatal Flash",
+  "tooltip": "Lock onto a low-health enemy and perform a kill, which cannot be interrupted during execution (Weapons allowed: uchigatana, katana, tachi, longsword)"
+ },
+ "cdmoveset:greatsword_dual_skill": {
+  "name": "Earth Splitting Slash",
+  "tooltip": "A powerful ground-shaking attack that knocks down all enemies within range"
+ },
+ "cdmoveset:greeat_tachiskill": {
+  "name": "Blood Blade",
+  "tooltip": "After a brief charge, stun the enemy, deal a fatal attack, and effectively push back the enemy."
+ },
+ "cdmoveset:guardparry": {
+  "name": "Absolute Defense",
+  "tooltip": "Allows you to adjust your defensive stance and block all blockable attacks during the skill duration. Each defeated enemy restores one layer of defense points (the base value of defense points is 4, the Sweeping Blade enchantment can increase defense points)"
+ },
+ "cdmoveset:katanaskill": {
+  "name": "Critical Strike",
+  "tooltip": "A swift thrust that pierces through enemies in its path. In a running state, you can sheathe the sword and deliver a powerful strike."
+ },
+ "cdmoveset:katanaspskill": {
+  "name": "Critical Strike",
+  "tooltip": "Adopt a stance to block the enemy's attack and then execute a killing blow."
+ },
+ "cdmoveset:lethalslicing": {
+  "name": "Lethal Slash",
+  "tooltip": "Stun the enemy and deliver a powerful strike. The number of strikes varies depending on the number of enemies."
+ },
+ "cdmoveset:shiled_slahs": {
+  "name": "Shield Bash!!!!",
+  "tooltip": "Use the shield to block the enemy's attack and stun the enemy."
+ },
+ "cdmoveset:spearslash": {
+  "name": "Spear Dance",
+  "tooltip": "Grab surrounding enemies and deliver a powerful knockdown."
+ },
+ "cdmoveset:sstep": {
+  "name": "Step (for creatures, bosses, etc.)",
+  "tooltip": "A meaningless dodge skill book, maybe the author was too lazy to delete it. It doesn't differ much from dodging, except that it reduces stamina consumption by 1.\n\n(Stamina: %d)"
+ },
+ "cdmoveset:sword_slash": {
+  "name": "Enhanced Sweeping Blade",
+  "tooltip": "Spin forward and deliver a powerful strike."
+ },
+ "cdmoveset:wind_slash": {
+  "name": "Steel Whirlwind",
+  "tooltip": "Raise your greatsword and slash all surrounding enemies."
+ },
+ "cdmoveset:wolf_dodge": {
+  "name": "Wolf God Leap",
+  "tooltip": "Allows you to use different actions to dodge. A successful dodge can trigger special effects and restore weapon charge."
+ },
+ "cdmoveset:yamato_step": {
+  "name": "Phantom",
+  "tooltip": "Teleport in a specified direction. Dodge all dodgeable attacks.\n\n(Stamina: %d)"
+ },
+ "cdmoveset:yamatoskill": {
+  "name": "During the preparation phase of normal skill usage, being attacked by the enemy can trigger a counterattack. After 1a, 2a, 3a, you can release additional combos, and after a parry, you can release the Illusory Blade Realm for a counterattack.",
+  "tooltip": "Depending on the attack, the combo delivered is different."
+ },
+ "combat_evolution:shield_counter": {
+  "name": "Shield Counter",
+  "tooltip": "When holding a shield in your off-hand\nPress [Guard + Weapon Innate] consume stamina to swing the shield\nIf you successfully block an attack, you will stun the enemy, restore your stamina, and gain stun immunity, resistance, and strength effect"
+ },
+ "dodge_parry_reward:absorb1": {
+  "name": "Damage Absorption I",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:absorb2": {
+  "name": "Damage Absorption II",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:absorb3": {
+  "name": "Damage Absorption III",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:absorb4": {
+  "name": "Damage Absorption IV",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:damage_boost1": {
+  "name": "Strength I",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:damage_boost2": {
+  "name": "Strength II",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:damage_boost3": {
+  "name": "Strength III",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:damage_boost4": {
+  "name": "Strength IV",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:heal1": {
+  "name": "Instant Heal I",
+  "tooltip": "Instantly restores %d HP after a perfect dodge or perfect parry"
+ },
+ "dodge_parry_reward:heal2": {
+  "name": "Instant Heal II",
+  "tooltip": "Instantly restores %d HP after a perfect dodge or perfect parry"
+ },
+ "dodge_parry_reward:heal3": {
+  "name": "Instant Heal III",
+  "tooltip": "Instantly restores %d HP after a perfect dodge or perfect parry"
+ },
+ "dodge_parry_reward:heal4": {
+  "name": "Instant Heal IV",
+  "tooltip": "Instantly restores %d HP after a perfect dodge or perfect parry"
+ },
+ "dodge_parry_reward:health_boost1": {
+  "name": "Health Boost I",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:health_boost2": {
+  "name": "Health Boost II",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:health_boost3": {
+  "name": "Health Boost III",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:health_boost4": {
+  "name": "Health Boost IV",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:resist1": {
+  "name": "Resistance I",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:resist2": {
+  "name": "Resistance II",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:resist3": {
+  "name": "Resistance III",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:resist4": {
+  "name": "Resistance IV",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:speed1": {
+  "name": "Speed I",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:speed2": {
+  "name": "Speed II",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:speed3": {
+  "name": "Speed III",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:speed4": {
+  "name": "Speed IV",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:stamina1": {
+  "name": "Stamina Boost I",
+  "tooltip": "Triggers immediate recover 2 stamina after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:stamina2": {
+  "name": "Stamina Boost II",
+  "tooltip": "Triggers immediate recover 2 stamina and Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:stamina3": {
+  "name": "Stamina Boost III",
+  "tooltip": "Triggers immediate recover 3 stamina and Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:stamina4": {
+  "name": "Stamina Boost IV",
+  "tooltip": "Triggers immediate recover 3 stamina and Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:stun_imm1": {
+  "name": "Stun Immunity I",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:stun_imm2": {
+  "name": "Stun Immunity II",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:stun_imm3": {
+  "name": "Stun Immunity III",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dodge_parry_reward:stun_imm4": {
+  "name": "Stun Immunity IV",
+  "tooltip": "Grants [%d] level(s) of [%s] for [%d] tick(s) after a perfect dodge or perfect parry."
+ },
+ "dualgreatswords:dualgreatsword": {
+  "name": "Dual Greatswords",
+  "tooltip": "The good stuff...ARE BACK!!!!!!\nA skill for the strongest of all characters (which is steve).\nAllows you to dual-wield greatswords."
+ },
+ "dualgreatswords:earthquake": {
+  "name": "Earth Quake",
+  "tooltip": "Rise your great swords and slam them on the ground."
+ },
+ "efclash_blade:clash_blade": {
+  "name": "Clash Blade",
+  "tooltip": "Clash incoming melee attacks and projectiles mid-swing, canceling damage and knocking targets back."
+ },
+ "efdg:dualgreatsword": {
+  "name": "Dual greatswords",
+  "tooltip": "A skill for the strongest of all characters (which is steve).\nAllows you to dual-wield greatswords."
+ },
+ "efdg:earthquake": {
+  "name": "Earthquake",
+  "tooltip": "Rise your greatswords and slam them on the ground.\nDuring the animation, you have superarmor that prevent stun."
+ },
+ "efn:efn_dodge": {
+  "name": "\u00a7o\u00a7l\u300esoul-like dodge\u300f",
+  "tooltip": "\u00a7o\u00a7l\u300esoul-like dodge\u300f\n- Superior long-distance evasion"
+ },
+ "efn:efn_parry": {
+  "name": "\u00a7l\u300eParry\u300f",
+  "tooltip": "Enhanced parrying"
+ },
+ "efn:efn_step": {
+  "name": "\u00a7o\u00a7l \u300esoul-like step\u300f",
+  "tooltip": "\u00a7o\u00a7l \u300esoul-like step\u300f\n- Smoother short-distance evasion"
+ },
+ "efn:execution": {
+  "name": "\u00a7l\u300eSoul Hunt\u300f",
+  "tooltip": "Press [%s] to launch an assault forward; %.1fs cooldown \n-\u300eSoul Hunt\u300f reduces cooldown by %.1fs per kill during cooldown period \n-\u300eSoul Hunt\u300f directly killing target reduces cooldown by %.1fs, gain %d innate skill stacks \n-\u300eSoul Hunt\u300f hitting guard-broken target increases damage to %dx, impact to %dx, and reduces cooldown by %.1fs, gain %d innate skill stacks \n-\u300eSoul Hunt\u300f directly killing target or hitting guard-broken target grants significant buffs"
+ },
+ "efn:indestructible": {
+  "name": "\u00a7o\u00a7c \u300eindestructible\u300f",
+  "tooltip": "\u00a7lTrue Combat Optimization:\n- \u00a7lNo hitstun\n- \u00a7lNo stamina cost\n- \u00a7lDodge cancel anytime\n- SLAY ALL!"
+ },
+ "efn:judgementcutend": {
+  "name": "\u00a7l\u300eJudgement Cut End\u300f",
+  "tooltip": "\u00a7l SLAY ALL \n Press [%s] to use; %.1fs cooldown"
+ },
+ "efn:mortal_blade": {
+  "name": "\u00a7l\u300eMortal Blade-HaiRui\u300f",
+  "tooltip": "Press [%s] to consume %.1f stamina for use Mortal Blade, %.1fs cooldown, consume %d stacks\n-A blade shrouded in crimson-black miasma that cuts down enemies from great distances;\nAn unsheathed technique only the Divine Heir's attendant can wield - the forbidden draw of immortality's bane"
+ },
+ "efn:murasama_parry": {
+  "name": "\u00a7l\u300eParry-MURASAMA\u300f",
+  "tooltip": "Enhanced parrying-MURASAMA"
+ },
+ "efn:parry_master": {
+  "name": "\u00a7l\u300ePARRY_MASTER\u300f",
+  "tooltip": "\u00a7lGains skill charge after each parry\n-\u00a7l%d%% chance to ignore enemy defense (increases per successful parry)\n-\u00a7lEnables ICHIMONJI counters when wielding tachi/uchigatana"
+ },
+ "efn:precise_parry": {
+  "name": "\u00a7o\u00a7c\u300ePRECISE PARRY\u300f",
+  "tooltip": "\u00a7lParry within Parry:\n-\u00a7lMore precise parrying; \u00a7lMore fierce counterattacks.\n-Triggering parry at the perfect moment grants significant buffs and enhances the next attack within 0.7s."
+ },
+ "efn:stomp": {
+  "name": "\u00a7l\u300eGravity Stomp\u300f",
+  "tooltip": "Press [%s] to consume %.1f stamina for a wide-area stomp attack; %.1fs cooldown \n-\u00a7lDeals extra damage to 'Vex' entities"
+ },
+ "efn:yamato_step": {
+  "name": "\u00a7o\u00a7l\u00a7b YAMATO STEP",
+  "tooltip": "\u00a7o\u00a7l\u00a7bInstant Movement\n-\u00a7o\u00a7l\u00a7b Too Slow."
+ },
+ "efn:zansetsu": {
+  "name": "\u300eBlade Mode\u300f",
+  "tooltip": "The mountains don't give back what they take...\n\n\u25c6 Activation Condition\n When holding 'HF-Murasama', hold [%s] to consume skill charge and enter \u3010Blade Mode\u3011\n\n\u25c6 Mode Mechanics\n Duration: %.1f seconds \u00d7 HF-Murasama's current weapon charge stacks\n Basic Operation: Move mouse left/right to switch slash direction\n  \u00b7 Click Left Button - Execute a single slash\n  \u00b7 Hold Left Button - Execute a reciprocating slash\n Advanced Operation: Hold [%s] to switch input mode\n  In this mode, swipe mouse in 8 directions to directly execute slashes\n\n\u25c6 Finisher\n When slashes hit a certain number of times or target's health falls below a certain percentage\n Press RMB to execute \u3010Zandatsu\u3011\n\n\u203b This skill is exclusive to 'HF-Murasama', other weapons cannot use it"
+ },
+ "efs_iss:against_magic": {
+  "name": "Magic Immunity",
+  "tooltip": "Grants the wielder extremely high magic resistance"
+ },
+ "efs_iss:auto_heal": {
+  "name": "Auto Heal",
+  "tooltip": "When mana is greater than 0, automatically consumes mana to restore an equivalent proportion of HP"
+ },
+ "efs_iss:blood_into_mana": {
+  "name": "Blood into Mana",
+  "tooltip": "When HP is greater than 20%% of max HP:\n\nAll mana costs are replaced proportionally by HP consumption"
+ },
+ "efs_iss:breathe_again": {
+  "name": "Second Wind",
+  "tooltip": "When receiving fatal damage, immediately consumes all mana to avoid that damage"
+ },
+ "efs_iss:connect_root": {
+  "name": "\u00a74\u00a7l\u2721 Connect to the Root \u2721",
+  "tooltip": "\u00a76Draws an endless supply of mana from the root to sustain oneself"
+ },
+ "efs_iss:hasty_casting": {
+  "name": "Hasty Casting",
+  "tooltip": "Greatly increases the wielder's movement speed while casting spells"
+ },
+ "efs_iss:magic_sword": {
+  "name": "Magic Blade",
+  "tooltip": "Automatically casts the currently selected spell when a weapon swing ends\n\nNot restricted by cooldown, but the spell level released is reduced by 10*(current cooldown/max cooldown)\n\nIf the level is below 0, no spell is cast"
+ },
+ "efs_iss:mana_shield": {
+  "name": "Mana Shield",
+  "tooltip": "When taking damage, consumes mana proportional to the ratio of damage value to max HP to offset the damage"
+ },
+ "efs_iss:rapid_chant": {
+  "name": "Rapid Chant",
+  "tooltip": "Greatly reduces casting time, while significantly increasing the duration of chanted spells"
+ },
+ "efs_iss:reserve_mana": {
+  "name": "Reserve Mana",
+  "tooltip": "Immediately refills mana when it falls below 10%% of max mana"
+ },
+ "epicfight:adaptive_skin": {
+  "name": "Adaptive Skin",
+  "tooltip": "Get a damage resistance against the damage type that you've taken recently by %s%%. The damage resistance stacks up to %d.\n\nResistible damage types:\n%s"
+ },
+ "epicfight:adrenaline_fiend": {
+  "name": "Adrenaline Fiend",
+  "tooltip": "Starts to regenerate stamina immediately when killing a mob."
+ },
+ "epicfight:battojutsu": {
+  "name": "Battojutsu",
+  "tooltip": "Unleash your blade at blinding speeds! If cast while sprinting, You slash forwards, slicing enemies in your path."
+ },
+ "epicfight:berserker": {
+  "name": "Berserker",
+  "tooltip": "Gain %s%% additional attack damage and %s%% additional attack speed for each 1%% of missing health.\n\nAdditional attack speed can't exceed over 5.0"
+ },
+ "epicfight:blade_rush": {
+  "name": "Blade Rush",
+  "tooltip": "Slash through your enemy, applying Instability for 5 seconds. Reaching 3 stacks of Instability will execute the target."
+ },
+ "epicfight:bonebreaker": {
+  "name": "Bonebreaker",
+  "tooltip": "Gain a damage bonus against an enemy you've recently attacked by %s%%. Stacks up to %d and the stack will be reset if you strike another target."
+ },
+ "epicfight:catharsis": {
+  "name": "Catharsis",
+  "tooltip": "Charges your weapon when dodging attacks."
+ },
+ "epicfight:combat_mastery_i": {
+  "name": "Combat Mastery I",
+  "tooltip": "You have grown more adept at seizing opportunities between offense and evasion. You can dodge while attacking, or follow up with an attack after dodging."
+ },
+ "epicfight:combat_mastery_ii": {
+  "name": "Combat Mastery II",
+  "tooltip": "For a short time after dodging, sprinting will enter the [Dash] state. While in [Dash], stamina will be continuously consumed."
+ },
+ "epicfight:dancing_edge": {
+  "name": "Dancing Edge",
+  "tooltip": "Cut down enemies with a lethal flourish! It strikes 3 times"
+ },
+ "epicfight:death_harvest": {
+  "name": "Death Harvest",
+  "tooltip": "Regain weapon charge when killing an enemy with an innate weapon skill."
+ },
+ "epicfight:demolition_leap": {
+  "name": "Demolition Leap",
+  "tooltip": "Gather energy to launch yourself into a targeted direction, reducing next fall damage by 50%."
+ },
+ "epicfight:emergency_escape": {
+  "name": "Emergency Escape",
+  "tooltip": "Allows a player dodging when being hit or out of stamina.\n\nAllows a player canceling attack motions and dodge. (Always activated)"
+ },
+ "epicfight:endurance": {
+  "name": "Endurance",
+  "tooltip": "Grants stun resistance as an amount of stamina consumed for %s seconds if a player is hit while preparing an attack."
+ },
+ "epicfight:everlasting_allegiance": {
+  "name": "Everlasting Allegiance",
+  "tooltip": "Recall your thrown trident, damaging all enemies in it's path."
+ },
+ "epicfight:eviscerate": {
+  "name": "Eviscerate",
+  "tooltip": "Tear into the enemy with a savage stab. Successfully hitting an enemy will rip out the dagger, dealing critical damage."
+ },
+ "epicfight:forbidden_strength": {
+  "name": "Forbidden Strength",
+  "tooltip": "Consumes health instead of stamina when it's insufficient."
+ },
+ "epicfight:grasping_spire": {
+  "name": "Grasping Spire",
+  "tooltip": "Stab through your enemy to pull them in. Successfully hitting an enemy will perform a second strike, knocking them back based on how many enemies were hit."
+ },
+ "epicfight:guard": {
+  "name": "Guard",
+  "tooltip": "Right-click to guard against frontal attacks. Continued guarding will consume more stamina."
+ },
+ "epicfight:heartpiercer": {
+  "name": "Heartpiercer",
+  "tooltip": "Thrust your spear rapidly 3 times."
+ },
+ "epicfight:hypervitality": {
+  "name": "Hyper Vitality",
+  "tooltip": "Uses stamina instead of weapon charge when it's not full."
+ },
+ "epicfight:impact_guard": {
+  "name": "Impact Guard",
+  "tooltip": "Reduces stamina consumption and guard penalty on guarding. You can guard against explosions, fire, magic, and projectiles, taking %d%% of the original damage."
+ },
+ "epicfight:katana_skill": {
+  "name": "Stance Flow",
+  "tooltip": "\u00a78Attacks build stance stacks. Sweeping Edge increases the cap. Current weapon cap: \u00a7e%s\u00a78.\n\n\u00a78Idle Cast: Swap between \u00a7c[Unsheathed]\u00a78 and \u00a7b[Sheathed]\u00a78 stances for free.\n\u00a78Attack Cast: \u00a7e[Flow]\u00a78, granting invincibility frames.\n\n\u00a7c[Unsheathed Skill]\u00a78: Consumes all stacks to deal multiplied damage based on the number of stacks.\n\u00a7b[Sheathed Skill]\u00a78: Consumes all stacks to unleash (stacks - 1) extra dimensional slashes"
+ },
+ "epicfight:liechtenauer": {
+  "name": "Liechtenauer",
+  "tooltip": "Assume a defensive stance for %s seconds. Player can deflect all attacks from in front while attacking. Killing enemies increases defensive stance duration by %s seconds. You cannot sprint while this effect is active."
+ },
+ "epicfight:meteor_slam": {
+  "name": "Meteor Slam",
+  "tooltip": "\u00a7oApocalypse descended from the sky.\u00a7r\n\nCrash into the ground with a powerful slam. Height increases damage done and stamina consumed. Take damage if fall damage exceeds stamina limit."
+ },
+ "epicfight:parrying": {
+  "name": "Parrying",
+  "tooltip": "Allows a player to time guards accordingly to prevent stamina use. Player is able to guard against ranged attacks."
+ },
+ "epicfight:phantom_ascent": {
+  "name": "Phantom Ascent",
+  "tooltip": "Allows a player to jump %d times more in the air."
+ },
+ "epicfight:relentless_combo": {
+  "name": "Relentless Combo",
+  "tooltip": "Release a devastating flurry of blows!"
+ },
+ "epicfight:revelation": {
+  "name": "Revelation",
+  "tooltip": "\u00a7oEye of Hawk catching the weakpoints of the enemies\u00a7r\n\nBlocking, Parrying, and Dodging gives stacks of Revelation. Reaching the indicated amount of stacks will allow a player to unleash a stunning counter attack."
+ },
+ "epicfight:roll": {
+  "name": "Roll",
+  "tooltip": "Roll in the direction a player is moving. Evades all incoming attacks."
+ },
+ "epicfight:rushing_tempo": {
+  "name": "Rushing Tempo",
+  "tooltip": "Slash an extra strike at the end of each basic attack. This skill can be stacked by %s times."
+ },
+ "epicfight:scythe_skill": {
+  "name": "Decapitate / Hymn of the Night",
+  "tooltip": "\u00a78Attempt to grab a target in front of you. Upon success, you may follow up with:\n  \u00a76Decapitate \u00a7a[Left Click]\u00a78: Deals (3 \u00d7 Weapon Damage + Target's Max HP) as damage.\n  \u00a76Hymn of the Night \u00a7a[Right Click]\u00a78: Slams the target down, dealing (8 \u00d7 Weapon Damage \u00d7 0.1) Dark Magic damage and healing for the same amount.\n\u00a78If the grab fails, a powerful slash is performed instead."
+ },
+ "epicfight:sharp_stab": {
+  "name": "Sharp Stab",
+  "tooltip": "Follow up your attacks with a swift and precise stab ignoring the enemy's guard."
+ },
+ "epicfight:stamina_pillager": {
+  "name": "Stamina Pillager",
+  "tooltip": "Regain %s%% of missing stamina when killing your target."
+ },
+ "epicfight:steel_whirlwind": {
+  "name": "Steel Whirlwind",
+  "tooltip": "Cleave forwards and decimate your enemies! This can ability be charged, increasing attack range and speed."
+ },
+ "epicfight:step": {
+  "name": "Step",
+  "tooltip": "Slide a short distance in the direction a player is moving. Evades all incoming attacks."
+ },
+ "epicfight:sweeping_edge": {
+  "name": "Sweeping Edge",
+  "tooltip": "Cleave nearby enemies with a powerful slash."
+ },
+ "epicfight:swordmaster": {
+  "name": "Swordmaster",
+  "tooltip": "Gain %s%% additional attack speed."
+ },
+ "epicfight:technician": {
+  "name": "Technician",
+  "tooltip": "Regain stamina when dodging right before an enemy attack hits a player."
+ },
+ "epicfight:the_guillotine": {
+  "name": "The Guillotine",
+  "tooltip": "Execute your target with a hefty blow. Executes if the target has less than %s health."
+ },
+ "epicfight:tsunami": {
+  "name": "Tsunami",
+  "tooltip": "Draw forth the power of the tides and surge forward! Dash distance increased when raining or underwater."
+ },
+ "epicfight:vengeance": {
+  "name": "Vengeance",
+  "tooltip": "Gain a damage bonus against an enemy that recently hurt you by %s%%. You can switch the target after 4 seconds since you don't hit or get hurt by the current target. Killing the target will grant you a %s%% damage increase that gradually decreases for %d seconds."
+ },
+ "epicfight:wrathful_lighting": {
+  "name": "Wrathful Lightning",
+  "tooltip": "Invoke lightning to smite nearby enemies! Has a chance to change the weather."
+ },
+ "epicfightx:combat_mastery_i": {
+  "name": "Combat Mastery I",
+  "tooltip": ""
+ },
+ "epicfightx:combat_mastery_ii": {
+  "name": "Combat Mastery II",
+  "tooltip": ""
+ },
+ "epicfightx:roll": {
+  "name": "Roll",
+  "tooltip": ""
+ },
+ "epicfightx:step": {
+  "name": "Step",
+  "tooltip": ""
+ },
+ "falchionmoveset:falchion_art": {
+  "name": "Faith and Virtue",
+  "tooltip": "Slice enemies in a wide area. There will be three different attacks depending on the direction you type. \nFearless: The third normal attack will not be interrupted by the enemy's attack. \nForward: Perform two quick upward slashes to the front, which can effectively knockback the enemy. \nLeft/Right: Fast diagonal slash that cannot be interrupted by enemy attacks. \nBackward: After sweeping across a wide area, perform a slash on the enemy that knocks them down. Can use air slash to perform additional attacks on downed enemies"
+ },
+ "p1nero_ec:desc": {
+  "name": "\u00a76Perfect Dodge\u00a77 or \u00a76Perfect Parry\u00a77 to gain Skill Points",
+  "tooltip": ""
+ },
+ "project_babylon_weapons:beast_roar": {
+  "name": "Beast Roar",
+  "tooltip": "Release a furious roar that paralyzes nearby enemies and empowers your combat tempo."
+ },
+ "project_babylon_weapons:blessing": {
+  "name": "Blessing",
+  "tooltip": "Create holy seals beneath allies that \u00abHeals\u00bb over time and grant \u00abAbsorption\u00bb to those at full health."
+ },
+ "project_babylon_weapons:dragon_descend": {
+  "name": "Dragon Descend",
+  "tooltip": "Unleash a descending dragon that tears through enemies and leaves a damaging ender trail behind it, then get \u00abDragon Power\u00bb."
+ },
+ "project_babylon_weapons:fire_storm": {
+  "name": "Fire Storm",
+  "tooltip": "Summon a slow-moving fire tornado that hunts nearby enemies, drags them inward, and burns everything it touches."
+ },
+ "project_babylon_weapons:glacier": {
+  "name": "Glacier",
+  "tooltip": "Slam the ground to erupt icy spikes around you, freezing nearby enemies and chilling those caught in the wave."
+ },
+ "project_babylon_weapons:mana_bubble": {
+  "name": "Mana Bubble",
+  "tooltip": "Launch an oversized slow-moving projectile that deals heavy magic damage and pushes enemies along its path."
+ },
+ "project_babylon_weapons:sickle_throw": {
+  "name": "Sickle Throw",
+  "tooltip": "Throw a sickle to tether a target, then pull yourself or pull the target while tethered."
+ },
+ "project_babylon_weapons:stern_slam": {
+  "name": "Stern Slam",
+  "tooltip": "Leap and crash down with your shield, damaging the area and empowering nearby allies with \u00abPhysical Resistance\u00bb."
+ },
+ "project_babylon_weapons:tectonic": {
+  "name": "Tectonic",
+  "tooltip": "Smash the ground to unleash a wave that knocks up enemies and applies Concussed."
+ },
+ "project_babylon_weapons:the_harvest": {
+  "name": "The Harvest",
+  "tooltip": "A heavy sickle technique that drains life and marks enemies."
+ },
+ "project_babylon_weapons:uppercut": {
+  "name": "Uppercut",
+  "tooltip": "Launches enemies upward and inflicts \u00abFear\u00bb briefly after impact."
+ },
+ "refm:deadlybackflip": {
+  "name": "Deadly Backflip",
+  "tooltip": "Rush in to your enemy kicking him to do a backflip.\nAfter the backflip rush into your enemy a second time to give him a lethal stab."
+ },
+ "refm:deadlybackflip_amethyst": {
+  "name": "Amethyst Crystal Crush",
+  "tooltip": "Rush in to your enemy kicking him going high with magic.\nAfter that you will rush with the ancient mana collected inside the amethyst to behind your enemies armor."
+ },
+ "refm:deadlybackflip_ender": {
+  "name": "The Ender Dance",
+  "tooltip": "Rush in to your enemy kicking him to go into a end portal.\nAfter entering the portal you will use the end lost energy to shatter your enemy in pieces."
+ },
+ "refm:deadlybackflip_ocean": {
+  "name": "The Ocean Flow",
+  "tooltip": "Rush in to your enemy kicking him and gaining the height of the rain.\nAfter you reach the sky you will make sure that the rain on your blade will puncture into your enemy's armor."
+ },
+ "refm:deadlybackflip_wither": {
+  "name": "The Wither Rage",
+  "tooltip": "Rush in to your enemy kicking him and smelling his death wishes.\nAfter listening to your victim, you will please his wishes in the most demonic and brutal way."
+ },
+ "s_epicfied:chakram_slash": {
+  "name": "Chakram Slash",
+  "tooltip": "I just do Brrrrr... Hold LMB to use this skill. Sneak+Hold LMB to throw your weapon."
+ },
+ "s_epicfied:chakram_slash_2": {
+  "name": "Chakram Dance",
+  "tooltip": "Why is it my name?.. Hold LMB to use this skill. Sneak+Hold LMB to throw your offhand weapon. Hold RMB+LMB to throw your mainhand weapon."
+ },
+ "s_epicfied:charged_breaker": {
+  "name": "Heart-Breaker",
+  "tooltip": "You can't break thing what you \u00a7ldont have:)\u00a7r. This skill can be stacked up to 4. Hold LMB to charge up and thrust toward target releasing powerful strike(require 2 stacks). Sneak+LMB for a special teleportaion move. While having 4 stacks of this skill hold RMB+LMB to release more stronger charged attack what will guardbreak target."
+ },
+ "s_epicfied:charged_downslash": {
+  "name": "\u00a7lDeorsum",
+  "tooltip": "\u00a7oIs this even a real word?..\u00a7r Hold LMB to charge up your next attack. Upon release strikes a powerful downslam!"
+ },
+ "s_epicfied:charged_slam": {
+  "name": "\u00a7l\u00a7oTerra Destruction",
+  "tooltip": "Hold LMB to charge up your next attack. Upon release strikes a powerful slam."
+ },
+ "s_epicfied:charged_spearslash": {
+  "name": "Charged thrust",
+  "tooltip": "\u00a77I think there are not enough \u00a7ostabs...\u00a7r\u00a7r Hold LMB to charge up your next attack. Upon release strikes a strong thrust."
+ },
+ "s_epicfied:charged_swordslash": {
+  "name": "Magna Ictus",
+  "tooltip": "Hold LMB to charge up your next attack. Upon release strikes a strong slash."
+ },
+ "s_epicfied:charged_upperslash": {
+  "name": "\u00a7bAccusatio",
+  "tooltip": "Hold LMB to charge up your next attack. Upon release strikes a powerful upperslash."
+ },
+ "s_epicfied:cosmic_wrath": {
+  "name": "\u00a77\u00a7o\u00a7lCosmic Wrath",
+  "tooltip": "\u00a77\u00a7lYou are nothing but a \u00a7kcosmos\u00a7r... Cosmic dash: Hold LMB(Require 3 stacks to activate). Orbital slash: Hold LMB while sprinting(Require 4 stacks to activate). Cosmic \u00a7kfall\u00a7r: Jump+hold LMB(Req\u00a7kuire\u00a7r 6 sta\u00a7kck\u00a7rs \u00a7kto act\u00a7rivate). Inf\u00a7kertal\u00a7r \u00a7kp\u00a7rl\u00a7kanet\u00a7r: Sne\u00a7ka\u00a7rk+\u00a7kHold L\u00a7rMB(Req\u00a7kuire\u00a7r 7 s\u00a7ktacks\u00a7r to act\u00a7kivate\u00a7r). \u00a7kHollow slash\u00a7r: \u00a7kRMB\u00a7r+\u00a7kLMB\u00a7r(R\u00a7kequi\u00a7rre 5 \u00a7kstacks to\u00a7r a\u00a7kctivate\u00a7r)."
+ },
+ "s_epicfied:darkness_slash": {
+  "name": "\u00a7fSign from\u00a7r \u00a78Darkness\u00a7r",
+  "tooltip": "\u00a78I can see the \u00a70lightness...\u00a7r Hold LMB to cut through light,\u00a7r while having more than 1 stack \u00a78hold LMB right after first strike to peform second.\u00a7r"
+ },
+ "s_epicfied:dual_dance": {
+  "name": "\u00a7b\u00a7lDancing Blades",
+  "tooltip": "\u00a73\u00a7oWhoa\u00a7r\u00a7r, \u00a7b\u00a7ofancy text!:0"
+ },
+ "s_epicfied:heartstabber": {
+  "name": "Heart-Stabber",
+  "tooltip": "\u00a73I'd like to stab you!>:D\u00a7r Hold LMB to thrust target 3 times. Sneak+LMB for a special move."
+ },
+ "s_epicfied:judgement_ultimate": {
+  "name": "\u00a7b\u00a7lThe Judgement!",
+  "tooltip": "\u00a73\u00a7oPathetic."
+ },
+ "s_epicfied:mortal_slash": {
+  "name": "\u00a7c\u00a7lMortal Slash",
+  "tooltip": "Cut their souls in half \u00a74\u00a7land send them to hell!\u00a7r This skill can be stacked up to 7.\u00a7l Hold LMB\u00a7r\u00a7l to release powerful strike(require 3 stacks). Hold RMB+LMB to release another powerful strike(require 4 stacks).\u00a7r \u00a76Special keys:\u00a7r Sneak+Hold LMB to release a powerful flash(require 6 stacks). Hold LMB while sprinting to release powerful slash forward(require 5 stacks). \u00a74\u00a7lWhile having 7 stacks, hold LMB firt and then RMB+LMB to release follow-up powerful strike.\u00a7r"
+ },
+ "s_epicfied:pierce_rush": {
+  "name": "\u00a7l\u00a7ePiercing Rush",
+  "tooltip": "Hold LMB to dash toward target and pierce them. Sneak+Hold LMB to slash ground around you and Knock down nearby enemies."
+ },
+ "s_epicfied:rocket": {
+  "name": "\u00a7b\u00a7lGeschoss",
+  "tooltip": "\u00a74Target locked!\u00a7r Hold LMB to charge up your next attack. Upon release perform flying attack forward."
+ },
+ "s_epicfied:rushing_slam": {
+  "name": "\u00a7lRushing Slam",
+  "tooltip": "Hold LMB to channel yourself. After 2 seconds release powerful dash with ground slam!"
+ },
+ "s_epicfied:scythe_slash": {
+  "name": "\u00a74\u00a7ole Messor",
+  "tooltip": "\u00a74\u00a7lIt's harvest time!\u00a7r\u00a7r This skill can be stacked up to 3. Just a harvest: Hold LMB. Rushing harvest: Hold LMB while sprinting. Deadly harvest: Hold RMB+LMB(require 2 stacks). Total harvest: Sneak+Hold LMB(require 2 stacks)."
+ },
+ "s_epicfied:shading_slash": {
+  "name": "\u00a7fSign from\u00a7r \u00a78Shadows\u00a7r",
+  "tooltip": "\u00a78Must've been a \u00a70blink:D\u00a7r. Hold LMB to cut through light,\u00a7r while having more than 1 stack \u00a78hold LMB right after first strike to peform second(require additional 2 stacks).\u00a7r Hold LMB while sprinting to do teleportation attack on target(require 2 stacks). Sneak+Hold LMB to do teleportation attack behind target. \u00a7kH\u00a7rold R\u00a7kMB\u00a7r+\u00a7kLM\u00a7rB for ultimate(require max stacks)."
+ },
+ "s_epicfied:teleporting_skill": {
+  "name": "\u00a7lConcitus",
+  "tooltip": "\u00a7oGotta go fast!\u00a7r This skill can be stacked up to 5. \u00a7l Hold LMB\u00a7r\u00a7l to perform teleportation combo on selected target(require 2 stacks). Hold RMB+LMB to teleport above target and attack it(require 3 stacks). Sneak+Hold LMB to teleport near target and slash it(require 2 stacks). Ho\u00a7kld\u00a7r \u00a7kLM\u00a7rB wh\u00a7kile\u00a7r \u00a7ksprint\u00a7ring to release aerial slash(effective while target it above or flying near you)."
+ },
+ "s_epicfied:twinblade_skill": {
+  "name": "\u00a77\u00a7lTripudium",
+  "tooltip": "\u00a77You thought there will be something? nah, get out!..\u00a7r Hold LMB to do flight attack. Jump+Hold LMB to send yourself into air and slam the ground. Hold LMB while sprinting to release spinning attack."
+ },
+ "s_epicfied:void_slash": {
+  "name": "\u00a7b\u00a7lVoid Slash!",
+  "tooltip": "\u00a73\u00a7oYou're Pathetic."
+ },
+ "sword_soaring:babylon": {
+  "name": "Babylonian Armory",
+  "tooltip": "Unleash treasury of blades raining from skies\n\n\u00a7e\u00a7l\"Hmph. Noble armaments deserve proper use\"\u00a7r\n\nCooldown: %.1fs\n\n press [%s]"
+ },
+ "sword_soaring:kill_aura_1": {
+  "name": "Stellar Annihilation: Cataclysm",
+  "tooltip": "\u00a7b\u00a7lCelestial stars descend to mortal plane,/Ring's radiance brings purging flame\u00a7r\n\nSummons meteor array damaging nearby foes (scales with weapon)\n\nDuration: %.1fs\nCooldown: %.1fs\n\n press [%s]"
+ },
+ "sword_soaring:kill_aura_2": {
+  "name": "Bloodlotus Incineration",
+  "tooltip": "\u00a7c\u00a7lCrimson rings bloom as lotus fire,/Scorching all life, leaving none entire\u00a7r\n\nIgnites blazing array (scales with weapon), sets foes aflame\n\nDuration: %.1fs\nCooldown: %.1fs\n\n press [%s]"
+ },
+ "sword_soaring:rain_sword": {
+  "name": "Celestial Array: Purge",
+  "tooltip": "\u00a7f\u00a7lBig Dipper's might forms sword domain,/Where array reaches - evil's bane\u00a7r\n\nEach strike summons %d-%d phantom blades\n\nDuration: %.1fs\nCooldown: %.1fs\n\n press [%s]"
+ },
+ "sword_soaring:screen_sword": {
+  "name": "Voidblade Domain: Severance",
+  "tooltip": "\u00a7f\u00a7lSword-qi weaves net sealing realms eight,/Array complete - heaven-earth resonate\u00a7r\n\nSummon Voidblade Domain to deflect harm. Nullifies projectiles, counters melee strikes with blade's maximum might\n\nLoses 1 sword per %d/6 hits, healing %.1f HP\n\nDuration: %.1fs\nCooldown: %.1fs\n\n press [%s]"
+ },
+ "sword_soaring:sword_soaring_apprentice": {
+  "name": "Sword Soaring: Lv1",
+  "tooltip": "Apprentice\n\nDouble click [%s] to take off. Holding [%s] to speed up."
+ },
+ "sword_soaring:sword_soaring_elytra_apprentice": {
+  "name": "Soaring-Elytra1",
+  "tooltip": "Apprentice-Elytra\n\nDouble click [%s] to take off. Holding [%s] to speed up."
+ },
+ "sword_soaring:sword_soaring_elytra_expert": {
+  "name": "Soaring-Elytra2",
+  "tooltip": "Expert-Elytra\n\nDouble click [%s] to take off. Holding [%s] to speed up."
+ },
+ "sword_soaring:sword_soaring_elytra_master": {
+  "name": "Elytra-Master",
+  "tooltip": "You have already been a master, flying will not consume stamina and enter cooldown.\n\nDouble click [%s] to take off. Holding [%s] to speed up."
+ },
+ "sword_soaring:sword_soaring_expert": {
+  "name": "Sword Soaring: Lv2",
+  "tooltip": "Expert\n\nDouble click [%s] to take off. Holding [%s] to speed up."
+ },
+ "sword_soaring:sword_soaring_master": {
+  "name": "Soaring: Master",
+  "tooltip": "You have already been a master, flying will not consume stamina and enter cooldown.\n\nDouble click [%s] to take off. Holding [%s] to speed up."
+ },
+ "sword_soaring:vatansever_dodge": {
+  "name": "Vatansever Dodge",
+  "tooltip": "Dodge Skill for Vatansever. This skill will be learned automatically when you equip Vatansever. And the skill is invalid when holding other weapon."
+ },
+ "sword_soaring:wan_jian_gui_zong": {
+  "name": "Myriad Blades Convergence",
+  "tooltip": "Qi commands the Eight Directions,\nBlades dominate Six Realms' foundations.\n\nSoaring qi summons thousand-edge storm,\nFocused will merges myriad blades' form.\n\nPeak sword dao - mysteries unfold,\nOnly enlightened may this art behold.\n\nCooldown: %.1fs\n\n press [%s]"
+ },
+ "wom:adrenaline": {
+  "name": "Adrenaline",
+  "tooltip": "While under 20% Health,\ngain adrenanline wich will increase your damage by 60% and decrease the damage recieved by 40%"
+ },
+ "wom:agony_plunge": {
+  "name": "Sky dive",
+  "tooltip": "\"Disappear in the sky before diving on your enemies.\"\n\n Attacking enemies will charge this for up to 3 times.\nThe Final damage is multiplied by the number of charges"
+ },
+ "wom:all_eyes_on_me": {
+  "name": "All Eyes on Me",
+  "tooltip": "dealing damage with 8 different attack will trigger \"look - at - me\".\n\n look - at - me :\n  Regenerate your health, stamina and innate power moderably over 4 sec however, performing action during that time will cancel that effect."
+ },
+ "wom:all_eyes_on_you": {
+  "name": "All Eyes on You",
+  "tooltip": "Blocking or dodging 4 different attack will trigger \"And watch over you\".\n\n And watch over you :\n  Regenerate your stamina and innate power slowly over 8 sec."
+ },
+ "wom:aqua_maneuvre": {
+  "name": "Aqua maneuver",
+  "tooltip": "Improve swiming ability.\n\n Swim faster under water or a little less faster above water.\n\n Release jump button to propel under water or butterfly swim above water.\n"
+ },
+ "wom:arrow_tenacity": {
+  "name": "Arrow tenacity",
+  "tooltip": "Prevent the stun from arrows damage. This skill is permanent, thus you can use another passive on top of it but, you'll only keep the current passive if you die."
+ },
+ "wom:avatar_of_might": {
+  "name": "Avatar of Might",
+  "tooltip": "Holding sneak for 2 sec will release a chockwave that pushes enemy away and grant you with Stun immunity for a short period."
+ },
+ "wom:back_and_forth": {
+  "name": "Back and ... FORTH !",
+  "tooltip": "Allow you to blackout your target after reaching a certain distance from it.\n\nAttack your target once then move away from it.\nOnce the distance beetween you and your target is greater than 20,your next dash attack will be a strong stun that blackout your target for 5sec."
+ },
+ "wom:bull_charge": {
+  "name": "Ravanger force",
+  "tooltip": "Charge forward pushing away any entity that come across your path.\n\nYou are immune to stun effect during the charge and take 40% less damage"
+ },
+ "wom:buster_parade": {
+  "name": "Dread full buster",
+  "tooltip": "Windup your weapon for 1 to 2s, then, release a powerfull attack that bypass guard and cause blackout if the target was blocking or attacking.\n\n Available Weapon Types : %s"
+ },
+ "wom:charybdis": {
+  "name": "Charybdis into Scylla",
+  "tooltip": "Consume Stamina to perform a whirlwind of hit for a total of 8 strikes. Reduce the stamina consumption with sweeping edge.\n"
+ },
+ "wom:counter_attack": {
+  "name": "Counter attack",
+  "tooltip": "Perfect Guard will trigger a counter attack based on weapons attacks.\n\nAvailable Weapon Types : %s"
+ },
+ "wom:critical_knowledge": {
+  "name": "Critical knowledge",
+  "tooltip": "Give you %s%% chance to deal %s%% more damage.\n\nCritical chance is increased with Fire protection.\n\nCritical damage is increased with Blast protection"
+ },
+ "wom:damage": {
+  "name": "%s damage",
+  "tooltip": ""
+ },
+ "wom:dancing_blade": {
+  "name": "Dancing blade",
+  "tooltip": "\"Dance on the sound of death\"\n\nGain 80% damage on every 4th successfull attack."
+ },
+ "wom:demonic_ascension": {
+  "name": "Demonic Ascension",
+  "tooltip": "\"The scythe takes possession of your body\n and use it to perform terrible things....\"\n\nAscenscion :\n on a large area, try to Apply Wither effect\n before applying 50% catharsis* on affected entity.\n\nIn Demon form:\n Base Duration is equal to 20s x (1 + (Sweeping edge level) / 3).\n Dash attack have twice the chance to apply wither effect but\n will consume more and more health if used multiple times.\n Other attacks will cause 80% Catharsis* on withered entitys if they hit.\n\n *Catharsis: Reap of the wither effect from the target\n dealing the remaining damage depending on the catharsis percentage at once\n and heal you for the remaining of that percentage.\n catharsis also increase the Demon form\n duration depending on their wither state\n (+3s for wither II and +6s for wither III).\n"
+ },
+ "wom:dodge_master": {
+  "name": "Dodge master",
+  "tooltip": "Instinctly dodge a small distance if you would take damage after the cast within a window of 0.30s. Continuesly dodge all attack after the first one within a window of 0.50s and after each succesful dodge.\n\nDouble stamina consumption on multiple cast."
+ },
+ "wom:dopamine": {
+  "name": "Dopamine",
+  "tooltip": "Convert the damage dealt with a dash attack into stamina.\n\n Afterward, get in cooldown for 4sec."
+ },
+ "wom:ender_blast": {
+  "name": "Ender blast",
+  "tooltip": "\"The zenith of the End world technological power.\"\n\nThe blaster loader is composed of 12 chambers.\nKinetic energy is stored in them and transmuted into endpower.\nWhen the trigger is pressed, half of the converted endpower\nis condensed into end bullets.\nThe other half is transfered into a particle accelerator that overcharges\nthe endpower until it blasts the bullet out with tremendous force and precision.\nAll of that in just a fraction of a second ... outstanding!"
+ },
+ "wom:ender_fusion": {
+  "name": "Ender fusion",
+  "tooltip": "\"The zenith of the End world technological power.\"\n\nTwo blaster loader with 12 chambers each for 24 in Total.\nthe Kinetic energy stored is shared between both Blasters\nand transmuted into endpower for each.\nWhen the trigger is pressed, half of the converted endpower\nis condensed into end bullets.\nThe other half is transfered into a particle accelerator that overcharges\nthe endpower until it blasts the bullet out with tremendous force and precision.\nAll of that in just a fraction of a second ... outstanding!"
+ },
+ "wom:ender_obscuris": {
+  "name": "Ender obscuris",
+  "tooltip": "Teleport you behind the last hitted target within 30 blocks (in radius from your position).\n\nWhile executing this skill, player become immune from physical attacks."
+ },
+ "wom:ender_step": {
+  "name": "Ender step",
+  "tooltip": "A fast teleportion away from the danger. While executing this skill, player become immune from physical attacks."
+ },
+ "wom:flash_mutilation": {
+  "name": "Flash mutilation",
+  "tooltip": "Teleport yourself around a target before performing a spin attack."
+ },
+ "wom:heart_shield": {
+  "name": "Heart shield",
+  "tooltip": "Give you 20 shield point that will recover if no action is performed for %ssec at the rate of 1 point every %ssec.\n\nShield recovery rate can be improved with Protection enchantment."
+ },
+ "wom:inner_growth": {
+  "name": "Inner Growth",
+  "tooltip": "Regenerate 2.0 innate power per second. (+0.1 per Lvl of blast protection)\n\n Currently: %s /s"
+ },
+ "wom:latent_retribution": {
+  "name": "Latent retribution",
+  "tooltip": "If no action is performed within 4 sec, your next action will trigger \"Retribution\".\n Retribution :\n  For 4 sec, gives stun immunity and increase your attack by 40%."
+ },
+ "wom:lethal_focus": {
+  "name": "Lethal Focus",
+  "tooltip": "Each instance of damage will increase your damage by %s%% until it reaches %s%%.\n If no action is performed within 2sec, the damage will decrease rapidly.\n\nDamage addup is increased with Fire protection.\n\nDamage max is increased with blast protection lvl."
+ },
+ "wom:lunar_eclipse": {
+  "name": "Lunar Eclipse",
+  "tooltip": "\"Moonlight shadowing the night\"\n\n Strike foes in front of you\n and makes them glow for 7sec.\n\n In Recto : \n  - Attaking Glowing targets, stack your damage\n    and increase their Glowing lvl.\n  - Attaking Blind targets, stack your damage\n    and remove their Blindness.\n\n In Verso: \n  - Attaking Glowing targets, stack your damage\n    and remove their Glowing.\n  - Attaking Blind targets, increase their Blindness lvl\n\n Recto Jump attack ( Crescent )\n  Unleash all stacked damage on the target.\n  If it kills the target, it bounce to the closest target\n  and loose 5% of its damage.\n    Glowing increase the bounce range.\n    Blindness increase the damage.\n\n Verso Jump attack ( Fullmoon )\n  Unleash 70% of the stacked damage in Aoe.\n    Blindness increase the damage."
+ },
+ "wom:lunatic_vivacity": {
+  "name": "Lunatic Vivacity",
+  "tooltip": "Cycle between 2 phase while facing a target.\n\n [Lunatic Rush] Decrease your stamina consumption by 85%.\n Not facing target will stop the timer but not grant any stamina reduction.\n\n [Lunatic Linger] Increase your stamina consumption by 85%.\n Facing a target will double the speed of the timer."
+ },
+ "wom:manipulator": {
+  "name": "Manipulator",
+  "tooltip": "Blocking an attack will grant you stamina based on the timming of the block and your missing stamina.\n\n Perfect block = 60% missing stamina \n\n Regular block = 0~30% missing stamina"
+ },
+ "wom:meditation": {
+  "name": "Meditation",
+  "tooltip": "Sneak for 2 second without moving to enter in state of meditation. the longer you meditate the longer the buff.\nThere is 3 stage of meditation each giving different effect:\n\n Stage 1: 40% damage dealing.\n\n Stage 2: 30% attack speed and Movement speed I\n\n Stage 3: 50% damage reduction and Regeneration I"
+ },
+ "wom:mindset": {
+  "name": "Mindset",
+  "tooltip": "While above 80% Health,\ngain mindest which will increase your damage by 30% and decrease the damage recieved by 20%"
+ },
+ "wom:natural_sprinter": {
+  "name": "Natural Sprinter",
+  "tooltip": "Improve running ability.\n\n While [HOLDING] your sprint key for 1 sec,\n burst into a faster sprinting motion.\n\n Releasing sprint button will perform a [Burst step]:\n -  Short Boost forward at the cost of stamina.\n\n Jumping while spritting will lunch you further and slightly higher.\n Sneaking while sprinting will allow you to slide into 1 block gap."
+ },
+ "wom:orbital_beam": {
+  "name": "Orbital beam",
+  "tooltip": "Call an orbital beam that strike foes in your gaze."
+ },
+ "wom:pain_anticipation": {
+  "name": "Pain anticipation",
+  "tooltip": "If no action is performed within 2 sec, your next action will trigger \"Anticipation\".\n Anticipation :\n  For 2 sec, gives stun immunity and decrease damage recieved by 40%."
+ },
+ "wom:percent_of_target_lost_health": {
+  "name": " + %s of the target lost health",
+  "tooltip": ""
+ },
+ "wom:perfect_bulwark": {
+  "name": "Perfect bulwark",
+  "tooltip": "Holding Guard stance will block attacks from all directions at low progressive stamina cost.\nReleasing guard after being hit 5 times will send a shockwave that pushes enemys away. \n\nAvailable Weapon Types : %s"
+ },
+ "wom:plunder_perdition": {
+  "name": "Ender Ritual",
+  "tooltip": "\"Own the ancient arcane of the endermen.\"\n\n When triggering this skill, you can choose\n between 4 different type of actions:\n  - in neutral and rather close to target, you'll do an [Ender Assault]\n    while alternating between left swing and right swing. \n  - While sprinting, you will do an [Ender Assault] and,\n    if the attack connect, trigger positive [Ender Snatch].\n  - While rising in the air, you will trigger aerian\n    [Ender Assault] and, trigger negative [Ender Snatch].\n  - While sneaking and with 10 stored stack,\n    you'll summon Ender Hands under targets around you.\n   Then the hands grasps their respective targets,\n    Damagind them and inflicting them with mining fatigue and slowness.\n\n [Ender Assault] - Teleport you around your target depending\n on the direction you are look at.\n\n [Ender Snatch] - "
+ },
+ "wom:precise_roll": {
+  "name": "Precise roll",
+  "tooltip": "Faster, further and cheaper roll.\n\n Perform acrobatic Roll like a true expert."
+ },
+ "wom:proximity_exploiter": {
+  "name": "Proximity Exploiter",
+  "tooltip": "For each living things within 5 blocks of you, regenerate 3 innate power every 0.5s sec."
+ },
+ "wom:punishment_kick": {
+  "name": "Punishment kick",
+  "tooltip": "Kick in front of you with force. Cause strong Stun and can blackout if perform during enemy attack."
+ },
+ "wom:rechargement": {
+  "name": "Rechargement",
+  "tooltip": "\"Il n'y a que deux puissances au monde, le sabre et l'esprit : \u00e0 la longue, le sabre est toujours vaincu par l'esprit.\"\n\n After attacking performing skill will reload ammunition\n depending on the attack made before it.\n\n  - 1 ammo after first attack.\n  - 2 ammo after the second attacks.\n  - 3 ammo afer the third one.\n\n The last attack of the normal combo will also realod 3 ammo.\n\n To shoot your ammo, you must perform an attack or a reload first.\n You can also shoot right after sprinting or if you are rising in the air (jumping).\n\n Dealing damage with a shot will increase [Heatdrive] depending on the bullet type.\n [Heatdrive] slowly decrease if no shot damage is dealt within 4 sec.\n When fully charged, [Heatdrive] become [Souldrive]:\n  during that state, the drive will quickly decrease but,\n  every second during that state will reload 1 ammo.\n\n Ammo can be overcharged if rechargement is performed when 6 ammo is allready loaded.\n Overcharged Ammo deal more damage and bypass guards.\n\n Reloading to reach exactly 6 ammo or 6 overcharged ammo will double\n the reload ammount for as long as you keep your reloads to reach exactly 6.\n"
+ },
+ "wom:regierung": {
+  "name": "Regierung",
+  "tooltip": "\"Unbreakable defense combined with overwhelming offense rules over battle.\"\n\n On cast, you'll perform shield attacks in front of you.\n There is 3 Basic attacks, 1 Dash attack and\n 1 Jump attack for both the sword and the shield.\n\n Some attacks (shields or sword attacks) will move your in front of you.\n While this occure, the shield will have a slight red field around it as an indicator.\n During this short period,you will block incoming attacks and\n perform an automatic counter attack.\n\n Depending on how you block an attack, you will increase you Shield Charges by a certain amount.\n (increased with sweeping edge lvl)\n Shield Charges can be stored for up to 90 and used in 2 ways:\n  - With the Shield, by holding guard and casting a shield attack.\n    You will convert all Shield charge into shield Overcharge,\n    granting you damage resistance.\n  - With the Sword, by holding guard and casting a sword attack.\n    You will charge your sword and consume your\n     shield charges slowly to perform a spin attack.\n\n While your shield is Overcharged, your shield attack will do\n increase damage after a sword attack based on the Overcharge amount.\n\n Getting damaged reduce your Shield Overcharge by 5.\n ( Sweeping edge on your Sword reduce this by 1 per level )"
+ },
+ "wom:sakura_state": {
+  "name": "Sakura state",
+  "tooltip": "\"Sharpest blade forged in absolute serenity\"\n\n On cast, you'll perform a Sakura slash.\n Sakura slashes can be declined in 2 form\n  - while sprinting,\n  you will fastly pass through enemys in front of you, slashing them along the way.  - while sprinting, (cost 2 stack)\n  you will fastly pass through enemys in front of you,\n  slashing them along the way.\n  - while standing or walking, (cost 1 stack)\n  you'll fastly slash in front of you.\n Sakura slashes automaticaly sheath your blade afterward.\n\n You can stack a total of 12 sakura slashes and Sweeping edge\n on your blade will grant you extra stack depending\n on the amount of stack you have on the first cast.\n([initial amont of stack] * 1/3 of the sweeping edge levels)\n\n After the innitial draw, you'll enter sakura state.\n If you don't draw a Sakura slash again within 4 seconds, you loose all your\n stacks and get out of sakura state.\n\n Slashing a target with a Dash attack or a Sakura slash,\n will stack Perpetual slashes on the target.\n (3 on dashes and sakura slash.\n 6 on sakura dash slash\n this value is then multiply by 1/3 of the Sweeping edge lvl).\n If no action is performed for a set of time after landing perpetual slashes,\n All Perpetual slashes stacked on the target are triggered,\n slashing it in sequence for each stacks of Perpetual slashes"
+ },
+ "wom:shadow_step": {
+  "name": "Shadow step",
+  "tooltip": "\u00a7oSink in the shadows.\u00a7r\nMoving in the shadow will twist space to make you move faster than the light itself.\n\nWhile executing this skill, player become immune from physical attacks."
+ },
+ "wom:shooting_style": {
+  "name": "Shooting Style",
+  "tooltip": "When empty handed, holding sneak while attacking will do kicks.\n\n The combo contain 3 different kick."
+ },
+ "wom:shulker_cloak": {
+  "name": "Shulker cloak",
+  "tooltip": "Loose the ability to guard.\n\n Every 5 sec, You gain one level of shulker resistance. \n\nIf you have at least 1 level of Shulker resistance, you will negate 60% of damage.\n\nGetting damaged reduce the level by 1."
+ },
+ "wom:solar_arcano": {
+  "name": "Solar Arcano",
+  "tooltip": "\"Witness the full force of a star\"\n\n After each basic attack, a special icon will apear within a short period.\n Press the Skill button when you see it to perform a timed Solar attack.\n Solar attack cycle between ignites ( Polvora ) and explode ( Chispear ):\n\n    Polvora : set the target in fire. if target is\n    allready in fire, increase ignitions level by 1.\n    (can only go up to 2)\n\n    Chispear: if target is in fire, extinguish the fire and\n    explode for a set of damage depending on the ignitions level.\n    (3 => 6 => 9, +1 per sweeping edge lvl)\n\n Solar have a unique skill meter mechanique.\n Heat level, wich is showed by the percentage number on the skill,\n can change color (from red to white) depending on the Heating speed.\n Increase Heat level by increasing heating speed above\n the orange lvl by successfully performing Chispear.\n The heating speed increase depends on the target ignition level.\n\n Hold guard and press skill to perform Solar Brasero.\n Solar Brasero harvest heat level to perform incendiary spell:\n\n    Obscuridad: Infuse your blade with soul fire,\n    melting it into a new form.\n    All attacks within this form trigger Chispear.\n    Lock your heating speed to red.\n\n    Crematorio: breath soul fire in front of you.\n    Burns targets to ignitions level 3.\n    Durations depends on the amount of time\n    they stay in the flame.\n\n    Infierno: Burn target around you in a spherical shape.\n    The area of effect will keep growing until 10 sec.\n    Every 2sec, target within the area are affected by polvora.\n    (can increase ignition level to 3)\n    During infierno, all the speed at wich heat level is affected is doubled."
+ },
+ "wom:soul_protection": {
+  "name": "Soul protection",
+  "tooltip": "Loose the ability to guard.\n\n Each second you summon a soul that give 1% damage negation.\nYour own soul give you 20% damage negation.\n\n Getting damaged will remove 3 souls."
+ },
+ "wom:spider_techniques": {
+  "name": "Spider techniques",
+  "tooltip": "Allow you to run on walls.\n\n Hold sprint and jump toward a wall to run on it.\n Release sprint to fall or release movement input to slide slowly.\n Sneak to reduce the slide fall even more.\n\n You can jump from a wall to another by adjusting horizontal view angle.\n The position you jump from will adjust the hight of the wall jump.\n"
+ },
+ "wom:time_travel": {
+  "name": "Time travel",
+  "tooltip": "Register your position and health on cast.\nAfter 5sec you'll be teleported back to your previus position and half of all damage taken within this time is healed.\n\nCast again to teleport early or sneak to cancel."
+ },
+ "wom:true_berserk": {
+  "name": "True Wrath",
+  "tooltip": "\"May the god fear you...\"\n\nTorment wrath makes the skill gauge unreadable."
+ },
+ "wom:unbreakable": {
+  "name": "Unbreakable",
+  "tooltip": "Give you 3 charge of protection that grant you resistance and stun immunity uppon taking damage.\nLose a charge when taking damage."
+ },
+ "wom:vampirize": {
+  "name": "Essence Extortion",
+  "tooltip": "You heal yourself by 20% of the damage you deal."
+ },
+ "wom:vengeful_parry": {
+  "name": "Vengeful parry",
+  "tooltip": "Put you in a guarding stance for 2sec.\nYou will hold your position during that time blocking all attack at no stamina cost.\nAfter that you'll be able to send back all the damage in your next attack.\nRefresh damage on recast.\n1sec cooldown.\n\nAvailable Weapon Types : %s"
+ },
+ "wom:voodoo_magic": {
+  "name": "Voodoo magic",
+  "tooltip": "Loosing Health increase Stamina by half,\nLoosing Stamina increase Health by half.\n\nSneak to transfer health into stamina at double rate.\n\nDisable stamina auto recovery."
+ }
+}

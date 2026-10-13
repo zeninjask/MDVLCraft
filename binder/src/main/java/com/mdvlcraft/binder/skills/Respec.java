@@ -30,7 +30,10 @@ public final class Respec {
         "wanderer",
         "stalker",
         "druid",
-        "cursed"
+        "cursed",
+        "warlock",
+        "bloodborn",
+        "magehunter"
     );
 
     private Respec() {
