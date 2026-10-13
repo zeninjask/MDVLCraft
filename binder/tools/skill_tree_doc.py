@@ -49,7 +49,7 @@ def attr_name(attr):
     return attr.split(':')[1].replace('_', ' ').title()
 
 
-def attr_value(attr, value, digits=4):
+def attr_value(attr, value, digits=2):
     """Like gen.fmt; flat values keep `digits` decimal places (percentages always one)."""
     unit = gen.ATTRIBUTES[attr][1] if attr in gen.ATTRIBUTES else EXTRA_ATTRIBUTES.get(attr, (None, 'flat'))[1]
     sign = '+' if value >= 0 else ''
@@ -97,7 +97,7 @@ def tally(arch, classes_defs):
     for r in classes_defs[arch].get('rewards', []):
         data = r['data']
         if r['type'] == 'mdvlcraft:epicfight_skill':
-            name = re.sub(r'§.', '', EF_NAMES[data['skill']]['name'])
+            name = re.sub(r'§.|[『』]', '', EF_NAMES[data['skill']]['name']).strip().title()
             efskills.append(f"{name} ({SLOT_NAMES[EF_SLOTS[data['skill']]]}, from the Classes tab)")
         elif r['type'] == 'puffish_skills:attribute':
             extra.append(f"{attr_name(data['attribute'])} (from the Classes tab)")
@@ -157,7 +157,7 @@ def origin_rows(pack, layer_ns, layer_path):
             p = pack.data(pns, 'powers', ppath)
             if p.get('hidden'):
                 continue
-            key = f"power.{pns}.{ppath.replace('/', '.')}"
+            key = f'power.{pns}.{ppath}'
             pname = pack.text(p.get('name'), f'{key}.name')
             if pname:
                 powers.append((pname, pack.text(p.get('description'), f'{key}.description')))
