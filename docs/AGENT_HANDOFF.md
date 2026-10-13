@@ -11,7 +11,8 @@ You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its ow
 - **Game:** Minecraft **1.20.1**, Forge **47.4.10**, Java **17**. About 250 mods: Epic Fight and its addons, Iron's Spells and addons, Cursed Fate, Origins with Origins Classes, Medieval Origins and Origins++, Pufferfish's Skills, Villager Recruits, Bountiful, Cataclysm, Lootr, alekiships, Farmer's Delight, Xaero's maps, Distant Horizons, Embeddium, Oculus and others.
 - **Repository:** `so1ga1eo/mdvlcraft` (private). It contains an All Rights Reserved jar (`epic_fight_ponder`), so never make it public.
 - **Branches:**
-  - Development happens on `claude/optimistic-pasteur-olhvvt`.
+  - The main development branch is `liam-agent`, worked on by another Claude agent. Don't push to it. Create your own branch from it, do your work there, and push your branch. When you're finished, the `liam-agent` agent merges your branch and builds the release.
+  - Pull `liam-agent` into your branch now and then so you build on the latest work.
   - `main` holds only the release files for players: client and server `.mrpack`, the client Java arguments, the server `user_jvm_args.txt`, the skill-tree PDF and a short README.
   - Never open a pull request unless the user asks.
 - **Read first:**
@@ -50,6 +51,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 3. Build the binder, then run `python3 binder/tools/build_packs.py <new version> .`. It swaps the binder jar into both packs and sets the version.
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
+   - Only the `liam-agent` agent builds releases and pushes to `main`, unless the user tells you otherwise.
    - Every rebuild bumps the patch version. The latest is 1.9.24, so the next is 1.9.25.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
@@ -72,10 +74,10 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 
 ## Unfinished work
 
-- **Bountiful boards lean toward nearby players' origins.** It's committed on the branch but hasn't been boot-tested yet. The pieces are `content/BountyLean.java`, `mixin/bountiful/BoardBlockEntityMixin.java` (a `@ModifyArg` on `BoardBlockEntity.randomlyUpdateBoard` → `BountyCreator$Companion.createBountyItem`, argument 2), a new `mdvlcraft_hunter` decree and kill-objective pool under `src/main/resources/data/bountiful/`, and the compile-only jars `binder/libs/Bountiful-*.jar` and `Kambrik-*.jar`. Next step: boot a server and confirm the mixin applies and Bountiful loads the decree.
+- **Bountiful boards lean toward nearby players' origins.** It's committed on `liam-agent` but hasn't been boot-tested yet. The pieces are `content/BountyLean.java`, `mixin/bountiful/BoardBlockEntityMixin.java` (a `@ModifyArg` on `BoardBlockEntity.randomlyUpdateBoard` → `BountyCreator$Companion.createBountyItem`, argument 2), a new `mdvlcraft_hunter` decree and kill-objective pool under `src/main/resources/data/bountiful/`, and the compile-only jars `binder/libs/Bountiful-*.jar` and `Kambrik-*.jar`. Next step: boot a server and confirm the mixin applies and Bountiful loads the decree.
 - **Not yet in any pack:**
   - The guide book replaces the KubeJS first-join Book and Quill. Remove the "A Book and Quill for notes, once." block from `base/{client,server}/overrides/kubejs/server_scripts/mdvlcraft_start.js` when you recreate the base.
-  - The status page origin tooltips.
+  - The status page tooltips on the Class, Race, Martial and Job rows.
   - The 30-second to 3-minute gap between music tracks.
   - The Bountiful work above.
 
