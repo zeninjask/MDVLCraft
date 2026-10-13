@@ -13038,5 +13038,36 @@
       }
     },
     "size": 2.0
+  },
+  "bone_hands": {
+    "title": "Bone Hands",
+    "description": "Unlocks Bone Hands (Level 3) (43 mana, 90 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_bone_hands.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "iss_magicfromtheeast:bone_hands",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
   }
 }

@@ -26,6 +26,8 @@ EMBLEMS = {
 }
 # abilities the binder defines that no tree grants (still need a menu icon)
 UNTREED = {'mdvlcraft:babylonian_armory': ('Babylonian Armory', 'samurai'), 'mdvlcraft:celestial_array': ('Celestial Array', 'samurai')}
+# Epic Fight skills every player has without a tree (still need a Combat Skills icon)
+ALWAYS_EF = {'efclash_blade:clash_blade': 'Clash Blade'}
 STANCES = {'fire': ('flame', 'fire'), 'wind': ('tornado', 'wind'), 'water': ('wave', 'aqua'), 'earth': ('spikes', 'wood')}
 
 
@@ -71,6 +73,8 @@ def main():
         inv['tab:' + cat] = emblem('tab', cat, EMBLEMS[cat])
     for iid, (name, cat) in UNTREED.items():
         inv.setdefault(iid, dict(kind='technique', name=name, school='', cats=[cat]))
+    for sid, name in ALWAYS_EF.items():
+        inv.setdefault(sid, dict(kind='efskill', name=name, slot=EF_SLOTS[sid], tip='', cats=[]))
     for element, spec in STANCES.items():
         inv['mdvlcraft:stance_' + element] = emblem('ability', 'Stance ' + element, spec)
     json.dump(inv, open(sys.argv[1], 'w'), indent=1)

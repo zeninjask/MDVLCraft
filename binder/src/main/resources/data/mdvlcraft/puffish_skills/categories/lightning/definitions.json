@@ -14325,5 +14325,36 @@
       }
     },
     "size": 2.0
+  },
+  "megido": {
+    "title": "Electric Rain",
+    "description": "Unlocks Electric Rain (Level 3) (28 mana, 30 s cooldown) on the ability wheel",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons18/ability/alshanex_familiars_megido.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:ability",
+        "data": {
+          "ability": "alshanex_familiars:megido",
+          "level": 3
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
   }
 }

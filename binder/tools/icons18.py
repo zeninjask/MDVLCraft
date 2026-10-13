@@ -1103,9 +1103,50 @@ def pick(rules, name):
     return None
 
 
+# Hand-picked designs for icons the keyword rules would draw the same as another icon: id -> (motif, ramp[, corner, corner ramp])
+PINNED = {
+    'alshanex_familiars:end_mayhem': ('portal', 'ender'),
+    'iss_csw:conjure_refreshment': ('flask', 'amber'),
+    'cursed_school:decay_field': ('skull', 'poison', 'drop', 'cursed'),
+    'alshanex_familiars:guardian_angel': ('wings', 'holy'),
+    'traveloptics:sword_of_the_ancients': ('greatsword', 'gold'),
+    'alshanex_familiars:ice_chamber': ('wall', 'ice'),
+    'alshanex_familiars:ice_age': ('snowflake', 'ice', 'hourglass', 'ice'),
+    'irons_spellbooks:summon_ender_chest': ('bag', 'ender'),
+    'esoteric_spell:auto_lances_magic': ('spear', 'steel', 'star', 'gold'),
+    'antimagic:anti_magic_slash': ('slash', 'anti_magic'),
+    'alshanex_familiars:summon_shadows': ('ghost', 'shadow'),
+    'iss_csw:frostwhirl_slash': ('cross_slash', 'ice'),
+    'antimagic:black_mantle': ('shield', 'anti_magic'),
+    'irons_spellbooks:black_hole': ('vortex', 'ender'),
+    'somakespells:halberd_strike': ('axe', 'ice'),
+    'traveloptics:summon_desert_dwellers': ('totem', 'gold'),
+    'cdmoveset:fatalfalsh': ('stance_katana', 'gold', 'exclaim', 'crimson'),
+    'efclash_blade:clash_blade': ('crossed_swords', 'steel'),
+    'cdmoveset:wolf_dodge': ('beast', 'teal'),
+    'iss_magicfromtheeast:bone_hands': ('hand', 'bone'),
+    'wom:proximity_exploiter': ('target', 'teal'),
+    'traveloptics:supernova': ('sun', 'fire'),
+    'iss_elden_ring:rock_sling': ('comet', 'steel'),
+    'esoteric_spell:auto_javelin_magic': ('spear', 'barrier', 'plus', 'gold'),
+    'irons_spellbooks:telekinesis': ('hand', 'eldritch'),
+    'iss_csw:rime_veil': ('mask', 'ice'),
+    'iss_csw:summon_spell_clone': ('mirror', 'spirit'),
+    'iss_magicfromtheeast:underworld_aid': ('scythe', 'spirit', 'moon', 'spirit'),
+    'esoteric_spell:crash_magic': ('bomb', 'barrier'),
+    'irons_spellbooks:snowball': ('orb', 'ice'),
+    'irons_spellbooks:fang_swirl': ('vortex', 'eldritch'),
+    'esoteric_spell:immunity_aura': ('burst', 'barrier'),
+    'wom:bull_charge': ('horse', 'ember', 'up', 'gold'),
+}
+
+
 def plan(iid, e):
     """(motif, ramp, corner motif or None, corner ramp) for one inventory entry."""
     kind, name = e['kind'], e['name']
+    if iid in PINNED:
+        motif, ramp, *corner = PINNED[iid]
+        return motif, RAMPS[ramp], corner[0] if corner else None, RAMPS[corner[1] if corner else ramp]
     if kind in ('spell', 'technique'):
         school = e.get('school') or ''
         cat = (e.get('cats') or [''])[0]
@@ -1158,9 +1199,10 @@ def main():
     inv = json.load(open(sys.argv[1]))
     plans = {iid: plan(iid, e) for iid, e in inv.items()}
     # icons that would come out identical get a related colourway, then a corner badge
+    # icons already drawn keep their colourway: they claim theirs first and new icons are fitted around them
     taken = set()
-    for iid in sorted(plans):
-        if inv[iid]['kind'] in ('archetype', 'tab') or 'motif' in inv[iid]:
+    for iid in sorted(plans, key=lambda i: (not os.path.exists(file_for(i, inv[i]['kind'])), i)):
+        if inv[iid]['kind'] in ('archetype', 'tab') or 'motif' in inv[iid] or iid in PINNED:
             continue
         m, r, c, cr = plans[iid]
         options = [(r, c)] + [(RAMPS[alt], c) for alt in VARIANT_RAMPS.get(RAMP_NAME[r], [])]

@@ -13562,5 +13562,35 @@
       }
     },
     "size": 2.0
+  },
+  "fatalfalsh": {
+    "title": "Fatal Flash",
+    "description": "Teaches Fatal Flash, an Epic Fight identity skill: Lock onto a low-health enemy and perform a kill, which cannot be interrupted during execution (Weapons allowed: uchigatana, katana, tachi, longsword). Equip it in the Combat Skills box of the abilities screen",
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "mdvlcraft:textures/gui/icons18/skill/cdmoveset_fatalfalsh.png"
+      }
+    },
+    "rewards": [
+      {
+        "type": "mdvlcraft:epicfight_skill",
+        "data": {
+          "skill": "cdmoveset:fatalfalsh"
+        }
+      }
+    ],
+    "cost": 2,
+    "frame": {
+      "type": "texture",
+      "data": {
+        "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+        "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+        "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+        "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+        "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+      }
+    },
+    "size": 2.0
   }
 }
