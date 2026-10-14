@@ -15,14 +15,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
- * A demon sword's own art (Demon Slayer: Anti-Magic Shroud, Demon Dweller: Anti-Magic Slash, Demon Destroyer: Causality
- * Break), cast when the client reports both mouse buttons held. The Anti-Magic Slash leaves the blade 0.6 seconds after
- * the click and then has a 12 second cooldown (started at the click).
+ * A demon sword's own art. The Demon Slayer's Anti-Magic Shroud and the Demon Destroyer's Causality Break are cast when
+ * the client reports both mouse buttons held; the Demon Dweller's Anti-Magic Slash is its innate skill
+ * (DemonDwellerSlashSkill), which fires the slash here once its swing reaches the hit.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class DemonSwordArts {
-    private static final int SLASH_COOLDOWN_TICKS = 240;
-    private static final int SLASH_DELAY_TICKS = 12;
     /** Players with a slash on its way, and the ticks left before it leaves the blade. */
     private static final Map<ServerPlayer, Integer> PENDING_SLASHES = new WeakHashMap<>();
     private static boolean casting;
@@ -35,6 +33,12 @@ public final class DemonSwordArts {
         return item instanceof DemonSlayerSword || item instanceof DemonDwellerSword || item instanceof DemonDestroyerSword;
     }
 
+    /** Swords whose art is cast with both mouse buttons. */
+    public static boolean hasBothButtonArt(ItemStack stack) {
+        Item item = stack.getItem();
+        return item instanceof DemonSlayerSword || item instanceof DemonDestroyerSword;
+    }
+
     /** True while cast runs the sword's use, which DemonSwordUseMixin otherwise blocks. */
     public static boolean casting() {
         return casting;
@@ -43,17 +47,16 @@ public final class DemonSwordArts {
     public static void cast(ServerPlayer player) {
         ItemStack stack = player.getMainHandItem();
         Item item = stack.getItem();
-        if (!isDemonSword(stack) || player.getCooldowns().isOnCooldown(item)) {
-            return;
-        }
-
-        if (item instanceof DemonDwellerSword) {
-            player.getCooldowns().addCooldown(item, SLASH_COOLDOWN_TICKS);
-            PENDING_SLASHES.put(player, SLASH_DELAY_TICKS);
+        if (!hasBothButtonArt(stack) || player.getCooldowns().isOnCooldown(item)) {
             return;
         }
 
         use(player, item);
+    }
+
+    /** Fires the Demon Dweller's slash after the given ticks, if it is still in hand. */
+    public static void slashAfter(ServerPlayer player, int ticks) {
+        PENDING_SLASHES.put(player, ticks);
     }
 
     @SubscribeEvent

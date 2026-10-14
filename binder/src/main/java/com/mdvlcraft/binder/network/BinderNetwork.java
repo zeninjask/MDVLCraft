@@ -101,6 +101,14 @@ public final class BinderNetwork {
             ArchetypeLevelsPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
+        CHANNEL.registerMessage(
+            id++,
+            SummonOwnerPacket.class,
+            SummonOwnerPacket::encode,
+            SummonOwnerPacket::decode,
+            SummonOwnerPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
     }
 
     public static void sendTo(ServerPlayer player, Object packet) {

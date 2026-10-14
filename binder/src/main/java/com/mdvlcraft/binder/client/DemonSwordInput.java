@@ -11,7 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.lwjgl.glfw.GLFW;
 
-/** Pressing both mouse buttons with a demon sword in hand casts its art (DemonSwordArts), once per press. */
+/** Pressing both mouse buttons with the Demon Slayer or Demon Destroyer in hand casts its art (DemonSwordArts), once per press. */
 @EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
 public final class DemonSwordInput {
     private static boolean bothHeld;
@@ -30,7 +30,7 @@ public final class DemonSwordInput {
         boolean both = mc.player != null && mc.screen == null
             && GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_LEFT) == GLFW.GLFW_PRESS
             && GLFW.glfwGetMouseButton(window, GLFW.GLFW_MOUSE_BUTTON_RIGHT) == GLFW.GLFW_PRESS;
-        if (both && !bothHeld && DemonSwordArts.isDemonSword(mc.player.getMainHandItem())) {
+        if (both && !bothHeld && DemonSwordArts.hasBothButtonArt(mc.player.getMainHandItem())) {
             BinderNetwork.sendToServer(new DemonSwordArtPacket());
         }
         bothHeld = both;

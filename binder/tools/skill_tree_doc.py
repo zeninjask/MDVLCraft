@@ -214,8 +214,8 @@ def main():
             parts.append(f"<tr><td><b>{e(title[a])}</b></td><td>{badge(cls)}</td><td class='num'>{r['skills']}</td><td class='num'>{r['cost']}</td>"
                          + "".join(f"<td class='num'>{short(k, r['sums'][k]) if r['sums'].get(k) else '–'}</td>" for k, _ in CORE)
                          + f"<td class='num'>{len(r['abilities'])}</td><td class='num'>{len(r['efskills'])}</td></tr>")
-    parts.append("</table><p class='lead'>Everyone knows Guard, Parrying, Parry – Absolute Deflection and the souls-like dodge and step, and always has "
-                 "Clash Blade equipped. Assassin, Phantom, Scout and Thief also get Precise Parry. Hostile mobs have 20% more health and deal 10% more "
+    parts.append("</table><p class='lead'>Everyone knows Guard, Parrying, Parry – Absolute Deflection and the souls-like dodge and step. "
+                 "Assassin, Phantom, Scout and Thief also get Precise Parry. Hostile mobs have 20% more health and deal 10% more "
                  "damage. Players also pick a race, a Martial class and a job (Origins) on first joining; these are listed at the end and are separate from the "
                  "archetype trees.</p>")
 

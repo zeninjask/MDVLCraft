@@ -1,6 +1,8 @@
 package com.mdvlcraft.binder.ability;
 
+import com.mdvlcraft.binder.content.DemonicAssimilationDismiss;
 import com.mdvlcraft.binder.doppelganger.Doppelgangers;
+import com.tiago.antimagic.spell.DemonicAssimilationSpell;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
@@ -75,6 +77,11 @@ public final class AbilityActions {
     }
 
     private static void castSpell(ServerPlayer player, AbstractSpell spell, int level) {
+        // Casting Demonic Assimilation again ends it; Iron's would only answer that the spell is on cooldown.
+        if (spell instanceof DemonicAssimilationSpell && DemonicAssimilationDismiss.end(player)) {
+            return;
+        }
+
         MagicData magic = MagicData.getPlayerMagicData(player);
         if (magic.isCasting() && !magic.getCastingSpellId().equals(spell.getSpellId())) {
             Utils.serverSideCancelCast(player, magic.getCastType() != CastType.LONG);
