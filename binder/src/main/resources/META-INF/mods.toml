@@ -155,3 +155,11 @@ description='''${mod_description}'''
     versionRange="[2.3,)"
     ordering="AFTER"
     side="BOTH"
+
+# Optional: loaded first so the binder's data/fantasy_armor/ recipe (moon crystal from ink sacs) replaces its own
+[[dependencies.${mod_id}]]
+    modId="fantasy_armor"
+    mandatory=false
+    versionRange="[1.2,)"
+    ordering="AFTER"
+    side="BOTH"

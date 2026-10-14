@@ -25,11 +25,14 @@ import software.bernie.geckolib.renderer.GeoArmorRenderer;
 /**
  * Fantasy Armor's capes (every bone named cape, with what hangs off it) are not drawn.
  *
- * Marks which limb (arm, leg or boot bone and their children) GeckoLib is drawing and, while client/ArmorBend is on,
- * draws that limb's quads bent at the elbow or knee. Everything else is drawn as GeckoLib's own createVerticesOfQuad does.
+ * Marks which part (body, arm, leg or boot bone and their children; an arm or leg inside the body counts as the limb)
+ * GeckoLib is drawing and, while client/ArmorBend is on, draws that part's quads bent like Epic Fight's skin. Everything
+ * else (the helmet) is drawn as GeckoLib's own createVerticesOfQuad does.
  */
 @Mixin(value = GeoArmorRenderer.class, remap = false)
 public abstract class GeoArmorRendererMixin {
+    @Shadow
+    protected GeoBone body;
     @Shadow
     protected GeoBone rightArm;
     @Shadow
@@ -46,6 +49,8 @@ public abstract class GeoArmorRendererMixin {
     protected Matrix4f entityRenderTranslations;
     @Unique
     private GeoBone mdvlcraft$limbBone;
+    @Unique
+    private GeoBone mdvlcraft$bodyBone;
 
     @Inject(method = "renderRecursively(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/item/Item;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V",
         at = @At("HEAD"), cancellable = true, require = 1)
@@ -62,7 +67,13 @@ public abstract class GeoArmorRendererMixin {
     private void mdvlcraft$enterLimb(PoseStack poseStack, Item animatable, GeoBone bone, RenderType renderType, MultiBufferSource bufferSource,
                                      VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay,
                                      float red, float green, float blue, float alpha, CallbackInfo ci) {
-        if (!ArmorBend.active() || ArmorBend.limb() != null) {
+        if (!ArmorBend.active() || this.mdvlcraft$limbBone != null) {
+            return;
+        }
+
+        if (bone == this.body && this.mdvlcraft$bodyBone == null) {
+            ArmorBend.enter(ArmorBend.Limb.BODY);
+            this.mdvlcraft$bodyBone = bone;
             return;
         }
 
@@ -83,8 +94,11 @@ public abstract class GeoArmorRendererMixin {
                                      VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay,
                                      float red, float green, float blue, float alpha, CallbackInfo ci) {
         if (bone == this.mdvlcraft$limbBone) {
-            ArmorBend.enter(null);
+            ArmorBend.enter(this.mdvlcraft$bodyBone != null ? ArmorBend.Limb.BODY : null);
             this.mdvlcraft$limbBone = null;
+        } else if (bone == this.mdvlcraft$bodyBone) {
+            ArmorBend.enter(null);
+            this.mdvlcraft$bodyBone = null;
         }
     }
 
