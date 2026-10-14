@@ -4,9 +4,9 @@ A Forge **1.20.1** (Forge **47.4.10**) modpack built around Epic Fight combat, c
 
 | File | What it is |
 |------|------------|
-| [`MDVLCraft-1.9.32-client.mrpack`](MDVLCraft-1.9.32-client.mrpack) | Client Modrinth pack (Modrinth App, Prism Launcher). Set 8 GB and the JVM line from [`MDVLCraft-1.9.32-Client-Java-Arguments.txt`](MDVLCraft-1.9.32-Client-Java-Arguments.txt) in the launcher |
-| [`MDVLCraft-1.9.32-server.mrpack`](MDVLCraft-1.9.32-server.mrpack) | Dedicated server Modrinth pack (matches the client pack). Use the JVM arguments in [`MDVLCraft-1.9.32-Server-user_jvm_args.txt`](MDVLCraft-1.9.32-Server-user_jvm_args.txt) as the server's `user_jvm_args.txt` |
-| [`MDVLCraft-1.9.32-Skill-Trees.pdf`](MDVLCraft-1.9.32-Skill-Trees.pdf) | Every archetype's stats, abilities, Epic Fight skills and bonuses, and every Origins race, Martial class and Job with their powers |
+| [`MDVLCraft-1.9.33-client.mrpack`](MDVLCraft-1.9.33-client.mrpack) | Client Modrinth pack (Modrinth App, Prism Launcher). Set 8 GB and the JVM line from [`MDVLCraft-1.9.33-Client-Java-Arguments.txt`](MDVLCraft-1.9.33-Client-Java-Arguments.txt) in the launcher |
+| [`MDVLCraft-1.9.33-server.mrpack`](MDVLCraft-1.9.33-server.mrpack) | Dedicated server Modrinth pack (matches the client pack). Use the JVM arguments in [`MDVLCraft-1.9.33-Server-user_jvm_args.txt`](MDVLCraft-1.9.33-Server-user_jvm_args.txt) as the server's `user_jvm_args.txt` |
+| [`MDVLCraft-1.9.33-Skill-Trees.pdf`](MDVLCraft-1.9.33-Skill-Trees.pdf) | Every archetype's stats, abilities, Epic Fight skills and bonuses, and every Origins race, Martial class and Job with their powers |
 
 ## Origin selection
 
