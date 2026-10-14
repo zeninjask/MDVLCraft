@@ -5,7 +5,9 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
+import java.util.Locale;
 import net.minecraft.world.item.Item;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.joml.Matrix4f;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
@@ -21,6 +23,8 @@ import software.bernie.geckolib.cache.object.GeoVertex;
 import software.bernie.geckolib.renderer.GeoArmorRenderer;
 
 /**
+ * Fantasy Armor's capes (every bone named cape, with what hangs off it) are not drawn.
+ *
  * Marks which limb (arm, leg or boot bone and their children) GeckoLib is drawing and, while client/ArmorBend is on,
  * draws that limb's quads bent at the elbow or knee. Everything else is drawn as GeckoLib's own createVerticesOfQuad does.
  */
@@ -42,6 +46,16 @@ public abstract class GeoArmorRendererMixin {
     protected Matrix4f entityRenderTranslations;
     @Unique
     private GeoBone mdvlcraft$limbBone;
+
+    @Inject(method = "renderRecursively(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/item/Item;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V",
+        at = @At("HEAD"), cancellable = true, require = 1)
+    private void mdvlcraft$noFantasyCape(PoseStack poseStack, Item animatable, GeoBone bone, RenderType renderType, MultiBufferSource bufferSource,
+                                         VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay,
+                                         float red, float green, float blue, float alpha, CallbackInfo ci) {
+        if (bone.getName().toLowerCase(Locale.ROOT).contains("cape") && "fantasy_armor".equals(ForgeRegistries.ITEMS.getKey(animatable).getNamespace())) {
+            ci.cancel();
+        }
+    }
 
     @Inject(method = "renderRecursively(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/item/Item;Lsoftware/bernie/geckolib/cache/object/GeoBone;Lnet/minecraft/client/renderer/RenderType;Lnet/minecraft/client/renderer/MultiBufferSource;Lcom/mojang/blaze3d/vertex/VertexConsumer;ZFIIFFFF)V",
         at = @At("HEAD"), require = 1)
