@@ -66,6 +66,11 @@ public final class SpellPreviews {
         return SPELL_DEFINITIONS.contains(category + "#" + definitionId);
     }
 
+    /** Whether a spell (a skill-tree node or the abilities screen) was hovered within the last moment. */
+    static boolean hovering() {
+        return Util.getMillis() - hoveredAt < HOVER_MILLIS;
+    }
+
     public static Component prompt() {
         return Component.translatable("tooltip.iss_ponder.hold_to_preview", PonderKeybinds.PONDER.message());
     }
