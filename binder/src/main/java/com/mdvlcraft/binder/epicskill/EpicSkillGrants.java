@@ -24,8 +24,6 @@ public final class EpicSkillGrants {
     private static final String SOULSLIKE_DODGE = "efn:efn_dodge";
     private static final String SOULSLIKE_STEP = "efn:efn_step";
     private static final String ABSOLUTE_DEFLECTION = "efn:efn_parry";
-    // Clash Blade is taken away from every player (it used to be given to everyone).
-    private static final String CLASH_BLADE = "efclash_blade:clash_blade";
     private static final Set<Skill> TREE_SKILLS = new HashSet<>();
     private static final Map<UUID, Set<EpicSkillReward>> ACTIVE = new HashMap<>();
     private static final Set<UUID> DIRTY = new HashSet<>();
@@ -105,19 +103,6 @@ public final class EpicSkillGrants {
         replace(player, patch, skills, granted, EpicFightSkills.STEP, step);
         equipIfEmpty(patch, SkillSlots.DODGE, dodge);
         equipIfEmpty(patch, SkillSlots.GUARD, EpicFightSkills.GUARD);
-
-        Skill clash = SkillManager.getSkill(CLASH_BLADE);
-        if (clash == null) {
-            throw new IllegalStateException(CLASH_BLADE + " is not registered");
-        }
-        // Clash Blade equips itself into its own slot on a first join without being learned, so the slot is cleared too.
-        SkillContainer clashSlot = patch.getSkill(firstSlotFor(clash));
-        if (clashSlot.getSkill() == clash) {
-            EpicSkillEquip.apply(patch, clashSlot, null);
-        }
-        if (skills.hasLearned(clash)) {
-            forget(player, patch, skills, clash);
-        }
     }
 
     private static Skill orElse(String id, Skill fallback) {
