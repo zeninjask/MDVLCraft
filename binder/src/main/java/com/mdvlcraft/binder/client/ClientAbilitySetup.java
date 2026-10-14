@@ -51,5 +51,6 @@ public final class ClientAbilitySetup {
         ClientAbilities.reset();
         ClientStances.reset();
         ClientTechniqueCooldowns.reset();
+        ClientArchetypes.reset();
     }
 }

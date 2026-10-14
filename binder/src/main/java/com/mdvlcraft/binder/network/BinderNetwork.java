@@ -10,9 +10,9 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "6";
+    private static final String PROTOCOL = "7";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-        ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "6", "6"::equals, "6"::equals
+        ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "7", "7"::equals, "7"::equals
     );
 
     private BinderNetwork() {
@@ -77,10 +77,22 @@ public final class BinderNetwork {
             MusicPlacePacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
+        CHANNEL.registerMessage(
+            id++,
+            ArchetypeLevelsPacket.class,
+            ArchetypeLevelsPacket::encode,
+            ArchetypeLevelsPacket::decode,
+            ArchetypeLevelsPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
     }
 
     public static void sendTo(ServerPlayer player, Object packet) {
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
+    }
+
+    public static void sendToAll(Object packet) {
+        CHANNEL.send(PacketDistributor.ALL.noArg(), packet);
     }
 
     public static void sendToTrackingAndSelf(ServerPlayer player, Object packet) {

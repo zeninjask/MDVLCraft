@@ -77,12 +77,12 @@ public final class Respec {
         }
     }
 
-    private static boolean isPicked(ServerPlayer player, String archetype) {
+    static boolean isPicked(ServerPlayer player, String archetype) {
         return ARCHETYPES.contains(archetype)
             && SkillsAPI.getCategory(ArchetypeTabs.CLASSES).flatMap(c -> c.getSkill(archetype)).map(s -> s.getState(player) == State.UNLOCKED).orElse(false);
     }
 
-    private static Optional<Category> tab(String archetype) {
+    static Optional<Category> tab(String archetype) {
         return SkillsAPI.getCategory(ResourceLocation.fromNamespaceAndPath("mdvlcraft", archetype));
     }
 
