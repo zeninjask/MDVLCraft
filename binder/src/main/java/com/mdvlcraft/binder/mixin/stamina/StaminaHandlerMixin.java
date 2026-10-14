@@ -1,8 +1,10 @@
 package com.mdvlcraft.binder.mixin.stamina;
 
 import Gvoper.reworked.handlers.StaminaHandler;
+import com.mdvlcraft.binder.content.OriginTraits;
 import com.tiago.antimagic.capability.BlackAstaCapability;
 import com.tiago.antimagic.capability.BlackAstaCapabilityProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -11,10 +13,13 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.ModifyVariable;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
+import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 
 /**
  * Stamina regenerates 20% faster: the mod's own regen (it replaces Epic Fight's) adds 0.14 a tick times a stance
- * multiplier, so the base becomes 0.168. Demonic Assimilation regenerates it 1.5 times as fast again.
+ * multiplier, so the base becomes 0.168. The mod ignores Epic Fight's Stamina Regen attribute, so the regen is multiplied by
+ * it here (base 1, raised by class skill nodes); Demonic Assimilation regenerates it 1.5 times as fast again. The
+ * Explorer job's Trailblazer halves the stamina sprinting drains.
  *
  * Attacks cost half the stamina. The attack cost is attackDamage * 0.75 + weaponWeight * 1.8 (in the basic-attack
  * listener); halving both factors halves every attack, including weapons the stamina config doesn't list.
@@ -42,15 +47,26 @@ public abstract class StaminaHandlerMixin {
         return 0.168F;
     }
 
+    private static final ResourceLocation TRAILBLAZER = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "explorer/trailblazer");
+
     /** The first setStamina in onPlayerTick is the regen: min(max, stamina + regen). */
     @Redirect(method = "onPlayerTick", at = @At(value = "INVOKE",
         target = "Lyesman/epicfight/world/capabilities/entitypatch/player/PlayerPatch;setStamina(F)V", ordinal = 0), require = 1)
-    private static void mdvlcraft$assimilationRegen(PlayerPatch<?> patch, float regenerated) {
+    private static void mdvlcraft$scaledRegen(PlayerPatch<?> patch, float regenerated) {
         Player player = (Player)patch.getOriginal();
         boolean assimilated = player.getCapability(BlackAstaCapabilityProvider.BLACK_ASTA_CAPABILITY)
             .map(BlackAstaCapability::isBlackAstaActive).orElse(false);
+        float multiplier = (float)player.getAttributeValue(EpicFightAttributes.STAMINA_REGEN.get()) * (assimilated ? ASSIMILATION_REGEN : 1.0F);
         float stamina = patch.getStamina();
-        patch.setStamina(assimilated ? Math.min(patch.getMaxStamina(), stamina + (regenerated - stamina) * ASSIMILATION_REGEN) : regenerated);
+        patch.setStamina(Math.min(patch.getMaxStamina(), stamina + (regenerated - stamina) * multiplier));
+    }
+
+    /** The second setStamina in onPlayerTick is the sprint drain: stamina - sprint cost. */
+    @Redirect(method = "onPlayerTick", at = @At(value = "INVOKE",
+        target = "Lyesman/epicfight/world/capabilities/entitypatch/player/PlayerPatch;setStamina(F)V", ordinal = 1), require = 1)
+    private static void mdvlcraft$trailblazerSprint(PlayerPatch<?> patch, float drained) {
+        float stamina = patch.getStamina();
+        patch.setStamina(OriginTraits.has(patch.getOriginal(), TRAILBLAZER) ? stamina - (stamina - drained) / 2.0F : drained);
     }
 
     @ModifyConstant(method = "onPlayerTick", constant = {@Constant(intValue = 50), @Constant(intValue = 40), @Constant(intValue = 60)}, require = 3)
