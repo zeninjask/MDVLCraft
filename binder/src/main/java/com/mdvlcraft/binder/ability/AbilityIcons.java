@@ -2,7 +2,7 @@ package com.mdvlcraft.binder.ability;
 
 import net.minecraft.resources.ResourceLocation;
 
-/** Paths of the 18x18 icons drawn by tools/icons18.py (abilities, Epic Fight skills, archetype tabs). */
+/** Paths of the icons in textures/gui/icons18 (abilities, Epic Fight skills, archetype tabs): Dragon Quest IX icons, 32x32, from tools/dq9_icons.py. */
 public final class AbilityIcons {
     private AbilityIcons() {
     }

@@ -72,7 +72,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 
 ## Unfinished work
 
-- **Branch `seb-agent`** (another agent's branch, merged into the development branch by the agent who releases): the Spectral Rondo pose-stack crash fix and the Dragon Quest IX look for every menu (font, `client/DqGui`, button and slider mixins, skill screen textures, Recruits and Origins skins; see `binder/README.md` item 8). Everything ships in the binder jar except one pack setting:
-  - `base/client/overrides/options.txt`: `darkMojangStudiosBackground:true` (black loading screens, Forge's early window included). The file has CRLF line endings.
+- **Branch `seb-agent`** (another agent's branch, merged into the development branch by the agent who releases): the Spectral Rondo pose-stack crash fix and the Dragon Quest IX look for every menu (font, `client/DqGui`, button and slider mixins, skill screen textures, Recruits and Origins skins, and every binder icon replaced by a Dragon Quest IX icon from `binder/tools/dq9_icons.py`; see `binder/README.md` item 8). Everything ships in the binder jar except two pack settings:
+  - `base/client/overrides/options.txt`: `darkMojangStudiosBackground:true` (black loading screens, Forge's early window included) and `guiScale:4` (was 3; at 4 the 32 x 32 DQ9 icons draw at an even 2 screen pixels per icon pixel). The file has CRLF line endings.
 - **Known intermittent issue:** one test client start crashed inside VanillaBackport with "Registry is already frozen". Blackgear Platform unfreezes and refreezes the root registry. It couldn't be reproduced, so it's left alone.
 - **Client tests here:** the full client needs about 10 GB and is OOM-killed next to a server. Move JEI out of both the test client's and the test server's mods folders (its recipe loading is the spike; the server refuses a client without it).

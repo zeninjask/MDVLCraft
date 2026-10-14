@@ -6,6 +6,8 @@ shape, no background. Each icon is a main motif picked from keywords in its name
 archetype / Epic Fight slot / bonus type), plus a small corner motif from a second keyword. Icons that would come out
 identical get a different corner motif. Shapes are laid out in a 26-unit design space and sampled onto the 18px grid.
 
+The shipped icons are Dragon Quest IX ones: run tools/dq9_icons.py write afterwards, which replaces every file here.
+
 Usage: python3 icons18.py <inventory.json> [sheet_dir]
 The inventory maps id -> {kind, name, school?, cats?, slot?}; tools/icon_inventory.py writes it from the live trees.
 """
