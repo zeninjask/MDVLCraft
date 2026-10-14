@@ -41,8 +41,8 @@ final class PartyPanels implements IGuiOverlay {
     private static final ResourceLocation PARTIES_HUD = ResourceLocation.fromNamespaceAndPath("parties", "parties_hud");
     private static final int MIN_WIDTH = 64;
     /** Where "Lv." starts, right of the two vocation boxes. */
-    private static final int LEVEL_LEFT = 34;
-    private static final int H = 59;
+    private static final int LEVEL_LEFT = 39;
+    private static final int H = 61;
     private static final int GAP = 2;
     private static final int MARGIN = 4;
     private static final int HEADER_END = 16;
@@ -132,10 +132,10 @@ final class PartyPanels implements IGuiOverlay {
         bar(g, x + 6, y + 39, w - 12, member.maxMana() <= 0.0F ? 0.0F : member.mana() / member.maxMana(), MP_SHINE, MP_FILL);
         List<String> archetypes = member.archetypes().archetypes();
         box(g, archetypes.size() > 0 ? archetypes.get(0) : null, x + 6, y + 44);
-        box(g, archetypes.size() > 1 ? archetypes.get(1) : null, x + 20, y + 44);
+        box(g, archetypes.size() > 1 ? archetypes.get(1) : null, x + 22, y + 44);
         if (!archetypes.isEmpty()) {
-            g.drawString(font, "Lv.", x + LEVEL_LEFT, y + 48, text, false);
-            number(g, font, member.archetypes().level(), x + w - 8, y + 48, text);
+            g.drawString(font, "Lv.", x + LEVEL_LEFT, y + 47, text, false);
+            number(g, font, member.archetypes().level(), x + w - 8, y + 47, text);
         }
     }
 
@@ -178,14 +178,15 @@ final class PartyPanels implements IGuiOverlay {
     }
 
     /**
-     * A 12 x 12 vocation box with rounded corners, holding an archetype's emblem (null: empty). The 32 px emblem is
-     * drawn at 8 px, one icon pixel per screen pixel at GUI scale 4.
+     * A 14 x 14 vocation box with rounded corners, holding an archetype's emblem (null: empty). The 32 px emblem is
+     * drawn at 16 px (two screen pixels per icon pixel at GUI scale 4, as in the skill trees); its item sits in the
+     * middle 12, leaving a pixel of box round it.
      */
     private static void box(GuiGraphics g, String archetype, int x, int y) {
-        g.fill(x + 1, y, x + 11, y + 12, BOX);
-        g.fill(x, y + 1, x + 12, y + 11, BOX);
+        g.fill(x + 1, y, x + 13, y + 14, BOX);
+        g.fill(x, y + 1, x + 14, y + 13, BOX);
         if (archetype != null) {
-            g.blit(AbilityIcons.tab(archetype), x + 2, y + 2, 0.0F, 0.0F, 8, 8, 8, 8);
+            g.blit(AbilityIcons.tab(archetype), x - 1, y - 1, 0.0F, 0.0F, 16, 16, 16, 16);
         }
     }
 
