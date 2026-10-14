@@ -11,6 +11,7 @@ import com.mdvlcraft.binder.compat.issponder.PreviewCasts;
 import com.mdvlcraft.binder.config.BinderConfig;
 import com.mdvlcraft.binder.content.AddItemModifier;
 import com.mdvlcraft.binder.content.DisabledContentSetup;
+import com.mdvlcraft.binder.content.LanternBelt;
 import com.mdvlcraft.binder.content.OriginIcon;
 import com.mdvlcraft.binder.doppelganger.DoppelgangerSetup;
 import com.mdvlcraft.binder.epicskill.EpicSkillReward;
@@ -70,6 +71,7 @@ public final class MDVLBinder {
             ArchetypeTabs.register();
             Jingles.register();
             ClassTitles.register();
+            LanternBelt.register();
         });
     }
 }
