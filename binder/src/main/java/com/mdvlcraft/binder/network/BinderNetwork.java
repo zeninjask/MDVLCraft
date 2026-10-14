@@ -10,9 +10,9 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "8";
+    private static final String PROTOCOL = "9";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-        ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "8", "8"::equals, "8"::equals
+        ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "9", "9"::equals, "9"::equals
     );
 
     private BinderNetwork() {
@@ -93,10 +93,22 @@ public final class BinderNetwork {
             DismissAssimilationPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
+        CHANNEL.registerMessage(
+            id++,
+            ArchetypeLevelsPacket.class,
+            ArchetypeLevelsPacket::encode,
+            ArchetypeLevelsPacket::decode,
+            ArchetypeLevelsPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
     }
 
     public static void sendTo(ServerPlayer player, Object packet) {
         CHANNEL.send(PacketDistributor.PLAYER.with(() -> player), packet);
+    }
+
+    public static void sendToAll(Object packet) {
+        CHANNEL.send(PacketDistributor.ALL.noArg(), packet);
     }
 
     public static void sendToTrackingAndSelf(ServerPlayer player, Object packet) {

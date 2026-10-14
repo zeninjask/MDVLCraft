@@ -7,6 +7,7 @@ import app.sedu.mc.parties.common.group.ClientGroupManager;
 import app.sedu.mc.parties.common.group.GroupType;
 import app.sedu.mc.parties.common.group.TrackedGroup;
 import app.sedu.mc.parties.compat.modules.irons_spellbooks.ManaModule;
+import com.mdvlcraft.binder.ability.AbilityIcons;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.player.ClientMagicData;
 import java.util.ArrayList;
@@ -18,10 +19,7 @@ import java.util.UUID;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.PlayerFaceRenderer;
-import net.minecraft.client.multiplayer.PlayerInfo;
 import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.ai.attributes.Attribute;
@@ -31,7 +29,8 @@ import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
 /**
  * The Dragon Quest IX party status windows in the top left: you first, then each party member (by name), one window
- * each with the name, HP and MP bars, the player's face in the vocation box and the experience level. The windows are
+ * each with the name, HP and MP bars, two vocation boxes with the emblems of the player's archetypes (the higher level
+ * on the left, empty boxes before any is picked) and that higher archetype's level. The windows are
  * copied pixel for pixel from the game's (64 x 56, rows stretched by one pixel per text line for the pack's 7 px
  * capitals). The game cuts names at 8 letters; here every window widens alike to fit the longest name in full, and the
  * bars stretch with it. Other members' values are the ones Parties syncs to the client; Parties' own HUD frames are hidden
@@ -41,7 +40,9 @@ final class PartyPanels implements IGuiOverlay {
     static final PartyPanels INSTANCE = new PartyPanels();
     private static final ResourceLocation PARTIES_HUD = ResourceLocation.fromNamespaceAndPath("parties", "parties_hud");
     private static final int MIN_WIDTH = 64;
-    private static final int H = 59;
+    /** Where "Lv." starts, right of the two vocation boxes. */
+    private static final int LEVEL_LEFT = 39;
+    private static final int H = 61;
     private static final int GAP = 2;
     private static final int MARGIN = 4;
     private static final int HEADER_END = 16;
@@ -82,7 +83,10 @@ final class PartyPanels implements IGuiOverlay {
 
         List<Member> members = members(minecraft.player);
         // The header leaves 7 px each side for the blue tabs and 1 px of space inside them; a name's last column is spacing.
-        int w = Math.max(MIN_WIDTH, members.stream().mapToInt(m -> minecraft.font.width(m.name()) - 1 + 16).max().getAsInt());
+        int w = Math.max(MIN_WIDTH, members.stream().mapToInt(m -> Math.max(
+            minecraft.font.width(m.name()) - 1 + 16,
+            LEVEL_LEFT + minecraft.font.width("Lv. ") + 7 + minecraft.font.width(String.valueOf(m.archetypes().level()))
+        )).max().getAsInt());
         int perRow = Math.max(1, (screenWidth - 2 * MARGIN + GAP) / (w + GAP));
         for (int i = 0; i < members.size(); i++) {
             draw(graphics, minecraft, members.get(i), MARGIN + i % perRow * (w + GAP), MARGIN + i / perRow * (H + GAP), w);
@@ -93,7 +97,7 @@ final class PartyPanels implements IGuiOverlay {
         List<Member> members = new ArrayList<>();
         double maxMana = self.getAttributeValue((Attribute)AttributeRegistry.MAX_MANA.get());
         members.add(new Member(self.getUUID(), self.getGameProfile().getName(), self.getHealth(), self.getMaxHealth(),
-            ClientMagicData.getPlayerMana(), (float)maxMana, self.experienceLevel, true));
+            ClientMagicData.getPlayerMana(), (float)maxMana, ClientArchetypes.get(self.getUUID()), true));
         TrackedGroup party = ClientGroupManager.getGroup(GroupType.PARTY);
         if (party == null) {
             return members;
@@ -106,7 +110,7 @@ final class PartyPanels implements IGuiOverlay {
                 PlayerData data = ClientDataHandler.getPlayerData(id);
                 others.add(new Member(id, data.getData(DataTypes.NAME), data.getData(DataTypes.HEALTH),
                     data.getData(DataTypes.MAX_HEALTH).floatValue(), data.getData(ManaModule.MANA),
-                    data.getData(ManaModule.MAX_MANA).floatValue(), (int)(data.getData(DataTypes.XP) >>> 32), data.isOnline()));
+                    data.getData(ManaModule.MAX_MANA).floatValue(), ClientArchetypes.get(id), data.isOnline()));
             }
         }
 
@@ -126,9 +130,13 @@ final class PartyPanels implements IGuiOverlay {
         g.drawString(font, "MP", x + 7, y + 31, text, false);
         number(g, font, Mth.floor(member.mana()), x + w - 10, y + 31, text);
         bar(g, x + 6, y + 39, w - 12, member.maxMana() <= 0.0F ? 0.0F : member.mana() / member.maxMana(), MP_SHINE, MP_FILL);
-        box(g, minecraft, member.id(), x + 6, y + 44);
-        g.drawString(font, "Lv.", x + 26, y + 48, text, false);
-        number(g, font, member.level(), x + w - 8, y + 48, text);
+        List<String> archetypes = member.archetypes().archetypes();
+        box(g, archetypes.size() > 0 ? archetypes.get(0) : null, x + 6, y + 44);
+        box(g, archetypes.size() > 1 ? archetypes.get(1) : null, x + 22, y + 44);
+        if (!archetypes.isEmpty()) {
+            g.drawString(font, "Lv.", x + LEVEL_LEFT, y + 47, text, false);
+            number(g, font, member.archetypes().level(), x + w - 8, y + 47, text);
+        }
     }
 
     private static void window(GuiGraphics g, int x, int y, int w) {
@@ -169,14 +177,17 @@ final class PartyPanels implements IGuiOverlay {
         g.fill(x, y + 3, x + inner + 2, y + 4, BAR_EDGE);
     }
 
-    /** The 12 x 12 vocation box with rounded corners, holding the player's face. */
-    private static void box(GuiGraphics g, Minecraft minecraft, UUID id, int x, int y) {
-        g.fill(x + 1, y, x + 11, y + 12, BOX);
-        g.fill(x, y + 1, x + 12, y + 11, BOX);
-        PlayerInfo info = minecraft.getConnection() == null ? null : minecraft.getConnection().getPlayerInfo(id);
-        // Offline members are not in the tab list; the game draws them with the default skin too.
-        ResourceLocation skin = info != null ? info.getSkinLocation() : DefaultPlayerSkin.getDefaultSkin(id);
-        PlayerFaceRenderer.draw(g, skin, x + 2, y + 2, 8);
+    /**
+     * A 14 x 14 vocation box with rounded corners, holding an archetype's emblem (null: empty). The 32 px emblem is
+     * drawn at 16 px (two screen pixels per icon pixel at GUI scale 4, as in the skill trees); its item sits in the
+     * middle 12, leaving a pixel of box round it.
+     */
+    private static void box(GuiGraphics g, String archetype, int x, int y) {
+        g.fill(x + 1, y, x + 13, y + 14, BOX);
+        g.fill(x, y + 1, x + 14, y + 13, BOX);
+        if (archetype != null) {
+            g.blit(AbilityIcons.tab(archetype), x - 1, y - 1, 0.0F, 0.0F, 16, 16, 16, 16);
+        }
     }
 
     /** A number whose last pixel column is right - 1. */
@@ -185,6 +196,6 @@ final class PartyPanels implements IGuiOverlay {
         g.drawString(font, s, right + 1 - font.width(s), y, colour, false);
     }
 
-    private record Member(UUID id, String name, float hp, float maxHp, float mana, float maxMana, int level, boolean online) {
+    private record Member(UUID id, String name, float hp, float maxHp, float mana, float maxMana, ClientArchetypes.Entry archetypes, boolean online) {
     }
 }
