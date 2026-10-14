@@ -26,9 +26,33 @@
                 "type": "get_max_health"
               }
             ]
+          },
+          "is_mage": {
+            "operations": [
+              {
+                "type": "get_killed_living_entity"
+              },
+              {
+                "type": "get_type"
+              },
+              {
+                "type": "test",
+                "data": {
+                  "entity_type": "#mdvlcraft:mages"
+                }
+              }
+            ]
           }
         },
-        "experience": "dropped_xp + max_health / 5",
+        "experience": [
+          {
+            "condition": "is_mage",
+            "expression": "150"
+          },
+          {
+            "expression": "dropped_xp + max_health / 5"
+          }
+        ],
         "anti_farming": {
           "limit_per_chunk": 20,
           "reset_after_seconds": 300

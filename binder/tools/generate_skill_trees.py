@@ -728,8 +728,11 @@ def experience():
                 "variables": {
                     "dropped_xp": {"operations": [{"type": "get_dropped_experience"}]},
                     "max_health": {"operations": [{"type": "get_killed_living_entity"}, {"type": "get_max_health"}]},
+                    # Iron's mages and the Aquamancer (data/mdvlcraft/tags/entity_types/mages.json) are worth 150
+                    "is_mage": {"operations": [{"type": "get_killed_living_entity"}, {"type": "get_type"},
+                                               {"type": "test", "data": {"entity_type": "#mdvlcraft:mages"}}]},
                 },
-                "experience": "dropped_xp + max_health / 5",
+                "experience": [{"condition": "is_mage", "expression": "150"}, {"expression": "dropped_xp + max_health / 5"}],
                 "anti_farming": {"limit_per_chunk": 20, "reset_after_seconds": 300},
             },
         }],
@@ -1161,7 +1164,7 @@ def write_doc(all_nodes):
              f"- **Classes tab:** the four classes sit in a ring round the centre and are unlocked automatically. Their archetypes fan out in each class's quarter; hover one for a one-line summary and its key abilities. Pick up to **{ARCHETYPE_LIMIT} archetypes** from any classes; each opens its own tab.",
              f"- **Archetype tabs:** laid out like Path of Exile's passive tree: meandering paths leave the archetype skill at the centre or fork off one another, a few cross-links close loops, and connections are drawn as curves. Each path mixes several bonus chains in turn (small 1-point steps, then a 2-point capstone with a double-ringed frame), so no two neighbouring skills give the same bonus. Abilities (the largest frames) sit from the middle to the end of the paths: they unlock spells or techniques for the ability wheel, or teach Epic Fight skills (the skill's own icon), which you equip in the abilities screen's Combat Skills box. Everyone knows Epic Fight's Roll, Step, Guard and Parrying.",
              f"- **Twigs:** the small frames sprouting off every branch are tiny 1-point generic bonuses (health, speed, mana, cooldowns, saturation and more; table below). They are smaller than any class or signature step and capped per tree, so they widen your choices without raising the ceiling.",
-             f"- **Points:** {STARTING_POINTS} to start, then 1 per level with no level cap, so a whole tree can be filled in time. Experience comes from kills (`dropped XP + max health / 5`, at most 20 kills per chunk every 5 minutes). Level n to n+1 costs `25 + 5n` XP.",
+             f"- **Points:** {STARTING_POINTS} to start, then 1 per level with no level cap, so a whole tree can be filled in time. Experience comes from kills (`dropped XP + max health / 5`, or a flat 150 for a mage, at most 20 kills per chunk every 5 minutes). Level n to n+1 costs `25 + 5n` XP.",
              "- **Class bonuses** are shared by every archetype of that class. **Signature bonuses** belong to one archetype only; the generator enforces this. Abilities and Epic Fight skills can appear in several archetypes.",
              "- **Controls:** `[` opens the abilities screen, hold `` ` `` for the ability wheel, Caps Lock casts. Spells cost 40% less mana than Iron's defaults and have 50% longer cooldowns. Techniques cost mana and have their own cooldowns; hold the cast key on Dismantle or Cleave to keep casting each time it is ready. The Malevolent Shrine (closed, then open) only cuts while you hold Dismantle or Cleave; cast it again to close it (it lasts up to 20 s).", ""]
     lines += ["## Twig bonuses (every archetype)", "", "| Twig | Per node | Most per tree | Tree maximum |", "|---|---|---|---|"]

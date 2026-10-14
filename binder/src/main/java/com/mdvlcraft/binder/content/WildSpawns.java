@@ -29,7 +29,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 /**
  * Mobs of otherwise spawn-blocked mods that do spawn in the wild (WildSpawnsBiomeModifier, data/mdvlcraft/forge/biome_modifier/wild_spawns.json):
  * Iron's mages and the Aquamancer as rare hostile spawns in the dark (groups of up to 5), tougher than their structure
- * versions and worth 10 zombies of experience, and the Cursed Fate characters as very rare ones. Mages never drop
+ * versions, and the Cursed Fate characters as very rare ones. Every mage, wild or not, drops 150 experience (and gives
+ * 150 skill experience, the #mdvlcraft:mages case in each tree's experience.json). Mages never drop
  * inks (the scroll forge is disabled). Every hostile mob also gets {@link #HOSTILE_HEALTH} times its health and deals
  * {@link #HOSTILE_DAMAGE} times its damage to players.
  */
@@ -66,8 +67,7 @@ public final class WildSpawns {
     private static final double WILD_ARMOR_BONUS = 6.0;
     public static final double HOSTILE_HEALTH = 1.2;
     public static final double HOSTILE_DAMAGE = 1.1;
-    // a zombie drops 5 experience
-    private static final int MAGE_EXPERIENCE = 50;
+    private static final int MAGE_EXPERIENCE = 150;
 
     private WildSpawns() {
     }
@@ -147,7 +147,7 @@ public final class WildSpawns {
 
     @SubscribeEvent
     public static void onExperienceDrop(LivingExperienceDropEvent event) {
-        if (event.getEntity().getPersistentData().getBoolean(WILD) && isMage(event.getEntity().getType())) {
+        if (isMage(event.getEntity().getType())) {
             event.setDroppedExperience(MAGE_EXPERIENCE);
         }
     }

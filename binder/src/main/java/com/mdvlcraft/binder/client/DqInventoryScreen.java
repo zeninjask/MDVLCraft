@@ -6,6 +6,13 @@ import java.util.List;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.renderer.Rect2i;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.network.chat.CommonComponents;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffectUtil;
+import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
@@ -32,7 +39,8 @@ import top.theillusivec4.curios.common.network.client.CPacketOpenCurios;
  * The survival inventory as Dragon Quest IX's equipment screen. The left half is the bag (inventory and hotbar), the
  * 2x2 crafting grid and the player's stats. The right half is the equipment page: the player model, one row per
  * equipment slot (main hand, off hand, head, body, legs, feet: the item's name with a green E, or "Nothing equipped"),
- * and the Curios accessories underneath.
+ * and the Curios accessories underneath. The player's effects are listed in a window left of the bag: icon, name and
+ * time remaining, or only the icons (name and time on hover) when the screen is too narrow for names.
  *
  * It draws Curios' own inventory menu, which holds the vanilla slots, the crafting grid and the accessory slots and
  * already handles moving, shift-clicking, crafting and syncing: opening the inventory asks the server for that menu
@@ -92,6 +100,12 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
         "....OO..........", "....OYO..OOOO...", "OOO.OHYOOOYYYOO.", "OHYOOHYYYYHHYYYO", "OOO.OYDOOODYYOO.", "....ODO..OOOO...", "....OO.........."
     };
     private static final Map<Character, Integer> POINTER_COLOURS = Map.of('O', 0xFF3A2000, 'D', 0xFFC08000, 'Y', 0xFFF8D020, 'H', 0xFFFFF8A0);
+    private static final int EFFECTS_GAP = 6;
+    /** The window with names is up to EFFECTS_WIDE wide, taking what room there is, but not under EFFECTS_MIN_WIDE. */
+    private static final int EFFECTS_WIDE = 124;
+    private static final int EFFECTS_MIN_WIDE = 90;
+    private static final int EFFECTS_NARROW = 28;
+    private static final int EFFECT_ROW = 24;
     private final List<Slot> accessories = new ArrayList<>();
     /** The screen's real height, imageHeight or more with many accessory rows. */
     private int fullHeight = HEIGHT;
@@ -190,6 +204,8 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
         } else {
             this.renderTooltip(g, mouseX, mouseY);
         }
+
+        this.effectTooltip(g, mouseX, mouseY);
     }
 
     @Override
@@ -221,6 +237,99 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
         int hy = y + TITLE + 3 * 18 + 6;
         outline(g, hx - 1, hy - 1, 20, 20, 0xFFE7DEDE);
         outline(g, hx, hy, 18, 18, DqGui.BLUE);
+        this.effects(g);
+    }
+
+    /** The effects the inventory shows (as vanilla's inventory picks and orders them). */
+    private List<MobEffectInstance> shownEffects() {
+        return this.minecraft.player.getActiveEffects().stream()
+            .filter(effect -> IClientMobEffectExtensions.of(effect).isVisibleInInventory(effect))
+            .sorted()
+            .toList();
+    }
+
+    private int effectsRoom() {
+        return this.leftPos - EFFECTS_GAP - 2;
+    }
+
+    private boolean wideEffects() {
+        return this.effectsRoom() >= EFFECTS_MIN_WIDE;
+    }
+
+    private int effectsHeader() {
+        return this.wideEffects() ? TITLE : 5;
+    }
+
+    /** Rows overlap when there are more effects than fit on the screen. */
+    private int effectStep(int count) {
+        int room = this.height - this.topPos - 4 - this.effectsHeader() - EFFECT_ROW - 3;
+        return count < 2 ? EFFECT_ROW : Math.max(1, Math.min(EFFECT_ROW, room / (count - 1)));
+    }
+
+    /** The effects window, left of the bag; null with no effects shown or no room left of the screen. */
+    public Rect2i effectsArea() {
+        int count = this.shownEffects().size();
+        int w = this.wideEffects() ? Math.min(EFFECTS_WIDE, this.effectsRoom()) : EFFECTS_NARROW;
+        if (count == 0 || this.effectsRoom() < w) {
+            return null;
+        }
+
+        int h = this.effectsHeader() + this.effectStep(count) * (count - 1) + EFFECT_ROW + 3;
+        return new Rect2i(this.leftPos - EFFECTS_GAP - w, this.topPos, w, h);
+    }
+
+    private void effects(GuiGraphics g) {
+        Rect2i area = this.effectsArea();
+        if (area == null) {
+            return;
+        }
+
+        boolean wide = this.wideEffects();
+        if (wide) {
+            DqGui.window(g, this.font, Component.translatable("screen.mdvlcraft.inventory.effects"), area.getX(), area.getY(), area.getWidth(), area.getHeight());
+        } else {
+            DqGui.window(g, area.getX(), area.getY(), area.getWidth(), area.getHeight());
+        }
+
+        List<MobEffectInstance> effects = this.shownEffects();
+        int step = this.effectStep(effects.size());
+        for (int i = 0; i < effects.size(); i++) {
+            MobEffectInstance effect = effects.get(i);
+            int ex = area.getX() + 5;
+            int ey = area.getY() + this.effectsHeader() + i * step;
+            TextureAtlasSprite sprite = this.minecraft.getMobEffectTextures().get(effect.getEffect());
+            g.blit(ex, ey + 3, 0, 18, 18, sprite);
+            if (wide) {
+                int textW = area.getWidth() - 5 - 22 - 4;
+                g.drawString(this.font, this.font.plainSubstrByWidth(effectName(effect).getString(), textW), ex + 22, ey + 3, DqGui.TEXT, false);
+                g.drawString(this.font, MobEffectUtil.formatDuration(effect, 1.0F), ex + 22, ey + 13, DqGui.MUTED, false);
+            }
+        }
+    }
+
+    /** Name and time of the effect under the mouse, when the window only shows icons or cut the name short. */
+    private void effectTooltip(GuiGraphics g, int mouseX, int mouseY) {
+        Rect2i area = this.effectsArea();
+        if (area == null || !area.contains(mouseX, mouseY) || !this.menu.getCarried().isEmpty()) {
+            return;
+        }
+
+        List<MobEffectInstance> effects = this.shownEffects();
+        int i = Math.min(effects.size() - 1, Math.max(0, (mouseY - area.getY() - this.effectsHeader()) / this.effectStep(effects.size())));
+        MobEffectInstance effect = effects.get(i);
+        Component name = effectName(effect);
+        if (!this.wideEffects() || this.font.width(name) > area.getWidth() - 5 - 22 - 4) {
+            g.renderComponentTooltip(this.font, List.of(name, MobEffectUtil.formatDuration(effect, 1.0F)), mouseX, mouseY);
+        }
+    }
+
+    private static Component effectName(MobEffectInstance effect) {
+        MutableComponent name = effect.getEffect().getDisplayName().copy();
+        if (effect.getAmplifier() >= 1 && effect.getAmplifier() <= 9) {
+            name.append(CommonComponents.SPACE).append(Component.translatable("enchantment.level." + (effect.getAmplifier() + 1)));
+        }
+
+        return name;
     }
 
     private void status(GuiGraphics g, int x, int y, int h) {
@@ -306,9 +415,14 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
         return super.mouseClicked(mouseX, mouseY, button);
     }
 
-    /** Clicks off the slots drop the carried stack only outside the windows, which can reach below imageHeight. */
+    /** Clicks off the slots drop the carried stack only outside the windows (accessories can reach below imageHeight). */
     @Override
     protected boolean hasClickedOutside(double mouseX, double mouseY, int left, int top, int button) {
+        Rect2i effects = this.effectsArea();
+        if (effects != null && effects.contains((int)mouseX, (int)mouseY)) {
+            return false;
+        }
+
         return mouseX < left || mouseY < top || mouseX >= left + this.imageWidth || mouseY >= top + this.fullHeight;
     }
 
