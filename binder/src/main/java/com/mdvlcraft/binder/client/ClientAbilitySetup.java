@@ -34,11 +34,13 @@ public final class ClientAbilitySetup {
         modBus.addListener(BdHillFix::onAddPackFinders);
         MinecraftForge.EVENT_BUS.addListener(DqSkins::onRenderPre);
         MinecraftForge.EVENT_BUS.addListener(DqSkins::onRenderPost);
+        MinecraftForge.EVENT_BUS.addListener(PartyPanels::onRenderOverlay);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, false, Pre.class, TrueInvisibilityRender::onRenderLiving);
     }
 
     private static void onRegisterOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "ability_hud", AbilityHud.INSTANCE);
+        event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "party_panels", PartyPanels.INSTANCE);
     }
 
     private static void onClientSetup(FMLClientSetupEvent event) {
