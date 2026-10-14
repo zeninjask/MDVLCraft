@@ -59,6 +59,13 @@ public final class DqGui {
         frame(g, x, y, w, h, BLACK, WINDOW_COLOURS);
     }
 
+    /** A black window with its title centred above a white rule. */
+    public static void window(GuiGraphics g, Font font, Component title, int x, int y, int w, int h) {
+        window(g, x, y, w, h);
+        g.drawCenteredString(font, title, x + w / 2, y + 8, TEXT);
+        rule(g, x + WINDOW_EDGE, x + w - WINDOW_EDGE, y + 20);
+    }
+
     /** A charcoal window, the game's lists and status panels. */
     public static void panel(GuiGraphics g, int x, int y, int w, int h) {
         frame(g, x, y, w, h, CHARCOAL, WINDOW_COLOURS);

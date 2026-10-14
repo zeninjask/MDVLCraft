@@ -35,6 +35,7 @@ public final class ClientAbilitySetup {
         MinecraftForge.EVENT_BUS.addListener(DqSkins::onRenderPre);
         MinecraftForge.EVENT_BUS.addListener(DqSkins::onRenderPost);
         MinecraftForge.EVENT_BUS.addListener(PartyPanels::onRenderOverlay);
+        MinecraftForge.EVENT_BUS.addListener(DqInventoryScreen::onScreenOpening);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, false, Pre.class, TrueInvisibilityRender::onRenderLiving);
     }
 

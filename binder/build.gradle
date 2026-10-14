@@ -111,6 +111,10 @@ dependencies {
     compileOnly files('libs/Parties-1.20.1-2.2.0.jar')
     // Somakespells: SpectralRondoPlayerRenderHandlerMixin keeps Spectral Rondo's pose push and pop paired
     compileOnly files('libs/somakespells-1.0.9-1.20.1-fixaltar.jar')
+    // Curios: client/DqInventoryScreen draws its inventory menu (the pack's jar; the CurseMaven copy is runtime only)
+    compileOnly files('libs/curios-forge-5.14.1+1.20.1.jar')
+    // Inventory Profiles Next: client/DqInventoryScreen's @IPNGuiHints move its sort buttons onto the screen's windows
+    compileOnly files('libs/InventoryProfilesNext-forge-1.20-1.10.20.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))
