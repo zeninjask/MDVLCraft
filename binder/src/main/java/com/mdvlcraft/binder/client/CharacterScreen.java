@@ -74,17 +74,9 @@ public class CharacterScreen extends Screen {
     private static final int TOOLTIP_WIDTH = 220;
     private static final String CLASS_DEFINITIONS_PATH = "/data/mdvlcraft/puffish_skills/categories/classes/definitions.json";
     private static final JsonObject CLASS_DEFINITIONS = readClassDefinitions();
-    private static final ResourceLocation SKY = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/skills/astro_sky.png");
     private static final ResourceLocation ASTROLABE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/character/astrolabe.png");
     private static final ResourceLocation EXPERIENCE = ResourceLocation.fromNamespaceAndPath("puffish_attributes", "experience");
     private static final ResourceLocation CLASSES = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "classes");
-    private static final int NAVY = -267249868;
-    private static final int GOLD = -5600176;
-    private static final int GOLD_FAINT = 1621789776;
-    private static final int HEADING = -2047366;
-    private static final int LABEL = -2693889;
-    private static final int VALUE = -1;
-    private static final int MUTED = -7562556;
     private static final float REFERENCE_HIT = 10.0F;
     private final Screen parent;
     private static Method alArmor;
@@ -102,7 +94,7 @@ public class CharacterScreen extends Screen {
         int right = Math.round((this.width + 440.0F * scale) / 2.0F);
         int bottom = Math.round((this.height + 254.0F * scale) / 2.0F);
         this.addRenderableWidget(
-            new AstroGui.Button(
+            new DqGui.Button(
                 right - 66, bottom - 18, 56, 14, Component.translatable("screen.mdvlcraft.menu.back"), () -> Minecraft.getInstance().setScreen(this.parent)
             )
         );
@@ -142,9 +134,9 @@ public class CharacterScreen extends Screen {
             g.pose().scale(scale, scale, 1.0F);
             this.panel(g);
             Font font = this.font;
-            g.drawString(font, "✦ " + Component.translatable("screen.mdvlcraft.character").getString(), 10, 8, -2047366, false);
-            g.drawString(font, player.getName(), 22, 26, -1, false);
-            g.fill(10, 37, 430, 38, 1621789776);
+            g.drawString(font, "✦ " + Component.translatable("screen.mdvlcraft.character").getString(), 10, 8, DqGui.TEXT, false);
+            g.drawString(font, player.getName(), 22, 26, DqGui.HEADING, false);
+            DqGui.rule(g, 3, 437, 37);
             int left = 18;
             int mid = 160;
             int right = 302;
@@ -231,7 +223,7 @@ public class CharacterScreen extends Screen {
             );
             var38 = this.row(g, mid, colW, var38, Component.translatable("screen.mdvlcraft.character.luck"), fixed(player.getAttributeValue(Attributes.LUCK), 1));
             this.row(g, mid, colW, var38, Component.translatable("screen.mdvlcraft.character.experience_gain"), signedPercent(experienceBonus(player)));
-            g.blit(ASTROLABE, mid, 130, 120, 120, 0.0F, 0.0F, 132, 132, 132, 132);
+            g.blit(ASTROLABE, mid + 12, 128, 100, 100, 0.0F, 0.0F, 132, 132, 132, 132);
             int var45 = 46;
             var45 = this.heading(g, right, var45, "screen.mdvlcraft.character.attack_power");
             int weapons = 0;
@@ -250,8 +242,10 @@ public class CharacterScreen extends Screen {
             }
 
             if (weapons == 0) {
-                g.drawString(font, Component.translatable("screen.mdvlcraft.character.no_weapons"), right + 4, var45, -7562556, false);
-                var45 += 11;
+                for (FormattedCharSequence line : font.split(Component.translatable("screen.mdvlcraft.character.no_weapons"), colW)) {
+                    g.drawString(font, line, right + 4, var45, DqGui.MUTED, false);
+                    var45 += 11;
+                }
             }
 
             var45 += 8;
@@ -289,9 +283,9 @@ public class CharacterScreen extends Screen {
             var45 = this.row(g, right, colW, var45, Component.translatable("screen.mdvlcraft.character.fall"), negation(player, player.damageSources().fall()));
             var45 = this.attr(g, player, right, colW, var45, "minecraft:generic.knockback_resistance", CharacterScreen::percent);
             this.attr(g, player, right, colW, var45, "attributeslib:dodge_chance", CharacterScreen::percent);
-            g.fill(10, 232, 430, 233, 1621789776);
+            DqGui.rule(g, 3, 437, 232);
             g.drawString(
-                font, Component.translatable("screen.mdvlcraft.character.footer", AbilityKeys.MENU.getTranslatedKeyMessage()), 14, 239, -7562556, false
+                font, Component.translatable("screen.mdvlcraft.character.footer", AbilityKeys.MENU.getTranslatedKeyMessage()), 14, 239, DqGui.MUTED, false
             );
             g.pose().popPose();
             super.render(g, mouseX, mouseY, partialTick);
@@ -302,28 +296,13 @@ public class CharacterScreen extends Screen {
     }
 
     private void panel(GuiGraphics g) {
-        g.fill(0, 0, 440, 254, -267249868);
-
-        for (int x = 0; x < 440; x += 128) {
-            for (int y = 0; y < 254; y += 128) {
-                g.blit(SKY, x, y, 0.0F, 0.0F, Math.min(128, 440 - x), Math.min(128, 254 - y), 128, 128);
-            }
-        }
-
-        g.fill(0, 0, 440, 1, -5600176);
-        g.fill(0, 253, 440, 254, -5600176);
-        g.fill(0, 0, 1, 254, -5600176);
-        g.fill(439, 0, 440, 254, -5600176);
-        g.fill(3, 3, 437, 4, 1621789776);
-        g.fill(3, 250, 437, 251, 1621789776);
-        g.fill(3, 3, 4, 251, 1621789776);
-        g.fill(436, 3, 437, 251, 1621789776);
-        g.fill(150, 46, 151, 224, 1621789776);
-        g.fill(292, 46, 293, 224, 1621789776);
+        DqGui.panel(g, 0, 0, 440, 254);
+        g.fill(150, 46, 151, 224, DqGui.RULE_FAINT);
+        g.fill(292, 46, 293, 224, DqGui.RULE_FAINT);
     }
 
     private int heading(GuiGraphics g, int x, int y, String key) {
-        g.drawString(this.font, "✧ " + Component.translatable(key).getString(), x - 4, y, -2047366, false);
+        g.drawString(this.font, "✧ " + Component.translatable(key).getString(), x - 4, y, DqGui.HEADING, false);
         return y + 13;
     }
 
@@ -334,8 +313,8 @@ public class CharacterScreen extends Screen {
             text = this.font.plainSubstrByWidth(text, room - this.font.width(".")) + ".";
         }
 
-        g.drawString(this.font, text, x + 4, y, -2693889, false);
-        g.drawString(this.font, value, x + width - this.font.width(value), y, -1, false);
+        g.drawString(this.font, text, x + 4, y, DqGui.MUTED, false);
+        g.drawString(this.font, value, x + width - this.font.width(value), y, DqGui.TEXT, false);
         return y + 11;
     }
 

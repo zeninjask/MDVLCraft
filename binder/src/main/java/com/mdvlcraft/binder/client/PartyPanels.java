@@ -1,0 +1,190 @@
+package com.mdvlcraft.binder.client;
+
+import app.sedu.mc.parties.common.data.PlayerData;
+import app.sedu.mc.parties.common.data.core.DataTypes;
+import app.sedu.mc.parties.common.group.ClientDataHandler;
+import app.sedu.mc.parties.common.group.ClientGroupManager;
+import app.sedu.mc.parties.common.group.GroupType;
+import app.sedu.mc.parties.common.group.TrackedGroup;
+import app.sedu.mc.parties.compat.modules.irons_spellbooks.ManaModule;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
+import io.redspace.ironsspellbooks.player.ClientMagicData;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.Font;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.PlayerFaceRenderer;
+import net.minecraft.client.multiplayer.PlayerInfo;
+import net.minecraft.client.player.LocalPlayer;
+import net.minecraft.client.resources.DefaultPlayerSkin;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.ai.attributes.Attribute;
+import net.minecraftforge.client.event.RenderGuiOverlayEvent;
+import net.minecraftforge.client.gui.overlay.ForgeGui;
+import net.minecraftforge.client.gui.overlay.IGuiOverlay;
+
+/**
+ * The Dragon Quest IX party status windows in the top left: you first, then each party member (by name), one window
+ * each with the name, HP and MP bars, the player's face in the vocation box and the experience level. The windows are
+ * copied pixel for pixel from the game's (64 x 56, rows stretched by one pixel per text line for the pack's 7 px
+ * capitals). The game cuts names at 8 letters; here every window widens alike to fit the longest name in full, and the
+ * bars stretch with it. Other members' values are the ones Parties syncs to the client; Parties' own HUD frames are hidden
+ * (onRenderOverlay), its world trackers stay.
+ */
+final class PartyPanels implements IGuiOverlay {
+    static final PartyPanels INSTANCE = new PartyPanels();
+    private static final ResourceLocation PARTIES_HUD = ResourceLocation.fromNamespaceAndPath("parties", "parties_hud");
+    private static final int MIN_WIDTH = 64;
+    private static final int H = 59;
+    private static final int GAP = 2;
+    private static final int MARGIN = 4;
+    private static final int HEADER_END = 16;
+    /** Left edge of each row (the right edge mirrors it) and the colour across the middle. */
+    private static final String[][] ROWS = {
+        {"...OOOO", "O"}, {"..ORRRR", "R"}, {".ORBBBB", "F"}, {"ORBBBBB", "F"}, {"OGRRRRR", "R"}, {"ORFFFFF", "F"},
+        {"ORGFFFF", "F"}, {".ORGFFF", "F"}, {"..ORRRR", "R"}, {"...OOOO", "O"}
+    };
+    private static final Map<Character, Integer> COLOURS = Map.of(
+        'O', DqGui.BLACK, 'R', 0xFFE7E7E7, 'B', DqGui.BLUE, 'F', DqGui.CHARCOAL, 'G', 0xFF8C8C8C
+    );
+    private static final int BAR_EDGE = 0xFF8C8C8C;
+    private static final int BAR_TOP = 0xFFC6C6C6;
+    private static final int HP_FILL = 0xFF106BFF;
+    private static final int HP_SHINE = 0xFF9CC6F7;
+    private static final int MP_FILL = 0xFFFF7B18;
+    private static final int MP_SHINE = 0xFFFFBD63;
+    private static final int BOX = 0xFFE7E7E7;
+    /** The game's text colours for a member at a quarter of their HP or less, and for a fallen one. */
+    private static final int LOW = 0xFFFFBD63;
+    private static final int DOWN = 0xFFFF3131;
+
+    private PartyPanels() {
+    }
+
+    static void onRenderOverlay(RenderGuiOverlayEvent.Pre event) {
+        if (event.getOverlay().id().equals(PARTIES_HUD)) {
+            event.setCanceled(true);
+        }
+    }
+
+    @Override
+    public void render(ForgeGui gui, GuiGraphics graphics, float partialTick, int screenWidth, int screenHeight) {
+        Minecraft minecraft = Minecraft.getInstance();
+        if (minecraft.options.hideGui || minecraft.player == null) {
+            return;
+        }
+
+        List<Member> members = members(minecraft.player);
+        // The header leaves 7 px each side for the blue tabs and 1 px of space inside them; a name's last column is spacing.
+        int w = Math.max(MIN_WIDTH, members.stream().mapToInt(m -> minecraft.font.width(m.name()) - 1 + 16).max().getAsInt());
+        int perRow = Math.max(1, (screenWidth - 2 * MARGIN + GAP) / (w + GAP));
+        for (int i = 0; i < members.size(); i++) {
+            draw(graphics, minecraft, members.get(i), MARGIN + i % perRow * (w + GAP), MARGIN + i / perRow * (H + GAP), w);
+        }
+    }
+
+    private static List<Member> members(LocalPlayer self) {
+        List<Member> members = new ArrayList<>();
+        double maxMana = self.getAttributeValue((Attribute)AttributeRegistry.MAX_MANA.get());
+        members.add(new Member(self.getUUID(), self.getGameProfile().getName(), self.getHealth(), self.getMaxHealth(),
+            ClientMagicData.getPlayerMana(), (float)maxMana, self.experienceLevel, true));
+        TrackedGroup party = ClientGroupManager.getGroup(GroupType.PARTY);
+        if (party == null) {
+            return members;
+        }
+
+        Objects.requireNonNull(ManaModule.MANA, "Parties' Iron's Spellbooks mana module is off (config/parties/modules.properties)");
+        List<Member> others = new ArrayList<>();
+        for (UUID id : party.getMembers()) {
+            if (!id.equals(self.getUUID())) {
+                PlayerData data = ClientDataHandler.getPlayerData(id);
+                others.add(new Member(id, data.getData(DataTypes.NAME), data.getData(DataTypes.HEALTH),
+                    data.getData(DataTypes.MAX_HEALTH).floatValue(), data.getData(ManaModule.MANA),
+                    data.getData(ManaModule.MAX_MANA).floatValue(), (int)(data.getData(DataTypes.XP) >>> 32), data.isOnline()));
+            }
+        }
+
+        others.sort(Comparator.comparing(Member::name, String.CASE_INSENSITIVE_ORDER));
+        members.addAll(others);
+        return members;
+    }
+
+    private static void draw(GuiGraphics g, Minecraft minecraft, Member member, int x, int y, int w) {
+        Font font = minecraft.font;
+        window(g, x, y, w);
+        int text = !member.online() ? DqGui.MUTED : member.hp() <= 0.0F ? DOWN : member.hp() <= member.maxHp() / 4.0F ? LOW : DqGui.TEXT;
+        g.drawString(font, member.name(), x + (w - font.width(member.name()) + 1) / 2, y + 5, text, false);
+        g.drawString(font, "HP", x + 7, y + 18, text, false);
+        number(g, font, Mth.ceil(member.hp()), x + w - 10, y + 18, text);
+        bar(g, x + 6, y + 26, w - 12, member.hp() / member.maxHp(), HP_SHINE, HP_FILL);
+        g.drawString(font, "MP", x + 7, y + 31, text, false);
+        number(g, font, Mth.floor(member.mana()), x + w - 10, y + 31, text);
+        bar(g, x + 6, y + 39, w - 12, member.maxMana() <= 0.0F ? 0.0F : member.mana() / member.maxMana(), MP_SHINE, MP_FILL);
+        box(g, minecraft, member.id(), x + 6, y + 44);
+        g.drawString(font, "Lv.", x + 26, y + 48, text, false);
+        number(g, font, member.level(), x + w - 8, y + 48, text);
+    }
+
+    private static void window(GuiGraphics g, int x, int y, int w) {
+        rows(g, x, y, w, 0, 0, 0);
+        rows(g, x, y, w, 1, 1, 1);
+        rows(g, x, y, w, 2, 2, 2);
+        rows(g, x, y, w, 3, 3, HEADER_END - 1);
+        rows(g, x, y, w, 4, HEADER_END, HEADER_END);
+        rows(g, x, y, w, 5, HEADER_END + 1, H - 5);
+        for (int i = 6; i < ROWS.length; i++) {
+            rows(g, x, y, w, i, H - 10 + i, H - 10 + i);
+        }
+    }
+
+    /** Draws ROWS[pattern] on rows from..to of the window. */
+    private static void rows(GuiGraphics g, int x, int y, int w, int pattern, int from, int to) {
+        String left = ROWS[pattern][0];
+        for (int i = 0; i < left.length(); i++) {
+            char c = left.charAt(i);
+            if (c != '.') {
+                g.fill(x + i, y + from, x + i + 1, y + to + 1, COLOURS.get(c));
+                g.fill(x + w - 1 - i, y + from, x + w - i, y + to + 1, COLOURS.get(c));
+            }
+        }
+
+        g.fill(x + left.length(), y + from, x + w - left.length(), y + to + 1, COLOURS.get(ROWS[pattern][1].charAt(0)));
+    }
+
+    /** A gauge 4 px tall: grey sides and bottom, the fill's light shine along the top of the filled part. */
+    private static void bar(GuiGraphics g, int x, int y, int width, float fraction, int shine, int fill) {
+        int inner = width - 2;
+        int filled = Mth.clamp(Mth.ceil(fraction * inner), 0, inner);
+        g.fill(x, y, x + inner + 2, y + 1, BAR_TOP);
+        g.fill(x + 1, y, x + 1 + filled, y + 1, shine);
+        g.fill(x, y + 1, x + 1, y + 3, BAR_EDGE);
+        g.fill(x + inner + 1, y + 1, x + inner + 2, y + 3, BAR_EDGE);
+        g.fill(x + 1, y + 1, x + 1 + filled, y + 3, fill);
+        g.fill(x, y + 3, x + inner + 2, y + 4, BAR_EDGE);
+    }
+
+    /** The 12 x 12 vocation box with rounded corners, holding the player's face. */
+    private static void box(GuiGraphics g, Minecraft minecraft, UUID id, int x, int y) {
+        g.fill(x + 1, y, x + 11, y + 12, BOX);
+        g.fill(x, y + 1, x + 12, y + 11, BOX);
+        PlayerInfo info = minecraft.getConnection() == null ? null : minecraft.getConnection().getPlayerInfo(id);
+        // Offline members are not in the tab list; the game draws them with the default skin too.
+        ResourceLocation skin = info != null ? info.getSkinLocation() : DefaultPlayerSkin.getDefaultSkin(id);
+        PlayerFaceRenderer.draw(g, skin, x + 2, y + 2, 8);
+    }
+
+    /** A number whose last pixel column is right - 1. */
+    private static void number(GuiGraphics g, Font font, int value, int right, int y, int colour) {
+        String s = String.valueOf(value);
+        g.drawString(font, s, right + 1 - font.width(s), y, colour, false);
+    }
+
+    private record Member(UUID id, String name, float hp, float maxHp, float mana, float maxMana, int level, boolean online) {
+    }
+}

@@ -127,13 +127,13 @@ public class RespecScreen extends Screen {
             RespecScreen.Choice choice = choices.get(i);
             int x = this.panelX + (this.panelW - gridW) / 2 + i % columns * (buttonW + 8);
             int y = this.panelY + 40 + textH + 8 + i / columns * 24;
-            AstroGui.Button button = new RespecScreen.IconButton(x, y, buttonW, 20, choice.label(), choice.icon(), choice.action());
+            DqGui.Button button = new RespecScreen.IconButton(x, y, buttonW, 20, choice.label(), choice.icon(), choice.action());
             button.active = choice.active();
             this.addRenderableWidget(button);
         }
 
         this.addRenderableWidget(
-            new AstroGui.Button(
+            new DqGui.Button(
                 this.panelX + (this.panelW - 80) / 2, this.panelY + this.panelH - 28, 80, 18, Component.translatable("screen.mdvlcraft.menu.back"), this::back
             )
         );
@@ -173,13 +173,13 @@ public class RespecScreen extends Screen {
     @Override
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(g);
-        AstroGui.panel(g, this.panelX, this.panelY, this.panelW, this.panelH);
+        DqGui.window(g, this.panelX, this.panelY, this.panelW, this.panelH);
         Component heading = Component.translatable("screen.mdvlcraft.respec.title." + this.step.name().toLowerCase(Locale.ROOT));
-        g.drawString(this.font, "✦ " + heading.getString(), this.panelX + 12, this.panelY + 12, -2047366, false);
-        g.fill(this.panelX + 10, this.panelY + 28, this.panelX + this.panelW - 10, this.panelY + 29, 1621789776);
+        g.drawString(this.font, "✦ " + heading.getString(), this.panelX + 12, this.panelY + 12, DqGui.TEXT, false);
+        DqGui.rule(g, this.panelX + 3, this.panelX + this.panelW - 3, this.panelY + 28);
 
         for (int i = 0; i < this.lines.size(); i++) {
-            g.drawString(this.font, this.lines.get(i), this.panelX + 16, this.panelY + 38 + i * 10, -2693889, false);
+            g.drawString(this.font, this.lines.get(i), this.panelX + 16, this.panelY + 38 + i * 10, DqGui.TEXT, false);
         }
 
         super.render(g, mouseX, mouseY, partialTick);
@@ -188,7 +188,7 @@ public class RespecScreen extends Screen {
     private record Choice(Component label, String icon, Runnable action, boolean active) {
     }
 
-    private static class IconButton extends AstroGui.Button {
+    private static class IconButton extends DqGui.Button {
         private final ResourceLocation icon;
 
         IconButton(int x, int y, int w, int h, Component label, String archetype, Runnable action) {

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Draws the Slate skill screen textures: a charcoal window and flat tabs with hairline borders, rounded node frames
-with white outlines (one set for every tree), the dotted canvas tile behind
-the trees, and the Samurai's Stance icons.
+"""Draws the skill screen textures: the Dragon Quest IX window and tabs (the same bevelled frame as client/DqGui),
+rounded node frames with white outlines (one set for every tree) and the dark blue canvas tile behind the trees. The
+Samurai's Stance icons are Dragon Quest IX orbs written by tools/dq9_icons.py.
 
 The window and tabs keep the geometry of the vanilla advancement textures, because Pufferfish's Skills slices them the
 same way (the mixin SkillsScreenMixin swaps them in). Everything is drawn from code; no vanilla pixels are used.
@@ -20,23 +20,24 @@ from PIL import Image
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "src/main/resources/assets/mdvlcraft/textures/gui/skills"
 
-# Slate palette
-PANEL = (21, 24, 30)
-HEADER = (28, 32, 39)
-BORDER = (50, 56, 66)
-INNER = (38, 43, 51)
-CANVAS = (14, 16, 20)
-DOT = (32, 36, 44)
+# Node frames
 LOCKED_FILL, AVAILABLE_FILL = (26, 29, 35), (30, 34, 41)
 EXCLUDED_FILL, EXCLUDED_LINE = (19, 21, 25), (40, 44, 52)
 WHITE = (255, 255, 255)
+# Dragon Quest IX window (client/DqGui draws the same corners): light grey, white and dark grey rings, rounded corners.
+DQ = {"A": (132, 132, 132), "B": (165, 165, 165), "C": (214, 214, 214), "D": (255, 255, 255), "E": (66, 66, 66)}
+DQ_DIM = {"A": (74, 74, 74), "B": (90, 90, 90), "C": (107, 107, 107), "D": (123, 123, 123), "E": (42, 42, 42)}
+DQ_CORNERS = {
+    "top_left": ["...ABB", ".ACDDD", ".CDDAE", "ADDEFF", "BDAFFF", "BDEFFF"],
+    "top_right": ["BBA...", "DDDCA.", "EADDC.", "FFEDDE", "FFFBDE", "FFFBDE"],
+    "bottom_left": ["BDEFFF", "BDAFFF", "ADDEFF", "BCDDBB", ".ACDDD", "...EEE"],
+    "bottom_right": ["FFFBDE", "FFFBDE", "FFADDE", "BBDDAE", "DDDAE.", "EEE..."],
+}
+CHARCOAL = (49, 49, 49)
+DQ_CANVAS = (8, 14, 30)
 # kind: (texture size, box size, border width, inner ring)
 KINDS = {"twig": (20, 14, 1, False), "task": (40, 28, 1, False), "goal": (40, 30, 1, True),
          "challenge": (52, 36, 1, False), "root": (40, 34, 2, False)}
-
-
-def shade(colour, amount):
-    return tuple(max(0, min(255, c + amount)) for c in colour[:3]) + (255,)
 
 
 def mix(a, b, t):
@@ -51,50 +52,58 @@ def rounded(x, y, x0, y0, w, h):
     return cx + cy >= 2 or (cx >= 1 and cy >= 1 and cx + cy >= 2)
 
 
+def dq_frame(px, x0, y0, w, h, fill, colours, open_bottom=False):
+    """A DQ window: three-pixel bevel (light grey, white, dark grey on the top and left; reversed on the bottom and
+    right) with rounded corners. An open bottom carries the sides down to the last row, for a tab joining the window."""
+    corner = 6
+    bottom = h if open_bottom else h - corner
+    for y in range(y0 + 3, y0 + (h if open_bottom else h - 3)):
+        for x in range(x0 + 3, x0 + w - 3):
+            px[x, y] = fill + (255,)
+    for i, key in enumerate("BDE"):
+        for x in range(x0 + corner, x0 + w - corner):
+            px[x, y0 + i] = colours[key] + (255,)
+            if not open_bottom:
+                px[x, y0 + h - 1 - i] = colours["BDE"[2 - i]] + (255,)
+        for y in range(y0 + corner, y0 + bottom):
+            px[x0 + i, y] = colours[key] + (255,)
+            px[x0 + w - 1 - i, y] = colours["BDE"[2 - i]] + (255,)
+    placed = [("top_left", x0, y0), ("top_right", x0 + w - corner, y0)]
+    if not open_bottom:
+        placed += [("bottom_left", x0, y0 + h - corner), ("bottom_right", x0 + w - corner, y0 + h - corner)]
+    for name, cx, cy in placed:
+        for dy, row in enumerate(DQ_CORNERS[name]):
+            for dx, key in enumerate(row):
+                if key != ".":
+                    px[cx + dx, cy + dy] = (fill if key == "F" else colours[key]) + (255,)
+
+
 def window():
-    """252x140: 1px border, title bar rows 1-16, hairline under it, transparent content x 9-242, y 18-130."""
+    """252x140: a charcoal DQ window, title on its top strip, transparent content x 9-242, y 18-130 inside a white
+    hairline."""
     im = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
     px = im.load()
-    for y in range(140):
-        for x in range(252):
-            if not rounded(x, y, 0, 0, 252, 140):
-                continue
-            if 9 <= x <= 242 and 18 <= y <= 130:
-                continue
-            edge = not rounded(x - 1, y, 0, 0, 252, 140) or not rounded(x + 1, y, 0, 0, 252, 140) \
-                or not rounded(x, y - 1, 0, 0, 252, 140) or not rounded(x, y + 1, 0, 0, 252, 140)
-            px[x, y] = BORDER + (255,) if edge else (HEADER if y <= 16 else PANEL) + (255,)
+    dq_frame(px, 0, 0, 252, 140, CHARCOAL, DQ)
+    for y in range(18, 131):
+        for x in range(9, 243):
+            px[x, y] = (0, 0, 0, 0)
     for x in range(8, 244):
-        px[x, 17] = INNER + (255,)
-        px[x, 131] = INNER + (255,)
+        px[x, 17] = WHITE + (255,)
+        px[x, 131] = WHITE + (255,)
     for y in range(17, 132):
-        px[8, y] = INNER + (255,)
-        px[243, y] = INNER + (255,)
+        px[8, y] = WHITE + (255,)
+        px[243, y] = WHITE + (255,)
     im.save(OUT / "window.png")
 
 
 def tabs():
-    """Tab cells are 28x32: u=0 is the first tab, u=28 the others; v=32 is the selected tab (it covers the window
-    border and joins the title bar)."""
+    """Tab cells are 28x32: u=0 is the first tab, u=28 the others; v=32 is the selected tab, a charcoal DQ tab that
+    covers the window border and joins the title strip. Unselected tabs are dimmer and stop above the window."""
     im = Image.new("RGBA", (256, 256), (0, 0, 0, 0))
     px = im.load()
-    for v, selected in ((0, False), (32, True)):
-        for u in (0, 28):
-            bottom = 32 if selected else 29
-            for y in range(2, bottom):
-                for x in range(1, 27):
-                    if not rounded(x, y, 1, 2, 26, 40):
-                        continue
-                    edge = x in (1, 26) or y == 2 or not rounded(x - 1, y, 1, 2, 26, 40) or not rounded(x + 1, y, 1, 2, 26, 40) \
-                        or not rounded(x, y - 1, 1, 2, 26, 40)
-                    if edge:
-                        colour = (78, 86, 98) if selected else (44, 49, 57)
-                    else:
-                        colour = HEADER if selected else (24, 27, 33)
-                    px[u + x, v + y] = colour + (255,)
-            if selected:
-                for x in range(4, 24):
-                    px[u + x, v + 3] = (200, 206, 214, 255)
+    for u in (0, 28):
+        dq_frame(px, u + 1, 2, 26, 27, (31, 31, 31), DQ_DIM, open_bottom=True)
+        dq_frame(px, u + 1, 32 + 2, 26, 30, CHARCOAL, DQ, open_bottom=True)
     im.save(OUT / "tabs.png")
 
 
@@ -132,62 +141,31 @@ def frames():
 
 
 def canvas_tile():
-    """12x12 tile: the dark canvas behind the trees with one faint dot, so the background reads as a dot grid."""
-    im = Image.new("RGBA", (12, 12), CANVAS + (255,))
-    im.putpixel((6, 6), DOT + (255,))
+    """32x32 seamless tile: the dark blue backdrop of the DQ menus behind the trees, gently mottled (sums of sines whose
+    periods divide the tile, so it repeats without seams)."""
+    im = Image.new("RGBA", (32, 32))
+    for y in range(32):
+        for x in range(32):
+            t = 2 * math.pi / 32
+            v = math.sin(t * x) * math.cos(t * 2 * y) + 0.6 * math.sin(t * (3 * x + y)) + 0.4 * math.cos(t * (x - 4 * y))
+            im.putpixel((x, y), tuple(round(c + v * k) for c, k in zip(DQ_CANVAS, (1.5, 2.0, 4.0))) + (255,))
     im.save(OUT / "canvas.png")
 
 
-ELEMENTS = {"fire": (255, 90, 20), "wind": (168, 255, 210), "water": (46, 134, 255), "earth": (176, 122, 46)}
-
-
-def stance_icons():
-    """16x16 wheel icons for the Samurai's Stance: one per element (flame, gust, droplet, mountain) and a four-part
-    emblem for the skill tree."""
-    out = ROOT / "src/main/resources/assets/mdvlcraft/textures/gui"
-
-    def icon(name, inside, colour):
-        im = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-        px = im.load()
-        for y in range(16):
-            for x in range(16):
-                if inside(x + 0.5, y + 0.5):
-                    light = 40 if x + y < 14 else (-30 if x + y > 20 else 0)
-                    px[x, y] = shade(colour, light)
-        edge = [(x, y) for y in range(16) for x in range(16) if px[x, y][3] == 0 and any(
-            0 <= x + a < 16 and 0 <= y + b < 16 and px[x + a, y + b][3] == 255 for a, b in ((1, 0), (-1, 0), (0, 1), (0, -1)))]
-        for x, y in edge:
-            px[x, y] = (12, 8, 5, 255)
-        if name == "fire":
-            for y in range(16):
-                for x in range(16):
-                    if drop(x + 0.5, y + 2.5, 5) and abs(x + 0.5 - 8) < 2.6 and px[x, y][3] == 255:
-                        px[x, y] = (255, 214, 70, 255)
-        im.save(out / f"stance_{name}.png")
-
-    def drop(x, y, tip):
-        # Teardrop: a circle at the bottom narrowing to a point at the top (flipped for nothing else).
-        dx, dy = x - 8, y - 10
-        if dy >= 0:
-            return dx * dx + dy * dy <= 16
-        return abs(dx) <= 4 * (1 + dy / (10 - tip)) and dy >= -(10 - tip)
-
-    icon("fire", lambda x, y: drop(x, y, 1), ELEMENTS["fire"])
-    icon("water", lambda x, y: drop(x, y, 3), ELEMENTS["water"])
-    icon("wind", lambda x, y: any(abs(y - cy) < 0.6 and lo <= x <= hi for cy, lo, hi in ((3.5, 1, 11), (8.5, 3, 14), (13.5, 1, 9)))
-         or abs(math.hypot(x - 11.5, y - 5.5) - 2.2) < 0.6 and y < 5.5, ELEMENTS["wind"])
-    icon("earth", lambda x, y: 14 >= y >= 3 + abs(x - 8) * 1.4 or (y >= 9 + abs(x - 3) * 1.6 and y <= 14), ELEMENTS["earth"])
-
-    im = Image.new("RGBA", (16, 16), (0, 0, 0, 0))
-    px = im.load()
-    order = ["fire", "wind", "water", "earth"]
-    for y in range(16):
-        for x in range(16):
-            r = math.hypot(x + 0.5 - 8, y + 0.5 - 8)
-            if r <= 7.5:
-                quadrant = order[(0 if x < 8 else 1) + (0 if y < 8 else 2)]
-                px[x, y] = (12, 8, 5, 255) if r > 6.4 or abs(x + 0.5 - 8) < 0.6 or abs(y + 0.5 - 8) < 0.6 else shade(ELEMENTS[quadrant], 0)
-    im.save(out / "stance.png")
+def menu_background():
+    """Vanilla's menu backgrounds (the dirt behind options, world and server lists), replaced by the same blue mottle
+    as the trees. Minecraft tiles them every 32 GUI px and darkens them to a quarter (lists to an eighth), so the
+    32x32 tile is drawn four times brighter than the result should be."""
+    out = ROOT / "src/main/resources/assets/minecraft/textures/gui"
+    out.mkdir(parents=True, exist_ok=True)
+    im = Image.new("RGBA", (32, 32))
+    for y in range(32):
+        for x in range(32):
+            t = 2 * math.pi / 32
+            v = math.sin(t * x) * math.cos(t * 2 * y) + 0.6 * math.sin(t * (3 * x + y)) + 0.4 * math.cos(t * (x - 4 * y))
+            im.putpixel((x, y), tuple(min(255, round(4 * (c + v * k))) for c, k in zip(DQ_CANVAS, (1.5, 2.0, 4.0))) + (255,))
+    for name in ("options_background.png", "light_dirt_background.png"):
+        im.save(out / name)
 
 
 def main():
@@ -200,7 +178,7 @@ def main():
     tabs()
     frames()
     canvas_tile()
-    stance_icons()
+    menu_background()
     print("textures written to", OUT.relative_to(ROOT))
 
 

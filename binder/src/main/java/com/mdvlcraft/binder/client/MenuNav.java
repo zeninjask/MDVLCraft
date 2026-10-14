@@ -12,7 +12,7 @@ import net.minecraftforge.client.event.ScreenEvent.MouseButtonPressed.Pre;
 public final class MenuNav {
     private static Screen pendingParent;
     private static Screen target;
-    private static AstroGui.Button back;
+    private static DqGui.Button back;
 
     private MenuNav() {
     }
@@ -89,7 +89,7 @@ public final class MenuNav {
         if (pendingParent != null && !(screen instanceof MenuScreen) && !(screen instanceof CharacterScreen)) {
             target = screen;
             Screen parent = pendingParent;
-            back = new AstroGui.Button(0, 0, 64, 18, Component.translatable("screen.mdvlcraft.menu.back"), () -> Minecraft.getInstance().setScreen(parent));
+            back = new DqGui.Button(0, 0, 64, 18, Component.translatable("screen.mdvlcraft.menu.back"), () -> Minecraft.getInstance().setScreen(parent));
         }
 
         if (screen == target && back != null) {

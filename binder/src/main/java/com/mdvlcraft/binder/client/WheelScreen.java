@@ -46,28 +46,28 @@ public final class WheelScreen extends Screen {
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
         int hovered = this.hovered(mouseX, mouseY);
         int shown = hovered >= 0 ? hovered : ClientAbilities.selected();
-        SlateGui.disc(graphics, this.width / 2, this.height / 2, 76, false);
+        DqGui.disc(graphics, this.width / 2, this.height / 2, 76, false);
 
         for (int slot = 0; slot < 8; slot++) {
             int x = this.slotCenterX(slot) - 12;
             int y = this.slotCenterY(slot) - 12;
-            SlateGui.slot(
+            DqGui.slot(
                 graphics,
                 x,
                 y,
                 24,
-                slot == shown ? SlateGui.Slot.PICKED : (ClientAbilities.slot(slot).isPresent() ? SlateGui.Slot.FILLED : SlateGui.Slot.EMPTY)
+                slot == shown ? DqGui.Slot.PICKED : (ClientAbilities.slot(slot).isPresent() ? DqGui.Slot.FILLED : DqGui.Slot.EMPTY)
             );
             ClientAbilities.slot(slot).ifPresent(ability -> drawAbility(graphics, ability, x + 4, y + 4));
         }
 
-        SlateGui.disc(graphics, this.width / 2, this.height / 2, 18, true);
+        DqGui.disc(graphics, this.width / 2, this.height / 2, 18, true);
         ClientAbilities.slot(shown).ifPresent(ability -> {
             drawAbility(graphics, ability, this.width / 2 - 8, this.height / 2 - 8);
             int textWidth = this.font.width(ability.displayName());
             int bannerTop = this.height / 2 + 56 + 12 + 14;
-            SlateGui.panel(graphics, this.width / 2 - textWidth / 2 - 6, bannerTop, textWidth + 12, 16);
-            graphics.drawString(this.font, ability.displayName(), this.width / 2 - textWidth / 2, bannerTop + 4, -1512206, false);
+            DqGui.window(graphics, this.width / 2 - textWidth / 2 - 6, bannerTop, textWidth + 12, 18);
+            graphics.drawString(this.font, ability.displayName(), this.width / 2 - textWidth / 2, bannerTop + 5, DqGui.TEXT, false);
         });
         super.render(graphics, mouseX, mouseY, partialTick);
     }

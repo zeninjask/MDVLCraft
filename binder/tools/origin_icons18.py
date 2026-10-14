@@ -5,6 +5,9 @@ CustomModelData models point at these; the origin JSONs in the pack pick the mod
 Each origin is an object tied to the race (no faces) and each class an item of its trade; details are picked out in
 their own colours, as in the ability icons.
 
+The shipped icons are Dragon Quest IX ones: run tools/dq9_icons.py write afterwards, which replaces every file here
+(a new origin needs a pick in its ORIGINS).
+
 Usage: python3 origin_icons18.py [sheet.png]
 """
 import math, os, sys

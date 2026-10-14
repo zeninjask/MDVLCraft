@@ -86,7 +86,7 @@ final class CombatSkillsPanel {
     }
 
     void render(GuiGraphics graphics, int height) {
-        SlateGui.panel(graphics, this.font, Component.translatable("screen.mdvlcraft.skills"), this.left, this.top, 150, height);
+        DqGui.panel(graphics, this.font, Component.translatable("screen.mdvlcraft.skills"), this.left, this.top, 150, height);
         CapabilitySkill skills = skills();
 
         for (int i = 0; i < SLOTS.size(); i++) {
@@ -95,21 +95,21 @@ final class CombatSkillsPanel {
             Skill skill = container.getSkill();
             int x = this.left + 10;
             int y = this.slotY(i);
-            SlateGui.slot(graphics, x, y, 20, slot == this.picked ? SlateGui.Slot.PICKED : (skill != null ? SlateGui.Slot.FILLED : SlateGui.Slot.EMPTY));
+            DqGui.slot(graphics, x, y, 20, slot == this.picked ? DqGui.Slot.PICKED : (skill != null ? DqGui.Slot.FILLED : DqGui.Slot.EMPTY));
             if (skill != null) {
                 drawIcon(graphics, skill, x + 2, y + 2);
             }
 
-            graphics.drawString(this.font, Component.literal(SkillSlot.ENUM_MANAGER.toTranslated(slot)), x + 20 + 6, y + 1, -7826784, false);
+            graphics.drawString(this.font, Component.literal(SkillSlot.ENUM_MANAGER.toTranslated(slot)), x + 20 + 6, y + 1, DqGui.MUTED, false);
             Component name = skill != null ? Component.translatable(skill.getTranslationKey()) : Component.translatable("screen.mdvlcraft.skills.empty");
-            graphics.drawString(this.font, name, x + 20 + 6, y + 11, skill != null ? -1512206 : -7826784, false);
+            graphics.drawString(this.font, name, x + 20 + 6, y + 11, skill != null ? DqGui.TEXT : DqGui.MUTED, false);
             if (container.onReplaceCooldown()) {
                 String seconds = (container.getReplaceCooldown() + 19) / 20 + "s";
-                graphics.drawString(this.font, seconds, this.left + 150 - 10 - this.font.width(seconds), y + 1, -1944512, false);
+                graphics.drawString(this.font, seconds, this.left + 150 - 10 - this.font.width(seconds), y + 1, DqGui.HEADING, false);
             }
         }
 
-        SlateGui.rule(graphics, this.left + 10, this.left + 150 - 10, this.choicesTop() - 18);
+        DqGui.rule(graphics, this.left + 10, this.left + 150 - 10, this.choicesTop() - 18);
         graphics.drawString(
             this.font,
             this.picked == null
@@ -117,24 +117,24 @@ final class CombatSkillsPanel {
                 : Component.translatable("screen.mdvlcraft.skills.learned_for", Component.literal(SkillSlot.ENUM_MANAGER.toTranslated(this.picked))),
             this.left + 10,
             this.choicesTop() - 11,
-            -7826784,
+            DqGui.MUTED,
             false
         );
         List<Skill> choices = this.choices();
         if (this.picked != null && choices.isEmpty()) {
-            graphics.drawString(this.font, Component.translatable("screen.mdvlcraft.skills.none"), this.left + 10, this.choicesTop() + 5, -7826784, false);
+            graphics.drawString(this.font, Component.translatable("screen.mdvlcraft.skills.none"), this.left + 10, this.choicesTop() + 5, DqGui.MUTED, false);
         }
 
         for (int i = 0; i < choices.size(); i++) {
             Skill skillx = choices.get(i);
-            SlateGui.slot(graphics, this.choiceX(i), this.choiceY(i), 20, skills.isEquipping(skillx) ? SlateGui.Slot.PICKED : SlateGui.Slot.FILLED);
+            DqGui.slot(graphics, this.choiceX(i), this.choiceY(i), 20, skills.isEquipping(skillx) ? DqGui.Slot.PICKED : DqGui.Slot.FILLED);
             drawIcon(graphics, skillx, this.choiceX(i) + 2, this.choiceY(i) + 2);
         }
 
         List<FormattedCharSequence> hint = this.hint();
 
         for (int line = 0; line < hint.size(); line++) {
-            graphics.drawString(this.font, hint.get(line), this.left + 10, this.hintTop() + line * 10, -7826784, false);
+            graphics.drawString(this.font, hint.get(line), this.left + 10, this.hintTop() + line * 10, DqGui.MUTED, false);
         }
     }
 

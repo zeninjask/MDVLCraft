@@ -250,29 +250,22 @@ ICON_DIR = ROOT / "src/main/resources/assets/mdvlcraft/textures/gui/icons"
 # Frame kind -> skill size. Pufferfish draws frames at 26 x size and icons at 16 x size, so these sizes draw the
 # frames from tools/generate_textures.py (20, 40 and 52 px) and the 12 and 24 px icons 1:1.
 SIZES = {"twig": 0.75, "task": 1.5, "goal": 1.5, "root": 1.5, "challenge": 2.0}
-# Slate accents (tools/generate_textures.py ACCENTS): each class's trees, and neutral for the Classes tab.
-ACCENTS = {"warrior": (226, 84, 64), "mage": (78, 140, 255), "rogue": (164, 104, 240), "ranger": (78, 196, 122),
-           "neutral": (184, 192, 204)}
-CANVAS = "#0e1014"
 
 
 def hex_colour(rgb):
     return "#%02x%02x%02x" % rgb
 
 
-def colours(palette):
-    """Pufferfish's category colours: grey lines that light up in the accent; the stroke matches the canvas, so a
-    line reads as a 1px hairline that masks the dot grid under it."""
-    accent = ACCENTS[palette]
-    affordable = tuple(round((90 + a) / 2) for a in accent)
-    line = {"locked": (52, 58, 68), "available": (90, 98, 110), "affordable": affordable, "unlocked": accent,
-            "excluded": (40, 44, 52)}
-    return {"connections": {state: {"fill": hex_colour(rgb), "stroke": CANVAS} for state, rgb in line.items()},
-            "points": {"fill": hex_colour(accent), "stroke": "#1c2027"}}
+def colours():
+    """Pufferfish's category colours, the DQ9 greys for every tree: dark grey lines that turn pale blue when
+    affordable and white when unlocked, on black strokes."""
+    line = {"locked": "#424242", "available": "#a5a5a5", "affordable": "#9cc6f7", "unlocked": "#ffffff", "excluded": "#2a2a2a"}
+    return {"connections": {state: {"fill": fill, "stroke": "#000000"} for state, fill in line.items()},
+            "points": {"fill": "#ffffff", "stroke": "#000000"}}
 
 
 def background():
-    return {"texture": TEXTURES + "canvas.png", "width": 12, "height": 12, "position": "tile"}
+    return {"texture": TEXTURES + "canvas.png", "width": 32, "height": 32, "position": "tile"}
 
 
 def cooldown_text(cooldown):
@@ -1053,7 +1046,7 @@ def grow_archetype(arch_id, arch, seed):
     base_dir = OUT / "categories" / arch_id
     write(base_dir / "category.json", {
         "title": arch["title"], "description": arch["blurb"], "icon": own_icon(f"tab/{arch_id}.png"),
-        "background": background(), "colors": colours(arch["cls"]),
+        "background": background(), "colors": colours(),
         "unlocked_by_default": False, "starting_points": STARTING_POINTS,
     })
     write(base_dir / "definitions.json", definitions)
@@ -1103,7 +1096,7 @@ def build_classes():
     base = OUT / "categories" / "classes"
     write(base / "category.json", {
         "title": "Classes", "description": f"Pick up to {ARCHETYPE_LIMIT} archetypes.", "icon": own_icon("tab/classes.png"),
-        "background": background(), "colors": colours("neutral"),
+        "background": background(), "colors": colours(),
         "unlocked_by_default": True,
         "starting_points": ARCHETYPE_LIMIT, "spent_points_limit": ARCHETYPE_LIMIT,
     })

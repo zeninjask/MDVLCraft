@@ -1,6 +1,6 @@
 package com.mdvlcraft.binder.mixin;
 
-import com.mdvlcraft.binder.client.SlateRecruits;
+import com.mdvlcraft.binder.client.DqSkins;
 import net.minecraft.client.gui.GuiGraphics;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -17,12 +17,12 @@ public abstract class GuiGraphicsMixin {
         ordinal = 2,
         argsOnly = true
     )
-    private int mdvlcraft$slateText(int colour) {
-        return SlateRecruits.textColour(colour);
+    private int mdvlcraft$dqText(int colour) {
+        return DqSkins.textColour(colour);
     }
 
     @ModifyVariable(method = "fill(Lnet/minecraft/client/renderer/RenderType;IIIIII)V", at = @At("HEAD"), ordinal = 5, argsOnly = true)
-    private int mdvlcraft$slateFill(int colour) {
-        return SlateRecruits.fillColour(colour);
+    private int mdvlcraft$dqFill(int colour) {
+        return DqSkins.fillColour(colour);
     }
 }

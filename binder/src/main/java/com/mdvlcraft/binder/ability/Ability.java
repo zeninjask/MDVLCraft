@@ -16,7 +16,7 @@ public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbilit
 
     Component displayName();
 
-    /** The ability's 18x18 icon (tools/icons18.py). */
+    /** The ability's icon (a Dragon Quest IX icon, tools/dq9_icons.py). */
     default ResourceLocation icon() {
         return AbilityIcons.ability(this.id());
     }

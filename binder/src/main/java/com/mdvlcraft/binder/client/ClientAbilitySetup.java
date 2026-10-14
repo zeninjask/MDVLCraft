@@ -28,17 +28,19 @@ public final class ClientAbilitySetup {
         MinecraftForge.EVENT_BUS.addListener(MenuNav::onScreenRender);
         MinecraftForge.EVENT_BUS.addListener(MenuNav::onMouseClicked);
         MinecraftForge.EVENT_BUS.addListener(ClientAbilitySetup::onLoggingOut);
-        MinecraftForge.EVENT_BUS.addListener(SlateGui::onTooltipColour);
+        MinecraftForge.EVENT_BUS.addListener(DqGui::onTooltipColour);
         MinecraftForge.EVENT_BUS.addListener(SpellPreviews::onClientTick);
-        modBus.addListener(SlateRecruits::onAddPackFinders);
+        modBus.addListener(DqSkins::onAddPackFinders);
         modBus.addListener(BdHillFix::onAddPackFinders);
-        MinecraftForge.EVENT_BUS.addListener(SlateRecruits::onRenderPre);
-        MinecraftForge.EVENT_BUS.addListener(SlateRecruits::onRenderPost);
+        MinecraftForge.EVENT_BUS.addListener(DqSkins::onRenderPre);
+        MinecraftForge.EVENT_BUS.addListener(DqSkins::onRenderPost);
+        MinecraftForge.EVENT_BUS.addListener(PartyPanels::onRenderOverlay);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, false, Pre.class, TrueInvisibilityRender::onRenderLiving);
     }
 
     private static void onRegisterOverlays(RegisterGuiOverlaysEvent event) {
         event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "ability_hud", AbilityHud.INSTANCE);
+        event.registerAbove(VanillaGuiOverlay.HOTBAR.id(), "party_panels", PartyPanels.INSTANCE);
     }
 
     private static void onClientSetup(FMLClientSetupEvent event) {
