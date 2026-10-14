@@ -115,6 +115,8 @@ dependencies {
     compileOnly files('libs/curios-forge-5.14.1+1.20.1.jar')
     // Inventory Profiles Next: client/DqInventoryScreen's @IPNGuiHints move its sort buttons onto the screen's windows
     compileOnly files('libs/InventoryProfilesNext-forge-1.20-1.10.20.jar')
+    // GeckoLib: mixin/geckolib/ bends GeckoLib armour at the elbows and knees under Epic Fight (the pack's jar)
+    compileOnly files('libs/geckolib-forge-1.20.1-4.8.4.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))
