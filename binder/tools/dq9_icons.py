@@ -162,6 +162,7 @@ ABILITIES = {  # the Samurai's stance abilities share the stance orbs; a few sum
     "mdvlcraft_stance_water": "blue_orb", "mdvlcraft_stance_wind": "green_orb",
     "irons_spellbooks_summon_horse": "heavenly_horseshoe", "irons_spellbooks_summon_polar_bear": "magic_beast_hide",
     "irons_spellbooks_summon_ender_chest": "jewellery_box", "traveloptics_axe_of_the_doomed": "galaxy_axe",
+    "cursed_school_testament_of_ash": "saints_ashes",
 }
 SCHOOL_THEMES = {"fire": "fire", "ice": "ice", "lightning": "lightning", "holy": "holy", "nature": "nature", "blood": "blood",
                  "ender": "arcane", "evocation": "arcane", "eldritch": "arcane", "aqua": "water", "water": "water",
