@@ -113,6 +113,23 @@ public abstract class SkillsScreenMixin {
         return DqGui.TEXT;
     }
 
+    /** A spell node's tooltip ends with how to preview the spell (client/SpellPreviews). */
+    @Redirect(
+        method = "lambda$drawContentWithCategory$21",
+        at = @At(
+            value = "INVOKE",
+            target = "Lnet/puffish/skillsmod/client/config/skill/ClientSkillDefinitionConfig;description()Lnet/minecraft/network/chat/Component;"
+        ),
+        require = 0
+    )
+    private Component mdvlcraft$descriptionWithPreview(ClientSkillDefinitionConfig definition) {
+        Component description = definition.description();
+        boolean spell = this.optActiveCategoryData.map(category -> SpellPreviews.isSpellDefinition(category.getConfig().id(), definition.id())).orElse(false);
+        return spell
+            ? Component.empty().append(description).append("\n").append(SpellPreviews.prompt().copy().withStyle(ChatFormatting.DARK_GRAY))
+            : description;
+    }
+
     @Redirect(
         method = "lambda$drawContentWithCategory$21",
         at = @At(
