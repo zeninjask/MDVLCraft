@@ -25,6 +25,8 @@ public final class DisabledContent {
     };
     public static final Set<String> CONTENT_NAMESPACES = with(SPELL_ADDONS, "traveloptics", "alexscaves", "cursedfate_roslon_meimei");
     private static final Set<String> NO_SPAWN_NAMESPACES = with(SPELL_ADDONS, "cursedfate", "wom", "traveloptics", "alexscaves", "cursedfate_roslon_meimei");
+    /** Vanilla mobs that never spawn on their own. */
+    private static final Set<ResourceLocation> NO_SPAWN_TYPES = Set.of(ResourceLocation.fromNamespaceAndPath("minecraft", "creeper"));
     private static final Set<ResourceLocation> FORBIDDEN_ITEMS = Set.of(
         ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "scroll_forge"),
         ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "inscription_table"),
@@ -50,7 +52,7 @@ public final class DisabledContent {
 
     public static boolean isSpawnBlocked(EntityType<?> type) {
         ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
-        return id != null && NO_SPAWN_NAMESPACES.contains(id.getNamespace()) && !WildSpawns.allowed(type);
+        return id != null && (NO_SPAWN_NAMESPACES.contains(id.getNamespace()) || NO_SPAWN_TYPES.contains(id)) && !WildSpawns.allowed(type);
     }
 
     public static boolean isContentDisabled(ResourceLocation id) {
