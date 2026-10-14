@@ -35,6 +35,9 @@ import net.minecraftforge.client.gui.overlay.IGuiOverlay;
  * capitals). The game cuts names at 8 letters; here every window widens alike to fit the longest name in full, and the
  * bars stretch with it. Other members' values are the ones Parties syncs to the client; Parties' own HUD frames are hidden
  * (onRenderOverlay), its world trackers stay.
+ *
+ * When a player gains archetype experience, a small window under theirs shows it Pokemon style (ExpBars): the bar
+ * filling towards the next level and "+N" beneath. A row of windows with a bar showing pushes the rows below it down.
  */
 final class PartyPanels implements IGuiOverlay {
     static final PartyPanels INSTANCE = new PartyPanels();
@@ -46,6 +49,9 @@ final class PartyPanels implements IGuiOverlay {
     private static final int GAP = 2;
     private static final int MARGIN = 4;
     private static final int HEADER_END = 16;
+    /** The experience window under a party window: its height and the space above it. */
+    private static final int EXP_H = 26;
+    private static final int EXP_GAP = 1;
     /** Left edge of each row (the right edge mirrors it) and the colour across the middle. */
     private static final String[][] ROWS = {
         {"...OOOO", "O"}, {"..ORRRR", "R"}, {".ORBBBB", "F"}, {"ORBBBBB", "F"}, {"OGRRRRR", "R"}, {"ORFFFFF", "F"},
@@ -60,6 +66,8 @@ final class PartyPanels implements IGuiOverlay {
     private static final int HP_SHINE = 0xFF9CC6F7;
     private static final int MP_FILL = 0xFFFF7B18;
     private static final int MP_SHINE = 0xFFFFBD63;
+    private static final int EXP_FILL = 0xFF2BC8F0;
+    private static final int EXP_SHINE = 0xFFA8ECFF;
     private static final int BOX = 0xFFE7E7E7;
     /** The game's text colours for a member at a quarter of their HP or less, and for a fallen one. */
     private static final int LOW = 0xFFFFBD63;
@@ -88,8 +96,21 @@ final class PartyPanels implements IGuiOverlay {
             LEVEL_LEFT + minecraft.font.width("Lv. ") + 7 + minecraft.font.width(String.valueOf(m.archetypes().level()))
         )).max().getAsInt());
         int perRow = Math.max(1, (screenWidth - 2 * MARGIN + GAP) / (w + GAP));
-        for (int i = 0; i < members.size(); i++) {
-            draw(graphics, minecraft, members.get(i), MARGIN + i % perRow * (w + GAP), MARGIN + i / perRow * (H + GAP), w);
+        int y = MARGIN;
+        for (int row = 0; row * perRow < members.size(); row++) {
+            boolean bars = false;
+            for (int i = row * perRow; i < Math.min(members.size(), (row + 1) * perRow); i++) {
+                Member member = members.get(i);
+                int x = MARGIN + i % perRow * (w + GAP);
+                draw(graphics, minecraft, member, x, y, w);
+                ExpBars.Bar bar = ExpBars.get(member.id());
+                if (bar != null) {
+                    exp(graphics, minecraft.font, bar, x, y + H + EXP_GAP, w);
+                    bars = true;
+                }
+            }
+
+            y += H + GAP + (bars ? EXP_GAP + EXP_H : 0);
         }
     }
 
@@ -137,6 +158,23 @@ final class PartyPanels implements IGuiOverlay {
             g.drawString(font, "Lv.", x + LEVEL_LEFT, y + 47, text, false);
             number(g, font, member.archetypes().level(), x + w - 8, y + 47, text);
         }
+    }
+
+    /** The experience window: "EXP" and the bar, "+N" beneath. */
+    private static void exp(GuiGraphics g, Font font, ExpBars.Bar bar, int x, int y, int w) {
+        rows(g, x, y, w, 0, 0, 0);
+        rows(g, x, y, w, 1, 1, 1);
+        rows(g, x, y, w, 7, 2, 2);
+        rows(g, x, y, w, 6, 3, 3);
+        rows(g, x, y, w, 5, 4, EXP_H - 5);
+        for (int i = 6; i < ROWS.length; i++) {
+            rows(g, x, y, w, i, EXP_H - 10 + i, EXP_H - 10 + i);
+        }
+
+        g.drawString(font, "EXP", x + 7, y + 5, DqGui.TEXT, false);
+        int barX = x + 7 + font.width("EXP") + 2;
+        bar(g, barX, y + 7, x + w - 6 - barX, (float)bar.fill(), EXP_SHINE, EXP_FILL);
+        number(g, font, "+" + bar.counted(), x + w - 10, y + 15, DqGui.TEXT);
     }
 
     private static void window(GuiGraphics g, int x, int y, int w) {
@@ -192,7 +230,10 @@ final class PartyPanels implements IGuiOverlay {
 
     /** A number whose last pixel column is right - 1. */
     private static void number(GuiGraphics g, Font font, int value, int right, int y, int colour) {
-        String s = String.valueOf(value);
+        number(g, font, String.valueOf(value), right, y, colour);
+    }
+
+    private static void number(GuiGraphics g, Font font, String s, int right, int y, int colour) {
         g.drawString(font, s, right + 1 - font.width(s), y, colour, false);
     }
 
