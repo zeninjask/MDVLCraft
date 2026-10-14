@@ -24,9 +24,9 @@ public abstract class RuinsGreatSwordInnateMixin {
         this.mdvlcraft$inputContainer = container;
     }
 
-    /** Right-click alone charges Barbarian Arts (RuinsChargeInput). */
+    /** Left-click alone charges Barbarian Arts (RuinsChargeInput). */
     @Redirect(method = "handleClientInput", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwGetMouseButton(JI)I"), require = 2)
-    private int mdvlcraft$chargeOnRightClick(long window, int button) {
+    private int mdvlcraft$chargeOnLeftClick(long window, int button) {
         boolean charging = this.mdvlcraft$inputContainer.getDataManager().getDataValue(EFNSKillDataKeys.IS_PRESSING.get());
         return RuinsChargeInput.mouseButton(window, button, charging);
     }

@@ -20,7 +20,7 @@ import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 
 /**
  * Taking on Demonic Assimilation plays the Feral Claw's Beast Roar (Epic Fight Nightfall), shockwave and all. The
- * transformation lasts 88 seconds instead of 90.
+ * transformation lasts 45 seconds instead of 90.
  */
 @Pseudo
 @Mixin(targets = "com.tiago.antimagic.spell.DemonicAssimilationSpell", remap = false)
@@ -29,7 +29,7 @@ public abstract class DemonicAssimilationSpellMixin {
 
     @ModifyConstant(method = "lambda$onCast$2", constant = @Constant(intValue = 1800), require = 1)
     private static int mdvlcraft$shorterTransformation(int ticks) {
-        return 1760;
+        return 900;
     }
 
     @Inject(method = "onCast", at = @At("TAIL"))

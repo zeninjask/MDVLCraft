@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
- * Right-click on a demon sword is Epic Fight's (the Ruins Greatsword charge), so the sword's own right-click art (Anti-Magic
- * Shroud, Anti-Magic Slash, Causality Break) only runs when DemonSwordArts casts it on holding both mouse buttons.
+ * Right-click on a demon sword is Epic Fight's guard, so the sword's own right-click art (Anti-Magic Shroud, Anti-Magic
+ * Slash, Causality Break) only runs when DemonSwordArts casts it on holding both mouse buttons.
  */
 @Mixin(value = {DemonSlayerSword.class, DemonDwellerSword.class, DemonDestroyerSword.class}, remap = false)
 public abstract class DemonSwordUseMixin {
