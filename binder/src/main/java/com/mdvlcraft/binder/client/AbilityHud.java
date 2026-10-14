@@ -10,12 +10,19 @@ import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraftforge.client.gui.overlay.ForgeGui;
 import net.minecraftforge.client.gui.overlay.IGuiOverlay;
 
-final class AbilityHud implements IGuiOverlay {
+public final class AbilityHud implements IGuiOverlay {
     static final AbilityHud INSTANCE = new AbilityHud();
     private static final int MIN_WIDTH = 96;
     private static final int MAX_WIDTH = 180;
+    /** From the panel's top to the bottom of the screen. */
+    private static final int HEIGHT = 30;
 
     private AbilityHud() {
+    }
+
+    /** How far up from the bottom right the ability bar reaches (0 while it is hidden), for what sits above it. */
+    public static int reservedHeight() {
+        return ClientAbilities.granted().isEmpty() ? 0 : HEIGHT;
     }
 
     @Override
@@ -27,7 +34,7 @@ final class AbilityHud implements IGuiOverlay {
             String name = ability.<String>map(a -> a.displayName().getString()).orElse("");
             int width = Math.max(96, Math.min(180, 28 + minecraft.font.width(name) + 8 + minecraft.font.width(number) + 6));
             int x = screenWidth - width - 4;
-            int y = screenHeight - 30;
+            int y = screenHeight - HEIGHT;
             SlateGui.panel(graphics, x, y, width, 26);
             SlateGui.slot(graphics, x + 3, y + 3, 20);
             graphics.drawString(minecraft.font, number, x + width - 6 - minecraft.font.width(number), y + 5, -7826784, false);
