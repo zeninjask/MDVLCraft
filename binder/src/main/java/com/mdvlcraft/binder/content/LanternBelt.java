@@ -9,7 +9,7 @@ import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 /**
  * The Curios belt slot holds a lantern and nothing else (mixin/curios/CuriosImplMixinHooksMixin; the lantern validator
- * lists the slot in the lantern's tooltip), and a worn lantern lights up its wearer like a held one (client/LanternBeltLight).
+ * lists the slot in the lantern's tooltip), and a worn lantern lights up its wearer like a held one (mixin/dynamiclights/LanternBeltLightMixin).
  */
 public final class LanternBelt {
     public static final String SLOT = "belt";

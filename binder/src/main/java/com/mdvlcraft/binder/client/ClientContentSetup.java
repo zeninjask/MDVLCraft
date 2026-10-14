@@ -24,7 +24,6 @@ public final class ClientContentSetup {
             MinecraftForge.EVENT_BUS.unregister(CtrlDashHandler.class);
             PonderIndex.addPlugin(new WeaponPonderPlugin());
             PonderIndex.addPlugin(new ShipPonderPlugin());
-            LanternBeltLight.register();
         });
     }
 
