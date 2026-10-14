@@ -41,6 +41,10 @@ EXTRA_ATTRIBUTES = {
 e = html.escape
 
 
+# Class chip colours in the document (the game's DQ9 trees no longer colour classes).
+CLASS_COLOURS = {"warrior": (226, 84, 64), "mage": (78, 140, 255), "rogue": (164, 104, 240), "ranger": (78, 196, 122),
+                 "neutral": (184, 192, 204)}
+
 def attr_name(attr):
     if attr in gen.ATTRIBUTES:
         return gen.ATTRIBUTES[attr][0]
@@ -184,7 +188,7 @@ td.num { text-align: right; white-space: nowrap; }
 
 
 def badge(cls):
-    return f"<span class='cls' style='background:{gen.hex_colour(gen.ACCENTS[cls])}'>{gen.CLASSES[cls]['title']}</span>"
+    return f"<span class='cls' style='background:{gen.hex_colour(CLASS_COLOURS[cls])}'>{gen.CLASSES[cls]['title']}</span>"
 
 
 def main():
