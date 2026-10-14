@@ -100,6 +100,11 @@ final class ExpBars {
             return this.shown - Math.floor(this.shown);
         }
 
+        /** The level the bar is passing through. */
+        int level() {
+            return (int)Math.floor(this.shown);
+        }
+
         /** The experience shown beneath the bar, counting up to the total gained. */
         int counted() {
             return (int)Math.round(this.counted);

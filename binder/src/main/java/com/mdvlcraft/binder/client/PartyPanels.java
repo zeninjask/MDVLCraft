@@ -102,8 +102,8 @@ final class PartyPanels implements IGuiOverlay {
             for (int i = row * perRow; i < Math.min(members.size(), (row + 1) * perRow); i++) {
                 Member member = members.get(i);
                 int x = MARGIN + i % perRow * (w + GAP);
-                draw(graphics, minecraft, member, x, y, w);
                 ExpBars.Bar bar = ExpBars.get(member.id());
+                draw(graphics, minecraft, member, bar == null ? member.archetypes().level() : bar.level(), x, y, w);
                 if (bar != null) {
                     exp(graphics, minecraft.font, bar, x, y + H + EXP_GAP, w);
                     bars = true;
@@ -140,7 +140,8 @@ final class PartyPanels implements IGuiOverlay {
         return members;
     }
 
-    private static void draw(GuiGraphics g, Minecraft minecraft, Member member, int x, int y, int w) {
+    /** The level shown follows a filling experience bar, going up as the bar wraps. */
+    private static void draw(GuiGraphics g, Minecraft minecraft, Member member, int level, int x, int y, int w) {
         Font font = minecraft.font;
         window(g, x, y, w);
         int text = !member.online() ? DqGui.MUTED : member.hp() <= 0.0F ? DOWN : member.hp() <= member.maxHp() / 4.0F ? LOW : DqGui.TEXT;
@@ -156,7 +157,7 @@ final class PartyPanels implements IGuiOverlay {
         box(g, archetypes.size() > 1 ? archetypes.get(1) : null, x + 22, y + 44);
         if (!archetypes.isEmpty()) {
             g.drawString(font, "Lv.", x + LEVEL_LEFT, y + 47, text, false);
-            number(g, font, member.archetypes().level(), x + w - 8, y + 47, text);
+            number(g, font, level, x + w - 8, y + 47, text);
         }
     }
 
