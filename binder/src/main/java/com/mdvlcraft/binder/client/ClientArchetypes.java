@@ -24,6 +24,11 @@ public final class ClientArchetypes {
         }
     }
 
+    /** Whether the player has picked the archetype, as last sent. */
+    public static boolean picked(UUID player, String archetype) {
+        return get(player).archetypes().contains(archetype);
+    }
+
     /** Nothing picked (or not sent yet) reads as no archetypes. */
     static Entry get(UUID player) {
         return ENTRIES.getOrDefault(player, Entry.NONE);

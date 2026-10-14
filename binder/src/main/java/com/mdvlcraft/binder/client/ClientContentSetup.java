@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.content.MageHunterSlot;
 import com.mdvlcraft.binder.client.ponder.ShipPonderPlugin;
 import com.mdvlcraft.binder.client.ponder.WeaponPonderPlugin;
 import cursedfate.CtrlDashHandler;
@@ -25,6 +26,7 @@ public final class ClientContentSetup {
             PonderIndex.addPlugin(new WeaponPonderPlugin());
             PonderIndex.addPlugin(new ShipPonderPlugin());
             PonderHold.register();
+            MageHunterSlot.setClientCheck(player -> ClientArchetypes.picked(player.getUUID(), "magehunter"));
         });
     }
 

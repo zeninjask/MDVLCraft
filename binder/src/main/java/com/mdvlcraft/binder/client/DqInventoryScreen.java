@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.content.MageHunterSlot;
 import com.mdvlcraft.binder.mixin.SlotAccessor;
 import java.util.ArrayList;
 import java.util.List;
@@ -99,6 +100,9 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
     private static final String[] POINTER = {
         "....OO..........", "....OYO..OOOO...", "OOO.OHYOOOYYYOO.", "OHYOOHYYYYHHYYYO", "OOO.OYDOOODYYOO.", "....ODO..OOOO...", "....OO.........."
     };
+    /** The lock on a Mage Hunter's empty sword slot (8 x 10). */
+    private static final String[] PADLOCK = {"..OOOO..", ".O....O.", ".O....O.", "OOOOOOOO", "OYYYYYYO", "OYYOOYYO", "OYYOOYYO", "OYYYYYYO", "OYYYYYYO", "OOOOOOOO"};
+    private static final Map<Character, Integer> PADLOCK_COLOURS = Map.of('O', 0xFF787878, 'Y', 0xFF424242);
     private static final Map<Character, Integer> POINTER_COLOURS = Map.of('O', 0xFF3A2000, 'D', 0xFFC08000, 'Y', 0xFFF8D020, 'H', 0xFFFFF8A0);
     private static final int EFFECTS_GAP = 6;
     /** The window with names is up to EFFECTS_WIDE wide, taking what room there is, but not under EFFECTS_MIN_WIDE. */
@@ -230,6 +234,14 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
             if (slot.x > -10000 && !inRow) {
                 g.blit(SLOTS, x + slot.x - 1, y + slot.y - 1, 7, 83, 18, 18);
             }
+        }
+
+        // a Mage Hunter's empty sword slot is shut: dark, with a padlock (content/MageHunterSlot)
+        if (MageHunterSlot.isSwordSlot(inventory, MageHunterSlot.SLOT) && inventory.getItem(MageHunterSlot.SLOT).isEmpty()) {
+            int sx = x + 9 + MageHunterSlot.SLOT * 18;
+            int sy = y + TITLE + 3 * 18 + 6 + 1;
+            g.fill(sx, sy, sx + 16, sy + 16, 0xC0101010);
+            pattern(g, PADLOCK, sx + 4, sy + 3, PADLOCK_COLOURS);
         }
 
         // the selected hotbar slot: the light and blue lines of the game's selected frame

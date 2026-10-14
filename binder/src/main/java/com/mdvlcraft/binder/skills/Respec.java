@@ -77,7 +77,7 @@ public final class Respec {
         }
     }
 
-    static boolean isPicked(ServerPlayer player, String archetype) {
+    public static boolean isPicked(ServerPlayer player, String archetype) {
         return ARCHETYPES.contains(archetype)
             && SkillsAPI.getCategory(ArchetypeTabs.CLASSES).flatMap(c -> c.getSkill(archetype)).map(s -> s.getState(player) == State.UNLOCKED).orElse(false);
     }
