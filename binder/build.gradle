@@ -111,8 +111,6 @@ dependencies {
     compileOnly files('libs/Parties-1.20.1-2.2.0.jar')
     // Somakespells: SpectralRondoPlayerRenderHandlerMixin keeps Spectral Rondo's pose push and pop paired
     compileOnly files('libs/somakespells-1.0.9-1.20.1-fixaltar.jar')
-    // Ares HUD: mixin/ares draws its bars and value strip at whole-pixel scale with 8 px icons
-    compileOnly files('libs/ares_hud-2.0.5-forge-1.20.1.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))
