@@ -1,6 +1,6 @@
 # Skill tree totals
 
-Every bonus in each archetype tree added up, read from the tree data in `src/main/resources/data/mdvlcraft/puffish_skills`. These are the totals for a **whole** tree. A player gets 1 point to start and 1 per level, with no level cap, so a whole tree can be filled in time. Players pick 2 archetypes.
+Every bonus in each archetype tree added up, read from the tree data in `src/main/resources/data/mdvlcraft/puffish_skills`. These are the totals for a **whole** tree. A player gets 1 point to start and 1 per level, with no level cap, so a whole tree can be filled in time. Players pick 2 archetypes; two of the same class (two Warrior archetypes, say) each give half these stat bonuses (abilities stay whole).
 
 "Slower hunger" is Pufferfish's Stamina attribute (food drains more slowly). "%" values add to the base; flat values are points (Max Health in half-hearts).
 

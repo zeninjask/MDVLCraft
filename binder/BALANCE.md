@@ -5,7 +5,7 @@ How the 16 archetypes compare, what changed to even them out, and what keeps bos
 
 ## Method
 
-- **What a player can have.** Two archetypes (any classes), 1 point to start and 1 per level with no level cap. Every
+- **What a player can have.** Two archetypes (any classes; two of the same class each give half their stat bonuses), 1 point to start and 1 per level with no level cap. Every
   tree costs about 400–500 points, so a whole tree takes a long time to fill. Balance is about what a tree *offers*, at a
   similar price.
 - **What was compared.** For each archetype:

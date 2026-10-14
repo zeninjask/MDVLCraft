@@ -4,6 +4,7 @@ import com.mdvlcraft.binder.ability.AbilityActions;
 import com.mdvlcraft.binder.music.Jingle;
 import com.mdvlcraft.binder.music.Jingles;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -36,6 +37,30 @@ public final class Respec {
         "warlock",
         "bloodborn",
         "magehunter"
+    );
+    /** Each archetype's class: the class node it hangs from on the Classes page. */
+    private static final Map<String, String> CLASS = Map.ofEntries(
+        Map.entry("knight", "warrior"),
+        Map.entry("samurai", "warrior"),
+        Map.entry("berzerker", "warrior"),
+        Map.entry("monk", "warrior"),
+        Map.entry("magehunter", "warrior"),
+        Map.entry("holy", "mage"),
+        Map.entry("flame", "mage"),
+        Map.entry("lightning", "mage"),
+        Map.entry("necromancy", "mage"),
+        Map.entry("ice", "mage"),
+        Map.entry("water", "mage"),
+        Map.entry("warlock", "mage"),
+        Map.entry("assassin", "rogue"),
+        Map.entry("phantom", "rogue"),
+        Map.entry("scout", "rogue"),
+        Map.entry("thief", "rogue"),
+        Map.entry("wanderer", "ranger"),
+        Map.entry("stalker", "ranger"),
+        Map.entry("druid", "ranger"),
+        Map.entry("cursed", "ranger"),
+        Map.entry("bloodborn", "ranger")
     );
 
     private Respec() {
@@ -80,6 +105,15 @@ public final class Respec {
     public static boolean isPicked(ServerPlayer player, String archetype) {
         return ARCHETYPES.contains(archetype)
             && SkillsAPI.getCategory(ArchetypeTabs.CLASSES).flatMap(c -> c.getSkill(archetype)).map(s -> s.getState(player) == State.UNLOCKED).orElse(false);
+    }
+
+    public static String classOf(String archetype) {
+        String type = CLASS.get(archetype);
+        if (type == null) {
+            throw new IllegalArgumentException("Not an archetype: " + archetype);
+        }
+
+        return type;
     }
 
     static Optional<Category> tab(String archetype) {

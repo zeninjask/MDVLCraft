@@ -1,6 +1,7 @@
 """Writes the archetype info sheet (HTML, printed to PDF with headless Chromium): an overview of every archetype's core
-stats, one page per class (class-wide bonuses, then each archetype's role, abilities, Epic Fight skills and other
-bonuses), and the Origins races and classes with their powers. Everything is read from the live trees and the pack.
+stats, then one page per archetype listing every skill in its tree with what it does (abilities with their spell
+descriptions, Epic Fight skills, and each stat line with its per-node and total value and what the stat does), and the
+Origins races and classes with their powers. Everything is read from the live trees and the pack.
 
 Usage: python3 skill_tree_doc.py <version> <out.pdf> <mods dir> <pack kubejs dir>
   mods dir: the server pack's mods folder (origin data and names come from the jars); pack kubejs dir: its overrides/kubejs
@@ -39,6 +40,104 @@ EXTRA_ATTRIBUTES = {
     'mdvlcraft:unarmed_parry': ('Unarmed Parry', 'flat'),
 }
 e = html.escape
+
+ATTR_INFO = {
+    'epicfight:armor_negation': 'Part of your hits ignores the target\'s armour.',
+    'epicfight:impact': 'How hard your hits stagger: more impact stuns enemies longer and breaks their guard sooner.',
+    'epicfight:max_strikes': 'How many enemies one swing can hit.',
+    'epicfight:stamina_regen': 'How fast Epic Fight stamina refills.',
+    'epicfight:staminar': 'Epic Fight stamina: dodges, guards, heavy attacks and spells all spend it.',
+    'epicfight:stun_armor': 'Absorbs stagger: hits stop interrupting you until it is worn down.',
+    'forge:entity_reach': 'How far away you can hit creatures.',
+    'forge:step_height_addition': 'Walk up taller steps without jumping.',
+    'forge:swim_speed': 'Faster swimming.',
+    'irons_spellbooks:blood_magic_resist': 'Less damage from Blood spells.',
+    'irons_spellbooks:blood_spell_power': 'Blood spells hit harder and heal more.',
+    'irons_spellbooks:cast_time_reduction': 'Spells that charge or channel finish sooner.',
+    'irons_spellbooks:casting_movespeed': 'Move faster while casting.',
+    'irons_spellbooks:cooldown_reduction': 'Spells and abilities come off cooldown sooner.',
+    'irons_spellbooks:eldritch_spell_power': 'Eldritch spells hit harder.',
+    'irons_spellbooks:ender_magic_resist': 'Less damage from Ender spells.',
+    'irons_spellbooks:ender_spell_power': 'Ender spells hit harder.',
+    'irons_spellbooks:evocation_spell_power': 'Evocation spells (summons, vexes, fangs) are stronger.',
+    'irons_spellbooks:fire_magic_resist': 'Less damage from Fire spells.',
+    'irons_spellbooks:fire_spell_power': 'Fire spells hit harder.',
+    'irons_spellbooks:holy_magic_resist': 'Less damage from Holy spells.',
+    'irons_spellbooks:holy_spell_power': 'Holy spells hit harder and heal more.',
+    'irons_spellbooks:ice_magic_resist': 'Less damage from Ice spells.',
+    'irons_spellbooks:ice_spell_power': 'Ice spells hit harder.',
+    'irons_spellbooks:lightning_magic_resist': 'Less damage from Lightning spells.',
+    'irons_spellbooks:lightning_spell_power': 'Lightning spells hit harder.',
+    'irons_spellbooks:mana_regen': 'Mana refills faster.',
+    'irons_spellbooks:max_mana': 'More mana to cast spells with.',
+    'irons_spellbooks:nature_magic_resist': 'Less damage from Nature spells.',
+    'irons_spellbooks:nature_spell_power': 'Nature spells hit harder.',
+    'irons_spellbooks:spell_resist': 'Less damage from every school of magic.',
+    'irons_spellbooks:summon_damage': 'Your summoned creatures deal more damage.',
+    'mdvlcraft:affliction_immunity': 'At 100%, Poison and Hunger cannot be applied to you.',
+    'mdvlcraft:arrow_penetration': 'Your arrows ignore part of the target\'s armour.',
+    'mdvlcraft:backstab_damage': 'More melee damage when you hit a creature from behind.',
+    'mdvlcraft:dagger_damage': 'More damage with daggers.',
+    'mdvlcraft:dodge_efficiency': 'Dodging costs less stamina.',
+    'mdvlcraft:fist_mastery': 'More damage with fist weapons and bare-handed arts.',
+    'mdvlcraft:greatsword_damage': 'More damage with greatswords.',
+    'mdvlcraft:katana_damage': 'More damage with katanas.',
+    'mdvlcraft:nature_regen': 'Heals you every 5 seconds while you stand on grass or dirt under open sky.',
+    'mdvlcraft:parry_stamina': 'A successful parry gives back this share of your max stamina.',
+    'mdvlcraft:plunder': 'Chance that a creature you kill drops one of its items twice.',
+    'mdvlcraft:rapier_damage': 'More damage with a sword while your off hand is empty.',
+    'mdvlcraft:riposte_damage': 'Your first hit within 3 seconds of a dodge deals more damage.',
+    'mdvlcraft:saturation_bonus': 'Food fills you up for longer.',
+    'mdvlcraft:spear_damage': 'More damage with spears.',
+    'mdvlcraft:staff_damage': 'More melee damage with staves.',
+    'mdvlcraft:technique_efficiency': 'Techniques (non-spell abilities) cost less mana.',
+    'mdvlcraft:unarmed_damage': 'Extra flat damage on every punch with an empty main hand.',
+    'mdvlcraft:unarmed_parry': 'Lets you guard and parry with bare hands.',
+    'minecraft:generic.armor': 'Reduces physical damage taken.',
+    'minecraft:generic.armor_toughness': 'Makes armour hold up better against big hits.',
+    'minecraft:generic.attack_damage': 'Extra damage on every melee hit.',
+    'minecraft:generic.attack_knockback': 'Your hits push enemies further.',
+    'minecraft:generic.attack_speed': 'Faster melee attacks.',
+    'minecraft:generic.knockback_resistance': 'You get pushed back less when hit.',
+    'minecraft:generic.luck': 'Better loot from fishing and loot chests.',
+    'minecraft:generic.max_health': 'More health (2 = one heart).',
+    'minecraft:generic.movement_speed': 'Faster walking and running.',
+    'puffish_attributes:armor_shred': 'Your attacks ignore part of the target\'s armour.',
+    'puffish_attributes:axe_damage': 'More damage with axes.',
+    'puffish_attributes:bow_projectile_speed': 'Arrows fly faster and further.',
+    'puffish_attributes:breaking_speed': 'Mine and dig faster.',
+    'puffish_attributes:consuming_speed': 'Eat and drink faster.',
+    'puffish_attributes:crossbow_projectile_speed': 'Crossbow bolts fly faster and further.',
+    'puffish_attributes:damage_reflection': 'Reflects part of the damage you take back at the attacker.',
+    'puffish_attributes:experience': 'More experience orbs from mining and kills.',
+    'puffish_attributes:fall_reduction': 'Less fall damage.',
+    'puffish_attributes:fortune': 'Like the Fortune enchantment on every tool: more drops from ores and crops.',
+    'puffish_attributes:healing': 'All healing you receive is stronger.',
+    'puffish_attributes:jump': 'Jump higher.',
+    'puffish_attributes:life_steal': 'Heals you for part of the damage you deal.',
+    'puffish_attributes:magic_resistance': 'Less damage from magic.',
+    'puffish_attributes:melee_damage': 'More damage with every melee attack.',
+    'puffish_attributes:melee_resistance': 'Less damage from melee attacks.',
+    'puffish_attributes:melee_resistance_shred': 'Your melee hits ignore part of the target\'s melee resistance.',
+    'puffish_attributes:mount_speed': 'Your mounts move faster.',
+    'puffish_attributes:natural_regeneration': 'Health regenerates faster from a full hunger bar.',
+    'puffish_attributes:protection_shred': 'Your attacks ignore part of the target\'s Protection enchantments.',
+    'puffish_attributes:ranged_damage': 'More damage with bows, crossbows and thrown weapons.',
+    'puffish_attributes:ranged_resistance': 'Less damage from arrows and other projectiles.',
+    'puffish_attributes:repair_cost': 'Anvil repairs cost fewer levels.',
+    'puffish_attributes:resistance': 'Less damage from every source.',
+    'puffish_attributes:sprinting_speed': 'Faster sprinting.',
+    'puffish_attributes:stamina': 'Hunger drains more slowly.',
+    'puffish_attributes:stealth': 'Creatures notice you from less far away.',
+    'puffish_attributes:sword_damage': 'More damage with swords (summoned demon swords count).',
+    'puffish_attributes:tamed_damage': 'Your pets and mounts deal more damage.',
+    'puffish_attributes:tamed_resistance': 'Your pets and mounts take less damage.',
+    'puffish_attributes:toughness_shred': 'Your attacks ignore part of the target\'s armour toughness.',
+    'puffish_attributes:trident_damage': 'More damage with tridents.',
+    'traveloptics:aqua_magic_resist': 'Less damage from Aqua spells.',
+    'traveloptics:aqua_spell_power': 'Aqua spells hit harder.',
+}
+
 
 
 # Class chip colours in the document (the game's DQ9 trees no longer colour classes).
@@ -108,6 +207,175 @@ def tally(arch, classes_defs):
     return dict(sums=sums, abilities=abilities, efskills=efskills, cost=cost, skills=len(skills), extra=extra)
 
 
+# -- archetype pages --------------------------------------------------------------------------------------------------
+BOILERPLATE = re.compile(r'^(Twig bonus|Core bonus|(Warrior|Mage|Rogue|Ranger) class bonus)')
+
+
+def family(title):
+    """Stat nodes come in families (Bulk 1..9 with Bulk Mastery I..III): the name without its number or Mastery tier."""
+    m = re.match(r'^(.*?) ((\d+)|([IVX]+))$', title)
+    if not m:
+        return title
+    name = m.group(1)
+    return name[:-len(' Mastery')] if m.group(4) and name.endswith(' Mastery') else name
+
+
+def clean(text):
+    return re.sub(r'\s+', ' ', re.sub(r'§.', '', text.replace('%%', '%'))).strip()
+
+
+def ability_text(pack, ability, extra):
+    ns, path = ability.split(':')
+    keys = [f'ability.{ns}.{path}.desc'] if ns == 'mdvlcraft' else [f'spell.{ns}.{path}.guide', f'spell.{ns}.{path}.description']
+    for key in keys:
+        if key in pack.lang:
+            return clean(pack.lang[key])
+    if extra:
+        return clean(extra)
+    raise SystemExit(f'no description for ability {ability}')
+
+
+def ef_text(description):
+    m = re.match(r'^Teaches .*?, an Epic Fight \w+ skill: (.*?)\.? Equip it in the Combat Skills box of the abilities screen\.?$', description)
+    if not m:
+        raise SystemExit(f'unexpected Epic Fight skill description: {description}')
+    text = clean(m.group(1))
+    return text[0].upper() + text[1:] + ('' if text.endswith('.') else '.')
+
+
+def stat_text(nodes):
+    """nodes: [(title, cost, [(attr, value)])] of one family -> what the family gives, per node and in total, and what it does."""
+    parts = []
+    attrs = []
+    for _, _, rewards in nodes:
+        for attr, _ in rewards:
+            if attr not in attrs:
+                attrs.append(attr)
+    for attr in attrs:
+        plain = sorted({v for t, _, r in nodes for a, v in r if a == attr and not re.search(r' [IVX]+$', t)})
+        mastery = sorted({v for t, _, r in nodes for a, v in r if a == attr and re.search(r' [IVX]+$', t)})
+        total = sum(v for _, _, r in nodes for a, v in r if a == attr)
+        name = e(attr_name(attr))
+        if len(nodes) == 1:
+            line = f"<b>{attr_value(attr, total)} {name}</b>"
+        else:
+            each = '/'.join(attr_value(attr, v) for v in plain)
+            line = f"{each} each" if plain else ''
+            if mastery:
+                line += (', ' if line else '') + '/'.join(attr_value(attr, v) for v in mastery) + ' per Mastery'
+            line = f"<b>{attr_value(attr, total)} {name}</b> ({line})"
+        if attr not in ATTR_INFO:
+            raise SystemExit(f'no explanation for {attr}; add it to ATTR_INFO')
+        parts.append(f"{line}: {e(ATTR_INFO[attr])}")
+    return ' '.join(parts)
+
+
+def node_names(nodes):
+    """'Bulk 1–9, Mastery I–III' for a family, the title for a single node."""
+    if len(nodes) == 1:
+        return nodes[0][0]
+    numbers = [re.search(r' (\d+)$', n[0]) for n in nodes]
+    tiers = [re.search(r' ([IVX]+)$', n[0]) for n in nodes]
+    out = family(nodes[0][0])
+    plain = [int(m.group(1)) for m in numbers if m]
+    roman = [m.group(1) for m in tiers if m]
+    bits = []
+    if plain:
+        bits.append(f'{min(plain)}–{max(plain)}' if len(plain) > 1 else str(plain[0]))
+    if roman:
+        bits.append(f'Mastery {roman[0]}–{roman[-1]}' if len(roman) > 1 else f'Mastery {roman[0]}')
+    return f"{out} {', '.join(bits)}"
+
+
+def archetype_page(arch, cls, title, role, classes_defs, pack, halved_note):
+    defs = json.load(open(os.path.join(CAT, arch, 'definitions.json')))
+    skills = json.load(open(os.path.join(CAT, arch, 'skills.json')))
+    abilities, efskills, families, cost = [], [], {}, 0
+    for skill in skills.values():
+        d = defs[skill['definition']]
+        cost += d.get('cost', 0)
+        rewards = d.get('rewards', [])
+        extra = d.get('extra_description') or ''
+        kinds = {r['type'] for r in rewards}
+        stats = [(r['data']['attribute'], r['data']['value']) for r in rewards if r['type'] == 'puffish_skills:attribute']
+        for r in rewards:
+            if r['type'] == 'mdvlcraft:ability':
+                m = re.search(r'\((\d+(?:\.\d+)?) mana, (\d+(?:\.\d+)?) s cooldown\)', d['description'])
+                cast = f"{m.group(1)} mana, {m.group(2)} s" if m else ''
+                spell = re.sub(r' \(.*', '', re.sub(r'^Unlocks ', '', d['description']))
+                name = d['title'] if spell in d['title'] else f"{d['title']} ({spell})"
+                level = r['data'].get('level', 1)
+                if not r['data']['ability'].startswith('mdvlcraft:'):
+                    name += f' {ROMAN[level - 1]}'
+                text = ability_text(pack, r['data']['ability'], '' if BOILERPLATE.match(extra) else extra)
+                abilities.append((name, d.get('cost', 0), cast, text))
+            elif r['type'] == 'mdvlcraft:epicfight_skill':
+                slot = SLOT_NAMES[EF_SLOTS[r['data']['skill']]]
+                text = ef_text(d['description'])
+                if stats:
+                    text += ' Also ' + ', '.join(f"{attr_value(a, v)} {attr_name(a)}" for a, v in stats) + '.'
+                efskills.append((f"{d['title']} ({slot})", d.get('cost', 0), text))
+        if kinds & {'mdvlcraft:ability', 'mdvlcraft:epicfight_skill'}:
+            continue
+        if not rewards:
+            group = ('signature', family(d['title']))
+            families.setdefault(group, []).append((d['title'], d.get('cost', 0), [], d['description']))
+            continue
+        kind = 'signature'
+        if extra.startswith('Twig'):
+            kind = 'twig'
+        elif extra.startswith('Core'):
+            kind = 'core'
+        elif BOILERPLATE.match(extra):
+            kind = 'class'
+        families.setdefault((kind, family(d['title'])), []).append((d['title'], d.get('cost', 0), stats, None))
+
+    def stat_items(kind):
+        items = []
+        for (k, name), nodes in families.items():
+            if k != kind:
+                continue
+            pts = sum(n[1] for n in nodes)
+            if not nodes[0][2]:
+                text = ' '.join(f"{e(t)}: {e(desc)}." for t, _, _, desc in nodes)
+            else:
+                text = stat_text([(t, c, s) for t, c, s, _ in nodes])
+            items.append((node_names(nodes), f"{len(nodes)} node{'s' if len(nodes) > 1 else ''}, {pts} pts", text))
+        return items
+
+    def block(heading, items, lead=''):
+        if not items:
+            return ''
+        rows = ''.join(f"<div class='it'><b>{e(n)}</b> <span class='m'>{e(m)}</span> {t}</div>" for n, m, t in items)
+        return f"<div class='blk'><h4>{heading}{f' <small>{lead}</small>' if lead else ''}</h4>{rows}</div>"
+
+    picked = []
+    for r in classes_defs[arch].get('rewards', []):
+        data = r['data']
+        if r['type'] == 'mdvlcraft:epicfight_skill':
+            name = re.sub(r'§.|[『』]', '', EF_NAMES[data['skill']]['name']).strip().title()
+            tip = clean(EF_NAMES[data['skill']].get('tooltip', ''))
+            picked.append(f"<b>{e(name)}</b> ({SLOT_NAMES[EF_SLOTS[data['skill']]]} Epic Fight skill){': ' + e(tip) if tip else ''}")
+        elif r['type'] == 'puffish_skills:attribute':
+            picked.append(f"<b>{attr_value(data['attribute'], data['value'])} {e(attr_name(data['attribute']))}</b>. {e(ATTR_INFO[data['attribute']])}")
+
+    cname = gen.CLASSES[cls]['title']
+    body = [
+        block('Abilities', [(n, f"{p} pts" + (f", {c}" if c else ''), e(t)) for n, p, c, t in abilities],
+              'on the ability wheel; numeral = spell level'),
+        block('Epic Fight skills', [(n, f"{p} pts", e(t)) for n, p, t in efskills], 'equip in the Combat Skills box'),
+        block(f'{e(title)} bonuses', stat_items('signature'), 'only this archetype'),
+        block(f'{cname} class bonuses', stat_items('class'), f'every {cname} archetype'),
+        block('Core bonuses', stat_items('core'), 'every archetype'),
+        block('Twig bonuses', stat_items('twig'), 'every archetype has a few'),
+    ]
+    head = (f"<div class='page'><h2>{badge(cls)} {e(title)}</h2>"
+            f"<p class='lead'>{e(role)} {len(skills)} skills, {cost} points for the whole tree. "
+            + (f"Picking it on the Classes tab also gives: {'; '.join(picked)}. " if picked else '')
+            + e(halved_note) + "</p>")
+    return head + "<div class='cols'>" + ''.join(body) + "</div></div>"
+
+
 # -- origins ----------------------------------------------------------------------------------------------------------
 class Pack:
     """Data and English names as the game sees them: pack KubeJS data first, then the binder, then the mod jars."""
@@ -170,7 +438,7 @@ def origin_rows(pack, layer_ns, layer_path):
 
 
 # -- html -------------------------------------------------------------------------------------------------------------
-STYLE = """@page { size: A4 landscape; margin: 12mm; }
+STYLE = """@page { size: A4 landscape; margin: 9mm; }
 body { font-family: 'DejaVu Sans', Arial, sans-serif; font-size: 8pt; color: #1b1e24; background: #fff; margin: 0; }
 h1 { font-size: 20pt; margin: 0 0 2mm; } h2 { font-size: 14pt; margin: 0 0 1mm; } h3 { font-size: 12pt; margin: 3mm 0 1mm; }
 p.lead { margin: 0 0 3mm; color: #4a505c; font-size: 8.5pt; }
@@ -184,7 +452,13 @@ td.num { text-align: right; white-space: nowrap; }
 .arch td:first-child { width: 20mm; font-weight: bold; background: #eef0f4; font-size: 8.5pt; }
 .origins td:first-child { width: 22mm; font-weight: bold; }
 .origins td { font-size: 7.5pt; }
-.wide td, .wide th small { font-size: 6.8pt; } .wide th { font-size: 8pt; }"""
+.wide td, .wide th small { font-size: 6.8pt; } .wide th { font-size: 8pt; }
+.cols { column-count: 3; column-gap: 4mm; column-fill: auto; height: 166mm; }
+.blk h4 { font-size: 7.6pt; margin: 0 0 0.6mm; padding: 0.5mm 1mm; background: #dfe3ea; break-after: avoid; }
+.blk h4 small { font-weight: normal; color: #5a606c; font-size: 6.2pt; }
+.blk { margin-bottom: 1.6mm; }
+.it { font-size: 6.3pt; line-height: 1.22; padding: 0.35mm 1mm; border-bottom: 1px solid #e3e6eb; break-inside: avoid; }
+.it .m { color: #6a707c; font-size: 5.8pt; }"""
 
 
 def badge(cls):
@@ -205,7 +479,8 @@ def main():
              f"<p class='lead'>Version {e(version)}. Totals for the <b>whole</b> tree. Pick {gen.ARCHETYPE_LIMIT} archetypes; each tree gives "
              f"{gen.STARTING_POINTS} point to start and 1 per level, with no level cap. Percentages add to the base; Max Health is in half-hearts. "
              "Abilities (spells and techniques) go on the ability wheel; Epic Fight skills go in the Combat Skills box of the abilities screen. "
-             "Core stats are in this table only; bonuses shared by a whole class are listed once, at the top of its page.</p>",
+             "Each archetype then has its own page listing every skill in its tree and what it does. Two archetypes of the same class "
+             "each give half their stat bonuses (abilities and Epic Fight skills stay whole).</p>",
              "<table><tr><th>Archetype</th><th>Class</th><th>Skills</th><th>Cost</th>" + "".join(f"<th>{e(t)}</th>" for _, t in CORE)
              + "<th>Abilities</th><th>EF skills</th></tr>"]
     for cls in CLASS_NODES:
@@ -219,24 +494,12 @@ def main():
                  "damage. Players also pick a race, a Martial class and a job (Origins) on first joining; these are listed at the end and are separate from the "
                  "archetype trees.</p>")
 
-    for cls in CLASS_NODES:
-        archs = [a for a in order if cls_of[a] == cls]
-        attrs = set.intersection(*(set(rows[a]['sums']) for a in archs)) - CORE_IDS
-        shared = sorted(k for k in attrs if max(rows[a]['sums'][k] for a in archs) - min(rows[a]['sums'][k] for a in archs) < 1e-3)
-        parts.append(f"<div class='page'><h2>{badge(cls)} {gen.CLASSES[cls]['title']}</h2><p class='lead'>Every {gen.CLASSES[cls]['title']} archetype: "
-                     + (", ".join(f"{e(attr_name(k))} {attr_value(k, rows[archs[0]]['sums'][k])}" for k in shared) or "–") + "</p>")
-        parts.append(f"<table class='arch{' wide' if len(archs) > 5 else ''}'><tr><th></th>" + "".join(f"<th>{e(title[a])}<small>{rows[a]['skills']} skills · {rows[a]['cost']} pts</small></th>" for a in archs) + "</tr>")
-        parts.append("<tr><td>Role</td>" + "".join(f"<td>{e(role[a])}</td>" for a in archs) + "</tr>")
-        parts.append("<tr><td>Abilities</td>" + "".join(f"<td>{e(', '.join(rows[a]['abilities'])) or '–'}</td>" for a in archs) + "</tr>")
-        parts.append("<tr><td>Epic Fight</td>" + "".join(f"<td>{e(', '.join(rows[a]['efskills'])) or '–'}</td>" for a in archs) + "</tr>")
-        cells = []
-        for a in archs:
-            own = sorted((k for k in rows[a]['sums'] if k not in CORE_IDS and k not in shared), key=attr_name)
-            lines = [f"{e(attr_name(k))} {attr_value(k, rows[a]['sums'][k])}" for k in own] + [e(x) for x in rows[a]['extra']]
-            cells.append(f"<td>{'<br>'.join(lines) or '–'}</td>")
-        parts.append("<tr><td>Bonuses</td>" + "".join(cells) + "</tr></table></div>")
-
     pack = Pack(mods_dir, kubejs_dir)
+    for cls in CLASS_NODES:
+        for a in (x for x in order if cls_of[x] == cls):
+            parts.append(archetype_page(a, cls, title[a], role[a], classes_defs, pack,
+                                        f"Picked with another {gen.CLASSES[cls]['title']} archetype, every stat bonus here is halved."))
+
     parts.append("<div class='page'><h2>Origins</h2><p class='lead'>Picked on first joining, separately from the archetype trees: one race and one "
                  "class. A race or class can be changed later with an Orb of Origin (an enchanted golden apple surrounded by eight gold ingots).</p>")
     for heading, column, (ns, path) in (('Races', 'Race', ('origins', 'origin')), ('Martial classes', 'Martial', ('mdvlcraft', 'martial')),
