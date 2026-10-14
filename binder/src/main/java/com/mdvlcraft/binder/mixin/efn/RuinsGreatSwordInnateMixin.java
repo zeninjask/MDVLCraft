@@ -4,6 +4,7 @@ import com.hm.efn.gameasset.EFNSKillDataKeys;
 import com.hm.efn.gameasset.animations.EFNGreatSwordAnimations;
 import com.hm.efn.skill.weapon_innate.RuinsGreatSwordInnate;
 import com.mdvlcraft.binder.client.RuinsChargeInput;
+import net.minecraft.sounds.SoundEvent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -12,6 +13,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import yesman.epicfight.api.animation.AnimationManager.AnimationAccessor;
 import yesman.epicfight.skill.SkillContainer;
+import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 
 @Mixin(value = RuinsGreatSwordInnate.class, remap = false)
 public abstract class RuinsGreatSwordInnateMixin {
@@ -29,6 +31,12 @@ public abstract class RuinsGreatSwordInnateMixin {
     private int mdvlcraft$chargeOnLeftClick(long window, int button) {
         boolean charging = this.mdvlcraft$inputContainer.getDataManager().getDataValue(EFNSKillDataKeys.IS_PRESSING.get());
         return RuinsChargeInput.mouseButton(window, button, charging);
+    }
+
+    /** The respawn anchor "click" played at 100x volume when a charged swing is released. */
+    @Redirect(method = "playAttackAnimation", at = @At(value = "INVOKE",
+        target = "Lyesman/epicfight/world/capabilities/entitypatch/player/PlayerPatch;playSound(Lnet/minecraft/sounds/SoundEvent;FFF)V"), require = 2)
+    private void mdvlcraft$noReleaseClick(PlayerPatch<?> patch, SoundEvent sound, float volume, float pitchMin, float pitchMax) {
     }
 
     @Redirect(
