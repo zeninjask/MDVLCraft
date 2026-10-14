@@ -1,0 +1,13 @@
+{
+  "type": "origins:modify_damage_dealt",
+  "name": "Moonlit Fury",
+  "description": "At night you deal 15% more damage.",
+  "condition": {
+    "type": "origins:daytime",
+    "inverted": true
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.15
+  }
+}

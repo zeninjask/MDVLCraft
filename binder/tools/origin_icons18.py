@@ -290,6 +290,7 @@ ICONS = {
     'mdvlcraft:crossbowman': ('arrows', 'wood'), 'mdvlcraft:spearman': ('spear', 'steel'), 'mdvlcraft:monster_hunter': ('skull', 'bone'),
     'mdvlcraft:bounty_hunter': ('coin', 'gold'), 'mdvlcraft:battle_mage': ('sword_sparkle', 'glintstone'), 'mdvlcraft:sentinel': ('helmet', 'steel'),
     'mdvlcraft:paladin': ('cross', 'holy'), 'mdvlcraft:corsair': ('slash', 'crimson'), 'mdvlcraft:zealot': ('burst', 'blood'),
+    'mdvlcraft:wolf_blooded': ('moon', 'crimson'), 'mdvlcraft:changeling': ('mask', 'pink'),
 }
 # CustomModelData of the pack's own origins on mdvlcraft:origin_icon (the origin JSONs in data/mdvlcraft/origins use these)
 OWN_CMD = {oid: 30 + i for i, oid in enumerate([
@@ -297,7 +298,8 @@ OWN_CMD = {oid: 30 + i for i, oid in enumerate([
     'mdvlcraft:alchemist', 'mdvlcraft:sailor', 'mdvlcraft:fisher', 'mdvlcraft:bard', 'mdvlcraft:cavalry', 'mdvlcraft:herbalist',
     'mdvlcraft:beekeeper', 'mdvlcraft:gravedigger', 'mdvlcraft:duelist', 'mdvlcraft:guardian', 'mdvlcraft:skirmisher',
     'mdvlcraft:crossbowman', 'mdvlcraft:spearman', 'mdvlcraft:monster_hunter', 'mdvlcraft:bounty_hunter', 'mdvlcraft:battle_mage',
-    'mdvlcraft:sentinel', 'mdvlcraft:paladin', 'mdvlcraft:corsair', 'mdvlcraft:zealot'])}
+    'mdvlcraft:sentinel', 'mdvlcraft:paladin', 'mdvlcraft:corsair', 'mdvlcraft:zealot', 'mdvlcraft:wolf_blooded',
+    'mdvlcraft:changeling'])}
 MODELS = os.path.join(I.ROOT, 'src/main/resources/assets/mdvlcraft/models/item')
 
 

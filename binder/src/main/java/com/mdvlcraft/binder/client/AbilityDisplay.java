@@ -14,10 +14,13 @@ import io.redspace.ironsspellbooks.player.ClientMagicData;
 import io.redspace.ironsspellbooks.util.TooltipsUtils;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 
 final class AbilityDisplay {
@@ -53,12 +56,7 @@ final class AbilityDisplay {
             lines.add(technique.displayName().copy().withStyle(ChatFormatting.DARK_RED));
             lines.add(Component.translatable("ability.mdvlcraft." + technique.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));
             lines.add(Component.translatable("ui.irons_spellbooks.mana_cost", technique.manaCost(level)).withStyle(ChatFormatting.BLUE));
-            lines.add(
-                (technique.cooldownTicks() == 0
-                        ? Component.translatable("ability.mdvlcraft.no_cooldown")
-                        : Component.translatable("ability.mdvlcraft.cooldown", technique.cooldownTicks() / 20))
-                    .withStyle(ChatFormatting.BLUE)
-            );
+            lines.add(cooldownLine(technique, minecraft.player).withStyle(ChatFormatting.BLUE));
         } else if (ability instanceof SlotSkillAbility slotSkill) {
             lines.add(slotSkill.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(Component.translatable("ability.mdvlcraft." + slotSkill.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));
@@ -86,5 +84,23 @@ final class AbilityDisplay {
         }
 
         return lines;
+    }
+
+    /** The cooldown after the player's cooldown reduction, with the base beside it when they differ. */
+    private static MutableComponent cooldownLine(Technique technique, Player player) {
+        if (technique.cooldownTicks() == 0) {
+            return Component.translatable("ability.mdvlcraft.no_cooldown");
+        }
+
+        int effective = ClientTechniqueCooldowns.effectiveTicks(technique, player);
+        if (effective == technique.cooldownTicks()) {
+            return Component.translatable("ability.mdvlcraft.cooldown", seconds(effective));
+        }
+
+        return Component.translatable("ability.mdvlcraft.cooldown_reduced", seconds(effective), seconds(technique.cooldownTicks()));
+    }
+
+    private static String seconds(int ticks) {
+        return ticks % 20 == 0 ? String.valueOf(ticks / 20) : String.format(Locale.ROOT, "%.1f", ticks / 20.0);
     }
 }

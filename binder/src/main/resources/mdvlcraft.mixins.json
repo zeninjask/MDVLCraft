@@ -47,6 +47,7 @@
     "efn.CullableUtilMixin",
     "efn.YamatoInnateMixin",
     "efn.RuinsGreatSwordInnateMixin",
+    "efn.RuinGreatSwordPassiveMixin",
     "efn.MeenLanceInnateMixin",
     "wom.ShootingStyleSkillMixin",
     "calio.HolderCodecMixin",
@@ -54,6 +55,11 @@
     "majrusz.EntityHelperMixin",
     "antimagic.BlackAstaCapabilityMixin",
     "antimagic.DemonicAssimilationSpellMixin",
+    "antimagic.DemonSwordUseMixin",
+    "antimagic.AntiMagicSwordItemMixin",
+    "antimagic.SummonDemonSwordSpellMixin",
+    "epicfight.DodgeStaminaMixin",
+    "antimagic.AntiMagicSlashProjectileMixin",
     "traveloptics.HydroshotProjectileMixin",
     "LivingEntityMixin",
     "fen.TitleChatHandlerMixin",
@@ -64,11 +70,14 @@
     "BowItemMixin",
     "farmersdelight.BackstabbingEnchantmentMixin",
     "bountiful.BoardBlockEntityMixin",
-    "stamina.StaminaMonitorMixin"
+    "stamina.StaminaMonitorMixin",
+    "parties.EntityAllianceMixin",
+    "stamina.StaminaHandlerMixin"
   ],
   "client": [
     "origins.ChooseOriginScreenMixin",
     "cursedfate.CursedfateModKeyMappingsMixin",
+    "cursedfate.ScreenShakeMixin",
     "irons.KeyMappingsMixin",
     "WeaponTypeReloadListenerMixin",
     "SkillsScreenMixin",
@@ -95,7 +104,8 @@
     "babylon.AbsorbtionShieldHandlerMixin",
     "parties.PartiesBufferMixin",
     "somakespells.SpectralRondoPlayerRenderHandlerMixin",
-    "PoseStackAccessor"
+    "PoseStackAccessor",
+    "parties.EpicFightLockOnMixin"
   ],
   "injectors": {
     "defaultRequire": 1

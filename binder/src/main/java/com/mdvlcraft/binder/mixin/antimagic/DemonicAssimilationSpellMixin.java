@@ -10,17 +10,27 @@ import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 
-/** Taking on Demonic Assimilation plays the Feral Claw's Beast Roar (Epic Fight Nightfall), shockwave and all. */
+/**
+ * Taking on Demonic Assimilation plays the Feral Claw's Beast Roar (Epic Fight Nightfall), shockwave and all. The
+ * transformation lasts 45 seconds instead of 90.
+ */
 @Pseudo
 @Mixin(targets = "com.tiago.antimagic.spell.DemonicAssimilationSpell", remap = false)
 public abstract class DemonicAssimilationSpellMixin {
     private static final String BEAST_ROAR = "efn:biped/nf_claw/nf_claw_beastroar";
+
+    @ModifyConstant(method = "lambda$onCast$2", constant = @Constant(intValue = 1800), require = 1)
+    private static int mdvlcraft$shorterTransformation(int ticks) {
+        return 900;
+    }
 
     @Inject(method = "onCast", at = @At("TAIL"))
     private void mdvlcraft$beastRoar(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData magic, CallbackInfo ci) {

@@ -11,7 +11,8 @@ You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its ow
 - **Game:** Minecraft **1.20.1**, Forge **47.4.10**, Java **17**. About 250 mods: Epic Fight and its addons, Iron's Spells and addons, Cursed Fate, Origins with Origins Classes, Medieval Origins and Origins++, Pufferfish's Skills, Villager Recruits, Bountiful, Cataclysm, Lootr, alekiships, Farmer's Delight, Xaero's maps, Distant Horizons, Embeddium, Oculus and others.
 - **Repository:** `so1ga1eo/mdvlcraft` (private). It contains an All Rights Reserved jar (`epic_fight_ponder`), so never make it public.
 - **Branches:**
-  - Development happens on `claude/optimistic-pasteur-olhvvt`.
+  - The main development branch is `liam-agent`, worked on by another Claude agent. Don't push to it. Create your own branch from it, do your work there, and push your branch. When you're finished, the `liam-agent` agent merges your branch and builds the release.
+  - Pull `liam-agent` into your branch now and then so you build on the latest work.
   - `main` holds only the release files for players: client and server `.mrpack`, the client Java arguments, the server `user_jvm_args.txt`, the skill-tree PDF and a short README.
   - Never open a pull request unless the user asks.
 - **Read first:**
@@ -50,7 +51,8 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 3. Build the binder, then run `python3 binder/tools/build_packs.py <new version> .`. It swaps the binder jar into both packs and sets the version.
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
-   - Every rebuild bumps the patch version. The latest is 1.9.24, so the next is 1.9.25.
+   - Only the `liam-agent` agent builds releases and pushes to `main`, unless the user tells you otherwise.
+   - Every rebuild bumps the patch version. The latest is 1.9.32, so the next is 1.9.33.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -72,7 +74,6 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 
 ## Unfinished work
 
-- **Branch `seb-agent`** (another agent's branch, merged into the development branch by the agent who releases): the Spectral Rondo pose-stack crash fix and the Dragon Quest IX look for every menu (font, `client/DqGui`, button and slider mixins, skill screen textures, Recruits and Origins skins, and every binder icon replaced by a Dragon Quest IX icon from `binder/tools/dq9_icons.py`; see `binder/README.md` item 8). Everything ships in the binder jar except two pack settings:
-  - `base/client/overrides/options.txt`: `darkMojangStudiosBackground:true` (black loading screens, Forge's early window included) and `guiScale:4` (was 3; at 4 the 32 x 32 DQ9 icons draw at an even 2 screen pixels per icon pixel). The file has CRLF line endings.
+- Nothing is pending as of 1.9.32. Releases up to it contain creepers no longer spawning, rarer wild mages, the Dragon Quest IX look for every menu (font, `client/DqGui`, button and slider mixins, skill screen textures, Recruits and Origins skins, party status windows, and every binder icon replaced by a Dragon Quest IX icon from `binder/tools/dq9_icons.py`; see `binder/README.md` item 8, plus `darkMojangStudiosBackground:true` in `base/client/overrides/options.txt`, which has CRLF line endings), class Stamina Regen scaling the main stamina regen, the Explorer's Trailblazer, the demon swords on the Ruins Greatsword moveset, the Cursed Fate screen-shake fix, the Wolf-blooded and Changeling races, enchanted DPS on the status page, the Bountiful lean, the guide book, the status page tooltips (Class, Race, Martial, Job), the music gap, the stamina and Parties fixes, and the Spectral Rondo pose-stack crash fix.
 - **Known intermittent issue:** one test client start crashed inside VanillaBackport with "Registry is already frozen". Blackgear Platform unfreezes and refreezes the root registry. It couldn't be reproduced, so it's left alone.
 - **Client tests here:** the full client needs about 10 GB and is OOM-killed next to a server. Move JEI out of both the test client's and the test server's mods folders (its recipe loading is the spike; the server refuses a client without it).

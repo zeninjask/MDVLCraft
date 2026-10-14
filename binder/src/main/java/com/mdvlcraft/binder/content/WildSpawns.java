@@ -43,7 +43,7 @@ public final class WildSpawns {
     record Wild(int weight, double chance, boolean placement, int maxGroup) {
     }
 
-    private static final Wild MAGE = new Wild(2, 1.0, true, 5);
+    private static final Wild MAGE = new Wild(2, 0.75, true, 5);
     private static final Wild CHARACTER = new Wild(1, 0.05, false, 1);
     static final Map<ResourceLocation, Wild> ALLOWED = Map.ofEntries(
         Map.entry(id("irons_spellbooks", "archevoker"), MAGE),
