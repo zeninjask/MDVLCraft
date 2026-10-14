@@ -21,6 +21,7 @@ import com.mdvlcraft.binder.monk.UnarmedParry;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.music.Jingles;
 import com.mdvlcraft.binder.skills.ArchetypeTabs;
+import com.mdvlcraft.binder.skills.MageExperience;
 import com.mdvlcraft.binder.skills.ClassTitles;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
@@ -69,6 +70,7 @@ public final class MDVLBinder {
             AbilityReward.register();
             EpicSkillReward.register();
             ArchetypeTabs.register();
+            MageExperience.register();
             Jingles.register();
             ClassTitles.register();
             LanternBelt.register();
