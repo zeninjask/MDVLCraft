@@ -1,9 +1,12 @@
-"""Builds MDVLCraft-<version>-client.mrpack and -server.mrpack from an unpacked base (default: <repo>/base/{client,server},
-each a modrinth.index.json plus overrides/), with the newest binder jar from binder/build/libs in place of the base's own.
+"""Builds MDVLCraft-<version>-client.mrpack, -client-performance.mrpack and -server.mrpack from an unpacked base (default:
+<repo>/base/{client,server}, each a modrinth.index.json plus overrides/), with the newest binder jar from binder/build/libs
+in place of the base's own. The performance client is derived from base/client first (make_performance_pack.py).
 Recreate the base by unzipping the latest committed MDVLCraft-<version>-client/server.mrpack into base/client and base/server.
 Usage: python3 binder/tools/build_packs.py <version> <outdir> [base dir]
 """
 import glob, json, os, sys, zipfile
+
+import make_performance_pack
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = sys.argv[3] if len(sys.argv) > 3 else os.path.join(HERE, '..', '..', 'base')
@@ -35,5 +38,6 @@ def build(pack):
     print(out, len(index['files']), 'downloaded files, binder', os.path.basename(binder), os.path.getsize(out), 'bytes')
 
 
-for pack in ('client', 'server'):
+make_performance_pack.make(BASE)
+for pack in ('client', make_performance_pack.PACK, 'server'):
     build(pack)
