@@ -20,6 +20,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ClientPlayerNetworkEvent;
 import net.minecraftforge.client.event.sound.PlaySoundEvent;
@@ -34,6 +35,10 @@ import org.slf4j.Logger;
  * plays a random track from it that is never the one just played, waits 30 seconds to 3 minutes between tracks,
  * cross-fades straight to the new pool when the pool changes, ducks under the
  * skill / class / sleep jingles, and silences every other music source.
+ *
+ * Changes of place have a 15-block buffer so walking along an edge doesn't switch back and forth: the server only
+ * reports leaving a village or structure 15 blocks past its last piece (music/MusicPlaces), and the cave, ocean and
+ * wilds music only changes once the player is 15 blocks from where the old one last applied.
  */
 @EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
 public final class MusicDirector {
@@ -48,6 +53,10 @@ public final class MusicDirector {
     private static final RandomSource RANDOM = RandomSource.create();
     private static boolean inVillage;
     private static boolean inStructure;
+    private static final double TERRAIN_BUFFER = 15.0;
+    /** The cave, ocean or wilds pool playing, and where the player last stood in its area. */
+    private static MusicPool terrain;
+    private static Vec3 terrainAt;
     private static MusicTrack current;
     private static String lastTrack;
     private static int gap;
@@ -131,21 +140,32 @@ public final class MusicDirector {
             return MusicPool.ALCHEMY;
         }
         if (mc.level.dimension() != Level.OVERWORLD) {
+            terrain = null;
             return inStructure ? MusicPool.STRUCTURE : MusicPool.OTHER_DIMENSION;
         }
         if (inVillage) {
+            terrain = null;
             long time = mc.level.getDayTime() % 24000L;
             return time >= 13000L && time < 23000L ? MusicPool.VILLAGE_NIGHT : MusicPool.VILLAGE_DAY;
         }
         BlockPos pos = player.blockPosition();
-        if (pos.getY() < mc.level.getSeaLevel() && !mc.level.canSeeSky(pos.above())) {
-            return MusicPool.CAVE;
-        }
-        if (inStructure) {
+        boolean cave = pos.getY() < mc.level.getSeaLevel() && !mc.level.canSeeSky(pos.above());
+        if (inStructure && !cave) {
+            terrain = null;
             return MusicPool.STRUCTURE;
         }
         Holder<Biome> biome = mc.level.getBiome(pos);
-        return biome.is(BiomeTags.IS_OCEAN) || biome.is(BiomeTags.IS_BEACH) ? MusicPool.OCEAN : MusicPool.WILDS;
+        MusicPool here = cave ? MusicPool.CAVE : biome.is(BiomeTags.IS_OCEAN) || biome.is(BiomeTags.IS_BEACH) ? MusicPool.OCEAN : MusicPool.WILDS;
+        return buffered(here, player.position());
+    }
+
+    /** The cave, ocean or wilds pool, kept until the player is TERRAIN_BUFFER blocks from where it last applied. */
+    private static MusicPool buffered(MusicPool here, Vec3 position) {
+        if (terrain == null || here == terrain || position.distanceTo(terrainAt) >= TERRAIN_BUFFER) {
+            terrain = here;
+            terrainAt = position;
+        }
+        return terrain;
     }
 
     /** Vanilla and other mods' music (music category, or any sound named *music* other than jukebox discs) never plays. */
@@ -164,5 +184,6 @@ public final class MusicDirector {
     @SubscribeEvent
     public static void onLoggingOut(ClientPlayerNetworkEvent.LoggingOut event) {
         setPlace(false, false);
+        terrain = null;
     }
 }
