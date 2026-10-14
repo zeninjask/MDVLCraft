@@ -15,6 +15,8 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffectUtil;
 import net.minecraftforge.client.extensions.common.IClientMobEffectExtensions;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.screens.inventory.CreativeModeInventoryScreen;
+import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -48,6 +50,9 @@ import top.theillusivec4.curios.common.network.client.CPacketOpenCurios;
  * (onScreenOpening), and the screen Curios would show is replaced by this one. Slots are placed by what they hold, not
  * by index, every frame, since Curios rebuilds them when accessory slots are gained or lost. The main hand has no slot
  * of its own; its row is the selected hotbar slot.
+ *
+ * In creative mode a Creative button in the Equipment title goes to the creative menu, and the creative menu has an
+ * Inventory button back to this screen (onScreenInit).
  *
  * Inventory Profiles Next's buttons are moved by its hints, which count from the right and bottom of imageWidth x
  * imageHeight (its defaults sit above the vanilla inventory's rows): the move-all and sort buttons go to the right of
@@ -110,7 +115,9 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
     private static final int EFFECTS_MIN_WIDE = 90;
     private static final int EFFECTS_NARROW = 28;
     private static final int EFFECT_ROW = 24;
+    private static final int TOGGLE_H = 15;
     private final List<Slot> accessories = new ArrayList<>();
+    private DqGui.Button creative;
     /** The screen's real height, imageHeight or more with many accessory rows. */
     private int fullHeight = HEIGHT;
 
@@ -131,6 +138,36 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
         } else if (event.getNewScreen() instanceof AbstractContainerScreen<?> screen && screen.getMenu() instanceof CuriosContainer menu
             && !(screen instanceof DqInventoryScreen)) {
             event.setNewScreen(new DqInventoryScreen(menu, Minecraft.getInstance().player.getInventory(), screen.getTitle()));
+        }
+    }
+
+    @Override
+    protected void init() {
+        super.init();
+        this.creative = null;
+        if (this.minecraft.player.isCreative()) {
+            Component label = Component.translatable("screen.mdvlcraft.inventory.creative");
+            this.creative = this.addRenderableWidget(new DqGui.Button(0, 0, this.font.width(label) + 12, TOGGLE_H, label, DqInventoryScreen::openCreative));
+        }
+    }
+
+    /** Leaves Curios' menu (as closing the screen would) and opens the creative menu as the inventory key does. */
+    private static void openCreative() {
+        Minecraft minecraft = Minecraft.getInstance();
+        LocalPlayer player = minecraft.player;
+        player.closeContainer();
+        minecraft.setScreen(new CreativeModeInventoryScreen(
+            player, player.connection.enabledFeatures(), minecraft.options.operatorItemsTab().get() && player.canUseGameMasterBlocks()
+        ));
+    }
+
+    /** The creative menu's Inventory button opens this screen, by asking the server for Curios' menu (onScreenOpening). */
+    static void onScreenInit(ScreenEvent.Init.Post event) {
+        if (event.getScreen() instanceof CreativeModeInventoryScreen screen) {
+            Component label = Component.translatable("screen.mdvlcraft.inventory.open");
+            int w = screen.getMinecraft().font.width(label) + 12;
+            event.addListener(new DqGui.Button(screen.getGuiLeft() - 4 - w, screen.getGuiTop() + 4, w, TOGGLE_H + 3, label,
+                () -> NetworkHandler.INSTANCE.sendToServer(new CPacketOpenCurios(ItemStack.EMPTY))));
         }
     }
 
@@ -177,6 +214,9 @@ public final class DqInventoryScreen extends AbstractContainerScreen<InventoryMe
         this.fullHeight = Math.max(HEIGHT, this.accessoriesBottom());
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.fullHeight) / 2;
+        if (this.creative != null) {
+            this.creative.setPosition(this.leftPos + RIGHT_X + RIGHT_WIDTH - 6 - this.creative.getWidth(), this.topPos + 3);
+        }
     }
 
     private static int rowOf(int inventoryIndex) {
