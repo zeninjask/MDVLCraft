@@ -10,9 +10,9 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "7";
+    private static final String PROTOCOL = "8";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
-        ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "7", "7"::equals, "7"::equals
+        ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "8", "8"::equals, "8"::equals
     );
 
     private BinderNetwork() {
@@ -83,6 +83,14 @@ public final class BinderNetwork {
             DemonSwordArtPacket::encode,
             DemonSwordArtPacket::decode,
             DemonSwordArtPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+        CHANNEL.registerMessage(
+            id++,
+            DismissAssimilationPacket.class,
+            DismissAssimilationPacket::encode,
+            DismissAssimilationPacket::decode,
+            DismissAssimilationPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
     }
