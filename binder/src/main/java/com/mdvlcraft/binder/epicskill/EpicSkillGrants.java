@@ -110,6 +110,11 @@ public final class EpicSkillGrants {
         if (clash == null) {
             throw new IllegalStateException(CLASH_BLADE + " is not registered");
         }
+        // Clash Blade equips itself into its own slot on a first join without being learned, so the slot is cleared too.
+        SkillContainer clashSlot = patch.getSkill(firstSlotFor(clash));
+        if (clashSlot.getSkill() == clash) {
+            EpicSkillEquip.apply(patch, clashSlot, null);
+        }
         if (skills.hasLearned(clash)) {
             forget(player, patch, skills, clash);
         }
