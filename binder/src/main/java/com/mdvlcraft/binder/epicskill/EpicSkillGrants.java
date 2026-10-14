@@ -24,7 +24,7 @@ public final class EpicSkillGrants {
     private static final String SOULSLIKE_DODGE = "efn:efn_dodge";
     private static final String SOULSLIKE_STEP = "efn:efn_step";
     private static final String ABSOLUTE_DEFLECTION = "efn:efn_parry";
-    // Every player always has Clash Blade equipped in its own slot (not taught by a tree).
+    // Clash Blade is taken away from every player (it used to be given to everyone).
     private static final String CLASH_BLADE = "efclash_blade:clash_blade";
     private static final Set<Skill> TREE_SKILLS = new HashSet<>();
     private static final Map<UUID, Set<EpicSkillReward>> ACTIVE = new HashMap<>();
@@ -110,12 +110,8 @@ public final class EpicSkillGrants {
         if (clash == null) {
             throw new IllegalStateException(CLASH_BLADE + " is not registered");
         }
-        if (!skills.hasLearned(clash)) {
-            learn(player, skills, clash);
-        }
-        SkillContainer clashSlot = patch.getSkill(firstSlotFor(clash));
-        if (clashSlot.getSkill() != clash) {
-            EpicSkillEquip.apply(patch, clashSlot, clash);
+        if (skills.hasLearned(clash)) {
+            forget(player, patch, skills, clash);
         }
     }
 

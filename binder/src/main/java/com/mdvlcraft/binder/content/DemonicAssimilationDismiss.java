@@ -4,22 +4,28 @@ import com.tiago.antimagic.capability.BlackAstaCapabilityProvider;
 import net.minecraft.server.level.ServerPlayer;
 
 /**
- * Right-clicking while sneaking dismisses Demonic Assimilation (DemonicAssimilationInput sends it). The transformation is
- * left one tick, so Anti-Magic's own expiry ends it (effects removed, clients synced, expiry message) on the next tick.
+ * Right-clicking while sneaking (DemonicAssimilationInput sends it) or casting Demonic Assimilation again dismisses it.
+ * The transformation is left one tick, so Anti-Magic's own expiry ends it (effects removed, clients synced, expiry
+ * message) on the next tick.
  */
 public final class DemonicAssimilationDismiss {
     private DemonicAssimilationDismiss() {
     }
 
     public static void dismiss(ServerPlayer player) {
-        if (!player.isShiftKeyDown()) {
-            return;
+        if (player.isShiftKeyDown()) {
+            end(player);
         }
+    }
 
-        player.getCapability(BlackAstaCapabilityProvider.BLACK_ASTA_CAPABILITY).ifPresent(cap -> {
-            if (cap.isBlackAstaActive()) {
-                cap.setTransformationTicks(1);
+    /** Ends an active Demonic Assimilation; false when it isn't active. */
+    public static boolean end(ServerPlayer player) {
+        return player.getCapability(BlackAstaCapabilityProvider.BLACK_ASTA_CAPABILITY).map(cap -> {
+            if (!cap.isBlackAstaActive()) {
+                return false;
             }
-        });
+            cap.setTransformationTicks(1);
+            return true;
+        }).orElse(false);
     }
 }
