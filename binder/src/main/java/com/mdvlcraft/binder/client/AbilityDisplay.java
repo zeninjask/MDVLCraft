@@ -2,6 +2,7 @@ package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.Ability;
 import com.mdvlcraft.binder.ability.DoppelgangerAbility;
+import com.mdvlcraft.binder.ability.PlannedAbility;
 import com.mdvlcraft.binder.ability.SlotSkillAbility;
 import com.mdvlcraft.binder.ability.SpellAbility;
 import com.mdvlcraft.binder.ability.StanceAbility;
@@ -69,6 +70,10 @@ final class AbilityDisplay {
             lines.add(sustenance.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(Component.translatable("ability.mdvlcraft.arcane_sustenance.desc", 1, 4).withStyle(ChatFormatting.GRAY));
             lines.add(Component.translatable("ui.irons_spellbooks.mana_cost", sustenance.manaCost(level)).withStyle(ChatFormatting.BLUE));
+        } else if (ability instanceof PlannedAbility planned) {
+            lines.add(planned.displayName().copy().withStyle(ChatFormatting.GOLD));
+            lines.add(planned.description().copy().withStyle(ChatFormatting.GRAY));
+            lines.add(Component.translatable("ability.mdvlcraft.planned.tooltip").withStyle(ChatFormatting.YELLOW));
         } else if (ability instanceof StanceAbility stance) {
             int self = minecraft.player.getId();
             StanceElement element = ClientStances.element(self);

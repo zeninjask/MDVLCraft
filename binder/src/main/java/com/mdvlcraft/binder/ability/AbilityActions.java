@@ -54,6 +54,8 @@ public final class AbilityActions {
                 Doppelgangers.press(player);
             } else if (ability.get() instanceof SustenanceAbility sustenance) {
                 sustenance.cast(player);
+            } else if (ability.get() instanceof PlannedAbility planned) {
+                planned.cast(player);
             }
         }
     }

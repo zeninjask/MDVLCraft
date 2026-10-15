@@ -64,8 +64,8 @@ continue from the first unticked step in "Progress".
    the same number of points one old tree had.
 5. **Modified abilities** are a new ability kind (`ability/PlannedAbility`, ids `mdvlcraft:planned/<key>`): they have a
    name, description and DQ9 icon, show on the wheel and in the abilities screen, and casting them does nothing.
-6. **Same-class halving** (`skills/SameClassHalving`) keeps working: base nodes are prefixed with their archetype, so
-   attribute rewards of a vocation tab whose two archetypes share a class are halved.
+6. **No same-class halving**: the user removed it (two archetypes of the same class give full bonuses).
+   `SameClassHalving`, `AttributeRewardMixin` and `SkillsModAccessor` are deleted.
 7. **Removed archetypes' special code**: the Mage Hunter's demon-sword slot (`content/MageHunterSlot`) follows the demon
    swords to the Berserker base.
 
@@ -91,17 +91,22 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
    - Icons referenced but not drawn yet (step 6): `icons18/archetype/<new id>.png`, `icons18/tab/voc_<a>_<b>.png`,
      `icons18/ability/<ns>_<spell>.png` for newly granted spells, `icons18/ability/mdvlcraft_planned_<key>.png`,
      `icons18/skill/<ns>_<id>.png` for Epic Fight skills never granted before, `icons18/bonus/<attr>.png` for new attributes.
-- [ ] 2. Planned (Modified) abilities in Java (`PlannedAbility`, registry from a generated JSON, wheel + abilities screen).
+- [x] 2. Planned (Modified) abilities in Java (`PlannedAbility`, registry from a generated JSON, wheel + abilities screen).
+   - `ability/PlannedAbility` (in `Ability.byId`, cast in `AbilityActions.press`, tooltip in `client/AbilityDisplay`);
+     casting shows "<name> is not built yet" on the action bar. Compiles; not tested in game yet.
 - [ ] 3. Load-time composer mixin for `voc_*` categories; server boot loads all 154 categories with no `[puffish_skills]` errors.
+   - Written and compiling: `skills/VocationParts` (assembly, `tabOf(a, b)`, the vocation index) and
+     `mixin/puffish/PackConfigReaderMixin`. Not yet boot-tested (do it after step 4). If loading is slow, cache the
+     parsed base parts per reader (each base is read for 17 vocations).
 - [ ] 4. Java: `ArchetypeTabs` (pick page, vocation unlock), `Respec` (18 archetypes, classes, reset/change on the vocation
        tab), `ArchetypeLevels`, `ClassTitles` (vocation name), `CharacterScreen` (Status page), `RespecScreen`,
-       `PartyPanels` emblems, `Jingles`, `SameClassHalving`, `MageHunterSlot`.
+       `PartyPanels` emblems, `Jingles`, `MageHunterSlot`.
 - [ ] 5. Migration of old players: detect, pop-up to pick two archetypes, vocation level = highest old level, flag in the
        player's persistent data so it runs once.
 - [ ] 6. DQ9 icons for the 18 archetypes, tabs, every new spell and every Modified ability (`tools/dq9_icons.py`).
 - [ ] 7. Skill-tree PDF (`tools/skill_tree_doc.py`) for the new trees.
 - [ ] 8. Build, server boot test, client test (pick page, vocation tab, migration pop-up, titles, status page).
-- [ ] 9. Update `binder/README.md`, `binder/SKILL_TREES.md`, `docs/AGENT_HANDOFF.md`; final push. No release unless asked.
+- [ ] 9. Update `binder/BALANCE.md` (still describes same-class halving and the old trees), `binder/README.md`, `binder/SKILL_TREES.md`, `docs/AGENT_HANDOFF.md`; final push. No release unless asked.
 
 ## Notes for whoever continues
 

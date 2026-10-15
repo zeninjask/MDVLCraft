@@ -547,10 +547,8 @@ def build_vocations(live, roots):
         write(part / "definitions.json", defs)
         write(part / "skills.json", skills)
         write(part / "connections.json", {"normal": {"bidirectional": conns}})
-        same = CLASS_OF[a] == CLASS_OF[b]
         index[vid] = {"a": a, "b": b, "name": r["names"][0], "names": r["names"],
-                      "description": f"{D.TITLE[a]} + {D.TITLE[b]}. " + ("Two of the same class: each base's bonuses are halved. " if same else "")
-                      + f"Left: the {D.TITLE[a]} base. Right: the {D.TITLE[b]} base. Centre column: the {r['names'][0]} vocation's own skills and bonuses."}
+                      "description": f"{D.TITLE[a]} + {D.TITLE[b]}. Left: the {D.TITLE[a]} base. Right: the {D.TITLE[b]} base. Centre column: the {r['names'][0]} vocation's own skills and bonuses."}
     write(PARTS / "vocations.json", index)
     return index
 

@@ -22,7 +22,6 @@ import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.music.Jingles;
 import com.mdvlcraft.binder.skills.ArchetypeTabs;
 import com.mdvlcraft.binder.skills.MageExperience;
-import com.mdvlcraft.binder.skills.SameClassHalving;
 import com.mdvlcraft.binder.skills.ClassTitles;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
@@ -74,7 +73,6 @@ public final class MDVLBinder {
             MageExperience.register();
             Jingles.register();
             ClassTitles.register();
-            SameClassHalving.register();
             LanternBelt.register();
         });
     }
