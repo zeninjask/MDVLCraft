@@ -42,6 +42,7 @@ STAT = {
     'TMC': ('Technique Mana Cost', '-15%'), 'CRSP': ('Cursed Spell Power', '+15%'),
     'NSP': ('Nature Spell Power', '+15%'), 'NRES': ('Nature Resistance', '+15%'), 'NREG': ('Health per 5 s on natural ground', '+1'),
     'SYM': ('Symmetry Spell Power', '+15%'), 'SPI': ('Spirit Spell Power', '+15%'), 'SYMR': ('Symmetry Spell Resist', '+15%'),
+    'POLE': ('Staff & Spear Damage', '+15%'),
     'BSTB': ('Backstab Damage', '+15%'), 'DAG': ('Dagger Damage', '+15%'), 'ANEG': ('Armor Negation', '+10%'),
     'PSH': ('Protection Shred', '+10%'), 'STL': ('Stealth', '+10%'),
     'LUCK': ('Luck', '+2'), 'FORT': ('Fortune Level', '+1'), 'DROP': ('Chance of a Double Drop', '+10%'), 'REACH': ('Melee Reach', '+0.5'),
@@ -60,7 +61,7 @@ SIG = {
     'monk': ['UNA', 'FIST', 'DOD', 'RIP', 'MANA', 'STA'], 'blaze': ['FSP', 'FRES', 'CDR'], 'frost': ['ISP', 'IRES', 'MRES'],
     'water': ['AQSP', 'AQRS', 'SWIM'], 'lightning': ['LSP', 'LRES', 'MSC'], 'holy': ['HSP', 'HRES', 'HEAL'],
     'warlock': ['ESP', 'ENSP', 'STF'], 'necromancer': ['BSP', 'SUM', 'BRES', 'TMC'], 'druid': ['NSP', 'NRES', 'NREG'],
-    'spirit': ['SYM', 'SPI', 'SYMR'], 'assassin': ['BSTB', 'DAG', 'ANEG', 'PSH', 'STL'],
+    'spirit': ['SYM', 'SPI', 'SYMR', 'POLE'], 'assassin': ['BSTB', 'DAG', 'ANEG', 'PSH', 'STL'],
     'thief': ['LUCK', 'FORT', 'DROP', 'STL', 'SWD', 'REACH'], 'stalker': ['RNG', 'ARSP', 'BOLT', 'APEN', 'EVSP'],
     'wanderer': ['SAT', 'STEP', 'PET', 'MNT', 'SPRN', 'FALL'],
 }

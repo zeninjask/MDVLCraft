@@ -157,6 +157,6 @@ v('monk', 'necromancer', ['Jiangshi', 'Blood Monk', 'Hopping Corpse'],
 v('monk', 'druid', ['Druidic Fist', 'Mantis Style', 'Wild Monk'],
   ['Z:palm_nature', 'I:slow', 'C:crow_feast', 'Z:iron_body'],
   'wom:spider_techniques', ['UNA', 'NSP', 'NREG'])
-v('monk', 'spirit', ['Jade Monk', 'Celestial Fist', 'Way of the Bagua'],
+v('monk', 'spirit', ['Wukong', 'Jade Monk', 'Celestial Fist'],
   ['Z:palm_spirit', 'S:procession_of_souls', 'S:grave_sigil', 'Z:spirit_step'],
   'wom:soul_protection', ['UNA', 'SYM', 'DOD'])

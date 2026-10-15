@@ -70,7 +70,7 @@ CHOSEN = {
     ('monk', 'warlock'): 'Mind Flayer',
     ('monk', 'necromancer'): 'Jiangshi',
     ('monk', 'druid'): 'Druidic Fist',
-    ('monk', 'spirit'): 'Jade Monk',
+    ('monk', 'spirit'): 'Wukong',
     ('monk', 'assassin'): 'Shadow Palm',
     ('monk', 'thief'): 'Drunken Master',
     ('monk', 'stalker'): 'Zen Archer',

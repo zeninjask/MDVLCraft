@@ -87,7 +87,7 @@ STAT_ATTR = {
     'LSP': ['irons_spellbooks:lightning_spell_power'], 'LRES': ['irons_spellbooks:lightning_magic_resist'],
     'MSC': ['irons_spellbooks:casting_movespeed'], 'HSP': ['irons_spellbooks:holy_spell_power'],
     'HRES': ['irons_spellbooks:holy_magic_resist'], 'HEAL': ['puffish_attributes:healing'],
-    'ESP': ['irons_spellbooks:eldritch_spell_power'], 'ENSP': ['irons_spellbooks:ender_spell_power'], 'STF': ['mdvlcraft:staff_damage'],
+    'ESP': ['irons_spellbooks:eldritch_spell_power'], 'ENSP': ['irons_spellbooks:ender_spell_power'], 'STF': ['mdvlcraft:staff_damage'], 'POLE': ['mdvlcraft:polearm_damage'],
     'BSP': ['irons_spellbooks:blood_spell_power'], 'SUM': ['irons_spellbooks:summon_damage'],
     'BRES': ['irons_spellbooks:blood_magic_resist'], 'TMC': ['mdvlcraft:technique_efficiency'],
     'CRSP': ['cursed_school:cursed_spell_power'], 'NSP': ['irons_spellbooks:nature_spell_power'],
@@ -111,6 +111,7 @@ STAT_ATTR = {
 # attributes the old generator does not list: (name, unit, operation)
 EXTRA_ATTRIBUTES = {
     'mdvlcraft:spear_damage': ("Spear Damage", "pct", "addition"), 'mdvlcraft:staff_damage': ("Staff Damage", "pct", "addition"),
+    'mdvlcraft:polearm_damage': ("Staff & Spear Damage", "pct", "addition"),
     'mdvlcraft:unarmed_damage': ("Unarmed Damage", "flat", "addition"), 'mdvlcraft:fist_mastery': ("Fist Mastery", "pct", "addition"),
     'mdvlcraft:arrow_penetration': ("Arrow Armor Penetration", "pct", "addition"),
     'irons_spellbooks:eldritch_spell_power': ("Eldritch Spell Power", "pct", "addition"),
@@ -142,7 +143,7 @@ SIG_TITLE = {
     'ISP': 'Winter', 'IRES': 'Cold Blood', 'MRES': 'Glacial Ward', 'AQSP': 'Tide', 'AQRS': 'Deep Blood', 'SWIM': 'Current',
     'LSP': 'Storm', 'LRES': 'Grounded', 'MSC': 'Swift Current', 'HSP': 'Faith', 'HRES': 'Sanctity', 'HEAL': 'Mercy',
     'ESP': 'Abyss', 'ENSP': 'Rift', 'STF': 'Staff', 'BSP': 'Blood', 'SUM': 'Legion', 'BRES': 'Hemomancy',
-    'TMC': 'Blood Arts', 'NSP': 'Verdance', 'NRES': 'Barkhide', 'NREG': 'Grove', 'SYM': 'Symmetry', 'SPI': 'Spirit',
+    'TMC': 'Blood Arts', 'NSP': 'Verdance', 'NRES': 'Barkhide', 'NREG': 'Grove', 'SYM': 'Symmetry', 'SPI': 'Spirit', 'POLE': 'Jade Staff',
     'SYMR': 'Jade Ward', 'BSTB': 'Backstab', 'DAG': 'Dagger', 'ANEG': 'Pierce', 'PSH': 'Rend', 'STL': 'Shadow',
     'LUCK': "Fortune's Favour", 'FORT': 'Prospector', 'DROP': 'Plunder', 'REACH': 'Long Arms', 'RNG': 'Aim',
     'ARSP': 'Longbow', 'BOLT': 'Arbalest', 'APEN': 'Bodkin', 'EVSP': "Fletcher's Art", 'SAT': 'Provisions',

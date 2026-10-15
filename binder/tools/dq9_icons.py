@@ -93,7 +93,7 @@ BONUSES = {
     "mdvlcraft_greatsword_damage": "dragonslayer", "mdvlcraft_katana_damage": "deadly_nightblade",
     "mdvlcraft_nature_regen": "yggdrasil_dew", "mdvlcraft_parry_stamina": "scale_shield", "mdvlcraft_plunder": "thiefs_key",
     "mdvlcraft_rapier_damage": "rapier", "mdvlcraft_riposte_damage": "fencing_jacket", "mdvlcraft_saturation_bonus": "packed_lunch",
-    "mdvlcraft_spear_damage": "partisan", "mdvlcraft_staff_damage": "oak_staff", "mdvlcraft_technique_efficiency": "seed_of_deftness",
+    "mdvlcraft_spear_damage": "partisan", "mdvlcraft_staff_damage": "oak_staff", "mdvlcraft_polearm_damage": "staff_of_divine_wrath", "mdvlcraft_technique_efficiency": "seed_of_deftness",
     "mdvlcraft_unarmed_damage": "fisticup", "mdvlcraft_unarmed_parry": "iron_gauntlets",
     "minecraft_generic.armor": "iron_armour", "minecraft_generic.armor_toughness": "seed_of_defence",
     "minecraft_generic.attack_damage": "seed_of_strength", "minecraft_generic.attack_knockback": "war_hammer",
