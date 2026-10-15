@@ -128,9 +128,9 @@ v('berserker', 'necromancer', ['Bloodreaver', 'Vampire Lord', 'Crimson Fury'],
 v('berserker', 'druid', ['Beastmaster', 'Wild Fury', 'Feral Reaver'],
   ['I:devour', 'Z:brand_nature', 'C:choir_of_flies', 'Z:bear'],
   'cdmoveset:wolf_dodge', ['ATK', 'NSP', 'MSP'])
-v('berserker', 'spirit', ['Wukong', 'Kitsune Fury', 'Phantom Blade'],
+v('berserker', 'spirit', ['Kitsune Fury', 'Phantom Blade', 'Spirit Reaver'],
   ['M:kitsune_pack', 'Z:brand_spirit', 'Z:spirit_wolf', 'S:spirit_empowerment'],
-  'mdvlcraft:wukong_dodge', ['ATK', 'SPI', 'ASPD'])
+  'wom:inner_growth', ['ATK', 'SPI', 'ASPD'])
 
 # Monk + Mage
 v('monk', 'blaze', ['Fire Fist', 'Phoenix Monk', 'Agni Kai'],
@@ -157,6 +157,6 @@ v('monk', 'necromancer', ['Jiangshi', 'Blood Monk', 'Hopping Corpse'],
 v('monk', 'druid', ['Druidic Fist', 'Mantis Style', 'Wild Monk'],
   ['Z:palm_nature', 'I:slow', 'C:crow_feast', 'Z:iron_body'],
   'wom:spider_techniques', ['UNA', 'NSP', 'NREG'])
-v('monk', 'spirit', ['Jade Monk', 'Celestial Fist', 'Way of the Bagua'],
+v('monk', 'spirit', ['Wukong', 'Jade Monk', 'Celestial Fist'],
   ['Z:palm_spirit', 'S:procession_of_souls', 'S:grave_sigil', 'Z:spirit_step'],
-  'wom:soul_protection', ['UNA', 'SYM', 'DOD'])
+  'mdvlcraft:wukong_dodge', ['UNA', 'SYM', 'DOD'])
