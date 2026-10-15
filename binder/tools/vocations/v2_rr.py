@@ -18,10 +18,10 @@ v('assassin', 'wanderer', ['Hashashin', 'Desert Viper', 'Nomad Blade'],
   'wom:spider_techniques', ['BSTB', 'FALL', 'SAT'])
 v('thief', 'stalker', ['Outlaw', 'Bandit Archer', 'Robin Hood'],
   ['Z:grapple_arrow', 'Z:caltrops', 'Z:magpies', 'H:target_rewind'],
-  'epicfight:revelation', ['RNG', 'LUCK', 'DROP'])
+  'wom:natural_sprinter', ['RNG', 'LUCK', 'DROP'])
 v('thief', 'wanderer', ['Vagabond', 'Drifter', 'Rogue Trader'],
   ['A:sonata', 'Z:lockpick', 'H:speedup', 'Z:fence'],
   'wom:natural_sprinter', ['LUCK', 'SAT', 'MSP'])
 v('stalker', 'wanderer', ['Ranger', 'Pathfinder', 'Huntsman'],
   ['Z:tracking', 'Z:hunter_trap', 'Z:nomad_mount', 'S:evocation_fortitude'],
-  'epicfight:adrenaline_fiend', ['RNG', 'PET', 'SAT'])
+  'wom:dancing_blade', ['RNG', 'PET', 'SAT'])

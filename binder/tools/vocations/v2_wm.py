@@ -22,45 +22,45 @@ v('guardian', 'blaze', ['Ember Knight', 'Pyre Sentinel', 'Flame Warden'],
   'epicfight:adaptive_skin', ['FSP', 'ARM', 'FRES'])
 v('guardian', 'frost', ['Glacier Knight', 'Winter\'s Bulwark', 'Frostwarden'],
   ['X:ice_plate', 'Z:frost_armor', 'R:adulas_moonblade', 'Z:ice_wall'],
-  'efs_iss:against_magic', ['ISP', 'ATG', 'IRES'])
+  'wom:manipulator', ['ISP', 'ATG', 'IRES'])
 v('guardian', 'water', ['Breakwater', 'Tidewarden', 'Coral Knight'],
   ['T:echo_of_the_abyss', 'T:flood_slash', 'Z:tide_charge', 'S:ceraunus_grasp'],
-  'wom:aqua_maneuvre', ['AQSP', 'DRS', 'SWIM'])
+  'wom:manipulator', ['AQSP', 'DRS', 'SWIM'])
 v('guardian', 'lightning', ['Stormwarden', 'Thunder Aegis', 'Tempest Knight'],
   ['Z:lightning_rod', 'T:magnetron_deployment', 'T:em_pulse', 'E:storm_magic'],
-  'epicfight:endurance', ['LSP', 'STA', 'LRES'])
+  'epicfight:phantom_ascent', ['LSP', 'STA', 'LRES'])
 v('guardian', 'holy', ['Paladin', 'Templar', 'Lightbearer'],
   ['I:divine_smite', 'Z:holy_shield', 'E:guandian_beam_magic', 'Z:brand_holy'],
-  'efs_iss:breathe_again', ['HSP', 'ARM', 'HEAL'])
+  'dodge_parry_reward:heal2', ['HSP', 'ARM', 'HEAL'])
 v('guardian', 'warlock', ['Void Knight', 'Oathbreaker', 'Abyssal Bulwark'],
   ['T:eternal_sentinel', 'T:blackout', 'E:spell_calibration', 'N:black_ward'],
   'wom:voodoo_magic', ['ESP', 'MRES', 'GSD'])
 v('guardian', 'necromancer', ['Death Knight', 'Bone Warden', 'Grave Sentinel'],
   ['Z:bone_guard', 'T:cursed_revenants', 'A:summon_shadows', 'C:umbral_coffin'],
-  'epicfight:death_harvest', ['BSP', 'ARM', 'SUM'])
+  'epicfight:forbidden_strength', ['BSP', 'ARM', 'SUM'])
 v('guardian', 'druid', ['Thornguard', 'Grove Warden', 'Bramble Knight'],
   ['Z:totem_ward', 'Z:brand_nature', 'T:primordial_steed', 'Z:ent_stride'],
-  'dodge_parry_reward:heal3', ['NSP', 'DRS', 'NREG'])
+  'wom:vengeful_parry', ['NSP', 'DRS', 'NREG'])
 v('guardian', 'spirit', ['Jade Sentinel', 'Terracotta General', 'Celestial Guard'],
   ['Z:jade_skin', 'M:revenant_of_honor', 'M:spirit_challenging', 'H:dilated_zone'],
-  'efclash_blade:clash_blade', ['SYM', 'ATG', 'SYMR'])
+  'wom:inner_growth', ['SYM', 'ATG', 'SYMR'])
 
 # Brute + Mage
 v('brute', 'blaze', ['Magma Titan', 'Cinder Ogre', 'Forgeborn'],
   ['I:raise_hell', 'T:lava_bomb', 'Z:brand_fire', 'T:ignited_onslaught'],
-  'wom:avatar_of_might', ['FSP', 'AXE', 'MHP'])
+  'wom:adrenaline', ['FSP', 'AXE', 'MHP'])
 v('brute', 'frost', ['Frost Giant', 'Jotun', 'Yeti'],
   ['I:summon_polar_bear', 'T:despair', 'Z:brand_ice', 'Z:frost_charge'],
-  'epicfight:hypervitality', ['ISP', 'MHP', 'KBR'])
+  'wom:heart_shield', ['ISP', 'MHP', 'KBR'])
 v('brute', 'water', ['Leviathan', 'Harpooner', 'Dreadnought'],
   ['S:ceraunus_dash', 'Z:drowned_legion', 'S:storm_aura', 'Z:brand_water'],
-  'wom:bull_charge', ['AQSP', 'SPR', 'MHP'])
+  'epicfight:hypervitality', ['AQSP', 'SPR', 'MHP'])
 v('brute', 'lightning', ['Thunderclap', 'Storm Giant', 'Thunderlord'],
   ['I:volt_strike', 'S:lightning_lash', 'Z:brand_lightning', 'Z:thunder_slam'],
-  'wom:buster_parade', ['LSP', 'AXE', 'TPS'])
+  'wom:dopamine', ['LSP', 'AXE', 'TPS'])
 v('brute', 'holy', ['Zealot', 'Crusader', 'Hammer of Dawn'],
   ['T:sword_of_the_ancients', 'I:divine_smite', 'C:pale_lantern', 'Z:war_banner'],
-  'efs_iss:auto_heal', ['HSP', 'MHP', 'HEAL'])
+  'wom:heart_shield', ['HSP', 'MHP', 'HEAL'])
 v('brute', 'warlock', ['Abomination', 'Void Colossus', 'Forsaken'],
   ['T:the_forgotten_beast', 'R:gravity_ball', 'R:collapsing_stars', 'Z:brand_eldritch'],
   'wom:soul_protection', ['ESP', 'MHP', 'MRS'])
@@ -69,7 +69,7 @@ v('brute', 'necromancer', ['Butcher', 'Gravelord', 'Flesh Golem'],
   'wom:vampirize', ['BSP', 'MHP', 'LST'])
 v('brute', 'druid', ['Earthshaker', 'Ironbark', 'Wildheart'],
   ['Z:bear', 'X:sand_maelstrom', 'C:hatch_cysts', 'Z:ent_stride'],
-  'epicfight:roll', ['NSP', 'MHP', 'NREG'])
+  'epicfight:hypervitality', ['NSP', 'MHP', 'NREG'])
 v('brute', 'spirit', ['Oni', 'Jade Colossus', 'Kanabo Lord'],
   ['M:phantom_charge', 'M:bone_hands', 'S:spiral_of_ruin', 'Z:brand_spirit'],
   'wom:pain_anticipation', ['SPI', 'SPR', 'MHP'])
@@ -80,13 +80,13 @@ v('samurai', 'blaze', ['Kagutsuchi', 'Ember Ronin', 'Sunfire Blade'],
   'wom:critical_knowledge', ['KAT', 'FSP', 'ASH'])
 v('samurai', 'frost', ['Kuromi\'s Fang', 'Winter Ronin', 'Frostbitten Blade'],
   ['Z:stance_ice', 'X:frostwhirl_slash', 'M:ashigaru_squad', 'X:rime_veil'],
-  'epicfight:technician', ['KAT', 'ISP', 'POP'])
+  'wom:pain_anticipation', ['KAT', 'ISP', 'POP'])
 v('samurai', 'water', ['Tide Ronin', 'Mizuchi', 'Flowing Water'],
   ['Z:stance_water', 'S:hydro_slash', 'T:serpentide', 'E:flowing_barrier'],
   'cdmoveset:bstep', ['KAT', 'AQSP', 'RIP'])
 v('samurai', 'lightning', ['Raijin', 'Thunder Breathing', 'Lightning Iaido'],
   ['Z:stance_lightning', 'S:lightning_cut', 'I:volt_strike', 'W:aeropic'],
-  'efs_iss:hasty_casting', ['KAT', 'LSP', 'MSP'])
+  'epicfight:revelation', ['KAT', 'LSP', 'MSP'])
 v('samurai', 'holy', ['Amaterasu', 'Dawnblade', 'Sun Shrine Keeper'],
   ['Z:stance_holy', 'I:divine_smite', 'T:nullflare', 'E:magic_blade_enchanting'],
   'dodge_parry_reward:heal2', ['KAT', 'HSP', 'HEAL'])
@@ -95,13 +95,13 @@ v('samurai', 'warlock', ['King of Curses', 'Malevolent Ronin', 'Void Shogun'],
   'wom:lethal_focus', ['KAT', 'ESP', 'TMC'])
 v('samurai', 'necromancer', ['Revenant Ronin', 'Crimson Shogun', 'Blood Moon Blade'],
   ['Z:stance_blood', 'X:crimson_laceration', 'M:revenant_of_honor', 'S:bloodbound_blade'],
-  'cdmoveset:bloodwolf', ['KAT', 'BSP', 'LST'])
+  'dodge_parry_reward:damage_boost1', ['KAT', 'BSP', 'LST'])
 v('samurai', 'druid', ['Bamboo Ronin', 'Venom Blade', 'Kodama'],
   ['Z:stance_nature', 'C:blight_step', 'X:sand_maelstrom', 'C:rotting_rain'],
-  'epicfight:swordmaster', ['KAT', 'NSP', 'ASH'])
+  'dodge_parry_reward:damage_boost1', ['KAT', 'NSP', 'ASH'])
 v('samurai', 'spirit', ['Jade Shogun', 'Spirit Blade', 'Celestial Ronin'],
   ['Z:stance_spirit', 'M:phantom_charge', 'S:soul_latch', 'S:winged_ruin'],
-  'efn:parry_master', ['KAT', 'SYM', 'IMP'])
+  'wom:dodge_master', ['KAT', 'SYM', 'IMP'])
 
 # Berserker + Mage
 v('berserker', 'blaze', ['Hellraiser', 'Inferno Reaver', 'Demoman'],
@@ -109,36 +109,36 @@ v('berserker', 'blaze', ['Hellraiser', 'Inferno Reaver', 'Demoman'],
   'epicfight:berserker', ['ATK', 'FSP', 'LST'])
 v('berserker', 'frost', ['Draugr', 'Rime Reaver', 'Winterfang'],
   ['T:axe_of_the_doomed', 'Z:brand_ice', 'X:frostwhirl_slash', 'T:cursed_revenants'],
-  'wom:adrenaline', ['ATK', 'ISP', 'ASPD'])
+  'wom:heart_shield', ['ATK', 'ISP', 'ASPD'])
 v('berserker', 'water', ['Maelstrom', 'Riptide Reaver', 'Sea Wolf'],
   ['Z:brand_water', 'Z:tide_charge', 'T:jet_steam', 'S:hydro_slash'],
-  'wom:dopamine', ['ATK', 'AQSP', 'MSP'])
+  'epicfight:death_harvest', ['ATK', 'AQSP', 'MSP'])
 v('berserker', 'lightning', ['Thunder God', 'Stormbreaker', 'Voltage Fiend'],
   ['Z:brand_lightning', 'Z:thunder_charge', 'S:lightning_cut', 'S:thunder_cloud'],
-  'epicfightx:combat_mastery_ii', ['ATK', 'LSP', 'ASPD'])
+  'epicfight:phantom_ascent', ['ATK', 'LSP', 'ASPD'])
 v('berserker', 'holy', ['Avenger', 'Holy Fury', 'Zealous Blade'],
   ['Z:holy_avenger', 'Z:brand_holy', 'S:sovereign_armory', 'T:summon_desert_dwellers'],
-  'efs_iss:breathe_again', ['ATK', 'HSP', 'LST'])
+  'dodge_parry_reward:heal3', ['ATK', 'HSP', 'LST'])
 v('berserker', 'warlock', ['Abyss Walker', 'Void Reaver', 'Eldritch Fury'],
   ['Z:brand_eldritch', 'I:summon_swords', 'T:abyssal_blast', 'N:anti_magic_slash'],
-  'wom:voodoo_magic', ['ATK', 'ESP', 'SWD'])
+  'wom:ender_obscuris', ['ATK', 'ESP', 'SWD'])
 v('berserker', 'necromancer', ['Bloodreaver', 'Vampire Lord', 'Crimson Fury'],
   ['Z:bloodlust', 'Z:brand_blood', 'S:withered_rose_vortex', 'S:rose_secret'],
-  'cdmoveset:bloodwolf', ['ATK', 'BSP', 'LST'])
+  'epicfight:bonebreaker', ['ATK', 'BSP', 'LST'])
 v('berserker', 'druid', ['Beastmaster', 'Wild Fury', 'Feral Reaver'],
   ['I:devour', 'Z:brand_nature', 'C:choir_of_flies', 'Z:bear'],
   'cdmoveset:wolf_dodge', ['ATK', 'NSP', 'MSP'])
 v('berserker', 'spirit', ['Kitsune Fury', 'Phantom Blade', 'Spirit Reaver'],
   ['M:kitsune_pack', 'Z:brand_spirit', 'Z:spirit_wolf', 'S:spirit_empowerment'],
-  'efclash_blade:clash_blade', ['ATK', 'SPI', 'ASPD'])
+  'wom:inner_growth', ['ATK', 'SPI', 'ASPD'])
 
 # Monk + Mage
 v('monk', 'blaze', ['Fire Fist', 'Phoenix Monk', 'Agni Kai'],
   ['A:fire_fist', 'Z:ember_fists', 'I:burning_dash', 'S:abyssal_burn'],
-  'wom:inner_growth', ['UNA', 'FSP', 'FRES'])
+  'wom:adrenaline', ['UNA', 'FSP', 'FRES'])
 v('monk', 'frost', ['Winter Monk', 'Frost Palm', 'Yeti Hermit'],
   ['Z:palm_ice', 'Z:cold_meditation', 'H:stasis', 'X:rime_veil'],
-  'efs_iss:mana_shield', ['UNA', 'ISP', 'MANA'])
+  'wom:punishment_kick', ['UNA', 'ISP', 'MANA'])
 v('monk', 'water', ['Waterbender', 'Flowing Fist', 'Tide Monk'],
   ['Z:palm_water', 'Z:whirlpool_kick', 'T:jet_steam', 'E:cycle_aura'],
   'wom:aqua_maneuvre', ['UNA', 'AQSP', 'DOD'])
@@ -147,16 +147,16 @@ v('monk', 'lightning', ['Thunder Fist', 'Storm Monk', 'Lightning Lotus'],
   'efs_iss:hasty_casting', ['UNA', 'LSP', 'MSC'])
 v('monk', 'holy', ['Ascetic', 'Enlightened One', 'Sun Monk'],
   ['Z:palm_holy', 'Z:lotus', 'S:comforting_lullaby', 'E:mana_aura'],
-  'wom:meditation', ['UNA', 'HSP', 'HEAL'])
+  'dodge_parry_reward:heal3', ['UNA', 'HSP', 'HEAL'])
 v('monk', 'warlock', ['Void Monk', 'Abyssal Ascetic', 'Mind Flayer'],
   ['Z:palm_eldritch', 'Z:ki_wave', 'R:gravity_ball', 'H:time_stop'],
-  'wom:mindset', ['UNA', 'ESP', 'MANA'])
+  'wom:ender_step', ['UNA', 'ESP', 'MANA'])
 v('monk', 'necromancer', ['Jiangshi', 'Blood Monk', 'Hopping Corpse'],
   ['Z:palm_blood', 'Z:jiangshi_fists', 'I:heartstop', 'C:marrow_drain'],
   'wom:vampirize', ['UNA', 'BSP', 'LST'])
 v('monk', 'druid', ['Druidic Fist', 'Mantis Style', 'Wild Monk'],
   ['Z:palm_nature', 'I:slow', 'C:crow_feast', 'Z:iron_body'],
-  'cdmoveset:wolf_dodge', ['UNA', 'NSP', 'NREG'])
+  'wom:spider_techniques', ['UNA', 'NSP', 'NREG'])
 v('monk', 'spirit', ['Jade Monk', 'Celestial Fist', 'Way of the Bagua'],
   ['Z:palm_spirit', 'S:procession_of_souls', 'S:grave_sigil', 'Z:spirit_step'],
-  'wom:all_eyes_on_you', ['UNA', 'SYM', 'DOD'])
+  'wom:soul_protection', ['UNA', 'SYM', 'DOD'])

@@ -46,88 +46,88 @@ mod('jade_serpent', 'Jade Serpent', 'Sea Serpent', 'A jade serpent spirit that c
 # Mage + Mage
 v('blaze', 'frost', ['Frostfire', 'Equinox', 'Ember and Rime'],
   ['T:nullflare', 'X:chaos_strike', 'Z:frostfire_bolt', 'Z:thermal_shock'],
-  'efs_iss:reserve_mana', ['FSP', 'ISP', 'CDR'])
+  'efs_iss:magic_sword', ['FSP', 'ISP', 'CDR'])
 v('blaze', 'water', ['Steamcaller', 'Geyser Mage', 'Scaldmaster'],
   ['Z:scald', 'Z:geyser', 'Z:hot_spring', 'T:ashen_breath'],
-  'efs_iss:rapid_chant', ['FSP', 'AQSP', 'MREG'])
+  'wom:adrenaline', ['FSP', 'AQSP', 'MREG'])
 v('blaze', 'lightning', ['Plasma Caster', 'Solar Flare', 'Thunderfire'],
   ['T:death_laser', 'T:annihilation', 'Z:plasma_ball', 'A:explosion_melody'],
-  'efs_iss:hasty_casting', ['FSP', 'LSP', 'CTR'])
+  'epicfightx:combat_mastery_ii', ['FSP', 'LSP', 'CTR'])
 v('blaze', 'holy', ['Phoenix', 'Solar Priest', 'Sunbringer'],
   ['T:burning_judgment', 'Z:phoenix_wings', 'E:crash_magic', 'A:guardian_angel'],
-  'efs_iss:breathe_again', ['FSP', 'HSP', 'HEAL'])
+  'wom:critical_knowledge', ['FSP', 'HSP', 'HEAL'])
 v('blaze', 'warlock', ['Infernalist', 'Hellcaller', 'Abyssal Flame'],
   ['I:dragon_breath', 'C:eclipse_maw', 'Z:soul_fireball', 'R:meteorite'],
-  'efs_iss:magic_sword', ['FSP', 'ESP', 'SFSP'])
+  'wom:ender_obscuris', ['FSP', 'ESP', 'SFSP'])
 v('blaze', 'necromancer', ['Ashen Lich', 'Pyre Priest', 'Cinder Reaper'],
   ['C:testament_of_ash', 'C:ash_needle', 'T:ignited_onslaught', 'Z:burning_dead'],
-  'epicfight:death_harvest', ['FSP', 'BSP', 'SUM'])
+  'efs_iss:magic_sword', ['FSP', 'BSP', 'SUM'])
 v('blaze', 'druid', ['Wildfire', 'Ash Grove', 'Cinder Druid'],
   ['Z:burning_roots', 'Z:wildfire', 'C:decay_field', 'Z:ember_skin'],
-  'dodge_parry_reward:heal3', ['FSP', 'NSP', 'NREG'])
+  'efs_iss:magic_sword', ['FSP', 'NSP', 'NREG'])
 v('blaze', 'spirit', ['Foxfire', 'Kitsune-bi', 'Soulflame'],
   ['Z:foxfire', 'M:kitsune_pack', 'Z:soul_fireball', 'S:procession_of_souls'],
-  'efs_iss:reserve_mana', ['FSP', 'SPI', 'SFSP'])
+  'wom:inner_growth', ['FSP', 'SPI', 'SFSP'])
 v('frost', 'water', ['Glacial Tide', 'Polar Sea', 'Hailcaller'],
   ['Z:hailstorm', 'Z:iceberg', 'Z:frozen_sea', 'H:stasis'],
   'wom:aqua_maneuvre', ['ISP', 'AQSP', 'SWIM'])
 v('frost', 'lightning', ['Superconductor', 'Blizzard King', 'Aurora'],
   ['Z:superconductor', 'R:crystal_barrage', 'R:glintstone_comet', 'X:spell_empowerment'],
-  'efs_iss:rapid_chant', ['ISP', 'LSP', 'CTR'])
+  'epicfightx:combat_mastery_ii', ['ISP', 'LSP', 'CTR'])
 v('frost', 'holy', ['Snow Seraph', 'Winter Saint', 'Frost Priest'],
   ['Z:frost_angel', 'T:nullflare', 'X:spellbreak_burst', 'Z:holy_shield'],
-  'efs_iss:auto_heal', ['ISP', 'HSP', 'HEAL'])
+  'dodge_parry_reward:heal2', ['ISP', 'HSP', 'HEAL'])
 v('frost', 'warlock', ['Lich of the North', 'Void Frost', 'Rimewraith'],
   ['Z:lich_form', 'R:comet_azur', 'X:rime_veil', 'T:cursed_minefield'],
-  'efs_iss:mana_shield', ['ISP', 'ESP', 'MRES'])
+  'wom:heart_shield', ['ISP', 'ESP', 'MRES'])
 v('frost', 'necromancer', ['Draugr Lord', 'Frost Lich', 'Wight King'],
   ['Z:strays', 'T:cursed_revenants', 'C:grave_dust', 'C:marrow_drain'],
-  'wom:soul_protection', ['ISP', 'BSP', 'SUM'])
+  'wom:vampirize', ['ISP', 'BSP', 'SUM'])
 v('frost', 'druid', ['Tundra Druid', 'Winter Wolf', 'Taiga Warden'],
   ['Z:frost_wolves', 'I:summon_polar_bear', 'Z:frozen_sea', 'Z:frost_armor'],
   'epicfight:adaptive_skin', ['ISP', 'NSP', 'NREG'])
 v('frost', 'spirit', ['Yuki-onna', 'Snow Shrine', 'Jade Frost'],
   ['Z:snow_spirit', 'R:magic_glintblade', 'H:dilated_zone', 'A:lullaby'],
-  'efclash_blade:clash_blade', ['ISP', 'SYM', 'MRES'])
+  'wom:inner_growth', ['ISP', 'SYM', 'MRES'])
 v('water', 'lightning', ['Typhoon', 'Storm Tide', 'Tempest'],
   ['Z:storm_sea', 'S:thunder_cloud', 'A:harp_symphony', 'S:storm_aura'],
   'efs_iss:hasty_casting', ['AQSP', 'LSP', 'MSC'])
 v('water', 'holy', ['Font of Life', 'Tidal Priest', 'Holy Spring'],
   ['Z:holy_water', 'Z:baptism', 'E:mana_change_barrier', 'E:rapid_change_barrier', 'E:maximizer_change_barrier'],
-  'efs_iss:auto_heal', ['AQSP', 'HSP', 'MREG'])
+  'wom:dodge_master', ['AQSP', 'HSP', 'MREG'])
 v('water', 'warlock', ['Abyssal Tide', 'Leviathan Cult', 'Deep One'],
   ['Z:void_tide', 'T:cursed_minefield', 'T:abyssal_blast', 'T:echo_of_the_abyss'],
-  'wom:voodoo_magic', ['AQSP', 'ESP', 'SWIM'])
+  'wom:dodge_master', ['AQSP', 'ESP', 'SWIM'])
 v('water', 'necromancer', ['Drowned King', 'Bog Lich', 'Tide of Blood'],
   ['Z:drowned_dead', 'S:summon_drowned', 'X:life_tap', 'S:bloodmark'],
-  'efs_iss:blood_into_mana', ['AQSP', 'BSP', 'SUM'])
+  'epicfight:forbidden_strength', ['AQSP', 'BSP', 'SUM'])
 v('water', 'druid', ['Marsh Druid', 'Bog Witch', 'River Warden'],
   ['Z:bog', 'X:sand_maelstrom', 'Z:river_dragon', 'S:summon_drowned'],
   'dodge_parry_reward:heal2', ['AQSP', 'NSP', 'NREG'])
 v('water', 'spirit', ['Jade River', 'Sea Dragon', 'Ocean Spirit'],
   ['Z:jade_serpent', 'A:sonata', 'S:spiral_of_ruin', 'S:hydro_slash'],
-  'efclash_blade:clash_blade', ['AQSP', 'SYM', 'SPI'])
+  'wom:soul_protection', ['AQSP', 'SYM', 'SPI'])
 v('lightning', 'holy', ['Wrath of Heaven', 'Zeus', 'Divine Storm'],
   ['Z:smite_bolt', 'I:starfall', 'R:founding_rain_of_stars', 'E:guandian_beam_magic'],
-  'efs_iss:breathe_again', ['LSP', 'HSP', 'CDR'])
+  'wom:dopamine', ['LSP', 'HSP', 'CDR'])
 v('lightning', 'warlock', ['Black Lightning', 'Void Storm', 'Eldritch Tempest'],
   ['Z:chaos_bolt', 'E:namesis_magic', 'S:resonant_pulse', 'T:rapid_laser'],
-  'efs_iss:rapid_chant', ['LSP', 'ESP', 'CTR'])
+  'epicfight:phantom_ascent', ['LSP', 'ESP', 'CTR'])
 v('lightning', 'necromancer', ['Galvaniser', 'Frankenstein', 'Storm Lich'],
   ['Z:reanimate', 'X:life_tap', 'T:mechanized_predator', 'T:magnetron_deployment'],
-  'efs_iss:blood_into_mana', ['LSP', 'BSP', 'SUM'])
+  'epicfightx:combat_mastery_ii', ['LSP', 'BSP', 'SUM'])
 v('lightning', 'druid', ['Storm Druid', 'Thunderbird Shaman', 'Skyfather'],
   ['Z:storm_crows', 'Z:thunderbird', 'X:gust_pro', 'W:tornado'],
-  'cdmoveset:wolf_dodge', ['LSP', 'NSP', 'MSP'])
+  'wom:dopamine', ['LSP', 'NSP', 'MSP'])
 v('lightning', 'spirit', ['Raiju', 'Thunder Spirit', 'Heavenly Tribulation'],
   ['R:glintblade_phalanx', 'Z:spirit_wolf', 'S:lightning_cut', 'Z:thunderbird'],
-  'efn:parry_master', ['LSP', 'SYM', 'MSC'])
+  'epicfight:phantom_ascent', ['LSP', 'SYM', 'MSC'])
 v('holy', 'warlock', ['Fallen Angel', 'Twilight', 'Heretic'],
   ['Z:fallen_angel', 'C:black_verse', 'C:hex_barrage', 'R:stars_of_ruin'],
-  'efs_iss:against_magic', ['HSP', 'ESP', 'MRES'])
+  'dodge_parry_reward:heal3', ['HSP', 'ESP', 'MRES'])
 v('holy', 'necromancer', ['Exorcist', 'Gravekeeper', 'Plague Doctor'],
   ['Z:exorcism', 'C:pale_lantern', 'X:spellbreak_burst', 'S:fragmented_requiem'],
-  'efs_iss:auto_heal', ['HSP', 'BSP', 'HEAL'])
+  'wom:vampirize', ['HSP', 'BSP', 'HEAL'])
 v('holy', 'druid', ['Life Druid', 'Grove Saint', 'Elder Tree'],
   ['Z:sanctify', 'A:birds_spell', 'Z:totem_ward', 'S:comforting_lullaby'],
   'dodge_parry_reward:heal3', ['HSP', 'NSP', 'HEAL'])
@@ -136,19 +136,19 @@ v('holy', 'spirit', ['Celestial Sage', 'Bodhisattva', 'Jade Emperor'],
   'efs_iss:breathe_again', ['HSP', 'SYM', 'HEAL'])
 v('warlock', 'necromancer', ['Lich', 'Dread Lord', 'The Unsigned'],
   ['C:thrice_signed_name', 'C:chain_of_remorse', 'C:unsigned_judgment', 'Z:lich_form'],
-  'efs_iss:blood_into_mana', ['ESP', 'BSP', 'CRSP'])
+  'epicfight:forbidden_strength', ['ESP', 'BSP', 'CRSP'])
 v('warlock', 'druid', ['Blight Druid', 'Sculk Shaman', 'Corrupted Grove'],
   ['Z:corrupted_grove', 'C:rot_bolt', 'C:choir_of_flies', 'I:fang_strike'],
-  'wom:voodoo_magic', ['ESP', 'NSP', 'NRES'])
+  'wom:ender_step', ['ESP', 'NSP', 'NRES'])
 v('warlock', 'spirit', ['Yokai Lord', 'Void Sage', 'Mirror Demon'],
   ['T:conjure_void_tomes', 'Z:void_pet', 'S:ram_tchum', 'M:spirit_challenging'],
-  'efs_iss:magic_sword', ['ESP', 'SYM', 'SPI'])
+  'wom:inner_growth', ['ESP', 'SYM', 'SPI'])
 v('necromancer', 'druid', ['Plague Druid', 'Rot Witch', 'Grave Gardener'],
   ['Z:corpse_flower', 'S:funeral_bloom', 'C:grave_dust', 'T:nocturnal_swarm'],
-  'epicfight:death_harvest', ['BSP', 'NSP', 'SUM'])
+  'epicfight:adaptive_skin', ['BSP', 'NSP', 'SUM'])
 v('necromancer', 'spirit', ['Jiangshi Master', 'Soul Reaper', 'Underworld Judge'],
   ['Z:soul_reaper', 'C:wailing_dirge', 'A:summon_shadows', 'M:bone_hands'],
-  'wom:soul_protection', ['BSP', 'SPI', 'SUM'])
+  'wom:dodge_master', ['BSP', 'SPI', 'SUM'])
 v('druid', 'spirit', ['Spirit Tiger', 'Forest Kami', 'Kodama Sage'],
   ['Z:spirit_tiger', 'I:fang_swirl', 'X:totem_rite', 'C:crow_feast'],
-  'cdmoveset:wolf_dodge', ['NSP', 'SYM', 'NREG'])
+  'wom:soul_protection', ['NSP', 'SYM', 'NREG'])

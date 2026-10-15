@@ -33,13 +33,13 @@ mod('immortal_peach', 'Peach of Immortality', 'Gluttony', 'Conjure a peach that 
 # Mage + Rogue
 v('blaze', 'assassin', ['Ember Shade', 'Cinder Knife', 'Ash Stalker'],
   ['Z:flame_step', 'Z:immolate', 'T:ashen_breath', 'C:ash_needle'],
-  'wom:shadow_step', ['FSP', 'BSTB', 'DAG'])
+  'efs_iss:magic_sword', ['FSP', 'BSTB', 'DAG'])
 v('blaze', 'thief', ['Firebug', 'Arsonist', 'Ember Rogue'],
   ['I:chain_creeper', 'X:lob_creeper_chain', 'S:damned_demomans', 'Z:caltrops'],
-  'wom:ender_step', ['FSP', 'LUCK', 'DROP'])
+  'wom:adrenaline', ['FSP', 'LUCK', 'DROP'])
 v('blaze', 'stalker', ['Fire Archer', 'Flame Ranger', 'Ember Bow'],
   ['Z:flaming_volley', 'R:cannon_of_haima', 'T:lava_bomb', 'X:chaos_strike'],
-  'wom:critical_knowledge', ['FSP', 'RNG', 'ARSP'])
+  'wom:dancing_blade', ['FSP', 'RNG', 'ARSP'])
 v('blaze', 'wanderer', ['Ember Nomad', 'Desert Walker', 'Hearthkeeper'],
   ['Z:camel', 'T:summon_desert_dwellers', 'Z:heat_mirage', 'I:burning_dash'],
   'epicfight:adrenaline_fiend', ['FSP', 'SAT', 'FRES'])
@@ -48,37 +48,37 @@ v('frost', 'assassin', ['Frost Shade', 'Winter\'s Knife', 'Silent Snow'],
   'wom:ender_obscuris', ['ISP', 'BSTB', 'ANEG'])
 v('frost', 'thief', ['Black Ice', 'Cold Snap', 'Ice Thief'],
   ['Z:black_ice', 'Z:iceberg', 'H:time_stop', 'Z:mirror_image'],
-  'wom:time_travel', ['ISP', 'LUCK', 'FORT'])
+  'wom:heart_shield', ['ISP', 'LUCK', 'FORT'])
 v('frost', 'stalker', ['Winter Hunter', 'Hoarfrost Bow', 'Frost Archer'],
   ['Z:arrow_ice', 'R:comet', 'Z:frost_trap', 'Z:frost_wolves'],
-  'wom:arrow_tenacity', ['ISP', 'RNG', 'APEN'])
+  'wom:dancing_blade', ['ISP', 'RNG', 'APEN'])
 v('frost', 'wanderer', ['Tundra Walker', 'Polar Explorer', 'Snowbound Nomad'],
   ['X:summon_polar_bear', 'Z:frozen_sea', 'Z:igloo', 'X:gust_pro'],
   'epicfight:adaptive_skin', ['ISP', 'MNT', 'IRES'])
 v('water', 'assassin', ['Siren', 'Drowner', 'Riptide Knife'],
   ['Z:drown', 'T:serpentide', 'Z:mist_step', 'T:jet_steam'],
-  'wom:spider_techniques', ['AQSP', 'BSTB', 'SWIM'])
+  'cdmoveset:fatalfalsh', ['AQSP', 'BSTB', 'SWIM'])
 v('water', 'thief', ['Pirate', 'Buccaneer', 'Smuggler'],
   ['Z:pirate_crew', 'S:ceraunus_dash', 'T:cursed_minefield', 'R:cannon_of_haima'],
-  'wom:time_travel', ['AQSP', 'LUCK', 'SWD'])
+  'wom:proximity_exploiter', ['AQSP', 'LUCK', 'SWD'])
 v('water', 'stalker', ['Tide Hunter', 'Harpoon Gunner', 'Reef Ranger'],
   ['Z:arrow_water', 'Z:harpoon', 'Z:trident_rain', 'T:flood_slash'],
-  'wom:aqua_maneuvre', ['AQSP', 'RNG', 'BOLT'])
+  'wom:natural_sprinter', ['AQSP', 'RNG', 'BOLT'])
 v('water', 'wanderer', ['Voyager', 'Sailor', 'Sea Nomad'],
   ['T:echo_of_the_abyss', 'Z:spectral_boat', 'T:jet_steam', 'Z:trail_rations'],
-  'wom:natural_sprinter', ['AQSP', 'SWIM', 'SAT'])
+  'wom:spider_techniques', ['AQSP', 'SWIM', 'SAT'])
 v('lightning', 'assassin', ['Thunder Shinobi', 'Flash Blade', 'Raiju Knife'],
   ['Z:flash_step', 'T:em_pulse', 'S:lightning_lash', 'W:aeropic'],
-  'wom:shadow_step', ['LSP', 'BSTB', 'MSP'])
+  'wom:lethal_focus', ['LSP', 'BSTB', 'MSP'])
 v('lightning', 'thief', ['Spark Rogue', 'Static Thief', 'Grid Runner'],
   ['Z:static_snare', 'T:mechanized_predator', 'H:speedup', 'T:rapid_laser'],
   'epicfight:phantom_ascent', ['LSP', 'LUCK', 'MSP'])
 v('lightning', 'stalker', ['Railgunner', 'Storm Archer', 'Thunder Bow'],
   ['Z:arrow_lightning', 'T:death_laser', 'Z:storm_crows', 'E:esoteric_missile'],
-  'wom:critical_knowledge', ['LSP', 'RNG', 'ARSP'])
+  'wom:natural_sprinter', ['LSP', 'RNG', 'ARSP'])
 v('lightning', 'wanderer', ['Storm Rider', 'Stormchaser', 'Thunderhoof'],
   ['Z:storm_steed', 'X:gust_pro', 'Z:thunder_charge', 'H:borrowed_time'],
-  'wom:natural_sprinter', ['LSP', 'MNT', 'SPRN'])
+  'epicfightx:combat_mastery_ii', ['LSP', 'MNT', 'SPRN'])
 v('holy', 'assassin', ['Inquisitor', 'Witch Hunter', 'Silver Blade'],
   ['Z:radiant_dagger', 'T:nullflare', 'C:black_verse', 'Z:bounty'],
   'epicfight:bonebreaker', ['HSP', 'BSTB', 'ANEG'])
@@ -87,10 +87,10 @@ v('holy', 'thief', ['Pardoner', 'Saintly Thief', 'Robin of the Poor'],
   'wom:proximity_exploiter', ['HSP', 'LUCK', 'DROP'])
 v('holy', 'stalker', ['Radiant Archer', 'Sun Hunter', 'Arbiter'],
   ['Z:arrow_holy', 'I:starfall', 'R:star_shower', 'S:evocation_fortitude'],
-  'epicfight:revelation', ['HSP', 'RNG', 'EVSP'])
+  'wom:natural_sprinter', ['HSP', 'RNG', 'EVSP'])
 v('holy', 'wanderer', ['Lantern Bearer', 'Pilgrim Saint', 'Missionary'],
   ['C:pale_lantern', 'H:prepared_cut_back', 'A:guardian_angel', 'Z:holy_shield'],
-  'epicfight:adrenaline_fiend', ['HSP', 'SAT', 'HEAL'])
+  'wom:spider_techniques', ['HSP', 'SAT', 'HEAL'])
 v('warlock', 'assassin', ['Faceless', 'Void Blade', 'Shadow of the Abyss'],
   ['Z:stealth_summons', 'C:umbral_coffin', 'Z:void_shiv', 'T:blackout'],
   'wom:ender_obscuris', ['ESP', 'BSTB', 'STL'])
@@ -108,13 +108,13 @@ v('necromancer', 'assassin', ['Reaper', 'Blood Shade', 'Nightstalker'],
   'cdmoveset:fatalfalsh', ['BSP', 'BSTB', 'LST'])
 v('necromancer', 'thief', ['Grave Robber', 'Body Snatcher', 'Ghoul'],
   ['Z:grave_rob', 'Z:skeleton_archers', 'C:bone_toll', 'C:grave_dust'],
-  'epicfight:stamina_pillager', ['BSP', 'LUCK', 'FORT'])
+  'wom:vampirize', ['BSP', 'LUCK', 'FORT'])
 v('necromancer', 'stalker', ['Bone Archer', 'Wraith Hunter', 'Blood Sniper'],
   ['Z:arrow_blood', 'Z:skeleton_archers', 'T:blood_howl', 'S:bloodmark'],
-  'wom:arrow_tenacity', ['BSP', 'RNG', 'SUM'])
+  'epicfight:forbidden_strength', ['BSP', 'RNG', 'SUM'])
 v('necromancer', 'wanderer', ['Ferryman', 'Graveyard Shepherd', 'Lantern of Souls'],
   ['Z:bone_steed', 'A:summon_shadows', 'X:totem_rite', 'S:soul_latch'],
-  'wom:proximity_exploiter', ['BSP', 'PET', 'SUM'])
+  'epicfight:stamina_pillager', ['BSP', 'PET', 'SUM'])
 v('druid', 'assassin', ['Viper', 'Venomblade', 'Spider Queen'],
   ['Z:spider_brood', 'C:hatch_cysts', 'C:blight_step', 'Z:hunter_trap'],
   'wom:spider_techniques', ['NSP', 'BSTB', 'DAG'])
@@ -135,7 +135,7 @@ v('spirit', 'thief', ['Kitsune Trickster', 'Tanuki', 'Fox Spirit'],
   'wom:dodge_master', ['SYM', 'LUCK', 'DROP'])
 v('spirit', 'stalker', ['Jade Archer', 'Celestial Bow', 'Arrow Sage'],
   ['Z:arrow_spirit', 'R:glintblade_phalanx', 'E:echanted_spell', 'S:winged_ruin'],
-  'epicfight:revelation', ['SYM', 'RNG', 'ARSP'])
+  'wom:inner_growth', ['SYM', 'RNG', 'ARSP'])
 v('spirit', 'wanderer', ['Xian', 'Cloud Wanderer', 'Immortal'],
   ['Z:river_dragon', 'Z:spirit_tiger', 'Z:immortal_peach', 'R:terra_magica'],
-  'wom:natural_sprinter', ['SYM', 'SAT', 'SPRN'])
+  'epicfight:stamina_pillager', ['SYM', 'SAT', 'SPRN'])

@@ -1124,7 +1124,6 @@ PINNED = {
     'somakespells:halberd_strike': ('axe', 'ice'),
     'traveloptics:summon_desert_dwellers': ('totem', 'gold'),
     'cdmoveset:fatalfalsh': ('stance_katana', 'gold', 'exclaim', 'crimson'),
-    'efclash_blade:clash_blade': ('crossed_swords', 'steel'),
     'cdmoveset:wolf_dodge': ('beast', 'teal'),
     'iss_magicfromtheeast:bone_hands': ('hand', 'bone'),
     'wom:proximity_exploiter': ('target', 'teal'),

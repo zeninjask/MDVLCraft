@@ -163,7 +163,7 @@ MODS = {
     "irons_spellbooks": None, "irons_chronomancy": "time", "cursed_school": "death", "wind_spellbooks": "wind",
     "antimagic": "arcane", "esoteric_spell": "arcane", "alshanex_familiars": "summon", "iss_csw": None,
     "iss_elden_ring": "arcane", "iss_magicfromtheeast": None, "mdvlcraft": None, "somakespells": None, "traveloptics": None,
-    "cdmoveset": "sword", "combat_evolution": None, "dodge_parry_reward": None, "dualgreatswords": "sword", "efclash": None,
+    "cdmoveset": "sword", "combat_evolution": None, "dodge_parry_reward": None, "dualgreatswords": "sword",
     "efn": None, "efs_iss": "arcane", "epicfightx": None, "epicfight": None, "wom": None,
 }
 ABILITIES = {  # the Samurai's stance abilities share the stance orbs; a few summons and weapons get their own item

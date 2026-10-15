@@ -17,7 +17,7 @@ EFC = {
  'warlock': 'efs_iss:magic_sword wom:voodoo_magic wom:ender_step wom:ender_obscuris wom:soul_protection',
  'necromancer': 'wom:soul_protection efs_iss:blood_into_mana epicfight:death_harvest cdmoveset:bloodwolf wom:vampirize epicfight:forbidden_strength',
  'druid': 'dodge_parry_reward:heal3 epicfight:meteor_slam cdmoveset:wolf_dodge epicfight:adaptive_skin wom:natural_sprinter wom:spider_techniques',
- 'spirit': 'dodge_parry_reward:damage_boost1 efclash_blade:clash_blade wom:inner_growth wom:dodge_master wom:soul_protection',
+ 'spirit': 'dodge_parry_reward:damage_boost1 wom:inner_growth wom:dodge_master wom:soul_protection',
  'assassin': 'epicfight:bonebreaker wom:ender_obscuris wom:shadow_step wom:spider_techniques cdmoveset:fatalfalsh wom:lethal_focus',
  'thief': 'wom:ender_step epicfight:stamina_pillager wom:time_travel wom:dodge_master wom:proximity_exploiter epicfight:phantom_ascent',
  'stalker': 'wom:arrow_tenacity wom:critical_knowledge epicfight:revelation wom:dancing_blade wom:natural_sprinter epicfight:phantom_ascent',

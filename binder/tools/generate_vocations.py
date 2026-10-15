@@ -269,8 +269,7 @@ def ability_body(code, live, cost):
 
 def ef_body(skill, live, cost):
     info = CATALOG["ef"][skill]
-    slot = {"DODGE": "Dodge", "GUARD": "Guard", "MOVER": "Mobility", "IDENTITY": "Identity", "PASSIVE": "Passive",
-            "CLASH_BLADE": "Clash"}[info["slot"]]
+    slot = {"DODGE": "Dodge", "GUARD": "Guard", "MOVER": "Mobility", "IDENTITY": "Identity", "PASSIVE": "Passive"}[info["slot"]]
     old = live.get(skill)
     name = old["title"] if old else " ".join(w.capitalize() for w in info["name"].replace("_", " ").split())
     effect = (EF_DESC.get(skill) or info["tip"] or "").rstrip(".")

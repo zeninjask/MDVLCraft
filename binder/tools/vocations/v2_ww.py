@@ -13,10 +13,10 @@ v('guardian', 'brute', ['Bastion', 'Ironwall', 'Rampart'],
   'wom:vengeful_parry', ['MHP', 'ARM', 'KBR'])
 v('guardian', 'samurai', ['Hatamoto', 'Oathblade', 'Shogun\'s Shield'],
   ['E:magic_blade_enchanting', 'R:glintstone_arc', 'E:cycle_aura', 'Z:mushin'],
-  'efn:precise_parry', ['KAT', 'ATG', 'POP'])
+  'dodge_parry_reward:damage_boost1', ['KAT', 'ATG', 'POP'])
 v('guardian', 'berserker', ['Warlord', 'Vanguard', 'Iron Crusader'],
   ['I:summon_swords', 'S:sovereign_armory', 'R:carian_phalanx', 'Z:war_banner'],
-  'wom:dopamine', ['ATK', 'ARM', 'GSD'])
+  'wom:vengeful_parry', ['ATK', 'ARM', 'GSD'])
 v('guardian', 'monk', ['Temple Guard', 'Iron Monk', 'Shaolin Sentinel'],
   ['E:magic_skin', 'E:flowing_barrier', 'N:black_mantle', 'H:prepared_cut_back'],
   'efn:efn_parry', ['STA', 'UNA', 'DRS'])
@@ -25,16 +25,16 @@ v('brute', 'samurai', ['Sohei', 'Benkei', 'Oni Breaker'],
   'epicfight:parrying', ['SPR', 'KAT', 'MHP'])
 v('brute', 'berserker', ['Warmonger', 'Ravager', 'Juggernaut'],
   ['T:axe_of_the_doomed', 'Z:blood_frenzy', 'C:margin_pact', 'Z:warcry'],
-  'epicfight:vengeance', ['AXE', 'ATK', 'KBR'])
+  'epicfight:demolition_leap', ['AXE', 'ATK', 'KBR'])
 v('brute', 'monk', ['Sumo', 'Iron Mountain', 'Ogre Fist'],
   ['I:gust', 'E:blast_magic', 'Z:iron_body', 'R:rock_sling'],
-  'epicfight:guard', ['UNA', 'MHP', 'KBR'])
+  'epicfight:forbidden_strength', ['UNA', 'MHP', 'KBR'])
 v('samurai', 'berserker', ['Hitokiri', 'Ronin', 'Bloodsworn'],
   ['B:dismantle', 'B:cleave', 'R:carian_slicer', 'I:heartstop'],
-  'efn:efn_dodge', ['KAT', 'ATK', 'LST'])
+  'epicfight:revelation', ['KAT', 'ATK', 'LST'])
 v('samurai', 'monk', ['Kensei', 'Sword Saint', 'Zen Blade'],
   ['H:borrowed_time', 'H:speedup', 'E:magic_blade_conversion', 'I:slow'],
-  'efn:efn_step', ['KAT', 'DOD', 'RIP'])
+  'wom:punishment_kick', ['KAT', 'DOD', 'RIP'])
 v('berserker', 'monk', ['Brawler', 'Pit Fighter', 'Rampage Fist'],
   ['W:aeropic', 'C:withering_touch', 'Z:adrenal_surge', 'E:qadal_magic'],
-  'epicfight:catharsis', ['UNA', 'ATK', 'ASPD'])
+  'epicfight:bonebreaker', ['UNA', 'ATK', 'ASPD'])
