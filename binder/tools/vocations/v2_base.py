@@ -148,7 +148,7 @@ BASE = {
               ['wom:buster_parade', 'wom:bull_charge', 'wom:avatar_of_might', 'epicfightx:combat_mastery_ii', 'wom:punishment_kick']),
     'samurai': (['B:stance', 'B:blitz', 'B:myriad_blades', 'W:iron_slash', 'E:element_slash', 'E:magic_blade_enchant_slash',
                  'E:echanted_burst', 'E:union_sword', 'E:limit_break', 'E:cast_barrier', 'S:soulfall_judgment', 'M:calamity_cut',
-                 'E:magic_blade_absorb', 'Z:iaido'],
+                 'E:magic_blade_absorb', 'I:blood_step', 'Z:iaido'],
                 ['cdmoveset:fatalfalsh', 'efn:parry_master', 'wom:dancing_blade', 'wom:manipulator', 'epicfight:swordmaster',
                  'epicfight:technician']),
     'berserker': (['N:demonic_assimilation', 'S:spectral_rondo', 'S:render_rush', 'M:dragon_glide', 'E:dual_bringer', 'C:ruin_slash',

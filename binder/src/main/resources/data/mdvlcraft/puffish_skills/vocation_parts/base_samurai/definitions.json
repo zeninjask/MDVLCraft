@@ -319,20 +319,22 @@
   },
   "size": 1.5
  },
- "samurai__fatalfalsh": {
-  "title": "Fatal Flash",
-  "description": "Teaches Fatal Flash, an Epic Fight Identity skill: Lock onto a low-health enemy and perform a kill, which cannot be interrupted during execution (Weapons allowed: uchigatana, katana, tachi, longsword). Equip it in the Combat Skills box of the abilities screen",
+ "samurai__focus": {
+  "title": "Focus",
+  "description": "Unlocks Focus (36 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Your next strike within 10 s (a punch, a kick or one of your arts) is a guaranteed Black Flash: 2.5x damage and a short stun.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/cdmoveset_fatalfalsh.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_focus.png"
    }
   },
   "rewards": [
    {
-    "type": "mdvlcraft:epicfight_skill",
+    "type": "mdvlcraft:ability",
     "data": {
-     "skill": "cdmoveset:fatalfalsh"
+     "ability": "mdvlcraft:focus",
+     "level": 1
     }
    }
   ],
@@ -899,20 +901,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "samurai__parry_master": {
-  "title": "Parry Master",
-  "description": "Teaches Parry Master, an Epic Fight Passive skill: Parries charge your weapon skill and build up a chance to ignore enemy defence; with a katana, parries open Ichimonji counters. Equip it in the Combat Skills box of the abilities screen",
+ "samurai__fatalfalsh": {
+  "title": "Fatal Flash",
+  "description": "Teaches Fatal Flash, an Epic Fight Identity skill: Lock onto a low-health enemy and perform a kill, which cannot be interrupted during execution (Weapons allowed: uchigatana, katana, tachi, longsword). Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efn_parry_master.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/cdmoveset_fatalfalsh.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efn:parry_master"
+     "skill": "cdmoveset:fatalfalsh"
     }
    }
   ],
@@ -1387,20 +1389,20 @@
   },
   "size": 1.5
  },
- "samurai__dancing_blade": {
-  "title": "Dancing Blade",
-  "description": "Teaches Dancing Blade, an Epic Fight Passive skill: Every 4th hit that lands deals 80% more damage. Equip it in the Combat Skills box of the abilities screen",
+ "samurai__parry_master": {
+  "title": "Parry Master",
+  "description": "Teaches Parry Master, an Epic Fight Passive skill: Parries charge your weapon skill and build up a chance to ignore enemy defence; with a katana, parries open Ichimonji counters. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_dancing_blade.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efn_parry_master.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "wom:dancing_blade"
+     "skill": "efn:parry_master"
     }
    }
   ],
@@ -1806,20 +1808,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "samurai__manipulator": {
-  "title": "Manipulator",
-  "description": "Teaches Manipulator, an Epic Fight Passive skill: Blocking restores stamina: 60% of what you are missing on a perfect block, up to 30% on a normal one. Equip it in the Combat Skills box of the abilities screen",
+ "samurai__dancing_blade": {
+  "title": "Dancing Blade",
+  "description": "Teaches Dancing Blade, an Epic Fight Passive skill: Every 4th hit that lands deals 80% more damage. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_manipulator.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_dancing_blade.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "wom:manipulator"
+     "skill": "wom:dancing_blade"
     }
    }
   ],
@@ -2165,20 +2167,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "samurai__swordmaster": {
-  "title": "Swordmaster",
-  "description": "Teaches Swordmaster, an Epic Fight Passive skill: Bonus attack speed. Equip it in the Combat Skills box of the abilities screen",
+ "samurai__manipulator": {
+  "title": "Manipulator",
+  "description": "Teaches Manipulator, an Epic Fight Passive skill: Blocking restores stamina: 60% of what you are missing on a perfect block, up to 30% on a normal one. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_swordmaster.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_manipulator.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "epicfight:swordmaster"
+     "skill": "wom:manipulator"
     }
    }
   ],
@@ -2524,20 +2526,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "samurai__technician": {
-  "title": "Technician",
-  "description": "Teaches Technician, an Epic Fight Passive skill: Dodging just before a hit restores stamina. Equip it in the Combat Skills box of the abilities screen",
+ "samurai__swordmaster": {
+  "title": "Swordmaster",
+  "description": "Teaches Swordmaster, an Epic Fight Passive skill: Bonus attack speed. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_technician.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_swordmaster.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "epicfight:technician"
+     "skill": "epicfight:swordmaster"
     }
    }
   ],
@@ -2850,20 +2852,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "samurai__combat_mastery_i": {
-  "title": "Combat Mastery I",
-  "description": "Teaches Combat Mastery I, an Epic Fight Passive skill: Dodge in the middle of an attack, or attack straight out of a dodge. Equip it in the Combat Skills box of the abilities screen",
+ "samurai__technician": {
+  "title": "Technician",
+  "description": "Teaches Technician, an Epic Fight Passive skill: Dodging just before a hit restores stamina. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_i.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_technician.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "epicfightx:combat_mastery_i"
+     "skill": "epicfight:technician"
     }
    }
   ],
@@ -3242,20 +3244,20 @@
   "size": 1.5,
   "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
  },
- "samurai__combat_mastery_ii": {
-  "title": "Combat Mastery II",
-  "description": "Teaches Combat Mastery II, an Epic Fight Passive skill: Sprinting just after a dodge enters a Dash, which drains stamina while it lasts. Equip it in the Combat Skills box of the abilities screen",
+ "samurai__combat_mastery_i": {
+  "title": "Combat Mastery I",
+  "description": "Teaches Combat Mastery I, an Epic Fight Passive skill: Dodge in the middle of an attack, or attack straight out of a dodge. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_ii.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_i.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "epicfightx:combat_mastery_ii"
+     "skill": "epicfightx:combat_mastery_i"
     }
    }
   ],
@@ -3766,20 +3768,20 @@
   "size": 1.5,
   "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "samurai__precise_parry": {
-  "title": "Assassin",
-  "description": "Teaches Assassin, an Epic Fight Passive skill: Parry within Parry: -More precise parrying; More fierce counterattacks. -Triggering parry at the perfect moment grants significant buffs and enhances the next attack within 0.7s. Equip it in the Combat Skills box of the abilities screen",
+ "samurai__combat_mastery_ii": {
+  "title": "Combat Mastery II",
+  "description": "Teaches Combat Mastery II, an Epic Fight Passive skill: Sprinting just after a dodge enters a Dash, which drains stamina while it lasts. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efn_precise_parry.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_ii.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efn:precise_parry"
+     "skill": "epicfightx:combat_mastery_ii"
     }
    }
   ],
@@ -4256,6 +4258,36 @@
   },
   "size": 1.5,
   "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__precise_parry": {
+  "title": "Assassin",
+  "description": "Teaches Assassin, an Epic Fight Passive skill: Parry within Parry: -More precise parrying; More fierce counterattacks. -Triggering parry at the perfect moment grants significant buffs and enhances the next attack within 0.7s. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efn_precise_parry.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efn:precise_parry"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
  },
  "samurai__vitality_3": {
   "title": "Vitality 3",
@@ -5301,26 +5333,26 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "samurai__planned_iaido": {
-  "title": "Iaido Draw",
-  "description": "Unlocks Iaido Draw on the ability wheel. A katana-only dashing draw cut; a parry in the 2 s before it doubles its damage.",
-  "extra_description": "Coming soon: built from Blitz; casting it does nothing yet.",
+ "samurai__blood_step": {
+  "title": "Blood Step",
+  "description": "Unlocks Blood Step (Level 3) (36 mana, 18 s cooldown) on the ability wheel",
+  "extra_description": "Instantaneously teleport to where you are looking, or directly behind any targeted creature. Gain a short duration of true invisibility upon reaching your destination.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_iaido.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_step.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:planned_iaido",
-     "level": 1
+     "ability": "irons_spellbooks:blood_step",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -5754,21 +5786,21 @@
   "size": 1.5,
   "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
  },
- "samurai__focus": {
-  "title": "Focus",
-  "description": "Unlocks Focus (36 mana, 30 s cooldown) on the ability wheel",
-  "extra_description": "Your next strike within 10 s (a punch, a kick or one of your arts) is a guaranteed Black Flash: 2.5x damage and a short stun.",
+ "samurai__planned_iaido": {
+  "title": "Iaido Draw",
+  "description": "Unlocks Iaido Draw on the ability wheel. A katana-only dashing draw cut; a parry in the 2 s before it doubles its damage.",
+  "extra_description": "Coming soon: built from Blitz; casting it does nothing yet.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_focus.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_iaido.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:focus",
+     "ability": "mdvlcraft:planned_iaido",
      "level": 1
     }
    }
