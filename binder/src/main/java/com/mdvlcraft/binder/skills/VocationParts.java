@@ -27,7 +27,7 @@ public final class VocationParts {
     private VocationParts() {
     }
 
-    /** Every vocation by tab path (voc_<a>_<b>): {a, b, name, names, description}. */
+    /** Every vocation by tab path (voc_<a>_<b>): {a, b, name, description}. */
     public static Map<String, JsonElement> all() {
         return INDEX.asMap();
     }

@@ -547,7 +547,7 @@ def build_vocations(live, roots):
         write(part / "definitions.json", defs)
         write(part / "skills.json", skills)
         write(part / "connections.json", {"normal": {"bidirectional": conns}})
-        index[vid] = {"a": a, "b": b, "name": r["names"][0], "names": r["names"],
+        index[vid] = {"a": a, "b": b, "name": r["names"][0],
                       "description": f"{D.TITLE[a]} + {D.TITLE[b]}. Left: the {D.TITLE[a]} base. Right: the {D.TITLE[b]} base. Centre column: the {r['names'][0]} vocation's own skills and bonuses."}
     write(PARTS / "vocations.json", index)
     return index

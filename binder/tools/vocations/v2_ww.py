@@ -8,33 +8,33 @@ mod('warcry', 'Warcry', 'Scapegoat', 'A roar that makes every mob nearby target 
 mod('oni_summon', 'Summon Oni', 'Revenant of Honor', 'Summon a towering spirit oni with a kanabo instead of a samurai.')
 
 # Warrior + Warrior
-v('guardian', 'brute', ['Bastion', 'Ironwall', 'Rampart'],
+v('guardian', 'brute', ['Ironwall'],
   ['E:gloria_barrier', 'H:temporal_wall', 'E:barrier_aura', 'I:fang_ward'],
   'wom:vengeful_parry', ['MHP', 'ARM', 'KBR'])
-v('guardian', 'samurai', ['Hatamoto', 'Oathblade', 'Shogun\'s Shield'],
+v('guardian', 'samurai', ["Shogun's Shield"],
   ['E:magic_blade_enchanting', 'R:glintstone_arc', 'E:cycle_aura', 'Z:mushin'],
   'dodge_parry_reward:damage_boost1', ['KAT', 'ATG', 'POP'])
-v('guardian', 'berserker', ['Warlord', 'Vanguard', 'Iron Crusader'],
+v('guardian', 'berserker', ['Warlord'],
   ['I:summon_swords', 'S:sovereign_armory', 'R:carian_phalanx', 'Z:war_banner'],
   'wom:vengeful_parry', ['ATK', 'ARM', 'GSD'])
-v('guardian', 'monk', ['Temple Guard', 'Iron Monk', 'Shaolin Sentinel'],
+v('guardian', 'monk', ['Temple Guard'],
   ['E:magic_skin', 'E:flowing_barrier', 'N:black_mantle', 'H:prepared_cut_back'],
   'efn:efn_parry', ['STA', 'UNA', 'DRS'])
-v('brute', 'samurai', ['Sohei', 'Benkei', 'Oni Breaker'],
+v('brute', 'samurai', ['Oni Breaker'],
   ['M:ashigaru_squad', 'S:soul_latch', 'C:bone_toll', 'Z:oni_summon'],
   'epicfight:parrying', ['SPR', 'KAT', 'MHP'])
-v('brute', 'berserker', ['Warmonger', 'Ravager', 'Juggernaut'],
+v('brute', 'berserker', ['Warmonger'],
   ['T:axe_of_the_doomed', 'Z:blood_frenzy', 'C:margin_pact', 'Z:warcry'],
   'epicfight:demolition_leap', ['AXE', 'ATK', 'KBR'])
-v('brute', 'monk', ['Sumo', 'Iron Mountain', 'Ogre Fist'],
+v('brute', 'monk', ['Sumo'],
   ['I:gust', 'E:blast_magic', 'Z:iron_body', 'R:rock_sling'],
   'epicfight:forbidden_strength', ['UNA', 'MHP', 'KBR'])
-v('samurai', 'berserker', ['Hitokiri', 'Ronin', 'Bloodsworn'],
+v('samurai', 'berserker', ['Hitokiri'],
   ['B:dismantle', 'B:cleave', 'R:carian_slicer', 'I:heartstop'],
   'epicfight:revelation', ['KAT', 'ATK', 'LST'])
-v('samurai', 'monk', ['Kensei', 'Sword Saint', 'Zen Blade'],
+v('samurai', 'monk', ['Kensei'],
   ['H:borrowed_time', 'H:speedup', 'E:magic_blade_conversion', 'I:slow'],
   'wom:punishment_kick', ['KAT', 'DOD', 'RIP'])
-v('berserker', 'monk', ['Brawler', 'Pit Fighter', 'Rampage Fist'],
+v('berserker', 'monk', ['Brawler'],
   ['W:aeropic', 'C:withering_touch', 'Z:adrenal_surge', 'E:qadal_magic'],
   'epicfight:bonebreaker', ['UNA', 'ATK', 'ASPD'])

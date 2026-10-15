@@ -33,8 +33,8 @@ continue from the first unticked step in "Progress".
 
 - Design doc (Claude Docs, for humans): "MDVLCraft Vocations v2: Design Proposal",
   https://claude.ai/code/artifact/88032882-65b3-462a-9ad0-727761a37dc8. It lists every base, vocation, bonus and Modified
-  ability with descriptions. The user has not picked the vocation names yet: each vocation has three name options and the
-  **first option is used until the user chooses** (record their choices in `binder/tools/vocations/` when they do).
+  ability with descriptions. Each vocation has exactly **one name** (the user's pick, `names.py`); the user wants no
+  alternative names anywhere (design files, `vocations.json`, docs).
 - Design data (machine-readable, the source for everything generated): `binder/tools/vocations/`
   - `v2_base.py`: classes, the 18 archetypes, roles, signature stats (`SIG`), stat values (`STAT`), the base skill lists
     (`BASE`: spells/techniques and Epic Fight skills), the Modified abilities (`MOD`), exclusions, the five Epic Fight

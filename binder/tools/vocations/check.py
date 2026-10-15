@@ -37,7 +37,7 @@ basesk = {a: {full(s) if not s.startswith('Z:') else s for s in sk} for a, (sk, 
 vsk = {}
 for (a, b), r in d.VOC.items():
     w = f'{a}+{b}'
-    assert len(r['names']) == 3, w
+    assert len(r['names']) == 1, w
     assert len(r['bonus']) == 3, w
     s2 = set()
     for s in r['skills']:

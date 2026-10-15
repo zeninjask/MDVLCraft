@@ -31,111 +31,111 @@ mod('fox_glamour', 'Fox Glamour', 'Invisibility', 'Take on a mob\'s appearance; 
 mod('immortal_peach', 'Peach of Immortality', 'Gluttony', 'Conjure a peach that heals a lot and gives Regeneration and Resistance.')
 
 # Mage + Rogue
-v('blaze', 'assassin', ['Ember Shade', 'Cinder Knife', 'Ash Stalker'],
+v('blaze', 'assassin', ['Ash Stalker'],
   ['Z:flame_step', 'Z:immolate', 'T:ashen_breath', 'C:ash_needle'],
   'efs_iss:magic_sword', ['FSP', 'BSTB', 'DAG'])
-v('blaze', 'thief', ['Firebug', 'Arsonist', 'Ember Rogue'],
+v('blaze', 'thief', ['Firebug'],
   ['I:chain_creeper', 'X:lob_creeper_chain', 'S:damned_demomans', 'Z:caltrops'],
   'wom:adrenaline', ['FSP', 'LUCK', 'DROP'])
-v('blaze', 'stalker', ['Fire Archer', 'Flame Ranger', 'Ember Bow'],
+v('blaze', 'stalker', ['Fire Archer'],
   ['Z:flaming_volley', 'R:cannon_of_haima', 'T:lava_bomb', 'X:chaos_strike'],
   'wom:dancing_blade', ['FSP', 'RNG', 'ARSP'])
-v('blaze', 'wanderer', ['Ember Nomad', 'Desert Walker', 'Hearthkeeper'],
+v('blaze', 'wanderer', ['Desert Walker'],
   ['Z:camel', 'T:summon_desert_dwellers', 'Z:heat_mirage', 'I:burning_dash'],
   'epicfight:adrenaline_fiend', ['FSP', 'SAT', 'FRES'])
-v('frost', 'assassin', ['Frost Shade', 'Winter\'s Knife', 'Silent Snow'],
+v('frost', 'assassin', ['Frost Shade'],
   ['Z:ice_dagger', 'X:rime_veil', 'T:despair', 'H:slowdown'],
   'wom:ender_obscuris', ['ISP', 'BSTB', 'ANEG'])
-v('frost', 'thief', ['Black Ice', 'Cold Snap', 'Ice Thief'],
+v('frost', 'thief', ['Black Ice'],
   ['Z:black_ice', 'Z:iceberg', 'H:time_stop', 'Z:mirror_image'],
   'wom:heart_shield', ['ISP', 'LUCK', 'FORT'])
-v('frost', 'stalker', ['Winter Hunter', 'Hoarfrost Bow', 'Frost Archer'],
+v('frost', 'stalker', ['Frost Archer'],
   ['Z:arrow_ice', 'R:comet', 'Z:frost_trap', 'Z:frost_wolves'],
   'wom:dancing_blade', ['ISP', 'RNG', 'APEN'])
-v('frost', 'wanderer', ['Tundra Walker', 'Polar Explorer', 'Snowbound Nomad'],
+v('frost', 'wanderer', ['Snowbound Nomad'],
   ['X:summon_polar_bear', 'Z:frozen_sea', 'Z:igloo', 'X:gust_pro'],
   'epicfight:adaptive_skin', ['ISP', 'MNT', 'IRES'])
-v('water', 'assassin', ['Siren', 'Drowner', 'Riptide Knife'],
+v('water', 'assassin', ['Siren'],
   ['Z:drown', 'T:serpentide', 'Z:mist_step', 'T:jet_steam'],
   'cdmoveset:fatalfalsh', ['AQSP', 'BSTB', 'SWIM'])
-v('water', 'thief', ['Pirate', 'Buccaneer', 'Smuggler'],
+v('water', 'thief', ['Pirate'],
   ['Z:pirate_crew', 'S:ceraunus_dash', 'T:cursed_minefield', 'R:cannon_of_haima'],
   'wom:proximity_exploiter', ['AQSP', 'LUCK', 'SWD'])
-v('water', 'stalker', ['Tide Hunter', 'Harpoon Gunner', 'Reef Ranger'],
+v('water', 'stalker', ['Tide Hunter'],
   ['Z:arrow_water', 'Z:harpoon', 'Z:trident_rain', 'T:flood_slash'],
   'wom:natural_sprinter', ['AQSP', 'RNG', 'BOLT'])
-v('water', 'wanderer', ['Voyager', 'Sailor', 'Sea Nomad'],
+v('water', 'wanderer', ['Voyager'],
   ['T:echo_of_the_abyss', 'Z:spectral_boat', 'T:jet_steam', 'Z:trail_rations'],
   'wom:spider_techniques', ['AQSP', 'SWIM', 'SAT'])
-v('lightning', 'assassin', ['Thunder Shinobi', 'Flash Blade', 'Raiju Knife'],
+v('lightning', 'assassin', ['Raiju Knife'],
   ['Z:flash_step', 'T:em_pulse', 'S:lightning_lash', 'W:aeropic'],
   'wom:lethal_focus', ['LSP', 'BSTB', 'MSP'])
-v('lightning', 'thief', ['Spark Rogue', 'Static Thief', 'Grid Runner'],
+v('lightning', 'thief', ['Spark Rogue'],
   ['Z:static_snare', 'T:mechanized_predator', 'H:speedup', 'T:rapid_laser'],
   'epicfight:phantom_ascent', ['LSP', 'LUCK', 'MSP'])
-v('lightning', 'stalker', ['Railgunner', 'Storm Archer', 'Thunder Bow'],
+v('lightning', 'stalker', ['Storm Archer'],
   ['Z:arrow_lightning', 'T:death_laser', 'Z:storm_crows', 'E:esoteric_missile'],
   'wom:natural_sprinter', ['LSP', 'RNG', 'ARSP'])
-v('lightning', 'wanderer', ['Storm Rider', 'Stormchaser', 'Thunderhoof'],
+v('lightning', 'wanderer', ['Storm Rider'],
   ['Z:storm_steed', 'X:gust_pro', 'Z:thunder_charge', 'H:borrowed_time'],
   'epicfightx:combat_mastery_ii', ['LSP', 'MNT', 'SPRN'])
-v('holy', 'assassin', ['Inquisitor', 'Witch Hunter', 'Silver Blade'],
+v('holy', 'assassin', ['Inquisitor'],
   ['Z:radiant_dagger', 'T:nullflare', 'C:black_verse', 'Z:bounty'],
   'epicfight:bonebreaker', ['HSP', 'BSTB', 'ANEG'])
-v('holy', 'thief', ['Pardoner', 'Saintly Thief', 'Robin of the Poor'],
+v('holy', 'thief', ['Pardoner'],
   ['C:issue_invoice', 'E:gloria_barrier', 'Z:holy_water', 'Z:alms'],
   'wom:proximity_exploiter', ['HSP', 'LUCK', 'DROP'])
-v('holy', 'stalker', ['Radiant Archer', 'Sun Hunter', 'Arbiter'],
+v('holy', 'stalker', ['Radiant Archer'],
   ['Z:arrow_holy', 'I:starfall', 'R:star_shower', 'S:evocation_fortitude'],
   'wom:natural_sprinter', ['HSP', 'RNG', 'EVSP'])
-v('holy', 'wanderer', ['Lantern Bearer', 'Pilgrim Saint', 'Missionary'],
+v('holy', 'wanderer', ['Lantern Bearer'],
   ['C:pale_lantern', 'H:prepared_cut_back', 'A:guardian_angel', 'Z:holy_shield'],
   'wom:spider_techniques', ['HSP', 'SAT', 'HEAL'])
-v('warlock', 'assassin', ['Faceless', 'Void Blade', 'Shadow of the Abyss'],
+v('warlock', 'assassin', ['Faceless'],
   ['Z:stealth_summons', 'C:umbral_coffin', 'Z:void_shiv', 'T:blackout'],
   'wom:ender_obscuris', ['ESP', 'BSTB', 'STL'])
-v('warlock', 'thief', ['Debt Collector', 'Faustian', 'Trickster'],
+v('warlock', 'thief', ['Trickster'],
   ['C:call_clerk', 'C:debt_spike', 'C:invoice', 'C:greedy_margin'],
   'wom:ender_step', ['ESP', 'LUCK', 'CRSP'])
-v('warlock', 'stalker', ['Void Archer', 'Gravity Bow', 'Hexbolt'],
+v('warlock', 'stalker', ['Void Archer'],
   ['Z:arrow_eldritch', 'R:meteorite_of_astel', 'R:collapsing_stars', 'C:hex_barrage'],
   'epicfight:revelation', ['ESP', 'RNG', 'ENSP'])
-v('warlock', 'wanderer', ['Riftwalker', 'Planeswalker', 'Void Wanderer'],
+v('warlock', 'wanderer', ['Riftwalker'],
   ['Z:void_strider', 'T:conjure_void_tomes', 'H:chrono_step', 'H:chronal_bolt'],
   'wom:proximity_exploiter', ['ESP', 'ENSP', 'MNT'])
-v('necromancer', 'assassin', ['Reaper', 'Blood Shade', 'Nightstalker'],
+v('necromancer', 'assassin', ['Reaper'],
   ['S:blood_cut', 'T:nocturnal_swarm', 'Z:vampire_bite', 'C:umbral_coffin'],
   'cdmoveset:fatalfalsh', ['BSP', 'BSTB', 'LST'])
-v('necromancer', 'thief', ['Grave Robber', 'Body Snatcher', 'Ghoul'],
+v('necromancer', 'thief', ['Ghoul'],
   ['Z:grave_rob', 'Z:skeleton_archers', 'C:bone_toll', 'C:grave_dust'],
   'wom:vampirize', ['BSP', 'LUCK', 'FORT'])
-v('necromancer', 'stalker', ['Bone Archer', 'Wraith Hunter', 'Blood Sniper'],
+v('necromancer', 'stalker', ['Bone Archer'],
   ['Z:arrow_blood', 'Z:skeleton_archers', 'T:blood_howl', 'S:bloodmark'],
   'epicfight:forbidden_strength', ['BSP', 'RNG', 'SUM'])
-v('necromancer', 'wanderer', ['Ferryman', 'Graveyard Shepherd', 'Lantern of Souls'],
+v('necromancer', 'wanderer', ['Ferryman'],
   ['Z:bone_steed', 'A:summon_shadows', 'X:totem_rite', 'S:soul_latch'],
   'epicfight:stamina_pillager', ['BSP', 'PET', 'SUM'])
-v('druid', 'assassin', ['Viper', 'Venomblade', 'Spider Queen'],
+v('druid', 'assassin', ['Viper'],
   ['Z:spider_brood', 'C:hatch_cysts', 'C:blight_step', 'Z:hunter_trap'],
   'wom:spider_techniques', ['NSP', 'BSTB', 'DAG'])
-v('druid', 'thief', ['Poacher', 'Hedge Witch', 'Magpie'],
+v('druid', 'thief', ['Magpie'],
   ['Z:net_throw', 'Z:magpies', 'Z:hunter_trap', 'A:birds_spell'],
   'wom:time_travel', ['NSP', 'LUCK', 'DROP'])
-v('druid', 'stalker', ['Sylvan Archer', 'Beast Hunter', 'Thornbow'],
+v('druid', 'stalker', ['Sylvan Archer'],
   ['Z:thorn_volley', 'Z:bear', 'R:rock_sling', 'Z:totem_ward'],
   'wom:natural_sprinter', ['NSP', 'RNG', 'PET'])
-v('druid', 'wanderer', ['Wayfinder', 'Wild Shepherd', 'Ranger of the Wilds'],
+v('druid', 'wanderer', ['Wayfinder'],
   ['T:primordial_steed', 'A:birds_spell', 'Z:forage', 'Z:spirit_wolf'],
   'epicfight:adrenaline_fiend', ['NSP', 'PET', 'SAT'])
-v('spirit', 'assassin', ['Ghost Blade', 'Kitsune Shade', 'Jade Shinobi'],
+v('spirit', 'assassin', ['Kitsune Shade'],
   ['Z:spirit_step', 'S:spiral_of_ruin', 'Z:kunai_rain', 'R:magic_glintblade'],
   'wom:shadow_step', ['SYM', 'BSTB', 'STL'])
-v('spirit', 'thief', ['Kitsune Trickster', 'Tanuki', 'Fox Spirit'],
+v('spirit', 'thief', ['Tanuki'],
   ['Z:fox_glamour', 'A:default_note', 'A:music_bolt', 'M:kitsune_pack'],
   'wom:dodge_master', ['SYM', 'LUCK', 'DROP'])
-v('spirit', 'stalker', ['Jade Archer', 'Celestial Bow', 'Arrow Sage'],
+v('spirit', 'stalker', ['Jade Archer'],
   ['Z:arrow_spirit', 'R:glintblade_phalanx', 'E:echanted_spell', 'S:winged_ruin'],
   'wom:inner_growth', ['SYM', 'RNG', 'ARSP'])
-v('spirit', 'wanderer', ['Xian', 'Cloud Wanderer', 'Immortal'],
+v('spirit', 'wanderer', ['Xian'],
   ['Z:river_dragon', 'Z:spirit_tiger', 'Z:immortal_peach', 'R:terra_magica'],
   'epicfight:stamina_pillager', ['SYM', 'SAT', 'SPRN'])

@@ -488,7 +488,7 @@ def badge(cls):
 
 
 def vocation_block(vid, info, pack):
-    """One vocation: its name (and the other name options), its pair, its own skills with what they do, and its bonuses."""
+    """One vocation: its name, its pair, its own skills with what they do, and its bonuses."""
     defs = json.load(open(os.path.join(CAT, vid, 'definitions.json')))
     skills = json.load(open(os.path.join(CAT, vid, 'skills.json')))
     a, b = info['a'], info['b']
@@ -514,7 +514,6 @@ def vocation_block(vid, info, pack):
             elif r['type'] == 'mdvlcraft:epicfight_skill':
                 slot = SLOT_NAMES[EF_SLOTS[data['skill']]]
                 rows.append((f"{d['title']} ({slot})", f"{d.get('cost', 0)} pts", e(ef_text(d['description']))))
-    others = [n for n in info['names'] if n != info['name']]
     head = (f"<h4>{e(info['name'])} <small>{badge(V.CLASS_OF[a].lower())} {e(D.TITLE[a])} + {badge(V.CLASS_OF[b].lower())} "
             f"{e(D.TITLE[b])}</small></h4>")
     body = ''.join(f"<div class='it'><b>{e(n)}</b> <span class='m'>{e(m)}</span> {t}</div>" for n, m, t in rows)
