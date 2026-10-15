@@ -25,11 +25,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.fml.ModList;
+import com.mdvlcraft.binder.skills.VocationParts;
+import java.io.UncheckedIOException;
+import java.util.function.Function;
 
 public final class SpellPreviews {
     private static final int HOLD_TICKS = 12;
     private static final long HOVER_MILLIS = 200L;
-    private static final String TREES = "data/mdvlcraft/puffish_skills/categories";
+    private static final String SKILLS = "data/mdvlcraft/puffish_skills";
     private static final String ABILITY_REWARD = "mdvlcraft:ability";
     @Nullable
     private static Map<String, SpellPreviews.Spell> skillSpells;
@@ -97,28 +100,38 @@ public final class SpellPreviews {
     private static Map<String, SpellPreviews.Spell> skillSpells() {
         if (skillSpells == null) {
             Map<String, SpellPreviews.Spell> spells = new HashMap<>();
-            Path categories = null;
+            Path root = null;
             try {
-                categories = ModList.get().getModFileById(MDVLBinder.MOD_ID).getFile().findResource(TREES);
+                root = ModList.get().getModFileById(MDVLBinder.MOD_ID).getFile().findResource(SKILLS);
             } catch (RuntimeException e) {
                 MDVLBinder.LOGGER.error("Spell previews: the binder's mod file is missing", e);
             }
-            try (Stream<Path> trees = categories == null ? Stream.empty() : Files.list(categories)) {
-                for (Path tree : trees.toList()) {
-                    String category = MDVLBinder.MOD_ID + ":" + tree.getFileName().toString().replace("/", "");
-                    JsonObject definitions = read(tree.resolve("definitions.json"));
-                    read(tree.resolve("skills.json")).entrySet().forEach(node -> {
-                        JsonObject definition = definitions.getAsJsonObject(node.getValue().getAsJsonObject().get("definition").getAsString());
-                        String definitionId = node.getValue().getAsJsonObject().get("definition").getAsString();
-                        spell(definition).ifPresent(spell -> {
-                            spells.put(category + "/" + node.getKey(), spell);
-                            SPELL_DEFINITIONS.add(category + "#" + definitionId);
+            try {
+                if (root != null) {
+                    Path skillsRoot = root;
+                    Function<Path, JsonElement> part = path -> {
+                        try {
+                            return read(skillsRoot.resolve(path.toString()));
+                        } catch (IOException e) {
+                            throw new UncheckedIOException(e);
+                        }
+                    };
+                    // every vocation tab, assembled from its parts as Pufferfish loads it (skills/VocationParts)
+                    for (String tab : VocationParts.all().keySet()) {
+                        String category = MDVLBinder.MOD_ID + ":" + tab;
+                        JsonObject definitions = VocationParts.compose(tab, "definitions.json", part).orElseThrow().getAsJsonObject();
+                        VocationParts.compose(tab, "skills.json", part).orElseThrow().getAsJsonObject().entrySet().forEach(node -> {
+                            String definitionId = node.getValue().getAsJsonObject().get("definition").getAsString();
+                            spell(definitions.getAsJsonObject(definitionId)).ifPresent(spell -> {
+                                spells.put(category + "/" + node.getKey(), spell);
+                                SPELL_DEFINITIONS.add(category + "#" + definitionId);
+                            });
                         });
-                    });
+                    }
                 }
             } catch (IOException | RuntimeException e) {
                 // no previews rather than a crash on every hovered node
-                MDVLBinder.LOGGER.error("Spell previews: cannot read the skill trees in {}", categories, e);
+                MDVLBinder.LOGGER.error("Spell previews: cannot read the skill trees in {}", root, e);
                 spells.clear();
                 SPELL_DEFINITIONS.clear();
             }

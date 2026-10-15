@@ -2,10 +2,10 @@ package com.mdvlcraft.binder.skills;
 
 import com.mdvlcraft.binder.network.ArchetypeLevelsPacket;
 import com.mdvlcraft.binder.network.BinderNetwork;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.TickEvent.Phase;
@@ -14,19 +14,20 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedOutEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.puffish.skillsmod.api.Category;
 import net.puffish.skillsmod.api.Experience;
 
 /**
- * Sends every player's picked archetypes (highest level first), that highest level and the experience into it to all
- * clients, for the party windows and their experience bars (client/PartyPanels). Checked five times a second and sent
- * only when it changes; experience the top archetype gained since the last check rides along so the bars can show it.
+ * Sends every player's picked archetypes, their vocation tab's level and the experience into it to all clients, for the
+ * party windows and their experience bars (client/PartyPanels). Checked five times a second and sent only when it
+ * changes; experience the vocation gained since the last check rides along so the bars can show it.
  * A player who logs in gets everyone's.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class ArchetypeLevels {
     private static final int INTERVAL = 4;
     private static final Map<UUID, ArchetypeLevelsPacket> SENT = new HashMap<>();
-    /** The top archetype and its total experience at the last check. */
+    /** The vocation (its archetypes joined by +) and its total experience at the last check. */
     private static final Map<UUID, Total> TOTALS = new HashMap<>();
     private static int ticks;
 
@@ -62,33 +63,22 @@ public final class ArchetypeLevels {
     }
 
     private static ArchetypeLevelsPacket current(ServerPlayer player) {
-        List<Map.Entry<String, Integer>> picked = Respec.ARCHETYPES.stream()
-            .filter(archetype -> Respec.isPicked(player, archetype))
-            .map(archetype -> Map.entry(archetype, experience(archetype).getLevel(player)))
-            .sorted(Comparator.comparing(Map.Entry<String, Integer>::getValue).reversed())
-            .toList();
-        List<String> archetypes = picked.stream().map(Map.Entry::getKey).toList();
-        if (picked.isEmpty()) {
+        List<String> archetypes = Respec.picked(player);
+        Optional<Experience> vocation = Respec.vocation(player).flatMap(Category::getExperience);
+        if (vocation.isEmpty()) {
             TOTALS.remove(player.getUUID());
             return new ArchetypeLevelsPacket(player.getUUID(), archetypes, 0, 0, 0, 0);
         }
 
-        String top = picked.get(0).getKey();
-        int level = picked.get(0).getValue();
-        Experience experience = experience(top);
+        String tab = String.join("+", archetypes);
+        Experience experience = vocation.get();
+        int level = experience.getLevel(player);
         int total = experience.getTotal(player);
-        Total last = TOTALS.put(player.getUUID(), new Total(top, total));
-        int gained = last != null && last.archetype().equals(top) ? Math.max(0, total - last.total()) : 0;
+        Total last = TOTALS.put(player.getUUID(), new Total(tab, total));
+        int gained = last != null && last.archetype().equals(tab) ? Math.max(0, total - last.total()) : 0;
         return new ArchetypeLevelsPacket(
             player.getUUID(), archetypes, level, experience.getCurrent(player), experience.getRequired(player, level), gained
         );
-    }
-
-    private static Experience experience(String archetype) {
-        return Respec.tab(archetype)
-            .orElseThrow(() -> new IllegalStateException("No skill tab mdvlcraft:" + archetype))
-            .getExperience()
-            .orElseThrow(() -> new IllegalStateException("Skill tab mdvlcraft:" + archetype + " has no experience"));
     }
 
     private record Total(String archetype, int total) {

@@ -18,11 +18,7 @@ public record RespecPacket(String from, String to) {
     public static void handle(RespecPacket packet, Supplier<Context> context) {
         context.get().enqueueWork(() -> {
             if (context.get().getSender() != null) {
-                if (packet.to.isEmpty()) {
-                    Respec.reset(context.get().getSender(), packet.from);
-                } else {
-                    Respec.change(context.get().getSender(), packet.from, packet.to);
-                }
+                Respec.respec(context.get().getSender(), packet.from, packet.to);
             }
         });
         context.get().setPacketHandled(true);

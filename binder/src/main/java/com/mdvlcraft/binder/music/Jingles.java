@@ -6,16 +6,16 @@ import com.mdvlcraft.binder.skills.ArchetypeTabs;
 import net.minecraft.server.level.ServerPlayer;
 import net.puffish.skillsmod.api.SkillsAPI;
 
-/** Skill unlocks play Skill Point Gain; picking or changing an archetype on the Classes page plays Job Change. */
+/** Skill unlocks play Skill Point Gain; picking or changing an archetype on the Archetypes page plays Job Change. */
 public final class Jingles {
     private Jingles() {
     }
 
     public static void register() {
         SkillsAPI.registerSkillUnlockEvent((player, categoryId, skillId) -> {
-            if (!categoryId.equals(ArchetypeTabs.CLASSES)) {
+            if (!categoryId.equals(ArchetypeTabs.ARCHETYPES)) {
                 send(player, Jingle.SKILL_POINT_GAIN);
-            } else if (ArchetypeTabs.isArchetype(skillId)) {
+            } else if (ArchetypeTabs.isArchetypeNode(categoryId, skillId)) {
                 send(player, Jingle.JOB_CHANGE);
             }
         });

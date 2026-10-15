@@ -12,43 +12,55 @@ import net.puffish.skillsmod.api.Skill;
 import net.puffish.skillsmod.api.SkillsAPI;
 import net.puffish.skillsmod.api.Skill.State;
 
+/**
+ * The Archetypes page (mdvlcraft:archetypes): the three class nodes are unlocked for everyone on login, and picking a
+ * second archetype opens that pair's vocation tab. Dropping an archetype (a respec) erases the old vocation tab.
+ */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class ArchetypeTabs {
-    public static final ResourceLocation CLASSES = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "classes");
-    private static final List<String> CLASS_SKILLS = List.of("warrior", "mage", "rogue", "ranger");
+    public static final ResourceLocation ARCHETYPES = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "archetypes");
+    private static final List<String> CLASS_SKILLS = List.of("warrior", "mage", "rogue");
 
     private ArchetypeTabs() {
     }
 
     public static void register() {
-        SkillsAPI.registerSkillUnlockEvent((player, categoryId, skillId) -> archetypeTab(categoryId, skillId).ifPresent(tab -> tab.unlock(player)));
-        SkillsAPI.registerSkillLockEvent((player, categoryId, skillId) -> archetypeTab(categoryId, skillId).ifPresent(tab -> tab.erase(player)));
+        SkillsAPI.registerSkillUnlockEvent((player, categoryId, skillId) -> {
+            if (isArchetypeNode(categoryId, skillId)) {
+                Respec.vocation(player).ifPresent(tab -> {
+                    if (!tab.isUnlocked(player)) {
+                        tab.unlock(player);
+                    }
+                });
+            }
+        });
+        SkillsAPI.registerSkillLockEvent((player, categoryId, skillId) -> {
+            if (isArchetypeNode(categoryId, skillId)) {
+                List<String> rest = Respec.picked(player);
+                if (rest.size() == 1) {
+                    Respec.tab(rest.get(0), skillId).erase(player);   // already erased by a respec; harmless
+                }
+            }
+        });
     }
 
-    /** A Classes-page node that picks an archetype (the four class nodes are unlocked for everyone on login). */
-    public static boolean isArchetype(String skillId) {
-        return !CLASS_SKILLS.contains(skillId);
-    }
-
-    private static Optional<Category> archetypeTab(ResourceLocation categoryId, String skillId) {
-        return categoryId.equals(CLASSES) && isArchetype(skillId)
-            ? Optional.of(
-                (Category)SkillsAPI.getCategory(ResourceLocation.fromNamespaceAndPath("mdvlcraft", skillId))
-                    .orElseThrow(() -> new IllegalStateException("Archetype " + skillId + " has no skill tab"))
-            )
-            : Optional.empty();
+    /** A node of the Archetypes page that picks an archetype (not one of the class nodes). */
+    public static boolean isArchetypeNode(ResourceLocation categoryId, String skillId) {
+        return categoryId.equals(ARCHETYPES) && !CLASS_SKILLS.contains(skillId);
     }
 
     @SubscribeEvent
     public static void onLogin(PlayerLoggedInEvent event) {
         ServerPlayer player = (ServerPlayer)event.getEntity();
-        Category classes = (Category)SkillsAPI.getCategory(CLASSES).orElseThrow(() -> new IllegalStateException("Skill tab " + CLASSES + " is missing"));
-
+        Category page = SkillsAPI.getCategory(ARCHETYPES).orElseThrow(() -> new IllegalStateException("Skill tab " + ARCHETYPES + " is missing"));
         for (String classSkill : CLASS_SKILLS) {
-            Skill skill = (Skill)classes.getSkill(classSkill).orElseThrow(() -> new IllegalStateException("Class skill " + classSkill + " is missing"));
+            Skill skill = page.getSkill(classSkill).orElseThrow(() -> new IllegalStateException("Class skill " + classSkill + " is missing"));
             if (skill.getState(player) != State.UNLOCKED) {
                 skill.unlock(player);
             }
         }
+
+        Optional<Category> vocation = Respec.vocation(player);
+        vocation.filter(tab -> !tab.isUnlocked(player)).ifPresent(tab -> tab.unlock(player));
     }
 }

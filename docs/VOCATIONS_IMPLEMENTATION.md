@@ -19,6 +19,15 @@ continue from the first unticked step in "Progress".
 - The user's standing rules: work on `seb-agent`, push it after each finished piece; never push to `main` or build a
   release unless the user says so (see `CLAUDE.md` for the release rules when they do); no pull requests unless asked.
 
+## User decisions made during the work
+
+- **Vocation names**: the user picked one name per vocation in the design doc; they are in `binder/tools/vocations/names.py`
+  (`CHOSEN`) and `v2_all` puts the chosen name first, so `names[0]` is the vocation's name everywhere.
+- **No same-class halving** (removed on request).
+- **Respec**: you no longer swap one archetype. A respec picks **both** archetypes again (any two, the same pair too); the new
+  vocation tab starts empty at **three quarters** of the old level (`Respec.keptLevel`) and every point is spent again
+  (`Respec.respec`, `RespecPacket(first, second)`, `client/RespecScreen` steps CHOOSE -> FIRST -> SECOND -> CONFIRM).
+
 ## The design
 
 - Design doc (Claude Docs, for humans): "MDVLCraft Vocations v2: Design Proposal",
@@ -104,7 +113,10 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
 - [ ] 5. Migration of old players: detect, pop-up to pick two archetypes, vocation level = highest old level, flag in the
        player's persistent data so it runs once.
 - [ ] 6. DQ9 icons for the 18 archetypes, tabs, every new spell and every Modified ability (`tools/dq9_icons.py`).
-- [ ] 7. Skill-tree PDF (`tools/skill_tree_doc.py`) for the new trees.
+- [x] 7. Skill-tree PDF (`tools/skill_tree_doc.py`) for the new trees.
+   - Same usage as before (`python3 binder/tools/skill_tree_doc.py <version> <out.pdf> <server mods dir> base/server/overrides/kubejs`);
+     reads `vocation_parts/` and the Archetypes page. 40 pages: overview, 18 base pages, 17 vocation pages, Origins.
+     Regenerate it whenever the trees change.
 - [ ] 8. Build, server boot test, client test (pick page, vocation tab, migration pop-up, titles, status page).
 - [ ] 9. Update `binder/BALANCE.md` (still describes same-class halving and the old trees), `binder/README.md`, `binder/SKILL_TREES.md`, `docs/AGENT_HANDOFF.md`; final push. No release unless asked.
 

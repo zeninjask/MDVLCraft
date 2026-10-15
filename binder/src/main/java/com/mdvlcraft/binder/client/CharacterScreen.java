@@ -72,11 +72,8 @@ public class CharacterScreen extends Screen {
         JOB_LAYER, "screen.mdvlcraft.character.job"
     );
     private static final int TOOLTIP_WIDTH = 220;
-    private static final String CLASS_DEFINITIONS_PATH = "/data/mdvlcraft/puffish_skills/categories/classes/definitions.json";
-    private static final JsonObject CLASS_DEFINITIONS = readClassDefinitions();
     private static final ResourceLocation ASTROLABE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/character/astrolabe.png");
     private static final ResourceLocation EXPERIENCE = ResourceLocation.fromNamespaceAndPath("puffish_attributes", "experience");
-    private static final ResourceLocation CLASSES = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "classes");
     private static final float REFERENCE_HIT = 10.0F;
     private final Screen parent;
     private static Method alArmor;
@@ -141,7 +138,7 @@ public class CharacterScreen extends Screen {
             int mid = 160;
             int right = 302;
             int colW = 124;
-            Optional<ClientCategoryData> archetype = highestArchetype();
+            Optional<ClientCategoryData> archetype = ClientVocation.tab();
             int y = 46;
             y = this.row(
                 g,
@@ -152,11 +149,11 @@ public class CharacterScreen extends Screen {
                 archetype.<String>map(a -> String.valueOf(a.getCurrentLevel())).orElse("n/a")
             );
             List<FormattedCharSequence> tooltip = null;
-            if (!pickedArchetypes().isEmpty() && hovering(localX, localY, left, colW, y)) {
+            if (!ClientVocation.archetypes().isEmpty() && hovering(localX, localY, left, colW, y)) {
                 tooltip = this.classLines();
             }
 
-            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.class"), className());
+            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.class"), ClientVocation.name());
             for (ResourceLocation layer : List.of(RACE_LAYER, MARTIAL_LAYER, JOB_LAYER)) {
                 Origin origin = origin(player, layer);
                 if (origin != null && hovering(localX, localY, left, colW, y)) {
@@ -345,35 +342,19 @@ public class CharacterScreen extends Screen {
         return localX >= x && localX < x + width && localY >= y - 1 && localY < y + 10;
     }
 
-    /** The class name, then each picked archetype with its level and its description from the Classes page. */
+    /** The vocation's name and level, then each picked archetype with its description. */
     private List<FormattedCharSequence> classLines() {
         List<FormattedCharSequence> lines = new ArrayList<>();
-        lines.add(Component.literal(className()).withStyle(ChatFormatting.GOLD).getVisualOrderText());
-        for (ClientCategoryData archetype : pickedArchetypes()) {
-            String id = archetype.getConfig().id().getPath();
-            if (!CLASS_DEFINITIONS.has(id)) {
-                throw new IllegalStateException("Classes page has no definition for " + id);
-            }
-
-            lines.add(Component.translatable("screen.mdvlcraft.respec.level", archetype.getConfig().title(), archetype.getCurrentLevel())
-                .withStyle(ChatFormatting.YELLOW).getVisualOrderText());
-            String description = CLASS_DEFINITIONS.getAsJsonObject(id).get("description").getAsString();
-            lines.addAll(this.font.split(Component.literal(description).withStyle(ChatFormatting.GRAY), TOOLTIP_WIDTH));
+        lines.add(Component.literal(ClientVocation.name()).withStyle(ChatFormatting.GOLD).getVisualOrderText());
+        ClientVocation.tab().ifPresent(tab -> lines.add(
+            Component.translatable("screen.mdvlcraft.respec.level", tab.getConfig().title(), tab.getCurrentLevel())
+                .withStyle(ChatFormatting.YELLOW).getVisualOrderText()));
+        for (String archetype : ClientVocation.archetypes()) {
+            lines.add(Component.translatable("screen.mdvlcraft.archetype." + archetype).withStyle(ChatFormatting.YELLOW).getVisualOrderText());
+            lines.addAll(this.font.split(Component.translatable("screen.mdvlcraft.archetype." + archetype + ".desc").withStyle(ChatFormatting.GRAY), TOOLTIP_WIDTH));
         }
 
         return lines;
-    }
-
-    private static JsonObject readClassDefinitions() {
-        try (InputStream in = CharacterScreen.class.getResourceAsStream(CLASS_DEFINITIONS_PATH)) {
-            if (in == null) {
-                throw new IllegalStateException("Missing " + CLASS_DEFINITIONS_PATH);
-            }
-
-            return JsonParser.parseReader(new InputStreamReader(in, StandardCharsets.UTF_8)).getAsJsonObject();
-        } catch (IOException e) {
-            throw new IllegalStateException("Cannot read " + CLASS_DEFINITIONS_PATH, e);
-        }
     }
 
     /** The origin's name, then each visible power's name and description, wrapped for a tooltip. */
@@ -385,37 +366,6 @@ public class CharacterScreen extends Screen {
             lines.addAll(this.font.split(power.getDescription().copy().withStyle(ChatFormatting.GRAY), TOOLTIP_WIDTH));
         });
         return lines;
-    }
-
-    private static String className() {
-        List<ClientCategoryData> picked = pickedArchetypes();
-        if (picked.isEmpty()) {
-            return "n/a";
-        }
-
-        if (picked.size() == 1) {
-            return picked.get(0).getConfig().title().getString();
-        }
-
-        String key = "screen.mdvlcraft.class." + picked.get(0).getConfig().id().getPath() + "." + picked.get(1).getConfig().id().getPath();
-        return I18n.exists(key) ? I18n.get(key) : picked.get(0).getConfig().title().getString() + " / " + picked.get(1).getConfig().title().getString();
-    }
-
-    static List<ClientCategoryData> pickedArchetypes() {
-        return ((SkillsClientModAccessor)SkillsClientMod.getInstance())
-            .mdvlcraft$screenData()
-            .streamCategories()
-            .filter(c -> !c.getConfig().id().equals(CLASSES) && c.hasExperience())
-            .sorted(Comparator.comparingInt(c -> Respec.ARCHETYPES.indexOf(c.getConfig().id().getPath())))
-            .toList();
-    }
-
-    private static Optional<ClientCategoryData> highestArchetype() {
-        return ((SkillsClientModAccessor)SkillsClientMod.getInstance())
-            .mdvlcraft$screenData()
-            .streamCategories()
-            .filter(c -> !c.getConfig().id().equals(CLASSES) && c.hasExperience())
-            .max(Comparator.comparingInt(ClientCategoryData::getCurrentLevel).thenComparingInt(ClientCategoryData::getCurrentExperience));
     }
 
     private static double valueWith(LocalPlayer player, Attribute attribute, ItemStack stack) {

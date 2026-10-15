@@ -14,53 +14,27 @@ import net.puffish.skillsmod.api.Skill;
 import net.puffish.skillsmod.api.SkillsAPI;
 import net.puffish.skillsmod.api.Skill.State;
 
+/**
+ * The 18 archetypes and the player's vocation. Two archetypes picked on the Archetypes page (ArchetypeTabs) make a
+ * vocation: one skill tab, mdvlcraft:voc_<a>_<b> (skills/VocationParts), holding both archetypes' base trees and the
+ * pair's own skills. A respec picks both archetypes again and starts the new vocation tab empty at three quarters of the
+ * old level.
+ */
 public final class Respec {
+    /** In the design's order (tools/vocations/v2_base.ORDER); a vocation tab is named with the earlier one first. */
     public static final List<String> ARCHETYPES = List.of(
-        "knight",
-        "samurai",
-        "berzerker",
-        "monk",
-        "holy",
-        "flame",
-        "lightning",
-        "necromancy",
-        "ice",
-        "water",
-        "assassin",
-        "phantom",
-        "scout",
-        "thief",
-        "wanderer",
-        "stalker",
-        "druid",
-        "cursed",
-        "warlock",
-        "bloodborn",
-        "magehunter"
+        "guardian", "brute", "samurai", "berserker", "monk",
+        "blaze", "frost", "water", "lightning", "holy", "warlock", "necromancer", "druid", "spirit",
+        "assassin", "thief", "stalker", "wanderer"
     );
-    /** Each archetype's class: the class node it hangs from on the Classes page. */
+    /** Each archetype's class: the class node it hangs from on the Archetypes page. */
     private static final Map<String, String> CLASS = Map.ofEntries(
-        Map.entry("knight", "warrior"),
-        Map.entry("samurai", "warrior"),
-        Map.entry("berzerker", "warrior"),
-        Map.entry("monk", "warrior"),
-        Map.entry("magehunter", "warrior"),
-        Map.entry("holy", "mage"),
-        Map.entry("flame", "mage"),
-        Map.entry("lightning", "mage"),
-        Map.entry("necromancy", "mage"),
-        Map.entry("ice", "mage"),
-        Map.entry("water", "mage"),
-        Map.entry("warlock", "mage"),
-        Map.entry("assassin", "rogue"),
-        Map.entry("phantom", "rogue"),
-        Map.entry("scout", "rogue"),
-        Map.entry("thief", "rogue"),
-        Map.entry("wanderer", "ranger"),
-        Map.entry("stalker", "ranger"),
-        Map.entry("druid", "ranger"),
-        Map.entry("cursed", "ranger"),
-        Map.entry("bloodborn", "ranger")
+        Map.entry("guardian", "warrior"), Map.entry("brute", "warrior"), Map.entry("samurai", "warrior"),
+        Map.entry("berserker", "warrior"), Map.entry("monk", "warrior"),
+        Map.entry("blaze", "mage"), Map.entry("frost", "mage"), Map.entry("water", "mage"), Map.entry("lightning", "mage"),
+        Map.entry("holy", "mage"), Map.entry("warlock", "mage"), Map.entry("necromancer", "mage"), Map.entry("druid", "mage"),
+        Map.entry("spirit", "mage"),
+        Map.entry("assassin", "rogue"), Map.entry("thief", "rogue"), Map.entry("stalker", "rogue"), Map.entry("wanderer", "rogue")
     );
 
     private Respec() {
@@ -70,41 +44,39 @@ public final class Respec {
         return level * 3 / 4;
     }
 
-    public static void reset(ServerPlayer player, String archetype) {
-        if (isPicked(player, archetype)) {
-            tab(archetype).ifPresent(tab -> {
-                tab.resetSkills(player);
-                AbilityActions.dropUngranted(player);
-                player.displayClientMessage(Component.translatable("message.mdvlcraft.respec.reset", title(archetype)), false);
-                Jingles.send(player, Jingle.JOB_CHANGE);
-                tab.openScreen(player);
-            });
+    /**
+     * Picks both archetypes again (any two, the same pair included): every node of the old vocation tab is gone, the new
+     * pair's tab starts empty at three quarters of the old level, and all its points are spent afresh.
+     */
+    public static void respec(ServerPlayer player, String first, String second) {
+        List<String> picked = picked(player);
+        if (picked.size() != 2 || first.equals(second) || !ARCHETYPES.contains(first) || !ARCHETYPES.contains(second)) {
+            return;
         }
-    }
 
-    public static void change(ServerPlayer player, String from, String to) {
-        if (isPicked(player, from) && ARCHETYPES.contains(to) && !isPicked(player, to)) {
-            Optional<Category> classes = SkillsAPI.getCategory(ArchetypeTabs.CLASSES);
-            Optional<Category> oldTab = tab(from);
-            Optional<Category> newTab = tab(to);
-            Optional<Skill> oldNode = classes.flatMap(c -> c.getSkill(from));
-            Optional<Skill> newNode = classes.flatMap(c -> c.getSkill(to));
-            if (!oldTab.isEmpty() && !newTab.isEmpty() && !oldNode.isEmpty() && !newNode.isEmpty()) {
-                int level = keptLevel(oldTab.get().getExperience().map(e -> e.getLevel(player)).orElse(0));
-                oldNode.get().lock(player);
-                newTab.get().erase(player);
-                newNode.get().unlock(player);
-                newTab.get().getExperience().ifPresent(e -> e.setLevel(player, level));
-                AbilityActions.dropUngranted(player);
-                player.displayClientMessage(Component.translatable("message.mdvlcraft.respec.changed", title(from), title(to), level), false);
-                newTab.get().openScreen(player);
-            }
-        }
+        Category oldTab = vocation(player).orElseThrow(() -> new IllegalStateException("Two archetypes but no vocation tab"));
+        int level = keptLevel(oldTab.getExperience().map(e -> e.getLevel(player)).orElse(0));
+        String oldName = vocationName(player);
+        oldTab.erase(player);
+        picked.forEach(a -> node(a).lock(player));
+        Category newTab = tab(first, second);
+        newTab.erase(player);
+        node(first).unlock(player);
+        node(second).unlock(player);   // ArchetypeTabs opens the new pair's tab
+        newTab.getExperience().ifPresent(e -> e.setLevel(player, level));
+        AbilityActions.dropUngranted(player);
+        player.displayClientMessage(Component.translatable("message.mdvlcraft.respec.changed", oldName, vocationName(player), level), false);
+        Jingles.send(player, Jingle.JOB_CHANGE);
+        newTab.openScreen(player);
     }
 
     public static boolean isPicked(ServerPlayer player, String archetype) {
-        return ARCHETYPES.contains(archetype)
-            && SkillsAPI.getCategory(ArchetypeTabs.CLASSES).flatMap(c -> c.getSkill(archetype)).map(s -> s.getState(player) == State.UNLOCKED).orElse(false);
+        return ARCHETYPES.contains(archetype) && node(archetype).getState(player) == State.UNLOCKED;
+    }
+
+    /** The picked archetypes, in ARCHETYPES order. */
+    public static List<String> picked(ServerPlayer player) {
+        return ARCHETYPES.stream().filter(a -> isPicked(player, a)).toList();
     }
 
     public static String classOf(String archetype) {
@@ -116,11 +88,38 @@ public final class Respec {
         return type;
     }
 
-    static Optional<Category> tab(String archetype) {
-        return SkillsAPI.getCategory(ResourceLocation.fromNamespaceAndPath("mdvlcraft", archetype));
+    /** The tab of two archetypes (in either order). */
+    public static Category tab(String first, String second) {
+        String path = VocationParts.tabOf(first, second)
+            .orElseThrow(() -> new IllegalStateException("No vocation for " + first + " and " + second));
+        return SkillsAPI.getCategory(ResourceLocation.fromNamespaceAndPath("mdvlcraft", path))
+            .orElseThrow(() -> new IllegalStateException("Skill tab mdvlcraft:" + path + " is not loaded"));
     }
 
-    private static String title(String archetype) {
+    /** The player's vocation tab, when they have picked two archetypes. */
+    public static Optional<Category> vocation(ServerPlayer player) {
+        List<String> picked = picked(player);
+        return picked.size() == 2 ? Optional.of(tab(picked.get(0), picked.get(1))) : Optional.empty();
+    }
+
+    /** The vocation's name, the one archetype's name, or "" with none picked. */
+    public static String vocationName(ServerPlayer player) {
+        List<String> picked = picked(player);
+        return switch (picked.size()) {
+            case 0 -> "";
+            case 1 -> title(picked.get(0));
+            default -> VocationParts.vocation(VocationParts.tabOf(picked.get(0), picked.get(1)).orElseThrow())
+                .orElseThrow().get("name").getAsString();
+        };
+    }
+
+    public static String title(String archetype) {
         return Character.toUpperCase(archetype.charAt(0)) + archetype.substring(1);
+    }
+
+    static Skill node(String archetype) {
+        return SkillsAPI.getCategory(ArchetypeTabs.ARCHETYPES)
+            .flatMap(c -> c.getSkill(archetype))
+            .orElseThrow(() -> new IllegalStateException("Archetypes page has no " + archetype + " node"));
     }
 }

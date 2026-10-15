@@ -1,7 +1,8 @@
-"""Writes the archetype info sheet (HTML, printed to PDF with headless Chromium): an overview of every archetype's core
-stats, then one page per archetype listing every skill in its tree with what it does (abilities with their spell
-descriptions, Epic Fight skills, and each stat line with its per-node and total value and what the stat does), and the
-Origins races and classes with their powers. Everything is read from the live trees and the pack.
+"""Writes the skill-tree sheet (HTML, printed to PDF with headless Chromium): an overview of every archetype base's core
+stats, one page per archetype listing every skill in its base (abilities with their spell descriptions, Epic Fight
+skills, and each stat line with its per-node and total value and what the stat does), then every vocation with its own
+skills and bonuses, and the Origins races and classes with their powers. Everything is read from the generated vocation
+parts (tools/generate_vocations.py) and the pack.
 
 Usage: python3 skill_tree_doc.py <version> <out.pdf> <mods dir> <pack kubejs dir>
   mods dir: the server pack's mods folder (origin data and names come from the jars); pack kubejs dir: its overrides/kubejs
@@ -14,13 +15,15 @@ import generate_skill_trees as gen
 
 ROOT = os.path.dirname(TOOLS)
 RES = os.path.join(ROOT, 'src/main/resources')
-CAT = os.path.join(RES, 'data/mdvlcraft/puffish_skills/categories')
+CAT = os.path.join(RES, 'data/mdvlcraft/puffish_skills/vocation_parts')
+PICK = os.path.join(RES, 'data/mdvlcraft/puffish_skills/categories/archetypes')
 CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
 EF_SLOTS = json.load(open(os.path.join(TOOLS, 'ef_skill_slots.json')))
 EF_NAMES = json.load(open(os.path.join(TOOLS, 'ef_skill_names.json')))
-SLOT_NAMES = {'DODGE': 'Dodge', 'GUARD': 'Guard', 'MOVER': 'Mobility', 'IDENTITY': 'Identity', 'PASSIVE': 'Passive'}
+SLOT_NAMES = {'DODGE': 'Dodge', 'GUARD': 'Guard', 'MOVER': 'Mobility', 'IDENTITY': 'Identity', 'PASSIVE': 'Passive', 'CLASH_BLADE': 'Clash'}
 ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
-CLASS_NODES = ('warrior', 'mage', 'rogue', 'ranger')
+CLASS_NODES = ('warrior', 'mage', 'rogue')
+CLASS_TITLES = {'warrior': 'Warrior', 'mage': 'Mage', 'rogue': 'Rogue'}
 CORE = [('irons_spellbooks:max_mana', 'Max Mana'), ('irons_spellbooks:mana_regen', 'Mana Regen'),
         ('minecraft:generic.max_health', 'Max Health'), ('puffish_attributes:natural_regeneration', 'Health Regen'),
         ('minecraft:generic.armor', 'Armor'), ('irons_spellbooks:cooldown_reduction', 'Cooldown Red.'),
@@ -38,8 +41,13 @@ EXTRA_ATTRIBUTES = {
     'mdvlcraft:fist_mastery': ('Fist Mastery', 'flat'),
     'mdvlcraft:unarmed_damage': ('Unarmed Damage (empty main hand)', 'flat'),
     'mdvlcraft:unarmed_parry': ('Unarmed Parry', 'flat'),
+    'mdvlcraft:affliction_immunity': ('Affliction Immunity', 'pct'),
 }
 e = html.escape
+sys.path.insert(0, os.path.join(TOOLS, 'vocations'))
+import generate_vocations as V  # noqa: E402
+import compose  # noqa: E402
+D = V.D
 
 ATTR_INFO = {
     'epicfight:armor_negation': 'Part of your hits ignores the target\'s armour.',
@@ -136,6 +144,18 @@ ATTR_INFO = {
     'puffish_attributes:trident_damage': 'More damage with tridents.',
     'traveloptics:aqua_magic_resist': 'Less damage from Aqua spells.',
     'traveloptics:aqua_spell_power': 'Aqua spells hit harder.',
+    'somakespells:aqua_magic_resist': 'Less damage from Soma Aqua spells.',
+    'somakespells:aqua_spell_power': 'Soma Aqua spells hit harder.',
+    'somakespells:soul_fire_spell_power': 'Soul-fire spells hit harder.',
+    'cursed_school:cursed_spell_power': 'Cursed spells hit harder.',
+    'iss_magicfromtheeast:symmetry_spell_power': 'Symmetry (jade) spells hit harder.',
+    'iss_magicfromtheeast:spirit_spell_power': 'Spirit spells hit harder.',
+    'iss_magicfromtheeast:symmetry_magic_resist': 'Less damage from Symmetry spells.',
+    'iss_magicfromtheeast:spirit_magic_resist': 'Less damage from Spirit spells.',
+    'irons_chronomancy:time_spell_power': 'Time spells are stronger.',
+    'iss_elden_ring:glintstone_spell_power': 'Glintstone spells hit harder.',
+    'esoteric_spell:esoteric_spell_power': 'Esoteric barrier spells are stronger.',
+    'wind_spellbooks:wind_spell_power': 'Wind spells hit harder.',
 }
 
 
@@ -145,6 +165,8 @@ CLASS_COLOURS = {"warrior": (226, 84, 64), "mage": (78, 140, 255), "rogue": (164
                  "neutral": (184, 192, 204)}
 
 def attr_name(attr):
+    if attr in V.ATTRIBUTES:
+        return V.ATTRIBUTES[attr][0]
     if attr in gen.ATTRIBUTES:
         return gen.ATTRIBUTES[attr][0]
     if attr in EXTRA_ATTRIBUTES:
@@ -154,7 +176,7 @@ def attr_name(attr):
 
 def attr_value(attr, value, digits=2):
     """Like gen.fmt; flat values keep `digits` decimal places (percentages always one)."""
-    unit = gen.ATTRIBUTES[attr][1] if attr in gen.ATTRIBUTES else EXTRA_ATTRIBUTES.get(attr, (None, 'flat'))[1]
+    unit = V.ATTRIBUTES[attr][1] if attr in V.ATTRIBUTES else EXTRA_ATTRIBUTES.get(attr, (None, 'flat'))[1]
     sign = '+' if value >= 0 else ''
     if unit == 'pct':
         return f'{sign}{round(value * 100, 1):g}%'
@@ -170,18 +192,12 @@ def short(attr, value):
 
 # -- archetype trees --------------------------------------------------------------------------------------------------
 def class_of():
-    conns = json.load(open(os.path.join(CAT, 'classes/connections.json')))
-    out = {}
-    for a, b in conns['normal']['bidirectional']:
-        for c, x in ((a, b), (b, a)):
-            if c in CLASS_NODES and x not in CLASS_NODES and x != 'root':
-                out[x] = c
-    return out
+    return {a: V.CLASS_OF[a].lower() for a in D.ORDER}
 
 
 def tally(arch, classes_defs):
-    defs = json.load(open(os.path.join(CAT, arch, 'definitions.json')))
-    skills = json.load(open(os.path.join(CAT, arch, 'skills.json')))
+    defs = json.load(open(os.path.join(CAT, 'base_' + arch, 'definitions.json')))
+    skills = json.load(open(os.path.join(CAT, 'base_' + arch, 'skills.json')))
     sums, abilities, efskills, cost = {}, [], [], 0
     for s in skills.values():
         d = defs[s['definition']]
@@ -201,9 +217,9 @@ def tally(arch, classes_defs):
         data = r['data']
         if r['type'] == 'mdvlcraft:epicfight_skill':
             name = re.sub(r'§.|[『』]', '', EF_NAMES[data['skill']]['name']).strip().title()
-            efskills.append(f"{name} ({SLOT_NAMES[EF_SLOTS[data['skill']]]}, from the Classes tab)")
+            efskills.append(f"{name} ({SLOT_NAMES[EF_SLOTS[data['skill']]]}, from the Archetypes tab)")
         elif r['type'] == 'puffish_skills:attribute':
-            extra.append(f"{attr_name(data['attribute'])} (from the Classes tab)")
+            extra.append(f"{attr_name(data['attribute'])} (from the Archetypes tab)")
     return dict(sums=sums, abilities=abilities, efskills=efskills, cost=cost, skills=len(skills), extra=extra)
 
 
@@ -288,8 +304,8 @@ def node_names(nodes):
 
 
 def archetype_page(arch, cls, title, role, classes_defs, pack, halved_note):
-    defs = json.load(open(os.path.join(CAT, arch, 'definitions.json')))
-    skills = json.load(open(os.path.join(CAT, arch, 'skills.json')))
+    defs = json.load(open(os.path.join(CAT, 'base_' + arch, 'definitions.json')))
+    skills = json.load(open(os.path.join(CAT, 'base_' + arch, 'skills.json')))
     abilities, efskills, families, cost = [], [], {}, 0
     for skill in skills.values():
         d = defs[skill['definition']]
@@ -308,6 +324,9 @@ def archetype_page(arch, cls, title, role, classes_defs, pack, halved_note):
                 if not r['data']['ability'].startswith('mdvlcraft:'):
                     name += f' {ROMAN[level - 1]}'
                 text = ability_text(pack, r['data']['ability'], '' if BOILERPLATE.match(extra) else extra)
+                if r['data']['ability'].startswith('mdvlcraft:planned_'):
+                    name = d['title'] + ' (Modified)'
+                    text = re.sub(r' \(Coming soon: does nothing yet\.\)$', '', text) + ' Not built yet.'
                 abilities.append((name, d.get('cost', 0), cast, text))
             elif r['type'] == 'mdvlcraft:epicfight_skill':
                 slot = SLOT_NAMES[EF_SLOTS[r['data']['skill']]]
@@ -359,7 +378,7 @@ def archetype_page(arch, cls, title, role, classes_defs, pack, halved_note):
         elif r['type'] == 'puffish_skills:attribute':
             picked.append(f"<b>{attr_value(data['attribute'], data['value'])} {e(attr_name(data['attribute']))}</b>. {e(ATTR_INFO[data['attribute']])}")
 
-    cname = gen.CLASSES[cls]['title']
+    cname = CLASS_TITLES[cls]
     body = [
         block('Abilities', [(n, f"{p} pts" + (f", {c}" if c else ''), e(t)) for n, p, c, t in abilities],
               'on the ability wheel; numeral = spell level'),
@@ -370,8 +389,8 @@ def archetype_page(arch, cls, title, role, classes_defs, pack, halved_note):
         block('Twig bonuses', stat_items('twig'), 'every archetype has a few'),
     ]
     head = (f"<div class='page'><h2>{badge(cls)} {e(title)}</h2>"
-            f"<p class='lead'>{e(role)} {len(skills)} skills, {cost} points for the whole tree. "
-            + (f"Picking it on the Classes tab also gives: {'; '.join(picked)}. " if picked else '')
+            f"<p class='lead'>{e(role)} {len(skills)} skills, {cost} points for the whole base (one half of each of its vocation tabs). "
+            + (f"Picking it on the Archetypes tab also gives: {'; '.join(picked)}. " if picked else '')
             + e(halved_note) + "</p>")
     return head + "<div class='cols'>" + ''.join(body) + "</div></div>"
 
@@ -458,17 +477,53 @@ td.num { text-align: right; white-space: nowrap; }
 .blk h4 small { font-weight: normal; color: #5a606c; font-size: 6.2pt; }
 .blk { margin-bottom: 1.6mm; }
 .it { font-size: 6.3pt; line-height: 1.22; padding: 0.35mm 1mm; border-bottom: 1px solid #e3e6eb; break-inside: avoid; }
-.it .m { color: #6a707c; font-size: 5.8pt; }"""
+.it .m { color: #6a707c; font-size: 5.8pt; }
+.vocs .blk { break-inside: avoid; } .blk h4 .cls { font-size: 5.6pt; }"""
 
 
 def badge(cls):
-    return f"<span class='cls' style='background:{gen.hex_colour(CLASS_COLOURS[cls])}'>{gen.CLASSES[cls]['title']}</span>"
+    return f"<span class='cls' style='background:{gen.hex_colour(CLASS_COLOURS[cls])}'>{CLASS_TITLES[cls]}</span>"
+
+
+def vocation_block(vid, info, pack):
+    """One vocation: its name (and the other name options), its pair, its own skills with what they do, and its bonuses."""
+    defs = json.load(open(os.path.join(CAT, vid, 'definitions.json')))
+    skills = json.load(open(os.path.join(CAT, vid, 'skills.json')))
+    a, b = info['a'], info['b']
+    rows, bonuses = [], []
+    for key in sorted(skills, key=lambda k: int(k.split('__')[1])):
+        d = defs[skills[key]['definition']]
+        for r in d.get('rewards', []):
+            data = r['data']
+            if r['type'] == 'puffish_skills:attribute':
+                bonuses.append(f"{attr_value(data['attribute'], data['value'])} {attr_name(data['attribute'])}")
+            elif r['type'] == 'mdvlcraft:ability':
+                level = data.get('level', 1)
+                name = d['title'] + ('' if data['ability'].startswith('mdvlcraft:') else f' {ROMAN[level - 1]}')
+                if data['ability'].startswith('mdvlcraft:planned_'):
+                    name += ' (Modified)'
+                m = re.search(r'\((\d+(?:\.\d+)?) mana, (\d+(?:\.\d+)?) s cooldown\)', d['description'])
+                cast = f", {m.group(1)} mana, {m.group(2)} s" if m else ''
+                extra = d.get('extra_description', '')
+                text = ability_text(pack, data['ability'], re.sub(r' [^.]* vocation skill\.$', '', extra))
+                if data['ability'].startswith('mdvlcraft:planned_'):
+                    text = re.sub(r' \(Coming soon: does nothing yet\.\)$', '', text) + ' Not built yet.'
+                rows.append((name, f"{d.get('cost', 0)} pts{cast}", e(text)))
+            elif r['type'] == 'mdvlcraft:epicfight_skill':
+                slot = SLOT_NAMES[EF_SLOTS[data['skill']]]
+                rows.append((f"{d['title']} ({slot})", f"{d.get('cost', 0)} pts", e(ef_text(d['description']))))
+    others = [n for n in info['names'] if n != info['name']]
+    head = (f"<h4>{e(info['name'])} <small>{badge(V.CLASS_OF[a].lower())} {e(D.TITLE[a])} + {badge(V.CLASS_OF[b].lower())} "
+            f"{e(D.TITLE[b])}</small></h4>")
+    body = ''.join(f"<div class='it'><b>{e(n)}</b> <span class='m'>{e(m)}</span> {t}</div>" for n, m, t in rows)
+    body += f"<div class='it'><b>Bonuses</b> {e(', '.join(bonuses))} (2 pts each)</div>"
+    return f"<div class='blk voc'>{head}{body}</div>"
 
 
 def main():
     version, out_pdf, mods_dir, kubejs_dir = sys.argv[1:5]
-    classes_defs = json.load(open(os.path.join(CAT, 'classes/definitions.json')))
-    order = [c for c in json.load(open(os.path.join(RES, 'data/mdvlcraft/puffish_skills/config.json')))['categories'] if c != 'classes']
+    classes_defs = json.load(open(os.path.join(PICK, 'definitions.json')))
+    order = list(D.ORDER)
     cls_of = class_of()
     rows = {a: tally(a, classes_defs) for a in order}
     title = {a: classes_defs[a]['title'] for a in order}
@@ -476,11 +531,12 @@ def main():
 
     parts = [f"<!doctype html><html><head><meta charset='utf-8'><title>MDVLCraft Skill Trees</title><style>{STYLE}</style></head><body>",
              "<h1>MDVLCraft skill trees</h1>",
-             f"<p class='lead'>Version {e(version)}. Totals for the <b>whole</b> tree. Pick {gen.ARCHETYPE_LIMIT} archetypes; each tree gives "
-             f"{gen.STARTING_POINTS} point to start and 1 per level, with no level cap. Percentages add to the base; Max Health is in half-hearts. "
-             "Abilities (spells and techniques) go on the ability wheel; Epic Fight skills go in the Combat Skills box of the abilities screen. "
-             "Each archetype then has its own page listing every skill in its tree and what it does. Two archetypes of the same class "
-             "each give half their stat bonuses (abilities and Epic Fight skills stay whole).</p>",
+             f"<p class='lead'>Version {e(version)}. Pick 2 of the 18 archetypes on the Archetypes tab: the pair is your <b>vocation</b>, one skill tab "
+             "holding both archetypes' bases (left and right) and the vocation's own skills and bonuses (the centre column). The tab gives 1 point "
+             "to start and 1 per level, with no level cap. The table gives the totals of each <b>base</b>; percentages add to the base value and Max "
+             "Health is in half-hearts. Abilities (spells and techniques) go on the ability wheel; Epic Fight skills go in the Combat Skills box of the "
+             "abilities screen. Each archetype then has its own page listing every skill in its base, and the vocation pages list every pair's own "
+             "skills. Abilities marked (Modified) are designed but not built yet: they can be unlocked and put on the wheel but do nothing.</p>",
              "<table><tr><th>Archetype</th><th>Class</th><th>Skills</th><th>Cost</th>" + "".join(f"<th>{e(t)}</th>" for _, t in CORE)
              + "<th>Abilities</th><th>EF skills</th></tr>"]
     for cls in CLASS_NODES:
@@ -490,15 +546,25 @@ def main():
                          + "".join(f"<td class='num'>{short(k, r['sums'][k]) if r['sums'].get(k) else '–'}</td>" for k, _ in CORE)
                          + f"<td class='num'>{len(r['abilities'])}</td><td class='num'>{len(r['efskills'])}</td></tr>")
     parts.append("</table><p class='lead'>Everyone knows Guard, Parrying, Parry – Absolute Deflection and the souls-like dodge and step. "
-                 "Assassin, Phantom, Scout and Thief also get Precise Parry. Hostile mobs have 20% more health and deal 10% more "
-                 "damage. Players also pick a race, a Martial class and a job (Origins) on first joining; these are listed at the end and are separate from the "
-                 "archetype trees.</p>")
+                 "Assassin, Thief, Stalker and Wanderer also get Precise Parry; Wanderer and Druid get Affliction Immunity. Hostile mobs have 20% more "
+                 "health and deal 10% more damage. A respec picks both archetypes again: the new vocation starts at three quarters of the old level "
+                 "with all its points to spend. Players also pick a race, a Martial class and a job (Origins) on first joining; these are listed at the "
+                 "end and are separate from the skill trees.</p>")
 
     pack = Pack(mods_dir, kubejs_dir)
     for cls in CLASS_NODES:
         for a in (x for x in order if cls_of[x] == cls):
-            parts.append(archetype_page(a, cls, title[a], role[a], classes_defs, pack,
-                                        f"Picked with another {gen.CLASSES[cls]['title']} archetype, every stat bonus here is halved."))
+            parts.append(archetype_page(a, cls, title[a], role[a], classes_defs, pack, ''))
+
+    index = json.load(open(os.path.join(CAT, 'vocations.json')))
+    vocations = list(index.items())
+    for start in range(0, len(vocations), 9):
+        chunk = vocations[start:start + 9]
+        lead = ("Each vocation's own skills (the centre column of its tab), its Epic Fight skill and its three bonuses, on top of both bases."
+                if start == 0 else '')
+        parts.append(f"<div class='page'><h2>Vocations {start + 1}–{start + len(chunk)} of {len(vocations)}</h2>"
+                     + (f"<p class='lead'>{lead}</p>" if lead else '')
+                     + "<div class='cols vocs'>" + ''.join(vocation_block(vid, info, pack) for vid, info in chunk) + "</div></div>")
 
     parts.append("<div class='page'><h2>Origins</h2><p class='lead'>Picked on first joining, separately from the archetype trees: one race and one "
                  "class. A race or class can be changed later with an Orb of Origin (an enchanted golden apple surrounded by eight gold ingots).</p>")

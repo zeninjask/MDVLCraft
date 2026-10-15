@@ -39,3 +39,8 @@ def _pass(base, efc, bad, use):
 _use = collections.Counter(r['ef'] for r in d.VOC.values())
 _pass(d.BASE_OLD, EFC_OLD, set(), _use)   # the assignment the doc was first written with
 _pass(d.BASE, EFC, BAD, _use)             # only re-pick what the universal skills now clash with
+
+# the user's picked name goes first: names[0] is the vocation's name everywhere
+from names import CHOSEN
+for _k, _r in d.VOC.items():
+    _r['names'] = [CHOSEN[_k]] + [n for n in _r['names'] if n != CHOSEN[_k]]

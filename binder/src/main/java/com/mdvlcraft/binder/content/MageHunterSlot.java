@@ -36,7 +36,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class MageHunterSlot {
     public static final int SLOT = 0;
-    private static final String ARCHETYPE = "magehunter";
+    /** The demon swords moved from the Mage Hunter to the Berserker base with the vocations rework. */
+    private static final String ARCHETYPE = "berserker";
     private static final int CHECK_INTERVAL = 10;
     private static Predicate<Player> clientCheck = player -> false;
 

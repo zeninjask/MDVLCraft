@@ -46,70 +46,55 @@ public class RespecScreen extends Screen {
 
     @Override
     protected void init() {
-        List<ClientCategoryData> picked = CharacterScreen.pickedArchetypes();
+        List<String> picked = ClientVocation.archetypes();
+        int level = ClientVocation.tab().map(ClientCategoryData::getCurrentLevel).orElse(0);
         List<RespecScreen.Choice> choices = new ArrayList<>();
         int columns = 1;
         int buttonW = 170;
         Component text;
         switch (this.step) {
             case CHOOSE:
-                text = Component.translatable(picked.isEmpty() ? "screen.mdvlcraft.respec.desc.none" : "screen.mdvlcraft.respec.desc.choose");
-                choices.add(
-                    new RespecScreen.Choice(
-                        Component.translatable("screen.mdvlcraft.respec.reset"), null, () -> this.go(RespecScreen.Step.RESET), !picked.isEmpty()
-                    )
-                );
-                choices.add(
-                    new RespecScreen.Choice(
-                        Component.translatable("screen.mdvlcraft.respec.change"), null, () -> this.go(RespecScreen.Step.CHANGE_FROM), !picked.isEmpty()
-                    )
-                );
+                boolean ready = picked.size() == 2;
+                text = ready
+                    ? Component.translatable("screen.mdvlcraft.respec.desc.choose", ClientVocation.name(), level, Respec.keptLevel(level))
+                    : Component.translatable("screen.mdvlcraft.respec.desc.none");
+                choices.add(new RespecScreen.Choice(Component.translatable("screen.mdvlcraft.respec.change"), null, () -> {
+                    this.fromLevel = level;
+                    this.go(RespecScreen.Step.FIRST);
+                }, ready));
                 break;
-            case RESET:
-            case CHANGE_FROM:
-                boolean reset = this.step == RespecScreen.Step.RESET;
-                text = Component.translatable(reset ? "screen.mdvlcraft.respec.desc.reset" : "screen.mdvlcraft.respec.desc.change_from");
-
-                for (ClientCategoryData c : picked) {
-                    String id = c.getConfig().id().getPath();
-                    int level = c.getCurrentLevel();
-                    choices.add(new RespecScreen.Choice(Component.translatable("screen.mdvlcraft.respec.level", title(id), level), id, () -> {
-                        this.from = id;
-                        this.fromLevel = level;
-                        this.to = null;
-                        this.go(reset ? RespecScreen.Step.CONFIRM : RespecScreen.Step.CHANGE_TO);
-                    }, true));
-                }
-                break;
-            case CHANGE_TO:
-                text = Component.translatable("screen.mdvlcraft.respec.desc.change_to", Respec.keptLevel(this.fromLevel), title(this.from), this.fromLevel);
-                List<String> taken = picked.stream().map(c -> c.getConfig().id().getPath()).toList();
-
+            case FIRST:
+            case SECOND:
+                boolean first = this.step == RespecScreen.Step.FIRST;
+                text = first
+                    ? Component.translatable("screen.mdvlcraft.respec.desc.first")
+                    : Component.translatable("screen.mdvlcraft.respec.desc.second", title(this.from));
                 for (String id : Respec.ARCHETYPES) {
-                    if (!taken.contains(id)) {
-                        choices.add(new RespecScreen.Choice(Component.literal(title(id)), id, () -> {
+                    if (!first && id.equals(this.from)) {
+                        continue;
+                    }
+
+                    choices.add(new RespecScreen.Choice(Component.literal(title(id)), id, () -> {
+                        if (first) {
+                            this.from = id;
+                            this.go(RespecScreen.Step.SECOND);
+                        } else {
                             this.to = id;
                             this.go(RespecScreen.Step.CONFIRM);
-                        }, true));
-                    }
+                        }
+                    }, true));
                 }
 
                 columns = 3;
                 buttonW = 100;
                 break;
             default:
-                text = this.to == null
-                    ? Component.translatable("screen.mdvlcraft.respec.confirm.reset", title(this.from))
-                    : Component.translatable(
-                        "screen.mdvlcraft.respec.confirm.change",
-                        title(this.from),
-                        this.fromLevel,
-                        title(this.to),
-                        Respec.keptLevel(this.fromLevel),
-                        title(this.from)
-                    );
+                text = Component.translatable(
+                    "screen.mdvlcraft.respec.confirm.change", title(this.from), title(this.to), vocationName(this.from, this.to),
+                    Respec.keptLevel(this.fromLevel), this.fromLevel
+                );
                 choices.add(new RespecScreen.Choice(Component.translatable("screen.mdvlcraft.respec.confirm"), null, () -> {
-                    BinderNetwork.sendToServer(new RespecPacket(this.from, this.to == null ? "" : this.to));
+                    BinderNetwork.sendToServer(new RespecPacket(this.from, this.to));
                     Minecraft.getInstance().setScreen(null);
                 }, true));
         }
@@ -144,16 +129,21 @@ public class RespecScreen extends Screen {
             case CHOOSE:
                 Minecraft.getInstance().setScreen(this.parent);
                 break;
-            case RESET:
-            case CHANGE_FROM:
+            case FIRST:
                 this.go(RespecScreen.Step.CHOOSE);
                 break;
-            case CHANGE_TO:
-                this.go(RespecScreen.Step.CHANGE_FROM);
+            case SECOND:
+                this.go(RespecScreen.Step.FIRST);
                 break;
             case CONFIRM:
-                this.go(this.to == null ? RespecScreen.Step.RESET : RespecScreen.Step.CHANGE_TO);
+                this.go(RespecScreen.Step.SECOND);
         }
+    }
+
+    /** The vocation two archetypes make (lang key screen.mdvlcraft.vocation.<a>.<b>, a first in Respec.ARCHETYPES). */
+    private static String vocationName(String first, String second) {
+        boolean ordered = Respec.ARCHETYPES.indexOf(first) < Respec.ARCHETYPES.indexOf(second);
+        return Component.translatable("screen.mdvlcraft.vocation." + (ordered ? first + "." + second : second + "." + first)).getString();
     }
 
     private static String title(String archetype) {
@@ -208,9 +198,8 @@ public class RespecScreen extends Screen {
 
     private enum Step {
         CHOOSE,
-        RESET,
-        CHANGE_FROM,
-        CHANGE_TO,
+        FIRST,
+        SECOND,
         CONFIRM;
     }
 }
