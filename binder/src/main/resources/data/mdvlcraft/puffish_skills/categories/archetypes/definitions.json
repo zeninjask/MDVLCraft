@@ -1,0 +1,532 @@
+{
+ "warrior": {
+  "title": "Warrior",
+  "description": "Melee combat: armour, weapons and endurance.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/warrior.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_root_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_root_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_root_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_root_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_root_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 0
+ },
+ "guardian": {
+  "title": "Guardian",
+  "description": "A knight who protects: shields, greatswords and barriers. Key: Shield, Fortify, Guard Barrier.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/guardian.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "brute": {
+  "title": "Brute",
+  "description": "A frontline tank with great axes and spears who soaks hits and pulls enemies off allies. Key: Stomp, Axe Cleave, Soul Grab.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/brute.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "samurai": {
+  "title": "Samurai",
+  "description": "A master of katanas, parries and the Stance technique. Key: Stance, Blitz, Myriad Blades Convergence.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/samurai.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "berserker": {
+  "title": "Berserker",
+  "description": "A dual wielder who charges headlong at any threat, however large. Key: Summon Demon-Slayer Sword, Summon Demon-Dweller Sword, Summon Demon-Destroyer Sword.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/berserker.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "monk": {
+  "title": "Monk",
+  "description": "A master of unarmed combat, meditation, enlightenment and dodging. Key: Heavy Blow, Barrage, Uppercut.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/monk.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "mage": {
+  "title": "Mage",
+  "description": "Spellcasting: mana, casting speed and arcane study.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/mage.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_root_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_root_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_root_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_root_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_root_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 0
+ },
+ "blaze": {
+  "title": "Blaze",
+  "description": "Fire magic. Key: Firebolt, Fireball, Fire Breath.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/blaze.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "frost": {
+  "title": "Frost",
+  "description": "Ice magic. Key: Icicle, Cone of Cold, Frostwave.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/frost.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "water": {
+  "title": "Water",
+  "description": "Water magic. Key: Hydroshot, Water Spear, Water Ball.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/water.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "lightning": {
+  "title": "Lightning",
+  "description": "Lightning magic. Key: Lightning Bolt, Chain Lightning, Electrocute.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/lightning.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "holy": {
+  "title": "Holy",
+  "description": "Holy magic: healing, light and protection. Key: Heal, Greater Heal, Healing Circle.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/holy.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "warlock": {
+  "title": "Warlock",
+  "description": "Eldritch magic: the void, sculk and the abyss. Key: Eldritch Blast, Sculk Tentacles, Sonic Boom.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/warlock.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "necromancer": {
+  "title": "Necromancer",
+  "description": "Ash and blood: the risen dead, blood arts and siphoning. Key: Raise Dead, Summon Vex, Wither Skull.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/necromancer.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "druid": {
+  "title": "Druid",
+  "description": "Nature magic, poison and beasts. Key: Root, Oakskin, Poison Spray.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/druid.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1,
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:affliction_immunity",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ]
+ },
+ "spirit": {
+  "title": "Spirit",
+  "description": "Symmetry and jade magic of the Celestial Court. Key: Jade Bullet, Jade Judgement, Nephrite Slash.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/spirit.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1
+ },
+ "rogue": {
+  "title": "Rogue",
+  "description": "Speed, precision, trickery and the wilds.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/rogue.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_root_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_root_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_root_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_root_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_root_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 0
+ },
+ "assassin": {
+  "title": "Assassin",
+  "description": "Sneaks up on targets and deals huge damage. Key: Invisibility, Throw, Spectral Blink.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/assassin.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1,
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efn:precise_parry"
+    }
+   }
+  ]
+ },
+ "thief": {
+  "title": "Thief",
+  "description": "Stealth, stealing and distraction. Key: Boogie Woogie, Block Clap, Doppelganger.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/thief.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1,
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efn:precise_parry"
+    }
+   }
+  ]
+ },
+ "stalker": {
+  "title": "Stalker",
+  "description": "Ranged damage with bows and crossbows. Key: Magic Arrow, Arrow Volley, Marked Shot.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/stalker.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1,
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efn:precise_parry"
+    }
+   }
+  ]
+ },
+ "wanderer": {
+  "title": "Wanderer",
+  "description": "Travel and survival. Key: Summon Horse, Gluttony, Arcane Sustenance.",
+  "extra_description": "Pick two archetypes. The second one opens your vocation tab, which joins both archetypes' trees with that pair's own skills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/archetype/wanderer.png"
+   }
+  },
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "cost": 1,
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efn:precise_parry"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:affliction_immunity",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ]
+ }
+}

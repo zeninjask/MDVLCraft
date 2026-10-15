@@ -1,0 +1,268 @@
+{
+ "voc__0": {
+  "title": "Maelstrom: Attack Damage",
+  "description": "+1.5 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 1.5,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_root_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_root_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_root_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_root_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_root_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Maelstrom vocation bonus (Berserker + Water)."
+ },
+ "voc__1": {
+  "title": "Tidebrand",
+  "description": "Unlocks Tidebrand on the ability wheel. Your weapon hits deal extra water (Wet) damage for a while.",
+  "extra_description": "Coming soon: built from Blood Cut; casting it does nothing yet. Maelstrom vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_brand_water.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:planned_brand_water",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__2": {
+  "title": "Riptide Charge",
+  "description": "Unlocks Riptide Charge on the ability wheel. Launch forward on a surge of water, sweeping enemies aside.",
+  "extra_description": "Coming soon: built from Burning Dash; casting it does nothing yet. Maelstrom vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_tide_charge.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:planned_tide_charge",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__3": {
+  "title": "Jet Steam",
+  "description": "Unlocks Jet Steam (Level 1) (36 mana, 15 s cooldown) on the ability wheel",
+  "extra_description": "Generates a powerful surge that propels the caster at high speed while using elytra or swimming underwater, granting temporary water breathing. Maelstrom vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_jet_steam.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:jet_steam",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "Hydro Slash",
+  "description": "Unlocks Hydro Slash (Level 3) (25 mana, 15 s cooldown) on the ability wheel",
+  "extra_description": "Conjures a water slash that deals damage to enemies in front. Damage gains bonus based on the sword in hand. Maelstrom vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_hydro_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:hydro_slash",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__5": {
+  "title": "Death Harvest",
+  "description": "Teaches Death Harvest, an Epic Fight Passive skill: Killing an enemy with a weapon innate skill refunds weapon charge. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_death_harvest.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "epicfight:death_harvest"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0,
+  "extra_description": "Maelstrom vocation skill."
+ },
+ "voc__6": {
+  "title": "Maelstrom: Aqua Spell Power",
+  "description": "+15% Aqua Spell Power and Aqua Spell Power (Soma)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/traveloptics_aqua_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "traveloptics:aqua_spell_power",
+     "value": 0.15,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "somakespells:aqua_spell_power",
+     "value": 0.15,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Maelstrom vocation bonus (Berserker + Water)."
+ },
+ "voc__7": {
+  "title": "Maelstrom: Movement Speed",
+  "description": "+5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.05,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Maelstrom vocation bonus (Berserker + Water)."
+ }
+}

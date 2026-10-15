@@ -1,0 +1,6182 @@
+{
+ "samurai__root": {
+  "title": "Stance",
+  "description": "Unlocks Stance on the ability wheel (free): cast to take it up or drop it, sneak and cast to change element. Fire +15% attack speed, Wind +40% dodge distance, Water +50% perfect-parry window, Earth +15% attack damage. Your weapon trail takes the element's colour",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_stance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:stance",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0,
+  "extra_description": "The first skill of the Samurai base."
+ },
+ "samurai__cutting_edge_1": {
+  "title": "Cutting Edge 1",
+  "description": "+3% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_1": {
+  "title": "Deflection 1",
+  "description": "+3% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__blitz": {
+  "title": "Blitz",
+  "description": "Unlocks Blitz (18 mana, 8 s cooldown) on the ability wheel",
+  "extra_description": "Cursed Fate's Heavenly Restriction dash, without its weapon requirement.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_blitz.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:blitz",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__cutting_edge_2": {
+  "title": "Cutting Edge 2",
+  "description": "+3% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_2": {
+  "title": "Deflection 2",
+  "description": "+3% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__cutting_edge_mastery_i": {
+  "title": "Cutting Edge Mastery I",
+  "description": "+4% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.04,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_mastery_i": {
+  "title": "Deflection Mastery I",
+  "description": "+4% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__cutting_edge_3": {
+  "title": "Cutting Edge 3",
+  "description": "+3% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_3": {
+  "title": "Deflection 3",
+  "description": "+3% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__fatalfalsh": {
+  "title": "Fatal Flash",
+  "description": "Teaches Fatal Flash, an Epic Fight Identity skill: Lock onto a low-health enemy and perform a kill, which cannot be interrupted during execution (Weapons allowed: uchigatana, katana, tachi, longsword). Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/cdmoveset_fatalfalsh.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "cdmoveset:fatalfalsh"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__cutting_edge_4": {
+  "title": "Cutting Edge 4",
+  "description": "+3% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_4": {
+  "title": "Deflection 4",
+  "description": "+3% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__cutting_edge_mastery_ii": {
+  "title": "Cutting Edge Mastery II",
+  "description": "+4% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.04,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_mastery_ii": {
+  "title": "Deflection Mastery II",
+  "description": "+4% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__cutting_edge_5": {
+  "title": "Cutting Edge 5",
+  "description": "+3% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_5": {
+  "title": "Deflection 5",
+  "description": "+3% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__cutting_edge_6": {
+  "title": "Cutting Edge 6",
+  "description": "+3% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_6": {
+  "title": "Deflection 6",
+  "description": "+3% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__cutting_edge_mastery_iii": {
+  "title": "Cutting Edge Mastery III",
+  "description": "+4% Armor Shred",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_armor_shred.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:armor_shred",
+     "value": 0.04,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__deflection_mastery_iii": {
+  "title": "Deflection Mastery III",
+  "description": "+4% Stamina restored on Parry (of max)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__second_wind_1": {
+  "title": "Second Wind 1",
+  "description": "+3.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0334,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__mending_1": {
+  "title": "Mending 1",
+  "description": "+1.5% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__myriad_blades": {
+  "title": "Myriad Blades Convergence",
+  "description": "Unlocks Myriad Blades Convergence (42 mana, its Epic Fight skill's own cooldown) on the ability wheel",
+  "extra_description": "Sword Soaring's sword art on the ability wheel; needs a sword in hand and has its own cooldown.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_myriad_blades.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:myriad_blades",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__second_wind_2": {
+  "title": "Second Wind 2",
+  "description": "+1.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0167,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__mending_2": {
+  "title": "Mending 2",
+  "description": "+1.5% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__second_wind_mastery_i": {
+  "title": "Second Wind Mastery I",
+  "description": "+3.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0333,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__mending_3": {
+  "title": "Mending 3",
+  "description": "+1.5% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__parry_master": {
+  "title": "Parry Master",
+  "description": "Teaches Parry Master, an Epic Fight Passive skill: Parries charge your weapon skill and build up a chance to ignore enemy defence; with a katana, parries open Ichimonji counters. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efn_parry_master.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efn:parry_master"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__second_wind_3": {
+  "title": "Second Wind 3",
+  "description": "+3.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0334,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__mending_4": {
+  "title": "Mending 4",
+  "description": "+1.5% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__second_wind_4": {
+  "title": "Second Wind 4",
+  "description": "+1.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0167,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__second_wind_mastery_ii": {
+  "title": "Second Wind Mastery II",
+  "description": "+3.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0333,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__second_wind_5": {
+  "title": "Second Wind 5",
+  "description": "+3.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0334,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__second_wind_6": {
+  "title": "Second Wind 6",
+  "description": "+1.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0167,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__second_wind_mastery_iii": {
+  "title": "Second Wind Mastery III",
+  "description": "+3.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0333,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__hearty_1": {
+  "title": "Hearty 1",
+  "description": "+6% Saturation from Food",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:saturation_bonus",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__retribution_1": {
+  "title": "Retribution 1",
+  "description": "+1.8% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.018,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__iron_slash": {
+  "title": "Iron Slash",
+  "description": "Unlocks Iron Slash (Level 3) (43 mana, 12 s cooldown) on the ability wheel",
+  "extra_description": "Focus yourself before doing a big dash that slash your enemies",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/wind_spellbooks_iron_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "wind_spellbooks:iron_slash",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__hearty_2": {
+  "title": "Hearty 2",
+  "description": "+6% Saturation from Food",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:saturation_bonus",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__retribution_2": {
+  "title": "Retribution 2",
+  "description": "+1.8% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.018,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__hearty_3": {
+  "title": "Hearty 3",
+  "description": "+6% Saturation from Food",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:saturation_bonus",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__retribution_mastery_i": {
+  "title": "Retribution Mastery I",
+  "description": "+2.4% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.024,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__dancing_blade": {
+  "title": "Dancing Blade",
+  "description": "Teaches Dancing Blade, an Epic Fight Passive skill: Every 4th hit that lands deals 80% more damage. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_dancing_blade.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "wom:dancing_blade"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__hearty_4": {
+  "title": "Hearty 4",
+  "description": "+6% Saturation from Food",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:saturation_bonus",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__retribution_3": {
+  "title": "Retribution 3",
+  "description": "+1.8% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.018,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__retribution_4": {
+  "title": "Retribution 4",
+  "description": "+1.8% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.018,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__retribution_mastery_ii": {
+  "title": "Retribution Mastery II",
+  "description": "+2.4% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.024,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__retribution_5": {
+  "title": "Retribution 5",
+  "description": "+1.8% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.018,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__retribution_6": {
+  "title": "Retribution 6",
+  "description": "+1.8% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.018,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__retribution_mastery_iii": {
+  "title": "Retribution Mastery III",
+  "description": "+2.4% Damage Reflection",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_damage_reflection.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:damage_reflection",
+     "value": 0.024,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__willpower_1": {
+  "title": "Willpower 1",
+  "description": "+1.1% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.01125,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__readiness_1": {
+  "title": "Readiness 1",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__element_slash": {
+  "title": "Magic Blade: Element Slash",
+  "description": "Unlocks Magic Blade: Element Slash (Level 3) (54 mana, 22.5 s cooldown) on the ability wheel",
+  "extra_description": "Launches a slower slash along the view direction. Damage benefits from current attack damage and main-hand enchantments, but cannot trigger Conversion or Enchanting.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_element_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:element_slash",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__willpower_2": {
+  "title": "Willpower 2",
+  "description": "+1.1% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.01125,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__readiness_2": {
+  "title": "Readiness 2",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__manipulator": {
+  "title": "Manipulator",
+  "description": "Teaches Manipulator, an Epic Fight Passive skill: Blocking restores stamina: 60% of what you are missing on a perfect block, up to 30% on a normal one. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_manipulator.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "wom:manipulator"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__willpower_3": {
+  "title": "Willpower 3",
+  "description": "+1.1% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.01125,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__readiness_3": {
+  "title": "Readiness 3",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__willpower_4": {
+  "title": "Willpower 4",
+  "description": "+1.1% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.01125,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__readiness_4": {
+  "title": "Readiness 4",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__meditation_1": {
+  "title": "Meditation 1",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__renewal_1": {
+  "title": "Renewal 1",
+  "description": "+2.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0266,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__magic_blade_enchant_slash": {
+  "title": "Magic Blade: Enchant Slash",
+  "description": "Unlocks Magic Blade: Enchant Slash (Level 3) (65 mana, 22.5 s cooldown) on the ability wheel",
+  "extra_description": "Slashes forward. Conversion and Enchanting effects each add a separate hit at 50% of their normal damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_magic_blade_enchant_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:magic_blade_enchant_slash",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__meditation_2": {
+  "title": "Meditation 2",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__renewal_mastery_i": {
+  "title": "Renewal Mastery I",
+  "description": "+2.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0233,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__meditation_3": {
+  "title": "Meditation 3",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__swordmaster": {
+  "title": "Swordmaster",
+  "description": "Teaches Swordmaster, an Epic Fight Passive skill: Bonus attack speed. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_swordmaster.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "epicfight:swordmaster"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__renewal_2": {
+  "title": "Renewal 2",
+  "description": "+2.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0266,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__meditation_4": {
+  "title": "Meditation 4",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__renewal_mastery_ii": {
+  "title": "Renewal Mastery II",
+  "description": "+2.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0233,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__renewal_3": {
+  "title": "Renewal 3",
+  "description": "+2.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0266,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__renewal_mastery_iii": {
+  "title": "Renewal Mastery III",
+  "description": "+2.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0233,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__endurance_1": {
+  "title": "Endurance 1",
+  "description": "+0.75 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__second_breath_1": {
+  "title": "Second Breath 1",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__echanted_burst": {
+  "title": "Magic Blade: Enchanted Burst",
+  "description": "Unlocks Magic Blade: Enchanted Burst (Level 1) (90 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Bursts the locked target and grants Magic Blade Enhancement, increasing Enchant Slash and Element Slash damage by 25%.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_echanted_burst.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:echanted_burst",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__endurance_2": {
+  "title": "Endurance 2",
+  "description": "+0.75 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__second_breath_2": {
+  "title": "Second Breath 2",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__technician": {
+  "title": "Technician",
+  "description": "Teaches Technician, an Epic Fight Passive skill: Dodging just before a hit restores stamina. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_technician.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "epicfight:technician"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__endurance_3": {
+  "title": "Endurance 3",
+  "description": "+0.75 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__second_breath_3": {
+  "title": "Second Breath 3",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__endurance_4": {
+  "title": "Endurance 4",
+  "description": "+0.75 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__second_breath_4": {
+  "title": "Second Breath 4",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__attunement_1": {
+  "title": "Attunement 1",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__bounce_1": {
+  "title": "Bounce 1",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__union_sword": {
+  "title": "Magic Blade: Union Sword",
+  "description": "Unlocks Magic Blade: Union Sword (Level 1) (108 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Requires more than 15 seconds of Magic Blade Enhancement. Releases a horizontal slash and consumes 15 seconds, then consumes up to 15 more seconds and releases a vertical slash after 0.5 seconds.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_union_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:union_sword",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__attunement_2": {
+  "title": "Attunement 2",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__bounce_2": {
+  "title": "Bounce 2",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__combat_mastery_i": {
+  "title": "Combat Mastery I",
+  "description": "Teaches Combat Mastery I, an Epic Fight Passive skill: Dodge in the middle of an attack, or attack straight out of a dodge. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_i.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "epicfightx:combat_mastery_i"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__attunement_3": {
+  "title": "Attunement 3",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__bounce_3": {
+  "title": "Bounce 3",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__attunement_4": {
+  "title": "Attunement 4",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__bounce_4": {
+  "title": "Bounce 4",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__hardened_1": {
+  "title": "Hardened 1",
+  "description": "+0.75 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__bulk_1": {
+  "title": "Bulk 1",
+  "description": "+1 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 1.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__limit_break": {
+  "title": "Limit Break",
+  "description": "Unlocks Limit Break (Level 3) (58 mana, 180 s cooldown) on the ability wheel",
+  "extra_description": "Grants Limit Break. Each level grants 2.5% spell power and 5% cast-time and cooldown reduction.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_limit_break.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:limit_break",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__hardened_2": {
+  "title": "Hardened 2",
+  "description": "+0.75 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__bulk_2": {
+  "title": "Bulk 2",
+  "description": "+0.5 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.5,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__hardened_3": {
+  "title": "Hardened 3",
+  "description": "+0.75 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__bulk_mastery_i": {
+  "title": "Bulk Mastery I",
+  "description": "+1 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__combat_mastery_ii": {
+  "title": "Combat Mastery II",
+  "description": "Teaches Combat Mastery II, an Epic Fight Passive skill: Sprinting just after a dodge enters a Dash, which drains stamina while it lasts. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_ii.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "epicfightx:combat_mastery_ii"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__hardened_4": {
+  "title": "Hardened 4",
+  "description": "+0.75 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__bulk_3": {
+  "title": "Bulk 3",
+  "description": "+1 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 1.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__bulk_4": {
+  "title": "Bulk 4",
+  "description": "+0.5 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.5,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__bulk_mastery_ii": {
+  "title": "Bulk Mastery II",
+  "description": "+1 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__bulk_5": {
+  "title": "Bulk 5",
+  "description": "+1 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 1.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__bulk_6": {
+  "title": "Bulk 6",
+  "description": "+0.5 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.5,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__bulk_mastery_iii": {
+  "title": "Bulk Mastery III",
+  "description": "+1 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__constitution_1": {
+  "title": "Constitution 1",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__toughness_1": {
+  "title": "Toughness 1",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__cast_barrier": {
+  "title": "Cast Barrier",
+  "description": "Unlocks Cast Barrier (Level 3) (22 mana, 120 s cooldown) on the ability wheel",
+  "extra_description": "Creates a barrier that continuously grants the Iron's Spells Haste status to the caster and their summons, boosting movement, attack and cast speed.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_cast_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:cast_barrier",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__constitution_mastery_i": {
+  "title": "Constitution Mastery I",
+  "description": "+0.333 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.3333,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__toughness_2": {
+  "title": "Toughness 2",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__constitution_2": {
+  "title": "Constitution 2",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__toughness_mastery_i": {
+  "title": "Toughness Mastery I",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6667,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__constitution_mastery_ii": {
+  "title": "Constitution Mastery II",
+  "description": "+0.333 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.3333,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__precise_parry": {
+  "title": "Assassin",
+  "description": "Teaches Assassin, an Epic Fight Passive skill: Parry within Parry: -More precise parrying; More fierce counterattacks. -Triggering parry at the perfect moment grants significant buffs and enhances the next attack within 0.7s. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efn_precise_parry.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efn:precise_parry"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__toughness_3": {
+  "title": "Toughness 3",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__constitution_3": {
+  "title": "Constitution 3",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__toughness_4": {
+  "title": "Toughness 4",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__constitution_mastery_iii": {
+  "title": "Constitution Mastery III",
+  "description": "+0.333 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.3333,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__toughness_mastery_ii": {
+  "title": "Toughness Mastery II",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6667,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__toughness_5": {
+  "title": "Toughness 5",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__toughness_6": {
+  "title": "Toughness 6",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__toughness_mastery_iii": {
+  "title": "Toughness Mastery III",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6667,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__wellspring_1": {
+  "title": "Wellspring 1",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__vitality_1": {
+  "title": "Vitality 1",
+  "description": "+1 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.9999,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__soulfall_judgment": {
+  "title": "Soulfall Judgment",
+  "description": "Unlocks Soulfall Judgment (Level 3) (48 mana, 36 s cooldown) on the ability wheel",
+  "extra_description": "Unleashes a soul-charged impact around the caster and calls down a cyan-green formation of spectral blades.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_soulfall_judgment.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:soulfall_judgment",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__wellspring_mastery_i": {
+  "title": "Wellspring Mastery I",
+  "description": "+7% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.07,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__vitality_2": {
+  "title": "Vitality 2",
+  "description": "+1 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.9999,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__wellspring_2": {
+  "title": "Wellspring 2",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__clash_blade": {
+  "title": "Clash Blade",
+  "description": "Teaches Clash Blade, an Epic Fight Clash skill: Clash incoming melee attacks and projectiles mid-swing, canceling damage and knocking targets back. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efclash_blade_clash_blade.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efclash_blade:clash_blade"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__vitality_3": {
+  "title": "Vitality 3",
+  "description": "+1 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.9999,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__wellspring_mastery_ii": {
+  "title": "Wellspring Mastery II",
+  "description": "+7% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.07,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__vitality_4": {
+  "title": "Vitality 4",
+  "description": "+1 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.9999,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__wellspring_3": {
+  "title": "Wellspring 3",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__wellspring_mastery_iii": {
+  "title": "Wellspring Mastery III",
+  "description": "+7% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.07,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__impact_1": {
+  "title": "Impact 1",
+  "description": "+0.15 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.15,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__reservoir_1": {
+  "title": "Reservoir 1",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__calamity_cut": {
+  "title": "Devastating Cut",
+  "description": "Unlocks Devastating Cut (Level 3) (48 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Swing your weapon and strike down a deadly cut, the stronger your weapon, the more powerful the cut is",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_calamity_cut.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_magicfromtheeast:calamity_cut",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__impact_2": {
+  "title": "Impact 2",
+  "description": "+0.15 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.15,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__reservoir_mastery_i": {
+  "title": "Reservoir Mastery I",
+  "description": "+14 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 14,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__impact_mastery_i": {
+  "title": "Impact Mastery I",
+  "description": "+0.2 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.2,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__reservoir_2": {
+  "title": "Reservoir 2",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__impact_3": {
+  "title": "Impact 3",
+  "description": "+0.15 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.15,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__reservoir_mastery_ii": {
+  "title": "Reservoir Mastery II",
+  "description": "+14 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 14,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__impact_4": {
+  "title": "Impact 4",
+  "description": "+0.15 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.15,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__reservoir_3": {
+  "title": "Reservoir 3",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__impact_mastery_ii": {
+  "title": "Impact Mastery II",
+  "description": "+0.2 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.2,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__reservoir_mastery_iii": {
+  "title": "Reservoir Mastery III",
+  "description": "+14 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 14,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "samurai__impact_5": {
+  "title": "Impact 5",
+  "description": "+0.15 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.15,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__impact_6": {
+  "title": "Impact 6",
+  "description": "+0.15 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.15,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__impact_mastery_iii": {
+  "title": "Impact Mastery III",
+  "description": "+0.2 Impact (stagger power)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:impact",
+     "value": 0.2,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__focus_1": {
+  "title": "Focus 1",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__swiftness_1": {
+  "title": "Swiftness 1",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__magic_blade_absorb": {
+  "title": "Magic Blade: Absorb",
+  "description": "Unlocks Magic Blade: Absorb (Level 3) (36 mana, 60 s cooldown) on the ability wheel",
+  "extra_description": "Successful weapon hits restore mana while the effect lasts. The restored amount scales with spell and Esoteric spell power.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_magic_blade_absorb.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:magic_blade_absorb",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__focus_2": {
+  "title": "Focus 2",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__swiftness_2": {
+  "title": "Swiftness 2",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__focus_3": {
+  "title": "Focus 3",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__swiftness_3": {
+  "title": "Swiftness 3",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__focus_4": {
+  "title": "Focus 4",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__swiftness_4": {
+  "title": "Swiftness 4",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__edge_1": {
+  "title": "Edge 1",
+  "description": "+4.5% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__footing_1": {
+  "title": "Footing 1",
+  "description": "+2.2% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.0225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__planned_iaido": {
+  "title": "Iaido Draw",
+  "description": "Unlocks Iaido Draw on the ability wheel. A katana-only dashing draw cut; a parry in the 2 s before it doubles its damage.",
+  "extra_description": "Coming soon: built from Blitz; casting it does nothing yet.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_iaido.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:planned_iaido",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__edge_2": {
+  "title": "Edge 2",
+  "description": "+4.5% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__footing_2": {
+  "title": "Footing 2",
+  "description": "+2.2% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.0225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__edge_mastery_i": {
+  "title": "Edge Mastery I",
+  "description": "+6% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__footing_3": {
+  "title": "Footing 3",
+  "description": "+2.2% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.0225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__edge_3": {
+  "title": "Edge 3",
+  "description": "+4.5% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__footing_4": {
+  "title": "Footing 4",
+  "description": "+2.2% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.0225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__edge_4": {
+  "title": "Edge 4",
+  "description": "+4.5% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__edge_mastery_ii": {
+  "title": "Edge Mastery II",
+  "description": "+6% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__edge_5": {
+  "title": "Edge 5",
+  "description": "+4.5% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__edge_6": {
+  "title": "Edge 6",
+  "description": "+4.5% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__edge_mastery_iii": {
+  "title": "Edge Mastery III",
+  "description": "+6% Katana Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_katana_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:katana_damage",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__might_1": {
+  "title": "Might 1",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__stand_firm_1": {
+  "title": "Stand Firm 1",
+  "description": "+6% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__focus": {
+  "title": "Focus",
+  "description": "Unlocks Focus (36 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Your next strike within 10 s (a punch, a kick or one of your arts) is a guaranteed Black Flash: 2.5x damage and a short stun.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_focus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:focus",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "samurai__might_2": {
+  "title": "Might 2",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__stand_firm_2": {
+  "title": "Stand Firm 2",
+  "description": "+3% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__might_3": {
+  "title": "Might 3",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__stand_firm_mastery_i": {
+  "title": "Stand Firm Mastery I",
+  "description": "+6% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__might_4": {
+  "title": "Might 4",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "samurai__stand_firm_3": {
+  "title": "Stand Firm 3",
+  "description": "+6% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__stand_firm_4": {
+  "title": "Stand Firm 4",
+  "description": "+3% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__stand_firm_mastery_ii": {
+  "title": "Stand Firm Mastery II",
+  "description": "+6% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__stand_firm_5": {
+  "title": "Stand Firm 5",
+  "description": "+6% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__stand_firm_6": {
+  "title": "Stand Firm 6",
+  "description": "+3% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.03,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "samurai__stand_firm_mastery_iii": {
+  "title": "Stand Firm Mastery III",
+  "description": "+6% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ }
+}

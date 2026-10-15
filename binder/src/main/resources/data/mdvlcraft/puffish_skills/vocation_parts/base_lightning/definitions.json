@@ -1,0 +1,5821 @@
+{
+ "lightning__root": {
+  "title": "Lightning Bolt",
+  "description": "Unlocks Lightning Bolt (Level 3) (76 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Down from the heavens, summon a bolt of lightning. The first skill of the Lightning base.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_lightning_bolt.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:lightning_bolt",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__wellspring_1": {
+  "title": "Wellspring 1",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__second_breath_1": {
+  "title": "Second Breath 1",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__chain_lightning": {
+  "title": "Chain Lightning",
+  "description": "Unlocks Chain Lightning (Level 3) (28 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Start a chain of lightning from a targeted creature, causing waves of zapping magic to cascade to nearby creatures",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_chain_lightning.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:chain_lightning",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__wellspring_mastery_i": {
+  "title": "Wellspring Mastery I",
+  "description": "+7% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.07,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__second_breath_2": {
+  "title": "Second Breath 2",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__wellspring_2": {
+  "title": "Wellspring 2",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__ascension": {
+  "title": "Ascension",
+  "description": "Unlocks Ascension (Level 3) (37 mana, 22.5 s cooldown) on the ability wheel",
+  "extra_description": "Cast to strike lightning at your feet and ascend quickly into the air, and gain reduced gravity for a short duration. The lightning bolt deals damage and knocks back creatures struck.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_ascension.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:ascension",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__second_breath_3": {
+  "title": "Second Breath 3",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__wellspring_mastery_ii": {
+  "title": "Wellspring Mastery II",
+  "description": "+7% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.07,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__second_breath_4": {
+  "title": "Second Breath 4",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__wellspring_3": {
+  "title": "Wellspring 3",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__wellspring_mastery_iii": {
+  "title": "Wellspring Mastery III",
+  "description": "+7% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.07,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__swift_current_1": {
+  "title": "Swift Current 1",
+  "description": "+4.5% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__hearty_1": {
+  "title": "Hearty 1",
+  "description": "+6% Saturation from Food",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:saturation_bonus",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__electrocute": {
+  "title": "Electrocute",
+  "description": "Unlocks Electrocute (Level 3) (4 mana, 18 s cooldown) on the ability wheel",
+  "extra_description": "Hold to manifest a cone of electrical energy, damaging creatures in its path.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_electrocute.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:electrocute",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__swift_current_2": {
+  "title": "Swift Current 2",
+  "description": "+4.5% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__hearty_2": {
+  "title": "Hearty 2",
+  "description": "+6% Saturation from Food",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:saturation_bonus",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__swift_current_mastery_i": {
+  "title": "Swift Current Mastery I",
+  "description": "+6% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__hearty_3": {
+  "title": "Hearty 3",
+  "description": "+6% Saturation from Food",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:saturation_bonus",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__lightning_ball": {
+  "title": "Lightning Ball",
+  "description": "Unlocks Lightning Ball (Level 3) (65 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Throws a lightning ball that deals area damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_ball.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:lightning_ball",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__swift_current_3": {
+  "title": "Swift Current 3",
+  "description": "+4.5% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__hearty_4": {
+  "title": "Hearty 4",
+  "description": "+6% Saturation from Food",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:saturation_bonus",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__swift_current_4": {
+  "title": "Swift Current 4",
+  "description": "+4.5% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__swift_current_mastery_ii": {
+  "title": "Swift Current Mastery II",
+  "description": "+6% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__swift_current_5": {
+  "title": "Swift Current 5",
+  "description": "+4.5% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__swift_current_6": {
+  "title": "Swift Current 6",
+  "description": "+4.5% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__swift_current_mastery_iii": {
+  "title": "Swift Current Mastery III",
+  "description": "+6% Movement Speed while Casting",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_casting_movespeed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:casting_movespeed",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__mana_well_1": {
+  "title": "Mana Well 1",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__might_1": {
+  "title": "Might 1",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__ball_lightning": {
+  "title": "Ball Lightning",
+  "description": "Unlocks Ball Lightning (Level 3) (20 mana, 3 s cooldown) on the ability wheel",
+  "extra_description": "Conjure an orb of lightning that slowly moves forward, damaging creatures it phases through and bouncing off blocks.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_ball_lightning.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:ball_lightning",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__mana_well_2": {
+  "title": "Mana Well 2",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__might_2": {
+  "title": "Might 2",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__mana_well_mastery_i": {
+  "title": "Mana Well Mastery I",
+  "description": "+18 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 18,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__might_3": {
+  "title": "Might 3",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__lightning_dance": {
+  "title": "Lightning Dance",
+  "description": "Unlocks Lightning Dance (Level 3) (50 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Launches multiple lightning spears at nearby targets.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_dance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:lightning_dance",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__mana_well_3": {
+  "title": "Mana Well 3",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__might_4": {
+  "title": "Might 4",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__mana_well_4": {
+  "title": "Mana Well 4",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__mana_well_mastery_ii": {
+  "title": "Mana Well Mastery II",
+  "description": "+18 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 18,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__mana_well_5": {
+  "title": "Mana Well 5",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__mana_well_6": {
+  "title": "Mana Well 6",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__mana_well_mastery_iii": {
+  "title": "Mana Well Mastery III",
+  "description": "+18 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 18,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__mending_1": {
+  "title": "Mending 1",
+  "description": "+1.5% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__bounce_1": {
+  "title": "Bounce 1",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__lightning_lance": {
+  "title": "Lightning Lance",
+  "description": "Unlocks Lightning Lance (Level 3) (50 mana, 12 s cooldown) on the ability wheel",
+  "extra_description": "Hold to charge a spear made of lightning. Release to throw it like a javelin, dealing high damage to the creature it hits.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_lightning_lance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:lightning_lance",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__mending_2": {
+  "title": "Mending 2",
+  "description": "+1.5% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__bounce_2": {
+  "title": "Bounce 2",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__planned_storm_hounds": {
+  "title": "Storm Hounds",
+  "description": "Unlocks Storm Hounds on the ability wheel. Summon wolves wreathed in lightning whose bites chain a spark to a nearby enemy.",
+  "extra_description": "Coming soon: built from Raise Dead; casting it does nothing yet.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_storm_hounds.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:planned_storm_hounds",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__mending_3": {
+  "title": "Mending 3",
+  "description": "+1.5% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__bounce_3": {
+  "title": "Bounce 3",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__mending_4": {
+  "title": "Mending 4",
+  "description": "+1.5% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__bounce_4": {
+  "title": "Bounce 4",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__flow_1": {
+  "title": "Flow 1",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__focus_1": {
+  "title": "Focus 1",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__shockwave": {
+  "title": "Shockwave",
+  "description": "Unlocks Shockwave (Level 3) (58 mana, 45 s cooldown) on the ability wheel",
+  "extra_description": "Coalesce a surge of electrical power, and unleash it in a devastating shockwave, blasting exposed creatures.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_shockwave.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:shockwave",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__flow_2": {
+  "title": "Flow 2",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__focus_2": {
+  "title": "Focus 2",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__flow_mastery_i": {
+  "title": "Flow Mastery I",
+  "description": "+9% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.09,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__focus_3": {
+  "title": "Focus 3",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__rapid_chant": {
+  "title": "Rapid Chant",
+  "description": "Teaches Rapid Chant, an Epic Fight Passive skill: Much shorter cast times, and channelled spells last much longer. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_rapid_chant.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efs_iss:rapid_chant"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__flow_3": {
+  "title": "Flow 3",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__focus_4": {
+  "title": "Focus 4",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__flow_4": {
+  "title": "Flow 4",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__flow_mastery_ii": {
+  "title": "Flow Mastery II",
+  "description": "+9% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.09,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__flow_5": {
+  "title": "Flow 5",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__flow_6": {
+  "title": "Flow 6",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__flow_mastery_iii": {
+  "title": "Flow Mastery III",
+  "description": "+9% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.09,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__storm_1": {
+  "title": "Storm 1",
+  "description": "+4.5% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__footing_1": {
+  "title": "Footing 1",
+  "description": "+2.2% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.0225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__thunderstorm": {
+  "title": "Thunderstorm",
+  "description": "Unlocks Thunderstorm (Level 3) (65 mana, 120 s cooldown) on the ability wheel",
+  "extra_description": "Cast to conjure a thunderstorm centered around yourself, which strikes nearby creatures within sight with a small bolt of lightning every 2 seconds for the spell's duration.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_thunderstorm.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:thunderstorm",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__storm_2": {
+  "title": "Storm 2",
+  "description": "+4.5% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__footing_2": {
+  "title": "Footing 2",
+  "description": "+2.2% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.0225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__storm_mastery_i": {
+  "title": "Storm Mastery I",
+  "description": "+6% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__footing_3": {
+  "title": "Footing 3",
+  "description": "+2.2% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.0225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__hasty_casting": {
+  "title": "Hasty Casting",
+  "description": "Teaches Hasty Casting, an Epic Fight Mobility skill: Spells take half as long to cast, and much faster movement while casting. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_hasty_casting.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efs_iss:hasty_casting"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__storm_3": {
+  "title": "Storm 3",
+  "description": "+4.5% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__footing_4": {
+  "title": "Footing 4",
+  "description": "+2.2% Knockback Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.knockback_resistance.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.knockback_resistance",
+     "value": 0.0225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__storm_4": {
+  "title": "Storm 4",
+  "description": "+4.5% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__storm_mastery_ii": {
+  "title": "Storm Mastery II",
+  "description": "+6% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__storm_5": {
+  "title": "Storm 5",
+  "description": "+4.5% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__storm_6": {
+  "title": "Storm 6",
+  "description": "+4.5% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__storm_mastery_iii": {
+  "title": "Storm Mastery III",
+  "description": "+6% Lightning Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_spell_power",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__scholar_1": {
+  "title": "Scholar 1",
+  "description": "+10% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.1,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__willpower_1": {
+  "title": "Willpower 1",
+  "description": "+1.1% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.01125,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__charge": {
+  "title": "Charge",
+  "description": "Unlocks Charge (Level 3) (72 mana, 60 s cooldown) on the ability wheel",
+  "extra_description": "Imbue yourself with the power of lightning, increasing your speed and combat abilities.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_charge.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:charge",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__scholar_2": {
+  "title": "Scholar 2",
+  "description": "+5% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.05,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__willpower_2": {
+  "title": "Willpower 2",
+  "description": "+1.1% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.01125,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__scholar_mastery_i": {
+  "title": "Scholar Mastery I",
+  "description": "+10% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.1,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__willpower_3": {
+  "title": "Willpower 3",
+  "description": "+1.1% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.01125,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__reserve_mana": {
+  "title": "Reserve Mana",
+  "description": "Teaches Reserve Mana, an Epic Fight Passive skill: Refills your mana at once when it drops below 10%. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_reserve_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efs_iss:reserve_mana"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__scholar_3": {
+  "title": "Scholar 3",
+  "description": "+10% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.1,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__willpower_4": {
+  "title": "Willpower 4",
+  "description": "+1.1% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.01125,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__scholar_4": {
+  "title": "Scholar 4",
+  "description": "+5% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.05,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__scholar_mastery_ii": {
+  "title": "Scholar Mastery II",
+  "description": "+10% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.1,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__scholar_5": {
+  "title": "Scholar 5",
+  "description": "+10% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.1,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__scholar_6": {
+  "title": "Scholar 6",
+  "description": "+5% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.05,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__scholar_mastery_iii": {
+  "title": "Scholar Mastery III",
+  "description": "+10% Experience Gained (enchanting)",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_experience.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:experience",
+     "value": 0.1,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__readiness_1": {
+  "title": "Readiness 1",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__hardened_1": {
+  "title": "Hardened 1",
+  "description": "+0.75 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__lightning_spark": {
+  "title": "Lightning Spark",
+  "description": "Unlocks Lightning Spark (Level 3) (10 mana, 3 s cooldown) on the ability wheel",
+  "extra_description": "Fires a long-range lightning spark.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_spark.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:lightning_spark",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__readiness_2": {
+  "title": "Readiness 2",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__hardened_2": {
+  "title": "Hardened 2",
+  "description": "+0.75 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__readiness_3": {
+  "title": "Readiness 3",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__hardened_3": {
+  "title": "Hardened 3",
+  "description": "+0.75 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__readiness_4": {
+  "title": "Readiness 4",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__hardened_4": {
+  "title": "Hardened 4",
+  "description": "+0.75 Armor",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__grounded_1": {
+  "title": "Grounded 1",
+  "description": "+4.5% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__renewal_1": {
+  "title": "Renewal 1",
+  "description": "+2.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0266,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__lightning_spear": {
+  "title": "Lightning Spear",
+  "description": "Unlocks Lightning Spear (Level 3) (36 mana, 7.5 s cooldown) on the ability wheel",
+  "extra_description": "Throws a summoned lightning spear projectile that deals damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_spear.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:lightning_spear",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__grounded_2": {
+  "title": "Grounded 2",
+  "description": "+4.5% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__renewal_mastery_i": {
+  "title": "Renewal Mastery I",
+  "description": "+2.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0233,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__grounded_mastery_i": {
+  "title": "Grounded Mastery I",
+  "description": "+6% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__renewal_2": {
+  "title": "Renewal 2",
+  "description": "+2.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0266,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__grounded_3": {
+  "title": "Grounded 3",
+  "description": "+4.5% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__renewal_mastery_ii": {
+  "title": "Renewal Mastery II",
+  "description": "+2.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0233,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__grounded_4": {
+  "title": "Grounded 4",
+  "description": "+4.5% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__renewal_3": {
+  "title": "Renewal 3",
+  "description": "+2.7% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0266,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__grounded_mastery_ii": {
+  "title": "Grounded Mastery II",
+  "description": "+6% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__renewal_mastery_iii": {
+  "title": "Renewal Mastery III",
+  "description": "+2.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0233,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__grounded_5": {
+  "title": "Grounded 5",
+  "description": "+4.5% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__grounded_6": {
+  "title": "Grounded 6",
+  "description": "+4.5% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__grounded_mastery_iii": {
+  "title": "Grounded Mastery III",
+  "description": "+6% Lightning Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_lightning_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:lightning_magic_resist",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "lightning__constitution_1": {
+  "title": "Constitution 1",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__endurance_1": {
+  "title": "Endurance 1",
+  "description": "+0.75 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__lightning_strike": {
+  "title": "Lightning Strike",
+  "description": "Unlocks Lightning Strike (Level 3) (36 mana, 22.5 s cooldown) on the ability wheel",
+  "extra_description": "Summons a lightning strike and electrocutes the target.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_strike.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:lightning_strike",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__constitution_mastery_i": {
+  "title": "Constitution Mastery I",
+  "description": "+0.333 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.3333,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__endurance_2": {
+  "title": "Endurance 2",
+  "description": "+0.75 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__constitution_2": {
+  "title": "Constitution 2",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__endurance_3": {
+  "title": "Endurance 3",
+  "description": "+0.75 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__constitution_mastery_ii": {
+  "title": "Constitution Mastery II",
+  "description": "+0.333 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.3333,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__endurance_4": {
+  "title": "Endurance 4",
+  "description": "+0.75 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 0.75,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__constitution_3": {
+  "title": "Constitution 3",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__constitution_mastery_iii": {
+  "title": "Constitution Mastery III",
+  "description": "+0.333 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.3333,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__reservoir_1": {
+  "title": "Reservoir 1",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__quick_casting_1": {
+  "title": "Quick Casting 1",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__lightning_swarm": {
+  "title": "Lightning Swarm",
+  "description": "Unlocks Lightning Swarm (Level 3) (58 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Releases a swarm of electric sparks against multiple targets.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_swarm.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:lightning_swarm",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__reservoir_mastery_i": {
+  "title": "Reservoir Mastery I",
+  "description": "+14 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 14,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__quick_casting_2": {
+  "title": "Quick Casting 2",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__reservoir_2": {
+  "title": "Reservoir 2",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__quick_casting_mastery_i": {
+  "title": "Quick Casting Mastery I",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__reservoir_mastery_ii": {
+  "title": "Reservoir Mastery II",
+  "description": "+14 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 14,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__quick_casting_3": {
+  "title": "Quick Casting 3",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__reservoir_3": {
+  "title": "Reservoir 3",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__quick_casting_4": {
+  "title": "Quick Casting 4",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__reservoir_mastery_iii": {
+  "title": "Reservoir Mastery III",
+  "description": "+14 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 14,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "lightning__quick_casting_mastery_ii": {
+  "title": "Quick Casting Mastery II",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__quick_casting_5": {
+  "title": "Quick Casting 5",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__quick_casting_6": {
+  "title": "Quick Casting 6",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__quick_casting_mastery_iii": {
+  "title": "Quick Casting Mastery III",
+  "description": "+4% Cast Time Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__meditation_1": {
+  "title": "Meditation 1",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__attunement_1": {
+  "title": "Attunement 1",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__megido": {
+  "title": "Electric Rain",
+  "description": "Unlocks Electric Rain (Level 3) (28 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Summon the wrath of the heavens, striking with lightnings every entity that dares to come around.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/alshanex_familiars_megido.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "alshanex_familiars:megido",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__meditation_2": {
+  "title": "Meditation 2",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__attunement_2": {
+  "title": "Attunement 2",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__meditation_3": {
+  "title": "Meditation 3",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__attunement_3": {
+  "title": "Attunement 3",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__meditation_4": {
+  "title": "Meditation 4",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__attunement_4": {
+  "title": "Attunement 4",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__warding_1": {
+  "title": "Warding 1",
+  "description": "+4% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__swiftness_1": {
+  "title": "Swiftness 1",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__lightning_field": {
+  "title": "Lightning Field",
+  "description": "Unlocks Lightning Field (Level 3) (65 mana, 45 s cooldown) on the ability wheel",
+  "extra_description": "Creates an electricity field that electrocutes the ground and deals continuous damage to enemies.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_field.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:lightning_field",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__warding_2": {
+  "title": "Warding 2",
+  "description": "+2% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.02,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__swiftness_2": {
+  "title": "Swiftness 2",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__warding_mastery_i": {
+  "title": "Warding Mastery I",
+  "description": "+4% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__swiftness_3": {
+  "title": "Swiftness 3",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__warding_3": {
+  "title": "Warding 3",
+  "description": "+4% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__swiftness_4": {
+  "title": "Swiftness 4",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__warding_4": {
+  "title": "Warding 4",
+  "description": "+2% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.02,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__warding_mastery_ii": {
+  "title": "Warding Mastery II",
+  "description": "+4% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__warding_5": {
+  "title": "Warding 5",
+  "description": "+4% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__warding_6": {
+  "title": "Warding 6",
+  "description": "+2% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.02,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__warding_mastery_iii": {
+  "title": "Warding Mastery III",
+  "description": "+4% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
+ },
+ "lightning__vitality_1": {
+  "title": "Vitality 1",
+  "description": "+1 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.9999,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__vitality_2": {
+  "title": "Vitality 2",
+  "description": "+1 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.9999,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__thunder_step": {
+  "title": "Thunderstep",
+  "description": "Unlocks Thunderstep (Level 3) (76 mana, 12 s cooldown) on the ability wheel",
+  "extra_description": "Teleport a short distance forward, creating a wake of lightning that damages creatures you teleport through.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_thunder_step.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:thunder_step",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "lightning__vitality_3": {
+  "title": "Vitality 3",
+  "description": "+1 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.9999,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__vitality_4": {
+  "title": "Vitality 4",
+  "description": "+1 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.9999,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus (every archetype has a few of these)."
+ }
+}

@@ -74,8 +74,23 @@ continue from the first unticked step in "Progress".
 Tick each step when it is done, committed and pushed. Add notes under a step when something was not obvious.
 
 - [x] 0. Design data in the repo (`binder/tools/vocations/`), this document.
-- [ ] 1. Generator `binder/tools/generate_vocations.py`: pick page, 18 base fragments, 153 vocation fragments, config,
+- [x] 1. Generator `binder/tools/generate_vocations.py`: pick page, 18 base fragments, 153 vocation fragments, config,
        spell configs for every newly granted spell, lang keys (vocation names, planned abilities).
+   - Run `python3 binder/tools/generate_vocations.py` (4 s). It reuses the old generator's stat spokes, texts and frames
+     (`tools/generate_skill_trees.py`), the box layout (`tools/relayout_trees.py`) and spell mana/cooldown/level helpers
+     (`tools/tree_edit.py`). The old trees are deleted; their ability texts were snapshotted to
+     `tools/vocations/legacy_nodes.json` so technique nodes keep their wording.
+   - Bases: 178-216 nodes, 187-236 points each; a vocation tab is about 390 nodes. The parts are 7.4 MB uncompressed.
+   - Spell configs: only written for spells without one (144 new); existing hand-tuned ones are never overwritten.
+   - `tools/vocations/compose.py` assembles a tab in Python exactly like the game will (used for checks and the PDF).
+     All 153 composed tabs pass the layout check (no crossing lines, no icon on a line, no overlap).
+   - Node ids: base nodes `<archetype>__<name>`, vocation nodes `voc__<n>` (`voc__0` is the root, the first bonus).
+   - Planned abilities: `data/mdvlcraft/planned_abilities.json` (key -> name, built from, description); ability ids
+     `mdvlcraft:planned_<key>`; lang `ability.mdvlcraft.planned_<key>` and `.desc`.
+   - Lang: `screen.mdvlcraft.vocation.<a>.<b>` (vocation name, first option), `screen.mdvlcraft.archetype.<id>` and `.desc`.
+   - Icons referenced but not drawn yet (step 6): `icons18/archetype/<new id>.png`, `icons18/tab/voc_<a>_<b>.png`,
+     `icons18/ability/<ns>_<spell>.png` for newly granted spells, `icons18/ability/mdvlcraft_planned_<key>.png`,
+     `icons18/skill/<ns>_<id>.png` for Epic Fight skills never granted before, `icons18/bonus/<attr>.png` for new attributes.
 - [ ] 2. Planned (Modified) abilities in Java (`PlannedAbility`, registry from a generated JSON, wheel + abilities screen).
 - [ ] 3. Load-time composer mixin for `voc_*` categories; server boot loads all 154 categories with no `[puffish_skills]` errors.
 - [ ] 4. Java: `ArchetypeTabs` (pick page, vocation unlock), `Respec` (18 archetypes, classes, reset/change on the vocation
