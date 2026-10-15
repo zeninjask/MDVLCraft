@@ -117,7 +117,7 @@ public final class Respec {
         return Character.toUpperCase(archetype.charAt(0)) + archetype.substring(1);
     }
 
-    static Skill node(String archetype) {
+    public static Skill node(String archetype) {
         return SkillsAPI.getCategory(ArchetypeTabs.ARCHETYPES)
             .flatMap(c -> c.getSkill(archetype))
             .orElseThrow(() -> new IllegalStateException("Archetypes page has no " + archetype + " node"));

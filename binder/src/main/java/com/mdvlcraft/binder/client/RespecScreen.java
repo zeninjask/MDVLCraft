@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.AbilityIcons;
+import com.mdvlcraft.binder.network.ArchetypePickPacket;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.network.RespecPacket;
 import com.mdvlcraft.binder.skills.Respec;
@@ -29,9 +30,20 @@ public class RespecScreen extends Screen {
     private int panelW;
     private int panelH;
 
+    /** The level a player from before the vocations rework keeps (skills/LegacyMigration), or -1 for a normal respec. */
+    private int migrationLevel = -1;
+
     public RespecScreen(Screen parent) {
         super(Component.translatable("screen.mdvlcraft.menu.respec"));
         this.parent = parent;
+    }
+
+    /** The pop-up where a player from before the vocations rework picks their two archetypes. */
+    public static RespecScreen migration(int level) {
+        RespecScreen screen = new RespecScreen(null);
+        screen.migrationLevel = level;
+        screen.step = RespecScreen.Step.FIRST;
+        return screen;
     }
 
     @Override
@@ -67,7 +79,9 @@ public class RespecScreen extends Screen {
             case SECOND:
                 boolean first = this.step == RespecScreen.Step.FIRST;
                 text = first
-                    ? Component.translatable("screen.mdvlcraft.respec.desc.first")
+                    ? (this.migrationLevel >= 0
+                        ? Component.translatable("screen.mdvlcraft.migration.desc", this.migrationLevel)
+                        : Component.translatable("screen.mdvlcraft.respec.desc.first"))
                     : Component.translatable("screen.mdvlcraft.respec.desc.second", title(this.from));
                 for (String id : Respec.ARCHETYPES) {
                     if (!first && id.equals(this.from)) {
@@ -89,12 +103,18 @@ public class RespecScreen extends Screen {
                 buttonW = 100;
                 break;
             default:
-                text = Component.translatable(
-                    "screen.mdvlcraft.respec.confirm.change", title(this.from), title(this.to), vocationName(this.from, this.to),
-                    Respec.keptLevel(this.fromLevel), this.fromLevel
-                );
+                text = this.migrationLevel >= 0
+                    ? Component.translatable(
+                        "screen.mdvlcraft.migration.confirm", title(this.from), title(this.to), vocationName(this.from, this.to), this.migrationLevel
+                    )
+                    : Component.translatable(
+                        "screen.mdvlcraft.respec.confirm.change", title(this.from), title(this.to), vocationName(this.from, this.to),
+                        Respec.keptLevel(this.fromLevel), this.fromLevel
+                    );
                 choices.add(new RespecScreen.Choice(Component.translatable("screen.mdvlcraft.respec.confirm"), null, () -> {
-                    BinderNetwork.sendToServer(new RespecPacket(this.from, this.to));
+                    BinderNetwork.sendToServer(this.migrationLevel >= 0
+                        ? new ArchetypePickPacket(this.from, this.to)
+                        : new RespecPacket(this.from, this.to));
                     Minecraft.getInstance().setScreen(null);
                 }, true));
         }
@@ -130,7 +150,11 @@ public class RespecScreen extends Screen {
                 Minecraft.getInstance().setScreen(this.parent);
                 break;
             case FIRST:
-                this.go(RespecScreen.Step.CHOOSE);
+                if (this.migrationLevel >= 0) {
+                    Minecraft.getInstance().setScreen(null);   // asked again on the next join
+                } else {
+                    this.go(RespecScreen.Step.CHOOSE);
+                }
                 break;
             case SECOND:
                 this.go(RespecScreen.Step.FIRST);
@@ -164,7 +188,9 @@ public class RespecScreen extends Screen {
     public void render(GuiGraphics g, int mouseX, int mouseY, float partialTick) {
         this.renderBackground(g);
         DqGui.window(g, this.panelX, this.panelY, this.panelW, this.panelH);
-        Component heading = Component.translatable("screen.mdvlcraft.respec.title." + this.step.name().toLowerCase(Locale.ROOT));
+        Component heading = this.migrationLevel >= 0
+            ? Component.translatable("screen.mdvlcraft.migration.title")
+            : Component.translatable("screen.mdvlcraft.respec.title." + this.step.name().toLowerCase(Locale.ROOT));
         g.drawString(this.font, "✦ " + heading.getString(), this.panelX + 12, this.panelY + 12, DqGui.TEXT, false);
         DqGui.rule(g, this.panelX + 3, this.panelX + this.panelW - 3, this.panelY + 28);
 

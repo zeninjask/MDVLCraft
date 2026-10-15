@@ -30,6 +30,7 @@ public final class ArchetypeTabs {
                 Respec.vocation(player).ifPresent(tab -> {
                     if (!tab.isUnlocked(player)) {
                         tab.unlock(player);
+                        LegacyMigration.applyPendingLevel(player, tab);
                     }
                 });
             }

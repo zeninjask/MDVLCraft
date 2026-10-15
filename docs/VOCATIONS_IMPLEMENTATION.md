@@ -109,11 +109,20 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
    - Written and compiling: `skills/VocationParts` (assembly, `tabOf(a, b)`, the vocation index) and
      `mixin/puffish/PackConfigReaderMixin`. Not yet boot-tested (do it after step 4). If loading is slow, cache the
      parsed base parts per reader (each base is read for 17 vocations).
-- [ ] 4. Java: `ArchetypeTabs` (pick page, vocation unlock), `Respec` (18 archetypes, classes, reset/change on the vocation
+- [x] 4. (code written, compiles, not tested in game) Java: `ArchetypeTabs` (pick page, vocation unlock), `Respec` (18 archetypes, classes, reset/change on the vocation
        tab), `ArchetypeLevels`, `ClassTitles` (vocation name), `CharacterScreen` (Status page), `RespecScreen`,
        `PartyPanels` emblems, `Jingles`, `MageHunterSlot`.
-- [ ] 5. Migration of old players: detect, pop-up to pick two archetypes, vocation level = highest old level, flag in the
-       player's persistent data so it runs once.
+- [x] 5. (code written, compiles, not tested in game) Migration of old players: detect, pop-up to pick two archetypes,
+       vocation level = highest old level, flag in the player's persistent data so it runs once.
+   - `skills/LegacyMigration` (reads old picks and levels through `mixin/puffish/PlayerDataAccessor` and
+     `CategoryDataAccessor`; old level from the old curve 25 + 5 x level), `network/OpenArchetypePickPacket`,
+     `network/ArchetypePickPacket` (protocol 11), `client/RespecScreen.migration(level)`. The level is applied when the
+     vocation tab opens (`ArchetypeTabs` calls `LegacyMigration.applyPendingLevel`), so picking on the Archetypes tab
+     instead of the pop-up also works. Persistent data keys: `mdvlcraft_vocations` (done), `mdvlcraft_vocation_level`.
+   - Step 4 notes: `skills/Respec` (18 archetypes, `picked`, `vocation`, `vocationName`, `respec`), `client/ClientVocation`
+     (the client's view: vocation tab and picked archetypes), `CharacterScreen` Level/Class/Experience rows use the
+     vocation tab, `ClassTitles` uses the vocation name, `ArchetypeLevels` sends the vocation level,
+     `client/SpellPreviews` assembles vocation tabs with `VocationParts`.
 - [ ] 6. DQ9 icons for the 18 archetypes, tabs, every new spell and every Modified ability (`tools/dq9_icons.py`).
 - [x] 7. Skill-tree PDF (`tools/skill_tree_doc.py`) for the new trees.
    - Same usage as before (`python3 binder/tools/skill_tree_doc.py <version> <out.pdf> <server mods dir> base/server/overrides/kubejs`);

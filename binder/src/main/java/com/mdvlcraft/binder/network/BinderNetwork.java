@@ -10,7 +10,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "10";
+    private static final String PROTOCOL = "11";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
         ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> "10", "10"::equals, "10"::equals
     );
@@ -68,6 +68,14 @@ public final class BinderNetwork {
         );
         CHANNEL.registerMessage(
             id++, JinglePacket.class, JinglePacket::encode, JinglePacket::decode, JinglePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, OpenArchetypePickPacket.class, OpenArchetypePickPacket::encode, OpenArchetypePickPacket::decode, OpenArchetypePickPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, ArchetypePickPacket.class, ArchetypePickPacket::encode, ArchetypePickPacket::decode, ArchetypePickPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
         CHANNEL.registerMessage(
             id++,
