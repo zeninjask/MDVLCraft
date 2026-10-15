@@ -130,7 +130,7 @@ v('berserker', 'druid', ['Beastmaster', 'Wild Fury', 'Feral Reaver'],
   'cdmoveset:wolf_dodge', ['ATK', 'NSP', 'MSP'])
 v('berserker', 'spirit', ['Wukong', 'Kitsune Fury', 'Phantom Blade'],
   ['M:kitsune_pack', 'Z:brand_spirit', 'Z:spirit_wolf', 'S:spirit_empowerment'],
-  'wom:inner_growth', ['ATK', 'SPI', 'ASPD'])
+  'mdvlcraft:wukong_dodge', ['ATK', 'SPI', 'ASPD'])
 
 # Monk + Mage
 v('monk', 'blaze', ['Fire Fist', 'Phoenix Monk', 'Agni Kai'],

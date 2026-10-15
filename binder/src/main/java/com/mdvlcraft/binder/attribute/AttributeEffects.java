@@ -2,7 +2,7 @@ package com.mdvlcraft.binder.attribute;
 
 import com.mdvlcraft.binder.ability.ManaRegen;
 import com.mdvlcraft.binder.combat.KatanaWeapons;
-import com.mdvlcraft.binder.compat.wukong.WukongStaff;
+import com.mdvlcraft.binder.wukong.WukongCategories;
 import com.mdvlcraft.binder.monk.Fists;
 import io.redspace.ironsspellbooks.item.weapons.StaffItem;
 import java.util.HashMap;
@@ -114,7 +114,7 @@ public final class AttributeEffects {
             bonus += value(attacker, BinderAttributes.FIST_MASTERY);
         }
 
-        if (category == WeaponCategories.SPEAR || attacker.getMainHandItem().getItem() instanceof StaffItem || WukongStaff.is(category)) {
+        if (category == WeaponCategories.SPEAR || attacker.getMainHandItem().getItem() instanceof StaffItem || category == WukongCategories.WK_STAFF) {
             bonus += value(attacker, BinderAttributes.POLEARM_DAMAGE);
         }
 

@@ -91,7 +91,9 @@
     "epicfight.OBBColliderAccessor",
     "epicfight.MultiColliderAccessor",
     "antimagic.BlackDividerReachMixin",
-    "curios.CuriosImplMixinHooksMixin"
+    "curios.CuriosImplMixinHooksMixin",
+    "epicfight.LivingEntityPatchHoldingMixin",
+    "epicfight.ServerPlayerPatchHeldItemMixin"
   ],
   "client": [
     "origins.ChooseOriginScreenMixin",
@@ -137,7 +139,8 @@
     "PoseStackAccessor",
     "SlotAccessor",
     "parties.EpicFightLockOnMixin",
-    "ServerStatusPingerMixin"
+    "ServerStatusPingerMixin",
+    "epicfight.ClientPlayerPatchHeldItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -23,6 +23,7 @@ import com.mdvlcraft.binder.music.Jingles;
 import com.mdvlcraft.binder.skills.ArchetypeTabs;
 import com.mdvlcraft.binder.skills.MageExperience;
 import com.mdvlcraft.binder.skills.ClassTitles;
+import com.mdvlcraft.binder.wukong.WukongStaffSetup;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
@@ -50,6 +51,7 @@ public final class MDVLBinder {
         DoppelgangerSetup.register(modBus);
         UnarmedParry.register(modBus);
         AddItemModifier.register(modBus);
+        WukongStaffSetup.register(modBus);
         modBus.addListener(MDVLBinder::onCommonSetup);
         modBus.addListener(com.mdvlcraft.binder.content.WildSpawns::onSpawnPlacements);
         if (FMLEnvironment.dist == Dist.CLIENT) {

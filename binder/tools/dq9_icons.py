@@ -169,6 +169,7 @@ MODS = {
 ABILITIES = {  # the Samurai's stance abilities share the stance orbs; a few summons and weapons get their own item
     "mdvlcraft_stance": "silver_orb", "mdvlcraft_stance_earth": "yellow_orb", "mdvlcraft_stance_fire": "red_orb",
     "mdvlcraft_stance_water": "blue_orb", "mdvlcraft_stance_wind": "green_orb",
+    "mdvlcraft_wukong_dodge": "clump_of_cloud",
     "irons_spellbooks_summon_horse": "heavenly_horseshoe", "irons_spellbooks_summon_polar_bear": "magic_beast_hide",
     "irons_spellbooks_summon_ender_chest": "jewellery_box", "traveloptics_axe_of_the_doomed": "galaxy_axe",
     "cursed_school_testament_of_ash": "saints_ashes",
