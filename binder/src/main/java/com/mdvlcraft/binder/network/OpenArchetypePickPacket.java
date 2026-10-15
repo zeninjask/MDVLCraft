@@ -1,8 +1,7 @@
 package com.mdvlcraft.binder.network;
 
-import com.mdvlcraft.binder.client.RespecScreen;
+import com.mdvlcraft.binder.client.MigrationPopup;
 import java.util.function.Supplier;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.DistExecutor;
@@ -19,7 +18,7 @@ public record OpenArchetypePickPacket(int level) {
     }
 
     public static void handle(OpenArchetypePickPacket packet, Supplier<Context> context) {
-        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> Minecraft.getInstance().setScreen(RespecScreen.migration(packet.level))));
+        context.get().enqueueWork(() -> DistExecutor.unsafeRunWhenOn(Dist.CLIENT, () -> () -> MigrationPopup.open(packet.level)));
         context.get().setPacketHandled(true);
     }
 }
