@@ -4190,20 +4190,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "monk__combat_mastery_i": {
-  "title": "Combat Mastery I",
-  "description": "Teaches Combat Mastery I, an Epic Fight Passive skill: Dodge in the middle of an attack, or attack straight out of a dodge. Equip it in the Combat Skills box of the abilities screen",
+ "monk__hypervitality": {
+  "title": "Hyper Vitality",
+  "description": "Teaches Hyper Vitality, an Epic Fight Passive skill: Innate skills use stamina when your weapon charge is not full. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_i.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_hypervitality.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "epicfightx:combat_mastery_i"
+     "skill": "epicfight:hypervitality"
     }
    }
   ],
@@ -4675,20 +4675,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "monk__combat_mastery_ii": {
-  "title": "Combat Mastery II",
-  "description": "Teaches Combat Mastery II, an Epic Fight Passive skill: Sprinting just after a dodge enters a Dash, which drains stamina while it lasts. Equip it in the Combat Skills box of the abilities screen",
+ "monk__combat_mastery_i": {
+  "title": "Combat Mastery I",
+  "description": "Teaches Combat Mastery I, an Epic Fight Passive skill: Dodge in the middle of an attack, or attack straight out of a dodge. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_ii.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_i.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "epicfightx:combat_mastery_ii"
+     "skill": "epicfightx:combat_mastery_i"
     }
    }
   ],
@@ -5163,20 +5163,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "monk__catharsis": {
-  "title": "Catharsis",
-  "description": "Teaches Catharsis, an Epic Fight Passive skill: Dodging attacks charges your weapon's innate skill. Equip it in the Combat Skills box of the abilities screen",
+ "monk__combat_mastery_ii": {
+  "title": "Combat Mastery II",
+  "description": "Teaches Combat Mastery II, an Epic Fight Passive skill: Sprinting just after a dodge enters a Dash, which drains stamina while it lasts. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_catharsis.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfightx_combat_mastery_ii.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "epicfight:catharsis"
+     "skill": "epicfightx:combat_mastery_ii"
     }
    }
   ],
@@ -5647,6 +5647,36 @@
   },
   "size": 1.5,
   "extra_description": "Warrior class bonus (every Warrior archetype has this spoke)."
+ },
+ "monk__catharsis": {
+  "title": "Catharsis",
+  "description": "Teaches Catharsis, an Epic Fight Passive skill: Dodging attacks charges your weapon's innate skill. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_catharsis.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "epicfight:catharsis"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
  },
  "monk__vitality_4": {
   "title": "Vitality 4",

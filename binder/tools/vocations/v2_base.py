@@ -159,7 +159,7 @@ BASE = {
               'B:phantom_movement', 'B:follow_up_kick', 'T:vortex_punch', 'I:haste', 'E:fast_reaction_aura', 'E:quick_motion_aura',
               'E:mana_resonance', 'Z:still_mind'],
              ['wom:shooting_style', 'wom:meditation', 'wom:mindset', 'wom:precise_roll', 'wom:dodge_master', 'wom:inner_growth',
-              'wom:all_eyes_on_you', 'dodge_parry_reward:heal2']),
+              'wom:all_eyes_on_you', 'dodge_parry_reward:heal2', 'epicfight:hypervitality']),
     'blaze': (['I:firebolt', 'I:fireball', 'I:fire_breath', 'I:blaze_storm', 'I:scorch', 'I:heat_surge', 'I:magma_bomb',
                'I:wall_of_fire', 'S:combustion', 'S:fire_blast', 'S:fire_orbs', 'I:flaming_barrage', 'S:firestorm_vortex',
                'S:eruption', 'S:apocalyptic_burst', 'T:meteor_storm', 'Z:blaze_spirits'],
