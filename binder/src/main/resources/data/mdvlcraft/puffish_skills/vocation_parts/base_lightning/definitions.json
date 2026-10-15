@@ -1566,24 +1566,26 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__rapid_chant": {
-  "title": "Rapid Chant",
-  "description": "Teaches Rapid Chant, an Epic Fight Passive skill: Much shorter cast times, and channelled spells last much longer. Equip it in the Combat Skills box of the abilities screen",
+ "lightning__blood_step": {
+  "title": "Blood Step",
+  "description": "Unlocks Blood Step (Level 3) (36 mana, 18 s cooldown) on the ability wheel",
+  "extra_description": "Instantaneously teleport to where you are looking, or directly behind any targeted creature. Gain a short duration of true invisibility upon reaching your destination.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_rapid_chant.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_step.png"
    }
   },
   "rewards": [
    {
-    "type": "mdvlcraft:epicfight_skill",
+    "type": "mdvlcraft:ability",
     "data": {
-     "skill": "efs_iss:rapid_chant"
+     "ability": "irons_spellbooks:blood_step",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -1958,20 +1960,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__hasty_casting": {
-  "title": "Hasty Casting",
-  "description": "Teaches Hasty Casting, an Epic Fight Mobility skill: Spells take half as long to cast, and much faster movement while casting. Equip it in the Combat Skills box of the abilities screen",
+ "lightning__rapid_chant": {
+  "title": "Rapid Chant",
+  "description": "Teaches Rapid Chant, an Epic Fight Passive skill: Much shorter cast times, and channelled spells last much longer. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_hasty_casting.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_rapid_chant.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efs_iss:hasty_casting"
+     "skill": "efs_iss:rapid_chant"
     }
    }
   ],
@@ -2446,20 +2448,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__reserve_mana": {
-  "title": "Reserve Mana",
-  "description": "Teaches Reserve Mana, an Epic Fight Passive skill: Refills your mana at once when it drops below 10%. Equip it in the Combat Skills box of the abilities screen",
+ "lightning__hasty_casting": {
+  "title": "Hasty Casting",
+  "description": "Teaches Hasty Casting, an Epic Fight Mobility skill: Spells take half as long to cast, and much faster movement while casting. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_reserve_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_hasty_casting.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efs_iss:reserve_mana"
+     "skill": "efs_iss:hasty_casting"
     }
    }
   ],
@@ -2930,6 +2932,36 @@
   },
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
+ },
+ "lightning__reserve_mana": {
+  "title": "Reserve Mana",
+  "description": "Teaches Reserve Mana, an Epic Fight Passive skill: Refills your mana at once when it drops below 10%. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_reserve_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "efs_iss:reserve_mana"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
  },
  "lightning__scholar_3": {
   "title": "Scholar 3",
