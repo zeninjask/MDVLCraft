@@ -38,12 +38,14 @@ import generate_skill_trees as G  # noqa: E402  (stat spokes, texts, frames)
 import relayout_trees as L  # noqa: E402  (box layout)
 import tree_edit as T  # noqa: E402  (spell mana, levels, cooldowns, spell config)
 import v2_all  # noqa: E402
+from built import BUILT  # noqa: E402  (the Modified abilities that are built)
 
 D = v2_all.d
 OUT = ROOT / "src/main/resources/data/mdvlcraft/puffish_skills"
 PARTS = OUT / "vocation_parts"
 LANG = ROOT / "src/main/resources/assets/mdvlcraft/lang/en_us.json"
 PLANNED = ROOT / "src/main/resources/data/mdvlcraft/planned_abilities.json"
+MODIFIED = ROOT / "src/main/resources/data/mdvlcraft/modified_abilities.json"
 HERE = ROOT / "tools/vocations"
 CATALOG = json.loads((HERE / "catalog.json").read_text())
 FULLDESC = json.loads((HERE / "fulldesc.json").read_text())
@@ -236,6 +238,12 @@ def ability_body(code, live, cost):
     if code.startswith('Z:'):
         key = code[2:]
         name, base, desc = D.MOD[key]
+        if key in BUILT:
+            b = BUILT[key]
+            return {"title": name, "description": f"Unlocks {name} ({b['mana']} mana, {b['cooldown']:g} s cooldown) on the ability wheel",
+                    "extra_description": desc, "icon": tex(f"{ICON}ability/mdvlcraft_{key}.png"),
+                    "rewards": [{"type": "mdvlcraft:ability", "data": {"ability": f"mdvlcraft:{key}", "level": 1}}],
+                    "cost": cost, **frame("challenge")}
         return {"title": name, "description": f"Unlocks {name} on the ability wheel. {desc}",
                 "extra_description": f"Coming soon: built from {base}; casting it does nothing yet.",
                 "icon": tex(f"{ICON}ability/mdvlcraft_planned_{key}.png"),
@@ -611,13 +619,19 @@ def write_shared(index):
 
 
 def write_planned():
-    entries = {key: {"name": name, "base": base, "description": desc} for key, (name, base, desc) in sorted(D.MOD.items())}
+    entries = {key: {"name": name, "base": base, "description": desc} for key, (name, base, desc) in sorted(D.MOD.items())
+               if key not in BUILT}
     write(PLANNED, entries)
+    unknown = set(BUILT) - set(D.MOD)
+    if unknown:
+        raise SystemExit(f"built.py names abilities that are not in the design: {sorted(unknown)}")
+    write(MODIFIED, {key: {"name": D.MOD[key][0], "description": D.MOD[key][2], **BUILT[key]} for key in sorted(BUILT)})
 
 
 def write_lang(index):
     lang = json.loads(LANG.read_text())
-    for k in [k for k in lang if k.startswith(("screen.mdvlcraft.vocation.", "screen.mdvlcraft.archetype.", "ability.mdvlcraft.planned_"))]:
+    for k in [k for k in lang if k.startswith(("screen.mdvlcraft.vocation.", "screen.mdvlcraft.archetype.", "ability.mdvlcraft.planned_"))
+              or k.startswith("spell.mdvlcraft.") and k.removeprefix("spell.mdvlcraft.").split(".")[0] in D.MOD]:
         del lang[k]
     for vid, v in index.items():
         lang[f"screen.mdvlcraft.vocation.{v['a']}.{v['b']}"] = v["name"]
@@ -625,8 +639,12 @@ def write_lang(index):
         lang[f"screen.mdvlcraft.archetype.{arch}"] = D.TITLE[arch]
         lang[f"screen.mdvlcraft.archetype.{arch}.desc"] = D.ROLE[arch]
     for key, (name, base, desc) in sorted(D.MOD.items()):
-        lang[f"ability.mdvlcraft.planned_{key}"] = name
-        lang[f"ability.mdvlcraft.planned_{key}.desc"] = desc
+        if key in BUILT:   # an Iron's spell: Iron's reads spell.<namespace>.<path> and .guide
+            lang[f"spell.mdvlcraft.{key}"] = name
+            lang[f"spell.mdvlcraft.{key}.guide"] = desc
+        else:
+            lang[f"ability.mdvlcraft.planned_{key}"] = name
+            lang[f"ability.mdvlcraft.planned_{key}.desc"] = desc
     LANG.write_text(json.dumps(lang, indent=2, ensure_ascii=False) + "\n")
 
 

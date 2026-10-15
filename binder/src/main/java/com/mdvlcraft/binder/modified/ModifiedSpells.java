@@ -1,0 +1,48 @@
+package com.mdvlcraft.binder.modified;
+
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+
+/** Registers every built Modified ability as an Iron's spell; each must have an entry in modified_abilities.json and vice versa. */
+public final class ModifiedSpells {
+    private static final DeferredRegister<AbstractSpell> SPELLS = DeferredRegister.create(SpellRegistry.SPELL_REGISTRY_KEY, "mdvlcraft");
+    private static final List<Supplier<ModifiedSpell>> ALL = List.of(
+        MartialSpells.ShieldBash::new, MartialSpells.Provoke::new, MartialSpells.Javelin::new, MartialSpells.Iaido::new,
+        MartialSpells.TwinFang::new, MartialSpells.QuakeSlam::new,
+        BuffSpells.WarFrenzy::new, BuffSpells.Envenom::new, BuffSpells.DeathMark::new, BuffSpells.SmokeBomb::new, BuffSpells.StillMind::new,
+        SummonSpells.BlazeSpirits::new, SummonSpells.SnowSentinels::new, SummonSpells.TideGuardians::new, SummonSpells.StormHounds::new,
+        SummonSpells.WolfPack::new, SummonSpells.GuardianAngel::new, SummonSpells.SculkWatcher::new, SummonSpells.Treant::new,
+        SummonSpells.Terracotta::new, SummonSpells.HuntingHawk::new, SummonSpells.PackMule::new,
+        UtilitySpells.Rally::new, UtilitySpells.Campfire::new, UtilitySpells.Pickpocket::new
+    );
+
+    private ModifiedSpells() {
+    }
+
+    public static void register(IEventBus modBus) {
+        Set<String> built = new TreeSet<>();
+        for (Supplier<ModifiedSpell> factory : ALL) {
+            ModifiedSpell spell = factory.get();
+            String key = spell.getSpellResource().getPath();
+            if (!built.add(key)) {
+                throw new IllegalStateException("Modified ability " + key + " has two spell classes");
+            }
+            SPELLS.register(key, () -> spell);
+        }
+        Set<String> configured = new TreeSet<>(ModifiedAbilities.all().keySet());
+        if (!built.equals(configured)) {
+            throw new IllegalStateException("modified_abilities.json and the spell classes disagree: "
+                + configured.stream().filter(k -> !built.contains(k)).collect(Collectors.joining(", ", "no class for [", "]"))
+                + built.stream().filter(k -> !configured.contains(k)).collect(Collectors.joining(", ", ", not built.py: [", "]")));
+        }
+        SPELLS.register(modBus);
+        ModifiedEntities.register(modBus);
+    }
+}
