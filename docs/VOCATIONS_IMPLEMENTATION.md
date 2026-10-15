@@ -24,6 +24,7 @@ continue from the first unticked step in "Progress".
 - **Vocation names**: the user picked one name per vocation in the design doc; they are in `binder/tools/vocations/names.py`
   (`CHOSEN`) and `v2_all` puts the chosen name first, so `names[0]` is the vocation's name everywhere.
 - **No same-class halving** (removed on request).
+- **No demon swords in the Berserker base** (removed on request, with Sword Call).
 - **Respec**: you no longer swap one archetype. A respec picks **both** archetypes again (any two, the same pair too); the new
   vocation tab starts empty at **three quarters** of the old level (`Respec.keptLevel`) and every point is spent again
   (`Respec.respec`, `RespecPacket(first, second)`, `client/RespecScreen` steps CHOOSE -> FIRST -> SECOND -> CONFIRM).
@@ -75,8 +76,9 @@ continue from the first unticked step in "Progress".
    name, description and DQ9 icon, show on the wheel and in the abilities screen, and casting them does nothing.
 6. **No same-class halving**: the user removed it (two archetypes of the same class give full bonuses).
    `SameClassHalving`, `AttributeRewardMixin` and `SkillsModAccessor` are deleted.
-7. **Removed archetypes' special code**: the Mage Hunter's demon-sword slot (`content/MageHunterSlot`) follows the demon
-   swords to the Berserker base.
+7. **Demon swords**: on request, Summon Demon-Slayer/Dweller/Destroyer Sword are in no tree (and Sword Call, which only
+   recalls thrown demon swords, went with them). The Mage Hunter sword slot (`content/MageHunterSlot`) now applies to
+   anyone with a demon-sword summon unlocked, so today nobody has it; the code stays for when a tree grants one again.
 
 ## Progress
 

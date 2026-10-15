@@ -1,6 +1,10 @@
 package com.mdvlcraft.binder.content;
 
-import com.mdvlcraft.binder.skills.Respec;
+import com.mdvlcraft.binder.ability.Ability;
+import com.mdvlcraft.binder.ability.AbilityGrants;
+import java.util.Collection;
+import java.util.Set;
+import net.minecraft.resources.ResourceLocation;
 import com.tiago.antimagic.item.AbstractAntiMagicSwordItem;
 import java.util.function.Predicate;
 import net.minecraft.network.protocol.game.ClientboundSetCarriedItemPacket;
@@ -31,13 +35,18 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * A check twice a second also catches what other mods put in or take out: an item in the slot goes back into the bag
  * (or on the ground if the bag is full). A demon sword anywhere else goes into the slot if it is empty, else it is
  * desummoned. The sword isn't dropped on death.
- * Clients know who is a Mage Hunter from skills/ArchetypeLevels (client/ClientArchetypes, set by setClientCheck).
+ * A Mage Hunter is anyone with a demon sword summon unlocked (no tree grants one since the vocations rework). The client
+ * knows it for the local player from its granted abilities (client/ClientAbilities, set by setClientCheck).
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class MageHunterSlot {
     public static final int SLOT = 0;
-    /** The demon swords moved from the Mage Hunter to the Berserker base with the vocations rework. */
-    private static final String ARCHETYPE = "berserker";
+    /** The spells that summon a demon sword; whoever has one of them unlocked has the sword slot. */
+    private static final Set<ResourceLocation> SWORD_SUMMONS = Set.of(
+        ResourceLocation.fromNamespaceAndPath("antimagic", "summon_demon_slayer"),
+        ResourceLocation.fromNamespaceAndPath("antimagic", "summon_demon_dweller"),
+        ResourceLocation.fromNamespaceAndPath("antimagic", "summon_demon_destroyer")
+    );
     private static final int CHECK_INTERVAL = 10;
     private static Predicate<Player> clientCheck = player -> false;
 
@@ -50,9 +59,14 @@ public final class MageHunterSlot {
 
     public static boolean isMageHunter(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
-            return Respec.isPicked(serverPlayer, ARCHETYPE);
+            return summonsSwords(AbilityGrants.of(serverPlayer).keySet());
         }
         return player != null && player.level().isClientSide && clientCheck.test(player);
+    }
+
+    /** Whether these granted abilities include a demon sword summon. */
+    public static boolean summonsSwords(Collection<Ability> granted) {
+        return granted.stream().anyMatch(ability -> SWORD_SUMMONS.contains(ability.id()));
     }
 
     /** Whether the container slot is a Mage Hunter's sword slot (creative mode leaves it open). */

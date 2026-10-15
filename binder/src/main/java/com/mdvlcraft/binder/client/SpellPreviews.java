@@ -129,7 +129,7 @@ public final class SpellPreviews {
                         });
                     }
                 }
-            } catch (IOException | RuntimeException e) {
+            } catch (RuntimeException e) {
                 // no previews rather than a crash on every hovered node
                 MDVLBinder.LOGGER.error("Spell previews: cannot read the skill trees in {}", root, e);
                 spells.clear();

@@ -26,7 +26,7 @@ public final class ClientContentSetup {
             PonderIndex.addPlugin(new WeaponPonderPlugin());
             PonderIndex.addPlugin(new ShipPonderPlugin());
             PonderHold.register();
-            MageHunterSlot.setClientCheck(player -> ClientArchetypes.picked(player.getUUID(), "magehunter"));
+            MageHunterSlot.setClientCheck(player -> player == Minecraft.getInstance().player && MageHunterSlot.summonsSwords(ClientAbilities.granted().keySet()));
         });
     }
 

@@ -137,7 +137,7 @@ ATTR_INFO = {
     'puffish_attributes:sprinting_speed': 'Faster sprinting.',
     'puffish_attributes:stamina': 'Hunger drains more slowly.',
     'puffish_attributes:stealth': 'Creatures notice you from less far away.',
-    'puffish_attributes:sword_damage': 'More damage with swords (summoned demon swords count).',
+    'puffish_attributes:sword_damage': 'More damage with swords.',
     'puffish_attributes:tamed_damage': 'Your pets and mounts deal more damage.',
     'puffish_attributes:tamed_resistance': 'Your pets and mounts take less damage.',
     'puffish_attributes:toughness_shred': 'Your attacks ignore part of the target\'s armour toughness.',
