@@ -535,8 +535,8 @@ def main():
              "holding both archetypes' bases (left and right) and the vocation's own skills and bonuses (the centre column). The tab gives 1 point "
              "to start and 1 per level, with no level cap. The table gives the totals of each <b>base</b>; percentages add to the base value and Max "
              "Health is in half-hearts. Abilities (spells and techniques) go on the ability wheel; Epic Fight skills go in the Combat Skills box of the "
-             "abilities screen. Each archetype then has its own page listing every skill in its base, and the vocation pages list every pair's own "
-             "skills. Abilities marked (Modified) are designed but not built yet: they can be unlocked and put on the wheel but do nothing.</p>",
+             "abilities screen. Then each archetype has its own section: a page listing every skill in its base, then every vocation it is part of with that "
+             "pair's own skills (so each vocation appears under both of its archetypes). Abilities marked (Modified) are designed but not built yet: they can be unlocked and put on the wheel but do nothing.</p>",
              "<table><tr><th>Archetype</th><th>Class</th><th>Skills</th><th>Cost</th>" + "".join(f"<th>{e(t)}</th>" for _, t in CORE)
              + "<th>Abilities</th><th>EF skills</th></tr>"]
     for cls in CLASS_NODES:
@@ -552,19 +552,20 @@ def main():
                  "end and are separate from the skill trees.</p>")
 
     pack = Pack(mods_dir, kubejs_dir)
+    index = json.load(open(os.path.join(CAT, 'vocations.json')))
+    # One section per archetype: its base page, then every vocation it is part of (each vocation appears under both archetypes).
     for cls in CLASS_NODES:
         for a in (x for x in order if cls_of[x] == cls):
             parts.append(archetype_page(a, cls, title[a], role[a], classes_defs, pack, ''))
-
-    index = json.load(open(os.path.join(CAT, 'vocations.json')))
-    vocations = list(index.items())
-    for start in range(0, len(vocations), 9):
-        chunk = vocations[start:start + 9]
-        lead = ("Each vocation's own skills (the centre column of its tab), its Epic Fight skill and its three bonuses, on top of both bases."
-                if start == 0 else '')
-        parts.append(f"<div class='page'><h2>Vocations {start + 1}–{start + len(chunk)} of {len(vocations)}</h2>"
-                     + (f"<p class='lead'>{lead}</p>" if lead else '')
-                     + "<div class='cols vocs'>" + ''.join(vocation_block(vid, info, pack) for vid, info in chunk) + "</div></div>")
+            mine = [(vid, info) for vid, info in index.items() if a in (info['a'], info['b'])]
+            mine.sort(key=lambda item: order.index(item[1]['b'] if item[1]['a'] == a else item[1]['a']))
+            for start in range(0, len(mine), 9):
+                chunk = mine[start:start + 9]
+                lead = (f"Every vocation with {e(title[a])}: each one's own skills (the centre column of its tab), its Epic Fight skill and its "
+                        "three bonuses, on top of both bases." if start == 0 else '')
+                parts.append(f"<div class='page'><h2>{e(title[a])} vocations <small>{start + 1}–{start + len(chunk)} of {len(mine)}</small></h2>"
+                             + (f"<p class='lead'>{lead}</p>" if lead else '')
+                             + "<div class='cols vocs'>" + ''.join(vocation_block(vid, info, pack) for vid, info in chunk) + "</div></div>")
 
     parts.append("<div class='page'><h2>Origins</h2><p class='lead'>Picked on first joining, separately from the archetype trees: one race and one "
                  "class. A race or class can be changed later with an Orb of Origin (an enchanted golden apple surrounded by eight gold ingots).</p>")

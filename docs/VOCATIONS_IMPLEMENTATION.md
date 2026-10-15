@@ -50,6 +50,9 @@ continue from the first unticked step in "Progress".
     `R` iss_elden_ring, `M` iss_magicfromtheeast, `W` wind_spellbooks, `X` iss_csw, `A` alshanex_familiars,
     `H` irons_chronomancy, `B` mdvlcraft (binder technique), `N` antimagic, `Z` a Modified ability (key into `MOD`).
 
+- Later requests: Recall, Portal and Frost Step taken out of the Wanderer base; the skill-tree PDF is in one section per
+  archetype (its base page, then every vocation it is part of, so each vocation appears twice).
+
 ## Architecture decisions (and why)
 
 1. **One Pufferfish category per vocation**, id `mdvlcraft:voc_<a>_<b>` with `a`, `b` in `v2_base.ORDER` order
@@ -104,15 +107,14 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
      `icons18/skill/<ns>_<id>.png` for Epic Fight skills never granted before, `icons18/bonus/<attr>.png` for new attributes.
 - [x] 2. Planned (Modified) abilities in Java (`PlannedAbility`, registry from a generated JSON, wheel + abilities screen).
    - `ability/PlannedAbility` (in `Ability.byId`, cast in `AbilityActions.press`, tooltip in `client/AbilityDisplay`);
-     casting shows "<name> is not built yet" on the action bar. Compiles; not tested in game yet.
-- [ ] 3. Load-time composer mixin for `voc_*` categories; server boot loads all 154 categories with no `[puffish_skills]` errors.
+     casting shows "<name> is not built yet: it does nothing for now." on the action bar. Tested in game (Stance: Void Form).
+- [x] 3. Load-time composer mixin for `voc_*` categories; server boot loads all 154 categories with no `[puffish_skills]` errors.
    - Written and compiling: `skills/VocationParts` (assembly, `tabOf(a, b)`, the vocation index) and
-     `mixin/puffish/PackConfigReaderMixin`. Not yet boot-tested (do it after step 4). If loading is slow, cache the
-     parsed base parts per reader (each base is read for 17 vocations).
-- [x] 4. (code written, compiles, not tested in game) Java: `ArchetypeTabs` (pick page, vocation unlock), `Respec` (18 archetypes, classes, reset/change on the vocation
+     `mixin/puffish/PackConfigReaderMixin`. Boot-tested: `Data pack mdvlcraft loaded successfully`, no `[puffish_skills]` errors.
+- [x] 4. (tested in game) Java: `ArchetypeTabs` (pick page, vocation unlock), `Respec` (18 archetypes, classes, reset/change on the vocation
        tab), `ArchetypeLevels`, `ClassTitles` (vocation name), `CharacterScreen` (Status page), `RespecScreen`,
        `PartyPanels` emblems, `Jingles`, `MageHunterSlot`.
-- [x] 5. (code written, compiles, not tested in game) Migration of old players: detect, pop-up to pick two archetypes,
+- [x] 5. (tested in game) Migration of old players: detect, pop-up to pick two archetypes,
        vocation level = highest old level, flag in the player's persistent data so it runs once.
    - `skills/LegacyMigration` (reads old picks and levels through `mixin/puffish/PlayerDataAccessor` and
      `CategoryDataAccessor`; old level from the old curve 25 + 5 x level), `network/OpenArchetypePickPacket`,
@@ -132,8 +134,18 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
    - Same usage as before (`python3 binder/tools/skill_tree_doc.py <version> <out.pdf> <server mods dir> base/server/overrides/kubejs`);
      reads `vocation_parts/` and the Archetypes page. 40 pages: overview, 18 base pages, 17 vocation pages, Origins.
      Regenerate it whenever the trees change.
-- [ ] 8. Build, server boot test, client test (pick page, vocation tab, migration pop-up, titles, status page).
-- [ ] 9. Update `binder/BALANCE.md` (still describes same-class halving and the old trees), `binder/README.md`, `binder/SKILL_TREES.md`, `docs/AGENT_HANDOFF.md`; final push. No release unless asked.
+- [x] 8. Build, server boot test, client test.
+   - Migration: Tester seeded with old Knight 20 and Ice 12 got the pop-up (Level 20), picked Samurai + Warlock and became
+     King of Curses at Level 20 ("Title gained: King of Curses", party window emblems at Lv. 20).
+   - Vocation tab: bases left and mirrored right, centre column, icons and tooltips; 21 points at Level 20; unlocking costs
+     points. On the software-rendered test client clicks can take a few seconds to register.
+   - Planned ability: unlocked, put on the wheel and cast: only the action-bar message.
+   - Respec: picks both again; Frost + Guardian became Frostwarden at Level 15 with 16 points, title and party window
+     updated; Status page shows Level 15, Class Frostwarden, Experience 0 / 100.
+   - Not tested in game: a brand-new player picking on the Archetypes page (the same unlock path as the migration pick).
+   - Known nit: after a respec chat shows "You have a new skill point" several times.
+- [x] 9. Docs updated (`binder/BALANCE.md`, `binder/README.md`, `binder/SKILL_TREES.md`, `docs/AGENT_HANDOFF.md`).
+- [x] 10. Released in 1.9.44 at the user's request (client, client-performance and server packs, PDF, README on `main`).
 
 ## Notes for whoever continues
 
