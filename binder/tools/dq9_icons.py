@@ -15,6 +15,9 @@ Usage (from the binder folder; needs Pillow and curl):
   python3 tools/dq9_icons.py fetch <library dir>   download the wiki's DQ9 icons (about 860)
   python3 tools/dq9_icons.py write <library dir>   write the icons, tools/dq9_icons.json (icon -> DQ9 file) and
                                                    contact sheets in <library dir>/sheets
+  python3 tools/dq9_icons.py add <library dir>     only draw the icons the skill trees use that do not exist yet,
+                                                   keeping every existing icon (theme pools continue where they were);
+                                                   vocation tab icons (tab/voc_<a>_<b>) join the two archetype emblems
 """
 import glob
 import json
@@ -41,6 +44,9 @@ EMBLEMS = {  # tabs and archetypes share these
     "samurai": "deadly_nightblade", "scout": "x_ray_specs", "stalker": "hunters_hat", "thief": "thiefs_key",
     "wanderer": "chimaera_wing", "warlock": "purple_orb", "warrior": "warriors_helm", "water": "dragons_tear",
     "classes": "seed_of_skill",
+    # the vocations rework's archetypes (blaze, frost and necromancer keep the old flame, ice and necromancy emblems)
+    "guardian": "white_shield", "brute": "great_helm", "berserker": "valkyrie_sword", "blaze": "flame_shield",
+    "frost": "ice_crystal", "necromancer": "skullcap", "spirit": "black_tortoise_fan",
 }
 ORIGINS = {
     "mdvlcraft_alchemist": "mystifying_mixture", "mdvlcraft_bard": "minstrels_manual", "mdvlcraft_battle_mage": "rune_staff",
@@ -111,6 +117,9 @@ BONUSES = {
     "puffish_attributes_tamed_resistance": "magic_beast_hide", "puffish_attributes_toughness_shred": "sledgehammer",
     "puffish_attributes_trident_damage": "trident", "traveloptics_aqua_magic_resist": "shell_shield",
     "traveloptics_aqua_spell_power": "blue_orb",
+    "cursed_school_cursed_spell_power": "hades_helm", "iss_magicfromtheeast_spirit_spell_power": "silver_orb",
+    "iss_magicfromtheeast_symmetry_spell_power": "lunar_fan", "iss_magicfromtheeast_symmetry_magic_resist": "solar_fan",
+    "somakespells_soul_fire_spell_power": "flame_tang",
 }
 
 # ---- themes: (theme, keywords in the icon name), first match wins
@@ -361,7 +370,60 @@ def sheets(lib, mapping):
         sheet.save(os.path.join(out, f"{group}.png"))
 
 
+def referenced():
+    """Every icons18 texture the skill trees use (the Archetypes page and the vocation parts), plus each vocation's tab
+    icon and each archetype's tab icon (the respec screen's buttons)."""
+    data = os.path.join(ROOT, "src/main/resources/data/mdvlcraft/puffish_skills")
+    refs = set()
+    for path in glob.glob(os.path.join(data, "**/*.json"), recursive=True):
+        refs.update(re.findall(r'"mdvlcraft:textures/(gui/icons18/[^"]+)"', open(path).read()))
+    index = json.load(open(os.path.join(data, "vocation_parts/vocations.json")))
+    refs.update(f"gui/icons18/tab/voc_{v['a']}_{v['b']}.png" for v in index.values())
+    refs.update(f"gui/icons18/tab/tab_{a}.png" for v in index.values() for a in (v["a"], v["b"]))
+    return sorted(os.path.join(TEXTURES, r) for r in refs)
+
+
+def add(lib):
+    index = library(lib)
+    with open(os.path.join(ROOT, "tools/dq9_icons.json")) as f:
+        mapping = json.load(f)
+    used = {}
+    for v in mapping.values():
+        used[v["theme"]] = used.get(v["theme"], 0) + 1
+    new = [p for p in referenced() if not os.path.exists(p)]
+    vocations = [p for p in new if os.path.basename(p).startswith("voc_")]
+    for path in [p for p in new if p not in vocations]:
+        kind, name = os.path.basename(os.path.dirname(path)), os.path.basename(path)[:-4]
+        if kind in ("tab", "archetype"):
+            key, t = EMBLEMS[name.removeprefix("tab_")], "emblem"
+        elif kind == "bonus":
+            key, t = BONUSES[name], "bonus"
+        elif name in ABILITIES:
+            key, t = ABILITIES[name], "pick"
+        else:
+            t = theme(name, kind)
+            key = POOLS[t][used.get(t, 0) % len(POOLS[t])]
+            used[t] = used.get(t, 0) + 1
+        if key not in index:
+            raise SystemExit(f"{name}: {key} is not in the library")
+        Image.open(index[key]).convert("RGBA").resize((32, 32), Image.NEAREST).save(path)
+        mapping[os.path.relpath(path, TEXTURES)] = {"dq9": os.path.basename(index[key]), "theme": t}
+    for path in vocations:
+        a, b = os.path.basename(path)[len("voc_"):-4].split("_")
+        canvas = Image.new("RGBA", (32, 32))
+        for emblem, at in ((a, (0, 0)), (b, (10, 10))):
+            icon = Image.open(index[EMBLEMS[emblem]]).convert("RGBA").resize((22, 22), Image.LANCZOS)
+            canvas.alpha_composite(icon, at)
+        canvas.save(path)
+        mapping[os.path.relpath(path, TEXTURES)] = {"dq9": f"{EMBLEMS[a]} + {EMBLEMS[b]}", "theme": "vocation"}
+    with open(os.path.join(ROOT, "tools/dq9_icons.json"), "w") as f:
+        json.dump(mapping, f, indent=1, sort_keys=True, ensure_ascii=False)
+        f.write("\n")
+    sheets(lib, {k: v for k, v in mapping.items() if os.path.join(TEXTURES, k) in new})
+    print(len(new), "icons added")
+
+
 if __name__ == "__main__":
-    if len(sys.argv) != 3 or sys.argv[1] not in ("fetch", "write"):
+    if len(sys.argv) != 3 or sys.argv[1] not in ("fetch", "write", "add"):
         raise SystemExit(__doc__)
-    (fetch if sys.argv[1] == "fetch" else write)(sys.argv[2])
+    {"fetch": fetch, "write": write, "add": add}[sys.argv[1]](sys.argv[2])

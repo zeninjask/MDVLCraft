@@ -123,7 +123,11 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
      (the client's view: vocation tab and picked archetypes), `CharacterScreen` Level/Class/Experience rows use the
      vocation tab, `ClassTitles` uses the vocation name, `ArchetypeLevels` sends the vocation level,
      `client/SpellPreviews` assembles vocation tabs with `VocationParts`.
-- [ ] 6. DQ9 icons for the 18 archetypes, tabs, every new spell and every Modified ability (`tools/dq9_icons.py`).
+- [x] 6. DQ9 icons for the 18 archetypes, tabs, every new spell and every Modified ability (`tools/dq9_icons.py`).
+   - `python3 binder/tools/dq9_icons.py add <library dir>` draws only the icons the trees use that do not exist yet (506 the
+     first time: 334 abilities, 153 vocation tabs, 18 archetype tabs/emblems, 5 bonuses), keeping every existing icon.
+     Vocation tab icons join both archetype emblems. The library is fetched with `dq9_icons.py fetch <dir>` (dragon-quest.org).
+     Old archetypes' emblems were deleted. Rerun `add` after any tree change that adds a new spell or Modified ability.
 - [x] 7. Skill-tree PDF (`tools/skill_tree_doc.py`) for the new trees.
    - Same usage as before (`python3 binder/tools/skill_tree_doc.py <version> <out.pdf> <server mods dir> base/server/overrides/kubejs`);
      reads `vocation_parts/` and the Archetypes page. 40 pages: overview, 18 base pages, 17 vocation pages, Origins.
