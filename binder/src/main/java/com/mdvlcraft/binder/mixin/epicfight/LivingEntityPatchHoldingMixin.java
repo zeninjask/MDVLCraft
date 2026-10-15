@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
-/** The Ruyi Jingu Bang's moveset only for the Wukong vocation (wukong/WukongGate). */
+/** The Ruyi Jingu Bang's moveset only with the Monkey King identity (wukong/WukongGate). */
 @Mixin(value = LivingEntityPatch.class, remap = false)
 public abstract class LivingEntityPatchHoldingMixin {
     @Inject(method = "getHoldingItemCapability", at = @At("RETURN"), cancellable = true)

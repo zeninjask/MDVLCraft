@@ -49,6 +49,7 @@ CATALOG = json.loads((HERE / "catalog.json").read_text())
 FULLDESC = json.loads((HERE / "fulldesc.json").read_text())
 EF_DESC = json.loads((HERE / "ef_desc.json").read_text())
 EF_SLOTS = json.loads((ROOT / "tools/ef_skill_slots.json").read_text())
+EF_NAMES = json.loads((ROOT / "tools/ef_skill_names.json").read_text())
 ICON = "mdvlcraft:textures/gui/icons18/"
 TWIG_CAP = 4
 COLUMN_STEP = 60
@@ -67,6 +68,8 @@ PICK_REWARDS = {a: [{"type": "mdvlcraft:epicfight_skill", "data": {"skill": "efn
 for a in ("wanderer", "druid"):
     PICK_REWARDS.setdefault(a, []).append({"type": "puffish_skills:attribute",
                                            "data": {"attribute": "mdvlcraft:affliction_immunity", "value": 1, "operation": "addition"}})
+# Epic Fight skills a vocation's first node (its centre root) teaches on top of its bonus.
+ROOT_SKILLS = {("monk", "spirit"): "mdvlcraft:wukong"}   # the Monkey King identity: the Ruyi Jingu Bang's moveset (wukong/WukongGate)
 
 # design stat code -> attributes (one node can raise several, e.g. both mods' aqua spell power)
 STAT_ATTR = {
@@ -514,6 +517,12 @@ def vocation_parts(a, b, r, live):
                 value = abs(value)
             body = stat_body(f"{name}: {sname}", attrs, value, 2, "root" if i == 0 else "goal",
                              f"{name} vocation bonus ({D.TITLE[a]} + {D.TITLE[b]}).")
+            if i == 0 and (a, b) in ROOT_SKILLS:
+                skill = ROOT_SKILLS[(a, b)]
+                taught = EF_NAMES[skill]
+                body["rewards"].append({"type": "mdvlcraft:epicfight_skill", "data": {"skill": skill}})
+                body["extra_description"] += (f" Teaches {taught['name']}, an Epic Fight {EF_SLOTS[skill].capitalize()} skill: "
+                                              f"{taught['tooltip']} Equip it in the Combat Skills box of the abilities screen.")
         else:
             body = ability_body(code, live, ability_cost(code) if not code.startswith(("Z:",)) else 2)
             body["extra_description"] = (body.get("extra_description", "") + f" {name} vocation skill.").strip()

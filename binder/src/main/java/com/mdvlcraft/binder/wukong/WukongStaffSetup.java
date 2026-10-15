@@ -24,7 +24,8 @@ import yesman.epicfight.world.capabilities.item.WeaponCategory;
 /**
  * The Ruyi Jingu Bang (item mdvlcraft:ruyi_jingu_bang, weapon type mdvlcraft:wukong_staff in
  * data/mdvlcraft/capabilities/weapons/), its animations (WukongAnimations), its charged smash (mdvlcraft:wukong_smash)
- * and the four-way Wukong dodge (mdvlcraft:wukong_dodge, taught by the Wukong vocation's tree).
+ * the four-way Wukong dodge (mdvlcraft:wukong_dodge, taught by the Wukong vocation's tree) and the Monkey King identity
+ * (mdvlcraft:wukong, taught by the tree's first node), without which the staff has no moveset (WukongGate).
  */
 public final class WukongStaffSetup {
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "mdvlcraft");
@@ -32,6 +33,7 @@ public final class WukongStaffSetup {
         () -> new RuyiJinguBang(Tiers.NETHERITE, 3, -3.0F, new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.EPIC)));
     public static Skill SMASH;
     public static Skill DODGE;
+    public static Skill IDENTITY;
 
     private WukongStaffSetup() {
     }
@@ -46,6 +48,7 @@ public final class WukongStaffSetup {
 
     private static void onSkillBuild(SkillBuildEvent event) {
         SkillBuildEvent.ModRegistryWorker worker = event.createRegistryWorker("mdvlcraft");
+        IDENTITY = worker.build("wukong", MonkeyKingSkill::new, Skill.createIdentityBuilder());
         SMASH = worker.build("wukong_smash", WukongSmashSkill::new, WeaponInnateSkill.createWeaponInnateBuilder().setActivateType(Skill.ActivateType.HELD));
         DODGE = worker.build("wukong_dodge", DodgeSkill::new, DodgeSkill.createDodgeBuilder().setAnimations(
             WukongAnimations.DODGE_FORWARD, WukongAnimations.DODGE_BACKWARD, WukongAnimations.DODGE_LEFT, WukongAnimations.DODGE_RIGHT));

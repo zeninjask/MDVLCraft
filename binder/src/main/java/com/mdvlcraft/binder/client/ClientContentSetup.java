@@ -1,7 +1,6 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.content.MageHunterSlot;
-import com.mdvlcraft.binder.wukong.WukongGate;
 import com.mdvlcraft.binder.client.ponder.ShipPonderPlugin;
 import com.mdvlcraft.binder.client.ponder.WeaponPonderPlugin;
 import cursedfate.CtrlDashHandler;
@@ -27,8 +26,6 @@ public final class ClientContentSetup {
             PonderIndex.addPlugin(new WeaponPonderPlugin());
             PonderIndex.addPlugin(new ShipPonderPlugin());
             PonderHold.register();
-            WukongGate.setClientCheck(player -> WukongGate.ARCHETYPES.stream()
-                .allMatch(archetype -> ClientArchetypes.picked(player.getUUID(), archetype)));
             MageHunterSlot.setClientCheck(player -> player == Minecraft.getInstance().player && MageHunterSlot.summonsSwords(ClientAbilities.granted().keySet()));
         });
     }

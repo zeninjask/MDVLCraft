@@ -50,6 +50,9 @@ continue from the first unticked step in "Progress".
     `R` iss_elden_ring, `M` iss_magicfromtheeast, `W` wind_spellbooks, `X` iss_csw, `A` alshanex_familiars,
     `H` irons_chronomancy, `B` mdvlcraft (binder technique), `N` antimagic, `Z` a Modified ability (key into `MOD`).
 
+- The Ruyi Jingu Bang's moveset belongs to the Monkey King identity skill (`mdvlcraft:wukong`), which the first node of the
+  Monk + Spirit tree teaches; anyone without it equipped holds the staff as a plain item. Lightning and Monk bases teach
+  Hyper Vitality, the Samurai base Blood Step.
 - Later requests: Recall, Portal and Frost Step taken out of the Wanderer base; the skill-tree PDF is in one section per
   archetype (its base page, then every vocation it is part of, so each vocation appears twice).
 
@@ -147,7 +150,7 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
 - [x] 9. Docs updated (`binder/BALANCE.md`, `binder/README.md`, `binder/SKILL_TREES.md`, `docs/AGENT_HANDOFF.md`).
 - [x] 10. Released in 1.9.44 at the user's request (client, client-performance and server packs, PDF, README on `main`).
 - [x] 11. 2.0.0: Clash Blade out of every tree (worlds failed to load the trees), Spirit Staff & Spear Damage and Phantom Ascent, Monk + Spirit named Wukong.
-- [ ] 12. After 2.0.0 (paused): Monk + Spirit is Wukong (final) with the ported Wukong staff core, only usable by Wukong; one name per vocation. Built and boot-tested, in-game test of the Wukong moveset and the staff model swap (BATEX pack) still to do: see **Current work (paused)** in `docs/AGENT_HANDOFF.md`.
+- [x] 12. 2.0.1: Monk + Spirit is Wukong (final) with the ported Wukong staff core and the BATEX Sun Wukong staff model; the moveset needs the Monkey King identity, taught by the first node of the Monk + Spirit tree; Lightning, Samurai and Monk bases gain Hyper Vitality, Blood Step and Hyper Vitality; one name per vocation. Tested in game: staff model, gate, idle, walk, run, five-hit combo, dash and jump attacks, charged smash, all four Wukong dodges.
 
 ## Notes for whoever continues
 
