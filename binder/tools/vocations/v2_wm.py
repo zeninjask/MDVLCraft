@@ -9,7 +9,7 @@ mod('ent_stride', 'Ent Stride', 'Oakskin', 'Bark skin that also roots you in pla
 mod('ember_fists', 'Ember Fists', 'Fire Fist', 'Your unarmed hits set enemies on fire for a while.')
 mod('cold_meditation', 'Cold Meditation', 'Ice Block', 'Meditate inside an ice block: invulnerable, and restores mana and stamina while inside.')
 mod('ki_wave', 'Kamehameha Wave', 'Ray of Frost', 'A channelled beam of raw ki from both palms (Ray of Frost with blue spirit energy, no freezing).')
-mod('crane_leap', 'Crane Leap', 'Thunder Step', 'A leaping flip that lands with a thunderclap behind your target.')
+mod('crane_leap', 'Crane Leap', 'Burning Dash', 'A leaping flip that lands with a thunderclap behind your target.')
 mod('lotus', 'Lotus Bloom', 'Healing Circle', 'A lotus opens beneath you, healing allies and cleansing one harmful effect from each.')
 mod('jiangshi_fists', 'Jiangshi Fists', 'Jiangshi Invoke', 'Become a jiangshi for a while: your unarmed hits drain health and you hop instead of walk.')
 mod('flame_rush', 'Flame Rush', 'Burning Dash', 'A burning dash that you can chain up to three times.')
@@ -30,13 +30,13 @@ v('guardian', 'lightning', ['Stormwarden', 'Thunder Aegis', 'Tempest Knight'],
   ['Z:lightning_rod', 'T:magnetron_deployment', 'T:em_pulse', 'E:storm_magic'],
   'epicfight:endurance', ['LSP', 'STA', 'LRES'])
 v('guardian', 'holy', ['Paladin', 'Templar', 'Lightbearer'],
-  ['I:divine_smite', 'Z:holy_shield', 'S:guardian_connection', 'E:guandian_beam_magic', 'Z:brand_holy'],
+  ['I:divine_smite', 'Z:holy_shield', 'E:guandian_beam_magic', 'Z:brand_holy'],
   'efs_iss:breathe_again', ['HSP', 'ARM', 'HEAL'])
 v('guardian', 'warlock', ['Void Knight', 'Oathbreaker', 'Abyssal Bulwark'],
   ['T:eternal_sentinel', 'T:blackout', 'E:spell_calibration', 'N:black_ward'],
   'wom:voodoo_magic', ['ESP', 'MRES', 'GSD'])
 v('guardian', 'necromancer', ['Death Knight', 'Bone Warden', 'Grave Sentinel'],
-  ['Z:bone_guard', 'T:cursed_revenants', 'S:cursed_connection', 'C:umbral_coffin'],
+  ['Z:bone_guard', 'T:cursed_revenants', 'A:summon_shadows', 'C:umbral_coffin'],
   'epicfight:death_harvest', ['BSP', 'ARM', 'SUM'])
 v('guardian', 'druid', ['Thornguard', 'Grove Warden', 'Bramble Knight'],
   ['Z:totem_ward', 'Z:brand_nature', 'T:primordial_steed', 'Z:ent_stride'],
@@ -59,7 +59,7 @@ v('brute', 'lightning', ['Thunderclap', 'Storm Giant', 'Thunderlord'],
   ['I:volt_strike', 'S:lightning_lash', 'Z:brand_lightning', 'Z:thunder_slam'],
   'wom:buster_parade', ['LSP', 'AXE', 'TPS'])
 v('brute', 'holy', ['Zealot', 'Crusader', 'Hammer of Dawn'],
-  ['T:sword_of_the_ancients', 'S:blessed_connection', 'C:pale_lantern', 'Z:war_banner'],
+  ['T:sword_of_the_ancients', 'I:divine_smite', 'C:pale_lantern', 'Z:war_banner'],
   'efs_iss:auto_heal', ['HSP', 'MHP', 'HEAL'])
 v('brute', 'warlock', ['Abomination', 'Void Colossus', 'Forsaken'],
   ['T:the_forgotten_beast', 'R:gravity_ball', 'R:collapsing_stars', 'Z:brand_eldritch'],

@@ -13,7 +13,7 @@ mod('mist_step', 'Mist Step', 'Frost Step', 'Teleport in a burst of sea mist tha
 mod('pirate_crew', 'Pirate Crew', 'Summon Drowned', 'Summon a crew of drowned pirates with swords and pistols.')
 mod('trident_rain', 'Trident Rain', 'Arrow Volley', 'A volley of tridents instead of arrows; they soak and slow.')
 mod('spectral_boat', 'Spectral Boat', 'Summon Horse', 'Summon a ghostly boat that is faster than a normal one.')
-mod('flash_step', 'Flash Step', 'Thunder Step', 'Thunder step that always lands you behind the target you look at.')
+mod('flash_step', 'Flash Step', 'Frost Step', 'A crackling teleport that always lands you behind the target you look at.')
 mod('static_snare', 'Static Snare', 'Electrocute', 'A crackling snare that stuns the target and makes it drop what it holds.')
 mod('storm_steed', 'Storm Steed', 'Summon Horse', 'A horse of lightning that is very fast and shocks what it runs through.')
 mod('radiant_dagger', 'Radiant Dagger', 'Throw', 'Throw a dagger of light that burns undead and marks the target with Glowing.')
@@ -83,7 +83,7 @@ v('holy', 'assassin', ['Inquisitor', 'Witch Hunter', 'Silver Blade'],
   ['Z:radiant_dagger', 'T:nullflare', 'C:black_verse', 'Z:bounty'],
   'epicfight:bonebreaker', ['HSP', 'BSTB', 'ANEG'])
 v('holy', 'thief', ['Pardoner', 'Saintly Thief', 'Robin of the Poor'],
-  ['C:issue_invoice', 'S:blessed_connection', 'Z:holy_water', 'Z:alms'],
+  ['C:issue_invoice', 'E:gloria_barrier', 'Z:holy_water', 'Z:alms'],
   'wom:proximity_exploiter', ['HSP', 'LUCK', 'DROP'])
 v('holy', 'stalker', ['Radiant Archer', 'Sun Hunter', 'Arbiter'],
   ['Z:arrow_holy', 'I:starfall', 'R:star_shower', 'S:evocation_fortitude'],
@@ -107,7 +107,7 @@ v('necromancer', 'assassin', ['Reaper', 'Blood Shade', 'Nightstalker'],
   ['S:blood_cut', 'T:nocturnal_swarm', 'Z:vampire_bite', 'C:umbral_coffin'],
   'cdmoveset:fatalfalsh', ['BSP', 'BSTB', 'LST'])
 v('necromancer', 'thief', ['Grave Robber', 'Body Snatcher', 'Ghoul'],
-  ['Z:grave_rob', 'Z:skeleton_archers', 'C:bone_toll', 'S:cursed_connection'],
+  ['Z:grave_rob', 'Z:skeleton_archers', 'C:bone_toll', 'C:grave_dust'],
   'epicfight:stamina_pillager', ['BSP', 'LUCK', 'FORT'])
 v('necromancer', 'stalker', ['Bone Archer', 'Wraith Hunter', 'Blood Sniper'],
   ['Z:arrow_blood', 'Z:skeleton_archers', 'T:blood_howl', 'S:bloodmark'],

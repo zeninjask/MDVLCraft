@@ -195,26 +195,26 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "warlock__void_eruption": {
-  "title": "Void Eruption",
-  "description": "Unlocks Void Eruption (Level 2) (90 mana, 37.5 s cooldown) on the ability wheel",
-  "extra_description": "Shoots Void Howitzer Projectiles that explode and summon void runes in a radius. This spell can be recast.",
+ "warlock__violent_skreech": {
+  "title": "Paralyzing Skreech",
+  "description": "Unlocks Paralyzing Skreech (Level 3) (10 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Continuously pulsate sound blast to Shred Armor, Damage Nearby enemies and Applying Chilled effect. 2% of damage deal converted into lifesteal.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_void_eruption.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_violent_skreech.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "traveloptics:void_eruption",
-     "level": 2
+     "ability": "traveloptics:violent_skreech",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -523,21 +523,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "warlock__violent_skreech": {
-  "title": "Paralyzing Skreech",
-  "description": "Unlocks Paralyzing Skreech (Level 3) (10 mana, 37.5 s cooldown) on the ability wheel",
-  "extra_description": "Continuously pulsate sound blast to Shred Armor, Damage Nearby enemies and Applying Chilled effect. 2% of damage deal converted into lifesteal.",
+ "warlock__ender_corruption": {
+  "title": "Ender Corruption",
+  "description": "Unlocks Ender Corruption (Level 3) (72 mana, 60 s cooldown) on the ability wheel",
+  "extra_description": "Inflicts Ender Corruption on yourself, granting Ender Spell Power bonus for a long period of time.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_violent_skreech.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_ender_corruption.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "traveloptics:violent_skreech",
+     "ability": "somakespells:ender_corruption",
      "level": 3
     }
    }
@@ -917,26 +917,26 @@
   "size": 1.5,
   "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
  },
- "warlock__ender_corruption": {
-  "title": "Ender Corruption",
-  "description": "Unlocks Ender Corruption (Level 3) (72 mana, 60 s cooldown) on the ability wheel",
-  "extra_description": "Inflicts Ender Corruption on yourself, granting Ender Spell Power bonus for a long period of time.",
+ "warlock__planned_sculk_watcher": {
+  "title": "Summon Sculk Watcher",
+  "description": "Unlocks Summon Sculk Watcher on the ability wheel. Summon a small sculk creature that blinds and sonic-pulses nearby enemies.",
+  "extra_description": "Coming soon: built from Summon Vex; casting it does nothing yet.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_ender_corruption.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_sculk_watcher.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "somakespells:ender_corruption",
-     "level": 3
+     "ability": "mdvlcraft:planned_sculk_watcher",
+     "level": 1
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -1377,26 +1377,26 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "warlock__planned_sculk_watcher": {
-  "title": "Summon Sculk Watcher",
-  "description": "Unlocks Summon Sculk Watcher on the ability wheel. Summon a small sculk creature that blinds and sonic-pulses nearby enemies.",
-  "extra_description": "Coming soon: built from Summon Vex; casting it does nothing yet.",
+ "warlock__counterspell": {
+  "title": "Counterspell",
+  "description": "Unlocks Counterspell (Level 1) (36 mana, 15 s cooldown) on the ability wheel",
+  "extra_description": "Cast to interrupt any targeted magical process, such as a casting creature or a magical projectile.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_sculk_watcher.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_counterspell.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:planned_sculk_watcher",
+     "ability": "irons_spellbooks:counterspell",
      "level": 1
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -1801,26 +1801,24 @@
   },
   "size": 1.5
  },
- "warlock__counterspell": {
-  "title": "Counterspell",
-  "description": "Unlocks Counterspell (Level 1) (36 mana, 15 s cooldown) on the ability wheel",
-  "extra_description": "Cast to interrupt any targeted magical process, such as a casting creature or a magical projectile.",
+ "warlock__magic_sword": {
+  "title": "Magic Blade",
+  "description": "Teaches Magic Blade, an Epic Fight Passive skill: Automatically casts the currently selected spell when a weapon swing ends. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_counterspell.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_magic_sword.png"
    }
   },
   "rewards": [
    {
-    "type": "mdvlcraft:ability",
+    "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "ability": "irons_spellbooks:counterspell",
-     "level": 1
+     "skill": "efs_iss:magic_sword"
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -2255,20 +2253,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "warlock__magic_sword": {
-  "title": "Magic Blade",
-  "description": "Teaches Magic Blade, an Epic Fight Passive skill: Automatically casts the currently selected spell when a weapon swing ends. Equip it in the Combat Skills box of the abilities screen",
+ "warlock__voodoo_magic": {
+  "title": "Voodoo Magic",
+  "description": "Teaches Voodoo Magic, an Epic Fight Identity skill: Losing health restores half as much stamina and losing stamina half as much health; sneak to turn health into stamina; stamina no longer regenerates on its own. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_magic_sword.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_voodoo_magic.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efs_iss:magic_sword"
+     "skill": "wom:voodoo_magic"
     }
    }
   ],
@@ -2713,20 +2711,20 @@
   "size": 1.5,
   "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
  },
- "warlock__voodoo_magic": {
-  "title": "Voodoo Magic",
-  "description": "Teaches Voodoo Magic, an Epic Fight Identity skill: Losing health restores half as much stamina and losing stamina half as much health; sneak to turn health into stamina; stamina no longer regenerates on its own. Equip it in the Combat Skills box of the abilities screen",
+ "warlock__hasty_casting": {
+  "title": "Hasty Casting",
+  "description": "Teaches Hasty Casting, an Epic Fight Mobility skill: Spells take half as long to cast, and much faster movement while casting. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_voodoo_magic.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_hasty_casting.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "wom:voodoo_magic"
+     "skill": "efs_iss:hasty_casting"
     }
    }
   ],
@@ -3234,20 +3232,20 @@
   },
   "size": 1.5
  },
- "warlock__hasty_casting": {
-  "title": "Hasty Casting",
-  "description": "Teaches Hasty Casting, an Epic Fight Mobility skill: Spells take half as long to cast, and much faster movement while casting. Equip it in the Combat Skills box of the abilities screen",
+ "warlock__rapid_chant": {
+  "title": "Rapid Chant",
+  "description": "Teaches Rapid Chant, an Epic Fight Passive skill: Much shorter cast times, and channelled spells last much longer. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_hasty_casting.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_rapid_chant.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efs_iss:hasty_casting"
+     "skill": "efs_iss:rapid_chant"
     }
    }
   ],
@@ -3719,20 +3717,20 @@
   "size": 1.5,
   "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
  },
- "warlock__rapid_chant": {
-  "title": "Rapid Chant",
-  "description": "Teaches Rapid Chant, an Epic Fight Passive skill: Much shorter cast times, and channelled spells last much longer. Equip it in the Combat Skills box of the abilities screen",
+ "warlock__reserve_mana": {
+  "title": "Reserve Mana",
+  "description": "Teaches Reserve Mana, an Epic Fight Passive skill: Refills your mana at once when it drops below 10%. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_rapid_chant.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_reserve_mana.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efs_iss:rapid_chant"
+     "skill": "efs_iss:reserve_mana"
     }
    }
   ],
@@ -4045,21 +4043,21 @@
   },
   "size": 1.5
  },
- "warlock__void_devourer": {
-  "title": "Void Devourer",
-  "description": "Unlocks Void Devourer (Level 1) (180 mana, 90 s cooldown) on the ability wheel",
-  "extra_description": "Creates a Dimensional Rift that pulls everything around it and damages enemies caught in it.",
+ "warlock__gravity_fissure": {
+  "title": "Gravity Fissure",
+  "description": "Unlocks Gravity Fissure (Level 1) (108 mana, 67.5 s cooldown) on the ability wheel",
+  "extra_description": "Split from the air a miniature Black Hole that moves forward in a line, pulling nearby creatures into its gravity well, but dealing no damage.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_void_devourer.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_gravity_fissure.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "traveloptics:void_devourer",
+     "ability": "irons_spellbooks:gravity_fissure",
      "level": 1
     }
    }
@@ -4207,20 +4205,20 @@
   },
   "size": 1.5
  },
- "warlock__reserve_mana": {
-  "title": "Reserve Mana",
-  "description": "Teaches Reserve Mana, an Epic Fight Passive skill: Refills your mana at once when it drops below 10%. Equip it in the Combat Skills box of the abilities screen",
+ "warlock__against_magic": {
+  "title": "Magic Immunity",
+  "description": "Teaches Magic Immunity, an Epic Fight Passive skill: Grants extremely high magic resistance. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_reserve_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_against_magic.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efs_iss:reserve_mana"
+     "skill": "efs_iss:against_magic"
     }
    }
   ],
@@ -4528,26 +4526,26 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "warlock__gravity_fissure": {
-  "title": "Gravity Fissure",
-  "description": "Unlocks Gravity Fissure (Level 1) (108 mana, 67.5 s cooldown) on the ability wheel",
-  "extra_description": "Split from the air a miniature Black Hole that moves forward in a line, pulling nearby creatures into its gravity well, but dealing no damage.",
+ "warlock__orbital_void": {
+  "title": "Orbital Void",
+  "description": "Unlocks Orbital Void (Level 3) (86 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Shoots Abyssal Orb projectiles in a circular pattern around the player, damaging entities. On the initial cast, Abyssal Orbs home in on nearby entities.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_gravity_fissure.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_orbital_void.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "irons_spellbooks:gravity_fissure",
-     "level": 1
+     "ability": "traveloptics:orbital_void",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -4691,36 +4689,6 @@
   },
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
- },
- "warlock__against_magic": {
-  "title": "Magic Immunity",
-  "description": "Teaches Magic Immunity, an Epic Fight Passive skill: Grants extremely high magic resistance. Equip it in the Combat Skills box of the abilities screen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_against_magic.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:epicfight_skill",
-    "data": {
-     "skill": "efs_iss:against_magic"
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
  },
  "warlock__warding_3": {
   "title": "Warding 3",
@@ -5019,21 +4987,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "warlock__orbital_void": {
-  "title": "Orbital Void",
-  "description": "Unlocks Orbital Void (Level 3) (86 mana, 37.5 s cooldown) on the ability wheel",
-  "extra_description": "Shoots Abyssal Orb projectiles in a circular pattern around the player, damaging entities. On the initial cast, Abyssal Orbs home in on nearby entities.",
+ "warlock__abyssal_orbs": {
+  "title": "Abyssal Orbs",
+  "description": "Unlocks Abyssal Orbs (Level 3) (29 mana, 15 s cooldown) on the ability wheel",
+  "extra_description": "Summons several abyssal orbs that fall from the sky and hit enemies with direct impact.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_orbital_void.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_abyssal_orbs.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "traveloptics:orbital_void",
+     "ability": "somakespells:abyssal_orbs",
      "level": 3
     }
    }
@@ -5315,26 +5283,26 @@
   "size": 1.5,
   "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "warlock__abyssal_orbs": {
-  "title": "Abyssal Orbs",
-  "description": "Unlocks Abyssal Orbs (Level 3) (29 mana, 15 s cooldown) on the ability wheel",
-  "extra_description": "Summons several abyssal orbs that fall from the sky and hit enemies with direct impact.",
+ "warlock__end_mayhem": {
+  "title": "End's Mayhem",
+  "description": "Unlocks End's Mayhem (Level 3) (65 mana, 120 s cooldown) on the ability wheel",
+  "extra_description": "This spell allows you to become the ruler of the end while casting it, allowing you to use the full power of the end dimension to kill your target.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_abyssal_orbs.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/alshanex_familiars_end_mayhem.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "somakespells:abyssal_orbs",
+     "ability": "alshanex_familiars:end_mayhem",
      "level": 3
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -5677,22 +5645,22 @@
   "size": 1.5,
   "extra_description": "Mage class bonus (every Mage archetype has this spoke)."
  },
- "warlock__end_mayhem": {
-  "title": "End's Mayhem",
-  "description": "Unlocks End's Mayhem (Level 3) (65 mana, 120 s cooldown) on the ability wheel",
-  "extra_description": "This spell allows you to become the ruler of the end while casting it, allowing you to use the full power of the end dimension to kill your target.",
+ "warlock__void_eruption": {
+  "title": "Void Eruption",
+  "description": "Unlocks Void Eruption (Level 2) (90 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Shoots Void Howitzer Projectiles that explode and summon void runes in a radius. This spell can be recast.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/alshanex_familiars_end_mayhem.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_void_eruption.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "alshanex_familiars:end_mayhem",
-     "level": 3
+     "ability": "traveloptics:void_eruption",
+     "level": 2
     }
    }
   ],

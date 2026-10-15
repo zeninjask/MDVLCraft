@@ -173,7 +173,7 @@ BASE = {
               ['wom:aqua_maneuvre', 'epicfight:adaptive_skin']),
     'lightning': (['I:lightning_bolt', 'I:chain_lightning', 'I:electrocute', 'I:ball_lightning', 'I:lightning_lance', 'I:shockwave',
                    'I:thunderstorm', 'I:charge', 'S:lightning_spark', 'S:lightning_spear', 'S:lightning_strike', 'S:lightning_swarm',
-                   'A:megido', 'S:lightning_field', 'I:thunder_step', 'I:ascension', 'S:lightning_ball', 'S:lightning_dance',
+                   'A:megido', 'S:lightning_field', 'I:ascension', 'S:lightning_ball', 'S:lightning_dance',
                    'Z:storm_hounds'],
                   ['efs_iss:rapid_chant', 'efs_iss:hasty_casting']),
     'holy': (['I:heal', 'I:greater_heal', 'I:healing_circle', 'I:blessing_of_life', 'I:wisp', 'I:guiding_bolt', 'I:sunbeam',
@@ -181,7 +181,7 @@ BASE = {
               'E:prayer_barrier', 'E:health_aura', 'X:time_sand', 'E:resurrection', 'Z:guardian_angel'],
              ['efs_iss:breathe_again', 'efs_iss:auto_heal']),
     'warlock': (['I:eldritch_blast', 'I:sculk_tentacles', 'I:sonic_boom', 'I:black_hole', 'T:psychic_bolt', 'T:shadowed_miasma',
-                 'S:eldritch_gambit', 'I:abyssal_shroud', 'T:reversal', 'I:planar_sight', 'T:void_devourer', 'I:gravity_fissure',
+                 'S:eldritch_gambit', 'I:abyssal_shroud', 'T:reversal', 'I:planar_sight', 'I:gravity_fissure',
                  'T:orbital_void', 'S:abyssal_orbs', 'A:end_mayhem', 'T:void_eruption', 'T:violent_skreech', 'S:ender_corruption',
                  'Z:sculk_watcher'],
                 ['efs_iss:magic_sword', 'wom:voodoo_magic']),
@@ -264,7 +264,7 @@ EXCLUDED = {
                'E:vulcan_device'],
     'familiar': ['E:familia_blizzard', 'E:finale_guide', 'E:familia_imperial_ray', 'E:familia_lightning', 'E:finale_mana_regan',
                  'E:familia_meteor', 'E:familia_research', 'E:finale_stone_barrier', 'E:familia_symphony'],
-    'invalid': ['I:none', 'X:tp', 'E:auto_arrow_magic_circle', 'E:auto_javelin_magic_circle', 'E:auto_lances_magic_circle',
+    'invalid': ['I:thunder_step', 'T:void_devourer', 'S:blessed_connection', 'S:cursed_connection', 'S:guardian_connection', 'I:none', 'X:tp', 'E:auto_arrow_magic_circle', 'E:auto_javelin_magic_circle', 'E:auto_lances_magic_circle',
                 'H:temporal_anchors'],
 }
 VOC = {}

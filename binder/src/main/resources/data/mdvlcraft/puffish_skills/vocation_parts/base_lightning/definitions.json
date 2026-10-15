@@ -228,26 +228,26 @@
   "size": 1.5,
   "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "lightning__ascension": {
-  "title": "Ascension",
-  "description": "Unlocks Ascension (Level 3) (37 mana, 22.5 s cooldown) on the ability wheel",
-  "extra_description": "Cast to strike lightning at your feet and ascend quickly into the air, and gain reduced gravity for a short duration. The lightning bolt deals damage and knocks back creatures struck.",
+ "lightning__lightning_ball": {
+  "title": "Lightning Ball",
+  "description": "Unlocks Lightning Ball (Level 3) (65 mana, 37.5 s cooldown) on the ability wheel",
+  "extra_description": "Throws a lightning ball that deals area damage.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_ascension.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_ball.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "irons_spellbooks:ascension",
+     "ability": "somakespells:lightning_ball",
      "level": 3
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -652,26 +652,26 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__lightning_ball": {
-  "title": "Lightning Ball",
-  "description": "Unlocks Lightning Ball (Level 3) (65 mana, 37.5 s cooldown) on the ability wheel",
-  "extra_description": "Throws a lightning ball that deals area damage.",
+ "lightning__lightning_dance": {
+  "title": "Lightning Dance",
+  "description": "Unlocks Lightning Dance (Level 3) (50 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Launches multiple lightning spears at nearby targets.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_ball.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_dance.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "somakespells:lightning_ball",
+     "ability": "somakespells:lightning_dance",
      "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -1139,26 +1139,26 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__lightning_dance": {
-  "title": "Lightning Dance",
-  "description": "Unlocks Lightning Dance (Level 3) (50 mana, 30 s cooldown) on the ability wheel",
-  "extra_description": "Launches multiple lightning spears at nearby targets.",
+ "lightning__planned_storm_hounds": {
+  "title": "Storm Hounds",
+  "description": "Unlocks Storm Hounds on the ability wheel. Summon wolves wreathed in lightning whose bites chain a spark to a nearby enemy.",
+  "extra_description": "Coming soon: built from Raise Dead; casting it does nothing yet.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_lightning_dance.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_storm_hounds.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "somakespells:lightning_dance",
-     "level": 3
+     "ability": "mdvlcraft:planned_storm_hounds",
+     "level": 1
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -1566,22 +1566,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__planned_storm_hounds": {
-  "title": "Storm Hounds",
-  "description": "Unlocks Storm Hounds on the ability wheel. Summon wolves wreathed in lightning whose bites chain a spark to a nearby enemy.",
-  "extra_description": "Coming soon: built from Raise Dead; casting it does nothing yet.",
+ "lightning__rapid_chant": {
+  "title": "Rapid Chant",
+  "description": "Teaches Rapid Chant, an Epic Fight Passive skill: Much shorter cast times, and channelled spells last much longer. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_storm_hounds.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_rapid_chant.png"
    }
   },
   "rewards": [
    {
-    "type": "mdvlcraft:ability",
+    "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "ability": "mdvlcraft:planned_storm_hounds",
-     "level": 1
+     "skill": "efs_iss:rapid_chant"
     }
    }
   ],
@@ -1960,20 +1958,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__rapid_chant": {
-  "title": "Rapid Chant",
-  "description": "Teaches Rapid Chant, an Epic Fight Passive skill: Much shorter cast times, and channelled spells last much longer. Equip it in the Combat Skills box of the abilities screen",
+ "lightning__hasty_casting": {
+  "title": "Hasty Casting",
+  "description": "Teaches Hasty Casting, an Epic Fight Mobility skill: Spells take half as long to cast, and much faster movement while casting. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_rapid_chant.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_hasty_casting.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efs_iss:rapid_chant"
+     "skill": "efs_iss:hasty_casting"
     }
    }
   ],
@@ -2448,20 +2446,20 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__hasty_casting": {
-  "title": "Hasty Casting",
-  "description": "Teaches Hasty Casting, an Epic Fight Mobility skill: Spells take half as long to cast, and much faster movement while casting. Equip it in the Combat Skills box of the abilities screen",
+ "lightning__reserve_mana": {
+  "title": "Reserve Mana",
+  "description": "Teaches Reserve Mana, an Epic Fight Passive skill: Refills your mana at once when it drops below 10%. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_hasty_casting.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_reserve_mana.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "efs_iss:hasty_casting"
+     "skill": "efs_iss:reserve_mana"
     }
    }
   ],
@@ -2932,36 +2930,6 @@
   },
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
- },
- "lightning__reserve_mana": {
-  "title": "Reserve Mana",
-  "description": "Teaches Reserve Mana, an Epic Fight Passive skill: Refills your mana at once when it drops below 10%. Equip it in the Combat Skills box of the abilities screen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/efs_iss_reserve_mana.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:epicfight_skill",
-    "data": {
-     "skill": "efs_iss:reserve_mana"
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
  },
  "lightning__scholar_3": {
   "title": "Scholar 3",
@@ -5720,26 +5688,26 @@
   "size": 0.75,
   "extra_description": "Twig bonus (every archetype has a few of these)."
  },
- "lightning__thunder_step": {
-  "title": "Thunderstep",
-  "description": "Unlocks Thunderstep (Level 3) (76 mana, 12 s cooldown) on the ability wheel",
-  "extra_description": "Teleport a short distance forward, creating a wake of lightning that damages creatures you teleport through.",
+ "lightning__ascension": {
+  "title": "Ascension",
+  "description": "Unlocks Ascension (Level 3) (37 mana, 22.5 s cooldown) on the ability wheel",
+  "extra_description": "Cast to strike lightning at your feet and ascend quickly into the air, and gain reduced gravity for a short duration. The lightning bolt deals damage and knocks back creatures struck.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_thunder_step.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_ascension.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "irons_spellbooks:thunder_step",
+     "ability": "irons_spellbooks:ascension",
      "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {

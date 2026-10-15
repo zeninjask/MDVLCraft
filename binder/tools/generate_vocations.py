@@ -82,8 +82,8 @@ STAT_ATTR = {
     'FSP': ['irons_spellbooks:fire_spell_power'], 'FRES': ['irons_spellbooks:fire_magic_resist'],
     'CDR': ['irons_spellbooks:cooldown_reduction'], 'ISP': ['irons_spellbooks:ice_spell_power'],
     'IRES': ['irons_spellbooks:ice_magic_resist'], 'MRES': ['puffish_attributes:magic_resistance'],
-    'AQSP': ['traveloptics:aqua_spell_power', 'somakespells:aqua_spell_power'],
-    'AQRS': ['traveloptics:aqua_magic_resist', 'somakespells:aqua_magic_resist'], 'SWIM': ['forge:swim_speed'],
+    # somakespells' aqua attributes are not registered in the pack (only Traveloptics' are)
+    'AQSP': ['traveloptics:aqua_spell_power'], 'AQRS': ['traveloptics:aqua_magic_resist'], 'SWIM': ['forge:swim_speed'],
     'LSP': ['irons_spellbooks:lightning_spell_power'], 'LRES': ['irons_spellbooks:lightning_magic_resist'],
     'MSC': ['irons_spellbooks:casting_movespeed'], 'HSP': ['irons_spellbooks:holy_spell_power'],
     'HRES': ['irons_spellbooks:holy_magic_resist'], 'HEAL': ['puffish_attributes:healing'],
