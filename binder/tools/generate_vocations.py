@@ -617,7 +617,7 @@ def write_lang(index):
         lang[f"screen.mdvlcraft.archetype.{arch}.desc"] = D.ROLE[arch]
     for key, (name, base, desc) in sorted(D.MOD.items()):
         lang[f"ability.mdvlcraft.planned_{key}"] = name
-        lang[f"ability.mdvlcraft.planned_{key}.desc"] = f"{desc} (Coming soon: does nothing yet.)"
+        lang[f"ability.mdvlcraft.planned_{key}.desc"] = desc
     LANG.write_text(json.dumps(lang, indent=2, ensure_ascii=False) + "\n")
 
 

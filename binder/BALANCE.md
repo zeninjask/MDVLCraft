@@ -1,11 +1,13 @@
 # MDVLCraft balance pass (binder 0.7.1, pack 1.9.0)
 
+> **Superseded by vocations (seb-agent, not yet released).** Players now pick two of 18 archetypes on the Archetypes page and get one vocation tree: the first archetype's base on the left, the second's mirrored on the right, the vocation's own skills and bonuses in the centre column. Picking two of the same class no longer halves anything. Base halves keep each class, core and twig spoke total with half the nodes; spells cost 1 point (2 if strong), techniques, Epic Fight skills and planned (Modified) abilities 2, vocation bonus nodes 2. The design is in `binder/tools/vocations/` and the rules and progress in [`../docs/VOCATIONS_IMPLEMENTATION.md`](../docs/VOCATIONS_IMPLEMENTATION.md). The comparison below is of the old 16 archetype trees and is kept as background.
+
 How the 16 archetypes compare, what changed to even them out, and what keeps bosses hard. Exact numbers live in
 [`SKILL_TREES.md`](SKILL_TREES.md) (generated from `tools/generate_skill_trees.py`).
 
 ## Method
 
-- **What a player can have.** Two archetypes (any classes; two of the same class each give half their stat bonuses), 1 point to start and 1 per level with no level cap. Every
+- **What a player can have.** Two archetypes (any classes), 1 point to start and 1 per level with no level cap. Every
   tree costs about 400–500 points, so a whole tree takes a long time to fill. Balance is about what a tree *offers*, at a
   similar price.
 - **What was compared.** For each archetype:
