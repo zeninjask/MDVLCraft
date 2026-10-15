@@ -238,7 +238,7 @@ SHARED_SPELLS = {
     'brute': ['I:fortify'], 'berserker': ['I:haste', 'I:charge'], 'monk': ['I:evasion', 'B:blitz'],
     'samurai': ['B:focus'], 'spirit': ['B:focus'], 'thief': ['I:invisibility', 'I:evasion'],
     'assassin': ['B:phantom_movement', 'T:blink'], 'stalker': ['B:bird_strike', 'W:wind_jump', 'W:tailwind'],
-    'warlock': ['I:counterspell'], 'necromancer': ['I:blood_step'], 'holy': ['I:fortify'], 'druid': ['Z:wolf_pack'],
+    'lightning': ['I:blood_step'], 'warlock': ['I:counterspell'], 'necromancer': ['I:blood_step'], 'holy': ['I:fortify'], 'druid': ['Z:wolf_pack'],
 }
 # Granted to every player by the binder (EpicSkillGrants): Roll and Step are replaced by the Soulslike versions.
 UNIVERSAL = ['efn:efn_dodge', 'efn:efn_step', 'epicfight:guard', 'epicfight:parrying', 'efn:efn_parry']
