@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.1, so the next is 2.0.2.
+   - Every rebuild bumps the patch version. The latest is 2.0.2, so the next is 2.0.3.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -72,36 +72,34 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 - Commit with clear messages. Push the feature branch after each finished piece of work.
 - Report results plainly, including what you didn't verify.
 
-## Current work (paused by the user, 15 Oct 2026)
+## Current work (15 Oct 2026)
 
-The user paused everything; nothing is half-written in the repository and everything is pushed to `seb-agent`. Pick up here.
+Nothing is half-written; everything is pushed to `bane-agent` (branched from `seb-agent`, with `seb-agent`'s 2.0.1 merged in).
 
 ### Where things stand
 
-- **Released:** 2.0.1 is on `main`, built from `seb-agent` with everything below plus Blood Step in the Lightning base (the user asked for the release; the Wukong side of the staff moveset still hadn't been played in game).
-- **In 2.0.1** (on top of 2.0.0, which was built from `seb-agent` up to `169da4a`):
-  - `ba86062`, `c23c9f2`: the Wukong vocation moved to Berserker + Spirit and back; **Monk + Spirit is Wukong** (final). Berserker + Spirit is Kitsune Fury. Side effect of the vocation Epic Fight re-pick passes: Warlock + Assassin / + Stalker / + Wanderer swapped Soul Protection, Ender Step and Ender Obscuris between them; nothing else moved.
-  - `a0a63dd`: **the Wukong staff core**, ported from Epic Fight - Wukong Moveset into the binder (details below).
-  - `0e8e6d6`: **one name per vocation.** The user wants no alternative names anywhere: design files list only the chosen name, `vocations.json` has `name` only, `check.py` asserts one name.
-- **The user's rules for this work** (also in `VOCATIONS_IMPLEMENTATION.md`): one name per vocation; Monk + Spirit = Wukong; only the Wukong vocation gets the staff moveset (anyone else holding the staff gets no Epic Fight moveset); Spirit has Staff & Spear Damage (`mdvlcraft:polearm_damage`: spears, Iron's staves and the Wukong staff, `attribute/AttributeEffects.meleeBonus`) and Phantom Ascent in its base.
+- **Released:** 2.0.2 is on `main` (built from `bane-agent` at the merge `750c251` plus the PDF fix). 2.0.1 (from `seb-agent`) added Blood Step to the Lightning base; 2.0.0 was built from `seb-agent` up to `169da4a`.
+- **In 2.0.2:**
+  - Ruyi Jingu Bang uses the BATEX Sun Wukong staff (`binder/tools/wukong/BATEX_Sun_Wukong.zip`): a plain block model and texture, `RuyiJinguBang` is a plain `SwordItem`, the OptiFine emissive texture is dropped. Trail `begin_pos`/`end_pos` are +-1.35 (the model is 48 px long, centred on the grip, 0.92 scale in hand); the user said to leave this value. Recipe (gold block, blaze rod, netherite ingot) approved by the user.
+  - **Monkey King** (`mdvlcraft:wukong`, `wukong/MonkeyKingSkill`): an Epic Fight identity skill taught by the first node (`voc__0`) of the Monk + Spirit tree (`generate_vocations.py` `ROOT_SKILLS`). `WukongGate` gives the staff its moveset only while it is in the identity slot (read on both sides; Epic Fight syncs equipped skills to tracking players). Equipping or removing it while holding the staff applies at the next item switch.
+  - `skill_parameters/wukong_smash.json` (consumption 60, as Steel Whirlwind): without it Epic Fight never calls `setParams`, max stacks stay 0 and the smash can never be used. Every new weapon innate skill needs a parameter file.
+  - Epic Fight 20.14 skill icons live in a folder per category: `textures/gui/skills/{weapon_innate,dodge,identity}/`.
+  - Hyper Vitality in the Lightning and Monk bases, Blood Step in the Samurai base (no vocation's own skill moved).
+- **Tested in game (single client):** staff model, gate (Monk + Spirit without the identity holds it plain; with it, Wukong stance and weapon skill), idle, walk, run, five-hit combo, dash and jump attacks, charged smash (charge bar, release, 38.6 DPS on the target dummy), all four Wukong dodges, Monkey King listed under Learned: Identity. **Not tested:** a second player watching the Wukong player (two clients don't fit in this container's memory), the trail at +-1.35.
+- **The user's rules for this work** (also in `VOCATIONS_IMPLEMENTATION.md`): one name per vocation; Monk + Spirit = Wukong; the staff moveset belongs to the Monkey King identity; Spirit has Staff & Spear Damage and Phantom Ascent in its base.
 
 ### The Wukong staff (binder package `wukong/`)
 
-- **Why a port:** Epic Fight - Wukong Moveset (CurseForge project 1114622, LGPL, by p1nero; last release `wukong-forge1.20.1-20.2.0.jar`, April 2025) was written for Epic Fight before 20.9. With the pack's Epic Fight 20.14.17 it fails at load (`NoClassDefFoundError: yesman/epicfight/skill/Skill$Builder`); compiling its decompiled source against 20.14.17 gives about 1,180 errors. The user chose to port a smaller core only. The mod itself is **not** in the pack.
-- **What was ported** (the user agreed to leave out stances (thrust/pillar/great sage), spells, armour, staff spin and the focus-point stacks):
-  - `WukongAnimations`: Epic Fight 20.14 animation registry (`AnimationRegistryEvent`, namespace `mdvlcraft`) for idle, walk, run, dash, jump, fall, the five-hit combo (`auto_1`..`auto_5`), the dash attack, the jump attack, the smash charging loop, five charged smashes and the four Wukong dodges. Animation JSONs (unchanged Epic Fight format, with their `data/` trail sub-files) are copied from the mod's jar to `assets/mdvlcraft/animmodels/animations/biped/wukong/`. The smash damage multipliers were cut from the mod's 2.6-15.5x to 1.4-3.0x because there are no focus points.
-  - `WukongSmashSkill`: the staff's innate skill `mdvlcraft:wukong_smash` (hold the weapon-skill key to charge, release to smash; one level per 15 ticks, five levels), modelled on Epic Fight's Steel Whirlwind (`ChargeableSkill`).
-  - `WukongStaffSetup`: registers the item `mdvlcraft:ruyi_jingu_bang` (`RuyiJinguBang`, a GeckoLib item with the mod's model, unbreakable, netherite tier), the skills (`SkillBuildEvent`: `wukong_smash` and the dodge `mdvlcraft:wukong_dodge`, `DodgeSkill` with four directions) and the weapon type `mdvlcraft:wukong_staff` (`WeaponCapabilityPresetRegistryEvent`). The item's capability file is `data/mdvlcraft/capabilities/weapons/ruyi_jingu_bang.json`; its recipe `data/mdvlcraft/recipes/ruyi_jingu_bang.json` is a placeholder the user hasn't approved (gold block, blaze rod, netherite ingot); its trail is `assets/mdvlcraft/item_skins/ruyi_jingu_bang.json`.
-  - `WukongCategories`: the weapon category `WK_STAFF` (registered with `WeaponCategory.ENUM_MANAGER` at mod construction).
-  - `WukongGate` + `mixin/epicfight/LivingEntityPatchHoldingMixin`, `ServerPlayerPatchHeldItemMixin`, `ClientPlayerPatchHeldItemMixin`: for anyone not Monk + Spirit the staff's capability reads as `CapabilityItem.EMPTY` (no combo, innate skill or living motions). Server: `Respec.picked`; client: `ClientArchetypes` (every player's archetypes, so other players animate the same on every screen). Known gap: a player who respecs while holding the staff keeps the old state until they switch items.
-  - The Wukong vocation's own Epic Fight skill is the Wukong Dodge (design `v2_wm.py`, `catalog.json`, `ef_skill_names.json`, `ef_skill_slots.json`; tree icon `icons18/skill/mdvlcraft_wukong_dodge.png` is DQ9's Clump of Cloud via `dq9_icons.py` ABILITIES).
-- **Verified:** it compiles; a server with exactly the pack's mods boots, registers both skills and loads every skill tree; in the client the staff renders with its GeckoLib model, and Tester (Frostwarden, not Wukong) holds it as a plain item, which is the gate working.
-- **Not verified yet (the test stopped here):** Tester was in the Respec screen about to pick Monk then Spirit. Still to check in game: the Wukong idle/run pose with the staff, the five-hit combo, the dash and jump attacks, holding and releasing the weapon-skill key (smash levels), the Wukong Dodge (equip it in the abilities screen's Combat Skills box after unlocking it in the Wukong tree) and that a second player who isn't Wukong sees the Wukong player's animations.
-- **Next request from the user (not started):** swap the staff model for the one in the resource pack the user sent, saved as `binder/tools/wukong/BATEX_Sun_Wukong.zip` ("BATEX Sun Wukong" by Refa Store, an OptiFine CIT pack). Its staff is `assets/minecraft/optifine/cit/staff/refamc_wukong_staff_model.json` (a plain Java block model: 9 elements, `gui_light`, display transforms for every view) with the textures `refamc_wukong_staff_texture.png` and `refamc_wukong_staff_texture_e.png` (the `_e` one is the OptiFine emissive layer; `emissive.properties` sets the suffix). Plan: copy the model to `assets/mdvlcraft/models/item/ruyi_jingu_bang.json` with textures pointing at `mdvlcraft:item/ruyi_jingu_bang` (and use the `_e` texture as the particle or drop it), make `RuyiJinguBang` a plain `SwordItem` (drop `GeoItem`, `initializeClient`, the cache, `geo/item/ruyi_jingu_bang.geo.json` and `animations/item/ruyi_jingu_bang.animation.json`), then check in game that Epic Fight holds it sensibly (the display transforms were made for vanilla sword CIT) and that the trail in `item_skins/ruyi_jingu_bang.json` (`begin_pos`/`end_pos` 2.5/-2.0) still matches the model's length. The pack's armour CIT files are not part of the request.
-- **Then:** update `binder/README.md` (item list and `wukong/` in the source map), rebuild, boot-test, ask the user before releasing 2.0.1.
+- Port of Epic Fight - Wukong Moveset (CurseForge 1114622, LGPL, p1nero; it fails to load on Epic Fight 20.14.17). Ported core only: idle, walk, run, dash, jump, fall, five-hit combo, dash and jump attacks, the charged smash (`WukongSmashSkill`, five levels, 15 ticks each, multipliers 1.4-3.0x) and the four Wukong dodges (`mdvlcraft:wukong_dodge`, the vocation's own Epic Fight skill). Left out: stances, spells, armour, staff spin, focus points. Setup in `WukongStaffSetup`, category `WK_STAFF` in `WukongCategories`, gate in `WukongGate` + `mixin/epicfight/*HeldItemMixin`, `LivingEntityPatchHoldingMixin`.
 
 ### Test environment notes (learned the hard way)
 
+- Maven Central rate-limits this container (429): a user-level Gradle init script (`~/.gradle/init.d/central-mirror.gradle`) points it at Google's mirror. portablemc ignores `HTTPS_PROXY`; launch it through a wrapper that tunnels its `HTTPSConnection` through the proxy, with `SSL_CERT_FILE=/root/.ccr/ca-bundle.crt`.
+- Install `openjdk-17-jdk-headless` (the image has Java 21), `xdotool`, `libopengl0` (AAAParticles' Effekseer needs `libOpenGL.so.0`).
+- Distant Horizons opens a blocking native pop-up during client loading; click its OK (about 510,376 on a 1280x720 display).
+- The client on the software renderer reaches about 10 GB and was OOM-killed twice beside a 4 GB server: use `-Xmx5G`, render distance 4 and leave Falling Leaves out of the test client (its two 16384x8192 atlases).
+- Set `allow-flight=true` on the test server: falling while the server lags gets the player kicked for flying.
+- Test the smash and other hits on MmmMmmMmmMmm's `dummmmmmy:target_dummy` (it shows DPS); `/epicfight skill add <player> <slot> <skill>` and `/epicfight stamina set` help.
 - The test server must have exactly the pack's server mods (compare against `base/server/modrinth.index.json` plus `overrides/mods`). An old test server still had Clash Blade, so 1.9.44-1.9.45 shipped trees that referenced a mod the pack no longer has.
 - The test client's mods must match the server's (JEI on both, no Clash Blade or Kill Cam); otherwise the server drops the client with "mismatched mod channel list".
 - Check that Xvfb is still running before blaming the client: when it dies the client hangs on an early-display error.
