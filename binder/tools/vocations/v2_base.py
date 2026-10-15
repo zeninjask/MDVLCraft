@@ -176,7 +176,7 @@ BASE = {
                    'I:thunderstorm', 'I:charge', 'S:lightning_spark', 'S:lightning_spear', 'S:lightning_strike', 'S:lightning_swarm',
                    'A:megido', 'S:lightning_field', 'I:ascension', 'S:lightning_ball', 'S:lightning_dance',
                    'Z:storm_hounds'],
-                  ['efs_iss:rapid_chant', 'efs_iss:hasty_casting']),
+                  ['efs_iss:rapid_chant', 'efs_iss:hasty_casting', 'epicfight:hypervitality']),
     'holy': (['I:heal', 'I:greater_heal', 'I:healing_circle', 'I:blessing_of_life', 'I:wisp', 'I:guiding_bolt', 'I:sunbeam',
               'I:cleanse', 'I:cloud_of_regeneration', 'S:blessing', 'I:angel_wing', 'S:custodia_caeli', 'E:bless_barrier',
               'E:prayer_barrier', 'E:health_aura', 'X:time_sand', 'E:resurrection', 'Z:guardian_angel'],
