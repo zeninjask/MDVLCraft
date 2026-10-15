@@ -198,7 +198,7 @@ BASE = {
     'spirit': (['M:jade_bullet', 'M:jade_judgement', 'M:nephrite_slash', 'M:bagua_array_circle', 'M:drapes_of_reflection',
                 'M:sword_dance', 'M:punishing_heaven', 'M:underworld_aid', 'M:jiangshi_invoke', 'M:cloud_ride',
                 'S:symmetry_empowerment', 'S:mirror_strike', 'S:desert_wrath', 'M:soul_burst', 'M:soul_catalyst', 'Z:terracotta'],
-               ['dodge_parry_reward:damage_boost1']),
+               ['dodge_parry_reward:damage_boost1', 'epicfight:phantom_ascent']),
     'assassin': (['I:invisibility', 'I:throw', 'T:spectral_blink', 'I:echoing_strikes', 'S:soul_reprisal', 'M:splitting_shuriken',
                   'M:anchoring_kunai', 'W:wind_blade', 'I:blood_step', 'B:surprise_attack', 'I:shadow_slash', 'C:soot_shroud',
                   'I:evasion', 'H:paradox', 'Z:envenom', 'Z:death_mark'],

@@ -146,6 +146,8 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
    - Known nit: after a respec chat shows "You have a new skill point" several times.
 - [x] 9. Docs updated (`binder/BALANCE.md`, `binder/README.md`, `binder/SKILL_TREES.md`, `docs/AGENT_HANDOFF.md`).
 - [x] 10. Released in 1.9.44 at the user's request (client, client-performance and server packs, PDF, README on `main`).
+- [x] 11. 2.0.0: Clash Blade out of every tree (worlds failed to load the trees), Spirit Staff & Spear Damage and Phantom Ascent, Monk + Spirit named Wukong.
+- [ ] 12. After 2.0.0: Jade Monk back for Monk + Spirit, Spirit + Berserker becomes Wukong with the ported Wukong moveset (see `docs/AGENT_HANDOFF.md`).
 
 ## Notes for whoever continues
 
