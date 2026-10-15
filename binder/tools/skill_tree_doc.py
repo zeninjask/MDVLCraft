@@ -513,8 +513,13 @@ def vocation_block(vid, info, pack):
                 rows.append((name, f"{d.get('cost', 0)} pts{cast}", e(text)))
             elif r['type'] == 'mdvlcraft:epicfight_skill':
                 slot = SLOT_NAMES[EF_SLOTS[data['skill']]]
-                rows.append((f"{d['title']} ({slot})", f"{d.get('cost', 0)} pts", e(ef_text(d['description']))))
-    head = (f"<h4>{e(info['name'])} <small>{badge(V.CLASS_OF[a].lower())} {e(D.TITLE[a])} + {badge(V.CLASS_OF[b].lower())} "
+                if any(o['type'] == 'puffish_skills:attribute' for o in d['rewards']):
+                    # taught on top of the centre root's bonus (generate_vocations.ROOT_SKILLS)
+                    taught = EF_NAMES[data['skill']]
+                    rows.append((f"{taught['name']} ({slot})", "with the first node", e(clean(taught['tooltip']))))
+                else:
+                    rows.append((f"{d['title']} ({slot})", f"{d.get('cost', 0)} pts", e(ef_text(d['description']))))
+    head =(f"<h4>{e(info['name'])} <small>{badge(V.CLASS_OF[a].lower())} {e(D.TITLE[a])} + {badge(V.CLASS_OF[b].lower())} "
             f"{e(D.TITLE[b])}</small></h4>")
     body = ''.join(f"<div class='it'><b>{e(n)}</b> <span class='m'>{e(m)}</span> {t}</div>" for n, m, t in rows)
     body += f"<div class='it'><b>Bonuses</b> {e(', '.join(bonuses))} (2 pts each)</div>"
