@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.0 (the user asked for 2.0.0 instead of 1.9.46), so the next is 2.0.1.
+   - Every rebuild bumps the patch version. The latest is 2.0.1, so the next is 2.0.2.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -78,8 +78,8 @@ The user paused everything; nothing is half-written in the repository and everyt
 
 ### Where things stand
 
-- **Released:** 2.0.0 is on `main` (commit `251d881`). It was built from `seb-agent` up to `169da4a`.
-- **On `seb-agent`, not released yet** (goes into 2.0.1, built only when the user asks):
+- **Released:** 2.0.1 is on `main`, built from `seb-agent` with everything below plus Blood Step in the Lightning base (the user asked for the release; the Wukong side of the staff moveset still hadn't been played in game).
+- **In 2.0.1** (on top of 2.0.0, which was built from `seb-agent` up to `169da4a`):
   - `ba86062`, `c23c9f2`: the Wukong vocation moved to Berserker + Spirit and back; **Monk + Spirit is Wukong** (final). Berserker + Spirit is Kitsune Fury. Side effect of the vocation Epic Fight re-pick passes: Warlock + Assassin / + Stalker / + Wanderer swapped Soul Protection, Ender Step and Ender Obscuris between them; nothing else moved.
   - `a0a63dd`: **the Wukong staff core**, ported from Epic Fight - Wukong Moveset into the binder (details below).
   - `0e8e6d6`: **one name per vocation.** The user wants no alternative names anywhere: design files list only the chosen name, `vocations.json` has `name` only, `check.py` asserts one name.
