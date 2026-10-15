@@ -1,0 +1,40 @@
+from v2_base import v, mod
+
+mod('iron_body', 'Iron Body', 'Oakskin', 'Harden your body: large damage reduction and knockback immunity, but you move slower while it lasts.')
+mod('mushin', 'Mushin', 'Focus', 'Focus that also makes any parry in the next 3 s count as a perfect parry.')
+mod('adrenal_surge', 'Adrenal Surge', 'Haste', 'Haste that also gives Strength I; every hit you take while it lasts extends it.')
+mod('thunder_slam', 'Thunder Slam', 'Gravity Stomp', 'Stomp the ground; lightning strikes every enemy the shockwave hits.')
+mod('warcry', 'Warcry', 'Scapegoat', 'A roar that makes every mob nearby target you and gives you Strength I while they do.')
+mod('oni_summon', 'Summon Oni', 'Revenant of Honor', 'Summon a towering spirit oni with a kanabo instead of a samurai.')
+
+# Warrior + Warrior
+v('guardian', 'brute', ['Bastion', 'Ironwall', 'Rampart'],
+  ['E:gloria_barrier', 'H:temporal_wall', 'E:barrier_aura', 'I:fang_ward'],
+  'wom:vengeful_parry', ['MHP', 'ARM', 'KBR'])
+v('guardian', 'samurai', ['Hatamoto', 'Oathblade', 'Shogun\'s Shield'],
+  ['E:magic_blade_enchanting', 'R:glintstone_arc', 'E:cycle_aura', 'Z:mushin'],
+  'efn:precise_parry', ['KAT', 'ATG', 'POP'])
+v('guardian', 'berserker', ['Warlord', 'Vanguard', 'Iron Crusader'],
+  ['I:summon_swords', 'S:sovereign_armory', 'R:carian_phalanx', 'Z:war_banner'],
+  'wom:dopamine', ['ATK', 'ARM', 'GSD'])
+v('guardian', 'monk', ['Temple Guard', 'Iron Monk', 'Shaolin Sentinel'],
+  ['E:magic_skin', 'E:flowing_barrier', 'N:black_mantle', 'H:prepared_cut_back'],
+  'efn:efn_parry', ['STA', 'UNA', 'DRS'])
+v('brute', 'samurai', ['Sohei', 'Benkei', 'Oni Breaker'],
+  ['M:ashigaru_squad', 'S:soul_latch', 'C:bone_toll', 'Z:oni_summon'],
+  'epicfight:parrying', ['SPR', 'KAT', 'MHP'])
+v('brute', 'berserker', ['Warmonger', 'Ravager', 'Juggernaut'],
+  ['T:axe_of_the_doomed', 'Z:blood_frenzy', 'C:margin_pact', 'Z:warcry'],
+  'epicfight:vengeance', ['AXE', 'ATK', 'KBR'])
+v('brute', 'monk', ['Sumo', 'Iron Mountain', 'Ogre Fist'],
+  ['I:gust', 'E:blast_magic', 'Z:iron_body', 'R:rock_sling'],
+  'epicfight:guard', ['UNA', 'MHP', 'KBR'])
+v('samurai', 'berserker', ['Hitokiri', 'Ronin', 'Bloodsworn'],
+  ['B:dismantle', 'B:cleave', 'R:carian_slicer', 'I:heartstop'],
+  'efn:efn_dodge', ['KAT', 'ATK', 'LST'])
+v('samurai', 'monk', ['Kensei', 'Sword Saint', 'Zen Blade'],
+  ['H:borrowed_time', 'H:speedup', 'E:magic_blade_conversion', 'I:slow'],
+  'efn:efn_step', ['KAT', 'DOD', 'RIP'])
+v('berserker', 'monk', ['Brawler', 'Pit Fighter', 'Rampage Fist'],
+  ['W:aeropic', 'C:withering_touch', 'Z:adrenal_surge', 'E:qadal_magic'],
+  'epicfight:catharsis', ['UNA', 'ATK', 'ASPD'])
