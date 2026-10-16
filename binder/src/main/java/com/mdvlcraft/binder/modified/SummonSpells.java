@@ -41,6 +41,7 @@ import net.minecraft.world.entity.animal.horse.Mule;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Snowball;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -357,7 +358,10 @@ public final class SummonSpells {
 
         @Override
         protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
-            this.spawn(level, caster, power, EntityType.WOLF, 2, castData, wolf -> tame(wolf, caster));
+            this.spawn(level, caster, power, EntityType.WOLF, 2, castData, wolf -> {
+                tame(wolf, caster);
+                wolf.setCollarColor(DyeColor.LIGHT_BLUE);
+            });
         }
     }
 
