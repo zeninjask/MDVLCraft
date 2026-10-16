@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.2, so the next is 2.0.3.
+   - Every rebuild bumps the patch version. The latest is 2.0.3, so the next is 2.0.4.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -72,13 +72,22 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 - Commit with clear messages. Push the feature branch after each finished piece of work.
 - Report results plainly, including what you didn't verify.
 
-## Current work (15 Oct 2026)
+## Current work (16 Oct 2026)
 
 Nothing is half-written; everything is pushed to `bane-agent` (branched from `seb-agent`, with `seb-agent`'s 2.0.1 merged in).
 
 ### Where things stand
 
-- **Released:** 2.0.2 is on `main` (built from `bane-agent` at the merge `750c251` plus the PDF fix). 2.0.1 (from `seb-agent`) added Blood Step to the Lightning base; 2.0.0 was built from `seb-agent` up to `169da4a`.
+- **Released:** 2.0.3 is on `main` (`71a4707`, built from `bane-agent` at `08c00f7` plus the PDF wording fix).
+- **In 2.0.3:**
+  - **Modified abilities, batch 1:** the 25 base-tree abilities are real Iron's spells (`binder/.../modified/`, design in `tools/vocations/built.py`, config `data/mdvlcraft/modified_abilities.json`). Summons are vanilla or modded mobs (`Summons`): owner via Iron's `SummonManager`, removed from it when they die (so the next cast summons again), owner known to Parties (`Summons.registerPartiesOwner`), and `isAlliedTo` answers `Summons.allied` for summons (`mixin/parties/EntityAllianceMixin`, priority 100; `IllagerAllianceMixin` for Vindicator, Pillager, Evoker and Illusioner, which override `isAlliedTo` themselves). Terracotta Guard = vindicator with a jade guandao; Guardian Angel = vex.
+  - **Skill trees in Path of Exile style:** every base ability sits in a ring of bonuses (circle = signature, square = class, diamond = core/twig); white outline on ability/skill/spell frames, slate on bonuses. See `VOCATIONS_IMPLEMENTATION.md`.
+  - **Bonus profiles** per archetype (`tools/vocations/profiles.py`): 3 of the class spokes, own 6 major + 3 minor twigs, equal bonus-node count within a class.
+  - The Soulslike dodge (`efn:efn_dodge`/`efn_step`) plays the four Wukong dodges with the Ruyi Jingu Bang (`mixin/efn/EFNDodgeSkillMixin`, client side `EFNDodgeSkillClientMixin` for left/right). `dodge_b1.json` was missing a Root keyframe time and never loaded (the backward Wukong dodge never worked before 2.0.3).
+  - No "Your magic comprehension deepens" chat line from Interlace Spellweaves (`mixin/csw/SpellCapabilityHandlerMixin`).
+  - Parties: no StackOverflow when rendering an invisible party member (`PartiesBufferMixin`).
+- **Next:** Modified abilities batch 2 (the families: brands, arrows, palms, stances, ...), one release per batch; 162 planned abilities remain in `planned_abilities.json`.
+- **Earlier:** 2.0.2 is on `main` (built from `bane-agent` at the merge `750c251` plus the PDF fix). 2.0.1 (from `seb-agent`) added Blood Step to the Lightning base; 2.0.0 was built from `seb-agent` up to `169da4a`.
 - **In 2.0.2:**
   - Ruyi Jingu Bang uses the BATEX Sun Wukong staff (`binder/tools/wukong/BATEX_Sun_Wukong.zip`): a plain block model and texture, `RuyiJinguBang` is a plain `SwordItem`, the OptiFine emissive texture is dropped. Trail `begin_pos`/`end_pos` are +-1.35 (the model is 48 px long, centred on the grip, 0.92 scale in hand); the user said to leave this value. Recipe (gold block, blaze rod, netherite ingot) approved by the user.
   - **Monkey King** (`mdvlcraft:wukong`, `wukong/MonkeyKingSkill`): an Epic Fight identity skill taught by the first node (`voc__0`) of the Monk + Spirit tree (`generate_vocations.py` `ROOT_SKILLS`). `WukongGate` gives the staff its moveset only while it is in the identity slot (read on both sides; Epic Fight syncs equipped skills to tracking players). Equipping or removing it while holding the staff applies at the next item switch.
@@ -103,6 +112,9 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 - The test server must have exactly the pack's server mods (compare against `base/server/modrinth.index.json` plus `overrides/mods`). An old test server still had Clash Blade, so 1.9.44-1.9.45 shipped trees that referenced a mod the pack no longer has.
 - The test client's mods must match the server's (JEI on both, no Clash Blade or Kill Cam); otherwise the server drops the client with "mismatched mod channel list".
 - Check that Xvfb is still running before blaming the client: when it dies the client hangs on an early-display error.
+- Set `max-tick-time=-1` on the test server: a `/reload` can take over a minute and the watchdog kills the server. Avoid `/reload` when you can (put KubeJS debug scripts in before starting).
+- Long casts (1-2 s cast time) are interrupted when the caster is hit, and under server lag 30 ticks take several seconds: kill attackers before casting and wait 8 s. Casting a summon again while its recast is open dismisses instead of summoning.
+- KubeJS can call most Java (`p.getCapability(EpicFightCapabilities.CAPABILITY_ENTITY).orElse(null)`), but not Epic Fight's static helpers or overloaded `isAlliedTo`; for exact answers a temporary binder command printing the checks is quicker.
 - Don't kill processes with `pkill -f <path>` patterns that match your own shell's command line (this killed the shell several times); kill by PID.
 - The test player `Tester` is an operator; `/item replace entity Tester weapon.mainhand with mdvlcraft:ruyi_jingu_bang` puts the staff in hand. Respec: M menu, Respec, Pick New Archetypes, then the two archetypes, then Confirm (the screens open slowly on the software renderer; screenshot between clicks).
 - `binder/tools/vocations/check.py` then `binder/tools/generate_vocations.py` after any design change; compare the vocations' Epic Fight skills before and after (the re-pick passes in `v2_all.py` balance usage counts, so one change can shift others).
