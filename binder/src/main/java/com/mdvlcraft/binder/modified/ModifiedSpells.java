@@ -33,7 +33,9 @@ public final class ModifiedSpells {
         StrikeSpells.CraneLeap::new, StrikeSpells.FlameRush::new, StrikeSpells.WhirlpoolKick::new, StrikeSpells.KunaiRain::new,
         StrikeSpells.JadeArrow::new, StrikeSpells.KiWave::new,
         CloneSpells.MirrorImages::new, CloneSpells.ShadowClone::new, CloneSpells.SpiritStep::new,
-        SummonSpells.Oni::new, SummonSpells.SteppeHorse::new, UtilitySpells.Lotus::new, UtilitySpells.TrailRations::new
+        SummonSpells.Oni::new, SummonSpells.SteppeHorse::new, UtilitySpells.Lotus::new, UtilitySpells.TrailRations::new,
+        // the Lightning base, and Wukong's Shadow Clone
+        StrikeSpells.ThunderStep::new, CloneSpells.BodyOutsideOfBody::new
         ));
         PalmSpells.all().forEach(palm -> all.add(() -> palm));
         Arrays.stream(StanceElement.values()).filter(e -> e.form != null).forEach(e -> all.add(() -> new StanceForms.Form(e)));

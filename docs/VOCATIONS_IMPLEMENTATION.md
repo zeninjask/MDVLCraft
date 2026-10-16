@@ -28,6 +28,9 @@ continue from the first unticked step in "Progress".
 - **Respec**: you no longer swap one archetype. A respec picks **both** archetypes again (any two, the same pair too); the new
   vocation tab starts empty at **three quarters** of the old level (`Respec.keptLevel`) and every point is spent again
   (`Respec.respec`, `RespecPacket(first, second)`, `client/RespecScreen` steps CHOOSE -> FIRST -> SECOND -> CONFIRM).
+- **Reset Skills** (menu door `reset_skills`, 2.0.6): keeps the vocation and its level and refunds every point spent on
+  it, with nothing lost (`Respec.reset`: Puffish `Category.resetSkills`, then `AbilityActions.dropUngranted`;
+  `ResetSkillsPacket`, network protocol 12; `client/RespecScreen.reset`, step RESET; the client opens the tab afterwards).
 
 ## The design
 
@@ -52,7 +55,9 @@ continue from the first unticked step in "Progress".
 
 - The Ruyi Jingu Bang's moveset belongs to the Monkey King identity skill (`mdvlcraft:wukong`), which the first node of the
   Monk + Spirit tree teaches; anyone without it equipped holds the staff as a plain item. Lightning and Monk bases teach
-  Hyper Vitality, the Samurai base Blood Step.
+  Hyper Vitality, the Samurai base Blood Step (removed again in 2.0.6, when the Lightning base gained the Modified Thunder Step).
+  In 2.0.6 Wukong's Grave Sigil became Body Outside of Body (`CloneSpells.BodyOutsideOfBody`, the Shadow Clone Jutsu effect
+  under its own name); Shinobi keeps Shadow Clone Jutsu.
 - Later requests: Recall, Portal and Frost Step taken out of the Wanderer base; the skill-tree PDF is in one section per
   archetype (its base page, then every vocation it is part of, so each vocation appears twice).
 

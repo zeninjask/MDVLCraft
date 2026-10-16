@@ -71,7 +71,11 @@ public final class CloneSpells {
     /** Shadow Clone Jutsu: two copies for 20 s that fight beside the caster with the caster's own weapon. */
     public static class ShadowClone extends ModifiedSpell {
         public ShadowClone() {
-            super("shadow_clone", 0);
+            this("shadow_clone");
+        }
+
+        protected ShadowClone(String key) {
+            super(key, 0);
         }
 
         @Override
@@ -129,6 +133,13 @@ public final class CloneSpells {
                 server.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, from.x, from.y + 1.0, from.z, 20, 0.3, 0.6, 0.3, 0.02);
             }
             super.onCast(level, spellLevel, caster, source, data);
+        }
+    }
+
+    /** Body Outside of Body: Wukong's Shadow Clone Jutsu (a plucked hair blown into two fighting copies), the same effect. */
+    public static class BodyOutsideOfBody extends ShadowClone {
+        public BodyOutsideOfBody() {
+            super("body_outside_body");
         }
     }
 }

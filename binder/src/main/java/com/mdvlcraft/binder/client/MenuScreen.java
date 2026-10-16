@@ -46,6 +46,7 @@ public class MenuScreen extends Screen {
                 doors.add(new MenuScreen.Door("abilities", () -> MenuNav.open(this, AbilityScreen::new), true));
                 doors.add(new MenuScreen.Door("skills", () -> MenuNav.openWith(this, () -> SkillsClientMod.getInstance().openScreen(Optional.empty())), true));
                 doors.add(new MenuScreen.Door("respec", () -> mc.setScreen(new RespecScreen(this)), true));
+                doors.add(new MenuScreen.Door("reset_skills", () -> mc.setScreen(RespecScreen.reset(this)), true));
                 doors.add(
                     new MenuScreen.Door(
                         "advancements", () -> MenuNav.open(this, () -> new AdvancementsScreen(mc.player.connection.getAdvancements())), mc.player != null

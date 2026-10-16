@@ -83,6 +83,44 @@ public final class StrikeSpells {
         }
     }
 
+    /**
+     * Thunder Step: a teleport up to 14 blocks where the caster looks, in a flash of lightning; everything within 3 blocks
+     * of where it leaves and where it lands is shocked and staggered.
+     */
+    public static class ThunderStep extends ModifiedSpell {
+        public ThunderStep() {
+            super("thunder_step", 6);
+        }
+
+        @Override
+        public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
+            if (level instanceof ServerLevel server) {
+                Vec3 from = caster.position();
+                Vec3 eye = caster.getEyePosition();
+                Vec3 hit = level.clip(new ClipContext(eye, eye.add(caster.getLookAngle().scale(14.0)), ClipContext.Block.COLLIDER,
+                    ClipContext.Fluid.NONE, caster)).getLocation();
+                Vec3 dest = Utils.moveToRelativeGroundLevel(level, hit.subtract(caster.getLookAngle().scale(0.6)), 3);
+                Utils.handleSpellTeleport(this, caster, dest);
+                float damage = this.getSpellPower(spellLevel, caster);
+                for (Vec3 at : List.of(from, caster.position())) {
+                    for (LivingEntity enemy : Targets.enemies(caster, at, 3.0)) {
+                        DamageSources.applyDamage(enemy, damage, this.getDamageSource(caster));
+                        MartialSpells.stun(enemy, StunType.SHORT, 0.5F);
+                    }
+                    server.sendParticles(ParticleTypes.ELECTRIC_SPARK, at.x, at.y + 0.8, at.z, 40, 1.2, 0.8, 1.2, 0.15);
+                }
+                SummonSpells.spark(server, from.add(0.0, 1.0, 0.0), caster.position().add(0.0, 1.0, 0.0));
+                LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(server);
+                if (bolt != null) {
+                    bolt.moveTo(caster.position());
+                    bolt.setVisualOnly(true);
+                    server.addFreshEntity(bolt);
+                }
+            }
+            super.onCast(level, spellLevel, caster, source, data);
+        }
+    }
+
     /** Flame Rush: Burning Dash that can be cast twice more within 4 s before its cooldown starts. */
     public static class FlameRush extends ModifiedSpell {
         public FlameRush() {

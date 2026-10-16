@@ -84,4 +84,8 @@ BUILT = {
     'nomad_mount': spell(EVOCATION, 40, 120, 'long', 20),
     'lotus': spell(HOLY, 50, 45, 'long', 20),
     'trail_rations': spell(NATURE, 30, 90, 'long', 20),
+    # the Lightning base (in place of Iron's Thunder Step, which this pack doesn't have)
+    'thunder_step': spell(LIGHTNING, 30, 12),
+    # Wukong's Shadow Clone Jutsu (in place of Grave Sigil)
+    'body_outside_body': spell(ENDER, 60, 60),
 }

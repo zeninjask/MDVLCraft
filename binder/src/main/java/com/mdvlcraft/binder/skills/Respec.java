@@ -18,7 +18,7 @@ import net.puffish.skillsmod.api.Skill.State;
  * The 18 archetypes and the player's vocation. Two archetypes picked on the Archetypes page (ArchetypeTabs) make a
  * vocation: one skill tab, mdvlcraft:voc_<a>_<b> (skills/VocationParts), holding both archetypes' base trees and the
  * pair's own skills. A respec picks both archetypes again and starts the new vocation tab empty at three quarters of the
- * old level.
+ * old level. A reset keeps the vocation and its level and gives back every point spent on it.
  */
 public final class Respec {
     /** In the design's order (tools/vocations/v2_base.ORDER); a vocation tab is named with the earlier one first. */
@@ -68,6 +68,20 @@ public final class Respec {
         player.displayClientMessage(Component.translatable("message.mdvlcraft.respec.changed", oldName, vocationName(player), level), false);
         Jingles.send(player, Jingle.JOB_CHANGE);
         newTab.openScreen(player);
+    }
+
+    /** Unlearns every skill of the player's vocation tab and refunds all its points; the archetypes and level stay (the client opens the tab). */
+    public static void reset(ServerPlayer player) {
+        Optional<Category> tab = vocation(player);
+        if (tab.isEmpty()) {
+            return;
+        }
+
+        tab.get().resetSkills(player);
+        AbilityActions.dropUngranted(player);
+        player.displayClientMessage(
+            Component.translatable("message.mdvlcraft.respec.reset", vocationName(player), tab.get().getPointsLeft(player)), false
+        );
     }
 
     public static boolean isPicked(ServerPlayer player, String archetype) {

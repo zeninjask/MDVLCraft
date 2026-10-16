@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.client;
 import com.mdvlcraft.binder.ability.AbilityIcons;
 import com.mdvlcraft.binder.network.ArchetypePickPacket;
 import com.mdvlcraft.binder.network.BinderNetwork;
+import com.mdvlcraft.binder.network.ResetSkillsPacket;
 import com.mdvlcraft.binder.network.RespecPacket;
 import com.mdvlcraft.binder.skills.Respec;
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import net.puffish.skillsmod.client.SkillsClientMod;
 import net.puffish.skillsmod.client.data.ClientCategoryData;
 
 public class RespecScreen extends Screen {
@@ -46,6 +48,13 @@ public class RespecScreen extends Screen {
         return screen;
     }
 
+    /** The menu's Reset Skills: unlearn every skill of the vocation and spend all its points again, nothing lost. */
+    public static RespecScreen reset(Screen parent) {
+        RespecScreen screen = new RespecScreen(parent);
+        screen.step = RespecScreen.Step.RESET;
+        return screen;
+    }
+
     @Override
     public boolean isPauseScreen() {
         return false;
@@ -74,6 +83,16 @@ public class RespecScreen extends Screen {
                     this.fromLevel = level;
                     this.go(RespecScreen.Step.FIRST);
                 }, ready));
+                break;
+            case RESET:
+                boolean vocation = picked.size() == 2;
+                text = vocation
+                    ? Component.translatable("screen.mdvlcraft.respec.desc.reset", ClientVocation.name(), level)
+                    : Component.translatable("screen.mdvlcraft.respec.desc.none");
+                choices.add(new RespecScreen.Choice(Component.translatable("screen.mdvlcraft.respec.reset"), null, () -> {
+                    BinderNetwork.sendToServer(new ResetSkillsPacket());
+                    SkillsClientMod.getInstance().openScreen(ClientVocation.tab().map(tab -> tab.getConfig().id()));
+                }, vocation));
                 break;
             case FIRST:
             case SECOND:
@@ -147,6 +166,7 @@ public class RespecScreen extends Screen {
     private void back() {
         switch (this.step) {
             case CHOOSE:
+            case RESET:
                 Minecraft.getInstance().setScreen(this.parent);
                 break;
             case FIRST:
@@ -226,6 +246,7 @@ public class RespecScreen extends Screen {
         CHOOSE,
         FIRST,
         SECOND,
-        CONFIRM;
+        CONFIRM,
+        RESET;
     }
 }

@@ -7,6 +7,7 @@ mod('ballista', 'Siege Ballista', 'Arrow Volley', 'Place a ballista turret that 
 mod('harpoon', 'Harpoon', 'Ceraunus Grasp', 'Fire a harpoon from your crossbow that drags the target to you.')
 mod('kunai_rain', 'Kunai Rain', 'Splitting Shuriken', 'In the air, throw a fan of five kunai where you look.')
 mod('shadow_clone', 'Shadow Clone Jutsu', 'Summon Spell Clone', 'Summon two clones of yourself that fight with your held weapon instead of casting spells.')
+mod('body_outside_body', 'Body Outside of Body', 'Summon Spell Clone', 'Pluck a hair and blow on it: two clones of yourself that fight with your held weapon instead of casting spells.')
 mod('nomad_mount', 'Steppe Horse', 'Summon Horse', 'An armoured warhorse that is faster and can carry a rider into battle.')
 mod('camel', 'Summon Camel', 'Summon Horse', 'Summon a camel that two players can ride.')
 mod('hunter_trap', 'Bear Trap', 'Pinning Stake', 'Place a hidden bear trap that roots and bleeds the first enemy to step on it.')

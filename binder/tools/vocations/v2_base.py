@@ -92,6 +92,7 @@ mod('pickpocket', 'Pickpocket', 'Telekinesis', 'Grip a creature and pull one ite
 mod('smoke_bomb', 'Smoke Bomb', 'Firecracker', 'A burst of smoke that blinds everything in it and gives you a few seconds of invisibility.')
 mod('hunting_hawk', 'Hunting Hawk', 'Bird Strike', 'A hawk companion that circles you, marks the nearest enemy with Glowing and dives at it.')
 mod('campfire', 'Campfire', 'Healing Circle', 'Light a campfire that heals and warms allies around it and cooks food dropped in it.')
+mod('thunder_step', 'Thunder Step', 'Blood Step', 'Teleport up to 14 blocks where you look in a flash of lightning; enemies near where you leave and where you land are shocked and staggered.')
 mod('pack_mule', 'Pack Mule', 'Summon Horse', 'Summon a spectral mule with a chest that follows you.')
 # elemental reskins
 for el, nm, dsc in [('fire', 'Flamebrand', 'fire'), ('ice', 'Frostbrand', 'freezing'), ('water', 'Tidebrand', 'water (Wet)'),
@@ -151,7 +152,7 @@ BASE = {
               ['wom:buster_parade', 'wom:bull_charge', 'wom:avatar_of_might', 'epicfightx:combat_mastery_ii', 'wom:punishment_kick']),
     'samurai': (['B:stance', 'B:blitz', 'B:myriad_blades', 'W:iron_slash', 'E:element_slash', 'E:magic_blade_enchant_slash',
                  'E:echanted_burst', 'E:union_sword', 'E:limit_break', 'E:cast_barrier', 'S:soulfall_judgment', 'M:calamity_cut',
-                 'E:magic_blade_absorb', 'I:blood_step', 'Z:iaido'],
+                 'E:magic_blade_absorb', 'Z:iaido'],
                 ['cdmoveset:fatalfalsh', 'efn:parry_master', 'wom:dancing_blade', 'wom:manipulator', 'epicfight:swordmaster',
                  'epicfight:technician']),
     'berserker': (['N:demonic_assimilation', 'S:spectral_rondo', 'S:render_rush', 'M:dragon_glide', 'E:dual_bringer', 'C:ruin_slash',
@@ -241,7 +242,7 @@ SHARED_SPELLS = {
     'brute': ['I:fortify'], 'berserker': ['I:haste', 'I:charge'], 'monk': ['I:evasion', 'B:blitz'],
     'samurai': ['B:focus'], 'spirit': ['B:focus'], 'thief': ['I:invisibility', 'I:evasion'],
     'assassin': ['B:phantom_movement', 'T:blink'], 'stalker': ['B:bird_strike', 'W:wind_jump', 'W:tailwind'],
-    'lightning': ['I:blood_step'], 'warlock': ['I:counterspell'], 'necromancer': ['I:blood_step'], 'holy': ['I:fortify'], 'druid': ['Z:wolf_pack'],
+    'lightning': ['I:blood_step', 'Z:thunder_step'], 'warlock': ['I:counterspell'], 'necromancer': ['I:blood_step'], 'holy': ['I:fortify'], 'druid': ['Z:wolf_pack'],
 }
 # Granted to every player by the binder (EpicSkillGrants): Roll and Step are replaced by the Soulslike versions.
 UNIVERSAL = ['efn:efn_dodge', 'efn:efn_step', 'epicfight:guard', 'epicfight:parrying', 'efn:efn_parry']

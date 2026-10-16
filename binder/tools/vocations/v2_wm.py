@@ -158,5 +158,5 @@ v('monk', 'druid', ['Druidic Fist'],
   ['Z:palm_nature', 'I:slow', 'C:crow_feast', 'Z:iron_body'],
   'wom:spider_techniques', ['UNA', 'NSP', 'NREG'])
 v('monk', 'spirit', ['Wukong'],
-  ['Z:palm_spirit', 'S:procession_of_souls', 'S:grave_sigil', 'Z:spirit_step'],
+  ['Z:palm_spirit', 'S:procession_of_souls', 'Z:body_outside_body', 'Z:spirit_step'],
   'mdvlcraft:wukong_dodge', ['UNA', 'SYM', 'DOD'])
