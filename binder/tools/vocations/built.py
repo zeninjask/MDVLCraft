@@ -130,5 +130,5 @@ BUILT = {
     'bloodlust': spell(BLOOD, 30, 45),
     'blood_frenzy': spell(BLOOD, 35, 60),
     # not in any tree yet: the Seraphim transformation (seraph/SeraphForm)
-    'seraph_embodiment': spell(HOLY, 80, 120),
+    'seraph_embodiment': spell(HOLY, 80, 240),
 }
