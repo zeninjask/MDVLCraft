@@ -45,7 +45,19 @@ public final class ModifiedSpells {
         DaggerSpells.Immolate::new, DaggerSpells.VampireBite::new,
         BuffSpells.Bloodlust::new, BuffSpells.BloodFrenzy::new,
         // not in any tree yet
-        SeraphEmbodiment::new
+        SeraphEmbodiment::new,
+        // batch 4: summons, mounts and field abilities
+        UndeadSummons.SkeletonArchers::new, UndeadSummons.BoneGuard::new, UndeadSummons.BurningDead::new, UndeadSummons.Reanimate::new,
+        UndeadSummons.Strays::new, UndeadSummons.DrownedLegion::new, UndeadSummons.PirateCrew::new, UndeadSummons.DrownedHorde::new,
+        UndeadSummons.SoulReaper::new,
+        BeastSummons.FrostWolves::new, BeastSummons.SpiderBrood::new, BeastSummons.ShadowPack::new, BeastSummons.VoidHound::new,
+        BeastSummons.SpiritWolf::new, BeastSummons.SpiritTiger::new, BeastSummons.Bear::new, BeastSummons.FallenAngel::new,
+        BeastSummons.FrostAngel::new, BeastSummons.SnowSpirits::new, BeastSummons.Thunderbird::new, BeastSummons.Magpies::new,
+        BeastSummons.StormCrows::new,
+        MountSpells.BoneSteed::new, MountSpells.Camel::new, MountSpells.StormSteed::new, MountSpells.VoidStrider::new,
+        MountSpells.SpectralBoat::new,
+        FieldSpells.CorpseFlower::new, FieldSpells.Ballista::new, FieldSpells.Fence::new, FieldSpells.JadeSerpent::new,
+        FieldSpells.RiverDragon::new
         ));
         BrandSpells.all().forEach(brand -> all.add(() -> brand));
         ArrowSpells.all().forEach(arrow -> all.add(() -> arrow));

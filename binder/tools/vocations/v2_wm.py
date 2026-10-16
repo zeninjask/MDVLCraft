@@ -4,7 +4,7 @@ mod('flame_bulwark', 'Pyre Bulwark', 'Wall of Fire', 'Raise a wall of fire that 
 mod('ice_wall', 'Glacial Rampart', 'Wall of Fire', 'Raise a wall of ice instead of fire: it blocks movement and projectiles, then shatters into frost.')
 mod('drowned_legion', 'Drowned Legion', 'Summon Drowned', 'Summon three drowned that throw tridents.')
 mod('holy_avenger', 'Avenging Wings', 'Angel Wing', 'Angel wings that also make every melee hit call down a small sunbeam on the target.')
-mod('soul_reaper', 'Soul Reaper', 'Blood Slash', 'A wide blood slash; each enemy it kills raises a weakened skeleton for you.')
+mod('soul_reaper', 'Soul Reaper', 'Blood Slash', 'A wide blood slash; each enemy it kills rises as a weakened skeleton that fights for you.')
 mod('ent_stride', 'Ent Stride', 'Oakskin', 'Bark skin that also roots you in place: you cannot be knocked back and you regenerate.')
 mod('ember_fists', 'Ember Fists', 'Fire Fist', 'Your unarmed hits set enemies on fire for a while.')
 mod('cold_meditation', 'Cold Meditation', 'Ice Block', 'Meditate inside an ice block: invulnerable, and restores mana and stamina while inside.')
