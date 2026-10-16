@@ -168,18 +168,17 @@ public final class BodySpells {
         }
     }
 
-    /** Jiangshi Fists: a moving caster on the ground hops instead of walking. */
+    /** Jiangshi Fists: a moving caster on the ground hops instead of walking (on its own client, which moves it). */
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent event) {
         Player player = event.player;
-        if (event.phase != Phase.END || player.level().isClientSide() || !player.hasEffect(BinderEffects.JIANGSHI.get())
+        if (event.phase != Phase.END || !player.isLocalPlayer() || !player.hasEffect(BinderEffects.JIANGSHI.get())
             || !player.onGround() || player.tickCount % 8 != 0) {
             return;
         }
         Vec3 motion = player.getDeltaMovement();
         if (motion.horizontalDistanceSqr() > 0.0025) {
             player.setDeltaMovement(motion.x, 0.36, motion.z);
-            player.hurtMarked = true;
         }
     }
 }

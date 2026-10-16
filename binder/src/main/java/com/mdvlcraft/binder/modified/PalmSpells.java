@@ -43,11 +43,18 @@ public final class PalmSpells {
     public static class Palm extends ModifiedSpell {
         private final ParticleOptions particle;
         private final Effect effect;
+        private final boolean knockback;
 
         public Palm(String key, ParticleOptions particle, Effect effect) {
+            this(key, particle, effect, true);
+        }
+
+        /** `knockback` false: the hit doesn't knock back, so an effect that pulls isn't undone by it. */
+        public Palm(String key, ParticleOptions particle, Effect effect, boolean knockback) {
             super(key, 6);
             this.particle = particle;
             this.effect = effect;
+            this.knockback = knockback;
         }
 
         @Override
@@ -81,6 +88,9 @@ public final class PalmSpells {
                 float damage = this.damage(caster, spellLevel);
                 for (LivingEntity target : this.targets(caster)) {
                     float before = target.getHealth();
+                    if (!this.knockback) {
+                        DamageSources.ignoreNextKnockback(target);
+                    }
                     boolean hit = DamageSources.applyDamage(target, damage, this.getDamageSource(caster));
                     float dealt = Math.max(0.0F, before - target.getHealth());
                     if (hit || dealt > 0.0F) {
@@ -153,7 +163,7 @@ public final class PalmSpells {
                 Vec3 toward = caster.position().add(caster.getLookAngle().multiply(1.0, 0.0, 1.0).normalize().scale(1.5)).subtract(target.position());
                 target.setDeltaMovement(toward.scale(0.35).add(0.0, 0.15, 0.0));
                 target.hurtMarked = true;
-            }),
+            }, false),
             new Palm("palm_nature", ParticleTypes.HAPPY_VILLAGER,
                 (caster, target, damage) -> target.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1), caster)),
             new Palm("palm_spirit", ParticleTypes.GLOW,
