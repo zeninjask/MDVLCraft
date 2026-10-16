@@ -92,6 +92,7 @@ mod('pickpocket', 'Pickpocket', 'Telekinesis', 'Grip a creature and pull one ite
 mod('smoke_bomb', 'Smoke Bomb', 'Firecracker', 'A burst of smoke that blinds everything in it and gives you a few seconds of invisibility.')
 mod('hunting_hawk', 'Hunting Hawk', 'Bird Strike', 'A hawk companion that circles you, marks the nearest enemy with Glowing and dives at it.')
 mod('campfire', 'Campfire', 'Healing Circle', 'Light a campfire that heals and warms allies around it and cooks food dropped in it.')
+mod('seraph_embodiment', 'Seraph Embodiment', 'Angel Wing', 'Become a seraph of many eyes and wings for up to 30 s (cast again to leave): fly slowly, cast only spells, with 20% more spell power, faster mana regeneration and Regeneration. You cannot attack, use items or other abilities, and only your eye can be hit.')
 mod('thunder_step', 'Thunder Step', 'Blood Step', 'Teleport up to 14 blocks where you look in a flash of lightning; enemies near where you leave and where you land are shocked and staggered.')
 mod('pack_mule', 'Pack Mule', 'Summon Horse', 'Summon a spectral mule with a chest that follows you.')
 # elemental reskins

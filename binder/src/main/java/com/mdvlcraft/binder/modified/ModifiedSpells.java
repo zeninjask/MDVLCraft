@@ -43,7 +43,9 @@ public final class ModifiedSpells {
         DaggerSpells.FlashStep::new, DaggerSpells.MistStep::new, DaggerSpells.FlameStep::new,
         DaggerSpells::iceDagger, DaggerSpells::radiantDagger, DaggerSpells::voidShiv,
         DaggerSpells.Immolate::new, DaggerSpells.VampireBite::new,
-        BuffSpells.Bloodlust::new, BuffSpells.BloodFrenzy::new
+        BuffSpells.Bloodlust::new, BuffSpells.BloodFrenzy::new,
+        // not in any tree yet
+        SeraphEmbodiment::new
         ));
         BrandSpells.all().forEach(brand -> all.add(() -> brand));
         ArrowSpells.all().forEach(arrow -> all.add(() -> arrow));

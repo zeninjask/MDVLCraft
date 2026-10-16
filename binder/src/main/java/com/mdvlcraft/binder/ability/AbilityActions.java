@@ -2,6 +2,7 @@ package com.mdvlcraft.binder.ability;
 
 import com.mdvlcraft.binder.content.DemonicAssimilationDismiss;
 import com.mdvlcraft.binder.doppelganger.Doppelgangers;
+import com.mdvlcraft.binder.seraph.SeraphForm;
 import com.tiago.antimagic.spell.DemonicAssimilationSpell;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
@@ -42,6 +43,8 @@ public final class AbilityActions {
                             Component.translatable("ability.mdvlcraft.not_granted", ability.get().displayName()).withStyle(ChatFormatting.RED)
                         )
                     );
+            } else if (SeraphForm.in(player) && !(ability.get() instanceof SpellAbility)) {
+                SeraphForm.refuse(player);
             } else if (ability.get() instanceof SpellAbility spellAbility) {
                 castSpell(player, spellAbility.spell(), level);
             } else if (ability.get() instanceof Technique technique) {
