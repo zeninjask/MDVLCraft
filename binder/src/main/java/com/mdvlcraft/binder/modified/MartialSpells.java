@@ -76,6 +76,13 @@ public final class MartialSpells {
         }
     }
 
+    static void faceTowards(LivingEntity entity, LivingEntity other) {
+        float yaw = (float)(Math.atan2(other.getZ() - entity.getZ(), other.getX() - entity.getX()) * (180.0 / Math.PI)) - 90.0F;
+        entity.setYRot(yaw);
+        entity.setYHeadRot(yaw);
+        entity.setYBodyRot(yaw);
+    }
+
     static void root(LivingEntity target, int ticks) {
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ticks, 6, false, true));
         target.addEffect(new MobEffectInstance(MobEffects.JUMP, ticks, 128, false, false));
@@ -141,6 +148,7 @@ public final class MartialSpells {
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             LivingEntity target = Targets.looked(caster, 4.0F);
             if (target != null) {
+                faceTowards(target, caster);   // Epic Fight's stun throws the target backwards from where it faces
                 target.hurt(melee(caster), attack(caster) * 0.6F + 4.0F);
                 stun(target, StunType.LONG, 1.5F);
                 Vec3 away = target.position().subtract(caster.position()).normalize();

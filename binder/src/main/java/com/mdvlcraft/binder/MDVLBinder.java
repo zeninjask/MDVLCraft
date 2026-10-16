@@ -3,6 +3,7 @@ package com.mdvlcraft.binder;
 import com.mdvlcraft.binder.ability.AbilityReward;
 import com.mdvlcraft.binder.client.ModifiedClientSetup;
 import com.mdvlcraft.binder.modified.ModifiedSpells;
+import com.mdvlcraft.binder.modified.Summons;
 import com.mdvlcraft.binder.attribute.BinderAttributes;
 import com.mdvlcraft.binder.client.ClientAbilitySetup;
 import com.mdvlcraft.binder.client.ClientContentSetup;
@@ -80,6 +81,7 @@ public final class MDVLBinder {
             Jingles.register();
             ClassTitles.register();
             LanternBelt.register();
+            Summons.registerPartiesOwner();
         });
     }
 }

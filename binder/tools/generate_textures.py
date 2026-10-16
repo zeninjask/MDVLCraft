@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Draws the skill screen textures: the Dragon Quest IX window and tabs (the same bevelled frame as client/DqGui),
-rounded node frames with white outlines (one set for every tree) and the dark blue canvas tile behind the trees. The
+rounded node frames (white outlines on skill, ability and spell nodes, slate on bonuses; one set for every tree) and the dark blue canvas tile behind the trees. The
 Samurai's Stance icons are Dragon Quest IX orbs written by tools/dq9_icons.py.
 
 The window and tabs keep the geometry of the vanilla advancement textures, because Pufferfish's Skills slices them the
@@ -37,7 +37,11 @@ CHARCOAL = (49, 49, 49)
 DQ_CANVAS = (8, 14, 30)
 # kind: (texture size, box size, border width, inner ring)
 KINDS = {"twig": (20, 14, 1, False), "task": (40, 28, 1, False), "goal": (40, 30, 1, True),
-         "challenge": (52, 36, 1, False), "root": (40, 34, 2, False)}
+         "challenge": (52, 36, 2, False), "root": (40, 34, 2, False)}
+# Nodes that grant a skill, ability or spell (challenge) and the vocation centre (root) are outlined in white; bonus
+# nodes in slate, a little lighter once unlocked.
+OUTLINED = ("challenge", "root")
+BONUS_EDGE = (112, 120, 138)
 
 
 def mix(a, b, t):
@@ -110,11 +114,12 @@ def tabs():
 def frames():
     for kind, (size, box, line, ring) in KINDS.items():
         for state in ("locked", "available", "affordable", "unlocked", "excluded"):
+            outline = WHITE if kind in OUTLINED else BONUS_EDGE
             fill, edge = {
-                "locked": (LOCKED_FILL, WHITE),
-                "available": (AVAILABLE_FILL, WHITE),
-                "affordable": (AVAILABLE_FILL, WHITE),
-                "unlocked": (mix(LOCKED_FILL, WHITE, 0.30), WHITE),
+                "locked": (LOCKED_FILL, outline),
+                "available": (AVAILABLE_FILL, outline),
+                "affordable": (AVAILABLE_FILL, outline),
+                "unlocked": (mix(LOCKED_FILL, WHITE, 0.30), outline if kind in OUTLINED else mix(BONUS_EDGE, WHITE, 0.45)),
                 "excluded": (EXCLUDED_FILL, EXCLUDED_LINE),
             }[state]
             im = Image.new("RGBA", (size, size), (0, 0, 0, 0))

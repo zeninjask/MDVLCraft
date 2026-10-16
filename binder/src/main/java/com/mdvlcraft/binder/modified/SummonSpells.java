@@ -8,6 +8,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonManager;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
+import io.redspace.ironsspellbooks.entity.mobs.goals.GenericFollowOwnerGoal;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
@@ -29,18 +30,20 @@ import net.minecraft.world.entity.Entity.RemovalReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LandOnOwnersShoulderGoal;
-import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Wolf;
-import net.minecraft.world.entity.animal.allay.Allay;
 import net.minecraft.world.entity.animal.horse.Mule;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Snowball;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
@@ -199,7 +202,12 @@ public final class SummonSpells {
             return;
         }
         switch (Summons.kind(mob)) {
-            case "guardian_angel" -> mob.goalSelector.addGoal(0, new PulseGoal(mob, 60, SummonSpells::angelHeal));
+            case "guardian_angel" -> {   // a vex that heals instead of attacking
+                mob.goalSelector.removeAllGoals(goal -> true);
+                mob.targetSelector.removeAllGoals(goal -> true);
+                mob.goalSelector.addGoal(0, new PulseGoal(mob, 60, SummonSpells::angelHeal));
+                mob.goalSelector.addGoal(1, new GenericFollowOwnerGoal((PathfinderMob)mob, () -> Summons.owner(mob), 1.2, 4.0F, 2.0F, true, 24.0F));
+            }
             case "sculk_watcher" -> mob.goalSelector.addGoal(0, new PulseGoal(mob, 80, SummonSpells::sculkPulse));
             case "hunting_hawk" -> {
                 mob.goalSelector.removeAllGoals(goal -> goal instanceof LandOnOwnersShoulderGoal);
@@ -307,14 +315,6 @@ public final class SummonSpells {
         }
     }
 
-    private static EntityType<?> type(String id) {
-        EntityType<?> type = ForgeRegistries.ENTITY_TYPES.getValue(ResourceLocation.parse(id));
-        if (type == null) {
-            throw new IllegalStateException("Entity " + id + " is not registered");
-        }
-        return type;
-    }
-
     public static class BlazeSpirits extends SummonSpell {
         public BlazeSpirits() {
             super("blaze_spirits", 4);
@@ -386,10 +386,7 @@ public final class SummonSpells {
 
         @Override
         protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
-            this.spawn(level, caster, power, EntityType.ALLAY, 1, castData, (Allay allay) -> {
-                if (caster instanceof Player player) {
-                    allay.getBrain().setMemory(MemoryModuleType.LIKED_PLAYER, player.getUUID());
-                }
+            this.spawn(level, caster, power, EntityType.VEX, 1, castData, vex -> {   // the pack removes allays
             });
         }
     }
@@ -417,15 +414,21 @@ public final class SummonSpells {
         }
     }
 
+    /** A vindicator with Magic from the East's Jade Guandao (its Spirit Ashigaru does not fight for an outside summoner). */
     public static class Terracotta extends SummonSpell {
         public Terracotta() {
             super("terracotta", 4);
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
-            this.spawn(level, caster, power, (EntityType<Mob>)type("iss_magicfromtheeast:spirit_ashigaru"), 1, castData, mob -> {
+            Item guandao = ForgeRegistries.ITEMS.getValue(ResourceLocation.parse("iss_magicfromtheeast:jade_guandao"));
+            if (guandao == null || guandao == Items.AIR) {
+                throw new IllegalStateException("Item iss_magicfromtheeast:jade_guandao is not registered");
+            }
+            this.spawn(level, caster, power, EntityType.VINDICATOR, 1, castData, guard -> {
+                guard.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(guandao));
+                guard.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
             });
         }
     }
