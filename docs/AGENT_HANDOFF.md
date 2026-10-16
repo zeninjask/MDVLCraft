@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.7, so the next is 2.0.8.
+   - Every rebuild bumps the patch version. The latest is 2.0.8, so the next is 2.0.9.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -78,7 +78,16 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
-- **Released:** 2.0.7 is on `main` (`f7a893c`, built from `bane-agent` at `e0ba5fc`).
+- **Released:** 2.0.8 is on `main` (`ce5fecf`, built from `bane-agent` at `572459a`).
+- **In 2.0.8, Modified abilities batch 4** (32, all tested in game):
+  - Undead summons (`modified/UndeadSummons`): Skeleton Archers, Bone Guard, Burning Dead (fire burst on death), Reanimate, Strays, Drowned Legion, Pirate Crew, Drowned Horde, and Soul Reaper (a slash that raises skeletons from its kills).
+  - Beast summons (`modified/BeastSummons`): Frost Wolves, Spider Brood, Shadow Pack, Void Hound, Spirit Wolf, Spirit Tiger, Bear, Fallen Angel, Frost Seraph, Snow Spirits, Thunderbird, Magpies and Storm Crows.
+  - Mounts (`modified/MountSpells`): Bone Steed, Camel, Storm Steed (shocks what it runs past), Void Strider (blinks 4 blocks every 2 s) and Spectral Boat (about twice a boat's speed, `client/SpectralBoatClient`).
+  - Field abilities (`modified/FieldSpells`): Corpse Flower, Ballista, Fence (a trader), Jade Serpent and River Dragon.
+  - Lessons from batch 4:
+    - A drowned only attacks on land at night, so the drowned summons get a `MeleeAttackGoal`.
+    - The rider's client moves a ridden mount before it ticks on the server, so its `xo`/`zo` already equal its position. Mount pulses compare against where the mount was at the last pulse.
+    - A server teleport of a ridden mount is undone by the rider's next move packet. The Void Strider blink is made on the rider's client (`network/VehicleBlinkPacket`; network protocol 14).
 - **In 2.0.7:**
   - Modified abilities batch 3, all 34 tested in game:
     - brands, elemental arrows, skins and shields;
@@ -120,12 +129,15 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
   - The Soulslike dodge (`efn:efn_dodge`/`efn_step`) plays the four Wukong dodges with the Ruyi Jingu Bang (`mixin/efn/EFNDodgeSkillMixin`, client side `EFNDodgeSkillClientMixin` for left/right). `dodge_b1.json` was missing a Root keyframe time and never loaded (the backward Wukong dodge never worked before 2.0.3).
   - No "Your magic comprehension deepens" chat line from Interlace Spellweaves (`mixin/csw/SpellCapabilityHandlerMixin`).
   - Parties: no StackOverflow when rendering an invisible party member (`PartiesBufferMixin`).
-- **Next:** Modified abilities batch 3, one release per batch. The user asked for the Samurai and Monk vocations first (done in 2.0.5); 125 planned abilities remain in `planned_abilities.json`.
+- **Next:** Modified abilities batch 5, one release per batch. About 59 planned abilities remain in `planned_abilities.json` (volleys, bolts, walls, traps, zones, utility, and the forms such as Lich Form, Holy Avenger and Phoenix Wings).
 - **Test tips for casting by command (`cast <player> <spell>`):**
   - Casts need stamina above 0: run `epicfight stamina set <player> 106` first.
   - The command ignores cooldowns. A cast that doesn't take sometimes needs a second `cast`.
   - Long casts break on hits.
   - Read results with `data get entity`.
+  - A summon spell's second cast dismisses its summons. Between tests run `clearRecasts player <player>` and then `clearCooldowns`, in that order: ending a recast starts the cooldown.
+  - Test on a target dummy (`dummmmmmy:target_dummy`) where you can. A husk hurts the test player even with NoAI, and a mod adds about 12 max health to summoned mobs.
+  - A console `tp <entity> ~ ~ ~` sends the entity to world spawn, and any `tp` of a rider dismounts it.
 - **Earlier:** 2.0.2 is on `main` (built from `bane-agent` at the merge `750c251` plus the PDF fix). 2.0.1 (from `seb-agent`) added Blood Step to the Lightning base; 2.0.0 was built from `seb-agent` up to `169da4a`.
 - **In 2.0.2:**
   - Ruyi Jingu Bang uses the BATEX Sun Wukong staff (`binder/tools/wukong/BATEX_Sun_Wukong.zip`): a plain block model and texture, `RuyiJinguBang` is a plain `SwordItem`, the OptiFine emissive texture is dropped. Trail `begin_pos`/`end_pos` are +-1.35 (the model is 48 px long, centred on the grip, 0.92 scale in hand); the user said to leave this value. Recipe (gold block, blaze rod, netherite ingot) approved by the user.
