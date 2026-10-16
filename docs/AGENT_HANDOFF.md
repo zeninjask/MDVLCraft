@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.5, so the next is 2.0.6.
+   - Every rebuild bumps the patch version. The latest is 2.0.6, so the next is 2.0.7.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -78,7 +78,15 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
-- **Released:** 2.0.5 is on `main` (`b883a40`, built from `bane-agent` at `31d1ea9`). 2.0.4 (`2ec9847`) gave Storm Hounds a charged-creeper energy swirl (`client/StormHoundLayer`) and light blue collars.
+- **Released:** 2.0.6 is on `main` (`e87c02b`, built from `bane-agent` at `00486bb`).
+- **In 2.0.6:**
+  - Thunder Step (`StrikeSpells.ThunderStep`, Modified, Lightning base). Iron's Thunder Step isn't in this pack.
+  - Blood Step is out of the Samurai base.
+  - Reset Skills door in the MDVLCraft menu: full refund, same vocation and level (`Respec.reset`; network protocol 12).
+  - Wukong's Grave Sigil became Body Outside of Body (the Shadow Clone effect); Shinobi keeps Shadow Clone Jutsu.
+  - Tested in game: Thunder Step (14-block teleport, both ends hit), and Reset Skills (11 points back at Level 10).
+  - Not tested: Body Outside of Body (it is Shadow Clone's class under another key), and the skill tab opening on the client after a reset.
+- **Earlier:** 2.0.5 (`b883a40`, from `bane-agent` at `31d1ea9`). 2.0.4 (`2ec9847`) gave Storm Hounds a charged-creeper energy swirl (`client/StormHoundLayer`) and light blue collars.
 - **In 2.0.5, Modified abilities batch 2:** the 37 Samurai and Monk vocation abilities (62 built in all).
   - Nine stance forms (`StanceElement` EMBER..JADE, `modified/StanceForms`): cast to enter; the stance key cycles only through forms the player has; each form adds an effect to katana melee hits.
   - Ten palms (`modified/PalmSpells`): a 5-block cone needing empty hands, gloves or a fist weapon; Pilgrim's Palm hits the looked-at target only.
