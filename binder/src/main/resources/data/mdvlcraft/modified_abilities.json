@@ -8,10 +8,64 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "arrow_blood": {
+  "name": "Bone Arrow",
+  "description": "A charged arrow of bone shards that make the target bleed.",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "arrow_eldritch": {
+  "name": "Void Arrow",
+  "description": "A charged arrow of eldritch energy, pulling enemies in.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "arrow_holy": {
+  "name": "Radiant Arrow",
+  "description": "A charged arrow of holy light that marks the target for 8 s: your other arrows home in on it and deal 50% more.",
+  "school": "irons_spellbooks:holy",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "arrow_ice": {
+  "name": "Frost Arrow",
+  "description": "A charged arrow of ice, freezing the target.",
+  "school": "irons_spellbooks:ice",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "arrow_lightning": {
+  "name": "Storm Arrow",
+  "description": "A charged arrow of lightning, chaining to one more target.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "long",
+  "cast_time": 20
+ },
  "arrow_spirit": {
   "name": "Jade Arrow",
   "description": "A charged arrow of jade that splits into shards.",
   "school": "iss_magicfromtheeast:spirit",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "arrow_water": {
+  "name": "Tide Arrow",
+  "description": "A charged arrow of water, soaking and slowing.",
+  "school": "traveloptics:aqua",
   "mana": 30,
   "cooldown": 12,
   "cast": "long",
@@ -26,12 +80,111 @@
   "cast": "long",
   "cast_time": 30
  },
+ "blood_frenzy": {
+  "name": "Blood Frenzy",
+  "description": "Each kill for 15 s heals you and extends the frenzy.",
+  "school": "irons_spellbooks:blood",
+  "mana": 35,
+  "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "bloodlust": {
+  "name": "Bloodlust",
+  "description": "Each hit you land with dual weapons gives a stack of life steal (up to 5).",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "body_outside_body": {
   "name": "Body Outside of Body",
   "description": "Pluck a hair and blow on it: two clones of yourself that fight with your held weapon instead of casting spells.",
   "school": "irons_spellbooks:ender",
   "mana": 60,
   "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_blood": {
+  "name": "Bloodbrand",
+  "description": "For 20 s your weapon hits deal extra blood damage and make foes bleed. One brand at a time.",
+  "school": "irons_spellbooks:blood",
+  "mana": 25,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_eldritch": {
+  "name": "Voidbrand",
+  "description": "For 20 s your weapon hits deal extra eldritch damage and weaken. One brand at a time.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 25,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_fire": {
+  "name": "Flamebrand",
+  "description": "For 20 s your weapon hits deal extra fire damage and set foes alight. One brand at a time.",
+  "school": "irons_spellbooks:fire",
+  "mana": 25,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_holy": {
+  "name": "Sanctified Edge",
+  "description": "For 20 s your weapon hits deal extra holy damage, double to the undead. One brand at a time.",
+  "school": "irons_spellbooks:holy",
+  "mana": 25,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_ice": {
+  "name": "Frostbrand",
+  "description": "For 20 s your weapon hits deal extra freezing damage and slow. One brand at a time.",
+  "school": "irons_spellbooks:ice",
+  "mana": 25,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_lightning": {
+  "name": "Stormbrand",
+  "description": "For 20 s your weapon hits deal extra lightning damage and stagger. One brand at a time.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 25,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_nature": {
+  "name": "Thornbrand",
+  "description": "For 20 s your weapon hits deal extra nature damage and poison. One brand at a time.",
+  "school": "irons_spellbooks:nature",
+  "mana": 25,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_spirit": {
+  "name": "Jadebrand",
+  "description": "For 20 s your weapon hits deal extra symmetry damage and shatter armour. One brand at a time.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 25,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brand_water": {
+  "name": "Tidebrand",
+  "description": "For 20 s your weapon hits deal extra water damage and soak (Wet). One brand at a time.",
+  "school": "traveloptics:aqua",
+  "mana": 25,
+  "cooldown": 40,
   "cast": "instant",
   "cast_time": 0
  },
@@ -80,6 +233,24 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "ember_skin": {
+  "name": "Emberskin",
+  "description": "Burning skin: damage reduction, and melee attackers are set alight.",
+  "school": "irons_spellbooks:fire",
+  "mana": 30,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "ent_stride": {
+  "name": "Ent Stride",
+  "description": "Bark skin that also roots you in place: you cannot be knocked back and you regenerate.",
+  "school": "irons_spellbooks:nature",
+  "mana": 35,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "envenom": {
   "name": "Envenom",
   "description": "Coat your blade: hits poison the target for a while.",
@@ -98,6 +269,42 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "flame_step": {
+  "name": "Flicker Flame",
+  "description": "Teleport in a burst of flame, leaving a patch of fire where you stood.",
+  "school": "irons_spellbooks:fire",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "flash_step": {
+  "name": "Flash Step",
+  "description": "A crackling teleport that always lands you behind the target you look at.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "frost_armor": {
+  "name": "Frost Armour",
+  "description": "Icy skin: damage reduction, and melee attackers are slowed.",
+  "school": "irons_spellbooks:ice",
+  "mana": 30,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "frost_charge": {
+  "name": "Glacial Charge",
+  "description": "Launch forward on a trail of ice, freezing everything you pass through.",
+  "school": "irons_spellbooks:ice",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "guardian_angel": {
   "name": "Summon Guardian Angel",
   "description": "Summon an angel (a reskinned vex) that heals you and allies instead of attacking.",
@@ -106,6 +313,15 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 30
+ },
+ "holy_shield": {
+  "name": "Aegis of Light",
+  "description": "A shield of light that blocks projectiles and heals allies standing behind it.",
+  "school": "irons_spellbooks:holy",
+  "mana": 40,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
  },
  "hunting_hawk": {
   "name": "Hunting Hawk",
@@ -125,11 +341,38 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "ice_dagger": {
+  "name": "Ice Dagger",
+  "description": "Throw a dagger of ice; it deals triple damage from behind and freezes.",
+  "school": "irons_spellbooks:ice",
+  "mana": 20,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "immolate": {
+  "name": "Immolate",
+  "description": "A scorch that deals triple damage when it hits a target from behind.",
+  "school": "irons_spellbooks:fire",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "iron_body": {
   "name": "Iron Body",
   "description": "Harden your body: large damage reduction and knockback immunity, but you move slower while it lasts.",
   "school": "irons_spellbooks:nature",
   "mana": 40,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "jade_skin": {
+  "name": "Jade Skin",
+  "description": "Jade skin: damage reduction, and melee attackers take a little damage back.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 30,
   "cooldown": 45,
   "cast": "instant",
   "cast_time": 0
@@ -185,6 +428,15 @@
   "school": "irons_spellbooks:ender",
   "mana": 40,
   "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "mist_step": {
+  "name": "Mist Step",
+  "description": "Teleport in a burst of sea mist that blinds enemies around where you left.",
+  "school": "traveloptics:aqua",
+  "mana": 25,
+  "cooldown": 10,
   "cast": "instant",
   "cast_time": 0
  },
@@ -323,6 +575,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "radiant_dagger": {
+  "name": "Radiant Dagger",
+  "description": "Throw a dagger of light that burns undead and marks the target with Glowing.",
+  "school": "irons_spellbooks:holy",
+  "mana": 20,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "rally": {
   "name": "Rallying Banner",
   "description": "Plant a banner that gives allies around it Resistance I and slow regeneration.",
@@ -347,6 +608,15 @@
   "school": "irons_spellbooks:ender",
   "mana": 60,
   "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "shadow_guard": {
+  "name": "Shadow Guard",
+  "description": "A shield of shadow that, when it breaks, turns you invisible for 3 s.",
+  "school": "irons_spellbooks:ender",
+  "mana": 30,
+  "cooldown": 30,
   "cast": "instant",
   "cast_time": 0
  },
@@ -503,10 +773,28 @@
   "cast": "long",
   "cast_time": 30
  },
+ "thunder_charge": {
+  "name": "Thunder Charge",
+  "description": "Launch forward in a crackle of lightning, shocking everything you pass through.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "thunder_step": {
   "name": "Thunder Step",
   "description": "Teleport up to 14 blocks where you look in a flash of lightning; enemies near where you leave and where you land are shocked and staggered.",
   "school": "irons_spellbooks:lightning",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "tide_charge": {
+  "name": "Riptide Charge",
+  "description": "Launch forward on a surge of water, sweeping enemies aside.",
+  "school": "traveloptics:aqua",
   "mana": 30,
   "cooldown": 12,
   "cast": "instant",
@@ -545,6 +833,24 @@
   "school": "irons_spellbooks:evocation",
   "mana": 20,
   "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "vampire_bite": {
+  "name": "Vampire Bite",
+  "description": "A bite from behind that drains three times as much health.",
+  "school": "irons_spellbooks:blood",
+  "mana": 25,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "void_shiv": {
+  "name": "Void Shiv",
+  "description": "Throw a dagger of void that teleports you to where it lands.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 25,
+  "cooldown": 12,
   "cast": "instant",
   "cast_time": 0
  },

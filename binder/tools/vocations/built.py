@@ -88,4 +88,45 @@ BUILT = {
     'thunder_step': spell(LIGHTNING, 30, 12),
     # Wukong's Shadow Clone Jutsu (in place of Grave Sigil)
     'body_outside_body': spell(ENDER, 60, 60),
+    # batch 3
+    # brands (modified/BrandSpells): 20 s of extra elemental damage on weapon hits
+    'brand_fire': spell(FIRE, 25, 40),
+    'brand_ice': spell(ICE, 25, 40),
+    'brand_water': spell(AQUA, 25, 40),
+    'brand_lightning': spell(LIGHTNING, 25, 40),
+    'brand_holy': spell(HOLY, 25, 40),
+    'brand_eldritch': spell(ELDRITCH, 25, 40),
+    'brand_nature': spell(NATURE, 25, 40),
+    'brand_spirit': spell(SYMMETRY, 25, 40),
+    'brand_blood': spell(BLOOD, 25, 40),
+    # elemental arrows (modified/ArrowSpells)
+    'arrow_ice': spell(ICE, 30, 12, 'long', 20),
+    'arrow_lightning': spell(LIGHTNING, 30, 12, 'long', 20),
+    'arrow_holy': spell(HOLY, 30, 12, 'long', 20),
+    'arrow_eldritch': spell(ELDRITCH, 30, 12, 'long', 20),
+    'arrow_water': spell(AQUA, 30, 12, 'long', 20),
+    'arrow_blood': spell(BLOOD, 30, 12, 'long', 20),
+    # skins and shields (modified/SkinSpells)
+    'ember_skin': spell(FIRE, 30, 45),
+    'frost_armor': spell(ICE, 30, 45),
+    'jade_skin': spell(SYMMETRY, 30, 45),
+    'ent_stride': spell(NATURE, 35, 45),
+    'shadow_guard': spell(ENDER, 30, 30),
+    'holy_shield': spell(HOLY, 40, 30),
+    # charges (modified/ChargeSpells)
+    'frost_charge': spell(ICE, 30, 12),
+    'thunder_charge': spell(LIGHTNING, 30, 12),
+    'tide_charge': spell(AQUA, 30, 12),
+    # steps, daggers and strikes from behind (modified/DaggerSpells)
+    'flash_step': spell(LIGHTNING, 25, 10),
+    'mist_step': spell(AQUA, 25, 10),
+    'flame_step': spell(FIRE, 25, 10),
+    'ice_dagger': spell(ICE, 20, 8),
+    'radiant_dagger': spell(HOLY, 20, 8),
+    'void_shiv': spell(ELDRITCH, 25, 12),
+    'immolate': spell(FIRE, 25, 10),
+    'vampire_bite': spell(BLOOD, 25, 12),
+    # blood buffs (modified/BuffSpells)
+    'bloodlust': spell(BLOOD, 30, 45),
+    'blood_frenzy': spell(BLOOD, 35, 60),
 }

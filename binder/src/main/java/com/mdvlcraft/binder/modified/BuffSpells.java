@@ -18,6 +18,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.entity.living.LivingDamageEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -61,13 +62,66 @@ public final class BuffSpells {
             event.setAmount(event.getAmount() * 1.3F);
             restoreStamina(attacker, 0.05F);
         }
+        MobEffectInstance bloodlust = attacker.getEffect(BinderEffects.BLOODLUST.get());
+        if (bloodlust != null && MartialSpells.TwinFang.offhandDamage(attacker) > 0.0F && bloodlust.getAmplifier() < 5) {
+            attacker.addEffect(new MobEffectInstance(BinderEffects.BLOODLUST.get(), bloodlust.getDuration(), bloodlust.getAmplifier() + 1));
+        }
+    }
+
+    /** Blood Frenzy: a kill heals 15% of the killer's health and adds 3 s (up to 30 s). */
+    @SubscribeEvent
+    public static void onDeath(LivingDeathEvent event) {
+        if (event.getSource().getEntity() instanceof LivingEntity killer) {
+            MobEffectInstance frenzy = killer.getEffect(BinderEffects.BLOOD_FRENZY.get());
+            if (frenzy != null) {
+                killer.heal(killer.getMaxHealth() * 0.15F);
+                killer.addEffect(new MobEffectInstance(BinderEffects.BLOOD_FRENZY.get(), Math.min(frenzy.getDuration() + 60, 600), 0));
+            }
+        }
     }
 
     @SubscribeEvent
     public static void onDamage(LivingDamageEvent event) {
-        if (event.getSource().getEntity() instanceof LivingEntity attacker && event.getSource().getDirectEntity() == attacker
-            && attacker.hasEffect(BinderEffects.WAR_FRENZY.get())) {
+        if (!(event.getSource().getEntity() instanceof LivingEntity attacker) || event.getSource().getDirectEntity() != attacker) {
+            return;
+        }
+        if (attacker.hasEffect(BinderEffects.WAR_FRENZY.get())) {
             attacker.heal(event.getAmount() * 0.2F);
+        }
+        MobEffectInstance bloodlust = attacker.getEffect(BinderEffects.BLOODLUST.get());
+        if (bloodlust != null) {
+            attacker.heal(event.getAmount() * 0.04F * bloodlust.getAmplifier());
+        }
+    }
+
+    /** Bloodlust: for 20 s each melee hit with a weapon in both hands adds a stack (up to 5) of 4% life steal. */
+    public static class Bloodlust extends ModifiedSpell {
+        public Bloodlust() {
+            super("bloodlust", 0);
+        }
+
+        @Override
+        public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
+            caster.addEffect(new MobEffectInstance(BinderEffects.BLOODLUST.get(), 400, 0));
+            level.playSound(null, caster.blockPosition(), SoundEvents.WITHER_AMBIENT, SoundSource.PLAYERS, 0.5F, 1.4F);
+            super.onCast(level, spellLevel, caster, source, data);
+        }
+    }
+
+    /** Blood Frenzy: 15 s of 10% more attack damage; each kill heals 15% of max health and adds 3 s (up to 30 s). */
+    public static class BloodFrenzy extends ModifiedSpell {
+        public BloodFrenzy() {
+            super("blood_frenzy", 0);
+        }
+
+        @Override
+        public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
+            caster.addEffect(new MobEffectInstance(BinderEffects.BLOOD_FRENZY.get(), 300, 0));
+            if (level instanceof ServerLevel server) {
+                server.sendParticles(ParticleTypes.DAMAGE_INDICATOR, caster.getX(), caster.getY() + 1.0, caster.getZ(), 20, 0.4, 0.6, 0.4, 0.1);
+            }
+            level.playSound(null, caster.blockPosition(), SoundEvents.RAVAGER_ROAR, SoundSource.PLAYERS, 0.6F, 1.3F);
+            super.onCast(level, spellLevel, caster, source, data);
         }
     }
 

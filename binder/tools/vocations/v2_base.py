@@ -95,12 +95,14 @@ mod('campfire', 'Campfire', 'Healing Circle', 'Light a campfire that heals and w
 mod('thunder_step', 'Thunder Step', 'Blood Step', 'Teleport up to 14 blocks where you look in a flash of lightning; enemies near where you leave and where you land are shocked and staggered.')
 mod('pack_mule', 'Pack Mule', 'Summon Horse', 'Summon a spectral mule with a chest that follows you.')
 # elemental reskins
-for el, nm, dsc in [('fire', 'Flamebrand', 'fire'), ('ice', 'Frostbrand', 'freezing'), ('water', 'Tidebrand', 'water (Wet)'),
-                    ('lightning', 'Stormbrand', 'lightning'), ('holy', 'Sanctified Edge', 'holy'), ('eldritch', 'Voidbrand', 'eldritch'),
-                    ('nature', 'Thornbrand', 'nature (poison)'), ('spirit', 'Jadebrand', 'symmetry'), ('blood', 'Bloodbrand', 'blood (bleed)')]:
-    mod(f'brand_{el}', nm, 'Blood Cut', f'Your weapon hits deal extra {dsc} damage for a while.')
+for el, nm, dsc in [('fire', 'Flamebrand', 'fire damage and set foes alight'), ('ice', 'Frostbrand', 'freezing damage and slow'),
+                    ('water', 'Tidebrand', 'water damage and soak (Wet)'), ('lightning', 'Stormbrand', 'lightning damage and stagger'),
+                    ('holy', 'Sanctified Edge', 'holy damage, double to the undead'), ('eldritch', 'Voidbrand', 'eldritch damage and weaken'),
+                    ('nature', 'Thornbrand', 'nature damage and poison'), ('spirit', 'Jadebrand', 'symmetry damage and shatter armour'),
+                    ('blood', 'Bloodbrand', 'blood damage and make foes bleed')]:
+    mod(f'brand_{el}', nm, 'Blood Cut', f'For 20 s your weapon hits deal extra {dsc}. One brand at a time.')
 for el, nm, dsc in [('ice', 'Frost Arrow', 'ice, freezing the target'), ('lightning', 'Storm Arrow', 'lightning, chaining to one more target'),
-                    ('holy', 'Radiant Arrow', 'holy light, guiding other arrows to the target'), ('eldritch', 'Void Arrow', 'eldritch energy, pulling enemies in'),
+                    ('holy', 'Radiant Arrow', 'holy light that marks the target for 8 s: your other arrows home in on it and deal 50% more'), ('eldritch', 'Void Arrow', 'eldritch energy, pulling enemies in'),
                     ('water', 'Tide Arrow', 'water, soaking and slowing'), ('blood', 'Bone Arrow', 'bone shards that make the target bleed'),
                     ('spirit', 'Jade Arrow', 'jade that splits into shards')]:
     mod(f'arrow_{el}', nm, 'Fire Arrow', f'A charged arrow of {dsc}.')

@@ -1,5 +1,7 @@
 package com.mdvlcraft.binder.combat;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
@@ -38,6 +40,43 @@ public final class BinderEffects {
     public static final RegistryObject<MobEffect> JIANGSHI = EFFECTS.register("jiangshi", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x4A6B5A) {});
     /** Mushin (modified/): every parry while it lasts is a perfect one (mixin/efn/EFNParryingSkillMixin). */
     public static final RegistryObject<MobEffect> MUSHIN = EFFECTS.register("mushin", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xF2F2F2) {});
+
+    /** The brands (modified/BrandSpells): the bearer's weapon hits deal extra damage of the brand's element. */
+    public static final Map<String, RegistryObject<MobEffect>> BRANDS = brands();
+    /** Emberskin, Frost Armour, Jade Skin (modified/SkinSpells): 20% less damage taken, and melee attackers are punished. */
+    public static final RegistryObject<MobEffect> EMBER_SKIN = EFFECTS.register("ember_skin", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xE0581C) {});
+    public static final RegistryObject<MobEffect> FROST_ARMOR = EFFECTS.register("frost_armor", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x9FD8F0) {});
+    public static final RegistryObject<MobEffect> JADE_SKIN = EFFECTS.register("jade_skin", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x3FCF9A) {});
+    /** Ent Stride (modified/SkinSpells): rooted in place, no knockback, 20% less damage taken. */
+    public static final RegistryObject<MobEffect> ENT_STRIDE = EFFECTS.register("ent_stride", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x6B4F2A) {}
+        .addAttributeModifier(Attributes.KNOCKBACK_RESISTANCE, "4b2e9d1a-7c3f-4a8e-b5d6-2f1e0c9a8b01", 1.0, Operation.ADDITION)
+        .addAttributeModifier(Attributes.MOVEMENT_SPEED, "4b2e9d1a-7c3f-4a8e-b5d6-2f1e0c9a8b02", -1.0, Operation.MULTIPLY_TOTAL));
+    /** Shadow Guard (modified/SkinSpells): while its absorption lasts; breaking it turns the bearer invisible. */
+    public static final RegistryObject<MobEffect> SHADOW_GUARD = EFFECTS.register("shadow_guard", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x2A2238) {});
+    /** Bloodlust (modified/BuffSpells): 4% life steal per level on melee hits. */
+    public static final RegistryObject<MobEffect> BLOODLUST = EFFECTS.register("bloodlust", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x8A0F1E) {});
+    /** Blood Frenzy (modified/BuffSpells): 10% more attack damage; kills heal and extend it. */
+    public static final RegistryObject<MobEffect> BLOOD_FRENZY = EFFECTS.register("blood_frenzy", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xC21F2A) {}
+        .addAttributeModifier(Attributes.ATTACK_DAMAGE, "9e4a2c7d-1b3f-4d5e-8a6b-3c2d1e0f9a01", 0.1, Operation.MULTIPLY_TOTAL));
+    /** Radiant Arrow (modified/ArrowSpells): on the target; its marker's arrows home in on it and deal 50% more. */
+    public static final RegistryObject<MobEffect> RADIANT_MARK = EFFECTS.register("radiant_mark", () -> new MobEffect(MobEffectCategory.HARMFUL, 0xFFE9A0) {});
+
+    private static Map<String, RegistryObject<MobEffect>> brands() {
+        Map<String, Integer> colours = new LinkedHashMap<>();
+        colours.put("fire", 0xFF6A1F);
+        colours.put("ice", 0x9FD8F0);
+        colours.put("water", 0x2F7FD8);
+        colours.put("lightning", 0xFFE34D);
+        colours.put("holy", 0xFFF2B0);
+        colours.put("eldritch", 0x5B2A86);
+        colours.put("nature", 0x5BAA2F);
+        colours.put("spirit", 0x3FCF9A);
+        colours.put("blood", 0x9E1020);
+        Map<String, RegistryObject<MobEffect>> brands = new LinkedHashMap<>();
+        colours.forEach((element, colour) ->
+            brands.put(element, EFFECTS.register("brand_" + element, () -> new MobEffect(MobEffectCategory.BENEFICIAL, colour) {})));
+        return Map.copyOf(brands);
+    }
 
     private BinderEffects() {
     }

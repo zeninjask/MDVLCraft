@@ -35,8 +35,18 @@ public final class ModifiedSpells {
         CloneSpells.MirrorImages::new, CloneSpells.ShadowClone::new, CloneSpells.SpiritStep::new,
         SummonSpells.Oni::new, SummonSpells.SteppeHorse::new, UtilitySpells.Lotus::new, UtilitySpells.TrailRations::new,
         // the Lightning base, and Wukong's Shadow Clone
-        StrikeSpells.ThunderStep::new, CloneSpells.BodyOutsideOfBody::new
+        StrikeSpells.ThunderStep::new, CloneSpells.BodyOutsideOfBody::new,
+        // batch 3: skins, shields, charges, steps, daggers and the blood buffs
+        SkinSpells::emberSkin, SkinSpells::frostArmor, SkinSpells::jadeSkin, SkinSpells::entStride,
+        SkinSpells.ShadowGuard::new, SkinSpells.HolyShield::new,
+        ChargeSpells.FrostCharge::new, ChargeSpells.ThunderCharge::new, ChargeSpells.TideCharge::new,
+        DaggerSpells.FlashStep::new, DaggerSpells.MistStep::new, DaggerSpells.FlameStep::new,
+        DaggerSpells::iceDagger, DaggerSpells::radiantDagger, DaggerSpells::voidShiv,
+        DaggerSpells.Immolate::new, DaggerSpells.VampireBite::new,
+        BuffSpells.Bloodlust::new, BuffSpells.BloodFrenzy::new
         ));
+        BrandSpells.all().forEach(brand -> all.add(() -> brand));
+        ArrowSpells.all().forEach(arrow -> all.add(() -> arrow));
         PalmSpells.all().forEach(palm -> all.add(() -> palm));
         Arrays.stream(StanceElement.values()).filter(e -> e.form != null).forEach(e -> all.add(() -> new StanceForms.Form(e)));
         return all;
