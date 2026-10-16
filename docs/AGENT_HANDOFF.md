@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.3, so the next is 2.0.4.
+   - Every rebuild bumps the patch version. The latest is 2.0.5, so the next is 2.0.6.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -78,7 +78,16 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
-- **Released:** 2.0.3 is on `main` (`71a4707`, built from `bane-agent` at `08c00f7` plus the PDF wording fix).
+- **Released:** 2.0.5 is on `main` (`b883a40`, built from `bane-agent` at `31d1ea9`). 2.0.4 (`2ec9847`) gave Storm Hounds a charged-creeper energy swirl (`client/StormHoundLayer`) and light blue collars.
+- **In 2.0.5, Modified abilities batch 2:** the 37 Samurai and Monk vocation abilities (62 built in all).
+  - Nine stance forms (`StanceElement` EMBER..JADE, `modified/StanceForms`): cast to enter; the stance key cycles only through forms the player has; each form adds an effect to katana melee hits.
+  - Ten palms (`modified/PalmSpells`): a 5-block cone needing empty hands, gloves or a fist weapon; Pilgrim's Palm hits the looked-at target only.
+  - Body arts (`BodySpells`), strikes (`StrikeSpells`), clones (`CloneSpells`, `DoppelgangerEntity.spawnCopy`), Oni and Steppe Horse summons, Lotus Bloom and Trail Rations (`UtilitySpells`). New effects are in `combat/BinderEffects`. Mushin widens the EFN parry window (`mixin/efn/EFNParryingSkillMixin`).
+  - Damage from Modified abilities must go through `DamageSources.applyDamage(target, amount, this.getDamageSource(caster))`. A player-attack `hurt` dealt nothing in this pack.
+  - `ModifiedSpell.requiresLearning()` is false. Without it, eldritch-school abilities (Void Palm, Void Form, Pickpocket, Sculk Watcher) were refused with "You can't understand this spell" unless the player had researched eldritch magic. The 2.0.3 test missed this because `learn_all` had been run.
+  - Player movement is client-side, so movement-driven effects such as Jiangshi's hop run on the player's own client (`player.isLocalPlayer()`).
+  - **Tested in game:** all nine forms; every palm (damage and after-effect; Void pulls); every self-buff; Iron Body halving damage; Adrenal Surge extension; Jiangshi hops; Crane Leap; Whirlpool Kick; Flame Rush chaining; Kunai Rain from the air; Jade Arrow shards; Kamehameha Wave; Cold Meditation; the three clone spells (clones fight); Oni; Steppe Horse; Lotus Bloom; Trail Rations.
+  - **Not tested:** Mushin perfect parries, clone taunts, and cycling the stance key through unlocked forms.
 - **In 2.0.3:**
   - **Modified abilities, batch 1:** the 25 base-tree abilities are real Iron's spells (`binder/.../modified/`, design in `tools/vocations/built.py`, config `data/mdvlcraft/modified_abilities.json`). Summons are vanilla or modded mobs (`Summons`): owner via Iron's `SummonManager`, removed from it when they die (so the next cast summons again), owner known to Parties (`Summons.registerPartiesOwner`), and `isAlliedTo` answers `Summons.allied` for summons (`mixin/parties/EntityAllianceMixin`, priority 100; `IllagerAllianceMixin` for Vindicator, Pillager, Evoker and Illusioner, which override `isAlliedTo` themselves). Terracotta Guard = vindicator with a jade guandao; Guardian Angel = vex.
   - **Skill trees in Path of Exile style:** every base ability sits in a ring of bonuses (circle = signature, square = class, diamond = core/twig); white outline on ability/skill/spell frames, slate on bonuses. See `VOCATIONS_IMPLEMENTATION.md`.
@@ -86,7 +95,12 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
   - The Soulslike dodge (`efn:efn_dodge`/`efn_step`) plays the four Wukong dodges with the Ruyi Jingu Bang (`mixin/efn/EFNDodgeSkillMixin`, client side `EFNDodgeSkillClientMixin` for left/right). `dodge_b1.json` was missing a Root keyframe time and never loaded (the backward Wukong dodge never worked before 2.0.3).
   - No "Your magic comprehension deepens" chat line from Interlace Spellweaves (`mixin/csw/SpellCapabilityHandlerMixin`).
   - Parties: no StackOverflow when rendering an invisible party member (`PartiesBufferMixin`).
-- **Next:** Modified abilities batch 2 (the families: brands, arrows, palms, stances, ...), one release per batch; 162 planned abilities remain in `planned_abilities.json`.
+- **Next:** Modified abilities batch 3, one release per batch. The user asked for the Samurai and Monk vocations first (done in 2.0.5); 125 planned abilities remain in `planned_abilities.json`.
+- **Test tips for casting by command (`cast <player> <spell>`):**
+  - Casts need stamina above 0: run `epicfight stamina set <player> 106` first.
+  - The command ignores cooldowns. A cast that doesn't take sometimes needs a second `cast`.
+  - Long casts break on hits.
+  - Read results with `data get entity`.
 - **Earlier:** 2.0.2 is on `main` (built from `bane-agent` at the merge `750c251` plus the PDF fix). 2.0.1 (from `seb-agent`) added Blood Step to the Lightning base; 2.0.0 was built from `seb-agent` up to `169da4a`.
 - **In 2.0.2:**
   - Ruyi Jingu Bang uses the BATEX Sun Wukong staff (`binder/tools/wukong/BATEX_Sun_Wukong.zip`): a plain block model and texture, `RuyiJinguBang` is a plain `SwordItem`, the OptiFine emissive texture is dropped. Trail `begin_pos`/`end_pos` are +-1.35 (the model is 48 px long, centred on the grip, 0.92 scale in hand); the user said to leave this value. Recipe (gold block, blaze rod, netherite ingot) approved by the user.
