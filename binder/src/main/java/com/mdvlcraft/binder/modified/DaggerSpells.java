@@ -15,6 +15,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.projectile.Projectile;
@@ -24,7 +25,7 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ClipContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.event.entity.ProjectileImpactEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -39,9 +40,9 @@ public final class DaggerSpells {
     private DaggerSpells() {
     }
 
-    /** Whether `attacker` stands behind `target` (outside the 145-degree arc in front of its body). */
+    /** Whether `attacker` stands behind `target` (outside the 145-degree arc in front of where it faces). */
     static boolean behind(LivingEntity attacker, LivingEntity target) {
-        Vec3 facing = Vec3.directionFromRotation(0.0F, target.yBodyRot);
+        Vec3 facing = Vec3.directionFromRotation(0.0F, target.getYRot());
         Vec3 to = attacker.position().subtract(target.position()).multiply(1.0, 0.0, 1.0).normalize();
         return facing.dot(to) < -0.3;
     }
@@ -265,16 +266,19 @@ public final class DaggerSpells {
         }
     }
 
-    /** Void Shiv: the thrower follows the shiv to where it lands. */
+    /**
+     * Void Shiv: the thrower follows the shiv to where it lands. Iron's projectiles do not fire ProjectileImpactEvent; the
+     * shiv is discarded where it hits (or runs out of flight), so the thrower is sent there then.
+     */
     @SubscribeEvent
-    public static void onImpact(ProjectileImpactEvent event) {
-        if (!(event.getProjectile() instanceof ThrownItemProjectile shiv) || !"void_shiv".equals(shiv.getPersistentData().getString(TAG))
-            || !(shiv.level() instanceof ServerLevel level) || !(shiv.getOwner() instanceof LivingEntity owner)) {
+    public static void onLeave(EntityLeaveLevelEvent event) {
+        if (!(event.getEntity() instanceof ThrownItemProjectile shiv) || !"void_shiv".equals(shiv.getPersistentData().getString(TAG))
+            || shiv.getRemovalReason() != Entity.RemovalReason.DISCARDED || !(shiv.level() instanceof ServerLevel level)
+            || !(shiv.getOwner() instanceof LivingEntity owner) || !owner.isAlive() || owner.level() != level) {
             return;
         }
-        shiv.getPersistentData().remove(TAG);
         Vec3 from = owner.position();
-        Vec3 at = event.getRayTraceResult().getLocation().subtract(shiv.getDeltaMovement().normalize().scale(0.6));
+        Vec3 at = shiv.position().subtract(shiv.getDeltaMovement().normalize().scale(0.6));
         owner.teleportTo(at.x, Utils.moveToRelativeGroundLevel(level, at, 3).y, at.z);
         owner.resetFallDistance();
         level.sendParticles(ParticleTypes.PORTAL, from.x, from.y + 1.0, from.z, 40, 0.4, 0.8, 0.4, 0.3);
