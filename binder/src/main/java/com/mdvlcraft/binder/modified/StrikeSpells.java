@@ -7,6 +7,7 @@ import io.redspace.ironsspellbooks.api.spells.ICastData;
 import io.redspace.ironsspellbooks.api.spells.ICastDataSerializable;
 import io.redspace.ironsspellbooks.api.util.Utils;
 import io.redspace.ironsspellbooks.capabilities.magic.ImpulseCastData;
+import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.capabilities.magic.PlayerRecasts;
 import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
 import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
@@ -73,7 +74,7 @@ public final class StrikeSpells {
                 }
                 float damage = this.getSpellPower(spellLevel, caster);
                 for (LivingEntity enemy : Targets.enemies(caster, spot, 3.0)) {
-                    enemy.hurt(caster.damageSources().lightningBolt(), damage);
+                    DamageSources.applyDamage(enemy, damage, this.getDamageSource(caster));
                     MartialSpells.stun(enemy, StunType.SHORT, 0.5F);
                 }
                 server.sendParticles(ParticleTypes.ELECTRIC_SPARK, spot.x, spot.y + 0.3, spot.z, 40, 1.5, 0.2, 1.5, 0.1);
@@ -142,7 +143,7 @@ public final class StrikeSpells {
                 Vec3 in = caster.position().subtract(enemy.position()).multiply(1.0, 0.0, 1.0);
                 enemy.setDeltaMovement(in.scale(0.3).add(0.0, 0.25, 0.0));
                 enemy.hurtMarked = true;
-                enemy.hurt(MartialSpells.melee(caster), damage);
+                DamageSources.applyDamage(enemy, damage, this.getDamageSource(caster));
             }
             if (level instanceof ServerLevel server) {
                 for (int i = 0; i < 24; i++) {
@@ -158,7 +159,7 @@ public final class StrikeSpells {
         }
     }
 
-    /** Kunai Rain: in the air only; a fan of five kunai thrown down ahead. */
+    /** Kunai Rain: in the air only; a fan of five kunai thrown where the caster looks, never flatter than 35 degrees down. */
     public static class KunaiRain extends ModifiedSpell {
         public KunaiRain() {
             super("kunai_rain", 5);
@@ -176,12 +177,13 @@ public final class StrikeSpells {
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             float damage = this.getSpellPower(spellLevel, caster);
+            float pitch = Math.max(caster.getXRot(), 35.0F);
             for (int i = -2; i <= 2; i++) {
                 SplittingShurikenProjectile kunai = new SplittingShurikenProjectile(level, caster);
                 kunai.setSplitCount(0);
                 kunai.setDamage(damage);
                 kunai.setPos(caster.getEyePosition().subtract(0.0, kunai.getBbHeight() * 0.5, 0.0));
-                kunai.shoot(Vec3.directionFromRotation(70.0F, caster.getYRot() + i * 15.0F));
+                kunai.shoot(Vec3.directionFromRotation(pitch, caster.getYRot() + i * 8.0F));
                 level.addFreshEntity(kunai);
             }
             level.playSound(null, caster.blockPosition(), SoundEvents.TRIDENT_THROW, SoundSource.PLAYERS, 1.0F, 1.6F);
@@ -252,7 +254,7 @@ public final class StrikeSpells {
                     Vec3 c = e.getBoundingBox().getCenter().subtract(start);
                     double t = Mth.clamp(c.dot(dir), 0.0, length);
                     if (c.subtract(dir.scale(t)).length() <= 1.0 + e.getBbWidth() / 2) {
-                        e.hurt(caster.damageSources().indirectMagic(caster, caster), damage);
+                        DamageSources.applyDamage(e, damage, this.getDamageSource(caster));
                     }
                 }
                 for (double d = 0.5; d < length; d += 0.4) {

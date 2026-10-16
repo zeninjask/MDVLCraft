@@ -4,6 +4,7 @@ import com.mdvlcraft.binder.doppelganger.DoppelgangerEntity;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.api.util.Utils;
+import io.redspace.ironsspellbooks.damage.DamageSources;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -114,7 +115,7 @@ public final class CloneSpells {
                 DoppelgangerEntity copy = DoppelgangerEntity.spawnCopy(player, from, 60, true, c -> {
                     ServerLevel at = (ServerLevel)c.level();
                     for (LivingEntity enemy : Targets.enemies(player, c.position(), 3.0)) {
-                        enemy.hurt(player.damageSources().indirectMagic(c, player), damage);
+                        DamageSources.applyDamage(enemy, damage, this.getDamageSource(c, player));
                     }
                     at.sendParticles(ParticleTypes.SOUL, c.getX(), c.getY() + 1.0, c.getZ(), 40, 1.0, 1.0, 1.0, 0.1);
                     at.playSound(null, c.blockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 1.5F, 0.8F);

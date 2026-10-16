@@ -5,6 +5,7 @@ import com.mdvlcraft.binder.combat.BinderEffects;
 import com.mdvlcraft.binder.monk.Fists;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
+import io.redspace.ironsspellbooks.damage.DamageSources;
 import java.util.List;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
@@ -80,8 +81,10 @@ public final class PalmSpells {
                 float damage = this.damage(caster, spellLevel);
                 for (LivingEntity target : this.targets(caster)) {
                     float before = target.getHealth();
-                    if (target.hurt(MartialSpells.melee(caster), damage)) {
-                        this.effect.apply(caster, target, Math.max(0.0F, before - target.getHealth()));
+                    boolean hit = DamageSources.applyDamage(target, damage, this.getDamageSource(caster));
+                    float dealt = Math.max(0.0F, before - target.getHealth());
+                    if (hit || dealt > 0.0F) {
+                        this.effect.apply(caster, target, dealt);
                     }
                 }
                 Vec3 eye = caster.getEyePosition();

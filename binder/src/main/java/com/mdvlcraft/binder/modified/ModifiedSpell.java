@@ -51,4 +51,10 @@ public abstract class ModifiedSpell extends AbstractSpell {
     public boolean allowLooting() {
         return false;
     }
+
+    /** The skill tree grants these, so an eldritch one never needs Iron's eldritch research to be cast. */
+    @Override
+    public boolean requiresLearning() {
+        return false;
+    }
 }
