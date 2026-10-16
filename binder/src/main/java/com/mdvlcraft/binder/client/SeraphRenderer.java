@@ -146,6 +146,7 @@ final class SeraphRenderer {
 
         poseStack.pushPose();
         poseStack.translate(0.0F, SeraphForm.EYE / 2.0F, 0.0F);
+        // The model's eyes look along -Z (its pupil is on the eye's -Z face); turn them the way the player looks.
         poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - Mth.rotLerp(partialTick, player.yHeadRotO, player.yHeadRot)));
         poseStack.scale(SeraphForm.SCALE, SeraphForm.SCALE, SeraphForm.SCALE);
         poseStack.translate(-model.eye[0], -model.eye[1], -model.eye[2]);
