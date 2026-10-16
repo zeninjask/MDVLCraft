@@ -86,6 +86,14 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
   - Wukong's Grave Sigil became Body Outside of Body (the Shadow Clone effect); Shinobi keeps Shadow Clone Jutsu.
   - Tested in game: Thunder Step (14-block teleport, both ends hit), and Reset Skills (11 points back at Level 10).
   - Not tested: Body Outside of Body (it is Shadow Clone's class under another key), and the skill tab opening on the client after a reset.
+- **On `bane-agent`, not released:**
+  - **Modified abilities batch 3** (`98b1b6f`, untested; paused at the user's request): 34 abilities in four new files (`BrandSpells`, `ArrowSpells`, `SkinSpells`, `ChargeSpells`, `DaggerSpells`) plus Bloodlust and Blood Frenzy in `BuffSpells`.
+  - **Seraph Embodiment** (`mdvlcraft:seraph_embodiment`; in no tree yet, as the user asked):
+    - The model is CsDani50's Seraphim (Sketchfab Standard license, `binder/tools/seraph/`). `tools/seraph/convert.py` turns its Blockbench glTF into `assets/mdvlcraft/seraph/seraph.json`, which `client/SeraphRenderer` draws in place of the player at 0.8 scale.
+    - Animations: spawn going in, spawn reversed coming out, pose while casting, fly while moving, idle otherwise.
+    - `seraph/SeraphForm` drives slow flight, an eye-only hitbox, Iron's spells only, and no attacks, items or Epic Fight skills. The camera sits in front of the eye (`mixin/seraph/CameraMixin`). Network protocol 13.
+    - Tested in game. Not tested: how it looks to a second player.
+  - **Test tips:** the test client runs at -Xmx4G (5G got it killed for memory). `revive Tester` revives a downed player. Give saturation, or starvation downs the test player.
 - **Earlier:** 2.0.5 (`b883a40`, from `bane-agent` at `31d1ea9`). 2.0.4 (`2ec9847`) gave Storm Hounds a charged-creeper energy swirl (`client/StormHoundLayer`) and light blue collars.
 - **In 2.0.5, Modified abilities batch 2:** the 37 Samurai and Monk vocation abilities (62 built in all).
   - Nine stance forms (`StanceElement` EMBER..JADE, `modified/StanceForms`): cast to enter; the stance key cycles only through forms the player has; each form adds an effect to katana melee hits.
