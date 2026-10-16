@@ -5,7 +5,7 @@ mod('lockpick', 'Lockpick', 'Touch Dig', 'Touch a locked chest, door or vault to
 mod('net_throw', 'Net Throw', 'Arcane Shackle', 'Throw a net that pins and slows the first creature it hits.')
 mod('ballista', 'Siege Ballista', 'Arrow Volley', 'Place a ballista turret that fires heavy bolts at enemies in front of it for 15 s.')
 mod('harpoon', 'Harpoon', 'Ceraunus Grasp', 'Fire a harpoon from your crossbow that drags the target to you.')
-mod('kunai_rain', 'Kunai Rain', 'Splitting Shuriken', 'Throw a fan of kunai straight down after a jump.')
+mod('kunai_rain', 'Kunai Rain', 'Splitting Shuriken', 'In the air, throw a fan of five kunai where you look.')
 mod('shadow_clone', 'Shadow Clone Jutsu', 'Summon Spell Clone', 'Summon two clones of yourself that fight with your held weapon instead of casting spells.')
 mod('nomad_mount', 'Steppe Horse', 'Summon Horse', 'An armoured warhorse that is faster and can carry a rider into battle.')
 mod('camel', 'Summon Camel', 'Summon Horse', 'Summon a camel that two players can ride.')
