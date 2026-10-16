@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.6, so the next is 2.0.7.
+   - Every rebuild bumps the patch version. The latest is 2.0.7, so the next is 2.0.8.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -78,7 +78,17 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
-- **Released:** 2.0.6 is on `main` (`e87c02b`, built from `bane-agent` at `00486bb`).
+- **Released:** 2.0.7 is on `main` (`f7a893c`, built from `bane-agent` at `e0ba5fc`).
+- **In 2.0.7:**
+  - Modified abilities batch 3, all 34 tested in game:
+    - brands, elemental arrows, skins and shields;
+    - charges, steps and daggers;
+    - strikes from behind, Bloodlust and Blood Frenzy.
+  - Seraph Embodiment is in the jar, in no tree yet.
+  - Lessons from batch 3:
+    - Iron's projectiles never fire ProjectileImpactEvent; Void Shiv acts when the shiv is discarded.
+    - A mob with no AI never turns its body, so "behind" checks use `getYRot()`.
+- **2.0.6** (`e87c02b`).
 - **In 2.0.6:**
   - Thunder Step (`StrikeSpells.ThunderStep`, Modified, Lightning base). Iron's Thunder Step isn't in this pack.
   - Blood Step is out of the Samurai base.
@@ -86,8 +96,7 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
   - Wukong's Grave Sigil became Body Outside of Body (the Shadow Clone effect); Shinobi keeps Shadow Clone Jutsu.
   - Tested in game: Thunder Step (14-block teleport, both ends hit), and Reset Skills (11 points back at Level 10).
   - Not tested: Body Outside of Body (it is Shadow Clone's class under another key), and the skill tab opening on the client after a reset.
-- **On `bane-agent`, not released:**
-  - **Modified abilities batch 3** (`98b1b6f`, untested; paused at the user's request): 34 abilities in four new files (`BrandSpells`, `ArrowSpells`, `SkinSpells`, `ChargeSpells`, `DaggerSpells`) plus Bloodlust and Blood Frenzy in `BuffSpells`.
+- **Seraph Embodiment notes:**
   - **Seraph Embodiment** (`mdvlcraft:seraph_embodiment`; in no tree yet, as the user asked):
     - The model is CsDani50's Seraphim (Sketchfab Standard license, `binder/tools/seraph/`). `tools/seraph/convert.py` turns its Blockbench glTF into `assets/mdvlcraft/seraph/seraph.json`, which `client/SeraphRenderer` draws in place of the player at 0.8 scale.
     - Animations: spawn going in, spawn reversed coming out, pose while casting, fly while moving, idle otherwise.
