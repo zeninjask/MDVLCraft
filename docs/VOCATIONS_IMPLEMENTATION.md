@@ -93,6 +93,15 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
 - [x] 0. Design data in the repo (`binder/tools/vocations/`), this document.
 - [x] 1. Generator `binder/tools/generate_vocations.py`: pick page, 18 base fragments, 153 vocation fragments, config,
        spell configs for every newly granted spell, lang keys (vocation names, planned abilities).
+   - Base layout (since 2.0.3): every ability except the root is the centre of a ring of bonuses, Path of Exile style:
+     signature bonuses in a circle, class bonuses in a square, core and twig bonuses in a diamond (4-node rings are
+     diamonds). A ring is entered at the port facing the rest of the tree; the ability hangs off the opposite port.
+     Leftover bonuses are approach paths (at most 3 nodes) or spurs. Ability, skill and spell nodes have a white
+     outline, bonus nodes a slate one (`tools/generate_textures.py`).
+   - Bonus profiles (since 2.0.3, `tools/vocations/profiles.py`): each archetype keeps 3 of its class's spokes and has
+     its own 6 major and 3 minor generic twigs; dropped class spokes and missing signature spokes (against the most in
+     its class) are paid back as twig nodes, so every archetype of a class has the same number of bonus nodes, each
+     worth what it always was.
    - Run `python3 binder/tools/generate_vocations.py` (4 s). It reuses the old generator's stat spokes, texts and frames
      (`tools/generate_skill_trees.py`), the box layout (`tools/relayout_trees.py`) and spell mana/cooldown/level helpers
      (`tools/tree_edit.py`). The old trees are deleted; their ability texts were snapshotted to
@@ -100,7 +109,7 @@ Tick each step when it is done, committed and pushed. Add notes under a step whe
    - Bases: 178-216 nodes, 187-236 points each; a vocation tab is about 390 nodes. The parts are 7.4 MB uncompressed.
    - Spell configs: only written for spells without one (144 new); existing hand-tuned ones are never overwritten.
    - `tools/vocations/compose.py` assembles a tab in Python exactly like the game will (used for checks and the PDF).
-     All 153 composed tabs pass the layout check (no crossing lines, no icon on a line, no overlap).
+     All 153 composed tabs pass the layout check (`check_lines`: no crossing lines, no icon on a line, no overlap).
    - Node ids: base nodes `<archetype>__<name>`, vocation nodes `voc__<n>` (`voc__0` is the root, the first bonus).
    - Planned abilities: `data/mdvlcraft/planned_abilities.json` (key -> name, built from, description); ability ids
      `mdvlcraft:planned_<key>`; lang `ability.mdvlcraft.planned_<key>` and `.desc`.

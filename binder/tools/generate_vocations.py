@@ -16,10 +16,16 @@ part, base a as written and base b mirrored to the right. Also writes Iron's spe
 the planned (Modified) abilities list (data/mdvlcraft/planned_abilities.json) and lang keys (assets/mdvlcraft/lang/
 en_us.json: vocation names, archetype names, planned abilities).
 
-Balance (each base half is half an old archetype tree): class, core and twig spokes keep today's totals with half the
-nodes (two steps merged into one, capstones cost 1); twigs are capped at TWIG_CAP nodes per half at twice today's
-value per node; signature stats total 3 x the design's per-stat value (v2_base.STAT). Spells cost 1 point (2 if strong),
-techniques, Epic Fight skills and planned abilities 2, so one vocation tab costs about what one old tree did.
+Balance (each base half is half an old archetype tree): class and core spokes keep today's totals with half the nodes
+(two steps merged into one, capstones cost 1); signature stats total 3 x the design's per-stat value (v2_base.STAT).
+Each archetype keeps three of its class's spokes and its own six major and three minor generic twigs
+(vocations/profiles.py), so archetypes of one class differ in more than their signatures; every node keeps its value and
+every archetype of a class has the same number of bonus nodes. Spells cost 1 point (2 if strong), techniques, Epic Fight
+skills and planned abilities 2, so one vocation tab costs about what one old tree did.
+
+Layout: every ability but a base's root sits in a ring of bonuses (a circle of signature bonuses, a square of class
+bonuses, a diamond of core or twig bonuses), as Path of Exile's notables do; rings are joined by short bonus paths and
+the whole is laid out with relayout_trees' box layout, one box per ring.
 
 Run from the binder folder: python3 tools/generate_vocations.py
 """
@@ -39,6 +45,7 @@ import relayout_trees as L  # noqa: E402  (box layout)
 import tree_edit as T  # noqa: E402  (spell mana, levels, cooldowns, spell config)
 import v2_all  # noqa: E402
 from built import BUILT  # noqa: E402  (the Modified abilities that are built)
+import profiles as P  # noqa: E402  (each archetype's class spokes and twigs)
 
 D = v2_all.d
 OUT = ROOT / "src/main/resources/data/mdvlcraft/puffish_skills"
@@ -345,53 +352,142 @@ def signature(code):
     return nodes
 
 
-def twigs():
+def twig_spokes(arch, budget):
+    """The archetype's generic twigs (vocations/profiles.py): six major and three minor bonuses sharing `budget` nodes,
+    a major one node longer than a minor; every node is worth what a twig node always was."""
+    generic = {title: (attribute, value * cap / 2 / TWIG_CAP) for attribute, title, value, cap in G.GENERIC}
+    major, minor = P.MAJOR[arch], P.MINOR[arch]
+    picked = list(major) + list(minor)
+    if len(set(picked)) != 9 or any(t not in generic for t in picked):
+        raise SystemExit(f"{arch}: twig profile must name nine different generic twigs, got {picked}")
+    if (budget + 3) % 9:
+        raise SystemExit(f"{arch}: {budget} twig nodes do not split into six majors and three minors")
+    n_major = (budget + 3) // 9
     out = []
-    for attribute, title, value, cap in G.GENERIC:
-        per = value * cap / 2 / TWIG_CAP   # half of today's total per half-tree
+    for title in picked:
+        attribute, per = generic[title]
+        count = n_major if title in major else n_major - 1
         out.append([dict(kind="stat", attribute=attribute, value=round(per, 5), cost=1, title=f"{title} {i + 1}", group="generic")
-                    for i in range(TWIG_CAP)])
+                    for i in range(count)])
     return out
+
+
+def bonus_spokes(arch):
+    """(source, nodes) of every bonus spoke in the base: its three class spokes, the four core spokes, its signature
+    spokes and its twigs. The class spokes it does not keep, and the signature spokes it has fewer than the most in its
+    class, become twig nodes, so every archetype of a class has the same number of bonus nodes."""
+    pool = {halve(s)[0]["title"].rsplit(" ", 1)[0]: s for s in G.CLASSES[CLASS_POOL[CLASS_OF[arch]]]["pool"]}
+    kept = P.CLASS[arch]
+    if len(set(kept)) != 3 or any(t not in pool for t in kept):
+        raise SystemExit(f"{arch}: class profile must name three of {sorted(pool)}, got {kept}")
+    spokes = [("class", [dict(n, group="class") for n in halve(pool[t])]) for t in kept]
+    spokes += [("core", [dict(n, group="core") for n in halve(s)]) for s in G.CORE]
+    spokes += [("sig", signature(c)) for c in D.SIG[arch]]
+    # archetypes with fewer signature spokes than the most in their class get the difference as twig nodes
+    most = max(len(D.SIG[a]) for a in D.CLASSES[CLASS_OF[arch]])
+    budget = TWIG_CAP * len(G.GENERIC) + 9 * (len(pool) - len(kept)) + 9 * (most - len(D.SIG[arch]))
+    spokes += [("twig", nodes) for nodes in twig_spokes(arch, budget)]
+    return spokes
 
 
 def stat_node_body(n, cls_title):
     if n["kind"] == "sig":
         return stat_body(n["title"], n["attrs"], n["value"], n["cost"], "goal" if n.get("capstone") else "task")
     group = n.get("group")
-    extra = {"generic": "Twig bonus (every archetype has a few of these).",
-             "class": f"{cls_title} class bonus (every {cls_title} archetype has this spoke).",
+    extra = {"generic": "Twig bonus.",
+             "class": f"{cls_title} class bonus.",
              "core": "Core bonus (every archetype has this spoke)."}.get(group)
     kind = "twig" if group == "generic" else "goal" if n.get("capstone") else "task"
     return stat_body(n["title"], [n["attribute"]], n["value"], n["cost"], kind, extra)
 
 
-# ---- base half-trees ----------------------------------------------------------------------------------------------------
+# ---- base half-trees: clusters ------------------------------------------------------------------------------------------
+# Every ability but the root sits in the middle of a ring of bonuses, as the notables of Path of Exile's passive tree:
+# signature bonuses ring it in a circle, class bonuses in a square, core and twig bonuses in a diamond. A ring is entered
+# at the port facing the rest of the tree and the ability hangs off the opposite port, so it costs half the ring; the
+# other ports lead on to further clusters. Bonuses left over lead up to rings (approach paths) or branch off as spurs.
+RING_SHAPE = {"sig": "circle", "class": "square", "core": "diamond", "twig": "diamond"}
+RADIUS = {"circle": 76, "square": 62, "diamond": 80, "diamond4": 58}
+PORT_OF = {(0, -1): "N", (1, 0): "E", (0, 1): "S", (-1, 0): "W"}
+OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
+MAX_PATH = 3
+
+
+def ring_points(shape, n):
+    """Ring offsets clockwise from the top, and the index of each port (N, E, S, W) among them."""
+    if n == 4:
+        r = RADIUS["diamond4"]
+        return [(0, -r), (r, 0), (0, r), (-r, 0)], {"N": 0, "E": 1, "S": 2, "W": 3}
+    r = RADIUS[shape]
+    if shape == "circle":
+        pts = [(round(r * math.cos(math.radians(a - 90))), round(r * math.sin(math.radians(a - 90)))) for a in range(0, 360, 45)]
+    elif shape == "square":
+        pts = [(0, -r), (r, -r), (r, 0), (r, r), (0, r), (-r, r), (-r, 0), (-r, -r)]
+    else:
+        h = r // 2
+        pts = [(0, -r), (h, -h), (r, 0), (h, h), (0, r), (-h, h), (-r, 0), (-h, -h)]
+    return pts, {"N": 0, "E": 2, "S": 4, "W": 6}
+
+
+def carve(spokes, n_abilities):
+    """Rings (8 or 4 bonuses, the end of a spoke) with the rest of the spoke as their approach path, split or dropped to
+    give exactly one ring per ability; dropped rings and overlong paths become spurs of at most MAX_PATH bonuses."""
+    units, spurs = [], []
+    for src, nodes in spokes:
+        size = 8 if len(nodes) >= 8 else 4 if len(nodes) >= 4 else 0
+        if size == 0:
+            spurs.append(nodes)
+            continue
+        approach, ring = nodes[:len(nodes) - size], nodes[len(nodes) - size:]
+        units.append(dict(src=src, ring=ring, approach=approach))
+    while len(units) < n_abilities:
+        big = [u for u in units if len(u["ring"]) == 8]
+        if not big:
+            raise SystemExit(f"{n_abilities} abilities but only {len(units)} rings")
+        u = max(big, key=lambda u: (u["src"] == "twig", -len(u["approach"])))
+        units.remove(u)
+        units.append(dict(src=u["src"], ring=u["ring"][:4], approach=u["approach"]))
+        units.append(dict(src=u["src"], ring=u["ring"][4:], approach=[]))
+    while len(units) > n_abilities:
+        u = min(units, key=lambda u: (len(u["ring"]), u["src"] != "twig", len(u["approach"])))
+        units.remove(u)
+        spurs.append(u["approach"] + u["ring"])
+    for u in units:
+        while len(u["approach"]) > MAX_PATH:
+            spurs.append(u["approach"][:MAX_PATH])
+            u["approach"] = u["approach"][MAX_PATH:]
+    spurs = [s[i:i + MAX_PATH] for s in spurs for i in range(0, len(s), MAX_PATH)]
+    return units, spurs
+
+
+def check_lines(lines, pos, half):
+    """L.check without its straight-line rule (rings have slanted sides)."""
+    for i, (a, b) in enumerate(lines):
+        for c, d in lines[i + 1:]:
+            if len({a, b, c, d}) == 4 and L.segments_cross(pos[a], pos[b], pos[c], pos[d]):
+                return ('cross', a, b, c, d)
+        for k, p in pos.items():
+            if k not in (a, b) and L.seg_dist(p, pos[a], pos[b]) < half[k] + L.CLEARANCE:
+                return ('icon on line', a, b, k)
+    names = list(pos)
+    for i, a in enumerate(names):
+        for b in names[i + 1:]:
+            if math.dist(pos[a], pos[b]) < half[a] + half[b] + 4:
+                return ('overlap', a, b)
+    return None
+
+
 def base_tree(arch, live, seed=0):
-    """(definitions, parent links, root id) of one base: three trunks from the root, stat strands branching off them,
-    abilities spread along the strands from their second node on."""
+    """(definitions, lines, positions, root id) of one base, laid out with the root at (0, 0) and its link to the centre
+    leaving to the right."""
     rng = random.Random(f"{arch}:{seed}")
     cls = CLASS_OF[arch]
     skills, efs = D.BASE[arch]
-    strands_src = []
-    for spoke in G.CLASSES[CLASS_POOL[cls]]["pool"]:
-        strands_src.append([dict(n, group="class") for n in halve(spoke)])
-    for spoke in G.CORE:
-        strands_src.append([dict(n, group="core") for n in halve(spoke)])
-    strands_src += [signature(c) for c in D.SIG[arch]]
-    strands_src += twigs()
-    rng.shuffle(strands_src)
-    # pair spokes so neighbouring nodes rarely give the same bonus
-    strands = []
-    while strands_src:
-        a = strands_src.pop()
-        b = strands_src.pop() if strands_src else []
-        mixed = [x for pair in zip(a, b) for x in pair] + a[len(b):] + b[len(a):]
-        strands.append(mixed)
     abilities = list(skills[1:]) + list(efs)
-    per = collections.defaultdict(list)
-    for i, code in enumerate(abilities):
-        per[i % len(strands)].append(code)
-    defs, parent = {}, {}
+    rng.shuffle(abilities)
+    units, spurs = carve(bonus_spokes(arch), len(abilities))
+    rng.shuffle(units)
+    defs = {}
     names = collections.Counter()
 
     def node_id(base):
@@ -399,62 +495,56 @@ def base_tree(arch, live, seed=0):
         names[base] += 1
         return f"{arch}__{base}" + (f"_{names[base]}" if names[base] > 1 else "")
 
+    def stat(n):
+        nid = node_id(n["title"])
+        defs[nid] = stat_node_body(n, cls)
+        return nid
+
+    def half_of(nid):
+        return L.HALF * defs[nid].get("size", 1.0)
+
     root = node_id("root")
     defs[root] = ability_body(skills[0], live, 1)
     defs[root]["extra_description"] = (defs[root].get("extra_description", "") + f" The first skill of the {D.TITLE[arch]} base.").strip()
-    paths = []
-    for si, strand in enumerate(strands):
-        seq = []
-        codes = per[si]
-        gap = max(2, len(strand) // (len(codes) + 1)) if codes else 0
-        k = 0
-        for j, n in enumerate(strand):
-            seq.append(("stat", n))
-            if k < len(codes) and j >= 1 and (j - 1) % gap == 0:
-                seq.append(("ability", codes[k]))
-                k += 1
-        seq += [("ability", c) for c in codes[k:]]
-        ids = []
-        for kind, item in seq:
-            if kind == "stat":
-                nid = node_id(item["title"])
-                defs[nid] = stat_node_body(item, cls)
-            else:
-                nid = node_id(full(item).split(":")[1] if not item.startswith("Z:") else "planned_" + item[2:])
-                defs[nid] = ability_body(item, live, ability_cost(item))
-            ids.append(nid)
-        paths.append(ids)
-    # three trunks off the root, every other path hangs off a node with room (each node keeps at most 3 children)
-    paths.sort(key=len, reverse=True)
-    kids = collections.Counter()
-    slots = []
-    for p in paths[:3]:
-        parent[p[0]] = root
-        kids[root] += 1
-        for x, y in zip(p, p[1:]):
-            parent[y] = x
-            kids[x] += 1
-        slots += p[1::3]
-    for p in paths[3:]:
-        rng.shuffle(slots)
-        host = next(s for s in slots if kids[s] < 2)
-        parent[p[0]] = host
-        kids[host] += 1
-        for x, y in zip(p, p[1:]):
-            parent[y] = x
-            kids[x] += 1
-        slots += p[1::3]
-    return defs, parent, root
 
-
-def lay_out_base(defs, parent, root):
-    """Positions with the root at (0, 0) and its link to the centre leaving to the right; (positions, max x)."""
+    # macro tree: the root, path bonuses and clusters (an ability and its ring); every macro node has at most 3 children
+    clusters = {}      # macro id -> cluster
     kids = collections.defaultdict(list)
-    for n, p in parent.items():
-        kids[p].append(n)
-    for k in kids.values():
-        k.sort()
-    half = {n: L.HALF * d.get("size", 1.0) for n, d in defs.items()}
+    half = {root: half_of(root)}
+    room = {root: 3}
+    depth = {root: 0}
+
+    def attach(chain, last):
+        hosts = [h for h in room if room[h] > 0]
+        weights = [1.0 / (1 + depth[h]) ** 1.5 for h in hosts]
+        host = rng.choices(hosts, weights)[0]
+        room[host] -= 1
+        prev = host
+        for nid in chain:
+            kids[prev].append(nid)
+            half[nid] = half_of(nid)
+            depth[nid] = depth[host] + (1 if host in clusters or host == root else 0)
+            room[nid] = 0
+            prev = nid
+        if last is not None:
+            kids[prev].append(last)
+            depth[last] = depth[host] + 1
+            room[last] = 3
+
+    for code, u in zip(abilities, units):
+        approach = [stat(n) for n in u["approach"]]
+        centre = node_id(full(code).split(":")[1] if not code.startswith("Z:") else "planned_" + code[2:])
+        defs[centre] = ability_body(code, live, ability_cost(code))
+        ring = [stat(n) for n in u["ring"]]
+        shape = RING_SHAPE[u["src"]] if len(ring) == 8 else "diamond"
+        pts, ports = ring_points(shape, len(ring))
+        cid = f"cluster:{centre}"
+        clusters[cid] = dict(centre=centre, ring=ring, pts=pts, ports=ports)
+        half[cid] = max(max(abs(x), abs(y)) for x, y in pts) + max(half_of(n) for n in ring) + 2
+        attach(approach, cid)
+    for chain in spurs:
+        attach([stat(n) for n in chain], None)
+
     size_of = {}
 
     def count(n):
@@ -462,15 +552,45 @@ def lay_out_base(defs, parent, root):
         return size_of[n]
     count(root)
     sys.setrecursionlimit(20000)
-    pos = L.layout(root, kids, half, size_of, ('down', 'left', 'right'), has_parent=True)
-    pos = {n: L.turn(p, 'right') for n, p in pos.items()}
-    pos = {n: (round(x), round(y)) for n, (x, y) in pos.items()}
-    lines = [(parent[n], n) for n in parent]
-    problem = L.check(lines, pos, half)
+    macro = L.layout(root, kids, half, size_of, ('down', 'left', 'right'), has_parent=True)
+    macro = {n: L.turn(p, 'right') for n, p in macro.items()}
+    macro = {n: (round(x), round(y)) for n, (x, y) in macro.items()}
+
+    # expand the clusters: ring nodes round the centre, entered from the side facing the macro parent
+    parent_of = {c: p for p, cs in kids.items() for c in cs}
+    pos, lines = {}, []
+    port_node = {}
+    for m, (x, y) in macro.items():
+        if m not in clusters:
+            pos[m] = (x, y)
+            continue
+        c = clusters[m]
+        px, py = macro[parent_of[m]]
+        entry = PORT_OF[((px > x) - (px < x), (py > y) - (py < y))]
+        pos[c["centre"]] = (x, y)
+        for nid, (dx, dy) in zip(c["ring"], c["pts"]):
+            pos[nid] = (x + dx, y + dy)
+        ring = c["ring"]
+        lines += [(ring[i], ring[(i + 1) % len(ring)]) for i in range(len(ring))]
+        lines.append((ring[c["ports"][OPPOSITE[entry]]], c["centre"]))
+        port_node[m] = {side: ring[i] for side, i in c["ports"].items()}
+
+    def end(m, toward):
+        if m not in clusters:
+            return m
+        x, y = macro[m]
+        tx, ty = macro[toward]
+        return port_node[m][PORT_OF[((tx > x) - (tx < x), (ty > y) - (ty < y))]]
+    for p, cs in kids.items():
+        for c in cs:
+            lines.append((end(p, c), end(c, p)))
+    nhalf = {n: half_of(n) for n in pos}
+    problem = check_lines(lines, pos, nhalf)
     if problem:
         raise SystemExit(f"base layout problem: {problem}")
-    maxx = max(x + half[n] for n, (x, y) in pos.items())
-    return pos, maxx
+    if set(pos) != set(defs):
+        raise SystemExit(f"unplaced nodes: {sorted(set(defs) - set(pos))}")
+    return defs, lines, pos, root
 
 
 def write(path, data):
@@ -481,18 +601,18 @@ def write(path, data):
 def build_bases(live):
     offsets = {}
     for arch in D.ORDER:
-        for seed in range(20):
-            defs, parent, root = base_tree(arch, live, seed)
+        for seed in range(30):
             try:
-                pos, maxx = lay_out_base(defs, parent, root)
+                defs, lines, pos, root = base_tree(arch, live, seed)
                 break
             except SystemExit as e:
                 print(f"{arch} seed {seed}: {e}")
         else:
             raise SystemExit(f"{arch}: no layout")
+        maxx = max(x + L.HALF * defs[n].get("size", 1.0) for n, (x, y) in pos.items())
         dx = -(maxx + CENTRE_GAP)
         skills = {n: {"x": x + round(dx), "y": y, "definition": n} for n, (x, y) in pos.items()}
-        conns = [[parent[n], n] for n in parent]
+        conns = [list(line) for line in lines]
         base = PARTS / f"base_{arch}"
         write(base / "definitions.json", defs)
         write(base / "skills.json", skills)

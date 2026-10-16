@@ -15,8 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * isAlliedTo ask Parties too. Parties' vanilla provider calls isAlliedTo itself, so a re-entry guard lets that inner call
  * fall through to vanilla.
  *
- * A Modified ability's summon (Summons) is on its owner's side whatever else says: without this a summoned vindicator
- * still counted as allied with pillagers and never targeted them. Priority 100 puts this ahead of other mods' checks.
+ * A Modified ability's summon (Summons) is on its owner's side whatever other mods' checks say; priority 100 puts this
+ * ahead of them. Mobs that override isAlliedTo themselves (illagers) are handled by IllagerAllianceMixin.
  */
 @Mixin(value = Entity.class, priority = 100)
 public abstract class EntityAllianceMixin {
