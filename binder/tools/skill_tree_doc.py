@@ -386,9 +386,9 @@ def archetype_page(arch, cls, title, role, classes_defs, pack, halved_note):
               'on the ability wheel; numeral = spell level'),
         block('Epic Fight skills', [(n, f"{p} pts", e(t)) for n, p, t in efskills], 'equip in the Combat Skills box'),
         block(f'{e(title)} bonuses', stat_items('signature'), 'only this archetype'),
-        block(f'{cname} class bonuses', stat_items('class'), f'every {cname} archetype'),
+        block(f'{cname} class bonuses', stat_items('class'), f'three of the {cname} class spokes'),
         block('Core bonuses', stat_items('core'), 'every archetype'),
-        block('Twig bonuses', stat_items('twig'), 'every archetype has a few'),
+        block('Twig bonuses', stat_items('twig'), "this archetype's own mix"),
     ]
     head = (f"<div class='page'><h2>{badge(cls)} {e(title)}</h2>"
             f"<p class='lead'>{e(role)} {len(skills)} skills, {cost} points for the whole base (one half of each of its vocation tabs). "
