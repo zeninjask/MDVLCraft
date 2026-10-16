@@ -12,6 +12,7 @@ import io.redspace.ironsspellbooks.entity.mobs.goals.GenericFollowOwnerGoal;
 import java.util.Comparator;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import net.minecraft.core.particles.ParticleTypes;
@@ -28,19 +29,22 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Entity.RemovalReason;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LandOnOwnersShoulderGoal;
 import net.minecraft.world.entity.animal.IronGolem;
 import net.minecraft.world.entity.animal.Parrot;
 import net.minecraft.world.entity.animal.Wolf;
+import net.minecraft.world.entity.animal.horse.Horse;
 import net.minecraft.world.entity.animal.horse.Mule;
+import net.minecraft.world.entity.animal.horse.Variant;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Snowball;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -55,6 +59,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
+import virtuoel.pehkui.api.ScaleTypes;
 
 /**
  * The Modified summons (Summons does the owner AI): each lasts 2 minutes, recasting the spell dismisses them, and the
@@ -83,11 +88,16 @@ public final class SummonSpells {
         protected <T extends Mob> List<T> spawn(ServerLevel level, LivingEntity caster, float power, EntityType<T> type, int count,
                                                 SummonedEntitiesCastData castData, Consumer<T> setup) {
             String key = this.config.key();
-            return Summons.summon(level, caster, type, count, DURATION, key, castData, mob -> {
+            return Summons.summon(level, caster, type, count, this.duration(), key, castData, mob -> {
                 mob.getPersistentData().putFloat(POWER, power);
                 mob.setCustomName(Component.translatable("spell.mdvlcraft." + key));
                 setup.accept(mob);
             });
+        }
+
+        /** How long the summons last, in ticks. */
+        protected int duration() {
+            return DURATION;
         }
 
         @Override
@@ -113,7 +123,7 @@ public final class SummonSpells {
             if (!recasts.hasRecastForSpell(this) && level instanceof ServerLevel server) {
                 SummonedEntitiesCastData castData = new SummonedEntitiesCastData();
                 this.summon(server, caster, this.getSpellPower(spellLevel, caster), castData);
-                recasts.addRecast(new RecastInstance(this.getSpellId(), spellLevel, this.getRecastCount(spellLevel, caster), DURATION, source, castData), data);
+                recasts.addRecast(new RecastInstance(this.getSpellId(), spellLevel, this.getRecastCount(spellLevel, caster), this.duration(), source, castData), data);
                 level.playSound(null, caster.blockPosition(), SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
             super.onCast(level, spellLevel, caster, source, data);
@@ -281,7 +291,7 @@ public final class SummonSpells {
         }
     }
 
-    private static void spark(ServerLevel level, Vec3 from, Vec3 to) {
+    static void spark(ServerLevel level, Vec3 from, Vec3 to) {
         Vec3 step = to.subtract(from).scale(0.1);
         for (int i = 0; i <= 10; i++) {
             Vec3 at = from.add(step.scale(i));
@@ -468,6 +478,64 @@ public final class SummonSpells {
                 }
                 mule.setChest(true);
                 mule.equipSaddle(null);
+            });
+        }
+    }
+
+    /**
+     * Summon Oni: a towering spirit oni (a vindicator at 1.6 times size, Pehkui) swinging Fantasy Weapons' Hefty Club as its
+     * kanabo, with 80 health and heavy blows.
+     */
+    public static class Oni extends SummonSpell {
+        public Oni() {
+            super("oni_summon", 6);
+        }
+
+        @Override
+        protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
+            Item club = ForgeRegistries.ITEMS.getValue(ResourceLocation.parse("fantasy_weapons:weapon_hefty_club"));
+            if (club == null || club == Items.AIR) {
+                throw new IllegalStateException("Item fantasy_weapons:weapon_hefty_club is not registered");
+            }
+            this.spawn(level, caster, power, EntityType.VINDICATOR, 1, castData, oni -> {
+                oni.setItemSlot(EquipmentSlot.MAINHAND, new ItemStack(club));
+                oni.setDropChance(EquipmentSlot.MAINHAND, 0.0F);
+                Objects.requireNonNull(oni.getAttribute(Attributes.MAX_HEALTH)).setBaseValue(80.0);
+                Objects.requireNonNull(oni.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(6.0 + power);
+                Objects.requireNonNull(oni.getAttribute(Attributes.KNOCKBACK_RESISTANCE)).setBaseValue(0.8);
+                oni.setHealth(oni.getMaxHealth());
+                ScaleTypes.BASE.getScaleData(oni).setScale(1.6F);
+            });
+        }
+    }
+
+    /** Steppe Horse: a fast, armoured warhorse, saddled and tamed to the caster, for 5 minutes. */
+    public static class SteppeHorse extends SummonSpell {
+        public SteppeHorse() {
+            super("nomad_mount", 1);
+        }
+
+        @Override
+        protected int duration() {
+            return 6000;
+        }
+
+        @Override
+        public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity caster, MagicData data) {
+            return caster instanceof Player;
+        }
+
+        @Override
+        protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
+            this.spawn(level, caster, power, EntityType.HORSE, 1, castData, (Horse horse) -> {
+                horse.tameWithName((Player)caster);
+                horse.equipSaddle(null);
+                horse.equipArmor((Player)caster, new ItemStack(Items.DIAMOND_HORSE_ARMOR));
+                horse.setVariant(Variant.BLACK);
+                Objects.requireNonNull(horse.getAttribute(Attributes.MOVEMENT_SPEED)).setBaseValue(0.3375);
+                Objects.requireNonNull(horse.getAttribute(Attributes.JUMP_STRENGTH)).setBaseValue(0.9);
+                Objects.requireNonNull(horse.getAttribute(Attributes.MAX_HEALTH)).setBaseValue(40.0);
+                horse.setHealth(horse.getMaxHealth());
             });
         }
     }

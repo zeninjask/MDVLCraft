@@ -103,15 +103,18 @@ for el, nm, dsc in [('ice', 'Frost Arrow', 'ice, freezing the target'), ('lightn
                     ('water', 'Tide Arrow', 'water, soaking and slowing'), ('blood', 'Bone Arrow', 'bone shards that make the target bleed'),
                     ('spirit', 'Jade Arrow', 'jade that splits into shards')]:
     mod(f'arrow_{el}', nm, 'Fire Arrow', f'A charged arrow of {dsc}.')
-for el, nm, dsc in [('ice', 'Frost Palm', 'ice, freezing'), ('lightning', 'Thunder Palm', 'lightning, stunning'),
-                    ('water', 'Tide Palm', 'water, knocking back'), ('holy', 'Radiant Palm', 'holy light, healing you a little'),
-                    ('eldritch', 'Void Palm', 'void, pulling enemies in'), ('blood', 'Crimson Palm', 'blood, leeching health'),
-                    ('nature', 'Thorn Fist', 'thorns, poisoning'), ('spirit', 'Jade Palm', 'jade, shattering armour')]:
-    mod(f'palm_{el}', nm, 'Fire Fist', f'A powerful palm strike of {dsc}.')
-for el, nm in [('fire', 'Stance: Ember Form'), ('ice', 'Stance: Frost Form'), ('water', 'Stance: Flowing Form'),
-               ('lightning', 'Stance: Thunder Form'), ('holy', 'Stance: Dawn Form'), ('eldritch', 'Stance: Void Form'),
-               ('blood', 'Stance: Crimson Form'), ('nature', 'Stance: Bamboo Form'), ('spirit', 'Stance: Jade Form')]:
-    mod(f'stance_{el}', nm, 'Stance', 'A new element for Stance: sneak and cast to switch into it; your katana strikes take on its effect.')
+for el, nm, dsc in [('ice', 'Frost Palm', 'ice that freezes'), ('lightning', 'Thunder Palm', 'lightning that stuns'),
+                    ('water', 'Tide Palm', 'water that knocks back hard'), ('holy', 'Radiant Palm', 'holy light that heals you for a quarter of the damage'),
+                    ('eldritch', 'Void Palm', 'void that pulls enemies in'), ('blood', 'Crimson Palm', 'blood that leeches a third of the damage'),
+                    ('nature', 'Thorn Fist', 'thorns that poison'), ('spirit', 'Jade Palm', 'jade that shatters armour')]:
+    mod(f'palm_{el}', nm, 'Fire Fist', f'A palm strike of {dsc}, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.')
+for el, nm, dsc in [('fire', 'Stance: Ember Form', 'set foes on fire'), ('ice', 'Stance: Frost Form', 'slow and chill'),
+                    ('water', 'Stance: Flowing Form', 'knock back and refund a little stamina'),
+                    ('lightning', 'Stance: Thunder Form', 'stagger and arc a third of the damage to a nearby foe'),
+                    ('holy', 'Stance: Dawn Form', 'heal you a little and deal more to the undead'),
+                    ('eldritch', 'Stance: Void Form', 'weaken and pull the foe in'), ('blood', 'Stance: Crimson Form', 'deal 20% more and heal you for a tenth of it'),
+                    ('nature', 'Stance: Bamboo Form', 'poison'), ('spirit', 'Stance: Jade Form', 'shatter armour')]:
+    mod(f'stance_{el}', nm, 'Stance', f'A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes {dsc}.')
 mod('skeleton_archers', 'Summon Skeleton Archers', 'Raise Dead', 'Raise skeleton archers that shoot from range.')
 mod('bone_guard', 'Bone Bulwark', 'Raise Dead', 'Raise armoured skeleton shieldbearers that guard you.')
 mod('wolf_pack', 'Call the Pack', 'Raise Dead', 'Summon a pack of wolves that hunts with you.')

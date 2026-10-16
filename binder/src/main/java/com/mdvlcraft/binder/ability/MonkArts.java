@@ -69,6 +69,11 @@ public final class MonkArts {
         };
     }
 
+    /** Focus for another ability (Mushin): the next strike within 10 s is a Black Flash. */
+    public static void focusFor(ServerPlayer player) {
+        focus(player);
+    }
+
     private static float artMultiplier(Technique technique) {
         return switch (technique) {
             case HEAVY_BLOW, LEAPING_CRUSH -> 2.0F;

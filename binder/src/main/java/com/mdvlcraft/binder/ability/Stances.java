@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.ability;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.network.StanceSyncPacket;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import net.minecraft.nbt.CompoundTag;
@@ -29,7 +30,7 @@ public final class Stances {
     static void press(ServerPlayer player) {
         boolean active = ACTIVE.contains(player.getUUID());
         if (player.isShiftKeyDown()) {
-            StanceElement element = element(player).next();
+            StanceElement element = next(player, element(player));
             saveElement(player, element);
             apply(player, active);
             player.connection
@@ -49,6 +50,36 @@ public final class Stances {
                     )
                 );
         }
+    }
+
+    /** The element after `from` in the cycle that the player has: the four basic ones and every unlocked form. */
+    private static StanceElement next(ServerPlayer player, StanceElement from) {
+        StanceElement[] all = StanceElement.values();
+        for (int i = 1; i <= all.length; i++) {
+            StanceElement candidate = all[(from.ordinal() + i) % all.length];
+            if (has(player, candidate)) {
+                return candidate;
+            }
+        }
+        return from;
+    }
+
+    public static boolean has(ServerPlayer player, StanceElement element) {
+        return element.form == null
+            || Ability.byId(element.formId()).map(ability -> AbilityGrants.level(player, ability) > 0).orElse(false);
+    }
+
+    /** Casting a form: switches into it and turns the stance on. */
+    public static void enter(ServerPlayer player, StanceElement element) {
+        saveElement(player, element);
+        apply(player, true);
+        player.connection.send(new ClientboundSetActionBarTextPacket(
+            Component.translatable("stance.mdvlcraft.on", element.displayName(), element.effect())));
+    }
+
+    /** The active element of a player's stance, if the stance is on. */
+    public static Optional<StanceElement> active(Player player) {
+        return ACTIVE.contains(player.getUUID()) ? Optional.of(element(player)) : Optional.empty();
     }
 
     static void deactivate(ServerPlayer player) {
@@ -72,6 +103,9 @@ public final class Stances {
         StanceElement current = element(player);
 
         for (StanceElement element : StanceElement.values()) {
+            if (element.attribute == null) {
+                continue;
+            }
             AttributeInstance instance = player.getAttribute(element.attribute.get());
             if (instance == null) {
                 throw new IllegalStateException("Player has no " + element.attribute.get().getDescriptionId() + " attribute");

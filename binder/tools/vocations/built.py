@@ -9,7 +9,7 @@ EVOCATION = 'irons_spellbooks:evocation'
 FIRE, ICE, LIGHTNING, HOLY = 'irons_spellbooks:fire', 'irons_spellbooks:ice', 'irons_spellbooks:lightning', 'irons_spellbooks:holy'
 BLOOD, NATURE, ELDRITCH, ENDER = 'irons_spellbooks:blood', 'irons_spellbooks:nature', 'irons_spellbooks:eldritch', 'irons_spellbooks:ender'
 AQUA = 'traveloptics:aqua'
-SYMMETRY = 'iss_magicfromtheeast:symmetry'
+SYMMETRY, SPIRIT = 'iss_magicfromtheeast:symmetry', 'iss_magicfromtheeast:spirit'
 
 
 def spell(school, mana, cooldown, cast='instant', cast_time=0):
@@ -43,4 +43,45 @@ BUILT = {
     'pickpocket': spell(ELDRITCH, 20, 30),
     'smoke_bomb': spell(EVOCATION, 25, 25),
     'campfire': spell(FIRE, 35, 60, 'long', 20),
+    # batch 2: Samurai and Monk vocations
+    # Stance forms: cast to switch the stance into the form (modified/StanceForms)
+    'stance_fire': spell(FIRE, 15, 3),
+    'stance_ice': spell(ICE, 15, 3),
+    'stance_lightning': spell(LIGHTNING, 15, 3),
+    'stance_water': spell(AQUA, 15, 3),
+    'stance_holy': spell(HOLY, 15, 3),
+    'stance_blood': spell(BLOOD, 15, 3),
+    'stance_eldritch': spell(ELDRITCH, 15, 3),
+    'stance_nature': spell(NATURE, 15, 3),
+    'stance_spirit': spell(SPIRIT, 15, 3),
+    # palm strikes (modified/PalmSpells): a 5-block cone of force ahead; need empty hands, gloves or a fist weapon
+    'palm_ice': spell(ICE, 30, 10),
+    'palm_lightning': spell(LIGHTNING, 30, 10),
+    'palm_water': spell(AQUA, 30, 10),
+    'palm_holy': spell(HOLY, 30, 10),
+    'palm_blood': spell(BLOOD, 30, 10),
+    'palm_eldritch': spell(ELDRITCH, 30, 10),
+    'palm_nature': spell(NATURE, 30, 10),
+    'palm_spirit': spell(SPIRIT, 30, 10),
+    'stone_fist': spell(EVOCATION, 25, 8),
+    # the rest of the Samurai and Monk vocations
+    'adrenal_surge': spell(BLOOD, 35, 45),
+    'ember_fists': spell(FIRE, 30, 40),
+    'iron_body': spell(NATURE, 40, 45),
+    'jiangshi_fists': spell(SYMMETRY, 35, 50),
+    'mushin': spell(HOLY, 20, 25),
+    'cold_meditation': spell(ICE, 0, 45, 'continuous', 100),
+    'crane_leap': spell(LIGHTNING, 35, 14),
+    'flame_rush': spell(FIRE, 30, 15),
+    'whirlpool_kick': spell(AQUA, 30, 12),
+    'kunai_rain': spell(SPIRIT, 25, 10),
+    'arrow_spirit': spell(SPIRIT, 30, 12, 'long', 20),
+    'ki_wave': spell(EVOCATION, 10, 20, 'continuous', 60),
+    'mirror_image': spell(ENDER, 40, 30),
+    'shadow_clone': spell(ENDER, 60, 60),
+    'spirit_step': spell(SPIRIT, 30, 12),
+    'oni_summon': spell(SPIRIT, 70, 150, 'long', 40),
+    'nomad_mount': spell(EVOCATION, 40, 120, 'long', 20),
+    'lotus': spell(HOLY, 50, 45, 'long', 20),
+    'trail_rations': spell(NATURE, 30, 90, 'long', 20),
 }

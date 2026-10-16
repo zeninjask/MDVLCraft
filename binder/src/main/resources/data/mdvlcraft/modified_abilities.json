@@ -1,4 +1,22 @@
 {
+ "adrenal_surge": {
+  "name": "Adrenal Surge",
+  "description": "Haste that also gives Strength I; every hit you take while it lasts extends it.",
+  "school": "irons_spellbooks:blood",
+  "mana": 35,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "arrow_spirit": {
+  "name": "Jade Arrow",
+  "description": "A charged arrow of jade that splits into shards.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "long",
+  "cast_time": 20
+ },
  "blaze_spirits": {
   "name": "Summon Blaze Spirits",
   "description": "Summon allied blazes that shoot fire charges at your enemies.",
@@ -17,6 +35,24 @@
   "cast": "long",
   "cast_time": 20
  },
+ "cold_meditation": {
+  "name": "Cold Meditation",
+  "description": "Meditate inside an ice block: invulnerable, and restores mana and stamina while inside.",
+  "school": "irons_spellbooks:ice",
+  "mana": 0,
+  "cooldown": 45,
+  "cast": "continuous",
+  "cast_time": 100
+ },
+ "crane_leap": {
+  "name": "Crane Leap",
+  "description": "A leaping flip that lands with a thunderclap behind your target.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 35,
+  "cooldown": 14,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "death_mark": {
   "name": "Death Mark",
   "description": "Mark an enemy; your melee hits on it deal bonus damage and refund stamina.",
@@ -26,12 +62,30 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "ember_fists": {
+  "name": "Ember Fists",
+  "description": "Your unarmed hits set enemies on fire for a while.",
+  "school": "irons_spellbooks:fire",
+  "mana": 30,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "envenom": {
   "name": "Envenom",
   "description": "Coat your blade: hits poison the target for a while.",
   "school": "irons_spellbooks:nature",
   "mana": 20,
   "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "flame_rush": {
+  "name": "Flame Rush",
+  "description": "A burning dash that you can chain up to three times.",
+  "school": "irons_spellbooks:fire",
+  "mana": 30,
+  "cooldown": 15,
   "cast": "instant",
   "cast_time": 0
  },
@@ -62,6 +116,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "iron_body": {
+  "name": "Iron Body",
+  "description": "Harden your body: large damage reduction and knockback immunity, but you move slower while it lasts.",
+  "school": "irons_spellbooks:nature",
+  "mana": 40,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "javelin": {
   "name": "Javelin Hurl",
   "description": "Throw your held spear; it pierces through the first target and flies back to your hand.",
@@ -71,6 +134,78 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "jiangshi_fists": {
+  "name": "Jiangshi Fists",
+  "description": "Become a jiangshi for a while: your unarmed hits drain health and you hop instead of walk.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 35,
+  "cooldown": 50,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "ki_wave": {
+  "name": "Kamehameha Wave",
+  "description": "A channelled beam of raw ki from both palms (Ray of Frost with blue spirit energy, no freezing).",
+  "school": "irons_spellbooks:evocation",
+  "mana": 10,
+  "cooldown": 20,
+  "cast": "continuous",
+  "cast_time": 60
+ },
+ "kunai_rain": {
+  "name": "Kunai Rain",
+  "description": "Throw a fan of kunai straight down after a jump.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "lotus": {
+  "name": "Lotus Bloom",
+  "description": "A lotus opens beneath you, healing allies and cleansing one harmful effect from each.",
+  "school": "irons_spellbooks:holy",
+  "mana": 50,
+  "cooldown": 45,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "mirror_image": {
+  "name": "Mirror Images",
+  "description": "Split into three short-lived copies that confuse enemies; only one is real.",
+  "school": "irons_spellbooks:ender",
+  "mana": 40,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "mushin": {
+  "name": "Mushin",
+  "description": "Focus that also makes any parry in the next 3 s count as a perfect parry.",
+  "school": "irons_spellbooks:holy",
+  "mana": 20,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "nomad_mount": {
+  "name": "Steppe Horse",
+  "description": "An armoured warhorse that is faster and can carry a rider into battle.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 40,
+  "cooldown": 120,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "oni_summon": {
+  "name": "Summon Oni",
+  "description": "Summon a towering spirit oni with a kanabo instead of a samurai.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 70,
+  "cooldown": 150,
+  "cast": "long",
+  "cast_time": 40
+ },
  "pack_mule": {
   "name": "Pack Mule",
   "description": "Summon a spectral mule with a chest that follows you.",
@@ -79,6 +214,78 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 20
+ },
+ "palm_blood": {
+  "name": "Crimson Palm",
+  "description": "A palm strike of blood that leeches a third of the damage, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "palm_eldritch": {
+  "name": "Void Palm",
+  "description": "A palm strike of void that pulls enemies in, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "palm_holy": {
+  "name": "Radiant Palm",
+  "description": "A palm strike of holy light that heals you for a quarter of the damage, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.",
+  "school": "irons_spellbooks:holy",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "palm_ice": {
+  "name": "Frost Palm",
+  "description": "A palm strike of ice that freezes, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.",
+  "school": "irons_spellbooks:ice",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "palm_lightning": {
+  "name": "Thunder Palm",
+  "description": "A palm strike of lightning that stuns, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "palm_nature": {
+  "name": "Thorn Fist",
+  "description": "A palm strike of thorns that poison, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.",
+  "school": "irons_spellbooks:nature",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "palm_spirit": {
+  "name": "Jade Palm",
+  "description": "A palm strike of jade that shatters armour, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "palm_water": {
+  "name": "Tide Palm",
+  "description": "A palm strike of water that knocks back hard, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon.",
+  "school": "traveloptics:aqua",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
  },
  "pickpocket": {
   "name": "Pickpocket",
@@ -125,6 +332,15 @@
   "cast": "long",
   "cast_time": 30
  },
+ "shadow_clone": {
+  "name": "Shadow Clone Jutsu",
+  "description": "Summon two clones of yourself that fight with your held weapon instead of casting spells.",
+  "school": "irons_spellbooks:ender",
+  "mana": 60,
+  "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "shield_bash": {
   "name": "Shield Bash",
   "description": "With a shield in the off hand, slam it into the target in reach: stuns and knocks it back.",
@@ -152,6 +368,96 @@
   "cast": "long",
   "cast_time": 30
  },
+ "spirit_step": {
+  "name": "Spirit Step",
+  "description": "Teleport where you look, leaving a spirit double that taunts enemies and bursts.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_blood": {
+  "name": "Stance: Crimson Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes deal 20% more and heal you for a tenth of it.",
+  "school": "irons_spellbooks:blood",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_eldritch": {
+  "name": "Stance: Void Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes weaken and pull the foe in.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_fire": {
+  "name": "Stance: Ember Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes set foes on fire.",
+  "school": "irons_spellbooks:fire",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_holy": {
+  "name": "Stance: Dawn Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes heal you a little and deal more to the undead.",
+  "school": "irons_spellbooks:holy",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_ice": {
+  "name": "Stance: Frost Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes slow and chill.",
+  "school": "irons_spellbooks:ice",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_lightning": {
+  "name": "Stance: Thunder Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes stagger and arc a third of the damage to a nearby foe.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_nature": {
+  "name": "Stance: Bamboo Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes poison.",
+  "school": "irons_spellbooks:nature",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_spirit": {
+  "name": "Stance: Jade Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes shatter armour.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_water": {
+  "name": "Stance: Flowing Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes knock back and refund a little stamina.",
+  "school": "traveloptics:aqua",
+  "mana": 15,
+  "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "still_mind": {
   "name": "Still Mind",
   "description": "Sneak still to channel: restores mana and stamina instead of other players' health.",
@@ -160,6 +466,15 @@
   "cooldown": 30,
   "cast": "continuous",
   "cast_time": 200
+ },
+ "stone_fist": {
+  "name": "Pilgrim's Palm",
+  "description": "A plain, heavy palm strike that knocks the target back and breaks its guard.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
  },
  "storm_hounds": {
   "name": "Storm Hounds",
@@ -188,6 +503,15 @@
   "cast": "long",
   "cast_time": 30
  },
+ "trail_rations": {
+  "name": "Trail Rations",
+  "description": "Conjure food for the whole party that also gives a short Regeneration.",
+  "school": "irons_spellbooks:nature",
+  "mana": 30,
+  "cooldown": 90,
+  "cast": "long",
+  "cast_time": 20
+ },
  "treant": {
   "name": "Summon Treant",
   "description": "Summon a treant (a reskinned iron golem) that roots what it hits.",
@@ -212,6 +536,15 @@
   "school": "irons_spellbooks:blood",
   "mana": 30,
   "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "whirlpool_kick": {
+  "name": "Whirlpool Kick",
+  "description": "A spinning kick wrapped in water that drags nearby enemies in.",
+  "school": "traveloptics:aqua",
+  "mana": 30,
+  "cooldown": 12,
   "cast": "instant",
   "cast_time": 0
  },

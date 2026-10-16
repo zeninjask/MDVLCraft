@@ -1,7 +1,10 @@
 package com.mdvlcraft.binder.modified;
 
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import com.mdvlcraft.binder.ability.StanceElement;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
@@ -13,15 +16,29 @@ import net.minecraftforge.registries.DeferredRegister;
 /** Registers every built Modified ability as an Iron's spell; each must have an entry in modified_abilities.json and vice versa. */
 public final class ModifiedSpells {
     private static final DeferredRegister<AbstractSpell> SPELLS = DeferredRegister.create(SpellRegistry.SPELL_REGISTRY_KEY, "mdvlcraft");
-    private static final List<Supplier<ModifiedSpell>> ALL = List.of(
+    private static final List<Supplier<ModifiedSpell>> ALL = all();
+
+    private static List<Supplier<ModifiedSpell>> all() {
+        List<Supplier<ModifiedSpell>> all = new ArrayList<>(List.of(
         MartialSpells.ShieldBash::new, MartialSpells.Provoke::new, MartialSpells.Javelin::new, MartialSpells.Iaido::new,
         MartialSpells.TwinFang::new, MartialSpells.QuakeSlam::new,
         BuffSpells.WarFrenzy::new, BuffSpells.Envenom::new, BuffSpells.DeathMark::new, BuffSpells.SmokeBomb::new, BuffSpells.StillMind::new,
         SummonSpells.BlazeSpirits::new, SummonSpells.SnowSentinels::new, SummonSpells.TideGuardians::new, SummonSpells.StormHounds::new,
         SummonSpells.WolfPack::new, SummonSpells.GuardianAngel::new, SummonSpells.SculkWatcher::new, SummonSpells.Treant::new,
         SummonSpells.Terracotta::new, SummonSpells.HuntingHawk::new, SummonSpells.PackMule::new,
-        UtilitySpells.Rally::new, UtilitySpells.Campfire::new, UtilitySpells.Pickpocket::new
-    );
+        UtilitySpells.Rally::new, UtilitySpells.Campfire::new, UtilitySpells.Pickpocket::new,
+        // batch 2: the Samurai and Monk vocations
+        BodySpells.AdrenalSurge::new, BodySpells.EmberFists::new, BodySpells.IronBody::new, BodySpells.JiangshiFists::new,
+        BodySpells.Mushin::new, BodySpells.ColdMeditation::new,
+        StrikeSpells.CraneLeap::new, StrikeSpells.FlameRush::new, StrikeSpells.WhirlpoolKick::new, StrikeSpells.KunaiRain::new,
+        StrikeSpells.JadeArrow::new, StrikeSpells.KiWave::new,
+        CloneSpells.MirrorImages::new, CloneSpells.ShadowClone::new, CloneSpells.SpiritStep::new,
+        SummonSpells.Oni::new, SummonSpells.SteppeHorse::new, UtilitySpells.Lotus::new, UtilitySpells.TrailRations::new
+        ));
+        PalmSpells.all().forEach(palm -> all.add(() -> palm));
+        Arrays.stream(StanceElement.values()).filter(e -> e.form != null).forEach(e -> all.add(() -> new StanceForms.Form(e)));
+        return all;
+    }
 
     private ModifiedSpells() {
     }

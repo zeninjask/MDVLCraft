@@ -32,6 +32,7 @@ import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import org.xszb.interlace_spellweaves.item.utils.MagicCookiesItem;
 
 /** Modified abilities that leave something in the world or take something from it. */
 public final class UtilitySpells {
@@ -159,6 +160,62 @@ public final class UtilitySpells {
                     level.playSound(null, caster.blockPosition(), SoundEvents.ITEM_PICKUP, SoundSource.PLAYERS, 1.0F, 0.7F);
                 }
             }
+            super.onCast(level, spellLevel, caster, source, data);
+        }
+    }
+
+    /** Lotus Bloom: a lotus for 10 s; every second, allies within 5 blocks heal and lose one harmful effect each. */
+    public static class Lotus extends ModifiedSpell {
+        public Lotus() {
+            super("lotus", 3);
+        }
+
+        @Override
+        public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
+            if (level instanceof ServerLevel server) {
+                Vec3 center = caster.position();
+                float heal = this.getSpellPower(spellLevel, caster);
+                Zones.start(server, center, caster, heal, 200, 20, zone -> {
+                    for (LivingEntity ally : Targets.allies(caster, center, 5.0)) {
+                        ally.heal(heal);
+                        ally.getActiveEffects().stream().filter(e -> !e.getEffect().isBeneficial()).findFirst()
+                            .ifPresent(e -> ally.removeEffect(e.getEffect()));
+                    }
+                    for (int i = 0; i < 12; i++) {
+                        double a = Math.PI * 2 * i / 12;
+                        server.sendParticles(ParticleTypes.CHERRY_LEAVES, center.x + Math.cos(a) * 2.5, center.y + 0.2, center.z + Math.sin(a) * 2.5,
+                            2, 0.3, 0.1, 0.3, 0.0);
+                    }
+                    server.sendParticles(ParticleTypes.HEART, center.x, center.y + 0.6, center.z, 3, 1.5, 0.3, 1.5, 0.0);
+                }, () -> {
+                }, null);
+                level.playSound(null, caster.blockPosition(), SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.PLAYERS, 1.5F, 0.8F);
+            }
+            super.onCast(level, spellLevel, caster, source, data);
+        }
+    }
+
+    /** Trail Rations: every player ally within 8 blocks gets a conjured cookie (Interlace Spellweaves' magic cookie) and 8 s of Regeneration I. */
+    public static class TrailRations extends ModifiedSpell {
+        public TrailRations() {
+            super("trail_rations", 0);
+        }
+
+        @Override
+        public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
+            for (LivingEntity ally : Targets.allies(caster, caster.position(), 8.0)) {
+                if (ally instanceof Player player) {
+                    ItemStack cookie = MagicCookiesItem.createCustomCookie(8, 0.8F);
+                    if (!player.getInventory().add(cookie)) {
+                        player.spawnAtLocation(cookie);
+                    }
+                    player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 160, 0), caster);
+                }
+            }
+            if (level instanceof ServerLevel server) {
+                server.sendParticles(ParticleTypes.HAPPY_VILLAGER, caster.getX(), caster.getY() + 1.0, caster.getZ(), 20, 2.0, 0.5, 2.0, 0.0);
+            }
+            level.playSound(null, caster.blockPosition(), SoundEvents.PLAYER_BURP, SoundSource.PLAYERS, 1.0F, 1.2F);
             super.onCast(level, spellLevel, caster, source, data);
         }
     }

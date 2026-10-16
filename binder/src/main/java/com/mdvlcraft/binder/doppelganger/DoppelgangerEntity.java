@@ -2,12 +2,15 @@ package com.mdvlcraft.binder.doppelganger;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.function.Consumer;
 import javax.annotation.Nullable;
 import net.minecraft.commands.arguments.EntityAnchorArgument.Anchor;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -42,6 +45,11 @@ public class DoppelgangerEntity extends PathfinderMob {
     private LivingEntity sentTarget;
     private int sentTicks;
     private int holdTicks;
+    /** A temporary copy (Modified abilities' clones): ticks left, or -1 for the Doppelganger ability's own. */
+    private int lifetime = -1;
+    private boolean holdForever;
+    @Nullable
+    private Consumer<DoppelgangerEntity> onExpire;
 
     public DoppelgangerEntity(EntityType<? extends DoppelgangerEntity> type, Level level) {
         super(type, level);
@@ -94,6 +102,25 @@ public class DoppelgangerEntity extends PathfinderMob {
         return this.sentTarget;
     }
 
+    /**
+     * A temporary copy of `owner` at `at` for `ticks` (Mirror Images, Shadow Clone, Spirit Step): it fights like the
+     * Doppelganger ability's copy but is not tied to it; `stay` keeps it where it was spawned, `onExpire` runs when it runs out.
+     */
+    public static DoppelgangerEntity spawnCopy(ServerPlayer owner, Vec3 at, int ticks, boolean stay, @Nullable Consumer<DoppelgangerEntity> onExpire) {
+        ServerLevel level = owner.serverLevel();
+        DoppelgangerEntity copy = DoppelgangerSetup.DOPPELGANGER.get().create(level);
+        if (copy == null) {
+            throw new IllegalStateException("Cannot create a doppelganger");
+        }
+        copy.moveTo(at.x, at.y, at.z, owner.getYRot(), owner.getXRot());
+        copy.setOwner(owner);
+        copy.lifetime = ticks;
+        copy.holdForever = stay;
+        copy.onExpire = onExpire;
+        level.addFreshEntity(copy);
+        return copy;
+    }
+
     void setOwner(Player owner) {
         this.entityData.set(OWNER, Optional.of(owner.getUUID()));
         this.side = this.random.nextBoolean() ? 1 : -1;
@@ -120,8 +147,19 @@ public class DoppelgangerEntity extends PathfinderMob {
         super.tick();
         if (!this.level().isClientSide()) {
             Player owner = this.getOwner();
+            if (this.lifetime > 0 && --this.lifetime == 0) {
+                if (this.onExpire != null) {
+                    this.onExpire.accept(this);
+                }
+                this.discard();
+                return;
+            }
             if (owner != null && owner.isAlive() && owner.level() == this.level()) {
                 this.copyGear(owner);
+                if (this.holdForever) {
+                    this.setDeltaMovement(Vec3.ZERO);
+                    return;
+                }
                 if (this.sentTicks > 0) {
                     this.sentTicks--;
                 }

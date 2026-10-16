@@ -13,8 +13,10 @@ public enum StanceAbility implements Ability {
         return ID.equals(id) ? Optional.of(INSTANCE) : Optional.empty();
     }
 
+    /** A basic element's orb (stance_element_<name>), or a form's own ability icon. */
     public static ResourceLocation icon(StanceElement element) {
-        return AbilityIcons.ability(ResourceLocation.fromNamespaceAndPath("mdvlcraft", "stance_" + element.name().toLowerCase()));
+        return AbilityIcons.ability(element.form != null ? element.formId()
+            : ResourceLocation.fromNamespaceAndPath("mdvlcraft", "stance_element_" + element.name().toLowerCase()));
     }
 
     @Override
