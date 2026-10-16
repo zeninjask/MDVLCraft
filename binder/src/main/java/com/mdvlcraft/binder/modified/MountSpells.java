@@ -2,18 +2,23 @@ package com.mdvlcraft.binder.modified;
 
 import com.mdvlcraft.binder.modified.SummonSpells.PulseGoal;
 import com.mdvlcraft.binder.modified.SummonSpells.SummonSpell;
+import com.mdvlcraft.binder.network.BinderNetwork;
+import com.mdvlcraft.binder.network.VehicleBlinkPacket;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
+import java.util.Map;
 import java.util.Objects;
+import java.util.WeakHashMap;
+import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -26,7 +31,6 @@ import net.minecraft.world.entity.vehicle.Boat;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -37,6 +41,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class MountSpells {
     static final int MOUNT_TICKS = 6000;
+    private static final int SHOCK_TICKS = 5;
+    private static final int BLINK_TICKS = 40;
+    private static final Map<Mob, Vec3> LAST = new WeakHashMap<>();
     public static final String SPECTRAL_BOAT = "spell.mdvlcraft.spectral_boat";
 
     private MountSpells() {
@@ -156,24 +163,30 @@ public final class MountSpells {
             return;
         }
         switch (Summons.kind(mob)) {
-            case "storm_steed" -> mob.goalSelector.addGoal(0, new PulseGoal(mob, 10, MountSpells::shock));
-            case "void_strider" -> mob.goalSelector.addGoal(0, new PulseGoal(mob, 40, MountSpells::blink));
+            case "storm_steed" -> mob.goalSelector.addGoal(0, new PulseGoal(mob, SHOCK_TICKS, MountSpells::shock));
+            case "void_strider" -> mob.goalSelector.addGoal(0, new PulseGoal(mob, BLINK_TICKS, MountSpells::blink));
             default -> {
             }
         }
     }
 
-    private static boolean galloping(Mob mount) {
-        return mount.isVehicle() && new Vec3(mount.getX() - mount.xo, 0.0, mount.getZ() - mount.zo).lengthSqr() > 0.04;
+    /**
+     * Whether the ridden mount covered 0.2 blocks a tick since its last pulse `ticks` ago. The rider moves it from their
+     * client before it ticks here, so its own xo/zo already match its position.
+     */
+    private static boolean galloping(Mob mount, int ticks) {
+        Vec3 last = LAST.put(mount, mount.position());
+        double step = 0.2 * ticks;
+        return mount.isVehicle() && last != null && mount.position().subtract(last).horizontalDistanceSqr() > step * step;
     }
 
     private static void shock(Mob steed) {
         ServerLevel level = (ServerLevel)steed.level();
         level.sendParticles(ParticleTypes.ELECTRIC_SPARK, steed.getX(), steed.getY(0.6), steed.getZ(), 6, 0.5, 0.5, 0.5, 0.05);
-        if (!galloping(steed) || !(Summons.owner(steed) instanceof LivingEntity owner)) {
+        if (!galloping(steed, SHOCK_TICKS) || !(Summons.owner(steed) instanceof LivingEntity owner)) {
             return;
         }
-        for (LivingEntity enemy : Targets.enemies(owner, steed.position(), 2.0)) {
+        for (LivingEntity enemy : Targets.enemies(owner, steed.position(), 2.5)) {
             if (enemy != steed && !steed.hasPassenger(enemy)) {
                 enemy.hurt(steed.damageSources().lightningBolt(), 3.0F + SummonSpells.power(steed));
                 SummonSpells.spark(level, steed.getEyePosition(), enemy.getEyePosition());
@@ -181,25 +194,26 @@ public final class MountSpells {
         }
     }
 
-    /** The rider steers the mount from their client, so the blink carries both: off, teleport, back on. */
+    /**
+     * The rider steers the mount from their client, so the blink is made there (network/VehicleBlinkPacket): a move the
+     * server made would be undone by the rider's next one. Every block of the way must be clear.
+     */
     private static void blink(Mob strider) {
-        Entity rider = strider.getControllingPassenger();
-        if (!galloping(strider) || rider == null) {
+        if (!galloping(strider, BLINK_TICKS) || !(strider.getControllingPassenger() instanceof ServerPlayer rider)) {
             return;
         }
         ServerLevel level = (ServerLevel)strider.level();
-        Vec3 forward = Vec3.directionFromRotation(0.0F, rider.getYRot()).scale(4.0);
-        Vec3 to = strider.position().add(forward);
-        AABB box = strider.getBoundingBox().move(forward);
-        if (!level.noCollision(strider, box) || !level.noCollision(rider, rider.getBoundingBox().move(forward))) {
-            return;
+        Vec3 forward = Vec3.directionFromRotation(0.0F, rider.getYRot());
+        for (int step = 1; step <= 4; step++) {
+            Vec3 by = forward.scale(step);
+            if (!level.noCollision(strider, strider.getBoundingBox().move(by)) || !level.noCollision(rider, rider.getBoundingBox().move(by))) {
+                return;
+            }
         }
+        Vec3 to = strider.position().add(forward.scale(4.0));
         level.sendParticles(ParticleTypes.PORTAL, strider.getX(), strider.getY(0.5), strider.getZ(), 40, 0.6, 0.6, 0.6, 0.3);
-        rider.stopRiding();
-        strider.teleportTo(to.x, to.y, to.z);
-        rider.teleportTo(to.x, to.y, to.z);
-        rider.startRiding(strider, true);
+        BinderNetwork.sendTo(rider, new VehicleBlinkPacket(strider.getId(), to.x, to.y, to.z));
         level.sendParticles(ParticleTypes.REVERSE_PORTAL, to.x, to.y + 0.8, to.z, 40, 0.6, 0.6, 0.6, 0.1);
-        level.playSound(null, strider.blockPosition(), SoundEvents.ENDERMAN_TELEPORT, SoundSource.NEUTRAL, 0.8F, 1.2F);
+        level.playSound(null, BlockPos.containing(to), SoundEvents.ENDERMAN_TELEPORT, SoundSource.NEUTRAL, 0.8F, 1.2F);
     }
 }

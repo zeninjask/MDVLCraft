@@ -19,6 +19,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.DyeableLeatherItem;
 import net.minecraft.world.item.ItemStack;
@@ -271,11 +273,20 @@ public final class UndeadSummons {
         }
     }
 
-    /** The Burning Dead stay alight (a zombie on fire sets what it hits alight). */
+    /**
+     * The Burning Dead stay alight (a zombie on fire sets what it hits alight). The drowned pirates and horde fight on land
+     * by day too (a drowned's own attack waits for night or water).
+     */
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onJoin(EntityJoinLevelEvent event) {
-        if (!event.getLevel().isClientSide() && event.getEntity() instanceof Mob mob && Summons.kind(mob).equals("burning_dead")) {
-            mob.goalSelector.addGoal(0, new SummonSpells.PulseGoal(mob, 20, m -> m.setRemainingFireTicks(DURATION_FIRE)));
+        if (event.getLevel().isClientSide() || !(event.getEntity() instanceof Mob mob)) {
+            return;
+        }
+        switch (Summons.kind(mob)) {
+            case "burning_dead" -> mob.goalSelector.addGoal(0, new SummonSpells.PulseGoal(mob, 20, m -> m.setRemainingFireTicks(DURATION_FIRE)));
+            case "pirate_crew", "drowned_dead" -> mob.goalSelector.addGoal(2, new MeleeAttackGoal((PathfinderMob)mob, 1.0, false));
+            default -> {
+            }
         }
     }
 

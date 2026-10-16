@@ -15,11 +15,13 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * Spectral Boat (modified/MountSpells): the player steering a boat moves it from their own client, so its extra speed is
- * given here: while moving, it speeds up by 4% a tick up to 1.2 blocks a tick (an ordinary boat tops out near 0.4 on water).
+ * given here: while moving, it speeds up by 6% a tick up to 1.2 blocks a tick. Against water's drag that settles near 0.75
+ * blocks a tick, about twice an ordinary boat's 0.36.
  */
 @EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
 public final class SpectralBoatClient {
     private static final double TOP = 1.2;
+    private static final double BOOST = 1.06;
 
     private SpectralBoatClient() {
     }
@@ -37,7 +39,7 @@ public final class SpectralBoatClient {
         Vec3 motion = boat.getDeltaMovement();
         double speed = motion.horizontalDistance();
         if (speed > 0.05 && speed < TOP) {
-            double boost = Math.min(1.04, TOP / speed);
+            double boost = Math.min(BOOST, TOP / speed);
             boat.setDeltaMovement(motion.x * boost, motion.y, motion.z * boost);
         }
     }
