@@ -96,7 +96,21 @@
     "antimagic.BlackDividerReachMixin",
     "curios.CuriosImplMixinHooksMixin",
     "epicfight.LivingEntityPatchHoldingMixin",
-    "epicfight.ServerPlayerPatchHeldItemMixin"
+    "epicfight.ServerPlayerPatchHeldItemMixin",
+    "loot.LootTableAccessor",
+    "loot.LootPoolAccessor",
+    "loot.LootPoolEntryContainerAccessor",
+    "loot.LootPoolSingletonContainerAccessor",
+    "loot.CompositeEntryBaseAccessor",
+    "loot.LootItemAccessor",
+    "loot.TagEntryAccessor",
+    "loot.LootTableReferenceAccessor",
+    "loot.SetItemCountFunctionAccessor",
+    "loot.LootItemRandomChanceConditionAccessor",
+    "loot.LootItemRandomChanceWithLootingConditionAccessor",
+    "loot.LootModifierAccessor",
+    "loot.ForgeInternalHandlerAccessor",
+    "EmeraldsForVillagerTypeItemAccessor"
   ],
   "client": [
     "seraph.CameraMixin",
@@ -144,7 +158,13 @@
     "SlotAccessor",
     "parties.EpicFightLockOnMixin",
     "ServerStatusPingerMixin",
-    "epicfight.ClientPlayerPatchHeldItemMixin"
+    "epicfight.ClientPlayerPatchHeldItemMixin",
+    "jer.LootTableHelperMixin",
+    "jer.MinecraftCompatMixin",
+    "jer.DungeonEntryAccessor",
+    "jer.TradeListMixin",
+    "jer.VillagersHelperMixin",
+    "jer.DungeonWrapperMixin"
   ],
   "injectors": {
     "defaultRequire": 1

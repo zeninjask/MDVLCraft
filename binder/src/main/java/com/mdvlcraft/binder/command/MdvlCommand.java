@@ -77,6 +77,7 @@ public final class MdvlCommand {
                         ))
                     .then(Commands.literal("release").then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::release))))
                 .then(Commands.literal("weapons").executes(MdvlCommand::weapons))
+                .then(Commands.literal("obtainable").executes(MdvlCommand::obtainable))
         );
     }
 
@@ -98,6 +99,25 @@ public final class MdvlCommand {
         ((CommandSourceStack)context.getSource())
             .sendSuccess(() -> Component.literal(rows.size() + " weapons, " + unsupported + " without Epic Fight support; written to " + file), false);
         return (int)unsupported;
+    }
+
+    private static int obtainable(CommandContext<CommandSourceStack> context) {
+        ObtainabilityReport.Result result = ObtainabilityReport.build(((CommandSourceStack)context.getSource()).getServer());
+        Path file = ((CommandSourceStack)context.getSource()).getServer().getServerDirectory().toPath().resolve("obtainability.tsv");
+        List<String> lines = new ArrayList<>(List.of("item\tsource\thidden"));
+        result.rows().forEach(row -> lines.add(row.id() + "\t" + (row.source() == null ? "-" : row.source()) + "\t" + row.hidden()));
+        result.problems().forEach(problem -> lines.add("# " + problem));
+
+        try {
+            Files.write(file, lines);
+        } catch (IOException var5) {
+            throw new UncheckedIOException(var5);
+        }
+
+        int missing = result.missing().size();
+        ((CommandSourceStack)context.getSource())
+            .sendSuccess(() -> Component.literal(result.rows().size() + " items, " + missing + " with no survival source that JEI still lists; written to " + file), false);
+        return missing;
     }
 
     private static int abilities(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

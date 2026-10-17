@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.9, so the next is 2.0.10.
+   - Every rebuild bumps the patch version. The latest is 2.0.10, so the next is 2.0.11.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -78,7 +78,15 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
-- **Released:** 2.0.9 is on `main` (`e992d27`, binder 0.8.0).
+- **Released:** 2.0.10 is on `main` (`c1c4e45`, binder 0.8.1).
+- **In 2.0.10:**
+  - Recipes for the Golden Harp (`epicfight_arachne:arachne_harp`) and The Lost Helmet (`epicfight_leonidas:the_lost_helmet`).
+  - Just Enough Resources (client only). The server works out every living mob's drops and every chest table's loot (`loot/LootDrops`, `loot/LootViews`: table entries, tags, nested tables, global loot modifiers sampled, the pack's rune swap and forbidden items, and `loot/CodeDrops` for drops mods make in code) and sends them at login and on /reload (`network/LootViewsPacket`); `compat/jer/JerLoot` and `mixin/jer/` give them to JER instead of its own jar-only loot reading. JER's villager pages also get Forge's modded trades, a stand-in villager (JER had none), and skip broken trades one by one.
+  - JEI hides unobtainable items listed in `resources/mdvlcraft/unobtainable_items.txt` (`content/UnobtainableItems`). `/mdvl obtainable` (`command/ObtainabilityReport`) writes `obtainability.tsv`; after the 229 reviewed additions it reports 0 items with no source that JEI lists. Re-run it after adding mods; code-only sources go in `ObtainabilityReport.OTHER_SOURCES` or `CodeDrops`.
+  - Distant Horizons bundles a Fabric API mixin that crashes `VillagerTrades$EmeraldsForVillagerTypeItem` (the fisherman's boat trade); `content/TradeTuning` rebuilds that trade.
+  - Tested: server boot, the audit, JER mob, chest and villager pages in a client. Not re-tested in a client after the last change (the chest page's mod name on its own line). A client test here needs the test server at -Xmx3G without AlwaysPreTouch and the slim client options, or the container's 14 GB limit kills the client.
+  - Travel Optics' summoned mobs fail to construct (missing Iron's `OwnerGetter` class); summoning one in game would crash. Not fixed.
+- **2.0.9** (`e992d27`, binder 0.8.0).
 - **In 2.0.9, content changes** (server-tested; the two marked untested need a player client):
   - Project Babylon Weapons and Simply Swords removed. Babylon's axe and pickaxe recipes used the vanilla patterns and shadowed the vanilla ones, which is why the plain axes had no recipe.
   - Runes, upgrade orbs and legendary ink removed (`content/RuneSwap`, `DisabledContent`). Recipes that used a rune now take the rune's focus item (Shadow-Walker = wizard piece + arcane essence + ender pearl); a rune or orb in loot becomes that item. The blank rune has no recipe and maps to arcane essence. Alshanex's archmage shard ritual needs legendary ink, so it is now uncraftable.
