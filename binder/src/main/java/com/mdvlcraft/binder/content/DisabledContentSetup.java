@@ -46,6 +46,7 @@ public final class DisabledContentSetup {
 
     private static void onCommonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> CURSED_FATE_LISTENERS.forEach(MinecraftForge.EVENT_BUS::unregister));
+        DisabledContent.checkAllowedItems();
     }
 
     static {

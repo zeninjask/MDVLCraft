@@ -30,9 +30,25 @@ public final class DisabledContent {
     private static final Set<ResourceLocation> FORBIDDEN_ITEMS = Set.of(
         ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "scroll_forge"),
         ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "inscription_table"),
+        ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "legendary_ink"),
         ResourceLocation.fromNamespaceAndPath("cursedfate", "cursed_shards"),
         ResourceLocation.fromNamespaceAndPath("minecraft", "elytra")
     );
+    /** Items of the spell addons above that are in the game anyway, with the materials their recipes need. */
+    private static final Set<ResourceLocation> ALLOWED_ITEMS = Stream.of(
+        armour("hazennstuff", "alchemist_supreme", "atlas", "blazeborne", "creaking_sorcerer", "cryogenic_ruler", "ender_dragon",
+            "fireblossom_battlemage", "flesh_mass", "hazel", "infestation", "legionnaire_commander", "legionnaire_ruler",
+            "mithril_battlemage", "pyrium_battlemage", "pyrium", "seraph", "thunder_prowler"),
+        items("hazennstuff", "fireblossom_battlemage_crown", "how_did_you_find_the_hazel_chestplate", "divine_mold", "pyrium_nugget",
+            "raw_zenalite", "starkissed_zenalite", "zenalite_ingot", "zenalite_block", "stone_zenalite_ore", "deepslate_zenalite_ore",
+            "end_stone_zenalite_ore"),
+        armour("iss_magicfromtheeast", "jade_pagoda", "onmyoji", "taoist"),
+        items("iss_magicfromtheeast", "mist_boots", "elemental_commander_chestplate", "jiangshi_hat", "jade_pagoda_horse_armor",
+            "coins_sword", "rusted_coins_sword", "jade_guandao", "muramasa", "repeating_crossbow", "soul_breaker", "soul_katana",
+            "soulpiercer", "spirit_crusher", "taiji_sword",
+            "jade", "jade_block", "jade_ore", "deepslate_jade_ore", "refined_jade_ingot", "refined_jade_block", "red_string",
+            "red_shaft", "copper_coins", "yin_yang_core", "crystallized_soul", "bottle_of_souls")
+    ).flatMap(s -> s).collect(Collectors.toUnmodifiableSet());
     private static final Set<ResourceLocation> UNTRADEABLE_ITEMS = Set.of(ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "hither_thither_wand"));
 
     private DisabledContent() {
@@ -40,6 +56,21 @@ public final class DisabledContent {
 
     private static Set<String> with(String[] base, String... more) {
         return Stream.concat(Arrays.stream(base), Arrays.stream(more)).collect(Collectors.toUnmodifiableSet());
+    }
+
+    private static Stream<ResourceLocation> items(String namespace, String... paths) {
+        return Arrays.stream(paths).map(path -> ResourceLocation.fromNamespaceAndPath(namespace, path));
+    }
+
+    private static Stream<ResourceLocation> armour(String namespace, String... sets) {
+        return Arrays.stream(sets).flatMap(set -> items(namespace, set + "_helmet", set + "_chestplate", set + "_leggings", set + "_boots"));
+    }
+
+    /** Every allowed item must exist, so a renamed item can't silently drop out of the game. */
+    public static void checkAllowedItems() {
+        ALLOWED_ITEMS.stream().filter(id -> !ForgeRegistries.ITEMS.containsKey(id)).findFirst().ifPresent(id -> {
+            throw new IllegalStateException("Allowed item " + id + " is not registered");
+        });
     }
 
     public static boolean isDisabled(ResourceLocation id) {
@@ -60,12 +91,27 @@ public final class DisabledContent {
     }
 
     public static boolean isForbidden(Item item) {
-        return isContentDisabled(ForgeRegistries.ITEMS.getKey(item))
+        ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
+        if (ALLOWED_ITEMS.contains(id)) {
+            return false;
+        }
+        return isContentDisabled(id)
+            || RuneSwap.isRemoved(id)
             || item instanceof ISpellbook
             || item instanceof IScroll
             || item instanceof EldritchManuscript
             || item instanceof SkillBookItem
-            || FORBIDDEN_ITEMS.contains(ForgeRegistries.ITEMS.getKey(item));
+            || FORBIDDEN_ITEMS.contains(id);
+    }
+
+    /** A recipe from a disabled addon's own data still loads when it makes an item that is in the game. */
+    public static boolean dropsRecipe(ResourceLocation id, JsonElement recipe) {
+        return isContentDisabled(id) && !producesAllowedItem(recipe) || producesForbiddenItem(recipe);
+    }
+
+    private static boolean producesAllowedItem(JsonElement recipe) {
+        ResourceLocation result = resultId(recipe);
+        return result != null && ALLOWED_ITEMS.contains(result);
     }
 
     public static boolean isUntradeable(ItemStack stack) {
@@ -77,19 +123,23 @@ public final class DisabledContent {
     }
 
     public static boolean producesForbiddenItem(JsonElement recipe) {
+        return isForbiddenId(resultId(recipe));
+    }
+
+    private static ResourceLocation resultId(JsonElement recipe) {
         if (recipe.isJsonObject() && recipe.getAsJsonObject().has("result")) {
             JsonElement result = recipe.getAsJsonObject().get("result");
             if (result.isJsonPrimitive()) {
-                return isForbiddenId(ResourceLocation.tryParse(result.getAsString()));
+                return ResourceLocation.tryParse(result.getAsString());
             } else if (result.isJsonObject()) {
                 JsonObject object = result.getAsJsonObject();
                 String key = object.has("item") ? "item" : "id";
-                return object.has(key) && isForbiddenId(ResourceLocation.tryParse(object.get(key).getAsString()));
+                return object.has(key) ? ResourceLocation.tryParse(object.get(key).getAsString()) : null;
             } else {
-                return false;
+                return null;
             }
         } else {
-            return false;
+            return null;
         }
     }
 

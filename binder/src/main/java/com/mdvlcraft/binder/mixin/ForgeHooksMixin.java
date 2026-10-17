@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.mixin;
 
 import com.mdvlcraft.binder.content.DisabledContent;
+import com.mdvlcraft.binder.content.RuneSwap;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -20,6 +21,8 @@ public abstract class ForgeHooksMixin {
     private static void mdvlcraft$stripForbiddenLoot(
         ResourceLocation lootTableId, ObjectArrayList<ItemStack> generatedLoot, LootContext context, CallbackInfoReturnable<ObjectArrayList<ItemStack>> cir
     ) {
-        cir.getReturnValue().removeIf(DisabledContent::isForbidden);
+        ObjectArrayList<ItemStack> loot = cir.getReturnValue();
+        loot.replaceAll(RuneSwap::swap);
+        loot.removeIf(DisabledContent::isForbidden);
     }
 }

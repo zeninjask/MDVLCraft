@@ -2,6 +2,7 @@ package com.mdvlcraft.binder.mixin;
 
 import com.google.gson.JsonElement;
 import com.mdvlcraft.binder.content.DisabledContent;
+import com.mdvlcraft.binder.content.RuneSwap;
 import java.util.Map;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -21,6 +22,7 @@ public abstract class RecipeManagerMixin {
     private void mdvlcraft$dropForbiddenRecipes(
         Map<ResourceLocation, JsonElement> recipes, ResourceManager resourceManager, ProfilerFiller profiler, CallbackInfo ci
     ) {
-        recipes.entrySet().removeIf(entry -> DisabledContent.isContentDisabled(entry.getKey()) || DisabledContent.producesForbiddenItem(entry.getValue()));
+        recipes.entrySet().removeIf(entry -> DisabledContent.dropsRecipe(entry.getKey(), entry.getValue()));
+        recipes.values().forEach(RuneSwap::rewriteIngredients);
     }
 }

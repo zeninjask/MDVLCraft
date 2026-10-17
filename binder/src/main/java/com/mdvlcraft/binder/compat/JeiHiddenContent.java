@@ -35,7 +35,6 @@ public final class JeiHiddenContent implements IModPlugin {
         "citadel:fancy_item", "citadel:icon_item", "citadel:effect_item", "alekiships:sloop_icon_only", "alekiships:rowboat_icon_only",
         "sereneseasons:ss_icon", "mdvlcraft:origin_icon", "moonlight:placeable_item",
         "wom:herrscher_aura", "wom:gesetz_aura", "wom:gesetz_handle", "wom:moonless_handle",
-        "project_babylon_weapons:fire_spell_projectile", "project_babylon_weapons:frozen_debuff_ice_block",
         "lootr:lootr_chest", "lootr:lootr_barrel", "lootr:lootr_trapped_chest", "lootr:lootr_shulker", "lootr:lootr_inventory"
     );
 

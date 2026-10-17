@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.8, so the next is 2.0.9.
+   - Every rebuild bumps the patch version. The latest is 2.0.9, so the next is 2.0.10.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -72,13 +72,20 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 - Commit with clear messages. Push the feature branch after each finished piece of work.
 - Report results plainly, including what you didn't verify.
 
-## Current work (16 Oct 2026)
+## Current work (17 Oct 2026)
 
 Nothing is half-written; everything is pushed to `bane-agent` (branched from `seb-agent`, with `seb-agent`'s 2.0.1 merged in).
 
 ### Where things stand
 
-- **Released:** 2.0.8 is on `main` (`ce5fecf`, built from `bane-agent` at `572459a`).
+- **Released:** 2.0.9 is on `main` (`e992d27`, binder 0.8.0).
+- **In 2.0.9, content changes** (server-tested; the two marked untested need a player client):
+  - Project Babylon Weapons and Simply Swords removed. Babylon's axe and pickaxe recipes used the vanilla patterns and shadowed the vanilla ones, which is why the plain axes had no recipe.
+  - Runes, upgrade orbs and legendary ink removed (`content/RuneSwap`, `DisabledContent`). Recipes that used a rune now take the rune's focus item (Shadow-Walker = wizard piece + arcane essence + ender pearl); a rune or orb in loot becomes that item. The blank rune has no recipe and maps to arcane essence. Alshanex's archmage shard ritual needs legendary ink, so it is now uncraftable.
+  - Hazen-n-Stuff armour and Magic from the East weapons and armour are allowed through the disabled-addon filter (`DisabledContent.ALLOWED_ITEMS`). New recipes in `data/mdvlcraft/recipes`: the Cursed Fate weapons, Avalon's Merlin GG (its only item), Muramasa, Repeating Crossbow, Jiangshi Hat, and jade from 4 emeralds.
+  - Return Crystal (`integration/ReturnCrystal`): every `#forge:bosses` kill in a `cataclysm_dimension` level drops one; using it returns the player to where they used the eye. The drop is tested; the teleport is untested.
+  - `compat/HerobrineInvitation`: 1% chance of the Mimic's Invitation, with a "You have been invited…" title, when Herobrine discards himself. Untested.
+- **2.0.8** (`ce5fecf`, built from `bane-agent` at `572459a`).
 - **In 2.0.8, Modified abilities batch 4** (32, all tested in game):
   - Undead summons (`modified/UndeadSummons`): Skeleton Archers, Bone Guard, Burning Dead (fire burst on death), Reanimate, Strays, Drowned Legion, Pirate Crew, Drowned Horde, and Soul Reaper (a slash that raises skeletons from its kills).
   - Beast summons (`modified/BeastSummons`): Frost Wolves, Spider Brood, Shadow Pack, Void Hound, Spirit Wolf, Spirit Tiger, Bear, Fallen Angel, Frost Seraph, Snow Spirits, Thunderbird, Magpies and Storm Crows.

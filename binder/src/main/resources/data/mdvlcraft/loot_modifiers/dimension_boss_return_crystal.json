@@ -1,0 +1,67 @@
+{
+  "type": "mdvlcraft:add_item",
+  "conditions": [
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "#forge:bosses"
+      }
+    },
+    {
+      "condition": "minecraft:any_of",
+      "terms": [
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "dimension": "cataclysm_dimension:cataclysm_abyssal_depths"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "dimension": "cataclysm_dimension:cataclysm_bastion_lost"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "dimension": "cataclysm_dimension:cataclysm_eternal_frosthold"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "dimension": "cataclysm_dimension:cataclysm_forge_of_aeons"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "dimension": "cataclysm_dimension:cataclysm_infernos_maw"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "dimension": "cataclysm_dimension:cataclysm_pharaohs_bane"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "dimension": "cataclysm_dimension:cataclysm_sanctum_fallen"
+          }
+        },
+        {
+          "condition": "minecraft:location_check",
+          "predicate": {
+            "dimension": "cataclysm_dimension:cataclysm_souls_anvil"
+          }
+        }
+      ]
+    }
+  ],
+  "item": "mdvlcraft:return_crystal",
+  "chance": 1.0
+}

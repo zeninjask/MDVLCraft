@@ -165,12 +165,12 @@ public final class DaggerSpells {
 
     /** Ice Dagger: triple damage from behind; freezes (Slowness II, 3 s). */
     public static Dagger iceDagger() {
-        return new Dagger("ice_dagger", 6, "project_babylon_weapons:ice_dagger");
+        return new Dagger("ice_dagger", 6, "hazennstuff:frostburn_dagger");
     }
 
     /** Radiant Dagger: double damage to the undead, which also burn; the target glows for 10 s. */
     public static Dagger radiantDagger() {
-        return new Dagger("radiant_dagger", 6, "project_babylon_weapons:golden_dagger");
+        return new Dagger("radiant_dagger", 6, "epicfight:golden_dagger");
     }
 
     /** Void Shiv: the caster is teleported to wherever it lands. */

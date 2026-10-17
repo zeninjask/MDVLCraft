@@ -9,6 +9,7 @@ import com.mdvlcraft.binder.client.ClientAbilitySetup;
 import com.mdvlcraft.binder.client.ClientContentSetup;
 import com.mdvlcraft.binder.client.HerobrineRender;
 import com.mdvlcraft.binder.combat.BinderEffects;
+import com.mdvlcraft.binder.compat.HerobrineInvitation;
 import com.mdvlcraft.binder.compat.HerobrineLook;
 import com.mdvlcraft.binder.compat.issponder.PreviewCasts;
 import com.mdvlcraft.binder.config.BinderConfig;
@@ -20,6 +21,7 @@ import com.mdvlcraft.binder.doppelganger.DoppelgangerSetup;
 import com.mdvlcraft.binder.epicskill.EpicSkillReward;
 import com.mdvlcraft.binder.integration.CataclysmIntegration;
 import com.mdvlcraft.binder.integration.EpicFightIntegration;
+import com.mdvlcraft.binder.integration.ReturnCrystal;
 import com.mdvlcraft.binder.monk.UnarmedParry;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.music.Jingles;
@@ -68,7 +70,9 @@ public final class MDVLBinder {
         EpicFightIntegration.register(modBus, forgeBus);
         PreviewCasts.register();
         CataclysmIntegration.register(modBus, forgeBus);
+        ReturnCrystal.register(modBus, forgeBus);
         HerobrineLook.register();
+        HerobrineInvitation.register();
     }
 
     private static void onCommonSetup(FMLCommonSetupEvent event) {
