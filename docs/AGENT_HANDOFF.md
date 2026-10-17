@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.12, so the next is 2.0.13.
+   - Every rebuild bumps the patch version. The latest is 2.0.13, so the next is 2.0.14.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing
@@ -78,7 +78,8 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
-- **Released:** 2.0.12 is on `main` (binder 0.8.3): red string (redstone + string) and bloody vellum (paper + redstone) recipes, untested.
+- **Released:** 2.0.13 is on `main` (binder 0.8.4): cinder essence recipe (netherite scrap surrounded by blaze powder), untested.
+- **2.0.12** (binder 0.8.3): red string (redstone + string) and bloody vellum (paper + redstone) recipes, untested.
 - **2.0.11** (`0ef8736`, binder 0.8.2).
 - **In 2.0.11 (not tested in game, as the user asked):** `content/MagicGearScaling` scales every item's and curio's positive max mana modifiers to a fifth and every positive `*spell_power` modifier (any school) to half, rounded up to 0.1%. It runs at LOWEST priority on `ItemAttributeModifierEvent` and Curios' `CurioAttributeModifierEvent`, so it also scales content/TarnishedCrown's 35 mana to 7.
 - **2.0.10** (`c1c4e45`, binder 0.8.1).
