@@ -52,7 +52,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.
-   - Every rebuild bumps the patch version. The latest is 2.0.13, so the next is 2.0.14.
+   - Every rebuild bumps the patch version. The latest is 2.0.14, so the next is 2.0.15.
    - Remove the old version's files, update the README links, and push the release files to `main`. Do that from a git worktree based on `origin/main`, with `git push origin HEAD:main`.
 
 ## Testing

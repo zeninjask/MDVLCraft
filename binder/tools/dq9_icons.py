@@ -46,7 +46,7 @@ EMBLEMS = {  # tabs and archetypes share these
     "classes": "seed_of_skill",
     # the vocations rework's archetypes (blaze, frost and necromancer keep the old flame, ice and necromancy emblems)
     "guardian": "white_shield", "brute": "great_helm", "berserker": "valkyrie_sword", "blaze": "flame_shield",
-    "frost": "ice_crystal", "necromancer": "skullcap", "jade": "black_tortoise_fan",
+    "frost": "ice_crystal", "necromancer": "skullcap", "jade": "black_tortoise_fan", "spirit": "angel_bell",
 }
 ORIGINS = {
     "mdvlcraft_alchemist": "mystifying_mixture", "mdvlcraft_bard": "minstrels_manual", "mdvlcraft_battle_mage": "rune_staff",
@@ -118,7 +118,7 @@ BONUSES = {
     "puffish_attributes_trident_damage": "trident", "traveloptics_aqua_magic_resist": "shell_shield",
     "traveloptics_aqua_spell_power": "blue_orb",
     "cursed_school_cursed_spell_power": "hades_helm", "iss_magicfromtheeast_spirit_spell_power": "silver_orb",
-    "iss_magicfromtheeast_symmetry_spell_power": "lunar_fan", "iss_magicfromtheeast_symmetry_magic_resist": "solar_fan",
+    "iss_magicfromtheeast_symmetry_spell_power": "lunar_fan", "iss_magicfromtheeast_symmetry_magic_resist": "solar_fan", "iss_magicfromtheeast_spirit_magic_resist": "rosary",
     "somakespells_soul_fire_spell_power": "flame_tang",
 }
 
