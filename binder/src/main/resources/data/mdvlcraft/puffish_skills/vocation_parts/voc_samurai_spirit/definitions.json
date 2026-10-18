@@ -1,6 +1,6 @@
 {
  "voc__0": {
-  "title": "Spirit Blade: Katana Damage",
+  "title": "Yurei Ronin: Katana Damage",
   "description": "+15% Katana Damage",
   "icon": {
    "type": "texture",
@@ -30,23 +30,23 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Spirit Blade vocation bonus (Samurai + Spirit)."
+  "extra_description": "Yurei Ronin vocation bonus (Samurai + Spirit)."
  },
  "voc__1": {
-  "title": "Stance: Jade Form",
-  "description": "Unlocks Stance: Jade Form (15 mana, 3 s cooldown) on the ability wheel",
-  "extra_description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes shatter armour. Spirit Blade vocation skill.",
+  "title": "Phantom Draw",
+  "description": "Unlocks Phantom Draw on the ability wheel. A dashing draw cut that leaves a phantom samurai behind, which repeats the cut a moment later.",
+  "extra_description": "Coming soon: built from Iaido Draw (Modified); casting it does nothing yet. Yurei Ronin vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_stance_spirit.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_phantom_draw.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:stance_spirit",
+     "ability": "mdvlcraft:planned_phantom_draw",
      "level": 1
     }
    }
@@ -65,20 +65,20 @@
   "size": 2.0
  },
  "voc__2": {
-  "title": "Phantom Charge",
-  "description": "Unlocks Phantom Charge (Level 3) (54 mana, 120 s cooldown) on the ability wheel",
-  "extra_description": "Summon a group of samurai horseman that will charge directly into your enemy formation Spirit Blade vocation skill.",
+  "title": "Cursed Revenants",
+  "description": "Unlocks Cursed Revenants (Level 3) (72 mana, 150 s cooldown) on the ability wheel",
+  "extra_description": "Cast to summon random Draugr variants that'll protect you and fight for you. Yurei Ronin vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_phantom_charge.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_cursed_revenants.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_magicfromtheeast:phantom_charge",
+     "ability": "traveloptics:cursed_revenants",
      "level": 3
     }
    }
@@ -97,20 +97,52 @@
   "size": 2.0
  },
  "voc__3": {
-  "title": "Soul Latch",
-  "description": "Unlocks Soul Latch (Level 3) (43 mana, 33 s cooldown) on the ability wheel",
-  "extra_description": "Latches onto a target with a spectral stab, binding and pulling it toward you before dealing damage in a final releasing burst. Spirit Blade vocation skill.",
+  "title": "Stance: Soul Form",
+  "description": "Unlocks Stance: Soul Form on the ability wheel. A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes soulburn.",
+  "extra_description": "Coming soon: built from Stance; casting it does nothing yet. Yurei Ronin vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_soul_latch.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_stance_soul.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "somakespells:soul_latch",
+     "ability": "mdvlcraft:planned_stance_soul",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "Slowdown",
+  "description": "Unlocks Slowdown (Level 3) (27 mana, 27 s cooldown) on the ability wheel",
+  "extra_description": "Slows an eligible enemy and its temporal movement. Downward marks and slow clock hands distinguish it from Speedup. Higher levels improve duration, range and slowing strength. Yurei Ronin vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_chronomancy_slowdown.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_chronomancy:slowdown",
      "level": 3
     }
    }
@@ -128,52 +160,20 @@
   },
   "size": 2.0
  },
- "voc__4": {
-  "title": "Winged Ruin",
-  "description": "Unlocks Winged Ruin (Level 3) (55 mana, 45 s cooldown) on the ability wheel",
-  "extra_description": "Unfurls the Possessed Paladin's original crimson wings, rises amid converging souls and dives into a selected point, unleashing the Finisher's four cardinal formations of Soul Pillar Explosions. Spirit Blade vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_winged_ruin.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "somakespells:winged_ruin",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
  "voc__5": {
-  "title": "Dodge Master",
-  "description": "Teaches Dodge Master, an Epic Fight Dodge skill: For a moment after casting, dodge out of any hit by instinct, chaining dodges; repeated casts cost double stamina. Equip it in the Combat Skills box of the abilities screen",
+  "title": "Revelation",
+  "description": "Teaches Revelation, an Epic Fight Identity skill: Guarding, parrying and dodging build stacks; at full stacks unleash a stunning counter-attack. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_dodge_master.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_revelation.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "wom:dodge_master"
+     "skill": "epicfight:revelation"
     }
    }
   ],
@@ -189,22 +189,22 @@
    }
   },
   "size": 2.0,
-  "extra_description": "Spirit Blade vocation skill."
+  "extra_description": "Yurei Ronin vocation skill."
  },
  "voc__6": {
-  "title": "Spirit Blade: Symmetry Spell Power",
-  "description": "+15% Symmetry Spell Power",
+  "title": "Yurei Ronin: Spirit Spell Power",
+  "description": "+15% Spirit Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_spirit_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "attribute": "iss_magicfromtheeast:spirit_spell_power",
      "value": 0.15,
      "operation": "addition"
     }
@@ -222,23 +222,23 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Spirit Blade vocation bonus (Samurai + Spirit)."
+  "extra_description": "Yurei Ronin vocation bonus (Samurai + Spirit)."
  },
  "voc__7": {
-  "title": "Spirit Blade: Impact",
-  "description": "+0.5 Impact (stagger power)",
+  "title": "Yurei Ronin: Stamina restored on Parry",
+  "description": "+10% Stamina restored on Parry (of max)",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_impact.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_parry_stamina.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:impact",
-     "value": 0.5,
+     "attribute": "mdvlcraft:parry_stamina",
+     "value": 0.1,
      "operation": "addition"
     }
    }
@@ -255,6 +255,6 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Spirit Blade vocation bonus (Samurai + Spirit)."
+  "extra_description": "Yurei Ronin vocation bonus (Samurai + Spirit)."
  }
 }

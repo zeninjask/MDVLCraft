@@ -41,7 +41,7 @@ v('guardian', 'necromancer', ['Bone Warden'],
 v('guardian', 'druid', ['Grove Warden'],
   ['Z:totem_ward', 'Z:brand_nature', 'T:primordial_steed', 'Z:ent_stride'],
   'wom:vengeful_parry', ['NSP', 'DRS', 'NREG'])
-v('guardian', 'spirit', ['Jade Sentinel'],
+v('guardian', 'jade', ['Jade Sentinel'],
   ['Z:jade_skin', 'M:revenant_of_honor', 'M:spirit_challenging', 'H:dilated_zone'],
   'wom:inner_growth', ['SYM', 'ATG', 'SYMR'])
 
@@ -70,7 +70,7 @@ v('brute', 'necromancer', ['Butcher'],
 v('brute', 'druid', ['Earthshaker'],
   ['Z:bear', 'X:sand_maelstrom', 'C:hatch_cysts', 'Z:ent_stride'],
   'epicfight:hypervitality', ['NSP', 'MHP', 'NREG'])
-v('brute', 'spirit', ['Jade Colossus'],
+v('brute', 'jade', ['Jade Colossus'],
   ['M:phantom_charge', 'M:bone_hands', 'S:spiral_of_ruin', 'Z:brand_spirit'],
   'wom:pain_anticipation', ['SPI', 'SPR', 'MHP'])
 
@@ -99,7 +99,7 @@ v('samurai', 'necromancer', ['Revenant Ronin'],
 v('samurai', 'druid', ['Kodama'],
   ['Z:stance_nature', 'C:blight_step', 'X:sand_maelstrom', 'C:rotting_rain'],
   'dodge_parry_reward:damage_boost1', ['KAT', 'NSP', 'ASH'])
-v('samurai', 'spirit', ['Spirit Blade'],
+v('samurai', 'jade', ['Spirit Blade'],
   ['Z:stance_spirit', 'M:phantom_charge', 'S:soul_latch', 'S:winged_ruin'],
   'wom:dodge_master', ['KAT', 'SYM', 'IMP'])
 
@@ -128,7 +128,7 @@ v('berserker', 'necromancer', ['Bloodreaver'],
 v('berserker', 'druid', ['Beastmaster'],
   ['I:devour', 'Z:brand_nature', 'C:choir_of_flies', 'Z:bear'],
   'cdmoveset:wolf_dodge', ['ATK', 'NSP', 'MSP'])
-v('berserker', 'spirit', ['Kitsune Fury'],
+v('berserker', 'jade', ['Kitsune Fury'],
   ['M:kitsune_pack', 'Z:brand_spirit', 'Z:spirit_wolf', 'S:spirit_empowerment'],
   'wom:inner_growth', ['ATK', 'SPI', 'ASPD'])
 
@@ -157,6 +157,6 @@ v('monk', 'necromancer', ['Jiangshi'],
 v('monk', 'druid', ['Druidic Fist'],
   ['Z:palm_nature', 'I:slow', 'C:crow_feast', 'Z:iron_body'],
   'wom:spider_techniques', ['UNA', 'NSP', 'NREG'])
-v('monk', 'spirit', ['Wukong'],
+v('monk', 'jade', ['Wukong'],
   ['Z:palm_spirit', 'S:procession_of_souls', 'Z:body_outside_body', 'Z:spirit_step'],
   'mdvlcraft:wukong_dodge', ['UNA', 'SYM', 'DOD'])

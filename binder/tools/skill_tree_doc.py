@@ -537,7 +537,7 @@ def main():
 
     parts = [f"<!doctype html><html><head><meta charset='utf-8'><title>MDVLCraft Skill Trees</title><style>{STYLE}</style></head><body>",
              "<h1>MDVLCraft skill trees</h1>",
-             f"<p class='lead'>Version {e(version)}. Pick 2 of the 18 archetypes on the Archetypes tab: the pair is your <b>vocation</b>, one skill tab "
+             f"<p class='lead'>Version {e(version)}. Pick 2 of the 19 archetypes on the Archetypes tab: the pair is your <b>vocation</b>, one skill tab "
              "holding both archetypes' bases (left and right) and the vocation's own skills and bonuses (the centre column). The tab gives 1 point "
              "to start and 1 per level, with no level cap. The table gives the totals of each <b>base</b>; percentages add to the base value and Max "
              "Health is in half-hearts. Abilities (spells and techniques) go on the ability wheel; Epic Fight skills go in the Combat Skills box of the "

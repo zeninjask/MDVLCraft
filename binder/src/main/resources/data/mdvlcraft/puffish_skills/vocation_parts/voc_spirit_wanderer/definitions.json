@@ -1,20 +1,20 @@
 {
  "voc__0": {
-  "title": "Xian: Symmetry Spell Power",
-  "description": "+15% Symmetry Spell Power",
+  "title": "Spirit Pilgrim: Mount Speed",
+  "description": "+15% Mount Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_mount_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "attribute": "puffish_attributes:mount_speed",
      "value": 0.15,
-     "operation": "addition"
+     "operation": "multiply_base"
     }
    }
   ],
@@ -30,23 +30,23 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Xian vocation bonus (Spirit + Wanderer)."
+  "extra_description": "Spirit Pilgrim vocation bonus (Spirit + Wanderer)."
  },
  "voc__1": {
-  "title": "River Dragon",
-  "description": "Unlocks River Dragon (40 mana, 20 s cooldown) on the ability wheel",
-  "extra_description": "A jade river dragon instead of a sea serpent: it heals allies it passes. Xian vocation skill.",
+  "title": "Spirit Steed",
+  "description": "Unlocks Spirit Steed on the ability wheel. Summon a spectral horse that runs over water and through tall grass without slowing.",
+  "extra_description": "Coming soon: built from Summon Horse; casting it does nothing yet. Spirit Pilgrim vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_river_dragon.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_spirit_steed.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:river_dragon",
+     "ability": "mdvlcraft:planned_spirit_steed",
      "level": 1
     }
    }
@@ -65,20 +65,20 @@
   "size": 2.0
  },
  "voc__2": {
-  "title": "Spirit Tiger",
-  "description": "Unlocks Spirit Tiger (60 mana, 120 s cooldown) on the ability wheel",
-  "extra_description": "Summon a single white tiger spirit that fights beside you. Xian vocation skill.",
+  "title": "Wayshrine",
+  "description": "Unlocks Wayshrine on the ability wheel. Set a small roadside shrine; cast again from anywhere in the same dimension to return to it.",
+  "extra_description": "Coming soon: built from Recall; casting it does nothing yet. Spirit Pilgrim vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_spirit_tiger.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_wayshrine.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:spirit_tiger",
+     "ability": "mdvlcraft:planned_wayshrine",
      "level": 1
     }
    }
@@ -97,25 +97,25 @@
   "size": 2.0
  },
  "voc__3": {
-  "title": "Peach of Immortality",
-  "description": "Unlocks Peach of Immortality on the ability wheel. Conjure a peach that heals a lot and gives Regeneration and Resistance.",
-  "extra_description": "Coming soon: built from Gluttony; casting it does nothing yet. Xian vocation skill.",
+  "title": "Totem Rite",
+  "description": "Unlocks Totem Rite (Level 3) (14 mana, 4.5 s cooldown) on the ability wheel",
+  "extra_description": "Place a hollow totem at the target location to invoke a ritual circle. Enemies within the area continuously take damage. If it slays a target, an undead totem is successfully created. Spirit Pilgrim vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_immortal_peach.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_csw_totem_rite.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:planned_immortal_peach",
-     "level": 1
+     "ability": "iss_csw:totem_rite",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -129,25 +129,25 @@
   "size": 2.0
  },
  "voc__4": {
-  "title": "Terra Magica",
-  "description": "Unlocks Terra Magica (Level 1) (40 mana, 7.5 s cooldown) on the ability wheel",
-  "extra_description": "Inscribes a glintstone sigil on the ground that raises the caster's spell power by 30% while they stand in it. Casting it again replaces the old one. Xian vocation skill.",
+  "title": "Tornado",
+  "description": "Unlocks Tornado (Level 1) (144 mana, 150 s cooldown) on the ability wheel",
+  "extra_description": "Around a targeted location, create a tornado that will suck in nearby creatures and propulse them in the air Spirit Pilgrim vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_elden_ring_terra_magica.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/wind_spellbooks_tornado.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_elden_ring:terra_magica",
+     "ability": "wind_spellbooks:tornado",
      "level": 1
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -189,23 +189,23 @@
    }
   },
   "size": 2.0,
-  "extra_description": "Xian vocation skill."
+  "extra_description": "Spirit Pilgrim vocation skill."
  },
  "voc__6": {
-  "title": "Xian: Saturation from Food",
-  "description": "+25% Saturation from Food",
+  "title": "Spirit Pilgrim: Spirit Spell Power",
+  "description": "+15% Spirit Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_saturation_bonus.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_spirit_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "mdvlcraft:saturation_bonus",
-     "value": 0.25,
+     "attribute": "iss_magicfromtheeast:spirit_spell_power",
+     "value": 0.15,
      "operation": "addition"
     }
    }
@@ -222,10 +222,10 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Xian vocation bonus (Spirit + Wanderer)."
+  "extra_description": "Spirit Pilgrim vocation bonus (Spirit + Wanderer)."
  },
  "voc__7": {
-  "title": "Xian: Sprinting Speed",
+  "title": "Spirit Pilgrim: Sprinting Speed",
   "description": "+8% Sprinting Speed",
   "icon": {
    "type": "texture",
@@ -255,6 +255,6 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Xian vocation bonus (Spirit + Wanderer)."
+  "extra_description": "Spirit Pilgrim vocation bonus (Spirit + Wanderer)."
  }
 }

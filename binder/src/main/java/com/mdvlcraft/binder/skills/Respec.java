@@ -15,7 +15,7 @@ import net.puffish.skillsmod.api.SkillsAPI;
 import net.puffish.skillsmod.api.Skill.State;
 
 /**
- * The 18 archetypes and the player's vocation. Two archetypes picked on the Archetypes page (ArchetypeTabs) make a
+ * The 19 archetypes and the player's vocation. Two archetypes picked on the Archetypes page (ArchetypeTabs) make a
  * vocation: one skill tab, mdvlcraft:voc_<a>_<b> (skills/VocationParts), holding both archetypes' base trees and the
  * pair's own skills. A respec picks both archetypes again and starts the new vocation tab empty at three quarters of the
  * old level. A reset keeps the vocation and its level and gives back every point spent on it.
@@ -24,7 +24,7 @@ public final class Respec {
     /** In the design's order (tools/vocations/v2_base.ORDER); a vocation tab is named with the earlier one first. */
     public static final List<String> ARCHETYPES = List.of(
         "guardian", "brute", "samurai", "berserker", "monk",
-        "blaze", "frost", "water", "lightning", "holy", "warlock", "necromancer", "druid", "spirit",
+        "blaze", "frost", "water", "lightning", "holy", "warlock", "necromancer", "druid", "jade", "spirit",
         "assassin", "thief", "stalker", "wanderer"
     );
     /** Each archetype's class: the class node it hangs from on the Archetypes page. */
@@ -33,7 +33,7 @@ public final class Respec {
         Map.entry("berserker", "warrior"), Map.entry("monk", "warrior"),
         Map.entry("blaze", "mage"), Map.entry("frost", "mage"), Map.entry("water", "mage"), Map.entry("lightning", "mage"),
         Map.entry("holy", "mage"), Map.entry("warlock", "mage"), Map.entry("necromancer", "mage"), Map.entry("druid", "mage"),
-        Map.entry("spirit", "mage"),
+        Map.entry("jade", "mage"), Map.entry("spirit", "mage"),
         Map.entry("assassin", "rogue"), Map.entry("thief", "rogue"), Map.entry("stalker", "rogue"), Map.entry("wanderer", "rogue")
     );
 

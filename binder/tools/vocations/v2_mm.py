@@ -65,7 +65,7 @@ v('blaze', 'necromancer', ['Ashen Lich'],
 v('blaze', 'druid', ['Wildfire'],
   ['Z:burning_roots', 'Z:wildfire', 'C:decay_field', 'Z:ember_skin'],
   'efs_iss:magic_sword', ['FSP', 'NSP', 'NREG'])
-v('blaze', 'spirit', ['Foxfire'],
+v('blaze', 'jade', ['Foxfire'],
   ['Z:foxfire', 'M:kitsune_pack', 'Z:soul_fireball', 'S:procession_of_souls'],
   'wom:inner_growth', ['FSP', 'SPI', 'SFSP'])
 v('frost', 'water', ['Glacial Tide'],
@@ -86,7 +86,7 @@ v('frost', 'necromancer', ['Draugr Lord'],
 v('frost', 'druid', ['Tundra Druid'],
   ['Z:frost_wolves', 'I:summon_polar_bear', 'Z:frozen_sea', 'Z:frost_armor'],
   'epicfight:adaptive_skin', ['ISP', 'NSP', 'NREG'])
-v('frost', 'spirit', ['Yuki-onna'],
+v('frost', 'jade', ['Yuki-onna'],
   ['Z:snow_spirit', 'R:magic_glintblade', 'H:dilated_zone', 'A:lullaby'],
   'wom:inner_growth', ['ISP', 'SYM', 'MRES'])
 v('water', 'lightning', ['Typhoon'],
@@ -104,7 +104,7 @@ v('water', 'necromancer', ['Drowned King'],
 v('water', 'druid', ['Marsh Druid'],
   ['Z:bog', 'X:sand_maelstrom', 'Z:river_dragon', 'S:summon_drowned'],
   'dodge_parry_reward:heal2', ['AQSP', 'NSP', 'NREG'])
-v('water', 'spirit', ['Jade River'],
+v('water', 'jade', ['Jade River'],
   ['Z:jade_serpent', 'A:sonata', 'S:spiral_of_ruin', 'S:hydro_slash'],
   'wom:soul_protection', ['AQSP', 'SYM', 'SPI'])
 v('lightning', 'holy', ['Zeus'],
@@ -119,7 +119,7 @@ v('lightning', 'necromancer', ['Storm Lich'],
 v('lightning', 'druid', ['Skyfather'],
   ['Z:storm_crows', 'Z:thunderbird', 'X:gust_pro', 'W:tornado'],
   'wom:dopamine', ['LSP', 'NSP', 'MSP'])
-v('lightning', 'spirit', ['Raiju'],
+v('lightning', 'jade', ['Raiju'],
   ['R:glintblade_phalanx', 'Z:spirit_wolf', 'S:lightning_cut', 'Z:thunderbird'],
   'epicfight:phantom_ascent', ['LSP', 'SYM', 'MSC'])
 v('holy', 'warlock', ['Fallen Angel'],
@@ -131,7 +131,7 @@ v('holy', 'necromancer', ['Exorcist'],
 v('holy', 'druid', ['Life Druid'],
   ['Z:sanctify', 'A:birds_spell', 'Z:totem_ward', 'S:comforting_lullaby'],
   'dodge_parry_reward:heal3', ['HSP', 'NSP', 'HEAL'])
-v('holy', 'spirit', ['Celestial Sage'],
+v('holy', 'jade', ['Celestial Sage'],
   ['Z:jade_lotus', 'R:star_shower', 'A:guardian_angel', 'M:revenant_of_honor'],
   'efs_iss:breathe_again', ['HSP', 'SYM', 'HEAL'])
 v('warlock', 'necromancer', ['Lich'],
@@ -140,15 +140,15 @@ v('warlock', 'necromancer', ['Lich'],
 v('warlock', 'druid', ['Blight Druid'],
   ['Z:corrupted_grove', 'C:rot_bolt', 'C:choir_of_flies', 'I:fang_strike'],
   'wom:ender_step', ['ESP', 'NSP', 'NRES'])
-v('warlock', 'spirit', ['Yokai Lord'],
+v('warlock', 'jade', ['Yokai Lord'],
   ['T:conjure_void_tomes', 'Z:void_pet', 'S:ram_tchum', 'M:spirit_challenging'],
   'wom:inner_growth', ['ESP', 'SYM', 'SPI'])
 v('necromancer', 'druid', ['Plague Druid'],
   ['Z:corpse_flower', 'S:funeral_bloom', 'C:grave_dust', 'T:nocturnal_swarm'],
   'epicfight:adaptive_skin', ['BSP', 'NSP', 'SUM'])
-v('necromancer', 'spirit', ['Jiangshi Master'],
+v('necromancer', 'jade', ['Jiangshi Master'],
   ['Z:soul_reaper', 'C:wailing_dirge', 'A:summon_shadows', 'M:bone_hands'],
   'wom:dodge_master', ['BSP', 'SPI', 'SUM'])
-v('druid', 'spirit', ['Kodama Sage'],
+v('druid', 'jade', ['Kodama Sage'],
   ['Z:spirit_tiger', 'I:fang_swirl', 'X:totem_rite', 'C:crow_feast'],
   'wom:soul_protection', ['NSP', 'SYM', 'NREG'])

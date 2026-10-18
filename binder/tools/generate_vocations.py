@@ -78,7 +78,7 @@ for a in ("wanderer", "druid"):
     PICK_REWARDS.setdefault(a, []).append({"type": "puffish_skills:attribute",
                                            "data": {"attribute": "mdvlcraft:affliction_immunity", "value": 1, "operation": "addition"}})
 # Epic Fight skills a vocation's first node (its centre root) teaches on top of its bonus.
-ROOT_SKILLS = {("monk", "spirit"): "mdvlcraft:wukong"}   # the Monkey King identity: the Ruyi Jingu Bang's moveset (wukong/WukongGate)
+ROOT_SKILLS = {("monk", "jade"): "mdvlcraft:wukong"}   # the Monkey King identity: the Ruyi Jingu Bang's moveset (wukong/WukongGate)
 
 # design stat code -> attributes (one node can raise several, e.g. both mods' aqua spell power)
 STAT_ATTR = {
@@ -105,7 +105,7 @@ STAT_ATTR = {
     'CRSP': ['cursed_school:cursed_spell_power'], 'NSP': ['irons_spellbooks:nature_spell_power'],
     'NRES': ['irons_spellbooks:nature_magic_resist'], 'NREG': ['mdvlcraft:nature_regen'],
     'SYM': ['iss_magicfromtheeast:symmetry_spell_power'], 'SPI': ['iss_magicfromtheeast:spirit_spell_power'],
-    'SYMR': ['iss_magicfromtheeast:symmetry_magic_resist', 'iss_magicfromtheeast:spirit_magic_resist'],
+    'SYMR': ['iss_magicfromtheeast:symmetry_magic_resist'], 'SPIR': ['iss_magicfromtheeast:spirit_magic_resist'],
     'BSTB': ['mdvlcraft:backstab_damage'], 'DAG': ['mdvlcraft:dagger_damage'], 'ANEG': ['epicfight:armor_negation'],
     'PSH': ['puffish_attributes:protection_shred'], 'STL': ['puffish_attributes:stealth'], 'LUCK': ['minecraft:generic.luck'],
     'FORT': ['puffish_attributes:fortune'], 'DROP': ['mdvlcraft:plunder'], 'REACH': ['forge:entity_reach'],
@@ -156,7 +156,7 @@ SIG_TITLE = {
     'LSP': 'Storm', 'LRES': 'Grounded', 'MSC': 'Swift Current', 'HSP': 'Faith', 'HRES': 'Sanctity', 'HEAL': 'Mercy',
     'ESP': 'Abyss', 'ENSP': 'Rift', 'STF': 'Staff', 'BSP': 'Blood', 'SUM': 'Legion', 'BRES': 'Hemomancy',
     'TMC': 'Blood Arts', 'NSP': 'Verdance', 'NRES': 'Barkhide', 'NREG': 'Grove', 'SYM': 'Symmetry', 'SPI': 'Spirit', 'POLE': 'Jade Staff',
-    'SYMR': 'Jade Ward', 'BSTB': 'Backstab', 'DAG': 'Dagger', 'ANEG': 'Pierce', 'PSH': 'Rend', 'STL': 'Shadow',
+    'SYMR': 'Jade Ward', 'SPIR': 'Soul Ward', 'BSTB': 'Backstab', 'DAG': 'Dagger', 'ANEG': 'Pierce', 'PSH': 'Rend', 'STL': 'Shadow',
     'LUCK': "Fortune's Favour", 'FORT': 'Prospector', 'DROP': 'Plunder', 'REACH': 'Long Arms', 'RNG': 'Aim',
     'ARSP': 'Longbow', 'BOLT': 'Arbalest', 'APEN': 'Bodkin', 'EVSP': "Fletcher's Art", 'SAT': 'Provisions',
     'STEP': 'Sure-footed', 'PET': 'Pack Leader', 'MNT': 'Rider', 'SPRN': 'Roadrunner', 'FALL': 'Light Foot',

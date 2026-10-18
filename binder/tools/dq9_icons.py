@@ -46,7 +46,7 @@ EMBLEMS = {  # tabs and archetypes share these
     "classes": "seed_of_skill",
     # the vocations rework's archetypes (blaze, frost and necromancer keep the old flame, ice and necromancy emblems)
     "guardian": "white_shield", "brute": "great_helm", "berserker": "valkyrie_sword", "blaze": "flame_shield",
-    "frost": "ice_crystal", "necromancer": "skullcap", "spirit": "black_tortoise_fan",
+    "frost": "ice_crystal", "necromancer": "skullcap", "jade": "black_tortoise_fan",
 }
 ORIGINS = {
     "mdvlcraft_alchemist": "mystifying_mixture", "mdvlcraft_bard": "minstrels_manual", "mdvlcraft_battle_mage": "rune_staff",

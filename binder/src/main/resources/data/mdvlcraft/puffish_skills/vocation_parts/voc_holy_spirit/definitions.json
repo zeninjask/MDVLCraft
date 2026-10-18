@@ -1,6 +1,6 @@
 {
  "voc__0": {
-  "title": "Celestial Sage: Holy Spell Power",
+  "title": "Shrine Maiden: Holy Spell Power",
   "description": "+15% Holy Spell Power",
   "icon": {
    "type": "texture",
@@ -30,23 +30,23 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Celestial Sage vocation bonus (Holy + Spirit)."
+  "extra_description": "Shrine Maiden vocation bonus (Holy + Spirit)."
  },
  "voc__1": {
-  "title": "Jade Lotus",
-  "description": "Unlocks Jade Lotus on the ability wheel. A jade lotus that heals allies and grants Symmetry resistance.",
-  "extra_description": "Coming soon: built from Healing Circle; casting it does nothing yet. Celestial Sage vocation skill.",
+  "title": "Ofuda",
+  "description": "Unlocks Ofuda on the ability wheel. Throw a paper talisman that seals spirits: holy damage, double to the undead and to summons, and silences the target for 2 s.",
+  "extra_description": "Coming soon: built from Guiding Bolt; casting it does nothing yet. Shrine Maiden vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_jade_lotus.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_ofuda.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:planned_jade_lotus",
+     "ability": "mdvlcraft:planned_ofuda",
      "level": 1
     }
    }
@@ -65,20 +65,52 @@
   "size": 2.0
  },
  "voc__2": {
-  "title": "Star Shower",
-  "description": "Unlocks Star Shower (Level 3) (25 mana, 3 s cooldown) on the ability wheel",
-  "extra_description": "Fires six glintstone stars that home in on enemies. Celestial Sage vocation skill.",
+  "title": "Ancestral Blessing",
+  "description": "Unlocks Ancestral Blessing on the ability wheel. An ancestor spirit heals an ally over time and gives them Spirit Resistance while it lasts.",
+  "extra_description": "Coming soon: built from Blessing of Life; casting it does nothing yet. Shrine Maiden vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_elden_ring_star_shower.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_ancestor_blessing.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_elden_ring:star_shower",
+     "ability": "mdvlcraft:planned_ancestor_blessing",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__3": {
+  "title": "Pale Lantern",
+  "description": "Unlocks Pale Lantern (Level 3) (7 mana, 3 s cooldown) on the ability wheel",
+  "extra_description": "Reveals hostiles with Glowing and burns undead with ongoing pale light. Shrine Maiden vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_pale_lantern.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:pale_lantern",
      "level": 3
     }
    }
@@ -96,58 +128,26 @@
   },
   "size": 2.0
  },
- "voc__3": {
-  "title": "Celestial Chant",
-  "description": "Unlocks Celestial Chant (Level 3) (86 mana, 135 s cooldown) on the ability wheel",
-  "extra_description": "Calls the angels to play an angelic melody that will heal and protect you and your allies. Celestial Sage vocation skill.",
+ "voc__4": {
+  "title": "Comforting Lullaby",
+  "description": "Unlocks Comforting Lullaby (Level 3) (4 mana, 39 s cooldown) on the ability wheel",
+  "extra_description": "Channels a melody that heals nearby injured players in pulses, including the caster, but also makes each healed player Sleepy. Shrine Maiden vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/alshanex_familiars_guardian_angel.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_comforting_lullaby.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "alshanex_familiars:guardian_angel",
+     "ability": "somakespells:comforting_lullaby",
      "level": 3
     }
    }
   ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__4": {
-  "title": "Revenant of Honor",
-  "description": "Unlocks Revenant of Honor (Level 2) (83 mana, 240 s cooldown) on the ability wheel",
-  "extra_description": "Summon a loyal Spirit Samurai to protect you from threats Celestial Sage vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_revenant_of_honor.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "iss_magicfromtheeast:revenant_of_honor",
-     "level": 2
-    }
-   }
-  ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -161,19 +161,19 @@
   "size": 2.0
  },
  "voc__5": {
-  "title": "Instant Heal III",
-  "description": "Teaches Instant Heal III, an Epic Fight Passive skill: Instantly restores 3 health (1.5 hearts) after a perfect dodge or perfect parry. Equip it in the Combat Skills box of the abilities screen",
+  "title": "Instant Heal II",
+  "description": "Teaches Instant Heal II, an Epic Fight Passive skill: A perfect dodge or a perfect parry instantly restores some health. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/dodge_parry_reward_heal3.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/dodge_parry_reward_heal2.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "dodge_parry_reward:heal3"
+     "skill": "dodge_parry_reward:heal2"
     }
    }
   ],
@@ -189,22 +189,22 @@
    }
   },
   "size": 2.0,
-  "extra_description": "Celestial Sage vocation skill."
+  "extra_description": "Shrine Maiden vocation skill."
  },
  "voc__6": {
-  "title": "Celestial Sage: Symmetry Spell Power",
-  "description": "+15% Symmetry Spell Power",
+  "title": "Shrine Maiden: Spirit Spell Resist",
+  "description": "+15% Spirit Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_spirit_magic_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "attribute": "iss_magicfromtheeast:spirit_magic_resist",
      "value": 0.15,
      "operation": "addition"
     }
@@ -222,10 +222,10 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Celestial Sage vocation bonus (Holy + Spirit)."
+  "extra_description": "Shrine Maiden vocation bonus (Holy + Spirit)."
  },
  "voc__7": {
-  "title": "Celestial Sage: Healing Received",
+  "title": "Shrine Maiden: Healing Received",
   "description": "+10% Healing Received",
   "icon": {
    "type": "texture",
@@ -255,6 +255,6 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Celestial Sage vocation bonus (Holy + Spirit)."
+  "extra_description": "Shrine Maiden vocation bonus (Holy + Spirit)."
  }
 }

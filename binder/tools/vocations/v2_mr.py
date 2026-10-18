@@ -127,15 +127,15 @@ v('druid', 'stalker', ['Sylvan Archer'],
 v('druid', 'wanderer', ['Wayfinder'],
   ['T:primordial_steed', 'A:birds_spell', 'Z:forage', 'Z:spirit_wolf'],
   'epicfight:adrenaline_fiend', ['NSP', 'PET', 'SAT'])
-v('spirit', 'assassin', ['Kitsune Shade'],
+v('jade', 'assassin', ['Kitsune Shade'],
   ['Z:spirit_step', 'S:spiral_of_ruin', 'Z:kunai_rain', 'R:magic_glintblade'],
   'wom:shadow_step', ['SYM', 'BSTB', 'STL'])
-v('spirit', 'thief', ['Tanuki'],
+v('jade', 'thief', ['Tanuki'],
   ['Z:fox_glamour', 'A:default_note', 'A:music_bolt', 'M:kitsune_pack'],
   'wom:dodge_master', ['SYM', 'LUCK', 'DROP'])
-v('spirit', 'stalker', ['Jade Archer'],
+v('jade', 'stalker', ['Jade Archer'],
   ['Z:arrow_spirit', 'R:glintblade_phalanx', 'E:echanted_spell', 'S:winged_ruin'],
   'wom:inner_growth', ['SYM', 'RNG', 'ARSP'])
-v('spirit', 'wanderer', ['Xian'],
+v('jade', 'wanderer', ['Xian'],
   ['Z:river_dragon', 'Z:spirit_tiger', 'Z:immortal_peach', 'R:terra_magica'],
   'epicfight:stamina_pillager', ['SYM', 'SAT', 'SPRN'])

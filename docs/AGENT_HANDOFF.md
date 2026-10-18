@@ -191,6 +191,7 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ## Unfinished work
 
+- 2.0.14 (from liam-agent): Spirit renamed Jade and a new Spirit archetype with 18 vocations (19 archetypes, 171 vocations; see step 13 in [`VOCATIONS_IMPLEMENTATION.md`](VOCATIONS_IMPLEMENTATION.md)). Its 33 new Modified abilities are placeholders still to build. Old Spirit players are moved to Jade on their first join (`skills/JadeRename`).
 - 1.9.44 (from seb-agent) replaces the Classes page and archetype trees with the vocation trees (see [`VOCATIONS_IMPLEMENTATION.md`](VOCATIONS_IMPLEMENTATION.md)); Modified abilities are placeholders still to build.
 - 2.0.0: Clash Blade removed from every tree (its mod left the pack in 1.9.3x, and 1.9.44-1.9.45 trees still used it, so the skill trees failed to load: `Unknown Epic Fight skill efclash_blade:clash_blade`); boot tests must use exactly the pack's server mods. Spirit gets Staff & Spear Damage (`mdvlcraft:polearm_damage`: spears, Iron's staves, the Wukong staff) and Phantom Ascent; Monk + Spirit is named Wukong.
 - After 2.0.0: see **Current work (paused)** above.

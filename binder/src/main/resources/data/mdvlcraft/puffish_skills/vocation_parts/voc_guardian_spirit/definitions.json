@@ -1,18 +1,18 @@
 {
  "voc__0": {
-  "title": "Jade Sentinel: Symmetry Spell Power",
-  "description": "+15% Symmetry Spell Power",
+  "title": "Ancestral Bulwark: Spirit Spell Power",
+  "description": "+15% Spirit Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_spirit_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "attribute": "iss_magicfromtheeast:spirit_spell_power",
      "value": 0.15,
      "operation": "addition"
     }
@@ -30,24 +30,24 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Jade Sentinel vocation bonus (Guardian + Spirit)."
+  "extra_description": "Ancestral Bulwark vocation bonus (Guardian + Spirit)."
  },
  "voc__1": {
-  "title": "Jade Skin",
-  "description": "Unlocks Jade Skin (30 mana, 45 s cooldown) on the ability wheel",
-  "extra_description": "Jade skin: damage reduction, and melee attackers take a little damage back. Jade Sentinel vocation skill.",
+  "title": "Barrier Aura",
+  "description": "Unlocks Barrier Aura (Level 3) (72 mana, 60 s cooldown) on the ability wheel",
+  "extra_description": "Creates a moving aura that grants Protection to allies. The aura vanishes when its owner takes actual damage. Ancestral Bulwark vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_jade_skin.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_barrier_aura.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:jade_skin",
-     "level": 1
+     "ability": "esoteric_spell:barrier_aura",
+     "level": 3
     }
    }
   ],
@@ -65,84 +65,20 @@
   "size": 2.0
  },
  "voc__2": {
-  "title": "Revenant of Honor",
-  "description": "Unlocks Revenant of Honor (Level 2) (83 mana, 240 s cooldown) on the ability wheel",
-  "extra_description": "Summon a loyal Spirit Samurai to protect you from threats Jade Sentinel vocation skill.",
+  "title": "Adula's Moonblade",
+  "description": "Unlocks Adula's Moonblade (Level 3) (27 mana, 12 s cooldown) on the ability wheel",
+  "extra_description": "Hold to chain slashes with a huge moonlight greatsword that strike all around the caster and freeze enemies, ending in a crescent wave that flies forward. Ancestral Bulwark vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_revenant_of_honor.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_elden_ring_adulas_moonblade.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_magicfromtheeast:revenant_of_honor",
-     "level": 2
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__3": {
-  "title": "Spirit Challenging",
-  "description": "Unlocks Spirit Challenging (Level 3) (76 mana, 120 s cooldown) on the ability wheel",
-  "extra_description": "Extracting a part of target soul and then start the challenging. The soul can be attacked and an amount of the damage it took will be transferred to its owner. Jade Sentinel vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_spirit_challenging.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "iss_magicfromtheeast:spirit_challenging",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__4": {
-  "title": "Dilated Zone",
-  "description": "Unlocks Dilated Zone (Level 3) (40 mana, 36 s cooldown) on the ability wheel",
-  "extra_description": "Creates a fixed zone that slows eligible living entities and projectiles, including supported flying and custom movement. The caster is immune to their own zone. Higher levels improve coverage and lifetime. Jade Sentinel vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_chronomancy_dilated_zone.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "irons_chronomancy:dilated_zone",
+     "ability": "iss_elden_ring:adulas_moonblade",
      "level": 3
     }
    }
@@ -160,20 +96,84 @@
   },
   "size": 2.0
  },
- "voc__5": {
-  "title": "Inner Growth",
-  "description": "Teaches Inner Growth, an Epic Fight Passive skill: Regenerate 2 innate power every second (+0.1 per level of Blast Protection on your armour). Equip it in the Combat Skills box of the abilities screen",
+ "voc__3": {
+  "title": "Spirit Aegis",
+  "description": "Unlocks Spirit Aegis on the ability wheel. A shield of ancestral spirits that blocks projectiles; anything that strikes it is soulburned.",
+  "extra_description": "Coming soon: built from Shield; casting it does nothing yet. Ancestral Bulwark vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_inner_growth.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_spirit_aegis.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:planned_spirit_aegis",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "Honour Guard",
+  "description": "Unlocks Honour Guard on the ability wheel. Summon a spirit samurai with a tower shield that taunts enemies near you and takes hits for you.",
+  "extra_description": "Coming soon: built from Revenant of Honor; casting it does nothing yet. Ancestral Bulwark vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_honor_guard.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:planned_honor_guard",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__5": {
+  "title": "Vengeful parry",
+  "description": "Teaches Vengeful parry, an Epic Fight Guard skill: Put you in a guarding stance for 2sec. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_vengeful_parry.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "wom:inner_growth"
+     "skill": "wom:vengeful_parry"
     }
    }
   ],
@@ -189,22 +189,22 @@
    }
   },
   "size": 2.0,
-  "extra_description": "Jade Sentinel vocation skill."
+  "extra_description": "Ancestral Bulwark vocation skill."
  },
  "voc__6": {
-  "title": "Jade Sentinel: Armor Toughness",
-  "description": "+2 Armor Toughness",
+  "title": "Ancestral Bulwark: Armor",
+  "description": "+2 Armor",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor_toughness.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.armor.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.armor_toughness",
+     "attribute": "minecraft:generic.armor",
      "value": 2.0,
      "operation": "addition"
     }
@@ -222,26 +222,18 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Jade Sentinel vocation bonus (Guardian + Spirit)."
+  "extra_description": "Ancestral Bulwark vocation bonus (Guardian + Spirit)."
  },
  "voc__7": {
-  "title": "Jade Sentinel: Symmetry Spell Resist",
-  "description": "+15% Symmetry Resistance and Spirit Resistance",
+  "title": "Ancestral Bulwark: Spirit Spell Resist",
+  "description": "+15% Spirit Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_spirit_magic_resist.png"
    }
   },
   "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
-     "value": 0.15,
-     "operation": "addition"
-    }
-   },
    {
     "type": "puffish_skills:attribute",
     "data": {
@@ -263,6 +255,6 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Jade Sentinel vocation bonus (Guardian + Spirit)."
+  "extra_description": "Ancestral Bulwark vocation bonus (Guardian + Spirit)."
  }
 }

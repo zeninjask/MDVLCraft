@@ -1,18 +1,18 @@
 {
  "voc__0": {
-  "title": "Jade Colossus: Spirit Spell Power",
-  "description": "+15% Spirit Spell Power",
+  "title": "Oni: Summon Damage",
+  "description": "+15% Summon Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_spirit_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_summon_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:spirit_spell_power",
+     "attribute": "irons_spellbooks:summon_damage",
      "value": 0.15,
      "operation": "addition"
     }
@@ -30,24 +30,24 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Jade Colossus vocation bonus (Brute + Spirit)."
+  "extra_description": "Oni vocation bonus (Brute + Spirit)."
  },
  "voc__1": {
-  "title": "Phantom Charge",
-  "description": "Unlocks Phantom Charge (Level 3) (54 mana, 120 s cooldown) on the ability wheel",
-  "extra_description": "Summon a group of samurai horseman that will charge directly into your enemy formation Jade Colossus vocation skill.",
+  "title": "Summon Oni",
+  "description": "Unlocks Summon Oni (70 mana, 150 s cooldown) on the ability wheel",
+  "extra_description": "Summon a towering spirit oni with a kanabo instead of a samurai. Oni vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_phantom_charge.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_oni_summon.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_magicfromtheeast:phantom_charge",
-     "level": 3
+     "ability": "mdvlcraft:oni_summon",
+     "level": 1
     }
    }
   ],
@@ -65,52 +65,20 @@
   "size": 2.0
  },
  "voc__2": {
-  "title": "Bone Hands",
-  "description": "Unlocks Bone Hands (Level 3) (43 mana, 90 s cooldown) on the ability wheel",
-  "extra_description": "Summon Spirit Bone Hands from the ground, the hands will slam your targets if they are in range Jade Colossus vocation skill.",
+  "title": "Devour",
+  "description": "Unlocks Devour (Level 3) (24 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Pull in a nearby creature and attack them with a bite, leeching 15% of damage done as health. If the creature is killed, you temporarily gain additional max HP. Created by the Ancient Magician known as Yorhavich. Oni vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_bone_hands.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_devour.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_magicfromtheeast:bone_hands",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__3": {
-  "title": "Spiral of Ruin",
-  "description": "Unlocks Spiral of Ruin (Level 3) (42 mana, 30 s cooldown) on the ability wheel",
-  "extra_description": "Hurls a spectral trident that unfurls a telegraphed spiral of soul eruptions from its point of impact. Jade Colossus vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_spiral_of_ruin.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "somakespells:spiral_of_ruin",
+     "ability": "irons_spellbooks:devour",
      "level": 3
     }
    }
@@ -128,21 +96,53 @@
   },
   "size": 2.0
  },
- "voc__4": {
-  "title": "Jadebrand",
-  "description": "Unlocks Jadebrand (25 mana, 40 s cooldown) on the ability wheel",
-  "extra_description": "For 20 s your weapon hits deal extra symmetry damage and shatter armour. One brand at a time. Jade Colossus vocation skill.",
+ "voc__3": {
+  "title": "Soul Cleave",
+  "description": "Unlocks Soul Cleave on the ability wheel. An axe cleave that tears at the soul: soulburns everything hit and heals you for a little of the damage.",
+  "extra_description": "Coming soon: built from Axe Cleave; casting it does nothing yet. Oni vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_brand_spirit.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_soul_cleave.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:brand_spirit",
+     "ability": "mdvlcraft:planned_soul_cleave",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "The Forgotten Beast",
+  "description": "Unlocks The Forgotten Beast (Level 1) (234 mana, 600 s cooldown) on the ability wheel",
+  "extra_description": "Summon Forsaken, a powerful, rideable creature that fight alongside you. However, beware: its will is not fully tameable, and its ferocity may prove unpredictable. Can only be obtained by defeating Forsaken. Oni vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_the_forgotten_beast.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:the_forgotten_beast",
      "level": 1
     }
    }
@@ -161,19 +161,19 @@
   "size": 2.0
  },
  "voc__5": {
-  "title": "Pain Anticipation",
-  "description": "Teaches Pain Anticipation, an Epic Fight Passive skill: After 2 s without acting, your next action grants 2 s of stun immunity and 40% less damage taken. Equip it in the Combat Skills box of the abilities screen",
+  "title": "Meteor Slam",
+  "description": "Teaches Meteor Slam, an Epic Fight Identity skill: Slam into the ground from the air; the higher the fall, the more damage it deals and stamina it costs. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_pain_anticipation.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_meteor_slam.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "wom:pain_anticipation"
+     "skill": "epicfight:meteor_slam"
     }
    }
   ],
@@ -189,43 +189,10 @@
    }
   },
   "size": 2.0,
-  "extra_description": "Jade Colossus vocation skill."
+  "extra_description": "Oni vocation skill."
  },
  "voc__6": {
-  "title": "Jade Colossus: Spear Damage",
-  "description": "+15% Spear Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_spear_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "mdvlcraft:spear_damage",
-     "value": 0.15,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Jade Colossus vocation bonus (Brute + Spirit)."
- },
- "voc__7": {
-  "title": "Jade Colossus: Max Health",
+  "title": "Oni: Max Health",
   "description": "+4 Max Health",
   "icon": {
    "type": "texture",
@@ -255,6 +222,39 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Jade Colossus vocation bonus (Brute + Spirit)."
+  "extra_description": "Oni vocation bonus (Brute + Spirit)."
+ },
+ "voc__7": {
+  "title": "Oni: Axe Damage",
+  "description": "+15% Axe Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_axe_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:axe_damage",
+     "value": 0.15,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Oni vocation bonus (Brute + Spirit)."
  }
 }

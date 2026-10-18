@@ -1,6 +1,6 @@
 {
  "voc__0": {
-  "title": "Kitsune Fury: Attack Damage",
+  "title": "Hungry Ghost: Attack Damage",
   "description": "+1.5 Attack Damage",
   "icon": {
    "type": "texture",
@@ -30,24 +30,24 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Kitsune Fury vocation bonus (Berserker + Spirit)."
+  "extra_description": "Hungry Ghost vocation bonus (Berserker + Spirit)."
  },
  "voc__1": {
-  "title": "Kitsune Pack",
-  "description": "Unlocks Kitsune Pack (Level 3) (43 mana, 180 s cooldown) on the ability wheel",
-  "extra_description": "Summon a pack of Kitsune that will fight for you, inflict soulburn effect on their bite Kitsune Fury vocation skill.",
+  "title": "Hungry Ghosts",
+  "description": "Unlocks Hungry Ghosts on the ability wheel. For 15 s every kill releases a hungry ghost that flies at the nearest enemy and soulburns it; each kill extends the time.",
+  "extra_description": "Coming soon: built from Blood Frenzy (Modified); casting it does nothing yet. Hungry Ghost vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_kitsune_pack.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_hungry_ghost.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_magicfromtheeast:kitsune_pack",
-     "level": 3
+     "ability": "mdvlcraft:planned_hungry_ghost",
+     "level": 1
     }
    }
   ],
@@ -65,20 +65,20 @@
   "size": 2.0
  },
  "voc__2": {
-  "title": "Jadebrand",
-  "description": "Unlocks Jadebrand (25 mana, 40 s cooldown) on the ability wheel",
-  "extra_description": "For 20 s your weapon hits deal extra symmetry damage and shatter armour. One brand at a time. Kitsune Fury vocation skill.",
+  "title": "Soul Rend",
+  "description": "Unlocks Soul Rend on the ability wheel. A dash that strikes once with each hand; both hits soulburn and each target hit restores a little mana.",
+  "extra_description": "Coming soon: built from Twin Fang (Modified); casting it does nothing yet. Hungry Ghost vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_brand_spirit.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_planned_soul_rend.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:brand_spirit",
+     "ability": "mdvlcraft:planned_soul_rend",
      "level": 1
     }
    }
@@ -97,21 +97,21 @@
   "size": 2.0
  },
  "voc__3": {
-  "title": "Spirit Wolf",
-  "description": "Unlocks Spirit Wolf (60 mana, 120 s cooldown) on the ability wheel",
-  "extra_description": "Summon a single great spirit wolf that bites with soulburn. Kitsune Fury vocation skill.",
+  "title": "Heartstop",
+  "description": "Unlocks Heartstop (Level 3) (86 mana, 120 s cooldown) on the ability wheel",
+  "extra_description": "Cast to inflict yourself with Heartstop, an effect that makes you temporarily invulnerable. However, once it wears off, you take 50% of all damage accumulated while under its effects. Hungry Ghost vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_spirit_wolf.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_heartstop.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:spirit_wolf",
-     "level": 1
+     "ability": "irons_spellbooks:heartstop",
+     "level": 3
     }
    }
   ],
@@ -129,25 +129,25 @@
   "size": 2.0
  },
  "voc__4": {
-  "title": "Spirit Empowerment",
-  "description": "Unlocks Spirit Empowerment (Level 3) (72 mana, 60 s cooldown) on the ability wheel",
-  "extra_description": "Applies Spirit Empowerment to yourself, granting Spirit Spell Power bonus. Kitsune Fury vocation skill.",
+  "title": "Withered Rose Vortex",
+  "description": "Unlocks Withered Rose Vortex (Level 3) (73 mana, 36 s cooldown) on the ability wheel",
+  "extra_description": "Summons a tornado of withered rose petals at the target point. The vortex drags enemies inward, lifts them, deals Blood damage in pulses, and afflicts them with Wither. Hungry Ghost vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_spirit_empowerment.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_withered_rose_vortex.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "somakespells:spirit_empowerment",
+     "ability": "somakespells:withered_rose_vortex",
      "level": 3
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -161,19 +161,19 @@
   "size": 2.0
  },
  "voc__5": {
-  "title": "Inner Growth",
-  "description": "Teaches Inner Growth, an Epic Fight Passive skill: Regenerate 2 innate power every second (+0.1 per level of Blast Protection on your armour). Equip it in the Combat Skills box of the abilities screen",
+  "title": "Death Harvest",
+  "description": "Teaches Death Harvest, an Epic Fight Passive skill: Killing an enemy with a weapon innate skill refunds weapon charge. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_inner_growth.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/epicfight_death_harvest.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "skill": "wom:inner_growth"
+     "skill": "epicfight:death_harvest"
     }
    }
   ],
@@ -189,10 +189,10 @@
    }
   },
   "size": 2.0,
-  "extra_description": "Kitsune Fury vocation skill."
+  "extra_description": "Hungry Ghost vocation skill."
  },
  "voc__6": {
-  "title": "Kitsune Fury: Spirit Spell Power",
+  "title": "Hungry Ghost: Spirit Spell Power",
   "description": "+15% Spirit Spell Power",
   "icon": {
    "type": "texture",
@@ -222,23 +222,23 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Kitsune Fury vocation bonus (Berserker + Spirit)."
+  "extra_description": "Hungry Ghost vocation bonus (Berserker + Spirit)."
  },
  "voc__7": {
-  "title": "Kitsune Fury: Attack Speed",
-  "description": "+6% Attack Speed",
+  "title": "Hungry Ghost: Life Steal",
+  "description": "+4% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_life_steal.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_speed",
-     "value": 0.06,
+     "attribute": "puffish_attributes:life_steal",
+     "value": 0.04,
      "operation": "multiply_base"
     }
    }
@@ -255,6 +255,6 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Kitsune Fury vocation bonus (Berserker + Spirit)."
+  "extra_description": "Hungry Ghost vocation bonus (Berserker + Spirit)."
  }
 }

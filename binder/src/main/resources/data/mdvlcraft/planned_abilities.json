@@ -4,6 +4,16 @@
   "base": "Conjure Refreshment",
   "description": "Conjure bread for the party; allies who eat it gain Luck for a while."
  },
+ "ancestor_blessing": {
+  "name": "Ancestral Blessing",
+  "base": "Blessing of Life",
+  "description": "An ancestor spirit heals an ally over time and gives them Spirit Resistance while it lasts."
+ },
+ "arrow_soul": {
+  "name": "Soul Arrow",
+  "base": "Fire Arrow",
+  "description": "A charged arrow of soul fire that soulburns and passes through summons."
+ },
  "baptism": {
   "name": "Baptism",
   "base": "Cleanse",
@@ -52,7 +62,7 @@
  "exorcism": {
   "name": "Exorcism",
   "base": "Cleanse",
-  "description": "A burst of light that cleanses allies and deals big damage to undead around you."
+  "description": "Banish spirits around you: summons take heavy damage, and enemies lose their buffs and are soulburned."
  },
  "flame_bulwark": {
   "name": "Pyre Bulwark",
@@ -94,6 +104,11 @@
   "base": "Frostwave",
   "description": "A frost wave that freezes water into walkable ice wherever it passes."
  },
+ "funayurei": {
+  "name": "Funayurei",
+  "base": "Summon Drowned",
+  "description": "Raise drowned ghosts with ladles that drag enemies down and slow them."
+ },
  "geyser": {
   "name": "Geyser",
   "base": "Eruption",
@@ -119,6 +134,11 @@
   "base": "Ceraunus Grasp",
   "description": "Fire a harpoon from your crossbow that drags the target to you."
  },
+ "haunting": {
+  "name": "Haunting",
+  "base": "Scapegoat",
+  "description": "Leave a ghostly copy of yourself that enemies attack; when it is struck it shrieks and makes them flee for 3 s."
+ },
  "heat_mirage": {
   "name": "Heat Mirage",
   "base": "Invisibility",
@@ -134,10 +154,20 @@
   "base": "Water Ball",
   "description": "A ball of blessed water that heals allies it splashes and burns undead."
  },
+ "honor_guard": {
+  "name": "Honour Guard",
+  "base": "Revenant of Honor",
+  "description": "Summon a spirit samurai with a tower shield that taunts enemies near you and takes hits for you."
+ },
  "hot_spring": {
   "name": "Hot Spring",
   "base": "Healing Circle",
   "description": "A steaming pool that heals allies in it and thaws freezing."
+ },
+ "hungry_ghost": {
+  "name": "Hungry Ghosts",
+  "base": "Blood Frenzy (Modified)",
+  "description": "For 15 s every kill releases a hungry ghost that flies at the nearest enemy and soulburns it; each kill extends the time."
  },
  "hunter_trap": {
   "name": "Bear Trap",
@@ -164,10 +194,25 @@
   "base": "Gluttony",
   "description": "Conjure a peach that heals a lot and gives Regeneration and Resistance."
  },
+ "jade_barrage": {
+  "name": "Jade Barrage",
+  "base": "Soul Catalyst",
+  "description": "After the cast, a barrage of jade shards instead of soul skulls; each hit shatters armour."
+ },
  "jade_lotus": {
   "name": "Jade Lotus",
   "base": "Healing Circle",
   "description": "A jade lotus that heals allies and grants Symmetry resistance."
+ },
+ "jade_nova": {
+  "name": "Jade Nova",
+  "base": "Soul Burst",
+  "description": "A burst of jade shards around you instead of soul fire: symmetry damage that shatters armour."
+ },
+ "kami_shrine": {
+  "name": "Kami Shrine",
+  "base": "Totem Rite",
+  "description": "Raise a small forest shrine: its kami heals allies near it and roots enemies that come close."
  },
  "leap_of_faith": {
   "name": "Leap of Faith",
@@ -194,6 +239,31 @@
   "base": "Arcane Shackle",
   "description": "Throw a net that pins and slows the first creature it hits."
  },
+ "night_parade": {
+  "name": "Hyakki Yagyo",
+  "base": "Raise Dead",
+  "description": "A short night parade of yokai sweeps forward through your enemies, soulburning and weakening everything it passes."
+ },
+ "ofuda": {
+  "name": "Ofuda",
+  "base": "Guiding Bolt",
+  "description": "Throw a paper talisman that seals spirits: holy damage, double to the undead and to summons, and silences the target for 2 s."
+ },
+ "onibi": {
+  "name": "Onibi",
+  "base": "Wisp",
+  "description": "Three ghost-fire wisps drift after enemies and burn them with soul fire that ignores fire resistance."
+ },
+ "palm_soul": {
+  "name": "Soul Palm",
+  "base": "Fire Fist",
+  "description": "A palm strike of soul fire that soulburns, hitting everything in a short cone ahead. Needs empty hands, gloves or a fist weapon."
+ },
+ "phantom_draw": {
+  "name": "Phantom Draw",
+  "base": "Iaido Draw (Modified)",
+  "description": "A dashing draw cut that leaves a phantom samurai behind, which repeats the cut a moment later."
+ },
  "phoenix_wings": {
   "name": "Phoenix Wings",
   "base": "Angel Wing",
@@ -203,6 +273,16 @@
   "name": "Plasma Orb",
   "base": "Ball Lightning",
   "description": "A ball of lightning that bursts into fire when it pops."
+ },
+ "raijin_drums": {
+  "name": "Raijin's Drums",
+  "base": "Thunderstorm",
+  "description": "Spirit drums beat overhead: each beat strikes an enemy near you with lightning, and the last one soulburns them all."
+ },
+ "reaper_mark": {
+  "name": "Reaper's Mark",
+  "base": "Death Mark (Modified)",
+  "description": "Mark an enemy; when it dies its soul is torn out and bursts, soulburning every enemy around it."
  },
  "sanctify": {
   "name": "Sacred Grove",
@@ -224,10 +304,60 @@
   "base": "Lightning Bolt",
   "description": "A golden bolt from the heavens: double damage to undead."
  },
+ "soul_cleave": {
+  "name": "Soul Cleave",
+  "base": "Axe Cleave",
+  "description": "An axe cleave that tears at the soul: soulburns everything hit and heals you for a little of the damage."
+ },
  "soul_fireball": {
   "name": "Soulfire Orb",
   "base": "Fireball",
   "description": "A blue soul-fire fireball that ignores fire resistance."
+ },
+ "soul_harvest": {
+  "name": "Soul Harvest",
+  "base": "Ray of Siphoning",
+  "description": "A beam that pulls the soul out of an enemy: drains health and mana, and soulburns it."
+ },
+ "soul_lantern": {
+  "name": "Soul Lantern",
+  "base": "Wisp",
+  "description": "A pale soul lantern drifts to the target and bursts in soul fire, applying soulburn."
+ },
+ "soul_rend": {
+  "name": "Soul Rend",
+  "base": "Twin Fang (Modified)",
+  "description": "A dash that strikes once with each hand; both hits soulburn and each target hit restores a little mana."
+ },
+ "spirit_aegis": {
+  "name": "Spirit Aegis",
+  "base": "Shield",
+  "description": "A shield of ancestral spirits that blocks projectiles; anything that strikes it is soulburned."
+ },
+ "spirit_communion": {
+  "name": "Spirit Communion",
+  "base": "Still Mind (Modified)",
+  "description": "Sneak still to channel: spirits gather round you, restoring mana and stamina, and you keep 20% more spirit spell power for 20 s after."
+ },
+ "spirit_hawk": {
+  "name": "Spirit Hawk",
+  "base": "Hunting Hawk (Modified)",
+  "description": "A ghost hawk that flies through walls, marks the nearest enemy with Glowing and soulburns it when it dives."
+ },
+ "spirit_steed": {
+  "name": "Spirit Steed",
+  "base": "Summon Horse",
+  "description": "Summon a spectral horse that runs over water and through tall grass without slowing."
+ },
+ "spirit_ward": {
+  "name": "Spirit Ward",
+  "base": "Fortify",
+  "description": "Ancestral spirits circle you and absorb damage; each hit they absorb burns the attacker with soulburn."
+ },
+ "stance_soul": {
+  "name": "Stance: Soul Form",
+  "base": "Stance",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes soulburn."
  },
  "static_snare": {
   "name": "Static Snare",
@@ -243,6 +373,11 @@
   "name": "Superconductor",
   "base": "Chain Lightning",
   "description": "Chain lightning that jumps twice as far between frozen targets and freezes them solid."
+ },
+ "taiji_seal": {
+  "name": "Taiji Seal",
+  "base": "Bagua Array Circle",
+  "description": "A yin-yang seal on the ground: allies inside heal slowly, enemies inside take symmetry and spirit damage in turns."
  },
  "thermal_shock": {
   "name": "Thermal Shock",
@@ -279,6 +414,11 @@
   "base": "Tsunami",
   "description": "A black tsunami from the abyss that blinds and drags enemies with it."
  },
+ "void_yokai": {
+  "name": "Void Yokai",
+  "base": "Summon Vex",
+  "description": "Summon small void yokai that blink to enemies and weaken them."
+ },
  "war_banner": {
   "name": "War Banner",
   "base": "Healing Circle",
@@ -289,9 +429,19 @@
   "base": "Scapegoat",
   "description": "A roar that makes every mob nearby target you and gives you Strength I while they do."
  },
+ "wayshrine": {
+  "name": "Wayshrine",
+  "base": "Recall",
+  "description": "Set a small roadside shrine; cast again from anywhere in the same dimension to return to it."
+ },
  "wildfire": {
   "name": "Wildfire",
   "base": "Blaze Storm",
   "description": "A blaze storm that spreads fire across grass and leaves around the target."
+ },
+ "wraith_chill": {
+  "name": "Wraith Chill",
+  "base": "Cone of Cold",
+  "description": "A breath of grave-cold spirit frost that slows and soulburns everything in the cone."
  }
 }

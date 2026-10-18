@@ -2,7 +2,7 @@
 # Prefixes as in v1 (I irons, T traveloptics, S somakespells, E esoteric, C cursed school, R elden ring, M magic from the east,
 # W wind, X iss_csw, A alshanex, H chronomancy, B binder technique, N antimagic). Z: = a (Modified) ability from MOD.
 CLASSES = {'Warrior': ['guardian', 'brute', 'samurai', 'berserker', 'monk'],
-           'Mage': ['blaze', 'frost', 'water', 'lightning', 'holy', 'warlock', 'necromancer', 'druid', 'spirit'],
+           'Mage': ['blaze', 'frost', 'water', 'lightning', 'holy', 'warlock', 'necromancer', 'druid', 'jade', 'spirit'],
            'Rogue': ['assassin', 'thief', 'stalker', 'wanderer']}
 ORDER = [a for c in CLASSES.values() for a in c]
 TITLE = {a: a.title() for a in ORDER}
@@ -15,7 +15,8 @@ ROLE = {
     'blaze': 'Fire magic.', 'frost': 'Ice magic.', 'water': 'Water magic.', 'lightning': 'Lightning magic.',
     'holy': 'Holy magic: healing, light and protection.', 'warlock': 'Eldritch magic: the void, sculk and the abyss.',
     'necromancer': 'Ash and blood: the risen dead, blood arts and siphoning.', 'druid': 'Nature magic, poison and beasts.',
-    'spirit': 'Symmetry and jade magic of the Celestial Court.',
+    'jade': 'Symmetry and jade magic of the Celestial Court.',
+    'spirit': 'Spirit magic of the eastern underworld: soul fire, fox spirits, summoned spirit warriors and duels for the soul.',
     'assassin': 'Sneaks up on targets and deals huge damage.', 'thief': 'Stealth, stealing and distraction.',
     'stalker': 'Ranged damage with bows and crossbows.', 'wanderer': 'Travel and survival.',
 }
@@ -41,7 +42,7 @@ STAT = {
     'BSP': ('Blood Spell Power', '+15%'), 'SUM': ('Summon Damage', '+15%'), 'BRES': ('Blood Resistance', '+15%'),
     'TMC': ('Technique Mana Cost', '-15%'), 'CRSP': ('Cursed Spell Power', '+15%'),
     'NSP': ('Nature Spell Power', '+15%'), 'NRES': ('Nature Resistance', '+15%'), 'NREG': ('Health per 5 s on natural ground', '+1'),
-    'SYM': ('Symmetry Spell Power', '+15%'), 'SPI': ('Spirit Spell Power', '+15%'), 'SYMR': ('Symmetry Spell Resist', '+15%'),
+    'SYM': ('Symmetry Spell Power', '+15%'), 'SPI': ('Spirit Spell Power', '+15%'), 'SYMR': ('Symmetry Spell Resist', '+15%'), 'SPIR': ('Spirit Spell Resist', '+15%'),
     'POLE': ('Staff & Spear Damage', '+15%'),
     'BSTB': ('Backstab Damage', '+15%'), 'DAG': ('Dagger Damage', '+15%'), 'ANEG': ('Armor Negation', '+10%'),
     'PSH': ('Protection Shred', '+10%'), 'STL': ('Stealth', '+10%'),
@@ -61,7 +62,7 @@ SIG = {
     'monk': ['UNA', 'FIST', 'DOD', 'RIP', 'MANA', 'STA'], 'blaze': ['FSP', 'FRES', 'CDR'], 'frost': ['ISP', 'IRES', 'MRES'],
     'water': ['AQSP', 'AQRS', 'SWIM'], 'lightning': ['LSP', 'LRES', 'MSC'], 'holy': ['HSP', 'HRES', 'HEAL'],
     'warlock': ['ESP', 'ENSP', 'STF'], 'necromancer': ['BSP', 'SUM', 'BRES', 'TMC'], 'druid': ['NSP', 'NRES', 'NREG'],
-    'spirit': ['SYM', 'SPI', 'SYMR', 'POLE'], 'assassin': ['BSTB', 'DAG', 'ANEG', 'PSH', 'STL'],
+    'jade': ['SYM', 'SYMR', 'POLE'], 'spirit': ['SPI', 'SPIR', 'SUM'], 'assassin': ['BSTB', 'DAG', 'ANEG', 'PSH', 'STL'],
     'thief': ['LUCK', 'FORT', 'DROP', 'STL', 'SWD', 'REACH'], 'stalker': ['RNG', 'ARSP', 'BOLT', 'APEN', 'EVSP'],
     'wanderer': ['SAT', 'STEP', 'PET', 'MNT', 'SPRN', 'FALL'],
 }
@@ -202,10 +203,14 @@ BASE = {
                'I:poison_splash', 'I:spider_aspect', 'S:overgrowth', 'T:aerial_collapse', 'X:pinning_stake', 'X:firefly_seeker',
                'T:stele_cascade', 'C:black_root', 'T:primal_pack', 'Z:treant'],
               ['dodge_parry_reward:heal3', 'epicfight:meteor_slam', 'cdmoveset:wolf_dodge']),
-    'spirit': (['M:jade_bullet', 'M:jade_judgement', 'M:nephrite_slash', 'M:bagua_array_circle', 'M:drapes_of_reflection',
+    'jade': (['M:jade_bullet', 'M:jade_judgement', 'M:nephrite_slash', 'M:bagua_array_circle', 'M:drapes_of_reflection',
                 'M:sword_dance', 'M:punishing_heaven', 'M:underworld_aid', 'M:jiangshi_invoke', 'M:cloud_ride',
-                'S:symmetry_empowerment', 'S:mirror_strike', 'S:desert_wrath', 'M:soul_burst', 'M:soul_catalyst', 'Z:terracotta'],
+                'S:symmetry_empowerment', 'S:mirror_strike', 'S:desert_wrath', 'Z:jade_nova', 'Z:jade_barrage', 'Z:terracotta'],
                ['dodge_parry_reward:damage_boost1', 'epicfight:phantom_ascent']),
+    'spirit': (['M:soul_burst', 'M:soul_catalyst', 'M:kitsune_pack', 'M:revenant_of_honor', 'M:ashigaru_squad', 'M:phantom_charge',
+                'M:bone_hands', 'M:spirit_challenging', 'S:procession_of_souls', 'S:grave_sigil', 'S:spiral_of_ruin',
+                'S:spirit_empowerment', 'S:soul_latch', 'Z:soul_lantern', 'Z:spirit_ward', 'Z:night_parade'],
+               ['wom:soul_protection', 'wom:inner_growth']),
     'assassin': (['I:invisibility', 'I:throw', 'T:spectral_blink', 'I:echoing_strikes', 'S:soul_reprisal', 'M:splitting_shuriken',
                   'M:anchoring_kunai', 'W:wind_blade', 'I:blood_step', 'B:surprise_attack', 'I:shadow_slash', 'C:soot_shroud',
                   'I:evasion', 'H:paradox', 'Z:envenom', 'Z:death_mark'],
@@ -237,13 +242,13 @@ EXTRA_EF = {
     'monk': ['epicfight:roll', 'efn:efn_step', 'epicfight:catharsis'],
     'blaze': ['wom:avatar_of_might'], 'frost': ['efs_iss:against_magic'], 'water': [],
     'holy': ['efs_iss:mana_shield'], 'warlock': ['efs_iss:against_magic'], 'necromancer': ['efs_iss:breathe_again'],
-    'druid': [], 'spirit': ['efn:parry_master', 'wom:meditation'],
+    'druid': [], 'jade': ['efn:parry_master', 'wom:meditation'], 'spirit': ['efs_iss:mana_shield'],
     'assassin': ['efn:efn_dodge', 'wom:critical_knowledge'], 'thief': ['efn:efn_dodge', 'wom:precise_roll'],
     'stalker': ['efn:efn_step', 'wom:shadow_step'], 'wanderer': ['wom:aqua_maneuvre', 'epicfight:roll'],
 }
 SHARED_SPELLS = {
     'brute': ['I:fortify'], 'berserker': ['I:haste', 'I:charge'], 'monk': ['I:evasion', 'B:blitz'],
-    'samurai': ['B:focus'], 'spirit': ['B:focus'], 'thief': ['I:invisibility', 'I:evasion'],
+    'samurai': ['B:focus'], 'jade': ['B:focus'], 'thief': ['I:invisibility', 'I:evasion'],
     'assassin': ['B:phantom_movement', 'T:blink'], 'stalker': ['B:bird_strike', 'W:wind_jump', 'W:tailwind'],
     'lightning': ['I:blood_step', 'Z:thunder_step'], 'warlock': ['I:counterspell'], 'necromancer': ['I:blood_step'], 'holy': ['I:fortify'], 'druid': ['Z:wolf_pack'],
 }
