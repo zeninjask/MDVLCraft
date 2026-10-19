@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.ability;
 
 import com.mdvlcraft.binder.content.DemonicAssimilationDismiss;
+import com.mdvlcraft.binder.content.SummonModes;
 import com.mdvlcraft.binder.doppelganger.Doppelgangers;
 import com.mdvlcraft.binder.seraph.SeraphForm;
 import com.tiago.antimagic.spell.DemonicAssimilationSpell;
@@ -88,6 +89,12 @@ public final class AbilityActions {
         }
 
         MagicData magic = MagicData.getPlayerMagicData(player);
+        // With its summons out, casting a summon spell again changes how they fight; sneaking casts the recast, which dismisses them.
+        if (SummonModes.summonsOut(magic, spell) && !player.isShiftKeyDown()) {
+            SummonModes.cycle(player);
+            return;
+        }
+
         if (magic.isCasting() && !magic.getCastingSpellId().equals(spell.getSpellId())) {
             Utils.serverSideCancelCast(player, magic.getCastType() != CastType.LONG);
         }

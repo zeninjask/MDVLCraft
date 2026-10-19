@@ -22,10 +22,6 @@ public class DoppelgangerPatch extends HumanoidMobPatch<DoppelgangerEntity> {
     static final float DAMAGE_SHARE = 0.5F;
     private static final ThreadLocal<Boolean> DOUBLE_HIT = ThreadLocal.withInitial(() -> Boolean.FALSE);
 
-    /** True while a doppelganger's hit (dealt with its owner's damage source) is being applied. */
-    public static boolean attacking() {
-        return DOUBLE_HIT.get();
-    }
 
     static void onLivingHurt(LivingHurtEvent event) {
         if (DOUBLE_HIT.get()) {

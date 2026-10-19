@@ -52,7 +52,7 @@ STAT = {
     'SAT': ('Saturation from Food', '+25%'), 'STEP': ('Step Height', '+0.5'), 'PET': ('Pet & Mount Damage', '+15%'),
     'MNT': ('Mount Speed', '+15%'), 'SPRN': ('Sprinting Speed', '+8%'), 'FALL': ('Fall Damage Reduction', '+15%'),
     'CTR': ('Cast Time Reduction', '+8%'), 'MREG': ('Mana Regen', '+10%'), 'SPRES': ('Spell Resistance', '+6%'),
-    'NATR': ('Natural Regeneration', '+8%'), 'STAM': ('Max Stamina', '+4'), 'STRG': ('Stamina Regen', '+10%'),
+    'NATR': ('Natural Regeneration', '+8%'), 'STAM': ('Max Stamina', '+40'), 'STRG': ('Stamina Regen', '+10%'),
     'JMP': ('Jump Height', '+8%'), 'TSP': ('Time Spell Power', '+15%'), 'GLSP': ('Glintstone Spell Power', '+15%'),
     'ESOP': ('Esoteric Spell Power', '+15%'), 'WSP': ('Wind Spell Power', '+15%'), 'SFSP': ('Soul Fire Spell Power', '+15%'),
 }

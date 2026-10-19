@@ -18,8 +18,9 @@ EF_NAMES = json.loads((Path(__file__).parent / "ef_skill_names.json").read_text(
 
 # Same policy as generate_skill_trees.py (x1.2 mana, x1.1 power on top since 1.9.20).
 MANA_MULTIPLIER = 0.72
-POWER_MULTIPLIER = 1.1
+POWER_MULTIPLIER = 1.21
 COOLDOWN_MULTIPLIER = 1.5
+COOLDOWN_SCALE = 0.95   # every spell cooldown 5% shorter (2.0.15)
 COOLDOWN_MIN = 3
 COOLDOWN_KEEP = 120
 MANA_POOL = 100
@@ -35,7 +36,7 @@ def spell_cooldown(sid):
     cd = SPELLS[sid]["cd"]
     if cd is None:
         raise SystemExit(f"{sid} has no known cooldown")
-    return cd if cd >= COOLDOWN_KEEP else max(COOLDOWN_MIN, round(cd * COOLDOWN_MULTIPLIER, 1))
+    return round((cd if cd >= COOLDOWN_KEEP else max(COOLDOWN_MIN, round(cd * COOLDOWN_MULTIPLIER, 1))) * COOLDOWN_SCALE, 2)
 
 
 def spell_mana(sid, level):

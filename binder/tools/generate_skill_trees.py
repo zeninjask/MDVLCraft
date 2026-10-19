@@ -226,7 +226,7 @@ GENERIC = [
     ("irons_spellbooks:cooldown_reduction", "Focus", 0.005, 8),
     ("mdvlcraft:saturation_bonus", "Hearty", 0.02, 8),
     ("minecraft:generic.armor", "Hardened", 0.25, 8),
-    ("epicfight:staminar", "Endurance", 0.25, 8),
+    ("epicfight:staminar", "Endurance", 2.5, 8),   # x10 (2.0.15)
     ("epicfight:stamina_regen", "Second Breath", 0.01, 8),
     ("puffish_attributes:natural_regeneration", "Mending", 0.015, 8),
     ("minecraft:generic.attack_speed", "Readiness", 0.005, 8),

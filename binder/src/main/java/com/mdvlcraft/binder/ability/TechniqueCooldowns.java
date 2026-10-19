@@ -25,11 +25,14 @@ public final class TechniqueCooldowns {
     static void start(ServerPlayer player, Technique technique) {
         if (technique.cooldownTicks() != 0) {
             CompoundTag ready = player.getPersistentData().getCompound("mdvlcraft:technique_ready");
-            ready.putLong(technique.id().toString(), player.level().getGameTime() + Math.round(technique.cooldownTicks() * cooldownMultiplier(player)));
+            ready.putLong(technique.id().toString(), player.level().getGameTime() + Math.round(technique.cooldownTicks() * TECHNIQUE_COOLDOWN_SCALE * cooldownMultiplier(player)));
             player.getPersistentData().put("mdvlcraft:technique_ready", ready);
             send(player);
         }
     }
+
+    /** Technique cooldowns are 5% shorter, like every spell's (their spell configs). */
+    public static final double TECHNIQUE_COOLDOWN_SCALE = 0.95;
 
     /** Iron's cooldown reduction, applied to every skill cooldown the way Iron's applies it to spells. */
     public static double cooldownMultiplier(Player player) {

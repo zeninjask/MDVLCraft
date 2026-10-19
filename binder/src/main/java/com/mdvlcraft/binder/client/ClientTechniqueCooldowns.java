@@ -36,6 +36,6 @@ public final class ClientTechniqueCooldowns {
 
     /** The technique's cooldown after cooldown reduction, as the server starts it (TechniqueCooldowns.start). */
     static int effectiveTicks(Technique technique, Player player) {
-        return (int)Math.round(technique.cooldownTicks() * TechniqueCooldowns.cooldownMultiplier(player));
+        return (int)Math.round(technique.cooldownTicks() * TechniqueCooldowns.TECHNIQUE_COOLDOWN_SCALE * TechniqueCooldowns.cooldownMultiplier(player));
     }
 }
