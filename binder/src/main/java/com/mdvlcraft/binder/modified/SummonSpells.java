@@ -1,5 +1,9 @@
 package com.mdvlcraft.binder.modified;
 
+import com.blackgear.vanillabackport.common.api.variant.VariantDataHolder;
+import com.blackgear.vanillabackport.common.api.variant.VariantUtils;
+import com.blackgear.vanillabackport.common.level.entities.wolf.WolfVariant;
+import com.blackgear.vanillabackport.common.level.entities.wolf.WolfVariants;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.api.spells.ICastDataSerializable;
@@ -35,6 +39,7 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.goal.LandOnOwnersShoulderGoal;
 import net.minecraft.world.entity.animal.IronGolem;
@@ -371,7 +376,21 @@ public final class SummonSpells {
             this.spawn(level, caster, power, EntityType.WOLF, 2, castData, wolf -> {
                 tame(wolf, caster);
                 wolf.setCollarColor(DyeColor.LIGHT_BLUE);
+                VariantDataHolder.<WolfVariant>getHolder(wolf).setVariantData(VariantUtils.getDefault(WolfVariants.REGISTRY, WolfVariants.SNOWY));
             });
+        }
+
+        @Override
+        protected int duration() {
+            return DURATION * 2;
+        }
+    }
+
+    /** The Storm Hounds keep close: they run back once 4 blocks away (a tame wolf's own goal waits until 10). */
+    @SubscribeEvent
+    public static void onHoundJoin(EntityJoinLevelEvent event) {
+        if (!event.getLevel().isClientSide() && event.getEntity() instanceof Wolf wolf && Summons.kind(wolf).equals("storm_hounds")) {
+            wolf.goalSelector.addGoal(5, new FollowOwnerGoal(wolf, 1.3, 4.0F, 2.0F, false));
         }
     }
 
