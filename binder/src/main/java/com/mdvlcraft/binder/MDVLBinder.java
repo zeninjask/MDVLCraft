@@ -18,6 +18,7 @@ import com.mdvlcraft.binder.content.DisabledContentSetup;
 import com.mdvlcraft.binder.content.LanternBelt;
 import com.mdvlcraft.binder.content.OriginIcon;
 import com.mdvlcraft.binder.doppelganger.DoppelgangerSetup;
+import com.mdvlcraft.binder.haunted.HauntedSetup;
 import com.mdvlcraft.binder.epicskill.EpicSkillReward;
 import com.mdvlcraft.binder.integration.CataclysmIntegration;
 import com.mdvlcraft.binder.integration.EpicFightIntegration;
@@ -58,6 +59,7 @@ public final class MDVLBinder {
         AddItemModifier.register(modBus);
         WukongStaffSetup.register(modBus);
         ModifiedSpells.register(modBus);
+        HauntedSetup.register(modBus);
         modBus.addListener(MDVLBinder::onCommonSetup);
         modBus.addListener(com.mdvlcraft.binder.content.WildSpawns::onSpawnPlacements);
         if (FMLEnvironment.dist == Dist.CLIENT) {

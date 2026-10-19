@@ -14,6 +14,7 @@ import io.github.edwinmindcraft.origins.api.origin.Origin;
 import io.github.edwinmindcraft.origins.api.origin.OriginLayer;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.player.ClientMagicData;
+import io.redspace.ironsspellbooks.registries.ItemRegistry;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -52,13 +53,16 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import net.puffish.skillsmod.client.SkillsClientMod;
 import net.puffish.skillsmod.client.data.ClientCategoryData;
 import yesman.epicfight.client.world.capabilites.entitypatch.player.LocalPlayerPatch;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
+import top.theillusivec4.curios.api.CuriosApi;
 
 public class CharacterScreen extends Screen {
     private static final int W = 440;
@@ -74,6 +78,7 @@ public class CharacterScreen extends Screen {
     private static final int TOOLTIP_WIDTH = 220;
     private static final ResourceLocation ASTROLABE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/character/astrolabe.png");
     private static final ResourceLocation EXPERIENCE = ResourceLocation.fromNamespaceAndPath("puffish_attributes", "experience");
+    private static final RegistryObject<Enchantment> ENLIGHTENMENT = RegistryObject.create(ResourceLocation.fromNamespaceAndPath("majruszsenchantments", "enlightenment"), ForgeRegistries.ENCHANTMENTS);
     private static final float REFERENCE_HIT = 10.0F;
     private final Screen parent;
     private static Method alArmor;
@@ -466,8 +471,22 @@ public class CharacterScreen extends Screen {
         return String.format(Locale.ROOT, "%." + decimals + "f", value);
     }
 
-    /** Puffish's experience attribute is dynamic: it multiplies dropped experience the way DynamicModification.applyTo does, so read its modifiers. */
+    /**
+     * Puffish's experience attribute (it multiplies dropped experience the way DynamicModification.applyTo does, so read its
+     * modifiers), times x1.25 per Emerald Stoneplate Ring (Iron's, on kills) and +12.5% per level of Enlightenment summed
+     * over the armour (Majrusz's, on picking up orbs; config/majruszsenchantments.json experience_multiplier_per_level).
+     */
     private static double experienceBonus(LocalPlayer player) {
+        int rings = CuriosApi.getCuriosInventory(player).map(curios -> curios.findCurios(ItemRegistry.EMERALD_STONEPLATE_RING.get()).size()).orElse(0);
+        int enlightenment = 0;
+        for (ItemStack armor : player.getArmorSlots()) {
+            enlightenment += EnchantmentHelper.getItemEnchantmentLevel(ENLIGHTENMENT.get(), armor);
+        }
+
+        return (1.0 + attributeExperienceBonus(player)) * Math.pow(1.25, rings) * (1.0 + 0.125 * enlightenment) - 1.0;
+    }
+
+    private static double attributeExperienceBonus(LocalPlayer player) {
         AttributeInstance instance = player.getAttribute(ForgeRegistries.ATTRIBUTES.getValue(EXPERIENCE));
         if (instance == null) {
             throw new IllegalStateException("puffish_attributes:experience is missing on the player");

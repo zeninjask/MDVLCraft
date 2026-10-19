@@ -1,5 +1,7 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.haunted.HauntedSetup;
+import net.minecraftforge.client.event.EntityRenderersEvent.RegisterRenderers;
 import com.mdvlcraft.binder.content.MageHunterSlot;
 import com.mdvlcraft.binder.client.ponder.ShipPonderPlugin;
 import com.mdvlcraft.binder.client.ponder.WeaponPonderPlugin;
@@ -17,6 +19,7 @@ public final class ClientContentSetup {
 
     public static void register(IEventBus modBus) {
         modBus.addListener(ClientContentSetup::onClientSetup);
+        modBus.addListener(ClientContentSetup::onRegisterRenderers);
         MinecraftForge.EVENT_BUS.addListener(ClientContentSetup::onLoggingIn);
     }
 
@@ -28,6 +31,10 @@ public final class ClientContentSetup {
             PonderHold.register();
             MageHunterSlot.setClientCheck(player -> player == Minecraft.getInstance().player && MageHunterSlot.summonsSwords(ClientAbilities.granted().keySet()));
         });
+    }
+
+    private static void onRegisterRenderers(RegisterRenderers event) {
+        event.registerEntityRenderer(HauntedSetup.HAUNTED_CREAKING.get(), HauntedCreakingRenderer::new);
     }
 
     private static void onLoggingIn(LoggingIn event) {
