@@ -11,3 +11,7 @@ Always use these skills, in every session, without being asked:
 - **RTK**: run shell commands through `rtk` (e.g. `rtk git status`, `rtk grep ...`) so command output is compressed. If `rtk` isn't installed, run commands normally.
 - **ponytail**: take the smallest change that fully solves the task, and keep replies short and plain.
 - **graphify**: for any question about the codebase, its structure or how files relate, use graphify first (build or refresh `graphify-out/` if it's missing or stale) before reading files by hand.
+
+# Working rules
+
+- While a long task runs (tests, builds), check its progress every 5 minutes and report it.
