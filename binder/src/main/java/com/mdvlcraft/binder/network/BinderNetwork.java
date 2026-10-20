@@ -10,7 +10,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "15";
+    private static final String PROTOCOL = "16";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
         ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals
     );
@@ -132,6 +132,9 @@ public final class BinderNetwork {
         CHANNEL.registerMessage(
             id++, LootViewsPacket.class, LootViewsPacket::encode, LootViewsPacket::decode, LootViewsPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, ChatLinePacket.class, ChatLinePacket::encode, ChatLinePacket::decode, ChatLinePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
     }
 
