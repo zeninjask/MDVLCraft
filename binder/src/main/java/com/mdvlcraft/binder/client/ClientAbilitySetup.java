@@ -39,6 +39,7 @@ public final class ClientAbilitySetup {
         MinecraftForge.EVENT_BUS.addListener(DqInventoryScreen::onScreenInit);
         MinecraftForge.EVENT_BUS.addListener(ChatPosition::onChat);
         MinecraftForge.EVENT_BUS.addListener(EventPriority.HIGHEST, false, Pre.class, TrueInvisibilityRender::onRenderLiving);
+        MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, true, Pre.class, PartiesGhostFlag::onRenderLiving);
     }
 
     private static void onRegisterOverlays(RegisterGuiOverlaysEvent event) {
