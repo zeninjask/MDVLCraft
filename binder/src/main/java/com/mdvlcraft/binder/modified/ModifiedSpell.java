@@ -14,6 +14,8 @@ public abstract class ModifiedSpell extends AbstractSpell {
     protected final ModifiedAbilities.Config config;
     private final ResourceLocation id;
     private final DefaultConfig defaultConfig;
+    /** Every Modified ability's mana and cooldown are 5% above its config's (2.0.21); its damage is in ModifiedSpellPower. */
+    private static final double COST_SCALE = 1.05;
 
     protected ModifiedSpell(String key, int baseSpellPower) {
         this.config = ModifiedAbilities.get(key);
@@ -22,10 +24,10 @@ public abstract class ModifiedSpell extends AbstractSpell {
             .setMinRarity(SpellRarity.COMMON)
             .setSchoolResource(this.config.school())
             .setMaxLevel(1)
-            .setCooldownSeconds(this.config.cooldownSeconds())
+            .setCooldownSeconds(this.config.cooldownSeconds() * COST_SCALE)
             .setAllowCrafting(false)
             .build();
-        this.baseManaCost = this.config.mana();
+        this.baseManaCost = (int)Math.round(this.config.mana() * COST_SCALE);
         this.manaCostPerLevel = 0;
         this.baseSpellPower = baseSpellPower;
         this.spellPowerPerLevel = 0;
