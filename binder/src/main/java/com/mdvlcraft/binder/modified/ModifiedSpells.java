@@ -72,6 +72,7 @@ public final class ModifiedSpells {
         VolleySpells.all().forEach(volley -> all.add(() -> volley));
         GroundSpells.all().forEach(ground -> all.add(() -> ground));
         WallSpells.all().forEach(wall -> all.add(() -> wall));
+        Wave2Necromancer.all().forEach(spell -> all.add(() -> spell));
         FormSpells.all().forEach(form -> all.add(() -> form));
         BoonSpells.all().forEach(boon -> all.add(() -> boon));
         SpiritSummons.all().forEach(summon -> all.add(() -> summon));
