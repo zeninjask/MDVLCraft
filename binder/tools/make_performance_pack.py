@@ -12,8 +12,9 @@ server also runs stay and have their effects turned down in their configs instea
     Weapons' texture Flazmore3.png (capital letter) when YACL lists images through ModernFix's resource cache.
 - Defaults: render distance 6, simulation distance 5, fast graphics, no smooth lighting, clouds, entity shadows,
   biome blend or mipmaps, minimal particles, half entity distance, no vsync, uncapped frame rate; Render Scale 0.7.
-- Distant Horizons: 50-chunk LODs on its LOW quality preset (low horizontal and vertical quality, no transparency,
-  single-pass fade) and LOW_IMPACT threads (1 worker thread), without SSAO, anti-aliasing, clouds, textured LODs,
+- Distant Horizons, kept light so it builds little and shuts down fast when leaving a world: 24-chunk LODs at the lowest
+  quality (lowest horizontal quality, height-map vertical quality, 4-block detail, no transparency, single-pass fade)
+  on 1 worker thread that runs half the time, without SSAO, anti-aliasing, clouds, textured LODs,
   noise texture, dithering or biome blending.
 - Every other client config with a cost: Embeddium fast weather and leaves without vignette, Bad Optimizations'
   lightmap caching, Sound Physics off, slow dynamic lights without block entities, a plainer minimap, and the blood,
@@ -51,12 +52,12 @@ OPTIONS = {
 CONFIGS = {
     'renderscale.json5': {'scale': '0.7'},
     'DistantHorizons.toml': {
-        'lodChunkRenderDistanceRadius': '50', 'horizontalQuality': '"LOW"', 'verticalQuality': '"LOW"',
-        'maxHorizontalResolution': '"BLOCK"', 'transparency': '"DISABLED"', 'vanillaFadeMode': '"SINGLE_PASS"',
+        'lodChunkRenderDistanceRadius': '24', 'horizontalQuality': '"LOWEST"', 'verticalQuality': '"HEIGHT_MAP"',
+        'maxHorizontalResolution': '"FOUR_BLOCKS"', 'transparency': '"DISABLED"', 'vanillaFadeMode': '"SINGLE_PASS"',
         'enableSsao': 'false', 'enableAntiAliasing': 'false', 'enableCloudRendering': 'false',
         'enableMultiLayerClouds': 'false', 'enableTexturedLods': 'false', 'enableNoiseTexture': 'false',
         'ditherDhFade': 'false', 'increaseQualityWhenZoomedIn': 'false', 'lodBiomeBlending': '0',
-        'threadRunTimeRatio': '"1.0"',
+        'threadRunTimeRatio': '"0.5"',
     },
     'embeddium-options.json': {'quality.weather_quality': 'FAST', 'quality.leaves_quality': 'FAST', 'quality.enable_vignette': False},
     'badoptimizations.txt': {'enable_lightmap_caching': 'true'},
