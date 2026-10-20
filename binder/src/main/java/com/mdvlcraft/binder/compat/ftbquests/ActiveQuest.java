@@ -21,10 +21,13 @@ import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.TickTask;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.server.ServerLifecycleHooks;
 
 /**
  * One quest at a time. Every generated quest (tools/generate_quests.py) opens with an "Accept Quest" checkmark and
@@ -61,7 +64,9 @@ public final class ActiveQuest {
         Quest quest = task.getQuest();
         Optional<Quest> other = active(data).stream().filter(found -> found != quest).findFirst();
         if (other.isPresent()) {
-            data.resetProgress(task);
+            // FTB Quests marks the task complete after this event, so the undo waits a tick.
+            MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+            server.tell(new TickTask(server.getTickCount() + 1, () -> data.resetProgress(task)));
             members.forEach(player -> player.sendSystemMessage(Component.literal("You are already on a quest: ")
                 .append(title(other.get())).append(". Finish it or ").append(cancelLink()).append(" first.")
                 .withStyle(ChatFormatting.RED)));

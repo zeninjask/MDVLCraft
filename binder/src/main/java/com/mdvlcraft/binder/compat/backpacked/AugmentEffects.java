@@ -15,7 +15,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * What the pack's augments do on the server (BackpackAugments). Tool Swapper: starting to break a block swaps the
- * held item for the fastest tool in that backpack. Void: picked-up items in its filter are destroyed.
+ * held item for the fastest tool in that backpack (in Epic Fight's battle mode left click attacks instead, so it acts
+ * when mining, as when a tool is held). Void: picked-up items in its filter are destroyed.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class AugmentEffects {
@@ -29,7 +30,6 @@ public final class AugmentEffects {
             return;
         }
 
-        com.mojang.logging.LogUtils.getLogger().info("TOOLSWAP DEBUG left click {} by {}", event.getPos(), player.getName().getString());
         BlockState state = player.level().getBlockState(event.getPos());
         if (state.getDestroySpeed(player.level(), event.getPos()) <= 0) {
             return;
