@@ -43,7 +43,7 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
 
 /**
  * Gaunt Vessel (modified/GauntVessel): the player becomes the Haunted Lord (client/GauntRenderer draws it in their place).
- * Entering, the player is lifted and their bones snap one by one (SNAPS, a crack each) until the body tears into the
+ * Entering, the player is lifted and their bones snap one by one (SNAPS) until the body tears into the
  * Haunted Lord, which unfolds (its transform animation); leaving plays all of it backwards at twice the speed. While
  * changing the player cannot move or jump. In the form: 25% faster, 20% more spirit spell power, Night Vision; spells
  * only (Iron's spells, not the Modified abilities), no attacks, item use or Epic Fight skills.
@@ -191,18 +191,10 @@ public final class GauntForm {
         }
     }
 
-    /** The cracks (and the tearing into the Haunted Lord) between two points of the entering sequence, either way round. */
+    /** The tearing into the Haunted Lord, between two points of the entering sequence, either way round (the bone cracks
+     * are played by each client, client/GauntClient). */
     private static void sounds(ServerPlayer player, float from, float to) {
-        float lo = Math.min(from, to);
-        float hi = Math.max(from, to);
-        for (int k = 0; k < SNAPS.length; k++) {
-            if (SNAPS[k] > lo && SNAPS[k] <= hi) {
-                float pitch = 0.55F + 0.07F * (k % 5);
-                player.level().playSound(null, player.blockPosition(), SoundEvents.BONE_BLOCK_BREAK, SoundSource.PLAYERS, 1.6F, pitch);
-                player.level().playSound(null, player.blockPosition(), SoundEvents.SKELETON_HURT, SoundSource.PLAYERS, 0.7F, pitch * 0.8F);
-            }
-        }
-        if (SNAP_TICKS > lo && SNAP_TICKS <= hi) {
+        if (SNAP_TICKS > Math.min(from, to) && SNAP_TICKS <= Math.max(from, to)) {
             player.level().playSound(null, player.blockPosition(), SoundEvents.SCULK_SHRIEKER_SHRIEK, SoundSource.PLAYERS, 1.4F, 0.7F);
             player.level().playSound(null, player.blockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 2.0F, 0.6F);
         }

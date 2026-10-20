@@ -88,6 +88,8 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
   code moved out of `client/SeraphRenderer` into `client/NodeModel` (shared, plus a glow pass). Model data from
   `tools/haunted_lord/convert.py`. To check in game: Seraph Embodiment still renders as before, the snapping body
   (part rotation signs), the head turning the right way, and the walk/sprint/crawl pacing constants in GauntRenderer.
+  Its sounds (CC0, Freesound, `tools/haunted_lord/sounds.py`, `assets/mdvlcraft/sounds.json`) are played client-side by
+  `client/GauntClient` at cue points of the animations; check they line up with the steps and hand plants.
 - **Released:** 2.0.13 is on `main` (binder 0.8.4): cinder essence recipe (netherite scrap surrounded by blaze powder), untested.
 - **2.0.12** (binder 0.8.3): red string (redstone + string) and bloody vellum (paper + redstone) recipes, untested.
 - **2.0.11** (`0ef8736`, binder 0.8.2).

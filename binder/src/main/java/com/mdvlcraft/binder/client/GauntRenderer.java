@@ -70,7 +70,8 @@ final class GauntRenderer {
         if (time < GauntForm.ENTER_TICKS) {
             pose = blend.pose(model, "transform", Math.min((time - GauntForm.SNAP_TICKS) / 20.0F, model.length("transform")), now);
         } else {
-            pose = choose(model, player, seen, partialTick, now, blend);
+            Pick pick = pick(player, seen, partialTick, now);
+            pose = blend.pose(model, pick.animation, pick.time, now);
             look(pose, player, partialTick, yaw);
         }
         poseStack.pushPose();
@@ -84,7 +85,12 @@ final class GauntRenderer {
         poseStack.popPose();
     }
 
-    private static float[][] choose(NodeModel model, Player player, Seen seen, float partialTick, float now, NodeModel.Blend blend) {
+    /** The animation shown in the form this frame, its time (seconds) and its length. */
+    record Pick(String animation, float time, float length) {
+    }
+
+    static Pick pick(Player player, Seen seen, float partialTick, float now) {
+        NodeModel model = model();
         String animation;
         float time;
         float walked = player.walkAnimation.position(partialTick);
@@ -93,21 +99,22 @@ final class GauntRenderer {
         boolean moving = dx * dx + dz * dz > 1.0E-4;
         if (ClientMagicData.getSyncedSpellData(player).isCasting() || (now - seen.castAt) / 20.0F < CAST_HOLD) {
             animation = "cast";
-            time = now / 20.0F % model.length("cast");
+            time = now / 20.0F;
         } else if (player.isCrouching()) {
             animation = "crawl";
-            time = walked * CRAWL_PACE % model.length("crawl");
+            time = walked * CRAWL_PACE;
         } else if (moving && player.isSprinting()) {
             animation = "sprint";
-            time = walked * SPRINT_PACE % model.length("sprint");
+            time = walked * SPRINT_PACE;
         } else if (moving) {
             animation = "walk";
-            time = walked * WALK_PACE % model.length("walk");
+            time = walked * WALK_PACE;
         } else {
             animation = "idle";
-            time = now / 20.0F % model.length("idle");
+            time = now / 20.0F;
         }
-        return blend.pose(model, animation, time, now);
+        float length = model.length(animation);
+        return new Pick(animation, time % length, length);
     }
 
     /** Turns the head towards where the player looks (relative to the body, within limits). */

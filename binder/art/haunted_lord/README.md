@@ -30,3 +30,17 @@ Built by `source/anims.py` (`python3 anims.py out.animation.json`): each animati
 hands and the cast forearms are placed by IK on `source/hl.py`, which matches Blockbench's own bone maths to 1e-14, then
 sampled into catmullrom keys. `source/animprev.js` renders previews in Blockbench web; `source/bbsave.js` bakes the
 animations into the `.bbmodel`.
+
+## Sounds
+
+Cut by `tools/haunted_lord/sounds.py` into `assets/mdvlcraft/sounds/haunted_lord/` (mono OGG, several variants each) and
+played by `client/GauntClient`. All are CC0 recordings from Freesound:
+
+| Event | Source |
+|---|---|
+| `haunted_lord.idle` | [Masked_Breathing_Raspy_Loop](https://freesound.org/s/788055/) by Mediasaur |
+| `haunted_lord.walk` | [Foot Drags Dirt 2](https://freesound.org/s/319210/) by worthahep88 |
+| `haunted_lord.sprint` | [Creature Screeching](https://freesound.org/s/436199/) by Dmgrinder |
+| `haunted_lord.crawl` | [Knuckles Cracking](https://freesound.org/s/449608/) by SMuntsinger |
+| `haunted_lord.cast` | [Deafening Whispers](https://freesound.org/s/185059/) by unfa |
+| `haunted_lord.snap` | [bonebreaker](https://freesound.org/s/124971/) by morgothFLOW |
