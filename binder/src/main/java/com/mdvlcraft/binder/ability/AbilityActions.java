@@ -38,12 +38,16 @@ public final class AbilityActions {
 
     public static void press(ServerPlayer player, int slot) {
         if (GauntForm.in(player)) {
-            // The form's own wheel: Transform Back and Leap, nothing else.
+            // The form's own wheel: Transform Back, Leap and Horrify, nothing else.
             GauntAbility.slot(slot).ifPresent(gaunt -> {
                 if (gaunt == GauntAbility.REVERT) {
                     castSpell(player, SpellRegistry.getSpell(ResourceLocation.parse(GauntForm.SPELL)), 1);
                 } else if (GauntForm.active(player)) {
-                    GauntLeap.press(player);
+                    if (gaunt == GauntAbility.LEAP) {
+                        GauntLeap.press(player);
+                    } else {
+                        GauntLeap.horrify(player);
+                    }
                 }
             });
             return;

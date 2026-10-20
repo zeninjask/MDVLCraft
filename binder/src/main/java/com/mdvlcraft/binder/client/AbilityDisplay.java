@@ -41,7 +41,7 @@ final class AbilityDisplay {
             float cooldown = ability instanceof SpellAbility spell
                 ? ClientMagicData.getCooldownPercent(spell.spell())
                 : (ability instanceof Technique technique ? ClientTechniqueCooldowns.percent(technique)
-                    : (ability == GauntAbility.LEAP ? GauntClient.leapCooldown() : 0.0F));
+                    : (ability instanceof GauntAbility gaunt ? GauntClient.cooldown(gaunt) : 0.0F));
             if (cooldown > 0.0F) {
                 int height = Math.round(16.0F * cooldown);
                 graphics.fill(x, y + 16 - height, x + 16, y + 16, -1610612736);

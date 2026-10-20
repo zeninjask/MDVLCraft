@@ -43,4 +43,5 @@ played by `client/GauntClient`. All are CC0 recordings from Freesound:
 | `haunted_lord.sprint` | [Creature Screeching](https://freesound.org/s/436199/) by Dmgrinder |
 | `haunted_lord.crawl` | [Knuckles Cracking](https://freesound.org/s/449608/) by SMuntsinger |
 | `haunted_lord.cast` | [Deafening Whispers](https://freesound.org/s/185059/) by unfa |
+| `haunted_lord.horrify` | [Ghost Scream](https://freesound.org/s/469141/) by onderwish |
 | `haunted_lord.snap` | [bonebreaker](https://freesound.org/s/124971/) by morgothFLOW |

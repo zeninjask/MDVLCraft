@@ -7,14 +7,16 @@ import net.minecraft.resources.ResourceLocation;
 
 /**
  * The only two abilities on the wheel while in Gaunt Vessel's form (gaunt/GauntForm), in place of the loadout: Transform
- * Back (casts Gaunt Vessel again) and Leap (gaunt/GauntLeap: hold to charge, release to jump).
+ * Back (casts Gaunt Vessel again), Leap (gaunt/GauntLeap: hold to charge, release to jump) and Horrify (a screech that
+ * blinds and slows the players around).
  */
 public enum GauntAbility implements Ability {
     REVERT("gaunt_revert"),
-    LEAP("gaunt_leap");
+    LEAP("gaunt_leap"),
+    HORRIFY("gaunt_horrify");
 
     /** The wheel's slots in the form. */
-    public static final GauntAbility[] WHEEL = {REVERT, LEAP};
+    public static final GauntAbility[] WHEEL = {REVERT, LEAP, HORRIFY};
 
     private final ResourceLocation id;
 

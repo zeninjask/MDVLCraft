@@ -304,9 +304,53 @@ def transform(t, L=1.8, S=None):
 def scale_full(t):
     return 0.62 + 0.38 * (0.35 * snap(t, 0.85) + 0.35 * snap(t, 1.0) + 0.3 * snap(t, 1.12))
 
+# ---- execute: grab a victim by the neck, lift it, snap its neck, drop it (gaunt/GauntExecute moves the victim along GRIP)
+GRAB = np.array([5.0, 30.0, -26.0])     # the victim's neck when standing in front (model px, Blockbench space: +x right, -z front)
+LIFT = np.array([4.0, 50.0, -22.0])     # held up at arm's length
+EXECUTE_SNAP = 2.0                     # the neck snaps (the sound, the victim's head, the kill)
+EXECUTE_DROP = 2.6
+
+def grip(t):
+    """Where the right hand's knuckles are aimed, by time (model px)."""
+    rest = KNUCKLE['right']
+    if t < 0.5: return rest + (GRAB - rest) * smooth(t / 0.5)
+    if t < 0.6: return GRAB
+    if t < 1.5: return GRAB + (LIFT - GRAB) * smooth((t - 0.6) / 0.9)
+    if t < EXECUTE_SNAP:                                  # the victim kicks and struggles
+        return LIFT + 0.8 * np.array([math.sin(t * 37), math.sin(t * 29 + 1), 0.0])
+    if t < EXECUTE_DROP: return LIFT + np.array([0.0, -0.6 * smooth((t - EXECUTE_SNAP) / 0.2), 0.0])
+    if t < 2.8: return LIFT + np.array([0.0, -0.6 - 4.0 * smooth((t - EXECUTE_DROP) / 0.2), 0.0])
+    return LIFT + np.array([0.0, -4.6, 0.0])
+
+def execute(t, L=3.4, S=None):
+    """Grab by the neck (0 - 0.6 s), lift (to 1.5 s), hold it struggling, twist the wrist: the neck snaps at EXECUTE_SNAP,
+    hold the limp body, open the hand (EXECUTE_DROP), and settle back into the idle's first pose."""
+    P = {}
+    lean = 12 * smooth(t / 0.5) - 20 * smooth((t - 0.6) / 0.9)
+    add(P, 'body', (lean, -6 * smooth(t / 0.5), 0))
+    add(P, 'head', (6 * smooth(t / 0.5) - 24 * smooth((t - 0.6) / 0.9), 0, 22 * snap(t, EXECUTE_SNAP + 0.05) * max(0.0, 1 - smooth((t - 2.3) / 0.5))))
+    add(P, 'jaw', (20 * smooth((t - 0.6) / 0.9) + 12 * snap(t, EXECUTE_SNAP) - 32 * smooth((t - 2.4) / 0.6), 0, 0))
+    add(P, 'left_arm', (-15 * smooth((t - 0.6) / 0.6), 0, -25 * smooth((t - 0.6) / 0.6)))
+    add(P, 'left_arm_down', (-20 * smooth((t - 0.6) / 0.6), 0, 0))
+    for f in FINGERS['left']:
+        add(P, f, (-20 * smooth((t - 0.6) / 0.6), 0, 0))
+    add(P, 'full', (0, 0, 0), (0, -1.5 * smooth(t / 0.5) + 1.5 * smooth((t - 0.6) / 0.9), 0))
+    for s in ('left', 'right'):
+        toe, heel = foot_targets(s, 0.0, 0.0, 0.0, None)
+        P, _ = S.leg(P, s, toe, heel)
+    P, _ = S.arm(P, 'right', [('right_arm_down', KNUCKLE['right'], grip(t), 1.0)], [-60, 0, 10, -30, 0, 0])
+    closed = snap(t, 0.5, 0.05) - snap(t, EXECUTE_DROP, 0.05)
+    add(P, 'right_arm_down', (0, 38 * snap(t, EXECUTE_SNAP, 0.05), 0))          # the twist
+    for f in FINGERS['right']:
+        add(P, f, (35 * closed + 15 * snap(t, EXECUTE_SNAP, 0.05) * closed, 0, 0))
+    if t > 2.8:                                              # back to the idle's first pose
+        P = mix(P, idle(0.0, 4.0), smooth((t - 2.8) / 0.6))
+    return P
+
 ANIMS = {  # name: (function, length, keys per second[, loops])
     'idle': (idle, 4.0, 10), 'cast': (cast, 4.0, 10), 'walk': (walk, 2.4, 10), 'sprint': (sprint, 0.7, 20), 'crawl': (crawl, 2.8, 10),
     'transform': (transform, 1.8, 40, False),
+    'execute': (execute, 3.4, 30, False),
 }
 
 def build(names=None):

@@ -80,6 +80,8 @@ public final class GauntClient {
         boolean leaping;
         long readyAt;
         int cooldown = 1;
+        long horrifyReadyAt;
+        int horrifyCooldown = 1;
     }
 
     private static final Map<Integer, Leap> LEAP = new HashMap<>();
@@ -133,6 +135,10 @@ public final class GauntClient {
             leap.readyAt = now + packet.cooldown();
             leap.cooldown = packet.cooldown();
         }
+        if (packet.horrifyCooldown() > 0) {
+            leap.horrifyReadyAt = now + packet.horrifyCooldown();
+            leap.horrifyCooldown = packet.horrifyCooldown();
+        }
     }
 
     @Nullable
@@ -140,11 +146,17 @@ public final class GauntClient {
         return LEAP.get(entity);
     }
 
-    /** The local player's leap cooldown left, 0..1 (for the wheel and the ability bar). */
-    public static float leapCooldown() {
+    /** The local player's cooldown left on a form ability, 0..1 (for the wheel and the ability bar). */
+    public static float cooldown(GauntAbility ability) {
         LocalPlayer player = Minecraft.getInstance().player;
         Leap leap = player == null ? null : LEAP.get(player.getId());
-        return leap == null ? 0.0F : Mth.clamp((leap.readyAt - player.level().getGameTime()) / (float)leap.cooldown, 0.0F, 1.0F);
+        if (leap == null || ability == GauntAbility.REVERT) {
+            return 0.0F;
+        }
+        long now = player.level().getGameTime();
+        return ability == GauntAbility.LEAP
+            ? Mth.clamp((leap.readyAt - now) / (float)leap.cooldown, 0.0F, 1.0F)
+            : Mth.clamp((leap.horrifyReadyAt - now) / (float)leap.horrifyCooldown, 0.0F, 1.0F);
     }
 
     /** A player's leap charge so far, 0..1, or -1 when not charging. */

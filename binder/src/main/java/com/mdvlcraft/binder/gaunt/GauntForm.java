@@ -318,6 +318,14 @@ public final class GauntForm {
         }
     }
 
+    /** Plays the cast animation (on everyone's screen), as a spell begun in the form would. */
+    static void playCast(ServerPlayer player) {
+        State state = SERVER.get(player.getUUID());
+        if (state != null) {
+            sync(player, state, true);
+        }
+    }
+
     public static void refuse(Player player) {
         player.displayClientMessage(Component.translatable("ability.mdvlcraft.gaunt.spells_only").withStyle(ChatFormatting.RED), true);
     }

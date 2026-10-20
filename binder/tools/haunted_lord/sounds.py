@@ -27,6 +27,8 @@ SOUNDS = {
     # unfa, "Deafening Whispers": 4 s of whispering, the cast's cycle
     'cast': (185059, 'https://cdn.freesound.org/previews/185/185059_1038806-hq.mp3',
              [(1.0, 5.0), (9.0, 13.0), (17.0, 21.0), (27.0, 31.0)], -18),
+    # onderwish, "Ghost Scream": the Horrify screech (gaunt/GauntLeap.horrify)
+    'horrify': (469141, 'https://cdn.freesound.org/previews/469/469141_2694940-hq.mp3', [(1.0, 5.0)], -14),
     # morgothFLOW, "bonebreaker.mp3": bone snaps (the transformation)
     'snap': (124971, 'https://cdn.freesound.org/previews/124/124971_1247793-hq.mp3',
              [(1.92, 2.25), (2.36, 2.78), (2.8, 3.2), (3.68, 4.0)], None),

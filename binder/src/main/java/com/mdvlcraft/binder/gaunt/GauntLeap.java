@@ -11,6 +11,8 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
@@ -22,11 +24,18 @@ import net.minecraft.world.phys.Vec3;
  * and asks, GauntClingPacket; the server checks the block is there): no gravity, held in place, drawn crawling on the
  * surface (client/GauntRenderer) until they jump off, leap again, or the block goes. The state goes to the player and
  * everyone tracking them (GauntStatePacket).
+ *
+ * Horrify (ability/GauntAbility.HORRIFY) lives here too, sharing that state: the Haunted Lord screeches (the cast
+ * animation) and every other player within HORRIFY_RANGE blocks is blinded and slowed.
  */
 public final class GauntLeap {
     public static final int CHARGE_TICKS = 20;
     public static final int COOLDOWN_TICKS = 30;
+    public static final int HORRIFY_COOLDOWN_TICKS = 400;
+    private static final double HORRIFY_RANGE = 20.0;
+    private static final int HORRIFY_TICKS = 100;
     private static final SoundEvent SCREECH = SoundEvent.createVariableRangeEvent(new ResourceLocation("mdvlcraft", "haunted_lord.sprint"));
+    private static final SoundEvent HORRIFY = SoundEvent.createVariableRangeEvent(new ResourceLocation("mdvlcraft", "haunted_lord.horrify"));
 
     private static final class State {
         long chargingSince = -1;
@@ -34,6 +43,7 @@ public final class GauntLeap {
         Direction cling;
         boolean leaping;
         long readyAt;
+        long horrifyReadyAt;
     }
 
     private static final Map<UUID, State> SERVER = new HashMap<>();
@@ -93,6 +103,25 @@ public final class GauntLeap {
         sync(player, state);
     }
 
+    /** Horrify: blinds and slows every other player within range (not spectators or creative players). */
+    public static void horrify(ServerPlayer player) {
+        State state = state(player);
+        long now = player.level().getGameTime();
+        if (now < state.horrifyReadyAt) {
+            return;
+        }
+        state.horrifyReadyAt = now + HORRIFY_COOLDOWN_TICKS;
+        for (ServerPlayer other : player.serverLevel().players()) {
+            if (other != player && !other.isSpectator() && !other.isCreative() && other.distanceToSqr(player) <= HORRIFY_RANGE * HORRIFY_RANGE) {
+                other.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, HORRIFY_TICKS, 0), player);
+                other.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, HORRIFY_TICKS, 1), player);
+            }
+        }
+        player.level().playSound(null, player.blockPosition(), HORRIFY, SoundSource.PLAYERS, 2.5F, 1.0F);
+        GauntForm.playCast(player);
+        sync(player, state);
+    }
+
     /** The client says the player touched `face` mid-leap (cling), or jumped off (null). */
     public static void cling(ServerPlayer player, @Nullable Direction face) {
         State state = SERVER.get(player.getUUID());
@@ -142,7 +171,7 @@ public final class GauntLeap {
         State state = SERVER.remove(player.getUUID());
         if (state != null) {
             letGo(player, state);
-            BinderNetwork.sendToTrackingAndSelf(player, new GauntStatePacket(player.getId(), -1, -1, false, 0));
+            BinderNetwork.sendToTrackingAndSelf(player, new GauntStatePacket(player.getId(), -1, -1, false, 0, 0));
         }
     }
 
@@ -160,6 +189,7 @@ public final class GauntLeap {
     private static GauntStatePacket packet(ServerPlayer player, State state) {
         long now = player.level().getGameTime();
         return new GauntStatePacket(player.getId(), state.chargingSince < 0 ? -1 : (int)(now - state.chargingSince),
-            state.cling == null ? -1 : state.cling.get3DDataValue(), state.leaping, (int)Math.max(0, state.readyAt - now));
+            state.cling == null ? -1 : state.cling.get3DDataValue(), state.leaping, (int)Math.max(0, state.readyAt - now),
+            (int)Math.max(0, state.horrifyReadyAt - now));
     }
 }
