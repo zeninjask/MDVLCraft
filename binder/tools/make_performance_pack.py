@@ -4,7 +4,8 @@ server also runs stay and have their effects turned down in their configs instea
 
 - Dropped (client-only, cost frames, nothing depends on them): the shader packs, Falling Leaves, Particle Rain,
   AAA Particles' world particles, Ambient Sounds, Forgematica and its library, Chat Animation, Smooth GUI, Cull Less
-  Leaves, Fancy World Animations, and the Better Leaves, tall-grass and Fancy Crops resource packs.
+  Leaves, Fancy World Animations, Continuity (connected textures, which slow chunk meshing) with the Sinytra Connector
+  and Fabric API it runs on, and the Better Leaves, tall-grass and Fancy Crops resource packs.
 - Kept on purpose:
   - Sodium Dynamic Lights: the binder's lantern belt hooks it; its lights are slowed instead.
   - Oculus, with shaders off as in the client: without it the game crashes loading resources, on Project Babylon
@@ -35,9 +36,12 @@ DROPPED = {
     'aaa_particles_world-forge-1.20.1-2.0.0.jar', 'AmbientSounds_FORGE_v6.3.9_mc1.20.1.jar',
     'Forgematica-0.1.13-mc1.20.1.jar', 'MaFgLib-0.1.14-mc1.20.1.jar', 'chatanimation-forge-1.3.4+mc1.20.1.jar',
     'smoothgui-forge-2.0.7+mc1.20.1.jar', 'CullLessLeaves-Reforged-1.20.1-1.0.5.jar', 'fwa+1.20.1-forge-1.2.31.jar',
+    'continuity-3.0.0+1.20.1.forge.jar', 'Connector-1.0.0-beta.49+1.20.1.jar', 'fabric-api-0.92.6+1.11.15+1.20.1.jar',
     'Better-Leaves-9.6.zip', 'Os-Colorful-Grasses-Tall-26.3.zip', 'Fancy-Crops-1.3.zip',
     'MakeUp-UltraFast-9.5g.zip', 'photon_v1.3b.zip', 'ComplementaryReimagined_r5.9.3.zip',
 }
+# built-in resource packs of dropped mods, switched off in options.txt
+DROPPED_RESOURCE_PACKS = {'continuity:default', 'continuity:glass_pane_culling_fix'}
 OPTIONS = {
     'renderDistance': '6', 'simulationDistance': '5', 'graphicsMode': '0', 'ao': 'false', 'biomeBlendRadius': '0',
     'entityShadows': 'false', 'particles': '2', 'mipmapLevels': '0', 'renderClouds': '"false"', 'enableVsync': 'false',
@@ -131,7 +135,7 @@ def make(base):
     for key, value in OPTIONS.items():
         options = set_lines(options, re.escape(key), ':', value, 'options.txt')
     packs = re.search(r'^resourcePacks:(\[.*\])\r?$', options, re.M)
-    kept = [p for p in json.loads(packs.group(1)) if os.path.basename(p.replace('file/', '')) not in DROPPED]
+    kept = [p for p in json.loads(packs.group(1)) if os.path.basename(p.replace('file/', '')) not in DROPPED and p not in DROPPED_RESOURCE_PACKS]
     options = options.replace(packs.group(1), json.dumps(kept, separators=(',', ':')))
     open(options_path, 'w', encoding='utf-8', newline='').write(options)
 

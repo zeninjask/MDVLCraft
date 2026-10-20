@@ -729,10 +729,11 @@ def experience():
                     "max_health": {"operations": [{"type": "get_killed_living_entity"}, {"type": "get_max_health"}]},
                     # Iron's mages and the Aquamancer (data/mdvlcraft/tags/entity_types/mages.json, checked by skills/MageExperience) are worth 150
                     "is_mage": {"operations": [{"type": "get_killed_living_entity"}, {"type": "mdvlcraft:is_mage"}]},
+                    "is_armor_stand": {"operations": [{"type": "get_killed_living_entity"}, {"type": "mdvlcraft:is_armor_stand"}]},
                 },
-                # Pufferfish adds up every case whose condition holds, so the usual one excludes mages
+                # Pufferfish adds up every case whose condition holds, so the usual one excludes mages; armour stands give nothing
                 "experience": [{"condition": "is_mage", "expression": "150"},
-                               {"condition": "1 - is_mage", "expression": "dropped_xp + max_health / 5"}],
+                               {"condition": "(1 - is_mage) * (1 - is_armor_stand)", "expression": "dropped_xp + max_health / 5"}],
                 "anti_farming": {"limit_per_chunk": 20, "reset_after_seconds": 300},
             },
         }],
