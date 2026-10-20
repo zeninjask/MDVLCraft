@@ -1,6 +1,6 @@
 package com.mdvlcraft.binder.mixin.geckolib;
 
-import com.mdvlcraft.binder.client.GeoMobRig;
+import com.mdvlcraft.binder.client.MobRig;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import software.bernie.geckolib.cache.object.BakedGeoModel;
 import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-/** Puts an acting Epic Fight skeleton onto a GeckoLib mob's model (client/GeoMobRig). */
+/** Puts an acting Epic Fight skeleton onto a GeckoLib mob's model (client/MobRig). */
 @Mixin(value = GeoEntityRenderer.class, remap = false)
 public abstract class GeoEntityRendererMixin {
     private static final String ACTUALLY_RENDER = "actuallyRender(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/world/entity/Entity;"
@@ -25,7 +25,7 @@ public abstract class GeoEntityRendererMixin {
     private void mdvlcraft$rootMotion(PoseStack poseStack, Entity animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource,
                                       VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay,
                                       float red, float green, float blue, float alpha, CallbackInfo ci) {
-        GeoMobRig.rootMotion(animatable, poseStack, partialTick);
+        MobRig.rootMotion(animatable, poseStack, partialTick);
     }
 
     @Inject(method = ACTUALLY_RENDER, require = 1, at = @At(value = "INVOKE", shift = At.Shift.AFTER,
@@ -33,6 +33,6 @@ public abstract class GeoEntityRendererMixin {
     private void mdvlcraft$bones(PoseStack poseStack, Entity animatable, BakedGeoModel model, RenderType renderType, MultiBufferSource bufferSource,
                                  VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay,
                                  float red, float green, float blue, float alpha, CallbackInfo ci) {
-        GeoMobRig.bones(animatable, model);
+        MobRig.bones(animatable, model);
     }
 }
