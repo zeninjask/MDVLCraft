@@ -102,6 +102,9 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
   `4a42e3918c064ad5aaa13e4b72029037bbfc9329d34163fd5c01030d556f1740bf6db688d990d07a7e667b3d00bd8abb5bbf382dbf445f99b2097b7f602d5f4a`,
   size 282039, `env` client required / server unsupported. GPL-3.0. To check in game: the cling orientation on each wall
   and the ceiling, the predicted path matching the real leap, and that no other ability or spell can be used in the form.
+  Trajectory Estimation's own aim lines (bows, pearls, tridents, potions, every compat) are switched off by
+  `mixin/tje/CompatibilityEventMixin` (cancels its `interModEnqueue`, which registers all of them); only the Leap path
+  draws. To check in game: no arcs when aiming a bow or holding a pearl.
 - **Released:** 2.0.13 is on `main` (binder 0.8.4): cinder essence recipe (netherite scrap surrounded by blaze powder), untested.
 - **2.0.12** (binder 0.8.3): red string (redstone + string) and bloody vellum (paper + redstone) recipes, untested.
 - **2.0.11** (`0ef8736`, binder 0.8.2).
