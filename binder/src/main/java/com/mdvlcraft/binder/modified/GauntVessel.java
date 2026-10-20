@@ -3,29 +3,17 @@ package com.mdvlcraft.binder.modified;
 import com.mdvlcraft.binder.gaunt.GauntForm;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
-import io.redspace.ironsspellbooks.api.spells.ICastDataSerializable;
-import io.redspace.ironsspellbooks.capabilities.magic.PlayerRecasts;
-import io.redspace.ironsspellbooks.capabilities.magic.RecastInstance;
-import io.redspace.ironsspellbooks.capabilities.magic.RecastResult;
-import javax.annotation.Nullable;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 
 /**
- * Gaunt Vessel: the caster's bones snap and they become the Haunted Lord (gaunt/GauntForm) for up to 30 s; cast it again
- * to leave sooner. The cooldown starts when the form is left.
+ * Gaunt Vessel: the caster's bones snap and they become the Haunted Lord (gaunt/GauntForm) until they cast it again (from
+ * the form's wheel: Transform Back). No timer and no cooldown. Granted by wearing the Haunted Locket (gaunt/HauntedLocket).
  */
 public class GauntVessel extends ModifiedSpell {
-    private static final int DURATION = 600;
-
     public GauntVessel() {
         super("gaunt_vessel", 0);
-    }
-
-    @Override
-    public int getRecastCount(int spellLevel, @Nullable LivingEntity entity) {
-        return 1;
     }
 
     @Override
@@ -39,21 +27,9 @@ public class GauntVessel extends ModifiedSpell {
             if (GauntForm.in(player)) {
                 GauntForm.leave(player);
             } else {
-                PlayerRecasts recasts = data.getPlayerRecasts();
-                if (!recasts.hasRecastForSpell(this)) {
-                    recasts.addRecast(new RecastInstance(this.getSpellId(), spellLevel, this.getRecastCount(spellLevel, player), DURATION, source, null),
-                        data);
-                }
                 GauntForm.enter(player);
             }
         }
         super.onCast(level, spellLevel, caster, source, data);
-    }
-
-    /** The recast ran out (or was used, or the player died): the form ends, and the cooldown begins. */
-    @Override
-    public void onRecastFinished(ServerPlayer player, RecastInstance instance, RecastResult result, ICastDataSerializable data) {
-        GauntForm.leave(player);
-        super.onRecastFinished(player, instance, result, data);
     }
 }

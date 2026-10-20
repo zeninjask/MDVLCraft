@@ -132,7 +132,7 @@ BUILT = {
     # not in any tree yet: the Seraphim transformation (seraph/SeraphForm)
     'seraph_embodiment': spell(HOLY, 80, 240),
     # not in any tree yet: the Haunted Lord transformation (gaunt/GauntForm)
-    'gaunt_vessel': spell(SPIRIT, 80, 240),
+    'gaunt_vessel': spell(SPIRIT, 80, 0),
     # batch 4: summons (modified/UndeadSummons, BeastSummons), mounts (MountSpells) and field abilities (FieldSpells)
     'skeleton_archers': spell(BLOOD, 50, 90, 'long', 30),
     'bone_guard': spell(BLOOD, 50, 90, 'long', 30),
