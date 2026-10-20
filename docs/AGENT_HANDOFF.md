@@ -78,6 +78,16 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
+- **Gaunt Vessel (on `bane-agent`, not compiled or tested; for liam-agent to merge, build and test):** a Modified ability
+  (`modified/GauntVessel`, spirit school, 80 mana, 240 s cooldown) in no tree yet, like Seraph Embodiment. The caster is
+  lifted and their own body's bones snap one by one (`client/GauntRenderer`, ticks in `gaunt/GauntForm.SNAPS`, bone
+  cracks from the server), then the body tears into the Haunted Lord (`binder/art/haunted_lord/`), which unfolds
+  (its `transform` animation); 30 s in the form (idle, walk, sprint, crawl while sneaking, cast while casting), then
+  the same backwards. 25% speed, 20% spirit spell power, Night Vision, spells only. New: `gaunt/GauntForm`,
+  `network/GauntFormPacket` (network protocol 16), `client/GauntClient`, `client/GauntRenderer`; the glTF node model
+  code moved out of `client/SeraphRenderer` into `client/NodeModel` (shared, plus a glow pass). Model data from
+  `tools/haunted_lord/convert.py`. To check in game: Seraph Embodiment still renders as before, the snapping body
+  (part rotation signs), the head turning the right way, and the walk/sprint/crawl pacing constants in GauntRenderer.
 - **Released:** 2.0.13 is on `main` (binder 0.8.4): cinder essence recipe (netherite scrap surrounded by blaze powder), untested.
 - **2.0.12** (binder 0.8.3): red string (redstone + string) and bloody vellum (paper + redstone) recipes, untested.
 - **2.0.11** (`0ef8736`, binder 0.8.2).

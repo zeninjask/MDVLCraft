@@ -243,19 +243,82 @@ def crawl(t, L=2.8, S=None):
     add(P, 'jaw', (6 + 4 * math.sin(TAU * 2 * p), 0, 0))
     return P
 
-ANIMS = {  # name: (function, length, keys per second)
-    'idle': (idle, 4.0, 5), 'cast': (cast, 4.0, 10), 'walk': (walk, 2.4, 10), 'sprint': (sprint, 0.7, 20), 'crawl': (crawl, 2.8, 10),
+def snap(t, t0, hold=0.07):
+    """0 before t0, then a near-instant crack to 1 with a small overshoot that rings out (a bone snapping into place)."""
+    if t < t0: return 0.0
+    x = t - t0
+    if x < hold: return 1.12 * (1 - (1 - x / hold) ** 3)
+    return 1.0 + 0.12 * math.exp(-(x - hold) / 0.07) * math.cos((x - hold) * 45)
+
+def mix(a, b, w):
+    """Pose a -> b by weight w (per bone weights from a dict, default 1)."""
+    out = {}
+    for bone in set(a) | set(b):
+        wb = w.get(bone, 1.0) if isinstance(w, dict) else w
+        d = {}
+        for ch in ('rotation', 'position'):
+            va = np.array(a.get(bone, {}).get(ch, (0, 0, 0)), float); vb = np.array(b.get(bone, {}).get(ch, (0, 0, 0)), float)
+            if np.abs(va).max() or np.abs(vb).max(): d[ch] = list(va + (vb - va) * wb)
+        if d: out[bone] = d
+    return out
+
+FOLDED = {}
+add(FOLDED, 'full', (0, 0, 0), (0, -7.0, 0))
+add(FOLDED, 'body', (52, 8, 12))
+add(FOLDED, 'head', (40, -35, 28))
+add(FOLDED, 'jaw', (-10, 0, 0))
+for _s, _sg in (('left', -1), ('right', 1)):
+    add(FOLDED, f'{_s}_arm', (-55, _sg * 15, -_sg * 30))
+    add(FOLDED, f'{_s}_arm_down', (-95, 0, -_sg * 20))
+    for _f in FINGERS[_s]: add(FOLDED, _f, (55, 0, 0))
+
+def transform(t, L=1.8, S=None):
+    """Out of the player's broken body: the Haunted Lord starts folded tight and small and cracks open bone by bone
+    (head, right arm, left arm, the spine in three jolts, the jaw), then settles into the idle's first pose.
+    Scale keys on `full` (scale_full) are added in build()."""
+    end = idle(0.0, 4.0)
+    w = {}
+    w['head'] = 0.55 * snap(t, 0.30) + 0.45 * snap(t, 1.25)
+    w['jaw'] = snap(t, 1.15)
+    w['right_arm'] = w['right_arm_down'] = snap(t, 0.50)
+    w['left_arm'] = w['left_arm_down'] = snap(t, 0.68)
+    for f in FINGERS['right']: w[f] = snap(t, 0.58, 0.05)
+    for f in FINGERS['left']: w[f] = snap(t, 0.76, 0.05)
+    spine = 0.4 * snap(t, 0.85) + 0.35 * snap(t, 1.0) + 0.25 * snap(t, 1.12)
+    w['body'] = w['full'] = spine
+    P = mix(FOLDED, end, w)
+    # the head's last crack overshoots into a wrong tilt and slowly rights itself; the jaw gapes once
+    tilt = 32 * snap(t, 1.25) * max(0.0, 1 - smooth((t - 1.3) / 0.45))
+    add(P, 'head', (0, 0, tilt))
+    add(P, 'jaw', (26 * snap(t, 1.15) * max(0.0, 1 - smooth((t - 1.2) / 0.5)), 0, 0))
+    # twitching fingers while still folded
+    for s in ('left', 'right'):
+        for k, f in enumerate(FINGERS[s]):
+            add(P, f, (6 * math.sin(t * 40 + k * 2) * max(0.0, 1 - t / 0.9), 0, 0))
+    W = hl.fk(P)
+    for s in ('left', 'right'):                                   # feet stay planted while the body rises
+        toe, heel = foot_targets(s, 0.0, 0.0, 0.0, None)
+        P, _ = S.leg(P, s, toe, heel)
+    return P
+
+def scale_full(t):
+    return 0.62 + 0.38 * (0.35 * snap(t, 0.85) + 0.35 * snap(t, 1.0) + 0.3 * snap(t, 1.12))
+
+ANIMS = {  # name: (function, length, keys per second[, loops])
+    'idle': (idle, 4.0, 10), 'cast': (cast, 4.0, 10), 'walk': (walk, 2.4, 10), 'sprint': (sprint, 0.7, 20), 'crawl': (crawl, 2.8, 10),
+    'transform': (transform, 1.8, 40, False),
 }
 
 def build(names=None):
     out = {}; report = {}
-    for name, (fn, L, kps) in ANIMS.items():
+    for name, (fn, L, kps, *flags) in ANIMS.items():
         if names and name not in names: continue
+        loop = flags[0] if flags else True
         S = Solver(); n = int(round(L * kps)); times = [L * k / n for k in range(n + 1)]
         poses = []; worst = 0.0
         for k, t in enumerate(times):
-            r = fn(t % L if k < n else 0.0, L, S) if k < n else None
-            if k == n: r = poses[0]
+            r = fn(t, L, S) if k < n or not loop else None
+            if k == n and loop: r = poses[0]
             if isinstance(r, tuple): r, e = r; worst = max(worst, e)
             poses.append(r)
         bones = {}
@@ -266,7 +329,10 @@ def build(names=None):
                 V[:, :] = np.unwrap(np.radians(V), axis=0) * 180 / math.pi if ch == 'rotation' else V
                 bones.setdefault(b, {})[ch] = {('%.4f' % t).rstrip('0').rstrip('.') or '0': {'post': [round(float(x), 3) + 0.0 for x in v], 'lerp_mode': 'catmullrom'}
                                               for t, v in zip(times, V)}
-        out[f'animation.haunted_lord.{name}'] = {'loop': True, 'animation_length': L, 'bones': bones}
+        if name == 'transform':
+            bones.setdefault('full', {})['scale'] = {('%.4f' % t).rstrip('0').rstrip('.') or '0': {'post': [round(scale_full(t), 4)] * 3, 'lerp_mode': 'catmullrom'}
+                                                    for t in times}
+        out[f'animation.haunted_lord.{name}'] = {'loop': loop, 'animation_length': L, 'bones': bones}
         # ground check over the sampled poses
         lowest = min(min(hl.world(hl.fk(pz), b, hl.corners[b])[:, 1].min() for b in hl.order if len(hl.corners[b])) for pz in poses)
         report[name] = dict(keys=n + 1, bones=len(bones), ik={k: round(float(v), 2) for k, v in S.err.items()}, lowest=round(float(lowest), 2))

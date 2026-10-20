@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.ability;
 import com.mdvlcraft.binder.content.DemonicAssimilationDismiss;
 import com.mdvlcraft.binder.content.SummonModes;
 import com.mdvlcraft.binder.doppelganger.Doppelgangers;
+import com.mdvlcraft.binder.gaunt.GauntForm;
 import com.mdvlcraft.binder.seraph.SeraphForm;
 import com.tiago.antimagic.spell.DemonicAssimilationSpell;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -46,6 +47,8 @@ public final class AbilityActions {
                     );
             } else if (SeraphForm.in(player) && !(ability.get() instanceof SpellAbility)) {
                 SeraphForm.refuse(player);
+            } else if (GauntForm.in(player) && !(ability.get() instanceof SpellAbility)) {
+                GauntForm.refuse(player);
             } else if (ability.get() instanceof SpellAbility spellAbility) {
                 castSpell(player, spellAbility.spell(), level);
             } else if (ability.get() instanceof Technique technique) {
