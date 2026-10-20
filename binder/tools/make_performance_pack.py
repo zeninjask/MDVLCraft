@@ -4,7 +4,7 @@ server also runs stay and have their effects turned down in their configs instea
 
 - Dropped (client-only, cost frames, nothing depends on them): the shader packs, Falling Leaves, Particle Rain,
   AAA Particles' world particles, Ambient Sounds, Forgematica and its library, Chat Animation, Smooth GUI, Cull Less
-  Leaves, and the Better Leaves, tall-grass and Fancy Crops resource packs.
+  Leaves, Fancy World Animations, and the Better Leaves, tall-grass and Fancy Crops resource packs.
 - Kept on purpose:
   - Sodium Dynamic Lights: the binder's lantern belt hooks it; its lights are slowed instead.
   - Oculus, with shaders off as in the client: without it the game crashes loading resources, on Project Babylon
@@ -34,7 +34,7 @@ DROPPED = {
     'fallingleaves-1.20.1-2.1.2.jar', 'particlerain-4.0.1+1.20.1-forge.jar',
     'aaa_particles_world-forge-1.20.1-2.0.0.jar', 'AmbientSounds_FORGE_v6.3.9_mc1.20.1.jar',
     'Forgematica-0.1.13-mc1.20.1.jar', 'MaFgLib-0.1.14-mc1.20.1.jar', 'chatanimation-forge-1.3.4+mc1.20.1.jar',
-    'smoothgui-forge-2.0.7+mc1.20.1.jar', 'CullLessLeaves-Reforged-1.20.1-1.0.5.jar',
+    'smoothgui-forge-2.0.7+mc1.20.1.jar', 'CullLessLeaves-Reforged-1.20.1-1.0.5.jar', 'fwa+1.20.1-forge-1.2.31.jar',
     'Better-Leaves-9.6.zip', 'Os-Colorful-Grasses-Tall-26.3.zip', 'Fancy-Crops-1.3.zip',
     'MakeUp-UltraFast-9.5g.zip', 'photon_v1.3b.zip', 'ComplementaryReimagined_r5.9.3.zip',
 }
