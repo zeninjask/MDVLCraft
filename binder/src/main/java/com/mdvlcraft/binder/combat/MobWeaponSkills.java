@@ -2,21 +2,18 @@ package com.mdvlcraft.binder.combat;
 
 import com.mdvlcraft.binder.mixin.epicfight.CombatBehaviorsBuilderAccessor;
 import com.mdvlcraft.binder.mixin.epicfight.ConditionalWeaponInnateSkillAccessor;
-import com.mdvlcraft.binder.mixin.epicfight.EviscerateSkillAccessor;
-import com.mdvlcraft.binder.mixin.epicfight.GraspingSpireSkillAccessor;
 import com.mdvlcraft.binder.mixin.epicfight.SimpleWeaponInnateSkillAccessor;
 import com.mdvlcraft.binder.mixin.epicfight.WeaponCapabilityAccessor;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.types.AttackAnimation;
-import yesman.epicfight.api.asset.AssetAccessor;
 import yesman.epicfight.skill.Skill;
 import yesman.epicfight.skill.weaponinnate.ConditionalWeaponInnateSkill;
-import yesman.epicfight.skill.weaponinnate.EviscerateSkill;
-import yesman.epicfight.skill.weaponinnate.GraspingSpireSkill;
 import yesman.epicfight.skill.weaponinnate.SimpleWeaponInnateSkill;
 import yesman.epicfight.world.capabilities.entitypatch.HumanoidMobPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
@@ -27,9 +24,9 @@ import yesman.epicfight.world.entity.ai.goal.CombatBehaviors;
  * Armed mobs use their weapon's Epic Fight skill. A mob has no skill slots or weapon charge, so Epic Fight's mob attacks
  * (MobCombatBehaviors) are plain swings for most weapons: a zombie or skeleton with a sword, axe or tool never does
  * anything else. Each mob's attacks (mixin/epicfight/HumanoidMobPatchMixin) get one more series that plays the held
- * weapon's skill move: a simple skill's attack (Sweeping Edge, the Guillotine, most modded weapons), a conditional
- * skill's first (Battojutsu), or both hits of Grasping Spiral and Eviscerate. Skills built on a stance, a charge or a
- * summon add nothing.
+ * weapon's skill move: a simple skill's attack (Sweeping Edge, the Guillotine, Heartpiercer, most modded weapons), a
+ * conditional skill's first (Battojutsu), or the attack of one of Epic Fight Extra's own skills ({@link #EXTRA_MOVES}).
+ * Skills built on a stance (Liechtenauer) or a grab (Blade Rush, the scythe) add nothing.
  *
  * mixin/epicfight/BehaviorSeriesMixin scales every series with a cooldown, this one too: weight 40 becomes 100 (an even
  * pick against the plain swings) and the 360-tick cooldown becomes 180 (9 seconds).
@@ -38,6 +35,16 @@ public final class MobWeaponSkills {
     private static final float WEIGHT = 40.0F;
     private static final int COOLDOWN = 360;
     private static final double REACH = 3.0;
+    /** Epic Fight Extra's skills that aren't simple or conditional ones: their attacks, by skill. */
+    private static final Map<ResourceLocation, List<String>> EXTRA_MOVES = Map.of(
+        extra("grasping_spire"), List.of("biped/skill/grasping_spire_first", "biped/skill/grasping_spire_second"),
+        extra("eviscerate"), List.of("biped/skill/eviscerate_first", "biped/skill/eviscerate_second"),
+        extra("steel_whirlwind"), List.of("biped/skill/steel_whirlwind"),
+        extra("rushing_tempo"), List.of("biped/skill/rushing_tempo1"),
+        extra("otachi_skill"), List.of("biped/skill/otachi_skill_01"),
+        extra("pickaxe_skill"), List.of("biped/skill/pickaxe_skill"),
+        extra("katana_skill"), List.of("biped/skill/uchigatana_skill_01")
+    );
 
     private MobWeaponSkills() {
     }
@@ -72,23 +79,27 @@ public final class MobWeaponSkills {
         var providers = ((WeaponCapabilityAccessor)weapon).mdvlcraft$innateSkill();
         Function<ItemStack, Skill> provider = providers.getOrDefault(weapon.getStyle(mobpatch), providers.get(CapabilityItem.Styles.COMMON));
         Skill skill = provider == null ? null : provider.apply(mobpatch.getOriginal().getMainHandItem());
-        if (skill instanceof SimpleWeaponInnateSkill simple) {
+        if (skill == null) {
+            return List.of();
+        } else if (EXTRA_MOVES.containsKey(skill.getRegistryName())) {
+            return EXTRA_MOVES.get(skill.getRegistryName()).stream().map(MobWeaponSkills::extraAnimation).toList();
+        } else if (skill instanceof SimpleWeaponInnateSkill simple) {
             return List.of(((SimpleWeaponInnateSkillAccessor)simple).mdvlcraft$animation());
         } else if (skill instanceof ConditionalWeaponInnateSkill conditional) {
             return List.of(((ConditionalWeaponInnateSkillAccessor)conditional).mdvlcraft$animations()[0]);
-        } else if (skill instanceof GraspingSpireSkill spire) {
-            GraspingSpireSkillAccessor moves = (GraspingSpireSkillAccessor)spire;
-            return List.of(moves.mdvlcraft$first(), moves.mdvlcraft$second());
-        } else if (skill instanceof EviscerateSkill eviscerate) {
-            EviscerateSkillAccessor moves = (EviscerateSkillAccessor)eviscerate;
-            return List.of(animation(moves.mdvlcraft$first()), animation(moves.mdvlcraft$second()));
         }
         return List.of();
     }
 
-    /** Eviscerate keeps its moves as plain asset accessors; Epic Fight fills them with animation accessors. */
-    @SuppressWarnings("unchecked")
-    private static AnimationManager.AnimationAccessor<? extends AttackAnimation> animation(AssetAccessor<? extends AttackAnimation> move) {
-        return (AnimationManager.AnimationAccessor<? extends AttackAnimation>)move;
+    private static ResourceLocation extra(String path) {
+        return ResourceLocation.fromNamespaceAndPath("epicfightx", path);
+    }
+
+    private static AnimationManager.AnimationAccessor<? extends AttackAnimation> extraAnimation(String path) {
+        AnimationManager.AnimationAccessor<? extends AttackAnimation> animation = AnimationManager.byKey(extra(path));
+        if (animation == null) {
+            throw new IllegalStateException("Epic Fight Extra has no animation " + extra(path));
+        }
+        return animation;
     }
 }
