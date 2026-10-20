@@ -22,7 +22,8 @@ LEVELS = [10, 15, 25, 30, 40, 50]
 
 
 def qid(key):
-    return hashlib.sha1(key.encode()).hexdigest()[:16].upper()
+    """A stable FTB Quests id for the key: 16 hex digits that fit a signed long, as FTB Quests parses them."""
+    return '%016X' % (int(hashlib.sha1(key.encode()).hexdigest()[:16], 16) & 0x7FFFFFFFFFFFFFFF)
 
 
 # Task and reward builders: dicts in FTB Quests' own keys.
