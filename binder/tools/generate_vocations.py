@@ -23,9 +23,10 @@ Each archetype keeps three of its class's spokes and its own six major and three
 every archetype of a class has the same number of bonus nodes. Spells cost 1 point (2 if strong), techniques, Epic Fight
 skills and planned abilities 2, so one vocation tab costs about what one old tree did.
 
-Layout: every ability but a base's root sits in a ring of bonuses (a circle of signature bonuses, a square of class
-bonuses, a diamond of core or twig bonuses), as Path of Exile's notables do; rings are joined by short bonus paths and
-the whole is laid out with relayout_trees' box layout, one box per ring.
+Layout: a Path of Exile style web (base_tree): every ability but a base's root sits in a small ring of bonuses, the rings
+are scattered over a fan left of the root and joined by straight paths of bonuses with loops, and every bonus is drawn
+at random from the base's bonuses. A vocation's own abilities sit in the gap between its two bases, each linked to base
+nodes 3 to 9 steps in (vocation_parts).
 
 Run from the binder folder: python3 tools/generate_vocations.py
 """
@@ -41,7 +42,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "tools"))
 sys.path.insert(0, str(ROOT / "tools/vocations"))
 import generate_skill_trees as G  # noqa: E402  (stat spokes, texts, frames)
-import relayout_trees as L  # noqa: E402  (box layout)
+import relayout_trees as L  # noqa: E402  (line and overlap checks)
 import tree_edit as T  # noqa: E402  (spell mana, levels, cooldowns, spell config)
 import v2_all  # noqa: E402
 from built import BUILT  # noqa: E402  (the Modified abilities that are built)
@@ -61,9 +62,7 @@ EF_SLOTS = json.loads((ROOT / "tools/ef_skill_slots.json").read_text())
 EF_NAMES = json.loads((ROOT / "tools/ef_skill_names.json").read_text())
 ICON = "mdvlcraft:textures/gui/icons18/"
 TWIG_CAP = 4
-COLUMN_STEP = 60
-CENTRE_GAP = 80
-ZIGZAG = 34   # the vocation column zig-zags this far either side of the centre
+CENTRE_GAP = 360
 PREFIX = {'I': 'irons_spellbooks', 'T': 'traveloptics', 'S': 'somakespells', 'E': 'esoteric_spell', 'C': 'cursed_school',
           'R': 'iss_elden_ring', 'M': 'iss_magicfromtheeast', 'W': 'wind_spellbooks', 'X': 'iss_csw', 'A': 'alshanex_familiars',
           'H': 'irons_chronomancy', 'B': 'mdvlcraft', 'N': 'antimagic'}
@@ -402,73 +401,6 @@ def stat_node_body(n, cls_title):
     return stat_body(n["title"], [n["attribute"]], n["value"], n["cost"], kind, extra)
 
 
-# ---- base half-trees: clusters ------------------------------------------------------------------------------------------
-# Every ability but the root sits in the middle of a ring of bonuses, as the notables of Path of Exile's passive tree:
-# signature bonuses ring it in a circle, class bonuses in a square, core and twig bonuses in a diamond. A ring is entered
-# at the port facing the rest of the tree and the ability hangs off the opposite port, so it costs half the ring; the
-# other ports lead on to further clusters. Bonuses left over lead up to rings (approach paths) or branch off as spurs.
-RING_SHAPE = {"sig": "circle", "class": "square", "core": "diamond", "twig": "diamond"}
-RADIUS = {"circle": 76, "square": 62, "diamond": 80, "diamond4": 58}
-PORT_OF = {(0, -1): "N", (1, 0): "E", (0, 1): "S", (-1, 0): "W"}
-OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
-MAX_PATH = 3
-JITTER = 22   # how far (px) each node of a base is nudged off the layout grid
-
-
-def ring_points(shape, n):
-    """Ring offsets clockwise from the top, and the index of each port (N, E, S, W) among them."""
-    if n == 4:
-        r = RADIUS["diamond4"]
-        return [(0, -r), (r, 0), (0, r), (-r, 0)], {"N": 0, "E": 1, "S": 2, "W": 3}
-    r = RADIUS[shape]
-    if shape == "circle":
-        pts = [(round(r * math.cos(math.radians(a - 90))), round(r * math.sin(math.radians(a - 90)))) for a in range(0, 360, 45)]
-    elif shape == "square":
-        pts = [(0, -r), (r, -r), (r, 0), (r, r), (0, r), (-r, r), (-r, 0), (-r, -r)]
-    else:
-        h = r // 2
-        pts = [(0, -r), (h, -h), (r, 0), (h, h), (0, r), (-h, h), (-r, 0), (-h, -h)]
-    return pts, {"N": 0, "E": 2, "S": 4, "W": 6}
-
-
-def carve(spokes, n_abilities):
-    """Rings (8 or 4 bonuses, the end of a spoke) with the rest of the spoke as their approach path, split or dropped to
-    give exactly one ring per ability; dropped rings and overlong paths become spurs of at most MAX_PATH bonuses."""
-    units, spurs = [], []
-    for src, nodes in spokes:
-        size = 8 if len(nodes) >= 8 else 4 if len(nodes) >= 4 else 0
-        if size == 0:
-            spurs.append(nodes)
-            continue
-        approach, ring = nodes[:len(nodes) - size], nodes[len(nodes) - size:]
-        units.append(dict(src=src, ring=ring, approach=approach))
-    while len(units) < n_abilities:
-        big = [u for u in units if len(u["ring"]) == 8]
-        if not big:
-            raise SystemExit(f"{n_abilities} abilities but only {len(units)} rings")
-        u = max(big, key=lambda u: (u["src"] == "twig", -len(u["approach"])))
-        units.remove(u)
-        units.append(dict(src=u["src"], ring=u["ring"][:4], approach=u["approach"]))
-        units.append(dict(src=u["src"], ring=u["ring"][4:], approach=[]))
-    while len(units) > n_abilities:
-        u = min(units, key=lambda u: (len(u["ring"]), u["src"] != "twig", len(u["approach"])))
-        units.remove(u)
-        spurs.append(u["approach"] + u["ring"])
-    for u in units:
-        while len(u["approach"]) > MAX_PATH:
-            spurs.append(u["approach"][:MAX_PATH])
-            u["approach"] = u["approach"][MAX_PATH:]
-    spurs = [s[i:i + MAX_PATH] for s in spurs for i in range(0, len(s), MAX_PATH)]
-    return units, spurs
-
-
-def nearest(cluster, target, centre):
-    """The ring node of `cluster` (centred on `centre`) pointing most nearly at `target`."""
-    want = math.atan2(target[1] - centre[1], target[0] - centre[0])
-    return min(zip(cluster["ring"], cluster["pts"]),
-               key=lambda np: abs((math.atan2(np[1][1], np[1][0]) - want + math.pi) % (2 * math.pi) - math.pi))[0]
-
-
 def check_lines(lines, pos, half):
     """L.check without its straight-line rule (rings have slanted sides)."""
     for i, (a, b) in enumerate(lines):
@@ -486,23 +418,29 @@ def check_lines(lines, pos, half):
     return None
 
 
+# ---- base half-trees: a Path of Exile style web ---------------------------------------------------------------------
+# Every ability but the root sits in a cluster (a ring of 3 to 6 bonuses round it); clusters are scattered over a fan to
+# the left of the root and joined by straight paths of evenly spaced bonuses, with extra links making loops (up to four
+# per cluster, no crossings). An arc of bonuses rings the root, as Path of Exile's class starts. Every bonus is drawn at
+# random from all of the base's bonuses, so neither clusters nor paths repeat one stat.
+WEB_SPACING = 54      # between bonus nodes along a path
+WEB_RING = 66         # cluster ring radius
+WEB_CLUSTER_GAP = 270
+WEB_FAN = 1100        # how far the clusters spread from the root (wider if they don't fit)
+WEB_ORBIT = 190       # radius of the arc round the root
+WEB_LINK = 560        # longest link between clusters
+
+
 def base_tree(arch, live, seed=0):
-    """(definitions, lines, positions, root id) of one base, laid out with the root at (0, 0) and its link to the centre
-    leaving to the right."""
-    rng = random.Random(f"{arch}:{seed}")
+    """(definitions, lines, positions, root id) of one base, with the root at (0, 0) and the centre to its right."""
+    rng = random.Random(f"{arch}:web:{seed}")
     cls = CLASS_OF[arch]
     skills, efs = D.BASE[arch]
     abilities = list(skills[1:]) + list(efs)
     rng.shuffle(abilities)
-    units, spurs = carve(bonus_spokes(arch), len(abilities))
-    rng.shuffle(units)
-    # mix the bonuses: each ring takes a random draw from every ring's bonuses (sizes kept), and a random shape
-    pooled = [n for u in units for n in u["ring"]]
-    rng.shuffle(pooled)
-    for u in units:
-        u["ring"], pooled = pooled[:len(u["ring"])], pooled[len(u["ring"]):]
-        u["shape"] = rng.choice(["circle", "square", "diamond"])
-    defs = {}
+    bonus = [n for _, nodes in bonus_spokes(arch) for n in nodes]
+    rng.shuffle(bonus)
+    defs, pos, lines = {}, {}, []
     names = collections.Counter()
 
     def node_id(base):
@@ -510,104 +448,110 @@ def base_tree(arch, live, seed=0):
         names[base] += 1
         return f"{arch}__{base}" + (f"_{names[base]}" if names[base] > 1 else "")
 
-    def stat(n):
+    def stat(p):
+        n = bonus.pop()
         nid = node_id(n["title"])
         defs[nid] = stat_node_body(n, cls)
+        pos[nid] = p
         return nid
-
-    def half_of(nid):
-        return L.HALF * defs[nid].get("size", 1.0)
 
     root = node_id("root")
     defs[root] = ability_body(skills[0], live, 1)
     defs[root]["extra_description"] = (defs[root].get("extra_description", "") + f" The first skill of the {D.TITLE[arch]} base.").strip()
+    pos[root] = (0, 0)
 
-    # macro tree: the root, path bonuses and clusters (an ability and its ring); every macro node has at most 3 children
-    clusters = {}      # macro id -> cluster
-    kids = collections.defaultdict(list)
-    half = {root: half_of(root)}
-    room = {root: 3}
-    depth = {root: 0}
+    orbit = []
+    for t in range(10):
+        a = math.radians(100 + t * 160 / 9)
+        orbit.append(stat((round(WEB_ORBIT * math.cos(a)), round(WEB_ORBIT * math.sin(a)))))
+    lines += list(zip(orbit, orbit[1:]))
+    lines += [(root, orbit[0]), (root, orbit[-1])]
 
-    def attach(chain, last):
-        hosts = [h for h in room if room[h] > 0]
-        weights = [1.0 / (1 + depth[h]) ** 1.5 for h in hosts]
-        host = rng.choices(hosts, weights)[0]
-        room[host] -= 1
-        prev = host
-        for nid in chain:
-            kids[prev].append(nid)
-            half[nid] = half_of(nid)
-            depth[nid] = depth[host] + (1 if host in clusters or host == root else 0)
-            room[nid] = 0
-            prev = nid
-        if last is not None:
-            kids[prev].append(last)
-            depth[last] = depth[host] + 1
-            room[last] = 3
-
-    for code, u in zip(abilities, units):
-        approach = [stat(n) for n in u["approach"]]
+    centres = []
+    tries = 0
+    fan = WEB_FAN
+    while len(centres) < len(abilities):
+        tries += 1
+        if tries % 3000 == 0:   # crowded: spread wider
+            fan *= 1.06
+        a = math.radians(rng.uniform(95, 265))
+        r = rng.uniform(WEB_ORBIT + 170, fan)
+        p = (r * math.cos(a), r * math.sin(a) * 0.8)
+        if all(math.dist(p, q) > WEB_CLUSTER_GAP for q in centres):
+            centres.append(p)
+    hubs = [(orbit[0], pos[orbit[0]]), (orbit[4], pos[orbit[4]]), (orbit[-1], pos[orbit[-1]])]
+    for code, c in zip(abilities, centres):
+        c = (round(c[0]), round(c[1]))
         centre = node_id(full(code).split(":")[1] if not code.startswith("Z:") else "planned_" + code[2:])
         defs[centre] = ability_body(code, live, ability_cost(code))
-        ring = [stat(n) for n in u["ring"]]
-        shape = u["shape"] if len(ring) == 8 else "diamond"
-        pts, ports = ring_points(shape, len(ring))
-        if len(ring) == 8:   # turned a little, so the rings don't all sit square to the grid
-            turn = math.radians(rng.choice([0, 15, 22.5, 30, 45]))
-            pts = [(round(x * math.cos(turn) - y * math.sin(turn)), round(x * math.sin(turn) + y * math.cos(turn))) for x, y in pts]
-        cid = f"cluster:{centre}"
-        clusters[cid] = dict(centre=centre, ring=ring, pts=pts, ports=ports)
-        half[cid] = max(max(abs(x), abs(y)) for x, y in pts) + max(half_of(n) for n in ring) + 2
-        attach(approach, cid)
-    for chain in spurs:
-        attach([stat(n) for n in chain], None)
+        pos[centre] = c
+        m = rng.choice([3, 4, 4, 5, 6])
+        start = rng.uniform(0, 360)
+        ring = [stat((round(c[0] + WEB_RING * math.cos(math.radians(start + t * 360 / m))),
+                      round(c[1] + WEB_RING * math.sin(math.radians(start + t * 360 / m))))) for t in range(m)]
+        lines += [(ring[t], ring[(t + 1) % m]) for t in range(m)]
+        # the ability hangs off the ring node facing away from the root
+        lines.append((max(ring, key=lambda n: math.dist(pos[n], (0, 0))), centre))
+        hubs.append((ring, c))
 
-    size_of = {}
+    def port(hub, toward):
+        ids, _ = hub
+        return min(ids, key=lambda n: math.dist(pos[n], toward)) if isinstance(ids, list) else ids
 
-    def count(n):
-        size_of[n] = 1 + sum(count(c) for c in kids[n])
-        return size_of[n]
-    count(root)
-    sys.setrecursionlimit(20000)
-    macro = L.layout(root, kids, half, size_of, ('down', 'left', 'right'), has_parent=True)
-    macro = {n: L.turn(p, 'right') for n, p in macro.items()}
-    macro = {n: (round(x), round(y)) for n, (x, y) in macro.items()}
-    # nudge the rings off the grid, so the links to them run at an angle
-    macro = {n: (x + rng.randint(-JITTER, JITTER), y + rng.randint(-JITTER, JITTER)) if n in clusters else (x, y)
-             for n, (x, y) in macro.items()}
+    # links between hubs: spanning first, then loops; never crossing
+    pairs = sorted(((i, j) for i in range(len(hubs)) for j in range(i + 1, len(hubs))),
+                   key=lambda e: math.dist(hubs[e[0]][1], hubs[e[1]][1]))
+    group = list(range(len(hubs)))
 
-    # expand the clusters: ring nodes round the centre, entered from the side facing the macro parent
-    parent_of = {c: p for p, cs in kids.items() for c in cs}
-    pos, lines = {}, []
-    port_node = {}
-    for m, (x, y) in macro.items():
-        if m not in clusters:
-            pos[m] = (x, y)
+    def find(x):
+        while group[x] != x:
+            x = group[x]
+        return x
+    degree = [0] * len(hubs)
+    links, segments = [], []
+    for i, j in pairs:
+        a, b = hubs[i][1], hubs[j][1]
+        if math.dist(a, b) > WEB_LINK:
             continue
-        c = clusters[m]
-        px, py = macro[parent_of[m]]
-        pos[c["centre"]] = (x, y)
-        for nid, (dx, dy) in zip(c["ring"], c["pts"]):
-            pos[nid] = (x + dx, y + dy)
-        ring = c["ring"]
-        lines += [(ring[i], ring[(i + 1) % len(ring)]) for i in range(len(ring))]
-        # the ability hangs off the ring node facing away from the parent
-        lines.append((nearest(c, (x - (px - x), y - (py - y)), (x, y)), c["centre"]))
+        joined = find(i) == find(j)
+        if degree[i] >= 4 or degree[j] >= 4 or joined and rng.random() < 0.3:
+            continue
+        if any(L.segments_cross(a, b, c, d) for c, d in segments):
+            continue
+        segments.append((a, b))
+        links.append((i, j))
+        degree[i] += 1
+        degree[j] += 1
+        group[find(i)] = find(j)
+    if len({find(i) for i in range(len(hubs))}) > 1:
+        raise SystemExit("clusters not all joined")
 
-    def end(m, toward):
-        if m not in clusters:
-            return m
-        return nearest(clusters[m], macro[toward], macro[m])
-    for p, cs in kids.items():
-        for c in cs:
-            lines.append((end(p, c), end(c, p)))
-    nhalf = {n: half_of(n) for n in pos}
-    problem = check_lines(lines, pos, nhalf)
+    # the remaining bonuses are spread along the links, by length; each link keeps at least WEB_SPACING between nodes
+    ends = [(port(hubs[i], hubs[j][1]), port(hubs[j], hubs[i][1])) for i, j in links]
+    length = [math.dist(pos[a], pos[b]) for a, b in ends]
+    room = [max(0, int(l // WEB_SPACING) - 1) for l in length]
+    if sum(room) < len(bonus):
+        raise SystemExit(f"links hold {sum(room)} bonuses, {len(bonus)} left")
+    share = [0] * len(ends)
+    for _ in range(len(bonus)):
+        k = max((k for k in range(len(ends)) if share[k] < room[k]), key=lambda k: length[k] / (share[k] + 1))
+        share[k] += 1
+    for (a, b), n in zip(ends, share):
+        pa, pb = pos[a], pos[b]
+        prev = a
+        for t in range(1, n + 1):
+            f = t / (n + 1)
+            nid = stat((round(pa[0] + (pb[0] - pa[0]) * f), round(pa[1] + (pb[1] - pa[1]) * f)))
+            lines.append((prev, nid))
+            prev = nid
+        lines.append((prev, b))
+
+    half = {n: L.HALF * defs[n].get("size", 1.0) for n in pos}
+    problem = check_lines(lines, pos, half)
     if problem:
         raise SystemExit(f"base layout problem: {problem}")
-    if set(pos) != set(defs):
-        raise SystemExit(f"unplaced nodes: {sorted(set(defs) - set(pos))}")
+    if set(pos) != set(defs) or bonus:
+        raise SystemExit("unplaced nodes")
     return defs, lines, pos, root
 
 
@@ -619,7 +563,7 @@ def write(path, data):
 def build_bases(live):
     offsets = {}
     for arch in D.ORDER:
-        for seed in range(80):
+        for seed in range(200):
             try:
                 defs, lines, pos, root = base_tree(arch, live, seed)
                 break
@@ -636,6 +580,7 @@ def build_bases(live):
         write(base / "skills.json", skills)
         write(base / "connections.json", {"normal": {"bidirectional": conns}})
         offsets[arch] = root
+        GEOMETRY[arch] = dict(pos={n: (v["x"], v["y"]) for n, v in skills.items()}, lines=lines, defs=defs, root=root)
         cost = sum(d["cost"] for d in defs.values())
         xs = [v["x"] for v in skills.values()]
         ys = [v["y"] for v in skills.values()]
@@ -644,13 +589,36 @@ def build_bases(live):
 
 
 # ---- vocations ----------------------------------------------------------------------------------------------------------
+GEOMETRY = {}   # each base's node positions and links (build_bases), for linking the vocations' abilities into them
+VOC_SPOTS = [(-190, -330), (190, -330), (0, -560), (-190, 330), (190, 330), (0, 560), (0, -800), (0, 800)]
+VOC_DEPTH = (3, 9)   # the vocation's abilities link to base nodes this many steps from the base's root
+
+
+def hops_from(geometry):
+    adj = collections.defaultdict(set)
+    for x, y in geometry["lines"]:
+        adj[x].add(y)
+        adj[y].add(x)
+    hops = {geometry["root"]: 0}
+    queue = collections.deque([geometry["root"]])
+    while queue:
+        u = queue.popleft()
+        for w in adj[u]:
+            if w not in hops:
+                hops[w] = hops[u] + 1
+                queue.append(w)
+    return hops
+
+
 def vocation_parts(a, b, r, live):
-    """The centre column: the centre (root, the first bonus), then the vocation skills and the other bonuses above and below."""
+    """The vocation's own part: its start (the first bonus) between the two base roots with its two other bonuses beside
+    it, and its abilities spread through the gap between the bases, each linked to base nodes VOC_DEPTH steps in (to
+    base a on the left, to base b, mirrored, on the right; those in the middle to both)."""
     defs, skills, conns = {}, {}, []
     name = r["names"][0]
-    items = [("bonus", r["bonus"][0])] + [("skill", c) for c in r["skills"]] + [("skill", r["ef"])] + [("bonus", c) for c in r["bonus"][1:]]
-    ids = []
-    for i, (kind, code) in enumerate(items):
+    bonuses = [("bonus", c) for c in r["bonus"]]
+    abilities = [("skill", c) for c in r["skills"]] + [("skill", r["ef"])]
+    for i, (kind, code) in enumerate(bonuses + abilities):
         nid = f"voc__{i}"
         if kind == "bonus":
             stat, _, val = code.partition(':')
@@ -673,20 +641,49 @@ def vocation_parts(a, b, r, live):
             body = ability_body(code, live, ability_cost(code) if not code.startswith(("Z:",)) else 2)
             body["extra_description"] = (body.get("extra_description", "") + f" {name} vocation skill.").strip()
         defs[nid] = body
-        ids.append(nid)
-    up = ids[1:1 + (len(ids) - 1) // 2]
-    down = ids[1 + (len(ids) - 1) // 2:]
-    skills[ids[0]] = {"x": 0, "y": 0, "definition": ids[0], "root": True}
-    prev = ids[0]
-    for k, nid in enumerate(up):
-        skills[nid] = {"x": ZIGZAG * (1 if k % 2 == 0 else -1), "y": -(k + 1) * COLUMN_STEP, "definition": nid}
-        conns.append([prev, nid])
-        prev = nid
-    prev = ids[0]
-    for k, nid in enumerate(down):
-        skills[nid] = {"x": ZIGZAG * (-1 if k % 2 == 0 else 1), "y": (k + 1) * COLUMN_STEP, "definition": nid}
-        conns.append([prev, nid])
-        prev = nid
+    skills["voc__0"] = {"x": 0, "y": 0, "definition": "voc__0", "root": True}
+    for k, y in ((1, -120), (2, 120)):
+        skills[f"voc__{k}"] = {"x": 0, "y": y, "definition": f"voc__{k}"}
+        conns.append(["voc__0", f"voc__{k}"])
+    # both bases as they appear in the tab: a as written, b mirrored
+    sides = {}
+    for arch, sign in ((a, 1), (b, -1)):
+        g = GEOMETRY[arch]
+        hops = hops_from(g)
+        sides[arch] = dict(pos={n: (sign * x, y) for n, (x, y) in g["pos"].items()}, lines=g["lines"],
+                           near=[n for n, h in hops.items() if VOC_DEPTH[0] <= h <= VOC_DEPTH[1]])
+    allpos = {**sides[a]["pos"], **sides[b]["pos"], **{n: (v["x"], v["y"]) for n, v in skills.items()}}
+    alllines = list(sides[a]["lines"]) + list(sides[b]["lines"])
+    def links_for(x, y):
+        found = []
+        for arch in ([a] if x < 0 else [b] if x > 0 else [a, b]):
+            side = sides[arch]
+            for target in sorted(side["near"], key=lambda n: math.dist(side["pos"][n], (x, y))):
+                tp = side["pos"][target]
+                if not any(L.segments_cross((x, y), tp, allpos[c], allpos[d]) for c, d in alllines if target not in (c, d)) \
+                        and all(L.seg_dist(allpos[n], (x, y), tp) > L.HALF * 1.5 + L.CLEARANCE for n in allpos if n != target):
+                    found.append(target)
+                    break
+            else:
+                return None
+        return found
+
+    for k, (x0, y0) in enumerate(VOC_SPOTS[:len(abilities)]):
+        nid = f"voc__{3 + k}"
+        for dy in (0, -90, 90, -180, 180, -270, 270):   # nudged along the gap if no clear line reaches the bases
+            x, y = x0, y0 + dy
+            if any(math.dist((x, y), allpos[n]) < 70 for n in allpos):
+                continue
+            targets = links_for(x, y)
+            if targets:
+                break
+        else:
+            raise SystemExit(f"{name}: no clear link from vocation ability {k}")
+        skills[nid] = {"x": x, "y": y, "definition": nid}
+        allpos[nid] = (x, y)
+        for target in targets:
+            conns.append([nid, target])
+            alllines.append((nid, target))
     return defs, skills, conns
 
 
