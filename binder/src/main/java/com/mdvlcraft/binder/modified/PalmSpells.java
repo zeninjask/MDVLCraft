@@ -168,6 +168,7 @@ public final class PalmSpells {
                 (caster, target, damage) -> target.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1), caster)),
             new Palm("palm_spirit", ParticleTypes.GLOW,
                 (caster, target, damage) -> target.addEffect(new MobEffectInstance(BinderEffects.SHATTERED.get(), 120, 1), caster)),
+            new Palm("palm_soul", ParticleTypes.SOUL_FIRE_FLAME, (caster, target, damage) -> BoltSpells.soulburn(caster, target, 100)),
             new PilgrimsPalm());
     }
 }

@@ -60,6 +60,11 @@ public final class BinderEffects {
         .addAttributeModifier(Attributes.ATTACK_DAMAGE, "9e4a2c7d-1b3f-4d5e-8a6b-3c2d1e0f9a01", 0.1, Operation.MULTIPLY_TOTAL));
     /** Radiant Arrow (modified/ArrowSpells): on the target; its marker's arrows home in on it and deal 50% more. */
     public static final RegistryObject<MobEffect> RADIANT_MARK = EFFECTS.register("radiant_mark", () -> new MobEffect(MobEffectCategory.HARMFUL, 0xFFE9A0) {});
+    /** Ofuda and Drown (modified/SmiteSpells): a silenced player can't cast spells. */
+    /** Jade Lotus and Ancestral Blessing (modified/GroundSpells): 25% less damage from symmetry or spirit spells. */
+    public static final RegistryObject<MobEffect> JADE_WARD = EFFECTS.register("jade_ward", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x3FCF9A) {});
+    public static final RegistryObject<MobEffect> SPIRIT_WARD = EFFECTS.register("spirit_ward", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x9FE8F0) {});
+    public static final RegistryObject<MobEffect> SILENCED = EFFECTS.register("silenced", () -> new MobEffect(MobEffectCategory.HARMFUL, 0xC8C0A8) {});
 
     private static Map<String, RegistryObject<MobEffect>> brands() {
         Map<String, Integer> colours = new LinkedHashMap<>();

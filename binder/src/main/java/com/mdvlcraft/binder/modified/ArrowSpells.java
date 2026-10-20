@@ -33,7 +33,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * The elemental arrows (built from Fire Arrow): a charged arrow shot where the caster looks, hitting for the spell's
- * power, with the element's effect on what it hits. Jade Arrow (StrikeSpells) is the spirit one.
+ * power, with the element's effect on what it hits. Jade Arrow (StrikeSpells) is the jade one; Soul Arrow pierces 3 creatures.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class ArrowSpells {
@@ -60,6 +60,9 @@ public final class ArrowSpells {
             arrow.setCritArrow(true);
             arrow.pickup = AbstractArrow.Pickup.DISALLOWED;
             arrow.getPersistentData().putString(TAG, this.element);
+            if (this.element.equals("soul")) {
+                arrow.setPierceLevel((byte)3);
+            }
             arrow.shootFromRotation(caster, caster.getXRot(), caster.getYRot(), 0.0F, 3.0F, 0.5F);
             level.addFreshEntity(arrow);
             level.playSound(null, caster.blockPosition(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, 1.2F);
@@ -68,7 +71,7 @@ public final class ArrowSpells {
     }
 
     public static List<ElementArrow> all() {
-        return List.of("ice", "lightning", "holy", "eldritch", "water", "blood").stream().map(ElementArrow::new).toList();
+        return List.of("ice", "lightning", "holy", "eldritch", "water", "blood", "soul").stream().map(ElementArrow::new).toList();
     }
 
     @SubscribeEvent
@@ -109,6 +112,7 @@ public final class ArrowSpells {
                 victim.addEffect(new MobEffectInstance(BrandSpells.external("traveloptics:wet"), 160, 0), owner);
             }
             case "blood" -> victim.addEffect(new MobEffectInstance(BrandSpells.external("attributeslib:bleeding"), 100, 1), owner);
+            case "soul" -> BoltSpells.soulburn(owner, victim, 100);
             default -> throw new IllegalStateException("Unknown arrow " + element);
         }
     }

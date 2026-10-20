@@ -34,7 +34,7 @@ mod('exorcism', 'Exorcism', 'Cleanse', 'Banish spirits around you: summons take 
 mod('taiji_seal', 'Taiji Seal', 'Bagua Array Circle', 'A yin-yang seal on the ground: allies inside heal slowly, enemies inside take symmetry and spirit damage in turns.')
 mod('reaper_mark', "Reaper's Mark", 'Death Mark (Modified)', 'Mark an enemy; when it dies its soul is torn out and bursts, soulburning every enemy around it.')
 mod('haunting', 'Haunting', 'Scapegoat', 'Leave a ghostly copy of yourself that enemies attack; when it is struck it shrieks and makes them flee for 3 s.')
-mod('arrow_soul', 'Soul Arrow', 'Fire Arrow', 'A charged arrow of soul fire that soulburns and passes through summons.')
+mod('arrow_soul', 'Soul Arrow', 'Fire Arrow', 'A charged arrow of soul fire that soulburns and pierces up to 3 creatures.')
 mod('spirit_hawk', 'Spirit Hawk', 'Hunting Hawk (Modified)', 'A ghost hawk that flies through walls, marks the nearest enemy with Glowing and soulburns it when it dives.')
 mod('spirit_steed', 'Spirit Steed', 'Summon Horse', 'Summon a spectral horse that runs over water and through tall grass without slowing.')
 mod('wayshrine', 'Wayshrine', 'Recall', 'Set a small roadside shrine; cast again from anywhere in the same dimension to return to it.')

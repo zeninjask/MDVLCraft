@@ -57,8 +57,19 @@ public final class ModifiedSpells {
         MountSpells.BoneSteed::new, MountSpells.Camel::new, MountSpells.StormSteed::new, MountSpells.VoidStrider::new,
         MountSpells.SpectralBoat::new,
         FieldSpells.CorpseFlower::new, FieldSpells.Ballista::new, FieldSpells.Fence::new, FieldSpells.JadeSerpent::new,
-        FieldSpells.RiverDragon::new
+        FieldSpells.RiverDragon::new,
+        // batch 5: bolts, strikes and blades
+        SmiteSpells.ChaosBolt::new, SmiteSpells.SmiteBolt::new, SmiteSpells.Superconductor::new, SmiteSpells.StaticSnare::new,
+        SmiteSpells.Drown::new, SmiteSpells.Geyser::new, SmiteSpells.SoulHarvest::new,
+        BladeSpells.SoulRend::new, BladeSpells.PhantomDraw::new, BladeSpells.LeapOfFaith::new,
+        // batch 6
+        SmiteSpells.BurningRoots::new
         ));
+        BoltSpells.all().forEach(bolt -> all.add(() -> bolt));
+        ConeSpells.all().forEach(cone -> all.add(() -> cone));
+        VolleySpells.all().forEach(volley -> all.add(() -> volley));
+        GroundSpells.all().forEach(ground -> all.add(() -> ground));
+        WallSpells.all().forEach(wall -> all.add(() -> wall));
         BrandSpells.all().forEach(brand -> all.add(() -> brand));
         ArrowSpells.all().forEach(arrow -> all.add(() -> arrow));
         PalmSpells.all().forEach(palm -> all.add(() -> palm));
