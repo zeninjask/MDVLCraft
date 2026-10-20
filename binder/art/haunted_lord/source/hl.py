@@ -8,8 +8,10 @@ from scipy.spatial.transform import Rotation as Rot
 BB = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'haunted_lord.bbmodel')))
 parent, origin, rest, order = {}, {}, {}, []
 uuid_bone = {}
+GROUPS = {g['uuid']: g for g in BB.get('groups', [])}      # Blockbench 5 keeps bone data here, the outliner only nests uuids
 def _walk(g, p):
     if isinstance(g, str): uuid_bone[g] = p; return
+    if 'name' not in g: g = dict(GROUPS[g['uuid']], children=g['children'])
     parent[g['name']] = p; origin[g['name']] = np.array(g['origin'], float); rest[g['name']] = np.array(g.get('rotation', [0, 0, 0]), float)
     order.append(g['name'])
     for c in g['children']: _walk(c, g['name'])
