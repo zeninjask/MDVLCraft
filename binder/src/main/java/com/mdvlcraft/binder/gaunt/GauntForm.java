@@ -45,8 +45,8 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
  * Entering, the player is lifted and their bones snap one by one (SNAPS) until the body tears into the
  * Haunted Lord, which unfolds (its transform animation); leaving plays all of it backwards at twice the speed. While
  * changing the player cannot move or jump. In the form: 25% faster, Night Vision, no fall damage; the ability wheel holds
- * only Transform Back and Leap (ability/GauntAbility, gaunt/GauntLeap); no other abilities, spells, attacks, item use or
- * Epic Fight skills.
+ * only Transform Back, Leap, Horrify and Execute (ability/GauntAbility, gaunt/GauntLeap, gaunt/GauntExecute); attacking
+ * strikes with its claws (gaunt/GauntAttack); no other abilities, spells, attacks, item use or Epic Fight skills.
  *
  * The server keeps each player's phase and sends it to them and everyone tracking them (GauntFormPacket); clients keep
  * what they were told in CLIENT, so in() answers on both sides.
@@ -130,6 +130,8 @@ public final class GauntForm {
         }
         state.phase = FormPhase.EXITING;
         state.ticks = 0;
+        GauntExecute.stop(player);
+        GauntAttack.clear(player);
         GauntLeap.clear(player);
         active(player, false);
         modifier(player, Attributes.MOVEMENT_SPEED, FROZEN, "Gaunt Vessel (changing)", -1.0, Operation.MULTIPLY_TOTAL);
@@ -142,6 +144,8 @@ public final class GauntForm {
         if (state == null) {
             return;
         }
+        GauntExecute.stop(player);
+        GauntAttack.clear(player);
         GauntLeap.clear(player);
         active(player, false);
         removeModifier(player, Attributes.MOVEMENT_SPEED, FROZEN);
@@ -222,6 +226,8 @@ public final class GauntForm {
             end(player);
         } else if (state.phase == FormPhase.ACTIVE) {
             GauntLeap.tick(player);
+            GauntExecute.tick(player);
+            GauntAttack.tick(player);
         }
     }
 
@@ -273,6 +279,7 @@ public final class GauntForm {
             if (state != null) {
                 BinderNetwork.sendTo(viewer, new GauntFormPacket(target.getId(), state.phase, state.ticks, false));
                 GauntLeap.sendTo(viewer, target);
+                GauntExecute.sendTo(viewer, target);
             }
         }
     }

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Cuts the Haunted Lord's sounds (client/GauntClient) from CC0 Freesound recordings into mono OGGs and writes
 assets/mdvlcraft/sounds.json entries for them. Each sound event gets several variants (Minecraft picks one at random).
-Needs curl and ffmpeg. Usage (from the binder folder): python3 tools/haunted_lord/sounds.py <download dir>
+Needs curl and ffmpeg. Usage (from the binder folder): python3 tools/haunted_lord/sounds.py <download dir> [event,event]
 """
 import json
 import os
@@ -32,6 +32,9 @@ SOUNDS = {
     # morgothFLOW, "bonebreaker.mp3": bone snaps (the transformation)
     'snap': (124971, 'https://cdn.freesound.org/previews/124/124971_1247793-hq.mp3',
              [(1.92, 2.25), (2.36, 2.78), (2.8, 3.2), (3.68, 4.0)], None),
+    # danielrutterfilm, "Necksnap_build.wav" (T1): the execution's neck snap; the crack peaks 0.3 s into the cut
+    # (gaunt/GauntExecute.SNAP_SOUND_LEAD)
+    'neck_snap': (134025, 'https://cdn.freesound.org/previews/134/134025_1911785-hq.mp3', [(0.42, 1.56)], None),
 }
 
 download = sys.argv[1]
@@ -39,7 +42,10 @@ os.makedirs(download, exist_ok=True)
 out_dir = os.path.join(ASSETS, 'sounds', 'haunted_lord')
 os.makedirs(out_dir, exist_ok=True)
 events = {}
+only = sys.argv[2].split(',') if len(sys.argv) > 2 else list(SOUNDS)
 for event, (sid, url, cuts, loudness) in SOUNDS.items():
+    if event not in only:
+        continue
     src = os.path.join(download, f'{sid}.mp3')
     if not os.path.exists(src):
         subprocess.run(['curl', '-sSfL', '-A', 'Mozilla/5.0', '-o', src, url], check=True)

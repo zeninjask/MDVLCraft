@@ -31,7 +31,8 @@ import org.joml.Vector3f;
  * (assets/mdvlcraft/haunted_lord/haunted_lord.json, from tools/haunted_lord/convert.py) unfolding out of it (transform).
  * Leaving plays all of it backwards. In the form: cast while casting, crawl while sneaking, sprint or walk while moving
  * (paced by the walk animation's distance), idle otherwise, each change blended over BLEND_TICKS; the head turns towards
- * where the player looks. Charging a leap (gaunt/GauntLeap) it crouches in the crawl with its hands down, pressing lower
+ * where the player looks. Its own attacks and executions (GauntClient.Action) play over all of these, the execution
+ * facing its victim. Charging a leap (gaunt/GauntLeap) it crouches in the crawl with its hands down, pressing lower
  * and shaking; clinging to a wall or a ceiling it holds that pose turned onto the surface. The eyes glow (the glow mask,
  * drawn full bright).
  */
@@ -67,7 +68,9 @@ final class GauntRenderer {
         PlayerRenderer renderer) {
         float now = player.level().getGameTime() + partialTick;
         float time = GauntForm.enteringTime(seen.phase, now - seen.since);
-        float yaw = Mth.rotLerp(partialTick, player.yBodyRotO, player.yBodyRot);
+        GauntClient.Action action = GauntClient.action(player.getId());
+        boolean acting = action != null && time >= GauntForm.ENTER_TICKS && (now - action.since) / 20.0F < model().length(action.animation);
+        float yaw = acting && !Float.isNaN(action.yaw) ? action.yaw : Mth.rotLerp(partialTick, player.yBodyRotO, player.yBodyRot);
         if (time < GauntForm.SNAP_TICKS) {
             body((AbstractClientPlayer)player, time, now, yaw, poseStack, buffers, light, renderer);
             return;
@@ -88,7 +91,7 @@ final class GauntRenderer {
         if (cling != null) {
             surface(poseStack, player, cling, partialTick, yaw);
         } else {
-            if (time >= GauntForm.ENTER_TICKS) {
+            if (time >= GauntForm.ENTER_TICKS && !acting) {
                 look(pose, player, partialTick, yaw);
             }
             poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - yaw));
@@ -113,6 +116,10 @@ final class GauntRenderer {
 
     static Pick pick(Player player, Seen seen, float partialTick, float now) {
         NodeModel model = model();
+        GauntClient.Action action = GauntClient.action(player.getId());
+        if (action != null && (now - action.since) / 20.0F < model.length(action.animation)) {
+            return new Pick(action.animation, (now - action.since) / 20.0F, model.length(action.animation));
+        }
         GauntClient.Leap leap = GauntClient.leap(player.getId());
         if (leap != null && (leap.cling != null || leap.chargingSince >= 0)) {
             return new Pick("crawl", HANDS_PLANTED, model.length("crawl"));

@@ -105,6 +105,15 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
   Trajectory Estimation's own aim lines (bows, pearls, tridents, potions, every compat) are switched off by
   `mixin/tje/CompatibilityEventMixin` (cancels its `interModEnqueue`, which registers all of them); only the Leap path
   draws. To check in game: no arcs when aiming a bow or holding a pearl.
+  Execute (4th form wheel slot, `gaunt/GauntExecute`, 30 s cooldown): seizes a looked-at creature (3.5 blocks, at or
+  below half health, not a boss, at most 2.2 tall and 1 wide) by the neck, lifts it and snaps its neck (head flops
+  sideways; T1 "Necksnap_build" timed so its crack lands on the snap), kills it at 2.6 s. The victim is moved along the
+  hand path on the server and placed every frame on clients. Attacking in the form strikes with the claws
+  (`gaunt/GauntAttack`, `network/GauntAttackPacket`): ground chain attack1/attack2/attack3 (7/7/11 damage, buffered like
+  Epic Fight combos), jump_attack in the air (10), dash_attack while sprinting (4 slashes of 4.5, lunges forward).
+  Animations sent with `network/GauntActionPacket`. Built and run on the test server/client (bane-agent session):
+  execute lifts and kills a husk, attacks hit; the test client renders about 1 FPS so short attack poses were only
+  checked in Blockbench previews. Not yet checked: player victims, Epic Fight mobs' head turn.
 - **Released:** 2.0.13 is on `main` (binder 0.8.4): cinder essence recipe (netherite scrap surrounded by blaze powder), untested.
 - **2.0.12** (binder 0.8.3): red string (redstone + string) and bloody vellum (paper + redstone) recipes, untested.
 - **2.0.11** (`0ef8736`, binder 0.8.2).

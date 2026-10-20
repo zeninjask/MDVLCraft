@@ -1,4 +1,4 @@
-"""Haunted Lord animations: idle, cast, walk, sprint, crawl -> GeckoLib/Bedrock animation JSON.
+"""Haunted Lord animations: idle, cast, walk, sprint, crawl, transform, execute, attack1-3, jump_attack, dash_attack -> GeckoLib/Bedrock animation JSON.
 Each animation is a smooth function of time (pose = keyframe values per bone); feet and hands that must stay planted
 or on the face are placed with IK against the exact rig (hl.py). Sampled into catmullrom keys."""
 import sys, os, json, math
@@ -305,8 +305,8 @@ def scale_full(t):
     return 0.62 + 0.38 * (0.35 * snap(t, 0.85) + 0.35 * snap(t, 1.0) + 0.3 * snap(t, 1.12))
 
 # ---- execute: grab a victim by the neck, lift it, snap its neck, drop it (gaunt/GauntExecute moves the victim along GRIP)
-GRAB = np.array([5.0, 30.0, -26.0])     # the victim's neck when standing in front (model px, Blockbench space: +x right, -z front)
-LIFT = np.array([4.0, 50.0, -22.0])     # held up at arm's length
+GRAB = np.array([6.0, 31.0, -19.0])     # the victim's neck when standing in front (model px, Blockbench space: +x right, -z front)
+LIFT = np.array([5.0, 45.0, -17.0])     # held up at arm's length
 EXECUTE_SNAP = 2.0                     # the neck snaps (the sound, the victim's head, the kill)
 EXECUTE_DROP = 2.6
 
@@ -347,10 +347,130 @@ def execute(t, L=3.4, S=None):
         P = mix(P, idle(0.0, 4.0), smooth((t - 2.8) / 0.6))
     return P
 
+# ---- attacks (gaunt/GauntAttack): a three-hit chain, a leaping rake and a frenzied dash ----
+def keys(t, ks):
+    """Smoothly from key to key: ks = [(time, value)], value a number or a point; held before the first and after the last."""
+    if t <= ks[0][0]: return np.array(ks[0][1], float) if not np.isscalar(ks[0][1]) else ks[0][1]
+    for (a, va), (b, vb) in zip(ks, ks[1:]):
+        if t <= b:
+            w = smooth((t - a) / (b - a))
+            return np.asarray(va, float) + (np.asarray(vb, float) - np.asarray(va, float)) * w if not np.isscalar(va) else va + (vb - va) * w
+    return np.array(ks[-1][1], float) if not np.isscalar(ks[-1][1]) else ks[-1][1]
+
+def mirror(v): return np.array([-v[0], v[1], v[2]])
+ARM_PRIOR = {'right': [-60, 0, 10, -30, 0, 0], 'left': [-60, 0, -10, -30, 0, 0]}
+
+def planted(P, S, crouch=0.0):
+    add(P, 'full', (0, 0, 0), (0, -crouch, 0))
+    for s in ('left', 'right'):
+        toe, heel = foot_targets(s, 0.0, 0.0, 0.0, None)
+        P, _ = S.leg(P, s, toe, heel)
+    return P
+
+def claws(P, s, splay):
+    """Fingers spread (splay 1) or curled (negative)."""
+    sg = -1 if s == 'left' else 1
+    for k, f in enumerate(FINGERS[s]):
+        add(P, f, (-30 * splay, 0, -sg * 6 * k * max(splay, 0)))
+
+def settle(P, t, start, L):
+    """Back to the idle's first pose over the end of a one-shot animation."""
+    return mix(P, idle(0.0, 4.0), smooth((t - start) / (L - start))) if t > start else P
+
+def swipe_path(s, t0):
+    """One claw's slash, wind-up from t0 - 0.22 (keys relative): hand back and high, through the front, across."""
+    pts = [(0.0, (17, 46, 6)), (0.08, (8, 33, -20)), (0.14, (-7, 25, -12)), (0.3, (-5, 24, -10))]
+    m = (lambda v: np.array(v, float)) if s == 'right' else (lambda v: mirror(np.array(v, float)))
+    return [(t0 + a, m(v)) for a, v in pts]
+
+def swipe(t, L, S, s):
+    """attack1 (right claw) / attack2 (left claw): a twisting slash from high on its side across the front; hit at 0.3 s."""
+    sg = 1 if s == 'right' else -1
+    o = 'left' if s == 'right' else 'right'
+    P = {}
+    add(P, 'body', (keys(t, [(0, 0), (0.22, -6), (0.34, 16), (0.5, 12)]), sg * keys(t, [(0, 0), (0.22, 24), (0.34, -28), (0.5, -24)]), 0))
+    add(P, 'head', (keys(t, [(0, 0), (0.22, 6), (0.34, -14)]), sg * keys(t, [(0, 0), (0.22, -14), (0.34, 16)]), sg * 8 * snap(t, 0.3)))
+    add(P, 'jaw', (keys(t, [(0, 4), (0.24, 26), (0.4, 12), (0.6, 5)]), 0, 0))
+    P = planted(P, S, keys(t, [(0, 0), (0.22, 1.5), (0.34, 3.0), (0.5, 2.5)]))
+    path = [(0.0, KNUCKLE[s])] + swipe_path(s, 0.22)
+    P, e = S.arm(P, s, [(f'{s}_arm_down', KNUCKLE[s], keys(t, path), 1.0)], ARM_PRIOR[s])
+    add(P, f'{o}_arm', (keys(t, [(0, 0), (0.22, -20), (0.34, 10)]), 0, -sg * keys(t, [(0, 0), (0.22, 20), (0.34, 10)])))
+    claws(P, s, keys(t, [(0, 0), (0.2, 1.0), (0.4, 0.6), (0.55, 0)]))
+    return settle(P, t, 0.5, L), e
+
+def attack1(t, L=0.75, S=None): return swipe(t, L, S, 'right')
+def attack2(t, L=0.75, S=None): return swipe(t, L, S, 'left')
+
+def attack3(t, L=1.0, S=None):
+    """Both claws raised overhead, then slammed down in front with the whole body; hit at 0.48 s."""
+    P = {}
+    add(P, 'body', (keys(t, [(0, 0), (0.38, -14), (0.5, 38), (0.72, 34)]), 0, 0))
+    add(P, 'head', (keys(t, [(0, 0), (0.38, 10), (0.5, -30), (0.72, -26)]), 0, 0))
+    add(P, 'jaw', (keys(t, [(0, 4), (0.36, 32), (0.46, 6), (0.6, 18)]), 0, 0))
+    P = planted(P, S, keys(t, [(0, 0), (0.38, -1.0), (0.5, 5.0), (0.72, 4.5)]))
+    e = 0.0
+    for s in ('right', 'left'):
+        m = (lambda v: np.array(v, float)) if s == 'right' else (lambda v: mirror(np.array(v, float)))
+        path = [(0.0, KNUCKLE[s]), (0.38, m((9, 55, 0))), (0.5, m((8, 12, -19))), (0.72, m((8, 11, -18)))]
+        P, ei = S.arm(P, s, [(f'{s}_arm_down', KNUCKLE[s], keys(t, path), 1.0)], ARM_PRIOR[s]); e = max(e, ei)
+        claws(P, s, keys(t, [(0, 0), (0.36, 1.0), (0.5, 0.8), (0.75, 0)]))
+    return settle(P, t, 0.72, L), e
+
+def jump_attack(t, L=0.8, S=None):
+    """In the air: legs tucked, both claws raised behind the head, then raked down through the front; hit at 0.38 s."""
+    P = {}
+    add(P, 'body', (keys(t, [(0, 0), (0.2, -10), (0.38, 40), (0.6, 30)]), 0, 0))
+    add(P, 'head', (keys(t, [(0, 0), (0.2, 8), (0.38, -34), (0.6, -24)]), 0, 0))
+    add(P, 'jaw', (keys(t, [(0, 4), (0.18, 34), (0.4, 10)]), 0, 0))
+    tuck = keys(t, [(0, 0), (0.15, 1), (0.55, 1), (0.75, 0)])
+    for s in ('left', 'right'):
+        toe, heel = foot_targets(s, -5.0 * tuck, 9.0 * tuck, 25 * tuck, None)
+        P, _ = S.leg(P, s, toe, heel)
+    e = 0.0
+    for s in ('right', 'left'):
+        m = (lambda v: np.array(v, float)) if s == 'right' else (lambda v: mirror(np.array(v, float)))
+        path = [(0.0, KNUCKLE[s]), (0.2, m((10, 54, 4))), (0.38, m((9, 15, -18))), (0.6, m((9, 15, -16)))]
+        P, ei = S.arm(P, s, [(f'{s}_arm_down', KNUCKLE[s], keys(t, path), 1.0)], ARM_PRIOR[s]); e = max(e, ei)
+        claws(P, s, keys(t, [(0, 0), (0.18, 1.0), (0.4, 0.8), (0.65, 0)]))
+    return settle(P, t, 0.6, L), e
+
+DASH_HITS = (0.24, 0.44, 0.64, 0.84)
+def dash_attack(t, L=1.2, S=None):
+    """Frenzy while rushing forward: thrown low, legs running, four alternating slashes (right, left, right, left), head
+    thrashing, jaw wide; hits at DASH_HITS."""
+    P = {}
+    lean = keys(t, [(0, 0), (0.12, 30), (0.9, 30), (1.0, 10)])
+    twist = 0.0
+    for k, h in enumerate(DASH_HITS):
+        sg = 1 if k % 2 == 0 else -1
+        twist += sg * keys(t, [(h - 0.2, 0), (h - 0.08, 22), (h + 0.04, -26), (h + 0.12, 0)])
+    add(P, 'body', (lean, twist, 0))
+    add(P, 'head', (-lean * 0.8 + 6 * math.sin(t * 31), -0.5 * twist + 8 * math.sin(t * 23), 10 * math.sin(t * 17)))
+    add(P, 'jaw', (keys(t, [(0, 4), (0.12, 30), (0.9, 30), (1.1, 5)]) + 4 * math.sin(t * 40), 0, 0))
+    run = keys(t, [(0, 0), (0.1, 1), (0.85, 1), (1.0, 0)])
+    add(P, 'full', (0, 0, 0), (0, -2.0 * run, 0))
+    for s, off in (('left', 0.0), ('right', 0.5)):
+        z, up, pitch = gait_foot(wrap(t / 0.4 + off), 0.45, 12.0 * run, 4.0 * run)
+        toe, heel = foot_targets(s, z, up, pitch, None)
+        P, _ = S.leg(P, s, toe, heel, reg=0.01)
+    e = 0.0
+    for s in ('right', 'left'):
+        mine = [h for k, h in enumerate(DASH_HITS) if (k % 2 == 0) == (s == 'right')]
+        m = (lambda v: np.array(v, float)) if s == 'right' else (lambda v: mirror(np.array(v, float)))
+        path = [(0.0, KNUCKLE[s])]
+        for h in mine:
+            path += [(h - 0.16, m((17, 46, 6))), (h - 0.04, m((8, 33, -20))), (h + 0.04, m((-7, 25, -12)))]
+        path += [(0.95, KNUCKLE[s])]
+        P, ei = S.arm(P, s, [(f'{s}_arm_down', KNUCKLE[s], keys(t, path), 1.0)], ARM_PRIOR[s]); e = max(e, ei)
+        claws(P, s, 1.0 * run)
+    return settle(P, t, 0.95, L), e
+
 ANIMS = {  # name: (function, length, keys per second[, loops])
     'idle': (idle, 4.0, 10), 'cast': (cast, 4.0, 10), 'walk': (walk, 2.4, 10), 'sprint': (sprint, 0.7, 20), 'crawl': (crawl, 2.8, 10),
     'transform': (transform, 1.8, 40, False),
     'execute': (execute, 3.4, 30, False),
+    'attack1': (attack1, 0.75, 40, False), 'attack2': (attack2, 0.75, 40, False), 'attack3': (attack3, 1.0, 40, False),
+    'jump_attack': (jump_attack, 0.8, 40, False), 'dash_attack': (dash_attack, 1.2, 40, False),
 }
 
 def build(names=None):

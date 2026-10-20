@@ -44,6 +44,7 @@ public final class GauntLeap {
         boolean leaping;
         long readyAt;
         long horrifyReadyAt;
+        long executeReadyAt;
     }
 
     private static final Map<UUID, State> SERVER = new HashMap<>();
@@ -78,7 +79,7 @@ public final class GauntLeap {
     public static void press(ServerPlayer player) {
         State state = state(player);
         long now = player.level().getGameTime();
-        if (now < state.readyAt || state.chargingSince >= 0) {
+        if (now < state.readyAt || state.chargingSince >= 0 || GauntExecute.busy(player) || GauntAttack.busy(player)) {
             return;
         }
         state.chargingSince = now;
@@ -107,7 +108,7 @@ public final class GauntLeap {
     public static void horrify(ServerPlayer player) {
         State state = state(player);
         long now = player.level().getGameTime();
-        if (now < state.horrifyReadyAt) {
+        if (now < state.horrifyReadyAt || GauntExecute.busy(player) || GauntAttack.busy(player)) {
             return;
         }
         state.horrifyReadyAt = now + HORRIFY_COOLDOWN_TICKS;
@@ -119,6 +120,23 @@ public final class GauntLeap {
         }
         player.level().playSound(null, player.blockPosition(), HORRIFY, SoundSource.PLAYERS, 2.5F, 1.0F);
         GauntForm.playCast(player);
+        sync(player, state);
+    }
+
+    /** Whether the player is charging a leap or clinging (no attacking meanwhile). */
+    static boolean held(ServerPlayer player) {
+        State state = SERVER.get(player.getUUID());
+        return state != null && (state.chargingSince >= 0 || state.cling != null);
+    }
+
+    static boolean executeReady(ServerPlayer player) {
+        State state = state(player);
+        return player.level().getGameTime() >= state.executeReadyAt && !held(player);
+    }
+
+    static void executeUsed(ServerPlayer player) {
+        State state = state(player);
+        state.executeReadyAt = player.level().getGameTime() + GauntExecute.COOLDOWN_TICKS;
         sync(player, state);
     }
 
@@ -171,7 +189,7 @@ public final class GauntLeap {
         State state = SERVER.remove(player.getUUID());
         if (state != null) {
             letGo(player, state);
-            BinderNetwork.sendToTrackingAndSelf(player, new GauntStatePacket(player.getId(), -1, -1, false, 0, 0));
+            BinderNetwork.sendToTrackingAndSelf(player, new GauntStatePacket(player.getId(), -1, -1, false, 0, 0, 0));
         }
     }
 
@@ -190,6 +208,6 @@ public final class GauntLeap {
         long now = player.level().getGameTime();
         return new GauntStatePacket(player.getId(), state.chargingSince < 0 ? -1 : (int)(now - state.chargingSince),
             state.cling == null ? -1 : state.cling.get3DDataValue(), state.leaping, (int)Math.max(0, state.readyAt - now),
-            (int)Math.max(0, state.horrifyReadyAt - now));
+            (int)Math.max(0, state.horrifyReadyAt - now), (int)Math.max(0, state.executeReadyAt - now));
     }
 }

@@ -9,9 +9,9 @@ import net.minecraftforge.network.NetworkEvent.Context;
 
 /**
  * A Haunted Lord's leap state (gaunt/GauntLeap): ticks into a charge (-1 none), the face of the block it clings to
- * (Direction 3D data value, -1 none), whether it is mid-leap, and the ticks until it can leap and horrify again.
+ * (Direction 3D data value, -1 none), whether it is mid-leap, and the ticks until it can leap, horrify and execute again.
  */
-public record GauntStatePacket(int entity, int charging, int cling, boolean leaping, int cooldown, int horrifyCooldown) {
+public record GauntStatePacket(int entity, int charging, int cling, boolean leaping, int cooldown, int horrifyCooldown, int executeCooldown) {
     public static void encode(GauntStatePacket packet, FriendlyByteBuf buf) {
         buf.writeVarInt(packet.entity);
         buf.writeVarInt(packet.charging);
@@ -19,10 +19,11 @@ public record GauntStatePacket(int entity, int charging, int cling, boolean leap
         buf.writeBoolean(packet.leaping);
         buf.writeVarInt(packet.cooldown);
         buf.writeVarInt(packet.horrifyCooldown);
+        buf.writeVarInt(packet.executeCooldown);
     }
 
     public static GauntStatePacket decode(FriendlyByteBuf buf) {
-        return new GauntStatePacket(buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt(), buf.readVarInt());
+        return new GauntStatePacket(buf.readVarInt(), buf.readVarInt(), buf.readVarInt(), buf.readBoolean(), buf.readVarInt(), buf.readVarInt(), buf.readVarInt());
     }
 
     public static void handle(GauntStatePacket packet, Supplier<Context> context) {

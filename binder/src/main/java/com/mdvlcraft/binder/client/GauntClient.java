@@ -1,9 +1,12 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.GauntAbility;
+import com.mdvlcraft.binder.gaunt.GauntExecute;
 import com.mdvlcraft.binder.gaunt.GauntForm;
 import com.mdvlcraft.binder.gaunt.GauntLeap;
 import com.mdvlcraft.binder.network.BinderNetwork;
+import com.mdvlcraft.binder.network.GauntActionPacket;
+import com.mdvlcraft.binder.network.GauntAttackPacket;
 import com.mdvlcraft.binder.network.GauntClingPacket;
 import com.mdvlcraft.binder.network.GauntFormPacket;
 import com.mdvlcraft.binder.network.GauntStatePacket;
@@ -25,6 +28,7 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.api.distmarker.Dist;
@@ -34,6 +38,7 @@ import net.minecraftforge.client.event.MovementInputUpdateEvent;
 import net.minecraftforge.client.event.RenderHandEvent;
 import net.minecraftforge.client.event.RenderLevelStageEvent;
 import net.minecraftforge.client.event.RenderPlayerEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -48,7 +53,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * tools/haunted_lord/sounds.py) at the points of its animations they belong to: a bone snap at each of the player's
  * snaps and the Haunted Lord's own as it unfolds, a breath per idle cycle, whispers per cast cycle, a foot drag per walking
  * step, a joint crack per hand planted in the crawl, and a screech every few seconds of sprinting. The local player in
- * the form sees no hands and cannot attack or use anything; their wheel is the form's own (ClientAbilities, Leap picked
+ * the form sees no hands and cannot use anything, and attacking strikes with the claws (gaunt/GauntAttack); their wheel is the form's own (ClientAbilities, Leap picked
  * on entering, the old pick back on leaving).
  *
  * The leap (gaunt/GauntLeap) as each client sees it is kept in LEAP from GauntStatePacket. For the local player: while
@@ -82,7 +87,28 @@ public final class GauntClient {
         int cooldown = 1;
         long horrifyReadyAt;
         int horrifyCooldown = 1;
+        long executeReadyAt;
+        int executeCooldown = 1;
     }
+
+    /** One of a Haunted Lord's own animations playing (gaunt/GauntAttack, gaunt/GauntExecute), from GauntActionPacket. */
+    static final class Action {
+        final String animation;
+        final long since;
+        /** The execution's victim (entity id), -1 when none is held. */
+        int victim;
+        /** The way the Haunted Lord faces through it; NaN for the player's own. */
+        final float yaw;
+
+        Action(String animation, long since, int victim, float yaw) {
+            this.animation = animation;
+            this.since = since;
+            this.victim = victim;
+            this.yaw = yaw;
+        }
+    }
+
+    private static final Map<Integer, Action> ACTION = new HashMap<>();
 
     private static final Map<Integer, Leap> LEAP = new HashMap<>();
     /** The local player's velocity last tick (a collision zeroes the blocked axis, so the touch is judged from this). */
@@ -139,6 +165,34 @@ public final class GauntClient {
             leap.horrifyReadyAt = now + packet.horrifyCooldown();
             leap.horrifyCooldown = packet.horrifyCooldown();
         }
+        if (packet.executeCooldown() > 0) {
+            leap.executeReadyAt = now + packet.executeCooldown();
+            leap.executeCooldown = packet.executeCooldown();
+        }
+    }
+
+    public static void handle(GauntActionPacket packet) {
+        ClientLevel level = Minecraft.getInstance().level;
+        if (level == null) {
+            return;
+        }
+        if (packet.animation().isEmpty()) {
+            ACTION.remove(packet.entity());
+            return;
+        }
+        Action current = ACTION.get(packet.entity());
+        long since = level.getGameTime() - packet.ticks();
+        if (current != null && current.animation.equals(packet.animation()) && current.since == since) {
+            current.victim = packet.victim();   // the execution's victim let go
+        } else {
+            ACTION.put(packet.entity(), new Action(packet.animation(), since, packet.victim(), packet.yaw()));
+        }
+    }
+
+    /** The animation a Haunted Lord is playing of its own, if any (it may have played out: see GauntRenderer.pick). */
+    @Nullable
+    static Action action(int entity) {
+        return ACTION.get(entity);
     }
 
     @Nullable
@@ -154,9 +208,11 @@ public final class GauntClient {
             return 0.0F;
         }
         long now = player.level().getGameTime();
-        return ability == GauntAbility.LEAP
-            ? Mth.clamp((leap.readyAt - now) / (float)leap.cooldown, 0.0F, 1.0F)
-            : Mth.clamp((leap.horrifyReadyAt - now) / (float)leap.horrifyCooldown, 0.0F, 1.0F);
+        return switch (ability) {
+            case LEAP -> Mth.clamp((leap.readyAt - now) / (float)leap.cooldown, 0.0F, 1.0F);
+            case HORRIFY -> Mth.clamp((leap.horrifyReadyAt - now) / (float)leap.horrifyCooldown, 0.0F, 1.0F);
+            default -> Mth.clamp((leap.executeReadyAt - now) / (float)leap.executeCooldown, 0.0F, 1.0F);
+        };
     }
 
     /** A player's leap charge so far, 0..1, or -1 when not charging. */
@@ -194,12 +250,50 @@ public final class GauntClient {
         }
     }
 
-    /** No attacking, using or picking: the keys do nothing and the hand does not swing. */
+    /** No using or picking, and no vanilla attack: the attack key strikes with the claws instead (gaunt/GauntAttack). */
     @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onInteractionKey(InputEvent.InteractionKeyMappingTriggered event) {
         if (local()) {
             event.setSwingHand(false);
             event.setCanceled(true);
+            if (event.isAttack()) {
+                BinderNetwork.sendToServer(new GauntAttackPacket());
+            }
+        }
+    }
+
+    /** Each execution's victim is drawn in the Haunted Lord's hand (gaunt/GauntExecute.victimAt), its head flopped aside
+     * after the snap; placed every frame, before anything is drawn. */
+    @SubscribeEvent
+    public static void onRenderTick(TickEvent.RenderTickEvent event) {
+        ClientLevel level = Minecraft.getInstance().level;
+        if (event.phase != Phase.START || level == null) {
+            return;
+        }
+        float partialTick = event.renderTickTime;
+        for (Map.Entry<Integer, Action> entry : ACTION.entrySet()) {
+            Action action = entry.getValue();
+            if (action.victim < 0 || !(level.getEntity(entry.getKey()) instanceof Player executor)
+                || !(level.getEntity(action.victim) instanceof LivingEntity victim)) {
+                continue;
+            }
+            float t = (level.getGameTime() - action.since + partialTick) / 20.0F;
+            Vec3 origin = new Vec3(Mth.lerp(partialTick, executor.xo, executor.getX()), Mth.lerp(partialTick, executor.yo, executor.getY()),
+                Mth.lerp(partialTick, executor.zo, executor.getZ()));
+            Vec3 at = GauntExecute.victimAt(origin, action.yaw, t, victim);
+            victim.setPos(at);
+            victim.xo = victim.xOld = at.x;
+            victim.yo = victim.yOld = at.y;
+            victim.zo = victim.zOld = at.z;
+            float facing = action.yaw + 180.0F;
+            boolean snapped = t * 20.0F >= GauntExecute.SNAP_TICK;
+            victim.yBodyRot = victim.yBodyRotO = facing;
+            victim.yHeadRot = victim.yHeadRotO = facing + (snapped ? 80.0F : 0.0F);
+            if (victim != Minecraft.getInstance().player) {
+                float pitch = snapped ? 35.0F : -25.0F;   // chin forced up by the grip, then the head drops
+                victim.setXRot(pitch);
+                victim.xRotO = pitch;
+            }
         }
     }
 
@@ -215,6 +309,7 @@ public final class GauntClient {
             LAST_PICK.clear();
             NEXT_SCREECH.clear();
             LEAP.clear();
+            ACTION.clear();
             return;
         }
         GauntForm.CLIENT.keySet().removeIf(id -> !(level.getEntity(id) instanceof Player));
@@ -223,6 +318,13 @@ public final class GauntClient {
         long now = level.getGameTime();
         LAST_PICK.keySet().retainAll(GauntForm.CLIENT.keySet());
         LEAP.keySet().retainAll(GauntForm.CLIENT.keySet());
+        ACTION.keySet().retainAll(GauntForm.CLIENT.keySet());
+        for (Action action : ACTION.values()) {
+            long ticks = now - action.since;
+            if (action.victim >= 0 && ticks >= 12 && ticks < GauntExecute.SNAP_TICK && level.getEntity(action.victim) instanceof LivingEntity victim) {
+                victim.walkAnimation.update(1.2F, 0.6F);   // kicking
+            }
+        }
         LocalPlayer self = Minecraft.getInstance().player;
         if (self != null) {
             touch(self);
@@ -304,15 +406,17 @@ public final class GauntClient {
         lastVelocity = player.getDeltaMovement();
     }
 
-    /** No walking while charging or clinging; jumping off a surface lets go of it, pushed away from it. */
+    /** No walking while charging, clinging or executing; jumping off a surface lets go of it, pushed away from it. */
     @SubscribeEvent
     public static void onMovementInput(MovementInputUpdateEvent event) {
         Leap leap = LEAP.get(event.getEntity().getId());
-        if (leap == null || (leap.cling == null && leap.chargingSince < 0)) {
+        Action action = ACTION.get(event.getEntity().getId());
+        boolean executing = action != null && action.animation.equals(GauntExecute.ANIMATION);
+        if (!executing && (leap == null || (leap.cling == null && leap.chargingSince < 0))) {
             return;
         }
         Input input = event.getInput();
-        if (leap.cling != null && input.jumping) {
+        if (leap != null && leap.cling != null && input.jumping) {
             Direction face = leap.cling;
             leap.cling = null;
             BinderNetwork.sendToServer(new GauntClingPacket(-1));
@@ -389,5 +493,6 @@ public final class GauntClient {
         LAST_PICK.clear();
         NEXT_SCREECH.clear();
         LEAP.clear();
+        ACTION.clear();
     }
 }
