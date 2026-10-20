@@ -1,10 +1,13 @@
 """Builds MDVLCraft-<version>-client.mrpack, -client-performance.mrpack and -server.mrpack from an unpacked base (default:
 <repo>/base/{client,server}, each a modrinth.index.json plus overrides/), with the newest binder jar from binder/build/libs
 in place of the base's own. The performance client is derived from base/client first (make_performance_pack.py).
+The pack icon (<repo>/icon.png) goes at the root of every pack and, at 64x64, in the server pack as server-icon.png.
 Recreate the base by unzipping the latest committed MDVLCraft-<version>-client/server.mrpack into base/client and base/server.
 Usage: python3 binder/tools/build_packs.py <version> <outdir> [base dir]
 """
-import glob, json, os, sys, zipfile
+import glob, io, json, os, sys, zipfile
+
+from PIL import Image
 
 import make_performance_pack
 
@@ -16,6 +19,13 @@ built = sorted(glob.glob(f'{BINDER}/mdvlcraft-*.jar'), key=os.path.getmtime)
 if not built:
     raise SystemExit(f'no binder jar in {BINDER}: run ./gradlew build')
 binder = built[-1]
+ICON = os.path.join(HERE, '..', '..', 'icon.png')
+
+
+def server_icon():
+    out = io.BytesIO()
+    Image.open(ICON).resize((64, 64), Image.NEAREST).save(out, 'PNG')
+    return out.getvalue()
 
 
 def build(pack):
@@ -35,6 +45,9 @@ def build(pack):
                 path = os.path.join(d, name)
                 z.write(path, os.path.relpath(path, root))
         z.write(binder, f'overrides/mods/{os.path.basename(binder)}')
+        z.write(ICON, 'icon.png')
+        if pack == 'server':
+            z.writestr('overrides/server-icon.png', server_icon())
     print(out, len(index['files']), 'downloaded files, binder', os.path.basename(binder), os.path.getsize(out), 'bytes')
 
 

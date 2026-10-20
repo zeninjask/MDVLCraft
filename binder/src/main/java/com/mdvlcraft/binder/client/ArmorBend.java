@@ -76,9 +76,14 @@ public final class ArmorBend {
             return;
         }
 
-        OpenMatrix4f toVanilla = OpenMatrix4f.mul(
-            OpenMatrix4f.invert((OpenMatrix4f)call(VANILLA_MODEL_SPACE), null), OpenMatrix4f.invert(rootDelta, null), null
-        );
+        OpenMatrix4f vanillaSpace = (OpenMatrix4f)call(VANILLA_MODEL_SPACE);
+        if (singular(vanillaSpace) || singular(rootDelta)) {
+            return;
+        }
+        OpenMatrix4f toVanilla = OpenMatrix4f.mul(OpenMatrix4f.invert(vanillaSpace, null), OpenMatrix4f.invert(rootDelta, null), null);
+        if (singular(toVanilla)) {
+            return;
+        }
         OpenMatrix4f fromVanilla = OpenMatrix4f.invert(toVanilla, null);
         for (Limb each : Limb.values()) {
             Joint upper = armature.searchJointByName(each.upper);
@@ -88,13 +93,25 @@ public final class ArmorBend {
                 return;
             }
 
-            OpenMatrix4f fromUpper = OpenMatrix4f.invert(OpenMatrix4f.mul(poses[upper.getId()], upper.getToOrigin(), null), null);
+            OpenMatrix4f upperPose = OpenMatrix4f.mul(poses[upper.getId()], upper.getToOrigin(), null);
+            if (singular(upperPose) || singular(lower.getToOrigin())) {
+                return;
+            }
+            OpenMatrix4f fromUpper = OpenMatrix4f.invert(upperPose, null);
             CORRECTION[each.ordinal()] = correction(toVanilla, lower, poses, fromUpper, fromVanilla);
             SEAM_CORRECTION[each.ordinal()] = posed(seam, poses) ? correction(toVanilla, seam, poses, fromUpper, fromVanilla) : null;
             CUT[each.ordinal()] = OpenMatrix4f.invert(lower.getToOrigin(), null).m31;
         }
 
         active = true;
+    }
+
+    /**
+     * A matrix with no inverse: a joint scaled to nothing (the Mimic poses some that way). Epic Fight's invert writes into
+     * its null destination for these and crashes, so such an entity's armour is drawn unbent.
+     */
+    private static boolean singular(OpenMatrix4f matrix) {
+        return matrix.determinant() == 0.0F;
     }
 
     private static boolean posed(Joint joint, OpenMatrix4f[] poses) {
