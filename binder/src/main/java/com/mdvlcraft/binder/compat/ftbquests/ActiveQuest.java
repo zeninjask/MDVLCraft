@@ -20,6 +20,7 @@ import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.ClickEvent;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.HoverEvent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -62,7 +63,7 @@ public final class ActiveQuest {
         if (other.isPresent()) {
             data.resetProgress(task);
             members.forEach(player -> player.sendSystemMessage(Component.literal("You are already on a quest: ")
-                .append(other.get().getTitle()).append(". Finish it or ").append(cancelLink()).append(" first.")
+                .append(title(other.get())).append(". Finish it or ").append(cancelLink()).append(" first.")
                 .withStyle(ChatFormatting.RED)));
             return;
         }
@@ -70,7 +71,7 @@ public final class ActiveQuest {
         members.forEach(player -> {
             Jingles.send(player, Jingle.QUEST_ACCEPT);
             player.sendSystemMessage(Component.literal("Quest accepted: ").withStyle(ChatFormatting.GOLD)
-                .append(quest.getTitle().copy().withStyle(ChatFormatting.YELLOW)).append(" ").append(cancelLink()));
+                .append(title(quest).withStyle(ChatFormatting.YELLOW)).append(" ").append(cancelLink()));
         });
     }
 
@@ -87,6 +88,11 @@ public final class ActiveQuest {
         List<Task> tasks = quest.getTasksAsList();
         return tasks.isEmpty() || !(tasks.get(0) instanceof CheckmarkTask) || !ACCEPT.equals(tasks.get(0).getRawTitle())
             ? Optional.empty() : Optional.of(tasks.get(0));
+    }
+
+    /** The quest's title as written in the quest book (the generated titles are plain text). */
+    private static MutableComponent title(Quest quest) {
+        return Component.literal(quest.getRawTitle());
     }
 
     private static Component cancelLink() {
@@ -114,7 +120,7 @@ public final class ActiveQuest {
             data.getOnlineMembers().forEach(member -> {
                 Jingles.send(member, Jingle.CURSED);
                 member.sendSystemMessage(Component.literal("Quest abandoned: ").withStyle(ChatFormatting.DARK_PURPLE)
-                    .append(quest.getTitle()));
+                    .append(title(quest)));
             });
         }
 
