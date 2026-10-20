@@ -25,7 +25,7 @@ import yesman.epicfight.world.entity.ai.goal.CombatBehaviors;
  * (MobCombatBehaviors) are plain swings for most weapons: a zombie or skeleton with a sword, axe or tool never does
  * anything else. Each mob's attacks (mixin/epicfight/HumanoidMobPatchMixin) get one more series that plays the held
  * weapon's skill move: a simple skill's attack (Sweeping Edge, the Guillotine, Heartpiercer, most modded weapons), a
- * conditional skill's first (Battojutsu), or the attack of one of Epic Fight Extra's own skills ({@link #EXTRA_MOVES}).
+ * conditional skill's first (Battojutsu), or the attack of a skill listed in {@link #EXTRA_MOVES}.
  * Skills built on a stance (Liechtenauer) or a grab (Blade Rush, the scythe) add nothing.
  *
  * mixin/epicfight/BehaviorSeriesMixin scales every series with a cooldown, this one too: weight 40 becomes 100 (an even
@@ -35,15 +35,17 @@ public final class MobWeaponSkills {
     private static final float WEIGHT = 40.0F;
     private static final int COOLDOWN = 360;
     private static final double REACH = 3.0;
-    /** Epic Fight Extra's skills that aren't simple or conditional ones: their attacks, by skill. */
+    /** Skills that aren't simple or conditional ones (Epic Fight Extra's own, Epic Fight's Steel Whirlwind): their attacks, by skill. */
     private static final Map<ResourceLocation, List<String>> EXTRA_MOVES = Map.of(
-        extra("grasping_spire"), List.of("biped/skill/grasping_spire_first", "biped/skill/grasping_spire_second"),
-        extra("eviscerate"), List.of("biped/skill/eviscerate_first", "biped/skill/eviscerate_second"),
-        extra("steel_whirlwind"), List.of("biped/skill/steel_whirlwind"),
-        extra("rushing_tempo"), List.of("biped/skill/rushing_tempo1"),
-        extra("otachi_skill"), List.of("biped/skill/otachi_skill_01"),
-        extra("pickaxe_skill"), List.of("biped/skill/pickaxe_skill"),
-        extra("katana_skill"), List.of("biped/skill/uchigatana_skill_01")
+        extra("grasping_spire"), List.of("epicfightx:biped/skill/grasping_spire_first", "epicfightx:biped/skill/grasping_spire_second"),
+        extra("eviscerate"), List.of("epicfightx:biped/skill/eviscerate_first", "epicfightx:biped/skill/eviscerate_second"),
+        extra("steel_whirlwind"), List.of("epicfightx:biped/skill/steel_whirlwind"),
+        // Dual Greatswords gives every greatsword Epic Fight's own Steel Whirlwind
+        ResourceLocation.fromNamespaceAndPath("epicfight", "steel_whirlwind"), List.of("epicfight:biped/skill/steel_whirlwind"),
+        extra("rushing_tempo"), List.of("epicfightx:biped/skill/rushing_tempo1"),
+        extra("otachi_skill"), List.of("epicfightx:biped/skill/otachi_skill_01"),
+        extra("pickaxe_skill"), List.of("epicfightx:biped/skill/pickaxe_skill"),
+        extra("katana_skill"), List.of("epicfightx:biped/skill/uchigatana_skill_01")
     );
 
     private MobWeaponSkills() {
@@ -95,10 +97,10 @@ public final class MobWeaponSkills {
         return ResourceLocation.fromNamespaceAndPath("epicfightx", path);
     }
 
-    private static AnimationManager.AnimationAccessor<? extends AttackAnimation> extraAnimation(String path) {
-        AnimationManager.AnimationAccessor<? extends AttackAnimation> animation = AnimationManager.byKey(extra(path));
+    private static AnimationManager.AnimationAccessor<? extends AttackAnimation> extraAnimation(String id) {
+        AnimationManager.AnimationAccessor<? extends AttackAnimation> animation = AnimationManager.byKey(ResourceLocation.parse(id));
         if (animation == null) {
-            throw new IllegalStateException("Epic Fight Extra has no animation " + extra(path));
+            throw new IllegalStateException("No animation " + id);
         }
         return animation;
     }
