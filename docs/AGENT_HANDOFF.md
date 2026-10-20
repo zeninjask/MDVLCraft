@@ -148,7 +148,7 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
   - The Soulslike dodge (`efn:efn_dodge`/`efn_step`) plays the four Wukong dodges with the Ruyi Jingu Bang (`mixin/efn/EFNDodgeSkillMixin`, client side `EFNDodgeSkillClientMixin` for left/right). `dodge_b1.json` was missing a Root keyframe time and never loaded (the backward Wukong dodge never worked before 2.0.3).
   - No "Your magic comprehension deepens" chat line from Interlace Spellweaves (`mixin/csw/SpellCapabilityHandlerMixin`).
   - Parties: no StackOverflow when rendering an invisible party member (`PartiesBufferMixin`).
-- **Next:** Modified abilities batch 5, one release per batch. About 59 planned abilities remain in `planned_abilities.json` (volleys, bolts, walls, traps, zones, utility, and the forms such as Lich Form, Holy Avenger and Phoenix Wings).
+- **Next:** see "For liam-agent: Modified abilities batches 5-7 on `seb-agent`" below; no placeholders remain.
 - **Test tips for casting by command (`cast <player> <spell>`):**
   - Casts need stamina above 0: run `epicfight stamina set <player> 106` first.
   - The command ignores cooldowns. A cast that doesn't take sometimes needs a second `cast`.
@@ -188,6 +188,54 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 - Don't kill processes with `pkill -f <path>` patterns that match your own shell's command line (this killed the shell several times); kill by PID.
 - The test player `Tester` is an operator; `/item replace entity Tester weapon.mainhand with mdvlcraft:ruyi_jingu_bang` puts the staff in hand. Respec: M menu, Respec, Pick New Archetypes, then the two archetypes, then Confirm (the screens open slowly on the software renderer; screenshot between clicks).
 - `binder/tools/vocations/check.py` then `binder/tools/generate_vocations.py` after any design change; compare the vocations' Epic Fight skills before and after (the re-pick passes in `v2_all.py` balance usage counts, so one change can shift others).
+
+## For liam-agent: Modified abilities batches 5-7 on `seb-agent` (20 Oct 2026)
+
+`seb-agent` builds every Modified ability that was still a placeholder (89: batches 5, 6 and 7). `planned_abilities.json` is now empty. seb-agent did not build a jar or packs and did not push to `main`: merge `seb-agent` into `liam-agent`, then build, release (next patch version) and push to `main` as usual.
+
+**How to merge:**
+- The code is new files in `binder/src/main/java/com/mdvlcraft/binder/modified/`:
+  - batch 5: `BoltProjectile`, `BoltSpells`, `SmiteSpells`, `ConeSpells`, `VolleySpells`, `BladeSpells`;
+  - batch 6: `GroundSpells`, `WallSpells`;
+  - batch 7: `FormSpells`, `BoonSpells`, `SpiritSummons`.
+- It also makes small edits to existing files:
+  - `ModifiedSpells` (registration);
+  - `ModifiedEntities` (`mdvlcraft:bolt` entity) and `client/ModifiedClientSetup` (its renderer);
+  - `combat/BinderEffects` (Silenced, Jade Ward, Ancestral Ward and 11 batch-7 effects);
+  - `Zones` (`stop()`, `age()`);
+  - `ArrowSpells` (Soul Arrow), `PalmSpells` (Soul Palm);
+  - `ability/StanceElement` (new `SOUL` at the end of the enum) and `StanceForms` (Soul form).
+- Assets and data:
+  - Icons copied from the planned ones into `gui/spell_icons/<key>.png` and `gui/icons18/ability/mdvlcraft_<key>.png`.
+  - Effect icons in `textures/mob_effect/`.
+  - Hand-added lang keys in `en_us.json`: `effect.mdvlcraft.*`, `ability.mdvlcraft.modified.*`, `item.mdvlcraft.boon.*`, `stance.mdvlcraft.soul*`.
+- Design:
+  - `tools/vocations/built.py` has the new entries.
+  - Four descriptions changed to match what was built (Soul Arrow, Silent Shot, Fox Glamour, Spirit Steed, Lockpick, Lightning Rod in `v2_*.py`).
+- If generated files conflict (lang, `modified_abilities.json`, `planned_abilities.json`, `puffish_skills/vocation_parts/*/definitions.json`):
+  1. Take either side.
+  2. Rerun `python3 binder/tools/vocations/check.py` and `python3 binder/tools/generate_vocations.py`.
+  3. Re-add the hand-written lang keys listed above if they were lost.
+
+**Tested.** Server-tested by casting from mobs over RCON, with one player online:
+- Batch 5, all passed: every bolt, smite, cone, arrow and blade.
+- Batch 6, all passed: the zones, storms, walls, igloo, Frozen Sea, the traps and Exorcism.
+- Fixed and only compile-checked:
+  - volleys now aim at the enemies at the spot; before, they scattered and missed;
+  - Pyre Bulwark now checks for projectiles every tick; before, a fast arrow got through.
+
+**Not tested in game:** all of batch 7 (compile-checked only):
+- Avenging Wings, Phoenix Wings, Heat Mirage, Fox Glamour, Lich Form;
+- Spirit Aegis, Spirit Ward, Lightning Rod, Warcry, Haunting, Spirit Communion;
+- Hungry Ghosts, Reaper's Mark, Bounty, Tracking;
+- Alms, Forage, Peach of Immortality, Baptism, Ancestral Blessing, Wayshrine, Lockpick, Grave Robbing;
+- Funayurei, Honour Guard, Void Yokai, Spirit Hawk, Spirit Steed, Stance: Soul.
+
+**Test-environment lessons:**
+- Entities don't tick on a server with no player online, even in force-loaded chunks. Server-side RCON tests need one player joined; a spectator works.
+- A console `tp <mob> ... facing ...` aims from the feet, not the eyes, so look-based spells can miss from a height or at the ground. Aim at a point 1.74 blocks lower.
+- Don't run Gradle while the test client is up. Client (about 9 GB RSS) plus Gradle got the client OOM-killed twice. Launch the client's `java` directly, not through portablemc: portablemc's Python process grew to 10 GB.
+- Armour stands have no attack-damage attribute, so weapon-scaled spells throw when an armour stand casts them (test-only).
 
 ## Unfinished work
 

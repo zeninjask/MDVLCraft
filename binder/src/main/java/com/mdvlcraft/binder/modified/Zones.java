@@ -41,6 +41,7 @@ public final class Zones {
         private final Runnable onEnd;
         @Nullable
         private final Entity marker;
+        private boolean stopped;
 
         private Zone(ServerLevel level, Vec3 center, LivingEntity caster, float power, int duration, int interval, Consumer<Zone> pulse,
                      Runnable onEnd, @Nullable Entity marker) {
@@ -54,6 +55,16 @@ public final class Zones {
             this.pulse = pulse;
             this.onEnd = onEnd;
             this.marker = marker;
+        }
+
+        /** Ends the zone at the end of this tick (a trap that has sprung). */
+        public void stop() {
+            this.stopped = true;
+        }
+
+        /** Ticks since the zone started. */
+        public long age() {
+            return this.level.getGameTime() - this.start;
         }
     }
 
@@ -78,7 +89,7 @@ public final class Zones {
 
         for (Zone zone : List.copyOf(ZONES)) {
             long now = zone.level.getGameTime();
-            if (now >= zone.end || !zone.caster.isAlive() && zone.caster.isRemoved()) {
+            if (zone.stopped || now >= zone.end || !zone.caster.isAlive() && zone.caster.isRemoved()) {
                 finish(zone);
             } else if ((now - zone.start) % zone.interval == 0) {
                 zone.pulse.accept(zone);

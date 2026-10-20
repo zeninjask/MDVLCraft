@@ -1,6 +1,6 @@
 from v2_base import v, mod
 
-mod('silent_shot', 'Silent Shot', 'Magic Arrow', 'An invisible arrow that makes no sound and always crits from stealth.')
+mod('silent_shot', 'Silent Shot', 'Magic Arrow', 'A silent arrow; shot while sneaking or invisible it crits for half again as much.')
 mod('leap_of_faith', 'Leap of Faith', 'Controlled Collapse', 'Dive from a height and land on a target below with an assassination strike that takes no fall damage.')
 mod('grapple_arrow', 'Grapple Arrow', 'Ceraunus Dash', 'Fire an arrow with a rope; you are pulled to wherever it lands.')
 mod('fence', 'Fence', 'Summon Ender Chest', 'Summon a travelling trader for 60 s who buys common loot for emeralds.')

@@ -76,6 +76,7 @@ public final class StanceForms {
             case CRIMSON -> ParticleTypes.DAMAGE_INDICATOR;
             case VOID -> ParticleTypes.REVERSE_PORTAL;
             case BAMBOO -> ParticleTypes.HAPPY_VILLAGER;
+            case SOUL -> ParticleTypes.SOUL_FIRE_FLAME;
             default -> ParticleTypes.GLOW;
         };
     }
@@ -134,6 +135,7 @@ public final class StanceForms {
             }
             case BAMBOO -> victim.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0), player);
             case JADE -> victim.addEffect(new MobEffectInstance(BinderEffects.SHATTERED.get(), 80, 0), player);
+            case SOUL -> BoltSpells.soulburn(player, victim, 80);
             default -> {
                 return;
             }

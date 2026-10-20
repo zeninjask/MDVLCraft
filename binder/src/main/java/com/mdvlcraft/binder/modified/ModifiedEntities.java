@@ -14,6 +14,9 @@ public final class ModifiedEntities {
     public static final RegistryObject<EntityType<JavelinProjectile>> JAVELIN = ENTITY_TYPES.register(
         "javelin", () -> Builder.<JavelinProjectile>of(JavelinProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(64).build("javelin")
     );
+    public static final RegistryObject<EntityType<BoltProjectile>> BOLT = ENTITY_TYPES.register(
+        "bolt", () -> Builder.<BoltProjectile>of(BoltProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(64).build("bolt")
+    );
 
     private ModifiedEntities() {
     }

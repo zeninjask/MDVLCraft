@@ -1,7 +1,7 @@
 from v2_base import v, mod
 
 mod('shadow_guard', 'Shadow Guard', 'Shield', 'A shield of shadow that, when it breaks, turns you invisible for 3 s.')
-mod('lockpick', 'Lockpick', 'Touch Dig', 'Touch a locked chest, door or vault to open it without the key (unlocks loot chests in structures).')
+mod('lockpick', 'Lockpick', 'Touch Dig', 'Touch a locked chest or iron door to open it without the key.')
 mod('net_throw', 'Net Throw', 'Arcane Shackle', 'Throw a net that pins and slows the first creature it hits.')
 mod('ballista', 'Siege Ballista', 'Arrow Volley', 'Place a ballista that fires heavy piercing bolts at enemies in front of it for 15 s.')
 mod('harpoon', 'Harpoon', 'Ceraunus Grasp', 'Fire a harpoon from your crossbow that drags the target to you.')
