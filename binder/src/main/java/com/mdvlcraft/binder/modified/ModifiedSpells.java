@@ -70,6 +70,9 @@ public final class ModifiedSpells {
         VolleySpells.all().forEach(volley -> all.add(() -> volley));
         GroundSpells.all().forEach(ground -> all.add(() -> ground));
         WallSpells.all().forEach(wall -> all.add(() -> wall));
+        FormSpells.all().forEach(form -> all.add(() -> form));
+        BoonSpells.all().forEach(boon -> all.add(() -> boon));
+        SpiritSummons.all().forEach(summon -> all.add(() -> summon));
         BrandSpells.all().forEach(brand -> all.add(() -> brand));
         ArrowSpells.all().forEach(arrow -> all.add(() -> arrow));
         PalmSpells.all().forEach(palm -> all.add(() -> palm));

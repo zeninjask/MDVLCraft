@@ -27,7 +27,7 @@ mod('spider_brood', 'Spider Brood', 'Raise Dead', 'Summon a brood of cave spider
 mod('magpies', 'Magpie Flock', 'Bird Strike', 'Magpies dive at enemies and knock the item out of a mob\'s hand.')
 mod('thorn_volley', 'Thorn Volley', 'Arrow Volley', 'A volley of thorns that poison and slow.')
 mod('forage', 'Forage', 'Conjure Refreshment', 'Gather wild berries and herbs: food that cures poison and gives Regeneration.')
-mod('fox_glamour', 'Fox Glamour', 'Invisibility', 'Take on a mob\'s appearance; mobs ignore you until you attack.')
+mod('fox_glamour', 'Fox Glamour', 'Invisibility', 'Fade from sight; mobs ignore you until you attack.')
 mod('immortal_peach', 'Peach of Immortality', 'Gluttony', 'Conjure a peach that heals a lot and gives Regeneration and Resistance.')
 
 # Mage + Rogue

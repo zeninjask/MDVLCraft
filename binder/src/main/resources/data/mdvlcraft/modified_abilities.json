@@ -8,6 +8,24 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "alms": {
+  "name": "Alms",
+  "description": "Conjure bread for the party; allies who eat it gain Luck for a while.",
+  "school": "irons_spellbooks:holy",
+  "mana": 30,
+  "cooldown": 120,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "ancestor_blessing": {
+  "name": "Ancestral Blessing",
+  "description": "An ancestor spirit heals an ally over time and gives them Spirit Resistance while it lasts.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 35,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "arrow_blood": {
   "name": "Bone Arrow",
   "description": "A charged arrow of bone shards that make the target bleed.",
@@ -89,6 +107,15 @@
   "cast": "long",
   "cast_time": 20
  },
+ "baptism": {
+  "name": "Baptism",
+  "description": "Cleanse that also gives the target Regeneration and water breathing.",
+  "school": "traveloptics:aqua",
+  "mana": 30,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "bear": {
   "name": "Call the Bear",
   "description": "Summon a brown bear that fights beside you.",
@@ -169,6 +196,15 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 20
+ },
+ "bounty": {
+  "name": "Bounty Mark",
+  "description": "Mark a target; killing it gives extra loot and experience.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 20,
+  "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
  },
  "brand_blood": {
   "name": "Bloodbrand",
@@ -485,6 +521,24 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "forage": {
+  "name": "Forage",
+  "description": "Gather wild berries and herbs: food that cures poison and gives Regeneration.",
+  "school": "irons_spellbooks:nature",
+  "mana": 20,
+  "cooldown": 120,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "fox_glamour": {
+  "name": "Fox Glamour",
+  "description": "Fade from sight; mobs ignore you until you attack.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 40,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "foxfire": {
   "name": "Foxfire",
   "description": "Blue soul-fire orbs that circle you, then home in on enemies.",
@@ -557,6 +611,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "funayurei": {
+  "name": "Funayurei",
+  "description": "Raise drowned ghosts with ladles that drag enemies down and slow them.",
+  "school": "traveloptics:aqua",
+  "mana": 50,
+  "cooldown": 90,
+  "cast": "long",
+  "cast_time": 30
+ },
  "geyser": {
   "name": "Geyser",
   "description": "A water eruption under the target that launches it into the air.",
@@ -572,6 +635,15 @@
   "school": "irons_spellbooks:evocation",
   "mana": 20,
   "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "grave_rob": {
+  "name": "Grave Robbing",
+  "description": "Dig up graves: digging soil or gravel has a chance to drop bones, gold or a skeleton that fights you.",
+  "school": "irons_spellbooks:blood",
+  "mana": 10,
+  "cooldown": 4,
   "cast": "instant",
   "cast_time": 0
  },
@@ -602,6 +674,33 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "haunting": {
+  "name": "Haunting",
+  "description": "Leave a ghostly copy of yourself that enemies attack; when it is struck it shrieks and makes them flee for 3 s.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 35,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "heat_mirage": {
+  "name": "Heat Mirage",
+  "description": "A heat shimmer: mobs lose track of you, and you take less fire damage while it lasts.",
+  "school": "irons_spellbooks:fire",
+  "mana": 35,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "holy_avenger": {
+  "name": "Avenging Wings",
+  "description": "Angel wings that also make every melee hit call down a small sunbeam on the target.",
+  "school": "irons_spellbooks:holy",
+  "mana": 60,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 20
+ },
  "holy_shield": {
   "name": "Aegis of Light",
   "description": "A shield of light that blocks projectiles and heals allies standing behind it.",
@@ -620,12 +719,30 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "honor_guard": {
+  "name": "Honour Guard",
+  "description": "Summon a spirit samurai with a tower shield that taunts enemies near you and takes hits for you.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 55,
+  "cooldown": 90,
+  "cast": "long",
+  "cast_time": 30
+ },
  "hot_spring": {
   "name": "Hot Spring",
   "description": "A steaming pool that heals allies in it and thaws freezing.",
   "school": "traveloptics:aqua",
   "mana": 45,
   "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "hungry_ghost": {
+  "name": "Hungry Ghosts",
+  "description": "For 15 s every kill releases a hungry ghost that flies at the nearest enemy and soulburns it; each kill extends the time.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 30,
+  "cooldown": 45,
   "cast": "instant",
   "cast_time": 0
  },
@@ -700,6 +817,15 @@
   "cooldown": 10,
   "cast": "instant",
   "cast_time": 0
+ },
+ "immortal_peach": {
+  "name": "Peach of Immortality",
+  "description": "Conjure a peach that heals a lot and gives Regeneration and Resistance.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 50,
+  "cooldown": 180,
+  "cast": "long",
+  "cast_time": 20
  },
  "iron_body": {
   "name": "Iron Body",
@@ -806,6 +932,33 @@
   "school": "irons_spellbooks:evocation",
   "mana": 25,
   "cooldown": 15,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "lich_form": {
+  "name": "Lich Form",
+  "description": "Become a lich for a while: you cannot be healed but your spells cost health instead of mana and hit harder.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 50,
+  "cooldown": 90,
+  "cast": "long",
+  "cast_time": 30
+ },
+ "lightning_rod": {
+  "name": "Lightning Rod",
+  "description": "Allies around you gain a shield and take no lightning damage while it lasts.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 45,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "lockpick": {
+  "name": "Lockpick",
+  "description": "Touch a locked chest or iron door to open it without the key.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 15,
+  "cooldown": 10,
   "cast": "instant",
   "cast_time": 0
  },
@@ -1007,6 +1160,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "phoenix_wings": {
+  "name": "Phoenix Wings",
+  "description": "Wings of fire: fly, and enemies you fly over are set alight.",
+  "school": "irons_spellbooks:fire",
+  "mana": 60,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 20
+ },
  "pickpocket": {
   "name": "Pickpocket",
   "description": "Grip a creature and pull one item from its loot table out of it (once per creature).",
@@ -1087,6 +1249,15 @@
   "cooldown": 90,
   "cast": "long",
   "cast_time": 30
+ },
+ "reaper_mark": {
+  "name": "Reaper's Mark",
+  "description": "Mark an enemy; when it dies its soul is torn out and bursts, soulburning every enemy around it.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 25,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
  },
  "river_dragon": {
   "name": "River Dragon",
@@ -1286,6 +1457,42 @@
   "cast": "long",
   "cast_time": 30
  },
+ "spirit_aegis": {
+  "name": "Spirit Aegis",
+  "description": "A shield of ancestral spirits that blocks projectiles; anything that strikes it is soulburned.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 35,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "spirit_communion": {
+  "name": "Spirit Communion",
+  "description": "Sneak still to channel: spirits gather round you, restoring mana and stamina, and you keep 20% more spirit spell power for 20 s after.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 0,
+  "cooldown": 30,
+  "cast": "continuous",
+  "cast_time": 200
+ },
+ "spirit_hawk": {
+  "name": "Spirit Hawk",
+  "description": "A ghost hawk that flies through walls, marks the nearest enemy with Glowing and soulburns it when it dives.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 40,
+  "cooldown": 90,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "spirit_steed": {
+  "name": "Spirit Steed",
+  "description": "Summon a spectral horse that freezes a path over water as it runs.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 30,
+  "cooldown": 120,
+  "cast": "long",
+  "cast_time": 20
+ },
  "spirit_step": {
   "name": "Spirit Step",
   "description": "Teleport where you look, leaving a spirit double that taunts enemies and bursts.",
@@ -1303,6 +1510,15 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 30
+ },
+ "spirit_ward": {
+  "name": "Spirit Ward",
+  "description": "Ancestral spirits circle you and absorb damage; each hit they absorb burns the attacker with soulburn.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 40,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
  },
  "spirit_wolf": {
   "name": "Spirit Wolf",
@@ -1373,6 +1589,15 @@
   "school": "irons_spellbooks:nature",
   "mana": 15,
   "cooldown": 3,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "stance_soul": {
+  "name": "Stance: Soul Form",
+  "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes soulburn.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 20,
+  "cooldown": 2,
   "cast": "instant",
   "cast_time": 0
  },
@@ -1583,6 +1808,15 @@
   "cast": "long",
   "cast_time": 20
  },
+ "tracking": {
+  "name": "Tracking",
+  "description": "Every creature nearby glows and leaves a visible trail for a while.",
+  "school": "irons_spellbooks:nature",
+  "mana": 25,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "trail_rations": {
   "name": "Trail Rations",
   "description": "Conjure food for the whole party that also gives a short Regeneration.",
@@ -1664,6 +1898,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "void_yokai": {
+  "name": "Void Yokai",
+  "description": "Summon small void yokai that blink to enemies and weaken them.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 50,
+  "cooldown": 90,
+  "cast": "long",
+  "cast_time": 30
+ },
  "war_banner": {
   "name": "War Banner",
   "description": "Plant a banner that gives allies around it Strength I.",
@@ -1681,6 +1924,24 @@
   "cooldown": 45,
   "cast": "instant",
   "cast_time": 0
+ },
+ "warcry": {
+  "name": "Warcry",
+  "description": "A roar that makes every mob nearby target you and gives you Strength I while they do.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "wayshrine": {
+  "name": "Wayshrine",
+  "description": "Set a small roadside shrine; cast again from anywhere in the same dimension to return to it.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 40,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 30
  },
  "whirlpool_kick": {
   "name": "Whirlpool Kick",

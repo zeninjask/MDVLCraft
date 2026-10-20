@@ -36,7 +36,7 @@ mod('reaper_mark', "Reaper's Mark", 'Death Mark (Modified)', 'Mark an enemy; whe
 mod('haunting', 'Haunting', 'Scapegoat', 'Leave a ghostly copy of yourself that enemies attack; when it is struck it shrieks and makes them flee for 3 s.')
 mod('arrow_soul', 'Soul Arrow', 'Fire Arrow', 'A charged arrow of soul fire that soulburns and pierces up to 3 creatures.')
 mod('spirit_hawk', 'Spirit Hawk', 'Hunting Hawk (Modified)', 'A ghost hawk that flies through walls, marks the nearest enemy with Glowing and soulburns it when it dives.')
-mod('spirit_steed', 'Spirit Steed', 'Summon Horse', 'Summon a spectral horse that runs over water and through tall grass without slowing.')
+mod('spirit_steed', 'Spirit Steed', 'Summon Horse', 'Summon a spectral horse that freezes a path over water as it runs.')
 mod('wayshrine', 'Wayshrine', 'Recall', 'Set a small roadside shrine; cast again from anywhere in the same dimension to return to it.')
 
 # Warrior + Spirit

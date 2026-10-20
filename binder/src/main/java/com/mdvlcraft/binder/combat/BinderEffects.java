@@ -60,6 +60,18 @@ public final class BinderEffects {
         .addAttributeModifier(Attributes.ATTACK_DAMAGE, "9e4a2c7d-1b3f-4d5e-8a6b-3c2d1e0f9a01", 0.1, Operation.MULTIPLY_TOTAL));
     /** Radiant Arrow (modified/ArrowSpells): on the target; its marker's arrows home in on it and deal 50% more. */
     public static final RegistryObject<MobEffect> RADIANT_MARK = EFFECTS.register("radiant_mark", () -> new MobEffect(MobEffectCategory.HARMFUL, 0xFFE9A0) {});
+    /** Batch 7 Modified abilities (modified/FormSpells): markers whose behaviour lives in the event handlers there. */
+    public static final RegistryObject<MobEffect> AVENGING_WINGS = EFFECTS.register("avenging_wings", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xFFF2B0) {});
+    public static final RegistryObject<MobEffect> LICH = EFFECTS.register("lich", () -> new MobEffect(MobEffectCategory.NEUTRAL, 0x4A6B8A) {});
+    public static final RegistryObject<MobEffect> HEAT_MIRAGE = EFFECTS.register("heat_mirage", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xFFB060) {});
+    public static final RegistryObject<MobEffect> FOX_GLAMOUR = EFFECTS.register("fox_glamour", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xE8862A) {});
+    public static final RegistryObject<MobEffect> SPIRIT_AEGIS = EFFECTS.register("spirit_aegis", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x7FE0E8) {});
+    public static final RegistryObject<MobEffect> SPIRIT_GUARD = EFFECTS.register("spirit_guard", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x9FE8F0) {});
+    public static final RegistryObject<MobEffect> LIGHTNING_ROD = EFFECTS.register("lightning_rod", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0xFFE34D) {});
+    public static final RegistryObject<MobEffect> HUNGRY_GHOSTS = EFFECTS.register("hungry_ghosts", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x5FD8E8) {});
+    public static final RegistryObject<MobEffect> REAPER_MARK = EFFECTS.register("reaper_mark", () -> new MobEffect(MobEffectCategory.HARMFUL, 0x2A6B7A) {});
+    public static final RegistryObject<MobEffect> BOUNTY = EFFECTS.register("bounty", () -> new MobEffect(MobEffectCategory.HARMFUL, 0xE8C040) {});
+    public static final RegistryObject<MobEffect> SPIRIT_COMMUNION = EFFECTS.register("spirit_communion", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x7FE0E8) {});
     /** Ofuda and Drown (modified/SmiteSpells): a silenced player can't cast spells. */
     /** Jade Lotus and Ancestral Blessing (modified/GroundSpells): 25% less damage from symmetry or spirit spells. */
     public static final RegistryObject<MobEffect> JADE_WARD = EFFECTS.register("jade_ward", () -> new MobEffect(MobEffectCategory.BENEFICIAL, 0x3FCF9A) {});

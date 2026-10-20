@@ -31,7 +31,8 @@ public enum StanceElement {
     CRIMSON(0xB0182A, "stance_blood"),
     VOID(0x7A3FCF, "stance_eldritch"),
     BAMBOO(0x6FCF3F, "stance_nature"),
-    JADE(0x3FCF9A, "stance_spirit");
+    JADE(0x3FCF9A, "stance_spirit"),
+    SOUL(0x5FD8E8, "stance_soul");
 
     public final int colour;
     @Nullable

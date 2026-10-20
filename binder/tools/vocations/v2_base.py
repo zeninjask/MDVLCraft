@@ -132,7 +132,7 @@ mod('frost_charge', 'Glacial Charge', 'Burning Dash', 'Launch forward on a trail
 mod('tide_charge', 'Riptide Charge', 'Burning Dash', 'Launch forward on a surge of water, sweeping enemies aside.')
 mod('blood_frenzy', 'Blood Frenzy', 'Convergence', 'Each kill for 15 s heals you and extends the frenzy.')
 mod('quake_slam', 'Seismic Slam', 'Gravity Stomp', 'A heavier stomp that also roots enemies in place for 2 s.')
-mod('lightning_rod', 'Lightning Rod', 'Fortify', 'Allies around you gain a shield; lightning that hits you or them is redirected to you and absorbed.')
+mod('lightning_rod', 'Lightning Rod', 'Fortify', 'Allies around you gain a shield and take no lightning damage while it lasts.')
 mod('jade_skin', 'Jade Skin', 'Oakskin', 'Jade skin: damage reduction, and melee attackers take a little damage back.')
 mod('ember_skin', 'Emberskin', 'Oakskin', 'Burning skin: damage reduction, and melee attackers are set alight.')
 mod('frost_armor', 'Frost Armour', 'Oakskin', 'Icy skin: damage reduction, and melee attackers are slowed.')
