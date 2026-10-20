@@ -12,6 +12,7 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.memory.MemoryModuleType;
 import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.player.Player;
@@ -25,7 +26,6 @@ import net.minecraft.world.level.Level;
  */
 public class HauntedCreaking extends Creaking {
     private static final double KEEPER_RANGE = 20.0;
-    private static final double HUNT_RANGE = 16.0;
     @Nullable
     private BlockPos heart;
 
@@ -83,7 +83,7 @@ public class HauntedCreaking extends Creaking {
             target = null;
         }
         if (target == null && this.tickCount % 10 == 0) {
-            target = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(HUNT_RANGE),
+            target = this.level().getEntitiesOfClass(LivingEntity.class, this.getBoundingBox().inflate(this.getAttributeValue(Attributes.FOLLOW_RANGE)),
                     living -> living != this && this.hunts(living) && this.hasLineOfSight(living))
                 .stream().min(Comparator.comparingDouble(this::distanceToSqr)).orElse(null);
             if (target != null) {
