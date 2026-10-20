@@ -30,6 +30,7 @@ public final class ClientContentSetup {
             PonderIndex.addPlugin(new ShipPonderPlugin());
             PonderHold.register();
             BackpackAugmentIcons.register();
+            VoidFilterMenu.register();
             MageHunterSlot.setClientCheck(player -> player == Minecraft.getInstance().player && MageHunterSlot.summonsSwords(ClientAbilities.granted().keySet()));
         });
     }

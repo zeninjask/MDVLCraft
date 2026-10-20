@@ -85,6 +85,7 @@ public final class MDVLBinder {
             ArchetypeTabs.register();
             MageExperience.register();
             Jingles.register();
+            com.mdvlcraft.binder.compat.ftbquests.ActiveQuest.register();
             ClassTitles.register();
             LanternBelt.register();
             Summons.registerPartiesOwner();

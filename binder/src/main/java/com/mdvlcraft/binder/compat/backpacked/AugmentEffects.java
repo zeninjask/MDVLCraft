@@ -3,9 +3,6 @@ package com.mdvlcraft.binder.compat.backpacked;
 import com.mrcrayfish.backpacked.BackpackHelper;
 import com.mrcrayfish.backpacked.common.InventoryAugmentSnapshot;
 import com.mrcrayfish.backpacked.inventory.BackpackInventory;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -18,12 +15,10 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * What the pack's augments do on the server (BackpackAugments). Tool Swapper: starting to break a block swaps the
- * held item for the fastest tool in that backpack. Void: picked-up items tagged mdvlcraft:void_junk are destroyed.
+ * held item for the fastest tool in that backpack. Void: picked-up items in its filter are destroyed.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class AugmentEffects {
-    private static final TagKey<Item> VOID_JUNK = TagKey.create(Registries.ITEM, ResourceLocation.fromNamespaceAndPath("mdvlcraft", "void_junk"));
-
     private AugmentEffects() {
     }
 
@@ -76,7 +71,8 @@ public final class AugmentEffects {
     @SubscribeEvent
     public static void onItemPickup(EntityItemPickupEvent event) {
         Player player = event.getEntity();
-        if (!player.level().isClientSide && event.getItem().getItem().is(VOID_JUNK) && BackpackAugments.wears(player, BackpackAugments.VOID_TYPE)) {
+        Item item = event.getItem().getItem().getItem();
+        if (!player.level().isClientSide && BackpackAugments.worn(player, BackpackAugments.VOID_TYPE).stream().anyMatch(augment -> augment.isFilteringItem(item))) {
             event.getItem().discard();
             event.setCanceled(true);
         }

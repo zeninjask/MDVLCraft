@@ -8,7 +8,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 
 /**
- * Skill experience from a kill made in a party is shared, by the killer's Experience Share setting (ExpShare). Off: the
+ * Skill experience from a kill made in a party is shared, by the party leader's Experience Share setting (ExpShare). Off: the
  * killer keeps 75% and the other 25% is split evenly between the rest of the party. On: the whole party, killer included,
  * splits it evenly. Party members count wherever they are, as long as they are online.
  */

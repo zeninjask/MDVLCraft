@@ -12,20 +12,23 @@ import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-/** The Experience Share toggle under the Social Interactions screen's blocking button (content/ExpShare). */
+/** The Experience Share toggle under the Social Interactions screen's blocking button, greyed out for party members who aren't the leader (content/ExpShare). */
 @EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
 public final class ExpShareButton {
     private static final Component BLOCKING_HINT = Component.translatable("gui.socialInteractions.blocking_hint");
     private static boolean on;
+    private static boolean decides = true;
     private static Button button;
 
     private ExpShareButton() {
     }
 
-    public static void set(boolean value) {
+    public static void set(boolean value, boolean mayChange) {
         on = value;
+        decides = mayChange;
         if (button != null) {
             button.setMessage(label());
+            button.active = decides;
         }
     }
 
@@ -39,11 +42,13 @@ public final class ExpShareButton {
             .map(Button.class::cast)
             .findFirst()
             .orElseThrow(() -> new IllegalStateException("Social Interactions screen has no blocking button"));
-        button = Button.builder(label(), pressed -> BinderNetwork.sendToServer(new ExpShareTogglePacket()))
+        button = Button.builder(label(), pressed -> BinderNetwork.sendToServer(new ExpShareTogglePacket(true)))
             .bounds(hint.getX(), hint.getY() + hint.getHeight() + 4, hint.getWidth(), hint.getHeight())
             .tooltip(Tooltip.create(Component.translatable("gui.mdvlcraft.exp_share.tooltip")))
             .build();
+        button.active = decides;
         event.addListener(button);
+        BinderNetwork.sendToServer(new ExpShareTogglePacket(false));
     }
 
     private static Component label() {

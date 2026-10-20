@@ -82,11 +82,18 @@ def compass(struct, dim, name):
     return command(f'/mdvlquest compass {{p}} {struct} {dim} {name}')
 
 
+ACCEPT = {'type': 'checkmark', 'title': 'Accept Quest'}
+
+
 class Quest:
-    def __init__(self, key, title, x, y, tasks, rewards, desc=(), deps=(), icon=None, min_deps=0, shape=None, size=None):
+    """A quest; unless accept=False its first task is the Accept Quest checkmark and its tasks count in order, so only one
+    quest is in progress at a time (compat/ftbquests/ActiveQuest)."""
+
+    def __init__(self, key, title, x, y, tasks, rewards, desc=(), deps=(), icon=None, min_deps=0, shape=None, size=None, accept=True):
         self.id = qid(key)
         self.title, self.x, self.y = title, x, y
-        self.tasks, self.rewards, self.desc = tasks, rewards, list(desc)
+        self.accept = accept
+        self.tasks, self.rewards, self.desc = ([ACCEPT] if accept else []) + list(tasks), rewards, list(desc)
         self.deps, self.icon, self.min_deps, self.shape, self.size = list(deps), icon, min_deps, shape, size
 
 
@@ -294,8 +301,9 @@ def first_steps():
     q = []
     welcome = Quest('fs_welcome', 'Welcome to MDVLCraft', 0, 0, [checkmark()], [give('minecraft:bread', 8), give('minecraft:torch', 16)],
                     ['Pick your origin, class and martial path, then tick this quest.', '',
-                     'This book points you at the next boss, in order of difficulty. Each chapter ends in a capstone that opens the next.'],
-                    icon='minecraft:writable_book', shape='gear', size=1.5)
+                     'This book points you at the next boss, in order of difficulty. Each chapter ends in a capstone that opens the next.', '',
+                     'Take one quest at a time: tick Accept Quest to start it. Type /quest cancel to abandon it and lose its progress.'],
+                    icon='minecraft:writable_book', shape='gear', size=1.5, accept=False)
     zombies = Quest('fs_zombies', 'First Blood', 2, -1, [kill('minecraft:zombie', 20)], [give('minecraft:iron_ingot', 4), xp(50)], ['Zombies are everywhere at night.'], [welcome.id])
     skeletons = Quest('fs_skeletons', 'Bone Collector', 2, 0, [kill('minecraft:skeleton', 20)], [give('minecraft:arrow', 32), xp(50)], ['Skeletons keep their distance. Close it.'], [welcome.id])
     spiders = Quest('fs_spiders', 'Eight Legs', 2, 1, [kill('minecraft:spider', 10)], [give('minecraft:bread', 8), xp(50)], ['Spiders climb walls. Watch above.'], [welcome.id])
@@ -416,6 +424,8 @@ def quest_nbt(qu, key):
         out['dependencies'] = qu.deps
     if qu.min_deps:
         out['min_required_dependencies'] = qu.min_deps
+    if qu.accept:
+        out['require_sequential_tasks'] = True
     out['tasks'] = tasks
     out['rewards'] = rewards
     return out
