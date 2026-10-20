@@ -98,6 +98,15 @@
   "cast": "long",
   "cast_time": 20
  },
+ "asp_lunge": {
+  "name": "Asp Lunge",
+  "description": "Dash 5 blocks forward; the first enemy hit gets poison II for 6 s.",
+  "school": "irons_spellbooks:nature",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "ballista": {
   "name": "Siege Ballista",
   "description": "Place a ballista that fires heavy piercing bolts at enemies in front of it for 15 s.",
@@ -116,6 +125,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "barrow_thrall": {
+  "name": "Barrow Thrall",
+  "description": "Summon a frost-armoured zombie for 30 s that explodes on death, freezing enemies within 4 blocks 3 s.",
+  "school": "irons_spellbooks:ice",
+  "mana": 50,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 25
+ },
  "bear": {
   "name": "Call the Bear",
   "description": "Summon a brown bear that fights beside you.",
@@ -124,6 +142,15 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 30
+ },
+ "binding_fu": {
+  "name": "Binding Fu",
+  "description": "Throw a paper talisman; the creature hit is stunned for 3 s and takes +25% damage from your summons.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 25,
+  "cooldown": 15,
+  "cast": "instant",
+  "cast_time": 0
  },
  "black_ice": {
   "name": "Black Ice",
@@ -143,12 +170,39 @@
   "cast": "long",
   "cast_time": 30
  },
+ "bleeding_bone": {
+  "name": "Bleeding Bone",
+  "description": "Throw a sharpened bone that inflicts Bleeding for 6 seconds, healing you 1 health per bleed tick.",
+  "school": "irons_spellbooks:blood",
+  "mana": 20,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "blood_frenzy": {
   "name": "Blood Frenzy",
   "description": "Each kill for 15 s heals you and extends the frenzy.",
   "school": "irons_spellbooks:blood",
   "mana": 35,
   "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "blood_scent": {
+  "name": "Blood Scent",
+  "description": "Make all creatures below 50% health within 20 blocks glow for 10 seconds and gain Speed II.",
+  "school": "irons_spellbooks:blood",
+  "mana": 20,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "blood_tithe": {
+  "name": "Blood Tithe",
+  "description": "Sacrifice 4 health to gain Strength II and 20% extra life steal for 10 seconds.",
+  "school": "irons_spellbooks:blood",
+  "mana": 15,
+  "cooldown": 30,
   "cast": "instant",
   "cast_time": 0
  },
@@ -179,6 +233,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "bolt_kunai": {
+  "name": "Bolt Kunai",
+  "description": "Throw a kunai that calls a small lightning strike on hit and makes the target glow 6 s.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 20,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "bone_guard": {
   "name": "Bone Bulwark",
   "description": "Raise armoured skeleton shieldbearers that guard you.",
@@ -187,6 +250,15 @@
   "cooldown": 90,
   "cast": "long",
   "cast_time": 30
+ },
+ "bone_lattice": {
+  "name": "Bone Lattice",
+  "description": "Raise a ring of bone blocks around you for 6 s; enemies touching it get wither I for 4 s.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 35,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
  },
  "bone_steed": {
   "name": "Bone Steed",
@@ -197,12 +269,48 @@
   "cast": "long",
   "cast_time": 20
  },
+ "bonehound_pack": {
+  "name": "Bonehound Pack",
+  "description": "Summon 2 skeletal wolves for 25 s whose bites apply wither I for 3 s.",
+  "school": "irons_spellbooks:nature",
+  "mana": 50,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 25
+ },
+ "borrowed_face": {
+  "name": "Borrowed Face",
+  "description": "Become invisible for 8 s; your first hit from invisibility deals +6 damage and wither for 4 s.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 35,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "bound_shade": {
+  "name": "Bound Shade",
+  "description": "Summon 2 allied vexes for 20 s whose hits make targets glow.",
+  "school": "irons_spellbooks:holy",
+  "mana": 45,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 25
+ },
  "bounty": {
   "name": "Bounty Mark",
   "description": "Mark a target; killing it gives extra loot and experience.",
   "school": "irons_spellbooks:evocation",
   "mana": 20,
   "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "brackish_bile": {
+  "name": "Brackish Bile",
+  "description": "Throw a bile flask; enemies within 3 blocks get Poison II 4 s and Nausea 6 s.",
+  "school": "traveloptics:aqua",
+  "mana": 25,
+  "cooldown": 12,
   "cast": "instant",
   "cast_time": 0
  },
@@ -305,6 +413,24 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "burning_sheath": {
+  "name": "Burning Sheath",
+  "description": "For 8 seconds your hits ignite targets, and every third hit explodes for 4 damage within 2 blocks.",
+  "school": "irons_spellbooks:fire",
+  "mana": 40,
+  "cooldown": 35,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "calling_card": {
+  "name": "Calling Card",
+  "description": "Mark a target for 20 s; if it dies, it drops double loot and you turn invisible for 5 s.",
+  "school": "irons_spellbooks:ender",
+  "mana": 25,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "caltrops": {
   "name": "Caltrops",
   "description": "Scatter caltrops behind you that slow and hurt anything that walks over them.",
@@ -332,12 +458,84 @@
   "cast": "long",
   "cast_time": 20
  },
+ "carp_leap": {
+  "name": "Carp Leap",
+  "description": "Leap 6 blocks upward, gaining Slow Falling and Dolphin's Grace for 5 seconds.",
+  "school": "traveloptics:aqua",
+  "mana": 15,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "carrion_beetles": {
+  "name": "Carrion Beetles",
+  "description": "Summon 4 silverfish for 20 s whose bites apply poison I for 4 s.",
+  "school": "irons_spellbooks:nature",
+  "mana": 45,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 25
+ },
+ "carrion_cage": {
+  "name": "Carrion Cage",
+  "description": "Mark a target; when it dies it bursts, damaging enemies within 4 blocks and healing you 2 hearts per enemy hit.",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "cedar_cleave": {
+  "name": "Cedar Cleave",
+  "description": "Strike the creature you look at for katana damage and root it with vines (Slowness V) for 3 seconds.",
+  "school": "irons_spellbooks:nature",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "censer_step": {
+  "name": "Censer Step",
+  "description": "Dash 6 blocks backward, leaving an incense cloud where you stood that blinds enemies inside for 3 s.",
+  "school": "irons_spellbooks:holy",
+  "mana": 25,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "chaos_bolt": {
   "name": "Chaos Lightning",
   "description": "Black lightning from the void that also blinds.",
   "school": "irons_spellbooks:eldritch",
   "mana": 35,
   "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "cinder_husks": {
+  "name": "Cinder Husks",
+  "description": "Summon 3 fire-immune husks for 20 seconds that ignite whatever they hit.",
+  "school": "irons_spellbooks:fire",
+  "mana": 55,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 30
+ },
+ "cinder_palisade": {
+  "name": "Cinder Palisade",
+  "description": "Raise a 5-block wall of magma blocks for 6 seconds that burns creatures touching it.",
+  "school": "irons_spellbooks:fire",
+  "mana": 35,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "cleaving_hex": {
+  "name": "Cleaving Hex",
+  "description": "Mark a target for 8 seconds; every hit on it also deals 3 damage to enemies within 3 blocks of it.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 30,
+  "cooldown": 20,
   "cast": "instant",
   "cast_time": 0
  },
@@ -350,6 +548,15 @@
   "cast": "continuous",
   "cast_time": 100
  },
+ "confession_brand": {
+  "name": "Confession Brand",
+  "description": "Mark a target for 15 s; if it dies, you gain strength I and allies within 8 blocks gain regeneration II for 6 s.",
+  "school": "irons_spellbooks:holy",
+  "mana": 25,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "corpse_flower": {
   "name": "Corpse Flower",
   "description": "A huge rotting flower that spits poison at enemies and heals your summons near it.",
@@ -359,12 +566,30 @@
   "cast": "long",
   "cast_time": 20
  },
+ "corpse_hop": {
+  "name": "Corpse Hop",
+  "description": "Hop 3 times in quick succession; each landing deals 4 damage and Weakness to creatures within 2 blocks.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 30,
+  "cooldown": 14,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "corrupted_grove": {
   "name": "Corrupted Grove",
   "description": "Overgrowth of sculk and black roots that blind and root enemies.",
   "school": "irons_spellbooks:eldritch",
   "mana": 50,
   "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "coup_de_grace": {
+  "name": "Coup de Grace",
+  "description": "Strike the creature you look at for triple damage if it is below 30% health.",
+  "school": "irons_spellbooks:blood",
+  "mana": 25,
+  "cooldown": 10,
   "cast": "instant",
   "cast_time": 0
  },
@@ -377,6 +602,51 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "crimson_toll": {
+  "name": "Crimson Toll",
+  "description": "Strike the creature you look at, dealing all its remaining bleed damage at once and healing you that much.",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "crown_of_brine": {
+  "name": "Crown of Brine",
+  "description": "For 15 s each kill raises a trident-wielding drowned ally for 20 s.",
+  "school": "traveloptics:aqua",
+  "mana": 45,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "cursed_womb": {
+  "name": "Cursed Womb",
+  "description": "Summon 4 allied endermites for 12 seconds whose bites inflict Wither I.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 50,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "cutpurse_stroke": {
+  "name": "Cutpurse Stroke",
+  "description": "For 10 seconds, every creature you kill with a katana drops 1-3 emeralds.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "dawnbreak": {
+  "name": "Dawnbreak",
+  "description": "Flash light in a 6-block ring, blinding enemies for 4 seconds and healing allies 3 hearts.",
+  "school": "irons_spellbooks:holy",
+  "mana": 40,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "death_mark": {
   "name": "Death Mark",
   "description": "Mark an enemy; your melee hits on it deal bonus damage and refund stamina.",
@@ -385,6 +655,15 @@
   "cooldown": 20,
   "cast": "instant",
   "cast_time": 0
+ },
+ "desert_dates": {
+  "name": "Desert Dates",
+  "description": "Conjure 4 dates that restore 3 hunger and grant fire resistance and speed I for 45 s.",
+  "school": "irons_spellbooks:nature",
+  "mana": 25,
+  "cooldown": 120,
+  "cast": "long",
+  "cast_time": 20
  },
  "drown": {
   "name": "Drown",
@@ -413,12 +692,30 @@
   "cast": "long",
   "cast_time": 30
  },
+ "duskward": {
+  "name": "Duskward",
+  "description": "For 6 seconds, when hit you blink behind the attacker and gain Strength I for 3 seconds.",
+  "school": "irons_spellbooks:ender",
+  "mana": 30,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "ember_fists": {
   "name": "Ember Fists",
   "description": "Your unarmed hits set enemies on fire for a while.",
   "school": "irons_spellbooks:fire",
   "mana": 30,
   "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "ember_garrote": {
+  "name": "Ember Garrote",
+  "description": "Strike the looked-at target within 4 blocks for bleeding and fire 6 s; double damage below 30% health.",
+  "school": "irons_spellbooks:fire",
+  "mana": 30,
+  "cooldown": 12,
   "cast": "instant",
   "cast_time": 0
  },
@@ -466,6 +763,33 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 30
+ },
+ "fallen_retainer": {
+  "name": "Fallen Retainer",
+  "description": "Summon an allied wither skeleton bodyguard for 20 seconds whose hits make enemies bleed.",
+  "school": "irons_spellbooks:blood",
+  "mana": 55,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 25
+ },
+ "fan_of_knives": {
+  "name": "Fan of Knives",
+  "description": "Throw 5 knives in a 6-block cone, each dealing 3 damage and bleeding for 4 s.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "farshot": {
+  "name": "Farshot",
+  "description": "Your next arrow deals double damage and bleeding for 6 s if it hits from over 20 blocks.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 20,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
  },
  "fence": {
   "name": "Fence",
@@ -629,12 +953,75 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "ghouls_jerky": {
+  "name": "Ghoul's Jerky",
+  "description": "Conjure 3 jerky that restore 6 hunger, grant strength I for 20 s and remove hunger.",
+  "school": "irons_spellbooks:blood",
+  "mana": 25,
+  "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "glass_needle": {
+  "name": "Glass Needle",
+  "description": "Throw a jade needle; the creature hit bleeds for 6 s and loses 20% armour.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 20,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "grapple_arrow": {
   "name": "Grapple Arrow",
   "description": "Fire an arrow with a rope; you are pulled to wherever it lands.",
   "school": "irons_spellbooks:evocation",
   "mana": 20,
   "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "grave_fruit": {
+  "name": "Grave Fruit",
+  "description": "Conjure 3 grave fruits that restore 4 hunger, grant regeneration II for 6 s and cure poison.",
+  "school": "irons_spellbooks:nature",
+  "mana": 30,
+  "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "grave_hex": {
+  "name": "Grave Hex",
+  "description": "Mark a target for 10 s; if it dies, it explodes for 6 damage and wither I in 4 blocks.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 30,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "grave_pact": {
+  "name": "Grave Pact",
+  "description": "Mark a target; if it dies within 10 seconds you gain Absorption II for 10 seconds and an allied zombie bodyguard.",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "grave_pilgrim": {
+  "name": "Grave Pilgrim",
+  "description": "For 15 s, each kill heals you 3 and raises a skeleton that fights for you for 10 s.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 40,
+  "cooldown": 45,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "grave_qi": {
+  "name": "Grave Qi",
+  "description": "Mark the creature you look at; if it dies within 12 seconds, it rises as an allied husk for 20 seconds.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 35,
+  "cooldown": 30,
   "cast": "instant",
   "cast_time": 0
  },
@@ -674,6 +1061,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "harvest_swing": {
+  "name": "Harvest Swing",
+  "description": "Slash a 4-block cone, applying bleeding for 6 s and healing you 1 HP per enemy hit.",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "haunting": {
   "name": "Haunting",
   "description": "Leave a ghostly copy of yourself that enemies attack; when it is struck it shrieks and makes them flee for 3 s.",
@@ -683,12 +1079,48 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "headsmans_verdict": {
+  "name": "Headsman's Verdict",
+  "description": "Strike the creature you look at for triple damage if it is below 30% health, otherwise make it bleed for 4 seconds.",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "heat_mirage": {
   "name": "Heat Mirage",
   "description": "A heat shimmer: mobs lose track of you, and you take less fire damage while it lasts.",
   "school": "irons_spellbooks:fire",
   "mana": 35,
   "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "hikime_arrow": {
+  "name": "Hikime Arrow",
+  "description": "Fire a whistling arrow that makes every creature within 8 blocks of impact glow for 10 seconds.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 20,
+  "cooldown": 15,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "hoarfrost_tithe": {
+  "name": "Hoarfrost Tithe",
+  "description": "Drain 2 HP from every enemy within 5 blocks, slowing them 4 s and healing you per enemy hit.",
+  "school": "irons_spellbooks:ice",
+  "mana": 35,
+  "cooldown": 15,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "hollow_mask": {
+  "name": "Hollow Mask",
+  "description": "For 20 s undead and endermen ignore you and you have Night Vision.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 35,
+  "cooldown": 60,
   "cast": "instant",
   "cast_time": 0
  },
@@ -716,6 +1148,15 @@
   "school": "irons_spellbooks:holy",
   "mana": 30,
   "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "honjin_ring": {
+  "name": "Honjin Ring",
+  "description": "Allies within 6 blocks gain Resistance I and Speed I for 8 seconds.",
+  "school": "irons_spellbooks:holy",
+  "mana": 40,
+  "cooldown": 40,
   "cast": "instant",
   "cast_time": 0
  },
@@ -763,6 +1204,15 @@
   "cooldown": 90,
   "cast": "long",
   "cast_time": 20
+ },
+ "hyoga_draw": {
+  "name": "Hyoga Draw",
+  "description": "Strike the creature you look at, freezing it for 4 seconds; already frozen targets take double damage.",
+  "school": "irons_spellbooks:ice",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
  },
  "iaido": {
   "name": "Iaido Draw",
@@ -845,6 +1295,15 @@
   "cast": "long",
   "cast_time": 30
  },
+ "jade_iai": {
+  "name": "Jade Iai",
+  "description": "Dash 6 blocks forward, cutting every creature you pass and shattering 2 of their armour points for 8 seconds.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "jade_lotus": {
   "name": "Jade Lotus",
   "description": "A jade lotus that heals allies and grants Symmetry resistance.",
@@ -899,6 +1358,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "kagu_flare": {
+  "name": "Kagu Flare",
+  "description": "Leap 5 blocks backward, leaving a 3-block trail of fire behind you.",
+  "school": "irons_spellbooks:fire",
+  "mana": 20,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "kami_shrine": {
   "name": "Kami Shrine",
   "description": "Raise a small forest shrine: its kami heals allies near it and roots enemies that come close.",
@@ -908,6 +1376,51 @@
   "cast": "long",
   "cast_time": 20
  },
+ "kaminari_return": {
+  "name": "Kaminari Return",
+  "description": "Throw a lightning image of your blade up to 10 blocks; you teleport to where it lands and strike what is there.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 30,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "kanabo_crush": {
+  "name": "Kanabo Crush",
+  "description": "Strike the creature you look at for heavy damage, stunning it for 2 seconds.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 14,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "kawarimi": {
+  "name": "Kawarimi",
+  "description": "For 8 seconds, the next hit against you is negated and you blink 3 blocks behind the attacker with Invisibility for 3 seconds.",
+  "school": "irons_spellbooks:ender",
+  "mana": 35,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "kesa_guard": {
+  "name": "Kesa Guard",
+  "description": "Strike the creature you look at within 4 blocks, then gain absorption equal to the damage dealt for 6 seconds.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "ki_slash": {
+  "name": "Ki Slash",
+  "description": "Throw a ki crescent that travels 12 blocks, dealing 7 damage to every enemy it passes through.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "ki_wave": {
   "name": "Kamehameha Wave",
   "description": "A channelled beam of raw ki from both palms (Ray of Frost with blue spirit energy, no freezing).",
@@ -916,6 +1429,24 @@
   "cooldown": 20,
   "cast": "continuous",
   "cast_time": 60
+ },
+ "kirisute_dash": {
+  "name": "Kirisute Dash",
+  "description": "Dash 5 blocks, cutting every enemy you pass and making them bleed for 6 seconds.",
+  "school": "irons_spellbooks:blood",
+  "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "kodama_wisps": {
+  "name": "Kodama Wisps",
+  "description": "Summon 2 allays for 15 seconds that grant you Regeneration I every 3 seconds while near you.",
+  "school": "irons_spellbooks:nature",
+  "mana": 45,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 20
  },
  "kunai_rain": {
   "name": "Kunai Rain",
@@ -980,11 +1511,38 @@
   "cast": "long",
   "cast_time": 20
  },
+ "marked_for_the_block": {
+  "name": "Marked for the Block",
+  "description": "Mark a target for 10 seconds: it glows and takes 25% more damage; killing it resets this cooldown.",
+  "school": "irons_spellbooks:blood",
+  "mana": 25,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "marrow_pilfer": {
+  "name": "Marrow Pilfer",
+  "description": "Strike the creature you look at, stealing one of its positive effects and 2 HP.",
+  "school": "irons_spellbooks:blood",
+  "mana": 25,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "mirror_image": {
   "name": "Mirror Images",
   "description": "Split into three short-lived copies that confuse enemies; only one is real.",
   "school": "irons_spellbooks:ender",
   "mana": 40,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "mirrored_kata": {
+  "name": "Mirrored Kata",
+  "description": "For 6 seconds, 50% of every melee hit you take is reflected back at the attacker.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 35,
   "cooldown": 30,
   "cast": "instant",
   "cast_time": 0
@@ -1007,12 +1565,30 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "necrotic_static": {
+  "name": "Necrotic Static",
+  "description": "A 5-block area pulses for 5 s, dealing 2 damage to enemies and healing your summons.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 40,
+  "cooldown": 25,
+  "cast": "long",
+  "cast_time": 20
+ },
  "net_throw": {
   "name": "Net Throw",
   "description": "Throw a net that pins and slows the first creature it hits.",
   "school": "irons_spellbooks:evocation",
   "mana": 20,
   "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "nettle_shroud": {
+  "name": "Nettle Shroud",
+  "description": "For 8 s, attackers get poison I for 4 s and being hurt makes you invisible for 2 s.",
+  "school": "irons_spellbooks:nature",
+  "mana": 30,
+  "cooldown": 30,
   "cast": "instant",
   "cast_time": 0
  },
@@ -1025,6 +1601,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "night_watch": {
+  "name": "Night Watch",
+  "description": "Enemies within 8 blocks glow for 10 seconds and you become invisible for 4 seconds.",
+  "school": "irons_spellbooks:ender",
+  "mana": 30,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "nomad_mount": {
   "name": "Steppe Horse",
   "description": "An armoured warhorse that is faster and can carry a rider into battle.",
@@ -1033,6 +1618,24 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 20
+ },
+ "numbing_venom": {
+  "name": "Numbing Venom",
+  "description": "For 10 s your hits freeze targets 2 s and poison them 3 s.",
+  "school": "irons_spellbooks:ice",
+  "mana": 35,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "offal_feast": {
+  "name": "Offal Feast",
+  "description": "Conjure raw offal that, when eaten, heals 6 hearts and grants Strength I for 20 seconds.",
+  "school": "irons_spellbooks:blood",
+  "mana": 25,
+  "cooldown": 60,
+  "cast": "instant",
+  "cast_time": 0
  },
  "ofuda": {
   "name": "Ofuda",
@@ -1061,6 +1664,24 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "onryo_seal": {
+  "name": "Onryo Seal",
+  "description": "Mark the creature you look at; if it dies within 10 seconds, its ghost bursts for 6 soul fire damage within 4 blocks.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 30,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "ossuary_wall": {
+  "name": "Ossuary Wall",
+  "description": "Raise a 5-wide bone block wall for 10 seconds; when it crumbles it releases 3 allied skeletons.",
+  "school": "irons_spellbooks:blood",
+  "mana": 45,
+  "cooldown": 40,
+  "cast": "long",
+  "cast_time": 20
+ },
  "pack_mule": {
   "name": "Pack Mule",
   "description": "Summon a spectral mule with a chest that follows you.",
@@ -1069,6 +1690,15 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 20
+ },
+ "pale_pursuit": {
+  "name": "Pale Pursuit",
+  "description": "For 6 s, each backstab applies wither II for 4 s and grants you speed II for 3 s.",
+  "school": "irons_spellbooks:blood",
+  "mana": 30,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
  },
  "palm_blood": {
   "name": "Crimson Palm",
@@ -1169,6 +1799,15 @@
   "cast": "long",
   "cast_time": 20
  },
+ "phylactery_ward": {
+  "name": "Phylactery Ward",
+  "description": "For 10 s, the first lethal hit leaves you at 4 HP instead and summons 2 vexes for 15 s.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 60,
+  "cooldown": 120,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "pickpocket": {
   "name": "Pickpocket",
   "description": "Grip a creature and pull one item from its loot table out of it (once per creature).",
@@ -1193,6 +1832,15 @@
   "school": "irons_spellbooks:lightning",
   "mana": 35,
   "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "pressure_point": {
+  "name": "Pressure Point",
+  "description": "Strike the creature you look at; if hit from behind, it is stunned for 3 seconds.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 12,
   "cast": "instant",
   "cast_time": 0
  },
@@ -1232,6 +1880,15 @@
   "cast": "long",
   "cast_time": 20
  },
+ "rain_curtain": {
+  "name": "Rain Curtain",
+  "description": "Call rain on a 5-block area for 6 seconds, giving allies Regeneration I and enemies Slowness I.",
+  "school": "traveloptics:aqua",
+  "mana": 45,
+  "cooldown": 40,
+  "cast": "long",
+  "cast_time": 20
+ },
  "rally": {
   "name": "Rallying Banner",
   "description": "Plant a banner that gives allies around it Resistance I and slow regeneration.",
@@ -1259,6 +1916,24 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "restless_flock": {
+  "name": "Restless Flock",
+  "description": "Mark a target for 15 s; if it dies, it releases 3 vexes that fight for you for 15 s.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 35,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "ribcage_trap": {
+  "name": "Ribcage Trap",
+  "description": "Throw a bone that cages the creature hit in bone blocks for 4 s.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 18,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "river_dragon": {
   "name": "River Dragon",
   "description": "A jade river dragon instead of a sea serpent: it heals allies it passes.",
@@ -1268,6 +1943,51 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "road_onigiri": {
+  "name": "Road Onigiri",
+  "description": "Conjure 3 onigiri; eating one grants Speed I and Haste I for 60 seconds.",
+  "school": "irons_spellbooks:nature",
+  "mana": 30,
+  "cooldown": 120,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "ronin_ancestors": {
+  "name": "Ronin Ancestors",
+  "description": "Summon 2 vexes as ancestral ronin for 20 seconds; their hits set targets soulburning.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 55,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 25
+ },
+ "rooftop_vault": {
+  "name": "Rooftop Vault",
+  "description": "Kick the creature you look at back 3 blocks and launch yourself 5 blocks up and away.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 20,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "ryo_toss": {
+  "name": "Ryo Toss",
+  "description": "Throw a gold coin that stuns the creature hit for 2 seconds.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 15,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "salt_circle": {
+  "name": "Salt Circle",
+  "description": "A 4-block salt ring pulses for 6 s, dealing 3 damage per second to undead and clearing Weakness from allies.",
+  "school": "irons_spellbooks:holy",
+  "mana": 40,
+  "cooldown": 25,
+  "cast": "long",
+  "cast_time": 20
+ },
  "sanctify": {
   "name": "Sacred Grove",
   "description": "Holy grass grows around you; allies on it regenerate.",
@@ -1276,6 +1996,15 @@
   "cooldown": 30,
   "cast": "instant",
   "cast_time": 0
+ },
+ "sandstorm_veil": {
+  "name": "Sandstorm Veil",
+  "description": "A 5-block sandstorm lasts 6 s, blinding enemies inside and making you invisible while in it.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 45,
+  "cooldown": 45,
+  "cast": "long",
+  "cast_time": 20
  },
  "scald": {
   "name": "Scalding Steam",
@@ -1294,6 +2023,15 @@
   "cooldown": 90,
   "cast": "long",
   "cast_time": 30
+ },
+ "seafoam_vanish": {
+  "name": "Seafoam Vanish",
+  "description": "Become invisible with Speed II for 3 s; your first hit out of it deals +6 damage.",
+  "school": "traveloptics:aqua",
+  "mana": 25,
+  "cooldown": 18,
+  "cast": "instant",
+  "cast_time": 0
  },
  "seraph_embodiment": {
   "name": "Seraph Embodiment",
@@ -1322,11 +2060,47 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "shatterstab": {
+  "name": "Shatterstab",
+  "description": "Strike the looked-at target; if frozen, it takes triple damage and the freeze ends.",
+  "school": "irons_spellbooks:ice",
+  "mana": 25,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "shepherds_toll": {
+  "name": "Shepherd's Toll",
+  "description": "Ring a 6-block pulse that pulls enemies 3 blocks inward and applies soulburn for 4 s.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 35,
+  "cooldown": 18,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "shield_bash": {
   "name": "Shield Bash",
   "description": "With a shield in the off hand, slam it into the target in reach: stuns and knocks it back.",
   "school": "irons_spellbooks:evocation",
   "mana": 15,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "shura_mode": {
+  "name": "Shura Mode",
+  "description": "For 8 seconds deal 40% more damage but take 20% more; each kill heals you 3 hearts.",
+  "school": "irons_spellbooks:blood",
+  "mana": 40,
+  "cooldown": 40,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "shuriken_fan": {
+  "name": "Shuriken Fan",
+  "description": "Throw 5 shuriken in a cone, each dealing damage and Bleeding for 4 seconds.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
   "cooldown": 8,
   "cast": "instant",
   "cast_time": 0
@@ -1337,6 +2111,15 @@
   "school": "irons_spellbooks:ender",
   "mana": 25,
   "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "sirens_lure": {
+  "name": "Siren's Lure",
+  "description": "Pull enemies in an 8-block cone toward you and apply Weakness for 4 s.",
+  "school": "traveloptics:aqua",
+  "mana": 30,
+  "cooldown": 15,
   "cast": "instant",
   "cast_time": 0
  },
@@ -1367,6 +2150,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "smoulder_step": {
+  "name": "Smoulder Step",
+  "description": "Dash 6 blocks leaving burning ground; your next hit within 3 s ignites the target for 5 s.",
+  "school": "irons_spellbooks:fire",
+  "mana": 30,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "snow_sentinels": {
   "name": "Frost Sentinels",
   "description": "Summon snow golems whose snowballs slow and chill enemies.",
@@ -1384,6 +2176,15 @@
   "cooldown": 90,
   "cast": "long",
   "cast_time": 30
+ },
+ "snowfall_step": {
+  "name": "Snowfall Step",
+  "description": "Dash 6 blocks, leaving a line of powder snow behind you for 5 seconds.",
+  "school": "irons_spellbooks:ice",
+  "mana": 20,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
  },
  "soul_cleave": {
   "name": "Soul Cleave",
@@ -1619,6 +2420,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "static_edge": {
+  "name": "Static Edge",
+  "description": "For 10 s your hits from behind stun the target for 1.5 s.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 30,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "static_snare": {
   "name": "Static Snare",
   "description": "A crackling snare that stuns the target and makes it drop what it holds.",
@@ -1700,6 +2510,24 @@
   "cast": "long",
   "cast_time": 30
  },
+ "styx_fog": {
+  "name": "Styx Fog",
+  "description": "A 5-block fog lasts 6 s, giving enemies slowness II and your summons regeneration I.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 40,
+  "cooldown": 30,
+  "cast": "long",
+  "cast_time": 20
+ },
+ "sun_disk": {
+  "name": "Sun Disk",
+  "description": "Throw a radiant disk dealing 7 damage that sets undead on fire and makes the target glow for 10 seconds.",
+  "school": "irons_spellbooks:holy",
+  "mana": 25,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "superconductor": {
   "name": "Superconductor",
   "description": "Chain lightning that jumps twice as far between frozen targets and freezes them solid.",
@@ -1718,6 +2546,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "tail_decoy": {
+  "name": "Tail Decoy",
+  "description": "Summon a fox decoy that draws mobs for 6 s, then bursts in jade shards removing 20% armour in 3 blocks.",
+  "school": "iss_magicfromtheeast:symmetry",
+  "mana": 45,
+  "cooldown": 40,
+  "cast": "long",
+  "cast_time": 20
+ },
  "terracotta": {
   "name": "Jade Terracotta Guard",
   "description": "Summon a jade terracotta soldier that guards you with a halberd.",
@@ -1726,6 +2563,15 @@
   "cooldown": 120,
   "cast": "long",
   "cast_time": 30
+ },
+ "tetsubo_sweep": {
+  "name": "Tetsubo Sweep",
+  "description": "Swing in a 3-block ring, knocking all enemies back 4 blocks and giving them Slowness II for 4 seconds.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 14,
+  "cast": "instant",
+  "cast_time": 0
  },
  "thermal_shock": {
   "name": "Thermal Shock",
@@ -1751,6 +2597,15 @@
   "school": "irons_spellbooks:lightning",
   "mana": 30,
   "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "thunder_gods_descent": {
+  "name": "Thunder God's Descent",
+  "description": "Leap up and slam down where you look; lightning strikes every enemy within 4 blocks.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 45,
+  "cooldown": 18,
   "cast": "instant",
   "cast_time": 0
  },
@@ -1853,12 +2708,48 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "two_heavens": {
+  "name": "Two Heavens",
+  "description": "For 10 seconds, each melee hit strikes twice, the second strike dealing 50% damage.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 40,
+  "cooldown": 35,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "umbral_knot": {
+  "name": "Umbral Knot",
+  "description": "Throw a void orb; teleport behind the first creature it hits and give it weakness II for 5 s.",
+  "school": "irons_spellbooks:eldritch",
+  "mana": 30,
+  "cooldown": 14,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "underworld_gate": {
+  "name": "Underworld Gate",
+  "description": "Open the Malevolent Shrine domain: everything within 12 blocks is rooted for 10 s (and can still be executed) and you turn invisible for 10 s.",
+  "school": "iss_magicfromtheeast:spirit",
+  "mana": 40,
+  "cooldown": 120,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "vampire_bite": {
   "name": "Vampire Bite",
   "description": "A bite from behind that drains three times as much health.",
   "school": "irons_spellbooks:blood",
   "mana": 25,
   "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "veiled_step": {
+  "name": "Veiled Step",
+  "description": "Dash 5 blocks and gain Invisibility for 4 seconds; your next unarmed hit in that time deals +8 damage.",
+  "school": "irons_spellbooks:ender",
+  "mana": 30,
+  "cooldown": 15,
   "cast": "instant",
   "cast_time": 0
  },
@@ -1906,6 +2797,15 @@
   "cooldown": 90,
   "cast": "long",
   "cast_time": 30
+ },
+ "voltaic_revenant": {
+  "name": "Voltaic Revenant",
+  "description": "Summon a charged husk for 20 s with Speed II whose hits chain lightning to one nearby enemy.",
+  "school": "irons_spellbooks:lightning",
+  "mana": 50,
+  "cooldown": 60,
+  "cast": "long",
+  "cast_time": 25
  },
  "war_banner": {
   "name": "War Banner",
@@ -1976,6 +2876,24 @@
   "school": "iss_magicfromtheeast:spirit",
   "mana": 35,
   "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "yabusame": {
+  "name": "Yabusame",
+  "description": "Leap 5 blocks backward and fire 3 arrows at the creature you look at while airborne.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 14,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "zanshin": {
+  "name": "Zanshin",
+  "description": "For 8 seconds, each time you are hit your next melee strike deals 6 extra damage.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 30,
   "cast": "instant",
   "cast_time": 0
  }
