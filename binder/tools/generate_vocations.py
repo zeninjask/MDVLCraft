@@ -62,7 +62,8 @@ EF_NAMES = json.loads((ROOT / "tools/ef_skill_names.json").read_text())
 ICON = "mdvlcraft:textures/gui/icons18/"
 TWIG_CAP = 4
 COLUMN_STEP = 60
-CENTRE_GAP = 60
+CENTRE_GAP = 80
+ZIGZAG = 34   # the vocation column zig-zags this far either side of the centre
 PREFIX = {'I': 'irons_spellbooks', 'T': 'traveloptics', 'S': 'somakespells', 'E': 'esoteric_spell', 'C': 'cursed_school',
           'R': 'iss_elden_ring', 'M': 'iss_magicfromtheeast', 'W': 'wind_spellbooks', 'X': 'iss_csw', 'A': 'alshanex_familiars',
           'H': 'irons_chronomancy', 'B': 'mdvlcraft', 'N': 'antimagic'}
@@ -411,6 +412,7 @@ RADIUS = {"circle": 76, "square": 62, "diamond": 80, "diamond4": 58}
 PORT_OF = {(0, -1): "N", (1, 0): "E", (0, 1): "S", (-1, 0): "W"}
 OPPOSITE = {"N": "S", "S": "N", "E": "W", "W": "E"}
 MAX_PATH = 3
+JITTER = 22   # how far (px) each node of a base is nudged off the layout grid
 
 
 def ring_points(shape, n):
@@ -460,6 +462,13 @@ def carve(spokes, n_abilities):
     return units, spurs
 
 
+def nearest(cluster, target, centre):
+    """The ring node of `cluster` (centred on `centre`) pointing most nearly at `target`."""
+    want = math.atan2(target[1] - centre[1], target[0] - centre[0])
+    return min(zip(cluster["ring"], cluster["pts"]),
+               key=lambda np: abs((math.atan2(np[1][1], np[1][0]) - want + math.pi) % (2 * math.pi) - math.pi))[0]
+
+
 def check_lines(lines, pos, half):
     """L.check without its straight-line rule (rings have slanted sides)."""
     for i, (a, b) in enumerate(lines):
@@ -487,6 +496,12 @@ def base_tree(arch, live, seed=0):
     rng.shuffle(abilities)
     units, spurs = carve(bonus_spokes(arch), len(abilities))
     rng.shuffle(units)
+    # mix the bonuses: each ring takes a random draw from every ring's bonuses (sizes kept), and a random shape
+    pooled = [n for u in units for n in u["ring"]]
+    rng.shuffle(pooled)
+    for u in units:
+        u["ring"], pooled = pooled[:len(u["ring"])], pooled[len(u["ring"]):]
+        u["shape"] = rng.choice(["circle", "square", "diamond"])
     defs = {}
     names = collections.Counter()
 
@@ -536,8 +551,11 @@ def base_tree(arch, live, seed=0):
         centre = node_id(full(code).split(":")[1] if not code.startswith("Z:") else "planned_" + code[2:])
         defs[centre] = ability_body(code, live, ability_cost(code))
         ring = [stat(n) for n in u["ring"]]
-        shape = RING_SHAPE[u["src"]] if len(ring) == 8 else "diamond"
+        shape = u["shape"] if len(ring) == 8 else "diamond"
         pts, ports = ring_points(shape, len(ring))
+        if len(ring) == 8:   # turned a little, so the rings don't all sit square to the grid
+            turn = math.radians(rng.choice([0, 15, 22.5, 30, 45]))
+            pts = [(round(x * math.cos(turn) - y * math.sin(turn)), round(x * math.sin(turn) + y * math.cos(turn))) for x, y in pts]
         cid = f"cluster:{centre}"
         clusters[cid] = dict(centre=centre, ring=ring, pts=pts, ports=ports)
         half[cid] = max(max(abs(x), abs(y)) for x, y in pts) + max(half_of(n) for n in ring) + 2
@@ -555,6 +573,9 @@ def base_tree(arch, live, seed=0):
     macro = L.layout(root, kids, half, size_of, ('down', 'left', 'right'), has_parent=True)
     macro = {n: L.turn(p, 'right') for n, p in macro.items()}
     macro = {n: (round(x), round(y)) for n, (x, y) in macro.items()}
+    # nudge the rings off the grid, so the links to them run at an angle
+    macro = {n: (x + rng.randint(-JITTER, JITTER), y + rng.randint(-JITTER, JITTER)) if n in clusters else (x, y)
+             for n, (x, y) in macro.items()}
 
     # expand the clusters: ring nodes round the centre, entered from the side facing the macro parent
     parent_of = {c: p for p, cs in kids.items() for c in cs}
@@ -566,21 +587,18 @@ def base_tree(arch, live, seed=0):
             continue
         c = clusters[m]
         px, py = macro[parent_of[m]]
-        entry = PORT_OF[((px > x) - (px < x), (py > y) - (py < y))]
         pos[c["centre"]] = (x, y)
         for nid, (dx, dy) in zip(c["ring"], c["pts"]):
             pos[nid] = (x + dx, y + dy)
         ring = c["ring"]
         lines += [(ring[i], ring[(i + 1) % len(ring)]) for i in range(len(ring))]
-        lines.append((ring[c["ports"][OPPOSITE[entry]]], c["centre"]))
-        port_node[m] = {side: ring[i] for side, i in c["ports"].items()}
+        # the ability hangs off the ring node facing away from the parent
+        lines.append((nearest(c, (x - (px - x), y - (py - y)), (x, y)), c["centre"]))
 
     def end(m, toward):
         if m not in clusters:
             return m
-        x, y = macro[m]
-        tx, ty = macro[toward]
-        return port_node[m][PORT_OF[((tx > x) - (tx < x), (ty > y) - (ty < y))]]
+        return nearest(clusters[m], macro[toward], macro[m])
     for p, cs in kids.items():
         for c in cs:
             lines.append((end(p, c), end(c, p)))
@@ -601,7 +619,7 @@ def write(path, data):
 def build_bases(live):
     offsets = {}
     for arch in D.ORDER:
-        for seed in range(30):
+        for seed in range(80):
             try:
                 defs, lines, pos, root = base_tree(arch, live, seed)
                 break
@@ -661,12 +679,12 @@ def vocation_parts(a, b, r, live):
     skills[ids[0]] = {"x": 0, "y": 0, "definition": ids[0], "root": True}
     prev = ids[0]
     for k, nid in enumerate(up):
-        skills[nid] = {"x": 0, "y": -(k + 1) * COLUMN_STEP, "definition": nid}
+        skills[nid] = {"x": ZIGZAG * (1 if k % 2 == 0 else -1), "y": -(k + 1) * COLUMN_STEP, "definition": nid}
         conns.append([prev, nid])
         prev = nid
     prev = ids[0]
     for k, nid in enumerate(down):
-        skills[nid] = {"x": 0, "y": (k + 1) * COLUMN_STEP, "definition": nid}
+        skills[nid] = {"x": ZIGZAG * (-1 if k % 2 == 0 else 1), "y": (k + 1) * COLUMN_STEP, "definition": nid}
         conns.append([prev, nid])
         prev = nid
     return defs, skills, conns

@@ -129,22 +129,119 @@
   },
   "size": 2.0
  },
- "jade__renewal_2": {
-  "title": "Renewal 2",
-  "description": "+2.7% Natural Regeneration",
+ "jade__swiftness_8": {
+  "title": "Swiftness 8",
+  "description": "+1.5% Movement Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "puffish_attributes:natural_regeneration",
-     "value": 0.0266,
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
      "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__symmetry_5": {
+  "title": "Symmetry 5",
+  "description": "+4.5% Symmetry Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__jade_ward_mastery_i": {
+  "title": "Jade Ward Mastery I",
+  "description": "+6% Symmetry Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__warding_3": {
+  "title": "Warding 3",
+  "description": "+4% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
     }
    }
   ],
@@ -160,106 +257,7 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
- },
- "jade__renewal_mastery_ii": {
-  "title": "Renewal Mastery II",
-  "description": "+2.3% Natural Regeneration",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "puffish_attributes:natural_regeneration",
-     "value": 0.0233,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
- },
- "jade__renewal_3": {
-  "title": "Renewal 3",
-  "description": "+2.7% Natural Regeneration",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "puffish_attributes:natural_regeneration",
-     "value": 0.0266,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
- },
- "jade__renewal_mastery_iii": {
-  "title": "Renewal Mastery III",
-  "description": "+2.3% Natural Regeneration",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "puffish_attributes:natural_regeneration",
-     "value": 0.0233,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
+  "extra_description": "Mage class bonus."
  },
  "jade__jade_staff_1": {
   "title": "Jade Staff 1",
@@ -323,6 +321,236 @@
   },
   "size": 2.0
  },
+ "jade__readiness_7": {
+  "title": "Readiness 7",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__might_10": {
+  "title": "Might 10",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__symmetry_4": {
+  "title": "Symmetry 4",
+  "description": "+4.5% Symmetry Spell Power",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__focus_7": {
+  "title": "Focus 7",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__bounce_6": {
+  "title": "Bounce 6",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__second_breath_3": {
+  "title": "Second Breath 3",
+  "description": "+3% Stamina Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__flow_2": {
+  "title": "Flow 2",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
+ },
  "jade__jade_staff_2": {
   "title": "Jade Staff 2",
   "description": "+4.5% Staff & Spear Damage",
@@ -351,230 +579,6 @@
     "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
     "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
     "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__jade_staff_mastery_i": {
-  "title": "Jade Staff Mastery I",
-  "description": "+6% Staff & Spear Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "mdvlcraft:polearm_damage",
-     "value": 0.06,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__jade_staff_3": {
-  "title": "Jade Staff 3",
-  "description": "+4.5% Staff & Spear Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "mdvlcraft:polearm_damage",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__jade_staff_4": {
-  "title": "Jade Staff 4",
-  "description": "+4.5% Staff & Spear Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "mdvlcraft:polearm_damage",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__jade_staff_mastery_ii": {
-  "title": "Jade Staff Mastery II",
-  "description": "+6% Staff & Spear Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "mdvlcraft:polearm_damage",
-     "value": 0.06,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__jade_staff_5": {
-  "title": "Jade Staff 5",
-  "description": "+4.5% Staff & Spear Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "mdvlcraft:polearm_damage",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__jade_staff_6": {
-  "title": "Jade Staff 6",
-  "description": "+4.5% Staff & Spear Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "mdvlcraft:polearm_damage",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__jade_staff_mastery_iii": {
-  "title": "Jade Staff Mastery III",
-  "description": "+6% Staff & Spear Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "mdvlcraft:polearm_damage",
-     "value": 0.06,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
   "size": 1.5
@@ -677,8 +681,40 @@
   },
   "size": 2.0
  },
- "jade__readiness_3": {
-  "title": "Readiness 3",
+ "jade__jade_ward_3": {
+  "title": "Jade Ward 3",
+  "description": "+4.5% Symmetry Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__readiness_8": {
+  "title": "Readiness 8",
   "description": "+1.5% Attack Speed",
   "icon": {
    "type": "texture",
@@ -710,22 +746,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__readiness_4": {
-  "title": "Readiness 4",
-  "description": "+1.5% Attack Speed",
+ "jade__flow_4": {
+  "title": "Flow 4",
+  "description": "+8% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
     }
    }
   ],
@@ -733,65 +769,32 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__readiness_5": {
-  "title": "Readiness 5",
-  "description": "+1.5% Attack Speed",
+ "jade__might_8": {
+  "title": "Might 8",
+  "description": "+0.225 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__readiness_6": {
-  "title": "Readiness 6",
-  "description": "+1.5% Attack Speed",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.attack_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
     }
    }
   ],
@@ -907,21 +910,87 @@
   },
   "size": 2.0
  },
- "jade__constitution_2": {
-  "title": "Constitution 2",
-  "description": "+0.667 Max Health",
+ "jade__swiftness_7": {
+  "title": "Swiftness 7",
+  "description": "+1.5% Movement Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.max_health",
-     "value": 0.6666,
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__swiftness_4": {
+  "title": "Swiftness 4",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__warding_6": {
+  "title": "Warding 6",
+  "description": "+2% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.02,
      "operation": "addition"
     }
    }
@@ -938,23 +1007,23 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
+  "extra_description": "Mage class bonus."
  },
- "jade__constitution_mastery_ii": {
-  "title": "Constitution Mastery II",
-  "description": "+0.333 Max Health",
+ "jade__focus_10": {
+  "title": "Focus 10",
+  "description": "+1.5% Cooldown Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.max_health",
-     "value": 0.3333,
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
      "operation": "addition"
     }
    }
@@ -963,81 +1032,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
- },
- "jade__constitution_3": {
-  "title": "Constitution 3",
-  "description": "+0.667 Max Health",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.max_health",
-     "value": 0.6666,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
- },
- "jade__constitution_mastery_iii": {
-  "title": "Constitution Mastery III",
-  "description": "+0.333 Max Health",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.max_health",
-     "value": 0.3333,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
  "jade__jiangshi_invoke": {
   "title": "Jiangshi Invoke",
@@ -1071,21 +1074,85 @@
   },
   "size": 2.0
  },
- "jade__attunement_6": {
-  "title": "Attunement 6",
-  "description": "+12 Max Mana",
+ "jade__symmetry_6": {
+  "title": "Symmetry 6",
+  "description": "+4.5% Symmetry Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 12.0,
+     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__jade_staff_mastery_i": {
+  "title": "Jade Staff Mastery I",
+  "description": "+6% Staff & Spear Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:polearm_damage",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__meditation_9": {
+  "title": "Meditation 9",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -1104,21 +1171,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__attunement_7": {
-  "title": "Attunement 7",
-  "description": "+12 Max Mana",
+ "jade__constitution_mastery_ii": {
+  "title": "Constitution Mastery II",
+  "description": "+0.333 Max Health",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 12.0,
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.3333,
      "operation": "addition"
     }
    }
@@ -1127,81 +1194,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__attunement_8": {
-  "title": "Attunement 8",
-  "description": "+12 Max Mana",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 12.0,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__attunement_9": {
-  "title": "Attunement 9",
-  "description": "+12 Max Mana",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 12.0,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
  "jade__wellspring_1": {
   "title": "Wellspring 1",
@@ -1301,9 +1302,9 @@
   },
   "size": 2.0
  },
- "jade__wellspring_2": {
-  "title": "Wellspring 2",
-  "description": "+8% Mana Regen",
+ "jade__meditation_7": {
+  "title": "Meditation 7",
+  "description": "+4.5% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
@@ -1315,7 +1316,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.08,
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -1324,31 +1325,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__wellspring_mastery_ii": {
-  "title": "Wellspring Mastery II",
-  "description": "+7% Mana Regen",
+ "jade__jade_staff_mastery_ii": {
+  "title": "Jade Staff Mastery II",
+  "description": "+6% Staff & Spear Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.07,
+     "attribute": "mdvlcraft:polearm_damage",
+     "value": 0.06,
      "operation": "addition"
     }
    }
@@ -1364,24 +1365,23 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
+  "size": 1.5
  },
- "jade__wellspring_3": {
-  "title": "Wellspring 3",
-  "description": "+8% Mana Regen",
+ "jade__attunement_2": {
+  "title": "Attunement 2",
+  "description": "+12 Max Mana",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.08,
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
      "operation": "addition"
     }
    }
@@ -1390,31 +1390,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__wellspring_mastery_iii": {
-  "title": "Wellspring Mastery III",
-  "description": "+7% Mana Regen",
+ "jade__focus_9": {
+  "title": "Focus 9",
+  "description": "+1.5% Cooldown Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.07,
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
      "operation": "addition"
     }
    }
@@ -1423,15 +1423,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
  "jade__second_breath_1": {
   "title": "Second Breath 1",
@@ -1531,22 +1531,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__second_breath_3": {
-  "title": "Second Breath 3",
-  "description": "+3% Stamina Regen",
+ "jade__endurance_7": {
+  "title": "Endurance 7",
+  "description": "+7.5 Max Stamina",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:stamina_regen",
-     "value": 0.03,
-     "operation": "multiply_base"
+     "attribute": "epicfight:staminar",
+     "value": 7.5,
+     "operation": "addition"
     }
    }
   ],
@@ -1564,22 +1564,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__second_breath_4": {
-  "title": "Second Breath 4",
-  "description": "+3% Stamina Regen",
+ "jade__quick_casting_2": {
+  "title": "Quick Casting 2",
+  "description": "+4% Cast Time Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:stamina_regen",
-     "value": 0.03,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
     }
    }
   ],
@@ -1587,32 +1587,32 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__second_breath_5": {
-  "title": "Second Breath 5",
-  "description": "+3% Stamina Regen",
+ "jade__attunement_7": {
+  "title": "Attunement 7",
+  "description": "+12 Max Mana",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:stamina_regen",
-     "value": 0.03,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
     }
    }
   ],
@@ -1662,22 +1662,22 @@
   },
   "size": 2.0
  },
- "jade__second_breath_6": {
-  "title": "Second Breath 6",
-  "description": "+3% Stamina Regen",
+ "jade__endurance_9": {
+  "title": "Endurance 9",
+  "description": "+7.5 Max Stamina",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:stamina_regen",
-     "value": 0.03,
-     "operation": "multiply_base"
+     "attribute": "epicfight:staminar",
+     "value": 7.5,
+     "operation": "addition"
     }
    }
   ],
@@ -1695,22 +1695,55 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__second_breath_7": {
-  "title": "Second Breath 7",
-  "description": "+3% Stamina Regen",
+ "jade__warding_2": {
+  "title": "Warding 2",
+  "description": "+2% Spell Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:stamina_regen",
-     "value": 0.03,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.02,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
+ },
+ "jade__endurance_10": {
+  "title": "Endurance 10",
+  "description": "+7.5 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 7.5,
+     "operation": "addition"
     }
    }
   ],
@@ -1728,22 +1761,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__second_breath_8": {
-  "title": "Second Breath 8",
-  "description": "+3% Stamina Regen",
+ "jade__warding_mastery_iii": {
+  "title": "Warding Mastery III",
+  "description": "+4% Spell Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:stamina_regen",
-     "value": 0.03,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
     }
    }
   ],
@@ -1751,48 +1784,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__second_breath_9": {
-  "title": "Second Breath 9",
-  "description": "+3% Stamina Regen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "epicfight:stamina_regen",
-     "value": 0.03,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
  "jade__might_1": {
   "title": "Might 1",
@@ -1892,21 +1892,21 @@
   },
   "size": 2.0
  },
- "jade__might_3": {
-  "title": "Might 3",
-  "description": "+0.225 Attack Damage",
+ "jade__attunement_5": {
+  "title": "Attunement 5",
+  "description": "+12 Max Mana",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
      "operation": "addition"
     }
    }
@@ -1925,21 +1925,54 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__might_4": {
-  "title": "Might 4",
-  "description": "+0.225 Attack Damage",
+ "jade__bounce_2": {
+  "title": "Bounce 2",
+  "description": "+2.2% Jump Height",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__endurance_4": {
+  "title": "Endurance 4",
+  "description": "+7.5 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 7.5,
      "operation": "addition"
     }
    }
@@ -1958,21 +1991,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__might_5": {
-  "title": "Might 5",
-  "description": "+0.225 Attack Damage",
+ "jade__meditation_4": {
+  "title": "Meditation 4",
+  "description": "+4.5% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -1991,21 +2024,53 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__might_6": {
-  "title": "Might 6",
-  "description": "+0.225 Attack Damage",
+ "jade__symmetry_mastery_ii": {
+  "title": "Symmetry Mastery II",
+  "description": "+6% Symmetry Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__focus_5": {
+  "title": "Focus 5",
+  "description": "+1.5% Cooldown Reduction",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
      "operation": "addition"
     }
    }
@@ -2024,21 +2089,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__might_7": {
-  "title": "Might 7",
-  "description": "+0.225 Attack Damage",
+ "jade__focus_8": {
+  "title": "Focus 8",
+  "description": "+1.5% Cooldown Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
      "operation": "addition"
     }
    }
@@ -2057,88 +2122,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__might_8": {
-  "title": "Might 8",
-  "description": "+0.225 Attack Damage",
+ "jade__second_breath_4": {
+  "title": "Second Breath 4",
+  "description": "+3% Stamina Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__might_9": {
-  "title": "Might 9",
-  "description": "+0.225 Attack Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__might_10": {
-  "title": "Might 10",
-  "description": "+0.225 Attack Damage",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
-     "operation": "addition"
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -2254,8 +2253,8 @@
   },
   "size": 2.0
  },
- "jade__endurance_3": {
-  "title": "Endurance 3",
+ "jade__endurance_8": {
+  "title": "Endurance 8",
   "description": "+7.5 Max Stamina",
   "icon": {
    "type": "texture",
@@ -2287,21 +2286,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__endurance_4": {
-  "title": "Endurance 4",
-  "description": "+7.5 Max Stamina",
+ "jade__wellspring_mastery_iii": {
+  "title": "Wellspring Mastery III",
+  "description": "+7% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:staminar",
-     "value": 7.5,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.07,
      "operation": "addition"
     }
    }
@@ -2310,48 +2309,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__endurance_5": {
-  "title": "Endurance 5",
-  "description": "+7.5 Max Stamina",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "epicfight:staminar",
-     "value": 7.5,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
  "jade__endurance_6": {
   "title": "Endurance 6",
@@ -2386,22 +2352,55 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__endurance_7": {
-  "title": "Endurance 7",
-  "description": "+7.5 Max Stamina",
+ "jade__warding_mastery_i": {
+  "title": "Warding Mastery I",
+  "description": "+4% Spell Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:staminar",
-     "value": 7.5,
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
      "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
+ },
+ "jade__readiness_5": {
+  "title": "Readiness 5",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -2419,22 +2418,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__endurance_8": {
-  "title": "Endurance 8",
-  "description": "+7.5 Max Stamina",
+ "jade__bounce_9": {
+  "title": "Bounce 9",
+  "description": "+2.2% Jump Height",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:staminar",
-     "value": 7.5,
-     "operation": "addition"
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -2452,21 +2451,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__endurance_9": {
-  "title": "Endurance 9",
-  "description": "+7.5 Max Stamina",
+ "jade__jade_ward_mastery_iii": {
+  "title": "Jade Ward Mastery III",
+  "description": "+6% Symmetry Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:staminar",
-     "value": 7.5,
+     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "value": 0.06,
      "operation": "addition"
     }
    }
@@ -2475,31 +2474,30 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5
  },
- "jade__endurance_10": {
-  "title": "Endurance 10",
-  "description": "+7.5 Max Stamina",
+ "jade__flow_mastery_iii": {
+  "title": "Flow Mastery III",
+  "description": "+9% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "epicfight:staminar",
-     "value": 7.5,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.09,
      "operation": "addition"
     }
    }
@@ -2508,15 +2506,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
  "jade__focus_1": {
   "title": "Focus 1",
@@ -2616,21 +2614,54 @@
   },
   "size": 2.0
  },
- "jade__focus_3": {
-  "title": "Focus 3",
-  "description": "+1.5% Cooldown Reduction",
+ "jade__readiness_6": {
+  "title": "Readiness 6",
+  "description": "+1.5% Attack Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cooldown_reduction",
+     "attribute": "minecraft:generic.attack_speed",
      "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__meditation_8": {
+  "title": "Meditation 8",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -2649,21 +2680,54 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__focus_4": {
-  "title": "Focus 4",
-  "description": "+1.5% Cooldown Reduction",
+ "jade__warding_5": {
+  "title": "Warding 5",
+  "description": "+4% Spell Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cooldown_reduction",
-     "value": 0.015,
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
+ },
+ "jade__endurance_5": {
+  "title": "Endurance 5",
+  "description": "+7.5 Max Stamina",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "epicfight:staminar",
+     "value": 7.5,
      "operation": "addition"
     }
    }
@@ -2682,21 +2746,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__focus_5": {
-  "title": "Focus 5",
-  "description": "+1.5% Cooldown Reduction",
+ "jade__constitution_2": {
+  "title": "Constitution 2",
+  "description": "+0.667 Max Health",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cooldown_reduction",
-     "value": 0.015,
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
      "operation": "addition"
     }
    }
@@ -2705,31 +2769,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__focus_6": {
-  "title": "Focus 6",
-  "description": "+1.5% Cooldown Reduction",
+ "jade__flow_3": {
+  "title": "Flow 3",
+  "description": "+8% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cooldown_reduction",
-     "value": 0.015,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
      "operation": "addition"
     }
    }
@@ -2738,31 +2802,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__focus_7": {
-  "title": "Focus 7",
-  "description": "+1.5% Cooldown Reduction",
+ "jade__jade_staff_3": {
+  "title": "Jade Staff 3",
+  "description": "+4.5% Staff & Spear Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cooldown_reduction",
-     "value": 0.015,
+     "attribute": "mdvlcraft:polearm_damage",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -2771,98 +2835,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5
  },
- "jade__focus_8": {
-  "title": "Focus 8",
-  "description": "+1.5% Cooldown Reduction",
+ "jade__second_breath_7": {
+  "title": "Second Breath 7",
+  "description": "+3% Stamina Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cooldown_reduction",
-     "value": 0.015,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__focus_9": {
-  "title": "Focus 9",
-  "description": "+1.5% Cooldown Reduction",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:cooldown_reduction",
-     "value": 0.015,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__focus_10": {
-  "title": "Focus 10",
-  "description": "+1.5% Cooldown Reduction",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:cooldown_reduction",
-     "value": 0.015,
-     "operation": "addition"
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -2942,20 +2939,20 @@
   },
   "size": 2.0
  },
- "jade__jade_ward_2": {
-  "title": "Jade Ward 2",
-  "description": "+4.5% Symmetry Resistance",
+ "jade__jade_staff_4": {
+  "title": "Jade Staff 4",
+  "description": "+4.5% Staff & Spear Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "attribute": "mdvlcraft:polearm_damage",
      "value": 0.045,
      "operation": "addition"
     }
@@ -2974,21 +2971,54 @@
   },
   "size": 1.5
  },
- "jade__jade_ward_mastery_i": {
-  "title": "Jade Ward Mastery I",
-  "description": "+6% Symmetry Resistance",
+ "jade__second_breath_6": {
+  "title": "Second Breath 6",
+  "description": "+3% Stamina Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
-     "value": 0.06,
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__meditation_10": {
+  "title": "Meditation 10",
+  "description": "+4.5% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -2997,30 +3027,64 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__jade_ward_3": {
-  "title": "Jade Ward 3",
-  "description": "+4.5% Symmetry Resistance",
+ "jade__second_breath_9": {
+  "title": "Second Breath 9",
+  "description": "+3% Stamina Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
-     "value": 0.045,
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__constitution_3": {
+  "title": "Constitution 3",
+  "description": "+0.667 Max Health",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.6666,
      "operation": "addition"
     }
    }
@@ -3036,24 +3100,25 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 1.5
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__jade_ward_4": {
-  "title": "Jade Ward 4",
-  "description": "+4.5% Symmetry Resistance",
+ "jade__readiness_10": {
+  "title": "Readiness 10",
+  "description": "+1.5% Attack Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
-     "value": 0.045,
-     "operation": "addition"
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -3061,31 +3126,32 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__jade_ward_mastery_ii": {
-  "title": "Jade Ward Mastery II",
-  "description": "+6% Symmetry Resistance",
+ "jade__swiftness_6": {
+  "title": "Swiftness 6",
+  "description": "+1.5% Movement Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
-     "value": 0.06,
-     "operation": "addition"
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -3093,31 +3159,32 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__jade_ward_5": {
-  "title": "Jade Ward 5",
-  "description": "+4.5% Symmetry Resistance",
+ "jade__bounce_5": {
+  "title": "Bounce 5",
+  "description": "+2.2% Jump Height",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
-     "value": 0.045,
-     "operation": "addition"
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -3125,78 +3192,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5
- },
- "jade__jade_ward_6": {
-  "title": "Jade Ward 6",
-  "description": "+4.5% Symmetry Resistance",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__jade_ward_mastery_iii": {
-  "title": "Jade Ward Mastery III",
-  "description": "+6% Symmetry Resistance",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
-     "value": 0.06,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
  "jade__symmetry_1": {
   "title": "Symmetry 1",
@@ -3260,21 +3264,87 @@
   },
   "size": 2.0
  },
- "jade__symmetry_2": {
-  "title": "Symmetry 2",
-  "description": "+4.5% Symmetry Spell Power",
+ "jade__second_breath_5": {
+  "title": "Second Breath 5",
+  "description": "+3% Stamina Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
-     "value": 0.045,
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__bounce_7": {
+  "title": "Bounce 7",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__might_5": {
+  "title": "Might 5",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
      "operation": "addition"
     }
    }
@@ -3283,30 +3353,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__symmetry_mastery_i": {
-  "title": "Symmetry Mastery I",
-  "description": "+6% Symmetry Spell Power",
+ "jade__quick_casting_mastery_ii": {
+  "title": "Quick Casting Mastery II",
+  "description": "+4% Cast Time Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
-     "value": 0.06,
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
      "operation": "addition"
     }
    }
@@ -3322,23 +3393,57 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 1.5
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__symmetry_3": {
-  "title": "Symmetry 3",
-  "description": "+4.5% Symmetry Spell Power",
+ "jade__focus_3": {
+  "title": "Focus 3",
+  "description": "+1.5% Cooldown Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
-     "value": 0.045,
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__reservoir_2": {
+  "title": "Reservoir 2",
+  "description": "+16 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 16,
      "operation": "addition"
     }
    }
@@ -3354,55 +3459,24 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 1.5
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__symmetry_4": {
-  "title": "Symmetry 4",
-  "description": "+4.5% Symmetry Spell Power",
+ "jade__flow_mastery_i": {
+  "title": "Flow Mastery I",
+  "description": "+9% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__symmetry_mastery_ii": {
-  "title": "Symmetry Mastery II",
-  "description": "+6% Symmetry Spell Power",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
-     "value": 0.06,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.09,
      "operation": "addition"
     }
    }
@@ -3418,22 +3492,23 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 1.5
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__symmetry_5": {
-  "title": "Symmetry 5",
-  "description": "+4.5% Symmetry Spell Power",
+ "jade__meditation_3": {
+  "title": "Meditation 3",
+  "description": "+4.5% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
      "operation": "addition"
     }
@@ -3443,78 +3518,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5
- },
- "jade__symmetry_6": {
-  "title": "Symmetry 6",
-  "description": "+4.5% Symmetry Spell Power",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5
- },
- "jade__symmetry_mastery_iii": {
-  "title": "Symmetry Mastery III",
-  "description": "+6% Symmetry Spell Power",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
-     "value": 0.06,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
  "jade__attunement_1": {
   "title": "Attunement 1",
@@ -3579,21 +3591,21 @@
   },
   "size": 2.0
  },
- "jade__attunement_2": {
-  "title": "Attunement 2",
-  "description": "+12 Max Mana",
+ "jade__meditation_6": {
+  "title": "Meditation 6",
+  "description": "+4.5% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 12.0,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -3612,21 +3624,54 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__attunement_3": {
-  "title": "Attunement 3",
-  "description": "+12 Max Mana",
+ "jade__renewal_2": {
+  "title": "Renewal 2",
+  "description": "+2.7% Natural Regeneration",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 12.0,
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0266,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "jade__might_3": {
+  "title": "Might 3",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
      "operation": "addition"
     }
    }
@@ -3645,21 +3690,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__attunement_4": {
-  "title": "Attunement 4",
-  "description": "+12 Max Mana",
+ "jade__wellspring_mastery_ii": {
+  "title": "Wellspring Mastery II",
+  "description": "+7% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 12.0,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.07,
      "operation": "addition"
     }
    }
@@ -3668,48 +3713,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__attunement_5": {
-  "title": "Attunement 5",
-  "description": "+12 Max Mana",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 12.0,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
  "jade__meditation_1": {
   "title": "Meditation 1",
@@ -3809,21 +3821,86 @@
   },
   "size": 2.0
  },
- "jade__meditation_3": {
-  "title": "Meditation 3",
-  "description": "+4.5% Mana Regen",
+ "jade__symmetry_mastery_i": {
+  "title": "Symmetry Mastery I",
+  "description": "+6% Symmetry Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.045,
+     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "value": 0.06,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__swiftness_9": {
+  "title": "Swiftness 9",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__attunement_9": {
+  "title": "Attunement 9",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
      "operation": "addition"
     }
    }
@@ -3842,21 +3919,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__meditation_4": {
-  "title": "Meditation 4",
-  "description": "+4.5% Mana Regen",
+ "jade__attunement_4": {
+  "title": "Attunement 4",
+  "description": "+12 Max Mana",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.045,
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
      "operation": "addition"
     }
    }
@@ -3875,21 +3952,21 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__meditation_5": {
-  "title": "Meditation 5",
-  "description": "+4.5% Mana Regen",
+ "jade__quick_casting_mastery_i": {
+  "title": "Quick Casting Mastery I",
+  "description": "+4% Cast Time Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.045,
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
      "operation": "addition"
     }
    }
@@ -3898,31 +3975,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__meditation_6": {
-  "title": "Meditation 6",
-  "description": "+4.5% Mana Regen",
+ "jade__quick_casting_5": {
+  "title": "Quick Casting 5",
+  "description": "+4% Cast Time Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.045,
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
      "operation": "addition"
     }
    }
@@ -3931,31 +4008,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__meditation_7": {
-  "title": "Meditation 7",
-  "description": "+4.5% Mana Regen",
+ "jade__reservoir_mastery_ii": {
+  "title": "Reservoir Mastery II",
+  "description": "+14 Max Mana",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.045,
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 14,
      "operation": "addition"
     }
    }
@@ -3964,98 +4041,32 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__meditation_8": {
-  "title": "Meditation 8",
-  "description": "+4.5% Mana Regen",
+ "jade__readiness_4": {
+  "title": "Readiness 4",
+  "description": "+1.5% Attack Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__meditation_9": {
-  "title": "Meditation 9",
-  "description": "+4.5% Mana Regen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.045,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__meditation_10": {
-  "title": "Meditation 10",
-  "description": "+4.5% Mana Regen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.045,
-     "operation": "addition"
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -4136,21 +4147,54 @@
   },
   "size": 2.0
  },
- "jade__quick_casting_2": {
-  "title": "Quick Casting 2",
-  "description": "+4% Cast Time Reduction",
+ "jade__might_4": {
+  "title": "Might 4",
+  "description": "+0.225 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cast_time_reduction",
-     "value": 0.04,
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__jade_ward_2": {
+  "title": "Jade Ward 2",
+  "description": "+4.5% Symmetry Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -4166,25 +4210,56 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 1.5
  },
- "jade__quick_casting_mastery_i": {
-  "title": "Quick Casting Mastery I",
-  "description": "+4% Cast Time Reduction",
+ "jade__jade_staff_5": {
+  "title": "Jade Staff 5",
+  "description": "+4.5% Staff & Spear Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cast_time_reduction",
-     "value": 0.04,
+     "attribute": "mdvlcraft:polearm_damage",
+     "value": 0.045,
      "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__renewal_mastery_iii": {
+  "title": "Renewal Mastery III",
+  "description": "+2.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0233,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -4200,24 +4275,24 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__quick_casting_3": {
-  "title": "Quick Casting 3",
-  "description": "+4% Cast Time Reduction",
+ "jade__renewal_3": {
+  "title": "Renewal 3",
+  "description": "+2.7% Natural Regeneration",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cast_time_reduction",
-     "value": 0.04,
-     "operation": "addition"
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0266,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -4233,24 +4308,24 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__quick_casting_4": {
-  "title": "Quick Casting 4",
-  "description": "+4% Cast Time Reduction",
+ "jade__swiftness_3": {
+  "title": "Swiftness 3",
+  "description": "+1.5% Movement Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cast_time_reduction",
-     "value": 0.04,
-     "operation": "addition"
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -4258,32 +4333,32 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__quick_casting_mastery_ii": {
-  "title": "Quick Casting Mastery II",
-  "description": "+4% Cast Time Reduction",
+ "jade__second_breath_8": {
+  "title": "Second Breath 8",
+  "description": "+3% Stamina Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_stamina_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:cast_time_reduction",
-     "value": 0.04,
-     "operation": "addition"
+     "attribute": "epicfight:stamina_regen",
+     "value": 0.03,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -4291,48 +4366,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
- },
- "jade__quick_casting_5": {
-  "title": "Quick Casting 5",
-  "description": "+4% Cast Time Reduction",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:cast_time_reduction",
-     "value": 0.04,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
  "jade__quick_casting_6": {
   "title": "Quick Casting 6",
@@ -4362,39 +4404,6 @@
     "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
     "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
     "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
- },
- "jade__quick_casting_mastery_iii": {
-  "title": "Quick Casting Mastery III",
-  "description": "+4% Cast Time Reduction",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:cast_time_reduction",
-     "value": 0.04,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
   "size": 1.5,
@@ -4463,21 +4472,21 @@
   },
   "size": 2.0
  },
- "jade__flow_2": {
-  "title": "Flow 2",
-  "description": "+8% Mana Regen",
+ "jade__jade_ward_4": {
+  "title": "Jade Ward 4",
+  "description": "+4.5% Symmetry Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.08,
+     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -4493,24 +4502,89 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 1.5
  },
- "jade__flow_mastery_i": {
-  "title": "Flow Mastery I",
-  "description": "+9% Mana Regen",
+ "jade__endurance_3": {
+  "title": "Endurance 3",
+  "description": "+7.5 Max Stamina",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/epicfight_staminar.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.09,
+     "attribute": "epicfight:staminar",
+     "value": 7.5,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__swiftness_5": {
+  "title": "Swiftness 5",
+  "description": "+1.5% Movement Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.movement_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__warding_mastery_ii": {
+  "title": "Warding Mastery II",
+  "description": "+4% Spell Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:spell_resist",
+     "value": 0.04,
      "operation": "addition"
     }
    }
@@ -4529,21 +4603,21 @@
   "size": 1.5,
   "extra_description": "Mage class bonus."
  },
- "jade__flow_3": {
-  "title": "Flow 3",
-  "description": "+8% Mana Regen",
+ "jade__focus_6": {
+  "title": "Focus 6",
+  "description": "+1.5% Cooldown Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.08,
+     "attribute": "irons_spellbooks:cooldown_reduction",
+     "value": 0.015,
      "operation": "addition"
     }
    }
@@ -4552,64 +4626,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__flow_4": {
-  "title": "Flow 4",
-  "description": "+8% Mana Regen",
+ "jade__constitution_mastery_iii": {
+  "title": "Constitution Mastery III",
+  "description": "+0.333 Max Health",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.max_health.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.08,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
- },
- "jade__flow_mastery_ii": {
-  "title": "Flow Mastery II",
-  "description": "+9% Mana Regen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.09,
+     "attribute": "minecraft:generic.max_health",
+     "value": 0.3333,
      "operation": "addition"
     }
    }
@@ -4626,23 +4667,56 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__flow_5": {
-  "title": "Flow 5",
-  "description": "+8% Mana Regen",
+ "jade__bounce_4": {
+  "title": "Bounce 4",
+  "description": "+2.2% Jump Height",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.08,
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__might_6": {
+  "title": "Might 6",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
      "operation": "addition"
     }
    }
@@ -4651,81 +4725,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
- },
- "jade__flow_6": {
-  "title": "Flow 6",
-  "description": "+8% Mana Regen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.08,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
- },
- "jade__flow_mastery_iii": {
-  "title": "Flow Mastery III",
-  "description": "+9% Mana Regen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:mana_regen",
-     "value": 0.09,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
  "jade__swiftness_1": {
   "title": "Swiftness 1",
@@ -4825,218 +4833,20 @@
   },
   "size": 2.0
  },
- "jade__swiftness_3": {
-  "title": "Swiftness 3",
-  "description": "+1.5% Movement Speed",
+ "jade__readiness_9": {
+  "title": "Readiness 9",
+  "description": "+1.5% Attack Speed",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.movement_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__swiftness_4": {
-  "title": "Swiftness 4",
-  "description": "+1.5% Movement Speed",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.movement_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__swiftness_5": {
-  "title": "Swiftness 5",
-  "description": "+1.5% Movement Speed",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.movement_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__swiftness_6": {
-  "title": "Swiftness 6",
-  "description": "+1.5% Movement Speed",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.movement_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__swiftness_7": {
-  "title": "Swiftness 7",
-  "description": "+1.5% Movement Speed",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.movement_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__swiftness_8": {
-  "title": "Swiftness 8",
-  "description": "+1.5% Movement Speed",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.movement_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__swiftness_9": {
-  "title": "Swiftness 9",
-  "description": "+1.5% Movement Speed",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.movement_speed.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "minecraft:generic.movement_speed",
+     "attribute": "minecraft:generic.attack_speed",
      "value": 0.015,
      "operation": "multiply_base"
     }
@@ -5089,6 +4899,203 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
+ "jade__wellspring_3": {
+  "title": "Wellspring 3",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "jade__renewal_mastery_ii": {
+  "title": "Renewal Mastery II",
+  "description": "+2.3% Natural Regeneration",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_natural_regeneration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:natural_regeneration",
+     "value": 0.0233,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5,
+  "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "jade__bounce_3": {
+  "title": "Bounce 3",
+  "description": "+2.2% Jump Height",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__might_7": {
+  "title": "Might 7",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__jade_ward_5": {
+  "title": "Jade Ward 5",
+  "description": "+4.5% Symmetry Resistance",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__might_9": {
+  "title": "Might 9",
+  "description": "+0.225 Attack Damage",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_damage.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.225,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
  "jade__underworld_aid": {
   "title": "Impermanence's Verdict",
   "description": "Unlocks Impermanence's Verdict (Level 1) (130 mana, 152 s cooldown) on the ability wheel",
@@ -5121,22 +5128,22 @@
   },
   "size": 2.0
  },
- "jade__bounce_6": {
-  "title": "Bounce 6",
-  "description": "+2.2% Jump Height",
+ "jade__quick_casting_4": {
+  "title": "Quick Casting 4",
+  "description": "+4% Cast Time Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "puffish_attributes:jump",
-     "value": 0.0225,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
     }
    }
   ],
@@ -5144,32 +5151,32 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__bounce_7": {
-  "title": "Bounce 7",
-  "description": "+2.2% Jump Height",
+ "jade__quick_casting_3": {
+  "title": "Quick Casting 3",
+  "description": "+4% Cast Time Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "puffish_attributes:jump",
-     "value": 0.0225,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
     }
    }
   ],
@@ -5177,32 +5184,32 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
- "jade__bounce_8": {
-  "title": "Bounce 8",
-  "description": "+2.2% Jump Height",
+ "jade__symmetry_mastery_iii": {
+  "title": "Symmetry Mastery III",
+  "description": "+6% Symmetry Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "puffish_attributes:jump",
-     "value": 0.0225,
-     "operation": "multiply_base"
+     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "value": 0.06,
+     "operation": "addition"
     }
    }
   ],
@@ -5210,32 +5217,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5
  },
- "jade__bounce_9": {
-  "title": "Bounce 9",
-  "description": "+2.2% Jump Height",
+ "jade__quick_casting_mastery_iii": {
+  "title": "Quick Casting Mastery III",
+  "description": "+4% Cast Time Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cast_time_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "puffish_attributes:jump",
-     "value": 0.0225,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:cast_time_reduction",
+     "value": 0.04,
+     "operation": "addition"
     }
    }
   ],
@@ -5243,15 +5249,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
  "jade__parry_master": {
   "title": "Parry Master",
@@ -5283,22 +5289,22 @@
   },
   "size": 2.0
  },
- "jade__readiness_7": {
-  "title": "Readiness 7",
-  "description": "+1.5% Attack Speed",
+ "jade__attunement_8": {
+  "title": "Attunement 8",
+  "description": "+12 Max Mana",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
     }
    }
   ],
@@ -5316,22 +5322,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__readiness_8": {
-  "title": "Readiness 8",
-  "description": "+1.5% Attack Speed",
+ "jade__focus_4": {
+  "title": "Focus 4",
+  "description": "+1.5% Cooldown Reduction",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_cooldown_reduction.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_speed",
+     "attribute": "irons_spellbooks:cooldown_reduction",
      "value": 0.015,
-     "operation": "multiply_base"
+     "operation": "addition"
     }
    }
   ],
@@ -5349,22 +5355,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__readiness_9": {
-  "title": "Readiness 9",
-  "description": "+1.5% Attack Speed",
+ "jade__jade_ward_6": {
+  "title": "Jade Ward 6",
+  "description": "+4.5% Symmetry Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
+     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "value": 0.045,
+     "operation": "addition"
     }
    }
   ],
@@ -5372,32 +5378,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5
  },
- "jade__readiness_10": {
-  "title": "Readiness 10",
-  "description": "+1.5% Attack Speed",
+ "jade__flow_5": {
+  "title": "Flow 5",
+  "description": "+8% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "minecraft:generic.attack_speed",
-     "value": 0.015,
-     "operation": "multiply_base"
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
+     "operation": "addition"
     }
    }
   ],
@@ -5405,15 +5410,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5,
+  "extra_description": "Mage class bonus."
  },
  "jade__reservoir_1": {
   "title": "Reservoir 1",
@@ -5513,21 +5518,21 @@
   },
   "size": 2.0
  },
- "jade__reservoir_2": {
-  "title": "Reservoir 2",
-  "description": "+16 Max Mana",
+ "jade__wellspring_2": {
+  "title": "Wellspring 2",
+  "description": "+8% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 16,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
      "operation": "addition"
     }
    }
@@ -5541,39 +5546,6 @@
     "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
     "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
     "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
- },
- "jade__reservoir_mastery_ii": {
-  "title": "Reservoir Mastery II",
-  "description": "+14 Max Mana",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 14,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
   "size": 1.5,
@@ -5612,21 +5584,21 @@
   "size": 1.5,
   "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__reservoir_mastery_iii": {
-  "title": "Reservoir Mastery III",
-  "description": "+14 Max Mana",
+ "jade__meditation_5": {
+  "title": "Meditation 5",
+  "description": "+4.5% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:max_mana",
-     "value": 14,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -5635,15 +5607,48 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Core bonus (every archetype has this spoke)."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
+ },
+ "jade__readiness_3": {
+  "title": "Readiness 3",
+  "description": "+1.5% Attack Speed",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/minecraft_generic.attack_speed.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_speed",
+     "value": 0.015,
+     "operation": "multiply_base"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+   }
+  },
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
  "jade__warding_1": {
   "title": "Warding 1",
@@ -5710,21 +5715,53 @@
   },
   "size": 2.0
  },
- "jade__warding_2": {
-  "title": "Warding 2",
-  "description": "+2% Spell Resistance",
+ "jade__symmetry_3": {
+  "title": "Symmetry 3",
+  "description": "+4.5% Symmetry Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:spell_resist",
-     "value": 0.02,
+     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__flow_6": {
+  "title": "Flow 6",
+  "description": "+8% Mana Regen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.08,
      "operation": "addition"
     }
    }
@@ -5743,21 +5780,21 @@
   "size": 1.5,
   "extra_description": "Mage class bonus."
  },
- "jade__warding_mastery_i": {
-  "title": "Warding Mastery I",
-  "description": "+4% Spell Resistance",
+ "jade__reservoir_mastery_iii": {
+  "title": "Reservoir Mastery III",
+  "description": "+14 Max Mana",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:spell_resist",
-     "value": 0.04,
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 14,
      "operation": "addition"
     }
    }
@@ -5774,23 +5811,23 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "jade__warding_3": {
-  "title": "Warding 3",
-  "description": "+4% Spell Resistance",
+ "jade__attunement_6": {
+  "title": "Attunement 6",
+  "description": "+12 Max Mana",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:spell_resist",
-     "value": 0.04,
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
      "operation": "addition"
     }
    }
@@ -5799,15 +5836,15 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
  "jade__warding_4": {
   "title": "Warding 4",
@@ -5842,54 +5879,21 @@
   "size": 1.5,
   "extra_description": "Mage class bonus."
  },
- "jade__warding_mastery_ii": {
-  "title": "Warding Mastery II",
-  "description": "+4% Spell Resistance",
+ "jade__jade_staff_6": {
+  "title": "Jade Staff 6",
+  "description": "+4.5% Staff & Spear Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:spell_resist",
-     "value": 0.04,
-     "operation": "addition"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
-   }
-  },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
- },
- "jade__warding_5": {
-  "title": "Warding 5",
-  "description": "+4% Spell Resistance",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "irons_spellbooks:spell_resist",
-     "value": 0.04,
+     "attribute": "mdvlcraft:polearm_damage",
+     "value": 0.045,
      "operation": "addition"
     }
    }
@@ -5905,25 +5909,24 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 1.5
  },
- "jade__warding_6": {
-  "title": "Warding 6",
-  "description": "+2% Spell Resistance",
+ "jade__bounce_8": {
+  "title": "Bounce 8",
+  "description": "+2.2% Jump Height",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:spell_resist",
-     "value": 0.02,
-     "operation": "addition"
+     "attribute": "puffish_attributes:jump",
+     "value": 0.0225,
+     "operation": "multiply_base"
     }
    }
   ],
@@ -5931,31 +5934,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
    }
   },
-  "size": 1.5,
-  "extra_description": "Mage class bonus."
+  "size": 0.75,
+  "extra_description": "Twig bonus."
  },
- "jade__warding_mastery_iii": {
-  "title": "Warding Mastery III",
-  "description": "+4% Spell Resistance",
+ "jade__flow_mastery_ii": {
+  "title": "Flow Mastery II",
+  "description": "+9% Mana Regen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_spell_resist.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_mana_regen.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "irons_spellbooks:spell_resist",
-     "value": 0.04,
+     "attribute": "irons_spellbooks:mana_regen",
+     "value": 0.09,
      "operation": "addition"
     }
    }
@@ -6039,22 +6042,54 @@
   },
   "size": 2.0
  },
- "jade__bounce_2": {
-  "title": "Bounce 2",
-  "description": "+2.2% Jump Height",
+ "jade__symmetry_2": {
+  "title": "Symmetry 2",
+  "description": "+4.5% Symmetry Spell Power",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_spell_power.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "puffish_attributes:jump",
-     "value": 0.0225,
-     "operation": "multiply_base"
+     "attribute": "iss_magicfromtheeast:symmetry_spell_power",
+     "value": 0.045,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "jade__attunement_3": {
+  "title": "Attunement 3",
+  "description": "+12 Max Mana",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/irons_spellbooks_max_mana.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "irons_spellbooks:max_mana",
+     "value": 12.0,
+     "operation": "addition"
     }
    }
   ],
@@ -6072,22 +6107,22 @@
   "size": 0.75,
   "extra_description": "Twig bonus."
  },
- "jade__bounce_3": {
-  "title": "Bounce 3",
-  "description": "+2.2% Jump Height",
+ "jade__jade_staff_mastery_iii": {
+  "title": "Jade Staff Mastery III",
+  "description": "+6% Staff & Spear Damage",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/mdvlcraft_polearm_damage.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "puffish_attributes:jump",
-     "value": 0.0225,
-     "operation": "multiply_base"
+     "attribute": "mdvlcraft:polearm_damage",
+     "value": 0.06,
+     "operation": "addition"
     }
    }
   ],
@@ -6095,32 +6130,31 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5
  },
- "jade__bounce_4": {
-  "title": "Bounce 4",
-  "description": "+2.2% Jump Height",
+ "jade__jade_ward_mastery_ii": {
+  "title": "Jade Ward Mastery II",
+  "description": "+6% Symmetry Resistance",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
+    "texture": "mdvlcraft:textures/gui/icons18/bonus/iss_magicfromtheeast_symmetry_magic_resist.png"
    }
   },
   "rewards": [
    {
     "type": "puffish_skills:attribute",
     "data": {
-     "attribute": "puffish_attributes:jump",
-     "value": 0.0225,
-     "operation": "multiply_base"
+     "attribute": "iss_magicfromtheeast:symmetry_magic_resist",
+     "value": 0.06,
+     "operation": "addition"
     }
    }
   ],
@@ -6128,47 +6162,13 @@
   "frame": {
    "type": "texture",
    "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
    }
   },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
- },
- "jade__bounce_5": {
-  "title": "Bounce 5",
-  "description": "+2.2% Jump Height",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/bonus/puffish_attributes_jump.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "puffish_skills:attribute",
-    "data": {
-     "attribute": "puffish_attributes:jump",
-     "value": 0.0225,
-     "operation": "multiply_base"
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_twig_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_twig_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_twig_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_twig_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_twig_excluded.png"
-   }
-  },
-  "size": 0.75,
-  "extra_description": "Twig bonus."
+  "size": 1.5
  }
 }
