@@ -94,7 +94,7 @@ mod('smoke_bomb', 'Smoke Bomb', 'Firecracker', 'A burst of smoke that blinds eve
 mod('hunting_hawk', 'Hunting Hawk', 'Bird Strike', 'A hawk companion that circles you, marks the nearest enemy with Glowing and dives at it.')
 mod('campfire', 'Campfire', 'Healing Circle', 'Light a campfire that heals and warms allies around it and cooks food dropped in it.')
 mod('seraph_embodiment', 'Seraph Embodiment', 'Angel Wing', 'Become a seraph of many eyes and wings for up to 30 s (cast again to leave): fly slowly, cast only spells, with 20% more spell power, faster mana regeneration and Regeneration. You cannot attack, use items or other abilities, and only your eye can be hit.')
-mod('gaunt_vessel', 'Gaunt Vessel', 'Angel Wing', 'Your bones snap one by one and your body tears into the Haunted Lord for up to 30 s (cast again to leave): 25% faster, 20% more spirit spell power and Night Vision, casting only spells. You cannot attack, use items or other abilities, and cannot move while changing.')
+mod('gaunt_vessel', 'Gaunt Vessel', 'Angel Wing', 'Your bones snap one by one and your body tears into the Haunted Lord for up to 30 s (cast again to leave): 25% faster, Night Vision and no fall damage; you can only leap (hold to charge, cling to walls and ceilings) or change back. You cannot attack, use items or other abilities, and cannot move while changing.')
 mod('thunder_step', 'Thunder Step', 'Blood Step', 'Teleport up to 14 blocks where you look in a flash of lightning; enemies near where you leave and where you land are shocked and staggered.')
 mod('pack_mule', 'Pack Mule', 'Summon Horse', 'Summon a spectral mule with a chest that follows you.')
 # elemental reskins

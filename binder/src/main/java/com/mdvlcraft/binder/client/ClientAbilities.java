@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.Ability;
+import com.mdvlcraft.binder.ability.GauntAbility;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
@@ -43,11 +44,12 @@ public final class ClientAbilities {
     }
 
     public static int level(Ability ability) {
-        return granted.getOrDefault(ability, 0);
+        return ability instanceof GauntAbility ? 1 : granted.getOrDefault(ability, 0);
     }
 
+    /** The wheel's slot; in Gaunt Vessel's form, the form's own wheel (Transform Back and Leap) instead of the loadout. */
     public static Optional<Ability> slot(int slot) {
-        return wheel.get(slot);
+        return GauntClient.local() ? GauntAbility.slot(slot).map(ability -> (Ability)ability) : wheel.get(slot);
     }
 
     public static int selected() {

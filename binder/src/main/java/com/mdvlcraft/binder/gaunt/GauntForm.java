@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -29,6 +28,7 @@ import net.minecraftforge.event.TickEvent.PlayerTickEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.living.LivingFallEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -36,7 +36,6 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import net.minecraftforge.registries.ForgeRegistries;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType;
@@ -45,8 +44,9 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
  * Gaunt Vessel (modified/GauntVessel): the player becomes the Haunted Lord (client/GauntRenderer draws it in their place).
  * Entering, the player is lifted and their bones snap one by one (SNAPS) until the body tears into the
  * Haunted Lord, which unfolds (its transform animation); leaving plays all of it backwards at twice the speed. While
- * changing the player cannot move or jump. In the form: 25% faster, 20% more spirit spell power, Night Vision; spells
- * only (Iron's spells, not the Modified abilities), no attacks, item use or Epic Fight skills.
+ * changing the player cannot move or jump. In the form: 25% faster, Night Vision, no fall damage; the ability wheel holds
+ * only Transform Back and Leap (ability/GauntAbility, gaunt/GauntLeap); no other abilities, spells, attacks, item use or
+ * Epic Fight skills.
  *
  * The server keeps each player's phase and sends it to them and everyone tracking them (GauntFormPacket); clients keep
  * what they were told in CLIENT, so in() answers on both sides.
@@ -62,9 +62,7 @@ public final class GauntForm {
     public static final int EXIT_TICKS = ENTER_TICKS / 2;
     /** The ticks of entering at which a bone snaps (client/GauntRenderer poses the body to match). */
     public static final int[] SNAPS = {12, 19, 26, 32, 37, 43, 47, 51, 55, 58, 61};
-    private static final ResourceLocation SPIRIT_POWER = new ResourceLocation("iss_magicfromtheeast", "spirit_spell_power");
     private static final UUID SPEED = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a21");
-    private static final UUID SPELL_POWER = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a22");
     private static final UUID FROZEN = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a23");
     private static final UUID SKILL_LISTENER = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a24");
     private static final UUID ATTACK_LISTENER = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a25");
@@ -99,9 +97,15 @@ public final class GauntForm {
         };
     }
 
-    /** Whether a spell may be cast in the form: Iron's spells, not the Modified abilities (Gaunt Vessel itself excepted). */
+    /** Whether the player is in the form and done changing (only then can they leap). */
+    public static boolean active(ServerPlayer player) {
+        State state = SERVER.get(player.getUUID());
+        return state != null && state.phase == FormPhase.ACTIVE;
+    }
+
+    /** The only spell that may be cast in the form is Gaunt Vessel itself (to change back). */
     public static boolean castable(String spellId) {
-        return !spellId.startsWith("mdvlcraft:") || spellId.equals(SPELL);
+        return spellId.equals(SPELL);
     }
 
     public static void enter(ServerPlayer player) {
@@ -126,6 +130,7 @@ public final class GauntForm {
         }
         state.phase = FormPhase.EXITING;
         state.ticks = 0;
+        GauntLeap.clear(player);
         active(player, false);
         modifier(player, Attributes.MOVEMENT_SPEED, FROZEN, "Gaunt Vessel (changing)", -1.0, Operation.MULTIPLY_TOTAL);
         sync(player, state, false);
@@ -137,6 +142,7 @@ public final class GauntForm {
         if (state == null) {
             return;
         }
+        GauntLeap.clear(player);
         active(player, false);
         removeModifier(player, Attributes.MOVEMENT_SPEED, FROZEN);
         if (state.epicFightMode) {
@@ -147,17 +153,11 @@ public final class GauntForm {
 
     /** The form's own boons, on or off. */
     private static void active(ServerPlayer player, boolean on) {
-        Attribute spirit = ForgeRegistries.ATTRIBUTES.getValue(SPIRIT_POWER);
-        if (spirit == null) {
-            throw new IllegalStateException("Attribute " + SPIRIT_POWER + " is missing from the pack");
-        }
         if (on) {
             modifier(player, Attributes.MOVEMENT_SPEED, SPEED, "Gaunt Vessel", 0.25, Operation.MULTIPLY_BASE);
-            modifier(player, spirit, SPELL_POWER, "Gaunt Vessel", 0.2, Operation.MULTIPLY_BASE);
             player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
         } else {
             removeModifier(player, Attributes.MOVEMENT_SPEED, SPEED);
-            removeModifier(player, spirit, SPELL_POWER);
             MobEffectInstance sight = player.getEffect(MobEffects.NIGHT_VISION);
             if (sight != null && sight.isInfiniteDuration()) {
                 player.removeEffect(MobEffects.NIGHT_VISION);
@@ -220,6 +220,15 @@ public final class GauntForm {
             sync(player, state, false);
         } else if (state.phase == FormPhase.EXITING && state.ticks >= EXIT_TICKS) {
             end(player);
+        } else if (state.phase == FormPhase.ACTIVE) {
+            GauntLeap.tick(player);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onFall(LivingFallEvent event) {
+        if (event.getEntity() instanceof Player player && in(player)) {
+            event.setCanceled(true);
         }
     }
 
@@ -263,6 +272,7 @@ public final class GauntForm {
             State state = SERVER.get(target.getUUID());
             if (state != null) {
                 BinderNetwork.sendTo(viewer, new GauntFormPacket(target.getId(), state.phase, state.ticks, false));
+                GauntLeap.sendTo(viewer, target);
             }
         }
     }
@@ -288,7 +298,7 @@ public final class GauntForm {
         }
     }
 
-    /** Spells only: Iron's spells, not the Modified abilities. */
+    /** No spells but Gaunt Vessel itself. */
     @SubscribeEvent
     public static void onPreCast(SpellPreCastEvent event) {
         if (in(event.getEntity()) && !castable(event.getSpellId())) {

@@ -15,10 +15,14 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.LivingEntityRenderer;
 import net.minecraft.client.renderer.entity.player.PlayerRenderer;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
+import org.joml.Matrix3f;
 import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 /**
  * Draws a player in Gaunt Vessel (gaunt/GauntForm). For the first SNAP_TICKS of entering it is the player's own body,
@@ -27,7 +31,9 @@ import org.joml.Quaternionf;
  * (assets/mdvlcraft/haunted_lord/haunted_lord.json, from tools/haunted_lord/convert.py) unfolding out of it (transform).
  * Leaving plays all of it backwards. In the form: cast while casting, crawl while sneaking, sprint or walk while moving
  * (paced by the walk animation's distance), idle otherwise, each change blended over BLEND_TICKS; the head turns towards
- * where the player looks. The eyes glow (the glow mask, drawn full bright).
+ * where the player looks. Charging a leap (gaunt/GauntLeap) it crouches in the crawl with its hands down, pressing lower
+ * and shaking; clinging to a wall or a ceiling it holds that pose turned onto the surface. The eyes glow (the glow mask,
+ * drawn full bright).
  */
 final class GauntRenderer {
     private static final ResourceLocation MODEL = new ResourceLocation("mdvlcraft", "haunted_lord/haunted_lord.json");
@@ -40,6 +46,8 @@ final class GauntRenderer {
     private static final float CRAWL_PACE = 0.08F;
     /** A spell begun in the form keeps the cast animation at least this long (seconds). */
     private static final float CAST_HOLD = 1.5F;
+    /** The crawl's moment with both hands down: the pose held while clinging or charging a leap. */
+    private static final float HANDS_PLANTED = 0.7F;
     private static NodeModel model;
     private static int head;
     private static final Map<Integer, NodeModel.Blend> BLENDS = new HashMap<>();
@@ -72,10 +80,24 @@ final class GauntRenderer {
         } else {
             Pick pick = pick(player, seen, partialTick, now);
             pose = blend.pose(model, pick.animation, pick.time, now);
-            look(pose, player, partialTick, yaw);
         }
+        GauntClient.Leap leap = GauntClient.leap(player.getId());
+        Direction cling = time >= GauntForm.ENTER_TICKS && leap != null ? leap.cling : null;
+        float charge = GauntClient.charge(player, partialTick);
         poseStack.pushPose();
-        poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - yaw));
+        if (cling != null) {
+            surface(poseStack, player, cling, partialTick, yaw);
+        } else {
+            if (time >= GauntForm.ENTER_TICKS) {
+                look(pose, player, partialTick, yaw);
+            }
+            poseStack.mulPose(Axis.YP.rotationDegrees(180.0F - yaw));
+        }
+        if (charge >= 0.0F) {
+            // gathering itself: pressed lower and wider the longer it charges, shaking
+            poseStack.mulPose(Axis.ZP.rotationDegrees(2.0F * charge * Mth.sin(now * 3.1F)));
+            poseStack.scale(1.0F + 0.08F * charge, 1.0F - 0.2F * charge, 1.0F + 0.08F * charge);
+        }
         poseStack.scale(SCALE, SCALE, SCALE);
         int overlay = LivingEntityRenderer.getOverlayCoords(player, 0.0F);
         model.draw(pose, poseStack, buffers.getBuffer(RenderType.entityCutoutNoCull(model.texture)), light, overlay);
@@ -91,6 +113,10 @@ final class GauntRenderer {
 
     static Pick pick(Player player, Seen seen, float partialTick, float now) {
         NodeModel model = model();
+        GauntClient.Leap leap = GauntClient.leap(player.getId());
+        if (leap != null && (leap.cling != null || leap.chargingSince >= 0)) {
+            return new Pick("crawl", HANDS_PLANTED, model.length("crawl"));
+        }
         String animation;
         float time;
         float walked = player.walkAnimation.position(partialTick);
@@ -115,6 +141,34 @@ final class GauntRenderer {
         }
         float length = model.length(animation);
         return new Pick(animation, time % length, length);
+    }
+
+    /**
+     * Turns the model onto the surface it clings to (gaunt/GauntLeap): its ground is the block face the player's hitbox
+     * touches, its feet towards the block, and it faces where the player looks along that face (up the wall, or the body's
+     * way on a ceiling, when the look is straight into or out of it).
+     */
+    private static void surface(PoseStack poseStack, Player player, Direction face, float partialTick, float yaw) {
+        Vector3f up = new Vector3f(-face.getStepX(), -face.getStepY(), -face.getStepZ());
+        if (face == Direction.UP) {
+            poseStack.translate(0.0F, player.getBbHeight(), 0.0F);
+        } else {
+            float half = player.getBbWidth() / 2.0F;
+            poseStack.translate(face.getStepX() * half, player.getBbHeight() / 2.0F, face.getStepZ() * half);
+        }
+        Vec3 view = player.getViewVector(partialTick);
+        Vector3f forward = new Vector3f((float)view.x, (float)view.y, (float)view.z);
+        forward.sub(new Vector3f(up).mul(forward.dot(up)));
+        if (forward.lengthSquared() < 0.04F) {
+            forward = face == Direction.UP
+                ? new Vector3f(-Mth.sin(yaw * Mth.DEG_TO_RAD), 0.0F, Mth.cos(yaw * Mth.DEG_TO_RAD))
+                : new Vector3f(0.0F, 1.0F, 0.0F);
+        }
+        forward.normalize();
+        // the model faces -Z: columns are its x, y (the surface's normal) and z axes in the world
+        Vector3f back = new Vector3f(forward).negate();
+        Vector3f side = new Vector3f(up).cross(back);
+        poseStack.mulPose(new Quaternionf().setFromNormalized(new Matrix3f(side, up, back)));
     }
 
     /** Turns the head towards where the player looks (relative to the body, within limits). */

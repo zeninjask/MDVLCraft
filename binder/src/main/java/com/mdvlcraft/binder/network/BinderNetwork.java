@@ -79,6 +79,14 @@ public final class BinderNetwork {
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
         CHANNEL.registerMessage(
+            id++, GauntStatePacket.class, GauntStatePacket::encode, GauntStatePacket::decode, GauntStatePacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, GauntClingPacket.class, GauntClingPacket::encode, GauntClingPacket::decode, GauntClingPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+        CHANNEL.registerMessage(
             id++, JinglePacket.class, JinglePacket::encode, JinglePacket::decode, JinglePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
         CHANNEL.registerMessage(
