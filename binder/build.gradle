@@ -109,6 +109,10 @@ dependencies {
     compileOnly files('libs/stamina_interactions_reworked-2.3.jar')
     // Parties: PartiesBufferMixin fixes its ghost rendering crash on enchanted items
     compileOnly files('libs/Parties-1.20.1-2.2.0.jar')
+    // Xaero's Minimap: compat/PartyMapTracker shows party members on the minimap and world map
+    compileOnly files('libs/Xaeros_Minimap_FP24.2.0_Forge_1.20.jar')
+    // Alshanex's Familiars: ShadowEntityMixin and ShadowSummonSpellMixin rework Call the Shadows
+    compileOnly files('libs/alshanex_familiars-1.20.1_v4.1.0.jar')
     // Somakespells: SpectralRondoPlayerRenderHandlerMixin keeps Spectral Rondo's pose push and pop paired
     compileOnly files('libs/somakespells-1.0.9-1.20.1-fixaltar.jar')
     // Interlace Spellweaves: mixin/csw silences its first-cast chat line
