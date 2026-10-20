@@ -29,6 +29,7 @@ public final class AugmentEffects {
             return;
         }
 
+        com.mojang.logging.LogUtils.getLogger().info("TOOLSWAP DEBUG left click {} by {}", event.getPos(), player.getName().getString());
         BlockState state = player.level().getBlockState(event.getPos());
         if (state.getDestroySpeed(player.level(), event.getPos()) <= 0) {
             return;
