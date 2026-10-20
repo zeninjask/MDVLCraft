@@ -256,6 +256,8 @@ BUILT = {
     'void_yokai': spell(ELDRITCH, 50, 90, 'long', 30),
     'spirit_hawk': spell(SPIRIT, 40, 90, 'long', 20),
     'spirit_steed': spell(SPIRIT, 30, 120, 'long', 20),
+    # wave 2 (the rest are in built_<group>.py)
+    'underworld_gate': spell(SPIRIT, 40, 120),
 }
 
 # The second wave (two abilities per vocation, tools/vocations/v2_new.py) is built group by group: each

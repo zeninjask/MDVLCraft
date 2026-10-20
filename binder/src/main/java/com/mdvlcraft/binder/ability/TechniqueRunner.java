@@ -55,6 +55,11 @@ final class TechniqueRunner {
         }
     }
 
+    /** Holds the cast key on `technique` for the player (the open shrine cuts while held) until release(). */
+    static void hold(ServerPlayer player, Technique technique) {
+        HELD.put(player.getUUID(), technique);
+    }
+
     static void release(ServerPlayer player) {
         HELD.remove(player.getUUID());
         BlackBirdManipulation.deactivate(player);

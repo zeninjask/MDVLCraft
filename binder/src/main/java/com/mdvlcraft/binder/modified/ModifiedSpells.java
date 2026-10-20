@@ -63,7 +63,9 @@ public final class ModifiedSpells {
         SmiteSpells.Drown::new, SmiteSpells.Geyser::new, SmiteSpells.SoulHarvest::new,
         BladeSpells.SoulRend::new, BladeSpells.PhantomDraw::new, BladeSpells.LeapOfFaith::new,
         // batch 6
-        SmiteSpells.BurningRoots::new
+        SmiteSpells.BurningRoots::new,
+        // wave 2 (two abilities per vocation): Underworld Gate here, the rest in Wave2<Group>.all() below
+        UnderworldGate::new
         ));
         BoltSpells.all().forEach(bolt -> all.add(() -> bolt));
         ConeSpells.all().forEach(cone -> all.add(() -> cone));
