@@ -229,7 +229,7 @@
  "voc__7": {
   "title": "Underworld Gate",
   "description": "Unlocks Underworld Gate (80 mana, 120 s cooldown) on the ability wheel",
-  "extra_description": "Open the Malevolent Shrine domain: everything within 12 blocks is rooted for 4 s (and can still be executed) and you turn invisible for 10 s. Shinigami vocation skill.",
+  "extra_description": "A dark shrine rises behind you for 10 s: every enemy within 12 blocks is held in black roots for 10 s and you turn invisible for 10 s. Shinigami vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
@@ -259,21 +259,19 @@
   "size": 2.0
  },
  "voc__8": {
-  "title": "Hollow Mask",
-  "description": "Unlocks Hollow Mask (35 mana, 60 s cooldown) on the ability wheel",
-  "extra_description": "For 20 s undead and endermen ignore you and you have Night Vision. Shinigami vocation skill.",
+  "title": "Shunpo",
+  "description": "Teaches Shunpo, an Epic Fight Guard skill: You cannot guard or block; press guard with a parry's timing to flash aside and dodge the attack (Dodge Master's sidestep), for no stamina. Works with any weapon. Equip it in the Combat Skills box of the abilities screen",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_hollow_mask.png"
+    "texture": "mdvlcraft:textures/gui/icons18/skill/mdvlcraft_shunpo.png"
    }
   },
   "rewards": [
    {
-    "type": "mdvlcraft:ability",
+    "type": "mdvlcraft:epicfight_skill",
     "data": {
-     "ability": "mdvlcraft:hollow_mask",
-     "level": 1
+     "skill": "mdvlcraft:shunpo"
     }
    }
   ],
@@ -288,7 +286,8 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
    }
   },
-  "size": 2.0
+  "size": 2.0,
+  "extra_description": "Shinigami vocation skill."
  },
  "voc__9": {
   "title": "Lethal Focus",

@@ -324,7 +324,7 @@ mod('twin_reflection', 'Twin Reflection', 'a new design', 'For 10 s, each arrow 
 mod('fracture_mark', 'Fracture Mark', 'a new design', 'Mark a target for 10 s; each arrow hit removes 10% of its armour, up to 50%.')
 mod('cloud_ascent', 'Cloud Ascent', 'a new design', 'Leap 8 blocks up and forward and gain slow falling for 6 s.')
 mod('golden_elixir', 'Golden Elixir', 'a new design', 'Conjure 3 jade pills that heal 4 HP and grant resistance I for 15 s.')
-mod('underworld_gate', 'Underworld Gate', 'a new design', 'Open the Malevolent Shrine domain: everything within 12 blocks is rooted for 4 s (and can still be executed) and you turn invisible for 10 s.')
+mod('underworld_gate', 'Underworld Gate', 'a new design', 'A dark shrine rises behind you for 10 s: every enemy within 12 blocks is held in black roots for 10 s and you turn invisible for 10 s.')
 mod('hollow_mask', 'Hollow Mask', 'a new design', 'For 20 s undead and endermen ignore you and you have Night Vision.')
 mod('haunted_crockery', 'Haunted Crockery', 'a new design', 'Throw a spectral pot; the creature hit takes 4 damage and nausea for 5 s.')
 mod('rattling_chains', 'Rattling Chains', 'a new design', 'A 5-block area rattles for 5 s, giving enemies slowness III and glowing.')
@@ -507,7 +507,7 @@ NEW = {
     ('jade', 'thief'): ['leaf_disguise', 'belly_drum'],
     ('jade', 'stalker'): ['twin_reflection', 'fracture_mark'],
     ('jade', 'wanderer'): ['cloud_ascent', 'golden_elixir'],
-    ('spirit', 'assassin'): ['underworld_gate', 'hollow_mask'],
+    ('spirit', 'assassin'): ['underworld_gate', 'mdvlcraft:shunpo'],
     ('spirit', 'thief'): ['haunted_crockery', 'rattling_chains'],
     ('spirit', 'stalker'): ['ancestors_call', 'ancestral_sight'],
     ('spirit', 'wanderer'): ['incense_circle', 'offering_onigiri'],
@@ -520,4 +520,4 @@ NEW = {
 }
 for (_a, _b), _keys in NEW.items():
     _r = d.VOC.get((_a, _b)) or d.VOC[(_b, _a)]
-    _r['skills'] += ['Z:' + k for k in _keys]
+    _r['skills'] += [k if ':' in k else 'Z:' + k for k in _keys]   # namespace:id is an Epic Fight skill
