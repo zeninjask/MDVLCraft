@@ -42,12 +42,12 @@ T = {
     # a mob caster is refused; the online player Tester gets 16 arrows (the clear count prints 16)
     'quiver_refill': lambda: run('Quiver Refill', 'quiver_refill', wait=0.5,
                                  after=('cast Tester mdvlcraft:quiver_refill', 'clear Tester minecraft:arrow 0')),
-    # the bomb lands at t1 (3 blocks): t1 Blindness (~30t, refreshed); the caster, 3 blocks from it, has Invisibility (15t, refreshed)
-    'rogue_smoke_bomb': lambda: run('Smoke Bomb', 'rogue_smoke_bomb', targets=(('husk', 0, 3),), face='feet', wait=2.0),
+    # the bomb lands at t1 (10 blocks, a lobbed throw sails over closer targets): t1 Blindness (~30t, refreshed)
+    'rogue_smoke_bomb': lambda: run('Smoke Bomb', 'rogue_smoke_bomb', targets=(('husk', 0, 10),), face='feet', wait=2.0),
     # caster Invisibility for 120t (no aggro to check on NoAI targets)
     'vanish': lambda: run('Vanish', 'vanish', wait=0.5),
     # t1 (2 blocks) loses ~2.4 per second (~7 after 3 s) and has Slowness amp 1; t2 (5 blocks) untouched
-    'rogue_caltrops': lambda: run('Caltrops', 'rogue_caltrops', targets=(('husk', 0, 2), ('husk', 0, 5))),
+    'rogue_caltrops': lambda: run('Caltrops', 'rogue_caltrops', targets=(('stander', 0, 2), ('stander', 0, 5))),
     # the caster's wolf w (Health 4) is healed to 14 (or its max) and has Regeneration amp 0 for 200t; with no wolf the cast is refused
     'mend_beast': lambda: run('Mend Beast', 'mend_beast', extra=WOLF, wait=0.5, after=WOLF_STATE),
     # bond marks on the caster and the wolf; t1's 10-damage hit on the caster: caster loses 5 (HP 15), the wolf loses 5 too

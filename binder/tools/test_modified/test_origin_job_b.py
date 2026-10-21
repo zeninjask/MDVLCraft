@@ -32,7 +32,7 @@ T = {
     'pathfinder': lambda: run('Pathfinder', 'pathfinder', wait=0.5,
                               after=(BUFFS, 'attribute @e[tag=c,limit=1] forge:step_height_addition get')),
     # t1 (cow at 8) takes no damage and is pulled to ~1.5-2 blocks from the caster; the caster's Pos doesn't move
-    'grappling_rope': lambda: run('Grappling Rope', 'grappling_rope', targets=(('cow', 0, 8),), face='feet', wait=2.0),
+    'grappling_rope': lambda: run('Grappling Rope', 'grappling_rope', targets=(('stander', 0, 8),), face='feet', wait=2.0),
     # the flask lands by t1/t2 (within 3): each loses ~4 and its armour is 4 lower; t3 at 15 untouched
     'acid_flask': lambda: run('Acid Flask', 'acid_flask', targets=(('husk', 0, 5), ('husk', 2, 5), ('husk', 0, 15)), wait=2.0,
                               after=(ARMOR,)),
@@ -47,7 +47,7 @@ T = {
     # caster: Conduit Power(0) 600t (the forecast is chat for players only; check it by hand)
     'weather_eye': lambda: run('Weather Eye', 'weather_eye', wait=0.5),
     # t1 (cow at 9) takes no damage and slides ~6 blocks toward the caster (to z ~3)
-    'hook_and_reel': lambda: run('Hook and Reel', 'hook_and_reel', targets=(('cow', 0, 9),), face='feet', wait=2.0),
+    'hook_and_reel': lambda: run('Hook and Reel', 'hook_and_reel', targets=(('stander', 0, 9),), face='feet', wait=2.0),
     # nothing to judge on mobs: the cast succeeds and a bubble ring shows at the spot looked at; check bites by hand with a rod
     'chum_the_water': lambda: run('Chum the Water', 'chum_the_water', face='ground:6', wait=1.0),
     # the net lands by t1/t2 (within 3): Slowness(6) and Jump Boost 60t; t3 at 12 untouched

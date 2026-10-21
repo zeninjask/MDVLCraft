@@ -44,7 +44,7 @@ T = {
     # t1's 10-damage hit leaves the caster at 20 HP; the caster's 2-damage hit takes only 1 off t1
     'divine_shield': lambda: run('Divine Shield', 'divine_shield', targets=(('husk', 0, 2),), wait=0.3, after=HIT_ME + (HIT,)),
     # a tripwire hook flies at t1 (pig, 10 blocks), which slides to ~1-2 blocks from the caster
-    'boarding_hook': lambda: run('Boarding Hook', 'boarding_hook', targets=(('pig', 0, 10),), face='feet', wait=2.5),
+    'boarding_hook': lambda: run('Boarding Hook', 'boarding_hook', targets=(('stander', 0, 10),), face='feet', wait=2.5),
     # the ally zombie a (2 blocks) and the caster get Water Breathing 300t; a player's own cast reads attack speed 4.4
     'sea_shanty': lambda: run('Sea Shanty', 'sea_shanty', targets=(('husk', 0, 6),), extra=TEAM, wait=0.5,
                               after=('data get entity @e[tag=a,limit=1] ActiveEffects', 'cast @p mdvlcraft:sea_shanty',
