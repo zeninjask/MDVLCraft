@@ -14,13 +14,13 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.puffish.skillsmod.api.SkillsAPI;
 
 /**
- * The 2.0.28 balance pass changed the trees and costs, so each player's first login after it gives back every point spent
- * on their vocation tab and Origin tab (levels and archetypes stay) to spend again. Done once per player, marked in their
- * persisted data; players who join for the first time are only marked.
+ * The balance passes of 2.0.28 and 2.0.29 changed the trees and costs, so each player's first login on 2.0.29 gives back
+ * every point spent on their vocation tab and Origin tab (levels and archetypes stay) to spend again. Done once per player,
+ * marked in their persisted data (a new flag per release that needs it); players who join for the first time are only marked.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class BalanceRespec {
-    private static final String DONE = "mdvlcraft_balance_respec_2_0_28";
+    private static final String DONE = "mdvlcraft_balance_respec_2_0_29";
 
     private BalanceRespec() {
     }

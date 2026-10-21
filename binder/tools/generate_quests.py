@@ -71,16 +71,17 @@ def xp(points):
     return {'type': 'xp', 'xp': points}
 
 
-def command(cmd):
-    return {'type': 'command', 'command': cmd, 'elevate_perms': True, 'silent': True}
+def command(cmd, title, icon):
+    """A command reward named and drawn as what it gives (FTB Quests otherwise shows it as "Command")."""
+    return {'type': 'command', 'command': cmd, 'elevate_perms': True, 'silent': True, 'title': title, 'icon': icon}
 
 
 def crate(tier):
-    return command(f'/loot give {{p}} loot mdvlcraft:quests/tier{tier}')
+    return command(f'/loot give {{p}} loot mdvlcraft:quests/tier{tier}', f'Tier {tier} Reward Crate', 'minecraft:chest')
 
 
 def compass(struct, dim, name):
-    return command(f'/mdvlquest compass {{p}} {struct} {dim} {name}')
+    return command(f'/mdvlquest compass {{p}} {struct} {dim} {name}', f"Compass to {name}'s Lair", 'minecraft:compass')
 
 
 ACCEPT = {'type': 'checkmark', 'title': 'Accept Quest'}
