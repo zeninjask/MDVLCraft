@@ -5,10 +5,10 @@ import io.redspace.ironsspellbooks.api.config.SpellConfigParameter;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
-/** Every Modified ability hits 20% harder (2.0.21): their spell power multiplier defaults to 1.2 instead of 1. */
+/** Every Modified ability hits 10% harder: their spell power multiplier defaults to 1.1 instead of 1 (1.2 from 2.0.21 until the balance pass). */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class ModifiedSpellPower {
-    private static final double POWER_MULTIPLIER = 1.2;
+    private static final double POWER_MULTIPLIER = 1.1;
 
     private ModifiedSpellPower() {
     }

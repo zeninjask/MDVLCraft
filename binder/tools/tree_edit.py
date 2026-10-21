@@ -17,12 +17,12 @@ SPELLS = json.loads((Path(__file__).parent / "addon_spells.json").read_text())
 EF_NAMES = json.loads((Path(__file__).parent / "ef_skill_names.json").read_text())
 
 # Same policy as generate_skill_trees.py (x1.2 mana, x1.1 power on top since 1.9.20), then x1.2 power and x1.05 mana
-# and cooldown (2.0.21).
-MANA_MULTIPLIER = 0.756
-POWER_MULTIPLIER = 1.452
+# and cooldown (2.0.21); the balance pass (docs/MDVLCraft-Balance-Report.pdf) took power to x1.30 and mana to x0.85.
+MANA_MULTIPLIER = 0.85
+POWER_MULTIPLIER = 1.30
 COOLDOWN_MULTIPLIER = 1.5
 COOLDOWN_SCALE = 0.9975   # 5% shorter (2.0.15), then 5% longer (2.0.21)
-COOLDOWN_MIN = 3
+COOLDOWN_MIN = 4   # was 3 before the balance pass
 COOLDOWN_KEEP = 120
 MANA_POOL = 100
 LEAF_DISTANCE = 46
@@ -43,6 +43,24 @@ def spell_cooldown(sid):
 def spell_mana(sid, level):
     s = SPELLS[sid]
     return round((s["mana"] + (s["perlvl"] or 0) * (level - 1)) * MANA_MULTIPLIER)
+
+
+def spell_config(sid):
+    """The spell's Iron's config as the pack ships it ({} if none)."""
+    ns, path = sid.split(":")
+    target = DATA / ns / "irons_spellbooks_spell_config" / f"{path}.json"
+    return json.loads(target.read_text()) if target.exists() else {}
+
+
+def config_mana(sid, level):
+    """Mana at `level` with the spell's own config multiplier (hand-tuned ones included)."""
+    s = SPELLS[sid]
+    mult = spell_config(sid).get("irons_spellbooks:mana_cost_multiplier", MANA_MULTIPLIER)
+    return round((s["mana"] + (s["perlvl"] or 0) * (level - 1)) * mult)
+
+
+def config_cooldown(sid):
+    return spell_config(sid).get("irons_spellbooks:cooldown_in_seconds", spell_cooldown(sid))
 
 
 def pick_level(sid, wanted=3):

@@ -45,3 +45,6 @@ _pass(d.BASE, EFC, BAD, _use)             # only re-pick what the universal skil
 from names import CHOSEN
 for _k, _r in d.VOC.items():
     _r['names'] = [CHOSEN[_k]]
+
+# the balance pass (docs/MDVLCraft-Balance-Report.pdf) adjusts the finished design
+import v2_balance  # noqa: E402,F401

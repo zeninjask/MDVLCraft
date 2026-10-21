@@ -31,6 +31,7 @@ nodes 3 to 9 steps in (vocation_parts).
 Run from the binder folder: python3 tools/generate_vocations.py
 """
 import collections
+import heapq
 import json
 import math
 import random
@@ -49,6 +50,7 @@ from built import BUILT  # noqa: E402  (the Modified abilities that are built)
 import profiles as P  # noqa: E402  (each archetype's class spokes and twigs)
 
 D = v2_all.d
+import v2_balance as BAL  # noqa: E402
 OUT = ROOT / "src/main/resources/data/mdvlcraft/puffish_skills"
 PARTS = OUT / "vocation_parts"
 LANG = ROOT / "src/main/resources/assets/mdvlcraft/lang/en_us.json"
@@ -235,12 +237,16 @@ SPELL_INFO = T.SPELLS
 
 
 # Spells a vocation unlocks above the usual level 3.
-SPELL_LEVEL = {'irons_spellbooks:raise_dead': 6}
+SPELL_LEVEL = {'irons_spellbooks:raise_dead': 3}   # 6 until the balance pass
+LONG_COOLDOWN = 60   # balance pass: spells with at least this cooldown (s) are granted one level lower
 
 
 def spell_level(sid):
     if sid in SPELL_INFO:
-        return T.pick_level(sid, SPELL_LEVEL.get(sid, 3))
+        if sid in SPELL_LEVEL:
+            return T.pick_level(sid, SPELL_LEVEL[sid])
+        long = SPELL_INFO[sid]["cd"] is not None and T.spell_cooldown(sid) >= LONG_COOLDOWN
+        return T.pick_level(sid, 2 if long else 3)
     return 1
 
 
@@ -266,8 +272,8 @@ def ability_body(code, live, cost):
     if sid in CATALOG["spells"]:
         s = CATALOG["spells"][sid]
         level = spell_level(sid)
-        mana = T.spell_mana(sid, level) if sid in SPELL_INFO else None
-        cd = T.spell_cooldown(sid) if sid in SPELL_INFO and SPELL_INFO[sid]["cd"] is not None else None
+        mana = T.config_mana(sid, level) if sid in SPELL_INFO else None
+        cd = T.config_cooldown(sid) if sid in SPELL_INFO and SPELL_INFO[sid]["cd"] is not None else None
         cost_text = f" ({mana} mana, {cd:g} s cooldown)" if mana is not None and cd is not None else ""
         desc = short(FULLDESC.get(sid) or s["desc"])
         for strip in (" Legendary — learn via Unsigned Page.", " Requires Corruption 80000+."):
@@ -559,6 +565,80 @@ def base_tree(arch, live, seed=0):
     return defs, lines, pos, root
 
 
+# ---- balance pass (vocations/v2_balance.py) ------------------------------------------------------------------------------
+def ability_of(body):
+    for r in body.get("rewards", []):
+        if r["type"] != "puffish_skills:attribute":
+            return r["data"].get("ability") or r["data"].get("skill")
+    return None
+
+
+def code_id(code):
+    if code.startswith("Z:"):
+        return "mdvlcraft:" + code[2:]
+    return full(code) if ":" in code and code.split(":")[0] in PREFIX else code
+
+
+def point_distance(defs, lines, root):
+    adj = collections.defaultdict(list)
+    for a, b in lines:
+        adj[a].append(b)
+        adj[b].append(a)
+    dist, todo = {}, [(defs[root]["cost"], root)]
+    while todo:
+        d, n = heapq.heappop(todo)
+        if n in dist:
+            continue
+        dist[n] = d
+        for m in adj[n]:
+            if m not in dist:
+                heapq.heappush(todo, (d + defs[m]["cost"], m))
+    return dist
+
+
+def balance_base(arch, defs, lines, pos, root):
+    """Moves skills (EARLY, LATE) by trading places with another skill, and sets bonus totals (STATS)."""
+    def trade(a, b):
+        pos[a], pos[b] = pos[b], pos[a]
+        swap = {a: b, b: a}
+        lines[:] = [(swap.get(x, x), swap.get(y, y)) for x, y in lines]
+
+    def node_of(code):
+        want = code_id(code)
+        found = [n for n, body in defs.items() if ability_of(body) == want]
+        if not found:
+            raise SystemExit(f"balance: {arch} has no node for {code}")
+        return found[0]
+
+    skills = [n for n, body in defs.items() if ability_of(body) and n != root]
+    if arch in BAL.EARLY:
+        dist = point_distance(defs, lines, root)
+        node = node_of(BAL.EARLY[arch])
+        if dist[node] > 15:
+            trade(node, min(skills, key=lambda n: dist[n]))
+    if arch in BAL.LATE:
+        code, at = BAL.LATE[arch]
+        dist = point_distance(defs, lines, root)
+        node = node_of(code)
+        trade(node, min((n for n in skills if n != node), key=lambda n: abs(dist[n] - at)))
+    for attribute, total in BAL.STATS.get(arch, {}).items():
+        holders = [(n, r) for n, body in defs.items() for r in body.get("rewards", [])
+                   if r["type"] == "puffish_skills:attribute" and r["data"]["attribute"] == attribute]
+        now = sum(r["data"]["value"] for _, r in holders)
+        if now:
+            for n, r in holders:
+                r["data"]["value"] = round(r["data"]["value"] * total / now, 5)
+                body = defs[n]
+                body["description"] = fmt(attribute, r["data"]["value"]) + " " + body["description"].split(" ", 1)[1]
+        else:
+            twigs = [n for n, body in defs.items() if body.get("extra_description") == "Twig bonus."]
+            each = round(total / len(twigs), 5)
+            for n in twigs:
+                defs[n]["rewards"].append({"type": "puffish_skills:attribute",
+                                           "data": {"attribute": attribute, "value": each, "operation": ATTRIBUTES[attribute][2]}})
+                defs[n]["description"] += f" and {fmt(attribute, each)} {ATTRIBUTES[attribute][0]}"
+
+
 def write(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=1, ensure_ascii=False) + "\n")
@@ -570,6 +650,7 @@ def build_bases(live):
         for seed in range(200):
             try:
                 defs, lines, pos, root = base_tree(arch, live, seed)
+                balance_base(arch, defs, lines, pos, root)
                 break
             except SystemExit as e:
                 print(f"{arch} seed {seed}: {e}")

@@ -1,7 +1,7 @@
 {
  "wanderer__root": {
   "title": "Summon Horse",
-  "description": "Unlocks Summon Horse (Level 3) (41 mana, 29.93 s cooldown) on the ability wheel",
+  "description": "Unlocks Summon Horse (Level 3) (46 mana, 29.93 s cooldown) on the ability wheel",
   "extra_description": "Conjure a spectral steed that will follow you around and only let you ride. The horse's speed, health, and jump height scales with spell power. The first skill of the Wanderer base.",
   "icon": {
    "type": "texture",
@@ -33,7 +33,7 @@
  },
  "wanderer__footing_7": {
   "title": "Footing 7",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -46,6 +46,22 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -66,7 +82,7 @@
  },
  "wanderer__vitality_8": {
   "title": "Vitality 8",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -78,7 +94,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -99,7 +131,7 @@
  },
  "wanderer__endurance_3": {
   "title": "Endurance 3",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -112,6 +144,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -197,7 +245,7 @@
  },
  "wanderer__bounce_2": {
   "title": "Bounce 2",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -211,6 +259,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -262,7 +326,7 @@
  },
  "wanderer__hearty_6": {
   "title": "Hearty 6",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -275,6 +339,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -327,7 +407,7 @@
  },
  "wanderer__hearty_5": {
   "title": "Hearty 5",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -340,6 +420,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -391,7 +487,7 @@
  },
  "wanderer__footing_8": {
   "title": "Footing 8",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -404,6 +500,22 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -456,7 +568,7 @@
  },
  "wanderer__hearty_4": {
   "title": "Hearty 4",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -469,6 +581,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -585,7 +713,7 @@
  },
  "wanderer__mending_6": {
   "title": "Mending 6",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -599,6 +727,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -746,7 +890,7 @@
  },
  "wanderer__attunement_6": {
   "title": "Attunement 6",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -759,6 +903,22 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -779,7 +939,7 @@
  },
  "wanderer__vitality_2": {
   "title": "Vitality 2",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -791,7 +951,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -842,7 +1018,7 @@
  },
  "wanderer__second_breath_8": {
   "title": "Second Breath 8",
-  "description": "+3% Stamina Regen",
+  "description": "+3% Stamina Regen and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -856,6 +1032,22 @@
      "attribute": "epicfight:stamina_regen",
      "value": 0.03,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -907,7 +1099,7 @@
  },
  "wanderer__attunement_5": {
   "title": "Attunement 5",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -920,6 +1112,22 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -940,7 +1148,7 @@
  },
  "wanderer__mending_5": {
   "title": "Mending 5",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -954,6 +1162,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -973,7 +1197,7 @@
  },
  "wanderer__pocket_dimension": {
   "title": "Pocket Dimension",
-  "description": "Unlocks Pocket Dimension (Level 1) (227 mana, 89.78 s cooldown) on the ability wheel",
+  "description": "Unlocks Pocket Dimension (Level 1) (255 mana, 89.78 s cooldown) on the ability wheel",
   "extra_description": "Cast to transport yourself into a personal pocket dimension only you can access, giving a small free range area.",
   "icon": {
    "type": "texture",
@@ -1005,7 +1229,7 @@
  },
  "wanderer__vitality_5": {
   "title": "Vitality 5",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1017,7 +1241,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -1038,7 +1278,7 @@
  },
  "wanderer__hearty_2": {
   "title": "Hearty 2",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1051,6 +1291,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -1197,7 +1453,7 @@
  },
  "wanderer__hearty_3": {
   "title": "Hearty 3",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1210,6 +1466,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -1230,7 +1502,7 @@
  },
  "wanderer__attunement_4": {
   "title": "Attunement 4",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1243,6 +1515,22 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -1263,7 +1551,7 @@
  },
  "wanderer__footing_3": {
   "title": "Footing 3",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1276,6 +1564,22 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -1423,7 +1727,7 @@
  },
  "wanderer__bounce_5": {
   "title": "Bounce 5",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1437,6 +1741,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -1456,7 +1776,7 @@
  },
  "wanderer__attunement_3": {
   "title": "Attunement 3",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1469,6 +1789,22 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -1489,7 +1825,7 @@
  },
  "wanderer__immunity_aura": {
   "title": "Immunity Aura",
-  "description": "Unlocks Immunity Aura (Level 3) (94 mana, 89.78 s cooldown) on the ability wheel",
+  "description": "Unlocks Immunity Aura (Level 2) (95 mana, 89.78 s cooldown) on the ability wheel",
   "extra_description": "Creates a moving aura that has a chance every 2 seconds to cleanse one random non-beneficial effect from each ally. The aura vanishes when its owner takes actual damage.",
   "icon": {
    "type": "texture",
@@ -1502,7 +1838,7 @@
     "type": "mdvlcraft:ability",
     "data": {
      "ability": "esoteric_spell:immunity_aura",
-     "level": 3
+     "level": 2
     }
    }
   ],
@@ -1587,7 +1923,7 @@
  },
  "wanderer__attunement_2": {
   "title": "Attunement 2",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1600,6 +1936,22 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -1620,7 +1972,7 @@
  },
  "wanderer__bounce_1": {
   "title": "Bounce 1",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1634,6 +1986,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -1686,7 +2054,7 @@
  },
  "wanderer__blink": {
   "title": "Blink",
-  "description": "Unlocks Blink (Level 3) (7 mana, 2.99 s cooldown) on the ability wheel",
+  "description": "Unlocks Blink (Level 3) (8 mana, 3.99 s cooldown) on the ability wheel",
   "extra_description": "Low-cost, short-ranged teleport in the direction you're moving. Works omni-directionally.",
   "icon": {
    "type": "texture",
@@ -1718,7 +2086,7 @@
  },
  "wanderer__endurance_2": {
   "title": "Endurance 2",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1731,6 +2099,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -1944,7 +2328,7 @@
  },
  "wanderer__constitution_mastery_iii": {
   "title": "Constitution Mastery III",
-  "description": "+0.333 Max Health",
+  "description": "+0.556 Max Health",
   "icon": {
    "type": "texture",
    "data": {
@@ -1956,7 +2340,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.3333,
+     "value": 0.55556,
      "operation": "addition"
     }
    }
@@ -2043,7 +2427,7 @@
  },
  "wanderer__swiftness_7": {
   "title": "Swiftness 7",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2057,6 +2441,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -2076,7 +2476,7 @@
  },
  "wanderer__tailwind": {
   "title": "Tailwind",
-  "description": "Unlocks Tailwind (Level 3) (76 mana, 59.85 s cooldown) on the ability wheel",
+  "description": "Unlocks Tailwind (Level 3) (85 mana, 59.85 s cooldown) on the ability wheel",
   "extra_description": "Imbue yourself with the strength of the wind, increasing your speed and your mobility in the air.",
   "icon": {
    "type": "texture",
@@ -2108,7 +2508,7 @@
  },
  "wanderer__footing_5": {
   "title": "Footing 5",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2121,6 +2521,22 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -2141,7 +2557,7 @@
  },
  "wanderer__attunement_7": {
   "title": "Attunement 7",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2154,6 +2570,22 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -2174,7 +2606,7 @@
  },
  "wanderer__footing_6": {
   "title": "Footing 6",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2187,6 +2619,22 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -2207,7 +2655,7 @@
  },
  "wanderer__bounce_8": {
   "title": "Bounce 8",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2221,6 +2669,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -2304,7 +2768,7 @@
  },
  "wanderer__swiftness_4": {
   "title": "Swiftness 4",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2318,6 +2782,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -2337,7 +2817,7 @@
  },
  "wanderer__vitality_6": {
   "title": "Vitality 6",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2349,7 +2829,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -2402,7 +2898,7 @@
  },
  "wanderer__almighty_push": {
   "title": "Almighty Push",
-  "description": "Unlocks Almighty Push (Level 3) (38 mana, 22.44 s cooldown) on the ability wheel",
+  "description": "Unlocks Almighty Push (Level 3) (42 mana, 22.45 s cooldown) on the ability wheel",
   "extra_description": "Create a area of wind around you knocking back creatures in every directions, causing damage if they impact a wall",
   "icon": {
    "type": "texture",
@@ -2434,7 +2930,7 @@
  },
  "wanderer__mending_8": {
   "title": "Mending 8",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2448,6 +2944,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -2500,7 +3012,7 @@
  },
  "wanderer__second_breath_4": {
   "title": "Second Breath 4",
-  "description": "+3% Stamina Regen",
+  "description": "+3% Stamina Regen and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2514,6 +3026,22 @@
      "attribute": "epicfight:stamina_regen",
      "value": 0.03,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -2598,7 +3126,7 @@
  },
  "wanderer__mending_9": {
   "title": "Mending 9",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2612,6 +3140,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -2631,7 +3175,7 @@
  },
  "wanderer__wind_jump": {
   "title": "Wind Jump",
-  "description": "Unlocks Wind Jump (Level 3) (23 mana, 7.48 s cooldown) on the ability wheel",
+  "description": "Unlocks Wind Jump (Level 3) (26 mana, 7.48 s cooldown) on the ability wheel",
   "extra_description": "Propulse yourself in the air",
   "icon": {
    "type": "texture",
@@ -2729,7 +3273,7 @@
  },
  "wanderer__bounce_4": {
   "title": "Bounce 4",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2743,6 +3287,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -2825,7 +3385,7 @@
  },
  "wanderer__endurance_1": {
   "title": "Endurance 1",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2838,6 +3398,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -2955,7 +3531,7 @@
  },
  "wanderer__vitality_3": {
   "title": "Vitality 3",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2967,7 +3543,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -3021,7 +3613,7 @@
  },
  "wanderer__hearty_8": {
   "title": "Hearty 8",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3034,6 +3626,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -3087,7 +3695,7 @@
  },
  "wanderer__endurance_6": {
   "title": "Endurance 6",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3100,6 +3708,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -3215,7 +3839,7 @@
  },
  "wanderer__endurance_5": {
   "title": "Endurance 5",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3228,6 +3852,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -3375,7 +4015,7 @@
  },
  "wanderer__bounce_3": {
   "title": "Bounce 3",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3389,6 +4029,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -3440,7 +4096,7 @@
  },
  "wanderer__endurance_4": {
   "title": "Endurance 4",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3453,6 +4109,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -3473,7 +4145,7 @@
  },
  "wanderer__esoteric_step": {
   "title": "Esoteric Step",
-  "description": "Unlocks Esoteric Step (Level 3) (42 mana, 4.49 s cooldown) on the ability wheel",
+  "description": "Unlocks Esoteric Step (Level 3) (48 mana, 4.48 s cooldown) on the ability wheel",
   "extra_description": "Teleports toward the aimed position after channeling. A destination beyond the maximum range is clamped along the same direction.",
   "icon": {
    "type": "texture",
@@ -3505,7 +4177,7 @@
  },
  "wanderer__bounce_6": {
   "title": "Bounce 6",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3519,6 +4191,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -3571,7 +4259,7 @@
  },
  "wanderer__hearty_9": {
   "title": "Hearty 9",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3584,6 +4272,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -3698,7 +4402,7 @@
  },
  "wanderer__mending_1": {
   "title": "Mending 1",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3712,6 +4416,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -3859,7 +4579,7 @@
  },
  "wanderer__hearty_7": {
   "title": "Hearty 7",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3872,6 +4592,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -3925,7 +4661,7 @@
  },
  "wanderer__footing_1": {
   "title": "Footing 1",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3938,6 +4674,22 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -4184,7 +4936,7 @@
  },
  "wanderer__swiftness_3": {
   "title": "Swiftness 3",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4198,6 +4950,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -4279,21 +5047,21 @@
   },
   "size": 1.5
  },
- "wanderer__touch_dig": {
-  "title": "Touch Dig",
-  "description": "Unlocks Touch Dig (Level 3) (11 mana, 2.99 s cooldown) on the ability wheel",
-  "extra_description": "Use magic to break a block. Held items affect drops.",
+ "wanderer__iron_slash": {
+  "title": "Iron Slash",
+  "description": "Unlocks Iron Slash (Level 3) (51 mana, 11.97 s cooldown) on the ability wheel",
+  "extra_description": "Focus yourself before doing a big dash that slash your enemies",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_touch_dig.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/wind_spellbooks_iron_slash.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "irons_spellbooks:touch_dig",
+     "ability": "wind_spellbooks:iron_slash",
      "level": 3
     }
    }
@@ -4345,7 +5113,7 @@
  },
  "wanderer__footing_4": {
   "title": "Footing 4",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4358,6 +5126,22 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -4410,7 +5194,7 @@
  },
  "wanderer__second_breath_2": {
   "title": "Second Breath 2",
-  "description": "+3% Stamina Regen",
+  "description": "+3% Stamina Regen and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4424,6 +5208,22 @@
      "attribute": "epicfight:stamina_regen",
      "value": 0.03,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -4443,7 +5243,7 @@
  },
  "wanderer__gluttony": {
   "title": "Gluttony",
-  "description": "Unlocks Gluttony (Level 3) (26 mana, 134.66 s cooldown) on the ability wheel",
+  "description": "Unlocks Gluttony (Level 2) (30 mana, 134.66 s cooldown) on the ability wheel",
   "extra_description": "Turn your stomach into an arcane furnace, turning eaten food into mana for a duration.",
   "icon": {
    "type": "texture",
@@ -4456,7 +5256,7 @@
     "type": "mdvlcraft:ability",
     "data": {
      "ability": "irons_spellbooks:gluttony",
-     "level": 3
+     "level": 2
     }
    }
   ],
@@ -4507,7 +5307,7 @@
  },
  "wanderer__vitality_9": {
   "title": "Vitality 9",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4519,7 +5319,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -4540,7 +5356,7 @@
  },
  "wanderer__constitution_mastery_ii": {
   "title": "Constitution Mastery II",
-  "description": "+0.333 Max Health",
+  "description": "+0.556 Max Health",
   "icon": {
    "type": "texture",
    "data": {
@@ -4552,7 +5368,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.3333,
+     "value": 0.55556,
      "operation": "addition"
     }
    }
@@ -4573,7 +5389,7 @@
  },
  "wanderer__constitution_3": {
   "title": "Constitution 3",
-  "description": "+0.667 Max Health",
+  "description": "+1.111 Max Health",
   "icon": {
    "type": "texture",
    "data": {
@@ -4585,7 +5401,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.6666,
+     "value": 1.11111,
      "operation": "addition"
     }
    }
@@ -4604,22 +5420,22 @@
   "size": 1.5,
   "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "wanderer__conjure_refreshment": {
-  "title": "Conjure Refreshment",
-  "description": "Unlocks Conjure Refreshment (Level 1) (42 mana, 22.44 s cooldown) on the ability wheel",
-  "extra_description": "Creates a magical cookie whose nutritional value scales with your Spell Power!",
+ "wanderer__orbital_void": {
+  "title": "Orbital Void",
+  "description": "Unlocks Orbital Void (Level 2) (68 mana, 37.4 s cooldown) on the ability wheel",
+  "extra_description": "Shoots Abyssal Orb projectiles in a circular pattern around the player, damaging entities. On the initial cast, Abyssal Orbs home in on nearby entities.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_csw_conjure_refreshment.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_orbital_void.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_csw:conjure_refreshment",
-     "level": 1
+     "ability": "traveloptics:orbital_void",
+     "level": 2
     }
    }
   ],
@@ -4670,7 +5486,7 @@
  },
  "wanderer__vitality_7": {
   "title": "Vitality 7",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4682,7 +5498,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -4736,7 +5568,7 @@
  },
  "wanderer__footing_2": {
   "title": "Footing 2",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4749,6 +5581,22 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -4800,26 +5648,26 @@
   "size": 1.5,
   "extra_description": "Rogue class bonus."
  },
- "wanderer__starlight": {
-  "title": "Starlight",
-  "description": "Unlocks Starlight (Level 1) (19 mana, 2.99 s cooldown) on the ability wheel",
-  "extra_description": "Summons a glowing star that lights up the caster's surroundings for two minutes. Casting it again replaces the old one.",
+ "wanderer__vortex_punch": {
+  "title": "Vortex Uppercut",
+  "description": "Unlocks Vortex Uppercut (Level 1) (60 mana, 26.93 s cooldown) on the ability wheel",
+  "extra_description": "Create a Void Vortex, pulling enemies in. Teleport into it and unleash a crushing uppercut, dealing damage and sending foes flying upward.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_elden_ring_starlight.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_vortex_punch.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "iss_elden_ring:starlight",
+     "ability": "traveloptics:vortex_punch",
      "level": 1
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -4898,7 +5746,7 @@
  },
  "wanderer__swiftness_5": {
   "title": "Swiftness 5",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4912,6 +5760,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -4931,7 +5795,7 @@
  },
  "wanderer__mending_7": {
   "title": "Mending 7",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4945,6 +5809,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -4996,7 +5876,7 @@
  },
  "wanderer__teleport": {
   "title": "Teleport",
-  "description": "Unlocks Teleport (Level 3) (23 mana, 8.98 s cooldown) on the ability wheel",
+  "description": "Unlocks Teleport (Level 3) (26 mana, 8.98 s cooldown) on the ability wheel",
   "extra_description": "Instantaneously teleport to where you are looking, leaving nothing but a cloud of ender energy behind.",
   "icon": {
    "type": "texture",
@@ -5221,7 +6101,7 @@
  },
  "wanderer__mending_2": {
   "title": "Mending 2",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5235,6 +6115,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5254,7 +6150,7 @@
  },
  "wanderer__second_breath_5": {
   "title": "Second Breath 5",
-  "description": "+3% Stamina Regen",
+  "description": "+3% Stamina Regen and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5268,6 +6164,22 @@
      "attribute": "epicfight:stamina_regen",
      "value": 0.03,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5287,7 +6199,7 @@
  },
  "wanderer__endurance_8": {
   "title": "Endurance 8",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5300,6 +6212,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -5352,7 +6280,7 @@
  },
  "wanderer__bounce_7": {
   "title": "Bounce 7",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5366,6 +6294,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5385,7 +6329,7 @@
  },
  "wanderer__second_breath_7": {
   "title": "Second Breath 7",
-  "description": "+3% Stamina Regen",
+  "description": "+3% Stamina Regen and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5399,6 +6343,22 @@
      "attribute": "epicfight:stamina_regen",
      "value": 0.03,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5514,7 +6474,7 @@
  },
  "wanderer__swiftness_9": {
   "title": "Swiftness 9",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5528,6 +6488,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5580,7 +6556,7 @@
  },
  "wanderer__second_breath_3": {
   "title": "Second Breath 3",
-  "description": "+3% Stamina Regen",
+  "description": "+3% Stamina Regen and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5594,6 +6570,22 @@
      "attribute": "epicfight:stamina_regen",
      "value": 0.03,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5678,7 +6670,7 @@
  },
  "wanderer__bounce_9": {
   "title": "Bounce 9",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5692,6 +6684,22 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5744,7 +6752,7 @@
  },
  "wanderer__swiftness_2": {
   "title": "Swiftness 2",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5758,6 +6766,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5810,7 +6834,7 @@
  },
  "wanderer__constitution_2": {
   "title": "Constitution 2",
-  "description": "+0.667 Max Health",
+  "description": "+1.111 Max Health",
   "icon": {
    "type": "texture",
    "data": {
@@ -5822,7 +6846,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.6666,
+     "value": 1.11111,
      "operation": "addition"
     }
    }
@@ -5843,7 +6867,7 @@
  },
  "wanderer__constitution_mastery_i": {
   "title": "Constitution Mastery I",
-  "description": "+0.333 Max Health",
+  "description": "+0.556 Max Health",
   "icon": {
    "type": "texture",
    "data": {
@@ -5855,7 +6879,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.3333,
+     "value": 0.55556,
      "operation": "addition"
     }
    }
@@ -5876,7 +6900,7 @@
  },
  "wanderer__constitution_1": {
   "title": "Constitution 1",
-  "description": "+0.667 Max Health",
+  "description": "+1.111 Max Health",
   "icon": {
    "type": "texture",
    "data": {
@@ -5888,7 +6912,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.6666,
+     "value": 1.11111,
      "operation": "addition"
     }
    }
@@ -5942,7 +6966,7 @@
  },
  "wanderer__mending_3": {
   "title": "Mending 3",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5956,6 +6980,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -5975,7 +7015,7 @@
  },
  "wanderer__endurance_9": {
   "title": "Endurance 9",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5988,6 +7028,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -6041,7 +7097,7 @@
  },
  "wanderer__swiftness_1": {
   "title": "Swiftness 1",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6055,6 +7111,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -6140,7 +7212,7 @@
  },
  "wanderer__hearty_1": {
   "title": "Hearty 1",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6153,6 +7225,22 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -6173,7 +7261,7 @@
  },
  "wanderer__attunement_1": {
   "title": "Attunement 1",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6186,6 +7274,22 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -6239,7 +7343,7 @@
  },
  "wanderer__attunement_8": {
   "title": "Attunement 8",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6252,6 +7356,22 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -6338,7 +7458,7 @@
  },
  "wanderer__mending_4": {
   "title": "Mending 4",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6352,6 +7472,22 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -6404,7 +7540,7 @@
  },
  "wanderer__vitality_1": {
   "title": "Vitality 1",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6416,7 +7552,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -6469,7 +7621,7 @@
  },
  "wanderer__swiftness_8": {
   "title": "Swiftness 8",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6483,6 +7635,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -6534,7 +7702,7 @@
  },
  "wanderer__swiftness_6": {
   "title": "Swiftness 6",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6548,6 +7716,22 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -6567,7 +7751,7 @@
  },
  "wanderer__second_breath_6": {
   "title": "Second Breath 6",
-  "description": "+3% Stamina Regen",
+  "description": "+3% Stamina Regen and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6581,6 +7765,22 @@
      "attribute": "epicfight:stamina_regen",
      "value": 0.03,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -6600,7 +7800,7 @@
  },
  "wanderer__vitality_4": {
   "title": "Vitality 4",
-  "description": "+1 Max Health",
+  "description": "+1.667 Max Health and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6612,7 +7812,23 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.max_health",
-     "value": 0.9999,
+     "value": 1.66667,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
@@ -6731,7 +7947,7 @@
  },
  "wanderer__second_breath_1": {
   "title": "Second Breath 1",
-  "description": "+3% Stamina Regen",
+  "description": "+3% Stamina Regen and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6745,6 +7961,22 @@
      "attribute": "epicfight:stamina_regen",
      "value": 0.03,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
+     "operation": "addition"
     }
    }
   ],
@@ -6764,7 +7996,7 @@
  },
  "wanderer__endurance_7": {
   "title": "Endurance 7",
-  "description": "+7.5 Max Stamina",
+  "description": "+7.5 Max Stamina and +0.026 Attack Damage and +0.038 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6777,6 +8009,22 @@
     "data": {
      "attribute": "epicfight:staminar",
      "value": 7.5,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.attack_damage",
+     "value": 0.02564,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03846,
      "operation": "addition"
     }
    }
