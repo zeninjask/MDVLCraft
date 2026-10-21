@@ -1,0 +1,12 @@
+{
+  "type": "origins:modify_damage_dealt",
+  "name": "Mounted Charge",
+  "description": "You deal 10% more damage while mounted.",
+  "condition": {
+    "type": "origins:riding"
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.1
+  }
+}

@@ -1,14 +1,14 @@
 {
   "type": "origins:action_over_time",
   "name": "Sea Legs",
-  "description": "Your breath lasts twice as long underwater.",
-  "interval": 2,
+  "description": "Your breath lasts three times as long underwater.",
+  "interval": 3,
   "condition": {
     "type": "origins:submerged_in",
     "fluid": "minecraft:water"
   },
   "entity_action": {
     "type": "origins:gain_air",
-    "value": 1
+    "value": 2
   }
 }

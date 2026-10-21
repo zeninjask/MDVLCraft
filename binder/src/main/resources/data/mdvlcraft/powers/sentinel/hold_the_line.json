@@ -1,7 +1,7 @@
 {
   "type": "origins:multiple",
   "name": "Hold the Line",
-  "description": "Standing still for 2 seconds grants Resistance I.",
+  "description": "After standing still for 2 seconds, you take 10% less damage until you move.",
   "still": {
     "type": "origins:resource",
     "min": 0,
@@ -33,23 +33,16 @@
     }
   },
   "guard": {
-    "type": "origins:action_over_time",
-    "interval": 10,
+    "type": "origins:modify_damage_taken",
     "condition": {
       "type": "origins:resource",
       "resource": "mdvlcraft:sentinel/hold_the_line_still",
       "comparison": ">=",
       "compare_to": 40
     },
-    "entity_action": {
-      "type": "origins:apply_effect",
-      "effect": {
-        "effect": "minecraft:resistance",
-        "duration": 20,
-        "amplifier": 0,
-        "show_particles": false,
-        "show_icon": true
-      }
+    "modifier": {
+      "operation": "multiply_base",
+      "value": -0.1
     }
   }
 }

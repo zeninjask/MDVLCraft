@@ -1,0 +1,13 @@
+{
+  "type": "origins:attribute",
+  "name": "Fragile",
+  "description": "You have 1 less heart of health than humans.",
+  "modifier": {
+    "attribute": "minecraft:generic.max_health",
+    "name": "Fragile health reduction",
+    "operation": "addition",
+    "value": -2.0
+  },
+  "update_health": true,
+  "loading_priority": 100
+}
