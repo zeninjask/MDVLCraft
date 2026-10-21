@@ -16,10 +16,10 @@ def bump(p, a, b):
     return math.sin(math.pi * q) ** 2 if q < 1 else 0.0
 
 # ---------- key points on the model (rest space) ----------
-def sole(foot):
-    C = hl.corners[foot]; low = C[C[:, 1] < C[:, 1].min() + 0.6]
-    return low[np.argmin(low[:, 2])], low[np.argmax(low[:, 2])]   # toe (front, -z), heel
-SOLE = {s: sole(f'{s}_foot') for s in ('left', 'right')}
+def sole(toe):
+    C = hl.corners[toe]; low = C[C[:, 1] < C[:, 1].min() + 0.6]
+    return low[np.argmin(low[:, 2])], low[np.argmax(low[:, 2])]   # tip (front, -z), back of the pad
+SOLE = {s: sole(f'{s}_toe') for s in ('left', 'right')}         # the foot pad (rig v2: rig_v2.py)
 FINGERS = {'left': ['left_finger1', 'left_finger2', 'left_finger3', 'big_finger_left'],
            'right': ['right_finger1', 'right_finger2', 'right_finger3', 'big_finger_right']}
 KNUCKLE = {s: np.mean([hl.origin[f] for f in FINGERS[s][:3]], 0) for s in FINGERS}
@@ -70,8 +70,8 @@ class Solver:
     def leg(self, pose, s, toe, heel, reg=0.02):
         params = LEG(s); x0 = self.prev.get(('leg', s), np.zeros(len(params)))
         t, h = SOLE[s]
-        pose, x, err = ik(pose, params, [(f'{s}_foot', t, toe, 1.0), (f'{s}_foot', h, heel, 1.0)], x0, reg,
-                          floor=[f'{s}_foot', f'{s}_leg_down'])
+        pose, x, err = ik(pose, params, [(f'{s}_toe', t, toe, 1.0), (f'{s}_toe', h, heel, 1.0)], x0, reg,
+                          floor=[f'{s}_toe', f'{s}_foot', f'{s}_leg_down'])
         self.prev[('leg', s)] = x; self.err['leg'] = max(self.err.get('leg', 0), err); return pose, err
     def arm(self, pose, s, targets, prior, reg=0.03):
         params = ARM(s); x0 = self.prev.get(('arm', s), np.array(prior, float))

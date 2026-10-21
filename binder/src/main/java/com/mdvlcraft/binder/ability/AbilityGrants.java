@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.ability;
 
 import com.mdvlcraft.binder.gaunt.HauntedLocket;
+import com.mdvlcraft.binder.raiju.RaijuFang;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -57,6 +58,11 @@ public final class AbilityGrants {
         // the Haunted Locket grants Gaunt Vessel while worn
         if (HauntedLocket.worn(player)) {
             granted.merge(HauntedLocket.ability(), 1, Math::max);
+        }
+
+        // Raijū's Fang grants Yakusanoikazuchi while worn
+        if (RaijuFang.worn(player)) {
+            granted.merge(RaijuFang.ability(), 1, Math::max);
         }
 
         return granted;

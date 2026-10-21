@@ -3,9 +3,9 @@ package com.mdvlcraft.binder.ability;
 import com.mdvlcraft.binder.content.DemonicAssimilationDismiss;
 import com.mdvlcraft.binder.content.SummonModes;
 import com.mdvlcraft.binder.doppelganger.Doppelgangers;
-import com.mdvlcraft.binder.gaunt.GauntExecute;
 import com.mdvlcraft.binder.gaunt.GauntForm;
 import com.mdvlcraft.binder.gaunt.GauntLeap;
+import com.mdvlcraft.binder.raiju.RaijuForm;
 import com.mdvlcraft.binder.seraph.SeraphForm;
 import com.tiago.antimagic.spell.DemonicAssimilationSpell;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -38,8 +38,13 @@ public final class AbilityActions {
     }
 
     public static void press(ServerPlayer player, int slot) {
+        if (RaijuForm.in(player)) {
+            // Yakusanoikazuchi's wheel: Transform Back only.
+            GauntAbility.raijuSlot(slot).ifPresent(raiju -> castSpell(player, SpellRegistry.getSpell(ResourceLocation.parse(RaijuForm.SPELL)), 1));
+            return;
+        }
         if (GauntForm.in(player)) {
-            // The form's own wheel: Transform Back, Leap, Horrify and Execute, nothing else.
+            // The form's own wheel: Transform Back, Leap, Horrify and Faceless, nothing else.
             GauntAbility.slot(slot).ifPresent(gaunt -> {
                 if (gaunt == GauntAbility.REVERT) {
                     castSpell(player, SpellRegistry.getSpell(ResourceLocation.parse(GauntForm.SPELL)), 1);
@@ -47,7 +52,9 @@ public final class AbilityActions {
                     switch (gaunt) {
                         case LEAP -> GauntLeap.press(player);
                         case HORRIFY -> GauntLeap.horrify(player);
-                        default -> GauntExecute.start(player);
+                        case FACELESS -> GauntLeap.faceless(player);
+                        default -> {
+                        }
                     }
                 }
             });

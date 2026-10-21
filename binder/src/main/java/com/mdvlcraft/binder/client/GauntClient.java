@@ -9,12 +9,15 @@ import com.mdvlcraft.binder.network.GauntActionPacket;
 import com.mdvlcraft.binder.network.GauntAttackPacket;
 import com.mdvlcraft.binder.network.GauntClingPacket;
 import com.mdvlcraft.binder.network.GauntFormPacket;
+import com.mdvlcraft.binder.network.GauntInputPacket;
 import com.mdvlcraft.binder.network.GauntStatePacket;
 import com.mdvlcraft.binder.seraph.SeraphForm.FormPhase;
 import com.mdvlcraft.binder.seraph.SeraphForm.Seen;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.Input;
@@ -45,6 +48,8 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import org.lwjgl.glfw.GLFW;
+import yesman.epicfight.client.input.EpicFightKeyMappings;
 
 /**
  * Gaunt Vessel on the client (gaunt/GauntForm): players in the form are drawn by GauntRenderer instead of their own body
@@ -68,8 +73,8 @@ public final class GauntClient {
     /** Each player's animation last tick in the form, to find the sound cues passed since. */
     private static final Map<Integer, GauntRenderer.Pick> LAST_PICK = new HashMap<>();
     private static final Map<Integer, Long> NEXT_SCREECH = new HashMap<>();
-    /** The Haunted Lord's own cracks as it unfolds (ticks of entering: SNAP_TICKS + its transform's snaps, art/haunted_lord/source/anims.py). */
-    private static final int[] EMERGE_SNAPS = {70, 74, 78, 81, 84, 86, 89};
+    /** The Haunted Lord's own cracks as it unfolds (ticks of entering: SNAP_TICKS + its transform's snaps, art/haunted_lord/source/library.py transform b). */
+    private static final int[] EMERGE_SNAPS = {69, 70, 71, 73, 74, 76, 78};
     /** Where in each animation (seconds) its sound plays: idle and cast at the start of the breath, walk at each foot
      * contact, crawl as each hand is planted. */
     private static final Map<String, float[]> CUES = Map.of("idle", new float[] {0.0F}, "cast", new float[] {0.0F},
@@ -89,6 +94,11 @@ public final class GauntClient {
         int horrifyCooldown = 1;
         long executeReadyAt;
         int executeCooldown = 1;
+        long facelessReadyAt;
+        int facelessCooldown = 1;
+        boolean blocking;
+        /** Distance moved while clinging (blocks), which paces the crawl on the surface. */
+        float crawled;
     }
 
     /** One of a Haunted Lord's own animations playing (gaunt/GauntAttack, gaunt/GauntExecute), from GauntActionPacket. */
@@ -115,6 +125,13 @@ public final class GauntClient {
     private static Vec3 lastVelocity = Vec3.ZERO;
     /** The wheel slot picked before the form, given back after it. */
     private static int pickedBefore = -1;
+    /** Blocks per tick crawling on a wall or ceiling. */
+    private static final double CLIMB_SPEED = 0.11;
+    /** The local player's steering this tick, kept for crawling on a surface. */
+    private static float crawlForward;
+    private static float crawlStrafe;
+    private static boolean dodgeWasDown;
+    private static boolean guardWasDown;
 
     private GauntClient() {
     }
@@ -129,6 +146,7 @@ public final class GauntClient {
         if (packet.phase() == FormPhase.NONE) {
             GauntForm.CLIENT.remove(packet.entity());
             LEAP.remove(packet.entity());
+            GauntLeap.CLIENT_CLING.remove(packet.entity());
             if (self && pickedBefore >= 0) {
                 ClientAbilities.select(pickedBefore);
                 pickedBefore = -1;
@@ -145,6 +163,9 @@ public final class GauntClient {
             }
             GauntForm.CLIENT.put(packet.entity(), new Seen(packet.phase(), now - packet.ticks()));
         }
+        if (level.getEntity(packet.entity()) instanceof Player player) {
+            player.refreshDimensions();
+        }
     }
 
     public static void handle(GauntStatePacket packet) {
@@ -155,7 +176,8 @@ public final class GauntClient {
         long now = level.getGameTime();
         Leap leap = LEAP.computeIfAbsent(packet.entity(), id -> new Leap());
         leap.chargingSince = packet.charging() < 0 ? -1 : now - packet.charging();
-        leap.cling = packet.cling() < 0 ? null : Direction.from3DDataValue(packet.cling());
+        setCling(level, packet.entity(), leap, packet.cling() < 0 ? null : Direction.from3DDataValue(packet.cling()));
+        leap.blocking = packet.blocking();
         leap.leaping = packet.leaping();
         if (packet.cooldown() > 0) {
             leap.readyAt = now + packet.cooldown();
@@ -164,6 +186,10 @@ public final class GauntClient {
         if (packet.horrifyCooldown() > 0) {
             leap.horrifyReadyAt = now + packet.horrifyCooldown();
             leap.horrifyCooldown = packet.horrifyCooldown();
+        }
+        if (packet.facelessCooldown() > 0) {
+            leap.facelessReadyAt = now + packet.facelessCooldown();
+            leap.facelessCooldown = packet.facelessCooldown();
         }
         if (packet.executeCooldown() > 0) {
             leap.executeReadyAt = now + packet.executeCooldown();
@@ -195,6 +221,20 @@ public final class GauntClient {
         return ACTION.get(entity);
     }
 
+    /** A player's cling as this client knows it (GauntLeap.CLIENT_CLING, and the hitbox follows). */
+    private static void setCling(ClientLevel level, int entity, Leap leap, @Nullable Direction face) {
+        boolean was = leap.cling != null;
+        leap.cling = face;
+        if (face != null) {
+            GauntLeap.CLIENT_CLING.add(entity);
+        } else {
+            GauntLeap.CLIENT_CLING.remove(entity);
+        }
+        if (was != (face != null) && level.getEntity(entity) instanceof Player player) {
+            player.refreshDimensions();
+        }
+    }
+
     @Nullable
     static Leap leap(int entity) {
         return LEAP.get(entity);
@@ -204,13 +244,14 @@ public final class GauntClient {
     public static float cooldown(GauntAbility ability) {
         LocalPlayer player = Minecraft.getInstance().player;
         Leap leap = player == null ? null : LEAP.get(player.getId());
-        if (leap == null || ability == GauntAbility.REVERT) {
+        if (leap == null || ability == GauntAbility.REVERT || ability == GauntAbility.RAIJU_REVERT) {
             return 0.0F;
         }
         long now = player.level().getGameTime();
         return switch (ability) {
             case LEAP -> Mth.clamp((leap.readyAt - now) / (float)leap.cooldown, 0.0F, 1.0F);
             case HORRIFY -> Mth.clamp((leap.horrifyReadyAt - now) / (float)leap.horrifyCooldown, 0.0F, 1.0F);
+            case FACELESS -> Mth.clamp((leap.facelessReadyAt - now) / (float)leap.facelessCooldown, 0.0F, 1.0F);
             default -> Mth.clamp((leap.executeReadyAt - now) / (float)leap.executeCooldown, 0.0F, 1.0F);
         };
     }
@@ -285,7 +326,7 @@ public final class GauntClient {
             victim.xo = victim.xOld = at.x;
             victim.yo = victim.yOld = at.y;
             victim.zo = victim.zOld = at.z;
-            float facing = action.yaw + 180.0F;
+            float facing = action.yaw;      // seized from behind (gaunt/GauntExecute)
             boolean snapped = t * 20.0F >= GauntExecute.SNAP_TICK;
             victim.yBodyRot = victim.yBodyRotO = facing;
             victim.yHeadRot = victim.yHeadRotO = facing + (snapped ? 80.0F : 0.0F);
@@ -310,6 +351,7 @@ public final class GauntClient {
             NEXT_SCREECH.clear();
             LEAP.clear();
             ACTION.clear();
+            GauntLeap.CLIENT_CLING.clear();
             return;
         }
         GauntForm.CLIENT.keySet().removeIf(id -> !(level.getEntity(id) instanceof Player));
@@ -328,6 +370,12 @@ public final class GauntClient {
         LocalPlayer self = Minecraft.getInstance().player;
         if (self != null) {
             touch(self);
+            keys(self);
+        }
+        for (Map.Entry<Integer, Leap> entry : LEAP.entrySet()) {
+            if (entry.getValue().cling != null && level.getEntity(entry.getKey()) instanceof Player player) {
+                entry.getValue().crawled += (float)player.position().distanceTo(new Vec3(player.xo, player.yo, player.zo));
+            }
         }
         for (Map.Entry<Integer, Seen> entry : GauntForm.CLIENT.entrySet()) {
             if (!(level.getEntity(entry.getKey()) instanceof Player player)) {
@@ -371,10 +419,64 @@ public final class GauntClient {
         }
     }
 
-    /** The local player mid-leap touching a wall or a ceiling clings to it; clinging or charging holds them still. */
+    /** Whether a key mapping's key is held, read from the keyboard / mouse directly: Epic Fight's combat keys only count
+     * as pressed in its battle mode, and the form is in vanilla mode. */
+    private static boolean held(KeyMapping mapping) {
+        InputConstants.Key key = mapping.getKey();
+        long window = Minecraft.getInstance().getWindow().getWindow();
+        if (key.getType() == InputConstants.Type.MOUSE) {
+            return GLFW.glfwGetMouseButton(window, key.getValue()) == GLFW.GLFW_PRESS;
+        }
+        return key.getType() == InputConstants.Type.KEYSYM && key.getValue() != InputConstants.UNKNOWN.getValue() && InputConstants.isKeyDown(window, key.getValue());
+    }
+
+    /** In the form: the dodge key dodges (steered by the movement keys), the guard key held keeps the guard up. Read as
+     * key states, since Epic Fight's own handling may take the clicks. */
+    private static void keys(LocalPlayer player) {
+        Seen seen = GauntForm.CLIENT.get(player.getId());
+        boolean active = seen != null && seen.phase == FormPhase.ACTIVE && Minecraft.getInstance().screen == null;
+        boolean dodge = active && held(EpicFightKeyMappings.DODGE);
+        if (dodge && !dodgeWasDown) {
+            BinderNetwork.sendToServer(new GauntInputPacket(GauntInputPacket.DODGE, player.input.leftImpulse, player.input.forwardImpulse));
+        }
+        dodgeWasDown = dodge;
+        boolean guard = active && (held(EpicFightKeyMappings.GUARD) || held(Minecraft.getInstance().options.keyUse));
+        if (guard != guardWasDown) {
+            BinderNetwork.sendToServer(new GauntInputPacket(guard ? GauntInputPacket.GUARD_ON : GauntInputPacket.GUARD_OFF, 0.0F, 0.0F));
+        }
+        guardWasDown = guard;
+    }
+
+    /** The local player mid-leap touching a wall or a ceiling clings to it, and crawling (sneaking) into a wall climbs onto
+     * it; clinging, they move along the surface (crawlSurface); charging holds them still. */
     private static void touch(LocalPlayer player) {
-        Leap leap = LEAP.get(player.getId());
+        Seen seen = GauntForm.CLIENT.get(player.getId());
+        Leap leap = seen != null && seen.phase == FormPhase.ACTIVE ? LEAP.computeIfAbsent(player.getId(), id -> new Leap()) : LEAP.get(player.getId());
         if (leap == null) {
+            lastVelocity = player.getDeltaMovement();
+            return;
+        }
+        ClientLevel level = (ClientLevel)player.level();
+        if (leap.cling == null && player.isShiftKeyDown() && player.horizontalCollision && leap.chargingSince < 0) {
+            // crawling into a wall climbs onto it (the one the player faces)
+            Vec3 look = player.getLookAngle();
+            Direction best = null;
+            double most = 0.5;
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                double toward = look.x * direction.getStepX() + look.z * direction.getStepZ();
+                if (toward > most && GauntLeap.against(player, direction)) {
+                    best = direction;
+                    most = toward;
+                }
+            }
+            if (best != null) {
+                setCling(level, player.getId(), leap, best);
+                leap.leaping = false;
+                BinderNetwork.sendToServer(new GauntClingPacket(best.get3DDataValue()));
+            }
+        }
+        if (leap.cling != null) {
+            crawlSurface(player, leap);
             lastVelocity = player.getDeltaMovement();
             return;
         }
@@ -395,30 +497,92 @@ public final class GauntClient {
                 face = Direction.UP;
             }
             if (face != null) {
-                leap.cling = face;
+                setCling(level, player.getId(), leap, face);
                 leap.leaping = false;
                 BinderNetwork.sendToServer(new GauntClingPacket(face.get3DDataValue()));
             }
         }
-        if (leap.cling != null || leap.chargingSince >= 0) {
-            player.setDeltaMovement(leap.cling != null ? Vec3.ZERO : new Vec3(0.0, Math.min(player.getDeltaMovement().y, 0.0), 0.0));
+        if (leap.chargingSince >= 0) {
+            player.setDeltaMovement(new Vec3(0.0, Math.min(player.getDeltaMovement().y, 0.0), 0.0));
         }
         lastVelocity = player.getDeltaMovement();
     }
 
-    /** No walking while charging, clinging or executing; jumping off a surface lets go of it, pushed away from it. */
+    /**
+     * Moving along the surface clung to: forward goes where the player looks, flattened onto the surface (up a wall when
+     * looking at it), strafing sideways; the player is held pressed to it. Running into another surface moves onto it
+     * (a wall onto the ceiling, the ceiling onto a wall); climbing past the top of a wall hops onto the ledge; walking down
+     * a wall onto the ground lets go.
+     */
+    private static void crawlSurface(LocalPlayer player, Leap leap) {
+        Direction face = leap.cling;
+        ClientLevel level = (ClientLevel)player.level();
+        Vec3 into = new Vec3(face.getStepX(), face.getStepY(), face.getStepZ());
+        Vec3 look = player.getLookAngle();
+        Vec3 ahead = look.subtract(into.scale(look.dot(into)));
+        if (ahead.lengthSqr() < 0.04) {
+            ahead = face == Direction.UP ? new Vec3(-Mth.sin(player.getYRot() * Mth.DEG_TO_RAD), 0.0, Mth.cos(player.getYRot() * Mth.DEG_TO_RAD))
+                : new Vec3(0.0, 1.0, 0.0);
+        }
+        ahead = ahead.normalize();
+        Vec3 right = ahead.cross(into.scale(-1.0)).normalize();
+        Vec3 move = ahead.scale(crawlForward).add(right.scale(-crawlStrafe));
+        if (move.lengthSqr() > 1.0) {
+            move = move.normalize();
+        }
+        move = move.scale(CLIMB_SPEED);
+        if (face != Direction.UP && move.y > 0.0 && player.verticalCollision && GauntLeap.against(player, Direction.UP)) {
+            setCling(level, player.getId(), leap, Direction.UP);
+            BinderNetwork.sendToServer(new GauntClingPacket(Direction.UP.get3DDataValue()));
+            return;
+        }
+        if (player.horizontalCollision) {
+            for (Direction direction : Direction.Plane.HORIZONTAL) {
+                if (direction != face && move.x * direction.getStepX() + move.z * direction.getStepZ() > 0.01 && GauntLeap.against(player, direction)) {
+                    setCling(level, player.getId(), leap, direction);
+                    BinderNetwork.sendToServer(new GauntClingPacket(direction.get3DDataValue()));
+                    return;
+                }
+            }
+        }
+        if (!GauntLeap.against(player, face)) {
+            setCling(level, player.getId(), leap, null);
+            BinderNetwork.sendToServer(new GauntClingPacket(-1));
+            if (face != Direction.UP && move.y > 0.0) {
+                player.setDeltaMovement(into.scale(0.25).add(0.0, 0.5, 0.0));      // over the top onto the ledge
+            }
+            return;
+        }
+        if (face != Direction.UP && move.y < 0.0 && player.onGround()) {
+            setCling(level, player.getId(), leap, null);
+            BinderNetwork.sendToServer(new GauntClingPacket(-1));
+            return;
+        }
+        player.setDeltaMovement(move.add(into.scale(0.05)));
+    }
+
+    /** No walking while charging or executing, slow while guarding; clinging, the input moves along the surface
+     * (crawlSurface) instead; jumping off a surface lets go of it, pushed away from it. */
     @SubscribeEvent
     public static void onMovementInput(MovementInputUpdateEvent event) {
         Leap leap = LEAP.get(event.getEntity().getId());
         Action action = ACTION.get(event.getEntity().getId());
         boolean executing = action != null && action.animation.equals(GauntExecute.ANIMATION);
+        Input input = event.getInput();
+        if (!executing && leap != null && leap.blocking && leap.cling == null) {
+            input.forwardImpulse *= 0.35F;
+            input.leftImpulse *= 0.35F;
+            input.jumping = false;
+            return;
+        }
         if (!executing && (leap == null || (leap.cling == null && leap.chargingSince < 0))) {
             return;
         }
-        Input input = event.getInput();
+        crawlForward = input.forwardImpulse;
+        crawlStrafe = input.leftImpulse;
         if (leap != null && leap.cling != null && input.jumping) {
             Direction face = leap.cling;
-            leap.cling = null;
+            setCling((ClientLevel)event.getEntity().level(), event.getEntity().getId(), leap, null);
             BinderNetwork.sendToServer(new GauntClingPacket(-1));
             Vec3 away = new Vec3(-face.getStepX(), -face.getStepY(), -face.getStepZ());
             event.getEntity().setDeltaMovement(face == Direction.UP ? new Vec3(0.0, -0.1, 0.0) : away.scale(0.35).add(0.0, 0.3, 0.0));
@@ -494,5 +658,6 @@ public final class GauntClient {
         NEXT_SCREECH.clear();
         LEAP.clear();
         ACTION.clear();
+        GauntLeap.CLIENT_CLING.clear();
     }
 }

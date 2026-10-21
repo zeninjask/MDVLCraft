@@ -21,10 +21,13 @@ import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
 import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.EntityDimensions;
+import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent.Phase;
 import net.minecraftforge.event.TickEvent.PlayerTickEvent;
+import net.minecraftforge.event.entity.EntityEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -44,7 +47,8 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
  * Gaunt Vessel (modified/GauntVessel): the player becomes the Haunted Lord (client/GauntRenderer draws it in their place).
  * Entering, the player is lifted and their bones snap one by one (SNAPS) until the body tears into the
  * Haunted Lord, which unfolds (its transform animation); leaving plays all of it backwards at twice the speed. While
- * changing the player cannot move or jump. In the form: 25% faster, Night Vision, no fall damage; the ability wheel holds
+ * changing the player cannot move or jump. In the form: walking 15% slower and sprinting 60% faster, Night Vision, no fall
+ * damage, a hitbox the Haunted Lord's size (STANDING, CRAWLING, CLINGING); the ability wheel holds
  * only Transform Back, Leap, Horrify and Execute (ability/GauntAbility, gaunt/GauntLeap, gaunt/GauntExecute); attacking
  * strikes with its claws (gaunt/GauntAttack); no other abilities, spells, attacks, item use or Epic Fight skills.
  *
@@ -63,6 +67,12 @@ public final class GauntForm {
     /** The ticks of entering at which a bone snaps (client/GauntRenderer poses the body to match). */
     public static final int[] SNAPS = {12, 19, 26, 32, 37, 43, 47, 51, 55, 58, 61};
     private static final UUID SPEED = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a21");
+    private static final double WALK_BONUS = -0.15;
+    private static final double SPRINT_BONUS = 0.6;
+    /** The Haunted Lord's hitbox (client/GauntRenderer draws it 1.3 times its first size): standing, crawling, clinging. */
+    private static final EntityDimensions STANDING = EntityDimensions.scalable(1.0F, 3.0F);
+    private static final EntityDimensions CRAWLING = EntityDimensions.scalable(1.3F, 1.5F);
+    private static final EntityDimensions CLINGING = EntityDimensions.scalable(1.2F, 1.2F);
     private static final UUID FROZEN = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a23");
     private static final UUID SKILL_LISTENER = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a24");
     private static final UUID ATTACK_LISTENER = UUID.fromString("7c2f4a91-3d6e-4b8a-a1f5-2e9d0c6b7a25");
@@ -130,6 +140,7 @@ public final class GauntForm {
         }
         state.phase = FormPhase.EXITING;
         state.ticks = 0;
+        player.refreshDimensions();
         GauntExecute.stop(player);
         GauntAttack.clear(player);
         GauntLeap.clear(player);
@@ -153,12 +164,23 @@ public final class GauntForm {
             patch(player).toEpicFightMode(true);
         }
         BinderNetwork.sendToTrackingAndSelf(player, new GauntFormPacket(player.getId(), FormPhase.NONE, 0, false));
+        player.refreshDimensions();
+    }
+
+    /** Walking is a slow shuffle (-15%), sprinting a mad rush (+60%); the modifier follows the sprint key. */
+    private static void pace(ServerPlayer player) {
+        double want = player.isSprinting() ? SPRINT_BONUS : WALK_BONUS;
+        AttributeInstance speed = player.getAttribute(Attributes.MOVEMENT_SPEED);
+        AttributeModifier current = speed == null ? null : speed.getModifier(SPEED);
+        if (speed != null && (current == null || current.getAmount() != want)) {
+            speed.removeModifier(SPEED);
+            speed.addTransientModifier(new AttributeModifier(SPEED, "Gaunt Vessel", want, Operation.MULTIPLY_BASE));
+        }
     }
 
     /** The form's own boons, on or off. */
     private static void active(ServerPlayer player, boolean on) {
         if (on) {
-            modifier(player, Attributes.MOVEMENT_SPEED, SPEED, "Gaunt Vessel", 0.25, Operation.MULTIPLY_BASE);
             player.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, MobEffectInstance.INFINITE_DURATION, 0, false, false, true));
         } else {
             removeModifier(player, Attributes.MOVEMENT_SPEED, SPEED);
@@ -222,12 +244,23 @@ public final class GauntForm {
             removeModifier(player, Attributes.MOVEMENT_SPEED, FROZEN);
             active(player, true);
             sync(player, state, false);
+            player.refreshDimensions();
         } else if (state.phase == FormPhase.EXITING && state.ticks >= EXIT_TICKS) {
             end(player);
         } else if (state.phase == FormPhase.ACTIVE) {
+            pace(player);
             GauntLeap.tick(player);
             GauntExecute.tick(player);
             GauntAttack.tick(player);
+        }
+    }
+
+    /** The hitbox matches the Haunted Lord once it has unfolded (both sides; refreshed when the phase or cling changes). */
+    @SubscribeEvent
+    public static void onSize(EntityEvent.Size event) {
+        if (event.getEntity() instanceof Player player && in(player) && !changing(player)) {
+            EntityDimensions size = GauntLeap.clinging(player) ? CLINGING : event.getPose() == Pose.CROUCHING ? CRAWLING : STANDING;
+            event.setNewSize(size, true);
         }
     }
 

@@ -78,6 +78,26 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
+- **Haunted Lord update (on `bane-agent`, built and tested on the test server/client):** rig v2 (`art/haunted_lord/source/rig_v2.py`:
+  neck/arm fur cards removed, `chest` and toe joints), every animation rebuilt in `library.py` (three variants each, the
+  user's picks in `PICKED`), drawn 1.3x with a matching hitbox (`GauntForm.onSize`), walk -15% / sprint +60%, wall and
+  ceiling crawling (sneak into a wall; `GauntClient.crawlSurface`), dodge (dodge key, read raw because Epic Fight's combat
+  keys only fire in battle mode), guard/parry (guard key), mid-leap pose, execute by attacking from behind (no longer on
+  the wheel), Faceless on the wheel (20 s Invisibility, 60 s cooldown), Horrify sound H7 (qubodup, CC0). Network packets
+  changed (GauntStatePacket, new GauntInputPacket). Checked in game: wall climb, jump-off, dodge, guard, execute from
+  behind, Faceless.
+- **Yakusanoikazuchi (on `bane-agent`, built and run on the test server/client):** a Modified ability (lightning, 80 mana,
+  no cooldown, in no tree) granted only by wearing **Raijū's Fang** (`raiju/RaijuFang`, necklace, no recipe, shows in JEI).
+  `raiju/RaijuForm`, `network/RaijuFormPacket`, `client/RaijuClient`, `mixin/raiju/RaijuSkinMixin` (PlayerInfo skin and
+  slim model while in the form, texture `textures/entity/yakusanoikazuchi.png`). Six darkened Vatansever blades
+  (`models/item/raiju_sword`, cut from Sword Soaring's Vatansever texture) circle the player, each outlined in a charged
+  energy swirl. Wheel = Transform Back only (`GauntAbility.RAIJU_REVERT`). Epic Fight skills other than basic attack,
+  guard and wake-up are refused; the dodge key (needs Epic Fight mode and a dodge skill equipped) does Thunder Step to the
+  locked-on target (beside it), or where the player looks, 2 s cooldown (`StrikeSpells.ThunderStep.step`, split out).
+  Melee hits: 1 in 6 drops a 2 s Somakespells Lightning Field tagged `mdvlcraft_raiju_field` that stuns what it shocks
+  (`combat/LightningFieldKnockback`). Checked in game: grant via the fang, skin, blades and swirl, wheel, lock-on step
+  (lands beside the target, damages), swings land, a stun field spawned and lasted 2 s. Not checked: the stun itself on a
+  moving mob, multiplayer viewers.
 - **Gaunt Vessel (on `bane-agent`, not compiled or tested; for liam-agent to merge, build and test):** a Modified ability
   (`modified/GauntVessel`, spirit school, 80 mana, 240 s cooldown) in no tree yet, like Seraph Embodiment. The caster is
   lifted and their own body's bones snap one by one (`client/GauntRenderer`, ticks in `gaunt/GauntForm.SNAPS`, bone

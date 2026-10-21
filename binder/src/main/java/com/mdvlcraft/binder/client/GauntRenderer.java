@@ -31,20 +31,23 @@ import org.joml.Vector3f;
  * (assets/mdvlcraft/haunted_lord/haunted_lord.json, from tools/haunted_lord/convert.py) unfolding out of it (transform).
  * Leaving plays all of it backwards. In the form: cast while casting, crawl while sneaking, sprint or walk while moving
  * (paced by the walk animation's distance), idle otherwise, each change blended over BLEND_TICKS; the head turns towards
- * where the player looks. Its own attacks and executions (GauntClient.Action) play over all of these, the execution
- * facing its victim. Charging a leap (gaunt/GauntLeap) it crouches in the crawl with its hands down, pressing lower
+ * where the player looks. Its own attacks, dodges, parries and executions (GauntClient.Action) play over all of these,
+ * the execution facing its victim; mid-leap it holds the leap pose, guarding the block pose, and on a wall or ceiling it
+ * crawls as it moves (paced by the distance crawled). Charging a leap (gaunt/GauntLeap) it crouches in the crawl with its hands down, pressing lower
  * and shaking; clinging to a wall or a ceiling it holds that pose turned onto the surface. The eyes glow (the glow mask,
  * drawn full bright).
  */
 final class GauntRenderer {
     private static final ResourceLocation MODEL = new ResourceLocation("mdvlcraft", "haunted_lord/haunted_lord.json");
-    /** The model is about 3.7 blocks to the antler tips; drawn about 2.8. */
-    private static final float SCALE = 0.75F;
+    /** The model is about 3.7 blocks to the antler tips; drawn about 3.6 (1.3 times its first size). */
+    private static final float SCALE = 0.975F;
     private static final float BLEND_TICKS = 5.0F;
     /** Animation seconds per unit of the walk animation's distance, per gait. */
-    private static final float WALK_PACE = 0.09F;
-    private static final float SPRINT_PACE = 0.07F;
-    private static final float CRAWL_PACE = 0.08F;
+    private static final float WALK_PACE = 0.06F;
+    private static final float SPRINT_PACE = 0.08F;
+    private static final float CRAWL_PACE = 0.055F;
+    /** Animation seconds per block crawled on a wall or ceiling. */
+    private static final float SURFACE_PACE = 3.0F;
     /** A spell begun in the form keeps the cast animation at least this long (seconds). */
     private static final float CAST_HOLD = 1.5F;
     /** The crawl's moment with both hands down: the pose held while clinging or charging a leap. */
@@ -121,8 +124,20 @@ final class GauntRenderer {
             return new Pick(action.animation, (now - action.since) / 20.0F, model.length(action.animation));
         }
         GauntClient.Leap leap = GauntClient.leap(player.getId());
-        if (leap != null && (leap.cling != null || leap.chargingSince >= 0)) {
+        if (leap != null && leap.cling != null) {
+            float length = model.length("crawl");
+            return new Pick("crawl", (HANDS_PLANTED + leap.crawled * SURFACE_PACE) % length, length);
+        }
+        if (leap != null && leap.chargingSince >= 0) {
             return new Pick("crawl", HANDS_PLANTED, model.length("crawl"));
+        }
+        if (leap != null && leap.leaping && !player.onGround()) {
+            float length = model.length("leap");
+            return new Pick("leap", (now / 20.0F) % length, length);
+        }
+        if (leap != null && leap.blocking) {
+            float length = model.length("block");
+            return new Pick("block", (now / 20.0F) % length, length);
         }
         String animation;
         float time;

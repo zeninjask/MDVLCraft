@@ -10,7 +10,7 @@ import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ASSETS = os.path.join(HERE, '..', '..', 'src', 'main', 'resources', 'assets', 'mdvlcraft')
-# event: (Freesound id, preview, [(start, end) seconds], loudness target or None to peak-normalise short hits)
+# event: (source id, preview URL (or zip URL#member), [(start, end) seconds], loudness target or None to peak-normalise short hits)
 SOUNDS = {
     # Mediasaur, "Masked_Breathing_Raspy_Loop": one breath every ~4.1 s, cut to the idle's 4 s cycle
     'idle': (788055, 'https://cdn.freesound.org/previews/788/788055_10164671-hq.mp3',
@@ -27,8 +27,9 @@ SOUNDS = {
     # unfa, "Deafening Whispers": 4 s of whispering, the cast's cycle
     'cast': (185059, 'https://cdn.freesound.org/previews/185/185059_1038806-hq.mp3',
              [(1.0, 5.0), (9.0, 13.0), (17.0, 21.0), (27.0, 31.0)], -18),
-    # onderwish, "Ghost Scream": the Horrify screech (gaunt/GauntLeap.horrify)
-    'horrify': (469141, 'https://cdn.freesound.org/previews/469/469141_2694940-hq.mp3', [(1.0, 5.0)], -14),
+    # qubodup, "Ghost Monster Voice Moaning & Growling" (OpenGameArt, CC0), GhostMoan02: the Horrify wail
+    # (gaunt/GauntLeap.horrify; the user's pick H7)
+    'horrify': ('qubodup-GhostMoans', 'https://opengameart.org/sites/default/files/qubodup-GhostMoans.zip#GhostMoan02.wav', [(0.1, 4.7)], -14),
     # morgothFLOW, "bonebreaker.mp3": bone snaps (the transformation)
     'snap': (124971, 'https://cdn.freesound.org/previews/124/124971_1247793-hq.mp3',
              [(1.92, 2.25), (2.36, 2.78), (2.8, 3.2), (3.68, 4.0)], None),
@@ -46,7 +47,18 @@ only = sys.argv[2].split(',') if len(sys.argv) > 2 else list(SOUNDS)
 for event, (sid, url, cuts, loudness) in SOUNDS.items():
     if event not in only:
         continue
-    src = os.path.join(download, f'{sid}.mp3')
+    if '#' in url:      # a member of a zip archive
+        url, member = url.split('#', 1)
+        src = os.path.join(download, f'{sid}_{os.path.basename(member)}')
+        if not os.path.exists(src):
+            archive = os.path.join(download, os.path.basename(url))
+            if not os.path.exists(archive):
+                subprocess.run(['curl', '-sSfL', '-A', 'Mozilla/5.0', '-o', archive, url], check=True)
+            import zipfile
+            with zipfile.ZipFile(archive) as z, open(src, 'wb') as f:
+                f.write(z.read(next(n for n in z.namelist() if n.endswith(member))))
+    else:
+        src = os.path.join(download, f'{sid}.mp3')
     if not os.path.exists(src):
         subprocess.run(['curl', '-sSfL', '-A', 'Mozilla/5.0', '-o', src, url], check=True)
     names = []

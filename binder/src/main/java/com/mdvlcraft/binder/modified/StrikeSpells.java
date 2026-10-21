@@ -95,29 +95,34 @@ public final class StrikeSpells {
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             if (level instanceof ServerLevel server) {
-                Vec3 from = caster.position();
                 Vec3 eye = caster.getEyePosition();
                 Vec3 hit = level.clip(new ClipContext(eye, eye.add(caster.getLookAngle().scale(14.0)), ClipContext.Block.COLLIDER,
                     ClipContext.Fluid.NONE, caster)).getLocation();
                 Vec3 dest = Utils.moveToRelativeGroundLevel(level, hit.subtract(caster.getLookAngle().scale(0.6)), 3);
-                Utils.handleSpellTeleport(this, caster, dest);
-                float damage = this.getSpellPower(spellLevel, caster);
-                for (Vec3 at : List.of(from, caster.position())) {
-                    for (LivingEntity enemy : Targets.enemies(caster, at, 3.0)) {
-                        DamageSources.applyDamage(enemy, damage, this.getDamageSource(caster));
-                        MartialSpells.stun(enemy, StunType.SHORT, 0.5F);
-                    }
-                    server.sendParticles(ParticleTypes.ELECTRIC_SPARK, at.x, at.y + 0.8, at.z, 40, 1.2, 0.8, 1.2, 0.15);
-                }
-                SummonSpells.spark(server, from.add(0.0, 1.0, 0.0), caster.position().add(0.0, 1.0, 0.0));
-                LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(server);
-                if (bolt != null) {
-                    bolt.moveTo(caster.position());
-                    bolt.setVisualOnly(true);
-                    server.addFreshEntity(bolt);
-                }
+                this.step(server, caster, dest, this.getSpellPower(spellLevel, caster));
             }
             super.onCast(level, spellLevel, caster, source, data);
+        }
+
+        /** Teleports the caster to `dest` in a flash of lightning, shocking and staggering everything within 3 blocks of both
+         * ends (also the dodge of Yakusanoikazuchi, raiju/RaijuForm). */
+        public void step(ServerLevel server, LivingEntity caster, Vec3 dest, float damage) {
+            Vec3 from = caster.position();
+            Utils.handleSpellTeleport(this, caster, dest);
+            for (Vec3 at : List.of(from, caster.position())) {
+                for (LivingEntity enemy : Targets.enemies(caster, at, 3.0)) {
+                    DamageSources.applyDamage(enemy, damage, this.getDamageSource(caster));
+                    MartialSpells.stun(enemy, StunType.SHORT, 0.5F);
+                }
+                server.sendParticles(ParticleTypes.ELECTRIC_SPARK, at.x, at.y + 0.8, at.z, 40, 1.2, 0.8, 1.2, 0.15);
+            }
+            SummonSpells.spark(server, from.add(0.0, 1.0, 0.0), caster.position().add(0.0, 1.0, 0.0));
+            LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(server);
+            if (bolt != null) {
+                bolt.moveTo(caster.position());
+                bolt.setVisualOnly(true);
+                server.addFreshEntity(bolt);
+            }
         }
     }
 
