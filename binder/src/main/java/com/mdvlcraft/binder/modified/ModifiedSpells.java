@@ -73,6 +73,7 @@ public final class ModifiedSpells {
         GroundSpells.all().forEach(ground -> all.add(() -> ground));
         WallSpells.all().forEach(wall -> all.add(() -> wall));
         Wave2Necromancer.all().forEach(spell -> all.add(() -> spell));
+        Wave2Water.all().forEach(spell -> all.add(() -> spell));
         Wave2Frost.all().forEach(spell -> all.add(() -> spell));
         Wave2Monk.all().forEach(spell -> all.add(() -> spell));
         Wave2Blaze.all().forEach(spell -> all.add(() -> spell));
