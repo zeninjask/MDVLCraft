@@ -79,6 +79,8 @@ public final class OriginJobA {
     private static final String SPICE = "spice_mix";
     private static final String BRIBED = "bribed";
     private static final String BRAND = "branding_iron";
+    private static final String SCARECROW_SEEN = "scarecrow_seen";
+    private static final String SCARECROW_LURED = "scarecrow_lured";
     private static final UUID TEMPER_ARMOUR_ID = UUID.fromString("6e2f4b81-3c9d-4a57-b0e8-1d7a5c3f9b26");
     private static final UUID TEMPER_TOUGHNESS_ID = UUID.fromString("b8d31e6a-7f42-4c09-a5b3-e2c94f1d6a87");
     private static final UUID SHRED_ID = UUID.fromString("2c9a7e15-d4b8-4f63-8e01-a6f5b3c7d942");
@@ -412,9 +414,9 @@ public final class OriginJobA {
     }
 
     /**
-     * Scarecrow: a scarecrow (a carved-pumpkin marker) on the caster's spot for 60 s; hostile mobs within 8 blocks get Slowness I
-     * and are drawn to it: they drop their target, walk to it, and can't take anyone else as a target while in its reach. Mobs
-     * can't target a marker, so "target it first" is this lure.
+     * Scarecrow: a scarecrow (a carved-pumpkin marker) on the caster's spot for 60 s; hostile mobs within 8 blocks get Slowness I.
+     * Mobs can't target a marker, so "target it first" is a lure: a hostile mob is drawn to it once, the first time it comes in
+     * reach (it drops its target and walks to the scarecrow for 3 s, taking no other target meanwhile), then fights as usual.
      */
     public static class Scarecrow extends ModifiedSpell {
         Scarecrow() {
@@ -430,8 +432,14 @@ public final class OriginJobA {
                     for (LivingEntity enemy : Targets.enemies(caster, at, 8.0)) {
                         if (hostile(caster, enemy) && enemy instanceof PathfinderMob mob) {
                             mob.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 0), caster);
-                            mob.setTarget(null);
-                            mob.getNavigation().moveTo(at.x, at.y, at.z, 1.0);
+                            if (!Buffs.has(mob, SCARECROW_SEEN)) {
+                                Buffs.give(mob, SCARECROW_SEEN, 1200);
+                                Buffs.give(mob, SCARECROW_LURED, 60);
+                            }
+                            if (Buffs.has(mob, SCARECROW_LURED)) {
+                                mob.setTarget(null);
+                                mob.getNavigation().moveTo(at.x, at.y, at.z, 1.0);
+                            }
                         }
                     }
                 }, GroundSpells.marker(server, at, Items.CARVED_PUMPKIN));
@@ -635,7 +643,7 @@ public final class OriginJobA {
 
     // ---- event handlers ----
 
-    /** Turned undead won't target their cleric, bribed mobs their briber, and hostile mobs in a scarecrow's reach anyone. */
+    /** Turned undead won't target their cleric, bribed mobs their briber, and mobs a scarecrow is luring anyone. */
     @SubscribeEvent
     public static void onTarget(LivingChangeTargetEvent event) {
         LivingEntity mob = event.getEntity();
@@ -644,7 +652,7 @@ public final class OriginJobA {
             return;
         }
         if (Buffs.markedBy(mob, TURNED) == target || Buffs.markedBy(mob, BRIBED) == target
-            || SCARECROWS.stream().anyMatch(s -> s.reaches(mob) && hostile(s.caster(), mob))) {
+            || Buffs.has(mob, SCARECROW_LURED)) {
             event.setCanceled(true);
         }
     }
