@@ -288,6 +288,7 @@ public final class Wave2Guardian {
                 if (enemy == caster) {
                     continue;
                 }
+                MartialSpells.faceTowards(enemy, caster);   // Epic Fight's stun throws a creature back from where it faces
                 MartialSpells.stun(enemy, StunType.LONG, 2.0F);
                 MartialSpells.root(enemy, 40);
                 knock(caster.position(), enemy, 4.0);
