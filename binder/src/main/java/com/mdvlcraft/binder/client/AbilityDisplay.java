@@ -2,6 +2,7 @@ package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.Ability;
 import com.mdvlcraft.binder.ability.DoppelgangerAbility;
+import com.mdvlcraft.binder.ability.GauntAbility;
 import com.mdvlcraft.binder.ability.PlannedAbility;
 import com.mdvlcraft.binder.ability.SlotSkillAbility;
 import com.mdvlcraft.binder.ability.SpellAbility;
@@ -39,7 +40,8 @@ final class AbilityDisplay {
             graphics.blit(ability.icon(), x, y, 16, 16, 0.0F, 0.0F, 18, 18, 18, 18);
             float cooldown = ability instanceof SpellAbility spell
                 ? ClientMagicData.getCooldownPercent(spell.spell())
-                : (ability instanceof Technique technique ? ClientTechniqueCooldowns.percent(technique) : 0.0F);
+                : (ability instanceof Technique technique ? ClientTechniqueCooldowns.percent(technique)
+                    : (ability instanceof GauntAbility gaunt ? GauntClient.cooldown(gaunt) : 0.0F));
             if (cooldown > 0.0F) {
                 int height = Math.round(16.0F * cooldown);
                 graphics.fill(x, y + 16 - height, x + 16, y + 16, -1610612736);
@@ -66,6 +68,9 @@ final class AbilityDisplay {
             lines.add(doppelganger.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(Component.translatable("ability.mdvlcraft.doppelganger.desc").withStyle(ChatFormatting.GRAY));
             lines.add(Component.translatable("ability.mdvlcraft.doppelganger.upkeep", doppelganger.manaCost(level)).withStyle(ChatFormatting.BLUE));
+        } else if (ability instanceof GauntAbility gaunt) {
+            lines.add(gaunt.displayName().copy().withStyle(ChatFormatting.DARK_AQUA));
+            lines.add(Component.translatable("ability." + gaunt.id().getNamespace() + "." + gaunt.id().getPath() + ".desc").withStyle(ChatFormatting.GRAY));
         } else if (ability instanceof SustenanceAbility sustenance) {
             lines.add(sustenance.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(Component.translatable("ability.mdvlcraft.arcane_sustenance.desc", 1, 4).withStyle(ChatFormatting.GRAY));

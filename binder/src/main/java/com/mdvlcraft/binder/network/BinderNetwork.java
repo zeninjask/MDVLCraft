@@ -10,7 +10,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "17";
+    private static final String PROTOCOL = "18";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
         ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals
     );
@@ -73,6 +73,26 @@ public final class BinderNetwork {
         CHANNEL.registerMessage(
             id++, SeraphFormPacket.class, SeraphFormPacket::encode, SeraphFormPacket::decode, SeraphFormPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, GauntFormPacket.class, GauntFormPacket::encode, GauntFormPacket::decode, GauntFormPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, GauntStatePacket.class, GauntStatePacket::encode, GauntStatePacket::decode, GauntStatePacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, GauntClingPacket.class, GauntClingPacket::encode, GauntClingPacket::decode, GauntClingPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+        CHANNEL.registerMessage(
+            id++, GauntActionPacket.class, GauntActionPacket::encode, GauntActionPacket::decode, GauntActionPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, GauntAttackPacket.class, GauntAttackPacket::encode, GauntAttackPacket::decode, GauntAttackPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
         CHANNEL.registerMessage(
             id++, JinglePacket.class, JinglePacket::encode, JinglePacket::decode, JinglePacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT)

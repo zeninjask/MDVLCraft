@@ -78,6 +78,42 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
+- **Gaunt Vessel (on `bane-agent`, not compiled or tested; for liam-agent to merge, build and test):** a Modified ability
+  (`modified/GauntVessel`, spirit school, 80 mana, 240 s cooldown) in no tree yet, like Seraph Embodiment. The caster is
+  lifted and their own body's bones snap one by one (`client/GauntRenderer`, ticks in `gaunt/GauntForm.SNAPS`, bone
+  cracks from the server), then the body tears into the Haunted Lord (`binder/art/haunted_lord/`), which unfolds
+  (its `transform` animation); 30 s in the form (idle, walk, sprint, crawl while sneaking, cast while casting), then
+  the same backwards. 25% speed, 20% spirit spell power, Night Vision, spells only. New: `gaunt/GauntForm`,
+  `network/GauntFormPacket` (network protocol 16), `client/GauntClient`, `client/GauntRenderer`; the glTF node model
+  code moved out of `client/SeraphRenderer` into `client/NodeModel` (shared, plus a glow pass). Model data from
+  `tools/haunted_lord/convert.py`. To check in game: Seraph Embodiment still renders as before, the snapping body
+  (part rotation signs), the head turning the right way, and the walk/sprint/crawl pacing constants in GauntRenderer.
+  Its sounds (CC0, Freesound, `tools/haunted_lord/sounds.py`, `assets/mdvlcraft/sounds.json`) are played client-side by
+  `client/GauntClient` at cue points of the animations; check they line up with the steps and hand plants.
+  In the form the ability wheel is only Transform Back and Leap (`ability/GauntAbility`; every other ability and spell is
+  refused). Leap (`gaunt/GauntLeap`): hold the cast key to charge (1 s), release to jump where you look; touching a wall
+  or ceiling mid-leap clings to it (crawl pose turned onto the surface, `client/GauntRenderer.surface`), jump to let go.
+  New packets `GauntStatePacket` and `GauntClingPacket` (protocol still 16, Gaunt Vessel is unreleased). The charge path
+  is drawn by `client/LeapTrajectory` through **Trajectory Estimation** (client-only, optional dependency, compiled
+  against `binder/libs/trajectory_estimation-forge-1.0.3.1-1.20.1.jar`). **Add it to the client packs** (not the server;
+  it says it does not run there): path `mods/trajectory_estimation-forge-1.0.3.1-1.20.1.jar`, download
+  `https://cdn.modrinth.com/data/7c13Zjk8/versions/cq06oKjy/trajectory_estimation-forge-1.0.3.1-1.20.1.jar`,
+  sha1 `48e01ab0c63c402936841b396781e089a1b33795`, sha512
+  `4a42e3918c064ad5aaa13e4b72029037bbfc9329d34163fd5c01030d556f1740bf6db688d990d07a7e667b3d00bd8abb5bbf382dbf445f99b2097b7f602d5f4a`,
+  size 282039, `env` client required / server unsupported. GPL-3.0. To check in game: the cling orientation on each wall
+  and the ceiling, the predicted path matching the real leap, and that no other ability or spell can be used in the form.
+  Trajectory Estimation's own aim lines (bows, pearls, tridents, potions, every compat) are switched off by
+  `mixin/tje/CompatibilityEventMixin` (cancels its `interModEnqueue`, which registers all of them); only the Leap path
+  draws. To check in game: no arcs when aiming a bow or holding a pearl.
+  Execute (4th form wheel slot, `gaunt/GauntExecute`, 30 s cooldown): seizes a looked-at creature (3.5 blocks, at or
+  below half health, not a boss, at most 2.2 tall and 1 wide) by the neck, lifts it and snaps its neck (head flops
+  sideways; T1 "Necksnap_build" timed so its crack lands on the snap), kills it at 2.6 s. The victim is moved along the
+  hand path on the server and placed every frame on clients. Attacking in the form strikes with the claws
+  (`gaunt/GauntAttack`, `network/GauntAttackPacket`): ground chain attack1/attack2/attack3 (7/7/11 damage, buffered like
+  Epic Fight combos), jump_attack in the air (10), dash_attack while sprinting (4 slashes of 4.5, lunges forward).
+  Animations sent with `network/GauntActionPacket`. Built and run on the test server/client (bane-agent session):
+  execute lifts and kills a husk, attacks hit; the test client renders about 1 FPS so short attack poses were only
+  checked in Blockbench previews. Not yet checked: player victims, Epic Fight mobs' head turn.
 - **Released:** 2.0.13 is on `main` (binder 0.8.4): cinder essence recipe (netherite scrap surrounded by blaze powder), untested.
 - **2.0.12** (binder 0.8.3): red string (redstone + string) and bloody vellum (paper + redstone) recipes, untested.
 - **2.0.11** (`0ef8736`, binder 0.8.2).
