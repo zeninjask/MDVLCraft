@@ -131,7 +131,7 @@ BUILT = {
     'blood_frenzy': spell(BLOOD, 35, 60),
     # not in any tree yet: the Seraphim transformation (seraph/SeraphForm)
     'seraph_embodiment': spell(HOLY, 80, 240),
-    # not in any tree yet: the Haunted Lord transformation (gaunt/GauntForm)
+    # never in a tree: the Haunted Lord transformation (gaunt/GauntForm), granted only by wearing the Haunted Locket
     'gaunt_vessel': spell(SPIRIT, 80, 0),
     # batch 4: summons (modified/UndeadSummons, BeastSummons), mounts (MountSpells) and field abilities (FieldSpells)
     'skeleton_archers': spell(BLOOD, 50, 90, 'long', 30),
