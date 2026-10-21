@@ -384,6 +384,48 @@ seb-agent built no jar or packs and did not push to `main`. Merge `seb-agent` in
 - Mounted Charge with a player rider.
 - The item abilities on a player: Forge Heat, Compost, Bribe, Quiver Refill (Quiver Refill was checked: 16 arrows).
 
+## For liam-agent: the balance pass on `seb-agent` (21 Oct 2026)
+
+The user approved every change in `docs/MDVLCraft-Balance-Report.pdf`. The ratings, scores and scripts behind it are in `docs/balance/`. All of it is applied on `seb-agent`. The server boots cleanly with it (all new mixins apply, and every changed origin power loads), but nothing was play-tested. Merge it, build, bump the version and release as usual.
+
+**Pack-wide (everyone weaker):**
+- Tree spells: power x1.452 -> x1.30, mana x0.756 -> x0.85, cooldowns at least 4 s (`tools/tree_edit.py`).
+  - Every shipped spell config was migrated once by `tools/balance_spell_configs.py`, which also holds the 40 per-spell fixes.
+  - The generator keeps existing configs, so don't rerun the migration.
+- Spells with a cooldown of 60 s or more are granted one level lower; Raise Dead goes from 6 to 3 (`generate_vocations.spell_level`).
+- Tree node descriptions now read each spell's own config for mana and cooldown.
+- Modified abilities: power x1.2 -> x1.1 (`modified/ModifiedSpellPower`).
+- Origin tab: bonus nodes at 15% of a vocation bonus (was 30%), ability nodes cost 3 points (was 2) (`tools/generate_origins.py`).
+
+**Trees** (`tools/vocations/v2_balance.py`, loaded last by `v2_all.py`; `generate_vocations.balance_base`):
+- Strong passives in fewer trees:
+  - Reserve Mana is out of Necromancer, Warlock, Frost and Holy.
+  - Soul Protection and Second Wind are out of Necromancer.
+  - Magic Immunity is out of Warlock.
+  - Soul Protection, Vampirize and Heart Shield are out of every vocation, and Magic Sword out of two. Each of those vocations gets its archetypes' least-used other skill.
+- Thief and Wanderer swap three utility skills each for combat skills.
+- Ruin Slash is Berserker's first skill; Demonic Assimilation moves about 20 points in.
+- Seven slow starters get a skill in their first ring.
+- Bonus totals change for Guardian (armour 15, toughness 4, 18% resistance), Berserker (attack damage 5, 8% life steal), Brute (24 health), and Wanderer, Thief, Stalker, Spirit and Druid (more health and/or armour).
+
+**Abilities:**
+- 42 Modified abilities: freezes shortened, caps, cooldowns and a few buffs (`modified/*.java`, `built*.py`, descriptions in `v2_*.py` / `origin_ideas.json`).
+- Techniques:
+  - Malevolent Shrine costs 20 mana/s, and its 120 s cooldown starts when it closes.
+  - The open shrine costs 25 mana/s and has a 20-block cut radius.
+  - Soul Hunt gets at most 2 big resets per cast (`mixin/efn/ExecuteSkillMixin`).
+- Epic Fight passives:
+  - Reserve Mana gets a 90 s cooldown and Second Wind (Breathe Again) 120 s, through `data/efs_iss/skill_parameters` (efs_iss is now an optional dependency loaded first).
+  - Auto Heal works at most once every 10 s.
+  - Magic Immunity drops to +0.4 spell resist, Heart Shield to a 10 shield, and Vampirize to 12% life steal (mixins in `mixin/efsiss` and `mixin/wom`, `@Pseudo` with `require = 1`, so a mod update that moves them stops the game at launch with a clear error).
+
+**Origins:**
+- 20 races, martial classes and jobs: the agent's list is in the commit message.
+- The pack's own origins change in `data/mdvlcraft/{origins,powers}` and `content/OriginTraits` / `MartialTraits`.
+- Overrides of other mods' origins and powers are in the new tracked `binder/tools/base_overlay/kubejs/data/`. **`build_packs.py` now copies `base_overlay/` into both sides of `base/` before building.** `base/` is gitignored, so this is how these KubeJS changes reach the packs; keep using it for KubeJS data that must survive a base rebuild.
+
+**Note for the release:** the trees were regenerated, so existing players' unlocked nodes may not line up with the new layouts. A respec on first join (or telling players to reset their trees) is advisable.
+
 ## Unfinished work
 
 - 2.0.14 (from liam-agent): Spirit renamed Jade and a new Spirit archetype with 18 vocations (19 archetypes, 171 vocations; see step 13 in [`VOCATIONS_IMPLEMENTATION.md`](VOCATIONS_IMPLEMENTATION.md)). Its 33 new Modified abilities are placeholders still to build. Old Spirit players are moved to Jade on their first join (`skills/JadeRename`).
