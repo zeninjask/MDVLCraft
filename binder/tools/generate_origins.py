@@ -151,7 +151,10 @@ def build():
     V.write(PARTS / "category.json", {"title": "Origin", "description": "", "icon": V.tex(f"{V.ICON}tab/tab_origin.png"),
                                       "background": V.G.background(), "colors": V.G.colours(),
                                       "unlocked_by_default": False, "starting_points": 1})
-    V.write(PARTS / "experience.json", V.G.experience())
+    experience = V.G.experience()
+    per_level = experience["experience_per_level"]["data"]
+    per_level["expression"] = f"2 * ({per_level['expression']})"   # the Origin tab levels at half the vocation pace
+    V.write(PARTS / "experience.json", experience)
     os = design.origins()
     index = {}
     for m in (o for o in os if o["layer"] == "martial"):

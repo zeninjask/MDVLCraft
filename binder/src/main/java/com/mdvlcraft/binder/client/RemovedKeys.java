@@ -52,7 +52,7 @@ final class RemovedKeys {
     private static final Set<String> PREFIXES = Set.of("key.shouldersurfing.", "gui.xaero_", "key.betterlockon.", "key.jade.", "keybind.invmove.", "key.jei.", "key.simplytooltips.", "key.sword_soaring.", "key.efn.",
         "key.p1nero_ec.");
     private static final Set<String> KEEP = Set.of(
-        "key.push_to_talk", "key.shouldersurfing.swap_shoulder", "gui.xaero_open_map",
+        "key.push_to_talk", "key.shouldersurfing.swap_shoulder", "gui.xaero_open_map", "key.combat_evolution.execution",
         "key.jei.showRecipe", "key.jei.closeRecipeGui", "key.jei.bookmark", "key.jei.toggleOverlay"
     );
     /** The JEI keys that stay share this one category ("JEI"), in place of JEI's several. */

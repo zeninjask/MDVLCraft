@@ -26,6 +26,7 @@ public final class ModifiedClientSetup {
     private static void onRegisterRenderers(RegisterRenderers event) {
         event.registerEntityRenderer(ModifiedEntities.JAVELIN.get(), ThrownItemRenderer::new);
         event.registerEntityRenderer(ModifiedEntities.BOLT.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(ModifiedEntities.BLACK_ROOT.get(), BlackRootRenderer::new);
     }
 
     private static void onLayerDefinitions(RegisterLayerDefinitions event) {

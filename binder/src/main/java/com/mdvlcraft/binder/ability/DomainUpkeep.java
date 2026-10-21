@@ -36,8 +36,9 @@ final class DomainUpkeep {
     private DomainUpkeep() {
     }
 
-    static void windingUp(ServerPlayer player, Technique shrine) {
-        DOMAINS.put(player.getUUID(), new DomainUpkeep.Domain(shrine, player.level().getGameTime(), -1L));
+    /** `free`: opened for another ability that paid for it, so it takes no upkeep. */
+    static void windingUp(ServerPlayer player, Technique shrine, boolean free) {
+        DOMAINS.put(player.getUUID(), new DomainUpkeep.Domain(shrine, player.level().getGameTime(), -1L, free));
     }
 
     static boolean isActive(ServerPlayer player) {
@@ -77,12 +78,12 @@ final class DomainUpkeep {
                 boolean up = domain.shrine() == Technique.MALEVOLENT_SHRINE ? !ownedClosedDomains(player).isEmpty() : ownsOpenShrine(player);
                 if (domain.openedTick() < 0L) {
                     if (up) {
-                        entry.setValue(new DomainUpkeep.Domain(domain.shrine(), domain.castTick(), now));
+                        entry.setValue(new DomainUpkeep.Domain(domain.shrine(), domain.castTick(), now, domain.free()));
                     } else if (now - domain.castTick() > 100L) {
                         entries.remove();
                     }
                 } else if (up) {
-                    if ((now - domain.openedTick()) % 20L == 0L && !pay(player, domain.shrine())) {
+                    if ((now - domain.openedTick()) % 20L == 0L && !domain.free() && !pay(player, domain.shrine())) {
                         entries.remove();
                         shut(player, domain);
                         continue;
@@ -152,6 +153,6 @@ final class DomainUpkeep {
         }
     }
 
-    private record Domain(Technique shrine, long castTick, long openedTick) {
+    private record Domain(Technique shrine, long castTick, long openedTick, boolean free) {
     }
 }

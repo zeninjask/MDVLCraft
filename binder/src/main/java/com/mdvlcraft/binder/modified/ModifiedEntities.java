@@ -1,8 +1,10 @@
 package com.mdvlcraft.binder.modified;
 
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType.Builder;
 import net.minecraft.world.entity.MobCategory;
+import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -17,11 +19,19 @@ public final class ModifiedEntities {
     public static final RegistryObject<EntityType<BoltProjectile>> BOLT = ENTITY_TYPES.register(
         "bolt", () -> Builder.<BoltProjectile>of(BoltProjectile::new, MobCategory.MISC).sized(0.5F, 0.5F).clientTrackingRange(64).build("bolt")
     );
+    public static final RegistryObject<EntityType<BlackRoot>> BLACK_ROOT = ENTITY_TYPES.register(
+        "black_root", () -> Builder.<BlackRoot>of(BlackRoot::new, MobCategory.MISC).sized(0.75F, 0.75F).clientTrackingRange(64).build("black_root")
+    );
 
     private ModifiedEntities() {
     }
 
     public static void register(IEventBus modBus) {
         ENTITY_TYPES.register(modBus);
+        modBus.addListener(ModifiedEntities::onAttributes);
+    }
+
+    private static void onAttributes(EntityAttributeCreationEvent event) {
+        event.put(BLACK_ROOT.get(), LivingEntity.createLivingAttributes().build());
     }
 }

@@ -18,4 +18,12 @@ public abstract class ItemStackMixin {
             cir.setReturnValue(true);
         }
     }
+
+    /** No enchantment shimmer on enchanted gear; enchanted books (stored, not applied, enchantments) keep theirs. */
+    @Inject(method = "hasFoil", at = @At("HEAD"), cancellable = true)
+    private void mdvlcraft$noGearFoil(CallbackInfoReturnable<Boolean> cir) {
+        if (((ItemStack)(Object)this).isEnchanted()) {
+            cir.setReturnValue(false);
+        }
+    }
 }

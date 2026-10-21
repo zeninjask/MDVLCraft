@@ -35,10 +35,10 @@ final class TechniqueRunner {
         if (technique.isShrine()) {
             pressShrine(player, technique);
         } else if (!technique.held) {
-            cast(player, technique);
+            cast(player, technique, false);
         } else {
             HELD.put(player.getUUID(), technique);
-            if (TechniqueCooldowns.remaining(player, technique) == 0L && !cast(player, technique)) {
+            if (TechniqueCooldowns.remaining(player, technique) == 0L && !cast(player, technique, false)) {
                 HELD.remove(player.getUUID());
             }
         }
@@ -47,17 +47,12 @@ final class TechniqueRunner {
     /** Malevolent Shrine: cast to open it, hold while it stands to cut, sneak and cast to close it. */
     private static void pressShrine(ServerPlayer player, Technique shrine) {
         if (!DomainUpkeep.isActive(player)) {
-            cast(player, shrine);
+            cast(player, shrine, false);
         } else if (player.isShiftKeyDown()) {
             DomainUpkeep.close(player);
         } else {
             HELD.put(player.getUUID(), shrine);
         }
-    }
-
-    /** Holds the cast key on `technique` for the player (the open shrine cuts while held) until release(). */
-    static void hold(ServerPlayer player, Technique technique) {
-        HELD.put(player.getUUID(), technique);
     }
 
     static void release(ServerPlayer player) {
@@ -84,19 +79,24 @@ final class TechniqueRunner {
                 if (!DomainUpkeep.isActive(player)) {
                     entries.remove();
                 }
-            } else if (TechniqueCooldowns.remaining(player, entry.getValue()) == 0L && !cast(player, entry.getValue())) {
+            } else if (TechniqueCooldowns.remaining(player, entry.getValue()) == 0L && !cast(player, entry.getValue(), false)) {
                 entries.remove();
             }
         }
     }
 
-    private static boolean cast(ServerPlayer player, Technique technique) {
+    /** Opens `shrine` for another ability that has already paid for it: no cooldown, mana or upkeep (DomainUpkeep). */
+    static void castFree(ServerPlayer player, Technique shrine) {
+        cast(player, shrine, true);
+    }
+
+    private static boolean cast(ServerPlayer player, Technique technique, boolean free) {
         if (technique == Technique.FOLLOW_UP_KICK && player.isShiftKeyDown()) {
             ProjectionSorcery.toggleFlow(player);
             return false;
         }
 
-        long cooldown = TechniqueCooldowns.remaining(player, technique);
+        long cooldown = free ? 0L : TechniqueCooldowns.remaining(player, technique);
         if (cooldown > 0L) {
             player.connection
                 .send(
@@ -132,7 +132,7 @@ final class TechniqueRunner {
             TechniqueCooldowns.start(player, technique);
             return true;
         } else {
-            if (!player.isCreative()) {
+            if (!player.isCreative() && !free) {
                 // The shrine is paid for while it stands (DomainUpkeep); opening needs its first second.
                 float needed = technique.isShrine() ? DomainUpkeep.manaPerSecond(technique) : cost;
                 if (magic.getMana() < needed) {
@@ -180,12 +180,14 @@ final class TechniqueRunner {
                 execute.run();
             }
 
-            TechniqueCooldowns.start(player, technique);
+            if (!free) {
+                TechniqueCooldowns.start(player, technique);
+            }
 
             if (technique.isShrine() && variables.SelectDomainVarient) {
                 variables.DomainVarientNumber = technique.domainVariant();
                 variables.syncPlayerVariables(player);
-                DomainUpkeep.windingUp(player, technique);
+                DomainUpkeep.windingUp(player, technique, free);
             }
 
             return true;

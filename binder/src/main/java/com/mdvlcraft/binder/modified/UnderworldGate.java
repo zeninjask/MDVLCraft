@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.modified;
 import com.mdvlcraft.binder.ability.ShrineGate;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
+import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -13,17 +14,15 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.common.util.FakePlayer;
-import yesman.epicfight.world.damagesource.StunType;
 
 /**
  * Underworld Gate (Shinigami): real players only (a fake player, such as the spell preview's, has no Cursed Fate data to
- * open the shrine with). Opens the open Malevolent Shrine for 10 s (cutting the whole time),
- * roots everything within 12 blocks for 4 s and turns the caster invisible for 10 s. The roots are effects, not Iron's
- * root entity, so a rooted mob stays on the ground and can still be executed; its guard is broken as the gate opens.
+ * open the shrine with). Opens the open Malevolent Shrine for 10 s (it does not cut), holds every enemy within
+ * 12 blocks (party members and the caster's summons are spared) in black root vines for 10 s and turns the caster
+ * invisible for 10 s.
  */
 public class UnderworldGate extends ModifiedSpell {
     private static final int TICKS = 200;
-    private static final int ROOT_TICKS = 80;
 
     public UnderworldGate() {
         super("underworld_gate", 0);
@@ -42,8 +41,9 @@ public class UnderworldGate extends ModifiedSpell {
                 }, () -> ShrineGate.close(player), null);
             }
             for (LivingEntity enemy : Targets.enemies(player, player.position(), 12.0)) {
-                MartialSpells.root(enemy, ROOT_TICKS);
-                MartialSpells.stun(enemy, StunType.NEUTRALIZE, 2.0F);
+                if (!(enemy instanceof RootEntity)) {
+                    BlackRoot.hold(player, enemy, TICKS);
+                }
             }
             player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, TICKS, 0, false, false, true));
             GroundSpells.ring(server, player.position(), 12.0, ParticleTypes.SCULK_SOUL);
