@@ -14,10 +14,14 @@ public enum GauntAbility implements Ability {
     REVERT("gaunt_revert"),
     LEAP("gaunt_leap"),
     HORRIFY("gaunt_horrify"),
-    EXECUTE("gaunt_execute");
+    EXECUTE("gaunt_execute"),
+    /** Yakusanoikazuchi's only wheel ability (raiju/RaijuForm): casts it again to change back. */
+    RAIJU_REVERT("raiju_revert");
 
     /** The wheel's slots in the form. */
     public static final GauntAbility[] WHEEL = {REVERT, LEAP, HORRIFY, EXECUTE};
+    /** The wheel in Yakusanoikazuchi's form. */
+    public static final GauntAbility[] RAIJU_WHEEL = {RAIJU_REVERT};
 
     private final ResourceLocation id;
 
@@ -27,6 +31,10 @@ public enum GauntAbility implements Ability {
 
     public static Optional<GauntAbility> slot(int slot) {
         return slot >= 0 && slot < WHEEL.length ? Optional.of(WHEEL[slot]) : Optional.empty();
+    }
+
+    public static Optional<GauntAbility> raijuSlot(int slot) {
+        return slot >= 0 && slot < RAIJU_WHEEL.length ? Optional.of(RAIJU_WHEEL[slot]) : Optional.empty();
     }
 
     static Optional<GauntAbility> byId(ResourceLocation id) {

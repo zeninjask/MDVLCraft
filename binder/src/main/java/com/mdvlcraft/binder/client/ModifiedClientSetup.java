@@ -20,6 +20,7 @@ public final class ModifiedClientSetup {
         modBus.addListener(ModifiedClientSetup::onRegisterRenderers);
         modBus.addListener(ModifiedClientSetup::onLayerDefinitions);
         modBus.addListener(ModifiedClientSetup::onAddLayers);
+        modBus.addListener(RaijuClient::onRegisterModels);
     }
 
     private static void onRegisterRenderers(RegisterRenderers event) {

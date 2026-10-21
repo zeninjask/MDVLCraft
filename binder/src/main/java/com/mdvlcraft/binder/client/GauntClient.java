@@ -204,7 +204,7 @@ public final class GauntClient {
     public static float cooldown(GauntAbility ability) {
         LocalPlayer player = Minecraft.getInstance().player;
         Leap leap = player == null ? null : LEAP.get(player.getId());
-        if (leap == null || ability == GauntAbility.REVERT) {
+        if (leap == null || ability == GauntAbility.REVERT || ability == GauntAbility.RAIJU_REVERT) {
             return 0.0F;
         }
         long now = player.level().getGameTime();

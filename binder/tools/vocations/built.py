@@ -133,6 +133,8 @@ BUILT = {
     'seraph_embodiment': spell(HOLY, 80, 240),
     # never in a tree: the Haunted Lord transformation (gaunt/GauntForm), granted only by wearing the Haunted Locket
     'gaunt_vessel': spell(SPIRIT, 80, 0),
+    # never in a tree: the thunder god transformation (raiju/RaijuForm), granted only by wearing Raijū's Fang
+    'yakusanoikazuchi': spell(LIGHTNING, 80, 0),
     # batch 4: summons (modified/UndeadSummons, BeastSummons), mounts (MountSpells) and field abilities (FieldSpells)
     'skeleton_archers': spell(BLOOD, 50, 90, 'long', 30),
     'bone_guard': spell(BLOOD, 50, 90, 'long', 30),

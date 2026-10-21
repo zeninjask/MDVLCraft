@@ -45,7 +45,7 @@ public final class ModifiedSpells {
         DaggerSpells.Immolate::new, DaggerSpells.VampireBite::new,
         BuffSpells.Bloodlust::new, BuffSpells.BloodFrenzy::new,
         // not in any tree yet
-        SeraphEmbodiment::new, GauntVessel::new,
+        SeraphEmbodiment::new, GauntVessel::new, Yakusanoikazuchi::new,
         // batch 4: summons, mounts and field abilities
         UndeadSummons.SkeletonArchers::new, UndeadSummons.BoneGuard::new, UndeadSummons.BurningDead::new, UndeadSummons.Reanimate::new,
         UndeadSummons.Strays::new, UndeadSummons.DrownedLegion::new, UndeadSummons.PirateCrew::new, UndeadSummons.DrownedHorde::new,

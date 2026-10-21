@@ -47,8 +47,12 @@ public final class ClientAbilities {
         return ability instanceof GauntAbility ? 1 : granted.getOrDefault(ability, 0);
     }
 
-    /** The wheel's slot; in Gaunt Vessel's form, the form's own wheel (ability/GauntAbility.WHEEL) instead of the loadout. */
+    /** The wheel's slot; in Gaunt Vessel's or Yakusanoikazuchi's form, the form's own wheel (ability/GauntAbility) instead
+     * of the loadout. */
     public static Optional<Ability> slot(int slot) {
+        if (RaijuClient.local()) {
+            return GauntAbility.raijuSlot(slot).map(ability -> (Ability)ability);
+        }
         return GauntClient.local() ? GauntAbility.slot(slot).map(ability -> (Ability)ability) : wheel.get(slot);
     }
 
