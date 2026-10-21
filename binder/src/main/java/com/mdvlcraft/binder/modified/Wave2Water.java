@@ -216,7 +216,7 @@ public final class Wave2Water {
         }
     }
 
-    /** Leviathan Hex: marks the creature looked at for 6 s, drowning it for 1 a second; if it dies marked, the caster heals 4. */
+    /** Leviathan Hex: marks the creature looked at for 6 s, drowning it for 2 a second; if it dies marked, the caster heals 4. */
     public static class LeviathanHex extends SmiteSpells.Smite {
         LeviathanHex() {
             super("leviathan_hex", 0, 16.0F);
@@ -225,7 +225,7 @@ public final class Wave2Water {
         @Override
         void strike(ServerLevel level, LivingEntity caster, LivingEntity target, float power, MagicData data) {
             Buffs.mark(target, "leviathan_hex", caster, 120);
-            Zones.start(level, target.position(), caster, 1.0F, 120, 20, zone -> {
+            Zones.start(level, target.position(), caster, 2.0F, 120, 20, zone -> {
                 if (zone.age() == 0 || !target.isAlive()) {
                     return;
                 }
@@ -511,7 +511,7 @@ public final class Wave2Water {
         }
     }
 
-    /** Balanced Judgment: strikes the creature looked at for the gap between their health percentages (in points), at least 4. */
+    /** Balanced Judgment: strikes the creature looked at for the gap between their health percentages (in points), 4 to 20. */
     public static class BalancedJudgment extends SmiteSpells.Smite {
         BalancedJudgment() {
             super("balanced_judgment", 4, 16.0F);
@@ -520,7 +520,7 @@ public final class Wave2Water {
         @Override
         void strike(ServerLevel level, LivingEntity caster, LivingEntity target, float power, MagicData data) {
             float gap = Math.abs(caster.getHealth() / caster.getMaxHealth() - target.getHealth() / target.getMaxHealth()) * 100.0F;
-            this.hurt(caster, target, Math.max(4.0F, gap));
+            this.hurt(caster, target, Math.min(20.0F, Math.max(4.0F, gap)));
             SmiteSpells.beam(level, caster.getEyePosition().subtract(0.0, 0.3, 0.0), target.getEyePosition(), ParticleTypes.END_ROD);
             level.sendParticles(ParticleTypes.FLASH, target.getX(), target.getY(0.6), target.getZ(), 1, 0.0, 0.0, 0.0, 0.0);
             level.playSound(null, target.blockPosition(), SoundEvents.BEACON_POWER_SELECT, SoundSource.PLAYERS, 1.0F, 1.4F);
@@ -556,13 +556,13 @@ public final class Wave2Water {
         }
     }
 
-    /** Indulgence Coin: a thrown gold coin; what it hits gets Weakness II for 6 s and the caster 4 absorption hearts (30 s). */
+    /** Indulgence Coin: a thrown gold coin; what it hits gets Weakness II for 6 s and the caster 2 absorption hearts (30 s). */
     public static class IndulgenceCoin extends BoltSpells.Bolt {
         IndulgenceCoin() {
             super("indulgence_coin", 2, Items.GOLD_NUGGET, ParticleTypes.WAX_OFF, (bolt, caster, target, power) -> {
                 bolt.hurt(caster, target, power);
                 target.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 120, 1), caster);
-                caster.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 1));
+                caster.addEffect(new MobEffectInstance(MobEffects.ABSORPTION, 600, 0));
             }, null);
             this.speed(1.8F).gravity(0.02).sound(SoundEvents.ARMOR_EQUIP_GOLD);
         }

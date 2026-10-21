@@ -3,14 +3,14 @@ from built import spell, EVOCATION, FIRE, ICE, LIGHTNING, HOLY, BLOOD, NATURE, E
 
 PART = {
     # Glacial Tide
-    'brine_lance': spell(AQUA, 25, 8),
-    'undertow_frost': spell(AQUA, 35, 18),
+    'brine_lance': spell(AQUA, 25, 14),
+    'undertow_frost': spell(AQUA, 35, 25),
     # Aurora
     'polar_flash': spell(LIGHTNING, 30, 12),
     'borealis_veil': spell(ICE, 40, 35),
     # Snow Seraph
     'hallowed_snowfall': spell(HOLY, 45, 40, 'long', 20),
-    'sanctified_icicle': spell(HOLY, 25, 8),
+    'sanctified_icicle': spell(HOLY, 25, 14),
     # Lich of the North
     'winter_pact': spell(BLOOD, 30, 40),
     'glacial_hex': spell(ELDRITCH, 25, 20),
@@ -22,7 +22,7 @@ PART = {
     'shiro_fracture': spell(SYMMETRY, 25, 10),
     # Frost Wraith
     'yurei_breath': spell(SPIRIT, 30, 12),
-    'phantom_drift': spell(SPIRIT, 20, 10),
+    'phantom_drift': spell(SPIRIT, 20, 16),
     # Black Ice
     'slick_floor': spell(ICE, 30, 25),
     'frozen_fingers': spell(ICE, 25, 14),

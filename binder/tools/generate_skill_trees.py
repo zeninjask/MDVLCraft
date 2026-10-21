@@ -641,11 +641,11 @@ ARCHETYPES = {
                               chain("puffish_attributes:toughness_shred", "Severing", 0.05, 2, 0.10)],
                    abilities=[[technique("mdvlcraft:dismantle", 2, "minecraft:shears"), technique("mdvlcraft:cleave", 3, "minecraft:iron_axe"),
                                technique("mdvlcraft:malevolent_shrine", 4, "minecraft:crying_obsidian",
-                                         note="Closed domain: a black barrier dome; only what is inside is cut, and only while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it."),
+                                         note="Closed domain: a black barrier dome; only what is inside is cut, and only while you hold Dismantle or Cleave. Drains 20 mana a second while it stands. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when it closes."),
                                technique("mdvlcraft:open_malevolent_shrine", 4, "minecraft:obsidian",
-                                         note="Open domain: no barrier, cuts everything within 45 blocks while you hold Dismantle or Cleave. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it.")],
+                                         note="Open domain: no barrier, cuts everything within 20 blocks while you hold Dismantle or Cleave. Drains 25 mana a second while it stands. Cast again to close it (free); it lasts up to 20 s. Its 120 s cooldown starts when you open it.")],
                               [efskill("epicfight:swordmaster", 3), efskill("epicfight:death_harvest", 2)],
-                              [technique("mdvlcraft:soul_hunt", 4, "minecraft:soul_lantern", note="Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown.")],
+                              [technique("mdvlcraft:soul_hunt", 4, "minecraft:soul_lantern", note="Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown; kills and guard-broken hits reset it at most twice per cast.")],
                               [spell("devour", 3, 2, "minecraft:rotten_flesh"), efskill("epicfight:vengeance", 3)]]),
 }
 

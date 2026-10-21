@@ -13,6 +13,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobType;
@@ -31,8 +32,10 @@ import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraft.world.level.block.BeehiveBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.CropBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent.Phase;
@@ -43,8 +46,11 @@ import net.minecraftforge.event.entity.living.AnimalTameEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
+import net.minecraftforge.event.entity.player.BonemealEvent;
 import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.entity.player.PlayerXpEvent;
+import net.minecraftforge.eventbus.api.Event.Result;
 import net.minecraftforge.event.level.BlockEvent.BreakEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -68,6 +74,12 @@ public final class OriginTraits {
     private static final ResourceLocation FRIEND_OF_BEES = power("beekeeper/friend_of_bees");
     private static final ResourceLocation RICH_HIVES = power("beekeeper/rich_hives");
     private static final ResourceLocation GRAVE_ROBBER = power("gravedigger/grave_robber");
+    private static final ResourceLocation QUICK_LEARNER = power("human/quick_learner");
+    private static final ResourceLocation CULTIVATOR = power("herbalist/cultivator");
+    private static final ResourceLocation HONEYED = power("beekeeper/honeyed");
+    private static final ResourceLocation RESTOCKING = ResourceLocation.fromNamespaceAndPath("origins-classes", "trade_availability");
+    private static final String RESTOCK_KEY = "mdvlcraft_merchant_restock";
+    private static final long RESTOCK_TICKS = 12000L;
 
     /** Minor negative gossip each village holds about these players: Infernals reach the -100 that turns iron golems hostile. */
     private static final int INFAMY_GOSSIP = 150;
@@ -169,6 +181,54 @@ public final class OriginTraits {
             Block.getDrops(state, level, pos, level.getBlockEntity(pos), player, player.getMainHandItem())
                 .forEach(stack -> Block.popResource(level, pos, stack));
         }
+
+        if (state.getBlock() instanceof CropBlock crop && crop.isMaxAge(state) && has(player, CULTIVATOR) && level.random.nextFloat() < 0.25F) {
+            BlockPos pos = event.getPos();
+            Block.getDrops(state, level, pos, level.getBlockEntity(pos), player, player.getMainHandItem()).stream()
+                .filter(stack -> stack.is(crop.asItem()))
+                .forEach(stack -> Block.popResource(level, pos, stack));
+        }
+    }
+
+    /** Bone meal on a small flower (which vanilla ignores) grows a copy of it. */
+    @SubscribeEvent
+    public static void onBonemeal(BonemealEvent event) {
+        if (event.getBlock().is(BlockTags.SMALL_FLOWERS) && has(event.getEntity(), CULTIVATOR)) {
+            if (event.getLevel() instanceof ServerLevel level) {
+                Block.popResource(level, event.getPos(), new ItemStack(event.getBlock().getBlock()));
+            }
+            event.setResult(Result.ALLOW);
+        }
+    }
+
+    /** Experience gains are 10% larger; the fraction rounds up by chance so small orbs still count. */
+    @SubscribeEvent
+    public static void onXp(PlayerXpEvent.XpChange event) {
+        int amount = event.getAmount();
+        if (amount > 0 && has(event.getEntity(), QUICK_LEARNER)) {
+            float bonus = amount * 0.1F;
+            int whole = (int)bonus;
+            event.setAmount(amount + whole + (event.getEntity().getRandom().nextFloat() < bonus - whole ? 1 : 0));
+        }
+    }
+
+    /** A Merchant's villagers refill their sold-out trades when spoken to, at most once per 10 minutes each. */
+    @SubscribeEvent
+    public static void onInteractEntity(PlayerInteractEvent.EntityInteract event) {
+        if (event.getLevel().isClientSide() || !(event.getTarget() instanceof Villager villager) || !has(event.getEntity(), RESTOCKING)) {
+            return;
+        }
+
+        long now = event.getLevel().getGameTime();
+        CompoundTag data = villager.getPersistentData();
+        if (data.contains(RESTOCK_KEY) && now - data.getLong(RESTOCK_KEY) < RESTOCK_TICKS) {
+            return;
+        }
+
+        if (villager.getOffers().stream().anyMatch(MerchantOffer::isOutOfStock)) {
+            villager.getOffers().forEach(MerchantOffer::resetUses);
+            data.putLong(RESTOCK_KEY, now);
+        }
     }
 
     @SubscribeEvent
@@ -214,6 +274,11 @@ public final class OriginTraits {
     public static void onEat(LivingEntityUseItemEvent.Finish event) {
         LivingEntity eater = event.getEntity();
         ItemStack stew = event.getItem();
+        if (!eater.level().isClientSide() && stew.is(Items.HONEY_BOTTLE) && has(eater, HONEYED)) {
+            eater.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 100, 0));
+            return;
+        }
+
         if (eater.level().isClientSide() || !stew.is(Items.SUSPICIOUS_STEW) || !has(eater, STEEPED) || stew.getTag() == null) {
             return;
         }
@@ -243,7 +308,7 @@ public final class OriginTraits {
             ItemStack held = event.getItemStack();
             if (state.getBlock() instanceof BeehiveBlock && state.getValue(BeehiveBlock.HONEY_LEVEL) >= BeehiveBlock.MAX_HONEY_LEVELS
                 && (held.is(Items.SHEARS) || held.is(Items.GLASS_BOTTLE)) && has(event.getEntity(), RICH_HIVES)) {
-                Block.popResource(level, event.getPos().above(), new ItemStack(Items.HONEYCOMB));
+                Block.popResource(level, event.getPos().above(), new ItemStack(Items.HONEYCOMB, 1 + level.random.nextInt(3)));
             }
         }
     }

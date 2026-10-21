@@ -16,7 +16,7 @@ mod('spectral_boat', 'Spectral Boat', 'Summon Horse', 'Summon a ghostly boat tha
 mod('flash_step', 'Flash Step', 'Frost Step', 'A crackling teleport that always lands you behind the target you look at.')
 mod('static_snare', 'Static Snare', 'Electrocute', 'A crackling snare that stuns the target and makes it drop what it holds.')
 mod('storm_steed', 'Storm Steed', 'Summon Horse', 'A horse of lightning that is very fast and shocks what it runs through.')
-mod('radiant_dagger', 'Radiant Dagger', 'Throw', 'Throw a dagger of light that burns undead and marks the target with Glowing.')
+mod('radiant_dagger', 'Radiant Dagger', 'Throw', 'Throw a dagger of light (11 base damage) that burns undead and marks the target with Glowing.')
 mod('alms', 'Alms', 'Conjure Refreshment', 'Conjure bread for the party; allies who eat it gain Luck for a while.')
 mod('void_shiv', 'Void Shiv', 'Throw', 'Throw a dagger of void that teleports you to where it lands.')
 mod('void_strider', 'Void Strider', 'Summon Horse', 'Summon a black horse of the End that blinks forward a few blocks at a time while you ride.')

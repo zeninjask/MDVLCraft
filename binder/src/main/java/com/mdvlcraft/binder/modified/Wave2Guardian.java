@@ -303,7 +303,7 @@ public final class Wave2Guardian {
         }
     }
 
-    /** Stone Lotus Pose: the caster is rooted for 6 s with Resistance III, healing 1 heart per second. */
+    /** Stone Lotus Pose: the caster is rooted for 6 s with Resistance II, healing 1 heart per second. */
     public static class StoneLotusPose extends ModifiedSpell {
         StoneLotusPose() {
             super("stone_lotus_pose", 0);
@@ -312,7 +312,7 @@ public final class Wave2Guardian {
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             MartialSpells.root(caster, 120);
-            caster.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 120, 2));
+            caster.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 120, 1));
             if (level instanceof ServerLevel server) {
                 Zones.start(server, caster.position(), caster, 0.0F, 120, 20, zone -> {
                     if (zone.age() > 0) {

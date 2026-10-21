@@ -219,7 +219,7 @@ public final class OriginMartialC {
         }, null).speed(2.0F).gravity(0.02).sound(SoundEvents.FISHING_BOBBER_THROW);
     }
 
-    /** Sea Shanty: for 15 s the caster and allies within 10 blocks get +10% attack speed and Water Breathing. */
+    /** Sea Shanty: for 15 s the caster and allies within 10 blocks get +20% attack speed and Water Breathing. */
     public static class SeaShanty extends ModifiedSpell {
         SeaShanty() {
             super(SHANTY, 0);
@@ -235,7 +235,7 @@ public final class OriginMartialC {
                         continue;
                     }
                     speed.removeModifier(SHANTY_ID);
-                    speed.addTransientModifier(new AttributeModifier(SHANTY_ID, "mdvlcraft sea shanty", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    speed.addTransientModifier(new AttributeModifier(SHANTY_ID, "mdvlcraft sea shanty", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL));
                     Buffs.give(ally, SHANTY, 300);
                     Zones.start(server, ally.position(), caster, 0.0F, 300, 301, zone -> {
                     }, () -> {

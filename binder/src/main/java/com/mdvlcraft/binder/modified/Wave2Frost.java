@@ -192,7 +192,7 @@ public final class Wave2Frost {
 
     // ---- Lich of the North ----
 
-    /** Winter Pact: sacrifices 4 health for Absorption II; for 10 s the caster's melee hits freeze for 2 s. */
+    /** Winter Pact: sacrifices 4 health for Absorption II; for 10 s the caster's melee hits freeze for 1 s (once per target per 3 s). */
     public static class WinterPact extends ModifiedSpell {
         WinterPact() {
             super("winter_pact", 0);
@@ -258,7 +258,7 @@ public final class Wave2Frost {
 
     // ---- Yuki-onna ----
 
-    /** Shiro Fracture: strikes the creature looked at, freezing it for 3 s and taking 4 of its armour for 8 s. */
+    /** Shiro Fracture: strikes the creature looked at, freezing it for 1.5 s and taking 4 of its armour for 8 s. */
     public static class ShiroFracture extends SmiteSpells.Smite {
         ShiroFracture() {
             super("shiro_fracture", 7, 5.0F);
@@ -267,7 +267,7 @@ public final class Wave2Frost {
         @Override
         void strike(ServerLevel level, LivingEntity caster, LivingEntity target, float power, MagicData data) {
             this.hurt(caster, target, power);
-            freeze(caster, target, 60);
+            freeze(caster, target, 30);
             Wave2Guardian.armour(target, SHIRO_ARMOR, "shiro_fracture_armour", -4.0, 160);
             level.sendParticles(ParticleTypes.SNOWFLAKE, target.getX(), target.getY(0.6), target.getZ(), 40, 0.4, 0.6, 0.4, 0.05);
             level.sendParticles(ParticleTypes.HAPPY_VILLAGER, target.getX(), target.getY(0.6), target.getZ(), 15, 0.3, 0.4, 0.3, 0.1);
@@ -677,10 +677,10 @@ public final class Wave2Frost {
             level.playSound(null, victim.blockPosition(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 0.6F, 1.8F);
         }
 
-        // arrows: Pinning Frost freezes for 2 s; Conductive Mark chains lightning to 2 nearby enemies
+        // arrows: Pinning Frost freezes for 1 s; Conductive Mark chains lightning to 2 nearby enemies
         if (event.getSource().is(DamageTypes.ARROW)) {
             if (source != null && Buffs.has(source, "pinning_frost")) {
-                freeze(source, victim, 40);
+                freeze(source, victim, 20);
             }
             LivingEntity marker = Buffs.markedBy(victim, "conductive_mark");
             if (marker != null) {
@@ -696,9 +696,10 @@ public final class Wave2Frost {
         if (melee == null || melee == victim) {
             return;
         }
-        // Winter Pact: melee hits freeze for 2 s
-        if (Buffs.has(melee, "winter_pact")) {
-            freeze(melee, victim, 40);
+        // Winter Pact: melee hits freeze for 1 s, once per target per 3 s
+        if (Buffs.has(melee, "winter_pact") && !Buffs.has(victim, "winter_pact_lock")) {
+            Buffs.give(victim, "winter_pact_lock", 60);
+            freeze(melee, victim, 20);
             level.sendParticles(ParticleTypes.SNOWFLAKE, victim.getX(), victim.getY(0.6), victim.getZ(), 15, 0.3, 0.5, 0.3, 0.05);
         }
         // Stag's Crown: melee hits knock 3 blocks back and give the attacker Speed I for 3 s
@@ -809,7 +810,7 @@ public final class Wave2Frost {
             yureiBreath(), new PhantomDrift(),
             new SlickFloor(), new FrozenFingers(),
             snowblindShot(),
-            new State("pinning_frost", 0, 200, ParticleTypes.SNOWFLAKE, SoundEvents.CROSSBOW_LOADING_END),   // Pinning Frost: 10 s of arrows freezing targets 2 s
+            new State("pinning_frost", 0, 200, ParticleTypes.SNOWFLAKE, SoundEvents.CROSSBOW_LOADING_END),   // Pinning Frost: 10 s of arrows freezing targets 1 s
             new SnowshoeBound(),
             new BoonSpells.Food("nomad_stew", Items.MUSHROOM_STEW, "frost_stew", 1, false),   // Nomad Stew: Absorption II and Speed I for 60 s
             new Mark("divine_verdict", 8, 200, MobEffects.GLOWING),   // Divine Verdict: 10 s mark; if it dies, lightning strikes the 3 nearest enemies

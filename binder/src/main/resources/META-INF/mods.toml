@@ -164,6 +164,14 @@ description='''${mod_description}'''
     ordering="AFTER"
     side="BOTH"
 
+# Optional: loaded first so the binder's data/efs_iss/skill_parameters/ (Reserve Mana, Breathe Again cooldowns) replace its own
+[[dependencies.${mod_id}]]
+    modId="efs_iss"
+    mandatory=false
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="BOTH"
+
 # Optional (client): draws the Haunted Lord's leap path (client/LeapTrajectory)
 [[dependencies.${mod_id}]]
     modId="trajectory_estimation"

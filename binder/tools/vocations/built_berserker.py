@@ -19,7 +19,7 @@ PART = {
     'boar_rush': spell(NATURE, 25, 12),
     'hornet_swarm': spell(NATURE, 40, 40, 'long', 20),
     'jade_rupture': spell(SYMMETRY, 30, 12),
-    'twin_tails': spell(SYMMETRY, 35, 30),
+    'twin_tails': spell(SYMMETRY, 35, 45),
     'gaki_banquet': spell(SPIRIT, 40, 25),
     'soul_gorge': spell(SPIRIT, 30, 30),
     'powder_keg': spell(FIRE, 30, 14),

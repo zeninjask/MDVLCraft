@@ -1,0 +1,19 @@
+{
+  "type": "origins:conditioned_attribute",
+  "name": "Heartwood",
+  "description": "In forest biomes you have 2 extra hearts of health.",
+  "condition": {
+    "type": "origins:biome",
+    "condition": {
+      "type": "origins:in_tag",
+      "tag": "minecraft:is_forest"
+    }
+  },
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.max_health",
+      "operation": "addition",
+      "value": 4.0
+    }
+  ]
+}

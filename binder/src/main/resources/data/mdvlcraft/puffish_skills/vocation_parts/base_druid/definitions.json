@@ -1,7 +1,7 @@
 {
  "druid__root": {
   "title": "Root",
-  "description": "Unlocks Root (Level 3) (39 mana, 52.37 s cooldown) on the ability wheel",
+  "description": "Unlocks Root (Level 3) (43 mana, 52.37 s cooldown) on the ability wheel",
   "extra_description": "Around a targeted creature, sprout magical roots than entangle them and completely prevent non-magical movement The first skill of the Druid base.",
   "icon": {
    "type": "texture",
@@ -33,7 +33,7 @@
  },
  "druid__footing_3": {
   "title": "Footing 3",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -46,6 +46,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -66,7 +74,7 @@
  },
  "druid__bounce_1": {
   "title": "Bounce 1",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -80,6 +88,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -99,7 +115,7 @@
  },
  "druid__bounce_4": {
   "title": "Bounce 4",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -113,6 +129,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -132,7 +156,7 @@
  },
  "druid__meditation_6": {
   "title": "Meditation 6",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -145,6 +169,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -197,7 +229,7 @@
  },
  "druid__bounce_7": {
   "title": "Bounce 7",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -211,6 +243,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -329,7 +369,7 @@
  },
  "druid__hearty_1": {
   "title": "Hearty 1",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -342,6 +382,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -362,7 +410,7 @@
  },
  "druid__acid_orb": {
   "title": "Acid Spit",
-  "description": "Unlocks Acid Spit (Level 3) (45 mana, 22.44 s cooldown) on the ability wheel",
+  "description": "Unlocks Acid Spit (Level 3) (51 mana, 22.45 s cooldown) on the ability wheel",
   "extra_description": "Spit an orb of acid, splashing in a radius upon impact and rending creatures hit, melting away and reducing their armor",
   "icon": {
    "type": "texture",
@@ -394,7 +442,7 @@
  },
  "druid__swiftness_3": {
   "title": "Swiftness 3",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -408,6 +456,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -460,7 +516,7 @@
  },
  "druid__willpower_5": {
   "title": "Willpower 5",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -473,6 +529,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -493,7 +557,7 @@
  },
  "druid__firefly_swarm": {
   "title": "Firefly Swarm",
-  "description": "Unlocks Firefly Swarm (Level 3) (45 mana, 29.93 s cooldown) on the ability wheel",
+  "description": "Unlocks Firefly Swarm (Level 3) (51 mana, 29.93 s cooldown) on the ability wheel",
   "extra_description": "Emanate a swarm of violent fireflies, following a targeted creature and dealing aoe damage. If the initial target dies, the last harmed creature will be targeted.",
   "icon": {
    "type": "texture",
@@ -558,7 +622,7 @@
  },
  "druid__footing_6": {
   "title": "Footing 6",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -571,6 +635,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -591,7 +663,7 @@
  },
  "druid__swiftness_8": {
   "title": "Swiftness 8",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -605,6 +677,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -624,7 +704,7 @@
  },
  "druid__bounce_8": {
   "title": "Bounce 8",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -638,6 +718,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -657,7 +745,7 @@
  },
  "druid__attunement_4": {
   "title": "Attunement 4",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -670,6 +758,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -690,7 +786,7 @@
  },
  "druid__black_root": {
   "title": "Black Root",
-  "description": "Unlocks Black Root (Level 3) (32 mana, 20.95 s cooldown) on the ability wheel",
+  "description": "Unlocks Black Root (Level 3) (36 mana, 20.95 s cooldown) on the ability wheel",
   "extra_description": "Hard-roots a foe in place under heavy wither pressure.",
   "icon": {
    "type": "texture",
@@ -722,7 +818,7 @@
  },
  "druid__willpower_2": {
   "title": "Willpower 2",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -735,6 +831,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -755,7 +859,7 @@
  },
  "druid__swiftness_9": {
   "title": "Swiftness 9",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -769,6 +873,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -788,7 +900,7 @@
  },
  "druid__hearty_3": {
   "title": "Hearty 3",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -801,6 +913,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -918,7 +1038,7 @@
  },
  "druid__meditation_2": {
   "title": "Meditation 2",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -931,6 +1051,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -951,7 +1079,7 @@
  },
  "druid__hearty_9": {
   "title": "Hearty 9",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -964,6 +1092,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -984,7 +1120,7 @@
  },
  "druid__mending_8": {
   "title": "Mending 8",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -998,6 +1134,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -1017,7 +1161,7 @@
  },
  "druid__blight": {
   "title": "Blight",
-  "description": "Unlocks Blight (Level 3) (76 mana, 134.66 s cooldown) on the ability wheel",
+  "description": "Unlocks Blight (Level 2) (68 mana, 134.66 s cooldown) on the ability wheel",
   "extra_description": "Target a creature to blight them, reducing their incoming healing and outgoing damage",
   "icon": {
    "type": "texture",
@@ -1030,7 +1174,7 @@
     "type": "mdvlcraft:ability",
     "data": {
      "ability": "irons_spellbooks:blight",
-     "level": 3
+     "level": 2
     }
    }
   ],
@@ -1049,7 +1193,7 @@
  },
  "druid__footing_4": {
   "title": "Footing 4",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1062,6 +1206,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -1082,7 +1234,7 @@
  },
  "druid__mending_10": {
   "title": "Mending 10",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1096,6 +1248,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -1179,7 +1339,7 @@
  },
  "druid__hearty_6": {
   "title": "Hearty 6",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1192,6 +1352,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -1212,7 +1380,7 @@
  },
  "druid__willpower_4": {
   "title": "Willpower 4",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1225,6 +1393,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -1245,7 +1421,7 @@
  },
  "druid__earthquake": {
   "title": "Earthquake",
-  "description": "Unlocks Earthquake (Level 3) (53 mana, 23.94 s cooldown) on the ability wheel",
+  "description": "Unlocks Earthquake (Level 3) (60 mana, 23.94 s cooldown) on the ability wheel",
   "extra_description": "Conjure an earthquake around a targeted creature or location, causing tremors to ripple through the ground, damaging and slowing creatures in the area.",
   "icon": {
    "type": "texture",
@@ -1277,7 +1453,7 @@
  },
  "druid__swiftness_6": {
   "title": "Swiftness 6",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1291,6 +1467,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -1343,7 +1527,7 @@
  },
  "druid__vitality_7": {
   "title": "Vitality 7",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1356,6 +1540,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -1376,7 +1568,7 @@
  },
  "druid__meditation_4": {
   "title": "Meditation 4",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1389,6 +1581,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -1409,7 +1609,7 @@
  },
  "druid__mending_5": {
   "title": "Mending 5",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1423,6 +1623,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -1442,7 +1650,7 @@
  },
  "druid__bounce_9": {
   "title": "Bounce 9",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1456,6 +1664,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -1537,7 +1753,7 @@
  },
  "druid__attunement_3": {
   "title": "Attunement 3",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1550,6 +1766,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -1603,7 +1827,7 @@
  },
  "druid__hearty_10": {
   "title": "Hearty 10",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1616,6 +1840,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -1636,7 +1868,7 @@
  },
  "druid__oakskin": {
   "title": "Oakskin",
-  "description": "Unlocks Oakskin (Level 3) (34 mana, 134.66 s cooldown) on the ability wheel",
+  "description": "Unlocks Oakskin (Level 2) (30 mana, 134.66 s cooldown) on the ability wheel",
   "extra_description": "The great power of oak infuses itself into your skin, granting damage reduction of any incoming damage for a duration.",
   "icon": {
    "type": "texture",
@@ -1649,7 +1881,7 @@
     "type": "mdvlcraft:ability",
     "data": {
      "ability": "irons_spellbooks:oakskin",
-     "level": 3
+     "level": 2
     }
    }
   ],
@@ -1668,7 +1900,7 @@
  },
  "druid__vitality_3": {
   "title": "Vitality 3",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1681,6 +1913,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -1734,7 +1974,7 @@
  },
  "druid__hearty_7": {
   "title": "Hearty 7",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -1747,6 +1987,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2026,7 +2274,7 @@
  },
  "druid__pinning_stake": {
   "title": "Rooting Stake",
-  "description": "Unlocks Rooting Stake (Level 3) (11 mana, 22.44 s cooldown) on the ability wheel",
+  "description": "Unlocks Rooting Stake (Level 3) (32 mana, 35 s cooldown) on the ability wheel",
   "extra_description": "Hurl a stake that ensnares the target with magical roots, preventing all non-magical movement. Damage is doubled against targets that cannot be entangled.",
   "icon": {
    "type": "texture",
@@ -2091,7 +2339,7 @@
  },
  "druid__vitality_6": {
   "title": "Vitality 6",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2104,6 +2352,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2188,7 +2444,7 @@
  },
  "druid__poison_splash": {
   "title": "Poison Splash",
-  "description": "Unlocks Poison Splash (Level 3) (45 mana, 29.93 s cooldown) on the ability wheel",
+  "description": "Unlocks Poison Splash (Level 3) (51 mana, 29.93 s cooldown) on the ability wheel",
   "extra_description": "Around a targeted creature or block, conjure a wave of poisonous magic that splashes down, damaging creatures hit and leaving behind a poisonous cloud",
   "icon": {
    "type": "texture",
@@ -2252,7 +2508,7 @@
  },
  "druid__vitality_5": {
   "title": "Vitality 5",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2265,6 +2521,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2318,7 +2582,7 @@
  },
  "druid__bounce_3": {
   "title": "Bounce 3",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2332,6 +2596,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -2384,7 +2656,7 @@
  },
  "druid__poison_breath": {
   "title": "Poison Spray",
-  "description": "Unlocks Poison Spray (Level 3) (5 mana, 17.96 s cooldown) on the ability wheel",
+  "description": "Unlocks Poison Spray (Level 3) (6 mana, 17.96 s cooldown) on the ability wheel",
   "extra_description": "Spew forth a cone of poison, damaging and poisoning creatures in its reach",
   "icon": {
    "type": "texture",
@@ -2449,7 +2721,7 @@
  },
  "druid__vitality_10": {
   "title": "Vitality 10",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2462,6 +2734,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2482,7 +2762,7 @@
  },
  "druid__mending_1": {
   "title": "Mending 1",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2496,6 +2776,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -2515,7 +2803,7 @@
  },
  "druid__vitality_2": {
   "title": "Vitality 2",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2528,6 +2816,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2548,7 +2844,7 @@
  },
  "druid__spider_aspect": {
   "title": "Aspect of the Spider",
-  "description": "Unlocks Aspect of the Spider (Level 3) (34 mana, 134.66 s cooldown) on the ability wheel",
+  "description": "Unlocks Aspect of the Spider (Level 2) (34 mana, 134.66 s cooldown) on the ability wheel",
   "extra_description": "Instill yourself with poisonous magic, dealing additional melee, ranged, or spell damage creatures that are poisoned",
   "icon": {
    "type": "texture",
@@ -2561,7 +2857,7 @@
     "type": "mdvlcraft:ability",
     "data": {
      "ability": "irons_spellbooks:spider_aspect",
-     "level": 3
+     "level": 2
     }
    }
   ],
@@ -2612,7 +2908,7 @@
  },
  "druid__willpower_3": {
   "title": "Willpower 3",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2625,6 +2921,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2678,7 +2982,7 @@
  },
  "druid__attunement_8": {
   "title": "Attunement 8",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2691,6 +2995,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2711,7 +3023,7 @@
  },
  "druid__primal_pack": {
   "title": "Primal Pack",
-  "description": "Unlocks Primal Pack (Level 1) (113 mana, 478.8 s cooldown) on the ability wheel",
+  "description": "Unlocks Primal Pack (Level 1) (128 mana, 478.8 s cooldown) on the ability wheel",
   "extra_description": "Summon Vallumraptors and Tremorsaurus to fight by your side. Can only be obtained by defeating Vallumraptors and Tremorsaurus.",
   "icon": {
    "type": "texture",
@@ -2809,7 +3121,7 @@
  },
  "druid__swiftness_1": {
   "title": "Swiftness 1",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2823,6 +3135,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -2842,7 +3162,7 @@
  },
  "druid__aerial_collapse": {
   "title": "Aerial Collapse",
-  "description": "Unlocks Aerial Collapse (Level 1) (60 mana, 74.81 s cooldown) on the ability wheel",
+  "description": "Unlocks Aerial Collapse (Level 1) (68 mana, 120 s cooldown) on the ability wheel",
   "extra_description": "Inflict an effect that lifts enemies into the air for 2.5 seconds before crushing them down to the floor, dealing percentage-based damage to their health. The damage dealt ignores any kind of damage cap.",
   "icon": {
    "type": "texture",
@@ -2874,7 +3194,7 @@
  },
  "druid__meditation_9": {
   "title": "Meditation 9",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2887,6 +3207,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2907,7 +3235,7 @@
  },
  "druid__footing_7": {
   "title": "Footing 7",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2920,6 +3248,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -2940,7 +3276,7 @@
  },
  "druid__willpower_7": {
   "title": "Willpower 7",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -2953,6 +3289,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3035,7 +3379,7 @@
  },
  "druid__mending_3": {
   "title": "Mending 3",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3049,6 +3393,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -3132,7 +3484,7 @@
  },
  "druid__vitality_9": {
   "title": "Vitality 9",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3145,6 +3497,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3165,7 +3525,7 @@
  },
  "druid__swiftness_7": {
   "title": "Swiftness 7",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3179,6 +3539,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -3198,7 +3566,7 @@
  },
  "druid__footing_1": {
   "title": "Footing 1",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3211,6 +3579,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3231,7 +3607,7 @@
  },
  "druid__overgrowth": {
   "title": "Overgrowth",
-  "description": "Unlocks Overgrowth (Level 3) (76 mana, 59.85 s cooldown) on the ability wheel",
+  "description": "Unlocks Overgrowth (Level 3) (85 mana, 59.85 s cooldown) on the ability wheel",
   "extra_description": "Applies Overgrowth to yourself, granting Nature Spell Power bonus and increased bow damage.",
   "icon": {
    "type": "texture",
@@ -3296,7 +3672,7 @@
  },
  "druid__swiftness_2": {
   "title": "Swiftness 2",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3310,6 +3686,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -3394,7 +3778,7 @@
  },
  "druid__footing_2": {
   "title": "Footing 2",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3407,6 +3791,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3492,7 +3884,7 @@
  },
  "druid__hearty_5": {
   "title": "Hearty 5",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3505,6 +3897,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3525,7 +3925,7 @@
  },
  "druid__willpower_8": {
   "title": "Willpower 8",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3538,6 +3938,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3558,7 +3966,7 @@
  },
  "druid__vitality_8": {
   "title": "Vitality 8",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3571,6 +3979,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3621,7 +4037,7 @@
  },
  "druid__willpower_6": {
   "title": "Willpower 6",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3634,6 +4050,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3686,7 +4110,7 @@
  },
  "druid__footing_9": {
   "title": "Footing 9",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3699,6 +4123,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3751,7 +4183,7 @@
  },
  "druid__mending_2": {
   "title": "Mending 2",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3765,6 +4197,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -3784,7 +4224,7 @@
  },
  "druid__meditation_1": {
   "title": "Meditation 1",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3797,6 +4237,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3847,7 +4295,7 @@
  },
  "druid__hearty_8": {
   "title": "Hearty 8",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3860,6 +4308,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3946,7 +4402,7 @@
  },
  "druid__willpower_1": {
   "title": "Willpower 1",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -3959,6 +4415,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -3979,7 +4443,7 @@
  },
  "druid__stele_cascade": {
   "title": "Stele Cascade",
-  "description": "Unlocks Stele Cascade (Level 3) (64 mana, 32.92 s cooldown) on the ability wheel",
+  "description": "Unlocks Stele Cascade (Level 3) (72 mana, 32.92 s cooldown) on the ability wheel",
   "extra_description": "Summons Ancient Desert Stele in a radius, crashing down and dealing damage.",
   "icon": {
    "type": "texture",
@@ -4172,7 +4636,7 @@
  },
  "druid__vitality_4": {
   "title": "Vitality 4",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4185,6 +4649,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -4205,7 +4677,7 @@
  },
  "druid__hearty_4": {
   "title": "Hearty 4",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4218,6 +4690,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -4337,7 +4817,7 @@
  },
  "druid__firefly_seeker": {
   "title": "Firefly Seeker",
-  "description": "Unlocks Firefly Seeker (Level 3) (33 mana, 26.93 s cooldown) on the ability wheel",
+  "description": "Unlocks Firefly Seeker (Level 3) (37 mana, 26.93 s cooldown) on the ability wheel",
   "extra_description": "Summons a swarm of fireflies that automatically track and attack the targeted enemy, dealing continuous damage.",
   "icon": {
    "type": "texture",
@@ -4402,7 +4882,7 @@
  },
  "druid__attunement_9": {
   "title": "Attunement 9",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4415,6 +4895,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -4534,7 +5022,7 @@
  },
  "druid__vitality_1": {
   "title": "Vitality 1",
-  "description": "+1 Max Health",
+  "description": "+1 Max Health and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4547,6 +5035,14 @@
     "data": {
      "attribute": "minecraft:generic.max_health",
      "value": 0.9999,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -4567,7 +5063,7 @@
  },
  "druid__meditation_7": {
   "title": "Meditation 7",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4580,6 +5076,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -4633,7 +5137,7 @@
  },
  "druid__bounce_5": {
   "title": "Bounce 5",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4647,6 +5151,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -4666,7 +5178,7 @@
  },
  "druid__mending_7": {
   "title": "Mending 7",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4680,6 +5192,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -4764,7 +5284,7 @@
  },
  "druid__swiftness_10": {
   "title": "Swiftness 10",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4778,6 +5298,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -4830,7 +5358,7 @@
  },
  "druid__swiftness_5": {
   "title": "Swiftness 5",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4844,6 +5372,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -4863,7 +5399,7 @@
  },
  "druid__attunement_5": {
   "title": "Attunement 5",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4876,6 +5412,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -4896,7 +5440,7 @@
  },
  "druid__mending_9": {
   "title": "Mending 9",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -4910,6 +5454,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -5092,7 +5644,7 @@
  },
  "druid__willpower_9": {
   "title": "Willpower 9",
-  "description": "+1.1% Spell Resistance",
+  "description": "+1.1% Spell Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5105,6 +5657,14 @@
     "data": {
      "attribute": "irons_spellbooks:spell_resist",
      "value": 0.01125,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5190,7 +5750,7 @@
  },
  "druid__meditation_10": {
   "title": "Meditation 10",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5203,6 +5763,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5223,7 +5791,7 @@
  },
  "druid__attunement_6": {
   "title": "Attunement 6",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5236,6 +5804,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5256,7 +5832,7 @@
  },
  "druid__footing_10": {
   "title": "Footing 10",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5269,6 +5845,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5289,7 +5873,7 @@
  },
  "druid__footing_8": {
   "title": "Footing 8",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5302,6 +5886,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5322,7 +5914,7 @@
  },
  "druid__bounce_2": {
   "title": "Bounce 2",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5336,6 +5928,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -5486,7 +6086,7 @@
  },
  "druid__footing_5": {
   "title": "Footing 5",
-  "description": "+2.2% Knockback Resistance",
+  "description": "+2.2% Knockback Resistance and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5499,6 +6099,14 @@
     "data": {
      "attribute": "minecraft:generic.knockback_resistance",
      "value": 0.0225,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5617,7 +6225,7 @@
  },
  "druid__mending_6": {
   "title": "Mending 6",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5631,6 +6239,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -5682,7 +6298,7 @@
  },
  "druid__meditation_5": {
   "title": "Meditation 5",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5695,6 +6311,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5715,7 +6339,7 @@
  },
  "druid__attunement_1": {
   "title": "Attunement 1",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5728,6 +6352,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5748,7 +6380,7 @@
  },
  "druid__meditation_3": {
   "title": "Meditation 3",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5761,6 +6393,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5847,7 +6487,7 @@
  },
  "druid__attunement_2": {
   "title": "Attunement 2",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5860,6 +6500,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5880,7 +6528,7 @@
  },
  "druid__attunement_7": {
   "title": "Attunement 7",
-  "description": "+12 Max Mana",
+  "description": "+12 Max Mana and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5893,6 +6541,14 @@
     "data": {
      "attribute": "irons_spellbooks:max_mana",
      "value": 12.0,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5913,7 +6569,7 @@
  },
  "druid__mending_4": {
   "title": "Mending 4",
-  "description": "+1.5% Natural Regeneration",
+  "description": "+1.5% Natural Regeneration and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5927,6 +6583,14 @@
      "attribute": "puffish_attributes:natural_regeneration",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -5946,7 +6610,7 @@
  },
  "druid__hearty_2": {
   "title": "Hearty 2",
-  "description": "+6% Saturation from Food",
+  "description": "+6% Saturation from Food and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5959,6 +6623,14 @@
     "data": {
      "attribute": "mdvlcraft:saturation_bonus",
      "value": 0.06,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -5979,7 +6651,7 @@
  },
  "druid__meditation_8": {
   "title": "Meditation 8",
-  "description": "+4.5% Mana Regen",
+  "description": "+4.5% Mana Regen and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -5992,6 +6664,14 @@
     "data": {
      "attribute": "irons_spellbooks:mana_regen",
      "value": 0.045,
+     "operation": "addition"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
      "operation": "addition"
     }
    }
@@ -6045,7 +6725,7 @@
  },
  "druid__swiftness_4": {
   "title": "Swiftness 4",
-  "description": "+1.5% Movement Speed",
+  "description": "+1.5% Movement Speed and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6059,6 +6739,14 @@
      "attribute": "minecraft:generic.movement_speed",
      "value": 0.015,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],
@@ -6142,7 +6830,7 @@
  },
  "druid__bounce_6": {
   "title": "Bounce 6",
-  "description": "+2.2% Jump Height",
+  "description": "+2.2% Jump Height and +0.034 Armor",
   "icon": {
    "type": "texture",
    "data": {
@@ -6156,6 +6844,14 @@
      "attribute": "puffish_attributes:jump",
      "value": 0.0225,
      "operation": "multiply_base"
+    }
+   },
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "minecraft:generic.armor",
+     "value": 0.03448,
+     "operation": "addition"
     }
    }
   ],

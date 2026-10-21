@@ -495,7 +495,7 @@ public final class OriginMartialB {
         }
     }
 
-    /** Trophy Strength: +2% damage (up to 20%) for 30 s per undead or arthropod the caster killed in the last 60 s; refused with none. */
+    /** Trophy Strength: +4% damage (up to 40%) for 30 s per undead or arthropod the caster killed in the last 60 s; refused with none. */
     public static class TrophyStrength extends ModifiedSpell {
         TrophyStrength() {
             super("trophy_strength", 0);
@@ -653,9 +653,9 @@ public final class OriginMartialB {
             if (loremaster != null && Summons.allied(loremaster, attacker)) {
                 event.setAmount(event.getAmount() * 1.15F);
             }
-            // Trophy Strength: +2% per stack
+            // Trophy Strength: +4% per stack
             if (Buffs.has(attacker, TROPHY)) {
-                event.setAmount(event.getAmount() * (1.0F + 0.02F * Buffs.count(attacker, TROPHY)));
+                event.setAmount(event.getAmount() * (1.0F + 0.04F * Buffs.count(attacker, TROPHY)));
             }
         }
 

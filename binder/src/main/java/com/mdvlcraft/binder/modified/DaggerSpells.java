@@ -168,9 +168,9 @@ public final class DaggerSpells {
         return new Dagger("ice_dagger", 6, "hazennstuff:frostburn_dagger");
     }
 
-    /** Radiant Dagger: double damage to the undead, which also burn; the target glows for 10 s. */
+    /** Radiant Dagger: 11 base damage, doubled on the undead, which also burn; the target glows for 10 s. */
     public static Dagger radiantDagger() {
-        return new Dagger("radiant_dagger", 6, "epicfight:golden_dagger");
+        return new Dagger("radiant_dagger", 11, "epicfight:golden_dagger");
     }
 
     /** Void Shiv: the caster is teleported to wherever it lands. */

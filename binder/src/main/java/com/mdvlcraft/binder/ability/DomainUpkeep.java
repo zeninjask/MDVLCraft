@@ -20,11 +20,14 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Follows a binder player's Malevolent Shrine (closed or open) from cast to close. While it stands it costs
- * {@link #MANA_PER_SECOND} mana a second and Cursed Fate's cursed energy is kept topped up; it closes when the owner
- * sneak-casts it again ({@link #close}) or cannot pay the next second.
+ * {@link #manaPerSecond} mana a second (closed 20, open 25) and Cursed Fate's cursed energy is kept topped up; it closes
+ * when the owner sneak-casts it again ({@link #close}) or cannot pay the next second. The closed shrine's cooldown
+ * restarts in full when it closes, however it closes.
  */
 final class DomainUpkeep {
-    static final float MANA_PER_SECOND = 10.0F;
+    static float manaPerSecond(Technique shrine) {
+        return shrine == Technique.MALEVOLENT_SHRINE ? 20.0F : 25.0F;
+    }
     private static final int WIND_UP_TICKS = 100;
     private static final double DOMAIN_RADIUS = 27.0;
     private static final ResourceLocation OPEN_SHRINE = ResourceLocation.fromNamespaceAndPath("cursedfate", "shrine");
@@ -50,6 +53,7 @@ final class DomainUpkeep {
     }
 
     private static void shut(ServerPlayer player, DomainUpkeep.Domain domain) {
+        ended(player, domain);
         if (domain.shrine() == Technique.MALEVOLENT_SHRINE) {
             ownedClosedDomains(player).forEach(entity -> entity.getPersistentData().putBoolean("forcestopdomain", true));
         } else {
@@ -78,7 +82,7 @@ final class DomainUpkeep {
                         entries.remove();
                     }
                 } else if (up) {
-                    if ((now - domain.openedTick()) % 20L == 0L && !pay(player)) {
+                    if ((now - domain.openedTick()) % 20L == 0L && !pay(player, domain.shrine())) {
                         entries.remove();
                         shut(player, domain);
                         continue;
@@ -92,23 +96,32 @@ final class DomainUpkeep {
                     }
                 } else {
                     entries.remove();
+                    ended(player, domain);
                 }
             }
         }
     }
 
+    /** An opened closed shrine has ended: its cooldown starts over from now. */
+    private static void ended(ServerPlayer player, DomainUpkeep.Domain domain) {
+        if (domain.shrine() == Technique.MALEVOLENT_SHRINE && domain.openedTick() >= 0L) {
+            TechniqueCooldowns.start(player, Technique.MALEVOLENT_SHRINE);
+        }
+    }
+
     /** Takes one second of upkeep; false when the player cannot pay it. */
-    private static boolean pay(ServerPlayer player) {
+    private static boolean pay(ServerPlayer player, Technique shrine) {
+        float cost = manaPerSecond(shrine);
         if (player.isCreative()) {
             return true;
         }
 
         MagicData magic = MagicData.getPlayerMagicData(player);
-        if (magic.getMana() < MANA_PER_SECOND) {
+        if (magic.getMana() < cost) {
             return false;
         }
 
-        magic.setMana(magic.getMana() - MANA_PER_SECOND);
+        magic.setMana(magic.getMana() - cost);
         PacketDistributor.sendToPlayer(player, new SyncManaPacket(magic));
         return true;
     }

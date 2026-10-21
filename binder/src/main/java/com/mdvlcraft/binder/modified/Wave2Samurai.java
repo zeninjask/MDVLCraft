@@ -301,7 +301,7 @@ public final class Wave2Samurai {
         }
     }
 
-    /** Hyoga Draw: strikes the creature looked at and freezes it for 4 s; an already frozen one takes double. */
+    /** Hyoga Draw: strikes the creature looked at and freezes it for 2 s; an already frozen one takes double. */
     public static class HyogaDraw extends SmiteSpells.Smite {
         HyogaDraw() {
             super("hyoga_draw", 8, 5.0F);
@@ -311,8 +311,8 @@ public final class Wave2Samurai {
         void strike(ServerLevel level, LivingEntity caster, LivingEntity target, float power, MagicData data) {
             boolean frozen = target.isFullyFrozen() || BoltSpells.chilled(target);
             this.hurt(caster, target, frozen ? power * 2.0F : power);
-            target.setTicksFrozen(target.getTicksRequiredToFreeze() + 80);
-            MartialSpells.root(target, 80);
+            target.setTicksFrozen(target.getTicksRequiredToFreeze() + 40);
+            MartialSpells.root(target, 40);
             level.sendParticles(ParticleTypes.SNOWFLAKE, target.getX(), target.getY(0.6), target.getZ(), 40, 0.4, 0.6, 0.4, 0.05);
             level.sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY(0.6), target.getZ(), 1, 0.0, 0.0, 0.0, 0.0);
             level.playSound(null, target.blockPosition(), SoundEvents.GLASS_BREAK, SoundSource.PLAYERS, 1.0F, 1.4F);
@@ -819,10 +819,10 @@ public final class Wave2Samurai {
             }
         }
 
-        // Two Heavens: a second strike 4 ticks later for half the damage
+        // Two Heavens: a second strike 4 ticks later for 30% of the damage
         if (Buffs.has(attacker, "two_heavens") && victim.level() instanceof ServerLevel level) {
-            float half = event.getAmount() * 0.5F;
-            Zones.start(level, victim.position(), attacker, half, 5, 4, zone -> {
+            float second = event.getAmount() * 0.3F;
+            Zones.start(level, victim.position(), attacker, second, 5, 4, zone -> {
                 if (zone.age() > 0 && victim.isAlive()) {
                     victim.invulnerableTime = 0;
                     hurt("two_heavens", attacker, victim, zone.power);
@@ -942,7 +942,7 @@ public final class Wave2Samurai {
             new RyoToss(),
             new Stance("cutpurse_stroke", 200),   // Cutpurse Stroke: 10 s; katana kills drop 1-3 emeralds
             new Yabusame(), new HikimeArrow(),
-            new Stance("two_heavens", 200),       // Two Heavens: 10 s; each melee hit strikes again for half
-            new BoonSpells.Food("road_onigiri", Items.BREAD, "samurai_onigiri", 3, false));
+            new Stance("two_heavens", 200),       // Two Heavens: 10 s; each melee hit strikes again for 30%
+            new BoonSpells.Food("road_onigiri", Items.BREAD, "samurai_onigiri", 1, false));
     }
 }

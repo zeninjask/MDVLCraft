@@ -1,0 +1,209 @@
+{
+ "ability_nerfs": [
+  "alshanex_familiars:ice_age",
+  "alshanex_familiars:lullaby",
+  "alshanex_familiars:megido",
+  "alshanex_familiars:summon_shadows",
+  "antimagic:anti_magic_slash",
+  "antimagic:black_ward",
+  "antimagic:demonic_assimilation",
+  "cursed_school:ash_pack",
+  "cursed_school:finished_margin",
+  "cursed_school:hatch_cysts",
+  "cursed_school:unsigned_judgment",
+  "esoteric_spell:flowing_barrier",
+  "esoteric_spell:mana_change_barrier",
+  "esoteric_spell:wall_barrier",
+  "irons_chronomancy:prepared_cut_back",
+  "irons_chronomancy:time_stop",
+  "irons_spellbooks:raise_dead",
+  "iss_csw:life_tap",
+  "iss_csw:pinning_stake",
+  "iss_csw:time_sand",
+  "iss_csw:totem_rite",
+  "iss_elden_ring:adulas_moonblade",
+  "iss_elden_ring:carian_greatsword",
+  "iss_elden_ring:carian_phalanx",
+  "iss_elden_ring:comet_azur",
+  "iss_elden_ring:crystal_burst",
+  "iss_elden_ring:founding_rain_of_stars",
+  "iss_elden_ring:meteorite",
+  "iss_magicfromtheeast:underworld_aid",
+  "mdvlcraft:avalanche_stomp",
+  "mdvlcraft:balanced_judgment",
+  "mdvlcraft:barrow_howl",
+  "mdvlcraft:blood_tithe",
+  "mdvlcraft:body_outside_body",
+  "mdvlcraft:brine_lance",
+  "mdvlcraft:cold_meditation",
+  "mdvlcraft:desert_dates",
+  "mdvlcraft:doppelganger",
+  "mdvlcraft:drunken_sway",
+  "mdvlcraft:equinox_ring",
+  "mdvlcraft:feast",
+  "mdvlcraft:hurled_rimeaxe",
+  "mdvlcraft:hyoga_draw",
+  "mdvlcraft:indulgence_coin",
+  "mdvlcraft:iron_gut",
+  "mdvlcraft:malevolent_shrine",
+  "mdvlcraft:mind_splinter",
+  "mdvlcraft:ninefold_ring",
+  "mdvlcraft:numbing_venom",
+  "mdvlcraft:open_malevolent_shrine",
+  "mdvlcraft:phantom_drift",
+  "mdvlcraft:pinning_frost",
+  "mdvlcraft:raiders_feast",
+  "mdvlcraft:road_onigiri",
+  "mdvlcraft:sanctified_icicle",
+  "mdvlcraft:shadow_clone",
+  "mdvlcraft:shiro_fracture",
+  "mdvlcraft:soul_harvest",
+  "mdvlcraft:soul_hunt",
+  "mdvlcraft:stone_lotus_pose",
+  "mdvlcraft:superconductor",
+  "mdvlcraft:temple_bell",
+  "mdvlcraft:twin_tails",
+  "mdvlcraft:two_heavens",
+  "mdvlcraft:undertow_frost",
+  "mdvlcraft:underworld_gate",
+  "mdvlcraft:winter_pact",
+  "somakespells:withered_rose_vortex",
+  "traveloptics:abyssal_blast",
+  "traveloptics:aerial_collapse",
+  "traveloptics:reversal",
+  "traveloptics:the_howling_tempest",
+  "traveloptics:violent_skreech"
+ ],
+ "ability_buffs": [
+  "alshanex_familiars:default_note",
+  "cursed_school:invoice",
+  "dodge_parry_reward:damage_boost1",
+  "irons_spellbooks:slow",
+  "mdvlcraft:ashen_renewal",
+  "mdvlcraft:brine_frenzy",
+  "mdvlcraft:carrion_beetles",
+  "mdvlcraft:infernal_sigil",
+  "mdvlcraft:leviathan_hex",
+  "mdvlcraft:radiant_dagger",
+  "mdvlcraft:sea_shanty",
+  "mdvlcraft:trophy_strength",
+  "somakespells:bloody_legacy",
+  "traveloptics:sticky_steed_summon"
+ ],
+ "remove_from": {
+  "efs_iss:reserve_mana": [
+   "base:necromancer",
+   "base:warlock",
+   "base:frost",
+   "base:holy"
+  ],
+  "wom:soul_protection": [
+   "base:necromancer",
+   "voc:voc_brute_warlock",
+   "voc:voc_water_jade",
+   "voc:voc_warlock_assassin",
+   "voc:voc_druid_jade",
+   "voc:voc_jade_assassin"
+  ],
+  "wom:vampirize": [
+   "voc:voc_brute_necromancer",
+   "voc:voc_monk_necromancer",
+   "voc:voc_frost_necromancer",
+   "voc:voc_holy_necromancer",
+   "voc:voc_necromancer_thief"
+  ],
+  "wom:heart_shield": [
+   "voc:voc_brute_frost",
+   "voc:voc_brute_holy",
+   "voc:voc_berserker_frost",
+   "voc:voc_frost_warlock",
+   "voc:voc_frost_thief"
+  ],
+  "efs_iss:against_magic": [
+   "base:warlock"
+  ],
+  "efs_iss:breathe_again": [
+   "base:necromancer"
+  ],
+  "efs_iss:magic_sword": [
+   "voc:voc_blaze_frost",
+   "voc:voc_blaze_necromancer"
+  ]
+ },
+ "move_early": {
+  "thief": "irons_spellbooks:evasion",
+  "samurai": "mdvlcraft:focus",
+  "wanderer": "irons_spellbooks:teleport",
+  "spirit": "efs_iss:mana_shield",
+  "brute": "somakespells:soul_grab",
+  "stalker": "iss_csw:barrage_volley",
+  "druid": "mdvlcraft:wolf_pack"
+ },
+ "root_out": {
+  "berserker": "antimagic:demonic_assimilation"
+ },
+ "stats": {
+  "guardian": {
+   "minecraft:generic.armor": 15.0,
+   "minecraft:generic.armor_toughness": 4.0,
+   "puffish_attributes:resistance": 0.18
+  },
+  "berserker": {
+   "minecraft:generic.attack_damage": 5.0,
+   "puffish_attributes:life_steal": 0.08
+  },
+  "brute": {
+   "minecraft:generic.max_health": 24.0
+  },
+  "wanderer": {
+   "minecraft:generic.max_health": 20.0,
+   "minecraft:generic.attack_damage": 2.0,
+   "minecraft:generic.armor": 3.0
+  },
+  "thief": {
+   "minecraft:generic.max_health": 17.0,
+   "minecraft:generic.armor": 4.0,
+   "minecraft:generic.attack_damage": 1.0
+  },
+  "stalker": {
+   "minecraft:generic.armor": 9.0
+  },
+  "spirit": {
+   "minecraft:generic.max_health": 17.0,
+   "minecraft:generic.armor": 4.0
+  },
+  "druid": {
+   "minecraft:generic.armor": 3.0
+  }
+ },
+ "swap": {
+  "thief": [
+   [
+    "irons_spellbooks:summon_ender_chest",
+    "traveloptics:shadowed_miasma"
+   ],
+   [
+    "mdvlcraft:pickpocket",
+    "traveloptics:psychic_bolt"
+   ],
+   [
+    "traveloptics:astral_sense",
+    "traveloptics:spectral_blink"
+   ]
+  ],
+  "wanderer": [
+   [
+    "irons_spellbooks:touch_dig",
+    "wind_spellbooks:iron_slash"
+   ],
+   [
+    "iss_elden_ring:starlight",
+    "traveloptics:vortex_punch"
+   ],
+   [
+    "iss_csw:conjure_refreshment",
+    "traveloptics:orbital_void"
+   ]
+  ]
+ }
+}

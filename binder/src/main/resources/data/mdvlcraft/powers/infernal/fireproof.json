@@ -1,0 +1,13 @@
+{
+  "type": "origins:modify_damage_taken",
+  "name": "Fireproof",
+  "description": "You take 75% less damage from fire and lava.",
+  "damage_condition": {
+    "type": "origins:in_tag",
+    "tag": "minecraft:is_fire"
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": -0.75
+  }
+}

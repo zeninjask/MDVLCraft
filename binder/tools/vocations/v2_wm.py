@@ -7,7 +7,7 @@ mod('holy_avenger', 'Avenging Wings', 'Angel Wing', 'Angel wings that also make 
 mod('soul_reaper', 'Soul Reaper', 'Blood Slash', 'A wide blood slash; each enemy it kills rises as a weakened skeleton that fights for you.')
 mod('ent_stride', 'Ent Stride', 'Oakskin', 'Bark skin that also roots you in place: you cannot be knocked back and you regenerate.')
 mod('ember_fists', 'Ember Fists', 'Fire Fist', 'Your unarmed hits set enemies on fire for a while.')
-mod('cold_meditation', 'Cold Meditation', 'Ice Block', 'Meditate inside an ice block: invulnerable, and restores mana and stamina while inside.')
+mod('cold_meditation', 'Cold Meditation', 'Ice Block', 'Meditate inside an ice block for up to 4 seconds: invulnerable, and restores mana and stamina while inside.')
 mod('ki_wave', 'Kamehameha Wave', 'Ray of Frost', 'A channelled beam of raw ki from both palms (Ray of Frost with blue spirit energy, no freezing).')
 mod('crane_leap', 'Crane Leap', 'Burning Dash', 'A leaping flip that lands with a thunderclap behind your target.')
 mod('lotus', 'Lotus Bloom', 'Healing Circle', 'A lotus opens beneath you, healing allies and cleansing one harmful effect from each.')

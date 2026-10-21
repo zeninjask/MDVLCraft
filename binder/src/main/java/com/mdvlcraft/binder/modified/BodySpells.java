@@ -122,7 +122,7 @@ public final class BodySpells {
     }
 
     /**
-     * Cold Meditation: a channel of up to 5 s inside a shell of ice: the caster takes no damage and cannot move, and every
+     * Cold Meditation: a channel of up to 4 s inside a shell of ice: the caster takes no damage and cannot move, and every
      * 0.5 s restores 6% mana and 8% stamina.
      */
     public static class ColdMeditation extends ModifiedSpell {

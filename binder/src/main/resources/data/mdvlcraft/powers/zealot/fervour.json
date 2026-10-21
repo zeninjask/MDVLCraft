@@ -1,7 +1,7 @@
 {
   "type": "origins:conditioned_attribute",
   "name": "Fervour",
-  "description": "Below half health, your stamina regenerates 10% faster.",
+  "description": "Below half health, your stamina regenerates 20% faster and you deal 5% more damage.",
   "condition": {
     "type": "origins:relative_health",
     "comparison": "<",
@@ -11,7 +11,12 @@
     {
       "attribute": "epicfight:stamina_regen",
       "operation": "multiply_base",
-      "value": 0.1
+      "value": 0.2
+    },
+    {
+      "attribute": "minecraft:generic.attack_damage",
+      "operation": "multiply_total",
+      "value": 0.05
     }
   ]
 }

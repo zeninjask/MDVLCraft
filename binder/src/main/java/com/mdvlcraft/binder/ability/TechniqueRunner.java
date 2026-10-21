@@ -134,7 +134,7 @@ final class TechniqueRunner {
         } else {
             if (!player.isCreative()) {
                 // The shrine is paid for while it stands (DomainUpkeep); opening needs its first second.
-                float needed = technique.isShrine() ? DomainUpkeep.MANA_PER_SECOND : cost;
+                float needed = technique.isShrine() ? DomainUpkeep.manaPerSecond(technique) : cost;
                 if (magic.getMana() < needed) {
                     player.connection
                         .send(

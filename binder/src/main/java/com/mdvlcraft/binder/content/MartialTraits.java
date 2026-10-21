@@ -1,10 +1,13 @@
 package com.mdvlcraft.binder.content;
 
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -59,6 +62,7 @@ public final class MartialTraits {
 
     private static final UUID EPIC_FIGHT_LISTENER = UUID.fromString("8a6f2c14-3d5e-4b7a-9c1f-0e2d4b6a8c10");
     private static final UUID SPEAR_REACH = UUID.fromString("8a6f2c14-3d5e-4b7a-9c1f-0e2d4b6a8c11");
+    private static final UUID SPELLBLADE_POWER = UUID.fromString("8a6f2c14-3d5e-4b7a-9c1f-0e2d4b6a8c12");
     private static final long SPELLBLADE_TICKS = 60L;
     private static final Map<UUID, Long> LAST_MELEE = new HashMap<>();
 
@@ -123,7 +127,14 @@ public final class MartialTraits {
                 multiplier *= 1.1F;
             }
 
-            if (onVessel(attacker) && has(attacker, BOARDING_FURY)) {
+            if (melee && has(attacker, SPELLBLADE_RHYTHM)) {
+                AttributeInstance power = attacker.getAttribute(AttributeRegistry.SPELL_POWER.get());
+                if (power != null && power.getModifier(SPELLBLADE_POWER) == null) {
+                    power.addTransientModifier(new AttributeModifier(SPELLBLADE_POWER, "Spellblade Rhythm", 0.05, Operation.MULTIPLY_BASE));
+                }
+            }
+
+            if ((onVessel(attacker) || nearWater(attacker)) && has(attacker, BOARDING_FURY)) {
                 multiplier *= 1.15F;
             }
         }
@@ -157,10 +168,22 @@ public final class MartialTraits {
         return vehicle != player && (vehicle instanceof Boat || ForgeRegistries.ENTITY_TYPES.getKey(vehicle.getType()).getNamespace().equals("alekiships"));
     }
 
+    /** Water (still or flowing) within 8 blocks. */
+    private static boolean nearWater(Player player) {
+        return BlockPos.findClosestMatch(player.blockPosition(), 8, 8, pos -> player.level().getFluidState(pos).is(FluidTags.WATER)).isPresent();
+    }
+
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent event) {
         Player player = event.player;
         if (event.phase == Phase.END && !player.level().isClientSide() && player.tickCount % 10 == 0) {
+            AttributeInstance spellPower = player.getAttribute(AttributeRegistry.SPELL_POWER.get());
+            Long last = LAST_MELEE.get(player.getUUID());
+            if (spellPower != null && spellPower.getModifier(SPELLBLADE_POWER) != null
+                && (last == null || player.level().getGameTime() - last > SPELLBLADE_TICKS || !has(player, SPELLBLADE_RHYTHM))) {
+                spellPower.removeModifier(SPELLBLADE_POWER);
+            }
+
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
             boolean extended = holdingSpear(player) && has(player, LONG_REACH);
             if (extended && reach.getModifier(SPEAR_REACH) == null) {

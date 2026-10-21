@@ -20,16 +20,18 @@ CLUSTER_GAP = 220     # between ability centres
 FAN = (290, 520)      # how far the ability centres sit from the start
 SPACING = 54          # between bonus nodes along a chain
 BONUS_NODES = 22      # bonus nodes per half (rings + chains)
+BONUS_SHARE = 0.15    # each bonus node: this share of a vocation bonus (0.3 until the balance pass)
+ABILITY_COST = 3      # points per ability node (2 until the balance pass)
 LAYERS = {"martial": "mdvlcraft:martial", "job": "origins-classes:class"}
 
 
 def bonus_value(code):
-    """One small node: 30% of the design's value for the code (a vocation signature step)."""
+    """One small node: BONUS_SHARE of the design's value for the code (half a vocation signature step)."""
     name, text = V.D.STAT[code]
     raw = float(text.replace('%', '').replace('+', ''))
     attrs = V.STAT_ATTR[code]
     value = raw / 100 if text.endswith('%') and V.ATTRIBUTES[attrs[0]][1] == "pct" else raw
-    return name, attrs, round(abs(value) * 0.3, 5)
+    return name, attrs, round(abs(value) * BONUS_SHARE, 5)
 
 
 def half_tree(o, live, seed):
@@ -65,7 +67,7 @@ def half_tree(o, live, seed):
     rings = []
     for (key, name, _), c in zip(o["abilities"], centres):
         aid = f"{o['id']}__{key}"
-        defs[aid] = V.ability_body(f"Z:{key}", live, 2)
+        defs[aid] = V.ability_body(f"Z:{key}", live, ABILITY_COST)
         defs[aid]["extra_description"] = (defs[aid].get("extra_description", "") + f" {o['title']} skill.").strip()
         pos[aid] = c
         m = rng.choice([4, 4, 5, 5])

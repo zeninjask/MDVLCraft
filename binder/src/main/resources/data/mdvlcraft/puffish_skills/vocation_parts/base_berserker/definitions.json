@@ -1,20 +1,20 @@
 {
  "berserker__root": {
-  "title": "Demonic Assimilation (Phase 1)",
-  "description": "Unlocks Demonic Assimilation (Phase 1) (Level 1) (0 mana, 119.7 s cooldown) on the ability wheel",
-  "extra_description": "Channels the power of the anti-magic demon, granting superhuman strength, speed, resistance, and flight. The first skill of the Berserker base.",
+  "title": "Ruin Slash",
+  "description": "Unlocks Ruin Slash (Level 3) (24 mana, 5.99 s cooldown) on the ability wheel",
+  "extra_description": "Cone slash that shreds armor on up to five enemies in front of you. The first skill of the Berserker base.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/antimagic_demonic_assimilation.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_ruin_slash.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "antimagic:demonic_assimilation",
-     "level": 1
+     "ability": "cursed_school:ruin_slash",
+     "level": 3
     }
    }
   ],
@@ -33,7 +33,7 @@
  },
  "berserker__bloodlust_4": {
   "title": "Bloodlust 4",
-  "description": "+1.2% Life Steal",
+  "description": "+0.8% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -45,7 +45,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.012,
+     "value": 0.008,
      "operation": "multiply_base"
     }
    }
@@ -131,7 +131,7 @@
  },
  "berserker__bloodlust_mastery_iii": {
   "title": "Bloodlust Mastery III",
-  "description": "+1.6% Life Steal",
+  "description": "+1.1% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -143,7 +143,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.016,
+     "value": 0.01067,
      "operation": "multiply_base"
     }
    }
@@ -163,7 +163,7 @@
  },
  "berserker__fury_5": {
   "title": "Fury 5",
-  "description": "+0.45 Attack Damage",
+  "description": "+0.345 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -175,7 +175,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.45,
+     "value": 0.34483,
      "operation": "addition"
     }
    }
@@ -228,7 +228,7 @@
  },
  "berserker__fury_mastery_ii": {
   "title": "Fury Mastery II",
-  "description": "+0.6 Attack Damage",
+  "description": "+0.46 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -240,7 +240,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.6,
+     "value": 0.45977,
      "operation": "addition"
     }
    }
@@ -293,7 +293,7 @@
  },
  "berserker__fury_6": {
   "title": "Fury 6",
-  "description": "+0.45 Attack Damage",
+  "description": "+0.345 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -305,7 +305,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.45,
+     "value": 0.34483,
      "operation": "addition"
     }
    }
@@ -357,7 +357,7 @@
  },
  "berserker__dual_bringer": {
   "title": "Magic Blade: Dual Bringer",
-  "description": "Unlocks Magic Blade: Dual Bringer (Level 1) (227 mana, 239.4 s cooldown) on the ability wheel",
+  "description": "Unlocks Magic Blade: Dual Bringer (Level 1) (255 mana, 239.4 s cooldown) on the ability wheel",
   "extra_description": "Clears the previous conversion when channeling starts. On completion, excess spell power becomes attack damage and attack damage becomes spell power; the calculated values remain fixed until expiration.",
   "icon": {
    "type": "texture",
@@ -586,7 +586,7 @@
  },
  "berserker__might_9": {
   "title": "Might 9",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -598,7 +598,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -619,7 +619,7 @@
  },
  "berserker__fury_1": {
   "title": "Fury 1",
-  "description": "+0.45 Attack Damage",
+  "description": "+0.345 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -631,7 +631,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.45,
+     "value": 0.34483,
      "operation": "addition"
     }
    }
@@ -684,7 +684,7 @@
  },
  "berserker__fury_mastery_i": {
   "title": "Fury Mastery I",
-  "description": "+0.6 Attack Damage",
+  "description": "+0.46 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -696,7 +696,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.6,
+     "value": 0.45977,
      "operation": "addition"
     }
    }
@@ -1008,7 +1008,7 @@
  },
  "berserker__bloodlust_2": {
   "title": "Bloodlust 2",
-  "description": "+1.2% Life Steal",
+  "description": "+0.8% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -1020,7 +1020,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.012,
+     "value": 0.008,
      "operation": "multiply_base"
     }
    }
@@ -1105,7 +1105,7 @@
  },
  "berserker__render_rush": {
   "title": "Render Rush",
-  "description": "Unlocks Render Rush (Level 3) (23 mana, 11.97 s cooldown) on the ability wheel",
+  "description": "Unlocks Render Rush (Level 3) (26 mana, 11.97 s cooldown) on the ability wheel",
   "extra_description": "Performs a frontal dash, dealing damage to anyone in the path.",
   "icon": {
    "type": "texture",
@@ -1268,7 +1268,7 @@
  },
  "berserker__haste": {
   "title": "Haste",
-  "description": "Unlocks Haste (Level 3) (53 mana, 119.7 s cooldown) on the ability wheel",
+  "description": "Unlocks Haste (Level 2) (51 mana, 119.7 s cooldown) on the ability wheel",
   "extra_description": "To a targeted creature, or yourself if no creature is targeted, apply the Hastened effect, increasing movement speed, attack speed, mining speed, and cast time reduction for a duration.",
   "icon": {
    "type": "texture",
@@ -1281,7 +1281,7 @@
     "type": "mdvlcraft:ability",
     "data": {
      "ability": "irons_spellbooks:haste",
-     "level": 3
+     "level": 2
     }
    }
   ],
@@ -1399,7 +1399,7 @@
  },
  "berserker__might_7": {
   "title": "Might 7",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -1411,7 +1411,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -1594,7 +1594,7 @@
  },
  "berserker__spectral_rondo": {
   "title": "Spectral Rondo",
-  "description": "Unlocks Spectral Rondo (Level 3) (44 mana, 29.93 s cooldown) on the ability wheel",
+  "description": "Unlocks Spectral Rondo (Level 3) (49 mana, 29.93 s cooldown) on the ability wheel",
   "extra_description": "Charges forward in a spectral spin, striking twice in 360 degrees while three parallel trails of cyan Soul Pillars erupt along the path.",
   "icon": {
    "type": "texture",
@@ -1950,26 +1950,26 @@
   },
   "size": 1.5
  },
- "berserker__ruin_slash": {
-  "title": "Ruin Slash",
-  "description": "Unlocks Ruin Slash (Level 3) (21 mana, 5.99 s cooldown) on the ability wheel",
-  "extra_description": "Cone slash that shreds armor on up to five enemies in front of you.",
+ "berserker__demonic_assimilation": {
+  "title": "Demonic Assimilation (Phase 1)",
+  "description": "Unlocks Demonic Assimilation (Phase 1) (Level 1) (0 mana, 180 s cooldown) on the ability wheel",
+  "extra_description": "Channels the power of the anti-magic demon, granting superhuman strength, speed, resistance, and flight.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_ruin_slash.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/antimagic_demonic_assimilation.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "cursed_school:ruin_slash",
-     "level": 3
+     "ability": "antimagic:demonic_assimilation",
+     "level": 1
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -2050,7 +2050,7 @@
  },
  "berserker__bloodlust_mastery_ii": {
   "title": "Bloodlust Mastery II",
-  "description": "+1.6% Life Steal",
+  "description": "+1.1% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -2062,7 +2062,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.016,
+     "value": 0.01067,
      "operation": "multiply_base"
     }
    }
@@ -2112,7 +2112,7 @@
  },
  "berserker__might_1": {
   "title": "Might 1",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -2124,7 +2124,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -2178,7 +2178,7 @@
  },
  "berserker__bloodlust_3": {
   "title": "Bloodlust 3",
-  "description": "+1.2% Life Steal",
+  "description": "+0.8% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -2190,7 +2190,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.012,
+     "value": 0.008,
      "operation": "multiply_base"
     }
    }
@@ -2532,7 +2532,7 @@
  },
  "berserker__bloody_legacy": {
   "title": "Bloody Legacy",
-  "description": "Unlocks Bloody Legacy (Level 3) (42 mana, 104.74 s cooldown) on the ability wheel",
+  "description": "Unlocks Bloody Legacy (Level 2) (41 mana, 40 s cooldown) on the ability wheel",
   "extra_description": "Delivers a blow that strikes the ground, dealing damage to all enemies in a straight line.",
   "icon": {
    "type": "texture",
@@ -2545,7 +2545,7 @@
     "type": "mdvlcraft:ability",
     "data": {
      "ability": "somakespells:bloody_legacy",
-     "level": 3
+     "level": 2
     }
    }
   ],
@@ -2597,7 +2597,7 @@
  },
  "berserker__fury_4": {
   "title": "Fury 4",
-  "description": "+0.45 Attack Damage",
+  "description": "+0.345 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -2609,7 +2609,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.45,
+     "value": 0.34483,
      "operation": "addition"
     }
    }
@@ -2788,7 +2788,7 @@
  },
  "berserker__bloodlust_mastery_i": {
   "title": "Bloodlust Mastery I",
-  "description": "+1.6% Life Steal",
+  "description": "+1.1% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -2800,7 +2800,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.016,
+     "value": 0.01067,
      "operation": "multiply_base"
     }
    }
@@ -2920,7 +2920,7 @@
  "berserker__soul_hunt": {
   "title": "Soul Hunt",
   "description": "Unlocks Soul Hunt (24 mana, its Epic Fight skill's own cooldown) on the ability wheel",
-  "extra_description": "Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown.",
+  "extra_description": "Epic Fight Nightfall's Soul Hunt on the ability wheel; needs a weapon in hand and has its own cooldown; kills and guard-broken hits reset it at most twice per cast.",
   "icon": {
    "type": "texture",
    "data": {
@@ -3050,7 +3050,7 @@
  },
  "berserker__charge": {
   "title": "Charge",
-  "description": "Unlocks Charge (Level 3) (76 mana, 59.85 s cooldown) on the ability wheel",
+  "description": "Unlocks Charge (Level 3) (85 mana, 59.85 s cooldown) on the ability wheel",
   "extra_description": "Imbue yourself with the power of lightning, increasing your speed and combat abilities.",
   "icon": {
    "type": "texture",
@@ -3247,7 +3247,7 @@
  },
  "berserker__dragon_glide": {
   "title": "Dragon Glide",
-  "description": "Unlocks Dragon Glide (Level 3) (32 mana, 7.48 s cooldown) on the ability wheel",
+  "description": "Unlocks Dragon Glide (Level 3) (36 mana, 7.48 s cooldown) on the ability wheel",
   "extra_description": "Cast a unstoppable force dragon ahead the caster, deal damage to anything on its path, can break magic shield with a chance",
   "icon": {
    "type": "texture",
@@ -3699,7 +3699,7 @@
  },
  "berserker__bloodlust_6": {
   "title": "Bloodlust 6",
-  "description": "+1.2% Life Steal",
+  "description": "+0.8% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -3711,7 +3711,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.012,
+     "value": 0.008,
      "operation": "multiply_base"
     }
    }
@@ -3862,7 +3862,7 @@
  },
  "berserker__fury_2": {
   "title": "Fury 2",
-  "description": "+0.45 Attack Damage",
+  "description": "+0.345 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -3874,7 +3874,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.45,
+     "value": 0.34483,
      "operation": "addition"
     }
    }
@@ -4220,7 +4220,7 @@
  },
  "berserker__might_6": {
   "title": "Might 6",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -4232,7 +4232,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -4253,7 +4253,7 @@
  },
  "berserker__might_3": {
   "title": "Might 3",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -4265,7 +4265,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -4417,7 +4417,7 @@
  },
  "berserker__bloodlust_1": {
   "title": "Bloodlust 1",
-  "description": "+1.2% Life Steal",
+  "description": "+0.8% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -4429,7 +4429,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.012,
+     "value": 0.008,
      "operation": "multiply_base"
     }
    }
@@ -4812,7 +4812,7 @@
  },
  "berserker__might_2": {
   "title": "Might 2",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -4824,7 +4824,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -5436,7 +5436,7 @@
  },
  "berserker__might_8": {
   "title": "Might 8",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -5448,7 +5448,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -5599,7 +5599,7 @@
  },
  "berserker__fury_3": {
   "title": "Fury 3",
-  "description": "+0.45 Attack Damage",
+  "description": "+0.345 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -5611,7 +5611,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.45,
+     "value": 0.34483,
      "operation": "addition"
     }
    }
@@ -5926,7 +5926,7 @@
  },
  "berserker__might_4": {
   "title": "Might 4",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -5938,7 +5938,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -6088,7 +6088,7 @@
  },
  "berserker__fury_mastery_iii": {
   "title": "Fury Mastery III",
-  "description": "+0.6 Attack Damage",
+  "description": "+0.46 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -6100,7 +6100,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.6,
+     "value": 0.45977,
      "operation": "addition"
     }
    }
@@ -6152,7 +6152,7 @@
  },
  "berserker__might_5": {
   "title": "Might 5",
-  "description": "+0.225 Attack Damage",
+  "description": "+0.172 Attack Damage",
   "icon": {
    "type": "texture",
    "data": {
@@ -6164,7 +6164,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "minecraft:generic.attack_damage",
-     "value": 0.225,
+     "value": 0.17241,
      "operation": "addition"
     }
    }
@@ -6350,7 +6350,7 @@
  },
  "berserker__bloodlust_5": {
   "title": "Bloodlust 5",
-  "description": "+1.2% Life Steal",
+  "description": "+0.8% Life Steal",
   "icon": {
    "type": "texture",
    "data": {
@@ -6362,7 +6362,7 @@
     "type": "puffish_skills:attribute",
     "data": {
      "attribute": "puffish_attributes:life_steal",
-     "value": 0.012,
+     "value": 0.008,
      "operation": "multiply_base"
     }
    }
