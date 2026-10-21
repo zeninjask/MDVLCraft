@@ -66,7 +66,7 @@ public final class ActiveQuest {
         if (other.isPresent()) {
             // FTB Quests marks the task complete after this event, so the undo waits a tick.
             MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-            server.tell(new TickTask(server.getTickCount() + 1, () -> data.resetProgress(task)));
+            server.tell(new TickTask(server.getTickCount() + 1, () -> data.setProgress(task, 0)));
             members.forEach(player -> player.sendSystemMessage(Component.literal("You are already on a quest: ")
                 .append(title(other.get())).append(". Finish it or ").append(cancelLink()).append(" first.")
                 .withStyle(ChatFormatting.RED)));
@@ -121,7 +121,7 @@ public final class ActiveQuest {
         }
 
         for (Quest quest : active) {
-            quest.getTasks().forEach(data::resetProgress);
+            quest.getTasks().forEach(task -> data.setProgress(task, 0));
             data.getOnlineMembers().forEach(member -> {
                 Jingles.send(member, Jingle.CURSED);
                 member.sendSystemMessage(Component.literal("Quest abandoned: ").withStyle(ChatFormatting.DARK_PURPLE)
