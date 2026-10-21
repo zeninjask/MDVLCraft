@@ -2,16 +2,18 @@ package com.mdvlcraft.binder.client;
 
 import com.mrcrayfish.backpacked.client.gui.screen.inventory.BackpackScreen;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.ContainerScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
+import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * Inventory Profiles Next's sort buttons sit centred above the backpack's name tab (config/inventoryprofilesnext/
  * integrationHints/backpacked.json: horizontalOffset 62 and top -19 put its four 10-wide buttons, 12 apart, 4 to 14 above
- * the screen's top, which is the tab's top). This draws a backdrop behind them in the tab's colours, joined to the tab.
+ * the screen's top, which is the tab's top). This draws a backdrop behind them in the tab's colours, joined to the tab,
+ * before anything else on the screen: Inventory Profiles Next draws its buttons before the container background
+ * events, so anything drawn there would cover them, and the backpack screen has no dimmed background to follow.
  */
 @EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
 public final class BackpackSortBackdrop {
@@ -25,10 +27,9 @@ public final class BackpackSortBackdrop {
     private BackpackSortBackdrop() {
     }
 
-    @SubscribeEvent
-    public static void onBackground(ContainerScreenEvent.Render.Background event) {
-        AbstractContainerScreen<?> screen = event.getContainerScreen();
-        if (!(screen instanceof BackpackScreen)) {
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
+    public static void onRender(ScreenEvent.Render.Pre event) {
+        if (!(event.getScreen() instanceof BackpackScreen screen)) {
             return;
         }
 

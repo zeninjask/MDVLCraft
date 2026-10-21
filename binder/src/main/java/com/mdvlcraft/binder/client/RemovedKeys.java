@@ -87,7 +87,8 @@ final class RemovedKeys {
         Map<String, Integer> order = KeyMappingAccessor.mdvlcraft$categoryOrder();
         for (KeyMapping key : keys) {
             if (key.getName().startsWith("key.jei.") && !JEI.equals(key.getCategory())) {
-                order.putIfAbsent(JEI, order.get(key.getCategory()));
+                // the sort reads a number for every category; JEI's own may have none
+                order.putIfAbsent(JEI, order.getOrDefault(key.getCategory(), order.values().stream().max(Integer::compare).orElse(0) + 1));
                 ((KeyMappingAccessor)key).mdvlcraft$setCategory(JEI);
             }
         }
