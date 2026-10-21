@@ -315,6 +315,55 @@ seb-agent built no jar or packs and did not push to `main`. Merge `seb-agent` in
 - Underworld Gate works for players only (it opens a Cursed Fate technique), so it was compile-checked but not run over RCON. Try it once in game.
 - Mob casters and NoAI targets sometimes slide a little during tests; it doesn't affect players. A NoAI zombie's leaps also land shorter than a player's.
 
+## For liam-agent: the Origin tab on `seb-agent` (21 Oct 2026)
+
+`seb-agent` adds an **Origin** skill tab, one per Martial class and Job pair: 272 tabs named `org_<martial>_<job>`. It also adds the 99 Modified abilities the user picked for them (3 per origin) from `docs/proposals/MDVLCraft-Proposed-Origin-Abilities.pdf`. seb-agent built only a local test jar, no packs, and did not push to `main`. Merge `seb-agent`, then build, bump the patch version and release as usual.
+
+**How it works:**
+- **Layout:** each tab joins the Martial class's half (left) and the Job's half (mirrored, right) at a shared `Origin` start node. A half is its 3 abilities, each in a ring of small bonus nodes themed to the origin, linked by chains of more small bonuses.
+- **Points:** the tab earns kill experience like a vocation tab.
+- **Unlocking** (`skills/OriginTabs`): the player's pair's tab is unlocked on login and checked every 2 s. Nitwit in either layer means no tab.
+- **Respec:** using an Orb of Origin, or any change of martial class or job, erases the tab. Its level is kept in the player's persisted data, so the next tab starts empty at that level with every point to spend again.
+- **Composing:** `skills/VocationParts` composes the origin tabs from `puffish_skills/origin_parts/`. Index entries carry `dir`, `own` and `icon`, and spell previews cover these tabs too.
+
+**Files:**
+- Design and generator:
+  - `tools/origins/design.py`: the picks and each origin's bonus codes.
+  - `tools/generate_origins.py`, run by `generate_vocations.py`, which also lists the tabs in `config.json`.
+  - `tools/vocations/v2_origin.py` adds the abilities to the design (lang, `modified_abilities.json`).
+- Abilities: `modified/Origin{MartialA,MartialB,MartialC,JobA,JobB,JobC}.java`, with `built_origin_<group>.py` and `lang_origin_<group>.json` (merged into `en_us.json`).
+- Tests: `tools/test_modified/test_origin_<group>.py`.
+- Icons: `dq9_icons.py add` (the `origin` tab emblem).
+
+**Fixes that affect older abilities too:**
+- `BoltProjectile` now calls Iron's `pierceOrDiscard()` on an entity hit. Before, every bolt flew on after hitting a creature, and a bolt with a landing effect landed twice. Iron Quarrel keeps its pierce level.
+- Every Origin stun turns the target to face the caster first, as Temple Bell does.
+
+**If generated files conflict:** rerun `python3 binder/tools/generate_vocations.py`. If lang keys are lost, re-merge the `lang_origin_*.json` files.
+
+**Tested** on a test server synced to the 2.0.24 server pack, with a client synced to the 2.0.24 client-performance pack:
+- **Tab and respec:** the pair's tab unlocks and gains levels. Changing the job, and clearing then re-picking an origin (the orb's flow), wipes the tab and starts the new one at the same level with all points free.
+- **Abilities:** all 99 were cast from mobs at targets and checked against the expected result written above each case.
+- **Fixed after the first run:**
+  - Shield Bash, Shovel Slam and Rest in Peace pulled the target toward the caster.
+  - Stampede's boars never moved.
+  - Arrow Rain mostly missed.
+  - Net Throw landed twice.
+  - Boarding Hook pulled the target past the caster.
+  - Scarecrow stopped all targeting for 60 s; now each mob is lured once for 3 s.
+
+**Test-environment lessons (2.0.24 pack):**
+- NoAI mobs ignore motion and never update `OnGround`. Use the harness's `pig` or `stander` targets for pushes, pulls and ground checks.
+- `/team join` takes players only. The harness turns it into the mob's `Team` tag.
+- Husks now have 240 health and cows 200.
+- Just Enough Resources needs JEI, so it is out of the test client too.
+- The client opens an `xmessage` dialog at start-up that must be closed. Kill the `xmessage` child process.
+
+**Not testable from a mob caster, check by hand:**
+- Tailwind (steered boat), Weather Eye's chat forecast, Chum the Water's faster bites, Miner's Lamp's light following a player.
+- Mounted Charge with a player rider.
+- The item abilities on a player: Forge Heat, Compost, Bribe, Quiver Refill (Quiver Refill was checked: 16 arrows).
+
 ## Unfinished work
 
 - 2.0.14 (from liam-agent): Spirit renamed Jade and a new Spirit archetype with 18 vocations (19 archetypes, 171 vocations; see step 13 in [`VOCATIONS_IMPLEMENTATION.md`](VOCATIONS_IMPLEMENTATION.md)). Its 33 new Modified abilities are placeholders still to build. Old Spirit players are moved to Jade on their first join (`skills/JadeRename`).
