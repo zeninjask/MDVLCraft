@@ -29,6 +29,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import yesman.epicfight.skill.SkillSlot;
 import yesman.epicfight.skill.SkillSlots;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
@@ -39,7 +40,7 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
  * Yakusanoikazuchi (modified/Yakusanoikazuchi): the player takes the thunder god's shape (client/RaijuClient draws them
  * with its skin and six darkened Vatansever swords circling them, each in its own charged swirl) until they cast it again
  * (the form's wheel holds only Transform Back, ability/GauntAbility.RAIJU_WHEEL). In the form: no other spells, abilities
- * or Epic Fight skills; the dodge key does Thunder Step (modified/StrikeSpells.ThunderStep) to the locked-on enemy (where
+ * or Epic Fight skills (attacks and guarding still work); the dodge key does Thunder Step (modified/StrikeSpells.ThunderStep) to the locked-on enemy (where
  * the player looks without one), every DODGE_COOLDOWN ticks at most; a melee hit has a 1 in 6 chance to drop a short
  * Lightning Field (FIELD_TICKS) on the target that stuns whatever it shocks (combat/LightningFieldKnockback).
  *
@@ -98,14 +99,14 @@ public final class RaijuForm {
             // just short of the target, on the side the player comes from
             Vec3 toward = target.position().subtract(player.position()).multiply(1.0, 0.0, 1.0);
             double gap = target.getBbWidth() / 2.0 + 0.8;
+            // (at the target's own height: it stands there, so no ground search, which can drop through thin floors)
             dest = toward.lengthSqr() > gap * gap ? target.position().subtract(toward.normalize().scale(gap)) : player.position();
         } else {
             Vec3 eye = player.getEyePosition();
             Vec3 hit = player.level().clip(new ClipContext(eye, eye.add(player.getLookAngle().scale(STEP_RANGE)), ClipContext.Block.COLLIDER,
                 ClipContext.Fluid.NONE, player)).getLocation();
-            dest = hit.subtract(player.getLookAngle().scale(0.6));
+            dest = Utils.moveToRelativeGroundLevel(player.level(), hit.subtract(player.getLookAngle().scale(0.6)), 3);
         }
-        dest = Utils.moveToRelativeGroundLevel(player.level(), dest, 3);
         thunderStep.step(player.serverLevel(), player, dest, thunderStep.getSpellPower(1, player));
     }
 
@@ -130,16 +131,17 @@ public final class RaijuForm {
         }
     }
 
-    /** No Epic Fight skills in the form; the dodge becomes the Thunder Step. */
+    /** No Epic Fight skills in the form but attacking and guarding; the dodge becomes the Thunder Step. */
     @SubscribeEvent
     public static void onJoin(EntityJoinLevelEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             ServerPlayerPatch patch = EpicFightCapabilities.getEntityPatch(player, ServerPlayerPatch.class);
             if (patch != null) {
                 patch.getEventListener().addEventListener(EventType.SKILL_CAST_EVENT, SKILL_LISTENER, cast -> {
-                    if (in(player)) {
+                    SkillSlot slot = cast.getSkillContainer().getSlot();
+                    if (in(player) && slot != SkillSlots.BASIC_ATTACK && slot != SkillSlots.GUARD && slot != SkillSlots.KNOCKDOWN_WAKEUP) {
                         cast.setSkillExecutable(false);
-                        if (cast.getSkillContainer().getSlot() == SkillSlots.DODGE) {
+                        if (slot == SkillSlots.DODGE) {
                             step(player);
                         }
                     }

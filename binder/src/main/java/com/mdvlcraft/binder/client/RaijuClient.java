@@ -16,10 +16,13 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
+import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.resources.model.BakedModel;
+import net.minecraft.core.Direction;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
@@ -49,6 +52,7 @@ public final class RaijuClient {
     private static final float DARK = 0.3F;
     private static final ItemStack STACK = new ItemStack(Items.IRON_SWORD);
     private static final MultiBufferSource.BufferSource BUFFERS = MultiBufferSource.immediate(new BufferBuilder(4096));
+    private static final RandomSource RANDOM = RandomSource.create();
     private static int pickedBefore = -1;
 
     private RaijuClient() {
@@ -124,12 +128,18 @@ public final class RaijuClient {
                 pose.scale(1.1F, 1.1F, 1.1F);
                 minecraft.getItemRenderer().render(STACK, ItemDisplayContext.NONE, false, pose, tinted(BUFFERS, DARK, DARK, DARK), light,
                     OverlayTexture.NO_OVERLAY, model);
-                // the charge: the same blade a little larger, drawn as a moving energy swirl
+                // the charge: the blade's outline (the item model's edge quads, not its flat faces, which cover the whole
+                // square) a little larger, drawn as a moving energy swirl
                 float scroll = time * 0.01F % 1.0F;
-                VertexConsumer swirl = new Swirl(BUFFERS.getBuffer(RenderType.energySwirl(SWIRL, scroll, scroll)), model.getParticleIcon());
-                pose.scale(1.12F, 1.06F, 2.2F);
-                minecraft.getItemRenderer().render(STACK, ItemDisplayContext.NONE, false, pose, type -> new Tinted(swirl, 0.45F, 0.65F, 1.0F),
-                    0xF000F0, OverlayTexture.NO_OVERLAY, model);
+                VertexConsumer swirl = new Tinted(new Swirl(BUFFERS.getBuffer(RenderType.energySwirl(SWIRL, scroll, scroll)), model.getParticleIcon()),
+                    0.45F, 0.65F, 1.0F);
+                pose.scale(1.15F, 1.08F, 3.0F);
+                pose.translate(-0.5F, -0.5F, -0.5F);
+                for (BakedQuad quad : model.getQuads(null, null, RANDOM)) {
+                    if (quad.getDirection().getAxis() != Direction.Axis.Z) {
+                        swirl.putBulkData(pose.last(), quad, 1.0F, 1.0F, 1.0F, 0xF000F0, OverlayTexture.NO_OVERLAY);
+                    }
+                }
                 pose.popPose();
             }
         }
