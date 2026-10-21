@@ -78,6 +78,14 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 
 ### Where things stand
 
+- **Haunted Lord update (on `bane-agent`, built and tested on the test server/client):** rig v2 (`art/haunted_lord/source/rig_v2.py`:
+  neck/arm fur cards removed, `chest` and toe joints), every animation rebuilt in `library.py` (three variants each, the
+  user's picks in `PICKED`), drawn 1.3x with a matching hitbox (`GauntForm.onSize`), walk -15% / sprint +60%, wall and
+  ceiling crawling (sneak into a wall; `GauntClient.crawlSurface`), dodge (dodge key, read raw because Epic Fight's combat
+  keys only fire in battle mode), guard/parry (guard key), mid-leap pose, execute by attacking from behind (no longer on
+  the wheel), Faceless on the wheel (20 s Invisibility, 60 s cooldown), Horrify sound H7 (qubodup, CC0). Network packets
+  changed (GauntStatePacket, new GauntInputPacket). Checked in game: wall climb, jump-off, dodge, guard, execute from
+  behind, Faceless.
 - **Yakusanoikazuchi (on `bane-agent`, built and run on the test server/client):** a Modified ability (lightning, 80 mana,
   no cooldown, in no tree) granted only by wearing **Raijū's Fang** (`raiju/RaijuFang`, necklace, no recipe, shows in JEI).
   `raiju/RaijuForm`, `network/RaijuFormPacket`, `client/RaijuClient`, `mixin/raiju/RaijuSkinMixin` (PlayerInfo skin and

@@ -16,6 +16,8 @@ import com.mdvlcraft.binder.seraph.SeraphForm.Seen;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Nullable;
+import com.mojang.blaze3d.platform.InputConstants;
+import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.player.Input;
@@ -46,6 +48,7 @@ import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import org.lwjgl.glfw.GLFW;
 import yesman.epicfight.client.input.EpicFightKeyMappings;
 
 /**
@@ -416,17 +419,28 @@ public final class GauntClient {
         }
     }
 
+    /** Whether a key mapping's key is held, read from the keyboard / mouse directly: Epic Fight's combat keys only count
+     * as pressed in its battle mode, and the form is in vanilla mode. */
+    private static boolean held(KeyMapping mapping) {
+        InputConstants.Key key = mapping.getKey();
+        long window = Minecraft.getInstance().getWindow().getWindow();
+        if (key.getType() == InputConstants.Type.MOUSE) {
+            return GLFW.glfwGetMouseButton(window, key.getValue()) == GLFW.GLFW_PRESS;
+        }
+        return key.getType() == InputConstants.Type.KEYSYM && key.getValue() != InputConstants.UNKNOWN.getValue() && InputConstants.isKeyDown(window, key.getValue());
+    }
+
     /** In the form: the dodge key dodges (steered by the movement keys), the guard key held keeps the guard up. Read as
      * key states, since Epic Fight's own handling may take the clicks. */
     private static void keys(LocalPlayer player) {
         Seen seen = GauntForm.CLIENT.get(player.getId());
         boolean active = seen != null && seen.phase == FormPhase.ACTIVE && Minecraft.getInstance().screen == null;
-        boolean dodge = active && EpicFightKeyMappings.DODGE.isDown();
+        boolean dodge = active && held(EpicFightKeyMappings.DODGE);
         if (dodge && !dodgeWasDown) {
             BinderNetwork.sendToServer(new GauntInputPacket(GauntInputPacket.DODGE, player.input.leftImpulse, player.input.forwardImpulse));
         }
         dodgeWasDown = dodge;
-        boolean guard = active && (EpicFightKeyMappings.GUARD.isDown() || Minecraft.getInstance().options.keyUse.isDown());
+        boolean guard = active && (held(EpicFightKeyMappings.GUARD) || held(Minecraft.getInstance().options.keyUse));
         if (guard != guardWasDown) {
             BinderNetwork.sendToServer(new GauntInputPacket(guard ? GauntInputPacket.GUARD_ON : GauntInputPacket.GUARD_OFF, 0.0F, 0.0F));
         }
