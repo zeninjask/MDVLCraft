@@ -34,10 +34,12 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.Entity.RemovalReason;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.SlotAccess;
+import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.goal.FollowOwnerGoal;
 import net.minecraft.world.entity.ai.goal.Goal;
@@ -279,6 +281,9 @@ public final class SummonSpells {
                 }
             }
             case "storm_hounds" -> {
+                if (attacker.level().random.nextInt(10) == 0) {
+                    strike((ServerLevel)attacker.level(), victim);
+                }
                 if (Summons.owner(attacker) instanceof LivingEntity owner) {
                     Targets.enemies(owner, victim.position(), 4.0).stream().filter(e -> e != victim).findFirst().ifPresent(next -> {
                         next.hurt(attacker.damageSources().lightningBolt(), power(attacker));
@@ -294,6 +299,15 @@ public final class SummonSpells {
             default -> {
             }
         }
+    }
+
+    /** A lightning strike on the victim alone: the bolt is only drawn, and its burn and damage go to the victim. */
+    private static void strike(ServerLevel level, LivingEntity victim) {
+        LightningBolt bolt = Objects.requireNonNull(EntityType.LIGHTNING_BOLT.create(level));
+        bolt.moveTo(victim.position());
+        bolt.setVisualOnly(true);
+        level.addFreshEntity(bolt);
+        victim.thunderHit(level, bolt);
     }
 
     static void spark(ServerLevel level, Vec3 from, Vec3 to) {
@@ -375,6 +389,10 @@ public final class SummonSpells {
         protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
             this.spawn(level, caster, power, EntityType.WOLF, 2, castData, wolf -> {
                 tame(wolf, caster);
+                AttributeInstance damage = Objects.requireNonNull(wolf.getAttribute(Attributes.ATTACK_DAMAGE));
+                damage.setBaseValue(damage.getBaseValue() * 1.2);
+                AttributeInstance speed = Objects.requireNonNull(wolf.getAttribute(Attributes.MOVEMENT_SPEED));
+                speed.setBaseValue(speed.getBaseValue() * 2.0);
                 wolf.setCollarColor(DyeColor.LIGHT_BLUE);
                 VariantDataHolder.<WolfVariant>getHolder(wolf).setVariantData(VariantUtils.getDefault(WolfVariants.REGISTRY, WolfVariants.SNOWY));
             });

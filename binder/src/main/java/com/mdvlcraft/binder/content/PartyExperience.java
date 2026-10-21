@@ -4,18 +4,15 @@ import app.sedu.mc.parties._lytecore.api.team.AllianceAPI;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
-import net.puffish.skillsmod.access.LivingEntityAccess;
 
 /**
- * Skill experience from a kill made in a party is shared. Party members within 25 blocks of the killer, or who hit the
- * mob, split it evenly with the killer. With none of them, the killer keeps 75% and the other 25% is split between the
- * rest of the party.
+ * Skill experience from a kill made in a party is shared, by the party leader's Experience Share setting (ExpShare). Off: the
+ * killer keeps 75% and the other 25% is split evenly between the rest of the party. On: the whole party, killer included,
+ * splits it evenly. Party members count wherever they are, as long as they are online.
  */
 public final class PartyExperience {
-    private static final double SHARE_RANGE = 25.0;
     private static final double PARTY_CUT = 0.25;
     /** The mob whose kill experience is being handed out, until its first hand-out is shared. */
     private static final ThreadLocal<LivingEntity> DYING = new ThreadLocal<>();
@@ -42,7 +39,7 @@ public final class PartyExperience {
     }
 
     /** Each player's share of the killer's experience; just the killer at 1 when they aren't in a party. */
-    public static Map<ServerPlayer, Double> shares(ServerPlayer killer, LivingEntity victim) {
+    public static Map<ServerPlayer, Double> shares(ServerPlayer killer) {
         List<ServerPlayer> party = killer.server.getPlayerList().getPlayers().stream()
             .filter(other -> other != killer && AllianceAPI.areAllied(killer, other))
             .toList();
@@ -52,14 +49,10 @@ public final class PartyExperience {
             return shares;
         }
 
-        Set<ServerPlayer> hitters = ((LivingEntityAccess)victim).getDamageShare().keySet();
-        List<ServerPlayer> sharers = party.stream()
-            .filter(other -> hitters.contains(other) || other.level() == killer.level() && other.distanceTo(killer) <= SHARE_RANGE)
-            .toList();
-        if (!sharers.isEmpty()) {
-            double even = 1.0 / (sharers.size() + 1);
+        if (ExpShare.isOn(killer)) {
+            double even = 1.0 / (party.size() + 1);
             shares.put(killer, even);
-            sharers.forEach(sharer -> shares.put(sharer, even));
+            party.forEach(member -> shares.put(member, even));
             return shares;
         }
 

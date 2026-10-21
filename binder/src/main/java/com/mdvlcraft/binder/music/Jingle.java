@@ -4,7 +4,11 @@ package com.mdvlcraft.binder.music;
 public enum Jingle {
     SKILL_POINT_GAIN("skill_point_gain"),
     JOB_CHANGE("job_change"),
-    SLEEP("sleep");
+    SLEEP("sleep"),
+    QUEST_ACCEPT("quest_accept"),
+    QUEST_CLEAR("quest_clear"),
+    CURSED("cursed"),
+    DEFEATED("defeated");
 
     public final String track;
 

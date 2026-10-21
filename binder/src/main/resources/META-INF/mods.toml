@@ -163,3 +163,11 @@ description='''${mod_description}'''
     versionRange="[1.2,)"
     ordering="AFTER"
     side="BOTH"
+
+# Optional (client): draws the Haunted Lord's leap path (client/LeapTrajectory)
+[[dependencies.${mod_id}]]
+    modId="trajectory_estimation"
+    mandatory=false
+    versionRange="[1.0.3,)"
+    ordering="NONE"
+    side="CLIENT"

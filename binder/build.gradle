@@ -109,6 +109,10 @@ dependencies {
     compileOnly files('libs/stamina_interactions_reworked-2.3.jar')
     // Parties: PartiesBufferMixin fixes its ghost rendering crash on enchanted items
     compileOnly files('libs/Parties-1.20.1-2.2.0.jar')
+    // Xaero's Minimap: compat/PartyMapTracker shows party members on the minimap and world map
+    compileOnly files('libs/Xaeros_Minimap_FP24.2.0_Forge_1.20.jar')
+    // Alshanex's Familiars: ShadowEntityMixin and ShadowSummonSpellMixin rework Call the Shadows
+    compileOnly files('libs/alshanex_familiars-1.20.1_v4.1.0.jar')
     // Somakespells: SpectralRondoPlayerRenderHandlerMixin keeps Spectral Rondo's pose push and pop paired
     compileOnly files('libs/somakespells-1.0.9-1.20.1-fixaltar.jar')
     // Interlace Spellweaves: mixin/csw silences its first-cast chat line
@@ -119,10 +123,16 @@ dependencies {
     compileOnly files('libs/iss_magicfromtheeast-1.20.1-1.1.3.jar')
     // Curios: client/DqInventoryScreen draws its inventory menu (the pack's jar; the CurseMaven copy is runtime only)
     compileOnly files('libs/curios-forge-5.14.1+1.20.1.jar')
+    // Trajectory Estimation (client, optional): client/LeapTrajectory draws the Haunted Lord's leap path with its helpers
+    compileOnly files('libs/trajectory_estimation-forge-1.0.3.1-1.20.1.jar')
     // Inventory Profiles Next: client/DqInventoryScreen's @IPNGuiHints move its sort buttons onto the screen's windows
     compileOnly files('libs/InventoryProfilesNext-forge-1.20-1.10.20.jar')
     // GeckoLib: mixin/geckolib/ bends GeckoLib armour at the elbows and knees under Epic Fight (the pack's jar)
     compileOnly files('libs/geckolib-forge-1.20.1-4.8.4.jar')
+    // Backpacked and Framework: compat/backpacked/ adds the pack's own backpack augments (the pack's jars)
+    compileOnly files('libs/backpacked-forge-1.20.1-3.0.9.jar', 'libs/framework-forge-1.20.1-0.8.0.jar')
+    // FTB Quests (with FTB Library, FTB Teams and Architectury): compat/ftbquests/ActiveQuest lets a player take one quest at a time
+    compileOnly files('libs/ftb-quests-forge-2001.4.22.jar', 'libs/ftb-library-forge-2001.2.13.jar', 'libs/ftb-teams-forge-2001.3.2.jar', 'libs/architectury-9.2.14-forge.jar')
     // Sodium Dynamic Lights: client/LanternBeltLight lights up a lantern worn on the belt (the pack's jar)
     compileOnly files('libs/sodiumdynamiclights-forge-1.0.10-1.20.1.jar')
     // Pick Up Notifier: mixin/pickupnotifier/ starts its entries above the ability bar (the pack's jar)

@@ -36,6 +36,16 @@
         "type": "mdvlcraft:is_mage"
        }
       ]
+     },
+     "is_armor_stand": {
+      "operations": [
+       {
+        "type": "get_killed_living_entity"
+       },
+       {
+        "type": "mdvlcraft:is_armor_stand"
+       }
+      ]
      }
     },
     "experience": [
@@ -44,7 +54,7 @@
       "expression": "150"
      },
      {
-      "condition": "1 - is_mage",
+      "condition": "(1 - is_mage) * (1 - is_armor_stand)",
       "expression": "dropped_xp + max_health / 5"
      }
     ],

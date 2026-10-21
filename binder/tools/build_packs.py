@@ -1,6 +1,7 @@
 """Builds MDVLCraft-<version>-client.mrpack, -client-performance.mrpack and -server.mrpack from an unpacked base (default:
 <repo>/base/{client,server}, each a modrinth.index.json plus overrides/), with the newest binder jar from binder/build/libs
-in place of the base's own. The performance client is derived from base/client first (make_performance_pack.py).
+in place of the base's own. The quest book is written into the base first (generate_quests.py), then the performance
+client is derived from base/client (make_performance_pack.py).
 The pack icon (<repo>/icon.png) goes at the root of every pack and, at 64x64, in the server pack as server-icon.png.
 Recreate the base by unzipping the latest committed MDVLCraft-<version>-client/server.mrpack into base/client and base/server.
 Usage: python3 binder/tools/build_packs.py <version> <outdir> [base dir]
@@ -9,6 +10,7 @@ import glob, io, json, os, sys, zipfile
 
 from PIL import Image
 
+import generate_quests
 import make_performance_pack
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -51,6 +53,7 @@ def build(pack):
     print(out, len(index['files']), 'downloaded files, binder', os.path.basename(binder), os.path.getsize(out), 'bytes')
 
 
+generate_quests.main(BASE)
 make_performance_pack.make(BASE)
 for pack in ('client', make_performance_pack.PACK, 'server'):
     build(pack)

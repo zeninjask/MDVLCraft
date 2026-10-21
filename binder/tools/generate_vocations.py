@@ -234,9 +234,13 @@ def stat_body(title, attrs, value, cost, kind, extra=None):
 SPELL_INFO = T.SPELLS
 
 
+# Spells a vocation unlocks above the usual level 3.
+SPELL_LEVEL = {'irons_spellbooks:raise_dead': 6}
+
+
 def spell_level(sid):
     if sid in SPELL_INFO:
-        return T.pick_level(sid)
+        return T.pick_level(sid, SPELL_LEVEL.get(sid, 3))
     return 1
 
 

@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.ability;
 
+import com.mdvlcraft.binder.gaunt.HauntedLocket;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -53,11 +54,21 @@ public final class AbilityGrants {
             granted.merge(reward.ability, reward.level, Math::max);
         }
 
+        // the Haunted Locket grants Gaunt Vessel while worn
+        if (HauntedLocket.worn(player)) {
+            granted.merge(HauntedLocket.ability(), 1, Math::max);
+        }
+
         return granted;
     }
 
     public static int level(ServerPlayer player, Ability ability) {
         return of(player).getOrDefault(ability, 0);
+    }
+
+    /** Re-sends the player's abilities (something outside the skill trees changed what they are granted). */
+    public static void refresh(ServerPlayer player) {
+        DIRTY.add(player.getUUID());
     }
 
     static void markDirty(ServerPlayer player) {

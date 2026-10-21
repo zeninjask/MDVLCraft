@@ -1,6 +1,5 @@
 package com.mdvlcraft.binder.skills;
 
-import com.fen.mmorpgtitles.ChatFormatData;
 import com.fen.mmorpgtitles.TitleConfigData;
 import com.fen.mmorpgtitles.TitleData;
 import com.fen.mmorpgtitles.TitleSystem;
@@ -21,12 +20,11 @@ import net.puffish.skillsmod.api.SkillsAPI;
 
 /**
  * Every player's Fen's RPG Titles title is their vocation: the archetype's name, or the vocation's name for two
- * (skills/VocationParts). Picking, changing or dropping an archetype replaces the title (old ones are revoked) and says "Title gained: ...". Chat reads
- * "Name - Title: message".
+ * (skills/VocationParts). Picking, changing or dropping an archetype replaces the title (old ones are revoked) and says "Title gained: ...". Fen's own chat prefix is
+ * off: chat/PlayerChat writes "Name - Title: message".
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class ClassTitles {
-    private static final String CHAT_FORMAT = "{player} - {title}: {message}";
     private static final Set<UUID> PENDING = new HashSet<>();
 
     private ClassTitles() {
@@ -46,8 +44,7 @@ public final class ClassTitles {
 
     @SubscribeEvent
     public static void onServerStarted(ServerStartedEvent event) {
-        TitleConfigData.get(event.getServer().overworld()).setChatPrefixEnabled(true);
-        ChatFormatData.get(event.getServer().overworld()).setFormat(CHAT_FORMAT);
+        TitleConfigData.get(event.getServer().overworld()).setChatPrefixEnabled(false);
     }
 
     @SubscribeEvent

@@ -6,7 +6,8 @@ import java.util.Optional;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
-public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbility, StanceAbility, DoppelgangerAbility, SustenanceAbility, PlannedAbility {
+public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbility, StanceAbility, DoppelgangerAbility, SustenanceAbility, PlannedAbility,
+    GauntAbility {
     /** Multiplier on every ability's base mana cost (Iron's spells get it through their spell config instead). */
     float MANA_SCALE = 1.2F;
     /** Multiplier on technique damage (combat/TechniqueScaling); Iron's spells get it through power_multiplier. */
@@ -45,6 +46,11 @@ public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbilit
 
         if (SustenanceAbility.INSTANCE.id().equals(id)) {
             return Optional.of(SustenanceAbility.INSTANCE);
+        }
+
+        Optional<Ability> gaunt = GauntAbility.byId(id).map(g -> (Ability)g);
+        if (gaunt.isPresent()) {
+            return gaunt;
         }
 
         Optional<Ability> planned = PlannedAbility.byId(id).map(p -> (Ability)p);

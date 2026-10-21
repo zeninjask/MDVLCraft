@@ -3,10 +3,14 @@ package com.mdvlcraft.binder.ability;
 import com.mdvlcraft.binder.content.DemonicAssimilationDismiss;
 import com.mdvlcraft.binder.content.SummonModes;
 import com.mdvlcraft.binder.doppelganger.Doppelgangers;
+import com.mdvlcraft.binder.gaunt.GauntExecute;
+import com.mdvlcraft.binder.gaunt.GauntForm;
+import com.mdvlcraft.binder.gaunt.GauntLeap;
 import com.mdvlcraft.binder.seraph.SeraphForm;
 import com.tiago.antimagic.spell.DemonicAssimilationSpell;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.magic.SpellSelectionManager;
+import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.api.spells.CastType;
@@ -34,6 +38,21 @@ public final class AbilityActions {
     }
 
     public static void press(ServerPlayer player, int slot) {
+        if (GauntForm.in(player)) {
+            // The form's own wheel: Transform Back, Leap, Horrify and Execute, nothing else.
+            GauntAbility.slot(slot).ifPresent(gaunt -> {
+                if (gaunt == GauntAbility.REVERT) {
+                    castSpell(player, SpellRegistry.getSpell(ResourceLocation.parse(GauntForm.SPELL)), 1);
+                } else if (GauntForm.active(player)) {
+                    switch (gaunt) {
+                        case LEAP -> GauntLeap.press(player);
+                        case HORRIFY -> GauntLeap.horrify(player);
+                        default -> GauntExecute.start(player);
+                    }
+                }
+            });
+            return;
+        }
         Optional<Ability> ability = Loadout.get(player).get(slot).flatMap(Ability::byId);
         if (!ability.isEmpty()) {
             int level = AbilityGrants.level(player, ability.get());
@@ -78,6 +97,7 @@ public final class AbilityActions {
     }
 
     public static void release(ServerPlayer player) {
+        GauntLeap.release(player);
         TechniqueRunner.release(player);
         Doppelgangers.release(player);
     }

@@ -26,7 +26,7 @@ public abstract class PartyExperienceMixin {
         if (victim == null) {
             return;
         }
-        Map<ServerPlayer, Double> shares = PartyExperience.shares(killer, victim);
+        Map<ServerPlayer, Double> shares = PartyExperience.shares(killer);
         if (shares.size() == 1) {
             return;
         }
