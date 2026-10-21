@@ -43,7 +43,7 @@ T = {
     'quiver_refill': lambda: run('Quiver Refill', 'quiver_refill', wait=0.5,
                                  after=('cast Tester mdvlcraft:quiver_refill', 'clear Tester minecraft:arrow 0')),
     # the bomb lands at t1 (3 blocks): t1 Blindness (~30t, refreshed); the caster, 3 blocks from it, has Invisibility (15t, refreshed)
-    'rogue_smoke_bomb': lambda: run('Smoke Bomb', 'rogue_smoke_bomb', targets=(('husk', 0, 3),), face='eyes', wait=2.0),
+    'rogue_smoke_bomb': lambda: run('Smoke Bomb', 'rogue_smoke_bomb', targets=(('husk', 0, 3),), face='feet', wait=2.0),
     # caster Invisibility for 120t (no aggro to check on NoAI targets)
     'vanish': lambda: run('Vanish', 'vanish', wait=0.5),
     # t1 (2 blocks) loses ~2.4 per second (~7 after 3 s) and has Slowness amp 1; t2 (5 blocks) untouched
@@ -65,14 +65,14 @@ T = {
     # riding: t1 (2 blocks from the horse) loses ~3.6 a second (~11 after 3 s); t2 (6 blocks) untouched
     'trample': lambda: run('Trample', 'trample', targets=(('husk', 0, 2), ('husk', 0, 6)), extra=MOUNT),
     # t1 rides a pig: afterwards it rides nothing (no RootVehicle), is ~1.5 blocks off the pig and rooted 40t
-    'unhorse': lambda: run('Unhorse', 'unhorse', targets=(('husk', 0, 5),), face='eyes', wait=1.0,
+    'unhorse': lambda: run('Unhorse', 'unhorse', targets=(('husk', 0, 5),), face='feet', wait=1.0,
                            extra=('summon minecraft:pig 0.5 -60 5.5 {Tags:["tst","p"],NoAI:1b,Silent:1b}',
                                   'ride @e[tag=t1,limit=1] mount @e[tag=p,limit=1]'),
                            after=('data get entity @e[tag=t1,limit=1] RootVehicle',)),
     # the caster slides ~4 blocks to +z; t1 (z=2, the first in its path) loses 4.5 (150% of 3); t2 (z=3.5) nothing
     'lunge': lambda: run('Lunge', 'lunge', targets=(('husk', 0, 2), ('husk', 0, 3)), wait=1.5),
     # t1 (2 blocks) takes 3 hits of 1.8 (60% of 3): HP ~194.6
-    'flourish': lambda: run('Flourish', 'flourish', targets=(('husk', 0, 2),), face='eyes', wait=1.0),
+    'flourish': lambda: run('Flourish', 'flourish', targets=(('husk', 0, 2),), face='feet', wait=1.0),
     # caster buff riposte_stance; t1's hit is answered: t1 loses 2.25 (75% of 3), HP ~197.75
     'riposte_stance': lambda: run('Riposte Stance', 'riposte_stance', targets=(('husk', 0, 2),), wait=0.5, after=HIT_ME),
 }

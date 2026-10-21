@@ -213,7 +213,7 @@ public final class OriginMartialC {
     static BoltSpells.Bolt boardingHook() {
         return new BoltSpells.Bolt("boarding_hook", 0, Items.TRIPWIRE_HOOK, ParticleTypes.CRIT, (bolt, caster, target, power) -> {
             Vec3 in = caster.position().subtract(target.position());
-            target.setDeltaMovement(in.normalize().scale(Math.min(2.2, in.length() * 0.22)).add(0.0, 0.3, 0.0));
+            target.setDeltaMovement(in.normalize().scale(Math.min(1.8, in.length() * 0.18)).add(0.0, 0.3, 0.0));   // stops just short of the caster
             target.hurtMarked = true;
             caster.level().playSound(null, target.blockPosition(), SoundEvents.CHAIN_HIT, SoundSource.PLAYERS, 1.0F, 0.8F);
         }, null).speed(2.0F).gravity(0.02).sound(SoundEvents.FISHING_BOBBER_THROW);

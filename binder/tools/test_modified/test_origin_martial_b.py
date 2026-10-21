@@ -74,7 +74,7 @@ T = {
     # no kills: refused, no trophy_strength buff
     'trophy_strength_none': lambda: run('Trophy Strength (no kills)', 'trophy_strength', targets=(('husk', 0, 4),), wait=0.5, after=(BUFFS,)),
     # t1 rooted (Slowness(6) + Jump Boost 60t); its hit on the caster right after does nothing (caster Health 20)
-    'bola': lambda: run('Bola', 'bola', targets=(('husk', 0, 4),), face='eyes', wait=0.5, extra=(VULNERABLE,), after=(HIT_C,)),
+    'bola': lambda: run('Bola', 'bola', targets=(('husk', 0, 4),), face='feet', wait=0.5, extra=(VULNERABLE,), after=(HIT_C,)),
     # the pillager (10) and witch (40) have Glowing 400t; the vindicator at 60 and t1 (husk) don't
     'tracker_s_instinct': lambda: run('Tracker\'s Instinct', 'tracker_s_instinct', targets=(('husk', 0, 4),), wait=0.5,
                                       extra=('summon minecraft:pillager 0.5 -60 10.5 {NoAI:1b,Tags:["tst","p"],PersistenceRequired:1b}',

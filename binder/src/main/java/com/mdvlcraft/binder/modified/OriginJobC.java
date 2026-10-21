@@ -362,6 +362,7 @@ public final class OriginJobC {
     public static class ShovelSlam extends ConeSpells.Cone {
         ShovelSlam() {
             super("shovel_slam", 0, 3.0, 75.0, ParticleTypes.SWEEP_ATTACK, SoundEvents.PLAYER_ATTACK_SWEEP, (caster, target, dealt) -> {
+                MartialSpells.faceTowards(target, caster);   // Epic Fight's stun throws a creature back from where it faces
                 MartialSpells.stun(target, StunType.KNOCKDOWN, 1.0F);
                 MartialSpells.root(target, 20);
             });
@@ -406,6 +407,7 @@ public final class OriginJobC {
                 if (enemy == caster || !BoltSpells.undead(enemy)) {
                     continue;
                 }
+                MartialSpells.faceTowards(enemy, caster);   // Epic Fight's stun throws a creature back from where it faces
                 MartialSpells.stun(enemy, StunType.LONG, 3.0F);
                 MartialSpells.root(enemy, 60);
                 DamageSources.applyDamage(enemy, power, this.getDamageSource(caster));

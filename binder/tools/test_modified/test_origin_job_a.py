@@ -14,10 +14,10 @@ def attrs(tag):
 
 T = {
     # caster's Attributes show generic.armor +3 and generic.armor_toughness +1 ("mdvlcraft temper ..."); t1 (cow, not allied) none
-    'temper_armour': lambda: run('Temper Armour', 'temper_armour', targets=(('cow', 0, 3),), face='eyes', wait=0.5,
+    'temper_armour': lambda: run('Temper Armour', 'temper_armour', targets=(('cow', 0, 3),), face='feet', wait=0.5,
                                  after=(attrs('c'), attrs('t1'))),
     # caster holds an iron sword: t1 loses 1.5x its attack damage; t1's Attributes show generic.armor -3 ("mdvlcraft hammer_shred")
-    'hammer_strike': lambda: run('Hammer Strike', 'hammer_strike', hand='minecraft:iron_sword', targets=(('husk', 0, 3),), face='eyes',
+    'hammer_strike': lambda: run('Hammer Strike', 'hammer_strike', hand='minecraft:iron_sword', targets=(('husk', 0, 3),), face='feet',
                                  wait=0.5, after=(attrs('t1'),)),
     # players only: the zombie caster is refused; nothing changes
     'forge_heat': lambda: run('Forge Heat', 'forge_heat', targets=(('husk', 0, 6),), wait=0.5),
@@ -49,9 +49,9 @@ T = {
     # players only: the zombie caster is refused; nothing changes
     'compost': lambda: run('Compost', 'compost', targets=(('husk', 0, 6),), wait=0.5),
     # either the caster has Luck(1) and Speed(0) 400t (heads) or t1 (husk at 5) lost ~6 (tails); run it a few times to see both
-    'coin_toss': lambda: run('Coin Toss', 'coin_toss', targets=(('husk', 0, 5),), face='eyes', wait=1.5),
+    'coin_toss': lambda: run('Coin Toss', 'coin_toss', targets=(('husk', 0, 5),), face='feet', wait=1.5),
     # players only: the zombie caster is refused; t1 has no bribed mark (no ForgeData)
-    'bribe': lambda: run('Bribe', 'bribe', targets=(('husk', 0, 4),), face='eyes', wait=0.5,
+    'bribe': lambda: run('Bribe', 'bribe', targets=(('husk', 0, 4),), face='feet', wait=0.5,
                          after=('data get entity @e[tag=t1,limit=1] ForgeData.mdvlcraft_buffs',)),
     # an iron golem named Caravan Guard stands near the caster (check succeeds)
     'caravan_guard': lambda: run('Caravan Guard', 'caravan_guard', targets=(('husk', 0, 8),), wait=1.0,
@@ -63,7 +63,7 @@ T = {
                              extra=('data merge entity @e[tag=t1,limit=1] {Age:-24000}', 'data merge entity @e[tag=t2,limit=1] {Age:-24000}'),
                              after=('data get entity @e[tag=t1,limit=1] Age', 'data get entity @e[tag=t2,limit=1] Age')),
     # t1 (cow at 5) Glowing(0) 1200t; killed by the caster it drops every stack twice (the item count is even, about twice a cow's)
-    'branding_iron': lambda: run('Branding Iron', 'branding_iron', targets=(('cow', 0, 5),), face='eyes', wait=0.5,
+    'branding_iron': lambda: run('Branding Iron', 'branding_iron', targets=(('cow', 0, 5),), face='feet', wait=0.5,
                                  after=('damage @e[tag=t1,limit=1] 500 minecraft:mob_attack by @e[tag=c,limit=1]',
                                         'execute if entity @e[type=minecraft:item]')),
 }

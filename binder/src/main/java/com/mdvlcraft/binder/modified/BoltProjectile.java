@@ -59,6 +59,7 @@ public class BoltProjectile extends ThrownItemProjectile {
             if (bolt.land != null) {
                 bolt.land.apply(bolt, level, caster, result.getLocation(), this.getDamage());
             }
+            this.pierceOrDiscard();   // Iron's own entity hit does this; without it a bolt flew on and landed a second time
         }
     }
 

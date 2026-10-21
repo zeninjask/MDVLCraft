@@ -243,6 +243,7 @@ public final class OriginMartialB {
                         server.sendParticles(ParticleTypes.MYCELIUM, at.x, at.y + 0.2, at.z, 2, 0.6, 0.0, 0.6, 0.0);
                     }
                     Targets.enemies(caster, at, 1.2).stream().filter(e -> e != caster).findFirst().ifPresent(enemy -> {
+                        MartialSpells.faceTowards(enemy, caster);   // Epic Fight's stun throws a creature back from where it faces
                         MartialSpells.stun(enemy, StunType.KNOCKDOWN, 2.0F);
                         MartialSpells.root(enemy, 40);
                         enemy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 80, 1), caster);
@@ -430,6 +431,7 @@ public final class OriginMartialB {
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             for (LivingEntity enemy : Targets.enemies(caster, caster.position(), 4.0)) {
                 if (enemy != caster) {
+                    MartialSpells.faceTowards(enemy, caster);   // Epic Fight's stun throws a creature back from where it faces
                     MartialSpells.stun(enemy, StunType.KNOCKDOWN, 1.5F);
                     MartialSpells.root(enemy, 30);
                 }

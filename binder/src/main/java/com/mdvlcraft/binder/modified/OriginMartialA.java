@@ -21,6 +21,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.MoverType;
 import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -131,6 +132,7 @@ public final class OriginMartialA {
             DamageSources.ignoreNextKnockback(target);
             this.hurt(caster, target, power);
             Wave2Guardian.knock(caster.position(), target, 3.0);
+            MartialSpells.faceTowards(target, caster);   // Epic Fight's stun throws a creature back from where it faces
             MartialSpells.stun(target, StunType.LONG, 1.0F);
             MartialSpells.root(target, 20);
             level.sendParticles(ParticleTypes.CRIT, target.getX(), target.getY(0.6), target.getZ(), 20, 0.3, 0.4, 0.3, 0.2);
@@ -165,7 +167,7 @@ public final class OriginMartialA {
 
     // ---- Archer ----
 
-    /** Arrow Rain: 10 arrows fall on the spot looked at (within 24 blocks), spread within 2 blocks of it (a 4-block-wide patch). */
+    /** Arrow Rain: 10 arrows fall on the spot looked at (within 24 blocks), over a 4-block-wide patch; two in three on the enemies in it. */
     public static class ArrowRain extends ModifiedSpell {
         ArrowRain() {
             super("arrow_rain", 6);
@@ -176,11 +178,14 @@ public final class OriginMartialA {
             if (level instanceof ServerLevel server) {
                 Vec3 at = VolleySpells.lookedPoint(caster, 24.0);
                 float power = this.getSpellPower(spellLevel, caster);
+                // two in three fall on the enemies in the patch (a scatter alone mostly misses), the rest anywhere in it
+                List<LivingEntity> enemies = Targets.enemies(caster, at, 2.5);
                 for (int i = 0; i < 10; i++) {
                     double angle = caster.getRandom().nextDouble() * Math.PI * 2.0;
                     double r = 2.0 * Math.sqrt(caster.getRandom().nextDouble());
-                    Vec3 aim = at.add(Math.cos(angle) * r, 0.0, Math.sin(angle) * r);
-                    Vec3 from = aim.add((caster.getRandom().nextDouble() - 0.5) * 1.5, 14.0 + caster.getRandom().nextDouble() * 3.0,
+                    Vec3 aim = !enemies.isEmpty() && i % 3 != 2 ? enemies.get(i % enemies.size()).getBoundingBox().getCenter()
+                        : at.add(Math.cos(angle) * r, 0.0, Math.sin(angle) * r);
+                    Vec3 from = aim.add((caster.getRandom().nextDouble() - 0.5) * 0.6, 14.0 + caster.getRandom().nextDouble() * 3.0,
                         (caster.getRandom().nextDouble() - 0.5) * 1.5);
                     Vec3 down = aim.subtract(from);
                     Arrow arrow = new Arrow(level, caster);
@@ -384,8 +389,7 @@ public final class OriginMartialA {
                         if (!boar.isAlive()) {
                             continue;
                         }
-                        boar.setDeltaMovement(look.scale(0.5).add(0.0, boar.getDeltaMovement().y, 0.0));
-                        boar.hurtMarked = true;
+                        boar.move(MoverType.SELF, look.scale(0.5));   // a mob without AI ignores its motion; walls still stop it
                         for (LivingEntity enemy : Targets.enemies(caster, boar.position(), 1.6)) {
                             if (struck.get(i).add(enemy)) {
                                 double side = enemy.position().subtract(boar.position()).dot(across) >= 0.0 ? 1.0 : -1.0;
@@ -501,6 +505,7 @@ public final class OriginMartialA {
             }
             target.stopRiding();
             Wave2Guardian.knock(vehicle.position(), target, 1.5);
+            MartialSpells.faceTowards(target, caster);   // Epic Fight's stun throws a creature back from where it faces
             MartialSpells.stun(target, StunType.LONG, 2.0F);
             MartialSpells.root(target, 40);
             SmiteSpells.beam(level, caster.getEyePosition().subtract(0.0, 0.3, 0.0), target.getEyePosition(), ParticleTypes.CRIT);
