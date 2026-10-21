@@ -235,7 +235,7 @@
  },
  "ashen_renewal": {
   "name": "Ashen Renewal",
-  "description": "For 12 seconds, killing a burning creature grants you Regeneration II for 4 seconds.",
+  "description": "For 12 seconds, killing a burning creature grants you Regeneration II for 8 seconds.",
   "school": "irons_spellbooks:nature",
   "mana": 30,
   "cooldown": 30,
@@ -253,7 +253,7 @@
  },
  "avalanche_stomp": {
   "name": "Avalanche Stomp",
-  "description": "Leap up to 6 blocks and land with a shockwave that freezes enemies within 4 blocks for 4 seconds.",
+  "description": "Leap up to 6 blocks and land with a shockwave that freezes enemies within 4 blocks for 2 seconds.",
   "school": "irons_spellbooks:ice",
   "mana": 35,
   "cooldown": 15,
@@ -280,7 +280,7 @@
  },
  "balanced_judgment": {
   "name": "Balanced Judgment",
-  "description": "Strike the creature you look at for holy damage equal to the health-percentage gap between you, minimum 4.",
+  "description": "Strike the creature you look at for holy damage equal to the health-percentage gap between you, from 4 up to 20.",
   "school": "irons_spellbooks:holy",
   "mana": 35,
   "cooldown": 25,
@@ -343,7 +343,7 @@
  },
  "barrow_howl": {
   "name": "Barrow Howl",
-  "description": "Roar in a 6-block cone, applying Weakness II and freezing creatures for 4 seconds.",
+  "description": "Roar in a 6-block cone, applying Weakness II and freezing creatures for 2 seconds.",
   "school": "irons_spellbooks:ice",
   "mana": 30,
   "cooldown": 20,
@@ -499,7 +499,7 @@
   "description": "Sacrifice 4 health to gain Strength II and 20% extra life steal for 10 seconds.",
   "school": "irons_spellbooks:blood",
   "mana": 15,
-  "cooldown": 30,
+  "cooldown": 45,
   "cast": "instant",
   "cast_time": 0
  },
@@ -562,7 +562,7 @@
   "description": "Pluck a hair and blow on it: two clones of yourself that fight with your held weapon instead of casting spells.",
   "school": "irons_spellbooks:ender",
   "mana": 60,
-  "cooldown": 60,
+  "cooldown": 90,
   "cast": "instant",
   "cast_time": 0
  },
@@ -847,7 +847,7 @@
  },
  "brine_frenzy": {
   "name": "Brine Frenzy",
-  "description": "For 10 seconds, each hit grants 1 heart of Absorption (max 4) while you stand in water or rain.",
+  "description": "For 10 seconds, each hit grants 1 heart of Absorption (2 while you stand in water or rain), max 4.",
   "school": "traveloptics:aqua",
   "mana": 30,
   "cooldown": 30,
@@ -859,7 +859,7 @@
   "description": "Throw a lance of icy brine that freezes the target 3 s and applies Slowness III for 4 s.",
   "school": "traveloptics:aqua",
   "mana": 25,
-  "cooldown": 8,
+  "cooldown": 14,
   "cast": "instant",
   "cast_time": 0
  },
@@ -982,7 +982,7 @@
  },
  "carrion_beetles": {
   "name": "Carrion Beetles",
-  "description": "Summon 4 silverfish for 20 s whose bites apply poison I for 4 s.",
+  "description": "Summon 6 silverfish for 20 s whose bites apply poison II for 4 s.",
   "school": "irons_spellbooks:nature",
   "mana": 45,
   "cooldown": 60,
@@ -1135,12 +1135,12 @@
  },
  "cold_meditation": {
   "name": "Cold Meditation",
-  "description": "Meditate inside an ice block: invulnerable, and restores mana and stamina while inside.",
+  "description": "Meditate inside an ice block for up to 4 seconds: invulnerable, and restores mana and stamina while inside.",
   "school": "irons_spellbooks:ice",
   "mana": 0,
-  "cooldown": 45,
+  "cooldown": 60,
   "cast": "continuous",
-  "cast_time": 100
+  "cast_time": 80
  },
  "collateral": {
   "name": "Collateral",
@@ -1351,7 +1351,7 @@
  },
  "desert_dates": {
   "name": "Desert Dates",
-  "description": "Conjure 4 dates that restore 3 hunger and grant fire resistance and speed I for 45 s.",
+  "description": "Conjure 2 dates that restore 3 hunger and grant fire resistance and speed I for 45 s.",
   "school": "irons_spellbooks:nature",
   "mana": 25,
   "cooldown": 120,
@@ -1405,7 +1405,7 @@
  },
  "drunken_sway": {
   "name": "Drunken Sway",
-  "description": "For 8 seconds, each hit against you has a 50% chance to miss as you stagger 2 blocks aside.",
+  "description": "For 8 seconds, each hit against you has a 30% chance to miss as you stagger 2 blocks aside.",
   "school": "irons_spellbooks:evocation",
   "mana": 35,
   "cooldown": 30,
@@ -1513,7 +1513,7 @@
  },
  "equinox_ring": {
   "name": "Equinox Ring",
-  "description": "Release a ring that ignites creatures within 3 blocks and freezes those 3-6 blocks away for 4 seconds.",
+  "description": "Release a ring that ignites creatures within 3 blocks and freezes those 3-6 blocks away for 2 seconds.",
   "school": "irons_spellbooks:ice",
   "mana": 40,
   "cooldown": 16,
@@ -1612,7 +1612,7 @@
  },
  "feast": {
   "name": "Feast",
-  "description": "Lay out a feast for 20 s: players who stand by it regenerate health and hunger and get Strength I for 2 minutes.",
+  "description": "Lay out a feast for 20 s: players who stand by it regenerate health and hunger and get Strength I for 60 seconds.",
   "school": "irons_spellbooks:nature",
   "mana": 40,
   "cooldown": 90,
@@ -2440,7 +2440,7 @@
  },
  "hurled_rimeaxe": {
   "name": "Hurled Rimeaxe",
-  "description": "Throw a frozen axe that deals damage and freezes the creature hit for 3 seconds.",
+  "description": "Throw a frozen axe that deals damage and freezes the creature hit for 1.5 seconds.",
   "school": "irons_spellbooks:ice",
   "mana": 25,
   "cooldown": 10,
@@ -2449,7 +2449,7 @@
  },
  "hyoga_draw": {
   "name": "Hyoga Draw",
-  "description": "Strike the creature you look at, freezing it for 4 seconds; already frozen targets take double damage.",
+  "description": "Strike the creature you look at, freezing it for 2 seconds; already frozen targets take double damage.",
   "school": "irons_spellbooks:ice",
   "mana": 25,
   "cooldown": 10,
@@ -2539,7 +2539,7 @@
  },
  "indulgence_coin": {
   "name": "Indulgence Coin",
-  "description": "Throw a gold coin; the creature hit gets weakness II for 6 s and you gain 4 absorption hearts.",
+  "description": "Throw a gold coin; the creature hit gets weakness II for 6 s and you gain 2 absorption hearts.",
   "school": "irons_spellbooks:holy",
   "mana": 25,
   "cooldown": 20,
@@ -2548,7 +2548,7 @@
  },
  "infernal_sigil": {
   "name": "Infernal Sigil",
-  "description": "Mark the creature you look at for 8 seconds; each spell you cast deals 2 soul fire damage to it.",
+  "description": "Mark the creature you look at for 8 seconds; each spell you cast deals 4 soul fire damage to it.",
   "school": "irons_spellbooks:eldritch",
   "mana": 30,
   "cooldown": 20,
@@ -2584,7 +2584,7 @@
  },
  "iron_gut": {
   "name": "Iron Gut",
-  "description": "For 12 seconds, take 30% less damage and gain Strength I for 3 seconds whenever you are hit.",
+  "description": "For 12 seconds, take 20% less damage and gain Strength I for 3 seconds whenever you are hit.",
   "school": "irons_spellbooks:evocation",
   "mana": 35,
   "cooldown": 30,
@@ -2890,7 +2890,7 @@
  },
  "leviathan_hex": {
   "name": "Leviathan Hex",
-  "description": "Mark a target to take 1 drowning damage per second for 6 s; if it dies, you heal 4 HP.",
+  "description": "Mark a target to take 2 drowning damage per second for 6 s; if it dies, you heal 4 HP.",
   "school": "irons_spellbooks:eldritch",
   "mana": 25,
   "cooldown": 16,
@@ -3133,7 +3133,7 @@
  },
  "mind_splinter": {
   "name": "Mind Splinter",
-  "description": "Strike the creature you look at, applying Nausea and Slowness and making it take 50% more damage for 6 seconds.",
+  "description": "Strike the creature you look at, applying Nausea and Slowness and making it take 25% more damage for 6 seconds.",
   "school": "irons_spellbooks:eldritch",
   "mana": 25,
   "cooldown": 12,
@@ -3295,7 +3295,7 @@
  },
  "ninefold_ring": {
   "name": "Ninefold Ring",
-  "description": "A fire ring bursts 5 blocks around you, burning enemies 3 s; gain Resistance I 5 s per enemy hit, up to 3 stacks.",
+  "description": "A fire ring bursts 5 blocks around you, burning enemies 3 s; gain Resistance I 5 s per enemy hit, up to 2 stacks.",
   "school": "irons_spellbooks:fire",
   "mana": 35,
   "cooldown": 16,
@@ -3322,7 +3322,7 @@
  },
  "numbing_venom": {
   "name": "Numbing Venom",
-  "description": "For 10 s your hits freeze targets 2 s and poison them 3 s.",
+  "description": "For 10 s your hits freeze targets 2 s (once per target every 4 s) and poison them 3 s.",
   "school": "irons_spellbooks:ice",
   "mana": 35,
   "cooldown": 30,
@@ -3595,7 +3595,7 @@
   "description": "Glide 5 blocks through enemies, freezing every creature you pass for 2 s.",
   "school": "iss_magicfromtheeast:spirit",
   "mana": 20,
-  "cooldown": 10,
+  "cooldown": 16,
   "cast": "instant",
   "cast_time": 0
  },
@@ -3655,7 +3655,7 @@
  },
  "pinning_frost": {
   "name": "Pinning Frost",
-  "description": "For 10 s your arrows freeze targets in place for 2 s.",
+  "description": "For 10 s your arrows freeze targets in place for 1 s.",
   "school": "irons_spellbooks:ice",
   "mana": 35,
   "cooldown": 35,
@@ -3790,7 +3790,7 @@
  },
  "radiant_dagger": {
   "name": "Radiant Dagger",
-  "description": "Throw a dagger of light that burns undead and marks the target with Glowing.",
+  "description": "Throw a dagger of light (11 base damage) that burns undead and marks the target with Glowing.",
   "school": "irons_spellbooks:holy",
   "mana": 20,
   "cooldown": 8,
@@ -3799,7 +3799,7 @@
  },
  "raiders_feast": {
   "name": "Raider's Feast",
-  "description": "Conjure 3 roasted mutton; eating one restores 6 health and grants Strength I for 45 seconds.",
+  "description": "Conjure 3 roasted mutton; eating one restores 6 health and grants Strength I for 20 seconds.",
   "school": "irons_spellbooks:nature",
   "mana": 25,
   "cooldown": 120,
@@ -3988,7 +3988,7 @@
  },
  "road_onigiri": {
   "name": "Road Onigiri",
-  "description": "Conjure 3 onigiri; eating one grants Speed I and Haste I for 60 seconds.",
+  "description": "Conjure 1 onigiri; eating it grants Speed I and Haste I for 60 seconds.",
   "school": "irons_spellbooks:nature",
   "mana": 30,
   "cooldown": 120,
@@ -4099,7 +4099,7 @@
   "description": "Throw a holy icicle that freezes the target 3 s and deals double damage to undead.",
   "school": "irons_spellbooks:holy",
   "mana": 25,
-  "cooldown": 8,
+  "cooldown": 14,
   "cast": "instant",
   "cast_time": 0
  },
@@ -4186,7 +4186,7 @@
  },
  "sea_shanty": {
   "name": "Sea Shanty",
-  "description": "For 15 s, you and allies within 10 blocks get +10% attack speed and Water Breathing.",
+  "description": "For 15 s, you and allies within 10 blocks get +20% attack speed and Water Breathing.",
   "school": "traveloptics:aqua",
   "mana": 35,
   "cooldown": 45,
@@ -4243,7 +4243,7 @@
   "description": "Summon two clones of yourself that fight with your held weapon instead of casting spells.",
   "school": "irons_spellbooks:ender",
   "mana": 60,
-  "cooldown": 60,
+  "cooldown": 90,
   "cast": "instant",
   "cast_time": 0
  },
@@ -4357,7 +4357,7 @@
  },
  "shiro_fracture": {
   "name": "Shiro Fracture",
-  "description": "Strike the looked-at target, freezing it 3 s and shattering 4 armour for 8 s.",
+  "description": "Strike the looked-at target, freezing it 1.5 s and shattering 4 armour for 8 s.",
   "school": "iss_magicfromtheeast:symmetry",
   "mana": 25,
   "cooldown": 10,
@@ -4602,7 +4602,7 @@
   "name": "Soul Harvest",
   "description": "A beam that pulls the soul out of an enemy: drains health and mana, and soulburns it.",
   "school": "iss_magicfromtheeast:spirit",
-  "mana": 6,
+  "mana": 30,
   "cooldown": 20,
   "cast": "continuous",
   "cast_time": 100
@@ -4951,7 +4951,7 @@
  },
  "stone_lotus_pose": {
   "name": "Stone Lotus Pose",
-  "description": "Root yourself for 6 seconds, gaining Resistance III and healing 1 heart per second.",
+  "description": "Root yourself for 6 seconds, gaining Resistance II and healing 1 heart per second.",
   "school": "irons_spellbooks:evocation",
   "mana": 35,
   "cooldown": 30,
@@ -5080,7 +5080,7 @@
   "description": "Chain lightning that jumps twice as far between frozen targets and freezes them solid.",
   "school": "irons_spellbooks:lightning",
   "mana": 45,
-  "cooldown": 12,
+  "cooldown": 20,
   "cast": "instant",
   "cast_time": 0
  },
@@ -5170,7 +5170,7 @@
   "description": "Ring a bell: enemies within 5 blocks are stunned for 2 seconds and pushed back 4 blocks.",
   "school": "irons_spellbooks:evocation",
   "mana": 35,
-  "cooldown": 18,
+  "cooldown": 25,
   "cast": "instant",
   "cast_time": 0
  },
@@ -5455,7 +5455,7 @@
  },
  "trophy_strength": {
   "name": "Trophy Strength",
-  "description": "Each undead or arthropod you killed in the last 60 s gives +2% damage (up to 20%) for 30 s.",
+  "description": "Each undead or arthropod you killed in the last 60 s gives +4% damage (up to 40%) for 30 s.",
   "school": "irons_spellbooks:blood",
   "mana": 25,
   "cooldown": 45,
@@ -5503,13 +5503,13 @@
   "description": "For 10 seconds, every hit you deal is copied onto the nearest other enemy within 5 blocks.",
   "school": "iss_magicfromtheeast:symmetry",
   "mana": 35,
-  "cooldown": 30,
+  "cooldown": 45,
   "cast": "instant",
   "cast_time": 0
  },
  "two_heavens": {
   "name": "Two Heavens",
-  "description": "For 10 seconds, each melee hit strikes twice, the second strike dealing 50% damage.",
+  "description": "For 10 seconds, each melee hit strikes twice, the second strike dealing 30% damage.",
   "school": "irons_spellbooks:evocation",
   "mana": 40,
   "cooldown": 35,
@@ -5548,15 +5548,15 @@
   "description": "Pull all enemies within 6 blocks toward you and freeze them for 3 s.",
   "school": "traveloptics:aqua",
   "mana": 35,
-  "cooldown": 18,
+  "cooldown": 25,
   "cast": "instant",
   "cast_time": 0
  },
  "underworld_gate": {
   "name": "Underworld Gate",
-  "description": "Open the Malevolent Shrine domain: everything within 12 blocks is rooted for 10 s (and can still be executed) and you turn invisible for 10 s.",
+  "description": "Open the Malevolent Shrine domain: everything within 12 blocks is rooted for 4 s (and can still be executed) and you turn invisible for 10 s.",
   "school": "iss_magicfromtheeast:spirit",
-  "mana": 40,
+  "mana": 80,
   "cooldown": 120,
   "cast": "instant",
   "cast_time": 0
@@ -5851,7 +5851,7 @@
  },
  "winter_pact": {
   "name": "Winter Pact",
-  "description": "Sacrifice 4 HP to gain Absorption II and make your hits freeze targets 2 s for 10 s.",
+  "description": "Sacrifice 4 HP to gain Absorption II and make your hits freeze targets 1 s (once per target every 3 s) for 10 s.",
   "school": "irons_spellbooks:blood",
   "mana": 30,
   "cooldown": 40,
