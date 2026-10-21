@@ -66,7 +66,7 @@ for a in g['animations']:
         channels.append({'node': c['target']['node'], 'path': paths[c['target']['path']], 'times': rnd(times),
                          'values': [x for v in read(s['output']) for x in rnd(v, 6)]})
     animations[a['name'][len(PREFIX):]] = {'length': round(length, 4), 'channels': channels}
-assert set(animations) == {'idle', 'cast', 'walk', 'sprint', 'crawl', 'transform', 'execute', 'attack1', 'attack2', 'attack3', 'jump_attack', 'dash_attack'}, sorted(animations)
+assert set(animations) == {'idle', 'cast', 'walk', 'sprint', 'crawl', 'transform', 'execute', 'attack1', 'attack2', 'attack3', 'jump_attack', 'dash_attack', 'dodge', 'block', 'parry', 'leap'}, sorted(animations)
 
 model = {'texture': 'mdvlcraft:textures/entity/haunted_lord.png', 'glow': 'mdvlcraft:textures/entity/haunted_lord_glowmask.png',
          'nodes': out_nodes, 'animations': animations}

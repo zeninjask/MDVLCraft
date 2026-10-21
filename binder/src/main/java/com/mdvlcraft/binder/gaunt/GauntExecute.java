@@ -42,8 +42,8 @@ public final class GauntExecute {
     /** The neck snap's crack is this far into its sound (tools/haunted_lord/sounds.py). */
     private static final int SNAP_SOUND_LEAD = 6;
     private static final double REACH = 3.5;
-    /** The model's pixels in blocks (client/GauntRenderer draws it at 0.75 of the glTF's 1/16). */
-    private static final double PX = 0.75 / 16.0;
+    /** The model's pixels in blocks (client/GauntRenderer draws it at 0.975 of the glTF's 1/16). */
+    private static final double PX = 0.975 / 16.0;
     private static final SoundEvent NECK_SNAP = SoundEvent.createVariableRangeEvent(new ResourceLocation("mdvlcraft", "haunted_lord.neck_snap"));
 
     private static final class State {

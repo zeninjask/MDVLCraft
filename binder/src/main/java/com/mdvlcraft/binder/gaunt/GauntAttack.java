@@ -79,7 +79,7 @@ public final class GauntAttack {
     }
 
     public static void press(ServerPlayer player) {
-        if (!GauntForm.active(player) || GauntExecute.busy(player) || GauntLeap.held(player)) {
+        if (!GauntForm.active(player) || GauntExecute.busy(player) || GauntLeap.held(player) || GauntLeap.blocking(player)) {
             return;
         }
         State state = SERVER.computeIfAbsent(player.getUUID(), id -> new State());

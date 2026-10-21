@@ -95,6 +95,10 @@ public final class BinderNetwork {
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
         CHANNEL.registerMessage(
+            id++, GauntInputPacket.class, GauntInputPacket::encode, GauntInputPacket::decode, GauntInputPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+        CHANNEL.registerMessage(
             id++, GauntAttackPacket.class, GauntAttackPacket::encode, GauntAttackPacket::decode, GauntAttackPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
