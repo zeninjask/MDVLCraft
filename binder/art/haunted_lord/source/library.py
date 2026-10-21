@@ -689,6 +689,9 @@ LIBRARY = {
     'jump_attack': (jump_attack, 0.8, 40, False), 'dash_attack': (dash_attack, 1.2, 40, False),
     'dodge': (dodge, 0.6, 40, False), 'block': (block, 1.2, 15, True), 'parry': (parry, 0.6, 40, False), 'leap': (leap, 0.8, 15, True),
 }
+# the variants picked for the mod (built under their plain names: python3 library.py ../haunted_lord.animation.json all picked)
+PICKED = {'idle': 'b', 'cast': 'c', 'walk': 'c', 'sprint': 'b', 'crawl': 'a', 'transform': 'b', 'execute': 'b', 'attack1': 'b',
+          'attack2': 'b', 'attack3': 'c', 'jump_attack': 'a', 'dash_attack': 'a', 'dodge': 'b', 'block': 'a', 'parry': 'b', 'leap': 'a'}
 # variant b of sprint is a gallop with a different length; c a slower lope
 LENGTHS = {('sprint', 'b'): 0.55, ('sprint', 'c'): 0.65, ('walk', 'b'): 3.4}
 
@@ -732,6 +735,11 @@ if __name__ == '__main__':
     import sys, json
     names = sys.argv[2].split(',') if len(sys.argv) > 2 and sys.argv[2] != 'all' else list(LIBRARY)
     variants = sys.argv[3] if len(sys.argv) > 3 else 'abc'
-    data, rep = build(names, variants, sys.argv[4] if len(sys.argv) > 4 else None)
+    if variants == 'picked':
+        data = {'format_version': '1.8.0', 'animations': {}}; rep = {}
+        for name in names:
+            d, r = build([name], PICKED[name], 'plain'); data['animations'].update(d['animations']); rep.update(r)
+    else:
+        data, rep = build(names, variants, sys.argv[4] if len(sys.argv) > 4 else None)
     json.dump(data, open(sys.argv[1], 'w'), indent=1)
     for k, v in rep.items(): print(k, v)

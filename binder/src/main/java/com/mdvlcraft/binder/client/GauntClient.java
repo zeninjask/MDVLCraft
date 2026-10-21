@@ -70,8 +70,8 @@ public final class GauntClient {
     /** Each player's animation last tick in the form, to find the sound cues passed since. */
     private static final Map<Integer, GauntRenderer.Pick> LAST_PICK = new HashMap<>();
     private static final Map<Integer, Long> NEXT_SCREECH = new HashMap<>();
-    /** The Haunted Lord's own cracks as it unfolds (ticks of entering: SNAP_TICKS + its transform's snaps, art/haunted_lord/source/anims.py). */
-    private static final int[] EMERGE_SNAPS = {70, 74, 78, 81, 84, 86, 89};
+    /** The Haunted Lord's own cracks as it unfolds (ticks of entering: SNAP_TICKS + its transform's snaps, art/haunted_lord/source/library.py transform b). */
+    private static final int[] EMERGE_SNAPS = {69, 70, 71, 73, 74, 76, 78};
     /** Where in each animation (seconds) its sound plays: idle and cast at the start of the breath, walk at each foot
      * contact, crawl as each hand is planted. */
     private static final Map<String, float[]> CUES = Map.of("idle", new float[] {0.0F}, "cast", new float[] {0.0F},
@@ -429,7 +429,8 @@ public final class GauntClient {
     /** The local player mid-leap touching a wall or a ceiling clings to it, and crawling (sneaking) into a wall climbs onto
      * it; clinging, they move along the surface (crawlSurface); charging holds them still. */
     private static void touch(LocalPlayer player) {
-        Leap leap = LEAP.get(player.getId());
+        Seen seen = GauntForm.CLIENT.get(player.getId());
+        Leap leap = seen != null && seen.phase == FormPhase.ACTIVE ? LEAP.computeIfAbsent(player.getId(), id -> new Leap()) : LEAP.get(player.getId());
         if (leap == null) {
             lastVelocity = player.getDeltaMovement();
             return;

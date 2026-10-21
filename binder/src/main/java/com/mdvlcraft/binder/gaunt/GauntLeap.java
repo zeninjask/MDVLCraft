@@ -170,10 +170,10 @@ public final class GauntLeap {
 
     /** The client says the player touched `face` mid-leap (cling), or jumped off (null). */
     public static void cling(ServerPlayer player, @Nullable Direction face) {
-        State state = SERVER.get(player.getUUID());
-        if (state == null || !GauntForm.active(player)) {
+        if (!GauntForm.active(player)) {
             return;
         }
+        State state = state(player);
         if (face == null) {
             letGo(player, state);
         } else if ((state.leaping || state.cling != null || player.isShiftKeyDown()) && face != Direction.DOWN && against(player, face)) {
