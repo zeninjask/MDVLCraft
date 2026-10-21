@@ -1,0 +1,773 @@
+{
+ "MartialA": [
+  {
+   "origin": "warrior",
+   "title": "Warrior",
+   "layer": "martial",
+   "already": "More attack damage; shields slow you less.",
+   "abilities": [
+    {
+     "key": "war_cry",
+     "name": "War Cry",
+     "description": "Shout: you and allies within 8 blocks get Strength I for 8 s; enemies within 8 blocks get Weakness I for 5 s."
+    },
+    {
+     "key": "warrior_shield_bash",
+     "name": "Shield Bash",
+     "description": "Strike with your shield: the enemy in front takes 4 damage, is knocked back 3 blocks and is stunned for 1 s. Needs a shield."
+    },
+    {
+     "key": "challenge",
+     "name": "Challenge",
+     "description": "Taunt every enemy within 10 blocks to attack you for 6 s; you take 15% less damage while they do."
+    }
+   ]
+  },
+  {
+   "origin": "archer",
+   "title": "Archer",
+   "layer": "martial",
+   "already": "No arrow spread; bows slow you less.",
+   "abilities": [
+    {
+     "key": "arrow_rain",
+     "name": "Arrow Rain",
+     "description": "A volley of 10 arrows falls on the spot you look at (within 24 blocks), spread over 4 blocks."
+    },
+    {
+     "key": "pinning_shot",
+     "name": "Pinning Shot",
+     "description": "Your next arrow roots the target in place for 3 s."
+    },
+    {
+     "key": "quiver_refill",
+     "name": "Quiver Refill",
+     "description": "Conjure 16 arrows into your inventory (once every 2 minutes)."
+    }
+   ]
+  },
+  {
+   "origin": "rogue",
+   "title": "Rogue",
+   "layer": "martial",
+   "already": "Sneaky; Stealth while sneaking (quieter).",
+   "abilities": [
+    {
+     "key": "rogue_smoke_bomb",
+     "name": "Smoke Bomb",
+     "description": "Throw a smoke cloud (4 blocks, 6 s): enemies inside get Blindness and lose track of you; you get Invisibility while inside."
+    },
+    {
+     "key": "vanish",
+     "name": "Vanish",
+     "description": "Become invisible for 6 s and drop the aggro of every enemy within 16 blocks."
+    },
+    {
+     "key": "rogue_caltrops",
+     "name": "Caltrops",
+     "description": "Scatter caltrops in a 3-block area for 10 s: enemies walking over them take 2 damage and get Slowness II."
+    }
+   ]
+  },
+  {
+   "origin": "beastmaster",
+   "title": "Beastmaster",
+   "layer": "martial",
+   "already": "Tamed animals are stronger and share your potions.",
+   "abilities": [
+    {
+     "key": "mend_beast",
+     "name": "Mend Beast",
+     "description": "Heal every tamed animal within 12 blocks for 10 and give them Regeneration I for 10 s."
+    },
+    {
+     "key": "feral_bond",
+     "name": "Feral Bond",
+     "description": "For 12 s you share damage with your nearest tamed animal: each of you takes half of what either takes."
+    },
+    {
+     "key": "stampede",
+     "name": "Stampede",
+     "description": "3 summoned boars charge forward 12 blocks, knocking enemies aside and dealing 5 damage each."
+    }
+   ]
+  },
+  {
+   "origin": "cavalry",
+   "title": "Cavalry",
+   "layer": "martial",
+   "already": "Better tamed horses; no fall damage mounted.",
+   "abilities": [
+    {
+     "key": "mounted_charge",
+     "name": "Mounted Charge",
+     "description": "While riding: your mount surges forward for 3 s at double speed; enemies you run into take 6 damage and are knocked back."
+    },
+    {
+     "key": "trample",
+     "name": "Trample",
+     "description": "While riding: enemies within 2 blocks of your mount take 3 damage a second for 6 s."
+    },
+    {
+     "key": "unhorse",
+     "name": "Unhorse",
+     "description": "Knock the target off whatever it rides and stun it for 2 s."
+    }
+   ]
+  },
+  {
+   "origin": "duelist",
+   "title": "Duelist",
+   "layer": "martial",
+   "already": "+10% damage when the target is alone; parries restore stamina.",
+   "abilities": [
+    {
+     "key": "lunge",
+     "name": "Lunge",
+     "description": "Thrust forward 4 blocks along the ground, hitting the first enemy for +50% damage."
+    },
+    {
+     "key": "flourish",
+     "name": "Flourish",
+     "description": "A quick 3-hit combo on the enemy in front, each hit 60% of your attack damage."
+    },
+    {
+     "key": "riposte_stance",
+     "name": "Riposte Stance",
+     "description": "For 6 s, every melee hit you take is answered with an automatic counter for 75% of your attack damage."
+    }
+   ]
+  }
+ ],
+ "MartialB": [
+  {
+   "origin": "guardian",
+   "title": "Guardian",
+   "layer": "martial",
+   "already": "Guarding costs less stamina; nearby players take 5% less damage.",
+   "abilities": [
+    {
+     "key": "intercept",
+     "name": "Intercept",
+     "description": "Mark an ally for 10 s: 40% of the damage it takes is redirected to you."
+    },
+    {
+     "key": "shield_wall",
+     "name": "Shield Wall",
+     "description": "For 6 s, allies standing behind you take 30% less damage from the front."
+    },
+    {
+     "key": "taunting_shout",
+     "name": "Taunting Shout",
+     "description": "Every enemy within 10 blocks is forced to attack you for 5 s."
+    }
+   ]
+  },
+  {
+   "origin": "skirmisher",
+   "title": "Skirmisher",
+   "layer": "martial",
+   "already": "Speed on hit; cheaper dodges.",
+   "abilities": [
+    {
+     "key": "harrier",
+     "name": "Harrier",
+     "description": "For 10 s, each hit you land on a different enemy gives +5% speed (stacks 5 times)."
+    },
+    {
+     "key": "throwing_knives",
+     "name": "Throwing Knives",
+     "description": "Throw 3 knives in a fan, 4 damage each."
+    },
+    {
+     "key": "tripwire",
+     "name": "Tripwire",
+     "description": "Place an invisible tripwire trap: the first enemy to cross it is knocked down (stunned) for 2 s and slowed for 4 s."
+    }
+   ]
+  },
+  {
+   "origin": "crossbowman",
+   "title": "Crossbowman",
+   "layer": "martial",
+   "already": "Faster crossbow reload; bolts pierce one extra target.",
+   "abilities": [
+    {
+     "key": "volley_fire",
+     "name": "Volley Fire",
+     "description": "Fire 3 bolts at once in a narrow spread from your loaded crossbow."
+    },
+    {
+     "key": "crossbow_pavise",
+     "name": "Pavise",
+     "description": "Plant a wooden shield for 15 s that blocks projectiles coming from the front."
+    },
+    {
+     "key": "steady_aim",
+     "name": "Steady Aim",
+     "description": "Crouch still for 2 s: your next bolt crits for +75% damage."
+    }
+   ]
+  },
+  {
+   "origin": "spearman",
+   "title": "Spearman",
+   "layer": "martial",
+   "already": "+0.5 reach with spears; +10% charging damage.",
+   "abilities": [
+    {
+     "key": "skewer",
+     "name": "Skewer",
+     "description": "A long thrust that hits every enemy in a 5-block line in front of you."
+    },
+    {
+     "key": "sweep_the_legs",
+     "name": "Sweep the Legs",
+     "description": "Spin your spear: every enemy within 4 blocks is knocked down (stunned) for 1.5 s."
+    },
+    {
+     "key": "pike_wall",
+     "name": "Pike Wall",
+     "description": "A row of spikes rises from the ground in front of you for 8 s; enemies touching them take 3 damage a second."
+    }
+   ]
+  },
+  {
+   "origin": "monster_hunter",
+   "title": "Monster Hunter",
+   "layer": "martial",
+   "already": "+15% damage to undead and arthropods; extra drops.",
+   "abilities": [
+    {
+     "key": "silver_oil",
+     "name": "Silver Oil",
+     "description": "For 20 s your weapon deals +4 damage to undead and sets them on fire."
+    },
+    {
+     "key": "monster_lore",
+     "name": "Monster Lore",
+     "description": "Look at a creature: it glows for 15 s and takes 15% more damage from you and your allies."
+    },
+    {
+     "key": "trophy_strength",
+     "name": "Trophy Strength",
+     "description": "Each undead or arthropod you killed in the last 60 s gives +2% damage (up to 20%) for 30 s."
+    }
+   ]
+  },
+  {
+   "origin": "bounty_hunter",
+   "title": "Bounty Hunter",
+   "layer": "martial",
+   "already": "+10% damage to illagers and witches; captains drop emeralds.",
+   "abilities": [
+    {
+     "key": "bola",
+     "name": "Bola",
+     "description": "Throw a bola that wraps the target: it is rooted for 3 s and can't attack for 1.5 s."
+    },
+    {
+     "key": "tracker_s_instinct",
+     "name": "Tracker's Instinct",
+     "description": "Every illager, witch and pillager within 48 blocks glows for 20 s."
+    },
+    {
+     "key": "hired_muscle",
+     "name": "Hired Muscle",
+     "description": "Summon a vindicator mercenary that fights for you for 30 s."
+    }
+   ]
+  }
+ ],
+ "MartialC": [
+  {
+   "origin": "battle_mage",
+   "title": "Battle Mage",
+   "layer": "martial",
+   "already": "Spells cost 10% less mana within 3 s of a melee hit.",
+   "abilities": [
+    {
+     "key": "mana_burst",
+     "name": "Mana Burst",
+     "description": "Spend 30 mana: an arcane blast around you deals 6 damage and knocks enemies back 4 blocks."
+    },
+    {
+     "key": "runic_strike",
+     "name": "Runic Strike",
+     "description": "Your next melee hit releases a magic missile at the nearest other enemy."
+    },
+    {
+     "key": "overchannel",
+     "name": "Overchannel",
+     "description": "For 8 s, spells cost 30% more mana but deal 25% more damage."
+    }
+   ]
+  },
+  {
+   "origin": "sentinel",
+   "title": "Sentinel",
+   "layer": "martial",
+   "already": "Resistance I after standing still 2 s; projectiles deal 20% less.",
+   "abilities": [
+    {
+     "key": "watchtower",
+     "name": "Watchtower",
+     "description": "Plant yourself for 8 s: you can't move but gain Resistance II and +30% ranged damage."
+    },
+    {
+     "key": "arrow_deflection",
+     "name": "Arrow Deflection",
+     "description": "For 5 s, projectiles that hit you bounce back at their shooter."
+    },
+    {
+     "key": "lookout",
+     "name": "Lookout",
+     "description": "For 20 s, every enemy within 40 blocks glows and you get Night Vision."
+    }
+   ]
+  },
+  {
+   "origin": "paladin",
+   "title": "Paladin",
+   "layer": "martial",
+   "already": "Healing received +15%; +10% damage to undead.",
+   "abilities": [
+    {
+     "key": "holy_smite",
+     "name": "Holy Smite",
+     "description": "A light strikes the target for 6 damage (12 to undead) and blinds it for 2 s."
+    },
+    {
+     "key": "consecrate",
+     "name": "Consecrate",
+     "description": "Bless the ground in 4 blocks for 8 s: undead in it take 3 damage a second and burn."
+    },
+    {
+     "key": "divine_shield",
+     "name": "Divine Shield",
+     "description": "Become immune to damage for 2 s but deal 50% less damage for 6 s."
+    }
+   ]
+  },
+  {
+   "origin": "corsair",
+   "title": "Corsair",
+   "layer": "martial",
+   "already": "+15% damage in a boat or ship; can't drown for 15 s.",
+   "abilities": [
+    {
+     "key": "boarding_hook",
+     "name": "Boarding Hook",
+     "description": "Fire a grappling hook that pulls the target to you."
+    },
+    {
+     "key": "sea_shanty",
+     "name": "Sea Shanty",
+     "description": "For 15 s, you and allies within 10 blocks get +10% attack speed and Water Breathing."
+    },
+    {
+     "key": "riptide_slash",
+     "name": "Riptide Slash",
+     "description": "Swing a wave forward: enemies in a 5-block cone take 5 damage and are pushed back; stronger in water."
+    }
+   ]
+  },
+  {
+   "origin": "zealot",
+   "title": "Zealot",
+   "layer": "martial",
+   "already": "Stamina regenerates 10% faster below half health.",
+   "abilities": [
+    {
+     "key": "flagellate",
+     "name": "Flagellate",
+     "description": "Lose 4 health to gain Strength II and Speed I for 10 s."
+    },
+    {
+     "key": "martyrdom",
+     "name": "Martyrdom",
+     "description": "For 10 s, damage you take heals every ally within 8 blocks for half of it."
+    },
+    {
+     "key": "burning_faith",
+     "name": "Burning Faith",
+     "description": "Your melee hits set targets on fire for 6 s; you get Fire Resistance while it lasts (12 s)."
+    }
+   ]
+  }
+ ],
+ "JobA": [
+  {
+   "origin": "blacksmith",
+   "title": "Blacksmith",
+   "layer": "job",
+   "already": "Better-quality crafted equipment; cheaper repairs.",
+   "abilities": [
+    {
+     "key": "temper_armour",
+     "name": "Temper Armour",
+     "description": "You and an ally you look at gain +3 armour and +1 toughness for 30 s."
+    },
+    {
+     "key": "hammer_strike",
+     "name": "Hammer Strike",
+     "description": "A heavy blow for +50% damage that shreds 3 armour from the target for 8 s."
+    },
+    {
+     "key": "forge_heat",
+     "name": "Forge Heat",
+     "description": "Smelt every raw ore in your inventory instantly (once every 5 minutes)."
+    }
+   ]
+  },
+  {
+   "origin": "cleric",
+   "title": "Cleric",
+   "layer": "job",
+   "already": "Stronger potions; better enchanting.",
+   "abilities": [
+    {
+     "key": "purify",
+     "name": "Purify",
+     "description": "Clear every negative effect from you and allies within 6 blocks."
+    },
+    {
+     "key": "sanctuary",
+     "name": "Sanctuary",
+     "description": "A 5-block circle for 10 s: allies in it heal 1 health a second; enemies can't hit from inside it."
+    },
+    {
+     "key": "turn_undead",
+     "name": "Turn Undead",
+     "description": "Undead within 10 blocks flee from you for 6 s and get Weakness II."
+    }
+   ]
+  },
+  {
+   "origin": "cook",
+   "title": "Cook",
+   "layer": "job",
+   "already": "Better crafted food; more smoker XP.",
+   "abilities": [
+    {
+     "key": "feast",
+     "name": "Feast",
+     "description": "Lay out a feast for 20 s: players who stand by it regenerate health and hunger and get Strength I for 2 minutes."
+    },
+    {
+     "key": "iron_stomach",
+     "name": "Iron Stomach",
+     "description": "Cure poison, hunger and nausea and become immune to them for 60 s."
+    },
+    {
+     "key": "spice_mix",
+     "name": "Spice Mix",
+     "description": "For 5 minutes, every food you eat also gives Speed I and Regeneration I for 10 s."
+    }
+   ]
+  },
+  {
+   "origin": "farmer",
+   "title": "Farmer",
+   "layer": "job",
+   "already": "More crop drops; better bone meal.",
+   "abilities": [
+    {
+     "key": "bountiful_harvest",
+     "name": "Bountiful Harvest",
+     "description": "Every crop within 6 blocks grows one stage instantly."
+    },
+    {
+     "key": "scarecrow",
+     "name": "Scarecrow",
+     "description": "Place a scarecrow for 60 s: hostile mobs within 8 blocks get Slowness I and target it first."
+    },
+    {
+     "key": "compost",
+     "name": "Compost",
+     "description": "Turn rotten flesh, seeds and saplings in your inventory into bone meal."
+    }
+   ]
+  },
+  {
+   "origin": "merchant",
+   "title": "Merchant",
+   "layer": "job",
+   "already": "Villager trades restock more often.",
+   "abilities": [
+    {
+     "key": "coin_toss",
+     "name": "Coin Toss",
+     "description": "Throw a gold coin: on heads you get Luck II and Speed I for 20 s; on tails the target takes 6 damage."
+    },
+    {
+     "key": "bribe",
+     "name": "Bribe",
+     "description": "Spend 3 emeralds: the hostile mob you look at stops attacking you for 15 s."
+    },
+    {
+     "key": "caravan_guard",
+     "name": "Caravan Guard",
+     "description": "Summon an iron-golem guard for 30 s (once every 5 minutes)."
+    }
+   ]
+  },
+  {
+   "origin": "rancher",
+   "title": "Rancher",
+   "layer": "job",
+   "already": "Twin breeding; more animal loot.",
+   "abilities": [
+    {
+     "key": "herd_call",
+     "name": "Herd Call",
+     "description": "Every farm animal within 24 blocks walks to you."
+    },
+    {
+     "key": "fatten_up",
+     "name": "Fatten Up",
+     "description": "Baby animals within 8 blocks grow up instantly."
+    },
+    {
+     "key": "branding_iron",
+     "name": "Branding Iron",
+     "description": "Brand a creature: it glows for 60 s and drops double loot if you kill it."
+    }
+   ]
+  }
+ ],
+ "JobB": [
+  {
+   "origin": "miner",
+   "title": "Miner",
+   "layer": "job",
+   "already": "Faster stone mining; no mining exhaustion.",
+   "abilities": [
+    {
+     "key": "hard_hat",
+     "name": "Hard Hat",
+     "description": "For 30 s: Resistance I and immunity to damage from falling blocks and suffocation."
+    },
+    {
+     "key": "miner_s_lamp",
+     "name": "Miner's Lamp",
+     "description": "Night Vision for 3 minutes and a 5-block light that follows you."
+    },
+    {
+     "key": "pickaxe_strike",
+     "name": "Pickaxe Strike",
+     "description": "A heavy blow with a pickaxe for +60% damage that shreds 4 armour for 8 s."
+    }
+   ]
+  },
+  {
+   "origin": "lumberjack",
+   "title": "Lumberjack",
+   "layer": "job",
+   "already": "Fells whole trees; more planks from logs.",
+   "abilities": [
+    {
+     "key": "log_throw",
+     "name": "Log Throw",
+     "description": "Hurl a log that rolls 10 blocks forward, hitting enemies for 6 damage and knocking them back."
+    },
+    {
+     "key": "woodsman_s_grit",
+     "name": "Woodsman's Grit",
+     "description": "For 15 s: Resistance I and Haste II."
+    },
+    {
+     "key": "forest_friend",
+     "name": "Forest Friend",
+     "description": "In a forest biome: Regeneration I and +10% speed for 30 s."
+    }
+   ]
+  },
+  {
+   "origin": "explorer",
+   "title": "Explorer",
+   "layer": "job",
+   "already": "Explorer kit; no sprint exhaustion; Trailblazer.",
+   "abilities": [
+    {
+     "key": "second_wind",
+     "name": "Second Wind",
+     "description": "Restore all your stamina and hunger once every 5 minutes."
+    },
+    {
+     "key": "pathfinder",
+     "name": "Pathfinder",
+     "description": "For 30 s: +20% speed and step up full blocks without jumping."
+    },
+    {
+     "key": "grappling_rope",
+     "name": "Grappling Rope",
+     "description": "Fire a rope that pulls the creature you hit toward you (no pulling yourself)."
+    }
+   ]
+  },
+  {
+   "origin": "alchemist",
+   "title": "Alchemist",
+   "layer": "job",
+   "already": "Helpful effects last 25% longer; XP from brewing.",
+   "abilities": [
+    {
+     "key": "acid_flask",
+     "name": "Acid Flask",
+     "description": "Throw a flask that deals 4 damage and shreds 4 armour from everything in 3 blocks for 8 s."
+    },
+    {
+     "key": "elixir_of_vigor",
+     "name": "Elixir of Vigor",
+     "description": "Drink: Strength I, Speed I and Haste I for 30 s."
+    },
+    {
+     "key": "volatile_mix",
+     "name": "Volatile Mix",
+     "description": "Throw a flask that bursts into a random harmful cloud (poison, slowness, weakness or blindness) for 6 s."
+    }
+   ]
+  },
+  {
+   "origin": "sailor",
+   "title": "Sailor",
+   "layer": "job",
+   "already": "Breath lasts twice as long; ships you steer go 15% faster.",
+   "abilities": [
+    {
+     "key": "tailwind",
+     "name": "Tailwind",
+     "description": "For 30 s the boat or ship you ride goes 40% faster."
+    },
+    {
+     "key": "deep_breath",
+     "name": "Deep Breath",
+     "description": "Water Breathing and Dolphin's Grace for 60 s."
+    },
+    {
+     "key": "weather_eye",
+     "name": "Weather Eye",
+     "description": "See the weather for the next 10 minutes and get Conduit Power for 30 s."
+    }
+   ]
+  },
+  {
+   "origin": "fisher",
+   "title": "Fisher",
+   "layer": "job",
+   "already": "Fish bite sooner, catches can double; fish feeds more.",
+   "abilities": [
+    {
+     "key": "hook_and_reel",
+     "name": "Hook and Reel",
+     "description": "Cast a hook that pulls the creature you hit 6 blocks toward you."
+    },
+    {
+     "key": "chum_the_water",
+     "name": "Chum the Water",
+     "description": "For 60 s, fish bite twice as fast within 8 blocks of the spot you look at."
+    },
+    {
+     "key": "fisher_net_throw",
+     "name": "Net Throw",
+     "description": "Throw a net that roots every creature in a 3-block area for 3 s."
+    }
+   ]
+  }
+ ],
+ "JobC": [
+  {
+   "origin": "bard",
+   "title": "Bard",
+   "layer": "job",
+   "already": "Goat horn rallies nearby players; +10% XP near other players.",
+   "abilities": [
+    {
+     "key": "song_of_courage",
+     "name": "Song of Courage",
+     "description": "For 20 s, allies within 10 blocks get +10% attack damage and +10% attack speed."
+    },
+    {
+     "key": "lullaby",
+     "name": "Lullaby",
+     "description": "Enemies within 8 blocks fall asleep (can't move or attack) for 4 s or until hit."
+    },
+    {
+     "key": "encore",
+     "name": "Encore",
+     "description": "Refresh the duration of every positive effect on allies within 10 blocks."
+    }
+   ]
+  },
+  {
+   "origin": "herbalist",
+   "title": "Herbalist",
+   "layer": "job",
+   "already": "More flowers when picking; suspicious stew lasts twice as long.",
+   "abilities": [
+    {
+     "key": "poultice",
+     "name": "Poultice",
+     "description": "Heal yourself or the ally you look at for 8 and stop bleeding and poison."
+    },
+    {
+     "key": "thornbush",
+     "name": "Thornbush",
+     "description": "A ring of thorny bushes grows around you for 10 s; enemies that touch it take 2 damage and are slowed."
+    },
+    {
+     "key": "healing_garden",
+     "name": "Healing Garden",
+     "description": "Flowers bloom in a 4-block circle for 12 s; allies in it get Regeneration I."
+    }
+   ]
+  },
+  {
+   "origin": "beekeeper",
+   "title": "Beekeeper",
+   "layer": "job",
+   "already": "Bees never sting you; extra honeycomb from hives.",
+   "abilities": [
+    {
+     "key": "swarm",
+     "name": "Swarm",
+     "description": "Release 4 bees that attack the enemy you look at for 15 s (they don't die after stinging)."
+    },
+    {
+     "key": "honey_trap",
+     "name": "Honey Trap",
+     "description": "Throw honey on the ground for 8 s: enemies in a 3-block patch are slowed heavily and can't jump."
+    },
+    {
+     "key": "stinger_shot",
+     "name": "Stinger Shot",
+     "description": "Fire 3 stingers that deal 3 damage and Poison I for 4 s each."
+    }
+   ]
+  },
+  {
+   "origin": "gravedigger",
+   "title": "Gravedigger",
+   "layer": "job",
+   "already": "Faster with shovels; extra undead loot; starts with a lantern.",
+   "abilities": [
+    {
+     "key": "shovel_slam",
+     "name": "Shovel Slam",
+     "description": "A wide shovel swing: enemies in a 3-block arc take +40% damage and are knocked down for 1 s."
+    },
+    {
+     "key": "rest_in_peace",
+     "name": "Rest in Peace",
+     "description": "Undead within 6 blocks are stunned for 3 s and take 6 damage."
+    },
+    {
+     "key": "mourner_s_veil",
+     "name": "Mourner's Veil",
+     "description": "For 15 s, undead ignore you unless you attack them."
+    }
+   ]
+  }
+ ]
+}

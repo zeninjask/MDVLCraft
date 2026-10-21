@@ -14,8 +14,11 @@ run(title, spell, caster='zombie', hand=None, targets=(('husk', dx, dz[, dy]), .
   level) or 'eyes' aims at t1, 'ground:<z>' at the
   ground <z> blocks ahead (a console tp aims from the feet, so look-based spells need this when the caster is higher).
 - caster: 'zombie' (NoAI, invulnerable) or 'stand' (armour stand: no attack damage attribute, so weapon spells throw).
-- Targets: 'husk' (undead, 252 health, NoAI), 'cow' (not undead, NoAI), 'pig' (has AI). Tags t1, t2, ...; the caster c.
-- Undead aren't affected by Regeneration or Poison; NoAI mobs still slide when knocked back.
+- Targets: 'husk' (undead, NoAI), 'cow' (not undead, NoAI), 'pig' (has AI, can't walk), 'stander' (zombie with AI that can't
+  walk). Tags t1, t2, ...; the caster c. Health depends on the pack's mob scaling (husk 240, cow and pig 200 in 2.0.24).
+- Undead aren't affected by Regeneration or Poison. NoAI mobs ignore motion (no knockback or pull shows) and never
+  update OnGround: use 'pig' or 'stander' to see a push, a pull or an on-the-ground check.
+- Aim level ('feet'): an 'eyes' aim from a console tp looks up and misses short targets.
 - Zones and summons outlive the caster for up to a second: reset() waits 1.5 s.
 """
 import re
@@ -33,6 +36,9 @@ def c(cmd, show=False):
     global _r
     if _r is None:
         _r = Rcon()
+    team = re.match(r'team join (\S+) (@e\S*)$', cmd)
+    if team:   # the pack's /team join takes players only; a mob joins through its Team tag
+        cmd = f'execute as {team[2]} run data merge entity @s {{Team:"{team[1]}"}}'
     out = _r.cmd(cmd)
     if show:
         print('  >', cmd, '\n   ', out[:400])
@@ -52,6 +58,8 @@ TARGETS = {
     'husk': 'minecraft:husk{Tags:["tst","t%d"],NoAI:1b,Silent:1b,PersistenceRequired:1b,Attributes:[{Name:"generic.max_health",Base:200}],Health:200f}',
     'pig': 'minecraft:pig{Tags:["tst","t%d"],Silent:1b,PersistenceRequired:1b,Attributes:[{Name:"generic.max_health",Base:200},{Name:"generic.movement_speed",Base:0}],Health:200f}',
     'cow': 'minecraft:cow{Tags:["tst","t%d"],NoAI:1b,Silent:1b,PersistenceRequired:1b,Attributes:[{Name:"generic.max_health",Base:200}],Health:200f}',
+    # a zombie with AI that can't walk: unlike NoAI mobs it can be pushed and pulled (NoAI mobs ignore motion in this pack)
+    'stander': 'minecraft:zombie{Tags:["tst","t%d"],Silent:1b,PersistenceRequired:1b,Attributes:[{Name:"generic.max_health",Base:200},{Name:"generic.movement_speed",Base:0},{Name:"generic.follow_range",Base:0}],Health:200f}',
 }
 
 

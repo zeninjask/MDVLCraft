@@ -1,6 +1,6 @@
 import collections, importlib
 import v2_base as d
-for m in ['v2_ww', 'v2_wm', 'v2_wr', 'v2_mm', 'v2_mr', 'v2_rr', 'v2_spirit', 'v2_new']:
+for m in ['v2_ww', 'v2_wm', 'v2_wr', 'v2_mm', 'v2_mr', 'v2_rr', 'v2_spirit', 'v2_new', 'v2_origin']:
     try: importlib.import_module(m)
     except ModuleNotFoundError: pass
 EFC = {

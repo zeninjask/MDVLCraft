@@ -72,5 +72,7 @@ if '-u' in sys.argv:
 print('EF used', len(efuse), 'of', len(efpool))
 if '-e' in sys.argv:
     for k in sorted(efpool): print('  ', k, len(efuse.get(k, [])))
-print('mods used', len(moduse), 'of', len(d.MOD), 'unused mods', [m for m in d.MOD if m not in moduse])
+import v2_origin  # the Origin tab's abilities live in no vocation
+print('mods used', len(moduse), 'of', len(d.MOD) - len(v2_origin.ORIGIN_KEYS), 'unused mods',
+      [m for m in d.MOD if m not in moduse and m not in v2_origin.ORIGIN_KEYS])
 print('sizes', sorted(len(r['skills']) for r in d.VOC.values())[:5], 'base', {a: len(s) for a, (s, _) in d.BASE.items()})

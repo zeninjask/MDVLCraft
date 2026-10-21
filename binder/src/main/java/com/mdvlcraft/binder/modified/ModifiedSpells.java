@@ -82,6 +82,13 @@ public final class ModifiedSpells {
         Wave2Brute.all().forEach(spell -> all.add(() -> spell));
         Wave2Assassin.all().forEach(spell -> all.add(() -> spell));
         Wave2Samurai.all().forEach(spell -> all.add(() -> spell));
+        // the Origin tab (one group per file, tools/origins/groups.json)
+        OriginMartialA.all().forEach(spell -> all.add(() -> spell));
+        OriginMartialB.all().forEach(spell -> all.add(() -> spell));
+        OriginMartialC.all().forEach(spell -> all.add(() -> spell));
+        OriginJobA.all().forEach(spell -> all.add(() -> spell));
+        OriginJobB.all().forEach(spell -> all.add(() -> spell));
+        OriginJobC.all().forEach(spell -> all.add(() -> spell));
         FormSpells.all().forEach(form -> all.add(() -> form));
         BoonSpells.all().forEach(boon -> all.add(() -> boon));
         SpiritSummons.all().forEach(summon -> all.add(() -> summon));
