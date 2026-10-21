@@ -226,7 +226,7 @@ BASE = {
                 ['wom:arrow_tenacity', 'wom:critical_knowledge', 'cdmoveset:bstep', 'epicfight:revelation']),
     'wanderer': (['I:summon_horse', 'I:gluttony', 'B:arcane_sustenance', 'I:pocket_dimension', 'W:almighty_push', 'C:hollow_bite',
                   'E:immunity_aura', 'I:teleport', 'T:blink', 'W:wind_jump', 'W:tailwind', 'I:touch_dig',
-                  'I:spectral_hammer', 'X:conjure_refreshment', 'R:starlight', 'B:bird_strike', 'B:blind_investment',
+                  'X:conjure_refreshment', 'R:starlight', 'B:bird_strike', 'B:blind_investment',
                   'B:controlled_collapse', 'B:silent_appraisal', 'E:esoteric_step', 'Z:campfire', 'Z:pack_mule'],
                  ['epicfight:adrenaline_fiend', 'wom:proximity_exploiter', 'wom:natural_sprinter', 'epicfight:phantom_ascent']),
 }
