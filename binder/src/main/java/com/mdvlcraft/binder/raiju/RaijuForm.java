@@ -38,7 +38,7 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
 
 /**
  * Yakusanoikazuchi (modified/Yakusanoikazuchi): the player takes the thunder god's shape (client/RaijuClient draws them
- * with its skin and six darkened Vatansever swords circling them, each in its own charged swirl) until they cast it again
+ * with its skin and six darkened Vatansever swords circling them, sparking now and then) until they cast it again
  * (the form's wheel holds only Transform Back, ability/GauntAbility.RAIJU_WHEEL). In the form: no other spells, abilities
  * or Epic Fight skills (attacks and guarding still work); the dodge key does Thunder Step (modified/StrikeSpells.ThunderStep) to the locked-on enemy (where
  * the player looks without one), every DODGE_COOLDOWN ticks at most; a melee hit has a 1 in 6 chance to drop a short

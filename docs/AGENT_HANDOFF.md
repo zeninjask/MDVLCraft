@@ -89,13 +89,13 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 - **Yakusanoikazuchi (on `bane-agent`, built and run on the test server/client):** a Modified ability (lightning, 80 mana,
   no cooldown, in no tree) granted only by wearing **Raijū's Fang** (`raiju/RaijuFang`, necklace, no recipe, shows in JEI).
   `raiju/RaijuForm`, `network/RaijuFormPacket`, `client/RaijuClient`, `mixin/raiju/RaijuSkinMixin` (PlayerInfo skin and
-  slim model while in the form, texture `textures/entity/yakusanoikazuchi.png`). Six darkened Vatansever blades
-  (`models/item/raiju_sword`, cut from Sword Soaring's Vatansever texture) circle the player, each outlined in a charged
-  energy swirl. Wheel = Transform Back only (`GauntAbility.RAIJU_REVERT`). Epic Fight skills other than basic attack,
+  slim model while in the form, texture `textures/entity/yakusanoikazuchi.png`). Six darkened Haran Geppaku Futsu blades
+  (`models/item/raiju_sword`, cube model from `art/raiju/haran_geppaku_futsu.gltf` via `tools/raiju/convert_sword.py`)
+  circle the player tip down, flats out, each throwing off an Electric Spark now and then. Wheel = Transform Back only (`GauntAbility.RAIJU_REVERT`). Epic Fight skills other than basic attack,
   guard and wake-up are refused; the dodge key (needs Epic Fight mode and a dodge skill equipped) does Thunder Step to the
   locked-on target (beside it), or where the player looks, 2 s cooldown (`StrikeSpells.ThunderStep.step`, split out).
   Melee hits: 1 in 6 drops a 2 s Somakespells Lightning Field tagged `mdvlcraft_raiju_field` that stuns what it shocks
-  (`combat/LightningFieldKnockback`). Checked in game: grant via the fang, skin, blades and swirl, wheel, lock-on step
+  (`combat/LightningFieldKnockback`). Checked in game: grant via the fang, skin, blades, wheel, lock-on step
   (lands beside the target, damages), swings land, a stun field spawned and lasted 2 s. Not checked: the stun itself on a
   moving mob, multiplayer viewers.
 - **Gaunt Vessel (on `bane-agent`, not compiled or tested; for liam-agent to merge, build and test):** a Modified ability
