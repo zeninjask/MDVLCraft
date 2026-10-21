@@ -256,4 +256,14 @@ BUILT = {
     'void_yokai': spell(ELDRITCH, 50, 90, 'long', 30),
     'spirit_hawk': spell(SPIRIT, 40, 90, 'long', 20),
     'spirit_steed': spell(SPIRIT, 30, 120, 'long', 20),
+    # wave 2 (the rest are in built_<group>.py)
+    'underworld_gate': spell(SPIRIT, 40, 120),
 }
+
+# The second wave (two abilities per vocation, tools/vocations/v2_new.py) is built group by group: each
+# tools/vocations/built_<group>.py holds PART = {key: spell(...)} for its group's abilities.
+import glob as _glob, importlib as _importlib, os as _os  # noqa: E402
+for _f in sorted(_glob.glob(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)), 'built_*.py'))):
+    _part = _importlib.import_module(_os.path.basename(_f)[:-3]).PART
+    assert not set(_part) & set(BUILT), sorted(set(_part) & set(BUILT))
+    BUILT.update(_part)

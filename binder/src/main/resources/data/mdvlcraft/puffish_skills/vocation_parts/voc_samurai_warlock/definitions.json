@@ -33,165 +33,6 @@
   "extra_description": "King of Curses vocation bonus (Samurai + Warlock)."
  },
  "voc__1": {
-  "title": "Malevolent Shrine",
-  "description": "Unlocks Malevolent Shrine (10 mana a second, 120 s cooldown) on the ability wheel",
-  "extra_description": "Closed domain: a black barrier dome; only what is inside is cut, and only while you hold the cast key on the shrine. Drains 10 mana a second and closes when you run out; sneak and cast to close it. Its 120 s cooldown starts when you open it. King of Curses vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_malevolent_shrine.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:malevolent_shrine",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__2": {
-  "title": "Malevolent Shrine: Open",
-  "description": "Unlocks Malevolent Shrine: Open (10 mana a second, 120 s cooldown) on the ability wheel",
-  "extra_description": "Open domain: no barrier, cuts everything within 45 blocks while you hold the cast key on the shrine. Drains 10 mana a second and closes when you run out; sneak and cast to close it. Its 120 s cooldown starts when you open it. King of Curses vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_open_malevolent_shrine.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:open_malevolent_shrine",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__3": {
-  "title": "Stance: Void Form",
-  "description": "Unlocks Stance: Void Form (15 mana, 3 s cooldown) on the ability wheel",
-  "extra_description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes weaken and pull the foe in. King of Curses vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_stance_eldritch.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:stance_eldritch",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__4": {
-  "title": "Dismantle",
-  "description": "Unlocks Dismantle (14 mana, 1 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_dismantle.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:dismantle",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0,
-  "extra_description": "King of Curses vocation skill."
- },
- "voc__5": {
-  "title": "Lethal Focus",
-  "description": "Teaches Lethal Focus, an Epic Fight Passive skill: Every hit raises your damage up to a cap; after 2 s without acting the bonus drains quickly. Equip it in the Combat Skills box of the abilities screen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_lethal_focus.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:epicfight_skill",
-    "data": {
-     "skill": "wom:lethal_focus"
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0,
-  "extra_description": "King of Curses vocation skill."
- },
- "voc__6": {
   "title": "King of Curses: Eldritch Spell Power",
   "description": "+15% Eldritch Spell Power",
   "icon": {
@@ -224,7 +65,7 @@
   "size": 1.5,
   "extra_description": "King of Curses vocation bonus (Samurai + Warlock)."
  },
- "voc__7": {
+ "voc__2": {
   "title": "King of Curses: Technique Mana Cost",
   "description": "-15% Technique Mana Cost Reduction",
   "icon": {
@@ -256,5 +97,228 @@
   },
   "size": 1.5,
   "extra_description": "King of Curses vocation bonus (Samurai + Warlock)."
+ },
+ "voc__3": {
+  "title": "Malevolent Shrine",
+  "description": "Unlocks Malevolent Shrine (10 mana a second, 120 s cooldown) on the ability wheel",
+  "extra_description": "Closed domain: a black barrier dome; only what is inside is cut, and only while you hold the cast key on the shrine. Drains 10 mana a second and closes when you run out; sneak and cast to close it. Its 120 s cooldown starts when you open it. King of Curses vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_malevolent_shrine.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:malevolent_shrine",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "Malevolent Shrine: Open",
+  "description": "Unlocks Malevolent Shrine: Open (10 mana a second, 120 s cooldown) on the ability wheel",
+  "extra_description": "Open domain: no barrier, cuts everything within 45 blocks while you hold the cast key on the shrine. Drains 10 mana a second and closes when you run out; sneak and cast to close it. Its 120 s cooldown starts when you open it. King of Curses vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_open_malevolent_shrine.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:open_malevolent_shrine",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__5": {
+  "title": "Stance: Void Form",
+  "description": "Unlocks Stance: Void Form (15 mana, 3 s cooldown) on the ability wheel",
+  "extra_description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes weaken and pull the foe in. King of Curses vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_stance_eldritch.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:stance_eldritch",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__6": {
+  "title": "Dismantle",
+  "description": "Unlocks Dismantle (14 mana, 1 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_dismantle.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:dismantle",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0,
+  "extra_description": "King of Curses vocation skill."
+ },
+ "voc__7": {
+  "title": "Cleaving Hex",
+  "description": "Unlocks Cleaving Hex (30 mana, 20 s cooldown) on the ability wheel",
+  "extra_description": "Mark a target for 8 seconds; every hit on it also deals 3 damage to enemies within 3 blocks of it. King of Curses vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_cleaving_hex.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:cleaving_hex",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__8": {
+  "title": "Cursed Womb",
+  "description": "Unlocks Cursed Womb (50 mana, 60 s cooldown) on the ability wheel",
+  "extra_description": "Summon 4 allied endermites for 12 seconds whose bites inflict Wither I. King of Curses vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_cursed_womb.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:cursed_womb",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__9": {
+  "title": "Lethal Focus",
+  "description": "Teaches Lethal Focus, an Epic Fight Passive skill: Every hit raises your damage up to a cap; after 2 s without acting the bonus drains quickly. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_lethal_focus.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "wom:lethal_focus"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0,
+  "extra_description": "King of Curses vocation skill."
  }
 }

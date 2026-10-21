@@ -33,165 +33,6 @@
   "extra_description": "Ranger vocation bonus (Stalker + Wanderer)."
  },
  "voc__1": {
-  "title": "Tracking",
-  "description": "Unlocks Tracking (25 mana, 45 s cooldown) on the ability wheel",
-  "extra_description": "Every creature nearby glows and leaves a visible trail for a while. Ranger vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_tracking.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:tracking",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__2": {
-  "title": "Bear Trap",
-  "description": "Unlocks Bear Trap (20 mana, 15 s cooldown) on the ability wheel",
-  "extra_description": "Place a hidden bear trap that roots and bleeds the first enemy to step on it. Ranger vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_hunter_trap.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:hunter_trap",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__3": {
-  "title": "Steppe Horse",
-  "description": "Unlocks Steppe Horse (40 mana, 120 s cooldown) on the ability wheel",
-  "extra_description": "An armoured warhorse that is faster and can carry a rider into battle. Ranger vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_nomad_mount.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:nomad_mount",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__4": {
-  "title": "Evocation Fortitude",
-  "description": "Unlocks Evocation Fortitude (Level 3) (76 mana, 59.85 s cooldown) on the ability wheel",
-  "extra_description": "Applies Evocation Fortitude, granting Evocation Spell Power bonus. Ranger vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_evocation_fortitude.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "somakespells:evocation_fortitude",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__5": {
-  "title": "Dancing Blade",
-  "description": "Teaches Dancing Blade, an Epic Fight Passive skill: Every 4th hit that lands deals 80% more damage. Equip it in the Combat Skills box of the abilities screen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_dancing_blade.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:epicfight_skill",
-    "data": {
-     "skill": "wom:dancing_blade"
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0,
-  "extra_description": "Ranger vocation skill."
- },
- "voc__6": {
   "title": "Ranger: Pet & Mount Damage",
   "description": "+15% Pet & Mount Damage",
   "icon": {
@@ -224,7 +65,7 @@
   "size": 1.5,
   "extra_description": "Ranger vocation bonus (Stalker + Wanderer)."
  },
- "voc__7": {
+ "voc__2": {
   "title": "Ranger: Saturation from Food",
   "description": "+25% Saturation from Food",
   "icon": {
@@ -256,5 +97,228 @@
   },
   "size": 1.5,
   "extra_description": "Ranger vocation bonus (Stalker + Wanderer)."
+ },
+ "voc__3": {
+  "title": "Tracking",
+  "description": "Unlocks Tracking (25 mana, 45 s cooldown) on the ability wheel",
+  "extra_description": "Every creature nearby glows and leaves a visible trail for a while. Ranger vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_tracking.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:tracking",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "Bear Trap",
+  "description": "Unlocks Bear Trap (20 mana, 15 s cooldown) on the ability wheel",
+  "extra_description": "Place a hidden bear trap that roots and bleeds the first enemy to step on it. Ranger vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_hunter_trap.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:hunter_trap",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__5": {
+  "title": "Steppe Horse",
+  "description": "Unlocks Steppe Horse (40 mana, 120 s cooldown) on the ability wheel",
+  "extra_description": "An armoured warhorse that is faster and can carry a rider into battle. Ranger vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_nomad_mount.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:nomad_mount",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__6": {
+  "title": "Evocation Fortitude",
+  "description": "Unlocks Evocation Fortitude (Level 3) (76 mana, 59.85 s cooldown) on the ability wheel",
+  "extra_description": "Applies Evocation Fortitude, granting Evocation Spell Power bonus. Ranger vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_evocation_fortitude.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:evocation_fortitude",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__7": {
+  "title": "Lookout Perch",
+  "description": "Unlocks Lookout Perch (25 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Raise a 4-block dirt pillar under you for 10 s; while on it you deal +30% ranged damage. Ranger vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_lookout_perch.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:lookout_perch",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__8": {
+  "title": "Tracker Hound",
+  "description": "Unlocks Tracker Hound (30 mana, 40 s cooldown) on the ability wheel",
+  "extra_description": "Summon a wolf for 30 s whose bites apply glowing and slowness I for 5 s. Ranger vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_tracker_hound.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:tracker_hound",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__9": {
+  "title": "Dancing Blade",
+  "description": "Teaches Dancing Blade, an Epic Fight Passive skill: Every 4th hit that lands deals 80% more damage. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_dancing_blade.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "wom:dancing_blade"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0,
+  "extra_description": "Ranger vocation skill."
  }
 }

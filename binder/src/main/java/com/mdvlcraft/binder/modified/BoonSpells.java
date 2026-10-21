@@ -52,6 +52,7 @@ public final class BoonSpells {
     private BoonSpells() {
     }
 
+    /** A conjured food tagged with `kind`; eating it runs the boon (here, or in another file's LivingEntityUseItemEvent.Finish handler via kindOf). */
     static ItemStack boon(Item item, String kind, int count) {
         ItemStack stack = new ItemStack(item, count);
         stack.getOrCreateTag().putString(BOON, kind);
@@ -93,6 +94,12 @@ public final class BoonSpells {
         }
     }
 
+    /** The boon kind of a conjured food, or "" for any other item. */
+    static String kindOf(ItemStack stack) {
+        CompoundTag tag = stack.getTag();
+        return tag == null ? "" : tag.getString(BOON);
+    }
+
     /** What eating a boon food does. */
     @SubscribeEvent
     public static void onEaten(LivingEntityUseItemEvent.Finish event) {
@@ -112,7 +119,8 @@ public final class BoonSpells {
                 eater.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 1));
                 eater.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 200, 0));
             }
-            default -> throw new IllegalStateException("Unknown boon " + tag.getString(BOON));
+            default -> {   // another file's boon food (it handles its own)
+            }
         }
     }
 

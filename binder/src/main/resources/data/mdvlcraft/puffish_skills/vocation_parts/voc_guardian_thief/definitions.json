@@ -33,165 +33,6 @@
   "extra_description": "Vault Keeper vocation bonus (Guardian + Thief)."
  },
  "voc__1": {
-  "title": "Lockpick",
-  "description": "Unlocks Lockpick (15 mana, 10 s cooldown) on the ability wheel",
-  "extra_description": "Touch a locked chest or iron door to open it without the key. Vault Keeper vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_lockpick.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:lockpick",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__2": {
-  "title": "Invoice",
-  "description": "Unlocks Invoice (Level 3) (30 mana, 22.44 s cooldown) on the ability wheel",
-  "extra_description": "Marks a trap invoice that detonates when the victim casts or heals. Vault Keeper vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_invoice.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "cursed_school:invoice",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__3": {
-  "title": "Esoteric Shackles",
-  "description": "Unlocks Esoteric Shackles (Level 3) (45 mana, 67.33 s cooldown) on the ability wheel",
-  "extra_description": "After charging, bind non-allied entities in the targeted area; each shackle can be destroyed independently. Vault Keeper vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_esoteric_shackle.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "esoteric_spell:esoteric_shackle",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__4": {
-  "title": "Temporal Wall",
-  "description": "Unlocks Temporal Wall (Level 3) (26 mana, 23.94 s cooldown) on the ability wheel",
-  "extra_description": "Raises a translucent temporal barrier. Eligible hostile creatures and projectiles cannot simply cross it; the caster and permitted allies remain free. Higher levels widen and heighten the wall without making it opaque. Vault Keeper vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_chronomancy_temporal_wall.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "irons_chronomancy:temporal_wall",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__5": {
-  "title": "Manipulator",
-  "description": "Teaches Manipulator, an Epic Fight Passive skill: Blocking restores stamina: 60% of what you are missing on a perfect block, up to 30% on a normal one. Equip it in the Combat Skills box of the abilities screen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_manipulator.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:epicfight_skill",
-    "data": {
-     "skill": "wom:manipulator"
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0,
-  "extra_description": "Vault Keeper vocation skill."
- },
- "voc__6": {
   "title": "Vault Keeper: Armor",
   "description": "+2 Armor",
   "icon": {
@@ -224,7 +65,7 @@
   "size": 1.5,
   "extra_description": "Vault Keeper vocation bonus (Guardian + Thief)."
  },
- "voc__7": {
+ "voc__2": {
   "title": "Vault Keeper: Chance of a Double Drop",
   "description": "+10% Chance of a Double Drop",
   "icon": {
@@ -256,5 +97,228 @@
   },
   "size": 1.5,
   "extra_description": "Vault Keeper vocation bonus (Guardian + Thief)."
+ },
+ "voc__3": {
+  "title": "Lockpick",
+  "description": "Unlocks Lockpick (15 mana, 10 s cooldown) on the ability wheel",
+  "extra_description": "Touch a locked chest or iron door to open it without the key. Vault Keeper vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_lockpick.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:lockpick",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "Invoice",
+  "description": "Unlocks Invoice (Level 3) (30 mana, 22.44 s cooldown) on the ability wheel",
+  "extra_description": "Marks a trap invoice that detonates when the victim casts or heals. Vault Keeper vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_invoice.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:invoice",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__5": {
+  "title": "Esoteric Shackles",
+  "description": "Unlocks Esoteric Shackles (Level 3) (45 mana, 67.33 s cooldown) on the ability wheel",
+  "extra_description": "After charging, bind non-allied entities in the targeted area; each shackle can be destroyed independently. Vault Keeper vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_esoteric_shackle.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:esoteric_shackle",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__6": {
+  "title": "Temporal Wall",
+  "description": "Unlocks Temporal Wall (Level 3) (26 mana, 23.94 s cooldown) on the ability wheel",
+  "extra_description": "Raises a translucent temporal barrier. Eligible hostile creatures and projectiles cannot simply cross it; the caster and permitted allies remain free. Higher levels widen and heighten the wall without making it opaque. Vault Keeper vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_chronomancy_temporal_wall.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_chronomancy:temporal_wall",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__7": {
+  "title": "Shackle Strike",
+  "description": "Unlocks Shackle Strike (30 mana, 15 s cooldown) on the ability wheel",
+  "extra_description": "Strike the creature you look at, applying Slowness IV and Weakness I for 5 seconds and stealing one of its positive effects. Vault Keeper vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_shackle_strike.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:shackle_strike",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__8": {
+  "title": "Collateral",
+  "description": "Unlocks Collateral (25 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Mark a target for 15 seconds; if it dies it drops an extra loot roll and you gain Absorption II for 10 seconds. Vault Keeper vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_collateral.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:collateral",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__9": {
+  "title": "Manipulator",
+  "description": "Teaches Manipulator, an Epic Fight Passive skill: Blocking restores stamina: 60% of what you are missing on a perfect block, up to 30% on a normal one. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_manipulator.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "wom:manipulator"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0,
+  "extra_description": "Vault Keeper vocation skill."
  }
 }

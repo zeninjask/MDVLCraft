@@ -33,197 +33,6 @@
   "extra_description": "Tidal Priest vocation bonus (Water + Holy)."
  },
  "voc__1": {
-  "title": "Holy Water",
-  "description": "Unlocks Holy Water (30 mana, 8 s cooldown) on the ability wheel",
-  "extra_description": "A ball of blessed water that heals allies it splashes and burns undead. Tidal Priest vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_holy_water.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:holy_water",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__2": {
-  "title": "Baptism",
-  "description": "Unlocks Baptism (30 mana, 20 s cooldown) on the ability wheel",
-  "extra_description": "Cleanse that also gives the target Regeneration and water breathing. Tidal Priest vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_baptism.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:baptism",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__3": {
-  "title": "Mana Change Barrier",
-  "description": "Unlocks Mana Change Barrier (Level 3) (0 mana, 22.44 s cooldown) on the ability wheel",
-  "extra_description": "Creates a barrier that restores mana to allies in range instantly and every second thereafter. Tidal Priest vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_mana_change_barrier.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "esoteric_spell:mana_change_barrier",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__4": {
-  "title": "Rapid Change Barrier",
-  "description": "Unlocks Rapid Change Barrier (Level 1) (38 mana, 44.89 s cooldown) on the ability wheel",
-  "extra_description": "Creates a barrier where casting Mana Change Barrier boosts per-second mana restore by 20%, and casting Maximizer Change Barrier grants allies the Full Mana status. Tidal Priest vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_rapid_change_barrier.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "esoteric_spell:rapid_change_barrier",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__5": {
-  "title": "Maximizer Change Barrier",
-  "description": "Unlocks Maximizer Change Barrier (Level 3) (23 mana, 29.93 s cooldown) on the ability wheel",
-  "extra_description": "Instantly cancels your own Mana Change Barrier and injects the remaining mana to be restored into allies in range (cast inside a Rapid Change Barrier for Full Mana). Tidal Priest vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_maximizer_change_barrier.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "esoteric_spell:maximizer_change_barrier",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__6": {
-  "title": "Dodge Master",
-  "description": "Teaches Dodge Master, an Epic Fight Dodge skill: For a moment after casting, dodge out of any hit by instinct, chaining dodges; repeated casts cost double stamina. Equip it in the Combat Skills box of the abilities screen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_dodge_master.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:epicfight_skill",
-    "data": {
-     "skill": "wom:dodge_master"
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0,
-  "extra_description": "Tidal Priest vocation skill."
- },
- "voc__7": {
   "title": "Tidal Priest: Holy Spell Power",
   "description": "+15% Holy Spell Power",
   "icon": {
@@ -256,7 +65,7 @@
   "size": 1.5,
   "extra_description": "Tidal Priest vocation bonus (Water + Holy)."
  },
- "voc__8": {
+ "voc__2": {
   "title": "Tidal Priest: Mana Regen",
   "description": "+10% Mana Regen",
   "icon": {
@@ -288,5 +97,260 @@
   },
   "size": 1.5,
   "extra_description": "Tidal Priest vocation bonus (Water + Holy)."
+ },
+ "voc__3": {
+  "title": "Holy Water",
+  "description": "Unlocks Holy Water (30 mana, 8 s cooldown) on the ability wheel",
+  "extra_description": "A ball of blessed water that heals allies it splashes and burns undead. Tidal Priest vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_holy_water.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:holy_water",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "Baptism",
+  "description": "Unlocks Baptism (30 mana, 20 s cooldown) on the ability wheel",
+  "extra_description": "Cleanse that also gives the target Regeneration and water breathing. Tidal Priest vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_baptism.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:baptism",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__5": {
+  "title": "Mana Change Barrier",
+  "description": "Unlocks Mana Change Barrier (Level 3) (0 mana, 22.44 s cooldown) on the ability wheel",
+  "extra_description": "Creates a barrier that restores mana to allies in range instantly and every second thereafter. Tidal Priest vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_mana_change_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:mana_change_barrier",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__6": {
+  "title": "Rapid Change Barrier",
+  "description": "Unlocks Rapid Change Barrier (Level 1) (38 mana, 44.89 s cooldown) on the ability wheel",
+  "extra_description": "Creates a barrier where casting Mana Change Barrier boosts per-second mana restore by 20%, and casting Maximizer Change Barrier grants allies the Full Mana status. Tidal Priest vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_rapid_change_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:rapid_change_barrier",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__7": {
+  "title": "Maximizer Change Barrier",
+  "description": "Unlocks Maximizer Change Barrier (Level 3) (23 mana, 29.93 s cooldown) on the ability wheel",
+  "extra_description": "Instantly cancels your own Mana Change Barrier and injects the remaining mana to be restored into allies in range (cast inside a Rapid Change Barrier for Full Mana). Tidal Priest vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_maximizer_change_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:maximizer_change_barrier",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__8": {
+  "title": "Blessed Font",
+  "description": "Unlocks Blessed Font (40 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "A 5-block font pulses for 6 s, healing allies 2 HP every 2 s and extinguishing fire. Tidal Priest vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_blessed_font.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:blessed_font",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__9": {
+  "title": "Mercy Wave",
+  "description": "Unlocks Mercy Wave (30 mana, 16 s cooldown) on the ability wheel",
+  "extra_description": "A 6-block wave cone heals allies 4 HP and pushes enemies back 4 blocks. Tidal Priest vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_mercy_wave.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:mercy_wave",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__10": {
+  "title": "Dodge Master",
+  "description": "Teaches Dodge Master, an Epic Fight Dodge skill: For a moment after casting, dodge out of any hit by instinct, chaining dodges; repeated casts cost double stamina. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/wom_dodge_master.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "wom:dodge_master"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0,
+  "extra_description": "Tidal Priest vocation skill."
  }
 }

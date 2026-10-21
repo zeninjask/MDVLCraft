@@ -63,13 +63,25 @@ public final class ModifiedSpells {
         SmiteSpells.Drown::new, SmiteSpells.Geyser::new, SmiteSpells.SoulHarvest::new,
         BladeSpells.SoulRend::new, BladeSpells.PhantomDraw::new, BladeSpells.LeapOfFaith::new,
         // batch 6
-        SmiteSpells.BurningRoots::new
+        SmiteSpells.BurningRoots::new,
+        // wave 2 (two abilities per vocation): Underworld Gate here, the rest in Wave2<Group>.all() below
+        UnderworldGate::new
         ));
         BoltSpells.all().forEach(bolt -> all.add(() -> bolt));
         ConeSpells.all().forEach(cone -> all.add(() -> cone));
         VolleySpells.all().forEach(volley -> all.add(() -> volley));
         GroundSpells.all().forEach(ground -> all.add(() -> ground));
         WallSpells.all().forEach(wall -> all.add(() -> wall));
+        Wave2Necromancer.all().forEach(spell -> all.add(() -> spell));
+        Wave2Water.all().forEach(spell -> all.add(() -> spell));
+        Wave2Frost.all().forEach(spell -> all.add(() -> spell));
+        Wave2Monk.all().forEach(spell -> all.add(() -> spell));
+        Wave2Blaze.all().forEach(spell -> all.add(() -> spell));
+        Wave2Berserker.all().forEach(spell -> all.add(() -> spell));
+        Wave2Guardian.all().forEach(spell -> all.add(() -> spell));
+        Wave2Brute.all().forEach(spell -> all.add(() -> spell));
+        Wave2Assassin.all().forEach(spell -> all.add(() -> spell));
+        Wave2Samurai.all().forEach(spell -> all.add(() -> spell));
         FormSpells.all().forEach(form -> all.add(() -> form));
         BoonSpells.all().forEach(boon -> all.add(() -> boon));
         SpiritSummons.all().forEach(summon -> all.add(() -> summon));

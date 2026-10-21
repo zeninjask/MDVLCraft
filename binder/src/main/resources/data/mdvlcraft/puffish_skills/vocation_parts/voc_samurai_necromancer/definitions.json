@@ -33,165 +33,6 @@
   "extra_description": "Revenant Ronin vocation bonus (Samurai + Necromancer)."
  },
  "voc__1": {
-  "title": "Stance: Crimson Form",
-  "description": "Unlocks Stance: Crimson Form (15 mana, 3 s cooldown) on the ability wheel",
-  "extra_description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes deal 20% more and heal you for a tenth of it. Revenant Ronin vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_stance_blood.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "mdvlcraft:stance_blood",
-     "level": 1
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__2": {
-  "title": "Crimson Laceration",
-  "description": "Unlocks Crimson Laceration (Level 3) (26 mana, 14.96 s cooldown) on the ability wheel",
-  "extra_description": "Unleashes a crimson slash that flies forward, widening as it travels and cutting through everything in its path. It can be attached to your melee attacks by spending an extra cast. Revenant Ronin vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_csw_crimson_laceration.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "iss_csw:crimson_laceration",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__3": {
-  "title": "Revenant of Honor",
-  "description": "Unlocks Revenant of Honor (Level 2) (87 mana, 239.4 s cooldown) on the ability wheel",
-  "extra_description": "Summon a loyal Spirit Samurai to protect you from threats Revenant Ronin vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_revenant_of_honor.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "iss_magicfromtheeast:revenant_of_honor",
-     "level": 2
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__4": {
-  "title": "Bloodbound Blade",
-  "description": "Unlocks Bloodbound Blade (Level 3) (34 mana, 20.95 s cooldown) on the ability wheel",
-  "extra_description": "Hurls the sword in your casting hand. A successful hit crystallizes the victim's blood, rooting them in place. Revenant Ronin vocation skill.",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_bloodbound_blade.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:ability",
-    "data": {
-     "ability": "somakespells:bloodbound_blade",
-     "level": 3
-    }
-   }
-  ],
-  "cost": 1,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0
- },
- "voc__5": {
-  "title": "Strength I",
-  "description": "Teaches Strength I, an Epic Fight Passive skill: A perfect parry grants Strength I for 2 s. Equip it in the Combat Skills box of the abilities screen",
-  "icon": {
-   "type": "texture",
-   "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/skill/dodge_parry_reward_damage_boost1.png"
-   }
-  },
-  "rewards": [
-   {
-    "type": "mdvlcraft:epicfight_skill",
-    "data": {
-     "skill": "dodge_parry_reward:damage_boost1"
-    }
-   }
-  ],
-  "cost": 2,
-  "frame": {
-   "type": "texture",
-   "data": {
-    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
-    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
-    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
-    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
-    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
-   }
-  },
-  "size": 2.0,
-  "extra_description": "Revenant Ronin vocation skill."
- },
- "voc__6": {
   "title": "Revenant Ronin: Blood Spell Power",
   "description": "+15% Blood Spell Power",
   "icon": {
@@ -224,7 +65,7 @@
   "size": 1.5,
   "extra_description": "Revenant Ronin vocation bonus (Samurai + Necromancer)."
  },
- "voc__7": {
+ "voc__2": {
   "title": "Revenant Ronin: Life Steal",
   "description": "+4% Life Steal",
   "icon": {
@@ -256,5 +97,228 @@
   },
   "size": 1.5,
   "extra_description": "Revenant Ronin vocation bonus (Samurai + Necromancer)."
+ },
+ "voc__3": {
+  "title": "Stance: Crimson Form",
+  "description": "Unlocks Stance: Crimson Form (15 mana, 3 s cooldown) on the ability wheel",
+  "extra_description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes deal 20% more and heal you for a tenth of it. Revenant Ronin vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_stance_blood.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:stance_blood",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__4": {
+  "title": "Crimson Laceration",
+  "description": "Unlocks Crimson Laceration (Level 3) (26 mana, 14.96 s cooldown) on the ability wheel",
+  "extra_description": "Unleashes a crimson slash that flies forward, widening as it travels and cutting through everything in its path. It can be attached to your melee attacks by spending an extra cast. Revenant Ronin vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_csw_crimson_laceration.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_csw:crimson_laceration",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__5": {
+  "title": "Revenant of Honor",
+  "description": "Unlocks Revenant of Honor (Level 2) (87 mana, 239.4 s cooldown) on the ability wheel",
+  "extra_description": "Summon a loyal Spirit Samurai to protect you from threats Revenant Ronin vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_revenant_of_honor.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_magicfromtheeast:revenant_of_honor",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__6": {
+  "title": "Bloodbound Blade",
+  "description": "Unlocks Bloodbound Blade (Level 3) (34 mana, 20.95 s cooldown) on the ability wheel",
+  "extra_description": "Hurls the sword in your casting hand. A successful hit crystallizes the victim's blood, rooting them in place. Revenant Ronin vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_bloodbound_blade.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:bloodbound_blade",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__7": {
+  "title": "Fallen Retainer",
+  "description": "Unlocks Fallen Retainer (55 mana, 60 s cooldown) on the ability wheel",
+  "extra_description": "Summon an allied wither skeleton bodyguard for 20 seconds whose hits make enemies bleed. Revenant Ronin vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_fallen_retainer.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:fallen_retainer",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__8": {
+  "title": "Crimson Toll",
+  "description": "Unlocks Crimson Toll (30 mana, 12 s cooldown) on the ability wheel",
+  "extra_description": "Strike the creature you look at, dealing all its remaining bleed damage at once and healing you that much. Revenant Ronin vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_crimson_toll.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "mdvlcraft:crimson_toll",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0
+ },
+ "voc__9": {
+  "title": "Strength I",
+  "description": "Teaches Strength I, an Epic Fight Passive skill: A perfect parry grants Strength I for 2 s. Equip it in the Combat Skills box of the abilities screen",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/skill/dodge_parry_reward_damage_boost1.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:epicfight_skill",
+    "data": {
+     "skill": "dodge_parry_reward:damage_boost1"
+    }
+   }
+  ],
+  "cost": 2,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_challenge_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_challenge_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_challenge_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_challenge_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
+   }
+  },
+  "size": 2.0,
+  "extra_description": "Revenant Ronin vocation skill."
  }
 }
