@@ -37,7 +37,7 @@ T = {
     'snowfall_step': lambda: run('Snowfall Step', 'snowfall_step', targets=(('husk', 0, 10),), wait=1.0,
                                  after=('execute if block 0 -60 2 minecraft:powder_snow',)),
     # t1 and t2 (in the 5-block rain where the caster looks) have Slowness(0)
-    'rain_curtain': lambda: run('Rain Curtain', 'rain_curtain', targets=(('husk', 0, 8), ('cow', 2, 8)), face='feet'),
+    'rain_curtain': lambda: run('Rain Curtain', 'rain_curtain', targets=(('husk', 0, 8), ('cow', 2, 8)), face='ground:8'),
     # caster Pos ~6 blocks up (measured mid-leap), Slow Falling and Dolphin's Grace 100t
     'carp_leap': lambda: run('Carp Leap', 'carp_leap', targets=(('husk', 0, 4),), wait=0.7),
     # caster lands near (0, 6); t1 and t2 (near the landing) lose ~9 with lightning; t3 far away untouched

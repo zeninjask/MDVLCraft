@@ -10,7 +10,8 @@ A test file defines T = {name: lambda: run(...)} and ends with main(T). Usage: p
 
 run(title, spell, caster='zombie', hand=None, targets=(('husk', dx, dz[, dy]), ...), cy=0, face='eyes', wait=3.0,
     extra=(commands before the cast), after=(commands after the wait))
-- The caster stands at (0.5, -60 + cy, 0.5) facing target t1; face='eyes' or 'feet' aims at t1, 'ground:<z>' at the
+- The caster stands at (0.5, -60 + cy, 0.5) facing target t1; face='feet' (default; a level look at a target on the same
+  level) or 'eyes' aims at t1, 'ground:<z>' at the
   ground <z> blocks ahead (a console tp aims from the feet, so look-based spells need this when the caster is higher).
 - caster: 'zombie' (NoAI, invulnerable) or 'stand' (armour stand: no attack damage attribute, so weapon spells throw).
 - Targets: 'husk' (undead, 252 health, NoAI), 'cow' (not undead, NoAI), 'pig' (has AI). Tags t1, t2, ...; the caster c.
@@ -39,10 +40,7 @@ def c(cmd, show=False):
 
 
 def reset():
-    c('kill @e[tag=tst]')
-    for kind in ('arrow', 'trident', 'item', 'experience_orb'):
-        c(f'kill @e[type=minecraft:{kind}]')
-    c('kill @e[type=mdvlcraft:bolt]')
+    c('kill @e[type=!minecraft:player]')   # targets, summons, items, arrows and bolts left by the last test
     time.sleep(1.5)
 
 
@@ -73,9 +71,17 @@ def state(tag):
             f'      Effects: {_effects(c(f"data get entity @e[tag={tag},limit=1] ActiveEffects"))}')
 
 
-def run(title, spell, caster='zombie', hand=None, targets=(('husk', 0, 6),), cy=0, face='eyes', wait=3.0, extra=(), after=()):
+def arena():
+    """A clean, flat grass floor and empty air around the test spot (spells leave ice, fire and walls behind)."""
+    c('fill -24 -60 -24 24 -50 24 minecraft:air')
+    c('fill -24 -61 -24 24 -61 24 minecraft:grass_block')
+    c('kill @e[type=!minecraft:player]')
+
+
+def run(title, spell, caster='zombie', hand=None, targets=(('husk', 0, 6),), cy=0, face='feet', wait=3.0, extra=(), after=()):
     print(f'== {title} ({spell})')
     reset()
+    c('fill -12 -61 -12 12 -61 12 minecraft:grass_block')
     h = f',HandItems:[{{id:"{hand}",Count:1b}},{{}}]' if hand else ''
     for i, (kind, dx, dz, *dy) in enumerate(targets, 1):
         c('summon ' + (TARGETS[kind] % i).replace('{', f' {dx + 0.5} {Y + (dy[0] if dy else 0)} {dz + 0.5} {{', 1))
@@ -100,6 +106,7 @@ def run(title, spell, caster='zombie', hand=None, targets=(('husk', 0, 6),), cy=
 
 
 def main(tests):
+    arena()
     for name in sys.argv[1:] or list(tests):
         try:
             tests[name]()
