@@ -5,6 +5,7 @@ import com.mdvlcraft.binder.mixin.KeyMappingAccessor;
 import com.mdvlcraft.binder.mixin.OptionsAccessor;
 import com.mojang.blaze3d.platform.InputConstants;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Set;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
@@ -28,7 +29,10 @@ final class RemovedKeys {
         "key.ftbquests.quests",
         "key.ftbteams.open_gui",
         "key.accurateblockplacement.toggle",
-        "key.esoteric_spell.toggle_hidden_ring"
+        "key.esoteric_spell.toggle_hidden_ring",
+        "soundsbegone.config",   // B by default, the backpack key
+        "key.saveToolbarActivator",
+        "key.loadToolbarActivator"
     );
     /** Every key of these categories goes, except the KEEP ones. */
     private static final Set<String> CATEGORIES = Set.of(
@@ -45,11 +49,14 @@ final class RemovedKeys {
         "key.categories.ftbteams"
     );
     /** Every key whose name starts with one of these goes, except the KEEP ones. */
-    private static final Set<String> PREFIXES = Set.of("key.shouldersurfing.", "gui.xaero_", "key.betterlockon.", "key.jade.", "keybind.invmove.", "key.jei.", "key.simplytooltips.");
+    private static final Set<String> PREFIXES = Set.of("key.shouldersurfing.", "gui.xaero_", "key.betterlockon.", "key.jade.", "keybind.invmove.", "key.jei.", "key.simplytooltips.", "key.sword_soaring.", "key.efn.",
+        "key.p1nero_ec.");
     private static final Set<String> KEEP = Set.of(
         "key.push_to_talk", "key.shouldersurfing.swap_shoulder", "gui.xaero_open_map",
         "key.jei.showRecipe", "key.jei.closeRecipeGui", "key.jei.bookmark", "key.jei.toggleOverlay"
     );
+    /** The JEI keys that stay share this one category ("JEI"), in place of JEI's several. */
+    private static final String JEI = "key.categories.mdvlcraft.jei";
     private static KeyMapping[] pruned;
 
     private RemovedKeys() {
@@ -72,7 +79,18 @@ final class RemovedKeys {
             MDVLBinder.LOGGER.debug("Removed {} keys now opened from the MDVLCraft menu", options.keyMappings.length - kept.length);
         }
 
+        mergeJei(options.keyMappings);
         pruned = options.keyMappings;
+    }
+
+    private static void mergeJei(KeyMapping[] keys) {
+        Map<String, Integer> order = KeyMappingAccessor.mdvlcraft$categoryOrder();
+        for (KeyMapping key : keys) {
+            if (key.getName().startsWith("key.jei.") && !JEI.equals(key.getCategory())) {
+                order.putIfAbsent(JEI, order.get(key.getCategory()));
+                ((KeyMappingAccessor)key).mdvlcraft$setCategory(JEI);
+            }
+        }
     }
 
     static boolean removed(KeyMapping key) {
