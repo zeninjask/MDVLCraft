@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 
 /**
  * Gaunt Vessel: the caster's bones snap and they become the Haunted Lord (gaunt/GauntForm) until they cast it again (from
- * the form's wheel: Transform Back). No timer and no cooldown. Granted by wearing the Haunted Locket (gaunt/HauntedLocket).
+ * the form's wheel: Transform Back). No timer and no cooldown. Granted to no one: the Haunted Locket was removed.
  */
 public class GauntVessel extends ModifiedSpell {
     public GauntVessel() {

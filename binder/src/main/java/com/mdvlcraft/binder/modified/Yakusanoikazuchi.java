@@ -9,7 +9,7 @@ import net.minecraft.world.level.Level;
 
 /**
  * Yakusanoikazuchi: the caster takes the thunder god's shape (raiju/RaijuForm) until they cast it again (from the form's
- * wheel: Transform Back). No timer and no cooldown. Granted by wearing Raijū's Fang (raiju/RaijuFang).
+ * wheel: Transform Back). No timer and no cooldown. Granted to no one: Raijū's Fang was removed.
  */
 public class Yakusanoikazuchi extends ModifiedSpell {
     public Yakusanoikazuchi() {
