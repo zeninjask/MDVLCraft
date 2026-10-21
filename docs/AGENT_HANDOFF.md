@@ -237,6 +237,48 @@ Nothing is half-written; everything is pushed to `bane-agent` (branched from `se
 - Don't run Gradle while the test client is up. Client (about 9 GB RSS) plus Gradle got the client OOM-killed twice. Launch the client's `java` directly, not through portablemc: portablemc's Python process grew to 10 GB.
 - Armour stands have no attack-damage attribute, so weapon-scaled spells throw when an armour stand casts them (test-only).
 
+## For liam-agent: wave 2 (342 new vocation abilities) and the web trees on `seb-agent` (21 Oct 2026)
+
+`seb-agent` adds two new Modified abilities to every vocation (342, picked by the user from `docs/proposals/MDVLCraft-Proposed-Vocation-Abilities.pdf`), plus Underworld Gate for Shinigami, and lays every tree out as a Path of Exile style web. `planned_abilities.json` is still empty, so nothing is a placeholder. `main` (2.0.22) is already merged into `seb-agent`. That merge conflicted only on `README.md`, which was taken from `main`; the trees regenerate unchanged and the binder compiles.
+
+seb-agent built no jar or packs and did not push to `main`. Merge `seb-agent` into your branch, then build, bump the patch version, release and push to `main` as usual (CLAUDE.md release rules).
+
+**What changed:**
+- **Trees** (`binder/tools/generate_vocations.py`):
+  - The ring/box layout is replaced by a web. Each base ability sits in a mixed ring of 3-6 bonuses, and the clusters are scattered over a fan. Links are straight with evenly spaced bonuses (a spanning tree plus loops, at most 4 links per hub, no crossings), with an orbit arc round the root.
+  - Vocation abilities sit in the gap between the two bases, linked to base nodes 3-9 hops in.
+  - The output is the usual `puffish_skills` files, `modified_abilities.json` and lang.
+- **Design:**
+  - `tools/vocations/v2_new.py` has the 342 entries (`v2_all.py` imports it).
+  - `tools/vocations/built_<group>.py` has their spell configs; `built.py` merges every `built_*.py` and asserts there are no duplicate keys.
+  - `tools/vocations/wave2_groups.json` lists which group builds which abilities.
+- **Code** (all in `binder/src/main/java/com/mdvlcraft/binder/`):
+  - New in `modified/`: `Wave2Necromancer`, `Wave2Assassin`, `Wave2Samurai`, `Wave2Brute` (with jade), `Wave2Guardian`, `Wave2Berserker` (with spirit, thief and stalker), `Wave2Monk` (with warlock), `Wave2Blaze` (with druid), `Wave2Frost` (with lightning), `Wave2Water` (with holy).
+  - Also new in `modified/`: `Buffs`, timed states and marks kept in the entity's persistent data (`mdvlcraft_buffs`).
+  - Underworld Gate: `modified/UnderworldGate` and `ability/ShrineGate`. It opens Cursed Fate's open Malevolent Shrine for 10 s, roots enemies within 12 blocks for 10 s with an executable stun, and makes the caster invisible for 10 s.
+  - Small edits to existing files: `ModifiedSpells` (registration after the `Wave2Necromancer` line), `BoonSpells` (unknown food kinds are left to the wave-2 files) and `ability/TechniqueRunner` (`hold()`).
+- **Assets:**
+  - Icons: `gui/spell_icons/<key>.png` and `gui/icons18/ability/mdvlcraft_<key>.png`, drawn by `tools/dq9_icons.py`.
+  - Lang: `tools/vocations/lang_<group>.json`, merged into `en_us.json`.
+- **Guide:** `docs/MODIFIED_ABILITIES_GUIDE.md` covers how to build a new ability (rules, templates and where each part goes).
+
+**If generated files conflict** (`en_us.json`, `modified_abilities.json`, `puffish_skills/...`):
+1. Take either side.
+2. Run `python3 binder/tools/vocations/integrate_wave2.py`. It copies the icons, runs `check.py` and `generate_vocations.py`.
+3. Re-merge the `lang_<group>.json` files into `en_us.json` if their keys were lost.
+
+**Tested.** Server-side over RCON with `binder/tools/test_modified/` (see `harness.py` for the setup; one player must be online):
+- Every wave-2 ability has a case and was cast at least once. Every damage, zone, dash, cone, wall and summon case was checked against the expected result written above it in `test_<group>.py`.
+- All 24 conjured foods were cast by a player and the right items arrived (`test_foods.py`).
+- Bugs found and fixed:
+  - Temple Bell threw targets toward the caster (Epic Fight's stun); it now turns them first.
+  - Several test aims were wrong, not the spells: Soulflame Rift, Overgrowth Roots and Stormsurge Leap now pass.
+- Only partly checked:
+  - Buffs that change the caster's next arrow or bow shot (e.g. Quickdraw, Bramble Shot, Farshot): only the buff tag was confirmed. The shot itself needs a player with a bow.
+  - Sprint-only Wandering Storm, and the abilities that need a player (summons attacking for a player, foods eaten): checked as far as a mob caster allows.
+- Underworld Gate works for players only (it opens a Cursed Fate technique), so it was compile-checked but not run over RCON. Try it once in game.
+- Mob casters and NoAI targets sometimes slide a little during tests; it doesn't affect players. A NoAI zombie's leaps also land shorter than a player's.
+
 ## Unfinished work
 
 - 2.0.14 (from liam-agent): Spirit renamed Jade and a new Spirit archetype with 18 vocations (19 archetypes, 171 vocations; see step 13 in [`VOCATIONS_IMPLEMENTATION.md`](VOCATIONS_IMPLEMENTATION.md)). Its 33 new Modified abilities are placeholders still to build. Old Spirit players are moved to Jade on their first join (`skills/JadeRename`).

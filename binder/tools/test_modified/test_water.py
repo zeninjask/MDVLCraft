@@ -12,8 +12,8 @@ T = {
     # rain where the caster looks; t1 (wet beforehand) loses ~8 a second, t2 (dry) ~4 a second, ~3 pulses in the wait
     'galvanic_downpour': lambda: run('Galvanic Downpour', 'galvanic_downpour', targets=(('husk', 0, 8), ('husk', 2, 8)), face='feet',
                                      extra=(WET_T1,)),
-    # caster Pos ~10 blocks ahead (z ~10); t1 at the landing loses ~6; t2 at z=4 untouched
-    'stormsurge_leap': lambda: run('Stormsurge Leap', 'stormsurge_leap', targets=(('husk', 0, 10), ('husk', 3, 3)), wait=3.0),
+    # caster leaps ahead (a NoAI zombie lands ~z 7, a player ~10); t1 at the landing loses ~6; t2 off to the side untouched
+    'stormsurge_leap': lambda: run('Stormsurge Leap', 'stormsurge_leap', targets=(('husk', 0, 7), ('husk', 6, 1)), wait=3.0),
     # the caster (set to 10 HP, on fire) heals 2 every 2 s and its Fire goes to 0 (or -1)
     'blessed_font': lambda: run('Blessed Font', 'blessed_font', targets=(('husk', 0, 8),), wait=4.5,
                                 extra=(VULNERABLE, HURT_C, 'data merge entity @e[tag=c,limit=1] {Fire:200s}')),

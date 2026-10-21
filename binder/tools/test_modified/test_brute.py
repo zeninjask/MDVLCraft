@@ -57,8 +57,8 @@ T = {
     'abyssal_mutation': lambda: run('Abyssal Mutation', 'abyssal_mutation', targets=(('husk', 0, 5),), wait=0.5),
     # t1 and t2 on the line ahead read mid-air (Pos y ~ -57) with Slowness II 80t; t3 (off the line) stays on the ground
     'fault_line': lambda: run('Fault Line', 'fault_line', targets=(('husk', 0, 3), ('husk', 0, 7), ('husk', 4, 4)), face='feet', wait=0.4),
-    # t1 (where the caster looks) takes ~1 x 5 and Slowness V (amp 4); t2 (10 blocks from it) untouched
-    'overgrowth_roots': lambda: run('Overgrowth Roots', 'overgrowth_roots', targets=(('husk', 0, 6), ('husk', 0, 16)), face='feet', wait=5.5),
+    # t1 (where the caster looks) takes ~1 a second and Slowness V (amp 4, refreshed to 25t; read before the 5 s area ends); t2 (10 blocks from it) untouched
+    'overgrowth_roots': lambda: run('Overgrowth Roots', 'overgrowth_roots', targets=(('husk', 0, 6), ('husk', 0, 16)), face='ground:6', wait=2.5),
     # caster dashes ~6 toward +z; t1 on the path reads armour -1 (2 - 3), t2 off the path 2
     'jade_rampage': lambda: run('Jade Rampage', 'jade_rampage', targets=(('husk', 0, 3), ('husk', 6, 3)), face='feet', wait=1.0,
                                 after=(ARMOR, 'attribute @e[tag=t2,limit=1] minecraft:generic.armor get')),

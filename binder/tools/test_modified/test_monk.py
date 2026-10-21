@@ -85,7 +85,7 @@ T = {
                                         'execute as @e[type=minecraft:vex,limit=1] run tp @s 0.5 -60 3.5',
                                         'kill @e[type=minecraft:vex,limit=1,sort=nearest]')),
     # t1 (pig at 6, inside the rift where the caster looks) is pulled toward 0 0 8 and soulburns
-    'soulflame_rift': lambda: run('Soulflame Rift', 'soulflame_rift', targets=(('pig', 0, 6), ('husk', 2, 8)), face='feet', wait=3.0),
+    'soulflame_rift': lambda: run('Soulflame Rift', 'soulflame_rift', targets=(('pig', 0, 6), ('husk', 2, 8)), face='ground:7', wait=3.0),
     # t1 (cow) loses ~5, Wither(1) 120t, Blindness and Darkness 80t
     'abyssal_gaze': lambda: run('Abyssal Gaze', 'abyssal_gaze', targets=(('cow', 0, 8),), wait=0.5),
     # t1 loses ~3, Slowness(1) 160t; the hit of 2 after it takes 2.4
