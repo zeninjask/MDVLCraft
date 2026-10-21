@@ -188,6 +188,15 @@
   "cast": "long",
   "cast_time": 20
  },
+ "arrow_rain": {
+  "name": "Arrow Rain",
+  "description": "A volley of 10 arrows falls on the spot you look at (within 24 blocks), spread over 4 blocks.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 35,
+  "cooldown": 18,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "arrow_soul": {
   "name": "Soul Arrow",
   "description": "A charged arrow of soul fire that soulburns and pierces up to 3 creatures.",
@@ -998,6 +1007,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "challenge": {
+  "name": "Challenge",
+  "description": "Taunt every enemy within 10 blocks to attack you for 6 s; you take 15% less damage while they do.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "chanko_nabe": {
   "name": "Chanko Nabe",
   "description": "Conjure a hotpot that, when eaten, grants Health Boost II and Resistance I for 60 seconds.",
@@ -1574,6 +1592,15 @@
   "cast": "long",
   "cast_time": 20
  },
+ "feral_bond": {
+  "name": "Feral Bond",
+  "description": "For 12 s you share damage with your nearest tamed animal: each of you takes half of what either takes.",
+  "school": "irons_spellbooks:nature",
+  "mana": 30,
+  "cooldown": 35,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "firebrand_flask": {
   "name": "Firebrand Flask",
   "description": "Throw a flask that bursts into flames, burning the ground in a 3-block radius for 4 seconds.",
@@ -1651,6 +1678,15 @@
   "description": "Strike the creature you look at, making it bleed and glow for 8 seconds.",
   "school": "irons_spellbooks:blood",
   "mana": 25,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "flourish": {
+  "name": "Flourish",
+  "description": "A quick 3-hit combo on the enemy in front, each hit 60% of your attack damage.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 20,
   "cooldown": 10,
   "cast": "instant",
   "cast_time": 0
@@ -2870,6 +2906,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "lunge": {
+  "name": "Lunge",
+  "description": "Thrust forward 4 blocks along the ground, hitting the first enemy for +50% damage.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 15,
+  "cooldown": 8,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "madness_ring": {
   "name": "Madness Ring",
   "description": "Create a 4-block area for 5 seconds that deals 2 damage per second and applies Nausea and Blindness.",
@@ -2969,6 +3014,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "mend_beast": {
+  "name": "Mend Beast",
+  "description": "Heal every tamed animal within 12 blocks for 10 and give them Regeneration I for 10 s.",
+  "school": "irons_spellbooks:nature",
+  "mana": 30,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "mercy_wave": {
   "name": "Mercy Wave",
   "description": "A 6-block wave cone heals allies 4 HP and pushes enemies back 4 blocks.",
@@ -3065,6 +3119,15 @@
   "school": "irons_spellbooks:nature",
   "mana": 30,
   "cooldown": 120,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "mounted_charge": {
+  "name": "Mounted Charge",
+  "description": "While riding: your mount surges forward for 3 s at double speed; enemies you run into take 6 damage and are knocked back.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 15,
   "cast": "instant",
   "cast_time": 0
  },
@@ -3482,6 +3545,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "pinning_shot": {
+  "name": "Pinning Shot",
+  "description": "Your next arrow roots the target in place for 3 s.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 15,
+  "cooldown": 10,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "pirate_crew": {
   "name": "Pirate Crew",
   "description": "Summon a crew of three drowned pirates with swords.",
@@ -3587,6 +3659,15 @@
   "school": "irons_spellbooks:evocation",
   "mana": 25,
   "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "quiver_refill": {
+  "name": "Quiver Refill",
+  "description": "Conjure 16 arrows into your inventory (once every 2 minutes).",
+  "school": "irons_spellbooks:evocation",
+  "mana": 10,
+  "cooldown": 120,
   "cast": "instant",
   "cast_time": 0
  },
@@ -3761,6 +3842,15 @@
   "cast": "long",
   "cast_time": 20
  },
+ "riposte_stance": {
+  "name": "Riposte Stance",
+  "description": "For 6 s, every melee hit you take is answered with an automatic counter for 75% of your attack damage.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "riptide_slash": {
   "name": "Riptide Slash",
   "description": "Swing a wave forward: enemies in a 5-block cone take 5 damage and are pushed back; stronger in water.",
@@ -3785,6 +3875,24 @@
   "school": "irons_spellbooks:nature",
   "mana": 30,
   "cooldown": 120,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "rogue_caltrops": {
+  "name": "Caltrops",
+  "description": "Scatter caltrops in a 3-block area for 10 s: enemies walking over them take 2 damage and get Slowness II.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 20,
+  "cooldown": 16,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "rogue_smoke_bomb": {
+  "name": "Smoke Bomb",
+  "description": "Throw a smoke cloud (4 blocks, 6 s): enemies inside get Blindness and lose track of you; you get Invisibility while inside.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 25,
+  "cooldown": 20,
   "cast": "instant",
   "cast_time": 0
  },
@@ -4535,6 +4643,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "stampede": {
+  "name": "Stampede",
+  "description": "3 summoned boars charge forward 12 blocks, knocking enemies aside and dealing 5 damage each.",
+  "school": "irons_spellbooks:nature",
+  "mana": 40,
+  "cooldown": 25,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "stance_blood": {
   "name": "Stance: Crimson Form",
   "description": "A new form for Stance: cast to switch into it (it also joins the sneak-cast cycle). While in it, your katana strikes deal 20% more and heal you for a tenth of it.",
@@ -5165,6 +5282,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "trample": {
+  "name": "Trample",
+  "description": "While riding: enemies within 2 blocks of your mount take 3 damage a second for 6 s.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 20,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "treant": {
   "name": "Summon Treant",
   "description": "Summon a treant (a reskinned iron golem) that roots what it hits.",
@@ -5300,6 +5426,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "unhorse": {
+  "name": "Unhorse",
+  "description": "Knock the target off whatever it rides and stun it for 2 s.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 20,
+  "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "usury_pact": {
   "name": "Usury Pact",
   "description": "For 10 s, each kill drops an extra emerald and refunds 20% of your mana.",
@@ -5315,6 +5450,15 @@
   "school": "irons_spellbooks:blood",
   "mana": 25,
   "cooldown": 12,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "vanish": {
+  "name": "Vanish",
+  "description": "Become invisible for 6 s and drop the aggro of every enemy within 16 blocks.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 30,
   "cast": "instant",
   "cast_time": 0
  },
@@ -5462,6 +5606,15 @@
   "cast": "instant",
   "cast_time": 0
  },
+ "war_cry": {
+  "name": "War Cry",
+  "description": "Shout: you and allies within 8 blocks get Strength I for 8 s; enemies within 8 blocks get Weakness I for 5 s.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 30,
+  "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
  "war_frenzy": {
   "name": "War Frenzy",
   "description": "Rage: attack speed and life steal for 10 s, but you take 20% more damage.",
@@ -5477,6 +5630,15 @@
   "school": "irons_spellbooks:evocation",
   "mana": 25,
   "cooldown": 30,
+  "cast": "instant",
+  "cast_time": 0
+ },
+ "warrior_shield_bash": {
+  "name": "Shield Bash",
+  "description": "Strike with your shield: the enemy in front takes 4 damage, is knocked back 3 blocks and is stunned for 1 s. Needs a shield.",
+  "school": "irons_spellbooks:evocation",
+  "mana": 15,
+  "cooldown": 8,
   "cast": "instant",
   "cast_time": 0
  },
