@@ -308,7 +308,6 @@ def first_steps():
     zombies = Quest('fs_zombies', 'First Blood', 2, -1, [kill('minecraft:zombie', 20)], [give('minecraft:iron_ingot', 4), xp(50)], ['Zombies are everywhere at night.'], [welcome.id])
     skeletons = Quest('fs_skeletons', 'Bone Collector', 2, 0, [kill('minecraft:skeleton', 20)], [give('minecraft:arrow', 32), xp(50)], ['Skeletons keep their distance. Close it.'], [welcome.id])
     spiders = Quest('fs_spiders', 'Eight Legs', 2, 1, [kill('minecraft:spider', 10)], [give('minecraft:bread', 8), xp(50)], ['Spiders climb walls. Watch above.'], [welcome.id])
-    creepers = Quest('fs_creepers', 'Boom', 4, 1, [kill('minecraft:creeper', 5)], [give('minecraft:gunpowder', 8), xp(50)], ['Kill creepers before they reach you.'], [spiders.id])
     village = Quest('fs_village', 'Neighbours', 0, 2, [structure('#minecraft:village')], [give('minecraft:emerald', 4)], ['Find a village. Its people trade, and some can be recruited.'], [welcome.id])
     bed = Quest('fs_bed', 'A Place to Rest', 0, -2, [advancement('minecraft:adventure/sleep_in_bed')], [give('minecraft:torch', 16)], ['Sleep in a bed to set your spawn.'], [welcome.id])
     backpack = Quest('fs_backpack', 'Pack Up', 2, 2, [item('backpacked:backpack')], [give('minecraft:leather', 8)],
@@ -318,7 +317,7 @@ def first_steps():
     iron = Quest('fs_iron', 'Iron Age', 6, 0, [item('minecraft:iron_helmet'), item('minecraft:iron_chestplate'), item('minecraft:iron_leggings'), item('minecraft:iron_boots')],
                  [give('minecraft:diamond', 1), xp(150)], ['Wear a full set of iron armour. The Wanderer chapter opens.'], [lvl.id, hunter.id],
                  icon='minecraft:iron_chestplate', shape='hexagon', size=1.5)
-    q += [welcome, zombies, skeletons, spiders, creepers, village, bed, backpack, lvl, hunter, iron]
+    q += [welcome, zombies, skeletons, spiders, village, bed, backpack, lvl, hunter, iron]
     return dict(file='first_steps', title='First Steps', icon='minecraft:oak_sapling', subtitle='Learn the ropes.', quests=q), iron.id
 
 

@@ -22,7 +22,13 @@ final class RemovedKeys {
         "key.recruits.map_screen_key",
         "key.entityculling.toggle",
         "key.epicfight.config",
-        "key.epicfight.switch_vanilla_model_debug"
+        "key.epicfight.switch_vanilla_model_debug",
+        "key.modernfix.config",
+        "key.curios.open.desc",
+        "key.ftbquests.quests",
+        "key.ftbteams.open_gui",
+        "key.accurateblockplacement.toggle",
+        "key.esoteric_spell.toggle_hidden_ring"
     );
     /** Every key of these categories goes, except the KEEP ones. */
     private static final Set<String> CATEGORIES = Set.of(
@@ -31,11 +37,19 @@ final class RemovedKeys {
         "fdlib.key_category",
         "key.categories.placebo",
         "key.betterlockon.category",
-        "key.category.invmove.main"
+        "key.category.invmove.main",
+        "key.categories.combat_evolution",
+        "key.categories.puzzlesapi",
+        "key.categories.traveloptics",
+        "key.categories.ftbquests",
+        "key.categories.ftbteams"
     );
     /** Every key whose name starts with one of these goes, except the KEEP ones. */
-    private static final Set<String> PREFIXES = Set.of("key.shouldersurfing.", "gui.xaero_", "key.betterlockon.", "key.jade.", "keybind.invmove.");
-    private static final Set<String> KEEP = Set.of("key.push_to_talk", "key.shouldersurfing.swap_shoulder", "gui.xaero_open_map");
+    private static final Set<String> PREFIXES = Set.of("key.shouldersurfing.", "gui.xaero_", "key.betterlockon.", "key.jade.", "keybind.invmove.", "key.jei.", "key.simplytooltips.");
+    private static final Set<String> KEEP = Set.of(
+        "key.push_to_talk", "key.shouldersurfing.swap_shoulder", "gui.xaero_open_map",
+        "key.jei.showRecipe", "key.jei.closeRecipeGui", "key.jei.bookmark", "key.jei.toggleOverlay"
+    );
     private static KeyMapping[] pruned;
 
     private RemovedKeys() {

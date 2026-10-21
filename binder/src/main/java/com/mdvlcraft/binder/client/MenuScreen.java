@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
+import dev.ftb.mods.ftbquests.client.ClientQuestFile;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
@@ -52,6 +53,7 @@ public class MenuScreen extends Screen {
                         "advancements", () -> MenuNav.open(this, () -> new AdvancementsScreen(mc.player.connection.getAdvancements())), mc.player != null
                     )
                 );
+                doors.add(new MenuScreen.Door("quests", () -> MenuNav.openWith(this, ClientQuestFile::openGui), ClientQuestFile.exists()));
                 doors.add(
                     new MenuScreen.Door(
                         "origin",
