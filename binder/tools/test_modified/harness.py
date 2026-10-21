@@ -33,6 +33,9 @@ def c(cmd, show=False):
     global _r
     if _r is None:
         _r = Rcon()
+    team = re.match(r'team join (\S+) (@e\S*)$', cmd)
+    if team:   # the pack's /team join takes players only; a mob joins through its Team tag
+        cmd = f'execute as {team[2]} run data merge entity @s {{Team:"{team[1]}"}}'
     out = _r.cmd(cmd)
     if show:
         print('  >', cmd, '\n   ', out[:400])
