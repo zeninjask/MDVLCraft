@@ -508,7 +508,7 @@ public final class Wave2Necromancer {
         }
     }
 
-    /** Carrion Beetles: four silverfish for 20 s whose bites poison (I) for 4 s. */
+    /** Carrion Beetles: six silverfish for 20 s whose bites poison (II) for 4 s. */
     public static class CarrionBeetles extends SummonSpell {
         CarrionBeetles() {
             super("carrion_beetles", 2);
@@ -521,7 +521,7 @@ public final class Wave2Necromancer {
 
         @Override
         protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
-            this.spawn(level, caster, power, EntityType.SILVERFISH, 4, castData, silverfish -> {
+            this.spawn(level, caster, power, EntityType.SILVERFISH, 6, castData, silverfish -> {
             });
         }
     }
@@ -787,7 +787,7 @@ public final class Wave2Necromancer {
                 SummonSpells.spark((ServerLevel)attacker.level(), victim.getEyePosition(), next.getEyePosition());
             });
             case "bound_shade" -> victim.addEffect(new MobEffectInstance(MobEffects.GLOWING, 100, 0), owner);
-            case "carrion_beetles" -> victim.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 0), owner);
+            case "carrion_beetles" -> victim.addEffect(new MobEffectInstance(MobEffects.POISON, 80, 1), owner);
             case "bonehound_pack" -> victim.addEffect(new MobEffectInstance(MobEffects.WITHER, 60, 0), owner);
             default -> {
             }

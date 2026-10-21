@@ -228,12 +228,12 @@ public final class Wave2Berserker {
 
     // ---- Draugr ----
 
-    /** Hurled Rimeaxe: a thrown frozen axe; the creature hit is hurt and frozen for 3 s. */
+    /** Hurled Rimeaxe: a thrown frozen axe; the creature hit is hurt and frozen for 1.5 s. */
     static Bolt hurledRimeaxe() {
         return new Bolt("hurled_rimeaxe", 6, Items.IRON_AXE, ParticleTypes.SNOWFLAKE, (bolt, caster, target, power) -> {
             bolt.hurt(caster, target, power);
-            freeze(caster, target, 60);
-            MartialSpells.root(target, 60);
+            freeze(caster, target, 30);
+            MartialSpells.root(target, 30);
             ServerLevel level = (ServerLevel)target.level();
             level.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, Blocks.ICE.defaultBlockState()), target.getX(), target.getY(0.6),
                 target.getZ(), 30, 0.4, 0.5, 0.4, 0.1);
@@ -241,7 +241,7 @@ public final class Wave2Berserker {
         }, null).speed(1.6F).sound(SoundEvents.TRIDENT_THROW);
     }
 
-    /** Barrow Howl: every enemy in a 6-block cone ahead gets Weakness II and is frozen for 4 s (no damage). */
+    /** Barrow Howl: every enemy in a 6-block cone ahead gets Weakness II and is frozen for 2 s (no damage). */
     public static class BarrowHowl extends ModifiedSpell {
         BarrowHowl() {
             super("barrow_howl", 0);
@@ -255,7 +255,7 @@ public final class Wave2Berserker {
             for (LivingEntity enemy : Targets.enemies(caster, eye, 6.0)) {
                 if (enemy != caster && enemy.getBoundingBox().getCenter().subtract(eye).normalize().dot(look) >= cone) {
                     enemy.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 80, 1), caster);
-                    freeze(caster, enemy, 80);
+                    freeze(caster, enemy, 40);
                 }
             }
             if (level instanceof ServerLevel server) {
@@ -300,7 +300,7 @@ public final class Wave2Berserker {
         }
     }
 
-    /** Brine Frenzy: for 10 s each of the caster's hits gives 1 heart of absorption (up to 4) while it stands in water or rain. */
+    /** Brine Frenzy: for 10 s each of the caster's hits gives 1 heart of absorption (2 in water or rain), up to 4. */
     public static class BrineFrenzy extends State {
         BrineFrenzy() {
             super("brine_frenzy", 200, ParticleTypes.SPLASH, SoundEvents.DOLPHIN_PLAY);
@@ -699,7 +699,7 @@ public final class Wave2Berserker {
     public static List<ModifiedSpell> all() {
         return List.of(
             new HundredFists(),
-            // Iron Gut: for 12 s the caster takes 30% less damage and each hit by a creature gives it Strength I for 3 s
+            // Iron Gut: for 12 s the caster takes 20% less damage and each hit by a creature gives it Strength I for 3 s
             new State("iron_gut", 240, ParticleTypes.CRIT, SoundEvents.ARMOR_EQUIP_IRON),
             firebrandFlask(),
             new PyreRage(),
@@ -741,7 +741,7 @@ public final class Wave2Berserker {
             new HamstringShot(),
             new HitAndRun(),
             beardedAxe(),
-            // Raider's Feast: three roasted mutton: 6 health and Strength I for 45 s
+            // Raider's Feast: three roasted mutton: 6 health and Strength I for 20 s
             new BoonSpells.Food("raiders_feast", Items.COOKED_MUTTON, MUTTON, 3, false),
             hauntedCrockery(),
             // Rattling Chains: 5 s within 5 blocks of the caster: enemies get Slowness III and glow
@@ -784,7 +784,7 @@ public final class Wave2Berserker {
         Entity by = source.getEntity();
 
         if (Buffs.has(victim, "iron_gut")) {
-            event.setAmount(event.getAmount() * 0.7F);
+            event.setAmount(event.getAmount() * 0.8F);
             if (by instanceof LivingEntity && by != victim) {
                 victim.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 60, 0));
             }
@@ -819,8 +819,8 @@ public final class Wave2Berserker {
         if (attacker == null || attacker == victim) {
             return;
         }
-        if (Buffs.has(attacker, "brine_frenzy") && GroundSpells.wet(attacker)) {
-            absorb(attacker, 2.0F, 8.0F);
+        if (Buffs.has(attacker, "brine_frenzy")) {
+            absorb(attacker, GroundSpells.wet(attacker) ? 4.0F : 2.0F, 8.0F);
             level.sendParticles(ParticleTypes.SPLASH, attacker.getX(), attacker.getY() + 1.0, attacker.getZ(), 10, 0.3, 0.4, 0.3, 0.1);
         }
         if (Buffs.has(attacker, "hit_and_run")) {
@@ -986,7 +986,7 @@ public final class Wave2Berserker {
             }
             case MUTTON -> {
                 eater.heal(6.0F);
-                eater.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 900, 0));
+                eater.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 400, 0));
             }
             case ONIGIRI -> {
                 if (eater instanceof Player player) {

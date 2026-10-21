@@ -16,11 +16,12 @@ import yesman.epicfight.world.damagesource.StunType;
 
 /**
  * Underworld Gate (Shinigami): players only. Opens the open Malevolent Shrine for 10 s (cutting the whole time),
- * roots everything within 12 blocks for 10 s and turns the caster invisible for 10 s. The roots are effects, not Iron's
+ * roots everything within 12 blocks for 4 s and turns the caster invisible for 10 s. The roots are effects, not Iron's
  * root entity, so a rooted mob stays on the ground and can still be executed; its guard is broken as the gate opens.
  */
 public class UnderworldGate extends ModifiedSpell {
     private static final int TICKS = 200;
+    private static final int ROOT_TICKS = 80;
 
     public UnderworldGate() {
         super("underworld_gate", 0);
@@ -39,7 +40,7 @@ public class UnderworldGate extends ModifiedSpell {
                 }, () -> ShrineGate.close(player), null);
             }
             for (LivingEntity enemy : Targets.enemies(player, player.position(), 12.0)) {
-                MartialSpells.root(enemy, TICKS);
+                MartialSpells.root(enemy, ROOT_TICKS);
                 MartialSpells.stun(enemy, StunType.NEUTRALIZE, 2.0F);
             }
             player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, TICKS, 0, false, false, true));

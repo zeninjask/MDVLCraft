@@ -237,7 +237,7 @@ public final class Wave2Brute {
 
     // ---- Jotun ----
 
-    /** Avalanche Stomp: a leap of up to 6 blocks; landing sends a shockwave that freezes enemies within 4 blocks for 4 s. */
+    /** Avalanche Stomp: a leap of up to 6 blocks; landing sends a shockwave that freezes enemies within 4 blocks for 2 s. */
     public static class AvalancheStomp extends ModifiedSpell {
         AvalancheStomp() {
             super("avalanche_stomp", 0);
@@ -258,7 +258,7 @@ public final class Wave2Brute {
                     zone.stop();
                     for (LivingEntity enemy : Targets.enemies(caster, caster.position(), 4.0)) {
                         if (enemy != caster) {
-                            freeze(caster, enemy, 80);
+                            freeze(caster, enemy, 40);
                         }
                     }
                     server.sendParticles(ParticleTypes.SNOWFLAKE, caster.getX(), caster.getY() + 0.2, caster.getZ(), 80, 2.0, 0.2, 2.0, 0.1);

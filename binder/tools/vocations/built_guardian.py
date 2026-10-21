@@ -6,7 +6,7 @@ PART = {
     'iron_retort': spell(EVOCATION, 30, 25),
     'shieldbreaker_roar': spell(BLOOD, 30, 18),
     'bloodied_bulwark': spell(BLOOD, 30, 30),
-    'temple_bell': spell(EVOCATION, 35, 18),
+    'temple_bell': spell(EVOCATION, 35, 25),
     'stone_lotus_pose': spell(EVOCATION, 35, 30),
     'cinder_rampart': spell(FIRE, 40, 25),
     'hearth_ward': spell(FIRE, 40, 30, 'long', 20),

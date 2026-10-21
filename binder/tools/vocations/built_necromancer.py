@@ -6,7 +6,7 @@ PART = {
     'grave_pact': spell(BLOOD, 30, 25),
     'offal_feast': spell(BLOOD, 25, 60),
     'carrion_cage': spell(BLOOD, 30, 20),
-    'blood_tithe': spell(BLOOD, 15, 30),
+    'blood_tithe': spell(BLOOD, 15, 45),
     'bleeding_bone': spell(BLOOD, 20, 8),
     'corpse_hop': spell(SYMMETRY, 30, 14),
     'grave_qi': spell(SYMMETRY, 35, 30),

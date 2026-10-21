@@ -155,7 +155,7 @@ public final class Wave2Blaze {
 
     // ---- Frostfire ----
 
-    /** Equinox Ring: a 6-block ring; enemies within 3 blocks take the spell's power and burn 4 s, those 3-6 away take it and freeze 4 s. */
+    /** Equinox Ring: a 6-block ring; enemies within 3 blocks take the spell's power and burn 4 s, those 3-6 away take it and freeze 2 s. */
     public static class EquinoxRing extends ModifiedSpell {
         EquinoxRing() {
             super("equinox_ring", 5);
@@ -170,7 +170,7 @@ public final class Wave2Blaze {
                     if (enemy.distanceToSqr(caster.position()) <= 9.0) {
                         enemy.setSecondsOnFire(4);
                     } else {
-                        freeze(enemy, 80);
+                        freeze(enemy, 40);
                     }
                 }
                 GroundSpells.ring(server, caster.position(), 3.0, ParticleTypes.FLAME);
@@ -346,7 +346,7 @@ public final class Wave2Blaze {
         }
     }
 
-    /** Infernal Sigil: marks the creature looked at for 8 s; every spell its marker (a player) casts deals 2 soul fire damage to it. */
+    /** Infernal Sigil: marks the creature looked at for 8 s; every spell its marker (a player) casts deals 4 soul fire damage to it. */
     static ModifiedSpell infernalSigil() {
         return new Wave2Samurai.Mark(SIGIL, 160);
     }
@@ -385,7 +385,7 @@ public final class Wave2Blaze {
         }, null).speed(1.7F).scale(0.6F).sound(SoundEvents.AMETHYST_BLOCK_CHIME);
     }
 
-    /** Ninefold Ring: a 5-block fire ring dealing the spell's power and burning enemies 3 s; Resistance for 5 s, one level per enemy hit (up to III). */
+    /** Ninefold Ring: a 5-block fire ring dealing the spell's power and burning enemies 3 s; Resistance for 5 s, one level per enemy hit (up to II). */
     public static class NinefoldRing extends ModifiedSpell {
         NinefoldRing() {
             super("ninefold_ring", 5);
@@ -403,7 +403,7 @@ public final class Wave2Blaze {
                     enemy.setSecondsOnFire(3);
                 }
                 if (hit > 0) {
-                    caster.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, Math.min(hit, 3) - 1));
+                    caster.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 100, Math.min(hit, 2) - 1));
                 }
                 GroundSpells.ring(server, caster.position(), 5.0, ParticleTypes.FLAME);
                 GroundSpells.ring(server, caster.position(), 3.0, ParticleTypes.SOUL_FIRE_FLAME);
@@ -689,7 +689,7 @@ public final class Wave2Blaze {
             new BrimstoneSlimes(),
             infernalSigil(),
             emberSeed(),
-            new Timed(ASHEN, 240),          // Ashen Renewal: for 12 s killing a burning creature gives Regeneration II for 4 s
+            new Timed(ASHEN, 240),          // Ashen Renewal: for 12 s killing a burning creature gives Regeneration II for 8 s
             vermilionShard(),
             new NinefoldRing(),
             wispBrand(),
@@ -749,7 +749,7 @@ public final class Wave2Blaze {
         }
         if (event.getSource().getEntity() instanceof LivingEntity killer && killer != victim) {
             if (Buffs.has(killer, ASHEN) && victim.isOnFire()) {
-                killer.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 80, 1));
+                killer.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 160, 1));
             }
             if (Buffs.has(killer, TRAILBLAZE) && killer instanceof Player player) {
                 player.getFoodData().eat(2, 0.0F);
@@ -842,7 +842,7 @@ public final class Wave2Blaze {
         }
     }
 
-    /** Infernal Sigil: each spell a player casts deals 2 soul fire damage to the creatures it has marked. */
+    /** Infernal Sigil: each spell a player casts deals 4 soul fire damage to the creatures it has marked. */
     @SubscribeEvent
     public static void onCast(SpellOnCastEvent event) {
         Player caster = event.getEntity();
@@ -852,7 +852,7 @@ public final class Wave2Blaze {
         for (LivingEntity marked : level.getEntitiesOfClass(LivingEntity.class, caster.getBoundingBox().inflate(32.0),
                 e -> e.isAlive() && Buffs.markedBy(e, SIGIL) == caster)) {
             marked.invulnerableTime = 0;
-            Wave2Samurai.hurt(SIGIL, caster, marked, 2.0F);
+            Wave2Samurai.hurt(SIGIL, caster, marked, 4.0F);
             level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME, marked.getX(), marked.getY(0.6), marked.getZ(), 20, 0.3, 0.5, 0.3, 0.03);
             level.playSound(null, marked.blockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 1.0F, 1.2F);
         }

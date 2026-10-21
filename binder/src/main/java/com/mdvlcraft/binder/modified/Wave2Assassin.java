@@ -63,6 +63,8 @@ public final class Wave2Assassin {
     private static final String VEILED = "veiled_step";
     private static final String SMOULDER = "smoulder_step";
     private static final String NUMBING = "numbing_venom";
+    /** On a target Numbing Venom froze: no new freeze from it until this ends. */
+    private static final String NUMBING_LOCK = "numbing_venom_lock";
     private static final String SEAFOAM = "seafoam_vanish";
     private static final String STATIC_EDGE = "static_edge";
     private static final String CONFESSION = "confession_brand";
@@ -374,7 +376,7 @@ public final class Wave2Assassin {
         }
     }
 
-    /** Numbing Venom: for 10 s the caster's melee hits freeze the target for 2 s and poison it for 3 s. */
+    /** Numbing Venom: for 10 s the caster's melee hits freeze the target for 2 s (once per target per 4 s) and poison it for 3 s. */
     public static class NumbingVenom extends ModifiedSpell {
         NumbingVenom() {
             super("numbing_venom", 0);
@@ -806,9 +808,9 @@ public final class Wave2Assassin {
         }
     }
 
-    /** Desert Dates: four dates (3 hunger each) that give Fire Resistance and Speed I for 45 s. */
+    /** Desert Dates: two dates (3 hunger each) that give Fire Resistance and Speed I for 45 s. */
     static BoonSpells.Food desertDates() {
-        return new BoonSpells.Food("desert_dates", Items.SWEET_BERRIES, DATES, 4, false);
+        return new BoonSpells.Food("desert_dates", Items.SWEET_BERRIES, DATES, 2, false);
     }
 
     public static List<ModifiedSpell> all() {
@@ -918,8 +920,11 @@ public final class Wave2Assassin {
             Buffs.clear(attacker, SMOULDER);
         }
         if (Buffs.has(attacker, NUMBING)) {
-            victim.setTicksFrozen(Math.max(victim.getTicksFrozen(), victim.getTicksRequiredToFreeze() + 40));
-            victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2), attacker);
+            if (!Buffs.has(victim, NUMBING_LOCK)) {
+                Buffs.give(victim, NUMBING_LOCK, 80);
+                victim.setTicksFrozen(Math.max(victim.getTicksFrozen(), victim.getTicksRequiredToFreeze() + 40));
+                victim.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 2), attacker);
+            }
             victim.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0), attacker);
         }
         boolean back = DaggerSpells.behind(attacker, victim);

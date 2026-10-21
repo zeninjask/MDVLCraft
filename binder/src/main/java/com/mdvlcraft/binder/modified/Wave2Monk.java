@@ -324,7 +324,7 @@ public final class Wave2Monk {
         }
     }
 
-    /** Mind Splinter: strikes the creature looked at, with Nausea and Slowness; for 6 s it takes 50% more damage. */
+    /** Mind Splinter: strikes the creature looked at, with Nausea and Slowness; for 6 s it takes 25% more damage. */
     public static class MindSplinter extends SmiteSpells.Smite {
         MindSplinter() {
             super("mind_splinter", 5, 5.0F);
@@ -732,7 +732,7 @@ public final class Wave2Monk {
             new VineLash(), new RuyiToss(), new CloudSomersault(), ancestorsMercy(),
             // Samsara Turn: 10 s; each kill refills dodge stamina and gives Resistance I for 5 s
             new Wave2Guardian.Stance(SAMSARA, 200, ParticleTypes.SOUL, SoundEvents.SOUL_ESCAPE),
-            // Drunken Sway: 8 s; each hit has a 50% chance to miss as the caster staggers 2 blocks aside
+            // Drunken Sway: 8 s; each hit has a 30% chance to miss as the caster staggers 2 blocks aside
             new Wave2Guardian.Stance(SWAY, 160, ParticleTypes.CLOUD, SoundEvents.GENERIC_DRINK),
             new SleightPalm(),
             // Zazen Aim: 10 s; arrows loosed standing still deal 50% more and home in
@@ -808,12 +808,12 @@ public final class Wave2Monk {
         }
     }
 
-    /** Drunken Sway: half the hits on the swaying caster miss as it staggers 2 blocks aside. */
+    /** Drunken Sway: 30% of the hits on the swaying caster miss as it staggers 2 blocks aside. */
     @SubscribeEvent
     public static void onAttack(LivingAttackEvent event) {
         LivingEntity victim = event.getEntity();
         if (!(victim.level() instanceof ServerLevel level) || !Buffs.has(victim, SWAY) || !(event.getSource().getEntity() instanceof LivingEntity attacker)
-            || attacker == victim || victim.getRandom().nextBoolean()) {
+            || attacker == victim || victim.getRandom().nextFloat() >= 0.3F) {
             return;
         }
         event.setCanceled(true);
@@ -848,9 +848,9 @@ public final class Wave2Monk {
         }
         Entity source = event.getSource().getEntity();
 
-        // Mind Splinter and Cursed Coin: the marked creature takes 50% / 20% more
+        // Mind Splinter and Cursed Coin: the marked creature takes 25% / 20% more
         if (Buffs.has(victim, SPLINTER)) {
-            event.setAmount(event.getAmount() * 1.5F);
+            event.setAmount(event.getAmount() * 1.25F);
         }
         if (Buffs.has(victim, COIN)) {
             event.setAmount(event.getAmount() * 1.2F);

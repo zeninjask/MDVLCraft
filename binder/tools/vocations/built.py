@@ -70,7 +70,7 @@ BUILT = {
     'iron_body': spell(NATURE, 40, 45),
     'jiangshi_fists': spell(SYMMETRY, 35, 50),
     'mushin': spell(HOLY, 20, 25),
-    'cold_meditation': spell(ICE, 0, 45, 'continuous', 100),
+    'cold_meditation': spell(ICE, 0, 60, 'continuous', 80),
     'crane_leap': spell(LIGHTNING, 35, 14),
     'flame_rush': spell(FIRE, 30, 15),
     'whirlpool_kick': spell(AQUA, 30, 12),
@@ -78,7 +78,7 @@ BUILT = {
     'arrow_spirit': spell(SPIRIT, 30, 12, 'long', 20),
     'ki_wave': spell(EVOCATION, 10, 20, 'continuous', 60),
     'mirror_image': spell(ENDER, 40, 30),
-    'shadow_clone': spell(ENDER, 60, 60),
+    'shadow_clone': spell(ENDER, 60, 90),
     'spirit_step': spell(SPIRIT, 30, 12),
     'oni_summon': spell(SPIRIT, 70, 150, 'long', 40),
     'nomad_mount': spell(EVOCATION, 40, 120, 'long', 20),
@@ -87,7 +87,7 @@ BUILT = {
     # the Lightning base (in place of Iron's Thunder Step, which this pack doesn't have)
     'thunder_step': spell(LIGHTNING, 30, 12),
     # Wukong's Shadow Clone Jutsu (in place of Grave Sigil)
-    'body_outside_body': spell(ENDER, 60, 60),
+    'body_outside_body': spell(ENDER, 60, 90),
     # batch 3
     # brands (modified/BrandSpells): 20 s of extra elemental damage on weapon hits
     'brand_fire': spell(FIRE, 25, 40),
@@ -184,11 +184,11 @@ BUILT = {
     'iceberg': spell(ICE, 60, 20, 'long', 30),
     'chaos_bolt': spell(ELDRITCH, 35, 8),
     'smite_bolt': spell(HOLY, 35, 8),
-    'superconductor': spell(LIGHTNING, 45, 12),
+    'superconductor': spell(LIGHTNING, 45, 20),
     'static_snare': spell(LIGHTNING, 30, 15),
     'drown': spell(AQUA, 40, 18),
     'geyser': spell(AQUA, 35, 10),
-    'soul_harvest': spell(SPIRIT, 6, 20, 'continuous', 100),
+    'soul_harvest': spell(SPIRIT, 30, 20, 'continuous', 100),
     'scald': spell(FIRE, 30, 8),
     'wraith_chill': spell(SPIRIT, 35, 10),
     'jade_nova': spell(SYMMETRY, 40, 12),
@@ -261,7 +261,7 @@ BUILT = {
     'spirit_hawk': spell(SPIRIT, 40, 90, 'long', 20),
     'spirit_steed': spell(SPIRIT, 30, 120, 'long', 20),
     # wave 2 (the rest are in built_<group>.py)
-    'underworld_gate': spell(SPIRIT, 40, 120),
+    'underworld_gate': spell(SPIRIT, 80, 120),
 }
 
 # The second wave (two abilities per vocation, tools/vocations/v2_new.py) is built group by group: each
