@@ -48,6 +48,9 @@ e = html.escape
 sys.path.insert(0, os.path.join(TOOLS, 'vocations'))
 import generate_vocations as V  # noqa: E402
 import compose  # noqa: E402
+sys.path.insert(0, os.path.join(TOOLS, 'origins'))
+import design as ORIGIN_DESIGN  # noqa: E402
+from v2_base import STAT as V2_STAT  # noqa: E402
 D = V.D
 
 ATTR_INFO = {
@@ -454,8 +457,18 @@ def origin_rows(pack, layer_ns, layer_path):
             pname = pack.text(p.get('name'), f'{key}.name')
             if pname:
                 powers.append((pname, pack.text(p.get('description'), f'{key}.description')))
-        rows.append((name, powers))
+        rows.append((name, powers, oid))
     return sorted(rows)
+
+
+def origin_tab_skills(pack):
+    """Each Martial class and Job origin id's three Origin tab abilities as (name, description), as the game shows them."""
+    out = {}
+    for o in ORIGIN_DESIGN.origins():
+        out[o['origin']] = [(pack.lang.get(f'spell.mdvlcraft.{key}', name), clean(pack.lang.get(f'spell.mdvlcraft.{key}.guide', desc)))
+                            for key, name, desc in o['abilities']]
+        out[o['origin']].append(('Bonuses', ', '.join(V2_STAT[c][0] for c in o['bonuses'])))
+    return out
 
 
 # -- html -------------------------------------------------------------------------------------------------------------
@@ -573,14 +586,21 @@ def main():
                              + (f"<p class='lead'>{lead}</p>" if lead else '')
                              + "<div class='cols vocs'>" + ''.join(vocation_block(vid, info, pack) for vid, info in chunk) + "</div></div>")
 
+    tab_skills = origin_tab_skills(pack)
     parts.append("<div class='page'><h2>Origins</h2><p class='lead'>Picked on first joining, separately from the archetype trees: one race and one "
-                 "class. A race or class can be changed later with an Orb of Origin (an enchanted golden apple surrounded by eight gold ingots).</p>")
+                 "class. A race or class can be changed later with an Orb of Origin (an enchanted golden apple surrounded by eight gold ingots). "
+                 "Each Martial class and Job pair also has its own <b>Origin</b> skill tab: the Martial class's three skills on one half, the Job's "
+                 "three on the other, each ringed by small bonuses of the kinds listed. It earns experience from kills, and changing either origin "
+                 "clears it but keeps its level.</p>")
     for heading, column, (ns, path) in (('Races', 'Race', ('origins', 'origin')), ('Martial classes', 'Martial', ('mdvlcraft', 'martial')),
                                         ('Jobs', 'Job', ('origins-classes', 'class'))):
-        parts.append(f"<h3>{heading}</h3><table class='origins'><tr><th>{column}</th><th>Powers</th></tr>")
-        for name, powers in origin_rows(pack, ns, path):
+        tabbed = column != 'Race'
+        parts.append(f"<h3>{heading}</h3><table class='origins'><tr><th>{column}</th><th>Powers</th>"
+                     + ("<th>Origin tab skills</th>" if tabbed else "") + "</tr>")
+        for name, powers, oid in origin_rows(pack, ns, path):
             body = "<br>".join(f"<b>{e(n)}</b> {e(d)}" for n, d in powers) or "–"
-            parts.append(f"<tr><td>{e(name)}</td><td>{body}</td></tr>")
+            skills = "<br>".join(f"<b>{e(n)}</b> {e(d)}" for n, d in tab_skills.get(oid, [])) or "–"
+            parts.append(f"<tr><td>{e(name)}</td><td>{body}</td>" + (f"<td>{skills}</td>" if tabbed else "") + "</tr>")
         parts.append("</table>")
     parts.append("</div></body></html>")
 
