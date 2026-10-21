@@ -89,7 +89,8 @@ public final class ActiveQuest {
         return active;
     }
 
-    private static Optional<Task> acceptTask(Quest quest) {
+    /** The quest's Accept Quest box, if it opens with one. */
+    public static Optional<Task> acceptTask(Quest quest) {
         List<Task> tasks = quest.getTasksAsList();
         return tasks.isEmpty() || !(tasks.get(0) instanceof CheckmarkTask) || !ACCEPT.equals(tasks.get(0).getRawTitle())
             ? Optional.empty() : Optional.of(tasks.get(0));

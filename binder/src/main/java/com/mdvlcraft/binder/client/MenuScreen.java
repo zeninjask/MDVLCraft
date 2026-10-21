@@ -53,7 +53,7 @@ public class MenuScreen extends Screen {
                         "advancements", () -> MenuNav.open(this, () -> new AdvancementsScreen(mc.player.connection.getAdvancements())), mc.player != null
                     )
                 );
-                doors.add(new MenuScreen.Door("quests", () -> MenuNav.openWith(this, ClientQuestFile::openGui), ClientQuestFile.exists()));
+                doors.add(new MenuScreen.Door("quests", () -> mc.setScreen(new QuestLogScreen(this)), ClientQuestFile.exists()));
                 doors.add(
                     new MenuScreen.Door(
                         "origin",

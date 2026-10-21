@@ -301,9 +301,9 @@ PROGRESS = {
 def first_steps():
     q = []
     welcome = Quest('fs_welcome', 'Welcome to MDVLCraft', 0, 0, [checkmark()], [give('minecraft:bread', 8), give('minecraft:torch', 16)],
-                    ['Pick your origin, class and martial path, then tick this quest.', '',
+                    ['Pick your origin, class and martial path, then press Done.', '',
                      'This book points you at the next boss, in order of difficulty. Each chapter ends in a capstone that opens the next.', '',
-                     'Take one quest at a time: tick Accept Quest to start it. Type /quest cancel to abandon it and lose its progress.'],
+                     'Open Quests from the MDVLCraft menu. Take one quest at a time: pick it and press Accept. Abandon drops it and loses its progress.'],
                     icon='minecraft:writable_book', shape='gear', size=1.5, accept=False)
     zombies = Quest('fs_zombies', 'First Blood', 2, -1, [kill('minecraft:zombie', 20)], [give('minecraft:iron_ingot', 4), xp(50)], ['Zombies are everywhere at night.'], [welcome.id])
     skeletons = Quest('fs_skeletons', 'Bone Collector', 2, 0, [kill('minecraft:skeleton', 20)], [give('minecraft:arrow', 32), xp(50)], ['Skeletons keep their distance. Close it.'], [welcome.id])
@@ -436,7 +436,7 @@ def write_book(chapters, out):
         shutil.rmtree(out)
     os.makedirs(f'{out}/chapters')
     data = {'version': 13, 'title': 'MDVLCraft', 'icon': 'minecraft:compass', 'default_reward_team': False, 'default_consume_items': False,
-            'default_autoclaim_rewards': 'disabled', 'default_quest_shape': 'circle', 'default_quest_disable_jei': False,
+            'default_autoclaim_rewards': 'enabled', 'default_quest_shape': 'circle', 'default_quest_disable_jei': False,
             'emergency_items_cooldown': 300, 'drop_loot_crates': False, 'disable_gui': False, 'grid_scale': 0.5,
             'pause_game': False, 'lock_message': '', 'progression_mode': 'linear', 'detection_delay': 20}
     open(f'{out}/data.snbt', 'w').write(snbt(data) + '\n')
