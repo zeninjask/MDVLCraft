@@ -17,7 +17,9 @@ import java.util.function.Function;
  * Assembles a vocation tab's Pufferfish files from the parts written by tools/generate_vocations.py (under
  * puffish_skills/vocation_parts/): the vocation's own part, base a as written (left of the centre) and base b mirrored
  * to the right. tools/vocations/compose.py does the same in Python for the checks and the PDF; keep them alike.
- * Called by mixin/puffish/PackConfigReaderMixin for categories/voc_<a>_<b>/*.json.
+ * The Origin tabs (org_<martial>_<job>, tools/generate_origins.py) are assembled the same way from origin_parts/: their
+ * index entries name the parts folder ("dir"), the shared own part ("own") and the tab icon ("icon").
+ * Called by mixin/puffish/PackConfigReaderMixin for categories/<tab>/*.json.
  */
 public final class VocationParts {
     public static final String PARTS = "vocation_parts";
@@ -27,7 +29,7 @@ public final class VocationParts {
     private VocationParts() {
     }
 
-    /** Every vocation by tab path (voc_<a>_<b>): {a, b, name, description}. */
+    /** Every vocation and Origin tab by tab path (voc_<a>_<b>, org_<martial>_<job>): {a, b, name, description, ...}. */
     public static Map<String, JsonElement> all() {
         return INDEX.asMap();
     }
@@ -57,32 +59,35 @@ public final class VocationParts {
         JsonObject vocation = INDEX.getAsJsonObject(tab);
         String a = vocation.get("a").getAsString();
         String b = vocation.get("b").getAsString();
+        String parts = vocation.has("dir") ? vocation.get("dir").getAsString() : PARTS;
+        String own = vocation.has("own") ? vocation.get("own").getAsString() : tab;
+        String iconPath = vocation.has("icon") ? vocation.get("icon").getAsString() : "tab/voc_" + a + "_" + b;
         return switch (file) {
             case "category.json" -> {
-                JsonObject category = read.apply(Path.of(PARTS, "category.json")).getAsJsonObject().deepCopy();
+                JsonObject category = read.apply(Path.of(parts, "category.json")).getAsJsonObject().deepCopy();
                 category.addProperty("title", vocation.get("name").getAsString());
                 category.addProperty("description", vocation.get("description").getAsString());
                 JsonObject icon = new JsonObject();
                 icon.addProperty("type", "texture");
                 JsonObject data = new JsonObject();
-                data.addProperty("texture", "mdvlcraft:textures/gui/icons18/tab/voc_" + a + "_" + b + ".png");
+                data.addProperty("texture", "mdvlcraft:textures/gui/icons18/" + iconPath + ".png");
                 icon.add("data", data);
                 category.add("icon", icon);
                 yield Optional.of(category);
             }
-            case "experience.json" -> Optional.of(read.apply(Path.of(PARTS, "experience.json")));
+            case "experience.json" -> Optional.of(read.apply(Path.of(parts, "experience.json")));
             case "definitions.json" -> {
                 JsonObject merged = new JsonObject();
-                for (String part : new String[]{tab, "base_" + a, "base_" + b}) {
-                    read.apply(Path.of(PARTS, part, file)).getAsJsonObject().entrySet().forEach(e -> merged.add(e.getKey(), e.getValue()));
+                for (String part : new String[]{own, "base_" + a, "base_" + b}) {
+                    read.apply(Path.of(parts, part, file)).getAsJsonObject().entrySet().forEach(e -> merged.add(e.getKey(), e.getValue()));
                 }
                 yield Optional.of(merged);
             }
             case "skills.json" -> {
                 JsonObject merged = new JsonObject();
-                read.apply(Path.of(PARTS, tab, file)).getAsJsonObject().entrySet().forEach(e -> merged.add(e.getKey(), e.getValue()));
-                read.apply(Path.of(PARTS, "base_" + a, file)).getAsJsonObject().entrySet().forEach(e -> merged.add(e.getKey(), e.getValue()));
-                read.apply(Path.of(PARTS, "base_" + b, file)).getAsJsonObject().entrySet().forEach(e -> {
+                read.apply(Path.of(parts, own, file)).getAsJsonObject().entrySet().forEach(e -> merged.add(e.getKey(), e.getValue()));
+                read.apply(Path.of(parts, "base_" + a, file)).getAsJsonObject().entrySet().forEach(e -> merged.add(e.getKey(), e.getValue()));
+                read.apply(Path.of(parts, "base_" + b, file)).getAsJsonObject().entrySet().forEach(e -> {
                     JsonObject skill = e.getValue().getAsJsonObject().deepCopy();
                     skill.addProperty("x", -skill.get("x").getAsDouble());
                     merged.add(e.getKey(), skill);
@@ -91,8 +96,8 @@ public final class VocationParts {
             }
             case "connections.json" -> {
                 JsonArray links = new JsonArray();
-                for (String part : new String[]{tab, "base_" + a, "base_" + b}) {
-                    links.addAll(read.apply(Path.of(PARTS, part, file)).getAsJsonObject()
+                for (String part : new String[]{own, "base_" + a, "base_" + b}) {
+                    links.addAll(read.apply(Path.of(parts, part, file)).getAsJsonObject()
                         .getAsJsonObject("normal").getAsJsonArray("bidirectional"));
                 }
                 JsonObject normal = new JsonObject();
@@ -106,7 +111,13 @@ public final class VocationParts {
     }
 
     private static JsonObject readIndex() {
-        String path = "/data/mdvlcraft/puffish_skills/" + PARTS + "/vocations.json";
+        JsonObject index = readIndex(PARTS + "/vocations.json");
+        readIndex("origin_parts/origins.json").entrySet().forEach(e -> index.add(e.getKey(), e.getValue()));
+        return index;
+    }
+
+    private static JsonObject readIndex(String file) {
+        String path = "/data/mdvlcraft/puffish_skills/" + file;
         try (InputStream in = VocationParts.class.getResourceAsStream(path)) {
             if (in == null) {
                 throw new IllegalStateException("Missing " + path);

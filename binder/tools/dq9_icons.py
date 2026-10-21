@@ -43,7 +43,7 @@ EMBLEMS = {  # tabs and archetypes share these
     "necromancy": "skullcap", "phantom": "phantom_mask", "ranger": "great_bow", "rogue": "thiefs_turban",
     "samurai": "deadly_nightblade", "scout": "x_ray_specs", "stalker": "hunters_hat", "thief": "thiefs_key",
     "wanderer": "chimaera_wing", "warlock": "purple_orb", "warrior": "warriors_helm", "water": "dragons_tear",
-    "classes": "seed_of_skill",
+    "classes": "seed_of_skill", "origin": "warriors_workbook",
     # the vocations rework's archetypes (blaze, frost and necromancer keep the old flame, ice and necromancy emblems)
     "guardian": "white_shield", "brute": "great_helm", "berserker": "valkyrie_sword", "blaze": "flame_shield",
     "frost": "ice_crystal", "necromancer": "skullcap", "jade": "black_tortoise_fan", "spirit": "angel_bell",

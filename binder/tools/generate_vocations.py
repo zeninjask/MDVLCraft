@@ -749,12 +749,12 @@ def ability_name_of(code):
     return CATALOG["abilities"][sid]["name"] if sid in CATALOG["abilities"] else sid
 
 
-def write_shared(index):
+def write_shared(index, origin_index=()):
     write(PARTS / "category.json", {"title": "Vocation", "description": "", "icon": tex(f"{ICON}tab/tab_classes.png"),
                                     "background": G.background(), "colors": G.colours(),
                                     "unlocked_by_default": False, "starting_points": 1})
     write(PARTS / "experience.json", G.experience())
-    write(OUT / "config.json", {"version": 3, "categories": ["archetypes"] + list(index)})
+    write(OUT / "config.json", {"version": 3, "categories": ["archetypes"] + list(index) + list(origin_index)})
 
 
 def write_planned():
@@ -814,11 +814,13 @@ def main():
     roots = build_bases(live)
     index = build_vocations(live, roots)
     build_pick_page()
-    write_shared(index)
+    import generate_origins   # imports this module; run after the bases so live_definitions is unchanged
+    origin_index = generate_origins.build()
+    write_shared(index, origin_index)
     write_planned()
     write_lang(index)
     write_spell_configs()
-    print(f"{len(index)} vocations")
+    print(f"{len(index)} vocations, {len(origin_index)} origin tabs")
 
 
 if __name__ == "__main__":
