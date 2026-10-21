@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import javax.annotation.Nullable;
-import net.minecraft.ChatFormatting;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
@@ -23,9 +21,9 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.Tags;
 
 /**
- * Execute (ability/GauntAbility.EXECUTE): the Haunted Lord seizes the creature it looks at by the neck, lifts it off its
- * feet, holds it kicking, and snaps its neck (the head flops to the side), then lets the body drop. Works on anything
- * about player-sized (not bosses) at or below half health, within REACH.
+ * Execute: attacking a creature from behind (within BEHIND degrees of straight behind it, within REACH), the Haunted Lord
+ * seizes it by the back of the neck instead, lifts it off its feet, holds it kicking, and snaps its neck (the head flops
+ * to the side), then lets the body drop. Works on anything about player-sized (not bosses), every COOLDOWN_TICKS at most.
  *
  * The Haunted Lord plays its execute animation (art/haunted_lord/source/anims.py: execute, grip); the victim is held at
  * the right hand's knuckles all along it: this side moves it there every tick, and every client places it there every
@@ -38,7 +36,9 @@ public final class GauntExecute {
     public static final int TICKS = 68;
     public static final int SNAP_TICK = 40;
     public static final int DROP_TICK = 52;
-    public static final int COOLDOWN_TICKS = 600;
+    public static final int COOLDOWN_TICKS = 200;
+    /** How far round from straight behind the Haunted Lord may stand (degrees). */
+    private static final double BEHIND = 70.0;
     /** The neck snap's crack is this far into its sound (tools/haunted_lord/sounds.py). */
     private static final int SNAP_SOUND_LEAD = 6;
     private static final double REACH = 3.5;
@@ -114,14 +114,14 @@ public final class GauntExecute {
         return SERVER.containsKey(player.getUUID());
     }
 
-    public static void start(ServerPlayer player) {
+    /** Attacking from behind a creature executes it instead (gaunt/GauntAttack.press asks first); false when it can't. */
+    public static boolean tryFromBehind(ServerPlayer player) {
         if (busy(player) || GauntAttack.busy(player) || !GauntLeap.executeReady(player)) {
-            return;
+            return false;
         }
         LivingEntity victim = target(player);
         if (victim == null) {
-            player.displayClientMessage(Component.translatable("ability.mdvlcraft.gaunt_execute.none").withStyle(ChatFormatting.RED), true);
-            return;
+            return false;
         }
         Vec3 to = victim.position().subtract(player.position());
         float yaw = (float)(Mth.atan2(to.z, to.x) * Mth.RAD_TO_DEG) - 90.0F;
@@ -141,9 +141,11 @@ public final class GauntExecute {
         hold(player, state, 0);
         GauntLeap.executeUsed(player);
         BinderNetwork.sendToTrackingAndSelf(player, new GauntActionPacket(player.getId(), ANIMATION, 0, victim.getId(), yaw));
+        return true;
     }
 
-    /** The living thing the player looks at within reach that can be executed, if any. */
+    /** The living thing the player looks at within reach, from behind it (within BEHIND degrees of straight behind),
+     * that can be executed, if any. */
     @Nullable
     private static LivingEntity target(ServerPlayer player) {
         Vec3 eye = player.getEyePosition();
@@ -157,16 +159,20 @@ public final class GauntExecute {
         boolean protectedPlayer = victim instanceof Player other && (other.isCreative() || other.isSpectator());
         boolean taken = SERVER.values().stream().anyMatch(state -> state.victim == victim);
         if (protectedPlayer || taken || victim.isInvulnerable() || victim.getType().is(Tags.EntityTypes.BOSSES) || victim.getBbHeight() > 2.2F
-            || victim.getBbWidth() > 1.0F || victim.getHealth() > victim.getMaxHealth() * 0.5F) {
+            || victim.getBbWidth() > 1.0F) {
             return null;
         }
-        return victim;
+        Vec3 toPlayer = player.position().subtract(victim.position()).multiply(1.0, 0.0, 1.0);
+        float body = victim.yBodyRot * Mth.DEG_TO_RAD;
+        Vec3 facing = new Vec3(-Mth.sin(body), 0.0, Mth.cos(body));
+        boolean behind = toPlayer.lengthSqr() > 1.0E-4 && toPlayer.normalize().dot(facing) < -Math.cos(Math.toRadians(BEHIND));
+        return behind ? victim : null;
     }
 
     private static void hold(ServerPlayer player, State state, int ticks) {
         LivingEntity victim = state.victim;
         Vec3 at = victimAt(player.position(), state.yaw, ticks / 20.0F, victim);
-        float facing = state.yaw + 180.0F;
+        float facing = state.yaw;      // seized from behind: it keeps facing away
         if (victim instanceof ServerPlayer held) {
             held.connection.teleport(at.x, at.y, at.z, facing, held.getXRot());
         } else {

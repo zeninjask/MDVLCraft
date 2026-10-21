@@ -39,7 +39,8 @@ import yesman.epicfight.world.damagesource.StunType;
  * everyone tracking them (GauntStatePacket).
  *
  * Horrify (ability/GauntAbility.HORRIFY) lives here too, sharing that state: the Haunted Lord screeches (the cast
- * animation) and every other player within HORRIFY_RANGE blocks is blinded and slowed. So do the dodge (a hop with
+ * animation) and every other player within HORRIFY_RANGE blocks is blinded and slowed; and Faceless (cast, then
+ * invisible for FACELESS_TICKS). So do the dodge (a hop with
  * DODGE_IFRAMES of untouchability), the guard (blows from the front deal BLOCKED_DAMAGE of their damage) and the parry (a
  * blow within PARRY_TICKS of raising the guard is turned aside and the attacker staggered), and crawling onto walls and
  * ceilings (sneaking into them: the cling, moved along the surface by the client, client/GauntClient).
@@ -62,12 +63,15 @@ public final class GauntLeap {
         long readyAt;
         long horrifyReadyAt;
         long executeReadyAt;
+        long facelessReadyAt;
         long blockSince = -1;
         long dodgeUntil;
         long dodgeReadyAt;
     }
 
     public static final int DODGE_COOLDOWN = 20;
+    public static final int FACELESS_TICKS = 400;
+    public static final int FACELESS_COOLDOWN_TICKS = 1200;
     private static final int DODGE_IFRAMES = 8;
     /** A blow landing this soon after the block went up is parried. */
     private static final int PARRY_TICKS = 6;
@@ -165,6 +169,20 @@ public final class GauntLeap {
     static void executeUsed(ServerPlayer player) {
         State state = state(player);
         state.executeReadyAt = player.level().getGameTime() + GauntExecute.COOLDOWN_TICKS;
+        sync(player, state);
+    }
+
+    /** Faceless: the cast animation, then invisible for FACELESS_TICKS. */
+    public static void faceless(ServerPlayer player) {
+        State state = state(player);
+        long now = player.level().getGameTime();
+        if (now < state.facelessReadyAt || GauntExecute.busy(player) || GauntAttack.busy(player)) {
+            return;
+        }
+        state.facelessReadyAt = now + FACELESS_COOLDOWN_TICKS;
+        player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, FACELESS_TICKS, 0, false, false, true));
+        player.level().playSound(null, player.blockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 2.0F, 0.5F);
+        GauntForm.playCast(player);
         sync(player, state);
     }
 
@@ -325,7 +343,7 @@ public final class GauntLeap {
         State state = SERVER.remove(player.getUUID());
         if (state != null) {
             letGo(player, state);
-            BinderNetwork.sendToTrackingAndSelf(player, new GauntStatePacket(player.getId(), -1, -1, false, 0, 0, 0, false));
+            BinderNetwork.sendToTrackingAndSelf(player, new GauntStatePacket(player.getId(), -1, -1, false, 0, 0, 0, 0, false));
         }
     }
 
@@ -344,6 +362,6 @@ public final class GauntLeap {
         long now = player.level().getGameTime();
         return new GauntStatePacket(player.getId(), state.chargingSince < 0 ? -1 : (int)(now - state.chargingSince),
             state.cling == null ? -1 : state.cling.get3DDataValue(), state.leaping, (int)Math.max(0, state.readyAt - now),
-            (int)Math.max(0, state.horrifyReadyAt - now), (int)Math.max(0, state.executeReadyAt - now), state.blockSince >= 0);
+            (int)Math.max(0, state.horrifyReadyAt - now), (int)Math.max(0, state.executeReadyAt - now), (int)Math.max(0, state.facelessReadyAt - now), state.blockSince >= 0);
     }
 }

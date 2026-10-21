@@ -91,6 +91,8 @@ public final class GauntClient {
         int horrifyCooldown = 1;
         long executeReadyAt;
         int executeCooldown = 1;
+        long facelessReadyAt;
+        int facelessCooldown = 1;
         boolean blocking;
         /** Distance moved while clinging (blocks), which paces the crawl on the surface. */
         float crawled;
@@ -182,6 +184,10 @@ public final class GauntClient {
             leap.horrifyReadyAt = now + packet.horrifyCooldown();
             leap.horrifyCooldown = packet.horrifyCooldown();
         }
+        if (packet.facelessCooldown() > 0) {
+            leap.facelessReadyAt = now + packet.facelessCooldown();
+            leap.facelessCooldown = packet.facelessCooldown();
+        }
         if (packet.executeCooldown() > 0) {
             leap.executeReadyAt = now + packet.executeCooldown();
             leap.executeCooldown = packet.executeCooldown();
@@ -242,6 +248,7 @@ public final class GauntClient {
         return switch (ability) {
             case LEAP -> Mth.clamp((leap.readyAt - now) / (float)leap.cooldown, 0.0F, 1.0F);
             case HORRIFY -> Mth.clamp((leap.horrifyReadyAt - now) / (float)leap.horrifyCooldown, 0.0F, 1.0F);
+            case FACELESS -> Mth.clamp((leap.facelessReadyAt - now) / (float)leap.facelessCooldown, 0.0F, 1.0F);
             default -> Mth.clamp((leap.executeReadyAt - now) / (float)leap.executeCooldown, 0.0F, 1.0F);
         };
     }
@@ -316,7 +323,7 @@ public final class GauntClient {
             victim.xo = victim.xOld = at.x;
             victim.yo = victim.yOld = at.y;
             victim.zo = victim.zOld = at.z;
-            float facing = action.yaw + 180.0F;
+            float facing = action.yaw;      // seized from behind (gaunt/GauntExecute)
             boolean snapped = t * 20.0F >= GauntExecute.SNAP_TICK;
             victim.yBodyRot = victim.yBodyRotO = facing;
             victim.yHeadRot = victim.yHeadRotO = facing + (snapped ? 80.0F : 0.0F);

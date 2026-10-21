@@ -84,6 +84,10 @@ public final class GauntAttack {
         }
         State state = SERVER.computeIfAbsent(player.getUUID(), id -> new State());
         long now = player.level().getGameTime();
+        if ((state.kind == null || now - state.start >= state.kind.next) && player.onGround() && GauntExecute.tryFromBehind(player)) {
+            state.queued = false;
+            return;
+        }
         if (state.kind != null && now - state.start < state.kind.next) {
             if (state.kind.next - (now - state.start) <= BUFFER_TICKS) {
                 state.queued = true;
