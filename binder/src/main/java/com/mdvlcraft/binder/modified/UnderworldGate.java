@@ -12,10 +12,12 @@ import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
+import net.minecraftforge.common.util.FakePlayer;
 import yesman.epicfight.world.damagesource.StunType;
 
 /**
- * Underworld Gate (Shinigami): players only. Opens the open Malevolent Shrine for 10 s (cutting the whole time),
+ * Underworld Gate (Shinigami): real players only (a fake player, such as the spell preview's, has no Cursed Fate data to
+ * open the shrine with). Opens the open Malevolent Shrine for 10 s (cutting the whole time),
  * roots everything within 12 blocks for 4 s and turns the caster invisible for 10 s. The roots are effects, not Iron's
  * root entity, so a rooted mob stays on the ground and can still be executed; its guard is broken as the gate opens.
  */
@@ -29,12 +31,12 @@ public class UnderworldGate extends ModifiedSpell {
 
     @Override
     public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity caster, MagicData data) {
-        return caster instanceof ServerPlayer;
+        return caster instanceof ServerPlayer && !(caster instanceof FakePlayer);
     }
 
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
-        if (caster instanceof ServerPlayer player && level instanceof ServerLevel server) {
+        if (caster instanceof ServerPlayer player && !(player instanceof FakePlayer) && level instanceof ServerLevel server) {
             if (ShrineGate.open(player)) {
                 Zones.start(server, player.position(), player, 0.0F, TICKS, 1000, zone -> {
                 }, () -> ShrineGate.close(player), null);
