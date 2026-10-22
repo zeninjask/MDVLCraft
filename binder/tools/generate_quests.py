@@ -89,6 +89,20 @@ def compass(struct, dim, name):
 ARENA_LAIRS = {'traveloptics:void_cathedral'}
 
 
+# Cataclysm lairs: Cataclysm Dimension moves each into a world of its own (at its 0,0), entered by sneaking and using the
+# lair's Cataclysm eye (crafted; the party comes along, integration/PartyTravel); a compass in the old dimension finds nothing.
+CATACLYSM_EYES = {
+    'cataclysm:ancient_factory': ('cataclysm:mech_eye', 'Mech Eye', 'the Forge of Aeons'),
+    'cataclysm:soul_black_smith': ('cataclysm:monstrous_eye', 'Monstrous Eye', "the Soul's Anvil"),
+    'cataclysm:burning_arena': ('cataclysm:flame_eye', 'Flame Eye', "the Inferno's Maw"),
+    'cataclysm:cursed_pyramid': ('cataclysm:desert_eye', 'Desert Eye', "the Pharaoh's Bane"),
+    'cataclysm:frosted_prison': ('cataclysm:cursed_eye', 'Cursed Eye', 'the Eternal Frosthold'),
+    'cataclysm:sunken_city': ('cataclysm:abyss_eye', 'Abyss Eye', 'the Abyssal Depths'),
+    'cataclysm:ruined_citadel': ('cataclysm:void_eye', 'Void Eye', 'the Bastion Lost'),
+    'cataclysm:acropolis': ('cataclysm:storm_eye', 'Storm Eye', 'the Sanctum Fallen'),
+}
+
+
 def arena_lair(struct):
     return struct.startswith('legendary_monsters:') or struct in ARENA_LAIRS
 
@@ -365,6 +379,10 @@ def tier_chapter(tier, gate):
                 if arena_lair(struct):
                     rewards.append(sigil(b['entity'], strip_article(b['name'])))
                     desc = desc + ' Reward: a Boss Sigil that takes you and your party to its arena.'
+                elif struct in CATACLYSM_EYES:
+                    eye, eye_name, world = CATACLYSM_EYES[struct]
+                    rewards.append(give(eye))
+                    desc = desc + f' Reward: a {eye_name}. Sneak and use it to travel to {world}, with your party.'
                 else:
                     rewards.append(compass(struct, dim, strip_article(b['name'])))
                     desc = desc + ' Reward: a compass to the lair.'
@@ -374,6 +392,10 @@ def tier_chapter(tier, gate):
         hint = b['hint']
         if b['lair'] and arena_lair(b['lair'][0]):
             hint = 'Use its Boss Sigil (the reward of the quest before) to face it in an arena, with your party.'
+        elif b['lair'] and b['lair'][0] in CATACLYSM_EYES:
+            _, eye_name, world = CATACLYSM_EYES[b['lair'][0]]
+            hint = (f'Its lair lies in {world}, a world of its own. Sneak and use a {eye_name} (the reward of the quest before, '
+                    f'or crafted) to travel there with your party; the Return Crystal it drops brings you home.')
         kq = Quest(f'{b["key"]}_kill', f'Defeat {b["name"]}', bx, 5.25, [kill(b['entity'], 1)], [crate(tier), xp(250 * tier)],
                    [hint], [prev_id], icon=b['icon'], shape='octagon', size=1.5)
         q.append(kq)
@@ -521,7 +543,7 @@ def main(base=os.path.join(REPO, 'base')):
         write_book(chapters, os.path.join(base, side, 'overrides', 'config', 'ftbquests', 'quests'))
     write_level_advancements()
     write_crates()
-    print(f'{len(chapters)} chapters, {len(ids)} quests, {sum(1 for b in B if b["lair"])} lair compasses')
+    print(f'{len(chapters)} chapters, {len(ids)} quests, {sum(1 for b in B if b["lair"] and not arena_lair(b["lair"][0]) and b["lair"][0] not in CATACLYSM_EYES)} lair compasses')
 
 
 if __name__ == '__main__':
