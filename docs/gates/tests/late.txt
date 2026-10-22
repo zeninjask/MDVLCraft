@@ -1,0 +1,117 @@
+wait 60
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd effect give Tester minecraft:saturation 99999 1 true
+cmd scoreboard objectives add late dummy
+cmd clear Tester
+cmd give Tester mdvlcraft:gate_key_s
+wait 2
+cmd execute store result score #mods late run data get entity Tester Inventory[{id:"mdvlcraft:gate_key_s"}].tag.modifiers
+cmd execute if score #mods late matches 1..3 run say KEY_ROLLED_OK
+cmd give Tester mdvlcraft:gate_key_a
+wait 2
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:gate_key_a",tag:{}}]}] run say KEY_A_ROLLED_OK
+cmd clear Tester
+cmd execute as Tester run mdvl gate late key S enraged,crimson
+cmd item replace entity Tester weapon.mainhand from entity Tester container.0
+cmd item replace entity Tester container.0 with minecraft:air
+cmd data get entity Tester SelectedItem.tag.modifiers
+cmd execute as Tester at @s run setblock ^ ^ ^2 mdvlcraft:gate_forge
+cmd give Tester mdvlcraft:essence_stone_a 4
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 45
+wait 2
+click 3
+wait 2
+cmd execute unless entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:essence_stone_a"}]}] run say REROLL_PAID_OK
+cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"mdvlcraft:gate_key_s"}}] run say REROLL_KEY_KEPT_OK
+cmd data get entity Tester SelectedItem.tag.modifiers
+cmd execute as Tester at @s run setblock ^ ^ ^2 minecraft:air
+cmd clear Tester
+cmd execute as Tester at @s run mdvl gate late open S crypt ironclad,swarming,enraged,volatile
+wait 10
+cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
+wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say MOD_GATE_ENTERED_OK
+cmd execute as Tester run mdvl gate late info
+cmd execute as Tester at @s run mdvl gate testroom
+wait 4
+cmd execute store result score #mobs late if entity @e[tag=mdvlcraft_gate]
+cmd scoreboard players get #mobs late
+cmd execute if score #mobs late matches 12.. run say SWARMING_OK
+cmd execute if entity @e[tag=mdvlcraft_gate,nbt={Attributes:[{Name:"minecraft:generic.armor",Modifiers:[{Name:"gate modifier armour"}]}]}] run say IRONCLAD_OK
+shot modifier_room
+cmd execute as Tester at @s run kill @e[tag=mdvlcraft_gate,limit=1,sort=nearest]
+wait 1
+shot volatile_burst
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester at @s run mdvl gate late open S crypt elite_pack
+wait 10
+cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
+wait 20
+cmd kill @e[tag=mdvlcraft_gate]
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester at @s run mdvl gate late open S crypt none no_potions
+wait 10
+cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
+wait 3
+shot trial_title
+wait 17
+cmd execute as Tester run mdvl gate late info
+cmd execute as Tester at @s if entity @e[type=minecraft:text_display,tag=mdvlcraft_gate_tablet,distance=..8] run say TABLET_OK
+cmd execute as Tester at @s anchored eyes facing entity @e[type=minecraft:text_display,tag=mdvlcraft_gate_tablet,limit=1,sort=nearest] eyes run tp @s ~ ~ ~ ~ ~
+wait 2
+shot trial_tablet
+cmd item replace entity Tester weapon.mainhand with minecraft:potion{Potion:"minecraft:strength"}
+cmd execute as Tester at @s run tp @s ~ ~ ~ ~ -90
+wait 2
+mdown 3
+wait 3
+mup 3
+wait 1
+cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"minecraft:potion"}}] unless entity @a[name=Tester,nbt={active_effects:[{id:"minecraft:strength"}]}] run say NO_POTIONS_OK
+cmd execute as Tester at @s run mdvl gate reward clear
+wait 2
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:gate_trophy"}]}] run say TROPHY_OK
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester at @s run mdvl gate late open S crypt none no_healing
+wait 10
+cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
+wait 20
+cmd effect clear Tester minecraft:saturation
+cmd effect give Tester minecraft:hunger 3 255
+wait 4
+cmd effect clear Tester minecraft:resistance
+cmd damage Tester 6 minecraft:generic
+cmd effect give Tester minecraft:regeneration 5 3
+wait 5
+cmd execute store result score #hp late run data get entity Tester Health
+cmd scoreboard players get #hp late
+cmd execute if score #hp late matches ..15 run say NO_HEALING_OK
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd effect give Tester minecraft:saturation 99999 1 true
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester at @s run mdvl gate red place S crypt
+wait 10
+cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
+wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:red_realm run say RED_S_OK
+cmd execute as Tester run mdvl gate red lair
+wait 8
+shot red_s_lair_camps
+cmd execute as Tester run mdvl gate red boss
+wait 3
+cmd execute as Tester at @s if entity @e[distance=..64,nbt={ForgeData:{mdvlcraft_gate_hidden:1b}}] run say HIDDEN_BOSS_OK
+cmd execute as Tester at @s if dimension mdvlcraft:red_realm run say STILL_SEALED_OK
+cmd execute as Tester at @s unless entity @e[type=item,distance=..64,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say NO_BLACK_FROM_LAIR_BOSS_OK
+shot hidden_boss
+cmd execute as Tester run mdvl gate red boss
+wait 3
+cmd execute as Tester at @s if entity @e[type=item,distance=..64,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say BLACK_STONE_OK
+cmd execute as Tester run mdvl gate red lair
+wait 4
+cmd execute as Tester at @s if dimension minecraft:overworld run say RED_S_EXIT_OK
+cmd mdvl gate list

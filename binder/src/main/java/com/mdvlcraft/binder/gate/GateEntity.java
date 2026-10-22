@@ -190,6 +190,9 @@ public class GateEntity extends Entity {
         if (instance.roster.isEmpty() && RedGates.roll(player, this, gates, instance)) {
             return;
         }
+        if (instance.roster.isEmpty()) {
+            RuleGates.roll(player, instance);   // late game: an S gate that stayed normal may become a trial gate
+        }
         GateTravel.enter(player, instance, this.returnPoint());
     }
 

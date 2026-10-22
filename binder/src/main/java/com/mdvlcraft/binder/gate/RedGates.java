@@ -58,7 +58,7 @@ public final class RedGates {
             return false;
         }
         boolean forced = FORCED.remove(instance.id);
-        if (!forced && player.getRandom().nextDouble() >= chance(instance.rank)) {
+        if (!forced && player.getRandom().nextDouble() >= chance(instance.rank) * GateModifiers.redFactor(instance.id)) {   // Crimson raises it
             return false;
         }
         Instance red = convert(player.server, instance, gate);
@@ -106,6 +106,7 @@ public final class RedGates {
         red.gateDimension = old.gateDimension;
         red.gatePos = old.gatePos;
         red.roster.addAll(old.roster);
+        GateModifiers.carry(old.id, red.id);   // modifiers (and a trial rule) stay with the gate
         GateBuilder.build(realm, red);
         red.built = true;
         red.state = GateInstances.State.ACTIVE;
@@ -248,6 +249,9 @@ public final class RedGates {
         Layout layout = RedLandscape.LAYOUTS.get(id);
         if (instance != null && instance.red && layout != null && instance.state == GateInstances.State.ACTIVE
             && dead.getPersistentData().getBoolean(RedLandscape.BOSS_TAG)) {
+            if (HiddenBoss.rise(level, instance, layout, dead)) {
+                return;   // a red S gate's hidden boss rises; the seal holds until it dies
+            }
             breakSeal(level, gates, instance, layout);
         }
     }
