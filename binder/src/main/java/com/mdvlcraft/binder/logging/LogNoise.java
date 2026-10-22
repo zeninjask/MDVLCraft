@@ -44,7 +44,11 @@ public final class LogNoise extends AbstractFilter {
         "^Datapack animation reading failed: No constructor information",
         "^defineId called for: class .* from class yesman\\.epicfight",
         "^Can't find a particle type epicfight:",
-        "^Skill p1nero_ec:step doesn't exist",
+        "^Skill [a-z0-9_]+:[a-z0-9_/]+ doesn't exist in the registry",
+        "^Item Capability Exception: No item named ",
+        "^\\[SLM EpicFight\\] No valid data folder found",
+        "^\\[Data Finder\\] Directory not found",
+        "^(=+ KRYPTON FNP =+|=+|Do not send messages about your game malfunctioning due to KryptonFNP.*|The author is unaware of this bug.*|Please send feedback via CurseForge.*)$",
         "^\\[SL Library\\] Mod not present:",
         // data of mods the pack only partly has
         "^Tag alshanex_familiars:.* is not known/registered",
@@ -97,7 +101,7 @@ public final class LogNoise extends AbstractFilter {
                 }
             }
         } catch (RuntimeException | LinkageError e) {
-            System.out.println("[mdvlcraft] LogNoise found no logging context: " + e);
+            // logging must never stop the game from starting
         }
         for (LoggerContext context : contexts) {
             try {
@@ -116,10 +120,9 @@ public final class LogNoise extends AbstractFilter {
                 }
                 context.updateLoggers();
             } catch (RuntimeException | LinkageError e) {
-                System.out.println("[mdvlcraft] LogNoise could not filter " + context + ": " + e);
+                // as above
             }
         }
-        System.out.println("[mdvlcraft] LogNoise filtering " + contexts.size() + " logging context(s): " + contexts);
     }
 
     private static boolean containsSelf(Filter filter) {
