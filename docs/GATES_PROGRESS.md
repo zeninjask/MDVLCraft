@@ -173,6 +173,11 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-22 night, gate 82c58f49 jar (before late2/themes2), `rewards.txt` (refreshed): **10/13**. Misses:
+  CHEST_PLACED (the chest was placed and opened — Tester ended up standing on it at y 67 and the check looks at the
+  block Tester stands in; step geometry), RED_B_STONES and BLACK_FROM_HIDDEN_BOSS (no stones seen 2 s after killing a
+  zombie tagged boss in the red B gate; a "Killed B-Rank Essence Stone" line appears later, so drops may be late or
+  the check radius/timing is off — to investigate).
 - 2026-10-22 night, gate eb946404 jar (2.0.40 + tower2), `spawner.txt` (refreshed steps): **9/9 PASS**.
 - 2026-10-22 night, 2.0.40 jar, `late.txt`: 12 markers PASS (KEY_IN_HAND, KEY_ROLLED, KEY_A_ROLLED, REROLL_KEY_KEPT,
   SWARMING, IRONCLAD, MOD_GATE_CLOSED, TRIAL_ENTERED, TABLET, NO_POTIONS, TROPHY, RED_S), then **the server crashed** in
