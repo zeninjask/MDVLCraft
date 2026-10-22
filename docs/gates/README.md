@@ -14,7 +14,11 @@ this folder, and its own files. The coordinator merges parts into `gate`, runs t
 | **Combat finish (3b rest, 5.4–5.5)** | `gate-combat` | `combat.md` | `gate/GateCombat`, `gate/GateSpawner`, `gate/GateMobs`, `gate/GateSpawnCommand`: boss-room doors, boss bars, party wipe and death/logout rules, health cap |
 | **Themes (phase 6)** | `gate-themes` | `themes.md` | `data/mdvlcraft/gate_themes/`, its loader, `gate/GateBuilder`, `gate/DungeonPlanner`, room templates and their generators, theme hazards |
 | **Late game (phase 7)** | `gate-late` | `late.md` | gate modifiers (`data/mdvlcraft/gate_modifiers/`), red S gates (hidden boss, black essence), rule gates; new classes of its own |
-| **Demon Castle tower (phase 8)** | `gate-tower` | `tower.md` | the tower: `gate/tower/` (new), the `demon_castle` dimension's use, Castle Sigil, floor saves |
+| Demon Castle tower (phase 8, merged) | `gate-tower` | `tower.md` | the tower: `gate/tower/` (new), the `demon_castle` dimension's use, Castle Sigil, floor saves |
+| **Tower finish (round 3)** | `gate-tower2` | `tower.md` | `gate/tower/`: seal trades at the Gate Forge (hook in GateRewards' forge), tower modifiers every 10 floors, floor-55 hidden boss |
+| **Themes finish (round 3)** | `gate-themes2` | `themes.md` | rank ranges per theme for unattuned keys, hand-built red lair/camp templates, red A/B hidden boss and veins |
+| **Late/combat finish (round 3)** | `gate-late2` | `late.md` | Statues and Narrowing Door rules, trial ×1.5 boss chest, downed (PlayerRevive) players count as gone for wipe detection |
+| **Test steps (round 3)** | `gate-tests` | `tests.md` | `docs/gates/tests/*.txt` only: bring stale steps up to date with the merged code |
 
 ## Usage limit rule (always)
 
