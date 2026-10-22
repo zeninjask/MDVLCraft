@@ -1,0 +1,197 @@
+{
+  "name": "gate.mdvlcraft.theme.forge",
+  "biome": "mdvlcraft:gate_forge",
+  "music": "minecraft:music.nether.nether_wastes",
+  "catalyst": "minecraft:magma_block",
+  "hazard": {
+    "hunger": 1.0
+  },
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/forge/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/forge/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/forge/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/forge/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/forge/combat_small_1",
+      "mdvlcraft:gate/forge/combat_small_2",
+      "mdvlcraft:gate/forge/combat_small_3"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/forge/combat_large_1",
+      "mdvlcraft:gate/forge/combat_large_2",
+      "mdvlcraft:gate/forge/combat_large_3"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/forge/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/forge/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/forge/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/forge/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/forge/boss_large_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "minecraft:magma_cube",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:flameborn_warrior",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:blaze",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:flameborn_guard",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "legendary_monsters:flameborn_warrior",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:wither_skeleton",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:blaze",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:flame_drifter",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:flameborn_guard",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:ignited_berserker",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "legendary_monsters:flameborn_warrior",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:ignited_berserker",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:wither_skeleton",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "legendary_monsters:flame_drifter",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:blaze",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "cataclysm:ignited_berserker",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:flameborn_guard",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "legendary_monsters:lava_eater",
+      "count": 1,
+      "size": "large"
+    },
+    "D": {
+      "id": "legendary_monsters:lava_eater",
+      "count": 1,
+      "size": "large"
+    },
+    "C": {
+      "id": "legendary_monsters:lava_eater",
+      "count": 1,
+      "size": "large"
+    },
+    "B": {
+      "id": "legendary_monsters:lava_eater",
+      "count": 1,
+      "size": "large"
+    },
+    "A": {
+      "id": "cataclysm:netherite_monstrosity",
+      "count": 1,
+      "size": "large"
+    },
+    "S": {
+      "id": "irons_spellbooks:fire_boss",
+      "count": 1,
+      "size": "medium"
+    }
+  },
+  "red": {
+    "landscape": "lava fields",
+    "palette": {
+      "floor": "minecraft:polished_blackstone",
+      "pillar": "minecraft:polished_blackstone_bricks",
+      "light": "minecraft:shroomlight",
+      "campfire": "minecraft:soul_campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:blaze",
+      "minecraft:magma_cube",
+      "minecraft:wither_skeleton"
+    ],
+    "stand_in_boss": "minecraft:blaze"
+  }
+}

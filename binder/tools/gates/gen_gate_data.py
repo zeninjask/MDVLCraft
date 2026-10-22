@@ -19,6 +19,11 @@ THEMES = {
     'spire':   (0x3a2a5a, 0x4a3a6a, 0x3a3aaa, 'minecraft:enchant', 0.004, False, 0.7, 'minecraft:music.end', None),
     'forge':   (0x5a1a0a, 0x6a2410, 0x8a2a0a, 'minecraft:lava', 0.002, False, 2.0, 'minecraft:music.nether.nether_wastes', 'minecraft:ambient.nether_wastes.loop'),
 }
+# the theme files (data/mdvlcraft/gate_themes/<theme>.json) own the music
+for _key, _look in list(THEMES.items()):
+    _file = ROOT / 'gate_themes' / f'{_key}.json'
+    if _file.exists():
+        THEMES[_key] = _look[:7] + (json.loads(_file.read_text()).get('music', _look[7]),) + _look[8:]
 CASTLE = (0x2a0a0a, 0x3a0c0c, 0x4a0a0a, 'minecraft:ash', 0.006, False, 1.0, 'minecraft:music.nether.crimson_forest', 'minecraft:ambient.crimson_forest.loop')
 # red realm ground per theme biome: (top, top patches, below the top, steep slopes, all stone below or None)
 RED_GROUND = {

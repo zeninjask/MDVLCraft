@@ -1,0 +1,190 @@
+{
+  "name": "gate.mdvlcraft.theme.frozen",
+  "biome": "mdvlcraft:gate_frozen",
+  "music": "minecraft:music.overworld.snowy_slopes",
+  "catalyst": "minecraft:packed_ice",
+  "hazard": {
+    "cold": true,
+    "hunger": 0.5
+  },
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/frozen/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/frozen/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/frozen/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/frozen/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/frozen/combat_small_1",
+      "mdvlcraft:gate/frozen/combat_small_2",
+      "mdvlcraft:gate/frozen/combat_small_3"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/frozen/combat_large_1",
+      "mdvlcraft:gate/frozen/combat_large_2",
+      "mdvlcraft:gate/frozen/combat_large_3"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/frozen/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/frozen/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/frozen/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/frozen/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/frozen/boss_large_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "minecraft:stray",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:draugr",
+          "weight": 1
+        },
+        {
+          "id": "wom:lycanth",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:stray",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "cataclysm:draugr",
+          "weight": 1
+        },
+        {
+          "id": "wom:lycanth",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:royal_draugr",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:stray",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:elite_draugr",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:frostbitten_golem",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "cataclysm:royal_draugr",
+          "weight": 1
+        },
+        {
+          "id": "wom:lycanth",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:elite_draugr",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:frostbitten_golem",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "legendary_monsters:frostbitten_golem",
+      "count": 1,
+      "size": "large"
+    },
+    "D": {
+      "id": "legendary_monsters:frostbitten_golem",
+      "count": 1,
+      "size": "large"
+    },
+    "C": {
+      "id": "legendary_monsters:frostbitten_golem",
+      "count": 1,
+      "size": "large"
+    },
+    "B": {
+      "id": "cataclysm:maledictus",
+      "count": 1,
+      "size": "large"
+    },
+    "A": {
+      "id": "cataclysm:maledictus",
+      "count": 1,
+      "size": "large"
+    },
+    "S": {
+      "id": "cataclysm:maledictus",
+      "count": 1,
+      "size": "large"
+    }
+  },
+  "red": {
+    "landscape": "snowfield",
+    "palette": {
+      "floor": "minecraft:snow_block",
+      "pillar": "minecraft:packed_ice",
+      "light": "minecraft:sea_lantern",
+      "campfire": "minecraft:campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:stray",
+      "minecraft:skeleton",
+      "minecraft:zombie"
+    ],
+    "stand_in_boss": "minecraft:ravager"
+  }
+}

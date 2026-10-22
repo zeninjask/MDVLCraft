@@ -18,6 +18,11 @@ THEMES = {
     'spire': ('Mage Spire', 'minecraft:lapis_block'),
     'forge': ('Infernal Forge', 'minecraft:magma_block'),
 }
+# the theme files (data/mdvlcraft/gate_themes/<theme>.json) own the catalysts
+for _theme, (_name, _catalyst) in list(THEMES.items()):
+    _file = DATA / 'gate_themes' / f'{_theme}.json'
+    if _file.exists():
+        THEMES[_theme] = (_name, json.loads(_file.read_text()).get('catalyst', _catalyst))
 # key recipes: rank -> extra ingredients besides the rank below's essence stones and mana crystals (E has its own recipe).
 # The plan's 8 stones + 4 crystals + extras don't fit a 3x3 grid: 4 stones + 4 crystals + 1 extra, or 4 + 3 + 2 extras.
 KEY_EXTRAS = {

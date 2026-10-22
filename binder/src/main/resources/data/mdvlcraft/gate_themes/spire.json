@@ -1,0 +1,215 @@
+{
+  "name": "gate.mdvlcraft.theme.spire",
+  "biome": "mdvlcraft:gate_spire",
+  "music": "minecraft:music.end",
+  "catalyst": "minecraft:lapis_block",
+  "hazard": {},
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/spire/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/spire/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/spire/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/spire/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/spire/combat_small_1",
+      "mdvlcraft:gate/spire/combat_small_2",
+      "mdvlcraft:gate/spire/combat_small_3"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/spire/combat_large_1",
+      "mdvlcraft:gate/spire/combat_large_2",
+      "mdvlcraft:gate/spire/combat_large_3"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/spire/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/spire/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/spire/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/spire/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/spire/boss_large_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_ashigaru",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:taoist",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_ashigaru",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:necromancer",
+          "weight": 1
+        },
+        {
+          "id": "iss_elden_ring:astrologer",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:onmyoji",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        },
+        {
+          "id": "iss_elden_ring:astrologer",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:fading_mage",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:aquamancer",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "esoteric_spell:esoteric_sorcerer",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:aqua_grandmaster",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "D": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "C": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "B": {
+      "id": "iss_magicfromtheeast:jade_executioner",
+      "count": 1,
+      "size": "medium"
+    },
+    "A": {
+      "id": "traveloptics:the_nightwarden",
+      "count": 1,
+      "size": "large"
+    },
+    "S": {
+      "id": "traveloptics:the_nightwarden",
+      "count": 1,
+      "size": "large"
+    }
+  },
+  "red": {
+    "landscape": "ruined city",
+    "palette": {
+      "floor": "minecraft:purpur_block",
+      "pillar": "minecraft:purpur_pillar",
+      "light": "minecraft:sea_lantern",
+      "campfire": "minecraft:soul_campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:witch",
+      "minecraft:vindicator",
+      "minecraft:pillager"
+    ],
+    "stand_in_boss": "minecraft:evoker"
+  }
+}

@@ -29,8 +29,9 @@ import org.slf4j.Logger;
 
 /**
  * Builds and clears what is inside an instance's cell (plan sections 5.1–5.2). In the gate realm it lays out the dungeon
- * DungeonPlanner plans: room templates (data/mdvlcraft/structures/gate/<theme>/<kind>_<n>.nbt, written by
- * tools/gates/gen_gate_rooms.py) set edge to edge around the cell centre, one room every 2 ticks from a server-wide queue
+ * DungeonPlanner plans: room templates from the theme file's pool for each kind (GateThemes; by default
+ * data/mdvlcraft/structures/gate/<theme>/<kind>_<n>.nbt, written by tools/gates/gen_gate_rooms.py; the boss room is the
+ * one for the boss's size class) set edge to edge around the cell centre, one room every 2 ticks from a server-wide queue
  * so a big gate doesn't stall the server. Each room's data markers are recorded in the instance (never placed), its unused
  * doorways are walled up, and once the last room is down the instance is `built` (GateEntity then lets it go ACTIVE).
  * In the red realm it stands the entry on the realm's own terrain at the cell centre (red gates are phase 5's).
@@ -77,7 +78,8 @@ public final class GateBuilder {
         instance.rooms.clear();
         instance.markers.clear();
         instance.built = false;
-        List<DungeonPlanner.Piece> pieces = DungeonPlanner.plan(instance.id, instance.rank, kind -> variants(level, instance.theme, kind));
+        List<DungeonPlanner.Piece> pieces = DungeonPlanner.plan(instance.id, instance.rank, bossKind(level, instance),
+            kind -> variants(level, instance.theme, kind));
         instance.entry = centre.above(2);   // until the entrance is down
         for (DungeonPlanner.Piece piece : pieces) {
             QUEUE.add(new Step(instance.id, true, () -> place(level, instance, centre, piece)));
@@ -128,21 +130,43 @@ public final class GateBuilder {
         VARIANTS.clear();
     }
 
+    /** The template of a planned piece ("combat_small_2"): the theme file's pool entry for its kind, or, for a kind the
+     * file doesn't list, gate/(theme)/(kind)_(n) (the generator's own naming). */
     private static ResourceLocation template(GateTheme theme, String name) {
+        int cut = name.lastIndexOf('_');
+        List<ResourceLocation> pool = GateThemes.rooms(theme, name.substring(0, cut));
+        if (!pool.isEmpty()) {
+            int n = Integer.parseInt(name.substring(cut + 1));
+            return pool.get(Math.min(Math.max(n, 1), pool.size()) - 1);
+        }
         return ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gate/" + theme.key() + "/" + name);
     }
 
+    /** How many templates the theme has of a kind: its file's pool, else those found as gate/(theme)/(kind)_1, _2 ... */
     private static int variants(ServerLevel level, GateTheme theme, String kind) {
+        List<ResourceLocation> pool = GateThemes.rooms(theme, kind);
+        if (!pool.isEmpty()) {
+            return pool.size();
+        }
         return VARIANTS.computeIfAbsent(theme.key() + "/" + kind, k -> {
             int n = 0;
             while (level.getStructureManager().get(template(theme, kind + "_" + (n + 1))).isPresent()) {
                 n++;
             }
-            if (n == 0) {
-                LOGGER.warn("Gate theme {} has no {} room templates", theme.key(), kind);
-            }
             return n;
         });
+    }
+
+    /** The boss room kind for the instance's boss (plan 5.1: one boss room per boss size class): boss_(size), else
+     * boss_medium, else the plain "boss" kind of older template sets. */
+    private static String bossKind(ServerLevel level, Instance instance) {
+        for (String kind : List.of("boss_" + GateThemes.bossSize(instance.theme, instance.rank), "boss_medium", "boss")) {
+            if (variants(level, instance.theme, kind) > 0) {
+                return kind;
+            }
+        }
+        LOGGER.warn("Gate theme {} has no boss room templates", instance.theme.key());
+        return "boss";
     }
 
     /** Places one planned room, records its markers and walls up the doorways it doesn't use. */

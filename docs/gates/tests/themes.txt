@@ -1,0 +1,78 @@
+wait 60
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd effect give Tester minecraft:night_vision 99999 0 true
+cmd tp Tester 200.5 140 36.5 90 0
+wait 2
+cmd mdvl gate themes
+cmd mdvl gate pools
+cmd execute as Tester run mdvl gate open E crypt
+wait 10
+cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_crypt run say THEMES_E_CRYPT_BUILT_OK
+cmd execute as Tester run mdvl gate goto boss
+wait 2
+cmd execute as Tester at @s if block ~3 ~13 ~ minecraft:deepslate_tiles run say THEMES_BOSS_SMALL_ROOM_OK
+cmd execute as Tester at @s run tp @s ~ ~3 ~ 180 15
+wait 2
+shot themes_1_boss_small
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester run mdvl gate open B crypt
+wait 10
+cmd execute as Tester run mdvl gate goto boss
+wait 2
+cmd execute as Tester at @s if block ~3 ~23 ~ minecraft:deepslate_tiles run say THEMES_BOSS_MEDIUM_ROOM_OK
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester run mdvl gate open C crypt
+wait 10
+cmd execute as Tester run mdvl gate goto boss
+wait 2
+cmd execute as Tester at @s if block ~3 ~23 ~ minecraft:air if block ~3 ~30 ~ minecraft:air run say THEMES_BOSS_LARGE_ROOM_OK
+cmd execute as Tester at @s run tp @s ~ ~3 ~ 180 15
+wait 2
+shot themes_2_boss_large
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester at @s run tp @s 200.5 140 236.5 0 60
+wait 5
+cmd execute as Tester at @s run place template mdvlcraft:gate/warcamp/combat_small_3 ~-23 ~-10 ~2
+wait 3
+shot themes_3_warcamp_room
+cmd execute as Tester at @s run place template mdvlcraft:gate/forge/combat_large_3 ~-23 ~-10 ~60
+cmd execute as Tester at @s run tp @s ~ ~ ~58 0 60
+wait 3
+shot themes_4_forge_room
+cmd execute as Tester at @s run place template mdvlcraft:gate/frozen/combat_large_3 ~-23 ~-10 ~60
+cmd execute as Tester at @s run tp @s ~ ~ ~58 0 60
+wait 3
+shot themes_5_frozen_room
+cmd tp Tester 200.5 140 36.5 90 0
+wait 3
+cmd item replace entity Tester armor.chest with minecraft:air
+cmd effect clear Tester minecraft:slowness
+cmd execute as Tester run mdvl gate hazard frozen
+cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:2b}]}] run say THEMES_COLD_SLOWNESS_OK
+cmd execute as Tester at @s run setblock ~ ~-1 ~ minecraft:mycelium
+cmd execute as Tester run mdvl gate hazard warren
+cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:19b}]}] run say THEMES_SPORES_POISON_OK
+cmd effect clear Tester minecraft:poison
+cmd data get entity Tester foodExhaustionLevel
+cmd execute as Tester run mdvl gate hazard forge
+cmd data get entity Tester foodExhaustionLevel
+cmd execute as Tester run mdvl gate hazard crypt
+cmd effect clear Tester minecraft:slowness
+cmd execute as Tester run mdvl gate open B frozen red
+wait 20
+cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_frozen run say THEMES_RED_FROZEN_IN_OK
+wait 8
+cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:2b}]}] run say THEMES_RED_COLD_TICKS_OK
+cmd execute as Tester run mdvl gate red boss
+wait 5
+cmd execute as Tester run mdvl gate red lair
+wait 5
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd reload
+wait 10
+cmd mdvl gate themes
