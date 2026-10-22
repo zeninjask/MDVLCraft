@@ -11,7 +11,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
  * Underworld Gate's shrine (modified/UnderworldGate) is only the model: Cursed Fate's domain tick (its slashes, sky, music
- * and barrier) never runs for it, and it goes once the gate's time is up (also after a restart, when it was saved).
+ * and barrier) never runs for it, it is held where it was raised, and it goes once the gate's time is up (also after a
+ * restart, when it was saved).
  */
 @Mixin(value = IncompleteShrineOnTickProcedure.class, remap = false)
 public abstract class IncompleteShrineOnTickProcedureMixin {
@@ -20,6 +21,8 @@ public abstract class IncompleteShrineOnTickProcedureMixin {
         if (shrine != null && shrine.getTags().contains(UnderworldGate.SHRINE_TAG)) {
             if (shrine.tickCount >= UnderworldGate.TICKS) {
                 shrine.discard();
+            } else {
+                UnderworldGate.hold(shrine);
             }
             ci.cancel();
         }

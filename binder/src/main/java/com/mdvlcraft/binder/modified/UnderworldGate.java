@@ -8,12 +8,14 @@ import io.redspace.ironsspellbooks.entity.spells.root.RootEntity;
 import net.minecraft.commands.arguments.EntityAnchorArgument;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.Level;
@@ -24,13 +26,16 @@ import net.minecraftforge.common.util.FakePlayer;
  * Underworld Gate (Shinigami): real players only (not a fake player, such as the spell preview's). Raises a dark incomplete
  * Malevolent Shrine behind the caster for 10 s (only the model: it does not cut, see mixin/cursedfate/
  * IncompleteShrineOnTickProcedureMixin), holds every enemy within 12 blocks (party members and the caster's summons are
- * spared) in black root vines for 10 s and turns the caster invisible for 10 s.
+ * spared) in black root vines for 10 s and turns the caster invisible for 10 s. The shrine is scenery: it can't move or turn
+ * (frozen in place by the shrine tick mixin) and can't be targeted or hit (mixin/cursedfate/IncompleteShrineEntityMixin).
  */
 public class UnderworldGate extends ModifiedSpell {
     public static final int TICKS = 200;
     /** Tag of the gate's shrine; texture assets/cursedfate/textures/entities/underworld_shrine.png (tools/underworld_tex.py). */
     public static final String SHRINE_TAG = "mdvlcraft_underworld_gate";
-    private static final String SHRINE_TEXTURE = "underworld_shrine";
+    public static final String SHRINE_TEXTURE = "underworld_shrine";
+    /** Where the shrine stands and faces (x, y, z, yaw), kept in its persistent data so it stays put. */
+    public static final String SHRINE_SPOT = "mdvlcraft_gate_spot";
 
     public UnderworldGate() {
         super("underworld_gate", 0);
@@ -68,5 +73,31 @@ public class UnderworldGate extends ModifiedSpell {
         shrine.addTag(SHRINE_TAG);
         shrine.setTexture(SHRINE_TEXTURE);
         shrine.lookAt(EntityAnchorArgument.Anchor.EYES, new Vec3(player.getX() + look.x * 12.0, player.getY(), player.getZ() + look.z * 12.0));
+        shrine.setNoAi(true);
+        shrine.setInvulnerable(true);
+        shrine.setNoGravity(true);
+        CompoundTag spot = new CompoundTag();
+        spot.putDouble("x", shrine.getX());
+        spot.putDouble("y", shrine.getY());
+        spot.putDouble("z", shrine.getZ());
+        spot.putFloat("yaw", shrine.getYRot());
+        shrine.getPersistentData().put(SHRINE_SPOT, spot);
+    }
+
+    /** Keeps the shrine where it was raised, facing the same way (called every tick by the shrine tick mixin). */
+    public static void hold(Entity shrine) {
+        CompoundTag spot = shrine.getPersistentData().getCompound(SHRINE_SPOT);
+        if (spot.isEmpty()) {
+            return;
+        }
+        float yaw = spot.getFloat("yaw");
+        shrine.setDeltaMovement(Vec3.ZERO);
+        shrine.moveTo(spot.getDouble("x"), spot.getDouble("y"), spot.getDouble("z"), yaw, 0.0F);
+        if (shrine instanceof LivingEntity living) {
+            living.setYBodyRot(yaw);
+            living.setYHeadRot(yaw);
+            living.yBodyRotO = yaw;
+            living.yHeadRotO = yaw;
+        }
     }
 }
