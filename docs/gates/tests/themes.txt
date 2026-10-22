@@ -52,10 +52,10 @@ wait 3
 cmd item replace entity Tester armor.chest with minecraft:air
 cmd effect clear Tester minecraft:slowness
 cmd execute as Tester run mdvl gate hazard frozen
-cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:2b}]}] run say THEMES_COLD_SLOWNESS_OK
+cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:2}]}] run say THEMES_COLD_SLOWNESS_OK
 cmd execute as Tester at @s run setblock ~ ~-1 ~ minecraft:mycelium
 cmd execute as Tester run mdvl gate hazard warren
-cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:19b}]}] run say THEMES_SPORES_POISON_OK
+cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:19}]}] run say THEMES_SPORES_POISON_OK
 cmd effect clear Tester minecraft:poison
 cmd data get entity Tester foodExhaustionLevel
 cmd execute as Tester run mdvl gate hazard forge
@@ -66,7 +66,7 @@ cmd execute as Tester run mdvl gate open B frozen red
 wait 20
 cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_frozen run say THEMES_RED_FROZEN_IN_OK
 wait 8
-cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:2b}]}] run say THEMES_RED_COLD_TICKS_OK
+cmd execute as Tester if entity @s[nbt={ActiveEffects:[{Id:2}]}] run say THEMES_RED_COLD_TICKS_OK
 cmd execute as Tester run mdvl gate red boss
 wait 5
 cmd execute as Tester run mdvl gate red lair
