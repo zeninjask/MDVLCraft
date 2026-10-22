@@ -35,6 +35,22 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Where the coordinator stopped (wrap-up, 2026-10-22)
+
+- `gate` has phases 1, 2, 3a (builder), 4 (rewards) and 5 (red/breaks) merged; head is the commit carrying this note.
+  **The merged tree has not been build-checked yet**: a build was queued behind the test rig's lock when wrap-up came.
+  Next: `cd binder && flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q`; fix any merge breakage.
+- Merge conflict resolved: `GateBuilder.build` red-realm branch = gate-red's `RedLandscape.plan` + builder's `whenBuilt`.
+  Added by the coordinator: `GateRewards.placeCrystals` is called in the builder's last queue step, before `built = true`.
+- Phase 3b (spawner, branch `gate-spawner`) is not merged. Its agent was told to merge `origin/gate`, honour the hooks
+  (`GateRewards.onCleared` on clear; `GateRewards.ROLE` "elite"/"boss" tags; red bosses handled by RedGates via
+  `mdvlcraft_gate_boss`; skip `mdvlcraft_gate_break` mobs; anti-farm exemption for gate kills) and push. Read
+  `docs/gates/spawner.md` on that branch for its state, then merge it into `gate`.
+- In-game: phase 1 PASS. Phase 2 (key opens a gate, stabilise, walk in, leave in front, no-space refusal, removal on
+  close) was being rerun on a fresh client with `docs/gates/tests/phase2.txt`; result not recorded. Not yet run:
+  `docs/gates/tests/{builder,rewards,red}.txt`. Run each on a fresh client (rig notes in the test log).
+- Phases 6–8 not started.
+
 ## Usage limit rule (always, for every agent and the coordinator)
 
 When the session nears its usage limit (about 95%), or the coordinator says "wrap up", **stop wherever you are**: commit
