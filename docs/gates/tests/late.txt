@@ -13,8 +13,7 @@ wait 2
 cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:gate_key_a",tag:{}}]}] run say KEY_A_ROLLED_OK
 cmd clear Tester
 cmd execute as Tester run mdvl gate late key S "enraged,crimson"
-cmd item replace entity Tester weapon.mainhand from entity Tester container.0
-cmd item replace entity Tester container.0 with minecraft:air
+cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"mdvlcraft:gate_key_s"}}] run say KEY_IN_HAND_OK
 cmd data get entity Tester SelectedItem.tag.modifiers
 cmd execute as Tester at @s run setblock ^ ^ ^2 mdvlcraft:gate_forge
 cmd give Tester mdvlcraft:essence_stone_a 4
@@ -27,6 +26,7 @@ cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"mdvlcraft:gate_key_s
 cmd data get entity Tester SelectedItem.tag.modifiers
 cmd execute as Tester at @s run setblock ^ ^ ^2 minecraft:air
 cmd clear Tester
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 0
 cmd execute as Tester at @s run mdvl gate late open S crypt "ironclad,swarming,enraged,volatile"
 wait 10
 cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
@@ -43,21 +43,17 @@ shot modifier_room
 cmd execute as Tester at @s run kill @e[tag=mdvlcraft_gate,limit=1,sort=nearest]
 wait 1
 shot volatile_burst
-cmd execute as Tester run mdvl gate leave
+cmd execute as Tester run mdvl gate late close
 wait 20
-cmd execute as Tester at @s run mdvl gate late open S crypt elite_pack
-wait 10
-cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
-wait 20
-cmd kill @e[tag=mdvlcraft_gate]
-cmd execute as Tester run mdvl gate leave
-wait 20
+cmd execute as Tester at @s if dimension minecraft:overworld run say MOD_GATE_CLOSED_OK
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 0
 cmd execute as Tester at @s run mdvl gate late open S crypt none no_potions
 wait 10
 cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
 wait 3
 shot trial_title
 wait 17
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say TRIAL_ENTERED_OK
 cmd execute as Tester run mdvl gate late info
 cmd execute as Tester at @s if entity @e[type=minecraft:text_display,tag=mdvlcraft_gate_tablet,distance=..8] run say TABLET_OK
 cmd execute as Tester at @s anchored eyes facing entity @e[type=minecraft:text_display,tag=mdvlcraft_gate_tablet,limit=1,sort=nearest] eyes run tp @s ~ ~ ~ ~ ~
@@ -70,30 +66,35 @@ mdown 3
 wait 3
 mup 3
 wait 1
-cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"minecraft:potion"}}] unless entity @a[name=Tester,nbt={active_effects:[{id:"minecraft:strength"}]}] run say NO_POTIONS_OK
+cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"minecraft:potion"}}] unless entity @a[name=Tester,nbt={ActiveEffects:[{"forge:id":"minecraft:strength"}]}] run say NO_POTIONS_OK
 cmd execute as Tester at @s run mdvl gate reward clear
 wait 2
 cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:gate_trophy"}]}] run say TROPHY_OK
-cmd execute as Tester run mdvl gate leave
+cmd execute as Tester run mdvl gate late close
 wait 20
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 0
 cmd execute as Tester at @s run mdvl gate late open S crypt none no_healing
 wait 10
 cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
 wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say HEAL_TRIAL_ENTERED_OK
 cmd effect clear Tester minecraft:saturation
 cmd effect give Tester minecraft:hunger 3 255
 wait 4
-cmd effect clear Tester minecraft:resistance
-cmd damage Tester 6 minecraft:generic
+cmd damage Tester 6 minecraft:out_of_world
+wait 1
+cmd execute store result score #hp late run data get entity Tester Health
+cmd scoreboard players get #hp late
 cmd effect give Tester minecraft:regeneration 5 3
 wait 5
 cmd execute store result score #hp late run data get entity Tester Health
 cmd scoreboard players get #hp late
 cmd execute if score #hp late matches ..15 run say NO_HEALING_OK
-cmd effect give Tester minecraft:resistance 99999 4 true
 cmd effect give Tester minecraft:saturation 99999 1 true
-cmd execute as Tester run mdvl gate leave
+cmd execute as Tester run mdvl gate late close
 wait 20
+cmd effect give Tester minecraft:instant_health 1 4 true
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 0
 cmd execute as Tester at @s run mdvl gate red place S crypt
 wait 10
 cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4

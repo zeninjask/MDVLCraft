@@ -14,6 +14,8 @@ import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -24,7 +26,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * Debug commands for the late game (phase 7), under /mdvl gate late:
  *   open <rank> <theme> <modifiers> [rule]  opens a gate 4 blocks ahead (as a key would) with these modifiers (comma list,
  *                                           or "none"); with a rule (no_potions, no_healing) its first entry makes it a trial
- *   key <rank> <modifiers>                  gives the caller a key with exactly these modifiers
+ *   key <rank> <modifiers>                  gives the caller a key with exactly these modifiers (into the main hand if empty)
+ *   close                                   closes the caller's gate: its players go home (off the roster), mobs and cell cleared
  *   info                                    the caller's gate: modifiers, rule, reward factors
  */
 @EventBusSubscriber(modid = "mdvlcraft")
@@ -52,7 +55,8 @@ public final class LateGateCommand {
                         .then(Commands.argument("modifiers", StringArgumentType.string())
                             .suggests((c, b) -> SharedSuggestionProvider.suggest(GateModifiers.REGISTRY.keySet(), b))
                             .executes(LateGateCommand::key))))
-                .then(Commands.literal("info").executes(LateGateCommand::info)))));
+                .then(Commands.literal("info").executes(LateGateCommand::info))
+                .then(Commands.literal("close").executes(LateGateCommand::close)))));
     }
 
     /** The comma list as known modifier ids; null (with a failure message) if one is unknown. */
@@ -109,7 +113,9 @@ public final class LateGateCommand {
         }
         ItemStack key = new ItemStack(GateItems.KEYS.get(rank).get());
         GateModifiers.set(key, ids);
-        if (!player.getInventory().add(key)) {
+        if (player.getMainHandItem().isEmpty()) {
+            player.setItemInHand(InteractionHand.MAIN_HAND, key);   // in hand, so tests can use it at once
+        } else if (!player.getInventory().add(key)) {
             player.drop(key, false);
         }
         context.getSource().sendSuccess(() -> Component.literal("Gave a " + rank + " key with " + ids), true);
@@ -129,5 +135,33 @@ public final class LateGateCommand {
             + String.format("%.2f", GateModifiers.rewardFactor(instance)) + ", clear experience x"
             + String.format("%.2f", GateModifiers.experienceFactor(instance))), false);
         return GateModifiers.ids(instance.id).size();
+    }
+
+    private static int close(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        GateInstances gates = GateInstances.get(player.server);
+        Instance instance = gates.ofPlayer(player.getUUID());
+        if (instance == null) {
+            context.getSource().sendFailure(Component.literal("You aren't on a gate's roster"));
+            return 0;
+        }
+        for (ServerPlayer member : player.server.getPlayerList().getPlayers()) {
+            if (instance.roster.contains(member.getUUID())) {
+                if (member.level().dimension() == instance.dimension) {
+                    GateTravel.leave(member, instance, true);
+                } else {
+                    instance.roster.remove(member.getUUID());
+                }
+            }
+        }
+        ServerLevel level = player.server.getLevel(instance.dimension);
+        if (level != null) {
+            RedGates.discardMobs(level, instance);
+            GateBuilder.clear(level, instance);
+        }
+        gates.close(instance);   // its gate entity removes itself
+        int id = instance.id;
+        context.getSource().sendSuccess(() -> Component.literal("Closed gate " + id), true);
+        return 1;
     }
 }
