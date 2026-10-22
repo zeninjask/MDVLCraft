@@ -7,6 +7,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
@@ -19,8 +20,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * Admin and test commands for gates (plan section 3.5), under /mdvl gate:
- *   open <rank> <theme> [red]  a gate instance with no gate in the world: the caller goes straight in (phase 1: onto a
- *                              platform in their cell; later phases build the dungeon)
+ *   open <rank> <theme> [red]  a gate instance with no gate in the world: its dungeon is built and the caller goes in
+ *                              once it is done (a few seconds)
  *   leave                      out of the gate the caller is in
  *   list                       every live instance
  *   tp <id>                    into an instance (joining its roster)
@@ -64,10 +65,19 @@ public final class GateCommand {
         GateInstances gates = GateInstances.get(player.server);
         Instance instance = gates.create(level.dimension(), theme, rank, level.getGameTime());
         instance.red = red;
-        GateBuilder.build(level, instance);
-        instance.state = GateInstances.State.ACTIVE;
+        UUID who = player.getUUID();
         gates.setDirty();
-        GateTravel.enter(player, instance);
+        // the dungeon is built over a few seconds: the caller goes in once it's done (if both are still there)
+        GateBuilder.build(level, instance, () -> {
+            ServerPlayer caller = level.getServer().getPlayerList().getPlayer(who);
+            if (instance.live()) {
+                instance.state = GateInstances.State.ACTIVE;
+                gates.setDirty();
+                if (caller != null) {
+                    GateTravel.enter(caller, instance);
+                }
+            }
+        });
         int id = instance.id;
         context.getSource().sendSuccess(() -> Component.literal("Opened gate " + id + ": " + rank + " " + theme.key() + (red ? " (red)" : "")
             + " in " + instance.dimension.location() + " cell " + instance.cellX + "," + instance.cellZ), true);

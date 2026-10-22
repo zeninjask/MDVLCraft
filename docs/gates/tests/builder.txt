@@ -1,0 +1,68 @@
+wait 60
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd effect give Tester minecraft:night_vision 99999 0 true
+cmd tp Tester 200.5 140 36.5 90 0
+wait 2
+cmd execute as Tester run mdvl gate open E crypt
+wait 10
+cmd data get entity Tester Dimension
+cmd data get entity Tester Pos
+cmd execute as Tester run mdvl gate rooms
+cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_crypt run say BUILDER_E_IN_CRYPT_OK
+cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:polished_deepslate run say BUILDER_E_ENTRY_FLOOR_OK
+cmd execute as Tester at @s if block ~ ~ ~ minecraft:air if block ~ ~1 ~ minecraft:air run say BUILDER_E_ENTRY_CLEAR_OK
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 10
+wait 2
+shot builder_1_entrance
+cmd execute as Tester run mdvl gate goto boss
+wait 2
+cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:polished_deepslate run say BUILDER_E_BOSS_FLOOR_OK
+cmd execute as Tester at @s unless block ~ ~ ~ minecraft:structure_block run say BUILDER_E_BOSS_MARKER_REMOVED_OK
+cmd execute as Tester at @s run tp @s ~ ~3 ~ 180 15
+wait 2
+shot builder_2_boss_room
+cmd execute as Tester run mdvl gate goto crystal
+wait 2
+cmd execute as Tester at @s if block ~ ~-1 ~ #minecraft:mineable/pickaxe run say BUILDER_E_CRYSTAL_ON_FLOOR_OK
+cmd execute as Tester at @s unless block ~ ~ ~ minecraft:structure_block run say BUILDER_E_CRYSTAL_MARKER_REMOVED_OK
+shot builder_3_crystal_room
+cmd execute as Tester run mdvl gate goto door
+wait 2
+cmd execute as Tester at @s if block ~ ~ ~ minecraft:air if block ~ ~3 ~ minecraft:air run say BUILDER_E_DOOR_OPEN_OK
+cmd execute as Tester at @s run tp @s ~ ~ ~ 90 0
+wait 1
+shot builder_4_doorway
+cmd gamemode spectator Tester
+cmd execute as Tester at @s run tp @s ~ ~60 ~ 0 90
+wait 3
+shot builder_5_from_above
+cmd gamemode survival Tester
+cmd execute as Tester run mdvl gate leave
+wait 3
+cmd execute as Tester run mdvl gate open S forge
+wait 15
+cmd execute as Tester run mdvl gate rooms
+cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_forge run say BUILDER_S_IN_FORGE_OK
+cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:blackstone run say BUILDER_S_ENTRY_FLOOR_OK
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 10
+wait 2
+shot builder_6_s_entrance
+cmd execute as Tester run mdvl gate goto "spawn:elite"
+wait 2
+cmd execute as Tester at @s if block ~ ~-1 ~ #minecraft:mineable/pickaxe run say BUILDER_S_ELITE_ON_FLOOR_OK
+shot builder_7_s_large_room
+cmd execute as Tester run mdvl gate goto boss
+wait 2
+cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:blackstone run say BUILDER_S_BOSS_FLOOR_OK
+cmd execute as Tester at @s run tp @s ~ ~3 ~ 180 15
+wait 2
+shot builder_8_s_boss_room
+cmd gamemode spectator Tester
+cmd execute as Tester at @s run tp @s ~ ~90 ~ 0 90
+wait 3
+shot builder_9_s_from_above
+cmd gamemode survival Tester
+cmd execute as Tester run mdvl gate leave
+wait 3
+cmd mdvl gate list
