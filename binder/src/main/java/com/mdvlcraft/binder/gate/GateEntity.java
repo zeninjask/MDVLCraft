@@ -61,7 +61,7 @@ public class GateEntity extends Entity {
             return null;
         }
         if (theme == null) {
-            theme = GateTheme.values()[here.random.nextInt(GateTheme.values().length)];
+            theme = GateThemes.randomFor(rank, here.random);   // a random theme valid for the rank
         }
         GateInstances gates = GateInstances.get(player.server);
         Instance instance = gates.create(realm.dimension(), theme, rank, here.getGameTime());

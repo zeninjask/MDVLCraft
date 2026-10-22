@@ -3,6 +3,7 @@ cmd gamemode survival Tester
 cmd effect give Tester minecraft:resistance 99999 4 true
 cmd effect give Tester minecraft:saturation 99999 1 true
 cmd scoreboard objectives add gt dummy
+cmd mdvl gate redhidden never
 cmd execute as Tester at @s run mdvl gate red place B frozen
 wait 10
 cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
@@ -56,3 +57,4 @@ wait 90
 cmd mdvl gate list
 cmd execute as Tester store result score @s gt run mdvl gate rooms
 cmd execute as Tester if score @s gt matches 0 run say RED_DEATH_CLOSED_OK
+cmd mdvl gate redhidden roll

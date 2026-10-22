@@ -38,11 +38,22 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *     boss when its mod is loaded, else the same, with HIDDEN_HEALTH times the health). Its death breaks the seal.
  * Only the hidden boss drops black essence stones (GateRewards asks {@link #dropsBlack}), which makes red S gates their only
  * source. Per-instance progress is in memory, like RedLandscape's layouts.
+ *
+ * Other red gates (A and B; plan 7.2): a hidden boss rises with HIDDEN_CHANCE (rolled once, when the lair boss dies) and
+ * drops no black stones, and every camp gets one vein (S: two). Veins sit on the camp template's "crystal" markers when it
+ * has them (RedLandscape.Layout.campCrystals), else in a ring 6 blocks out.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class HiddenBoss {
     /** Persistent NBT boolean on a hidden boss. */
     public static final String TAG = "mdvlcraft_gate_hidden";
+    /** Persistent NBT boolean on a hidden boss that drops black essence stones (red S gates only). */
+    public static final String BLACK_TAG = "mdvlcraft_gate_black";
+    /** Chance of a hidden boss in a red gate below S (plan 7.2: 50%, 100% for S). */
+    static final double HIDDEN_CHANCE = 0.5;
+    /** Debug override of that roll (/mdvl gate redhidden): TRUE always, FALSE never, null rolls. */
+    @Nullable
+    static Boolean forceHidden;
     static final int LAIR_CAMPS = 2;
     static final int VEINS_PER_CAMP = 2;
     private static final double HIDDEN_HEALTH = 1.5;
@@ -61,18 +72,26 @@ public final class HiddenBoss {
         return instance.red && instance.rank == GateRank.S;
     }
 
-    /** GateRewards.onDrops: black essence stones come only from a hidden boss. */
+    /** GateRewards.onDrops: black essence stones come only from a red S gate's hidden boss. */
     public static boolean dropsBlack(LivingEntity mob) {
-        return mob.getPersistentData().getBoolean(TAG);
+        return mob.getPersistentData().getBoolean(BLACK_TAG);
+    }
+
+    /** Camp veins: two per camp in a red S gate, one in other red gates. */
+    static int veinsPerCamp(Instance instance) {
+        return applies(instance) ? VEINS_PER_CAMP : 1;
     }
 
     /**
-     * RedGates.onDeath, when a red gate's boss dies: in a red S gate whose hidden boss hasn't risen, it rises now and the
-     * seal holds (returns true; the caller then does nothing more).
+     * RedGates.onDeath, when a red gate's boss dies: in a red S gate whose hidden boss hasn't risen (other red gates:
+     * HIDDEN_CHANCE, rolled once), it rises now and the seal holds (returns true; the caller then does nothing more).
      */
     public static boolean rise(ServerLevel level, Instance instance, Layout layout, LivingEntity dead) {
-        if (!applies(instance) || dropsBlack(dead) || !RISEN.add(instance.id)) {
+        if (!instance.red || dead.getPersistentData().getBoolean(TAG) || !RISEN.add(instance.id)) {
             return false;
+        }
+        if (!applies(instance) && !(forceHidden != null ? forceHidden : level.random.nextDouble() < HIDDEN_CHANCE)) {
+            return false;   // no hidden boss this time (RISEN keeps it from being rolled again)
         }
         BlockPos floor = layout.lairFloor != null ? layout.lairFloor : (layout.lairFloor = RedLandscape.buildArena(level, instance, layout.lair));
         Mob boss = spawn(level, instance, floor);
@@ -113,6 +132,9 @@ public final class HiddenBoss {
         }
         boss.getPersistentData().putBoolean(RedLandscape.BOSS_TAG, true);
         boss.getPersistentData().putBoolean(TAG, true);
+        if (applies(instance)) {
+            boss.getPersistentData().putBoolean(BLACK_TAG, true);
+        }
         AttributeInstance health = boss.getAttribute(Attributes.MAX_HEALTH);
         if (health != null && health.getModifier(HEALTH) == null) {
             health.addPermanentModifier(new AttributeModifier(HEALTH, "hidden boss", HIDDEN_HEALTH - 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL));
@@ -135,10 +157,10 @@ public final class HiddenBoss {
         for (Layout layout : RedLandscape.LAYOUTS.values()) {
             Instance instance = gates.byId(layout.instanceId);
             ServerLevel level = instance == null ? null : server.getLevel(instance.dimension);
-            if (level == null || !applies(instance)) {
+            if (level == null || !instance.red) {
                 continue;
             }
-            if (PLANNED.add(instance.id)) {
+            if (applies(instance) && PLANNED.add(instance.id)) {
                 double angle = level.random.nextDouble() * Math.PI * 2.0;
                 for (int n = 0; n < LAIR_CAMPS; n++) {
                     double a = angle + Math.PI * n;   // opposite sides of the arena
@@ -149,7 +171,8 @@ public final class HiddenBoss {
             Set<Integer> veined = VEINED.computeIfAbsent(instance.id, id -> new HashSet<>());
             for (int n : layout.campsDone) {
                 if (veined.add(n)) {
-                    veins(level, instance, layout.camps.get(n));
+                    BlockPos camp = layout.camps.get(n);
+                    veins(level, instance, camp, layout.campCrystals.getOrDefault(camp, List.of()));
                 }
             }
         }
@@ -158,13 +181,16 @@ public final class HiddenBoss {
         RISEN.removeIf(id -> gates.byId(id) == null);
     }
 
-    /** VEINS_PER_CAMP veins on the ground a few blocks out from the camp, red-sized (6–8 ore) and scaled by the modifiers. */
-    static void veins(ServerLevel level, Instance instance, BlockPos camp) {
+    /** veinsPerCamp veins, red-sized (6–8 ore) and scaled by the modifiers: on the camp's crystal spots, or on the ground a
+     * few blocks out from the camp. */
+    static void veins(ServerLevel level, Instance instance, BlockPos camp, List<BlockPos> spots) {
         var ore = GateRewards.CRYSTAL_ORES.get(instance.rank).get().defaultBlockState();
         double angle = level.random.nextDouble() * Math.PI * 2.0;
-        for (int n = 0; n < VEINS_PER_CAMP; n++) {
-            double a = angle + Math.PI * 2.0 * n / VEINS_PER_CAMP;
-            BlockPos at = RedLandscape.surface(level, camp.offset((int)(Math.cos(a) * 6), 0, (int)(Math.sin(a) * 6)));
+        int count = veinsPerCamp(instance);
+        for (int n = 0; n < count; n++) {
+            double a = angle + Math.PI * 2.0 * n / count;
+            BlockPos at = n < spots.size() ? spots.get(n)
+                : RedLandscape.surface(level, camp.offset((int)(Math.cos(a) * 6), 0, (int)(Math.sin(a) * 6)));
             int size = GateModifiers.scale(6 + level.random.nextInt(3), GateModifiers.rewardFactor(instance), level.random);
             GateRewards.vein(level, at, ore, size, level.random);
         }

@@ -1,15 +1,19 @@
 package com.mdvlcraft.binder.gate;
 
 import com.mdvlcraft.binder.gate.GateInstances.Instance;
+import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
@@ -20,9 +24,14 @@ import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.Heightmap;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings;
+import net.minecraft.world.level.levelgen.structure.templatesystem.StructureTemplate;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.slf4j.Logger;
 
 /**
  * A red gate's landscape (plan 7.2): the red realm's own generated land, themed by its biome's surface rules
@@ -31,6 +40,11 @@ import net.minecraftforge.registries.ForgeRegistries;
  * generates only one chunk: a camp is built and its mobs spawned when a roster player comes within CAMP_RANGE of it, the
  * boss arena when one comes within ARENA_RANGE, and the boss when one steps near the arena (RedGates ticks this).
  * Each instance's layout is kept in memory only: every gate closes on a server restart anyway (GateCleanup).
+ *
+ * The lair and the camps are hand-built templates from the theme file's "red" section ("lairs", "camps"; written by
+ * tools/gates/gen_red_lairs.py): the lair is pasted on the flattened arena (its (MID, 3, MID) on the arena floor's top), a
+ * camp on the ground at its spot with a random rotation; a camp's "spawn:*" markers place its mobs and its "crystal"
+ * markers are kept for the red gate veins (HiddenBoss.veins). A theme without templates gets the old procedural ones.
  */
 public final class RedLandscape {
     /** Persistent NBT boolean on a gate boss; whoever sees it die decides the clear (for red gates: RedGates). */
@@ -39,6 +53,9 @@ public final class RedLandscape {
     static final int ARENA_RANGE = 72;
     static final int BOSS_RANGE = 28;
     static final int ARENA_RADIUS = 14;
+    /** Height of the lair template's floor top above its bottom (tools/gates/gen_red_lairs.py FY). */
+    static final int LAIR_FLOOR = 3;
+    private static final Logger LOGGER = LogUtils.getLogger();
     private static final UUID BOSS_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0101");
     /** Extra boss health for the vanilla stand-in bosses, which are far weaker than the planned theme bosses. */
     private static final double STAND_IN_BOSS_HEALTH = 4.0;
@@ -56,6 +73,8 @@ public final class RedLandscape {
         boolean bossSpawned;
         /** Game time the boss died at, or -1. */
         long clearedAt = -1;
+        /** Crystal vein spots of each built camp (its "crystal" markers), by camp column. */
+        final Map<BlockPos, List<BlockPos>> campCrystals = new ConcurrentHashMap<>();
 
         Layout(int instanceId, BlockPos lair, List<BlockPos> camps) {
             this.instanceId = instanceId;
@@ -160,8 +179,13 @@ public final class RedLandscape {
     /** A random mob of the theme's pool at pos, as a gate mob of the instance. */
     @Nullable
     static Mob spawnMob(ServerLevel level, Instance instance, BlockPos pos) {
-        EntityType<?> type = GateMobs.pick(instance.theme, instance.rank, level.random.nextBoolean() ? GateMobs.Kind.MELEE : GateMobs.Kind.RANGED,
-            level.random);
+        return spawnMob(level, instance, pos, level.random.nextBoolean() ? GateMobs.Kind.MELEE : GateMobs.Kind.RANGED);
+    }
+
+    /** A random mob of the theme's pool of that kind at pos, as a gate mob of the instance. */
+    @Nullable
+    static Mob spawnMob(ServerLevel level, Instance instance, BlockPos pos, GateMobs.Kind kind) {
+        EntityType<?> type = GateMobs.pick(instance.theme, instance.rank, kind, level.random);
         if (type == null) {   // none of the theme's mods loaded: the vanilla stand-ins
             List<String> pool = standInMobs(instance.theme);
             type = type(pool.get(level.random.nextInt(pool.size())));
@@ -169,8 +193,60 @@ public final class RedLandscape {
         return type == null ? null : GateSpawner.spawn(level, instance, type, pos);
     }
 
-    /** A small camp (floor patch, campfire, two posts) with 3–5 mobs around it. */
+    /** A random template of the pool, or null if the pool is empty or none of it loads. */
+    @Nullable
+    static StructureTemplate template(ServerLevel level, List<ResourceLocation> pool) {
+        if (pool.isEmpty()) {
+            return null;
+        }
+        ResourceLocation id = pool.get(level.random.nextInt(pool.size()));
+        Optional<StructureTemplate> found = level.getStructureManager().get(id);
+        if (found.isEmpty()) {
+            LOGGER.error("Red gate template {} is missing", id);
+        }
+        return found.orElse(null);
+    }
+
+    /** Pastes a template with its (size/2, groundY, size/2) at centre, rotated about that point; returns its markers. */
+    static List<StructureTemplate.StructureBlockInfo> paste(ServerLevel level, StructureTemplate template, BlockPos centre, int groundY, Rotation rotation) {
+        Vec3i size = template.getSize();
+        BlockPos pivot = new BlockPos(size.getX() / 2, 0, size.getZ() / 2);
+        BlockPos origin = centre.offset(-pivot.getX(), -groundY, -pivot.getZ());
+        StructurePlaceSettings settings = new StructurePlaceSettings().setRotation(rotation).setRotationPivot(pivot).setIgnoreEntities(true)
+            .addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
+        template.placeInWorld(level, origin, origin, settings, level.random, Block.UPDATE_CLIENTS);
+        return template.filterBlocks(origin, settings, Blocks.STRUCTURE_BLOCK);
+    }
+
+    /**
+     * Readies a round patch of land for a template: air from `top` up for `height` blocks, and the ground under `base` filled
+     * down with `fill` (up to 10 blocks) where it falls away, so nothing floats on a slope.
+     */
+    static void groundwork(ServerLevel level, BlockPos centre, int radius, int base, int top, int height, Block fill) {
+        for (int dx = -radius; dx <= radius; dx++) {
+            for (int dz = -radius; dz <= radius; dz++) {
+                if (dx * dx + dz * dz > radius * radius + radius) {
+                    continue;
+                }
+                BlockPos column = centre.offset(dx, 0, dz);
+                for (int y = top; y < top + height; y++) {
+                    set(level, column.atY(y), Blocks.AIR);
+                }
+                for (int y = base - 1; y >= base - 10 && level.getBlockState(column.atY(y)).canBeReplaced(); y--) {
+                    set(level, column.atY(y), fill);
+                }
+            }
+        }
+    }
+
+    /** A camp with 3–5 mobs: the theme's camp template if it has one, else a small procedural camp. */
     static void buildCamp(ServerLevel level, Instance instance, BlockPos column) {
+        GateThemes.Theme data = GateThemes.get(instance.theme);
+        StructureTemplate camp = data == null ? null : template(level, data.camps());
+        if (camp != null) {
+            buildCamp(level, instance, column, camp);
+            return;
+        }
         Palette palette = palette(instance.theme);
         BlockPos centre = surface(level, column);
         for (int dx = -2; dx <= 2; dx++) {
@@ -194,10 +270,51 @@ public final class RedLandscape {
         }
     }
 
-    /** Flattens a round arena at the lair, ringed by eight lit pillars; returns the top of its floor. */
+    /** A camp from a template: pasted on the ground at the camp's spot, mobs on its spawn markers, its crystal spots kept. */
+    private static void buildCamp(ServerLevel level, Instance instance, BlockPos column, StructureTemplate camp) {
+        BlockPos ground = surface(level, column).below();
+        int radius = camp.getSize().getX() / 2;
+        groundwork(level, ground, radius, ground.getY(), ground.getY() + 1, camp.getSize().getY(), palette(instance.theme).floor());
+        List<BlockPos> spawns = new ArrayList<>();
+        List<GateMobs.Kind> kinds = new ArrayList<>();
+        List<BlockPos> crystals = new ArrayList<>();
+        for (StructureTemplate.StructureBlockInfo info : paste(level, camp, ground, 0, Rotation.getRandom(level.random))) {
+            String kind = info.nbt() != null ? info.nbt().getString("metadata") : "";
+            if (kind.equals("crystal")) {
+                crystals.add(info.pos());
+            } else if (kind.startsWith("spawn:")) {
+                spawns.add(info.pos());
+                kinds.add(kind.equals("spawn:ranged") ? GateMobs.Kind.RANGED : GateMobs.Kind.MELEE);
+            }
+        }
+        Layout layout = LAYOUTS.get(instance.id);
+        if (layout != null) {
+            layout.campCrystals.put(column, crystals);
+        }
+        int count = Math.min(spawns.size(), 3 + level.random.nextInt(3));
+        List<Integer> order = new ArrayList<>();
+        for (int n = 0; n < spawns.size(); n++) {
+            order.add(n);
+        }
+        Collections.shuffle(order, new java.util.Random(level.random.nextLong()));
+        for (int n = 0; n < count; n++) {
+            spawnMob(level, instance, spawns.get(order.get(n)), kinds.get(order.get(n)));
+        }
+    }
+
+    /** The lair's arena: the theme's lair template on a flattened round floor if it has one, else a procedural arena ringed
+     * by eight lit pillars. Returns the top of its floor. */
     static BlockPos buildArena(ServerLevel level, Instance instance, BlockPos lair) {
         Palette palette = palette(instance.theme);
         BlockPos floor = surface(level, lair).below();
+        GateThemes.Theme data = GateThemes.get(instance.theme);
+        StructureTemplate template = data == null ? null : template(level, data.lairs());
+        if (template != null) {
+            int radius = template.getSize().getX() / 2;
+            groundwork(level, floor, radius, floor.getY() - LAIR_FLOOR, floor.getY() + 1, template.getSize().getY(), palette.floor());
+            paste(level, template, floor, LAIR_FLOOR, Rotation.NONE);
+            return floor;
+        }
         for (int dx = -ARENA_RADIUS; dx <= ARENA_RADIUS; dx++) {
             for (int dz = -ARENA_RADIUS; dz <= ARENA_RADIUS; dz++) {
                 if (dx * dx + dz * dz > ARENA_RADIUS * ARENA_RADIUS) {

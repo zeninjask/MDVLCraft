@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -29,7 +30,8 @@ import org.slf4j.Logger;
  * The gate themes' data (plan section 8): one file per theme, data/mdvlcraft/gate_themes/&lt;theme&gt;.json, read on every
  * datapack (re)load. A file holds the theme's room template pools per room kind, its mob pools per rank band (low E–D,
  * mid C–B, high A–S) and spawn-marker kind with weights, its boss per rank with a size class (which picks the boss room),
- * its red-gate hazard, catalyst, red landscape palette and stand-in mobs, its biome and music. GateMobs, GateBuilder,
+ * its red-gate hazard, catalyst, red landscape palette, lair and camp templates and stand-in mobs, its biome and music,
+ * and the rank range an unattuned key may open it at. GateMobs, GateBuilder,
  * RedLandscape and GateHazards read it, so retuning a theme or giving it new rooms or mobs is a data change, and so is a
  * datapack override. The list of themes itself stays GateTheme (it is the checkerboard order the generated dimensions
  * bake in), so a file whose name isn't a GateTheme key is skipped with a warning.
@@ -66,7 +68,12 @@ public final class GateThemes extends SimpleJsonResourceReloadListener {
     public record Theme(GateTheme theme, ResourceLocation biome, @Nullable ResourceLocation music, @Nullable ResourceLocation catalyst,
                         Map<String, List<ResourceLocation>> rooms, List<Weighted>[][] mobs, BossEntry[] bosses, Hazard hazard,
                         String landscape, @Nullable RedLandscape.Palette palette, List<ResourceLocation> standInMobs,
-                        @Nullable ResourceLocation standInBoss) {
+                        @Nullable ResourceLocation standInBoss, GateRank minRank, GateRank maxRank, List<ResourceLocation> lairs,
+                        List<ResourceLocation> camps) {
+        /** Whether an unattuned key of this rank may open this theme (the file's "ranks"; plan section 8). */
+        public boolean allows(GateRank rank) {
+            return rank.ordinal() >= this.minRank.ordinal() && rank.ordinal() <= this.maxRank.ordinal();
+        }
     }
 
     private static volatile Map<GateTheme, Theme> themes = new EnumMap<>(GateTheme.class);
@@ -84,6 +91,22 @@ public final class GateThemes extends SimpleJsonResourceReloadListener {
     @Nullable
     public static Theme get(GateTheme theme) {
         return themes.get(theme);
+    }
+
+    /**
+     * The theme an unattuned key of `rank` opens: a random one whose rank range holds the rank (a theme without data counts
+     * as valid for every rank). If none does, any theme, so a key always opens something.
+     */
+    public static GateTheme randomFor(GateRank rank, RandomSource random) {
+        List<GateTheme> valid = new ArrayList<>();
+        for (GateTheme theme : GateTheme.values()) {
+            Theme data = get(theme);
+            if (data == null || data.allows(rank)) {
+                valid.add(theme);
+            }
+        }
+        List<GateTheme> pool = valid.isEmpty() ? List.of(GateTheme.values()) : valid;
+        return pool.get(random.nextInt(pool.size()));
     }
 
     /** The template pool of a room kind ("combat_small", "boss_large", ...); empty if the theme lists none. */
@@ -162,9 +185,27 @@ public final class GateThemes extends SimpleJsonResourceReloadListener {
             JsonObject p = GsonHelper.getAsJsonObject(red, "palette");
             palette = new RedLandscape.Palette(block(p, "floor"), block(p, "pillar"), block(p, "light"), block(p, "campfire"));
         }
+        JsonObject ranks = GsonHelper.getAsJsonObject(json, "ranks", new JsonObject());
+        GateRank min = rank(ranks, "min", GateRank.E);
+        GateRank max = rank(ranks, "max", GateRank.S);
+        if (min.ordinal() > max.ordinal()) {
+            throw new IllegalArgumentException("ranks min " + min + " is above max " + max);
+        }
         return new Theme(theme, id(GsonHelper.getAsString(json, "biome", "mdvlcraft:gate_" + theme.key())), optionalId(json, "music"),
             optionalId(json, "catalyst"), rooms, mobs, bosses, hazard.any() ? hazard : Hazard.NONE, GsonHelper.getAsString(red, "landscape", ""),
-            palette, ids(GsonHelper.getAsJsonArray(red, "stand_in_mobs", new JsonArray())), optionalId(red, "stand_in_boss"));
+            palette, ids(GsonHelper.getAsJsonArray(red, "stand_in_mobs", new JsonArray())), optionalId(red, "stand_in_boss"), min, max,
+            ids(GsonHelper.getAsJsonArray(red, "lairs", new JsonArray())), ids(GsonHelper.getAsJsonArray(red, "camps", new JsonArray())));
+    }
+
+    private static GateRank rank(JsonObject json, String key, GateRank fallback) {
+        if (!json.has(key)) {
+            return fallback;
+        }
+        GateRank rank = GateRank.byKey(GsonHelper.getAsString(json, key));
+        if (rank == null) {
+            throw new IllegalArgumentException("unknown rank " + GsonHelper.getAsString(json, key));
+        }
+        return rank;
     }
 
     private static ResourceLocation id(String text) {
