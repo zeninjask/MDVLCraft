@@ -40,8 +40,8 @@ public class GateRewardChestBlockEntity extends BlockEntity {
         super(GateRewards.REWARD_CHEST_ENTITY.get(), pos, state);
     }
 
-    /** Rolls `table` into a fresh container for this player. */
-    void roll(ServerPlayer player, ResourceLocation table) {
+    /** Rolls `table` into a fresh container for this player. Public for the Demon Castle's floor chests (gate/tower). */
+    public void roll(ServerPlayer player, ResourceLocation table) {
         if (!(this.level instanceof ServerLevel level)) {
             return;
         }
