@@ -93,8 +93,8 @@ public final class GateModifiers {
     public record Modifier(String id, String effect, double value, int weight) {
     }
 
-    /** Loaded entries by id, in file order. */
-    static final Map<String, Modifier> REGISTRY = new LinkedHashMap<>();
+    /** Loaded entries by id, in file order (public for the tower's modifiers, TowerModifiers). */
+    public static final Map<String, Modifier> REGISTRY = new LinkedHashMap<>();
     /** Modifier ids per live instance. */
     private static final Map<Integer, List<String>> ACTIVE = new HashMap<>();
     /** Swarming: fresh normal mobs counted per instance, so every 1/value-th gets a copy. */
@@ -263,7 +263,8 @@ public final class GateModifiers {
         attach(instanceId, of(key));
     }
 
-    static void attach(int instanceId, List<String> ids) {
+    /** Also the tower: a run's instance gets its floor's modifiers (TowerModifiers). */
+    public static void attach(int instanceId, List<String> ids) {
         if (ids.isEmpty()) {
             ACTIVE.remove(instanceId);
         } else {

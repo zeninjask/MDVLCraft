@@ -25,6 +25,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *   progress <player> [set <floor>] a player's reached / checkpoint / best / best boss floor, or sets their floor
  *   top                             the ten best players by best floor
  *   close <id>                      ends a run: its players go home, both floors are cleared
+ *   mods <floor>                    the tower modifiers of a floor in this world
+ *   hidden                          the caller's run: the next boss death on a floor of 55+ raises the hidden boss for sure
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class TowerCommand {
@@ -42,7 +44,9 @@ public final class TowerCommand {
                 .then(Commands.literal("progress").then(Commands.argument("player", EntityArgument.player()).executes(TowerCommand::progress)
                     .then(Commands.literal("set").then(Commands.argument("floor", IntegerArgumentType.integer(1)).executes(TowerCommand::set)))))
                 .then(Commands.literal("top").executes(TowerCommand::top))
-                .then(Commands.literal("close").then(Commands.argument("id", IntegerArgumentType.integer(1)).executes(TowerCommand::close))))));
+                .then(Commands.literal("close").then(Commands.argument("id", IntegerArgumentType.integer(1)).executes(TowerCommand::close)))
+                .then(Commands.literal("mods").then(Commands.argument("floor", IntegerArgumentType.integer(1)).executes(TowerCommand::mods)))
+                .then(Commands.literal("hidden").executes(TowerCommand::hidden)))));
     }
 
     private static int open(CommandContext<CommandSourceStack> context, int floor) throws CommandSyntaxException {
@@ -109,6 +113,24 @@ public final class TowerCommand {
             context.getSource().sendSuccess(() -> Component.literal("Nobody has climbed the Demon Castle yet"), false);
         }
         return rank;
+    }
+
+    private static int mods(CommandContext<CommandSourceStack> context) {
+        int floor = IntegerArgumentType.getInteger(context, "floor");
+        var ids = TowerModifiers.of(context.getSource().getLevel().getSeed(), floor);
+        context.getSource().sendSuccess(() -> Component.literal("Floor " + floor + " modifiers: " + ids), false);
+        return ids.size();
+    }
+
+    private static int hidden(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        TowerRun run = TowerRun.of(context.getSource().getPlayerOrException());
+        if (run == null) {
+            context.getSource().sendFailure(Component.literal("You are not in a tower run"));
+            return 0;
+        }
+        run.forceHidden = true;
+        context.getSource().sendSuccess(() -> Component.literal("Run " + run.id + ": the hidden boss will rise (floors 55+)"), false);
+        return 1;
     }
 
     private static int close(CommandContext<CommandSourceStack> context) {

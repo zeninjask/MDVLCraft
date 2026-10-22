@@ -1,4 +1,4 @@
-wait 60
+wait 120
 cmd gamemode survival Tester
 cmd effect give Tester minecraft:resistance 99999 4 true
 cmd effect give Tester minecraft:regeneration 99999 4 true
@@ -55,6 +55,59 @@ cmd execute as Tester at @s run mdvl gate tower open
 wait 25
 cmd mdvl gate tower info
 cmd execute as Tester at @s if dimension mdvlcraft:demon_castle run say REOPEN_IN_CASTLE_OK
+cmd scoreboard objectives add towermods dummy
+cmd execute store result score Tester towermods run mdvl gate tower mods 5
+cmd execute if score Tester towermods matches 0 run say MODS_5_NONE_OK
+cmd execute store result score Tester towermods run mdvl gate tower mods 15
+cmd execute if score Tester towermods matches 1 run say MODS_15_ONE_OK
+cmd execute store result score Tester towermods run mdvl gate tower mods 25
+cmd execute if score Tester towermods matches 2 run say MODS_25_TWO_OK
+cmd execute store result score Tester towermods run mdvl gate tower mods 55
+cmd execute if score Tester towermods matches 6.. run say MODS_55_LEGEND_OK
+cmd mdvl gate tower mods 15
+cmd mdvl gate tower mods 55
+cmd execute as Tester at @s run mdvl gate leave
+wait 20
+cmd execute as Tester at @s unless dimension mdvlcraft:demon_castle run say LEFT_FOR_55_OK
+cmd execute as Tester at @s run mdvl gate tower open 55
+wait 25
+cmd execute as Tester at @s if dimension mdvlcraft:demon_castle run say IN_FLOOR55_OK
+cmd execute if entity @e[type=minecraft:text_display,tag=mdvlcraft_gate_tablet] run say TABLET_OK
+cmd mdvl gate tower info
+shot tower_floor55_tablet
+cmd execute as Tester at @s run mdvl gate tower hidden
+cmd execute as Tester at @s run tp @s ~20 ~ ~
+wait 20
+cmd execute if entity @e[tag=mdvlcraft_tower_boss] run say BOSS55_SPAWNED_OK
+cmd kill @e[tag=mdvlcraft_tower_boss,tag=!mdvlcraft_tower_hidden]
+wait 3
+cmd execute if entity @e[tag=mdvlcraft_tower_hidden] run say HIDDEN_ROSE_OK
+cmd mdvl gate tower info
+shot tower_hidden_boss
+cmd clear Tester mdvlcraft:tower_seal
+cmd kill @e[type=minecraft:item]
+cmd kill @e[tag=mdvlcraft_tower_hidden]
+wait 3
+cmd execute if entity @e[type=minecraft:item,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say HIDDEN_BLACK_DROP_OK
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:tower_seal"}]}] run say HIDDEN_SEALS_OK
+cmd mdvl gate tower info
+cmd execute as Tester at @s run mdvl gate leave
+wait 20
+cmd give Tester mdvlcraft:tower_seal 32
+cmd give Tester mdvlcraft:mana_crystal_s 4
+cmd execute as Tester at @s run setblock ~ ~ ~2 mdvlcraft:gate_forge
+cmd execute as Tester at @s run tp @s ~ ~ ~ facing ~ ~0.5 ~2
+wait 2
+click right
+wait 2
+shot tower_forge_seal_trades
+key Escape
+cmd execute as Tester at @s run setblock ~ ~ ~2 minecraft:air
+cmd give Tester mdvlcraft:castle_trophy
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:castle_trophy"}]}] run say TROPHY_ITEM_OK
+cmd execute as Tester at @s run mdvl gate tower open
+wait 25
+cmd execute as Tester at @s if dimension mdvlcraft:demon_castle run say REOPEN2_IN_CASTLE_OK
 cmd effect clear Tester
 cmd kill Tester
 wait 5

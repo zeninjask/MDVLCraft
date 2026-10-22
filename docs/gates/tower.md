@@ -48,10 +48,31 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
       16 Tower Seals → Castle Trophy (`castle_trophy`, cosmetic, epic, stacks to 16; texture/model/lang from
       `gen_tower_items.py`)
 - [x] `tests/tower.txt`: SEALS_OK used `Tester[nbt=...]` (invalid); now `@a[name=Tester,nbt=...]`
-- [ ] Tower modifiers every 10 floors (next)
-- [ ] Floor-55+ hidden boss
-- [ ] Landing tablet (floor + modifiers)
-- [ ] Test steps for the above
+- [x] Tower modifiers (`TowerModifiers`): floors 1–10 none, 11–20 one, 21–30 two … (`(floor - 1) / 10`), boss floors
+      55+ two more (the plan's "Legend bosses with +2 modifiers"); capped at the usable pool (6 of the 8: room_elite and
+      red_chance have nothing to act on in the tower). The order is one weighted draw from the world seed alone, so each
+      stretch keeps the last one's modifiers and adds the next, and a replayed floor has the same ones. `TowerRun` hands
+      the list to `GateModifiers.attach(runId, ids)` on open and on every floor change, so the effects and the +20% stones
+      / vein size per modifier work as in gates (stones and veins through GateRewards). Announced in chat with the floor
+      title.
+- [x] Swarming copies (spawned by GateModifiers, not TowerRun) get the floor tag and scaling: `TowerRun.onJoin` (mobs of
+      a run without `mdvlcraft_tower_floor`; TowerRun's own spawns are skipped by a `spawning` flag)
+- [x] Landing tablet: a text display over the landing ("Floor N" + the modifiers / "No tower modifiers"), tagged with the
+      run id and floor, so it goes with the floor (discardMobs) and, after a restart, RuleGates drops it as stale (same
+      `mdvlcraft_gate_tablet` tag). `mobsLeft` now counts only Mobs.
+- [x] Hidden boss (plan 10.2, floors 55+): when a boss floor's last boss dies, 25% (rolled once per floor visit) that a
+      hidden boss rises at the arena centre: another theme's S boss (else this theme's, else an elite), ×1.5 health
+      before the floor scaling, glowing, "Hidden …", scoreboard tag `mdvlcraft_tower_hidden`, persistent
+      `HiddenBoss.TAG` (so GateRewards drops 1–2 black essence stones). The bars stay shut; its death gives the normal
+      boss rewards and opens them. Title/subtitle/chat to everyone present.
+- [x] Debug: `/mdvl gate tower mods <floor>` (that floor's modifiers; returns the count), `/mdvl gate tower hidden`
+      (the caller's run: next qualifying boss death raises the hidden boss for sure); `info` shows modifiers
+- [x] `tests/tower.txt`: `wait 120` at the start; new section after REOPEN_IN_CASTLE (MODS_5_NONE, MODS_15_ONE,
+      MODS_25_TWO, MODS_55_LEGEND, LEFT_FOR_55, IN_FLOOR55, TABLET, BOSS55_SPAWNED, HIDDEN_ROSE, HIDDEN_BLACK_DROP,
+      HIDDEN_SEALS, TROPHY_ITEM, REOPEN2_IN_CASTLE; shots tower_floor55_tablet, tower_hidden_boss,
+      tower_forge_seal_trades — the forge is placed 2 blocks south and right-clicked, check the two seal trades)
+- [ ] Left (not done): the sigil start menu (sneak-use still stands in), status-page leaderboard line, half essence
+      drops on farm floors (GateRewards' drop code; the chest and seals are already halved)
 
 ## Decisions
 
@@ -68,6 +89,8 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
 
 - Round 3: `gate/GateForgeBlock.java`: `offers()` ends with `offers.addAll(com.mdvlcraft.binder.gate.tower.TowerItems.forgeOffers());`
   (fully qualified, no import) + Javadoc line.
+- Round 3: `gate/GateModifiers.java`: `REGISTRY` and `attach(int, List<String>)` made `public` (+ a comment each), for
+  TowerModifiers / TowerRun.
 
 - `MDVLBinder.java`: `TowerItems.register(modBus)` after `GateRewards.register`; on the client
   `TowerClient.register(modBus)` after `GateRenderer.register` (fully qualified, no imports).
@@ -86,7 +109,11 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
 
 - 2026-10-22 (coordinator, 2.0.40 jar): `tests/tower.txt` all markers pass except SEALS_OK (selector syntax; fixed).
 - Round 3 step 1 (seal trades): build passes.
+- Round 3 steps 2–4 (modifiers, tablet, hidden boss, debug, steps): build passes. Not run in game.
 
 ## Where I stopped
 
-First full implementation committed; next: coordinator runs `tests/tower.txt`, then the "Next" items above.
+Round 3 done on `gate-tower2` (everything above committed and pushed; build passes). Next: coordinator merges and runs
+`tests/tower.txt` (new markers listed in the round 3 checklist). Watch: the tablet's position over the landing, Swarming
+copies getting floor scaling (`tower info` / mob health), the forge screen showing the two seal trades at the end of
+the list, and the hidden boss rising only once per floor visit. Then the "Left" items.

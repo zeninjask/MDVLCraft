@@ -125,6 +125,10 @@ def main():
         'tower.mdvlcraft.floor_cleared': 'Floor %s is clear: a chest waits in the stair room.',
         'tower.mdvlcraft.died': 'You fell on floor %s. Next time you start from floor %s.',
         'tower.mdvlcraft.left': 'You leave the Demon Castle. You will continue from floor %s.',
+        'tower.mdvlcraft.modifiers': 'Tower modifiers: %s',
+        'tower.mdvlcraft.no_modifiers': 'No tower modifiers',
+        'tower.mdvlcraft.hidden.subtitle': 'The stairs stay barred',
+        'tower.mdvlcraft.hidden.message': 'A hidden boss rises in the arena. The stairs open when it falls.',
     })
     lang_path.write_text(json.dumps(lang, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     print('tower resources written')
