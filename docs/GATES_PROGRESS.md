@@ -35,6 +35,15 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Usage limit rule (always, for every agent and the coordinator)
+
+When the session nears its usage limit (about 95%), or the coordinator says "wrap up", **stop wherever you are**: commit
+everything (half-finished work too, as long as the build passes; if it doesn't, commit it anyway with "WIP, build
+broken: <why>" in the message and the handoff), push your branch, and update your handoff file with exactly where you
+stopped and the next step. Do this regardless of what you're in the middle of. The coordinator does the same for `gate`
+and `docs/GATES_PROGRESS.md`. Agents can't see the usage meter themselves, so between those moments the protection is
+committing and pushing small steps often.
+
 ## Parallel work
 
 From phase 3 on, parts are built by several agents at once on their own branches (`gate-builder`, `gate-spawner`,

@@ -12,6 +12,15 @@ this folder, and its own files. The coordinator merges parts into `gate`, runs t
 | Rewards and clear bonus (phase 4) | `gate-rewards` | `rewards.md` | `gate/GateRewards`, crystal vein blocks, boss chest, loot tables, Gate Forge |
 | Red gates and breaks (phase 5) | `gate-red` | `red.md` | `gate/RedGates`, `gate/GateBreaks`, red realm surface rules in `gen_gate_data.py` |
 
+## Usage limit rule (always)
+
+When the session nears its usage limit (about 95%), or the coordinator says "wrap up", **stop wherever you are**: commit
+everything (half-finished work too, as long as the build passes; if it doesn't, commit it anyway with "WIP, build
+broken: <why>" in the message and the handoff), push your branch, and update your handoff file with exactly where you
+stopped and the next step. Do this regardless of what you're in the middle of. The coordinator does the same for `gate`
+and `docs/GATES_PROGRESS.md`. Agents can't see the usage meter themselves, so between those moments the protection is
+committing and pushing small steps often.
+
 ## Rules for every part
 
 - Work only on your branch. **Commit and push it often** (`git push -u origin <branch>`): after each working step, and at
