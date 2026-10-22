@@ -1,0 +1,29 @@
+wait 60
+cmd execute as Tester run mdvl gate pools
+wait 2
+cmd execute as Tester run mdvl gate open E crypt
+wait 30
+cmd execute as Tester at @s unless entity @e[distance=..128,type=!player] run say NO_NATURAL_SPAWNS_OK
+cmd execute as Tester at @s run mdvl gate testroom
+wait 3
+cmd execute as Tester at @s if entity @e[distance=..12,tag=mdvlcraft_gate] run say ROOM_SPAWNED_OK
+cmd execute as Tester at @s if entity @e[distance=..12,tag=mdvlcraft_gate,nbt={ForgeData:{mdvlcraft_gate_role:"elite"}}] run say ELITE_OK
+shot spawner_room
+cmd execute as Tester at @s run tp @e[distance=..12,limit=1,tag=mdvlcraft_gate] ~ ~ ~40
+wait 4
+cmd execute as Tester at @s unless entity @e[distance=30..,tag=mdvlcraft_gate] run say LEASH_OK
+cmd execute as Tester at @s run kill @e[distance=..60,tag=mdvlcraft_gate]
+wait 2
+cmd execute as Tester at @s run mdvl gate testroom boss
+wait 3
+cmd execute as Tester at @s if entity @e[distance=..12,tag=mdvlcraft_gate,nbt={ForgeData:{mdvlcraft_gate_role:"boss"}}] run say BOSS_SPAWNED_OK
+shot spawner_boss
+cmd execute as Tester at @s run kill @e[distance=..12,tag=mdvlcraft_gate,nbt={ForgeData:{mdvlcraft_gate_role:"boss"}}]
+wait 2
+cmd mdvl gate list
+shot spawner_exit
+cmd execute as Tester at @s run tp @s ~ ~ ~-3
+wait 2
+cmd execute as Tester unless entity @s[nbt={Dimension:"mdvlcraft:gate_realm"}] run say EXIT_OK
+wait 125
+cmd mdvl gate list
