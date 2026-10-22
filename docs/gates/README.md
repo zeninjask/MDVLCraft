@@ -7,10 +7,14 @@ this folder, and its own files. The coordinator merges parts into `gate`, runs t
 
 | Part | Branch | Handoff file | Owns |
 | --- | --- | --- | --- |
-| Dungeon builder (phase 3a) | `gate-builder` | `builder.md` | `gate/GateBuilder`, `gate/DungeonPlanner`, room templates (`data/mdvlcraft/structures/gate/`), their generator in `binder/tools/gates/` |
-| Spawning and combat (phase 3b) | `gate-spawner` | `spawner.md` | `gate/GateSpawner`, `gate/GateMobs`, room triggers, boss and clear, exit |
-| Rewards and clear bonus (phase 4) | `gate-rewards` | `rewards.md` | `gate/GateRewards`, crystal vein blocks, boss chest, loot tables, Gate Forge |
-| Red gates and breaks (phase 5) | `gate-red` | `red.md` | `gate/RedGates`, `gate/GateBreaks`, red realm surface rules in `gen_gate_data.py` |
+| Dungeon builder (phase 3a, merged) | `gate-builder` | `builder.md` | (now owned by the themes part) |
+| Spawning and combat (phase 3b, merged) | `gate-spawner` | `spawner.md` | (now owned by the combat part) |
+| Rewards and clear bonus (phase 4, merged) | `gate-rewards` | `rewards.md` | `gate/GateRewards`, crystal veins, boss chest, loot tables, Gate Forge (hooks only from now on) |
+| Red gates and breaks (phase 5, merged) | `gate-red` | `red.md` | `gate/RedGates`, `gate/GateBreaks`, `gate/RedLandscape` (hooks only from now on) |
+| **Combat finish (3b rest, 5.4–5.5)** | `gate-combat` | `combat.md` | `gate/GateCombat`, `gate/GateSpawner`, `gate/GateMobs`, `gate/GateSpawnCommand`: boss-room doors, boss bars, party wipe and death/logout rules, health cap |
+| **Themes (phase 6)** | `gate-themes` | `themes.md` | `data/mdvlcraft/gate_themes/`, its loader, `gate/GateBuilder`, `gate/DungeonPlanner`, room templates and their generators, theme hazards |
+| **Late game (phase 7)** | `gate-late` | `late.md` | gate modifiers (`data/mdvlcraft/gate_modifiers/`), red S gates (hidden boss, black essence), rule gates; new classes of its own |
+| **Demon Castle tower (phase 8)** | `gate-tower` | `tower.md` | the tower: `gate/tower/` (new), the `demon_castle` dimension's use, Castle Sigil, floor saves |
 
 ## Usage limit rule (always)
 

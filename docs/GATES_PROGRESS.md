@@ -35,26 +35,18 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
-## Where the coordinator stopped (wrap-up, 2026-10-22)
+## Coordinator state (new coordinator, 2026-10-22 evening)
 
-- `gate` has phases 1, 2, 3a (builder), 4 (rewards) and 5 (red/breaks) merged; head is the commit carrying this note.
-  **The merged tree has not been build-checked yet**: a build was queued behind the test rig's lock when wrap-up came.
-  Next: `cd binder && flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q`; fix any merge breakage.
-- Merge conflict resolved: `GateBuilder.build` red-realm branch = gate-red's `RedLandscape.plan` + builder's `whenBuilt`.
-  Added by the coordinator: `GateRewards.placeCrystals` is called in the builder's last queue step, before `built = true`.
-- Phase 3b (spawner): wrapped up on `gate-spawner` at 4d48c2e3, **not merged into gate, and it has not merged gate
-  in**. Its last two one-line edits await a build. Before merging, do its handoff's steps 2–6 (`docs/gates/spawner.md`):
-  rename its lang key to `gate.mdvlcraft.exit_open` (rewards owns `gate.mdvlcraft.cleared`), call
-  `GateRewards.onCleared` on clear, set `mdvlcraft_gate_boss` on bosses, skip red instances in its boss/trigger/exit/
-  collapse/leash code (its leash would otherwise pull red camp and break-wave mobs back), switch RedLandscape's stand-in
-  mobs to `GateMobs`. Expect a conflict in `en_us.json`. Original brief for this part: Its agent was told to merge `origin/gate`, honour the hooks
-  (`GateRewards.onCleared` on clear; `GateRewards.ROLE` "elite"/"boss" tags; red bosses handled by RedGates via
-  `mdvlcraft_gate_boss`; skip `mdvlcraft_gate_break` mobs; anti-farm exemption for gate kills) and push. Read
-  `docs/gates/spawner.md` on that branch for its state, then merge it into `gate`.
-- In-game: phase 1 PASS. Phase 2 (key opens a gate, stabilise, walk in, leave in front, no-space refusal, removal on
-  close) was being rerun on a fresh client with `docs/gates/tests/phase2.txt`; result not recorded. Not yet run:
-  `docs/gates/tests/{builder,rewards,red}.txt`. Run each on a fresh client (rig notes in the test log).
-- Phases 6–8 not started.
+- The merged tree (phases 1, 2, 3a, 4, 5) builds (`flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q`, exit 0).
+- **Phase 3b merged** from `gate-spawner` (4d48c2e3), no conflicts. Its pre-merge steps 2–6 done on `gate`: lang key
+  `gate.mdvlcraft.exit_open` (the duplicate `gate.mdvlcraft.cleared` removed; rewards keeps it), `GateCombat.clear` calls
+  `GateRewards.onCleared`, `GateSpawner.ROLE = GateRewards.ROLE`, bosses also get `RedLandscape.BOSS_TAG`, GateCombat
+  skips red instances (triggers, exit, collapse, boss death) and leaves red and break-wave mobs out of its leash,
+  RedLandscape uses `GateMobs` pools and bosses (vanilla stand-ins only if the mods are missing). Build passes.
+- Four parts started in parallel, cut from this commit (see `docs/gates/README.md`): `gate-combat`, `gate-themes`,
+  `gate-late`, `gate-tower`.
+- In-game: phase 2 rerun and `builder`, `rewards`, `red`, `spawner` steps files still to run (no test rig yet in this
+  session).
 
 ## Usage limit rule (always, for every agent and the coordinator)
 

@@ -106,3 +106,8 @@ spawns nothing.
    y+1 on the dais (the exit pad check uses ±1 block around it: fine), `door` markers are doorways in use.
 8. Build, push, then: door sealing for the boss room (unseal on clear, and if no roster member is left inside so a
    wiped party can come back), boss bar for bosses without one, pool tuning after `spawner.txt` runs.
+
+## Merged into gate (coordinator, 2026-10-22 evening)
+
+Merged without conflicts; steps 2–6 above were done on `gate` by the coordinator (see `docs/GATES_PROGRESS.md`). Step 8
+(door sealing, boss bar) moves to the combat part (`gate-combat`, `docs/gates/combat.md`).

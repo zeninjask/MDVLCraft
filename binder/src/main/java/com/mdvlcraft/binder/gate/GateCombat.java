@@ -70,6 +70,9 @@ public final class GateCombat {
                 if (level == null) {
                     continue;
                 }
+                if (instance.red) {
+                    continue;   // red gates have their own seal, exit pad and collapse (RedGates)
+                }
                 if (instance.state == GateInstances.State.ACTIVE) {
                     triggerRooms(level, gates, instance);
                 } else if (instance.state == GateInstances.State.CLEARED) {
@@ -177,6 +180,9 @@ public final class GateCombat {
                 gone.add(entity);
                 continue;
             }
+            if (instance.red || entity.getPersistentData().getBoolean(GateBreaks.BREAK_TAG)) {
+                continue;   // red camps and break waves roam (RedGates and GateBreaks keep them in bounds)
+            }
             BlockPos home = BlockPos.of(entity.getPersistentData().getLong(GateSpawner.HOME));
             int room = entity.getPersistentData().getInt(GateSpawner.ROOM);
             boolean stray;
@@ -207,7 +213,7 @@ public final class GateCombat {
         dead.getPersistentData().remove(GateSpawner.ROLE);   // a boss that dies twice (a second phase) counts once
         GateInstances gates = GateInstances.get(level.getServer());
         Instance instance = gates.byId(GateSpawner.instanceOf(dead));
-        if (instance == null || instance.state != GateInstances.State.ACTIVE) {
+        if (instance == null || instance.red || instance.state != GateInstances.State.ACTIVE) {
             return;
         }
         for (Entity other : level.getAllEntities()) {
@@ -221,6 +227,7 @@ public final class GateCombat {
     /** Marks the instance CLEARED, opens the exit (at the exit marker, else where the boss fell) and tells the roster. */
     static void clear(ServerLevel level, GateInstances gates, Instance instance, BlockPos fallen, int room) {
         instance.state = GateInstances.State.CLEARED;
+        GateRewards.onCleared(level, instance);   // clear bonus, boss chest, its own "cleared" message (idempotent)
         if (exit(instance) == null) {
             instance.markers.add(new Marker("exit", fallen, room));
         }
@@ -228,7 +235,7 @@ public final class GateCombat {
         CLEARED_AT.put(instance.id, level.getGameTime());
         for (ServerPlayer player : level.getServer().getPlayerList().getPlayers()) {
             if (instance.roster.contains(player.getUUID())) {
-                player.sendSystemMessage(Component.translatable("gate.mdvlcraft.cleared", COLLAPSE_TICKS / 20).withStyle(ChatFormatting.GOLD));
+                player.sendSystemMessage(Component.translatable("gate.mdvlcraft.exit_open", COLLAPSE_TICKS / 20).withStyle(ChatFormatting.GOLD));
                 player.playNotifySound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
         }

@@ -117,7 +117,7 @@ public final class RedLandscape {
         };
     }
 
-    // TODO switch to GateMobs (the spawner part's theme pools) once gate-spawner is merged; these vanilla mobs stand in.
+    /** Vanilla stand-ins, used only when none of the theme pool's mods is loaded (GateMobs). */
     static List<String> standInMobs(GateTheme theme) {
         return switch (theme) {
             case CRYPT -> List.of("minecraft:zombie", "minecraft:skeleton", "minecraft:husk");
@@ -129,7 +129,7 @@ public final class RedLandscape {
         };
     }
 
-    // TODO switch to GateMobs' boss pool (by theme and rank) once gate-spawner is merged.
+    /** Vanilla stand-in boss, used only when the theme boss's mod isn't loaded. */
     static String standInBoss(GateTheme theme) {
         return switch (theme) {
             case CRYPT -> "minecraft:wither_skeleton";
@@ -148,8 +148,12 @@ public final class RedLandscape {
     /** A random mob of the theme's pool at pos, as a gate mob of the instance. */
     @Nullable
     static Mob spawnMob(ServerLevel level, Instance instance, BlockPos pos) {
-        List<String> pool = standInMobs(instance.theme);
-        EntityType<?> type = type(pool.get(level.random.nextInt(pool.size())));
+        EntityType<?> type = GateMobs.pick(instance.theme, instance.rank, level.random.nextBoolean() ? GateMobs.Kind.MELEE : GateMobs.Kind.RANGED,
+            level.random);
+        if (type == null) {   // none of the theme's mods loaded: the vanilla stand-ins
+            List<String> pool = standInMobs(instance.theme);
+            type = type(pool.get(level.random.nextInt(pool.size())));
+        }
         return type == null ? null : GateSpawner.spawn(level, instance, type, pos);
     }
 
@@ -209,12 +213,16 @@ public final class RedLandscape {
     /** The theme's boss in the arena, a few blocks from its centre, flagged with BOSS_TAG. */
     @Nullable
     static Mob spawnBoss(ServerLevel level, Instance instance, BlockPos floor) {
-        EntityType<?> type = type(standInBoss(instance.theme));
+        EntityType<?> type = GateMobs.type(GateMobs.boss(instance.theme, instance.rank).id());
+        boolean standIn = type == null;
+        if (standIn) {
+            type = type(standInBoss(instance.theme));
+        }
         Mob boss = type == null ? null : GateSpawner.spawn(level, instance, type, floor.offset(0, 1, 6));
         if (boss != null) {
             boss.getPersistentData().putBoolean(BOSS_TAG, true);
             AttributeInstance health = boss.getAttribute(Attributes.MAX_HEALTH);
-            if (health != null && health.getModifier(BOSS_HEALTH) == null) {
+            if (standIn && health != null && health.getModifier(BOSS_HEALTH) == null) {   // a vanilla stand-in needs the bulk
                 health.addPermanentModifier(new AttributeModifier(BOSS_HEALTH, "red gate boss", STAND_IN_BOSS_HEALTH - 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
             boss.setHealth(boss.getMaxHealth());

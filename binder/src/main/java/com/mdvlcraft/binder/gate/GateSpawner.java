@@ -26,7 +26,7 @@ public final class GateSpawner {
     /** Persistent NBT int on every gate mob: the id of its instance. */
     public static final String TAG = "mdvlcraft_gate";
     /** Persistent NBT string: {@link #ELITE} or {@link #BOSS} (absent on ordinary gate mobs). */
-    public static final String ROLE = "mdvlcraft_gate_role";
+    public static final String ROLE = GateRewards.ROLE;
     /** Persistent NBT int: the room the mob belongs to (-1: none). */
     public static final String ROOM = "mdvlcraft_gate_room";
     /** Persistent NBT long: the block it was spawned at. */
@@ -66,6 +66,9 @@ public final class GateSpawner {
         data.putInt(TAG, instance.id);
         if (role != null) {
             data.putString(ROLE, role);
+        }
+        if (BOSS.equals(role)) {
+            data.putBoolean(RedLandscape.BOSS_TAG, true);   // the same flag red gates use for their boss
         }
         data.putInt(ROOM, room);
         data.putLong(HOME, pos.asLong());
