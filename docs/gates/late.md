@@ -1,7 +1,65 @@
 # Late game (phase 7): handoff
 
 > Standing rule (always applies): near the usage limit (~95%) or on "wrap up", stop, commit everything (WIP ok; say if the
-> build is broken), push `gate-late`, and update this file with exactly where work stopped and the next step.
+> build is broken), push `gate-late2` (round 3; `gate-late` before), and update this file with exactly where work stopped
+> and the next step.
+
+## Round 3: late/combat finish (branch `gate-late2`, from 4cc49214)
+
+Owner files this round: `gate/RuleGates`, new `gate/GateStatue`, new `client/GateStatueRenderer`, `gate/LateGateCommand`,
+`gen_gate_late.py` (+ `textures/entity/gate_statue.png`), and in `gate/GateCombat` only the PlayerRevive wipe change.
+
+- [x] **Statues** rule (`RuleGates.Rule.STATUES`, entity `mdvlcraft:gate_statue` = `GateStatue`): when a room other than
+      the entrance triggers (`instance.triggeredRooms`, polled every 10 ticks, so no GateCombat hook), one statue appears on
+      its floor, at the farthest of 16 tried floor spots from the roster. It hunts players inside its room only
+      (restriction = room centre, half the larger room span + 1; drops a target that leaves, walks back) and moves only
+      while no player within 64 blocks has it in view (view cone cos > 0.45, about 63° off centre, plus line of sight).
+      Watched = `isImmobile()` true for the tick (Mob.serverAiStep is final in 1.20.1), path stopped, horizontal motion
+      zeroed: it can't strike either. Invulnerable except `/kill` (bypasses invulnerability) and creative players; not
+      pushable; no despawn; rank-scaled through `GateSpawner.scale` (base 8 damage, speed 0.38). It discards itself when
+      its instance is gone (every 40 ticks). Not a gate mob (no `mdvlcraft_gate` tag), so no drops, leash or Swarming.
+      Client: humanoid (zombie model geometry) with a generated grey stone texture.
+- [x] **The Narrowing Door** rule (`Rule.NARROWING_DOOR`): before the clear, a roster member seen inside the cell who is
+      later online, alive and out of it (death respawn, Return Stone, `gate leave`, anything) has left: taken off the
+      roster and shut out (`RuleGates.shutOut`, hook in `GateEntity.tryEnter`); the rest are told. If after that nobody of
+      the roster is inside, the gate fails (`GateCombat.fail`). Logging out keeps the place. Shown via the usual title and
+      tablet.
+- [x] **Trial boss chest ×1.5**: each player's boss chest rolls a second time with a 50% chance in a trial gate
+      (`RuleGates.extraChestRoll`, hook in `GateRewards.onCleared`). `late info` prints "boss chest x1.50".
+- [x] **Wipe with PlayerRevive** (GateCombat): a downed player (`PlayerReviveServer.isBleeding`, by reflection, only if
+      `playerrevive` is loaded; no compile dep) is no longer in `present()`. Every 10 ticks an ACTIVE normal gate where a
+      roster member lies downed in the cell and nobody of the roster stands there fails at once. `fail()` sends the
+      standing home as before; the downed are bled out (`PlayerReviveServer.kill`) after the instance is closed, inside
+      the cell (same outcome as the 60 s bleed-out: their drops stay in the cell, user decision). A downed player also no
+      longer counts for room triggers, the boss-room seal or the exit pad.
+- [x] Tests: `tests/late.txt` (statues: placed, moves unseen, frozen seen, unhurt; narrowing door solo leave → gate
+      fails; chest factor in `late info`), `tests/combat.txt` (wipe fails within 5 s of `/kill` downing Tester). Both start
+      with `wait 120`. Not run.
+- [ ] Not done: Narrowing Door's shut-out of a returning member needs two players (not in the rig); trial gates'
+      statues in the boss room fight alongside the boss (intended, untested balance).
+
+Decisions this round:
+- Statues are hazards, not kills: invulnerable stone, room-bound, never needed for the clear. Spawned per triggered room
+  (chunks are loaded then) rather than all at the roll.
+- Narrowing Door read as "whoever leaves can't return, and someone must stay inside, or the gate fails" (plan: "a door
+  that shrinks each time a member leaves, so someone must stay behind"). No shrinking visual on the gate.
+- Chest ×1.5 as a 50% second roll of the same table (keeps gear and keys in the scaling; GateRewardChestBlockEntity's
+  roll adds into empty slots), not by scaling stack sizes.
+- PlayerRevive by reflection, so the build needs no new jar in `libs/`.
+
+Hooks into other files (round 3):
+- `GateEntity.tryEnter`: `if (RuleGates.shutOut(player, instance)) return;` after the other-gate check.
+- `GateRewards.onCleared`: per player, `if (RuleGates.extraChestRoll(instance, level.random)) chest.roll(player, table);`
+  after the normal roll; Javadoc line.
+- `GateCombat` (combat part's file, owned this round for the wipe only): `downed()`, `wiped()`, `present()` skips the
+  downed, `fail()` bleeds out the downed after closing; class Javadoc.
+- `lang/en_us.json`: new keys merged by `gen_gate_late.py`.
+
+Build: `flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q` passes (no warnings in the new code). Not run in game.
+
+State / next step (round 3): all four items done and pushed. Coordinator: merge, rerun `tests/late.txt` and
+`tests/combat.txt`; watch the statue's look (texture, frozen pose), whether it can reach players in tall rooms, and that
+`/kill` still downs (not kills) Tester so the wipe step really exercises PlayerRevive.
 
 Branch `gate-late`, cut from `gate` d7ff686 (the worktree first came up on main ce09fea; the branch was reset to d7ff686
 before any work and force-pushed, so it holds no main-only commits). Plan section 9. Owner files: `gate/GateModifiers`,
@@ -48,8 +106,7 @@ before any work and force-pushed, so it holds no main-only commits). Plan sectio
       gate: players home and off the roster, mobs and cell cleared). A comma list of modifiers must be quoted
       (`"enraged,crimson"`); `late key` puts the key in the main hand if it is empty.
 - [x] In-game steps: `docs/gates/tests/late.txt` (not run; coordinator runs it).
-- [ ] Not done / later: the two richer rules (Statues, Narrowing Door); boss chest ×1.5 for trial gates (only stones,
-      veins and experience are scaled); "except food" doesn't cover foods that heal directly in finishUsingItem (only
+- [ ] Not done / later: (Statues, Narrowing Door and the trial boss chest: done in round 3, above); "except food" doesn't cover foods that heal directly in finishUsingItem (only
       natural regeneration counts); trophy and Elite Pack in the red realm (camps have no rooms, so no Elite Pack there).
 
 ## Hooks into other files

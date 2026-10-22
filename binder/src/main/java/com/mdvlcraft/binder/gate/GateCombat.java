@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.gate;
 import com.mdvlcraft.binder.gate.GateInstances.Instance;
 import com.mdvlcraft.binder.gate.GateInstances.Marker;
 import com.mojang.logging.LogUtils;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,6 +25,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,6 +38,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.slf4j.Logger;
 
@@ -53,7 +56,9 @@ import org.slf4j.Logger;
  * doorway), its doorways are walled up with their frame block; they open again when the gate is cleared, or as soon as
  * no roster member is left in the room, so a party whose fighters fell can come back in. Death (plan 5.5): a player who
  * dies in a normal gate respawns outside, in front of the gate, and stays on the roster; when the last roster member alive
- * in the gate dies, the gate fails and closes (its key was used up on opening). Logging out keeps a player's roster place;
+ * in the gate dies, the gate fails and closes (its key was used up on opening). A player downed by PlayerRevive (bleeding,
+ * waiting for a revive) counts as gone: when nobody of the roster inside is left standing the gate fails at once, without
+ * waiting for the bleed-out, and the downed are bled out there. Logging out keeps a player's roster place;
  * GateProtection sends them home on login if the gate closed meanwhile. Red gates are RedGates' throughout.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
@@ -82,6 +87,10 @@ public final class GateCombat {
 
     /** Persistent flag on a gate boss whose death was already counted. */
     private static final String COUNTED = "mdvlcraft_gate_counted";
+    /** PlayerRevive's PlayerReviveServer.isBleeding / kill(Player), by reflection (optional mod; null if missing). */
+    private static Method isBleeding;
+    private static Method bleedOut;
+    private static boolean reviveLooked;
 
     private GateCombat() {
     }
@@ -106,6 +115,10 @@ public final class GateCombat {
                     continue;   // red gates have their own seal, exit pad and collapse (RedGates)
                 }
                 if (instance.state == GateInstances.State.ACTIVE) {
+                    if (wiped(level, instance)) {
+                        fail(level, gates, instance);
+                        continue;
+                    }
                     triggerRooms(level, gates, instance);
                     tickBossRoom(level, instance);
                 } else if (instance.state == GateInstances.State.CLEARED) {
@@ -123,11 +136,11 @@ public final class GateCombat {
         }
     }
 
-    /** Roster members standing in the instance's cell, alive and playing. */
+    /** Roster members standing in the instance's cell, alive, playing and not downed. */
     static List<ServerPlayer> present(ServerLevel level, Instance instance) {
         List<ServerPlayer> present = new ArrayList<>();
         for (ServerPlayer player : level.players()) {
-            if (instance.roster.contains(player.getUUID()) && player.isAlive() && !player.isSpectator()
+            if (instance.roster.contains(player.getUUID()) && player.isAlive() && !player.isSpectator() && !downed(player)
                 && GateDimensions.bounds(instance.cellX, instance.cellZ).contains(player.position())) {
                 present.add(player);
             }
@@ -458,6 +471,42 @@ public final class GateCombat {
         }
     }
 
+    /** Someone of the roster lies downed in the cell and nobody is left standing there to revive them. */
+    private static boolean wiped(ServerLevel level, Instance instance) {
+        if (!present(level, instance).isEmpty()) {
+            return false;
+        }
+        return level.players().stream().anyMatch(p -> instance.roster.contains(p.getUUID()) && p.isAlive() && downed(p)
+            && GateDimensions.bounds(instance.cellX, instance.cellZ).contains(p.position()));
+    }
+
+    /** True if PlayerRevive has this player downed (bleeding out, waiting for a revive). */
+    static boolean downed(Player player) {
+        lookUpRevive();
+        try {
+            return isBleeding != null && (boolean)isBleeding.invoke(null, player);
+        } catch (ReflectiveOperationException | RuntimeException e) {
+            return false;
+        }
+    }
+
+    private static void lookUpRevive() {
+        if (reviveLooked) {
+            return;
+        }
+        reviveLooked = true;
+        if (!ModList.get().isLoaded("playerrevive")) {
+            return;
+        }
+        try {
+            Class<?> server = Class.forName("team.creative.playerrevive.server.PlayerReviveServer");
+            isBleeding = server.getMethod("isBleeding", Player.class);
+            bleedOut = server.getMethod("kill", Player.class);
+        } catch (ReflectiveOperationException | LinkageError e) {
+            LOGGER.warn("PlayerRevive found but its API didn't match; downed players won't count as gone", e);
+        }
+    }
+
     /** The whole party is down: the gate fails. Anyone of the roster still standing in the gate world goes home, the cell is
      * cleared and the instance closed (its key was used up when it opened). */
     static void fail(ServerLevel level, GateInstances gates, Instance instance) {
@@ -467,16 +516,28 @@ public final class GateCombat {
                     "The gate has failed: the whole party fell. It closes, and its key is lost.").withStyle(ChatFormatting.DARK_RED));
             }
         }
+        List<ServerPlayer> downed = new ArrayList<>();
         for (ServerPlayer player : List.copyOf(level.players())) {
             if (instance.roster.contains(player.getUUID()) && player.isAlive()) {
-                GateTravel.leave(player, instance, true);
+                if (downed(player)) {
+                    downed.add(player);   // nobody left to revive them: they bleed out here, below
+                } else {
+                    GateTravel.leave(player, instance, true);
+                }
             }
         }
         SEALED.remove(instance.id);   // the blocks go with the cell
         SEAL_AT.remove(instance.id);
         CLEARED_AT.remove(instance.id);
         GateBuilder.clear(level, instance);
-        gates.close(instance);
+        gates.close(instance);   // closed first, so their deaths don't fail it again
+        for (ServerPlayer player : downed) {
+            try {
+                bleedOut.invoke(null, player);
+            } catch (ReflectiveOperationException | RuntimeException e) {
+                LOGGER.warn("Couldn't bleed out {}", player.getGameProfile().getName(), e);
+            }
+        }
     }
 
     /** Died in a normal gate: back in front of the gate (their origin), not at their bed. */

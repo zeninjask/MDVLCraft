@@ -1,4 +1,4 @@
-wait 60
+wait 120
 cmd gamerule doImmediateRespawn true
 cmd execute as Tester run mdvl gate open E crypt
 wait 30
@@ -32,7 +32,10 @@ wait 3
 cmd execute as Tester at @s if entity @e[distance=..30,tag=mdvlcraft_gate,nbt={ForgeData:{mdvlcraft_gate_role:"elite"}}] run say ELITE_PRESENT_CHECK_BAR_IN_SHOT
 shot combat_room
 cmd kill Tester
-wait 20
+wait 5
+cmd mdvl gate list
+cmd execute as Tester run say EXPECT_NO_LIVE_GATE_ABOVE_WIPE_DOWNED_OK
+wait 15
 cmd execute as Tester unless entity @s[nbt={Dimension:"mdvlcraft:gate_realm"}] run say RESPAWN_OUTSIDE_OK
 cmd mdvl gate list
 cmd execute as Tester run say EXPECT_NO_LIVE_GATE_ABOVE_WIPE_OK

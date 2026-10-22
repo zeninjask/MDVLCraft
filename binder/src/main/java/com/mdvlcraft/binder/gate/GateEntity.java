@@ -173,6 +173,9 @@ public class GateEntity extends Entity {
             player.displayClientMessage(Component.translatable("gate.mdvlcraft.other_gate"), true);
             return;
         }
+        if (RuleGates.shutOut(player, instance)) {
+            return;   // trial rule The Narrowing Door: whoever left can't come back
+        }
         if (!instance.roster.contains(player.getUUID())) {
             if (instance.red) {
                 player.displayClientMessage(Component.translatable("gate.mdvlcraft.sealed"), true);
