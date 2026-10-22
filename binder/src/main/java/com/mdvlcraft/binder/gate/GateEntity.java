@@ -41,7 +41,7 @@ public class GateEntity extends Entity {
     private static final EntityDataAccessor<Boolean> STABLE = SynchedEntityData.defineId(GateEntity.class, EntityDataSerializers.BOOLEAN);
     /** How long a new gate stabilises before anyone may enter (the dungeon builder of phase 3 will take its own time). */
     static final int STABILISE_TICKS = 100;
-    /** The mild dungeon break comes this long after opening (phase 5); shown on the gate already. */
+    /** The default time from opening to the mild dungeon break; the binder config can change it (GateBreaks.breakTicks). */
     static final long BREAK_TICKS = 2 * 60 * 60 * 20;
     private static final Vector3f RED_DUST = new Vector3f(1.0F, 0.25F, 0.25F);
 
@@ -88,6 +88,15 @@ public class GateEntity extends Entity {
     /** The space a gate of `rank` at `base` takes; it must be free of blocks to open there. */
     public static AABB spaceAt(GateRank rank, BlockPos base) {
         return sizeOf(rank).makeBoundingBox(base.getX() + 0.5, base.getY(), base.getZ() + 0.5);
+    }
+
+    public int instanceId() {
+        return this.instanceId;
+    }
+
+    /** Points the gate at another instance (RedGates, when its gate turns red and moves to the red realm). */
+    void retarget(int instanceId) {
+        this.instanceId = instanceId;
     }
 
     public GateRank rank() {
@@ -156,7 +165,7 @@ public class GateEntity extends Entity {
     }
 
     private void tryEnter(ServerPlayer player, GateInstances gates, Instance instance) {
-        if (player.isSpectator() || !player.isAlive()) {
+        if (player.isSpectator() || !player.isAlive() || !instance.live()) {
             return;
         }
         Instance theirs = gates.ofPlayer(player.getUUID());
@@ -178,11 +187,14 @@ public class GateEntity extends Entity {
                 return;
             }
         }
+        if (instance.roster.isEmpty() && RedGates.roll(player, this, gates, instance)) {
+            return;
+        }
         GateTravel.enter(player, instance, this.returnPoint());
     }
 
     /** The opener, and anyone in the opener's Parties alliance while the opener is online. */
-    private boolean mayJoin(ServerPlayer player, Instance instance) {
+    boolean mayJoin(ServerPlayer player, Instance instance) {
         if (instance.owner == null || instance.owner.equals(player.getUUID())) {
             return true;
         }
@@ -191,7 +203,7 @@ public class GateEntity extends Entity {
     }
 
     /** Just in front of the gate: where its players come back out. */
-    private Vec3 returnPoint() {
+    Vec3 returnPoint() {
         Vec3 forward = Vec3.directionFromRotation(0.0F, this.getYRot());
         return this.position().add(forward.scale(this.getBbWidth() / 2.0F + 1.0F));
     }
@@ -201,7 +213,7 @@ public class GateEntity extends Entity {
         if (instance.state == GateInstances.State.BUILDING) {
             return Component.translatable("gate.mdvlcraft.label.stabilising", name);
         }
-        long left = Math.max(0, instance.openedAt + BREAK_TICKS - this.level().getGameTime()) / 20;
+        long left = Math.max(0, instance.openedAt + GateBreaks.breakTicks() - this.level().getGameTime()) / 20;
         String time = String.format("%d:%02d:%02d", left / 3600, left / 60 % 60, left % 60);
         long inside = this.getServer().getPlayerList().getPlayers().stream()
             .filter(p -> instance.roster.contains(p.getUUID()) && p.level().dimension() == instance.dimension).count();

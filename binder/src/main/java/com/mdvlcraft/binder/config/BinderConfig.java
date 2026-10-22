@@ -18,6 +18,11 @@ public final class BinderConfig {
     private static final DoubleValue MOB_ARMOR_CHANCE;
     private static final DoubleValue MOB_ARMOR_PIECE_CHANCE;
     private static final BooleanValue MOB_WEAPONS_UP_TO_IRON;
+    private static final DoubleValue GATE_RED_CHANCE_B;
+    private static final DoubleValue GATE_RED_CHANCE_A;
+    private static final DoubleValue GATE_RED_CHANCE_S;
+    private static final BooleanValue GATE_BREAKS;
+    private static final IntValue GATE_BREAK_MINUTES;
 
     private BinderConfig() {
     }
@@ -62,6 +67,28 @@ public final class BinderConfig {
         return !SPEC.isLoaded() || MOB_WEAPONS_UP_TO_IRON.get();
     }
 
+    /** Chance a gate of this rank ("B", "A" or "S") turns red when its party first steps in; `fallback` before the config
+     * loads or for other ranks. */
+    public static double gateRedChance(String rank, double fallback) {
+        if (!SPEC.isLoaded()) {
+            return fallback;
+        }
+        return switch (rank) {
+            case "B" -> GATE_RED_CHANCE_B.get();
+            case "A" -> GATE_RED_CHANCE_A.get();
+            case "S" -> GATE_RED_CHANCE_S.get();
+            default -> fallback;
+        };
+    }
+
+    public static boolean gateBreaks() {
+        return !SPEC.isLoaded() || GATE_BREAKS.get();
+    }
+
+    public static int gateBreakMinutes() {
+        return SPEC.isLoaded() ? GATE_BREAK_MINUTES.get() : 120;
+    }
+
     static {
         Builder builder = new Builder();
         builder.push("villageRecruits");
@@ -99,6 +126,16 @@ public final class BinderConfig {
             .defineInRange("armorPieceChance", 0.6, 0.0, 1.0);
         MOB_WEAPONS_UP_TO_IRON = builder.comment("Only give mobs weapons made of iron or weaker materials (no diamond, netherite, steel and so on).")
             .define("weaponsUpToIron", true);
+        builder.pop();
+        builder.push("gates");
+        GATE_RED_CHANCE_B = builder.comment("Chance a B-rank gate turns red (sealed until its boss dies) when its party first steps in.")
+            .defineInRange("redChanceB", 0.05, 0.0, 1.0);
+        GATE_RED_CHANCE_A = builder.comment("The same for A-rank gates.").defineInRange("redChanceA", 0.08, 0.0, 1.0);
+        GATE_RED_CHANCE_S = builder.comment("The same for S-rank gates.").defineInRange("redChanceS", 0.12, 0.0, 1.0);
+        GATE_BREAKS = builder.comment("Dungeon breaks: a gate not cleared in time releases one wave of its mobs around itself, then closes.")
+            .define("breaks", true);
+        GATE_BREAK_MINUTES = builder.comment("Minutes from opening until a gate breaks (server time: it stops while the server is off).")
+            .defineInRange("breakMinutes", 120, 1, 10080);
         builder.pop();
         SPEC = builder.build();
     }
