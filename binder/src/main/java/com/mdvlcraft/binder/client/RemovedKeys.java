@@ -53,7 +53,7 @@ final class RemovedKeys {
         "key.p1nero_ec.");
     private static final Set<String> KEEP = Set.of(
         "key.push_to_talk", "key.shouldersurfing.swap_shoulder", "gui.xaero_open_map", "key.combat_evolution.execution",
-        "key.jei.showRecipe", "key.jei.closeRecipeGui", "key.jei.bookmark", "key.jei.toggleOverlay"
+        "key.jei.showRecipe", "key.jei.showRecipe2", "key.jei.showUses", "key.jei.showUses2", "key.jei.recipeBack", "key.jei.closeRecipeGui", "key.jei.bookmark", "key.jei.toggleOverlay"
     );
     /** The JEI keys that stay share this one category ("JEI"), in place of JEI's several. */
     private static final String JEI = "key.categories.mdvlcraft.jei";
