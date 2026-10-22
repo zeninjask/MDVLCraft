@@ -1,0 +1,97 @@
+wait 60
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd execute as Tester run mdvl gate open E crypt
+wait 20
+wait 3
+cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:glowstone run say ON_PLATFORM_OK
+cmd execute as Tester at @s run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["rw_boss"]}
+cmd execute as Tester at @s run summon minecraft:husk ~-3 ~ ~2 {NoAI:1b,Tags:["rw_elite"]}
+cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_boss] boss
+cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_elite] elite
+cmd kill @e[tag=rw_boss]
+cmd kill @e[tag=rw_elite]
+wait 2
+cmd execute as Tester at @s if entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_e"}}] run say MOB_STONES_OK
+cmd execute as Tester at @s positioned ~3 ~ ~ unless entity @e[type=item,distance=..1.5,nbt={Item:{id:"minecraft:rotten_flesh"}}] run say BOSS_LOOT_REPLACED_OK
+cmd execute as Tester at @s run data get entity @e[type=item,distance=..8,limit=1] Item
+cmd execute as Tester at @s run kill @e[type=item,distance=..8]
+cmd execute as Tester at @s positioned ~-3 ~ ~-2 run mdvl gate reward vein
+cmd execute as Tester at @s run fill ~-6 ~-1 ~-5 ~ ~3 ~1 mdvlcraft:mana_crystal_ore_e replace mdvlcraft:mana_crystal_ore_e
+cmd execute as Tester at @s run setblock ~ ~ ~1 mdvlcraft:mana_crystal_ore_e
+cmd item replace entity Tester weapon.mainhand with minecraft:diamond_pickaxe
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 50
+wait 20
+wait 1
+mdown 1
+wait 4
+mup 1
+wait 2
+cmd execute as Tester at @s unless block ~ ~ ~1 mdvlcraft:mana_crystal_ore_e run say VEIN_MINED_OK
+cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:glowstone run say FLOOR_STILL_PROTECTED_OK
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:mana_crystal_e"}]}] run say CRYSTAL_PICKED_OK
+cmd execute as Tester at @s run mdvl gate reward clear
+wait 2
+cmd execute as Tester at @s if block ~ ~ ~-2 mdvlcraft:gate_reward_chest run say CHEST_PLACED_OK
+cmd execute as Tester at @s run tp @s ~ ~ ~ 180 30
+wait 20
+wait 1
+shot rewards_cleared_chat
+click 3
+wait 2
+shot rewards_chest_open
+key Escape
+wait 1
+cmd execute as Tester run mdvl gate leave
+wait 20
+wait 3
+cmd data get entity Tester Inventory
+cmd loot give Tester loot mdvlcraft:gates/e/boss
+cmd loot give Tester loot mdvlcraft:gates/d/boss
+cmd loot give Tester loot mdvlcraft:gates/c/boss
+cmd loot give Tester loot mdvlcraft:gates/b/boss
+cmd loot give Tester loot mdvlcraft:gates/a/boss
+cmd loot give Tester loot mdvlcraft:gates/s/boss
+cmd recipe give Tester mdvlcraft:gate/gate_forge
+cmd execute as Tester run mdvl gate open B frozen red
+wait 20
+wait 6
+cmd execute as Tester at @s run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["rw_red"]}
+cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_red] boss
+cmd kill @e[tag=rw_red]
+wait 2
+cmd execute as Tester at @s if entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say BLACK_STONE_OK
+cmd execute as Tester at @s if entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_b"}}] run say RED_B_STONES_OK
+cmd execute as Tester at @s run kill @e[type=item,distance=..8]
+cmd item replace entity Tester weapon.mainhand with mdvlcraft:return_stone 1
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 -60
+wait 20
+wait 1
+click 3
+wait 3
+cmd execute as Tester at @s if dimension mdvlcraft:red_realm run say RETURN_REFUSED_IN_RED_OK
+cmd execute as Tester run mdvl gate reward clear
+wait 2
+cmd execute as Tester run mdvl gate leave
+wait 20
+wait 3
+cmd execute as Tester run mdvl gate open E crypt
+wait 20
+wait 3
+cmd item replace entity Tester weapon.mainhand with mdvlcraft:return_stone 1
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 -60
+wait 1
+click 3
+wait 20
+wait 3
+cmd execute as Tester at @s unless dimension mdvlcraft:gate_realm run say RETURN_STONE_OK
+cmd execute as Tester at @s run setblock ~2 ~ ~ mdvlcraft:gate_forge
+cmd execute as Tester at @s run tp @s ~ ~ ~ -90 30
+wait 20
+wait 1
+click 3
+wait 2
+shot rewards_forge_trades
+key Escape
+cmd execute as Tester at @s run setblock ~2 ~ ~ minecraft:air
+cmd mdvl gate list
