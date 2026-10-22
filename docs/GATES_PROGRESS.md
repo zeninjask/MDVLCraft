@@ -42,7 +42,12 @@ Design notes that differ from or refine the PDF:
   Next: `cd binder && flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q`; fix any merge breakage.
 - Merge conflict resolved: `GateBuilder.build` red-realm branch = gate-red's `RedLandscape.plan` + builder's `whenBuilt`.
   Added by the coordinator: `GateRewards.placeCrystals` is called in the builder's last queue step, before `built = true`.
-- Phase 3b (spawner, branch `gate-spawner`) is not merged. Its agent was told to merge `origin/gate`, honour the hooks
+- Phase 3b (spawner): wrapped up on `gate-spawner` at 4d48c2e3, **not merged into gate, and it has not merged gate
+  in**. Its last two one-line edits await a build. Before merging, do its handoff's steps 2–6 (`docs/gates/spawner.md`):
+  rename its lang key to `gate.mdvlcraft.exit_open` (rewards owns `gate.mdvlcraft.cleared`), call
+  `GateRewards.onCleared` on clear, set `mdvlcraft_gate_boss` on bosses, skip red instances in its boss/trigger/exit/
+  collapse/leash code (its leash would otherwise pull red camp and break-wave mobs back), switch RedLandscape's stand-in
+  mobs to `GateMobs`. Expect a conflict in `en_us.json`. Original brief for this part: Its agent was told to merge `origin/gate`, honour the hooks
   (`GateRewards.onCleared` on clear; `GateRewards.ROLE` "elite"/"boss" tags; red bosses handled by RedGates via
   `mdvlcraft_gate_boss`; skip `mdvlcraft_gate_break` mobs; anti-farm exemption for gate kills) and push. Read
   `docs/gates/spawner.md` on that branch for its state, then merge it into `gate`.
