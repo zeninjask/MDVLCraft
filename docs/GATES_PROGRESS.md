@@ -27,9 +27,9 @@ Phases (plan section 2): 1 Foundations · 2 Keys and gates · 3 Builder and comb
 
 Design notes that differ from or refine the PDF:
 
-- **Checkerboard scale is 8, not 6.** Minecraft's checkerboard biome source works in quarter-blocks: a cell is
-  `4 * 2^scale` blocks, so 1024-block cells need scale 8. The theme of cell (i, j) is `THEMES[(i + j) % 6]` in the
-  order of `gen_gate_data.py` (crypt, warren, frozen, warcamp, spire, forge).
+- **Checkerboard scale 6 = 1024-block cells** (checked in the bytecode: `bitShift = scale + 2`, applied to quarter-block
+  coordinates, so a cell is `2^(scale + 4)` blocks). The theme of cell (i, j), i = floor(x / 1024), j = floor(z / 1024),
+  is `THEMES[(i + j) mod 6]` in the order of `gen_gate_data.py` (crypt, warren, frozen, warcamp, spire, forge).
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 

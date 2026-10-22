@@ -20,7 +20,7 @@ THEMES = {
     'forge':   (0x5a1a0a, 0x6a2410, 0x8a2a0a, 'minecraft:lava', 0.002, False, 2.0, 'minecraft:music.nether.nether_wastes', 'minecraft:ambient.nether_wastes.loop'),
 }
 CASTLE = (0x2a0a0a, 0x3a0c0c, 0x4a0a0a, 'minecraft:ash', 0.006, False, 1.0, 'minecraft:music.nether.crimson_forest', 'minecraft:ambient.crimson_forest.loop')
-CELL_SCALE = 8   # checkerboard cells of 4 * 2^8 = 1024 blocks
+CELL_SCALE = 6   # checkerboard: biome index = ((quartX >> (scale + 2)) + (quartZ >> (scale + 2))) mod n, so cells are 2^(6 + 4) = 1024 blocks
 
 
 def write(rel, data):
