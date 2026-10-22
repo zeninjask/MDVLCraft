@@ -45,7 +45,22 @@ Design notes that differ from or refine the PDF:
   RedLandscape uses `GateMobs` pools and bosses (vanilla stand-ins only if the mods are missing). Build passes.
 - **Combat finish merged** from `gate-combat` (bc08c74): boss-room seal, boss bars (`GateBossBars`), death respawn at the
   gate, whole-party wipe fails the gate (`docs/gates/combat.md`; steps `tests/combat.txt`). Build passes.
-- Four parts started in parallel, cut from d7ff686 (see `docs/gates/README.md`): `gate-combat`, `gate-themes`,
+- **Late game merged** from `gate-late` (1c5bcb8): modifiers, red S gates (hidden boss, black essence only from it), rule
+  gates (`docs/gates/late.md`). Coordinator fix: red gates now call `GateRewards.onCleared` (clear bonus + boss chest in
+  the arena beside the exit pad); they never paid out before.
+- **Tower merged** from `gate-tower` (d9e8937): Demon Castle runs, floors, saves, Castle Sigil (`docs/gates/tower.md`).
+  Coordinator fix: `GateCombat.onDeath` no longer strips the boss role (a `mdvlcraft_gate_counted` flag instead), so
+  `GateRewards.onDrops` sees bosses.
+- **Themes merged** from `gate-themes` (c736a51): `data/mdvlcraft/gate_themes/*.json` + `GateThemes` loader, 15 rooms per
+  theme, boss rooms by size class, red-gate hazards (`docs/gates/themes.md`). Lang clash fixed: the boss-room seal message
+  is `gate.mdvlcraft.doors_sealed` (`gate.mdvlcraft.sealed` is the red-gate message).
+- All four parts' worktrees started on `main` by mistake; each agent reset its branch onto d7ff686 before working.
+- Merged build passes. **Nothing from phases 3–8 has been run in game.** Steps files to run, in order: `builder`,
+  `spawner`, `combat`, `rewards`, `red`, `themes`, `late`, `tower` (`docs/gates/tests/`).
+- Left (from the handoffs): tower seal trades at the Gate Forge, tower modifiers every 10 floors and the floor-55 hidden
+  boss (phase 7 code now merged, so these can be wired), rank ranges per theme for unattuned keys, hand-built red
+  lair/camp templates, Statues and Narrowing Door rules, trial ×1.5 boss chest, red A/B hidden boss and veins.
+- Parts were cut from d7ff686 (see `docs/gates/README.md`): `gate-combat`, `gate-themes`,
   `gate-late`, `gate-tower`.
 - In-game: phase 1 PASS, phase 2 PASS (test log below). Not yet run: `docs/gates/tests/{builder,spawner,rewards,red}.txt`,
   on the merged build. Run each on a fresh client (rig notes in the test log).

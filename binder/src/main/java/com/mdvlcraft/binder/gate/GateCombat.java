@@ -80,6 +80,9 @@ public final class GateCombat {
     /** Players who died in a normal gate and haven't respawned yet: they respawn in front of the gate. */
     private static final Set<UUID> DIED_INSIDE = new HashSet<>();
 
+    /** Persistent flag on a gate boss whose death was already counted. */
+    private static final String COUNTED = "mdvlcraft_gate_counted";
+
     private GateCombat() {
     }
 
@@ -247,7 +250,10 @@ public final class GateCombat {
         if (!GateSpawner.isBoss(dead)) {
             return;
         }
-        dead.getPersistentData().remove(GateSpawner.ROLE);   // a boss that dies twice (a second phase) counts once
+        if (dead.getPersistentData().getBoolean(COUNTED)) {
+            return;   // a boss that dies twice (a second phase) counts once
+        }
+        dead.getPersistentData().putBoolean(COUNTED, true);   // the role stays: GateRewards' drops need it after this event
         GateInstances gates = GateInstances.get(level.getServer());
         Instance instance = gates.byId(GateSpawner.instanceOf(dead));
         if (instance == null || instance.red || instance.state != GateInstances.State.ACTIVE) {
@@ -403,7 +409,7 @@ public final class GateCombat {
         SEAL_AT.remove(instance.id);
         for (ServerPlayer player : present) {
             if (box.isInside(player.blockPosition())) {
-                player.sendSystemMessage(Component.translatableWithFallback("gate.mdvlcraft.sealed", "The doors seal behind you.")
+                player.sendSystemMessage(Component.translatableWithFallback("gate.mdvlcraft.doors_sealed", "The doors seal behind you.")
                     .withStyle(ChatFormatting.DARK_RED));
             }
         }
