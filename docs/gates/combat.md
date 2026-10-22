@@ -52,8 +52,8 @@ Branch `gate-combat` (cut from `gate` at `d7ff686`). Owns `gate/GateCombat`, `ga
 
 ## Risks
 
-- Party wipe: dropped items stay in the failed gate's cell and are lost when it closes (no grave mod in the pack). If that
-  is too harsh, delay `fail` (e.g. 60 s) or close only after the items are picked up; plan 5.5 says the gate closes.
+- Party wipe: graves (the pack's gravestone mod) and dropped items stay in the failed gate's cell and are lost when
+  it closes. **User decision (2026-10-22): keep it that way.**
 - Seal/unseal state is in memory; a restart closes every gate anyway.
 - Untested in game (no rig here).
 
