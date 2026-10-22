@@ -35,6 +35,30 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Handoff (coordinator, 2026-10-22 late, released as 2.0.40)
+
+What this coordinator did: merged phases 3b, 6, 7 and 8 into `gate`, fixed the merge seams (listed under Coordinator
+state below), ran every steps file in game on the merged jar, fixed the two real bugs that turned up (crystal vein sort
+crash that stopped red gates finishing; `late` debug commands could not take a comma list of modifiers), merged the late
+agent's `late.txt` rework (`gate-late` b5f3dab: `late key` puts the key in the hand, new `late close`), and released
+everything on `gate` as **2.0.40** to `main` (packs built from `gate`, binder 0.9.0).
+
+Not merged: `seb-agent` b594385 (Anti-Magic `ModTiersMixin` debris fix). `gate` already carries the same fix as
+`DemonSwordTierMixin`; merging both would double up. Drop one before the branches meet.
+
+Still to test (run each on a fresh server and client, `gfresh.sh <part>` in the rig; see the test log):
+- `late.txt`: not rerun since the rework.
+- `tower.txt`: never really ran; every `tower open/next` now runs as Tester (the last rerun still used the old steps).
+- `themes.txt`: effect-id fix (`Id:2`, not `Id:2b`) not rerun.
+- Stale steps to update before rerunning: spawner EXIT_OK (exit opens where the boss died), combat wipe (wait over
+  PlayerRevive's 60 s bleed-out; ELITE room had no elite marker), rewards (no glowstone platform, chest position, black
+  stone only from the hidden boss), red RAVAGER (outdated), BREAK_HOME and RED_FORCE (timing).
+
+Still to build (from the handoffs): tower seal trades at the Gate Forge, tower modifiers every 10 floors, floor-55 hidden
+boss, rank ranges per theme for unattuned keys, hand-built red lairs and camps, Statues and Narrowing Door rules, trial
+×1.5 boss chest, red A/B hidden boss and veins. Maybe: count downed (PlayerRevive) players as gone for wipe detection,
+so a wipe fails the gate without the 60 s wait. Decided: graves left inside when a gate closes are lost with their items.
+
 ## Coordinator state (new coordinator, 2026-10-22 evening)
 
 - The merged tree (phases 1, 2, 3a, 4, 5) builds (`flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q`, exit 0).
@@ -135,6 +159,14 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 ## Test log
 
 (newest first; each entry: date, build, what was run, result)
+
+- 2026-10-22, gate 1b0b1f6 jar, every steps file on a fresh server each: builder 12/12 PASS; spawner 5/6 (EXIT_OK is test
+  geometry, collapse works); combat 7/9 (seal, unseal, reseal, clear PASS; wipe only fails the gate after PlayerRevive's
+  60 s bleed-out, the test waited 20 s); rewards 7/11 (misses are stale steps); red 9/12 after the vein-sort fix (first
+  run crashed on it; RAVAGER stale, BREAK_HOME and RED_FORCE timing); themes 5/8 (hazards work, Slowness seen as `Id: 2`;
+  the misses were the test's `Id:2b` NBT); late 6/17 (test setup, since reworked); tower 2/10 (steps ran `tower open`
+  from the console, so no run started; fixed, not rerun). Rig: the client needs about 8.5 GB and gets OOM-killed next to
+  the server and Gradle; the server leaks over long runs, so use one fresh server per file.
 
 - 2026-10-22, gate d0cff13f+contracts jar (phase 2, before the 3a/4/5 merges), `docs/gates/tests/phase2.txt` on a fresh
   client: **phase 2 all PASS**. Right-clicking the ground with an attuned E key spawns the gate (GATE_SPAWNED_OK) at the
