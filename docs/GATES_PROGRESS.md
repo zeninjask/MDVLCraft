@@ -44,6 +44,7 @@ Design notes that differ from or refine the PDF:
 - **All round 3 parts merged** into `gate` (ea29f24e): gate-tests e6137c03, gate-tower2 eb946404, gate-late2 0e601e60
   (conflicts: lang keys kept both; combat.txt wipe waits 20 s), gate-themes2 ea29f24e (red.txt kept both). Plus the
   coordinator's Enraged Dead King reach fix (82c58f49). Handoffs: tower.md, late.md, themes.md, tests.md.
+- `gate-fix` (from d1dab869): fixing what the tests find (handoff `docs/gates/fixes.md`).
 - Coordinator test queue on the merged jars: rewards, red, builder, tower, late, themes, combat (results in the log).
 - Coordinator testing: `tower`, `themes`, `late` steps on the 2.0.40 jar, one fresh server each
   (`scratchpad/tools/gfresh.sh <part>`, holds the gradle lock per file). Results go in the test log below.
@@ -173,6 +174,13 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-22 night, gate ea29f24e jar, `tower.txt` (tower2 steps, fresh Tester): **22/23**. HIDDEN_BLACK_DROP fails
+  (themes2 made black need `mdvlcraft_gate_black`; the tower hidden boss sets only the hidden tag). Log repeats
+  "Display entity Not a string" near the floor-55 tablet; the tablet and forge-trades shots missed their targets. All
+  three handed to `gate-fix` (handoff `docs/gates/fixes.md`).
+- 2026-10-22 night, gate ea29f24e jar, `builder.txt`: **void** — Tester was still dead from red.txt's final `kill`
+  (no respawn in the rig), so nothing entered a gate. Rig fix: `gfresh.sh` now deletes Tester's playerdata before each
+  file. Rerun queued.
 - 2026-10-22 night, gate ea29f24e jar (all round 3 merged), `red.txt` (refreshed + redhidden never): **15/15 PASS**
   (roll, frozen biome and ground, seal, Maledictus boss, exit, break wave/close/home, red force, forge ground, death
   closes). No gate errors in the log (one caught non-gate error: JER's LootViews creating Epic Fight Ponder's dummy
