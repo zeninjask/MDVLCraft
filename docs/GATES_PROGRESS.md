@@ -90,6 +90,15 @@ Changes from the plan in phase 2:
   4 crystals + 1 extra (D, C), or 4 stones + 3 crystals + 2 extras (B, A, S).
 - Gates always open in the gate realm for now; the red roll on first entry is phase 5.
 
+### Phase 5 — Red gates and breaks (merged from `gate-red`, untested in game)
+
+Details, hooks and what's left: `docs/gates/red.md`. Red roll on first entry of B/A/S (config `gates` section), new
+red_realm instance per red gate (instance id changes), frozen roster, red_realm terrain per theme
+(`worldgen/noise_settings/red_realm.json`), lazily built lair/camps/boss (vanilla stand-in mobs until GateMobs),
+exit pad on boss death, mild breaks (one wave, then close) on overworld game ticks, debug commands under
+`/mdvl gate red ...` and `/mdvl gate break ...`. Contracts it adds: persistent flag `mdvlcraft_gate_boss` on bosses,
+`mdvlcraft_gate_break` on break-wave mobs (rewards skip them). Test steps: `docs/gates/tests/red.txt`.
+
 Change from the plan: **all three gate worlds are wiped on every server start**, not only the red realm. Every instance is
 closed on start anyway, so their blocks are garbage; wiping means a cell never needs clearing after a restart.
 
