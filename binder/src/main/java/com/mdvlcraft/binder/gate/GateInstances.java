@@ -46,6 +46,9 @@ public final class GateInstances extends SavedData {
         public State state = State.BUILDING;
         public boolean red;
         public final Set<UUID> roster = new HashSet<>();
+        /** Who opened it with a key: they and their Parties allies may join the roster (null for debug instances). */
+        @Nullable
+        public UUID owner;
         /** Where players arrive inside. */
         public BlockPos entry = BlockPos.ZERO;
         /** The gate in the world (absent for debug instances opened by command). */
@@ -80,6 +83,9 @@ public final class GateInstances extends SavedData {
             ListTag roster = new ListTag();
             this.roster.forEach(uuid -> roster.add(NbtUtils.createUUID(uuid)));
             tag.put("roster", roster);
+            if (this.owner != null) {
+                tag.putUUID("owner", this.owner);
+            }
             tag.put("entry", NbtUtils.writeBlockPos(this.entry));
             if (this.gateDimension != null) {
                 tag.putString("gateDimension", this.gateDimension.location().toString());
@@ -100,6 +106,7 @@ public final class GateInstances extends SavedData {
             instance.state = State.valueOf(tag.getString("state"));
             instance.red = tag.getBoolean("red");
             tag.getList("roster", Tag.TAG_INT_ARRAY).forEach(uuid -> instance.roster.add(NbtUtils.loadUUID(uuid)));
+            instance.owner = tag.hasUUID("owner") ? tag.getUUID("owner") : null;
             instance.entry = NbtUtils.readBlockPos(tag.getCompound("entry"));
             instance.gateDimension = tag.contains("gateDimension") ? dimension(tag.getString("gateDimension")) : null;
             instance.gatePos = NbtUtils.readBlockPos(tag.getCompound("gatePos"));

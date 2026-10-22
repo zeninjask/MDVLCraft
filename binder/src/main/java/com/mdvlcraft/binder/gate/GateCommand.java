@@ -10,12 +10,9 @@ import java.util.List;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
-import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.Heightmap;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -31,10 +28,6 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class GateCommand {
-    /** Phase 1's stand-in for a dungeon: a 9x9 floor at this height in the gate realm. */
-    private static final int PLATFORM_Y = 64;
-    private static final int PLATFORM_RADIUS = 4;
-
     private GateCommand() {
     }
 
@@ -71,15 +64,7 @@ public final class GateCommand {
         GateInstances gates = GateInstances.get(player.server);
         Instance instance = gates.create(level.dimension(), theme, rank, level.getGameTime());
         instance.red = red;
-        BlockPos centre = GateDimensions.centre(instance.cellX, instance.cellZ, PLATFORM_Y);
-        if (red) {
-            level.getChunk(centre);   // generate the landscape there, then stand on it
-            centre = centre.atY(level.getHeight(Heightmap.Types.MOTION_BLOCKING, centre.getX(), centre.getZ()));
-        } else {
-            platform(level, centre, true);
-            centre = centre.above();
-        }
-        instance.entry = centre;
+        GateBuilder.build(level, instance);
         instance.state = GateInstances.State.ACTIVE;
         gates.setDirty();
         GateTravel.enter(player, instance);
@@ -87,17 +72,6 @@ public final class GateCommand {
         context.getSource().sendSuccess(() -> Component.literal("Opened gate " + id + ": " + rank + " " + theme.key() + (red ? " (red)" : "")
             + " in " + instance.dimension.location() + " cell " + instance.cellX + "," + instance.cellZ), true);
         return id;
-    }
-
-    /** The phase 1 stand-in floor (stone bricks, a glowstone centre), built or removed. */
-    private static void platform(ServerLevel level, BlockPos centre, boolean build) {
-        for (int dx = -PLATFORM_RADIUS; dx <= PLATFORM_RADIUS; dx++) {
-            for (int dz = -PLATFORM_RADIUS; dz <= PLATFORM_RADIUS; dz++) {
-                BlockPos pos = centre.offset(dx, 0, dz);
-                level.setBlockAndUpdate(pos, !build ? Blocks.AIR.defaultBlockState()
-                    : dx == 0 && dz == 0 ? Blocks.GLOWSTONE.defaultBlockState() : Blocks.STONE_BRICKS.defaultBlockState());
-            }
-        }
     }
 
     private static int leave(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
@@ -143,8 +117,8 @@ public final class GateCommand {
             }
         }
         ServerLevel level = context.getSource().getServer().getLevel(instance.dimension);
-        if (level != null && !instance.red) {
-            platform(level, instance.entry.below(), false);
+        if (level != null) {
+            GateBuilder.clear(level, instance);
         }
         gates.close(instance);
         context.getSource().sendSuccess(() -> Component.literal("Closed gate " + instance.id), true);

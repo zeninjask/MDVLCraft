@@ -23,7 +23,9 @@ Phases (plan section 2): 1 Foundations · 2 Keys and gates · 3 Builder and comb
 | --- | --- |
 | World data generator (themes, biomes, dimensions) | `binder/tools/gates/gen_gate_data.py` — edit THEMES there, rerun it, commit its output |
 | Generated world data | `binder/src/main/resources/data/mdvlcraft/{dimension,dimension_type,worldgen/biome,worldgen/noise_settings}/` (gate_*, red_realm, demon_castle) |
-| Java | `binder/src/main/java/com/mdvlcraft/binder/gate/` |
+| Java | `binder/src/main/java/com/mdvlcraft/binder/gate/`; renderer `binder/src/main/java/com/mdvlcraft/binder/client/GateRenderer.java` |
+| Item textures | `binder/tools/gates/gen_gate_textures.py` → `assets/mdvlcraft/textures/item/{gate_key,essence_stone,mana_crystal}_*.png` |
+| Item models, lang, recipes | `binder/tools/gates/gen_gate_items.py` → `assets/mdvlcraft/models/item/`, `lang/en_us.json` (merged), `data/mdvlcraft/recipes/gate/` |
 
 Design notes that differ from or refine the PDF:
 
@@ -47,6 +49,30 @@ Design notes that differ from or refine the PDF:
 - [x] `/mdvl gate open <rank> <theme> [red] | leave | list | tp <id> | close <id>` (`gate/GateCommand`; phase 1 builds a
       9x9 stone-brick platform at y 64 in the gate realm, or stands the player on the red realm's terrain)
 - [ ] Boot test + in-game test (running)
+
+### Phase 2 — Keys and gates (in progress)
+
+- [x] Items (`gate/GateItems`): `gate_key_{e,d,c,b,a,s}` (`GateKeyItem`, stacks to 16, tradeable), `essence_stone_{e..s}`,
+      `essence_stone_black`, `mana_crystal_{e..s}`; creative tabs Tools / Ingredients
+- [x] Recipes: E key (4 iron, 4 amethyst, ender pearl); D–S keys from the rank below's stones and crystals + extras;
+      36 attunement recipes (key + catalyst → same key with NBT `{theme}`; shown with enchant glint)
+- [x] `gate/GateEntity` (`mdvlcraft:gate`): opened by using a key on the top of a block (needs free space of the gate's
+      size; not inside a gate world; not while on another gate's roster). Size by rank (E 1.8×3, S 5.4×9). Stabilises
+      100 ticks (instance BUILDING → ACTIVE), then pulls in players who touch it if they are on the roster, or are the
+      opener / the opener's Parties ally and the roster is under the party cap. Leaving puts them just in front of the
+      gate. Label on look: rank, theme, players inside / cap, time until the (phase 5) break. Removes itself when its
+      instance is gone. Particles + portal hum.
+- [x] `client/GateRenderer`: an oval of the animated nether-portal sprite, tinted blue (red when red), spinning, rim
+- [x] `gate/GateBuilder`: the phase 1 stand-in contents (platform / red terrain) moved out of GateCommand; phase 3
+      replaces it with the dungeon builder
+- [ ] In-game test (`g2.txt`, see test log)
+
+Changes from the plan in phase 2:
+- **Six key items** (one per rank) instead of one `gate_key` with NBT rank: each rank needs its own texture and recipe,
+  and JEI shows them cleanly. Theme stays NBT.
+- **Key recipes are smaller** than the plan's "8 stones + 4 crystals + extras", which can't fit a 3×3 grid: 4 stones +
+  4 crystals + 1 extra (D, C), or 4 stones + 3 crystals + 2 extras (B, A, S).
+- Gates always open in the gate realm for now; the red roll on first entry is phase 5.
 
 Change from the plan: **all three gate worlds are wiped on every server start**, not only the red realm. Every instance is
 closed on start anyway, so their blocks are garbage; wiping means a cell never needs clearing after a restart.

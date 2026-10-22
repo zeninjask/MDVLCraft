@@ -7,6 +7,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Moving players into and out of gate instances. Going in, the player's origin (dimension, position, facing) is kept in
@@ -28,6 +29,12 @@ public final class GateTravel {
 
     /** Puts the player into the instance (adding them to its roster) at its entry point. False if its world is missing. */
     public static boolean enter(ServerPlayer player, Instance instance) {
+        return enter(player, instance, null);
+    }
+
+    /** As above; leaving later puts the player at `returnAt` (in front of the gate they walked through) rather than where
+     * they stood. */
+    public static boolean enter(ServerPlayer player, Instance instance, @Nullable Vec3 returnAt) {
         ServerLevel level = player.server.getLevel(instance.dimension);
         if (level == null) {
             return false;
@@ -35,9 +42,10 @@ public final class GateTravel {
         if (!GateDimensions.isGate(player.level().dimension())) {
             CompoundTag origin = new CompoundTag();
             origin.putString("dimension", player.level().dimension().location().toString());
-            origin.putDouble("x", player.getX());
-            origin.putDouble("y", player.getY());
-            origin.putDouble("z", player.getZ());
+            Vec3 at = returnAt != null ? returnAt : player.position();
+            origin.putDouble("x", at.x);
+            origin.putDouble("y", at.y);
+            origin.putDouble("z", at.z);
             origin.putFloat("yaw", player.getYRot());
             origin.putFloat("pitch", player.getXRot());
             persisted(player).put(ORIGIN, origin);

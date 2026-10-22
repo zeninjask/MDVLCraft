@@ -1,7 +1,9 @@
 package com.mdvlcraft.binder;
 
 import com.mdvlcraft.binder.ability.AbilityReward;
+import com.mdvlcraft.binder.client.GateRenderer;
 import com.mdvlcraft.binder.client.ModifiedClientSetup;
+import com.mdvlcraft.binder.gate.GateItems;
 import com.mdvlcraft.binder.modified.ModifiedSpells;
 import com.mdvlcraft.binder.modified.Summons;
 import com.mdvlcraft.binder.attribute.BinderAttributes;
@@ -67,6 +69,7 @@ public final class MDVLBinder {
         modBus.addListener(com.mdvlcraft.binder.content.WildSpawns::onSpawnPlacements);
         if (FMLEnvironment.dist == Dist.CLIENT) {
             ClientContentSetup.register(modBus);
+            GateRenderer.register(modBus);
             ClientAbilitySetup.register(modBus);
             HerobrineRender.register(modBus);
             ModifiedClientSetup.register(modBus);
@@ -76,6 +79,7 @@ public final class MDVLBinder {
         PreviewCasts.register();
         CataclysmIntegration.register(modBus, forgeBus);
         ReturnCrystal.register(modBus, forgeBus);
+        GateItems.register(modBus);
         BossArena.register(modBus, forgeBus);
         PartyTravel.register(forgeBus);
         HerobrineLook.register();
