@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.core.Logger;
+import org.apache.logging.log4j.message.Message;
+import org.apache.logging.log4j.message.ParameterizedMessage;
 import org.apache.logging.log4j.core.Filter;
 import org.apache.logging.log4j.core.LogEvent;
 import org.apache.logging.log4j.core.LoggerContext;
@@ -100,10 +104,32 @@ public final class LogNoise extends AbstractFilter {
 
     @Override
     public Filter.Result filter(LogEvent event) {
-        if (!event.getLevel().isMoreSpecificThan(Level.WARN) || event.getMessage() == null) {
+        return event.getMessage() == null ? Filter.Result.NEUTRAL : this.check(event.getLevel(), event.getMessage().getFormattedMessage());
+    }
+
+    // a configuration filter is asked through these before any event exists
+    @Override
+    public Filter.Result filter(Logger logger, Level level, Marker marker, String message, Object... params) {
+        if (message == null || !level.isMoreSpecificThan(Level.WARN)) {
             return Filter.Result.NEUTRAL;
         }
-        String message = event.getMessage().getFormattedMessage();
+        return this.check(level, params == null || params.length == 0 ? message : ParameterizedMessage.format(message, params));
+    }
+
+    @Override
+    public Filter.Result filter(Logger logger, Level level, Marker marker, Message message, Throwable thrown) {
+        return message == null ? Filter.Result.NEUTRAL : this.check(level, message.getFormattedMessage());
+    }
+
+    @Override
+    public Filter.Result filter(Logger logger, Level level, Marker marker, Object message, Throwable thrown) {
+        return message == null ? Filter.Result.NEUTRAL : this.check(level, message.toString());
+    }
+
+    private Filter.Result check(Level level, String message) {
+        if (!level.isMoreSpecificThan(Level.WARN)) {
+            return Filter.Result.NEUTRAL;
+        }
         for (Pattern rule : RULES) {
             if (rule.matcher(message).find()) {
                 return Filter.Result.DENY;
