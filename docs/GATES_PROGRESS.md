@@ -35,6 +35,15 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Coordinator round 3 (2026-10-22 night)
+
+- Pulled `gate` at 92608634 (2.0.40); build passes. Round 3 parts cut at 4cc49214: `gate-tower2` (seal trades, tower
+  modifiers every 10 floors, floor-55 hidden boss), `gate-themes2` (rank ranges per theme, hand-built red lairs/camps,
+  red A/B hidden boss and veins), `gate-late2` (Statues, Narrowing Door, trial ×1.5 chest, downed players count for
+  wipes), `gate-tests` (stale steps: spawner, combat wipe/ELITE, rewards, red). Table in `docs/gates/README.md`.
+- Coordinator testing: `tower`, `themes`, `late` steps on the 2.0.40 jar, one fresh server each
+  (`scratchpad/tools/gfresh.sh <part>`, holds the gradle lock per file). Results go in the test log below.
+
 ## Handoff (coordinator, 2026-10-22 late, released as 2.0.40)
 
 What this coordinator did: merged phases 3b, 6, 7 and 8 into `gate`, fixed the merge seams (listed under Coordinator
