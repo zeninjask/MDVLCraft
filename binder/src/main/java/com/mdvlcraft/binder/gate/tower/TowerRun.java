@@ -611,7 +611,7 @@ public final class TowerRun {
     @SubscribeEvent(priority = EventPriority.LOW)
     public static void onDeath(LivingDeathEvent event) {
         LivingEntity dead = event.getEntity();
-        if (!(dead.level() instanceof ServerLevel level) || level.dimension() != GateDimensions.DEMON_CASTLE) {
+        if (event.isCanceled() || !(dead.level() instanceof ServerLevel level) || level.dimension() != GateDimensions.DEMON_CASTLE) {
             return;
         }
         if (dead instanceof ServerPlayer player) {
