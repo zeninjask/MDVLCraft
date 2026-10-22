@@ -41,6 +41,10 @@ Design notes that differ from or refine the PDF:
   modifiers every 10 floors, floor-55 hidden boss), `gate-themes2` (rank ranges per theme, hand-built red lairs/camps,
   red A/B hidden boss and veins), `gate-late2` (Statues, Narrowing Door, trial ×1.5 chest, downed players count for
   wipes), `gate-tests` (stale steps: spawner, combat wipe/ELITE, rewards, red). Table in `docs/gates/README.md`.
+- **All round 3 parts merged** into `gate` (ea29f24e): gate-tests e6137c03, gate-tower2 eb946404, gate-late2 0e601e60
+  (conflicts: lang keys kept both; combat.txt wipe waits 20 s), gate-themes2 ea29f24e (red.txt kept both). Plus the
+  coordinator's Enraged Dead King reach fix (82c58f49). Handoffs: tower.md, late.md, themes.md, tests.md.
+- Coordinator test queue on the merged jars: rewards, red, builder, tower, late, themes, combat (results in the log).
 - Coordinator testing: `tower`, `themes`, `late` steps on the 2.0.40 jar, one fresh server each
   (`scratchpad/tools/gfresh.sh <part>`, holds the gradle lock per file). Results go in the test log below.
 
