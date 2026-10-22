@@ -426,6 +426,12 @@ The user approved every change in `docs/MDVLCraft-Balance-Report.pdf`. The ratin
 
 **Note for the release:** the trees were regenerated, so existing players' unlocked nodes may not line up with the new layouts. A respec on first join (or telling players to reset their trees) is advisable.
 
+## For liam-agent: no more automatic skill refunds; Underworld Gate fixes (22 Oct 2026)
+
+- **No automatic refunds.** The user wants no release to refund skill points automatically any more. `skills/BalanceRespec` (the first-login refund flagged per release) is removed; don't add a new one. Players respec only by choice (the respec item, or an Orb of Origin for the Origin tab).
+- **Underworld Gate's shrine is scenery.** It has no AI or gravity, is held at the spot and facing it was raised with every tick, and can't be targeted, hit, pushed or damaged (`mixin/cursedfate/IncompleteShrineEntityMixin`, which recognises it by its synced `underworld_shrine` texture; `UnderworldGate.hold`). Tested: a push and a forced turn didn't move it, and damage reports "invulnerable".
+- **Rooted enemies can be executed.** Nightfall's Execution needs a target in the neutralize state. `mixin/efn/ExecuteSkillMixin` now counts a creature held by black roots as neutralized and frees it from the roots when it is executed. The mixin applies (the server boots), but an actual execution wasn't performed in the test.
+
 ## Unfinished work
 
 - 2.0.14 (from liam-agent): Spirit renamed Jade and a new Spirit archetype with 18 vocations (19 archetypes, 171 vocations; see step 13 in [`VOCATIONS_IMPLEMENTATION.md`](VOCATIONS_IMPLEMENTATION.md)). Its 33 new Modified abilities are placeholders still to build. Old Spirit players are moved to Jade on their first join (`skills/JadeRename`).
