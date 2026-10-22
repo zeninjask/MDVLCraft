@@ -80,18 +80,37 @@ public final class LogNoise extends AbstractFilter {
         super(Filter.Result.DENY, Filter.Result.NEUTRAL);
     }
 
-    /** Adds the filter to the current logging configuration once (safe to call again). */
+    /** Adds the filter to every logging configuration in use (the one the game's loggers write through may not be the
+     * one this class's own loader resolves to), once each; safe to call again. */
     public static void install() {
+        java.util.Set<LoggerContext> contexts = java.util.Collections.newSetFromMap(new java.util.IdentityHashMap<>());
         try {
-            LoggerContext context = (LoggerContext)LogManager.getContext(false);
-            Configuration config = context.getConfiguration();
-            if (!config.hasFilter() || !containsSelf(config.getFilter())) {
-                config.addFilter(INSTANCE);
-                context.updateLoggers();
+            for (ClassLoader loader : new ClassLoader[]{LogNoise.class.getClassLoader(), ClassLoader.getSystemClassLoader(),
+                LogManager.class.getClassLoader(), Thread.currentThread().getContextClassLoader()}) {
+                if (LogManager.getContext(loader, false) instanceof LoggerContext context) {
+                    contexts.add(context);
+                }
+            }
+            for (String name : new String[]{"mixin", LogManager.ROOT_LOGGER_NAME, "net.minecraft.server.MinecraftServer"}) {
+                if (LogManager.getLogger(name) instanceof Logger logger) {
+                    contexts.add(logger.getContext());
+                }
             }
         } catch (RuntimeException | LinkageError e) {
-            // logging must never stop the game from starting
+            System.out.println("[mdvlcraft] LogNoise found no logging context: " + e);
         }
+        for (LoggerContext context : contexts) {
+            try {
+                Configuration config = context.getConfiguration();
+                if (!config.hasFilter() || !containsSelf(config.getFilter())) {
+                    config.addFilter(INSTANCE);
+                    context.updateLoggers();
+                }
+            } catch (RuntimeException | LinkageError e) {
+                System.out.println("[mdvlcraft] LogNoise could not filter " + context + ": " + e);
+            }
+        }
+        System.out.println("[mdvlcraft] LogNoise filtering " + contexts.size() + " logging context(s): " + contexts);
     }
 
     private static boolean containsSelf(Filter filter) {
