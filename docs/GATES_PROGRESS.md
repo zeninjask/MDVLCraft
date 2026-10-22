@@ -43,7 +43,9 @@ Design notes that differ from or refine the PDF:
   `GateRewards.onCleared`, `GateSpawner.ROLE = GateRewards.ROLE`, bosses also get `RedLandscape.BOSS_TAG`, GateCombat
   skips red instances (triggers, exit, collapse, boss death) and leaves red and break-wave mobs out of its leash,
   RedLandscape uses `GateMobs` pools and bosses (vanilla stand-ins only if the mods are missing). Build passes.
-- Four parts started in parallel, cut from this commit (see `docs/gates/README.md`): `gate-combat`, `gate-themes`,
+- **Combat finish merged** from `gate-combat` (bc08c74): boss-room seal, boss bars (`GateBossBars`), death respawn at the
+  gate, whole-party wipe fails the gate (`docs/gates/combat.md`; steps `tests/combat.txt`). Build passes.
+- Four parts started in parallel, cut from d7ff686 (see `docs/gates/README.md`): `gate-combat`, `gate-themes`,
   `gate-late`, `gate-tower`.
 - In-game: phase 1 PASS, phase 2 PASS (test log below). Not yet run: `docs/gates/tests/{builder,spawner,rewards,red}.txt`,
   on the merged build. Run each on a fresh client (rig notes in the test log).
