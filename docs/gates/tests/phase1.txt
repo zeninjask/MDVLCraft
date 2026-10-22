@@ -10,7 +10,7 @@ wait 3
 cmd data get entity Tester Dimension
 cmd data get entity Tester Pos
 cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_crypt run say BIOME_CRYPT_OK
-cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:glowstone run say ON_PLATFORM_OK
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm unless block ~ ~-1 ~ minecraft:air run say ON_ENTRY_FLOOR_OK
 key F5
 wait 3
 shot g1_gate_realm
@@ -23,7 +23,7 @@ mdown 1
 wait 6
 mup 1
 wait 1
-cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:glowstone run say BREAK_REFUSED_OK
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm unless block ~ ~-1 ~ minecraft:air run say BREAK_REFUSED_OK
 cmd execute as Tester at @s run tp @s ~700 ~ ~
 wait 20
 wait 2

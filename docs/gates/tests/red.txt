@@ -1,29 +1,30 @@
-wait 60
+wait 120
 cmd gamemode survival Tester
-cmd effect give Tester minecraft:resistance 900 4 true
-cmd effect give Tester minecraft:saturation 900 1 true
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd effect give Tester minecraft:saturation 99999 1 true
+cmd scoreboard objectives add gt dummy
 cmd execute as Tester at @s run mdvl gate red place B frozen
 wait 10
 cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
-wait 4
+wait 20
 cmd execute as Tester at @s if dimension mdvlcraft:red_realm run say RED_ROLL_OK
 cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_frozen run say RED_BIOME_FROZEN_OK
 cmd execute as Tester at @s unless block ~ ~-1 ~ minecraft:stone unless block ~ ~-1 ~ minecraft:grass_block run say RED_GROUND_THEMED_OK
 cmd mdvl gate list
 shot red_arrival
 cmd execute in minecraft:overworld run tp Tester 0 100 0
-wait 2
+wait 20
 cmd execute as Tester at @s if dimension mdvlcraft:red_realm run say RED_SEALED_OK
 cmd execute as Tester run mdvl gate red lair
-wait 4
+wait 20
 cmd execute as Tester at @s if entity @e[distance=..48,nbt={ForgeData:{mdvlcraft_gate_boss:1b}}] run say RED_BOSS_OK
-cmd execute as Tester at @s if entity @e[distance=..48,type=minecraft:ravager] run say RED_BOSS_RAVAGER_OK
+cmd execute as Tester at @s if entity @e[distance=..48,type=cataclysm:maledictus,nbt={ForgeData:{mdvlcraft_gate_boss:1b}}] run say RED_BOSS_MALEDICTUS_OK
 shot red_lair
 cmd execute as Tester run mdvl gate red boss
 wait 2
 cmd mdvl gate list
 cmd execute as Tester run mdvl gate red lair
-wait 4
+wait 20
 cmd execute as Tester at @s if dimension minecraft:overworld run say RED_EXIT_OK
 cmd mdvl gate list
 cmd execute as Tester at @s run mdvl gate red place E crypt
@@ -34,18 +35,24 @@ cmd execute as Tester at @s unless entity @e[distance=..16,type=mdvlcraft:gate] 
 shot break_wave
 cmd kill @e[nbt={ForgeData:{mdvlcraft_gate_break:1b}}]
 cmd execute as Tester run mdvl gate open C crypt
-wait 2
+wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say BREAK_TARGET_ENTERED_OK
 cmd execute as Tester run mdvl gate break now
-wait 2
-cmd execute as Tester at @s if dimension minecraft:overworld run say BREAK_HOME_OK
+wait 20
+cmd execute as Tester store result score @s gt run mdvl gate rooms
+cmd execute as Tester at @s if dimension minecraft:overworld if score @s gt matches 0 run say BREAK_HOME_OK
 cmd mdvl gate list
 cmd execute as Tester run mdvl gate open B forge
-wait 2
+wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say FORCE_TARGET_ENTERED_OK
 cmd execute as Tester run mdvl gate red force
-wait 2
+wait 20
 cmd execute as Tester at @s if dimension mdvlcraft:red_realm if biome ~ ~ ~ mdvlcraft:gate_forge run say RED_FORCE_OK
 cmd execute as Tester at @s unless block ~ ~-1 ~ minecraft:stone run say RED_FORGE_GROUND_OK
 shot red_forge
+cmd effect clear Tester minecraft:resistance
 cmd kill Tester
-wait 3
+wait 90
 cmd mdvl gate list
+cmd execute as Tester store result score @s gt run mdvl gate rooms
+cmd execute as Tester if score @s gt matches 0 run say RED_DEATH_CLOSED_OK
