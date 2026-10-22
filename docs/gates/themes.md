@@ -26,7 +26,19 @@ before any work, so it holds no main-only commits). Owns `data/mdvlcraft/gate_th
       furnaces); boss rooms `boss_small_1` (inset 6, h 16), `boss_medium_1` (= old `boss_1`, byte-identical), `boss_large_1`
       (h 36, corner pillars only). Old `boss_1` removed. The generator checks every pool entry in the theme files exists.
 - [x] RedLandscape palette and stand-ins read from the theme file (hook; old switch kept as fallback).
-- [ ] Hazards (`GateHazards`), catalyst/music read by the generators, `/mdvl gate themes`, tests file.
+- [x] Hazards (`GateHazards`, every 100 ticks, roster players in a sealed (ACTIVE) red gate, not creative/spectator):
+      `cold` (frozen) Slowness I + 1 freeze damage unless wearing a `freeze_immune_wearables` piece (leather) or within 6 of
+      a lit campfire (red camps have one); `hunger` = food exhaustion per 5 s (frozen 0.5 scarce food, forge 1.0 heat);
+      `spores` (warren: mycelium, rooted dirt) Poison I 3 s when standing on/in one. Crypt, warcamp, spire: none.
+- [x] Generators read the theme files: `gen_gate_items.py` catalysts (attunement recipes), `gen_gate_data.py` biome
+      music. Reran both: output unchanged.
+- [x] Debug: `/mdvl gate themes` (per theme: loaded, room pool sizes, boss size per rank, hazard, catalyst),
+      `/mdvl gate hazard <theme>` (apply that hazard to the caller once). Class `GateThemeCommand`.
+- [x] In-game steps `docs/gates/tests/themes.txt` (boss room per size class, themed rooms via `/place template`,
+      hazards, red frozen cold tick, `/reload` keeps themes).
+- [ ] Next (not done): hand-built red lair/camp templates per theme (`red.lair` field once they exist; RedLandscape
+      builds procedural ones now), more corridor/entrance/crystal variants per theme, theme rank ranges (see Decisions),
+      tuning boss sizes and pool weights after the in-game run.
 
 ## Decisions
 
@@ -43,6 +55,17 @@ before any work, so it holds no main-only commits). Owns `data/mdvlcraft/gate_th
 ## Hooks into other files
 
 - `RedLandscape.palette/standInMobs/standInBoss`: read `GateThemes.get(theme)` first (3 small `if` blocks).
+- `tools/gates/gen_gate_items.py`: catalysts overridden from the theme files (5 lines after THEMES).
+- `tools/gates/gen_gate_data.py`: music overridden from the theme files (5 lines after THEMES; order untouched).
+- `GateMobs` (combat part's file, data source only): pools/bosses now from GateThemes; public API unchanged.
+
+## Theme file format (data/mdvlcraft/gate_themes/<theme>.json)
+
+`name` (lang key), `biome`, `music`, `catalyst`, `hazard` {`cold`: bool, `hunger`: exhaustion per 5 s, `spores`: [block
+ids]}, `rooms` {kind: [template ids]} (kinds: entrance, corridor_straight/turn/t, combat_small, combat_large, crystal,
+treasure, boss_small/medium/large; repeat an id to weight it), `mobs` {low|mid|high: {melee|ranged|elite: [{id, weight}
+or bare id]}}, `bosses` {E..S: {id, count, size: small|medium|large}}, `red` {landscape (name), palette {floor, pillar,
+light, campfire}, stand_in_mobs, stand_in_boss}. Template markers per kind must follow builder.md.
 
 ## Build / test results
 
@@ -50,6 +73,10 @@ before any work, so it holds no main-only commits). Owns `data/mdvlcraft/gate_th
   boss_medium_1 == old boss_1.
 - `./gradlew build --offline -q`: passes.
 
+- Unverified (no in-game run allowed): the reload listener firing on server start and `/reload`, block ids in the
+  theme files resolving, `/place template` of the new rooms. First run: watch the log for "Loaded 6 gate themes".
+
 ## Where I stopped
 
-Hazards next.
+Items 1–3 of the task done and pushed. Next: the "Next" line of the checklist, after the coordinator runs
+`tests/themes.txt`.

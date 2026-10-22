@@ -29,8 +29,9 @@ import org.slf4j.Logger;
 
 /**
  * Builds and clears what is inside an instance's cell (plan sections 5.1–5.2). In the gate realm it lays out the dungeon
- * DungeonPlanner plans: room templates (data/mdvlcraft/structures/gate/<theme>/<kind>_<n>.nbt, written by
- * tools/gates/gen_gate_rooms.py) set edge to edge around the cell centre, one room every 2 ticks from a server-wide queue
+ * DungeonPlanner plans: room templates from the theme file's pool for each kind (GateThemes; by default
+ * data/mdvlcraft/structures/gate/<theme>/<kind>_<n>.nbt, written by tools/gates/gen_gate_rooms.py; the boss room is the
+ * one for the boss's size class) set edge to edge around the cell centre, one room every 2 ticks from a server-wide queue
  * so a big gate doesn't stall the server. Each room's data markers are recorded in the instance (never placed), its unused
  * doorways are walled up, and once the last room is down the instance is `built` (GateEntity then lets it go ACTIVE).
  * In the red realm it stands the entry on the realm's own terrain at the cell centre (red gates are phase 5's).
