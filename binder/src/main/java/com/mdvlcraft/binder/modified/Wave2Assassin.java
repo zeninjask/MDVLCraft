@@ -25,13 +25,11 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.MobType;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Fox;
 import net.minecraft.world.entity.item.ItemEntity;
-import net.minecraft.world.entity.monster.EnderMan;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
 import net.minecraft.world.item.Items;
@@ -41,7 +39,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
-import net.minecraftforge.event.entity.living.LivingChangeTargetEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingEntityUseItemEvent;
@@ -71,7 +68,6 @@ public final class Wave2Assassin {
     private static final String BORROWED = "borrowed_face";
     private static final String PALE = "pale_pursuit";
     private static final String NETTLE = "nettle_shroud";
-    private static final String HOLLOW = "hollow_mask";
     private static final String CALLING = "calling_card";
     private static final String FARSHOT = "farshot";
     private static final String FARSHOT_ARROW = "mdvlcraft_farshot_from";
@@ -674,33 +670,6 @@ public final class Wave2Assassin {
         }, null).speed(2.0F).scale(0.5F).sound(SoundEvents.AMETHYST_BLOCK_CHIME);
     }
 
-    // ---- Shinigami ----
-
-    /** Hollow Mask: for 20 s the undead and endermen ignore the caster, who has Night Vision. */
-    public static class HollowMask extends ModifiedSpell {
-        HollowMask() {
-            super("hollow_mask", 0);
-        }
-
-        @Override
-        public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
-            Buffs.give(caster, HOLLOW, 400);
-            caster.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 400, 0));
-            for (Mob mob : level.getEntitiesOfClass(Mob.class, caster.getBoundingBox().inflate(32.0), m -> m.getTarget() == caster && ignores(m))) {
-                mob.setTarget(null);
-            }
-            if (level instanceof ServerLevel server) {
-                server.sendParticles(ParticleTypes.SOUL, caster.getX(), caster.getY() + 1.6, caster.getZ(), 20, 0.3, 0.3, 0.3, 0.02);
-            }
-            level.playSound(null, caster.blockPosition(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 1.5F, 0.6F);
-            super.onCast(level, spellLevel, caster, source, data);
-        }
-    }
-
-    static boolean ignores(LivingEntity mob) {
-        return mob.getMobType() == MobType.UNDEAD || mob instanceof EnderMan;
-    }
-
     // ---- Phantom Thief ----
 
     /** Calling Card: marks the creature looked at for 20 s; if it dies it drops double loot and the caster turns invisible for 5 s. */
@@ -841,7 +810,6 @@ public final class Wave2Assassin {
             new NettleShroud(),
             new TailDecoy(),
             glassNeedle(),
-            new HollowMask(),
             new CallingCard(),
             new RooftopVault(),
             new Farshot(),
@@ -997,15 +965,6 @@ public final class Wave2Assassin {
         Buffs.clear(owner, FARSHOT);
         arrow.getPersistentData().putLongArray(FARSHOT_ARROW, new long[] {
             Math.round(owner.getX() * 100.0), Math.round(owner.getY() * 100.0), Math.round(owner.getZ() * 100.0)});
-    }
-
-    /** Hollow Mask: the undead and endermen won't take its wearer as a target. */
-    @SubscribeEvent
-    public static void onTarget(LivingChangeTargetEvent event) {
-        LivingEntity target = event.getNewTarget();
-        if (target != null && Buffs.has(target, HOLLOW) && ignores(event.getEntity())) {
-            event.setCanceled(true);
-        }
     }
 
     /** Desert Dates: 1 more hunger than the berry (3 in all), Fire Resistance and Speed I for 45 s. */

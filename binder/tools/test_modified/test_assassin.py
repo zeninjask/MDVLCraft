@@ -75,8 +75,6 @@ T = {
     'tail_decoy': lambda: run('Tail Decoy', 'tail_decoy', targets=(('husk', 2, 1), ('husk', -1, 2)), wait=7.5, after=(ARMOR,)),
     # t1 hurt ~4, bleeding 120t, armour 1.6 instead of 2
     'glass_needle': lambda: run('Glass Needle', 'glass_needle', targets=(('husk', 0, 8),), wait=1.0, after=(ARMOR,)),
-    # caster Night Vision 400t and buff hollow_mask in ForgeData
-    'hollow_mask': lambda: run('Hollow Mask', 'hollow_mask', targets=(('husk', 0, 5),), wait=0.5, after=(BUFFS,)),
     # t1 (cow) killed while marked: the item count is twice a normal cow's drops (even); caster Invisibility 100t
     'calling_card': lambda: run('Calling Card', 'calling_card', targets=(('cow', 0, 6),), wait=0.5,
                                 after=('kill @e[tag=t1]', 'execute if entity @e[type=minecraft:item]')),

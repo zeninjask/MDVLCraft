@@ -28,7 +28,6 @@ PART = {
     'nettle_shroud': spell(NATURE, 30, 30),
     'tail_decoy': spell(SYMMETRY, 45, 40, 'long', 20),
     'glass_needle': spell(SYMMETRY, 20, 8),
-    'hollow_mask': spell(SPIRIT, 35, 60),
     'calling_card': spell(ENDER, 25, 30),
     'rooftop_vault': spell(EVOCATION, 20, 10),
     'farshot': spell(EVOCATION, 20, 20),

@@ -325,7 +325,6 @@ mod('fracture_mark', 'Fracture Mark', 'a new design', 'Mark a target for 10 s; e
 mod('cloud_ascent', 'Cloud Ascent', 'a new design', 'Leap 8 blocks up and forward and gain slow falling for 6 s.')
 mod('golden_elixir', 'Golden Elixir', 'a new design', 'Conjure 3 jade pills that heal 4 HP and grant resistance I for 15 s.')
 mod('underworld_gate', 'Underworld Gate', 'a new design', 'A dark shrine rises behind you for 10 s: every enemy within 12 blocks is held in black roots for 10 s and you turn invisible for 10 s.')
-mod('hollow_mask', 'Hollow Mask', 'a new design', 'For 20 s undead and endermen ignore you and you have Night Vision.')
 mod('haunted_crockery', 'Haunted Crockery', 'a new design', 'Throw a spectral pot; the creature hit takes 4 damage and nausea for 5 s.')
 mod('rattling_chains', 'Rattling Chains', 'a new design', 'A 5-block area rattles for 5 s, giving enemies slowness III and glowing.')
 mod('ancestors_call', "Ancestor's Call", 'a new design', 'Your next arrow summons an ancestral ghost (vex) at impact that fights for 15 s.')
