@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Demon Castle (gate/tower) resources: Castle Sigil and Tower Seal textures and item models, the sigil's recipe, the
+"""Demon Castle (gate/tower) resources: Castle Sigil, Tower Seal and Castle Trophy textures and item models, the sigil's recipe, the
 tower floor and boss loot tables, and the tower's lang entries (merged into en_us.json). Rerun after edits; output is
 committed."""
 import json
@@ -50,6 +50,27 @@ def seal():
     return img
 
 
+def trophy():
+    """A small gold cup on a dark base with a red gem."""
+    img = Image.new('RGBA', (16, 16), (0, 0, 0, 0))
+    px = img.load()
+    cup = ['##########', '.########.', '.########.', '..######..', '...####...', '....##....', '....##....', '..######..']
+    gold, shade = (235, 190, 70, 255), (170, 120, 30, 255)
+    for j, row in enumerate(cup):
+        for i, c in enumerate(row):
+            if c == '#':
+                px[3 + i, 2 + j] = shade if i in (0, 9) or row[i - 1:i] == '.' else gold
+    for x in (1, 2):
+        px[x, 3], px[x, 4], px[x, 5] = shade, shade, shade
+    for x in (13, 14):
+        px[x, 3], px[x, 4], px[x, 5] = shade, shade, shade
+    for x in range(4, 12):
+        for y in (11, 12, 13):
+            px[x, y] = (40, 14, 16, 255)
+    px[7, 4], px[8, 4], px[7, 5], px[8, 5] = [(200, 20, 30, 255)] * 4
+    return img
+
+
 def loot_item(name, lo, hi, weight=1):
     return {'type': 'minecraft:item', 'name': name, 'weight': weight,
             'functions': [{'function': 'minecraft:set_count', 'count': {'type': 'minecraft:uniform', 'min': lo, 'max': hi}}]}
@@ -60,7 +81,8 @@ def main():
     textures.mkdir(parents=True, exist_ok=True)
     sigil().save(textures / 'castle_sigil.png')
     seal().save(textures / 'tower_seal.png')
-    for item in ('castle_sigil', 'tower_seal'):
+    trophy().save(textures / 'castle_trophy.png')
+    for item in ('castle_sigil', 'tower_seal', 'castle_trophy'):
         write_json(ASSETS / 'models' / 'item' / f'{item}.json', {'parent': 'item/generated', 'textures': {'layer0': f'mdvlcraft:item/{item}'}})
 
     # Plan 10.1 asks for 4 black + 8 S stones + netherite at the Gate Forge; a 3x3 grid takes one item per slot, so the
@@ -87,6 +109,7 @@ def main():
     lang.update({
         'item.mdvlcraft.castle_sigil': 'Castle Sigil',
         'item.mdvlcraft.tower_seal': 'Tower Seal',
+        'item.mdvlcraft.castle_trophy': 'Castle Trophy',
         'entity.mdvlcraft.castle_gate': 'Demon Castle Gate',
         'tower.mdvlcraft.sigil.use': 'Use on the ground: open the Demon Castle at your floor',
         'tower.mdvlcraft.sigil.sneak': 'Sneak-use: start from your checkpoint',
@@ -102,6 +125,10 @@ def main():
         'tower.mdvlcraft.floor_cleared': 'Floor %s is clear: a chest waits in the stair room.',
         'tower.mdvlcraft.died': 'You fell on floor %s. Next time you start from floor %s.',
         'tower.mdvlcraft.left': 'You leave the Demon Castle. You will continue from floor %s.',
+        'tower.mdvlcraft.modifiers': 'Tower modifiers: %s',
+        'tower.mdvlcraft.no_modifiers': 'No tower modifiers',
+        'tower.mdvlcraft.hidden.subtitle': 'The stairs stay barred',
+        'tower.mdvlcraft.hidden.message': 'A hidden boss rises in the arena. The stairs open when it falls.',
     })
     lang_path.write_text(json.dumps(lang, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     print('tower resources written')

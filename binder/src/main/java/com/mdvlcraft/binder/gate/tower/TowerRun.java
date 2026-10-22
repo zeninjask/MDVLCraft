@@ -6,11 +6,14 @@ import com.mdvlcraft.binder.gate.GateInstances;
 import com.mdvlcraft.binder.gate.GateInstances.Instance;
 import com.mdvlcraft.binder.gate.GateInstances.Marker;
 import com.mdvlcraft.binder.gate.GateMobs;
+import com.mdvlcraft.binder.gate.GateModifiers;
 import com.mdvlcraft.binder.gate.GateRank;
 import com.mdvlcraft.binder.gate.GateRewardChestBlockEntity;
 import com.mdvlcraft.binder.gate.GateRewards;
 import com.mdvlcraft.binder.gate.GateSpawner;
+import com.mdvlcraft.binder.gate.GateTheme;
 import com.mdvlcraft.binder.gate.GateTravel;
+import com.mdvlcraft.binder.gate.HiddenBoss;
 import com.mojang.logging.LogUtils;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -24,6 +27,9 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.DoubleTag;
+import net.minecraft.nbt.ListTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket;
 import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
@@ -44,6 +50,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -68,6 +75,11 @@ import org.slf4j.Logger;
  * checkpoint to 5k + 1; dying sends them home and drops reached back to the checkpoint (the rest of the party carries
  * on); the lever on a landing or in a stair room sends them home keeping their floor; logging back in mid-run sends them
  * home. A run nobody is inside for EMPTY_TICKS closes.
+ *
+ * Each floor carries its tower modifiers (TowerModifiers, handed to GateModifiers for the instance), listed on a text
+ * tablet over the landing. From floor 55 a boss floor has a HIDDEN_CHANCE chance that a hidden boss rises when its boss
+ * falls (another theme's S boss, x1.5 health, glowing; it drops black essence stones through HiddenBoss.TAG); the stairs
+ * open when it dies. Mobs that other code adds to a run (Swarming's copies) get the floor tag and scaling on joining.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class TowerRun {
@@ -88,6 +100,13 @@ public final class TowerRun {
     private static final int ALLY_RANGE = 32;
     private static final ResourceLocation FLOOR_LOOT = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/tower/floor");
     private static final ResourceLocation BOSS_LOOT = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/tower/boss");
+    /** Scoreboard tag on a hidden boss (for selectors; HiddenBoss.TAG is the persistent flag). */
+    public static final String HIDDEN_TAG = "mdvlcraft_tower_hidden";
+    private static final float HIDDEN_CHANCE = 0.25F;
+    private static final double HIDDEN_HEALTH = 1.5;
+    private static final UUID HIDDEN_HEALTH_ID = UUID.fromString("0b7c6c1e-3d2a-4f0e-9b1d-5a7e2c9f0003");
+    /** Same tag as RuleGates' tablets, so a tablet loaded after a restart (its run closed) is dropped there. */
+    private static final String TABLET_TAG = "mdvlcraft_gate_tablet";
 
     private static final Map<Integer, TowerRun> RUNS = new LinkedHashMap<>();
     /** Build and clear steps of every run, in order (a floor's clear always runs before the build that reuses its band). */
@@ -102,6 +121,12 @@ public final class TowerRun {
     private final Set<Integer> triggered = new HashSet<>();
     private boolean floorDone;
     private long emptySince = -1;
+    private List<String> modifiers = List.of();
+    private boolean hiddenRisen;
+    /** Debug: the next boss death on a floor of 55+ raises the hidden boss for sure. */
+    boolean forceHidden;
+    /** True while this class spawns, so onJoin leaves its own mobs to made(). */
+    private static boolean spawning;
     /** Players to send in once the first floor is built (the debug command). */
     private final List<UUID> sendIn = new ArrayList<>();
 
@@ -196,6 +221,7 @@ public final class TowerRun {
         run.current = TowerFloor.plan(level.getSeed(), floor, instance.cellX, instance.cellZ);
         run.next = TowerFloor.plan(level.getSeed(), floor + 1, instance.cellX, instance.cellZ);
         instance.entry = run.current.landing();
+        run.applyModifiers(level);
         gates.setDirty();
         TowerFloor.Layout first = run.current;
         QUEUE.addAll(TowerFloor.buildSteps(level, first));
@@ -203,6 +229,7 @@ public final class TowerRun {
             if (run.current == first) {
                 run.currentReady = true;
                 run.placeCrystals(level);
+                run.placeTablet(level);
                 run.sendIn.forEach(uuid -> {
                     ServerPlayer player = server.getPlayerList().getPlayer(uuid);
                     if (player != null) {
@@ -317,6 +344,46 @@ public final class TowerRun {
         player.connection.send(new ClientboundSetSubtitleTextPacket(TowerFloor.isBoss(this.floor)
             ? Component.translatableWithFallback("tower.mdvlcraft.floor.boss", "A boss awaits").withStyle(ChatFormatting.GOLD)
             : Component.translatable("gate.mdvlcraft.theme." + TowerFloor.theme(this.floor).key()).withStyle(ChatFormatting.GRAY)));
+        Component names = TowerModifiers.names(this.modifiers);
+        if (names != null) {
+            player.sendSystemMessage(Component.translatableWithFallback("tower.mdvlcraft.modifiers", "Tower modifiers: %s", names).withStyle(ChatFormatting.GOLD));
+        }
+    }
+
+    /** The current floor's tower modifiers go to the instance (GateModifiers applies them as in a gate). */
+    private void applyModifiers(ServerLevel level) {
+        this.modifiers = TowerModifiers.of(level.getSeed(), this.floor);
+        GateModifiers.attach(this.id, this.modifiers);
+    }
+
+    public List<String> modifiers() {
+        return this.modifiers;
+    }
+
+    /** A floating text over the landing: the floor and its modifiers. It carries the floor tag, so it goes with the floor's mobs. */
+    private void placeTablet(ServerLevel level) {
+        Component names = TowerModifiers.names(this.modifiers);
+        Component text = Component.empty().append(Component.translatableWithFallback("tower.mdvlcraft.floor", "Floor %s", this.floor)
+                .withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD))
+            .append("\n").append(names != null ? names
+                : Component.translatableWithFallback("tower.mdvlcraft.no_modifiers", "No tower modifiers").withStyle(ChatFormatting.GRAY));
+        BlockPos at = this.current.landing().offset(-2, 2, 0);
+        CompoundTag tag = new CompoundTag();
+        tag.putString("id", "minecraft:text_display");
+        tag.putString("text", Component.Serializer.toJson(text));
+        tag.putString("billboard", "center");
+        ListTag pos = new ListTag();
+        pos.add(DoubleTag.valueOf(at.getX() + 0.5));
+        pos.add(DoubleTag.valueOf(at.getY() + 0.2));
+        pos.add(DoubleTag.valueOf(at.getZ() + 0.5));
+        tag.put("Pos", pos);
+        Entity display = EntityType.loadEntityRecursive(tag, level, e -> e);
+        if (display != null) {
+            display.addTag(TABLET_TAG);
+            display.getPersistentData().putInt(GateSpawner.TAG, this.id);
+            display.getPersistentData().putInt(FLOOR_TAG, this.floor);
+            level.addFreshEntity(display);
+        }
     }
 
     /** The current floor's crystal veins (GateRewards places them at the instance's crystal markers). */
@@ -404,7 +471,7 @@ public final class TowerRun {
     private int mobsLeft(ServerLevel level) {
         int left = 0;
         for (Entity entity : level.getAllEntities()) {
-            if (entity.isAlive() && GateSpawner.instanceOf(entity) == this.id && entity.getPersistentData().getInt(FLOOR_TAG) == this.floor) {
+            if (entity instanceof Mob && entity.isAlive() && GateSpawner.instanceOf(entity) == this.id && entity.getPersistentData().getInt(FLOOR_TAG) == this.floor) {
                 left++;
             }
         }
@@ -424,8 +491,11 @@ public final class TowerRun {
         this.currentReady = true;
         this.triggered.clear();
         this.floorDone = false;
+        this.hiddenRisen = false;
+        this.forceHidden = false;
         instance.entry = this.current.landing();
         GateInstances.get(level.getServer()).setDirty();
+        this.applyModifiers(level);
         BlockPos landing = this.current.landing();
         for (ServerPlayer player : present) {
             player.teleportTo(level, landing.getX() + 0.5, landing.getY(), landing.getZ() + 0.5, player.getYRot(), 0.0F);
@@ -436,6 +506,7 @@ public final class TowerRun {
         level.playSound(null, landing, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.8F, 0.7F);
         this.placeCrystals(level);
         this.discardMobs(level, oldFloor);
+        this.placeTablet(level);
         QUEUE.addAll(TowerFloor.clearSteps(level, old));
         this.next = TowerFloor.plan(level.getSeed(), this.floor + 1, instance.cellX, instance.cellZ);
         this.queueNext(level);
@@ -509,7 +580,31 @@ public final class TowerRun {
     @Nullable
     private Mob spawnOne(ServerLevel level, Instance instance, GateMobs.Kind kind, BlockPos pos, @Nullable String role) {
         EntityType<?> type = GateMobs.pick(TowerFloor.theme(this.floor), instance.rank, kind, level.random);
-        return type == null ? null : this.made(GateSpawner.spawn(level, instance, type, pos, role, -1));
+        return type == null ? null : this.made(spawn(level, instance, type, pos, role));
+    }
+
+    /** GateSpawner.spawn with the onJoin scaling off (made() does it). */
+    @Nullable
+    private static Mob spawn(ServerLevel level, Instance instance, EntityType<?> type, BlockPos pos, @Nullable String role) {
+        spawning = true;
+        try {
+            return GateSpawner.spawn(level, instance, type, pos, role, -1);
+        } finally {
+            spawning = false;
+        }
+    }
+
+    /** Mobs added to a run by other code (Swarming's copies) get the current floor's tag and scaling. */
+    @SubscribeEvent
+    public static void onJoin(EntityJoinLevelEvent event) {
+        if (spawning || event.loadedFromDisk() || !(event.getEntity() instanceof Mob mob) || mob.getPersistentData().contains(FLOOR_TAG)
+            || event.getLevel().dimension() != GateDimensions.DEMON_CASTLE) {
+            return;
+        }
+        TowerRun run = RUNS.get(GateSpawner.instanceOf(mob));
+        if (run != null) {
+            run.made(mob);
+        }
     }
 
     /** Boss rank by floor (plan 10.2): floors 5–20 the B bosses ("Champion"), 25–50 A ("Legend"), 55 on S. */
@@ -526,12 +621,58 @@ public final class TowerRun {
         }
         for (int i = 0; type != null && i < boss.count(); i++) {
             BlockPos pos = this.current.boss().offset(i * 3 - (boss.count() - 1), 0, 0);
-            Mob mob = this.made(GateSpawner.spawn(level, instance, type, pos, GateSpawner.BOSS, -1));
+            Mob mob = this.made(spawn(level, instance, type, pos, GateSpawner.BOSS));
             if (mob != null) {
                 mob.getPersistentData().putBoolean(BOSS_TAG, true);
                 mob.addTag(BOSS_TAG);
             }
         }
+    }
+
+    /**
+     * The boss is dead on a floor of 55+: with HIDDEN_CHANCE (or when forced) a hidden boss rises in the arena and the bars
+     * stay shut (true). Another theme's S boss if one is loaded, else this theme's, else an elite.
+     */
+    private boolean riseHidden(ServerLevel level) {
+        Instance instance = this.instance(level.getServer());
+        if (instance == null) {
+            return false;
+        }
+        GateTheme theme = TowerFloor.theme(this.floor);
+        List<GateTheme> others = new ArrayList<>(List.of(GateTheme.values()));
+        others.remove(theme);
+        EntityType<?> type = null;
+        while (type == null && !others.isEmpty()) {
+            type = GateMobs.type(GateMobs.boss(others.remove(level.random.nextInt(others.size())), GateRank.S).id());
+        }
+        if (type == null) {
+            type = GateMobs.type(GateMobs.boss(theme, GateRank.S).id());
+        }
+        if (type == null) {
+            type = GateMobs.pick(theme, instance.rank, GateMobs.Kind.ELITE, level.random);
+        }
+        Mob boss = type == null ? null : spawn(level, instance, type, this.current.boss(), GateSpawner.BOSS);
+        if (boss == null) {
+            return false;
+        }
+        modify(boss.getAttribute(Attributes.MAX_HEALTH), HIDDEN_HEALTH_ID, HIDDEN_HEALTH - 1.0);   // before the floor scaling, which reads max health
+        this.made(boss);
+        boss.getPersistentData().putBoolean(BOSS_TAG, true);
+        boss.getPersistentData().putBoolean(HiddenBoss.TAG, true);   // black essence stones (GateRewards.onDrops)
+        boss.addTag(BOSS_TAG);
+        boss.addTag(HIDDEN_TAG);
+        boss.setGlowingTag(true);
+        boss.setCustomName(Component.translatableWithFallback("gate.mdvlcraft.hidden.name", "Hidden %s", type.getDescription()).withStyle(ChatFormatting.DARK_RED));
+        for (ServerPlayer player : this.present(level.getServer())) {
+            player.connection.send(new ClientboundSetSubtitleTextPacket(Component.translatableWithFallback("tower.mdvlcraft.hidden.subtitle",
+                "The stairs stay barred")));
+            player.connection.send(new ClientboundSetTitleTextPacket(Component.translatableWithFallback("gate.mdvlcraft.hidden.title",
+                "Something else stirs").withStyle(ChatFormatting.DARK_RED)));
+            player.sendSystemMessage(Component.translatableWithFallback("tower.mdvlcraft.hidden.message",
+                "A hidden boss rises in the arena. The stairs open when it falls.").withStyle(ChatFormatting.RED));
+            player.playNotifySound(SoundEvents.WITHER_SPAWN, SoundSource.HOSTILE, 1.0F, 0.5F);
+        }
+        return true;
     }
 
     /** Tags a fresh tower mob with its floor and adds the floor scaling: +5% health and +4% damage per floor, compounding.
@@ -643,6 +784,12 @@ public final class TowerRun {
                 return;   // its twin still stands
             }
         }
+        if (run.floor >= TowerModifiers.LEGEND_FLOOR && !run.hiddenRisen) {
+            run.hiddenRisen = true;
+            if ((run.forceHidden || level.random.nextFloat() < HIDDEN_CHANCE) && run.riseHidden(level)) {
+                return;
+            }
+        }
         run.floorDone = true;
         TowerFloor.openBars(level, run.current);
         run.reward(level, run.present(level.getServer()), true);
@@ -685,7 +832,8 @@ public final class TowerRun {
         return "Run " + this.id + ": floor " + this.floor + (TowerFloor.isBoss(this.floor) ? " (boss)" : "") + ", ready " + this.currentReady
             + ", next ready " + this.nextReady + ", rooms " + this.triggered.size() + "/" + this.current.rooms().size() + ", done " + this.floorDone
             + ", roster " + (instance == null ? 0 : instance.roster.size()) + ", inside " + this.inside(server)
-            + (instance == null ? "" : ", cell " + instance.cellX + "," + instance.cellZ);
+            + (instance == null ? "" : ", cell " + instance.cellX + "," + instance.cellZ) + ", modifiers " + this.modifiers
+            + (this.hiddenRisen ? ", hidden boss rolled" : this.forceHidden ? ", hidden boss forced" : "");
     }
 
     /** For the debug command: the landing of the current floor. */
