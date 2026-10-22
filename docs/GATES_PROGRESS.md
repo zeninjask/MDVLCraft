@@ -169,6 +169,12 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-22 night, 2.0.40 jar (gate 92608634), `tower.txt` on a fresh server: **PASS** except SEALS_OK, which is a
+  syntax error in the step (`Tester[nbt=…]`; the log shows the 4 seals given — fix passed to `gate-tower2`). Checked:
+  run opens in the castle on the crypt landing, landing clear, room spawns, floor 2 landing/band, floors 3–5, floor-5
+  boss (The Dead King) spawns and its kill sets checkpoint 6 / best boss 5, floors 6–7, close → home, reopen at floor 7,
+  death keeps checkpoint 6.
+
 - 2026-10-22, gate 1b0b1f6 jar, every steps file on a fresh server each: builder 12/12 PASS; spawner 5/6 (EXIT_OK is test
   geometry, collapse works); combat 7/9 (seal, unseal, reseal, clear PASS; wipe only fails the gate after PlayerRevive's
   60 s bleed-out, the test waited 20 s); rewards 7/11 (misses are stale steps); red 9/12 after the vein-sort fix (first
