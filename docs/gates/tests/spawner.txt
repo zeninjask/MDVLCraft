@@ -1,4 +1,5 @@
-wait 60
+wait 120
+cmd scoreboard objectives add gt dummy
 cmd execute as Tester run mdvl gate pools
 wait 2
 cmd execute as Tester run mdvl gate open E crypt
@@ -21,9 +22,14 @@ shot spawner_boss
 cmd execute as Tester at @s run kill @e[distance=..12,tag=mdvlcraft_gate,nbt={ForgeData:{mdvlcraft_gate_role:"boss"}}]
 wait 2
 cmd mdvl gate list
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say CLEARED_STILL_INSIDE_OK
+cmd execute as Tester run mdvl gate goto exit
+wait 20
 shot spawner_exit
-cmd execute as Tester at @s run tp @s ~ ~ ~-3
-wait 2
 cmd execute as Tester unless entity @s[nbt={Dimension:"mdvlcraft:gate_realm"}] run say EXIT_OK
-wait 125
+cmd execute as Tester store result score @s gt run mdvl gate rooms
+cmd execute as Tester if score @s gt matches 1.. run say EXIT_KEEPS_ROSTER_OK
+wait 110
 cmd mdvl gate list
+cmd execute as Tester store result score @s gt run mdvl gate rooms
+cmd execute as Tester if score @s gt matches 0 run say COLLAPSE_OK

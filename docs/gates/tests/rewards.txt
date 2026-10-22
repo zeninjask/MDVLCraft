@@ -1,10 +1,11 @@
-wait 60
+wait 120
 cmd gamemode survival Tester
 cmd effect give Tester minecraft:resistance 99999 4 true
+cmd scoreboard objectives add gt dummy
 cmd execute as Tester run mdvl gate open E crypt
 wait 20
 wait 3
-cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:glowstone run say ON_PLATFORM_OK
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm if biome ~ ~ ~ mdvlcraft:gate_crypt unless block ~ ~-1 ~ minecraft:air run say IN_CRYPT_GATE_OK
 cmd execute as Tester at @s run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["rw_boss"]}
 cmd execute as Tester at @s run summon minecraft:husk ~-3 ~ ~2 {NoAI:1b,Tags:["rw_elite"]}
 cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_boss] boss
@@ -28,12 +29,16 @@ wait 4
 mup 1
 wait 2
 cmd execute as Tester at @s unless block ~ ~ ~1 mdvlcraft:mana_crystal_ore_e run say VEIN_MINED_OK
-cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:glowstone run say FLOOR_STILL_PROTECTED_OK
+cmd execute as Tester at @s unless block ~ ~-1 ~ minecraft:air unless block ~ ~-1 ~1 minecraft:air run say FLOOR_STILL_PROTECTED_OK
 cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:mana_crystal_e"}]}] run say CRYSTAL_PICKED_OK
-cmd execute as Tester at @s run mdvl gate reward clear
+cmd execute as Tester run mdvl gate reward clear
 wait 2
-cmd execute as Tester at @s if block ~ ~ ~-2 mdvlcraft:gate_reward_chest run say CHEST_PLACED_OK
-cmd execute as Tester at @s run tp @s ~ ~ ~ 180 30
+cmd execute as Tester store result score @s gt run mdvl gate goto chest
+cmd execute as Tester if score @s gt matches 0 run mdvl gate goto boss
+cmd execute as Tester if score @s gt matches 0 at @s run tp @s ~ ~ ~-2
+wait 2
+cmd execute as Tester at @s if block ~ ~ ~ mdvlcraft:gate_reward_chest run say CHEST_PLACED_OK
+cmd execute as Tester at @s run tp @s ~ ~1 ~ 0 90
 wait 20
 wait 1
 shot rewards_cleared_chat
@@ -60,8 +65,14 @@ cmd execute as Tester at @s run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["r
 cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_red] boss
 cmd kill @e[tag=rw_red]
 wait 2
-cmd execute as Tester at @s if entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say BLACK_STONE_OK
 cmd execute as Tester at @s if entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_b"}}] run say RED_B_STONES_OK
+cmd execute as Tester at @s unless entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say NO_BLACK_FROM_RED_B_BOSS_OK
+cmd execute as Tester at @s run kill @e[type=item,distance=..8]
+cmd execute as Tester at @s run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["rw_hidden"],ForgeData:{mdvlcraft_gate_hidden:1b}}
+cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_hidden] boss
+cmd kill @e[tag=rw_hidden]
+wait 2
+cmd execute as Tester at @s if entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say BLACK_FROM_HIDDEN_BOSS_OK
 cmd execute as Tester at @s run kill @e[type=item,distance=..8]
 cmd item replace entity Tester weapon.mainhand with mdvlcraft:return_stone 1
 cmd execute as Tester at @s run tp @s ~ ~ ~ 0 -60
@@ -69,7 +80,7 @@ wait 20
 wait 1
 click 3
 wait 3
-cmd execute as Tester at @s if dimension mdvlcraft:red_realm run say RETURN_REFUSED_IN_RED_OK
+cmd execute as Tester at @s if dimension mdvlcraft:red_realm if entity @s[nbt={SelectedItem:{id:"mdvlcraft:return_stone"}}] run say RETURN_REFUSED_IN_RED_OK
 cmd execute as Tester run mdvl gate reward clear
 wait 2
 cmd execute as Tester run mdvl gate leave
@@ -79,7 +90,9 @@ cmd execute as Tester run mdvl gate open E crypt
 wait 20
 wait 3
 cmd item replace entity Tester weapon.mainhand with mdvlcraft:return_stone 1
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm if entity @s[nbt={SelectedItem:{id:"mdvlcraft:return_stone"}}] run say RETURN_STONE_READY_OK
 cmd execute as Tester at @s run tp @s ~ ~ ~ 0 -60
+wait 20
 wait 1
 click 3
 wait 20
