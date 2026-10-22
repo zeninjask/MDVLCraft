@@ -107,6 +107,10 @@ public final class RedLandscape {
     }
 
     static Palette palette(GateTheme theme) {
+        GateThemes.Theme data = GateThemes.get(theme);   // the theme file's red palette, if it has one
+        if (data != null && data.palette() != null) {
+            return data.palette();
+        }
         return switch (theme) {
             case CRYPT -> new Palette(Blocks.COBBLED_DEEPSLATE, Blocks.DEEPSLATE_BRICKS, Blocks.SOUL_LANTERN, Blocks.SOUL_CAMPFIRE);
             case WARREN -> new Palette(Blocks.PACKED_MUD, Blocks.MUD_BRICKS, Blocks.SHROOMLIGHT, Blocks.CAMPFIRE);
@@ -119,6 +123,10 @@ public final class RedLandscape {
 
     /** Vanilla stand-ins, used only when none of the theme pool's mods is loaded (GateMobs). */
     static List<String> standInMobs(GateTheme theme) {
+        GateThemes.Theme data = GateThemes.get(theme);
+        if (data != null && !data.standInMobs().isEmpty()) {
+            return data.standInMobs().stream().map(ResourceLocation::toString).toList();
+        }
         return switch (theme) {
             case CRYPT -> List.of("minecraft:zombie", "minecraft:skeleton", "minecraft:husk");
             case WARREN -> List.of("minecraft:spider", "minecraft:cave_spider", "minecraft:silverfish");
@@ -131,6 +139,10 @@ public final class RedLandscape {
 
     /** Vanilla stand-in boss, used only when the theme boss's mod isn't loaded. */
     static String standInBoss(GateTheme theme) {
+        GateThemes.Theme data = GateThemes.get(theme);
+        if (data != null && data.standInBoss() != null) {
+            return data.standInBoss().toString();
+        }
         return switch (theme) {
             case CRYPT -> "minecraft:wither_skeleton";
             case WARREN, FROZEN, WARCAMP -> "minecraft:ravager";

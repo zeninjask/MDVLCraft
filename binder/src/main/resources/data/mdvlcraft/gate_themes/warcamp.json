@@ -1,0 +1,182 @@
+{
+  "name": "gate.mdvlcraft.theme.warcamp",
+  "biome": "mdvlcraft:gate_warcamp",
+  "music": "minecraft:music.nether.basalt_deltas",
+  "catalyst": "minecraft:iron_axe",
+  "hazard": {},
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/warcamp/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/warcamp/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/warcamp/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/warcamp/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/warcamp/combat_small_1",
+      "mdvlcraft:gate/warcamp/combat_small_2",
+      "mdvlcraft:gate/warcamp/combat_small_3"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/warcamp/combat_large_1",
+      "mdvlcraft:gate/warcamp/combat_large_2",
+      "mdvlcraft:gate/warcamp/combat_large_3"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/warcamp/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/warcamp/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/warcamp/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/warcamp/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/warcamp/boss_large_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "minecraft:vindicator",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:pillager",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:magehunter_vindicator",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "minecraft:vindicator",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:magehunter_vindicator",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:pillager",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:evoker",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "minecraft:ravager",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "irons_spellbooks:magehunter_vindicator",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:vindicator",
+          "weight": 1
+        },
+        {
+          "id": "wom:lycanth",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:evoker",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:pillager",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "minecraft:ravager",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "wom:lupus_rex",
+      "count": 1,
+      "size": "large"
+    },
+    "D": {
+      "id": "wom:lupus_rex",
+      "count": 1,
+      "size": "large"
+    },
+    "C": {
+      "id": "wom:lupus_rex",
+      "count": 1,
+      "size": "large"
+    },
+    "B": {
+      "id": "cataclysm:ignited_revenant",
+      "count": 1,
+      "size": "medium"
+    },
+    "A": {
+      "id": "legendary_monsters:posessed_paladin",
+      "count": 1,
+      "size": "medium"
+    },
+    "S": {
+      "id": "legendary_monsters:posessed_paladin",
+      "count": 1,
+      "size": "medium"
+    }
+  },
+  "red": {
+    "landscape": "badlands",
+    "palette": {
+      "floor": "minecraft:coarse_dirt",
+      "pillar": "minecraft:spruce_log",
+      "light": "minecraft:lantern",
+      "campfire": "minecraft:campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:pillager",
+      "minecraft:vindicator"
+    ],
+    "stand_in_boss": "minecraft:ravager"
+  }
+}

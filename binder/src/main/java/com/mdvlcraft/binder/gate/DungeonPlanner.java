@@ -38,9 +38,14 @@ public final class DungeonPlanner {
      * `variants` says how many templates of a kind the theme has ("combat_small" -> 2); a kind with none is still asked
      * for as _1, and the builder skips what it can't find. */
     public static List<Piece> plan(long seed, GateRank rank, ToIntFunction<String> variants) {
+        return plan(seed, rank, "boss", variants);
+    }
+
+    /** As above, with the boss room's template kind given (GateBuilder passes the boss's size class: "boss_large" ...). */
+    public static List<Piece> plan(long seed, GateRank rank, String bossKind, ToIntFunction<String> variants) {
         Random random = new Random(seed * 0x9E3779B97F4A7C15L + 0x5DEECE66DL);
         for (int attempt = 0; attempt < ATTEMPTS; attempt++) {
-            List<Piece> pieces = attempt(random, rank, variants);
+            List<Piece> pieces = attempt(random, rank, bossKind, variants);
             if (pieces != null) {
                 return pieces;
             }
@@ -81,7 +86,7 @@ public final class DungeonPlanner {
     }
 
     /** One try at a layout; null if the path boxed itself in. */
-    private static List<Piece> attempt(Random random, GateRank rank, ToIntFunction<String> variants) {
+    private static List<Piece> attempt(Random random, GateRank rank, String bossKind, ToIntFunction<String> variants) {
         Map<Long, Node> slots = new HashMap<>();
         List<Node> path = new ArrayList<>();
         Node here = new Node(0, 0, "entrance", null);
@@ -131,9 +136,9 @@ public final class DungeonPlanner {
         }
         List<Piece> pieces = new ArrayList<>();
         for (Node node : path) {
-            pieces.add(piece(random, node, variants));
+            pieces.add(piece(random, node, bossKind, variants));
             for (Node side : node.branch) {
-                pieces.add(piece(random, side, variants));
+                pieces.add(piece(random, side, bossKind, variants));
             }
         }
         return pieces;
@@ -214,8 +219,8 @@ public final class DungeonPlanner {
         return false;
     }
 
-    private static Piece piece(Random random, Node node, ToIntFunction<String> variants) {
-        String kind = node.kind;
+    private static Piece piece(Random random, Node node, String bossKind, ToIntFunction<String> variants) {
+        String kind = node.kind.equals("boss") ? bossKind : node.kind;
         Rotation rotation;
         if (node.corridor()) {
             EnumSet<Direction> canonical;

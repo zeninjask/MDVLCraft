@@ -20,6 +20,7 @@ bottom-middle of its opening (y 2, in the face plane).
 Also checks every written file by parsing it back. Rerun after changing anything and commit the output.
 """
 import gzip
+import json
 import io
 import random
 import struct
@@ -291,6 +292,8 @@ def wall_lights(r, inset, height, step=8):
             r.set(x, WALK + 3, z, 'glow')
             if height > 14:
                 r.set(x, WALK + 9, z, 'glow')
+            if height > 26:
+                r.set(x, WALK + 18, z, 'glow')
 
 
 def hang(r, x, z, drop):
@@ -506,31 +509,170 @@ def treasure(seed):
     return r
 
 
-def boss(seed):
-    inset = 0
-    r = Room(26, seed)
+def boss(size, seed):
+    """The boss room for a boss size class (plan 5.1): small bosses fight in a lower, walled-in hall with close pillars,
+    medium ones in the full 47-wide hall, large ones in a 36-high hall with only corner pillars. The medium room is the
+    phase 3a boss_1 unchanged."""
+    inset, height = {'small': (6, 16), 'medium': (0, 26), 'large': (0, 36)}[size]
+    r = Room(height, seed)
     inner = shell(r, inset, ALL)
     floor_pattern(r, inner, inset, 'rings')
     wall_lights(r, inset, r.height, 6)
-    for x, z in ((8, 8), (38, 8), (8, 38), (38, 38), (8, MID - 8), (38, MID - 8), (8, MID + 8), (38, MID + 8)):
+    if size == 'small':
+        pillars = ((14, 14), (32, 14), (14, 32), (32, 32))
+        lamps = ((MID, MID),)
+        drop = 4
+    elif size == 'medium':
+        pillars = ((8, 8), (38, 8), (8, 38), (38, 38), (8, MID - 8), (38, MID - 8), (8, MID + 8), (38, MID + 8))
+        lamps = ((MID, MID), (14, 14), (32, 14), (14, 32), (32, 32))
+        drop = 6
+    else:
+        pillars = ((6, 6), (40, 6), (6, 40), (40, 40))
+        lamps = ((MID, MID), (12, 12), (34, 12), (12, 34), (34, 34))
+        drop = 12
+    for x, z in pillars:
         pillar(r, x, z, 1)
     # a dais at the north end, the boss in the middle
+    dais = inset + 4
     for x in range(MID - 6, MID + 7):
-        for z in range(4, 10):
+        for z in range(dais, dais + 6):
             r.set(x, WALK, z, 'floor2')
-    for x, z in ((MID - 6, 4), (MID + 6, 4)):
+    for x, z in ((MID - 6, dais), (MID + 6, dais)):
         for y in range(WALK + 1, WALK + 4):
             r.set(x, y, z, 'prop')
-    for x, z in ((MID, MID), (14, 14), (32, 14), (14, 32), (32, 32)):
-        hang(r, x, z, 6)
+    for x, z in lamps:
+        hang(r, x, z, drop)
     r.marker(MID, WALK, MID, 'boss')
-    r.marker(MID, WALK + 1, 7, 'exit')
+    r.marker(MID, WALK + 1, dais + 3, 'exit')
     clutter(r, inner)
     return r
 
 
-def layouts():
-    """kind_n -> Room. Corridors are named corridor_<shape>_n."""
+def keep_clear(r):
+    """Columns themed furniture must leave free: the cross of lanes from the doors to the centre, and a ring around
+    every marker (mobs stand there)."""
+    keep = set()
+    for a in range(SIZE):
+        for b in range(ARM_LO + 1, ARM_HI):
+            keep.add((a, b))
+            keep.add((b, a))
+    for (x, _, z) in r.markers:
+        for dx in (-1, 0, 1):
+            for dz in (-1, 0, 1):
+                keep.add((x + dx, z + dz))
+    return keep
+
+
+def cone(r, cx, cz, radius, height, role, down=False):
+    """A rough cone of `role`: up from the floor, or down from the ceiling."""
+    for x in range(cx - radius, cx + radius + 1):
+        for z in range(cz - radius, cz + radius + 1):
+            d = max(abs(x - cx), abs(z - cz))
+            h = height - d * height // (radius + 1) - (r.rng.random() < 0.3)
+            for i in range(max(h, 0)):
+                r.set(x, (r.height - 2 - i) if down else (WALK + i), z, role)
+
+
+def theme_features(theme, r, inner, inset):
+    """What makes a theme's own combat room: crypt tombs, warren earth mounds, frozen ice spikes, warcamp tents, spire
+    bookshelf stacks, forge lava channels. Placed only in free columns (keep_clear)."""
+    keep = keep_clear(r)
+
+    def free(cols):
+        return all(c in inner and c not in keep for c in cols)
+
+    lo, hi = inset + 3, SIZE - 4 - inset
+    if theme == 'crypt':   # rows of sarcophagi: a 2x3 slab with a raised head
+        for x in range(lo, hi - 1, 5):
+            for z in range(lo, hi - 2, 6):
+                cols = [(x + dx, z + dz) for dx in range(2) for dz in range(3)]
+                if free(cols):
+                    for (cx, cz) in cols:
+                        r.set(cx, WALK, cz, 'floor2')
+                    r.set(x, WALK + 1, z, 'pillar')
+                    r.set(x + 1, WALK + 1, z, 'pillar')
+                    r.set(x, WALK + 1, z + 2, 'litter')
+    elif theme == 'warren':   # earth mounds, some reaching the roof, mushrooms about
+        for _ in range(40):
+            cx, cz = r.rng.randrange(lo, hi), r.rng.randrange(lo, hi)
+            radius = r.rng.randint(1, 3)
+            cols = [(x, z) for x in range(cx - radius, cx + radius + 1) for z in range(cz - radius, cz + radius + 1)]
+            if free(cols):
+                cone(r, cx, cz, radius, r.rng.randint(3, r.height - 3), 'ceiling')
+                keep.update((x + dx, z + dz) for (x, z) in cols for dx in (-1, 0, 1) for dz in (-1, 0, 1))
+    elif theme == 'frozen':   # ice spikes from floor and roof, powder snow drifts
+        for _ in range(40):
+            cx, cz = r.rng.randrange(lo, hi), r.rng.randrange(lo, hi)
+            radius = r.rng.randint(1, 2)
+            cols = [(x, z) for x in range(cx - radius, cx + radius + 1) for z in range(cz - radius, cz + radius + 1)]
+            if free(cols):
+                down = r.rng.random() < 0.4
+                cone(r, cx, cz, radius, r.rng.randint(3, r.height // 2 if down else r.height - 4), 'pillar', down)
+                if down:   # a hanging spike leaves the floor below walkable; snow drifts there
+                    for (x, z) in cols:
+                        if r.rng.random() < 0.5:
+                            r.set(x, FLOOR, z, 'pool')
+                keep.update((x + dx, z + dz) for (x, z) in cols for dx in (-1, 0, 1) for dz in (-1, 0, 1))
+    elif theme == 'warcamp':   # ridge tents of cloth on planks, hay, weapon posts
+        for x in range(lo, hi - 4, 8):
+            for z in range(lo, hi - 4, 8):
+                cols = [(x + dx, z + dz) for dx in range(5) for dz in range(5)]
+                if not free(cols):
+                    continue
+                cloth = r.rng.choice(('white_wool', 'brown_wool', 'red_wool'))
+                for dx in range(5):
+                    for dz in range(5):
+                        r.set(x + dx, FLOOR, z + dz, 'floor2')
+                        r.set(x + dx, WALK + 2 - abs(dx - 2), z + dz, cloth)
+                r.set(x + 2, WALK, z + 2, 'prop')
+    elif theme == 'spire':   # bookshelf stacks in rows, lit columns between
+        for z in range(lo, hi, 4):
+            for x in range(lo, hi - 5, 9):
+                cols = [(x + dx, z) for dx in range(6)]
+                if free(cols):
+                    for (cx, cz) in cols:
+                        for y in range(WALK, WALK + 3):
+                            r.set(cx, y, cz, 'prop')
+                    r.set(x + 2, WALK + 3, z, 'glow')
+    elif theme == 'forge':   # fenced lava channels with anvils and furnaces beside them
+        for z in range(lo, hi - 3, 7):
+            for x in range(lo, hi - 7, 10):
+                cols = [(x + dx, z + dz) for dx in range(8) for dz in range(4)]
+                if free(cols):
+                    pool(r, x, z, x + 7, z + 3)
+                    if z + 4 < hi and (x, z + 4) in inner and (x, z + 4) not in keep:
+                        r.set(x, WALK, z + 4, 'prop')
+                    if (x + 7, z + 4) in inner and (x + 7, z + 4) not in keep:
+                        r.set(x + 7, WALK, z + 4, 'blast_furnace[facing=south]')
+
+
+def theme_combat(theme, large, seed):
+    """A theme's own combat room (small or large), with the marker set of the shared variant 1 of that size."""
+    inset, height = (2, 20) if large else (8, 14)
+    r = Room(height, seed)
+    inner = shell(r, inset, ALL)
+    if not large:
+        arm_lights(r, inset, ALL)
+    wall_lights(r, inset, r.height)
+    floor_pattern(r, inner, inset, 'cross')
+    if large:
+        spread(r, 'spawn:melee', ((MID, 8), (8, MID), (38, MID), (MID, 38), (14, 14), (32, 32)))
+        spread(r, 'spawn:ranged', ((6, 6), (40, 6), (6, 40)))
+        spread(r, 'spawn:elite', ((MID, MID),))
+    else:
+        spread(r, 'spawn:melee', ((MID, 13), (13, MID), (33, MID), (MID, 33)))
+        spread(r, 'spawn:ranged', ((12, 12), (34, 34)))
+    theme_features(theme, r, inner, inset)
+    hang(r, MID, MID, 4)
+    props(r, inset, 8)
+    clutter(r, inner)
+    return r
+
+
+def layouts(theme):
+    """kind_n -> Room for one theme: the shared layouts plus the theme's own combat rooms (variant 3 of each size).
+    Corridors are named corridor_<shape>_n, boss rooms boss_<size class>_n."""
+    salt = sum(map(ord, theme))
     return {
         'entrance_1': entrance(11),
         'corridor_straight_1': corridor('NS', 21),
@@ -542,7 +684,11 @@ def layouts():
         'combat_large_2': combat_large(2, 42),
         'crystal_1': crystal(51),
         'treasure_1': treasure(61),
-        'boss_1': boss(71),
+        'combat_small_3': theme_combat(theme, False, 33 + salt),
+        'combat_large_3': theme_combat(theme, True, 43 + salt),
+        'boss_small_1': boss('small', 72),
+        'boss_medium_1': boss('medium', 71),
+        'boss_large_1': boss('large', 73),
     }
 
 
@@ -603,18 +749,40 @@ def check(path, room):
     return len(tag['blocks']), markers
 
 
+def check_themes(written):
+    """Every room a theme file (data/mdvlcraft/gate_themes) lists must exist, and every written room should be listed."""
+    themes = ROOT.parents[1] / 'gate_themes'
+    for path in sorted(themes.glob('*.json')):
+        listed = set()
+        for kind, ids in json.loads(path.read_text())['rooms'].items():
+            for rid in ids:
+                ns, _, rel = rid.partition(':')
+                file = ROOT.parents[2] / ns / 'structures' / f'{rel}.nbt'
+                assert file.exists(), f'{path.name}: {kind} template {rid} does not exist'
+                listed.add(file)
+        unlisted = [p.name for p in written.get(path.stem, []) if p not in listed]
+        if unlisted:
+            print(f'warning: {path.name} lists none of', ', '.join(unlisted))
+
+
 def main():
-    rooms = layouts()
+    written = {}
     for key, palette in PALETTES.items():
+        rooms = layouts(key)
+        for stale in (ROOT / key).glob('*.nbt'):   # renamed or dropped templates
+            if stale.stem not in rooms:
+                stale.unlink()
         for name, room in rooms.items():
             path = ROOT / key / f'{name}.nbt'
             write_nbt(path, template(room, palette))
             count, markers = check(path, room)
-            if key == 'crypt':
+            written.setdefault(key, []).append(path)
+            if key == 'crypt' or name.endswith('_3'):
                 kinds = {}
                 for kind in markers.values():
                     kinds[kind] = kinds.get(kind, 0) + 1
-                print(f'{name:22} {count:6} blocks, h {room.height:2}, markers {kinds}')
+                print(f'{key:8} {name:22} {count:6} blocks, h {room.height:2}, markers {kinds}')
+    check_themes(written)
     print('gate rooms written:', len(PALETTES), 'themes x', len(rooms), 'templates ->', ROOT)
 
 
