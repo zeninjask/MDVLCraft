@@ -45,8 +45,8 @@ Design notes that differ from or refine the PDF:
   RedLandscape uses `GateMobs` pools and bosses (vanilla stand-ins only if the mods are missing). Build passes.
 - Four parts started in parallel, cut from this commit (see `docs/gates/README.md`): `gate-combat`, `gate-themes`,
   `gate-late`, `gate-tower`.
-- In-game: phase 2 rerun and `builder`, `rewards`, `red`, `spawner` steps files still to run (no test rig yet in this
-  session).
+- In-game: phase 1 PASS, phase 2 PASS (test log below). Not yet run: `docs/gates/tests/{builder,spawner,rewards,red}.txt`,
+  on the merged build. Run each on a fresh client (rig notes in the test log).
 
 ## Usage limit rule (always, for every agent and the coordinator)
 
@@ -94,7 +94,7 @@ the shared contracts and the rules. The coordinator merges into `gate`, runs the
 - [x] `client/GateRenderer`: an oval of the animated nether-portal sprite, tinted blue (red when red), spinning, rim
 - [x] `gate/GateBuilder`: the phase 1 stand-in contents (platform / red terrain) moved out of GateCommand; phase 3
       replaces it with the dungeon builder
-- [ ] In-game test (`g2.txt`, see test log)
+- [x] In-game test (`docs/gates/tests/phase2.txt`): PASS, see test log
 
 Changes from the plan in phase 2:
 - **Six key items** (one per rank) instead of one `gate_key` with NBT rank: each rank needs its own texture and recipe,
@@ -118,6 +118,15 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 ## Test log
 
 (newest first; each entry: date, build, what was run, result)
+
+- 2026-10-22, gate d0cff13f+contracts jar (phase 2, before the 3a/4/5 merges), `docs/gates/tests/phase2.txt` on a fresh
+  client: **phase 2 all PASS**. Right-clicking the ground with an attuned E key spawns the gate (GATE_SPAWNED_OK) at the
+  clicked block's top (305.5 100 304.5) and uses one key (2 → 1); while stabilising, looking at it shows
+  "E-Rank Gate: Gravekeeper Crypt · Stabilising…" with portal particles; after stabilising the label reads
+  "… 0/2 inside · breaks in 1:59:55"; walking into it → gate_realm, crypt biome (IN_CRYPT_OK, attunement honoured),
+  roster 1; `leave` → just in front of the gate (305.5 100 302.6); a key used under a 2-block ceiling is refused (no
+  gate, key kept); `close` removes the gate entity (GATE_REMOVED_OK). Not captured: a clear screenshot of the ring itself
+  (the shots looked down/through it).
 
 - 2026-10-22, gate 6ae18650, `docs/gates/tests/phase1.txt` with long waits: **phase 1 all PASS with the client in game**
   (screenshot shows the platform in the crypt-sky gate realm): BIOME_CRYPT_OK, ON_PLATFORM_OK, BREAK_REFUSED_OK (diamond
