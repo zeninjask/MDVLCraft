@@ -4,6 +4,7 @@ import io.redspace.ironsspellbooks.api.config.DefaultConfig;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.CastType;
 import io.redspace.ironsspellbooks.api.spells.SpellRarity;
+import io.redspace.ironsspellbooks.api.util.AnimationHolder;
 import net.minecraft.resources.ResourceLocation;
 
 /**
@@ -47,6 +48,17 @@ public abstract class ModifiedSpell extends AbstractSpell {
     @Override
     public CastType getCastType() {
         return this.config.castType();
+    }
+
+    /** Weapon and body blows swing with Epic Fight instead (SpellSwings). */
+    @Override
+    public AnimationHolder getCastStartAnimation() {
+        return SpellSwings.swings(this.id.getPath()) ? AnimationHolder.none() : super.getCastStartAnimation();
+    }
+
+    @Override
+    public AnimationHolder getCastFinishAnimation() {
+        return SpellSwings.swings(this.id.getPath()) ? AnimationHolder.none() : super.getCastFinishAnimation();
     }
 
     @Override
