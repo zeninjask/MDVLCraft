@@ -169,6 +169,13 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-22 night, gate eb946404 jar (2.0.40 + tower2), `spawner.txt` (refreshed steps): **9/9 PASS**.
+- 2026-10-22 night, 2.0.40 jar, `late.txt`: 12 markers PASS (KEY_IN_HAND, KEY_ROLLED, KEY_A_ROLLED, REROLL_KEY_KEPT,
+  SWARMING, IRONCLAD, MOD_GATE_CLOSED, TRIAL_ENTERED, TABLET, NO_POTIONS, TROPHY, RED_S), then **the server crashed** in
+  the red S crypt gate: Traveloptics' Enraged Dead King (crypt S boss) has no `forge:entity_reach`, and Iron's
+  WarlockAttackGoal reads it on melee. Fixed pack-wide in `BinderAttributes` (every mob type gets the default reach).
+  The 9 markers after the crash (REROLL_PAID, MOD_GATE_ENTERED, NO_HEALING, HEAL_TRIAL_ENTERED, HIDDEN_BOSS,
+  BLACK_STONE, NO_BLACK_FROM_LAIR_BOSS, STILL_SEALED, RED_S_EXIT) need the rerun.
 - 2026-10-22 night, 2.0.40 jar, `themes.txt` on a fresh server: **8/8 PASS** (E crypt built, boss rooms small /
   medium / large by size class, frozen cold → Slowness, red frozen gate entered and cold ticks, warren spores → Poison).
   The 4 error lines in the run are not gates (vanilla hanging entities near spawn, a KubeJS reflection warning).

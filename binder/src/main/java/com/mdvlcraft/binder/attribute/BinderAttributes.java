@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.attribute;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.RangedAttribute;
+import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.event.entity.EntityAttributeModificationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -52,5 +53,9 @@ public final class BinderAttributes {
 
     private static void onAttributeModification(EntityAttributeModificationEvent event) {
         ATTRIBUTES.getEntries().forEach(attribute -> event.add(EntityType.PLAYER, attribute.get()));
+        // Iron's spellcaster goals read every mob's entity reach, but some addon mobs built on Iron's classes (Traveloptics'
+        // Enraged Dead King) never register it, so their first melee crashes the server. Every mob gets the default.
+        event.getTypes().stream().filter(type -> !event.has(type, ForgeMod.ENTITY_REACH.get()))
+            .forEach(type -> event.add(type, ForgeMod.ENTITY_REACH.get()));
     }
 }
