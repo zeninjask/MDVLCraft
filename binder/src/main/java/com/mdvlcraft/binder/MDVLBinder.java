@@ -49,6 +49,7 @@ public final class MDVLBinder {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public MDVLBinder(FMLJavaModLoadingContext context) {
+        com.mdvlcraft.binder.logging.LogNoise.install();
         IEventBus modBus = context.getModEventBus();
         IEventBus forgeBus = MinecraftForge.EVENT_BUS;
         context.registerConfig(Type.COMMON, BinderConfig.SPEC);

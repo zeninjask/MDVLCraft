@@ -130,7 +130,7 @@ public final class LootViews {
             try {
                 entity = type.create(overworld);
             } catch (RuntimeException | LinkageError e) {
-                LOGGER.warn("JER: {} can't be created on the server, so its drops aren't shown: {}", id, e.toString());
+                LOGGER.debug("JER: {} can't be created on the server, so its drops aren't shown: {}", id, e.toString());
                 continue;
             }
 

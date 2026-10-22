@@ -25,7 +25,7 @@ import net.minecraftforge.common.util.FakePlayer;
 /**
  * Underworld Gate (Shinigami): real players only (not a fake player, such as the spell preview's). Raises a dark incomplete
  * Malevolent Shrine behind the caster for 10 s (only the model: it does not cut, see mixin/cursedfate/
- * IncompleteShrineOnTickProcedureMixin), holds every enemy within 12 blocks (party members and the caster's summons are
+ * IncompleteShrineOnTickProcedureMixin), holds every enemy within 24 blocks (party members and the caster's summons are
  * spared) in black root vines for 10 s and turns the caster invisible for 10 s. The shrine is scenery: it can't move or turn
  * (frozen in place by the shrine tick mixin) and can't be targeted or hit (mixin/cursedfate/IncompleteShrineEntityMixin).
  */
@@ -49,14 +49,14 @@ public class UnderworldGate extends ModifiedSpell {
     @Override
     public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
         if (caster instanceof ServerPlayer player && !(player instanceof FakePlayer) && level instanceof ServerLevel server) {
-            for (LivingEntity enemy : Targets.enemies(player, player.position(), 12.0)) {
+            for (LivingEntity enemy : Targets.enemies(player, player.position(), 24.0)) {
                 if (!(enemy instanceof RootEntity)) {
                     BlackRoot.hold(player, enemy, TICKS);
                 }
             }
             raiseShrine(server, player);   // after the roots, so the shrine is not taken for an enemy
             player.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, TICKS, 0, false, false, true));
-            GroundSpells.ring(server, player.position(), 12.0, ParticleTypes.SCULK_SOUL);
+            GroundSpells.ring(server, player.position(), 24.0, ParticleTypes.SCULK_SOUL);
             level.playSound(null, player.blockPosition(), SoundEvents.WARDEN_EMERGE, SoundSource.PLAYERS, 1.0F, 0.8F);
         }
         super.onCast(level, spellLevel, caster, source, data);

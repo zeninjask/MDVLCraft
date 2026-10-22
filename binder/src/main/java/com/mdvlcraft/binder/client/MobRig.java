@@ -49,7 +49,8 @@ public final class MobRig {
     private static final OpenMatrix4f VANILLA_SPACE = vanillaSpace();
     private static final OpenMatrix4f FROM_VANILLA_SPACE = OpenMatrix4f.invert(VANILLA_SPACE, null);
     /** The pose of the mob being drawn, from rootMotion to bones; null when it isn't acting. */
-    private static Entity posed;
+    /** The entity posed last (weakly held: it must not keep a left world alive). */
+    private static java.lang.ref.WeakReference<Entity> posed = new java.lang.ref.WeakReference<>(null);
     private static Armature armature;
     private static OpenMatrix4f[] poses;
     private static OpenMatrix4f rootDelta;
@@ -64,7 +65,7 @@ public final class MobRig {
     }
 
     public static void bones(Entity entity, BakedGeoModel model) {
-        if (posed != entity) {
+        if (posed.get() != entity) {
             return;
         }
 
@@ -110,7 +111,7 @@ public final class MobRig {
 
     /** Takes the pose of a mob in the middle of an Epic Fight action; false when it isn't in one. */
     private static boolean pose(Entity entity, float partialTick) {
-        posed = null;
+        posed = new java.lang.ref.WeakReference<>(null);
         LivingEntityPatch<?> patch = acting(entity);
         if (patch == null) {
             return false;
@@ -125,7 +126,7 @@ public final class MobRig {
             return false;
         }
 
-        posed = entity;
+        posed = new java.lang.ref.WeakReference<>(entity);
         return true;
     }
 
