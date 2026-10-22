@@ -33,7 +33,7 @@ Branch `gate-spawner` (cut from `gate` at `7ee4f1b9`). Plan sections 5.3–5.4 a
       copy for gate mob kills (same formula: 150 for mages, else dropped xp + max health / 5).
 - [x] Debug: `gate/GateSpawnCommand`: `/mdvl gate testroom [boss]`, `/mdvl gate pools`
 - [x] In-game checks: `docs/gates/tests/spawner.txt`
-- [ ] Build passing (see "Build results")
+- [x] Build passing (see "Build results"; final rebuild unconfirmed)
 - [ ] Not done (next, in this order): boss-room door sealing at `door` markers when the boss room triggers (plan 5.4; needs
       the builder's door marker meaning: probably swap the 3×4 doorway to a sealed block and back on clear); a
       ServerBossEvent bar for bosses/elites that have none of their own (most pack bosses draw their own, so skipped for
@@ -76,9 +76,33 @@ spawns nothing.
 
 ## Build results
 
-- (pending first build)
+- 2026-10-22 17:32: `./gradlew build --offline -q` passed (exit 0, no errors) on everything except two later one-line
+  edits (`mob.addTag(TAG)` in GateSpawner, an unused import removed from GateCombat). The rebuild including them was
+  still waiting on the shared Gradle lock at wrap-up: **unconfirmed**, very low risk.
 
-## Half-finished / next step
+## Where I stopped (wrap-up, 2026-10-22)
 
-Nothing half-written. Next: door sealing (needs `door` marker semantics from `gate-builder`), boss bar, then tune pools
-after the coordinator's in-game run (`spawner.txt`).
+**origin/gate (a0c4bb5c) is NOT merged yet.** Next steps, in order:
+
+1. `git fetch origin gate && git merge origin/gate`. Expected conflicts: `en_us.json` (gate keys), maybe
+   `docs/gates/README.md`.
+2. **Lang key clash:** rewards already uses `gate.mdvlcraft.cleared` ("...%s experience"). Rename mine in
+   `GateCombat.clear` and `en_us.json` to `gate.mdvlcraft.exit_open` ("An exit has opened; the gate collapses in %s
+   seconds.") and keep rewards' key as is.
+3. In `GateCombat.clear`: call `GateRewards.onCleared(level, instance)` after setting CLEARED (it is idempotent and
+   already clears the boss's own loot and sends its own cleared message).
+4. `GateSpawner.ROLE` already equals `GateRewards.ROLE` ("mdvlcraft_gate_role"); make it `= GateRewards.ROLE` (or the
+   reverse) so there is one constant. For bosses, also set `RedLandscape.BOSS_TAG` ("mdvlcraft_gate_boss", boolean)
+   so both flags agree.
+5. Leave red gates to RedGates: in `GateCombat` skip `instance.red` in `onDeath`, the trigger/exit/collapse tick and
+   `leash` (red has its own seal, exit pad, collapse and 96-block boundary). Break-wave mobs (`mdvlcraft_gate_break`)
+   have no room (-1), so the leash's 32-block-from-home rule applies to them only while their instance lives; skip them
+   too if that fights GateBreaks.
+6. `RedLandscape.spawnMob` / `spawnBoss` (TODOs): switch to `GateMobs.pick(theme, rank, MELEE or RANGED)` and
+   `GateMobs.boss(theme, rank)` (fall back to the stand-ins if null); drop `STAND_IN_BOSS_HEALTH` when the real boss is
+   used.
+7. Builder facts to check against: rooms 47 apart, floor y 66, `instance.rooms` includes corridors (markers carry the
+   room index, so `spawnRoom` already works per index), boss marker at floor level (boss spawns there), exit marker at
+   y+1 on the dais (the exit pad check uses ±1 block around it: fine), `door` markers are doorways in use.
+8. Build, push, then: door sealing for the boss room (unseal on clear, and if no roster member is left inside so a
+   wiped party can come back), boss bar for bosses without one, pool tuning after `spawner.txt` runs.
