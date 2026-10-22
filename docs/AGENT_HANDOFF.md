@@ -432,6 +432,25 @@ The user approved every change in `docs/MDVLCraft-Balance-Report.pdf`. The ratin
 - **Underworld Gate's shrine is scenery.** It has no AI or gravity, is held at the spot and facing it was raised with every tick, and can't be targeted, hit, pushed or damaged (`mixin/cursedfate/IncompleteShrineEntityMixin`, which recognises it by its synced `underworld_shrine` texture; `UnderworldGate.hold`). Tested: a push and a forced turn didn't move it, and damage reports "invulnerable".
 - **Rooted enemies can be executed.** Nightfall's Execution needs a target in the neutralize state. `mixin/efn/ExecuteSkillMixin` now counts a creature held by black roots as neutralized and frees it from the roots when it is executed. The mixin applies (the server boots), but an actual execution wasn't performed in the test.
 
+## For liam-agent: mod updates (22 Oct 2026)
+
+- **`binder/tools/mod_updates.json`** lists mod updates as old file name -> new Modrinth file. `build_packs.py` applies it to both sides of `base/` (`apply_mod_updates.py`). Add an entry there to update a mod; don't edit `base/` by hand (it's rebuilt from the last mrpack).
+- 20 updates, all from Modrinth (forge, 1.20.1): AmbientSounds 6.3.11, MRU 1.0.41, Platform 1.4, PuzzlesLib 8.1.36, StreamsReflowing 2.15.2, TerraBlender 3.0.1.11, almanac 1.26.10.3, chatanimation 1.3.5, entityculling 1.11.3, fragmentum 5.4.0, JEI 15.74.0.228, letmedespawn 1.26.10.1, ModernFix 5.27.89, Moonlight 2.16.37, Particle Rain 4.0.2, Pufferfish Skills 0.19.2, Quick Pack 1.5.1, Smooth GUI 2.1.0, Village Recruits 93TC-209, Simple Voice Chat 2.6.24.
+- **Tried and left out** (they break the pack):
+  - Medieval Origins 6.7.9 needs Cardinal Components, which isn't in the pack, so the game crashes at launch.
+  - VanillaBackport 1.2 moved its Creaking class, which the binder's Haunted Creaking extends.
+  - Xaero's World Map 1.47 needs a newer Minimap than the pack's 24.2.0 (CurseForge), so the client crashes in game.
+- **Not taken:** BetterCompatibilityChecker (Modrinth's "latest" is the old 3.0.1, which broke the Multiplayer screen), Krypton FNP (its successor Reno is a different fork), naturalist (Modrinth points to an older line), RenderScale 2.0 (beta) and gravestonecurioscompat (beta).
+- About 50 mods come from CurseForge only, and weren't checked because there's no CurseForge API key here.
+- Tested: the server and the performance client (plus the four client-only updates) boot and join, with no new errors in the logs. All 19 ability and origin test files ran on the updated server (456 cases, no errors). JEI stays out of the test client (memory), so the JEI update wasn't checked in game.
+
+## For liam-agent: armour actually weaker, player health, Inverted Spear (22 Oct 2026)
+
+- **The armour nerf now works.** `mixin/CombatRulesMixin` (armour and protection block 35% less) never ran in game: Apothic Attributes does that maths in its own `ALCombatRules`. `mixin/attributeslib/ALCombatRulesMixin` applies the same scale there (`combat/WeakerArmour.SCALE` = 0.65, shared by both). Tested on husks: a bare husk's 2 natural armour blocks 2.17 of 20 instead of 3.33, and Protection IV blocks 6.8 instead of 10.
+- **Players have 20% less max health** (`combat/PlayerHealth`: a transient x0.8 modifier added on login and respawn, after every bonus). Tested: 40 ("double health") becomes 32.
+- **Inverted Spear of Heaven** (`cursedfate:inverted_spearof_heaven`, an Epic Fight dagger) has attack speed 2.0 (was 1.7) via `combat/InvertedSpear`.
+- Tests with NoAI mobs: their equipment modifiers never apply (NoAI mobs don't tick in this pack), so use players or husk natural armour for armour tests. A player who hasn't moved since joining is invulnerable (Join Protection).
+
 ## Unfinished work
 
 - 2.0.14 (from liam-agent): Spirit renamed Jade and a new Spirit archetype with 18 vocations (19 archetypes, 171 vocations; see step 13 in [`VOCATIONS_IMPLEMENTATION.md`](VOCATIONS_IMPLEMENTATION.md)). Its 33 new Modified abilities are placeholders still to build. Old Spirit players are moved to Jade on their first join (`skills/JadeRename`).

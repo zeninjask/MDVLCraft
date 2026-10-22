@@ -4,13 +4,15 @@ in place of the base's own. The quest book is written into the base first (gener
 client is derived from base/client (make_performance_pack.py).
 The pack icon (<repo>/icon.png) goes at the root of every pack and, at 64x64, in the server pack as server-icon.png.
 Recreate the base by unzipping the latest committed MDVLCraft-<version>-client/server.mrpack into base/client and base/server.
-binder/tools/base_overlay/ (tracked) is copied into both sides' overrides first: KubeJS data the repository keeps.
+binder/tools/base_overlay/ (tracked) is copied into both sides' overrides first: KubeJS data the repository keeps; and
+binder/tools/mod_updates.json (apply_mod_updates.py) updates both sides' mod lists.
 Usage: python3 binder/tools/build_packs.py <version> <outdir> [base dir]
 """
 import glob, io, json, os, shutil, sys, zipfile
 
 from PIL import Image
 
+import apply_mod_updates
 import generate_quests
 import make_performance_pack
 
@@ -63,6 +65,8 @@ for root, _, files in os.walk(OVERLAY):
             dest = os.path.join(BASE, side, 'overrides', rel)
             os.makedirs(os.path.dirname(dest), exist_ok=True)
             shutil.copyfile(os.path.join(root, f), dest)
+for side in ('client', 'server'):   # mod updates the repository keeps (mod_updates.json)
+    apply_mod_updates.apply(os.path.join(BASE, side, 'modrinth.index.json'))
 generate_quests.main(BASE)
 make_performance_pack.make(BASE)
 for pack in ('client', make_performance_pack.PACK, 'server'):
