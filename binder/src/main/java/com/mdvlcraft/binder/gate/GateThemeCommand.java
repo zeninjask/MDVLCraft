@@ -19,6 +19,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * Debug commands for the theme files:
  *   /mdvl gate themes                 one line per theme: loaded or not, room templates per kind, boss size per rank, hazard
  *   /mdvl gate hazard &lt;theme&gt;   applies that theme's red-gate hazard to the caller once (as GateHazards does every 5 s)
+ *   /mdvl gate themepick &lt;rank&gt;  draws 200 random themes for an unattuned key of that rank (GateThemes.randomFor) and
+ *                                  lists the counts; succeeds (result 1) only if every draw is valid for the rank
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class GateThemeCommand {
@@ -34,7 +36,11 @@ public final class GateThemeCommand {
                 .then(Commands.literal("hazard")
                     .then(Commands.argument("theme", StringArgumentType.word())
                         .suggests((c, b) -> SharedSuggestionProvider.suggest(themes, b))
-                        .executes(GateThemeCommand::hazard)))));
+                        .executes(GateThemeCommand::hazard)))
+                .then(Commands.literal("themepick")
+                    .then(Commands.argument("rank", StringArgumentType.word())
+                        .suggests((c, b) -> SharedSuggestionProvider.suggest(Arrays.stream(GateRank.values()).map(Enum::name), b))
+                        .executes(GateThemeCommand::pick)))));
     }
 
     private static int list(CommandContext<CommandSourceStack> context) {
@@ -54,12 +60,32 @@ public final class GateThemeCommand {
                 }
                 GateThemes.Hazard h = data.hazard();
                 line = theme.key() + ": rooms " + rooms + ", boss sizes " + bosses + ", hazard cold=" + h.cold() + " hunger=" + h.hunger()
-                    + " spores=" + h.spores().size() + ", catalyst " + data.catalyst();
+                    + " spores=" + h.spores().size() + ", catalyst " + data.catalyst() + ", ranks " + data.minRank() + "-" + data.maxRank()
+                    + ", red lairs " + data.lairs().size() + " camps " + data.camps().size();
             }
             String text = line;
             context.getSource().sendSuccess(() -> Component.literal(text), false);
         }
         return loaded;
+    }
+
+    private static int pick(CommandContext<CommandSourceStack> context) {
+        GateRank rank = GateRank.byKey(StringArgumentType.getString(context, "rank"));
+        if (rank == null) {
+            context.getSource().sendFailure(Component.literal("Unknown rank"));
+            return 0;
+        }
+        TreeMap<String, Integer> counts = new TreeMap<>();
+        boolean valid = true;
+        for (int n = 0; n < 200; n++) {
+            GateTheme theme = GateThemes.randomFor(rank, context.getSource().getLevel().random);
+            counts.merge(theme.key(), 1, Integer::sum);
+            GateThemes.Theme data = GateThemes.get(theme);
+            valid &= data == null || data.allows(rank);
+        }
+        String text = "Unattuned " + rank + " keys: " + counts + (valid ? " (all valid)" : " (INVALID draws)");
+        context.getSource().sendSuccess(() -> Component.literal(text), false);
+        return valid ? 1 : 0;
     }
 
     private static int hazard(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

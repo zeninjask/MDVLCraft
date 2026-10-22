@@ -1,14 +1,26 @@
 # Themes (phase 6): handoff
 
 > Always applies: near the usage limit (~95%) or on "wrap up", stop, commit everything (WIP is fine; say if the build is
-> broken), push `gate-themes`, and update this file with where work stopped and the next step.
+> broken), push `gate-themes2` (round 3; round 2 was `gate-themes`), and update this file with where work stopped and the
+> next step.
 
 Branch `gate-themes`, cut from `gate` at d7ff686 (the worktree first started on main; the branch was reset to d7ff686
 before any work, so it holds no main-only commits). Owns `data/mdvlcraft/gate_themes/`, `gate/GateThemes` (loader),
 `gate/GateBuilder`, `gate/DungeonPlanner`, the room templates `data/mdvlcraft/structures/gate/` and their generator
 `tools/gates/gen_gate_rooms.py`, theme hazards (`gate/GateHazards`). GateMobs' data source (its public API unchanged).
 
-## Checklist
+## Round 3 (`gate-themes2`, cut from `gate` 4cc49214): checklist
+
+- [x] Rank ranges per theme for unattuned keys: theme file field `ranks` {`min`, `max`} (crypt E–S, warren E–C, frozen
+      D–A, warcamp C–A, spire D–A, forge B–S: the plan's table, with S for crypt and forge as "S-rank gates at launch use
+      the Crypt and the Infernal Forge"). `GateThemes.randomFor(rank, random)`: a random theme whose range holds the rank
+      (no data = valid for all; none valid = any theme). Hooked in `GateEntity.open` (one line). `/mdvl gate themes` shows
+      the range; `/mdvl gate themepick <rank>` draws 200 and returns 1 only if all are valid.
+- [ ] Hand-built red lair and camp templates per theme (generator `tools/gates/gen_red_lairs.py`), placed by RedLandscape.
+- [ ] Red A/B gates: hidden boss (50%) and crystal veins in every red gate.
+- [ ] `tests/themes.txt` checks for the above.
+
+## Round 2 checklist
 
 - [x] Theme files `data/mdvlcraft/gate_themes/<theme>.json` (6): name, biome, music, catalyst, hazard, room pools per
       kind, mob pools per band (low/mid/high) and kind (melee/ranged/elite) with weights, boss per rank (id, count, size
@@ -69,6 +81,8 @@ light, campfire}, stand_in_mobs, stand_in_boss}. Template markers per kind must 
 
 ## Build / test results
 
+- Round 3: `flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q` passes after the rank ranges.
+
 - `python3 tools/gates/gen_gate_rooms.py`: 6 x 15 templates written and parsed back; existing templates unchanged;
   boss_medium_1 == old boss_1.
 - `./gradlew build --offline -q`: passes.
@@ -77,6 +91,10 @@ light, campfire}, stand_in_mobs, stand_in_boss}. Template markers per kind must 
   theme files resolving, `/place template` of the new rooms. First run: watch the log for "Loaded 6 gate themes".
 
 ## Where I stopped
+
+Round 3: rank ranges done and pushed. Next: the red lair/camp generator and RedLandscape placement.
+
+Round 2:
 
 Items 1–3 of the task done and pushed. Next: the "Next" line of the checklist, after the coordinator runs
 `tests/themes.txt`.
