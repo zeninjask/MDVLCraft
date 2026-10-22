@@ -4,6 +4,7 @@ import com.mdvlcraft.binder.ability.AbilityReward;
 import com.mdvlcraft.binder.client.GateRenderer;
 import com.mdvlcraft.binder.client.ModifiedClientSetup;
 import com.mdvlcraft.binder.gate.GateItems;
+import com.mdvlcraft.binder.gate.GateRewards;
 import com.mdvlcraft.binder.modified.ModifiedSpells;
 import com.mdvlcraft.binder.modified.Summons;
 import com.mdvlcraft.binder.attribute.BinderAttributes;
@@ -80,6 +81,7 @@ public final class MDVLBinder {
         CataclysmIntegration.register(modBus, forgeBus);
         ReturnCrystal.register(modBus, forgeBus);
         GateItems.register(modBus);
+        GateRewards.register(modBus);
         BossArena.register(modBus, forgeBus);
         PartyTravel.register(forgeBus);
         HerobrineLook.register();

@@ -17,7 +17,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * Inside the gate dimensions nothing is built or broken and nobody leaves the way they shouldn't (plan section 3.4):
- * players can't break or place blocks or use buckets, explosions break nothing, ender pearls, chorus fruit and endermen
+ * players can't break (except mana crystal veins, GateRewards) or place blocks or use buckets, explosions break nothing, ender pearls, chorus fruit and endermen
  * can't teleport out of their cell, a red gate can't be left until its boss dies, and a player who is outside their own
  * cell (or has no live gate at all, e.g. logged in after it closed) is put back at the entry or sent home. Creative and
  * spectator players (admins) are left alone.
@@ -35,7 +35,7 @@ public final class GateProtection {
 
     @SubscribeEvent
     public static void onBreak(BlockEvent.BreakEvent event) {
-        if (guarded(event.getPlayer())) {
+        if (guarded(event.getPlayer()) && !GateRewards.isVein(event.getState())) {
             event.setCanceled(true);
         }
     }
