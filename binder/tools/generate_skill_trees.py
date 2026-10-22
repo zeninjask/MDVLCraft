@@ -718,25 +718,35 @@ def frame(kind):
             "size": SIZES[kind]}
 
 
+def kill_source(gate):
+    """A kill source for ordinary kills (gate=False, capped per chunk) or gate mob kills (gate=True, uncapped: plan 6)."""
+    only = "is_gate_mob" if gate else "(1 - is_gate_mob)"
+    source = {
+        "type": "puffish_skills:kill_entity",
+        "data": {
+            "variables": {
+                "dropped_xp": {"operations": [{"type": "get_dropped_experience"}]},
+                "max_health": {"operations": [{"type": "get_killed_living_entity"}, {"type": "get_max_health"}]},
+                # Iron's mages and the Aquamancer (data/mdvlcraft/tags/entity_types/mages.json, checked by skills/MageExperience) are worth 150
+                "is_mage": {"operations": [{"type": "get_killed_living_entity"}, {"type": "mdvlcraft:is_mage"}]},
+                "is_armor_stand": {"operations": [{"type": "get_killed_living_entity"}, {"type": "mdvlcraft:is_armor_stand"}]},
+                # mobs spawned by a gate (gate/GateSpawner's tag)
+                "is_gate_mob": {"operations": [{"type": "get_killed_living_entity"}, {"type": "mdvlcraft:is_gate_mob"}]},
+            },
+            # Pufferfish adds up every case whose condition holds, so the usual one excludes mages; armour stands give nothing
+            "experience": [{"condition": f"{only} * is_mage", "expression": "150"},
+                           {"condition": f"{only} * (1 - is_mage) * (1 - is_armor_stand)", "expression": "dropped_xp + max_health / 5"}],
+        },
+    }
+    if not gate:
+        source["data"]["anti_farming"] = {"limit_per_chunk": 20, "reset_after_seconds": 300}
+    return source
+
+
 def experience():
     return {
         "experience_per_level": {"type": "expression", "data": {"expression": "25 + level * 5"}},
-        "sources": [{
-            "type": "puffish_skills:kill_entity",
-            "data": {
-                "variables": {
-                    "dropped_xp": {"operations": [{"type": "get_dropped_experience"}]},
-                    "max_health": {"operations": [{"type": "get_killed_living_entity"}, {"type": "get_max_health"}]},
-                    # Iron's mages and the Aquamancer (data/mdvlcraft/tags/entity_types/mages.json, checked by skills/MageExperience) are worth 150
-                    "is_mage": {"operations": [{"type": "get_killed_living_entity"}, {"type": "mdvlcraft:is_mage"}]},
-                    "is_armor_stand": {"operations": [{"type": "get_killed_living_entity"}, {"type": "mdvlcraft:is_armor_stand"}]},
-                },
-                # Pufferfish adds up every case whose condition holds, so the usual one excludes mages; armour stands give nothing
-                "experience": [{"condition": "is_mage", "expression": "150"},
-                               {"condition": "(1 - is_mage) * (1 - is_armor_stand)", "expression": "dropped_xp + max_health / 5"}],
-                "anti_farming": {"limit_per_chunk": 20, "reset_after_seconds": 300},
-            },
-        }],
+        "sources": [kill_source(False), kill_source(True)],
     }
 
 

@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.skills;
 
+import com.mdvlcraft.binder.gate.GateSpawner;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
@@ -34,6 +35,12 @@ public final class MageExperience {
             ResourceLocation.fromNamespaceAndPath("mdvlcraft", "is_armor_stand"),
             BuiltinPrototypes.BOOLEAN,
             OperationFactory.create((LivingEntity entity) -> entity instanceof ArmorStand)
+        );
+        // mdvlcraft:is_gate_mob: gate mob kills go through a source without the per-chunk anti-farm cap (plan 6)
+        BuiltinPrototypes.LIVING_ENTITY.registerOperation(
+            ResourceLocation.fromNamespaceAndPath("mdvlcraft", "is_gate_mob"),
+            BuiltinPrototypes.BOOLEAN,
+            OperationFactory.create((LivingEntity entity) -> GateSpawner.instanceOf(entity) >= 0)
         );
     }
 }
