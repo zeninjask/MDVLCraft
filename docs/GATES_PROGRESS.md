@@ -38,13 +38,18 @@ Design notes that differ from or refine the PDF:
 ### Phase 1 — Foundations (in progress)
 
 - [x] World data: 3 dimensions, 3 dimension types, void noise settings, 7 biomes (6 themes + castle)
-- [ ] `gate/GateDimensions`, `GateTheme`, `GateRank`
-- [ ] `gate/GateInstances` (SavedData) and `CellAllocator`
-- [ ] `gate/GateTravel` (teleport in/out, origin save, return home)
-- [ ] `gate/GateProtection` (no break/place/explosions/pearls/leaving the cell)
-- [ ] `gate/GateCleanup` (wipe red realm on start, login check)
-- [ ] `/mdvl gate open|list|close|leave|tp` debug commands
-- [ ] Boot test + in-game test
+- [x] `gate/GateDimensions` (keys, cells, bounds), `GateTheme` (checkerboard order), `GateRank` (scaling, rooms, party cap, red chance)
+- [x] `gate/GateInstances` (SavedData "mdvlcraft_gates": instances, roster, entry, state; cell allocation per dimension)
+- [x] `gate/GateTravel` (enter/leave/toEntry; origin kept in persisted NBT "mdvlcraft_gate_origin")
+- [x] `gate/GateProtection` (no break/place/buckets/explosion damage; pearls etc. can't leave the cell; red gates can't be
+      left; a player outside their cell goes back to the entry; a player with no live gate there goes home; creative exempt)
+- [x] `gate/GateCleanup` (all three gate worlds' folders deleted on ServerAboutToStart; all instances closed on start)
+- [x] `/mdvl gate open <rank> <theme> [red] | leave | list | tp <id> | close <id>` (`gate/GateCommand`; phase 1 builds a
+      9x9 stone-brick platform at y 64 in the gate realm, or stands the player on the red realm's terrain)
+- [ ] Boot test + in-game test (running)
+
+Change from the plan: **all three gate worlds are wiped on every server start**, not only the red realm. Every instance is
+closed on start anyway, so their blocks are garbage; wiping means a cell never needs clearing after a restart.
 
 ## Test log
 
