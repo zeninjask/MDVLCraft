@@ -265,6 +265,9 @@ public final class RedGates {
             layout.lairFloor = RedLandscape.buildArena(level, instance, layout.lair);
         }
         RedLandscape.buildExit(level, layout.lairFloor);
+        // clear bonus and boss chest, as for a normal gate: the chest stands in the arena beside the exit pad
+        instance.markers.add(new GateInstances.Marker("chest", layout.lairFloor.offset(0, 1, -4), -1));
+        GateRewards.onCleared(level, instance);
         for (ServerPlayer player : inside(level.getServer(), instance)) {
             player.connection.send(new ClientboundSetTitleTextPacket(Component.translatableWithFallback("gate.mdvlcraft.red.broken", "The seal is broken")));
             player.sendSystemMessage(Component.translatableWithFallback("gate.mdvlcraft.red.exit",
