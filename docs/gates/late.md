@@ -44,7 +44,9 @@ before any work and force-pushed, so it holds no main-only commits). Plan sectio
         cancelled).
   - [x] ×1.5 stones, veins and clear experience; a Trial Trophy item (`mdvlcraft:gate_trophy`, NBT rule + rank) to every
         player present at the clear.
-- [x] Debug: `/mdvl gate late open <rank> <theme> <mods|none> [rule]`, `late key <rank> <mods>`, `late info` (a comma list of modifiers must be quoted: `"enraged,crimson"`).
+- [x] Debug: `/mdvl gate late open <rank> <theme> <mods|none> [rule]`, `late key <rank> <mods>`, `late info`, `late close` (closes the caller's
+      gate: players home and off the roster, mobs and cell cleared). A comma list of modifiers must be quoted
+      (`"enraged,crimson"`); `late key` puts the key in the main hand if it is empty.
 - [x] In-game steps: `docs/gates/tests/late.txt` (not run; coordinator runs it).
 - [ ] Not done / later: the two richer rules (Statues, Narrowing Door); boss chest ×1.5 for trial gates (only stones,
       veins and experience are scaled); "except food" doesn't cover foods that heal directly in finishUsingItem (only
@@ -82,9 +84,18 @@ before any work and force-pushed, so it holds no main-only commits). Plan sectio
 
 ## Build / test results
 
+- 2026-10-22, coordinator, gate 1b0b1f6 (2.0.39 mods), `tests/late.txt`: 6/17 (KEY_ROLLED, KEY_A_ROLLED, MOD_GATE_ENTERED,
+  SWARMING, IRONCLAD, NO_BLACK_FROM_LAIR_BOSS). Failures were test-file problems: the `late key` key wasn't in container.0;
+  `gate leave` left the old gate standing, so the next walk-in re-entered it and every later section ran in the wrong gate;
+  1.20.1 effect NBT; `/damage ... generic` refused. Fixed in late.txt (1ba03b9): `late key` puts the key in the hand
+  (KEY_IN_HAND marker); every section ends with `late close` and starts facing 0/0, with an entry marker
+  (MOD_GATE_CLOSED, TRIAL_ENTERED, HEAL_TRIAL_ENTERED, RED_S); `ActiveEffects:[{"forge:id":...}]`; NO_HEALING uses
+  `damage ... out_of_world` (bypasses resistance and invulnerability; Resistance stays on). The elite_pack walk-in (no
+  check) was dropped. Build passes. Rerun pending.
+
 - 2026-10-22: `flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q` passes. Not run in game.
 
 ## State / next step
 
-All three parts written; next: coordinator merges and runs `tests/late.txt`. Watch: Iron's ChangeManaEvent firing on cast
+Merged into gate (1b0b1f6). Next: coordinator reruns the fixed `tests/late.txt`. Watch: Iron's ChangeManaEvent firing on cast
 (Silenced), the text display tablet's look, trophy texture, and Swarming counts in real rooms.
