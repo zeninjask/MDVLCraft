@@ -35,6 +35,12 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Parallel work
+
+From phase 3 on, parts are built by several agents at once on their own branches (`gate-builder`, `gate-spawner`,
+`gate-rewards`, `gate-red`), each with a handoff file in `docs/gates/`. See `docs/gates/README.md` for who owns what,
+the shared contracts and the rules. The coordinator merges into `gate`, runs the in-game tests and updates this file.
+
 ## Status
 
 ### Phase 1 — Foundations (in progress)
@@ -48,7 +54,8 @@ Design notes that differ from or refine the PDF:
 - [x] `gate/GateCleanup` (all three gate worlds' folders deleted on ServerAboutToStart; all instances closed on start)
 - [x] `/mdvl gate open <rank> <theme> [red] | leave | list | tp <id> | close <id>` (`gate/GateCommand`; phase 1 builds a
       9x9 stone-brick platform at y 64 in the gate realm, or stands the player on the red realm's terrain)
-- [ ] Boot test + in-game test (running)
+- [x] Boot test; server-side in-game checks pass (see test log)
+- [ ] Client-side checks (break refused, out-of-cell pull-back): rerun pending
 
 ### Phase 2 — Keys and gates (in progress)
 
@@ -81,7 +88,15 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
-- none yet
+- 2026-10-22, gate d0cff13f + contracts, test rig (2.0.38 mods). `g1.txt` (phase 1) and `g2.txt` (phase 2):
+  - PASS (server side): `open E crypt` → gate_realm, entry on platform (BIOME_CRYPT_OK, ON_PLATFORM_OK); cross-dimension
+    tp out of a normal gate allowed; `list` shows roster; `leave` → back to origin (200.5 140 36.5); `open B frozen red` →
+    red_realm terrain y 68 (BIOME_FROZEN_OK); cross-dimension tp out of a red gate refused; `close 2` closes it;
+    recipes `gate/gate_key_e` and `gate/attune/gate_key_e_crypt` load; the key item exists ("E-Rank Gate Key").
+  - NOT RUN: the client was still on "Joining world…" during both runs (the rig's "joined" fires when the server sees the
+    login, before the client renders), so the client-input steps did nothing: mining the glowstone (BREAK_REFUSED_OK is
+    void), the key right-click (no gate spawned), and the +700 pull-back (player stayed at 5308; may be the same cause:
+    unconfirmed). Rerun with a `wait 60` at the start of each steps file.
 
 ## How to test (rig used so far)
 

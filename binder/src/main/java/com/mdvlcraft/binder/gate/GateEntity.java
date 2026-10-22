@@ -138,7 +138,7 @@ public class GateEntity extends Entity {
             this.discard();
             return;
         }
-        if (instance.state == GateInstances.State.BUILDING && this.level().getGameTime() >= instance.openedAt + STABILISE_TICKS) {
+        if (instance.state == GateInstances.State.BUILDING && instance.built && this.level().getGameTime() >= instance.openedAt + STABILISE_TICKS) {
             instance.state = GateInstances.State.ACTIVE;
             gates.setDirty();
             this.playSound(SoundEvents.BEACON_ACTIVATE, 1.0F, 0.6F);

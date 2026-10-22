@@ -12,6 +12,7 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.IntArrayTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.LongTag;
 import net.minecraft.nbt.NbtUtils;
@@ -20,6 +21,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.level.saveddata.SavedData;
 
 /**
@@ -35,6 +37,11 @@ public final class GateInstances extends SavedData {
     private static final int ROW = 64;
 
     public enum State { BUILDING, ACTIVE, CLEARED, CLOSED }
+
+    /** A point the dungeon builder recorded from a room template's data marker: `kind` is the marker text ("spawn:melee",
+     * "spawn:ranged", "spawn:elite", "boss", "crystal", "chest", "exit", "door"), `room` the index into Instance.rooms. */
+    public record Marker(String kind, BlockPos pos, int room) {
+    }
 
     public static final class Instance {
         public final int id;
@@ -56,6 +63,13 @@ public final class GateInstances extends SavedData {
         public ResourceKey<Level> gateDimension;
         public BlockPos gatePos = BlockPos.ZERO;
         public long openedAt;
+        /** The placed rooms' boxes, in path order (entrance first); set by the dungeon builder. */
+        public final List<BoundingBox> rooms = new ArrayList<>();
+        public final List<Marker> markers = new ArrayList<>();
+        /** Set by the builder once every room is placed; the gate stays "stabilising" until then. */
+        public boolean built;
+        /** Rooms whose mobs have been spawned (a roster member has stepped in). */
+        public final Set<Integer> triggeredRooms = new HashSet<>();
 
         Instance(int id, ResourceKey<Level> dimension, int cellX, int cellZ, GateTheme theme, GateRank rank) {
             this.id = id;
@@ -92,6 +106,20 @@ public final class GateInstances extends SavedData {
             }
             tag.put("gatePos", NbtUtils.writeBlockPos(this.gatePos));
             tag.putLong("openedAt", this.openedAt);
+            ListTag rooms = new ListTag();
+            this.rooms.forEach(box -> rooms.add(new IntArrayTag(new int[] {box.minX(), box.minY(), box.minZ(), box.maxX(), box.maxY(), box.maxZ()})));
+            tag.put("rooms", rooms);
+            tag.putBoolean("built", this.built);
+            ListTag markers = new ListTag();
+            for (Marker marker : this.markers) {
+                CompoundTag m = new CompoundTag();
+                m.putString("kind", marker.kind());
+                m.put("pos", NbtUtils.writeBlockPos(marker.pos()));
+                m.putInt("room", marker.room());
+                markers.add(m);
+            }
+            tag.put("markers", markers);
+            tag.putIntArray("triggeredRooms", this.triggeredRooms.stream().mapToInt(Integer::intValue).toArray());
             return tag;
         }
 
@@ -111,6 +139,18 @@ public final class GateInstances extends SavedData {
             instance.gateDimension = tag.contains("gateDimension") ? dimension(tag.getString("gateDimension")) : null;
             instance.gatePos = NbtUtils.readBlockPos(tag.getCompound("gatePos"));
             instance.openedAt = tag.getLong("openedAt");
+            instance.built = tag.getBoolean("built");
+            for (Tag box : tag.getList("rooms", Tag.TAG_INT_ARRAY)) {
+                int[] b = ((IntArrayTag)box).getAsIntArray();
+                instance.rooms.add(new BoundingBox(b[0], b[1], b[2], b[3], b[4], b[5]));
+            }
+            for (Tag entry : tag.getList("markers", Tag.TAG_COMPOUND)) {
+                CompoundTag m = (CompoundTag)entry;
+                instance.markers.add(new Marker(m.getString("kind"), NbtUtils.readBlockPos(m.getCompound("pos")), m.getInt("room")));
+            }
+            for (int room : tag.getIntArray("triggeredRooms")) {
+                instance.triggeredRooms.add(room);
+            }
             return instance;
         }
     }

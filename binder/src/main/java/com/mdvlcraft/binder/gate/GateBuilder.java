@@ -27,6 +27,7 @@ public final class GateBuilder {
             platform(level, centre, true);
             instance.entry = centre.above();
         }
+        instance.built = true;
     }
 
     /** Removes what build placed (nothing in the red realm, whose cells are never reused before the next wipe). */
