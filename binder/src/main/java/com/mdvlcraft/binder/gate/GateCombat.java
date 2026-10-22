@@ -5,10 +5,14 @@ import com.mdvlcraft.binder.gate.GateInstances.Marker;
 import com.mojang.logging.LogUtils;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
@@ -20,9 +24,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.structure.BoundingBox;
+import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.level.LevelEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -38,6 +48,13 @@ import org.slf4j.Logger;
  * (or where the boss fell) that sends whoever steps in home via GateTravel.leave, and after COLLAPSE_TICKS the gate
  * collapses (everyone out, cell cleared, instance closed). Nothing else spawns in the gate worlds: natural, structure and
  * patrol spawns there are cancelled.
+ *
+ * Boss room (plan 5.4): a few seconds after a roster member is well inside the boss room (and nobody stands in its
+ * doorway), its doorways are walled up with their frame block; they open again when the gate is cleared, or as soon as
+ * no roster member is left in the room, so a party whose fighters fell can come back in. Death (plan 5.5): a player who
+ * dies in a normal gate respawns outside, in front of the gate, and stays on the roster; when the last roster member alive
+ * in the gate dies, the gate fails and closes (its key was used up on opening). Logging out keeps a player's roster place;
+ * GateProtection sends them home on login if the gate closed meanwhile. Red gates are RedGates' throughout.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class GateCombat {
@@ -52,6 +69,16 @@ public final class GateCombat {
     private static final double PARTY_BONUS = 0.25;
     /** When each instance was cleared (game time of its world); a restart closes every instance, so this needn't persist. */
     private static final Map<Integer, Long> CLEARED_AT = new HashMap<>();
+    /** How long someone must be in the boss room before it seals, so the rest of the party can follow (3 s). */
+    private static final int SEAL_DELAY = 60;
+    /** How far inside the boss room's walls a player must be to start the seal. */
+    private static final int SEAL_DEPTH = 3;
+    /** Sealed boss rooms: instance id -> the doorway blocks as they were (to put back). In memory: a restart closes all. */
+    private static final Map<Integer, Map<BlockPos, BlockState>> SEALED = new HashMap<>();
+    /** When each boss room that has someone inside will seal (game time). */
+    private static final Map<Integer, Long> SEAL_AT = new HashMap<>();
+    /** Players who died in a normal gate and haven't respawned yet: they respawn in front of the gate. */
+    private static final Set<UUID> DIED_INSIDE = new HashSet<>();
 
     private GateCombat() {
     }
@@ -65,6 +92,8 @@ public final class GateCombat {
         int tick = server.getTickCount();
         if (tick % TRIGGER_TICKS == 0) {
             GateInstances gates = GateInstances.get(server);
+            SEALED.keySet().removeIf(id -> gates.byId(id) == null);   // closed some other way (command, red roll)
+            SEAL_AT.keySet().removeIf(id -> gates.byId(id) == null);
             for (Instance instance : new ArrayList<>(gates.all())) {
                 ServerLevel level = server.getLevel(instance.dimension);
                 if (level == null) {
@@ -75,6 +104,7 @@ public final class GateCombat {
                 }
                 if (instance.state == GateInstances.State.ACTIVE) {
                     triggerRooms(level, gates, instance);
+                    tickBossRoom(level, instance);
                 } else if (instance.state == GateInstances.State.CLEARED) {
                     tickExit(level, gates, instance);
                 }
@@ -207,7 +237,14 @@ public final class GateCombat {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onDeath(LivingDeathEvent event) {
         Entity dead = event.getEntity();
-        if (!(dead.level() instanceof ServerLevel level) || !GateDimensions.isGate(level.dimension()) || !GateSpawner.isBoss(dead)) {
+        if (!(dead.level() instanceof ServerLevel level) || !GateDimensions.isGate(level.dimension())) {
+            return;
+        }
+        if (dead instanceof ServerPlayer player) {
+            playerDied(level, player);
+            return;
+        }
+        if (!GateSpawner.isBoss(dead)) {
             return;
         }
         dead.getPersistentData().remove(GateSpawner.ROLE);   // a boss that dies twice (a second phase) counts once
@@ -227,6 +264,7 @@ public final class GateCombat {
     /** Marks the instance CLEARED, opens the exit (at the exit marker, else where the boss fell) and tells the roster. */
     static void clear(ServerLevel level, GateInstances gates, Instance instance, BlockPos fallen, int room) {
         instance.state = GateInstances.State.CLEARED;
+        unseal(level, instance.id);
         GateRewards.onCleared(level, instance);   // clear bonus, boss chest, its own "cleared" message (idempotent)
         if (exit(instance) == null) {
             instance.markers.add(new Marker("exit", fallen, room));
@@ -284,6 +322,163 @@ public final class GateCombat {
         CLEARED_AT.remove(instance.id);
         GateBuilder.clear(level, instance);
         gates.close(instance);
+    }
+
+    /** The index of the room holding the boss marker, or -1. */
+    static int bossRoom(Instance instance) {
+        for (Marker marker : instance.markers) {
+            if (marker.kind().equals("boss") && marker.room() >= 0 && marker.room() < instance.rooms.size()) {
+                return marker.room();
+            }
+        }
+        return -1;
+    }
+
+    /** True while the instance's boss room is walled up. */
+    static boolean sealed(int instance) {
+        return SEALED.containsKey(instance);
+    }
+
+    /** The doorways (as door markers with the face they're on) of one room. */
+    private static Map<BlockPos, Direction> doors(Instance instance, int room) {
+        BoundingBox box = instance.rooms.get(room);
+        Map<BlockPos, Direction> doors = new HashMap<>();
+        for (Marker marker : instance.markers) {
+            Direction side = marker.room() == room && marker.kind().equals("door") ? side(box, marker.pos()) : null;
+            if (side != null) {
+                doors.put(marker.pos(), side);
+            }
+        }
+        return doors;
+    }
+
+    /** Seals the boss room once someone has been well inside it for SEAL_DELAY with its doorways clear; opens it again when
+     * no roster member is left in it. */
+    private static void tickBossRoom(ServerLevel level, Instance instance) {
+        int room = bossRoom(instance);
+        if (room < 0) {
+            return;
+        }
+        BoundingBox box = instance.rooms.get(room);
+        List<ServerPlayer> present = present(level, instance);
+        if (SEALED.containsKey(instance.id)) {
+            if (present.stream().noneMatch(p -> box.isInside(p.blockPosition()))) {
+                unseal(level, instance.id);
+            }
+            return;
+        }
+        // well inside horizontally (the floor is only 2 above the box's bottom, so y just needs to be in the box)
+        BoundingBox deep = new BoundingBox(box.minX() + SEAL_DEPTH, box.minY(), box.minZ() + SEAL_DEPTH,
+            box.maxX() - SEAL_DEPTH, box.maxY(), box.maxZ() - SEAL_DEPTH);
+        if (present.stream().noneMatch(p -> deep.isInside(p.blockPosition()))) {
+            SEAL_AT.remove(instance.id);
+            return;
+        }
+        long now = level.getGameTime();
+        Map<BlockPos, Direction> doors = doors(instance, room);
+        List<AABB> doorways = new ArrayList<>();
+        doors.forEach((door, side) -> doorways.add(new AABB(door.relative(side.getClockWise(), -1))
+            .minmax(new AABB(door.relative(side.getClockWise(), 1).above(3)))));
+        if (now < SEAL_AT.computeIfAbsent(instance.id, id -> now + SEAL_DELAY)
+            || present.stream().anyMatch(p -> doorways.stream().anyMatch(d -> d.intersects(p.getBoundingBox())))) {
+            return;   // not yet, or someone stands in a doorway (they'd be walled in)
+        }
+        Map<BlockPos, BlockState> before = new HashMap<>();
+        doors.forEach((door, side) -> {
+            Direction along = side.getClockWise();
+            BlockState wall = level.getBlockState(door.relative(along, 2));   // the frame, as GateBuilder seals unused doors
+            if (wall.isAir()) {
+                wall = Blocks.STONE_BRICKS.defaultBlockState();
+            }
+            for (int a = -1; a <= 1; a++) {
+                for (int y = 0; y < 4; y++) {
+                    BlockPos pos = door.relative(along, a).above(y);
+                    before.putIfAbsent(pos, level.getBlockState(pos));
+                    level.setBlock(pos, wall, Block.UPDATE_CLIENTS);
+                }
+            }
+            level.playSound(null, door, SoundEvents.IRON_DOOR_CLOSE, SoundSource.BLOCKS, 1.0F, 0.5F);
+        });
+        SEALED.put(instance.id, before);
+        SEAL_AT.remove(instance.id);
+        for (ServerPlayer player : present) {
+            if (box.isInside(player.blockPosition())) {
+                player.sendSystemMessage(Component.translatableWithFallback("gate.mdvlcraft.sealed", "The doors seal behind you.")
+                    .withStyle(ChatFormatting.DARK_RED));
+            }
+        }
+    }
+
+    /** Puts a sealed boss room's doorways back as they were. */
+    private static void unseal(ServerLevel level, int instance) {
+        Map<BlockPos, BlockState> before = SEALED.remove(instance);
+        SEAL_AT.remove(instance);
+        if (before == null) {
+            return;
+        }
+        before.forEach((pos, state) -> level.setBlock(pos, state, Block.UPDATE_CLIENTS));
+        before.keySet().stream().findFirst()
+            .ifPresent(pos -> level.playSound(null, pos, SoundEvents.IRON_DOOR_OPEN, SoundSource.BLOCKS, 1.0F, 0.5F));
+    }
+
+    /** Which face of the room box a door marker is on (as GateBuilder.side), or null. */
+    private static Direction side(BoundingBox box, BlockPos pos) {
+        if (pos.getZ() == box.minZ()) {
+            return Direction.NORTH;
+        }
+        if (pos.getZ() == box.maxZ()) {
+            return Direction.SOUTH;
+        }
+        if (pos.getX() == box.minX()) {
+            return Direction.WEST;
+        }
+        if (pos.getX() == box.maxX()) {
+            return Direction.EAST;
+        }
+        return null;
+    }
+
+    /** A roster member died in their normal gate: they'll respawn in front of it; if nobody of the roster is left alive
+     * inside, the gate fails. */
+    private static void playerDied(ServerLevel level, ServerPlayer player) {
+        GateInstances gates = GateInstances.get(level.getServer());
+        Instance instance = gates.ofPlayer(player.getUUID());
+        if (instance == null || instance.red || instance.dimension != level.dimension()) {
+            return;
+        }
+        DIED_INSIDE.add(player.getUUID());
+        if (instance.state == GateInstances.State.ACTIVE && present(level, instance).stream().noneMatch(p -> p != player)) {
+            fail(level, gates, instance);
+        }
+    }
+
+    /** The whole party is down: the gate fails. Anyone of the roster still standing in the gate world goes home, the cell is
+     * cleared and the instance closed (its key was used up when it opened). */
+    static void fail(ServerLevel level, GateInstances gates, Instance instance) {
+        for (ServerPlayer player : level.getServer().getPlayerList().getPlayers()) {
+            if (instance.roster.contains(player.getUUID())) {
+                player.sendSystemMessage(Component.translatableWithFallback("gate.mdvlcraft.failed",
+                    "The gate has failed: the whole party fell. It closes, and its key is lost.").withStyle(ChatFormatting.DARK_RED));
+            }
+        }
+        for (ServerPlayer player : List.copyOf(level.players())) {
+            if (instance.roster.contains(player.getUUID()) && player.isAlive()) {
+                GateTravel.leave(player, instance, true);
+            }
+        }
+        SEALED.remove(instance.id);   // the blocks go with the cell
+        SEAL_AT.remove(instance.id);
+        CLEARED_AT.remove(instance.id);
+        GateBuilder.clear(level, instance);
+        gates.close(instance);
+    }
+
+    /** Died in a normal gate: back in front of the gate (their origin), not at their bed. */
+    @SubscribeEvent
+    public static void onRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (!event.isEndConquered() && event.getEntity() instanceof ServerPlayer player && DIED_INSIDE.remove(player.getUUID())) {
+            GateTravel.leave(player, GateInstances.get(player.server).ofPlayer(player.getUUID()), false);
+        }
     }
 
     /** No natural mobs in the gate worlds: every mob there comes from a gate. */

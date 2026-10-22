@@ -1,0 +1,39 @@
+wait 60
+cmd gamerule doImmediateRespawn true
+cmd execute as Tester run mdvl gate open E crypt
+wait 30
+cmd execute as Tester run mdvl gate doors
+cmd execute as Tester run say EXPECT_OPEN_ABOVE
+cmd execute as Tester run mdvl gate goto boss
+wait 8
+cmd execute as Tester run mdvl gate doors
+cmd execute as Tester run say EXPECT_SEALED_ABOVE
+cmd execute as Tester at @s if entity @e[distance=..20,tag=mdvlcraft_gate,nbt={ForgeData:{mdvlcraft_gate_role:"boss"}}] run say BOSS_OK
+shot combat_sealed_bossbar
+cmd execute as Tester run mdvl gate goto door 1
+wait 3
+cmd execute as Tester run mdvl gate doors
+cmd execute as Tester run say EXPECT_OPEN_ABOVE_LEFT_ROOM
+cmd execute as Tester run mdvl gate goto boss
+wait 8
+cmd execute as Tester run mdvl gate doors
+cmd execute as Tester run say EXPECT_SEALED_ABOVE_AGAIN
+cmd execute as Tester at @s run kill @e[distance=..30,tag=mdvlcraft_gate,nbt={ForgeData:{mdvlcraft_gate_role:"boss"}}]
+wait 3
+cmd execute as Tester run mdvl gate doors
+cmd execute as Tester run say EXPECT_CLEARED_OPEN_ABOVE
+shot combat_cleared
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester run mdvl gate open E crypt
+wait 30
+cmd execute as Tester run mdvl gate goto "spawn:melee" 1
+wait 3
+cmd execute as Tester at @s if entity @e[distance=..30,tag=mdvlcraft_gate,nbt={ForgeData:{mdvlcraft_gate_role:"elite"}}] run say ELITE_PRESENT_CHECK_BAR_IN_SHOT
+shot combat_room
+cmd kill Tester
+wait 20
+cmd execute as Tester unless entity @s[nbt={Dimension:"mdvlcraft:gate_realm"}] run say RESPAWN_OUTSIDE_OK
+cmd mdvl gate list
+cmd execute as Tester run say EXPECT_NO_LIVE_GATE_ABOVE_WIPE_OK
+cmd gamerule doImmediateRespawn false

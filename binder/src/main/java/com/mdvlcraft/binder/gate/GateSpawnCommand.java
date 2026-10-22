@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *                              fills it on its next check, exactly as a built room would be
  *   /mdvl gate testroom boss   the same with a boss marker 3 blocks south and an exit marker 3 blocks north
  *   /mdvl gate pools           lists pool and boss ids that aren't registered in this game
+ *   /mdvl gate doors           says whether the caller's gate's boss room is sealed (SEALED / OPEN) and its state
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class GateSpawnCommand {
@@ -38,7 +39,8 @@ public final class GateSpawnCommand {
                 .then(Commands.literal("testroom")
                     .executes(c -> testRoom(c, false))
                     .then(Commands.literal("boss").executes(c -> testRoom(c, true))))
-                .then(Commands.literal("pools").executes(GateSpawnCommand::pools))));
+                .then(Commands.literal("pools").executes(GateSpawnCommand::pools))
+                .then(Commands.literal("doors").executes(GateSpawnCommand::doors))));
     }
 
     private static int testRoom(CommandContext<CommandSourceStack> context, boolean boss) throws CommandSyntaxException {
@@ -67,6 +69,19 @@ public final class GateSpawnCommand {
         context.getSource().sendSuccess(() -> Component.literal("Gate " + instance.id + ": test room " + room + (boss ? " (boss)" : "")
             + " added; it fills on the next trigger check"), true);
         return room + 1;
+    }
+
+    private static int doors(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        Instance instance = GateInstances.get(player.server).ofPlayer(player.getUUID());
+        if (instance == null) {
+            context.getSource().sendFailure(Component.literal("Not on a gate's roster"));
+            return 0;
+        }
+        boolean sealed = GateCombat.sealed(instance.id);
+        context.getSource().sendSuccess(() -> Component.literal("Gate " + instance.id + " " + instance.state + ": boss room "
+            + GateCombat.bossRoom(instance) + " " + (sealed ? "SEALED" : "OPEN")), false);
+        return sealed ? 1 : 0;
     }
 
     private static int pools(CommandContext<CommandSourceStack> context) {
