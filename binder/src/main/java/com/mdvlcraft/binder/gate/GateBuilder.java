@@ -83,6 +83,7 @@ public final class GateBuilder {
             QUEUE.add(new Step(instance.id, true, () -> place(level, instance, centre, piece)));
         }
         QUEUE.add(new Step(instance.id, true, () -> {
+            GateRewards.placeCrystals(level, instance);
             instance.built = true;
             GateInstances.get(level.getServer()).setDirty();
             LOGGER.info("Gate {} built: {} rooms, {} markers", instance.id, instance.rooms.size(), instance.markers.size());
