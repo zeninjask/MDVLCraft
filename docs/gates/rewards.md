@@ -72,7 +72,7 @@ Gate Forge recipe, lang entries).
 
 ## Build / test results
 
-- First build queued on the shared Gradle lock when this WIP commit was made: result not known yet (next commit records it).
+- 2026-10-22: `flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q` passes (all code in 2e41a589). Not run in game.
 
 ## State / next step
 
