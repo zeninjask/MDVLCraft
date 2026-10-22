@@ -173,6 +173,10 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-22 night, gate ea29f24e jar (all round 3 merged), `red.txt` (refreshed + redhidden never): **15/15 PASS**
+  (roll, frozen biome and ground, seal, Maledictus boss, exit, break wave/close/home, red force, forge ground, death
+  closes). No gate errors in the log (one caught non-gate error: JER's LootViews creating Epic Fight Ponder's dummy
+  entity on the server; harmless).
 - 2026-10-22 night, gate 82c58f49 jar (before late2/themes2), `rewards.txt` (refreshed): **10/13**. Misses:
   CHEST_PLACED (the chest was placed and opened — Tester ended up standing on it at y 67 and the check looks at the
   block Tester stands in; step geometry), RED_B_STONES and BLACK_FROM_HIDDEN_BOSS (no stones seen 2 s after killing a
