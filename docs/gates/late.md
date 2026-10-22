@@ -44,7 +44,7 @@ before any work and force-pushed, so it holds no main-only commits). Plan sectio
         cancelled).
   - [x] ×1.5 stones, veins and clear experience; a Trial Trophy item (`mdvlcraft:gate_trophy`, NBT rule + rank) to every
         player present at the clear.
-- [x] Debug: `/mdvl gate late open <rank> <theme> <mods|none> [rule]`, `late key <rank> <mods>`, `late info`.
+- [x] Debug: `/mdvl gate late open <rank> <theme> <mods|none> [rule]`, `late key <rank> <mods>`, `late info` (a comma list of modifiers must be quoted: `"enraged,crimson"`).
 - [x] In-game steps: `docs/gates/tests/late.txt` (not run; coordinator runs it).
 - [ ] Not done / later: the two richer rules (Statues, Narrowing Door); boss chest ×1.5 for trial gates (only stones,
       veins and experience are scaled); "except food" doesn't cover foods that heal directly in finishUsingItem (only

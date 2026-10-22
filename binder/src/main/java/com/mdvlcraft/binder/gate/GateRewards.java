@@ -3,7 +3,9 @@ package com.mdvlcraft.binder.gate;
 import com.mdvlcraft.binder.gate.GateInstances.Instance;
 import com.mdvlcraft.binder.gate.GateInstances.Marker;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
@@ -199,8 +201,11 @@ public final class GateRewards {
                 spots.add(pos.immutable());
             }
         }
-        // nearest first, with some jitter so veins aren't all the same shape
-        spots.sort((a, b) -> Double.compare(a.distSqr(centre) + random.nextDouble() * 2.0, b.distSqr(centre) + random.nextDouble() * 2.0));
+        // nearest first, with some jitter so veins aren't all the same shape (drawn once per spot: a comparator that
+        // rolls on every comparison breaks the sort's contract and throws)
+        Map<BlockPos, Double> key = new HashMap<>();
+        spots.forEach(pos -> key.put(pos, pos.distSqr(centre) + random.nextDouble() * 2.0));
+        spots.sort(Comparator.comparingDouble(key::get));
         for (int i = 0; i < Math.min(size, spots.size()); i++) {
             level.setBlock(spots.get(i), ore, Block.UPDATE_CLIENTS);
         }

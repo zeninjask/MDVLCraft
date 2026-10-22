@@ -12,7 +12,7 @@ cmd give Tester mdvlcraft:gate_key_a
 wait 2
 cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:gate_key_a",tag:{}}]}] run say KEY_A_ROLLED_OK
 cmd clear Tester
-cmd execute as Tester run mdvl gate late key S enraged,crimson
+cmd execute as Tester run mdvl gate late key S "enraged,crimson"
 cmd item replace entity Tester weapon.mainhand from entity Tester container.0
 cmd item replace entity Tester container.0 with minecraft:air
 cmd data get entity Tester SelectedItem.tag.modifiers
@@ -27,7 +27,7 @@ cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"mdvlcraft:gate_key_s
 cmd data get entity Tester SelectedItem.tag.modifiers
 cmd execute as Tester at @s run setblock ^ ^ ^2 minecraft:air
 cmd clear Tester
-cmd execute as Tester at @s run mdvl gate late open S crypt ironclad,swarming,enraged,volatile
+cmd execute as Tester at @s run mdvl gate late open S crypt "ironclad,swarming,enraged,volatile"
 wait 10
 cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
 wait 20
