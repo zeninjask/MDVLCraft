@@ -33,10 +33,10 @@ import json, os, re, shutil, sys, zipfile
 
 PACK = 'client-performance'
 DROPPED = {
-    'fallingleaves-1.20.1-2.1.2.jar', 'particlerain-4.0.1+1.20.1-forge.jar',
-    'aaa_particles_world-forge-1.20.1-2.0.0.jar', 'AmbientSounds_FORGE_v6.3.9_mc1.20.1.jar',
-    'Forgematica-0.1.13-mc1.20.1.jar', 'MaFgLib-0.1.14-mc1.20.1.jar', 'chatanimation-forge-1.3.4+mc1.20.1.jar',
-    'smoothgui-forge-2.0.7+mc1.20.1.jar', 'CullLessLeaves-Reforged-1.20.1-1.0.5.jar', 'fwa+1.20.1-forge-1.2.31.jar',
+    'fallingleaves-1.20.1-2.1.2.jar', 'particlerain-4.0.2+1.20.1-forge.jar',
+    'aaa_particles_world-forge-1.20.1-2.0.0.jar', 'AmbientSounds_FORGE_v6.3.11_mc1.20.1.jar',
+    'Forgematica-0.1.13-mc1.20.1.jar', 'MaFgLib-0.1.14-mc1.20.1.jar', 'chatanimation-forge-1.3.5+mc1.20.1.jar',
+    'smoothgui-forge-2.1.0+mc1.20.1.jar', 'CullLessLeaves-Reforged-1.20.1-1.0.5.jar', 'fwa+1.20.1-forge-1.2.31.jar',
     'continuity-3.0.0+1.20.1.forge.jar', 'Connector-1.0.0-beta.49+1.20.1.jar', 'fabric-api-0.92.6+1.11.15+1.20.1.jar',
     'Better-Leaves-9.6.zip', 'Os-Colorful-Grasses-Tall-26.3.zip', 'Fancy-Crops-1.3.zip',
     'MakeUp-UltraFast-9.5g.zip', 'photon_v1.3b.zip', 'ComplementaryReimagined_r5.9.3.zip',
