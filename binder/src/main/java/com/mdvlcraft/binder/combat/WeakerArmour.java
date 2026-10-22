@@ -1,6 +1,9 @@
 package com.mdvlcraft.binder.combat;
 
-/** Armour and protection enchantments block this share of the damage they would (mixin.CombatRulesMixin, mixin.attributeslib.ALCombatRulesMixin). */
+/**
+ * Armour and protection enchantments block this share of the damage they would (mixin.CombatRulesMixin, and
+ * mixin.attributeslib.ALCombatRulesMixin, which is what applies in game and only to players).
+ */
 public final class WeakerArmour {
     public static final float SCALE = 0.65F;
 

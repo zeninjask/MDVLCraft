@@ -16,7 +16,7 @@ PART = {
     'snowfall_step': spell(ICE, 20, 10),
     'rain_curtain': spell(AQUA, 45, 40, 'long', 20),
     'carp_leap': spell(AQUA, 15, 8),
-    'thunder_gods_descent': spell(LIGHTNING, 45, 18),
+    'thunder_gods_descent': spell(LIGHTNING, 45, 27),
     'kaminari_return': spell(LIGHTNING, 30, 10),
     'sun_disk': spell(HOLY, 25, 8),
     'dawnbreak': spell(HOLY, 40, 30),

@@ -24,14 +24,15 @@ import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
  * Attacks cost half the stamina. The attack cost is attackDamage * 0.75 + weaponWeight * 1.8 (in the basic-attack
  * listener); halving both factors halves every attack, including weapons the stamina config doesn't list.
  *
- * Every regen delay is halved and then cut by another 15% (x0.425): attacking or acting 50 -> 21 ticks, sprinting
- * 40 -> 17, jumping 60 -> 26, drawing a crossbow 35 -> 15, shield blocks 45 -> 19, and every setRegenCooldown call (the
- * basic-attack listener's 50 -> 21 and Nightfall's 55 -> 23).
+ * Every regen delay is halved, cut by another 15% (x0.425) and then 0.25 s (5 ticks) longer: attacking or acting
+ * 50 -> 26 ticks, sprinting 40 -> 22, jumping 60 -> 31, drawing a crossbow 35 -> 20, shield blocks 45 -> 24, and every
+ * setRegenCooldown call (the basic-attack listener's 50 -> 26 and Nightfall's 55 -> 28).
  */
 @Mixin(value = StaminaHandler.class, remap = false)
 public abstract class StaminaHandlerMixin {
     private static final float ASSIMILATION_REGEN = 1.5F;
     private static final float REGEN_DELAY = 0.425F;
+    private static final int EXTRA_DELAY = 5;
 
     @ModifyConstant(method = "lambda$ensureEventListenersInitialized$0", constant = @Constant(doubleValue = 0.75), require = 1)
     private static double mdvlcraft$halveDamageFactor(double factor) {
@@ -72,21 +73,25 @@ public abstract class StaminaHandlerMixin {
 
     @ModifyConstant(method = "onPlayerTick", constant = {@Constant(intValue = 50), @Constant(intValue = 40), @Constant(intValue = 60)}, require = 3)
     private static int mdvlcraft$shortenTickDelays(int ticks) {
-        return Math.round(ticks * REGEN_DELAY);
+        return delay(ticks);
     }
 
     @ModifyConstant(method = "handleRangedStamina", constant = @Constant(intValue = 35), require = 1)
     private static int mdvlcraft$shortenCrossbowDelay(int ticks) {
-        return Math.round(ticks * REGEN_DELAY);
+        return delay(ticks);
     }
 
     @ModifyConstant(method = "onEntityShieldBlock", constant = @Constant(intValue = 45), require = 1)
     private static int mdvlcraft$shortenShieldDelay(int ticks) {
-        return Math.round(ticks * REGEN_DELAY);
+        return delay(ticks);
     }
 
     @ModifyVariable(method = "setRegenCooldown", at = @At("HEAD"), argsOnly = true, require = 1)
     private static int mdvlcraft$shortenRegenCooldown(int ticks) {
-        return Math.round(ticks * REGEN_DELAY);
+        return delay(ticks);
+    }
+
+    private static int delay(int ticks) {
+        return Math.round(ticks * REGEN_DELAY) + EXTRA_DELAY;
     }
 }

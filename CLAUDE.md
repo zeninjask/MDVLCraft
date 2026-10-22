@@ -15,3 +15,7 @@ Always use these skills, in every session, without being asked:
 # Working rules
 
 - While a long task runs (tests, builds), check its progress every 5 minutes and report it.
+
+# Terms
+
+- **Execute / execution / assassinate / assassination** always means Combat Evolution's execution: right click while behind a target that hasn't noticed you, for a big-damage attack (its damage carries the `combat_evolution` EXECUTION damage type tag). It never means Epic Fight Nightfall's Execution skill unless the user names Nightfall.

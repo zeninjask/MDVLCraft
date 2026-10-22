@@ -8,9 +8,12 @@ import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
 import io.redspace.ironsspellbooks.damage.DamageSources;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
+import io.redspace.ironsspellbooks.registries.MobEffectRegistry;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import javax.annotation.Nullable;
@@ -373,7 +376,11 @@ public final class Wave2Samurai {
         }
     }
 
-    /** Thunder God's Descent: a leap toward the spot looked at (16 blocks); on landing lightning strikes every enemy within 4. */
+    /**
+     * Thunder God's Descent: Iron's Ascension look (a lightning bolt strikes the caster, crackling electricity, no fall
+     * damage) and a leap toward the spot looked at (16 blocks); lightning comes down on two random enemies within 12
+     * blocks, and on landing it strikes every enemy within 4.
+     */
     public static class ThunderGodsDescent extends ModifiedSpell {
         ThunderGodsDescent() {
             super("thunder_gods_descent", 9);
@@ -382,10 +389,19 @@ public final class Wave2Samurai {
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             if (level instanceof ServerLevel server) {
+                float power = this.getSpellPower(spellLevel, caster);
+                SmiteSpells.flash(server, caster.position());
+                caster.addEffect(new MobEffectInstance(MobEffectRegistry.ASCENSION.get(), 80, 0, false, false, true));
+                List<LivingEntity> near = new ArrayList<>(Targets.enemies(caster, caster.position(), 12.0));
+                Collections.shuffle(near, new Random(caster.getRandom().nextLong()));
+                for (LivingEntity enemy : near.subList(0, Math.min(2, near.size()))) {
+                    SmiteSpells.flash(server, enemy.position());
+                    DamageSources.applyDamage(enemy, power, this.getDamageSource(caster));
+                }
                 Vec3 to = VolleySpells.lookedPoint(caster, 16.0).subtract(caster.position()).multiply(1.0, 0.0, 1.0);
                 caster.setDeltaMovement(to.scale(1.0 / 10.4).add(0.0, 1.0, 0.0));
                 caster.hurtMarked = true;
-                Zones.start(server, caster.position(), caster, this.getSpellPower(spellLevel, caster), 80, 1, zone -> {
+                Zones.start(server, caster.position(), caster, power, 80, 1, zone -> {
                     if (zone.age() < 5 || !caster.onGround() && !caster.isInWater()) {
                         caster.fallDistance = 0.0F;
                         return;
@@ -408,20 +424,35 @@ public final class Wave2Samurai {
         }
     }
 
-    /** Kaminari Return: a lightning image of the blade flashes up to 10 blocks; the caster appears where it lands and strikes what is there. */
+    /**
+     * Kaminari Return: needs a creature looked at within 35 blocks. A lightning image of the blade flashes to it; the
+     * caster appears just in front of it and strikes it, then a lightning field crackles around them for 1 s: one
+     * staggering hit (half the power) on every enemy within 4 blocks, the one struck included.
+     */
     public static class KaminariReturn extends ModifiedSpell {
+        private static final float RANGE = 35.0F;
+        private static final double FIELD_RADIUS = 4.0;
+
         KaminariReturn() {
             super("kaminari_return", 7);
         }
 
         @Override
+        public boolean checkPreCastConditions(Level level, int spellLevel, LivingEntity caster, MagicData data) {
+            if (Targets.looked(caster, RANGE) == null) {
+                MartialSpells.refuse(caster, "no_target");
+                return false;
+            }
+            return true;
+        }
+
+        @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
-            if (level instanceof ServerLevel server) {
+            LivingEntity target = Targets.looked(caster, RANGE);
+            if (level instanceof ServerLevel server && target != null) {
                 Vec3 look = caster.getLookAngle();
-                LivingEntity target = Targets.looked(caster, 10.0F);
-                Vec3 hit = target != null ? target.position().add(0.0, target.getBbHeight() / 2, 0.0) : VolleySpells.lookedPoint(caster, 10.0);
-                Vec3 land = (target != null ? target.position().subtract(look.multiply(1.0, 0.0, 1.0).normalize().scale(target.getBbWidth() / 2 + 0.8))
-                    : hit.subtract(look.scale(0.6)));
+                Vec3 hit = target.position().add(0.0, target.getBbHeight() / 2, 0.0);
+                Vec3 land = target.position().subtract(look.multiply(1.0, 0.0, 1.0).normalize().scale(target.getBbWidth() / 2 + 0.8));
                 SmiteSpells.beam(server, caster.getEyePosition().subtract(0.0, 0.3, 0.0), hit, ParticleTypes.ELECTRIC_SPARK);
                 caster.teleportTo(land.x, land.y, land.z);
                 caster.fallDistance = 0.0F;
@@ -431,6 +462,17 @@ public final class Wave2Samurai {
                     DamageSources.applyDamage(enemy, power, this.getDamageSource(caster));
                 }
                 server.sendParticles(ParticleTypes.ELECTRIC_SPARK, land.x, land.y + 1.0, land.z, 40, 0.4, 0.8, 0.4, 0.3);
+                for (LivingEntity enemy : Targets.enemies(caster, caster.position(), FIELD_RADIUS)) {
+                    enemy.invulnerableTime = 0;   // the strike may have just hit it
+                    DamageSources.applyDamage(enemy, power * 0.5F, this.getDamageSource(caster));
+                    MartialSpells.stun(enemy, StunType.LONG, 1.0F);
+                }
+                Zones.start(server, caster.position(), caster, power, 20, 2, zone -> {
+                    GroundSpells.ring(server, zone.center, FIELD_RADIUS, ParticleTypes.ELECTRIC_SPARK);
+                    server.sendParticles(ParticleTypes.ELECTRIC_SPARK, zone.center.x, zone.center.y + 0.2, zone.center.z, 20, FIELD_RADIUS / 2, 0.1,
+                        FIELD_RADIUS / 2, 0.1);
+                }, () -> {
+                }, null);
             }
             level.playSound(null, caster.blockPosition(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 0.8F, 1.6F);
             super.onCast(level, spellLevel, caster, source, data);

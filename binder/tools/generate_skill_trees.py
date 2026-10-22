@@ -205,7 +205,7 @@ TECHNIQUE_MANA = {"mdvlcraft:dismantle": 12, "mdvlcraft:cleave": 20, "mdvlcraft:
                   "mdvlcraft:myriad_blades": 35, "mdvlcraft:babylonian_armory": 35, "mdvlcraft:celestial_array": 30}
 TECHNIQUE_COOLDOWN = {"mdvlcraft:dismantle": 1, "mdvlcraft:cleave": 3, "mdvlcraft:malevolent_shrine": 120, "mdvlcraft:open_malevolent_shrine": 120,
                       "mdvlcraft:boogie_woogie": 2, "mdvlcraft:block_clap": 2, "mdvlcraft:blitz": 8, "mdvlcraft:surprise_attack": 15,
-                      "mdvlcraft:follow_up_kick": 6, "mdvlcraft:phantom_movement": 0, "mdvlcraft:soul_hunt": None,
+                      "mdvlcraft:follow_up_kick": 6, "mdvlcraft:phantom_movement": 3, "mdvlcraft:soul_hunt": None,
                       "mdvlcraft:myriad_blades": None, "mdvlcraft:babylonian_armory": None, "mdvlcraft:celestial_array": None}
 # Techniques that keep casting while the cast key is held (Technique.held), each time their cooldown ends, paying each time.
 HELD_TECHNIQUES = {"mdvlcraft:dismantle", "mdvlcraft:cleave"}
@@ -556,7 +556,7 @@ ARCHETYPES = {
                     abilities=[[spell("evasion", 1, 3, "minecraft:ender_pearl"), spell("evasion", 2, 3, "minecraft:ender_pearl", "Phantasm (Evasion II)")],
                                [spell("slow", 2, 2, "minecraft:cobweb"), spell("invisibility", 2, 3, "minecraft:glass")],
                                [technique("mdvlcraft:follow_up_kick", 3, "minecraft:leather_boots", note="Projection Sorcery. Sneak and cast to switch between the Normal and Flow forms."),
-                                technique("mdvlcraft:phantom_movement", 4, "texture:mdvlcraft:textures/gui/icons/ability/phantom_movement.png", note="Projection Sorcery's dash. Hold to map a path, release to dash along it, always at full output. No cooldown: each dash costs mana. Naobito's style.")],
+                                technique("mdvlcraft:phantom_movement", 4, "texture:mdvlcraft:textures/gui/icons/ability/phantom_movement.png", note="Projection Sorcery's dash. Hold to map a path, release to dash along it, always at full output. 3 s cooldown. Naobito's style.")],
                                [efskill("epicfight:catharsis", 3), efskill("epicfight:technician", 2)],
                                [efskill("epicfight:phantom_ascent", 3), efskill("epicfight:stamina_pillager", 3), efskill("epicfight:swordmaster", 3)],
                                [technique("mdvlcraft:babylonian_armory", 5, "texture:sword_soaring:textures/gui/skills/sword_controller/babylon.png",

@@ -3,7 +3,7 @@
 Each tier chapter has a top row of progress quests (kill counts, an experience level, places to find) ending in a
 capstone that opens the next chapter, and below it one column per boss: three lead-up quests themed on that boss, the
 last of which rewards a compass to the boss's lair (/mdvlquest compass, command/QuestCompass) when it lives in a
-structure, then the kill. Capstones need a few of the tier's bosses (min_required_dependencies), never all of them.
+structure (a Boss Sigil to an arena, integration/BossArena, when the pack doesn't generate that lair), then the kill. Capstones need a few of the tier's bosses (min_required_dependencies), never all of them.
 
 Writes:
   base/{client,server}/overrides/config/ftbquests/quests/  the quest book (SNBT, read by FTB Quests on the server)
@@ -84,6 +84,20 @@ def compass(struct, dim, name):
     return command(f'/mdvlquest compass {{p}} {struct} {dim} {name}', f"Compass to {name}'s Lair", 'minecraft:compass')
 
 
+# Lairs the pack doesn't generate (base kubejs empties their structure sets): their bosses are fought in an arena instead,
+# reached with a Boss Sigil (integration/BossArena; the party comes along, integration/PartyTravel).
+ARENA_LAIRS = {'traveloptics:void_cathedral'}
+
+
+def arena_lair(struct):
+    return struct.startswith('legendary_monsters:') or struct in ARENA_LAIRS
+
+
+def sigil(entity, name):
+    nbt = json.dumps({'Boss': entity, 'BossName': name}).replace('"Boss"', 'Boss').replace('"BossName"', 'BossName')
+    return command(f'/give {{p}} mdvlcraft:boss_sigil{nbt}', f'Boss Sigil: {name}', 'mdvlcraft:boss_sigil')
+
+
 ACCEPT = {'type': 'checkmark', 'title': 'Accept Quest'}
 
 
@@ -117,7 +131,7 @@ boss(1, 'dune_sentinel', 'the Dune Sentinel', 'legendary_monsters:dune_sentinel'
     ('Shield Wall', [item('minecraft:shield')], [xp(100)], 'The Sentinel hits hard. Carry a shield.'),
 ], ('legendary_monsters:ruined_pyramid', OVERWORLD), 'It guards a Ruined Pyramid in the desert.')
 boss(1, 'overgrown_colossus', 'the Overgrown Colossus', 'legendary_monsters:overgrown_colossus', 'minecraft:moss_block', [
-    ('Into the Green', [biome('#minecraft:is_jungle')], [give('minecraft:bread', 8)], 'Deep in the jungle, a temple of moss hides a giant.'),
+    ('Into the Green', [biome('#minecraft:is_jungle')], [give('minecraft:bread', 8)], 'A giant of moss sleeps somewhere in the jungle. Head into it.'),
     ('Clear the Undergrowth', [kill('minecraft:spider', 10)], [give('minecraft:golden_carrot', 6)], 'Spiders nest in the canopy. Clear a path.'),
     ('Vine Cutter', [item('minecraft:iron_axe')], [xp(100)], 'You will need an axe to cut through the vines.'),
 ], ('legendary_monsters:mossy_temple', OVERWORLD), 'It sleeps in a Mossy Temple deep in the jungle.')
@@ -129,17 +143,17 @@ boss(1, 'frostbitten_golem', 'the Frostbitten Golem', 'legendary_monsters:frostb
 
 # Tier 2 - Adventurer (iron to diamond)
 boss(2, 'possessed_paladin', 'the Possessed Paladin', 'legendary_monsters:posessed_paladin', 'minecraft:golden_helmet', [
-    ('A Fallen Kingdom', [biome('minecraft:plains')], [give('minecraft:cooked_beef', 8)], 'Ruins of a kingdom lie on the plains. Its knight never left.'),
+    ('A Fallen Kingdom', [biome('minecraft:plains')], [give('minecraft:cooked_beef', 8)], 'The tale of a fallen kingdom starts on the plains. Its knight never left.'),
     ('Knightly Steel', [item('minecraft:iron_chestplate')], [give('minecraft:iron_ingot', 6)], 'Meet steel with steel.'),
     ('Provisions', [item('minecraft:cooked_beef', 16)], [xp(200)], 'The kingdom is large. Pack food.'),
 ], ('legendary_monsters:collapsed_kingdom', OVERWORLD), 'It haunts the arena of a Collapsed Kingdom on plains and in forests.')
 boss(2, 'cloud_golem', 'the Cloud Golem', 'legendary_monsters:cloud_golem', 'minecraft:white_wool', [
-    ('Peak Season', [biome('#minecraft:is_mountain')], [give('minecraft:cooked_beef', 8)], 'Climb the mountains. A temple floats near the peaks.'),
+    ('Peak Season', [biome('#minecraft:is_mountain')], [give('minecraft:cooked_beef', 8)], 'Climb the mountains, where the tale of the Cloud Golem begins.'),
     ('Soft Landing', [item('minecraft:water_bucket')], [give('minecraft:feather', 16)], 'A long fall waits for the careless. Carry water.'),
     ('Night Flyers', [kill('minecraft:phantom', 5)], [xp(200)], 'Phantoms circle the heights. Clear the sky.'),
 ], ('legendary_monsters:cloudy_temple', OVERWORLD), 'It lives in a Cloudy Temple on mountain peaks, meadows and cherry groves.')
 boss(2, 'ancient_guardian', 'the Ancient Guardian', 'legendary_monsters:ancient_guardian', 'minecraft:mossy_stone_bricks', [
-    ('Dark Woods', [biome('minecraft:dark_forest')], [give('minecraft:cooked_beef', 8)], 'An old stronghold hides among dark forests and taiga.'),
+    ('Dark Woods', [biome('minecraft:dark_forest')], [give('minecraft:cooked_beef', 8)], 'The trail of the Ancient Guardian starts in the dark forest.'),
     ('Bonebreaker', [kill('minecraft:skeleton', 20)], [give('minecraft:arrow', 32)], 'Skeletons guard the approach.'),
     ('Diamond Edge', [item('minecraft:diamond_sword')], [xp(200)], 'Only a diamond blade will crack its stone.'),
 ], ('legendary_monsters:ancient_stronghold', OVERWORLD), 'It guards an Ancient Stronghold in dark forest and taiga.')
@@ -147,7 +161,7 @@ boss(2, 'elder_guardian', 'the Elder Guardian', 'minecraft:elder_guardian', 'min
     ('Deep Water', [biome('#minecraft:is_deep_ocean')], [give('minecraft:cooked_cod', 8)], 'Ocean monuments sit on the floor of deep oceans.'),
     ('Drowned Sailors', [kill('minecraft:drowned', 15)], [give('minecraft:prismarine_shard', 8)], 'The drowned swarm near the monument.'),
     ('Sea Legs', [item('minecraft:oak_boat')], [xp(200)], 'Bring a boat for the crossing.'),
-], ('minecraft:monument', OVERWORLD), 'It rules an Ocean Monument in deep oceans.')
+], ('betteroceanmonuments:ocean_monument', OVERWORLD), 'It rules an Ocean Monument in deep oceans.')
 boss(2, 'dead_king', 'the Dead King', 'irons_spellbooks:dead_king', 'minecraft:wither_skeleton_skull', [
     ('Restless Dead', [kill('minecraft:zombie', 25)], [give('minecraft:bread', 8)], 'The dead walk more often near the Catacombs.'),
     ('And So a Quest Begins', [item('irons_spellbooks:wayward_compass')], [give('minecraft:torch', 32)], 'Craft a Wayward Compass. Its trapped soul knows the way.'),
@@ -191,7 +205,7 @@ boss(3, 'skeletosaurus', 'the Skeletosaurus', 'legendary_monsters:skeletosaurus'
     ('Bone Collector', [item('minecraft:bone', 32)], [xp(300)], 'Collect bones to follow the trail.'),
 ], ('legendary_monsters:skeletosaurus_nest', NETHER), 'Its nest is in the soul sand valley.')
 boss(3, 'withered_abomination', 'the Withered Abomination', 'legendary_monsters:withered_abomination', 'minecraft:soul_soil', [
-    ('Blackened Bones', [kill('minecraft:wither_skeleton', 15)], [give('minecraft:coal', 16)], 'Wither skeletons stalk the old fortress remains.'),
+    ('Blackened Bones', [kill('minecraft:wither_skeleton', 15)], [give('minecraft:coal', 16)], 'Wither skeletons stalk the Nether fortresses.'),
     ('Soul Ground', [item('minecraft:soul_soil', 16)], [give('minecraft:cooked_porkchop', 8)], 'The remains stand on soul soil.'),
     ('Antidote', [item('minecraft:milk_bucket')], [xp(300)], 'Milk cures the wither. Bring a bucket.'),
 ], ('legendary_monsters:soul_fortress_remains', NETHER), 'It lurks in the Soul Fortress Remains in the soul sand valley and Nether wastes.')
@@ -221,19 +235,19 @@ boss(4, 'ender_dragon', 'the Ender Dragon', 'minecraft:ender_dragon', 'minecraft
     ('Eyes of Ender', [item('minecraft:ender_eye', 12)], [give('minecraft:ender_pearl', 8)], 'Twelve eyes open the portal.'),
     ('Arrow Storm', [item('minecraft:arrow', 64)], [give('minecraft:spectral_arrow', 16)], 'Shoot the crystals from afar.'),
     ('Bowyer', [item('minecraft:bow')], [xp(400)], 'Bring a bow for the crystals.'),
-], ('minecraft:stronghold', OVERWORLD), 'Find a stronghold and its End portal.')
+], ('betterstrongholds:stronghold', OVERWORLD), 'Find a stronghold and its End portal.')
 boss(4, 'ender_guardian', 'the Ender Guardian', 'cataclysm:ender_guardian', 'minecraft:purpur_block', [
     ('The Far Lands', [dimension(END)], [give('minecraft:cooked_beef', 8)], 'A ruined citadel floats on the outer End islands.'),
     ('Outer Island Patrol', [kill('minecraft:enderman', 20)], [give('minecraft:ender_pearl', 8)], 'Endermen crowd the outer islands.'),
     ('Chorus', [item('minecraft:chorus_fruit', 16)], [xp(400)], 'Chorus fruit gets you out of tight spots.'),
 ], ('cataclysm:ruined_citadel', END), 'It guards the Ruined Citadel on the outer End highlands.')
 boss(4, 'endersent', 'the Endersent', 'legendary_monsters:endersent', 'minecraft:end_stone_bricks', [
-    ('Highlands', [biome('minecraft:end_highlands')], [give('minecraft:cooked_beef', 8)], 'A ruined tower stands on the End highlands.'),
+    ('Highlands', [biome('minecraft:end_highlands')], [give('minecraft:cooked_beef', 8)], 'The trail of the Endersent leads to the End highlands.'),
     ('Tall Shadows', [kill('minecraft:enderman', 25)], [give('minecraft:ender_pearl', 8)], 'The Endersent commands the endermen.'),
     ('Pearls', [item('minecraft:ender_pearl', 16)], [xp(400)], 'Gather pearls to keep up with it.'),
 ], ('legendary_monsters:ancient_tower_remains', END), 'It haunts the Ancient Tower Remains on the outer End islands.')
 boss(4, 'annihilation_pursuer', 'the Annihilation Pursuer', 'legendary_monsters:annihilation_pursuer', 'minecraft:end_rod', [
-    ('Midlands', [biome('minecraft:end_midlands')], [give('minecraft:cooked_beef', 8)], 'Something not of this world crashed on the End midlands.'),
+    ('Midlands', [biome('minecraft:end_midlands')], [give('minecraft:cooked_beef', 8)], 'Something not of this world was seen over the End midlands.'),
     ('Shulker Hunt', [kill('minecraft:shulker', 10)], [give('minecraft:shulker_shell', 2)], 'Shulkers guard the outer cities.'),
     ('Shells', [item('minecraft:shulker_shell', 8)], [xp(400)], 'Gather shulker shells.'),
 ], ('legendary_monsters:space_station', END), 'It guards a Space Station on the outer End islands.')
@@ -250,8 +264,8 @@ boss(5, 'warden', 'the Warden', 'minecraft:warden', 'minecraft:sculk_shrieker', 
     ('Echoes', [item('minecraft:echo_shard', 4)], [xp(600)], 'Echo shards are found in ancient cities.'),
 ], ('minecraft:ancient_city', OVERWORLD), 'It rises in Ancient Cities in the deep dark.')
 boss(5, 'nightwarden', 'the Nightwarden', 'traveloptics:the_nightwarden', 'minecraft:crying_obsidian', [
-    ('The Far End', [dimension(END)], [give('minecraft:cooked_beef', 16)], 'A void cathedral stands on the End highlands.'),
-    ('Cathedral Watch', [kill('minecraft:enderman', 30)], [give('minecraft:ender_pearl', 16)], 'Clear the endermen around the cathedral.'),
+    ('The Far End', [dimension(END)], [give('minecraft:cooked_beef', 16)], 'The Nightwarden is imprisoned beyond the End.'),
+    ('Cathedral Watch', [kill('minecraft:enderman', 30)], [give('minecraft:ender_pearl', 16)], 'Clear the endermen of the End.'),
     ('Netherite Blade', [item('minecraft:netherite_sword')], [xp(600)], 'Nothing less than netherite.'),
 ], ('traveloptics:void_cathedral', END), 'It is imprisoned in the Void Cathedral on the End highlands.')
 boss(5, 'wraithon', 'the Wraithon', 'wraithon:wraithon', 'minecraft:netherite_ingot', [
@@ -288,12 +302,12 @@ PROGRESS = {
     3: [('Blaze Runner', [kill('minecraft:blaze', 30)], 'Blazes guard the Nether fortresses.'),
         ('Wither Bones', [kill('minecraft:wither_skeleton', 20)], 'Wither skeletons drop the skulls you will need later.'),
         ('Burning Arena Guards', [kill('cataclysm:ignited_revenant', 10)], 'Ignited Revenants guard the Burning Arena.'),
-        ('Fortress Found', [structure('minecraft:fortress')], 'Find a Nether fortress.'),
+        ('Fortress Found', [structure('betterfortresses:fortress')], 'Find a Nether fortress.'),
         ('Bastion Breaker', [structure('minecraft:bastion_remnant')], 'Find a bastion remnant.')],
     4: [('Void Walkers', [kill('minecraft:enderman', 50)], 'Endermen carry the pearls you need.'),
         ('Shell Shock', [kill('minecraft:shulker', 20)], 'Shulkers guard the End cities.'),
         ('Deeplings', [kill('cataclysm:deepling', 15)], 'Deeplings swarm around the Sunken City.'),
-        ('The Stronghold', [structure('minecraft:stronghold')], 'Find a stronghold.'),
+        ('The Stronghold', [structure('betterstrongholds:stronghold')], 'Find a stronghold.'),
         ('City of the End', [structure('minecraft:end_city')], 'Find an End city.')],
     5: [('Echoes in the Dark', [structure('minecraft:ancient_city')], 'Find an ancient city.')],
 }
@@ -309,7 +323,7 @@ def first_steps():
     zombies = Quest('fs_zombies', 'First Blood', 2, -1, [kill('minecraft:zombie', 20)], [give('minecraft:iron_ingot', 4), xp(50)], ['Zombies are everywhere at night.'], [welcome.id])
     skeletons = Quest('fs_skeletons', 'Bone Collector', 2, 0, [kill('minecraft:skeleton', 20)], [give('minecraft:arrow', 32), xp(50)], ['Skeletons keep their distance. Close it.'], [welcome.id])
     spiders = Quest('fs_spiders', 'Eight Legs', 2, 1, [kill('minecraft:spider', 10)], [give('minecraft:bread', 8), xp(50)], ['Spiders climb walls. Watch above.'], [welcome.id])
-    village = Quest('fs_village', 'Neighbours', 0, 2, [structure('#minecraft:village')], [give('minecraft:emerald', 4)], ['Find a village. Its people trade, and some can be recruited.'], [welcome.id])
+    village = Quest('fs_village', 'Neighbours', 0, 2, [structure('#mdvlcraft:villages')], [give('minecraft:emerald', 4)], ['Find a village. Its people trade, and some can be recruited.'], [welcome.id])
     bed = Quest('fs_bed', 'A Place to Rest', 0, -2, [advancement('minecraft:adventure/sleep_in_bed')], [give('minecraft:torch', 16)], ['Sleep in a bed to set your spawn.'], [welcome.id])
     backpack = Quest('fs_backpack', 'Pack Up', 2, 2, [item('backpacked:backpack')], [give('minecraft:leather', 8)],
                      ['Craft a backpack. Its augment bays add effects like Funnelling, Tool Swapper, Void and Lantern.'], [village.id])
@@ -348,13 +362,20 @@ def tier_chapter(tier, gate):
             rewards = list(rewards)
             if step == 2 and b['lair']:
                 struct, dim = b['lair']
-                rewards.append(compass(struct, dim, strip_article(b['name'])))
-                desc = desc + ' Reward: a compass to the lair.'
+                if arena_lair(struct):
+                    rewards.append(sigil(b['entity'], strip_article(b['name'])))
+                    desc = desc + ' Reward: a Boss Sigil that takes you and your party to its arena.'
+                else:
+                    rewards.append(compass(struct, dim, strip_article(b['name'])))
+                    desc = desc + ' Reward: a compass to the lair.'
             sq = Quest(f'{b["key"]}_{step}', title, bx, 2 + step, tasks, rewards, [desc], [prev_id], icon=None)
             q.append(sq)
             prev_id = sq.id
+        hint = b['hint']
+        if b['lair'] and arena_lair(b['lair'][0]):
+            hint = 'Use its Boss Sigil (the reward of the quest before) to face it in an arena, with your party.'
         kq = Quest(f'{b["key"]}_kill', f'Defeat {b["name"]}', bx, 5.25, [kill(b['entity'], 1)], [crate(tier), xp(250 * tier)],
-                   [b['hint']], [prev_id], icon=b['icon'], shape='octagon', size=1.5)
+                   [hint], [prev_id], icon=b['icon'], shape='octagon', size=1.5)
         q.append(kq)
         kill_ids.append(kq.id)
 

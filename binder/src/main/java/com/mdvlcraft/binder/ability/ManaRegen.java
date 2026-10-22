@@ -10,7 +10,7 @@ import net.minecraft.server.level.ServerPlayer;
  * Iron's, and stops whenever mana is spent, resuming only once no mana has been spent for {@link #PAUSE_TICKS}.
  */
 public final class ManaRegen {
-    public static final int PAUSE_TICKS = 20;
+    public static final int PAUSE_TICKS = 30;
     public static final float REGEN_MULTIPLIER = 0.5F;
     /** Game time of each player's last mana spend. */
     private static final Map<UUID, Long> LAST_SPEND = new HashMap<>();

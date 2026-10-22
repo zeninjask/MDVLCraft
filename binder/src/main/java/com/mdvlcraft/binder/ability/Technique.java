@@ -15,7 +15,7 @@ public enum Technique implements Ability {
     BLITZ("blitz", 60, 15, 8, false),
     SURPRISE_ATTACK("surprise_attack", 66, 15, 15, false),
     FOLLOW_UP_KICK("follow_up_kick", 114, 15, 6, false),
-    PHANTOM_MOVEMENT("phantom_movement", 118, 20, 0, false),
+    PHANTOM_MOVEMENT("phantom_movement", 118, 20, 3, false),
     SILENT_APPRAISAL("silent_appraisal", 113, 20, 15, false),
     BLIND_INVESTMENT("blind_investment", 115, 15, 15, false),
     BIRD_STRIKE("bird_strike", 116, 20, 15, false),

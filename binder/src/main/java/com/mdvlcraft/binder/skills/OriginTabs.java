@@ -83,6 +83,12 @@ public final class OriginTabs {
                 tab.getExperience().ifPresent(e -> e.setLevel(player, level));
                 kept.remove(LEVEL);
             }
+            // 2.0.33 doubled the experience per level: a tab levelled before that sank below the points already spent in
+            // it, so new levels only paid that back. Its level is raised just enough to cover them (no free points).
+            int deficit = tab.getSpentPoints(player) - tab.getPointsTotal(player);
+            if (deficit > 0) {
+                tab.getExperience().ifPresent(e -> e.setLevel(player, e.getLevel(player) + deficit));
+            }
         }
         player.getPersistentData().put(Player.PERSISTED_NBT_TAG, kept);
     }

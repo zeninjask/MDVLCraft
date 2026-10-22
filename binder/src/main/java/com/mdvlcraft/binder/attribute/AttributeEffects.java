@@ -9,9 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
@@ -50,6 +54,7 @@ public final class AttributeEffects {
     private static final int RIPOSTE_WINDOW_TICKS = 60;
     private static final int NATURE_REGEN_INTERVAL_TICKS = 100;
     private static final Map<UUID, Long> RIPOSTE_UNTIL = new HashMap<>();
+    private static final TagKey<DamageType> EXECUTION = TagKey.create(Registries.DAMAGE_TYPE, ResourceLocation.fromNamespaceAndPath("combat_evolution", "execution"));
 
     private AttributeEffects() {
     }
@@ -59,7 +64,12 @@ public final class AttributeEffects {
     }
 
     private static boolean isMelee(DamageSource source, Player attacker) {
-        return source.is(DamageTypes.PLAYER_ATTACK) && source.getDirectEntity() == attacker;
+        return source.is(DamageTypes.PLAYER_ATTACK) && source.getDirectEntity() == attacker || isExecution(source);
+    }
+
+    /** Combat Evolution's execution (assassination) hits: always count as a backstab. */
+    private static boolean isExecution(DamageSource source) {
+        return source.is(EXECUTION);
     }
 
     @SubscribeEvent
@@ -72,7 +82,7 @@ public final class AttributeEffects {
                 amount += (float)value(attacker, BinderAttributes.UNARMED_DAMAGE);
             }
 
-            event.setAmount(amount * (float)(1.0 + meleeBonus(attacker, target)));
+            event.setAmount(amount * (float)(1.0 + meleeBonus(attacker, target, isExecution(source))));
         }
 
         if (source.getEntity() instanceof ServerPlayer attacker
@@ -94,7 +104,7 @@ public final class AttributeEffects {
         }
     }
 
-    private static double meleeBonus(ServerPlayer attacker, LivingEntity target) {
+    private static double meleeBonus(ServerPlayer attacker, LivingEntity target, boolean execution) {
         CapabilityItem weapon = EpicFightCapabilities.getItemStackCapability(attacker.getMainHandItem());
         WeaponCategory category = weapon.getWeaponCategory();
         double bonus = 0.0;
@@ -120,7 +130,7 @@ public final class AttributeEffects {
 
         Vec3 facing = Vec3.directionFromRotation(0.0F, target.getYRot());
         Vec3 toAttacker = attacker.position().subtract(target.position()).multiply(1.0, 0.0, 1.0).normalize();
-        if (facing.dot(toAttacker) < -0.5) {
+        if (execution || facing.dot(toAttacker) < -0.5) {
             bonus += value(attacker, BinderAttributes.BACKSTAB_DAMAGE);
         }
 

@@ -22,6 +22,8 @@ import com.mdvlcraft.binder.haunted.HauntedSetup;
 import com.mdvlcraft.binder.epicskill.EpicSkillReward;
 import com.mdvlcraft.binder.integration.CataclysmIntegration;
 import com.mdvlcraft.binder.integration.EpicFightIntegration;
+import com.mdvlcraft.binder.integration.BossArena;
+import com.mdvlcraft.binder.integration.PartyTravel;
 import com.mdvlcraft.binder.integration.ReturnCrystal;
 import com.mdvlcraft.binder.monk.UnarmedParry;
 import com.mdvlcraft.binder.network.BinderNetwork;
@@ -73,6 +75,8 @@ public final class MDVLBinder {
         PreviewCasts.register();
         CataclysmIntegration.register(modBus, forgeBus);
         ReturnCrystal.register(modBus, forgeBus);
+        BossArena.register(modBus, forgeBus);
+        PartyTravel.register(forgeBus);
         HerobrineLook.register();
         HerobrineInvitation.register();
     }
