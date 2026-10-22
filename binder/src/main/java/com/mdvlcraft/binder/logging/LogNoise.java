@@ -104,8 +104,17 @@ public final class LogNoise extends AbstractFilter {
                 Configuration config = context.getConfiguration();
                 if (!config.hasFilter() || !containsSelf(config.getFilter())) {
                     config.addFilter(INSTANCE);
-                    context.updateLoggers();
                 }
+                // and on every logger config, which checks each finished event (the configuration filter alone isn't
+                // consulted on every path)
+                java.util.List<org.apache.logging.log4j.core.config.LoggerConfig> loggers = new java.util.ArrayList<>(config.getLoggers().values());
+                loggers.add(config.getRootLogger());
+                for (org.apache.logging.log4j.core.config.LoggerConfig logger : loggers) {
+                    if (!logger.hasFilter() || !containsSelf(logger.getFilter())) {
+                        logger.addFilter(INSTANCE);
+                    }
+                }
+                context.updateLoggers();
             } catch (RuntimeException | LinkageError e) {
                 System.out.println("[mdvlcraft] LogNoise could not filter " + context + ": " + e);
             }
