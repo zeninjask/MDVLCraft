@@ -71,6 +71,7 @@ public final class MDVLBinder {
         if (FMLEnvironment.dist == Dist.CLIENT) {
             ClientContentSetup.register(modBus);
             GateRenderer.register(modBus);
+            com.mdvlcraft.binder.gate.tower.client.TowerClient.register(modBus);
             ClientAbilitySetup.register(modBus);
             HerobrineRender.register(modBus);
             ModifiedClientSetup.register(modBus);
@@ -82,6 +83,7 @@ public final class MDVLBinder {
         ReturnCrystal.register(modBus, forgeBus);
         GateItems.register(modBus);
         GateRewards.register(modBus);
+        com.mdvlcraft.binder.gate.tower.TowerItems.register(modBus);
         BossArena.register(modBus, forgeBus);
         PartyTravel.register(forgeBus);
         HerobrineLook.register();

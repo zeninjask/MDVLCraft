@@ -1,0 +1,63 @@
+wait 60
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd effect give Tester minecraft:regeneration 99999 4 true
+cmd mdvl gate tower progress Tester set 1
+cmd mdvl gate tower open 1
+wait 25
+cmd execute as Tester at @s if dimension mdvlcraft:demon_castle run say IN_CASTLE_OK
+cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:deepslate_tiles run say ON_CRYPT_LANDING_OK
+cmd mdvl gate tower info
+shot tower_landing
+cmd execute as Tester at @s positioned ~3 ~ ~ if block ~ ~ ~ minecraft:air run say LANDING_CLEAR_OK
+cmd execute as Tester at @s run tp @s ~16 ~ ~
+wait 3
+cmd execute as Tester at @s run tp @s ~16 ~ ~
+wait 5
+cmd execute if entity @e[tag=mdvlcraft_gate] run say ROOM_SPAWNED_OK
+cmd mdvl gate tower info
+cmd mdvl gate tower next
+wait 20
+cmd mdvl gate tower progress Tester
+cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:deepslate_tiles run say ON_FLOOR2_LANDING_OK
+cmd execute as Tester at @s if entity @s[y=140,dy=30] run say FLOOR2_HIGH_BAND_OK
+cmd mdvl gate tower info
+cmd mdvl gate tower next
+wait 20
+cmd mdvl gate tower next
+wait 20
+cmd mdvl gate tower next
+wait 20
+cmd mdvl gate tower info
+cmd mdvl gate tower progress Tester
+shot tower_floor5
+cmd execute as Tester at @s run tp @s ~20 ~ ~
+wait 5
+cmd execute if entity @e[tag=mdvlcraft_tower_boss] run say BOSS_SPAWNED_OK
+cmd kill @e[tag=mdvlcraft_tower_boss]
+wait 3
+cmd mdvl gate tower progress Tester
+cmd mdvl gate tower info
+cmd clear Tester mdvlcraft:tower_seal 0
+cmd execute if entity Tester[nbt={Inventory:[{id:"mdvlcraft:tower_seal"}]}] run say SEALS_OK
+cmd mdvl gate tower next
+wait 20
+cmd mdvl gate tower progress Tester
+cmd mdvl gate tower next
+wait 20
+cmd mdvl gate tower progress Tester
+cmd mdvl gate tower top
+cmd mdvl gate tower close 1
+wait 10
+cmd mdvl gate tower info
+cmd execute as Tester at @s unless dimension mdvlcraft:demon_castle run say CLOSED_HOME_OK
+cmd mdvl gate tower open
+wait 25
+cmd mdvl gate tower info
+cmd execute as Tester at @s if dimension mdvlcraft:demon_castle run say REOPEN_IN_CASTLE_OK
+cmd effect clear Tester
+cmd kill Tester
+wait 5
+cmd mdvl gate tower progress Tester
+cmd mdvl gate tower info
+shot tower_died
