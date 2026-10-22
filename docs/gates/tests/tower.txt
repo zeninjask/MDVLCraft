@@ -39,7 +39,7 @@ wait 3
 cmd mdvl gate tower progress Tester
 cmd mdvl gate tower info
 cmd clear Tester mdvlcraft:tower_seal 0
-cmd execute if entity Tester[nbt={Inventory:[{id:"mdvlcraft:tower_seal"}]}] run say SEALS_OK
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:tower_seal"}]}] run say SEALS_OK
 cmd execute as Tester at @s run mdvl gate tower next
 wait 20
 cmd mdvl gate tower progress Tester

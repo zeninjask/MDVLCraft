@@ -1,7 +1,7 @@
 # Gates part: Demon Castle tower (phase 8), handoff
 
 > Standing rule (always applies): near the usage limit (~95%) or on "wrap up", stop, commit everything (WIP ok; say if the
-> build is broken), push `gate-tower`, and update this file with exactly where work stopped and the next step.
+> build is broken), push the branch (`gate-tower2` now), and update this file with exactly where work stopped and the next step.
 
 Branch `gate-tower`, cut from `gate` at d7ff686. (The worktree first came up on main's ce09fea; the branch was moved to
 d7ff686 before any work and `origin/gate-tower` force-pushed once to match. It contains no main-only commits.)
@@ -41,6 +41,18 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
       every 10 floors and the 25% hidden boss at 55+ (need phase 7's modifier API); landing tablet; the start menu
       (sneak-use stands in for "start from checkpoint"); status-page leaderboard line; half essence drops on farm floors
 
+## Round 3 (`gate-tower2`, cut from `gate` at 4cc49214)
+
+- [x] Tower Seal trades at the Gate Forge (`TowerItems.forgeOffers`, one hook line in `GateForgeBlock.offers`):
+      6 Tower Seals + 2 S mana crystals → S Temper Rune (the top tempering tier, without the 6 S stones);
+      16 Tower Seals → Castle Trophy (`castle_trophy`, cosmetic, epic, stacks to 16; texture/model/lang from
+      `gen_tower_items.py`)
+- [x] `tests/tower.txt`: SEALS_OK used `Tester[nbt=...]` (invalid); now `@a[name=Tester,nbt=...]`
+- [ ] Tower modifiers every 10 floors (next)
+- [ ] Floor-55+ hidden boss
+- [ ] Landing tablet (floor + modifiers)
+- [ ] Test steps for the above
+
 ## Decisions
 
 - Run = gate instance kept in BUILDING: GateProtection, rosters, cells and GateSpawner work unchanged, and GateCombat's
@@ -53,6 +65,9 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
   thousand blocks per tick.
 
 ## Hooks into other files
+
+- Round 3: `gate/GateForgeBlock.java`: `offers()` ends with `offers.addAll(com.mdvlcraft.binder.gate.tower.TowerItems.forgeOffers());`
+  (fully qualified, no import) + Javadoc line.
 
 - `MDVLBinder.java`: `TowerItems.register(modBus)` after `GateRewards.register`; on the client
   `TowerClient.register(modBus)` after `GateRenderer.register` (fully qualified, no imports).
@@ -68,6 +83,9 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
 
 - 2026-10-22: `flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q` passes (exit 0) on the first full commit. Not
   run in game.
+
+- 2026-10-22 (coordinator, 2.0.40 jar): `tests/tower.txt` all markers pass except SEALS_OK (selector syntax; fixed).
+- Round 3 step 1 (seal trades): build passes.
 
 ## Where I stopped
 

@@ -24,7 +24,8 @@ import net.minecraft.world.phys.BlockHitResult;
  * trading screen with fixed, unlimited trades, so it needs no menu or screen of its own:
  *   Return Stone        2 E essence stones + 1 E mana crystal
  *   <rank> Temper Rune  6 essence stones + 2 mana crystals of that rank (the rune tempers gear in an anvil, GateTempering)
- * Using it with an A or S key in hand rerolls the key's modifiers (GateModifiers.reroll). The Castle Sigil (phase 8) comes later.
+ * Using it with an A or S key in hand rerolls the key's modifiers (GateModifiers.reroll). The tower's seal trades come from
+ * TowerItems.forgeOffers.
  */
 public class GateForgeBlock extends Block {
     public GateForgeBlock() {
@@ -51,6 +52,7 @@ public class GateForgeBlock extends Block {
             offers.add(offer(new ItemStack(GateItems.ESSENCE_STONES.get(rank).get(), 6), new ItemStack(GateItems.MANA_CRYSTALS.get(rank).get(), 2),
                 new ItemStack(GateRewards.TEMPER_RUNES.get(rank).get())));
         }
+        offers.addAll(com.mdvlcraft.binder.gate.tower.TowerItems.forgeOffers());   // Tower Seal trades
         return offers;
     }
 
