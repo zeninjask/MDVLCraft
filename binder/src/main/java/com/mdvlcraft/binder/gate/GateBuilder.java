@@ -4,7 +4,6 @@ import com.mdvlcraft.binder.gate.GateInstances.Instance;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.levelgen.Heightmap;
 
 /**
  * Builds and clears what is inside an instance's cell. Until the dungeon builder (phase 3) this is a stand-in: a 9x9
@@ -21,8 +20,7 @@ public final class GateBuilder {
     public static void build(ServerLevel level, Instance instance) {
         BlockPos centre = GateDimensions.centre(instance.cellX, instance.cellZ, PLATFORM_Y);
         if (instance.dimension == GateDimensions.RED_REALM) {
-            level.getChunk(centre);   // generate the landscape there, then stand on it
-            instance.entry = centre.atY(level.getHeight(Heightmap.Types.MOTION_BLOCKING, centre.getX(), centre.getZ()));
+            RedLandscape.plan(level, instance);   // arrival point, lair and camps on the generated land
         } else {
             platform(level, centre, true);
             instance.entry = centre.above();
