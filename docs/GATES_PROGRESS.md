@@ -169,6 +169,9 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-22 night, 2.0.40 jar, `themes.txt` on a fresh server: **8/8 PASS** (E crypt built, boss rooms small /
+  medium / large by size class, frozen cold → Slowness, red frozen gate entered and cold ticks, warren spores → Poison).
+  The 4 error lines in the run are not gates (vanilla hanging entities near spawn, a KubeJS reflection warning).
 - 2026-10-22 night, 2.0.40 jar (gate 92608634), `tower.txt` on a fresh server: **PASS** except SEALS_OK, which is a
   syntax error in the step (`Tester[nbt=…]`; the log shows the 4 seals given — fix passed to `gate-tower2`). Checked:
   run opens in the castle on the crypt landing, landing clear, room spawns, floor 2 landing/band, floors 3–5, floor-5
