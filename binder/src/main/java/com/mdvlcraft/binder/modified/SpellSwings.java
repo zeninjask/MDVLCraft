@@ -5,6 +5,7 @@ import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import io.redspace.ironsspellbooks.api.spells.SpellAnimations;
 import io.redspace.ironsspellbooks.api.util.AnimationHolder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ import javax.annotation.Nullable;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
@@ -33,8 +36,9 @@ import yesman.epicfight.world.damagesource.EpicFightDamageSource;
  * the held weapon's own combo swing (its finisher for heavy blows, its dash attack for dashing cuts), or a fist combo
  * hit for palms, punches and kicks. The Modified ones are listed here (and show no Iron's animation, ModifiedSpell);
  * any other mod's spell whose cast animation is one of Iron's melee swings gets a weapon swing too (its Iron's swing is
- * dropped on the client, mixin/irons/ClientSpellCastHelperMixin). The swing is only the look: while it plays, its own
- * hits do no damage (the spell already dealt its own).
+ * dropped on the client, mixin/irons/ClientSpellCastHelperMixin). The spell itself takes effect when the swing lands
+ * (its first hit's contact time; mixin/irons/AbstractSpellSwingMixin holds the cast back till then), and the swing's own
+ * hits do no damage.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class SpellSwings {
@@ -48,6 +52,17 @@ public final class SpellSwings {
     /** Players whose spell swing is playing, until this game time: the swing's own hits are cancelled. */
     private static final Map<UUID, Long> SWINGING = new HashMap<>();
     private static final int SWING_TICKS = 24;
+    /** Ticks from the start of a swing to its blow, for the cast about to go off (castSpell posts the cast event, then
+     * calls onCast straight after). */
+    private static final Map<UUID, Integer> LANDS_IN = new HashMap<>();
+    /** Casts held back until their swing lands, by the game time they go off. */
+    private static final List<Pending> PENDING = new ArrayList<>();
+    /** The blow's moment from the animation's start, plus Epic Fight's blend into it. */
+    private static final int BLEND_TICKS = 1;
+    private static final int MAX_DELAY_TICKS = 15;
+
+    private record Pending(long at, ServerPlayer player, Runnable cast) {
+    }
 
     static {
         put(Kind.SWING, "cedar_cleave", "crimson_toll", "ember_garrote", "frozen_fingers", "kesa_guard", "pressure_point", "shakedown",
@@ -114,8 +129,42 @@ public final class SpellSwings {
         } else {
             swing = combo.get(player.getRandom().nextInt(hits));
         }
-        SWINGING.put(player.getUUID(), player.level().getGameTime() + SWING_TICKS);
+        int lands = Math.min(MAX_DELAY_TICKS, Math.round(swing.get().phases[0].contact * 20.0F) + BLEND_TICKS);
+        SWINGING.put(player.getUUID(), player.level().getGameTime() + lands + SWING_TICKS);
+        LANDS_IN.put(player.getUUID(), lands);
         patch.playAnimationSynchronized(swing, 0.0F);
+    }
+
+    /** Called in place of the spell's onCast (mixin/irons/AbstractSpellSwingMixin): true when the cast is held back until
+     * its swing lands (it runs then, if the caster is still there). */
+    public static boolean defer(LivingEntity caster, Runnable cast) {
+        Integer lands = caster instanceof ServerPlayer player ? LANDS_IN.remove(player.getUUID()) : null;
+        if (lands == null || lands <= 0) {
+            return false;
+        }
+        ServerPlayer player = (ServerPlayer)caster;
+        PENDING.add(new Pending(player.level().getGameTime() + lands, player, cast));
+        return true;
+    }
+
+    @SubscribeEvent
+    public static void onTick(TickEvent.ServerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || PENDING.isEmpty()) {
+            return;
+        }
+        List<Pending> due = new ArrayList<>();
+        PENDING.removeIf(pending -> {
+            boolean ready = pending.player.isRemoved() || pending.player.level().getGameTime() >= pending.at;
+            if (ready) {
+                due.add(pending);
+            }
+            return ready;
+        });
+        for (Pending pending : due) {
+            if (pending.player.isAlive() && !pending.player.isRemoved()) {
+                pending.cast.run();
+            }
+        }
     }
 
     /** The swing is only for show: its own hits land nothing. */
@@ -132,5 +181,6 @@ public final class SpellSwings {
     @SubscribeEvent
     public static void onLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         SWINGING.remove(event.getEntity().getUUID());
+        LANDS_IN.remove(event.getEntity().getUUID());
     }
 }
