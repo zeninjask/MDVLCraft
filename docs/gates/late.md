@@ -1,0 +1,90 @@
+# Late game (phase 7): handoff
+
+> Standing rule (always applies): near the usage limit (~95%) or on "wrap up", stop, commit everything (WIP ok; say if the
+> build is broken), push `gate-late`, and update this file with exactly where work stopped and the next step.
+
+Branch `gate-late`, cut from `gate` d7ff686 (the worktree first came up on main ce09fea; the branch was reset to d7ff686
+before any work and force-pushed, so it holds no main-only commits). Plan section 9. Owner files: `gate/GateModifiers`,
+`gate/RuleGates`, `gate/HiddenBoss`, `gate/LateGateCommand`, `binder/tools/gates/gen_gate_late.py` and what it writes
+(`data/mdvlcraft/gate_modifiers/*.json`, `textures/item/gate_trophy.png`, `models/item/gate_trophy.json`, lang entries),
+`docs/gates/tests/late.txt`.
+
+## Checklist
+
+- [x] Gate modifiers (9.1), `GateModifiers`:
+  - [x] Data entries `data/mdvlcraft/gate_modifiers/<id>.json` `{effect, value, weight}` loaded by a reload listener; the
+        eight of the plan (enraged, swarming, cursed, volatile, silenced, elite_pack, crimson, ironclad). Effects are coded
+        kinds (mob_damage, mob_count, no_regen, death_burst, mana_cost, room_elite, red_chance, mob_armour), so new
+        entries can reuse them with other values.
+  - [x] Rolling: A 0–1, S 1–3, distinct, by weight. At crafting (`GateKeyItem.onCraftedBy`; covers shift-click); keys
+        from anywhere else (loot, /give, creative) roll on their first inventory tick. NBT list `modifiers` (present, maybe
+        empty, once rolled). Attuning a key copies the grid key's modifiers (no free reroll).
+  - [x] Tooltip: each modifier + description (red/grey) and "Rewards +X%, clear experience +Y%".
+  - [x] Reroll: using the Gate Forge with an A/S key in hand rerolls it for 4 A essence stones (one key off a stack).
+  - [x] The key's modifiers go to the instance when the gate opens; a gate that turns red keeps them (and a rule).
+  - [x] Effects: Enraged (LivingHurtEvent, attacker is a gate mob: ×1.3), Ironclad (+10 armour on join), Swarming (every
+        2nd fresh normal gate mob gets a copy at its spawn point, next tick), Elite Pack (first mob of a room without an
+        elite or boss marker queues an elite there), Volatile (explosion power 2, ExplosionInteraction.NONE, on death),
+        Cursed (heals from FoodData cancelled), Silenced (Iron's `ChangeManaEvent`: mana spent ×2), Crimson (red chance ×2
+        in `RedGates.roll`).
+  - [x] Rewards: +20% stones (mob drops) and vein size per modifier, +15% clear experience per modifier.
+- [x] Red S gates (9.2), `HiddenBoss`:
+  - [x] Always a hidden boss: the lair boss's death doesn't break the seal; a second boss rises in the arena (another
+        theme's S boss if its mod is loaded, else the same / stand-in), ×1.5 health, glowing, named "Hidden …". Its death
+        breaks the seal.
+  - [x] Black essence stones (1–2) only from the hidden boss (GateRewards used to give them from every red boss).
+  - [x] Two lair camps (20–24 blocks from the arena centre, opposite sides) added to the layout; two crystal veins
+        (6–8 ore, × modifiers) at every camp once built ("double"; red gates otherwise have no veins in the red realm).
+- [x] Rule gates (9.3), `RuleGates`:
+  - [x] 6% on an S gate's first entry when the red roll didn't fire; once per instance.
+  - [x] Title + subtitle + chat on every entry (PlayerChangedDimensionEvent); a stone tablet (two chiseled stone bricks
+        2–3 blocks from the entry, inside the entrance room) with a floating text display of the rule. Stale tablets
+        (closed instances) are discarded.
+  - [x] No Potions (right-click and use-start of any PotionItem cancelled), No Healing (every heal not from FoodData
+        cancelled).
+  - [x] ×1.5 stones, veins and clear experience; a Trial Trophy item (`mdvlcraft:gate_trophy`, NBT rule + rank) to every
+        player present at the clear.
+- [x] Debug: `/mdvl gate late open <rank> <theme> <mods|none> [rule]`, `late key <rank> <mods>`, `late info`.
+- [x] In-game steps: `docs/gates/tests/late.txt` (not run; coordinator runs it).
+- [ ] Not done / later: the two richer rules (Statues, Narrowing Door); boss chest ×1.5 for trial gates (only stones,
+      veins and experience are scaled); "except food" doesn't cover foods that heal directly in finishUsingItem (only
+      natural regeneration counts); trophy and Elite Pack in the red realm (camps have no rooms, so no Elite Pack there).
+
+## Hooks into other files
+
+- `GateKeyItem`: `useOn` calls `GateModifiers.attach(gate.instanceId(), stack)` after `GateEntity.open`; tooltip calls
+  `GateModifiers.tooltip`; new overrides `onCraftedBy` → `GateModifiers.onCrafted`, `inventoryTick` → `GateModifiers.ensureRolled`
+  (+ Javadoc line, 2 imports).
+- `GateEntity.tryEnter`: after the red roll, `if (instance.roster.isEmpty()) RuleGates.roll(player, instance);`.
+- `RedGates.roll`: chance × `GateModifiers.redFactor(instance.id)`; `convert`: `GateModifiers.carry(old.id, red.id)`;
+  `onDeath`: `if (HiddenBoss.rise(level, instance, layout, dead)) return;` before `breakSeal`.
+- `GateRewards.onDrops`: stones × `GateModifiers.rewardFactor`; black stones only if `HiddenBoss.dropsBlack(mob)` (was: any
+  red boss). `placeCrystals`: vein size × `rewardFactor`. `onCleared`: experience × `experienceFactor` (red ×1.5 kept), and
+  `RuleGates.onCleared(instance, present)`. Javadoc line.
+- `GateForgeBlock.use`: `if (GateModifiers.reroll(player, hand)) return ...;` first; Javadoc line.
+- `lang/en_us.json`: merged by `gen_gate_late.py` (rerun it after a lang conflict). All messages also use
+  `translatableWithFallback`.
+- No MDVLBinder line: the trophy registers through `RegisterEvent` (`RuleGates.Registration`, mod bus).
+
+## Decisions
+
+- **Modifiers and rules live in memory per instance id** (like RedLandscape's layouts): every gate closes on restart.
+  So no GateInstances change; red conversion carries them over by hook.
+- **Swarming / Elite Pack from the spawn event**, not in GateCombat (combat part owns it): extra mobs are queued from
+  EntityJoinLevelEvent and spawned next tick through `GateSpawner.spawn`, with a flag so they don't count again.
+- **Reroll by using the forge with the key**, not a merchant trade: a trade can't keep the key's theme. Not sneak-use:
+  sneaking with an item skips the block and would open a gate on the forge.
+- **Lazy roll on inventory tick** as well as at crafting, so loot keys (the boss chest's 15% next-rank key) get modifiers.
+- **Black stones only from hidden bosses**, so red S gates are their only source (plan 9.2 over 7.2's "50% for others").
+  Red A/B gates get no hidden boss.
+- **Food detection by stack walk** (FoodData on the stack) for Cursed and No Healing: no mixin; only runs for players
+  inside a gate with that modifier/rule.
+
+## Build / test results
+
+- 2026-10-22: `flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q` passes. Not run in game.
+
+## State / next step
+
+All three parts written; next: coordinator merges and runs `tests/late.txt`. Watch: Iron's ChangeManaEvent firing on cast
+(Silenced), the text display tablet's look, trophy texture, and Swarming counts in real rooms.

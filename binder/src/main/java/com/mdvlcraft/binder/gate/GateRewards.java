@@ -50,7 +50,8 @@ import net.puffish.skillsmod.api.SkillsAPI;
  *
  * Amounts are tuned so one clear yields about what the next key costs (4 stones + 3-4 crystals): a normal mob drops a
  * stone 15% of the time, an elite 1-2, the boss 2-3, a vein holds 3-4 ore blocks (one crystal each before Fortune), and
- * the boss chest adds 0-2 of each per player. Red gates give 1.5x stones, double veins and black stones from the boss.
+ * the boss chest adds 0-2 of each per player. Red gates give 1.5x stones and double veins; black stones come only from red S gates' hidden bosses (HiddenBoss). Gate
+ * modifiers and trial gates scale stones, veins and the clear bonus (GateModifiers.rewardFactor / experienceFactor).
  *
  * The dungeon builder calls {@link #placeCrystals} after building; the spawner calls {@link #onCleared} when the boss dies.
  */
@@ -151,9 +152,10 @@ public final class GateRewards {
         if (instance.red) {
             stones = scaled(stones, 1.5, random);
         }
+        stones = scaled(stones, GateModifiers.rewardFactor(instance), random);   // modifiers and trial gates
         if (role.equals("boss")) {
             event.getDrops().clear();
-            if (instance.red) {
+            if (HiddenBoss.dropsBlack(mob)) {   // black stones only from red S gates' hidden bosses (plan 9.2)
                 drop(event, mob, new ItemStack(GateItems.BLACK_ESSENCE_STONE.get(), 1 + random.nextInt(2)));
             }
         }
@@ -184,7 +186,7 @@ public final class GateRewards {
         RandomSource random = level.random;
         for (Marker marker : instance.markers) {
             if (marker.kind().equals("crystal")) {
-                int size = (3 + random.nextInt(2)) * (instance.red ? 2 : 1);
+                int size = scaled((3 + random.nextInt(2)) * (instance.red ? 2 : 1), GateModifiers.rewardFactor(instance), random);
                 vein(level, marker.pos(), ore, size, random);
             }
         }
@@ -225,7 +227,7 @@ public final class GateRewards {
         List<ServerPlayer> present = level.players().stream()
             .filter(player -> instance.roster.contains(player.getUUID()) && GateDimensions.bounds(instance.cellX, instance.cellZ).contains(player.position()))
             .toList();
-        int experience = CLEAR_EXPERIENCE[instance.rank.ordinal()] * (instance.red ? 3 : 2) / 2;
+        int experience = (int)Math.round(CLEAR_EXPERIENCE[instance.rank.ordinal()] * (instance.red ? 1.5 : 1.0) * GateModifiers.experienceFactor(instance));
         present.forEach(player -> giveExperience(player, experience));
 
         BlockPos pos = chestPos(instance);
@@ -235,6 +237,7 @@ public final class GateRewards {
             present.forEach(player -> chest.roll(player, table));
         }
         present.forEach(player -> player.sendSystemMessage(Component.translatable("gate.mdvlcraft.cleared", experience)));
+        RuleGates.onCleared(instance, present);   // trial gates: a trophy each
     }
 
     private static BlockPos chestPos(Instance instance) {

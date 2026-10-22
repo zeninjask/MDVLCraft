@@ -24,7 +24,7 @@ import net.minecraft.world.phys.BlockHitResult;
  * trading screen with fixed, unlimited trades, so it needs no menu or screen of its own:
  *   Return Stone        2 E essence stones + 1 E mana crystal
  *   <rank> Temper Rune  6 essence stones + 2 mana crystals of that rank (the rune tempers gear in an anvil, GateTempering)
- * Modifier rerolls (phase 7) and the Castle Sigil (phase 8) are added here later.
+ * Using it with an A or S key in hand rerolls the key's modifiers (GateModifiers.reroll). The Castle Sigil (phase 8) comes later.
  */
 public class GateForgeBlock extends Block {
     public GateForgeBlock() {
@@ -34,6 +34,9 @@ public class GateForgeBlock extends Block {
     @SuppressWarnings("deprecation")
     @Override
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (GateModifiers.reroll(player, hand)) {   // with an A/S key in hand: reroll its modifiers
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
         if (!level.isClientSide) {
             new Trader(player).openTradingScreen(player, Component.translatable("block.mdvlcraft.gate_forge"), 0);
         }
