@@ -1,9 +1,11 @@
+wait 120
 cmd gamemode survival Tester
 cmd effect give Tester minecraft:resistance 99999 4 true
 cmd execute in minecraft:overworld run forceload add 290 290 320 320
 cmd execute in minecraft:overworld run fill 298 99 298 312 99 312 minecraft:stone
 cmd execute in minecraft:overworld run fill 298 100 298 312 115 312 minecraft:air
 cmd execute in minecraft:overworld run tp Tester 305.5 100 302.5 0 45
+wait 20
 wait 3
 cmd recipe give Tester mdvlcraft:gate/gate_key_e
 cmd recipe give Tester mdvlcraft:gate/attune/gate_key_e_crypt
@@ -20,19 +22,23 @@ wait 6
 cmd data get entity @e[type=mdvlcraft:gate,limit=1] CustomName
 shot g2_stable
 cmd tp Tester 305.5 100 305 180 0
+wait 20
 wait 2
 shot g2_stable_close
 cmd execute in minecraft:overworld run tp Tester 305.5 100 304.5 180 0
+wait 20
 wait 3
 cmd data get entity Tester Dimension
 cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_crypt run say IN_CRYPT_OK
 cmd mdvl gate list
 cmd execute as Tester run mdvl gate leave
+wait 20
 wait 3
 cmd data get entity Tester Dimension
 cmd data get entity Tester Pos
 cmd item replace entity Tester weapon.mainhand with mdvlcraft:gate_key_e 1
 cmd execute in minecraft:overworld run tp Tester 300.5 100 300.5 0 45
+wait 20
 cmd execute in minecraft:overworld run fill 299 102 299 302 102 303 minecraft:stone
 wait 2
 click 3
@@ -40,6 +46,7 @@ wait 2
 cmd execute if entity @e[type=mdvlcraft:gate,x=300,y=100,z=301,distance=..3] run say NO_SPACE_FAILED
 cmd clear Tester mdvlcraft:gate_key_e 0
 cmd mdvl gate close 3
+wait 20
 wait 6
 cmd execute unless entity @e[type=mdvlcraft:gate] run say GATE_REMOVED_OK
 cmd mdvl gate list

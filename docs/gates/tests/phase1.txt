@@ -1,9 +1,11 @@
-wait 60
+wait 120
 cmd gamemode survival Tester
 cmd effect give Tester minecraft:resistance 99999 4 true
 cmd tp Tester 200.5 140 36.5 90 0
+wait 20
 wait 2
 cmd execute as Tester run mdvl gate open E crypt
+wait 20
 wait 3
 cmd data get entity Tester Dimension
 cmd data get entity Tester Pos
@@ -15,6 +17,7 @@ shot g1_gate_realm
 key F5
 cmd item replace entity Tester weapon.mainhand with minecraft:diamond_pickaxe
 cmd execute as Tester at @s run tp @s ~ ~ ~ 0 90
+wait 20
 wait 1
 mdown 1
 wait 6
@@ -22,17 +25,21 @@ mup 1
 wait 1
 cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:glowstone run say BREAK_REFUSED_OK
 cmd execute as Tester at @s run tp @s ~700 ~ ~
+wait 20
 wait 2
 cmd data get entity Tester Pos
 cmd execute in minecraft:overworld run tp Tester 0 120 0
+wait 20
 wait 3
 cmd data get entity Tester Dimension
 cmd mdvl gate list
 cmd execute as Tester run mdvl gate leave
+wait 20
 wait 3
 cmd data get entity Tester Dimension
 cmd data get entity Tester Pos
 cmd execute as Tester run mdvl gate open B frozen red
+wait 20
 wait 6
 cmd data get entity Tester Dimension
 cmd data get entity Tester Pos
@@ -42,10 +49,12 @@ wait 3
 shot g1_red_realm
 key F5
 cmd execute in minecraft:overworld run tp Tester 0 120 0
+wait 20
 wait 3
 cmd data get entity Tester Dimension
 cmd mdvl gate list
 cmd mdvl gate close 2
+wait 20
 wait 3
 cmd data get entity Tester Dimension
 cmd mdvl gate list
