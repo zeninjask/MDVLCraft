@@ -37,7 +37,7 @@ cmd execute as Tester store result score @s gt run mdvl gate rooms
 cmd execute as Tester if score @s gt matches 1.. run say GATE_LIVE_BEFORE_WIPE_OK
 cmd effect clear Tester minecraft:resistance
 cmd kill Tester
-wait 90
+wait 20
 cmd execute as Tester unless entity @s[nbt={Dimension:"mdvlcraft:gate_realm"}] run say RESPAWN_OUTSIDE_OK
 cmd mdvl gate list
 cmd execute as Tester store result score @s gt run mdvl gate rooms

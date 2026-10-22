@@ -53,7 +53,8 @@ import net.puffish.skillsmod.api.SkillsAPI;
  * Amounts are tuned so one clear yields about what the next key costs (4 stones + 3-4 crystals): a normal mob drops a
  * stone 15% of the time, an elite 1-2, the boss 2-3, a vein holds 3-4 ore blocks (one crystal each before Fortune), and
  * the boss chest adds 0-2 of each per player. Red gates give 1.5x stones and double veins; black stones come only from red S gates' hidden bosses (HiddenBoss). Gate
- * modifiers and trial gates scale stones, veins and the clear bonus (GateModifiers.rewardFactor / experienceFactor).
+ * modifiers and trial gates scale stones, veins and the clear bonus (GateModifiers.rewardFactor / experienceFactor); a trial
+ * gate's boss chest rolls a second time for each player with a 50% chance (RuleGates.extraChestRoll).
  *
  * The dungeon builder calls {@link #placeCrystals} after building; the spawner calls {@link #onCleared} when the boss dies.
  */
@@ -239,7 +240,12 @@ public final class GateRewards {
         level.setBlockAndUpdate(pos, REWARD_CHEST.get().defaultBlockState());
         if (level.getBlockEntity(pos) instanceof GateRewardChestBlockEntity chest) {
             ResourceLocation table = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/" + instance.rank.name().toLowerCase(Locale.ROOT) + "/boss");
-            present.forEach(player -> chest.roll(player, table));
+            present.forEach(player -> {
+                chest.roll(player, table);
+                if (RuleGates.extraChestRoll(instance, level.random)) {
+                    chest.roll(player, table);   // trial gates: x1.5 on average
+                }
+            });
         }
         present.forEach(player -> player.sendSystemMessage(Component.translatable("gate.mdvlcraft.cleared", experience)));
         RuleGates.onCleared(instance, present);   // trial gates: a trophy each

@@ -1,11 +1,13 @@
 """Writes the late-game gate resources (run from anywhere; plan section 9): the gate modifier data entries
-(data/mdvlcraft/gate_modifiers/<id>.json), the Trial Trophy's texture and item model, and en_us lang entries (merged).
+(data/mdvlcraft/gate_modifiers/<id>.json), the Trial Trophy's texture and item model, the trial statue's entity texture,
+and en_us lang entries (merged).
 The Java side is gate/GateModifiers.java, gate/RuleGates.java and gate/HiddenBoss.java.
 
 A modifier entry is {"effect", "value", "weight"}: the effect is one of GateModifiers' coded kinds, weight its share of
 the roll. Name and description come from the lang keys below.
 """
 import json
+import random
 from pathlib import Path
 from PIL import Image
 
@@ -32,6 +34,15 @@ LANG = {
     'gate.mdvlcraft.rule.no_potions.desc': 'Potions cannot be used here',
     'gate.mdvlcraft.rule.no_healing': 'No Healing',
     'gate.mdvlcraft.rule.no_healing.desc': 'Nothing heals you here but food',
+    'gate.mdvlcraft.rule.statues': 'Statues',
+    'gate.mdvlcraft.rule.statues.desc': 'They move only when no one is looking',
+    'gate.mdvlcraft.rule.narrowing_door': 'The Narrowing Door',
+    'gate.mdvlcraft.rule.narrowing_door.desc': "Whoever leaves can't come back in. Someone must stay inside",
+    'gate.mdvlcraft.rule.narrowing_door.shut': "The door has narrowed: you can't go back in",
+    'gate.mdvlcraft.rule.narrowing_door.left': "The door narrows behind you. You can't go back in.",
+    'gate.mdvlcraft.rule.narrowing_door.narrows': "The door narrows: %s can't come back.",
+    'gate.mdvlcraft.rule.narrowing_door.failed': 'Nobody stayed behind: the door shuts and the gate fails.',
+    'entity.mdvlcraft.gate_statue': 'Statue',
     'gate.mdvlcraft.rule.tablet': 'Trial',
     'gate.mdvlcraft.rule.entered': 'Trial gate: %s. %s',
     'gate.mdvlcraft.rule.cleared': 'Trial passed: %s. You earned a Trial Trophy.',
@@ -72,12 +83,32 @@ def trophy():
     img.save(ASSETS / 'textures/item/gate_trophy.png')
 
 
+def statue():
+    """64x64 humanoid skin (zombie layout) in weathered grey stone with dark hollow eyes; the hat layer stays empty."""
+    rng = random.Random(7)
+    img = Image.new('RGBA', (64, 64))
+    px = img.load()
+    for y in range(64):
+        for x in range(64):
+            if x >= 32 and y < 16:
+                continue   # hat layer
+            v = 128 + rng.randint(-14, 14)
+            if rng.random() < 0.05:
+                v -= 35   # cracks and pits
+            px[x, y] = (v, v, v - 4, 255)
+    for x in (9, 10, 13, 14):   # eyes on the face (front of the head: u 8-15, v 8-15)
+        px[x, 12] = (40, 40, 44, 255)
+    (ASSETS / 'textures/entity').mkdir(parents=True, exist_ok=True)
+    img.save(ASSETS / 'textures/entity/gate_statue.png')
+
+
 def main():
     for key, (effect, value, name, desc) in MODIFIERS.items():
         write(DATA / f'gate_modifiers/{key}.json', {'effect': effect, 'value': value, 'weight': 1})
         LANG[f'gate.mdvlcraft.modifier.{key}'] = name
         LANG[f'gate.mdvlcraft.modifier.{key}.desc'] = desc
     trophy()
+    statue()
     write(ASSETS / 'models/item/gate_trophy.json', {'parent': 'minecraft:item/generated', 'textures': {'layer0': 'mdvlcraft:item/gate_trophy'}})
     path = ASSETS / 'lang/en_us.json'
     merged = json.loads(path.read_text())

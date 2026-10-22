@@ -25,7 +25,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 /**
  * Debug commands for the late game (phase 7), under /mdvl gate late:
  *   open <rank> <theme> <modifiers> [rule]  opens a gate 4 blocks ahead (as a key would) with these modifiers (comma list,
- *                                           or "none"); with a rule (no_potions, no_healing) its first entry makes it a trial
+ *                                           or "none"); with a rule (no_potions, no_healing, statues, narrowing_door) its first entry makes it a trial
  *   key <rank> <modifiers>                  gives the caller a key with exactly these modifiers (into the main hand if empty)
  *   close                                   closes the caller's gate: its players go home (off the roster), mobs and cell cleared
  *   info                                    the caller's gate: modifiers, rule, reward factors
@@ -133,7 +133,7 @@ public final class LateGateCommand {
         context.getSource().sendSuccess(() -> Component.literal("Gate " + instance.id + " (" + instance.rank + (instance.red ? " red" : "") + "): modifiers "
             + GateModifiers.ids(instance.id) + ", rule " + (rule == null ? "none" : rule.key()) + ", rewards x"
             + String.format("%.2f", GateModifiers.rewardFactor(instance)) + ", clear experience x"
-            + String.format("%.2f", GateModifiers.experienceFactor(instance))), false);
+            + String.format("%.2f", GateModifiers.experienceFactor(instance)) + ", boss chest x" + (rule == null ? "1.00" : "1.50 (50% second roll)")), false);
         return GateModifiers.ids(instance.id).size();
     }
 
