@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.damagesource.DamageSource;
 import reascer.wom.gameasset.WOMAnimations;
 import yesman.epicfight.api.animation.AnimationManager.AnimationAccessor;
@@ -21,8 +22,8 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
 import yesman.epicfight.world.entity.eventlistener.TakeDamageEvent;
 
 /**
- * Shunpo (the Shinigami's guard skill): its owner cannot guard or block (no guard stance, no shield), with any weapon or
- * none. Pressing the guard key with Parrying's timing (an attack landing within Parrying's window after the press, the
+ * Shunpo (the Shinigami's guard skill): its owner cannot guard or block (no guard stance, no shield). Holding any weapon,
+ * pressing the guard key with Parrying's timing (an attack landing within Parrying's window after the press, the
  * same window Parrying uses, parry-window bonuses included) instead dodges it with Dodge Master's sidestep, afterimage and
  * all, for no stamina. One dodge per press; a press that dodges nothing in its window costs 10 stamina. Registered and kept off shields by ShunpoSetup (not here: Forge's event scan
  * of a GuardSkill subclass touches its client-only methods on a dedicated server).
@@ -40,10 +41,11 @@ public class ShunpoSkill extends GuardSkill {
         super(builder);
     }
 
-    /** Any weapon, or none: Epic Fight's own checks without the guard's weapon check. */
+    /** Any weapon (an item Epic Fight gives a weapon capability) in the main hand, so a right click with an empty hand
+     * or a plain item does nothing; Epic Fight's own checks without the guard's weapon-category check. */
     @Override
     public boolean canExecute(SkillContainer container) {
-        return this.checkExecuteCondition(container);
+        return !container.getExecutor().getHoldingItemCapability(InteractionHand.MAIN_HAND).isEmpty() && this.checkExecuteCondition(container);
     }
 
     @Override
