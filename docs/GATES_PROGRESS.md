@@ -55,7 +55,7 @@ the shared contracts and the rules. The coordinator merges into `gate`, runs the
 - [x] `/mdvl gate open <rank> <theme> [red] | leave | list | tp <id> | close <id>` (`gate/GateCommand`; phase 1 builds a
       9x9 stone-brick platform at y 64 in the gate realm, or stands the player on the red realm's terrain)
 - [x] Boot test; server-side in-game checks pass (see test log)
-- [ ] Client-side checks (break refused, out-of-cell pull-back): rerun pending
+- [x] Client-side checks (break refused, out-of-cell pull-back) pass
 
 ### Phase 2 — Keys and gates (in progress)
 
@@ -87,6 +87,13 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 ## Test log
 
 (newest first; each entry: date, build, what was run, result)
+
+- 2026-10-22, gate 6ae18650, `docs/gates/tests/phase1.txt` with long waits: **phase 1 all PASS with the client in game**
+  (screenshot shows the platform in the crypt-sky gate realm): BIOME_CRYPT_OK, ON_PLATFORM_OK, BREAK_REFUSED_OK (diamond
+  pickaxe held on the glowstone for 6 s), +700 tp in the same world pulled back to the entry (5308 → 4608), normal gate
+  allows cross-dimension tp, leave → origin, red gate on terrain (BIOME_FROZEN_OK) refuses cross-dimension tp, close OK.
+  Rig note: the headless client stalls on "Joining world…" after a few dimension changes and then times out, so run each
+  steps file on a fresh client, and wait ≥20 s after every teleport. Phase 2 rerun pending.
 
 - 2026-10-22, gate d0cff13f + contracts, test rig (2.0.38 mods). `g1.txt` (phase 1) and `g2.txt` (phase 2):
   - PASS (server side): `open E crypt` → gate_realm, entry on platform (BIOME_CRYPT_OK, ON_PLATFORM_OK); cross-dimension
