@@ -1,4 +1,4 @@
-wait 60
+wait 120
 cmd gamemode survival Tester
 cmd effect give Tester minecraft:resistance 99999 4 true
 cmd effect give Tester minecraft:night_vision 99999 0 true
@@ -6,6 +6,14 @@ cmd tp Tester 200.5 140 36.5 90 0
 wait 2
 cmd mdvl gate themes
 cmd mdvl gate pools
+cmd mdvl gate redhidden never
+cmd scoreboard objectives add mdvlt dummy
+cmd execute store result score #pick mdvlt run mdvl gate themepick E
+cmd execute if score #pick mdvlt matches 1 run say THEMES_PICK_E_OK
+cmd execute store result score #pick mdvlt run mdvl gate themepick B
+cmd execute if score #pick mdvlt matches 1 run say THEMES_PICK_B_OK
+cmd execute store result score #pick mdvlt run mdvl gate themepick S
+cmd execute if score #pick mdvlt matches 1 run say THEMES_PICK_S_OK
 cmd execute as Tester run mdvl gate open E crypt
 wait 10
 cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_crypt run say THEMES_E_CRYPT_BUILT_OK
@@ -73,6 +81,60 @@ cmd execute as Tester run mdvl gate red lair
 wait 5
 cmd execute as Tester run mdvl gate leave
 wait 20
+cmd tp Tester 200.5 140 36.5 90 0
+wait 20
+cmd execute as Tester at @s run mdvl gate red place B crypt
+wait 10
+cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
+wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:red_realm if biome ~ ~ ~ mdvlcraft:gate_crypt run say THEMES_RED_CRYPT_IN_OK
+cmd execute as Tester run mdvl gate redcamp
+wait 20
+wait 3
+cmd execute as Tester run mdvl gate redinfo
+cmd execute as Tester store result score #veins mdvlt run mdvl gate redinfo
+cmd execute if score #veins mdvlt matches 1.. run say THEMES_RED_CAMP_VEIN_OK
+cmd execute as Tester at @s if entity @e[distance=..20,type=!minecraft:player,type=!minecraft:item] run say THEMES_RED_CAMP_MOBS_OK
+shot themes_6_red_camp
+cmd execute as Tester run mdvl gate redarena
+wait 20
+cmd execute as Tester at @s if block ~-5 ~-1 ~ minecraft:chiseled_deepslate if block ~-1 ~-1 ~ minecraft:polished_deepslate run say THEMES_RED_LAIR_TEMPLATE_OK
+cmd execute as Tester at @s if block ~4 ~ ~ minecraft:soul_campfire run say THEMES_RED_LAIR_BRAZIER_OK
+cmd execute as Tester at @s run tp @s ~6 ~4 ~ 90 25
+wait 20
+shot themes_7_red_lair
+cmd execute as Tester run mdvl gate red boss
+wait 3
+cmd execute as Tester run mdvl gate redarena
+wait 20
+cmd execute as Tester at @s if block ~-5 ~-1 ~ minecraft:crying_obsidian unless entity @e[distance=..48,nbt={ForgeData:{mdvlcraft_gate_hidden:1b}}] run say THEMES_RED_B_NO_HIDDEN_OK
+cmd execute as Tester run mdvl gate red lair
+wait 20
+cmd execute as Tester at @s if dimension minecraft:overworld run say THEMES_RED_B_HOME_OK
+cmd mdvl gate redhidden always
+cmd tp Tester 200.5 140 36.5 90 0
+wait 20
+cmd execute as Tester at @s run mdvl gate red place A forge
+wait 10
+cmd execute as Tester at @s rotated ~ 0 run tp @s ^ ^ ^4
+wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:red_realm if biome ~ ~ ~ mdvlcraft:gate_forge run say THEMES_RED_FORGE_IN_OK
+cmd execute as Tester run mdvl gate redarena
+wait 20
+cmd execute as Tester at @s if block ~-5 ~-1 ~ minecraft:gilded_blackstone run say THEMES_RED_FORGE_LAIR_OK
+cmd execute as Tester run mdvl gate red boss
+wait 3
+cmd execute as Tester at @s if entity @e[distance=..48,nbt={ForgeData:{mdvlcraft_gate_hidden:1b}}] run say THEMES_RED_A_HIDDEN_OK
+cmd execute as Tester at @s unless entity @e[distance=..48,nbt={ForgeData:{mdvlcraft_gate_black:1b}}] run say THEMES_RED_A_NO_BLACK_OK
+cmd execute as Tester at @s unless block ~-5 ~-1 ~ minecraft:crying_obsidian run say THEMES_RED_A_SEAL_HOLDS_OK
+shot themes_8_red_hidden
+cmd execute as Tester run mdvl gate red boss
+wait 3
+cmd execute as Tester at @s if block ~-5 ~-1 ~ minecraft:crying_obsidian run say THEMES_RED_A_SEAL_BROKEN_OK
+cmd execute as Tester run mdvl gate red lair
+wait 20
+cmd execute as Tester at @s if dimension minecraft:overworld run say THEMES_RED_A_HOME_OK
+cmd mdvl gate redhidden roll
 cmd reload
 wait 10
 cmd mdvl gate themes
