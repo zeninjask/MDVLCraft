@@ -177,6 +177,12 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate 0ffad579 jar, `late.txt` (gate-fix steps), fresh Tester: **23/28**. Now PASS: red S (hidden boss,
+  still sealed, black stone only from the hidden boss, exit), and all Statues checks (placed, moves unseen, frozen when
+  seen, unhurt; boss chest ×1.5 shown). Misses: REROLL_PAID (step: the forge was set 2 blocks along the old facing,
+  then the player was turned to pitch 45 — the click hit the ground; fixed in late.txt: face south at pitch 30, forge
+  2 blocks south); HEAL_TRIAL_ENTERED/NO_HEALING (Tester did not enter the no_healing gate; the statues gate entered the
+  same way worked — rerunning that section alone); DOOR_* (client killed by the machine after the statues section).
 - 2026-10-23, gate 0ffad579 jar (gate-fix + black-flag fix), `rewards.txt` (gate-fix steps), fresh Tester: **14/14
   PASS** — incl. CHEST_PLACED, RED_B_STONES, NO_BLACK_FROM_RED_B_HIDDEN and BLACK_FROM_HIDDEN_BOSS.
 - 2026-10-23, gate-fix jar (b7e83e18), `tower.txt` rerun: **22/23**; the "Display entity Not a string" error is gone

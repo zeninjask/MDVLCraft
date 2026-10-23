@@ -15,9 +15,9 @@ cmd clear Tester
 cmd execute as Tester run mdvl gate late key S "enraged,crimson"
 cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"mdvlcraft:gate_key_s"}}] run say KEY_IN_HAND_OK
 cmd data get entity Tester SelectedItem.tag.modifiers
-cmd execute as Tester at @s run setblock ^ ^ ^2 mdvlcraft:gate_forge
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 30
+cmd execute as Tester at @s run setblock ~ ~ ~2 mdvlcraft:gate_forge
 cmd give Tester mdvlcraft:essence_stone_a 4
-cmd execute as Tester at @s run tp @s ~ ~ ~ 0 45
 wait 20
 wait 1
 click 3
