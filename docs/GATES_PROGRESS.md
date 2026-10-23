@@ -62,7 +62,8 @@ never joined):
 - Rewards: tempering's small general bonus at A–S; trophies / rank gear materials in boss chests; JER listing of the
   stone drops; (the forge uses merchant trades, not its own recipe type — fine unless the user wants otherwise).
 - Quests: count-based clear quests, a key-reroll quest, quests for the round-4 tower features.
-- Xaero waypoints (deathpoints) still show inside gates (would need a mixin).
+- ~~Xaero waypoints (deathpoints) still show inside gates~~ — done on `gate-waypoints` (`docs/gates/minimap.md`), not
+  yet merged or run in game.
 - Not testable in the rig: the Narrowing Door shut-out of a returning member (needs two players).
 
 **Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.44**. Build: rebuild `base/`
