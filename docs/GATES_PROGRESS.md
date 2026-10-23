@@ -177,6 +177,10 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate 0ffad579 jar, `tower.txt` (gate-fix steps): **23/23 PASS** incl. HIDDEN_BLACK_DROP (black-flag fix).
+  Shot `tower_floor55_tablet`: the tablet text renders ("Floor 55" + its modifier names). Shot
+  `tower_forge_seal_trades` was taken while the client still showed "Loading terrain…", so the seal trades at the forge
+  are still unconfirmed by eye (needs a longer wait before that click/shot).
 - 2026-10-23, gate 0ffad579 jar, tail of `themes.txt` (from `redhidden always`, own fresh client): **7/7 PASS** —
   red A forge gate entered, forge lair template, hidden boss rises, seal holds until it dies then breaks, no black
   stones from a red A hidden boss, home after. With the earlier runs every `themes.txt` check has now passed at least
