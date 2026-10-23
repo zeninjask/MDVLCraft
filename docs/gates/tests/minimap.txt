@@ -22,3 +22,32 @@ key m
 wait 3
 shot worldmap_back_after_leave
 key Escape
+wait 2
+cmd gamerule doImmediateRespawn true
+cmd tp Tester 200.5 140 36.5 90 0
+wait 5
+cmd effect clear Tester minecraft:resistance
+cmd kill Tester
+wait 20
+cmd gamemode spectator Tester
+cmd tp Tester 230.5 140 36.5 90 10
+wait 20
+shot waypoint_overworld_deathpoint_shown
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd execute as Tester run mdvl gate open E crypt
+wait 20
+cmd effect clear Tester minecraft:resistance
+cmd kill Tester
+wait 20
+cmd execute as Tester unless entity @s[nbt={Dimension:"mdvlcraft:gate_realm"}] run say WAYPOINT_RESPAWN_OUTSIDE_OK
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd execute as Tester run mdvl gate open E crypt
+wait 20
+shot waypoint_gate_deathpoint_hidden
+cmd execute as Tester at @s run tp @s ~ ~ ~ ~180 10
+wait 5
+shot waypoint_gate_deathpoint_hidden_back
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd gamerule doImmediateRespawn false

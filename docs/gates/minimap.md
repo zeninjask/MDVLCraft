@@ -26,14 +26,24 @@ Branch `gate-minimap` (from `be4610ca`).
   fragile than the client flag.
 - Lang: `gate.mdvlcraft.no_map` in `en_us.json`.
 
+## Waypoints (branch `gate-waypoints`, from `f81d817`)
+- [x] Xaero's in-world waypoint markers and their on-screen labels (deathpoints included) are hidden in a gate.
+- [x] Build passes. [ ] In-game check: the waypoint steps at the end of `docs/gates/tests/minimap.txt`
+      (`waypoint_overworld_deathpoint_shown` shows the overworld deathpoint 30 blocks ahead; the two
+      `waypoint_gate_deathpoint_hidden*` shots show no deathpoint after dying in the crypt and reopening it).
+- How: client mixin `mixin/xaero/WaypointsIngameRendererMixin` cancels `WaypointsIngameRenderer.render` at HEAD when the
+  client level is a gate (`GateDimensions.isGate`). In Xaero FP 24.2.0 that method is the only caller of `drawAsOverlay`
+  / `drawIconInWorld` and is called only from `ClientEvents.handleRenderGameOverlayEventPre`. Listed under `client` in
+  `mdvlcraft.mixins.json`, `remap = false`, like the other compat mixins (skipped when Xaero isn't installed).
+
 ## Not covered
-- Xaero's in-world waypoint markers (e.g. a deathpoint set inside a gate) still render; waypoint keys are already removed
-  by `RemovedKeys`, so players can't make waypoints there by hand.
 - The world map still records gate chunks in its cache; it just can't be opened inside.
 
 ## Files
 - `binder/src/main/java/com/mdvlcraft/binder/client/GateMapBlock.java` (new)
 - `binder/src/main/resources/assets/mdvlcraft/lang/en_us.json` (one key)
+- `binder/src/main/java/com/mdvlcraft/binder/mixin/xaero/WaypointsIngameRendererMixin.java` (new),
+  `binder/src/main/resources/mdvlcraft.mixins.json` (one entry)
 - `docs/gates/tests/minimap.txt`, `docs/gates/minimap.md`
 
 ## Next
