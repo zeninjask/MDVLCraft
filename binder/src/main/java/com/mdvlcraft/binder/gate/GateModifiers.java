@@ -253,6 +253,9 @@ public final class GateModifiers {
             set(key, roll(item.rank(), player.getRandom()));
         }
         player.playNotifySound(SoundEvents.SMITHING_TABLE_USE, SoundSource.BLOCKS, 1.0F, 0.8F);
+        if (player instanceof net.minecraft.server.level.ServerPlayer server) {
+            GateAdvancements.grant(server, "reroll");   // quest book
+        }
         return true;
     }
 
