@@ -78,3 +78,17 @@ Gate Forge recipe, lang entries).
 
 All tasks implemented; next: coordinator merges and runs `tests/rewards.txt`. Watch for: the chest screen title, that
 leftovers arrive after `/mdvl gate leave`, and the forge's trades screen.
+
+## Round 4 (gate-rewards3)
+
+- **Tempering general bonus (A–S)**: A and S tempers also give +2% (A) / +4% (S) weapon damage against everything, and a
+  quarter of that per armour piece off damage from any attacker (on top of the gate-mob bonus). Tooltip line
+  `gate.mdvlcraft.tempered.general`.
+- **Boss chest**: one rank gear material every roll (E leather/iron, D iron/chain, C iron block/diamond, B diamonds, A
+  netherite scrap/upgrade template, S netherite ingot/template) and a 10–25% Boss Trophy of the rank (`boss_trophy_<r>`,
+  cosmetic, registered through GateRewards' DeferredRegister). Generator: `tools/gates/gen_gate_rewards.py`.
+- **JER**: skipped. JER is client-only in the pack and not a compile dependency; listing the stone drops would need it
+  added to the build. JEI already shows the items.
+- Test: rewards.txt GEAR_S_OK, GEAR_E_OK, TROPHY_ITEM_OK, shot `rewards_trophy_and_tempered_tooltip` (inventory with the S
+  trophy and an S-tempered sword: expect the "+4% against everything" line on hover — by eye; hover may need the cursor
+  on the slot).
