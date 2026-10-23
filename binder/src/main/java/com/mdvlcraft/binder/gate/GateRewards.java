@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
-import java.util.function.Function;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
@@ -242,7 +241,7 @@ public final class GateRewards {
         int experience = (int)Math.round(CLEAR_EXPERIENCE[instance.rank.ordinal()] * (instance.red ? 1.5 : 1.0) * GateModifiers.experienceFactor(instance));
         present.forEach(player -> giveExperience(player, experience));
 
-        BlockPos pos = chestPos(instance);
+        BlockPos pos = open(level, chestPos(instance));
         level.setBlockAndUpdate(pos, REWARD_CHEST.get().defaultBlockState());
         if (level.getBlockEntity(pos) instanceof GateRewardChestBlockEntity chest) {
             ResourceLocation table = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/" + instance.rank.name().toLowerCase(Locale.ROOT) + "/boss");
@@ -258,14 +257,33 @@ public final class GateRewards {
         GateAdvancements.onCleared(instance, present);   // the quest book's Gates chapter
     }
 
-    private static BlockPos chestPos(Instance instance) {
-        Function<String, BlockPos> find = kind -> instance.markers.stream().filter(m -> m.kind().equals(kind)).map(Marker::pos).findFirst().orElse(null);
-        BlockPos chest = find.apply("chest");
-        if (chest != null) {
-            return chest;
+    /** The nearest spot to `pos` (within 4 blocks) with air for the chest and a solid floor under it, so the chest never
+     * ends up inside a wall, a dais or the boss room's ceiling; `pos` itself if none. */
+    private static BlockPos open(ServerLevel level, BlockPos pos) {
+        BlockPos best = null;
+        double bestDistance = Double.MAX_VALUE;
+        for (BlockPos spot : BlockPos.betweenClosed(pos.offset(-4, -3, -4), pos.offset(4, 3, 4))) {
+            if (level.isEmptyBlock(spot) && level.isEmptyBlock(spot.above()) && level.getBlockState(spot.below()).isFaceSturdy(level, spot.below(), net.minecraft.core.Direction.UP)) {
+                double distance = spot.distSqr(pos);
+                if (distance < bestDistance) {
+                    bestDistance = distance;
+                    best = spot.immutable();
+                }
+            }
         }
-        BlockPos boss = find.apply("boss");
-        return boss != null ? boss.north(2) : instance.entry.north(2);
+        return best != null ? best : pos;
+    }
+
+    /** The boss chest: on a chest marker in the boss's room (rooms can hold other chest markers), else beside the boss
+     * marker; a gate with no boss marker (red gates add their lair's chest marker) takes its chest marker. */
+    private static BlockPos chestPos(Instance instance) {
+        Marker boss = instance.markers.stream().filter(m -> m.kind().equals("boss")).findFirst().orElse(null);
+        Marker chest = instance.markers.stream().filter(m -> m.kind().equals("chest") && (boss == null || m.room() == boss.room()))
+            .findFirst().orElse(null);
+        if (chest != null) {
+            return chest.pos();
+        }
+        return boss != null ? boss.pos().north(2) : instance.entry.north(2);
     }
 
     /** Skill experience in every skill tab the player has unlocked, as a kill gives it. */

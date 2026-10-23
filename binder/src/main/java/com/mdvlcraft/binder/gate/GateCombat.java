@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -266,6 +267,22 @@ public final class GateCombat {
             playerDied(level, player);
             return;
         }
+        bossDown(level, dead);
+    }
+
+    /** Some modded bosses (Cataclysm's, after their death animation) can leave the world killed without the death event
+     * reaching here; a gate boss removed as KILLED counts as dead too. */
+    @SubscribeEvent
+    public static void onLeave(EntityLeaveLevelEvent event) {
+        Entity gone = event.getEntity();
+        if (gone.getRemovalReason() == Entity.RemovalReason.KILLED && gone.level() instanceof ServerLevel level
+            && GateDimensions.isGate(level.dimension())) {
+            bossDown(level, gone);
+        }
+    }
+
+    /** A gate boss died: once the last one of an ACTIVE gate is down, CLEARED. */
+    private static void bossDown(ServerLevel level, Entity dead) {
         if (!GateSpawner.isBoss(dead)) {
             return;
         }
@@ -279,7 +296,7 @@ public final class GateCombat {
             return;
         }
         for (Entity other : level.getAllEntities()) {
-            if (other != dead && other.isAlive() && GateSpawner.isBoss(other) && GateSpawner.instanceOf(other) == instance.id) {
+            if (other != dead && other.isAlive() && !other.isRemoved() && GateSpawner.isBoss(other) && GateSpawner.instanceOf(other) == instance.id) {
                 return;   // its twin still stands
             }
         }

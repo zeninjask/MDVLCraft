@@ -11,12 +11,18 @@ import yesman.epicfight.world.capabilities.entitypatch.MobPatch;
 import yesman.epicfight.world.damagesource.StunType;
 
 /**
- * An Epic Fight patch for Dummmmmmy's target dummy (registered in EpicFightIntegration), so Combat Evolution can
- * assassinate it (it needs a patch on the target). The dummy keeps its own renderer and never moves or staggers.
+ * A bare Epic Fight patch (registered in EpicFightIntegration) for mobs Epic Fight doesn't patch itself: Dummmmmmy's
+ * target dummy and every hostile mob of other mods (Cataclysm's, ...). Combat Evolution can only assassinate a mob with a
+ * patch. The mob keeps its own renderer and AI (initAI does nothing) and isn't staggered by Epic Fight.
  */
-public class TargetDummyPatch extends MobPatch<Mob> {
-    public TargetDummyPatch() {
+public class PassiveMobPatch extends MobPatch<Mob> {
+    public PassiveMobPatch() {
         super(Factions.NEUTRAL);
+    }
+
+    @Override
+    protected void initAI() {
+        // the mob's own goals stay
     }
 
     @Override
