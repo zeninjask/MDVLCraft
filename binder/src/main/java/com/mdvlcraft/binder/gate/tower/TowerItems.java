@@ -4,6 +4,7 @@ import com.mdvlcraft.binder.gate.GateItems;
 import com.mdvlcraft.binder.gate.GateRank;
 import com.mdvlcraft.binder.gate.GateRewards;
 import java.util.List;
+import java.util.Optional;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -13,6 +14,8 @@ import net.minecraft.world.item.Rarity;
 import net.minecraft.world.item.trading.MerchantOffer;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.network.NetworkDirection;
+import net.minecraftforge.network.simple.SimpleChannel;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -46,6 +49,16 @@ public final class TowerItems {
         ITEMS.register(modBus);
         ENTITY_TYPES.register(modBus);
         modBus.addListener(TowerItems::onCreativeTab);
+    }
+
+    /** BinderNetwork.register: the sigil menu's packets and the status line's, from message id `id` on. */
+    public static void registerPackets(SimpleChannel channel, int id) {
+        channel.registerMessage(id++, CastleMenuPacket.class, CastleMenuPacket::encode, CastleMenuPacket::decode, CastleMenuPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT));
+        channel.registerMessage(id++, CastleStartPacket.class, CastleStartPacket::encode, CastleStartPacket::decode, CastleStartPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER));
+        channel.registerMessage(id, TowerStatusPacket.class, TowerStatusPacket::encode, TowerStatusPacket::decode, TowerStatusPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT));
     }
 
     /** GateForgeBlock.offers: the seal trades (fixed, unlimited, like the forge's own). */

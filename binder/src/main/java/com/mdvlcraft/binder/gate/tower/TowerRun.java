@@ -43,6 +43,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.OwnableEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -186,24 +187,19 @@ public final class TowerRun {
     }
 
     /**
-     * A new run for `opener`: it starts at their reached floor (or their checkpoint), or lower if an ally standing within
-     * ALLY_RANGE has less, so nobody skips floors. Its first two floors are queued for building. Null if the castle world
-     * is missing.
+     * A new run for `opener` at the floor they chose in the sigil menu (CastleSigilItem.allowed), or lower if an ally
+     * standing within ALLY_RANGE has reached less, so nobody skips floors. Its first two floors are queued for building.
+     * Null if the castle world is missing.
      */
     @Nullable
-    public static TowerRun open(ServerPlayer opener, boolean fromCheckpoint) {
-        int start = startFloor(opener, fromCheckpoint);
+    public static TowerRun open(ServerPlayer opener, int floor) {
+        int start = floor;
         for (ServerPlayer other : opener.serverLevel().players()) {
             if (other != opener && other.distanceTo(opener) <= ALLY_RANGE && AllianceAPI.areAllied(opener, other)) {
-                start = Math.min(start, startFloor(other, fromCheckpoint));
+                start = Math.min(start, TowerProgress.get(other.server).of(other.getUUID()).reached);
             }
         }
         return open(opener.server, opener.getUUID(), start);
-    }
-
-    private static int startFloor(ServerPlayer player, boolean fromCheckpoint) {
-        TowerProgress.Entry entry = TowerProgress.get(player.server).of(player.getUUID());
-        return fromCheckpoint ? entry.checkpoint : entry.reached;
     }
 
     /** A run starting at `floor`, owned by `owner` (null: anyone may join, for debug runs). */
@@ -715,6 +711,25 @@ public final class TowerRun {
     // ---- rewards ----
 
     /**
+     * Essence stone factor for a castle mob's drops (GateRewards.onDrops): 0.5 on a farm floor, more than 10 below the best
+     * floor of the player who gets the kill (or of the owner of the summon that does), else 1. Not a castle mob: 1.
+     */
+    public static double dropFactor(LivingEntity mob) {
+        if (mob.level().dimension() != GateDimensions.DEMON_CASTLE || !mob.getPersistentData().contains(FLOOR_TAG)) {
+            return 1.0;
+        }
+        LivingEntity killer = mob.getKillCredit();
+        if (killer instanceof OwnableEntity pet && pet.getOwner() instanceof ServerPlayer owner) {
+            killer = owner;
+        }
+        return killer instanceof ServerPlayer player ? dropFactor(player, mob.getPersistentData().getInt(FLOOR_TAG)) : 1.0;
+    }
+
+    static double dropFactor(ServerPlayer player, int floor) {
+        return floor < TowerProgress.get(player.server).of(player.getUUID()).best - 10 ? 0.5 : 1.0;
+    }
+
+    /**
      * The floor's chest (stair room on a normal floor, the arena centre on a boss floor) with one roll per present member.
      * Boss floors add Tower Seals (2, doubled on a player's first clear of that floor) and, on a first clear, 6000 × (1 +
      * floor / 50) skill experience. Floors more than 10 below a player's best give half (a 50% chance at the chest roll,
@@ -814,12 +829,17 @@ public final class TowerRun {
             TowerProgress.get(player.server).of(player.getUUID()).reached));
     }
 
-    /** Logging in inside the castle (after a logout or crash mid-run): home; the floor reached is already saved. */
+    /** Logging in inside the castle (after a logout or crash mid-run): home; the floor reached is already saved. Also sends
+     * the status page's tower line. */
     @SubscribeEvent
     public static void onLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        if (event.getEntity() instanceof ServerPlayer player && player.level().dimension() == GateDimensions.DEMON_CASTLE && !player.isCreative()) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+        if (player.level().dimension() == GateDimensions.DEMON_CASTLE && !player.isCreative()) {
             GateTravel.leave(player, GateInstances.get(player.server).ofPlayer(player.getUUID()), true);
         }
+        TowerStatusPacket.send(player);   // the status page's tower line
     }
 
     @SubscribeEvent

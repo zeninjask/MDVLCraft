@@ -156,6 +156,7 @@ public final class GateRewards {
             stones = scaled(stones, 1.5, random);
         }
         stones = scaled(stones, GateModifiers.rewardFactor(instance), random);   // modifiers and trial gates
+        stones = scaled(stones, com.mdvlcraft.binder.gate.tower.TowerRun.dropFactor(mob), random);   // tower farm floors: half
         if (role.equals("boss")) {
             event.getDrops().clear();
         }

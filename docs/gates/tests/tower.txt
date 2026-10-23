@@ -106,6 +106,52 @@ wait 2
 shot tower_forge_seal_trades
 key Escape
 cmd execute as Tester at @s run setblock ~ ~ ~2 minecraft:air
+cmd mdvl gate tower progress Tester set 32
+cmd mdvl gate tower progress Tester
+cmd execute as Tester at @s run tp @s ~ ~ ~ -90 0
+cmd execute as Tester at @s run fill ~1 ~ ~-4 ~10 ~9 ~4 minecraft:air
+cmd execute as Tester at @s run fill ~1 ~-1 ~-4 ~10 ~-1 ~4 minecraft:stone
+wait 5
+cmd scoreboard objectives add towerstart dummy
+cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower start 8
+cmd execute if score Tester towerstart matches 0 run say START_8_REFUSED_OK
+cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower start 36
+cmd execute if score Tester towerstart matches 0 run say START_36_REFUSED_OK
+cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower start 6
+cmd execute if score Tester towerstart matches 6 run say START_BLOCK6_OK
+wait 2
+cmd execute if entity @e[type=mdvlcraft:castle_gate] run say CASTLE_GATE_PLACED_OK
+cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower start 31
+cmd execute if score Tester towerstart matches 0 run say START_WHILE_OPEN_REFUSED_OK
+cmd execute as Tester at @s run mdvl gate tower close
+wait 5
+cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower start 31
+cmd execute if score Tester towerstart matches 31 run say START_CHECKPOINT_OK
+cmd execute as Tester at @s run mdvl gate tower close
+wait 5
+cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower start 32
+cmd execute if score Tester towerstart matches 32 run say START_CONTINUE_OK
+cmd execute as Tester at @s run mdvl gate tower close
+wait 5
+cmd execute unless entity @e[type=mdvlcraft:castle_gate] run say CASTLE_GATE_GONE_OK
+cmd execute as Tester at @s run mdvl gate tower menu
+wait 3
+shot tower_sigil_menu
+key Escape
+wait 1
+cmd execute as Tester at @s run mdvl gate tower open 1
+wait 25
+cmd execute as Tester at @s if dimension mdvlcraft:demon_castle run say IN_FARM_FLOOR_OK
+cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower farm
+cmd execute if score Tester towerstart matches 50 run say FARM_HALF_DROPS_OK
+cmd execute as Tester at @s run mdvl gate leave
+wait 20
+cmd execute as Tester at @s run mdvl gate tower open 50
+wait 25
+cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower farm
+cmd execute if score Tester towerstart matches 100 run say NOT_FARM_FULL_DROPS_OK
+cmd execute as Tester at @s run mdvl gate leave
+wait 20
 cmd give Tester mdvlcraft:castle_trophy
 cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:castle_trophy"}]}] run say TROPHY_ITEM_OK
 cmd execute as Tester at @s run mdvl gate tower open

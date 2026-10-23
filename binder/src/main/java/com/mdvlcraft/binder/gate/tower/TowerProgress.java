@@ -86,6 +86,7 @@ public final class TowerProgress extends SavedData {
         this.setDirty();
         if (this.server != null) {
             this.server.overworld().getDataStorage().save();
+            TowerStatusPacket.sendAll(this.server);   // own best and the server's best on every status page
         }
     }
 
