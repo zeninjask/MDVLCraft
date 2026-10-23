@@ -102,3 +102,13 @@ players in the castle, from `TowerProgress` best / bestBoss.
 chapter: `ftbquests change_progress` on a gate quest id). By eye in the client: the DQ9 log shows "Gates" after Legend
 with 001G… and the other chapters' numbers unchanged (First Steps starts at 001); FTB's own quest screen shows the
 chapter's layout readable; Accept on 001G works while no other quest is active.
+
+## Round 4 (gate-quests2): 7 more quests (075G–081G), row "Veteran and castle extras"
+
+- Count quests: Gate Regular / Gate Veteran / Gatebreaker (clear 10 / 50 / 100), an FTB stat task on the new custom
+  stat `mdvlcraft:gates_cleared` (registered through a DeferredRegister in GateAdvancements, awarded to everyone present
+  at a clear).
+- `reroll` (GateModifiers.reroll), `seal_trade` (a Tower Seal trade at the Gate Forge), `tower_pick` (Castle Sigil start
+  below the reached floor), `tower_farm` (a kill on a farm floor, TowerRun.dropFactor < 1).
+- Tests: quests.txt CLEARS_STAT_OK, late.txt REROLL_QUEST_OK, tower.txt TOWER_PICK_QUEST_OK. Not covered in the rig:
+  seal_trade (needs the trade GUI), tower_farm (needs a kill on a farm floor).

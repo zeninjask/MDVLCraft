@@ -92,6 +92,9 @@ public class GateForgeBlock extends Block {
         @Override
         public void notifyTrade(MerchantOffer offer) {
             offer.increaseUses();
+            if (this.player instanceof net.minecraft.server.level.ServerPlayer server && offer.getBaseCostA().is(com.mdvlcraft.binder.gate.tower.TowerItems.TOWER_SEAL.get())) {
+                GateAdvancements.grant(server, "seal_trade");   // quest book: a Tower Seal trade
+            }
         }
 
         @Override

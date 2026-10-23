@@ -435,7 +435,7 @@ THEME_NAMES = {'crypt': 'Gravekeeper Crypt', 'warren': 'Goblin Warren', 'frozen'
 RULES = ['no_potions', 'no_healing', 'statues', 'narrowing_door']
 GATE_EVENTS = (['open_gate', 'gate_kill', 'elite_kill', 'enter_red', 'enter_red_s', 'enter_trial', 'enter_modified', 'clear_red',
                 'clear_red_s', 'clear_modified', 'break', 'boss_chest', 'forge', 'return_stone', 'tower_enter', 'tower_boss_5',
-                'tower_hidden']
+                'tower_hidden', 'reroll', 'seal_trade', 'tower_pick', 'tower_farm']
                + [f'{kind}_{r}' for kind in ('enter', 'clear', 'vein') for r in RANKS]
                + [f'enter_theme_{t}' for t in THEMES] + [f'clear_trial_{r}' for r in RULES]
                + [f'tower_floor_{n}' for n in (5, 10, 25, 50, 55, 100)])
@@ -445,6 +445,11 @@ GATE_DATA_ADVANCEMENTS = ['attuned', 'tempered', 'tempered_s']
 def gadv(name):
     assert name in GATE_EVENTS or name in GATE_DATA_ADVANCEMENTS, name
     return advancement(f'mdvlcraft:quests/gates/{name}')
+
+
+def gates_cleared(n):
+    """Gates cleared (any rank, red and trials too): the custom stat gate/GateAdvancements counts at every clear."""
+    return {'type': 'stat', 'stat': 'mdvlcraft:gates_cleared', 'value': n}
 
 
 def skill_xp(n):
@@ -659,6 +664,27 @@ GATE_ROWS = [
         ('master', 'Master of Gates', [gadv('tower_floor_100'), item(g('castle_trophy'))], [skill_xp(20000), give(g('castle_trophy'))],
          'Reach floor 100 and hold a Castle Trophy. Every rank, every red gate, every trial: you have seen them all.',
          ['floor_100', 'castle_trophy', 'clear_red_s', 'trial_trophy'], g('castle_trophy'), 'gear'),
+    ]),
+    ('Veteran and castle extras', [
+        ('clears_10', 'Gate Regular', [gates_cleared(10)], [skill_xp(1000), give(g('return_stone'), 2)],
+         'Clear 10 gates, any rank. Red gates and trials count too; everyone present at a clear counts it.', ['clear_e'],
+         g('gate_key_d'), None),
+        ('clears_50', 'Gate Veteran', [gates_cleared(50)], [skill_xp(4000), give(g('essence_stone_a'), 2)],
+         'Clear 50 gates.', None, g('gate_key_b'), None),
+        ('clears_100', 'Gatebreaker', [gates_cleared(100)], [skill_xp(10000), give(g('essence_stone_black'))],
+         'Clear 100 gates.', None, g('gate_key_s'), 'hexagon'),
+        ('reroll', 'Fate Rerolled', [gadv('reroll')], [give(g('essence_stone_a'), 4)],
+         'Use the Gate Forge with an A or S key in hand to reroll its modifiers for 4 A essence stones. This quest pays '
+         'them back.', ['key_a'], 'minecraft:fermented_spider_eye', None),
+        ('seal_trade', 'Sealed Bargain', [gadv('seal_trade')], [give(g('tower_seal'), 2)],
+         'Trade Tower Seals at the Gate Forge: 6 seals and 2 S mana crystals for an S Temper Rune, or 16 seals for a '
+         'Castle Trophy.', ['seals'], g('tower_seal'), None),
+        ('tower_pick', 'Pick Your Floor', [gadv('tower_pick')], [xp(500)],
+         'Use the Castle Sigil and pick a start below your floor from its menu: the checkpoint, floor 1, or any block start '
+         '(6, 11, 16 ...) up to your checkpoint. Sneak-use starts from the checkpoint at once.', ['boss_5'], g('castle_sigil'), None),
+        ('tower_farm', 'Farm Floors', [gadv('tower_farm')], [give(g('tower_seal'), 2)],
+         'Kill a castle monster on a floor more than 10 below your best. Farm floors are safer, but pay half: half the '
+         'essence stones, half the seals and a 50% chance at the floor chest.', ['floor_25'], 'minecraft:iron_hoe', None),
     ]),
 ]
 

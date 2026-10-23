@@ -127,6 +127,7 @@ cmd execute as Tester at @s run mdvl gate tower close
 wait 5
 cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower start 31
 cmd execute if score Tester towerstart matches 31 run say START_CHECKPOINT_OK
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/tower_pick=true}] run say TOWER_PICK_QUEST_OK
 cmd execute as Tester at @s run mdvl gate tower close
 wait 5
 cmd execute as Tester at @s store result score Tester towerstart run mdvl gate tower start 32

@@ -100,7 +100,8 @@ public class CastleSigilItem extends Item {
     @Nullable
     public static TowerRun start(ServerPlayer player, BlockPos base, int floor) {
         ServerLevel server = player.serverLevel();
-        Component refusal = allowed(TowerProgress.get(player.server).of(player.getUUID()), floor) ? refusal(player, server, base)
+        TowerProgress.Entry entry = TowerProgress.get(player.server).of(player.getUUID());
+        Component refusal = allowed(entry, floor) ? refusal(player, server, base)
             : Component.translatableWithFallback("tower.mdvlcraft.floor_locked", "You can't start the castle at floor %s.", floor);
         if (refusal != null) {
             player.displayClientMessage(refusal, true);
@@ -112,6 +113,9 @@ public class CastleSigilItem extends Item {
         }
         float yaw = Mth.wrapDegrees(Math.round((player.getYRot() + 180.0F) / 90.0F) * 90.0F);
         CastleGateEntity.place(server, base, yaw, run.id);
+        if (floor < entry.reached) {
+            com.mdvlcraft.binder.gate.GateAdvancements.grant(player, "tower_pick");   // quest book: an earlier block start
+        }
         player.displayClientMessage(Component.translatableWithFallback("tower.mdvlcraft.opened", "The Demon Castle opens: floor %s.", run.floor()), true);
         return run;
     }

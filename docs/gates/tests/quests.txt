@@ -1,5 +1,6 @@
 wait 120
 cmd gamemode survival Tester
+cmd scoreboard objectives add gcl minecraft.custom:mdvlcraft.gates_cleared
 cmd effect give Tester minecraft:resistance 99999 4 true
 cmd advancement revoke Tester from mdvlcraft:quests/gates/clear_e
 cmd ftbquests change_progress Tester reset 20429024DD94D07E
@@ -38,3 +39,5 @@ wait 2
 cmd say GATES_CHAPTER_LOADED_IF_NO_ERROR_ABOVE
 cmd execute as Tester run mdvl gate tower info
 shot quests_end
+cmd execute if score Tester gcl matches 1.. run say CLEARS_STAT_OK
+cmd scoreboard players list Tester
