@@ -1,0 +1,56 @@
+wait 120
+cmd scoreboard objectives add gt dummy
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd effect give Tester minecraft:saturation 99999 1 true
+cmd execute as Tester run mdvl gate open C crypt
+wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say IN_GATE_OK
+wait 3
+cmd execute as Tester run mdvl gate portal
+cmd execute as Tester store result score @s gt run mdvl gate portal
+cmd execute as Tester if score @s gt matches 1 run say PORTAL_PLACED_OK
+cmd execute as Tester at @s if entity @e[type=mdvlcraft:return_gate,distance=3..10] run say PORTAL_NEAR_ENTRY_OK
+cmd execute as Tester at @s unless entity @e[type=mdvlcraft:return_gate,distance=..2.5] run say PORTAL_NOT_ON_ENTRY_OK
+shot portal_entrance
+wait 10
+cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say ARRIVAL_NOT_PULLED_OK
+cmd execute as Tester run mdvl gate roamers
+cmd execute as Tester store result score @s gt run mdvl gate roamers
+cmd execute as Tester if score @s gt matches 0 run say NO_ROAMERS_AT_ARRIVAL_OK
+cmd execute as Tester run mdvl gate goto boss
+wait 20
+cmd execute as Tester run mdvl gate goto crystal
+wait 20
+cmd execute as Tester run mdvl gate roamers
+cmd execute as Tester store result score @s gt run mdvl gate roamers
+cmd execute as Tester if score @s gt matches 1.. run say ROAMERS_SPAWNED_OK
+cmd execute as Tester store result score @s gt run mdvl gate roamers entrance
+cmd execute as Tester if score @s gt matches 0 run say ROAMERS_NOT_NEAR_ENTRANCE_OK
+cmd execute as Tester at @s unless entity @e[distance=..200,tag=mdvlcraft_gate_roamer,nbt={ForgeData:{mdvlcraft_gate_role:"boss"}}] run say ROAMERS_NOT_BOSS_OK
+cmd execute as Tester at @s if entity @e[distance=..200,tag=mdvlcraft_gate_roamer,tag=mdvlcraft_gate] run say ROAMERS_ARE_GATE_MOBS_OK
+shot portal_roamers
+cmd execute as Tester at @s run kill @e[distance=..200,tag=mdvlcraft_gate_roamer]
+cmd execute as Tester run mdvl gate goto door 1
+wait 20
+cmd execute as Tester at @s if entity @e[type=mdvlcraft:return_gate,distance=..30] run say PORTAL_STILL_THERE_OK
+cmd execute as Tester at @s at @e[type=mdvlcraft:return_gate,limit=1,sort=nearest] run tp Tester ~ ~0.5 ~
+wait 20
+cmd execute as Tester at @s if dimension minecraft:overworld run say RETURN_OK
+cmd execute as Tester store result score @s gt run mdvl gate rooms
+cmd execute as Tester if score @s gt matches 1.. run say RETURN_KEEPS_ROSTER_OK
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd execute as Tester run mdvl gate open B frozen red
+wait 20
+cmd execute as Tester at @s if dimension mdvlcraft:red_realm run say IN_RED_OK
+wait 3
+cmd execute as Tester store result score @s gt run mdvl gate portal
+cmd execute as Tester if score @s gt matches 0 run say RED_NO_PORTAL_OK
+cmd execute as Tester at @s unless entity @e[type=mdvlcraft:return_gate,distance=..128] run say RED_NO_PORTAL_ENTITY_OK
+cmd execute as Tester store result score @s gt run mdvl gate roamers
+cmd execute as Tester if score @s gt matches 0 run say RED_NO_ROAMERS_OK
+shot portal_red
+cmd execute as Tester run mdvl gate leave
+wait 20
+cmd mdvl gate list

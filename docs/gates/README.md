@@ -20,6 +20,7 @@ this folder, and its own files. The coordinator merges parts into `gate`, runs t
 | **Late/combat finish (round 3)** | `gate-late2` | `late.md` | Statues and Narrowing Door rules, trial ×1.5 boss chest, downed (PlayerRevive) players count as gone for wipe detection |
 | **Test steps (round 3)** | `gate-tests` | `tests.md` | `docs/gates/tests/*.txt` only: bring stale steps up to date with the merged code |
 | **Gates quest chapter** | `gate-quests` | `quests.md` | the Gates chapter in `tools/generate_quests.py`, `advancements/quests/gates/`, `gate/GateAdvancements`, gates numbering in `client/QuestLogScreen` |
+| **Return portal and roaming hostiles** | `gate-portal` | `portal.md` | `gate/ReturnGateEntity`, `gate/GateReturn`, `gate/GateRoamers`, `client/ReturnGateClient` |
 
 ## Usage limit rule (always)
 
