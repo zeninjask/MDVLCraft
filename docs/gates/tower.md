@@ -1,7 +1,7 @@
 # Gates part: Demon Castle tower (phase 8), handoff
 
 > Standing rule (always applies): near the usage limit (~95%) or on "wrap up", stop, commit everything (WIP ok; say if the
-> build is broken), push the branch (`gate-tower2` now), and update this file with exactly where work stopped and the next step.
+> build is broken), push the branch (`gate-tower3` now), and update this file with exactly where work stopped and the next step.
 
 Branch `gate-tower`, cut from `gate` at d7ff686. (The worktree first came up on main's ce09fea; the branch was moved to
 d7ff686 before any work and `origin/gate-tower` force-pushed once to match. It contains no main-only commits.)
@@ -71,8 +71,31 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
       MODS_25_TWO, MODS_55_LEGEND, LEFT_FOR_55, IN_FLOOR55, TABLET, BOSS55_SPAWNED, HIDDEN_ROSE, HIDDEN_BLACK_DROP,
       HIDDEN_SEALS, TROPHY_ITEM, REOPEN2_IN_CASTLE; shots tower_floor55_tablet, tower_hidden_boss,
       tower_forge_seal_trades — the forge is placed 2 blocks south and right-clicked, check the two seal trades)
-- [ ] Left (not done): the sigil start menu (sneak-use still stands in), status-page leaderboard line, half essence
-      drops on farm floors (GateRewards' drop code; the chest and seals are already halved)
+- [x] Left items done in round 4 (below).
+
+## Round 4 (`gate-tower3`, from 77a73a79, after the 2.1.40 release)
+
+- [x] Castle Sigil start menu (plan 10.3): using the sigil checks the spot (refusals as before), then sends
+      `CastleMenuPacket(base, reached, checkpoint)`; `client/CastleStartScreen` offers "Continue from floor N" (reached),
+      "From the checkpoint", "From floor 1" and, when the checkpoint is 11+, a `<` Floor X `>` Start stepper over the
+      other block starts (6, 11 ... below the checkpoint). The pick comes back as `CastleStartPacket(base, floor)`;
+      `CastleSigilItem.menuChoice` re-checks (sigil in a hand, within 8 blocks of the spot, `allowed(entry, floor)` =
+      the reached floor or a block start ≤ checkpoint, all the old refusals) and `CastleSigilItem.start` opens the run
+      and places the gate. Sneak-use is kept as the checkpoint shortcut.
+- [x] Status page leaderboard line (plan 10.4): `TowerStatusPacket(best, topFloor, topName)` sent on login and on every
+      TowerProgress save (to every online player); `TowerClient.statusLine()` draws "Demon Castle: best floor N · server
+      best M (Name)" right-aligned in the status page's footer row (no room in the three columns).
+- [x] Half essence drops on farm floors: `TowerRun.dropFactor(mob)` = 0.5 when the castle mob's floor
+      (`mdvlcraft_tower_floor`) is more than 10 below the best floor of the killer (`getKillCredit`, or the owner of a
+      tamed/owned killer), else 1; applied in `GateRewards.onDrops` after the modifier factor. Black stones (hidden boss)
+      are not halved.
+- [x] Debug: `/mdvl gate tower start <floor>` (the menu's choice server side, gate 6 blocks ahead, returns the floor or
+      0), `menu` (opens the menu on the caller's client), `farm` (drop factor in % on the caller's run floor), `close`
+      with no id (the caller's own sigil run)
+- [x] `tests/tower.txt`: new section before TROPHY_ITEM: START_8_REFUSED, START_36_REFUSED, START_BLOCK6,
+      CASTLE_GATE_PLACED, START_WHILE_OPEN_REFUSED, START_CHECKPOINT, START_CONTINUE, CASTLE_GATE_GONE, shot
+      tower_sigil_menu, IN_FARM_FLOOR, FARM_HALF_DROPS, NOT_FARM_FULL_DROPS
+- [ ] Not testable by commands: clicking the menu buttons, the status line itself (M → Status, look at the footer's right)
 
 ## Decisions
 
@@ -82,10 +105,23 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
   stones instead of 8 (one item per slot).
 - Plan's "Champion / Legend chapter" bosses = GateMobs' B / A bosses; floors 55+ use the S boss.
 - Party start floor: min over allies within 32 blocks at opening; late joiners must have reached the current floor.
+  Round 4: the start is min(chosen floor, each nearby ally's reached floor) (before: allies' checkpoint when sneaking).
+- Menu choices are the reached floor plus every block start up to the checkpoint (the task's "any saved block start
+  reached"); the server checks them, the client list is only a convenience.
+- Status line in the footer row, since all three columns are full; synced by packet because progress lives on the
+  server (no request packet: pushed on login and on change).
 - Floors are plain-block shells (not the builder's templates) so any height band works and building stays a few
   thousand blocks per tick.
 
 ## Hooks into other files
+
+- Round 4: `network/BinderNetwork.java`: PROTOCOL 18 → 19; after the last `registerMessage`,
+  `com.mdvlcraft.binder.gate.tower.TowerItems.registerPackets(CHANNEL, id);` (registers 3 packets from that id on).
+- Round 4: `client/CharacterScreen.java`: two lines after the footer `drawString`: the tower status line, right-aligned
+  at y 239 (`TowerClient.statusLine()`, fully qualified).
+- Round 4: `gate/GateRewards.java` `onDrops`: one line after the modifier scaling,
+  `stones = scaled(stones, com.mdvlcraft.binder.gate.tower.TowerRun.dropFactor(mob), random);`.
+- Round 4: `assets/mdvlcraft/lang/en_us.json`: new tower menu/status keys via `gen_tower_items.py`.
 
 - Round 3: `gate/GateForgeBlock.java`: `offers()` ends with `offers.addAll(com.mdvlcraft.binder.gate.tower.TowerItems.forgeOffers());`
   (fully qualified, no import) + Javadoc line.
@@ -110,10 +146,10 @@ Plan section 10. Owns `gate/tower/` (all new), `binder/tools/gates/gen_tower_ite
 - 2026-10-22 (coordinator, 2.0.40 jar): `tests/tower.txt` all markers pass except SEALS_OK (selector syntax; fixed).
 - Round 3 step 1 (seal trades): build passes.
 - Round 3 steps 2–4 (modifiers, tablet, hidden boss, debug, steps): build passes. Not run in game.
+- Round 4 (sigil menu, status line, farm drops, debug, steps): build passes. Not run in game.
 
 ## Where I stopped
 
-Round 3 done on `gate-tower2` (everything above committed and pushed; build passes). Next: coordinator merges and runs
-`tests/tower.txt` (new markers listed in the round 3 checklist). Watch: the tablet's position over the landing, Swarming
-copies getting floor scaling (`tower info` / mob health), the forge screen showing the two seal trades at the end of
-the list, and the hidden boss rising only once per floor visit. Then the "Left" items.
+Round 4 done on `gate-tower3` (committed and pushed; build passes). Next: coordinator merges and runs `tests/tower.txt`
+(new round 4 markers) and checks by hand: using a sigil opens the menu, each button opens the castle gate at that floor,
+and M → Status shows the Demon Castle line at the footer's right.

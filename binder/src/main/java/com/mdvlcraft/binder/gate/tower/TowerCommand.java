@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.gate.tower;
 
+import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -8,6 +9,7 @@ import java.util.UUID;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
@@ -24,7 +26,13 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *   next                            moves the caller's party up a floor now (skips the boss and the stairs)
  *   progress <player> [set <floor>] a player's reached / checkpoint / best / best boss floor, or sets their floor
  *   top                             the ten best players by best floor
- *   close <id>                      ends a run: its players go home, both floors are cleared
+ *   close [id]                      ends a run (default: the caller's own sigil run): its players go home, both floors
+ *                                   are cleared
+ *   start <floor>                   the sigil menu's choice, server side (CastleSigilItem.start, same checks, no sigil
+ *                                   needed): a castle gate 6 blocks in front of the caller; returns the run's floor, 0 if
+ *                                   refused
+ *   menu                            opens the sigil's start menu on the caller's client for a spot 6 blocks ahead
+ *   farm                            the caller's essence drop factor on their run's floor, in percent (50 on a farm floor)
  *   mods <floor>                    the tower modifiers of a floor in this world
  *   hidden                          the caller's run: the next boss death on a floor of 55+ raises the hidden boss for sure
  */
@@ -44,7 +52,11 @@ public final class TowerCommand {
                 .then(Commands.literal("progress").then(Commands.argument("player", EntityArgument.player()).executes(TowerCommand::progress)
                     .then(Commands.literal("set").then(Commands.argument("floor", IntegerArgumentType.integer(1)).executes(TowerCommand::set)))))
                 .then(Commands.literal("top").executes(TowerCommand::top))
-                .then(Commands.literal("close").then(Commands.argument("id", IntegerArgumentType.integer(1)).executes(TowerCommand::close)))
+                .then(Commands.literal("close").executes(TowerCommand::closeOwn)
+                    .then(Commands.argument("id", IntegerArgumentType.integer(1)).executes(TowerCommand::close)))
+                .then(Commands.literal("start").then(Commands.argument("floor", IntegerArgumentType.integer(1)).executes(TowerCommand::start)))
+                .then(Commands.literal("menu").executes(TowerCommand::menu))
+                .then(Commands.literal("farm").executes(TowerCommand::farm))
                 .then(Commands.literal("mods").then(Commands.argument("floor", IntegerArgumentType.integer(1)).executes(TowerCommand::mods)))
                 .then(Commands.literal("hidden").executes(TowerCommand::hidden)))));
     }
@@ -142,5 +154,52 @@ public final class TowerCommand {
         run.end(context.getSource().getServer(), true);
         context.getSource().sendSuccess(() -> Component.literal("Closed tower run " + run.id), true);
         return 1;
+    }
+
+    private static int closeOwn(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        TowerRun run = TowerRun.ownedBy(player.server, player.getUUID());
+        if (run == null) {
+            context.getSource().sendFailure(Component.literal("You have no open castle gate"));
+            return 0;
+        }
+        run.end(player.server, true);
+        context.getSource().sendSuccess(() -> Component.literal("Closed tower run " + run.id), true);
+        return 1;
+    }
+
+    /** Where the debug commands put the castle gate: 6 blocks in front of the player, at their feet. */
+    private static BlockPos ahead(ServerPlayer player) {
+        return player.blockPosition().relative(player.getDirection(), 6);
+    }
+
+    private static int start(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        TowerRun run = CastleSigilItem.start(player, ahead(player), IntegerArgumentType.getInteger(context, "floor"));
+        if (run == null) {
+            context.getSource().sendFailure(Component.literal("Refused (see the action bar)"));
+            return 0;
+        }
+        context.getSource().sendSuccess(() -> Component.literal("Castle gate opened: run " + run.id + " at floor " + run.floor()), true);
+        return run.floor();
+    }
+
+    private static int menu(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        TowerProgress.Entry entry = TowerProgress.get(player.server).of(player.getUUID());
+        BinderNetwork.sendTo(player, new CastleMenuPacket(ahead(player), entry.reached, entry.checkpoint));
+        return 1;
+    }
+
+    private static int farm(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        TowerRun run = TowerRun.of(player);
+        if (run == null) {
+            context.getSource().sendFailure(Component.literal("You are not in a tower run"));
+            return 0;
+        }
+        int percent = (int)Math.round(TowerRun.dropFactor(player, run.floor()) * 100);
+        context.getSource().sendSuccess(() -> Component.literal("Floor " + run.floor() + ": essence drops at " + percent + "%"), false);
+        return percent;
     }
 }

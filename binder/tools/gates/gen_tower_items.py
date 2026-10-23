@@ -111,7 +111,7 @@ def main():
         'item.mdvlcraft.tower_seal': 'Tower Seal',
         'item.mdvlcraft.castle_trophy': 'Castle Trophy',
         'entity.mdvlcraft.castle_gate': 'Demon Castle Gate',
-        'tower.mdvlcraft.sigil.use': 'Use on the ground: open the Demon Castle at your floor',
+        'tower.mdvlcraft.sigil.use': 'Use on the ground: open the Demon Castle (pick your start floor)',
         'tower.mdvlcraft.sigil.sneak': 'Sneak-use: start from your checkpoint',
         'tower.mdvlcraft.already_open': 'Your castle gate is already open.',
         'tower.mdvlcraft.opened': 'The Demon Castle opens: floor %s.',
@@ -129,6 +129,17 @@ def main():
         'tower.mdvlcraft.no_modifiers': 'No tower modifiers',
         'tower.mdvlcraft.hidden.subtitle': 'The stairs stay barred',
         'tower.mdvlcraft.hidden.message': 'A hidden boss rises in the arena. The stairs open when it falls.',
+        'tower.mdvlcraft.floor_locked': "You can't start the castle at floor %s.",
+        'tower.mdvlcraft.menu.title': 'Demon Castle',
+        'tower.mdvlcraft.menu.hint': 'Where do you start?',
+        'tower.mdvlcraft.menu.continue': 'Continue from floor %s',
+        'tower.mdvlcraft.menu.checkpoint': 'From the checkpoint: floor %s',
+        'tower.mdvlcraft.menu.first': 'From floor 1',
+        'tower.mdvlcraft.menu.floor': 'Floor %s',
+        'tower.mdvlcraft.menu.start': 'Start',
+        'tower.mdvlcraft.menu.cancel': 'Cancel',
+        'tower.mdvlcraft.status': 'Demon Castle: best floor %s · server best %s (%s)',
+        'tower.mdvlcraft.status.none': 'Demon Castle: not climbed yet',
     })
     lang_path.write_text(json.dumps(lang, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     print('tower resources written')

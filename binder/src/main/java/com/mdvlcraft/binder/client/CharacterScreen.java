@@ -289,6 +289,8 @@ public class CharacterScreen extends Screen {
             g.drawString(
                 font, Component.translatable("screen.mdvlcraft.character.footer", AbilityKeys.MENU.getTranslatedKeyMessage()), 14, 239, DqGui.MUTED, false
             );
+            Component tower = com.mdvlcraft.binder.gate.tower.client.TowerClient.statusLine();   // tower leaderboard line
+            g.drawString(font, tower, 426 - font.width(tower), 239, DqGui.MUTED, false);
             g.pose().popPose();
             super.render(g, mouseX, mouseY, partialTick);
             if (tooltip != null) {
