@@ -32,6 +32,14 @@ public final class GateItems {
         () -> EntityType.Builder.<GateEntity>of(GateEntity::new, MobCategory.MISC).sized(2.0F, 3.0F).fireImmune().clientTrackingRange(10)
             .updateInterval(20).build("gate"));
 
+    /** Trial gates' trophy (RuleGates), their statue (GateStatue) and the entrance room's return portal (GateReturn). */
+    public static final RegistryObject<Item> TROPHY = ITEMS.register("gate_trophy", RuleGates.TrophyItem::new);
+    public static final RegistryObject<EntityType<GateStatue>> STATUE = ENTITY_TYPES.register("gate_statue",
+        () -> EntityType.Builder.<GateStatue>of(GateStatue::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8).build("gate_statue"));
+    public static final RegistryObject<EntityType<ReturnGateEntity>> RETURN_GATE = ENTITY_TYPES.register("return_gate",
+        () -> EntityType.Builder.<ReturnGateEntity>of(ReturnGateEntity::new, MobCategory.MISC).sized(1.8F, 3.0F).fireImmune()
+            .clientTrackingRange(10).updateInterval(20).build("return_gate"));
+
     static {
         for (GateRank rank : GateRank.values()) {
             String key = rank.name().toLowerCase(java.util.Locale.ROOT);

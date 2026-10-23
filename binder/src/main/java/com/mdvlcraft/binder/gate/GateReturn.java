@@ -51,7 +51,6 @@ public final class GateReturn {
     private static final int CHECK_TICKS = 20;
     private static final int MIN_DISTANCE = 4;
     private static final int MAX_DISTANCE = 8;
-    public static EntityType<ReturnGateEntity> type;
     /** Instances whose portal has been placed: id -> where (in memory: a restart closes every gate). */
     private static final Map<Integer, BlockPos> PLACED = new HashMap<>();
     /** When each player last arrived in a gate world (server tick). */
@@ -86,7 +85,7 @@ public final class GateReturn {
 
     @SubscribeEvent
     public static void onServerTick(TickEvent.ServerTickEvent event) {
-        if (event.phase != TickEvent.Phase.END || event.getServer().getTickCount() % CHECK_TICKS != 0 || type == null) {
+        if (event.phase != TickEvent.Phase.END || event.getServer().getTickCount() % CHECK_TICKS != 0) {
             return;
         }
         MinecraftServer server = event.getServer();
@@ -120,7 +119,7 @@ public final class GateReturn {
             }
         }
         BlockPos pos = instance.entry.relative(side, distance);
-        ReturnGateEntity gate = new ReturnGateEntity(type, level);
+        ReturnGateEntity gate = new ReturnGateEntity(GateItems.RETURN_GATE.get(), level);
         gate.retarget(instance.id);
         gate.moveTo(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, side.getOpposite().toYRot(), 0.0F);   // facing the entry
         level.addFreshEntity(gate);
@@ -174,19 +173,4 @@ public final class GateReturn {
         return 1;
     }
 
-    /** Registers the return portal's entity type (no DeferredRegister, so MDVLBinder needs no line for it). */
-    @EventBusSubscriber(modid = "mdvlcraft", bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static final class Registration {
-        private Registration() {
-        }
-
-        @SubscribeEvent
-        public static void onRegister(RegisterEvent event) {
-            event.register(ForgeRegistries.Keys.ENTITY_TYPES, helper -> {
-                type = EntityType.Builder.<ReturnGateEntity>of(ReturnGateEntity::new, MobCategory.MISC).sized(1.8F, 3.0F).fireImmune()
-                    .clientTrackingRange(10).updateInterval(20).build("mdvlcraft:return_gate");
-                helper.register(ResourceLocation.fromNamespaceAndPath("mdvlcraft", "return_gate"), type);
-            });
-        }
-    }
 }

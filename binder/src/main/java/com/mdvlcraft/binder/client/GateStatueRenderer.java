@@ -33,8 +33,8 @@ public class GateStatueRenderer extends HumanoidMobRenderer<GateStatue, Humanoid
 
     @SubscribeEvent
     public static void onRegisterRenderers(RegisterRenderers event) {
-        if (RuleGates.statue != null) {
-            event.registerEntityRenderer(RuleGates.statue, GateStatueRenderer::new);
+        {
+            event.registerEntityRenderer(RuleGates.statue.get(), GateStatueRenderer::new);
         }
     }
 }

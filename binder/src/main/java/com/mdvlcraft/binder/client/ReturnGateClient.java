@@ -18,8 +18,8 @@ public final class ReturnGateClient {
 
     @SubscribeEvent
     public static void onRegisterRenderers(RegisterRenderers event) {
-        if (GateReturn.type != null) {
-            event.registerEntityRenderer(GateReturn.type, GateRenderer::new);
+        {
+            event.registerEntityRenderer(com.mdvlcraft.binder.gate.GateItems.RETURN_GATE.get(), GateRenderer::new);
         }
     }
 }

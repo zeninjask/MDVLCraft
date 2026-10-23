@@ -129,9 +129,9 @@ public final class RuleGates {
     private static final Map<Integer, Set<Integer>> STATUED = new HashMap<>();
     private static final StackWalker WALKER = StackWalker.getInstance(StackWalker.Option.RETAIN_CLASS_REFERENCE);
     @Nullable
-    static Item trophy;
+    static final java.util.function.Supplier<Item> trophy = GateItems.TROPHY;
     @Nullable
-    public static EntityType<GateStatue> statue;
+    public static final java.util.function.Supplier<EntityType<GateStatue>> statue = GateItems.STATUE;
 
     private RuleGates() {
     }
@@ -361,7 +361,7 @@ public final class RuleGates {
             }
             BoundingBox box = instance.rooms.get(room);
             BlockPos spot = statueSpot(level, instance, box);
-            GateStatue mob = spot == null ? null : statue.create(level);
+            GateStatue mob = spot == null ? null : statue.get().create(level);
             if (mob == null) {
                 continue;
             }
@@ -406,7 +406,7 @@ public final class RuleGates {
             return;
         }
         for (ServerPlayer player : present) {
-            ItemStack stack = new ItemStack(trophy);
+            ItemStack stack = new ItemStack(trophy.get());
             stack.getOrCreateTag().putString("rule", rule.key());
             stack.getOrCreateTag().putString("rank", instance.rank.name());
             if (!player.getInventory().add(stack)) {
@@ -456,36 +456,24 @@ public final class RuleGates {
         return instance == null || !instance.live();
     }
 
-    /** Registers the Trial Trophy item and the statue entity (no DeferredRegister, so MDVLBinder needs no line for them). */
+    /** The statue's attributes and the trophy's creative tab entry (both are registered by GateItems' DeferredRegisters: a raw
+     * RegisterEvent made Forge's registry sync fail on clients with Connector, "Override did not have an associated owner"). */
     @EventBusSubscriber(modid = "mdvlcraft", bus = Mod.EventBusSubscriber.Bus.MOD)
     public static final class Registration {
         private Registration() {
         }
 
         @SubscribeEvent
-        public static void onRegister(RegisterEvent event) {
-            event.register(ForgeRegistries.Keys.ITEMS, helper -> {
-                trophy = new TrophyItem();
-                helper.register(ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gate_trophy"), trophy);
-            });
-            event.register(ForgeRegistries.Keys.ENTITY_TYPES, helper -> {
-                statue = EntityType.Builder.<GateStatue>of(GateStatue::new, MobCategory.MONSTER).sized(0.6F, 1.95F).clientTrackingRange(8)
-                    .build("mdvlcraft:gate_statue");
-                helper.register(ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gate_statue"), statue);
-            });
-        }
-
-        @SubscribeEvent
         public static void onAttributes(EntityAttributeCreationEvent event) {
             if (statue != null) {
-                event.put(statue, GateStatue.attributes().build());
+                event.put(statue.get(), GateStatue.attributes().build());
             }
         }
 
         @SubscribeEvent
         public static void onCreativeTab(BuildCreativeModeTabContentsEvent event) {
             if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES && trophy != null) {
-                event.accept(trophy);
+                event.accept(trophy.get());
             }
         }
     }
