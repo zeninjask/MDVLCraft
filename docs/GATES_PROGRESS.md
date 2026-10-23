@@ -45,8 +45,8 @@ Open items, small:
 - late.txt REROLL_PAID and tower.txt forge-trades shot: rerun with the fixed aim / a longer wait.
 - Not built yet (from the handoffs): sigil start menu, status-page leaderboard line, half essence drops on farm floors
   (tower.md); more red lair/camp variants (themes.md); a two-player check of the Narrowing Door shut-out (late.md).
-- Release: nothing from this round is in a release yet (2.0.40 was the last). Build a new version only when the user
-  asks; follow CLAUDE.md's release rules (patch bump, release files only on main).
+- **Released as 2.1.40** (the user asked for 2.1.x for the gates; main 61e21209, release files only). Base rebuilt
+  from the 2.0.40 packs; binder 0.9.0 from gate 6291119e. Next release: 2.1.41.
 
 ## Coordinator round 3 (2026-10-22 night)
 
