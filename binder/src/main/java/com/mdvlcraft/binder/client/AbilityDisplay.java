@@ -75,6 +75,9 @@ final class AbilityDisplay {
             lines.add(sustenance.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(Component.translatable("ability.mdvlcraft.arcane_sustenance.desc", 1, 4).withStyle(ChatFormatting.GRAY));
             lines.add(Component.translatable("ui.irons_spellbooks.mana_cost", sustenance.manaCost(level)).withStyle(ChatFormatting.BLUE));
+        } else if (ability instanceof com.mdvlcraft.binder.ability.FormlessSwordAbility formless) {
+            lines.add(formless.displayName().copy().withStyle(ChatFormatting.DARK_PURPLE));
+            lines.add(Component.translatable("ability.mdvlcraft.formless_sword.desc").withStyle(ChatFormatting.GRAY));
         } else if (ability instanceof PlannedAbility planned) {
             lines.add(planned.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(planned.description().copy().withStyle(ChatFormatting.GRAY));

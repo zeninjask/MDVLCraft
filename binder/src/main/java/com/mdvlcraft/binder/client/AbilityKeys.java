@@ -21,6 +21,9 @@ public final class AbilityKeys {
     public static final KeyMapping GIVE_UP = key("give_up", 90);
     private static final List<KeyMapping> ALL = List.of(MENU, WHEEL, CAST, GIVE_UP);
     private static boolean castDown;
+    /** How long the cast key has been held (Formless Sword's Form mode opens the sword wheel at HOLD_TICKS). */
+    private static int holdTicks;
+    private static final int HOLD_TICKS = 6;
 
     private AbilityKeys() {
     }
@@ -61,7 +64,22 @@ public final class AbilityKeys {
             }
 
             boolean down = CAST.isDown() && minecraft.screen == null;
-            if (tapped && !down && !castDown) {
+            if (ClientArsenal.formSelected() && !minecraft.player.isShiftKeyDown() && (down || castDown || tapped)) {
+                // Formless Sword in Form mode: holding opens the sword wheel, a tap summons (or dismisses) the shadow weapon
+                if (down) {
+                    holdTicks++;
+                    if (holdTicks == HOLD_TICKS) {
+                        minecraft.setScreen(new SwordWheelScreen());
+                    }
+                } else if (holdTicks < HOLD_TICKS) {
+                    BinderNetwork.sendToServer(new CastPacket(true, ClientAbilities.selected()));
+                    BinderNetwork.sendToServer(new CastPacket(false, ClientAbilities.selected()));
+                }
+                castDown = down;
+                if (!down) {
+                    holdTicks = 0;
+                }
+            } else if (tapped && !down && !castDown) {
                 BinderNetwork.sendToServer(new CastPacket(true, ClientAbilities.selected()));
                 BinderNetwork.sendToServer(new CastPacket(false, ClientAbilities.selected()));
             } else if (down != castDown) {

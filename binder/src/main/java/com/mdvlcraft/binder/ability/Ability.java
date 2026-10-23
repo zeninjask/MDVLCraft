@@ -7,7 +7,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbility, StanceAbility, DoppelgangerAbility, SustenanceAbility, PlannedAbility,
-    GauntAbility {
+    GauntAbility, FormlessSwordAbility {
     /** Multiplier on every ability's base mana cost (Iron's spells get it through their spell config instead). */
     float MANA_SCALE = 1.2F;
     /** Multiplier on technique damage (combat/TechniqueScaling); Iron's spells get it through power_multiplier. */
@@ -42,6 +42,10 @@ public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbilit
 
         if (DoppelgangerAbility.INSTANCE.id().equals(id)) {
             return Optional.of(DoppelgangerAbility.INSTANCE);
+        }
+
+        if (FormlessSwordAbility.INSTANCE.id().equals(id)) {
+            return Optional.of(FormlessSwordAbility.INSTANCE);
         }
 
         if (SustenanceAbility.INSTANCE.id().equals(id)) {

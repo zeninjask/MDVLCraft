@@ -95,6 +95,7 @@ public final class MDVLBinder {
         BinderNetwork.register();
         event.enqueueWork(() -> {
             AbilityReward.register();
+            com.mdvlcraft.binder.shadow.ShadowEnchantReward.register();
             EpicSkillReward.register();
             ArchetypeTabs.register();
             MageExperience.register();

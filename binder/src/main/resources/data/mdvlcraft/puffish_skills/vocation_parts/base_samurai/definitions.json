@@ -358,26 +358,26 @@
   "size": 1.5,
   "extra_description": "Core bonus (every archetype has this spoke)."
  },
- "samurai__magic_blade_absorb": {
-  "title": "Magic Blade: Absorb",
-  "description": "Unlocks Magic Blade: Absorb (Level 3) (42 mana, 59.85 s cooldown) on the ability wheel",
-  "extra_description": "Successful weapon hits restore mana while the effect lasts. The restored amount scales with spell and Esoteric spell power.",
+ "samurai__planned_formless_sword": {
+  "title": "Formless Sword",
+  "description": "Unlocks Formless Sword on the ability wheel (shadow weapons drain 2 mana a second)",
+  "extra_description": "Three modes, cycled by sneaking as you activate it. Absorb: take the weapon in your off hand into your Shadow Arsenal (each weapon once, without its enchantments). Select: bind arsenal weapons to the sword wheel. Form: hold to pick a weapon on the sword wheel, tap to summon its shadow into your first hotbar slot (2 mana a second; tap again to dismiss).",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_magic_blade_absorb.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "esoteric_spell:magic_blade_absorb",
-     "level": 3
+     "ability": "mdvlcraft:formless_sword",
+     "level": 1
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -6434,6 +6434,606 @@
    }
   ],
   "cost": 1,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_arsenal": {
+  "title": "Shadow Arsenal",
+  "description": "Opens the Shadow Arsenal: enchantments for the shadow weapons Formless Sword summons",
+  "extra_description": "Each node beyond costs 5 points; shadow weapons carry the highest level of each enchantment unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [],
+  "cost": 0,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_sharpness_1": {
+  "title": "Shadow Sharpness I",
+  "description": "Your shadow weapons get Sharpness I",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:sharpness",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_sharpness_2": {
+  "title": "Shadow Sharpness II",
+  "description": "Your shadow weapons get Sharpness II",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:sharpness",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_sharpness_3": {
+  "title": "Shadow Sharpness III",
+  "description": "Your shadow weapons get Sharpness III",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:sharpness",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_sharpness_4": {
+  "title": "Shadow Sharpness IV",
+  "description": "Your shadow weapons get Sharpness IV",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:sharpness",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_sharpness_5": {
+  "title": "Shadow Sharpness V",
+  "description": "Your shadow weapons get Sharpness V",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:sharpness",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_looting_1": {
+  "title": "Shadow Looting I",
+  "description": "Your shadow weapons get Looting I",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:looting",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_looting_2": {
+  "title": "Shadow Looting II",
+  "description": "Your shadow weapons get Looting II",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:looting",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_looting_3": {
+  "title": "Shadow Looting III",
+  "description": "Your shadow weapons get Looting III",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:looting",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_sweeping_1": {
+  "title": "Shadow Sweeping Edge I",
+  "description": "Your shadow weapons get Sweeping Edge I",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:sweeping",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_sweeping_2": {
+  "title": "Shadow Sweeping Edge II",
+  "description": "Your shadow weapons get Sweeping Edge II",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:sweeping",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_sweeping_3": {
+  "title": "Shadow Sweeping Edge III",
+  "description": "Your shadow weapons get Sweeping Edge III",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "minecraft:sweeping",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_death_wish_1": {
+  "title": "Shadow Death Wish",
+  "description": "Your shadow weapons get Death Wish",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "majruszsenchantments:death_wish",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_leech_1": {
+  "title": "Shadow Leech",
+  "description": "Your shadow weapons get Leech",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "majruszsenchantments:leech",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_massacre_1": {
+  "title": "Shadow Massacre I",
+  "description": "Your shadow weapons get Massacre I",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "combat_evolution:massacre",
+     "level": 1
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_massacre_2": {
+  "title": "Shadow Massacre II",
+  "description": "Your shadow weapons get Massacre II",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "combat_evolution:massacre",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_massacre_3": {
+  "title": "Shadow Massacre III",
+  "description": "Your shadow weapons get Massacre III",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "combat_evolution:massacre",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_massacre_4": {
+  "title": "Shadow Massacre IV",
+  "description": "Your shadow weapons get Massacre IV",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "combat_evolution:massacre",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__shadow_massacre_5": {
+  "title": "Shadow Massacre V",
+  "description": "Your shadow weapons get Massacre V",
+  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_formless_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:shadow_enchant",
+    "data": {
+     "enchantment": "combat_evolution:massacre",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
   "frame": {
    "type": "texture",
    "data": {
