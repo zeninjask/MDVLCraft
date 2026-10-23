@@ -1,5 +1,5 @@
 """Writes the red gate lair and camp templates (vanilla structure .nbt files) into
-binder/src/main/resources/data/mdvlcraft/structures/gate/red/<theme>/{lair_1,camp_1,camp_2,camp_3}.nbt and lists them in
+binder/src/main/resources/data/mdvlcraft/structures/gate/red/<theme>/{lair_1..3,camp_1..5}.nbt and lists them in
 each theme file's "red" section ("lairs", "camps"). Run from anywhere, no dependencies; reuses gen_gate_rooms' NBT writer.
 
 Like the dungeon rooms, nobody can build these in game, so they are drawn here: one shared set of layouts, dressed per
@@ -12,10 +12,12 @@ Lair (LAIR x LAIR, gate/RedLandscape.buildArena pastes it on the flattened arena
   under arches, eight pillars at radius 12 (two of them toppled), a throne dais at the north edge, campfire braziers
   (the frozen cold hazard counts lit campfires) and the theme's furniture on the diagonals. The middle (radius 8) stays
   clear: RedLandscape puts the exit pad at the centre, the boss chest 4 north, the boss 6 south and a hidden boss 6 north.
-  No markers. Not rotated (the throne stays behind the chest).
+  No markers. Not rotated (the throne stays behind the chest). lair_1 is that ring; lair_2 an amphitheatre (benches
+  rising round the floor), lair_3 a cloister (square court in a roofed colonnade); all three share the middle
+  (court_top, braziers, keep_middle_clear). RedLandscape picks one by the instance id.
 Camps (CAMP x CAMP, RedLandscape.buildCamp pastes them on the ground with a random rotation about the centre):
   y 0      ground patch (replaces the top ground block); y 1 up: the camp.
-  camp_1 tents, camp_2 ruin, camp_3 palisade ring; each has a campfire in the middle. Markers (data structure blocks, as in
+  camp_1 tents, camp_2 ruin, camp_3 palisade ring, camp_4 lookout platform, camp_5 boulder heap; each has a campfire in the middle. Markers (data structure blocks, as in
   the rooms): five "spawn:melee" / "spawn:ranged" (RedLandscape spawns 3–5 mobs on them) and two "crystal" (red gate
   veins, gate/HiddenBoss.veins).
 
@@ -285,6 +287,228 @@ def p_seat(key):
             'spire': 'purpur_stairs[facing=north]', 'forge': 'polished_blackstone_stairs[facing=north]'}[key]
 
 
+# stairs for the bowl's benches and the throne steps (facing added where placed)
+STEPS = dict(crypt='polished_deepslate_stairs', warren='mud_brick_stairs', frozen='spruce_stairs',
+             warcamp='smooth_red_sandstone_stairs', spire='purpur_stairs', forge='polished_blackstone_brick_stairs')
+
+
+def outward(x, z, mid):
+    """The horizontal direction pointing away from the centre (for stairs rising outward)."""
+    dx, dz = x - mid, z - mid
+    if abs(dx) >= abs(dz):
+        return 'east' if dx > 0 else 'west'
+    return 'south' if dz > 0 else 'north'
+
+
+def court_top(rng, x, z, d):
+    """The lair's fighting floor, the same in every lair: the emblem disc (radius 2.5), rings at 4 and 9 and the cross of
+    lanes out to 8 in the floor's accent, a few worn blocks. Tests look at the emblem and the ring 4 east of the centre."""
+    if d <= 2.5:
+        return 'emblem'
+    if round(d) in (4, 9) or (d <= 8.5 and (x == LMID or z == LMID)):
+        return 'floor2'
+    return 'floor3' if rng.random() < 0.1 else 'floor'
+
+
+def keep_middle_clear(p, walk):
+    """Removes everything above the floor within radius 8.5 (exit pad, chest, boss, hidden boss) except the braziers."""
+    for (x, y, z) in list(p.blocks):
+        if y >= walk and dist(x, z, LMID) <= 8.5 and not (y == walk and p.blocks[(x, y, z)] == 'fire'):
+            del p.blocks[(x, y, z)]
+
+
+def braziers(p, walk):
+    """Campfire braziers 9 east and west of the centre (the frozen cold hazard counts lit campfires; tests look east)."""
+    for x in (LMID - 9, LMID + 9):
+        p.set(x, FY, LMID, 'emblem')
+        p.set(x, walk, LMID, 'fire')
+
+
+def lair_bowl(key, seed):
+    """An amphitheatre: the round fighting floor (radius 10) sunk among three rising rows of benches, a crenellated rim,
+    gateways east, south and west, a throne terrace built into the benches at the north, four obelisks with fires on the
+    diagonals and lamp posts along the top row."""
+    p = Piece(LAIR, LAIR_H, seed)
+    rng = p.rng
+    walk = FY + 1
+    step = STEPS[key]
+    for x in range(LAIR):
+        for z in range(LAIR):
+            d = dist(x, z, LMID)
+            if d > LMID + 0.5:
+                continue
+            for y in range(FY):
+                p.set(x, y, z, 'base')
+            dx, dz = x - LMID, z - LMID
+            gateway = (abs(dz) <= 2) or (abs(dx) <= 2 and dz > 0)
+            if d <= 10.5:
+                top = court_top(rng, x, z, d)
+                p.set(x, FY, z, top)
+                if top == 'floor' and d > 9.5 and rng.random() < 0.05:
+                    p.set(x, walk, z, 'litter')
+                continue
+            p.set(x, FY, z, 'floor2' if gateway else 'base')
+            if gateway:
+                continue
+            if d <= 15:   # benches: row 1, 2, 3 (one block higher each), stairs rising outward on top
+                rows = 1 if d <= 12 else 2 if d <= 13.5 else 3
+                for dy in range(rows - 1):
+                    p.set(x, walk + dy, z, 'base')
+                p.set(x, walk + rows - 1, z, f'{step}[facing={outward(x, z, LMID)}]')
+                continue
+            height = rng.choice((3, 4, 4, 5))   # the rim: a broken, crenellated wall
+            for dy in range(height):
+                p.set(x, walk + dy, z, 'wall2' if rng.random() < 0.2 else 'wall')
+            if height >= 4 and (x + z) % 2 == 0:
+                p.set(x, walk + height, z, 'wall')
+    # gateway arches in the rim, east, south and west
+    for side in range(1, 4):
+        def at(t, side=side):
+            return [(LMID + t, 1), (LAIR - 2, LMID + t), (LMID + t, LAIR - 2), (1, LMID + t)][side]
+        for t in (-3, 3):
+            x, z = at(t)
+            for dy in range(7):
+                p.set(x, walk + dy, z, 'pillar')
+            p.set(x, walk + 7, z, 'cap')
+            p.set(x, walk + 8, z, 'light')
+        for t in range(-2, 3):
+            x, z = at(t)
+            p.set(x, walk + 6, z, 'cap')
+            if t == 0:
+                p.set(x, walk + 5, z, 'chain[axis=y]')
+                p.set(x, walk + 4, z, p_hang(key))
+    # the throne terrace at the north, cut into the benches: steps up from the floor to a platform two blocks high
+    for x in range(LMID - 4, LMID + 5):
+        for z in range(LMID - 15, LMID - 10):
+            for y in range(walk, walk + 7):
+                p.blocks.pop((x, y, z), None)
+            rise = min(LMID - 10 - z, 3)   # z = LMID-11 -> 1 ... LMID-13 and beyond -> 3
+            edge = abs(x - LMID) == 4
+            for dy in range(rise - 1):
+                p.set(x, walk + dy, z, 'wall' if edge else 'base')
+            p.set(x, walk + rise - 1, z, 'wall' if edge else ('emblem' if rise == 3 else f'{step}[facing=north]'))
+    top = walk + 3
+    for x in range(LMID - 1, LMID + 2):
+        for dy in range(4):
+            p.set(x, top + dy, LMID - 15, 'pillar' if x == LMID else 'cap')
+    p.set(LMID, top + 4, LMID - 15, 'light')
+    p.set(LMID, top, LMID - 14, p_seat(key))
+    for x in (LMID - 3, LMID + 3):
+        p.set(x, top, LMID - 13, 'fence')
+        p.set(x, top + 1, LMID - 13, 'light')
+    # obelisks on the diagonals, on a plinth among the benches, with a fire on top
+    for sx, sz in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        cx, cz = LMID + sx * 9, LMID + sz * 9
+        for ddx in (-1, 0, 1):
+            for ddz in (-1, 0, 1):
+                for y in range(walk, walk + 3):
+                    p.set(cx + ddx, y, cz + ddz, 'wall')
+                p.set(cx + ddx, walk + 3, cz + ddz, 'cap' if abs(ddx) + abs(ddz) == 2 else 'wall')
+        for y in range(walk + 3, walk + 10):
+            p.set(cx, y, cz, 'pillar')
+        p.set(cx, walk + 10, cz, 'cap')
+        p.set(cx, walk + 11, cz, 'fire')
+    # lamp posts along the top row of benches, between the ways in
+    for n in range(8):
+        a = math.pi / 4 * n + math.pi / 8
+        x, z = LMID + round(math.cos(a) * 14), LMID + round(math.sin(a) * 14)
+        if z < LMID - 10 and abs(x - LMID) <= 5:
+            continue
+        p.set(x, walk + 2, z, 'base')
+        p.set(x, walk + 3, z, 'fence')
+        p.set(x, walk + 4, z, 'fence')
+        p.set(x, walk + 5, z, 'light')
+    for sx, sz in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        FEATURES[key](p, LMID + sx * 7, LMID + sz * 7, walk)
+    braziers(p, walk)
+    keep_middle_clear(p, walk)
+    return p
+
+
+def lair_cloister(key, seed):
+    """A square temple court: the round fighting floor in a square court (c 9), a roofed colonnade walk round it (c 10–12,
+    the roof partly fallen in, lanterns hanging under it), an outer wall with crenels and gateways east, south and west,
+    a corner tower at each corner with a fire or a light on top, and the throne under the colonnade's north wing."""
+    p = Piece(LAIR, LAIR_H, seed)
+    rng = p.rng
+    walk = FY + 1
+    roof = walk + 5
+    for x in range(LAIR):
+        for z in range(LAIR):
+            dx, dz = x - LMID, z - LMID
+            c = max(abs(dx), abs(dz))
+            if c > 13:
+                continue
+            d = dist(x, z, LMID)
+            for y in range(FY):
+                p.set(x, y, z, 'base')
+            t = dz if abs(dx) == c else dx   # position along the side
+            gateway = abs(t) <= 1 and not (dz < 0 and abs(dz) == c)
+            if c <= 9:
+                top = 'floor2' if c == 9 and d > 8.5 else court_top(rng, x, z, d)
+                p.set(x, FY, z, top)
+                if top == 'floor' and c >= 8 and rng.random() < 0.06:
+                    p.set(x, walk, z, 'litter')
+            elif c <= 12:
+                p.set(x, FY, z, 'floor3' if rng.random() < 0.08 else 'floor2')
+                if c == 10 and abs(t) >= 3 and abs(t) % 3 == 0 and not (dz == -10 and abs(dx) <= 4):
+                    for y in range(walk, roof):
+                        p.set(x, y, z, 'pillar')
+                if rng.random() < 0.2 and c >= 10 and not (c == 10 and abs(t) % 3 == 0):
+                    if rng.random() < 0.4:   # fallen in: rubble below
+                        p.set(x, walk, z, 'wall2')
+                else:
+                    p.set(x, roof, z, 'cap')
+                if c == 11 and abs(t) % 6 == 0 and (x, roof, z) in p.blocks and (x, walk, z) not in p.blocks:
+                    p.set(x, roof - 1, z, p_hang(key))
+            else:   # the outer wall
+                p.set(x, FY, z, 'floor2' if gateway else 'base')
+                if gateway:
+                    p.set(x, walk + 4, z, 'cap')
+                    p.set(x, roof, z, 'cap')
+                    continue
+                for y in range(walk, roof + 1):
+                    p.set(x, y, z, 'wall2' if rng.random() < 0.15 else 'wall')
+                if (x + z) % 2 == 0:
+                    p.set(x, roof + 1, z, 'wall')
+    # gateway frames: pillars either side
+    for side in range(1, 4):
+        for t in (-2, 2):
+            x, z = [(LMID + t, LMID - 13), (LMID + 13, LMID + t), (LMID + t, LMID + 13), (LMID - 13, LMID + t)][side]
+            for y in range(walk, roof + 1):
+                p.set(x, y, z, 'pillar')
+            p.set(x, roof + 1, z, 'light')
+    # corner towers
+    for n, (sx, sz) in enumerate(((-1, -1), (1, -1), (1, 1), (-1, 1))):
+        cx, cz = LMID + sx * 12, LMID + sz * 12
+        for ddx in (-1, 0, 1):
+            for ddz in (-1, 0, 1):
+                for y in range(walk, walk + 9):
+                    p.set(cx + ddx, y, cz + ddz, 'pillar' if abs(ddx) + abs(ddz) == 2 else 'wall')
+                if abs(ddx) + abs(ddz) == 2:
+                    p.set(cx + ddx, walk + 9, cz + ddz, 'cap')
+        p.set(cx, walk + 9, cz, 'cap')
+        p.set(cx, walk + 10, cz, 'fire' if n % 2 else 'light')
+    # the throne under the north wing
+    for x in range(LMID - 3, LMID + 4):
+        for z in range(LMID - 12, LMID - 9):
+            p.blocks.pop((x, walk, z), None)
+            p.set(x, walk, z, 'emblem')
+            p.set(x, roof, z, 'cap')
+    for x in range(LMID - 1, LMID + 2):
+        for dy in range(1, 4):
+            p.set(x, walk + dy, LMID - 12, 'pillar' if x == LMID else 'cap')
+    p.set(LMID, walk + 1, LMID - 11, p_seat(key))
+    for x in (LMID - 3, LMID + 3):
+        p.set(x, walk + 1, LMID - 10, 'fence')
+        p.set(x, walk + 2, LMID - 10, 'light')
+    for sx, sz in ((-1, -1), (1, -1), (1, 1), (-1, 1)):
+        FEATURES[key](p, LMID + sx * 7, LMID + sz * 7, walk)
+    braziers(p, walk)
+    keep_middle_clear(p, walk)
+    return p
+
+
 # ---- camps ----
 
 def camp_base(p):
@@ -380,6 +604,63 @@ def camp_ring(p, key):
     p.set(CMID + 2, 1, CMID + 3, 'crate')
 
 
+def camp_watch(p, key):
+    """A lookout: a log platform on posts (ladder on the fire side, railing, a light), a cloth lean-to with a crate under
+    it and a lamp post."""
+    camp_base(p)
+    x0, z0 = CMID + 2, CMID - 5
+    for x, z in ((x0, z0), (x0 + 2, z0), (x0, z0 + 2), (x0 + 2, z0 + 2), (x0 + 1, z0 + 2)):   # corners + the ladder's
+        for y in range(1, 4):
+            p.set(x, y, z, 'post')
+    for x in range(x0, x0 + 3):
+        for z in range(z0, z0 + 3):
+            p.set(x, 4, z, 'seat')
+            if x in (x0, x0 + 2) or z in (z0, z0 + 2):
+                if not (x == x0 + 1 and z == z0 + 2):
+                    p.set(x, 5, z, 'fence')
+    p.set(x0 + 2, 6, z0, 'light')
+    for y in range(1, 5):
+        p.set(x0 + 1, y, z0 + 3, 'ladder[facing=south]')
+    for k, z in enumerate((CMID + 3, CMID + 4, CMID + 5)):   # the lean-to, its roof falling away from the fire
+        for x in range(CMID - 5, CMID - 1):
+            p.set(x, 3 - k, z, 'cloth2' if x == CMID - 3 else 'cloth')
+        if k == 0:
+            for x in (CMID - 5, CMID - 2):
+                p.set(x, 1, z, 'post')
+                p.set(x, 2, z, 'post')
+    p.set(CMID - 4, 1, CMID + 4, 'crate')
+    lamp_post(p, CMID - 5, CMID - 2)
+    p.set(CMID + 4, 1, CMID + 3, 'crate')
+
+
+def camp_rock(p, key):
+    """A camp in the lee of a boulder heap at the north, a stockpile of crates and a drying rack."""
+    camp_base(p)
+    rng = p.rng
+    cx, cz = CMID + 1, CMID - 4
+    for x in range(CAMP):
+        for z in range(CAMP):
+            for y in range(1, 5):
+                if ((x - cx) / 3.6) ** 2 + ((z - cz) / 2.6) ** 2 + ((y - 0.5) / 4.2) ** 2 <= 1:
+                    p.set(x, y, z, rng.choice(('wall', 'wall', 'wall2', 'base')))
+    top = max(y for (x, y, z) in p.blocks if (x, z) == (cx, cz))
+    p.set(cx, top + 1, cz, 'light')
+    for x, z in ((cx - 2, cz), (cx + 2, cz + 1)):
+        y = max((y for (bx, y, bz) in p.blocks if (bx, bz) == (x, z)), default=0)
+        if y >= 1 and p.get(x, y + 1, z) is None:
+            p.set(x, y + 1, z, 'flora' if rng.random() < 0.5 else 'litter')
+    for x, z, h in ((CMID - 3, CMID + 5, 2), (CMID - 2, CMID + 5, 1), (CMID - 3, CMID + 4, 1)):   # stockpile
+        for y in range(1, h + 1):
+            p.set(x, y, z, 'crate')
+    for z in (CMID + 1, CMID + 4):   # drying rack: two posts and a fence beam with cloth hanging off it
+        for y in (1, 2, 3):
+            p.set(CMID - 5, y, z, 'post')
+    for z in (CMID + 2, CMID + 3):
+        p.set(CMID - 5, 3, z, 'fence')
+        p.set(CMID - 5, 2, z, 'cloth2')
+    lamp_post(p, CMID + 4, CMID + 2)
+
+
 def finish_camp(p, key, feature_at):
     """The theme's furniture in one corner, flora on the ground, then the markers on free ground."""
     FEATURES[key](p, *feature_at, 1)
@@ -404,7 +685,8 @@ def finish_camp(p, key, feature_at):
 def camps(key, seed):
     out = {}
     for n, (draw, feature_at) in enumerate(((camp_tents, (CMID - 4, CMID + 4)), (camp_ruin, (CMID + 4, CMID + 1)),
-                                            (camp_ring, (CMID + 3, CMID - 3))), 1):
+                                            (camp_ring, (CMID + 3, CMID - 3)), (camp_watch, (CMID - 4, CMID - 4)),
+                                            (camp_rock, (CMID + 4, CMID + 4))), 1):
         p = Piece(CAMP, CAMP_H, seed + n)
         draw(p, key)
         finish_camp(p, key, feature_at)
@@ -464,7 +746,7 @@ def list_in_theme(key, names):
 
 def main():
     for i, (key, palette) in enumerate(PALETTES.items()):
-        pieces = {'lair_1': lair(key, 9100 + i)}
+        pieces = {'lair_1': lair(key, 9100 + i), 'lair_2': lair_bowl(key, 9300 + i), 'lair_3': lair_cloister(key, 9400 + i)}
         pieces.update(camps(key, 9200 + 10 * i))
         for stale in (ROOT / key).glob('*.nbt'):
             if stale.stem not in pieces:

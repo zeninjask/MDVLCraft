@@ -4,14 +4,18 @@ import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 import javax.annotation.Nullable;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -29,7 +33,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *   /mdvl gate redarena               builds the caller's lair arena if needed and puts them on its floor 5 blocks east of
  *                                     the centre (off the exit pad), facing west
  *   /mdvl gate redinfo                the caller's red layout: camps built, their crystal spots and how many hold ore
- *                                     (the result), lair built or not
+ *                                     (the result), lair built or not, and which lair/camp templates were used
+ *   /mdvl gate redpick &lt;theme&gt;   draws the lair and camp picks of 300 instance ids (RedLandscape.pick) and lists the
+ *                                  counts; succeeds (result 1) only if every listed template loads and is drawn
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class GateThemeCommand {
@@ -56,7 +62,11 @@ public final class GateThemeCommand {
                     .then(Commands.literal("roll").executes(c -> hidden(c, null))))
                 .then(Commands.literal("redcamp").executes(GateThemeCommand::camp))
                 .then(Commands.literal("redarena").executes(GateThemeCommand::arena))
-                .then(Commands.literal("redinfo").executes(GateThemeCommand::info))));
+                .then(Commands.literal("redinfo").executes(GateThemeCommand::info))
+                .then(Commands.literal("redpick")
+                    .then(Commands.argument("theme", StringArgumentType.word())
+                        .suggests((c, b) -> SharedSuggestionProvider.suggest(themes, b))
+                        .executes(GateThemeCommand::redPick)))));
     }
 
     private static int list(CommandContext<CommandSourceStack> context) {
@@ -177,9 +187,46 @@ public final class GateThemeCommand {
             }
         }
         String text = "Red gate " + layout.instanceId + ": camps built " + layout.campsDone.size() + "/" + layout.camps.size()
-            + ", template crystal spots " + spots + " (" + ores + " with a vein), lair " + (layout.lairFloor == null ? "not built" : "at " + layout.lairFloor.toShortString());
+            + ", template crystal spots " + spots + " (" + ores + " with a vein), lair " + (layout.lairFloor == null ? "not built" : "at " + layout.lairFloor.toShortString())
+            + ", lair template " + layout.lairTemplate + ", camp templates " + new TreeMap<>(layout.campTemplates.values().stream()
+                .collect(Collectors.groupingBy(ResourceLocation::getPath, Collectors.counting())));
         context.getSource().sendSuccess(() -> Component.literal(text), false);
         return ores;
+    }
+
+    private static int redPick(CommandContext<CommandSourceStack> context) {
+        GateTheme theme = GateTheme.byKey(StringArgumentType.getString(context, "theme"));
+        GateThemes.Theme data = theme == null ? null : GateThemes.get(theme);
+        if (data == null) {
+            context.getSource().sendFailure(Component.literal("Unknown theme or no data"));
+            return 0;
+        }
+        TreeMap<String, Integer> lairs = new TreeMap<>();
+        TreeMap<String, Integer> camps = new TreeMap<>();
+        for (int id = 1; id <= 300; id++) {
+            ResourceLocation lair = RedLandscape.pick(data.lairs(), RedLandscape.lairSeed(id));
+            if (lair != null) {
+                lairs.merge(lair.getPath(), 1, Integer::sum);
+            }
+            ResourceLocation camp = RedLandscape.pick(data.camps(), RedLandscape.campSeed(id, new BlockPos(id * 37 - 4000, 0, id * 53 - 6000)));
+            if (camp != null) {
+                camps.merge(camp.getPath(), 1, Integer::sum);
+            }
+        }
+        Set<ResourceLocation> missing = new HashSet<>();
+        for (List<ResourceLocation> pool : List.of(data.lairs(), data.camps())) {
+            for (ResourceLocation id : pool) {
+                if (context.getSource().getServer().getStructureManager().get(id).isEmpty()) {
+                    missing.add(id);
+                }
+            }
+        }
+        boolean ok = !data.lairs().isEmpty() && !data.camps().isEmpty() && missing.isEmpty()
+            && lairs.size() == new HashSet<>(data.lairs()).size() && camps.size() == new HashSet<>(data.camps()).size();
+        String text = theme.key() + " red picks: lairs " + lairs + ", camps " + camps + (missing.isEmpty() ? "" : ", MISSING " + missing)
+            + (ok ? " (all drawn)" : " (NOT all drawn or loaded)");
+        context.getSource().sendSuccess(() -> Component.literal(text), false);
+        return ok ? 1 : 0;
     }
 
     private static int hazard(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

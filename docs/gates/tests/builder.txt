@@ -17,8 +17,8 @@ wait 20
 shot builder_1_entrance
 cmd execute as Tester run mdvl gate goto boss
 wait 2
-cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:polished_deepslate run say BUILDER_E_BOSS_FLOOR_OK
-cmd execute as Tester at @s unless block ~ ~ ~ minecraft:structure_block run say BUILDER_E_BOSS_MARKER_REMOVED_OK
+cmd execute as Tester at @s positioned ~ 65 ~ if block ~ ~ ~ minecraft:polished_deepslate run say BUILDER_E_BOSS_FLOOR_OK
+cmd execute as Tester at @s positioned ~ 66 ~ unless block ~ ~ ~ minecraft:structure_block run say BUILDER_E_BOSS_MARKER_REMOVED_OK
 cmd execute as Tester at @s run tp @s ~ ~3 ~ 180 15
 wait 20
 shot builder_2_boss_room
@@ -56,7 +56,7 @@ wait 18
 shot builder_7_s_large_room
 cmd execute as Tester run mdvl gate goto boss
 wait 2
-cmd execute as Tester at @s if block ~ ~-1 ~ minecraft:blackstone run say BUILDER_S_BOSS_FLOOR_OK
+cmd execute as Tester at @s positioned ~ 65 ~ if block ~ ~ ~ minecraft:blackstone run say BUILDER_S_BOSS_FLOOR_OK
 cmd execute as Tester at @s run tp @s ~ ~3 ~ 180 15
 wait 20
 shot builder_8_s_boss_room

@@ -45,6 +45,8 @@ import org.slf4j.Logger;
  * tools/gates/gen_red_lairs.py): the lair is pasted on the flattened arena (its (MID, 3, MID) on the arena floor's top), a
  * camp on the ground at its spot with a random rotation; a camp's "spawn:*" markers place its mobs and its "crystal"
  * markers are kept for the red gate veins (HiddenBoss.veins). A theme without templates gets the old procedural ones.
+ * Which lair and which camp (several layouts per theme) is drawn from the instance id (and the camp's spot), so a gate's
+ * look doesn't depend on who walks where first; Layout keeps the picks for /mdvl gate redinfo.
  */
 public final class RedLandscape {
     /** Persistent NBT boolean on a gate boss; whoever sees it die decides the clear (for red gates: RedGates). */
@@ -75,6 +77,11 @@ public final class RedLandscape {
         long clearedAt = -1;
         /** Crystal vein spots of each built camp (its "crystal" markers), by camp column. */
         final Map<BlockPos, List<BlockPos>> campCrystals = new ConcurrentHashMap<>();
+        /** The lair template used, once built from one. */
+        @Nullable
+        ResourceLocation lairTemplate;
+        /** The camp template used at each built camp's column. */
+        final Map<BlockPos, ResourceLocation> campTemplates = new ConcurrentHashMap<>();
 
         Layout(int instanceId, BlockPos lair, List<BlockPos> camps) {
             this.instanceId = instanceId;
@@ -193,13 +200,33 @@ public final class RedLandscape {
         return type == null ? null : GateSpawner.spawn(level, instance, type, pos);
     }
 
-    /** A random template of the pool, or null if the pool is empty or none of it loads. */
+    /** The pool entry for a seed (the same seed always gives the same entry), or null if the pool is empty. */
     @Nullable
-    static StructureTemplate template(ServerLevel level, List<ResourceLocation> pool) {
+    static ResourceLocation pick(List<ResourceLocation> pool, long seed) {
         if (pool.isEmpty()) {
             return null;
         }
-        ResourceLocation id = pool.get(level.random.nextInt(pool.size()));
+        long h = (seed + 0x632BE59BD9B4E019L) * 0x9E3779B97F4A7C15L;   // mixed, so neighbouring ids don't pick alike
+        h ^= h >>> 29;
+        return pool.get((int)Math.floorMod(h, (long)pool.size()));
+    }
+
+    /** Seed of the lair pick of an instance. */
+    static long lairSeed(int instanceId) {
+        return instanceId * 31L + 7;
+    }
+
+    /** Seed of the camp pick at a camp's column of an instance. */
+    static long campSeed(int instanceId, BlockPos column) {
+        return ((long)instanceId << 32) ^ column.asLong();
+    }
+
+    /** The template with that id, or null (logged) if it doesn't load. */
+    @Nullable
+    static StructureTemplate template(ServerLevel level, @Nullable ResourceLocation id) {
+        if (id == null) {
+            return null;
+        }
         Optional<StructureTemplate> found = level.getStructureManager().get(id);
         if (found.isEmpty()) {
             LOGGER.error("Red gate template {} is missing", id);
@@ -242,8 +269,13 @@ public final class RedLandscape {
     /** A camp with 3–5 mobs: the theme's camp template if it has one, else a small procedural camp. */
     static void buildCamp(ServerLevel level, Instance instance, BlockPos column) {
         GateThemes.Theme data = GateThemes.get(instance.theme);
-        StructureTemplate camp = data == null ? null : template(level, data.camps());
+        ResourceLocation campId = data == null ? null : pick(data.camps(), campSeed(instance.id, column));
+        StructureTemplate camp = template(level, campId);
         if (camp != null) {
+            Layout layout = LAYOUTS.get(instance.id);
+            if (layout != null) {
+                layout.campTemplates.put(column, campId);
+            }
             buildCamp(level, instance, column, camp);
             return;
         }
@@ -308,8 +340,13 @@ public final class RedLandscape {
         Palette palette = palette(instance.theme);
         BlockPos floor = surface(level, lair).below();
         GateThemes.Theme data = GateThemes.get(instance.theme);
-        StructureTemplate template = data == null ? null : template(level, data.lairs());
+        ResourceLocation lairId = data == null ? null : pick(data.lairs(), lairSeed(instance.id));
+        StructureTemplate template = template(level, lairId);
         if (template != null) {
+            Layout layout = LAYOUTS.get(instance.id);
+            if (layout != null) {
+                layout.lairTemplate = lairId;
+            }
             int radius = template.getSize().getX() / 2;
             groundwork(level, floor, radius, floor.getY() - LAIR_FLOOR, floor.getY() + 1, template.getSize().getY(), palette.floor());
             paste(level, template, floor, LAIR_FLOOR, Rotation.NONE);
