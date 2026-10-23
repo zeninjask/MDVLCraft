@@ -47,7 +47,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public final class HiddenBoss {
     /** Persistent NBT boolean on a hidden boss. */
     public static final String TAG = "mdvlcraft_gate_hidden";
-    /** Persistent NBT boolean on a hidden boss that drops black essence stones (red S gates only). */
+    /** Persistent NBT boolean on a hidden boss that drops black essence stones (red S gates, and the tower's floor-55+ one). */
     public static final String BLACK_TAG = "mdvlcraft_gate_black";
     /** Chance of a hidden boss in a red gate below S (plan 7.2: 50%, 100% for S). */
     static final double HIDDEN_CHANCE = 0.5;
@@ -72,7 +72,7 @@ public final class HiddenBoss {
         return instance.red && instance.rank == GateRank.S;
     }
 
-    /** GateRewards.onDrops: black essence stones come only from a red S gate's hidden boss. */
+    /** GateRewards.onDrops: black essence stones come only from a red S gate's hidden boss and the tower's (TowerRun). */
     public static boolean dropsBlack(LivingEntity mob) {
         return mob.getPersistentData().getBoolean(BLACK_TAG);
     }
