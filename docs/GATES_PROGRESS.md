@@ -177,6 +177,11 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate 0ffad579 jar, heal + door sections of `late.txt` (own fresh client): HEAL_TRIAL_ENTERED and
+  NO_HEALING **PASS** (+1.3 HP from regen IV in the no_healing trial). The Narrowing Door gate rolled red on first
+  entry (S gates: 12%), became a red_realm gate, so DOOR_ENTERED looked in the wrong dimension — the earlier heal-trial
+  miss was most likely the same roll. Rig fix: the test server's `config/mdvlcraft-common.toml` now has
+  redChanceB/A/S = 0 (red tests force their gates with `red place`). Door section rerun.
 - 2026-10-23, gate 0ffad579 jar, `tower.txt` (gate-fix steps): **23/23 PASS** incl. HIDDEN_BLACK_DROP (black-flag fix).
   Shot `tower_floor55_tablet`: the tablet text renders ("Floor 55" + its modifier names). Shot
   `tower_forge_seal_trades` was taken while the client still showed "Loading terrain…", so the seal trades at the forge
@@ -282,6 +287,13 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
     unconfirmed). Rerun with a `wait 60` at the start of each steps file.
 
 ## How to test (rig used so far)
+
+Rig settings that matter (scratchpad, not in the repo): `scratchpad/tools/gfresh.sh <part> [steps file]` runs one steps
+file on a fresh server + client under the gradle lock and deletes Tester's playerdata first (a test that ends with
+Tester dead would otherwise leave him dead). The test server sets redChanceB/A/S = 0 so the natural red roll can't turn
+a test's gate red (red tests use `red place`). The client is killed by the machine's memory limit on long files; split
+long files (e.g. the tail of themes.txt from `redhidden always`) and run the parts separately.
+
 
 The test server and client live in the session scratchpad (not in the repo): a Forge 47.4.10 server with the 2.0.38 server
 pack's mods, run headless, and a portablemc client under Xvfb driven with xdotool. Steps that only need the server can be
