@@ -35,6 +35,14 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Release 2.1.42 (2026-10-23)
+
+main 8995aa74 (release files only). Adds on top of 2.1.41: return portal in normal gates' entrance rooms and roaming
+hostiles (`gate-portal`, `docs/gates/portal.md`), Xaero's minimap/world map off inside gates (`gate-minimap`,
+`docs/gates/minimap.md`), DQ9 key icons for the gate keys (`gate-keyicons`, `docs/gates/keyicons.md`). None of the
+2.1.41/2.1.42 additions has been run in game yet; the coordinator's test queue (started after this release): questlog
+screenshot, portal, minimap, tower, builder, themes (head/tail), red, late reroll. Next release: 2.1.43.
+
 ## Release 2.1.41 (2026-10-23)
 
 main edef0666 (release files only). Adds on top of 2.1.40: the Gates quest chapter (`gate-quests`, 74 quests 001G–074G,
