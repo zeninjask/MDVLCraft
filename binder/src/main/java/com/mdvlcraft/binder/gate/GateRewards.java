@@ -71,6 +71,8 @@ public final class GateRewards {
 
     public static final Map<GateRank, RegistryObject<Block>> CRYSTAL_ORES = new EnumMap<>(GateRank.class);
     public static final Map<GateRank, RegistryObject<Item>> TEMPER_RUNES = new EnumMap<>(GateRank.class);
+    /** Cosmetic boss trophies, one per rank, from the boss chest's loot tables. */
+    public static final Map<GateRank, RegistryObject<Item>> BOSS_TROPHIES = new EnumMap<>(GateRank.class);
     public static final RegistryObject<Block> REWARD_CHEST = BLOCKS.register("gate_reward_chest", GateRewardChestBlock::new);
     @SuppressWarnings("DataFlowIssue")
     public static final RegistryObject<BlockEntityType<GateRewardChestBlockEntity>> REWARD_CHEST_ENTITY = BLOCK_ENTITIES.register("gate_reward_chest",
@@ -91,6 +93,7 @@ public final class GateRewards {
             CRYSTAL_ORES.put(rank, ore);
             ITEMS.register("mana_crystal_ore_" + key, () -> new BlockItem(ore.get(), new Item.Properties().rarity(GateItems.rarity(rank))));
             TEMPER_RUNES.put(rank, ITEMS.register("temper_rune_" + key, () -> new TemperRuneItem(rank)));
+            BOSS_TROPHIES.put(rank, ITEMS.register("boss_trophy_" + key, () -> new Item(new Item.Properties().stacksTo(16).rarity(GateItems.rarity(rank)))));
         }
     }
 
@@ -111,6 +114,7 @@ public final class GateRewards {
             event.accept(FORGE_ITEM);
         } else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(RETURN_STONE);
+            BOSS_TROPHIES.values().forEach(event::accept);
         } else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             TEMPER_RUNES.values().forEach(event::accept);
         }
