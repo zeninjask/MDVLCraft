@@ -1,0 +1,24 @@
+wait 120
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd tp Tester 200.5 140 36.5 90 0
+wait 20
+shot minimap_overworld_shown
+key m
+wait 3
+shot worldmap_overworld_opens
+key Escape
+wait 2
+cmd execute as Tester run mdvl gate open E crypt
+wait 20
+shot minimap_gate_hidden
+key m
+wait 3
+shot worldmap_gate_blocked
+cmd execute as Tester run mdvl gate leave
+wait 20
+shot minimap_back_after_leave
+key m
+wait 3
+shot worldmap_back_after_leave
+key Escape
