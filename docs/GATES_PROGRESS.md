@@ -35,6 +35,15 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Release 2.1.47 (2026-10-23)
+
+On top of 2.1.46 (not gate work, released from `gate`): Inner Growth regenerates 10 innate charge a second and charges
+Antitheus's Demonic Ascension (`mixin/wom/InnerGrowthSkillMixin`); Dummmmmmy's target dummy has an Epic Fight patch so
+it can be assassinated (`integration/TargetDummyPatch`) and counts as human for Misanthropy (tag `mdvlcraft:humans`).
+**Not tested in game** (the user asked for no testing); the gate test run was stopped before builder finished. Rig fix
+pending a rerun: `gtest.sh` now pre-picks Tester's three origins (`origins_pick.py`), since the wiped playerdata made the
+origin picker swallow phase 2's key click. Next release: 2.1.48.
+
 ## Release 2.1.46 (2026-10-23)
 
 Fix on top of 2.1.45: boss chests were lost. With no exit marker the exit opens where the boss fell, so a player standing
@@ -97,7 +106,7 @@ never joined):
   yet merged or run in game.
 - Not testable in the rig: the Narrowing Door shut-out of a returning member (needs two players).
 
-**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.47**. Build: rebuild `base/`
+**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.48**. Build: rebuild `base/`
 from the latest committed mrpacks if stale, `./gradlew build`, `python3 binder/tools/build_packs.py <ver> .`,
 `skill_tree_doc.py` for the PDF, copy the Java-args files; push only the release files to `main` from a worktree of
 `origin/main` (`git push origin HEAD:main`). Usage-limit wrap-up rule below applies to every agent.
