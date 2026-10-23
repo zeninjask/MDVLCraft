@@ -177,6 +177,10 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate 0ffad579 jar, tail of `themes.txt` (from `redhidden always`, own fresh client): **7/7 PASS** —
+  red A forge gate entered, forge lair template, hidden boss rises, seal holds until it dies then breaks, no black
+  stones from a red A hidden boss, home after. With the earlier runs every `themes.txt` check has now passed at least
+  once (BOSS_MEDIUM_ROOM passed in the first run, missed once on a slow client).
 - 2026-10-23, gate 0ffad579 jar, `late.txt` (gate-fix steps), fresh Tester: **23/28**. Now PASS: red S (hidden boss,
   still sealed, black stone only from the hidden boss, exit), and all Statues checks (placed, moves unseen, frozen when
   seen, unhurt; boss chest ×1.5 shown). Misses: REROLL_PAID (step: the forge was set 2 blocks along the old facing,
