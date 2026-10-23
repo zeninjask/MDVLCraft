@@ -35,6 +35,17 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Release 2.1.41 (2026-10-23)
+
+main edef0666 (release files only). Adds on top of 2.1.40: the Gates quest chapter (`gate-quests`, 74 quests 001G–074G,
+own chapter after Legend, open from the start; DQ9 log numbers it separately; `gate/GateAdvancements`), the tower finish
+(`gate-tower3`: Castle Sigil start menu, status-page tower line, half essence on farm floors; **network protocol 19**,
+so clients must update), and the themes finish (`gate-themes3`: 3 lairs + 5 camps per theme, seeded picks, builder
+boss-floor steps). Tested in game for this release: `quests.txt` 13/14 (the miss is NO_TOWER_FLOOR_50: tower progress
+from earlier tests lives in the test world's saved data, so the floor-50 quest was rightly granted). **Not yet run in
+game:** the new tower.txt sections (menu, starts, farm drops), the new themes/red lair and camp variants, builder
+boss-floor steps — rerun `tower`, `builder`, `themes` (split head/tail) and `red`. Next release: 2.1.42.
+
 ## Coordinator round 3 — status (2026-10-23)
 
 Round 3 is built, merged into `gate` and tested in game on the 0ffad579 jar (one fresh server + client per file):
