@@ -35,6 +35,19 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Coordinator round 3 — status (2026-10-23)
+
+Round 3 is built, merged into `gate` and tested in game on the 0ffad579 jar (one fresh server + client per file):
+phase1/2 PASS (earlier), builder 11/12, spawner 9/9, combat all, rewards 14/14, red 15/15, themes all (split in two;
+BOSS_MEDIUM_ROOM flaky on a slow client), late all (split; REROLL_PAID step fixed, not rerun), tower 23/23.
+Open items, small:
+- builder.txt BUILDER_S_BOSS_FLOOR: stale step (large forge boss room floor), update the expected block.
+- late.txt REROLL_PAID and tower.txt forge-trades shot: rerun with the fixed aim / a longer wait.
+- Not built yet (from the handoffs): sigil start menu, status-page leaderboard line, half essence drops on farm floors
+  (tower.md); more red lair/camp variants (themes.md); a two-player check of the Narrowing Door shut-out (late.md).
+- Release: nothing from this round is in a release yet (2.0.40 was the last). Build a new version only when the user
+  asks; follow CLAUDE.md's release rules (patch bump, release files only on main).
+
 ## Coordinator round 3 (2026-10-22 night)
 
 - Pulled `gate` at 92608634 (2.0.40); build passes. Round 3 parts cut at 4cc49214: `gate-tower2` (seal trades, tower
@@ -177,6 +190,9 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate 0ffad579 jar, door section of `late.txt` (red chance 0): **PASS** — DOOR_ENTERED, then a solo
+  `leave` fails the gate (DOOR_NOBODY_INSIDE_FAILED, no open gates after). With the runs above, every `late.txt` check
+  has passed; REROLL_PAID's step fix (forge aim) is not yet rerun.
 - 2026-10-23, gate 0ffad579 jar, heal + door sections of `late.txt` (own fresh client): HEAL_TRIAL_ENTERED and
   NO_HEALING **PASS** (+1.3 HP from regen IV in the no_healing trial). The Narrowing Door gate rolled red on first
   entry (S gates: 12%), became a red_realm gate, so DOOR_ENTERED looked in the wrong dimension — the earlier heal-trial
