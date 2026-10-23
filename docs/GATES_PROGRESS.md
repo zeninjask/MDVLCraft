@@ -35,6 +35,14 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Release 2.1.46 (2026-10-23)
+
+Fix on top of 2.1.45: boss chests were lost. With no exit marker the exit opens where the boss fell, so a player standing
+there was sent home at once, and 2.1.45's close-when-empty then closed the gate on its chest. The exit now takes only
+players who step onto it (`GateCombat.ON_EXIT`). Checked in game: Tester on the boss when it died stayed inside, the
+chest was placed ("Your boss chest is waiting"), stepping onto the exit sent Tester home and the gate closed. Next
+release: 2.1.47.
+
 ## Release 2.1.45 (2026-10-23)
 
 Adds on top of 2.1.44 (all on `gate`): red gates' 96-block boundary and seeded camp rotation (`gate-red3`); tempering's
@@ -46,7 +54,7 @@ ability wheel or Epic Fight skills (`combat/DownedNoSkills`); any non-boss mob w
 assassinated (`mixin/ce`, CE jar compileOnly). Checked in game (scratchpad newstuff steps): spider assassinated and
 killed, gate-boss refused, timer bar shows "E-Rank Gate · breaks in 1:59:37", cleared gate gone after leaving. Not yet
 checked in game: downed skill block, WOM S-only spawning. The full steps-file rerun follows this release. Network
-protocol 20 (unchanged). Next release: 2.1.46.
+protocol 20 (unchanged). Next release: 2.1.46 (done).
 
 ## Release 2.1.44 (2026-10-23)
 
@@ -89,7 +97,7 @@ never joined):
   yet merged or run in game.
 - Not testable in the rig: the Narrowing Door shut-out of a returning member (needs two players).
 
-**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.46**. Build: rebuild `base/`
+**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.47**. Build: rebuild `base/`
 from the latest committed mrpacks if stale, `./gradlew build`, `python3 binder/tools/build_packs.py <ver> .`,
 `skill_tree_doc.py` for the PDF, copy the Java-args files; push only the release files to `main` from a worktree of
 `origin/main` (`git push origin HEAD:main`). Usage-limit wrap-up rule below applies to every agent.
