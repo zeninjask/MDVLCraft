@@ -177,6 +177,8 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate 0ffad579 jar (gate-fix + black-flag fix), `rewards.txt` (gate-fix steps), fresh Tester: **14/14
+  PASS** — incl. CHEST_PLACED, RED_B_STONES, NO_BLACK_FROM_RED_B_HIDDEN and BLACK_FROM_HIDDEN_BOSS.
 - 2026-10-23, gate-fix jar (b7e83e18), `tower.txt` rerun: **22/23**; the "Display entity Not a string" error is gone
   (0 in the log). HIDDEN_BLACK_DROP still missed: `GateRewards.onDrops` only dropped black stones for mobs with the gate
   "boss" role, and the tower's hidden boss has the tower's own boss tag. Fixed in 0ffad579 (black flag alone decides);
