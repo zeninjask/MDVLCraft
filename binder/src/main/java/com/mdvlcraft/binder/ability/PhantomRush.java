@@ -78,6 +78,12 @@ public final class PhantomRush {
             return;
         }
 
+        long now = player.level().getGameTime();
+        if (player.isShiftKeyDown() && MODE.contains(player.getUUID()) && !rush.targets.isEmpty()) {
+            launch(player, rush, cost, now);   // sneaking with 1-2 picked: rush them now instead of switching mode
+            return;
+        }
+
         if (player.isShiftKeyDown()) {
             boolean on = MODE.add(player.getUUID()) || !MODE.remove(player.getUUID());
             rush.targets.clear();
@@ -87,7 +93,6 @@ public final class PhantomRush {
             return;
         }
 
-        long now = player.level().getGameTime();
         long left = player.getPersistentData().getLong(READY) - now;
         if (left > 0L) {
             bar(player, Component.translatable("ability.mdvlcraft.on_cooldown", Component.translatable("ability.mdvlcraft.phantom_rush"), (left + 19L) / 20L)
@@ -115,6 +120,11 @@ public final class PhantomRush {
             return;
         }
 
+        launch(player, rush, cost, now);
+    }
+
+    /** Pays and starts the rush on the picked targets (3, or fewer when the player sneak-casts early). */
+    private static void launch(ServerPlayer player, Rush rush, int cost, long now) {
         MagicData magic = MagicData.getPlayerMagicData(player);
         if (!player.isCreative()) {
             if (magic.getMana() < cost) {
