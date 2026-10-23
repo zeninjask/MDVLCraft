@@ -174,6 +174,12 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate ea29f24e jar, `late.txt` (late2 steps): **25/28**, no crash (the Dead King fix holds). Misses:
+  NO_HEALING, REROLL_PAID, STATUE_MOVES_UNSEEN → `gate-fix`.
+- 2026-10-23, gate ea29f24e jar, `themes.txt` (themes2 steps): **16/25**. Theme picks per rank, boss rooms by size,
+  hazards, red frozen gate, red crypt camps (template veins, mobs), lair template and braziers PASS. Then the client
+  disconnected (rig; likely OOM-killed) right after the red crypt lair boss died, so the 9 red A/B/forge checks never
+  ran. Rerun queued.
 - 2026-10-22 night, gate ea29f24e jar, `tower.txt` (tower2 steps, fresh Tester): **22/23**. HIDDEN_BLACK_DROP fails
   (themes2 made black need `mdvlcraft_gate_black`; the tower hidden boss sets only the hidden tag). Log repeats
   "Display entity Not a string" near the floor-55 tablet; the tablet and forge-trades shots missed their targets. All
