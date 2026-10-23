@@ -75,7 +75,7 @@ cmd execute as Tester at @s if dimension mdvlcraft:demon_castle run say IN_FLOOR
 cmd execute if entity @e[type=minecraft:text_display,tag=mdvlcraft_gate_tablet] run say TABLET_OK
 cmd mdvl gate tower info
 cmd execute as Tester at @s run tp @s ~ ~ ~ facing entity @e[type=minecraft:text_display,tag=mdvlcraft_gate_tablet,sort=nearest,limit=1]
-wait 3
+wait 10
 shot tower_floor55_tablet
 cmd execute as Tester at @s run mdvl gate tower hidden
 cmd execute as Tester at @s run tp @s ~20 ~ ~
@@ -99,7 +99,8 @@ cmd give Tester mdvlcraft:tower_seal 32
 cmd give Tester mdvlcraft:mana_crystal_s 4
 cmd execute as Tester at @s run setblock ~ ~ ~2 mdvlcraft:gate_forge
 cmd execute as Tester at @s run tp @s ~ ~ ~ facing ~ ~0.5 ~2
-wait 3
+wait 20
+wait 1
 click 3
 wait 2
 shot tower_forge_seal_trades

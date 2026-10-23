@@ -366,7 +366,9 @@ public final class RuleGates {
                 continue;
             }
             mob.moveTo(spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, level.random.nextFloat() * 360.0F, 0.0F);
-            mob.restrictTo(box.getCenter(), Math.max(box.getXSpan(), box.getZSpan()) / 2 + 1);
+            // a circle round the room's corners too: half the span left the corners (where spawn markers can sit) outside it,
+            // so a player standing there was never hunted
+            mob.restrictTo(box.getCenter(), (int)Math.ceil(Math.hypot(box.getXSpan(), box.getZSpan()) / 2.0) + 1);
             mob.getPersistentData().putInt(GateStatue.INSTANCE, instance.id);
             GateSpawner.scale(mob, instance.rank);
             level.addFreshEntity(mob);

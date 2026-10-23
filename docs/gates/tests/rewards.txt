@@ -34,11 +34,11 @@ cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:mana_crystal
 cmd execute as Tester run mdvl gate reward clear
 wait 2
 cmd execute as Tester store result score @s gt run mdvl gate goto chest
+cmd execute as Tester if score @s gt matches 1 at @s if block ~ ~ ~ mdvlcraft:gate_reward_chest run say CHEST_PLACED_OK
+cmd execute as Tester if score @s gt matches 1 at @s run tp @s ~ ~1 ~ 0 90
 cmd execute as Tester if score @s gt matches 0 run mdvl gate goto boss
-cmd execute as Tester if score @s gt matches 0 at @s run tp @s ~ ~ ~-2
-wait 2
-cmd execute as Tester at @s if block ~ ~ ~ mdvlcraft:gate_reward_chest run say CHEST_PLACED_OK
-cmd execute as Tester at @s run tp @s ~ ~1 ~ 0 90
+cmd execute as Tester if score @s gt matches 0 at @s if block ~ ~ ~-2 mdvlcraft:gate_reward_chest run say CHEST_PLACED_OK
+cmd execute as Tester if score @s gt matches 0 at @s run tp @s ~ ~1 ~-2 0 90
 wait 20
 wait 1
 shot rewards_cleared_chat
@@ -61,19 +61,29 @@ cmd recipe give Tester mdvlcraft:gate/gate_forge
 cmd execute as Tester run mdvl gate open B frozen red
 wait 20
 wait 6
+cmd data get entity Tester Pos
+cmd execute as Tester at @s run kill @e[type=item,distance=..32]
 cmd execute as Tester at @s run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["rw_red"]}
 cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_red] boss
+cmd data get entity @e[tag=rw_red,limit=1] Pos
 cmd kill @e[tag=rw_red]
-wait 2
-cmd execute as Tester at @s if entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_b"}}] run say RED_B_STONES_OK
-cmd execute as Tester at @s unless entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say NO_BLACK_FROM_RED_B_BOSS_OK
-cmd execute as Tester at @s run kill @e[type=item,distance=..8]
+wait 5
+cmd execute as Tester at @s run data get entity @e[type=item,distance=..32,sort=nearest,limit=1]
+cmd execute as Tester at @s if entity @e[type=item,distance=..16,nbt={Item:{id:"mdvlcraft:essence_stone_b"}}] run say RED_B_STONES_OK
+cmd execute as Tester at @s if entity @e[type=item,distance=..16] unless entity @e[type=item,distance=..32,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say NO_BLACK_FROM_RED_B_BOSS_OK
+cmd execute as Tester at @s run kill @e[type=item,distance=..32]
 cmd execute as Tester at @s run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["rw_hidden"],ForgeData:{mdvlcraft_gate_hidden:1b}}
 cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_hidden] boss
 cmd kill @e[tag=rw_hidden]
-wait 2
-cmd execute as Tester at @s if entity @e[type=item,distance=..8,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say BLACK_FROM_HIDDEN_BOSS_OK
-cmd execute as Tester at @s run kill @e[type=item,distance=..8]
+wait 5
+cmd execute as Tester at @s if entity @e[type=item,distance=..16] unless entity @e[type=item,distance=..32,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say NO_BLACK_FROM_RED_B_HIDDEN_OK
+cmd execute as Tester at @s run kill @e[type=item,distance=..32]
+cmd execute as Tester at @s run summon minecraft:zombie ~3 ~ ~ {NoAI:1b,Tags:["rw_black"],ForgeData:{mdvlcraft_gate_hidden:1b,mdvlcraft_gate_black:1b}}
+cmd execute as Tester at @s run mdvl gate reward tag @e[tag=rw_black] boss
+cmd kill @e[tag=rw_black]
+wait 5
+cmd execute as Tester at @s if entity @e[type=item,distance=..16,nbt={Item:{id:"mdvlcraft:essence_stone_black"}}] run say BLACK_FROM_HIDDEN_BOSS_OK
+cmd execute as Tester at @s run kill @e[type=item,distance=..32]
 cmd item replace entity Tester weapon.mainhand with mdvlcraft:return_stone 1
 cmd execute as Tester at @s run tp @s ~ ~ ~ 0 -60
 wait 20

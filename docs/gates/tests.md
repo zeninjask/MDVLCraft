@@ -49,7 +49,7 @@ Branch `gate-tests` (from `origin/gate-tests` 4cc49214). Owns `docs/gates/tests/
   room rotation). Note: killing the zombie tagged `boss` already clears the gate through GateCombat (chest placed then,
   `reward clear` is a no-op), and starts the 2-minute collapse; the steps leave the gate about 55 s later.
 - Black stones only from the hidden boss: BLACK_STONE_OK → NO_BLACK_FROM_RED_B_BOSS_OK (a red B boss drops none) and
-  BLACK_FROM_HIDDEN_BOSS_OK (a zombie summoned with `ForgeData:{mdvlcraft_gate_hidden:1b}`, `HiddenBoss.TAG`, tagged boss).
+  BLACK_FROM_HIDDEN_BOSS_OK (a zombie summoned with `ForgeData:{mdvlcraft_gate_hidden:1b,mdvlcraft_gate_black:1b}`, i.e. `HiddenBoss.TAG` + `BLACK_TAG`, tagged boss; one with only `mdvlcraft_gate_hidden` must drop none: NO_BLACK_FROM_RED_B_HIDDEN_OK).
 - RETURN_REFUSED_IN_RED_OK also needs the Return Stone still in hand; new RETURN_STONE_READY_OK (in the E gate with the
   stone in hand) before RETURN_STONE_OK, so the latter can't pass on a gate that never opened.
 - Waits after rotation tps and `open`/`leave` raised to 20+.

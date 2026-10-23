@@ -18,7 +18,8 @@ cmd data get entity Tester SelectedItem.tag.modifiers
 cmd execute as Tester at @s run setblock ^ ^ ^2 mdvlcraft:gate_forge
 cmd give Tester mdvlcraft:essence_stone_a 4
 cmd execute as Tester at @s run tp @s ~ ~ ~ 0 45
-wait 2
+wait 20
+wait 1
 click 3
 wait 2
 cmd execute unless entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:essence_stone_a"}]}] run say REROLL_PAID_OK
@@ -81,15 +82,16 @@ cmd execute as Tester at @s if dimension mdvlcraft:gate_realm run say HEAL_TRIAL
 cmd effect clear Tester minecraft:saturation
 cmd effect give Tester minecraft:hunger 3 255
 wait 4
-cmd damage Tester 6 minecraft:out_of_world
+cmd damage Tester 10 minecraft:out_of_world
 wait 1
-cmd execute store result score #hp late run data get entity Tester Health
-cmd scoreboard players get #hp late
+cmd execute store result score #hp0 late run data get entity Tester Health
+cmd scoreboard players get #hp0 late
 cmd effect give Tester minecraft:regeneration 5 3
 wait 5
 cmd execute store result score #hp late run data get entity Tester Health
 cmd scoreboard players get #hp late
-cmd execute if score #hp late matches ..15 run say NO_HEALING_OK
+cmd scoreboard players operation #hp late -= #hp0 late
+cmd execute if score #hp late matches ..3 run say NO_HEALING_OK
 cmd effect give Tester minecraft:saturation 99999 1 true
 cmd execute as Tester run mdvl gate late close
 wait 20
@@ -127,9 +129,12 @@ cmd execute as Tester run say EXPECT_BOSS_CHEST_X1.50_ABOVE
 cmd execute as Tester run mdvl gate goto "spawn:melee" 1
 wait 20
 cmd execute as Tester at @s if entity @e[type=mdvlcraft:gate_statue,distance=..48] run say STATUE_PLACED_OK
-cmd execute as Tester at @s run tp @e[type=mdvlcraft:gate_statue,limit=1,sort=nearest] ^ ^ ^-4
-wait 2
+cmd execute as Tester at @s rotated ~ 0 positioned ^ ^ ^4 if block ~ ~ ~ minecraft:air if block ~ ~1 ~ minecraft:air unless block ~ ~-1 ~ minecraft:air run tp @e[type=mdvlcraft:gate_statue,limit=1,sort=nearest] ~ ~ ~
+cmd execute as Tester at @s rotated ~ 0 positioned ^4 ^ ^ if block ~ ~ ~ minecraft:air if block ~ ~1 ~ minecraft:air unless block ~ ~-1 ~ minecraft:air run tp @e[type=mdvlcraft:gate_statue,limit=1,sort=nearest] ~ ~ ~
+cmd execute as Tester at @s rotated ~ 0 positioned ^-4 ^ ^ if block ~ ~ ~ minecraft:air if block ~ ~1 ~ minecraft:air unless block ~ ~-1 ~ minecraft:air run tp @e[type=mdvlcraft:gate_statue,limit=1,sort=nearest] ~ ~ ~
+cmd execute as Tester at @s rotated ~ 0 positioned ^ ^ ^-4 if block ~ ~ ~ minecraft:air if block ~ ~1 ~ minecraft:air unless block ~ ~-1 ~ minecraft:air run tp @e[type=mdvlcraft:gate_statue,limit=1,sort=nearest] ~ ~ ~
 cmd execute as Tester at @s as @e[type=mdvlcraft:gate_statue,limit=1,sort=nearest] at @s run summon minecraft:marker ~ ~ ~ {Tags:["statue_mark"]}
+cmd execute as Tester at @s facing entity @e[type=mdvlcraft:gate_statue,limit=1,sort=nearest] feet run tp @s ~ ~ ~ ~180 0
 wait 3
 cmd execute as Tester at @s as @e[type=mdvlcraft:gate_statue,limit=1,sort=nearest] at @s unless entity @e[tag=statue_mark,distance=..0.5] run say STATUE_MOVES_UNSEEN_OK
 cmd kill @e[tag=statue_mark]
