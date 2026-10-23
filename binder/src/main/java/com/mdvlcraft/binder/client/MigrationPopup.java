@@ -7,7 +7,7 @@ public final class MigrationPopup {
     private MigrationPopup() {
     }
 
-    public static void open(int level) {
-        Minecraft.getInstance().setScreen(RespecScreen.migration(level));
+    public static void open(int level, boolean free) {
+        Minecraft.getInstance().setScreen(free ? RespecScreen.free(level) : RespecScreen.migration(level));
     }
 }

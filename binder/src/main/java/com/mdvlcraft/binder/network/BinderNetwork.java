@@ -10,7 +10,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "19";
+    private static final String PROTOCOL = "20";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
         ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals
     );

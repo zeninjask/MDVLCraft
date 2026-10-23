@@ -78,7 +78,24 @@ public final class MdvlCommand {
                     .then(Commands.literal("release").then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::release))))
                 .then(Commands.literal("weapons").executes(MdvlCommand::weapons))
                 .then(Commands.literal("obtainable").executes(MdvlCommand::obtainable))
+                .then(Commands.literal("respec").then(Commands.argument("players", EntityArgument.players()).executes(MdvlCommand::respec)))
         );
+    }
+
+    /** Opens the archetype picker for the players; the respec they confirm keeps their whole level (Respec.offerFree). */
+    private static int respec(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        int offered = 0;
+        for (ServerPlayer player : EntityArgument.getPlayers(context, "players")) {
+            if (com.mdvlcraft.binder.skills.Respec.offerFree(player)) {
+                offered++;
+            } else {
+                ((CommandSourceStack)context.getSource()).sendFailure(Component.literal(player.getScoreboardName() + " has no vocation (two archetypes) to change"));
+            }
+        }
+
+        int count = offered;
+        ((CommandSourceStack)context.getSource()).sendSuccess(() -> Component.literal("Free respec offered to " + count + " player(s)"), true);
+        return count;
     }
 
     private static int weapons(CommandContext<CommandSourceStack> context) {

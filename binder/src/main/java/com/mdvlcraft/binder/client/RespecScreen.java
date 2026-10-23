@@ -34,6 +34,8 @@ public class RespecScreen extends Screen {
 
     /** The level a player from before the vocations rework keeps (skills/LegacyMigration), or -1 for a normal respec. */
     private int migrationLevel = -1;
+    /** An admin's free respec (Respec.offerFree): the new vocation keeps this whole level; -1 otherwise. */
+    private int freeLevel = -1;
 
     public RespecScreen(Screen parent) {
         super(Component.translatable("screen.mdvlcraft.menu.respec"));
@@ -44,6 +46,14 @@ public class RespecScreen extends Screen {
     public static RespecScreen migration(int level) {
         RespecScreen screen = new RespecScreen(null);
         screen.migrationLevel = level;
+        screen.step = RespecScreen.Step.FIRST;
+        return screen;
+    }
+
+    /** The pop-up of a free respec offered by an admin: pick two archetypes, keep the whole level. */
+    public static RespecScreen free(int level) {
+        RespecScreen screen = new RespecScreen(null);
+        screen.freeLevel = level;
         screen.step = RespecScreen.Step.FIRST;
         return screen;
     }
@@ -100,6 +110,8 @@ public class RespecScreen extends Screen {
                 text = first
                     ? (this.migrationLevel >= 0
                         ? Component.translatable("screen.mdvlcraft.migration.desc", this.migrationLevel)
+                        : this.freeLevel >= 0
+                        ? Component.translatable("screen.mdvlcraft.respec.desc.free", this.freeLevel)
                         : Component.translatable("screen.mdvlcraft.respec.desc.first"))
                     : Component.translatable("screen.mdvlcraft.respec.desc.second", title(this.from));
                 for (String id : Respec.ARCHETYPES) {
@@ -125,6 +137,10 @@ public class RespecScreen extends Screen {
                 text = this.migrationLevel >= 0
                     ? Component.translatable(
                         "screen.mdvlcraft.migration.confirm", title(this.from), title(this.to), vocationName(this.from, this.to), this.migrationLevel
+                    )
+                    : this.freeLevel >= 0
+                    ? Component.translatable(
+                        "screen.mdvlcraft.respec.confirm.free", title(this.from), title(this.to), vocationName(this.from, this.to), this.freeLevel
                     )
                     : Component.translatable(
                         "screen.mdvlcraft.respec.confirm.change", title(this.from), title(this.to), vocationName(this.from, this.to),
