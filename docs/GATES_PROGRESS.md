@@ -177,6 +177,11 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate-fix jar (b7e83e18), `themes.txt` rerun: **17/25**. New since the first run: RED_B_NO_HIDDEN and
+  RED_B_HOME PASS. The client was killed again (no error in its log, so the machine's memory limit) right after
+  placing the red A forge gate, so the 7 red A/forge checks never ran; BOSS_MEDIUM_ROOM missed this time (passed
+  before; likely the 10 s wait after `open B crypt` on a slow client). Rig workaround: the tail of themes.txt (from
+  `redhidden always`) runs as its own file on a fresh client (`gfresh.sh themes_tail <file>`).
 - 2026-10-23, gate ea29f24e jar, `builder.txt`, fresh Tester: **11/12**. Only BUILDER_S_BOSS_FLOOR misses: the step
   expects blackstone under the S boss marker, but since themes the S gate uses the large boss room (different floor;
   Tester was also lifted to y 69 on its dais). Stale step, the E boss floor check passes. Next agent: read the large
