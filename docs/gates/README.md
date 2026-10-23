@@ -31,6 +31,10 @@ committing and pushing small steps often.
 
 ## Rules for every part
 
+- Disk is a fixed per-session allowance (about 40 GB; `df` "Avail" 0 means it's spent). The coordinator removes each
+  part's worktree after merging it (`git worktree remove --force .claude/worktrees/agent-<id>`). Agents: don't keep
+  extra copies of jars/worlds; delete your own `binder/build` scratch outputs when you finish.
+
 - Work only on your branch. **Commit and push it often** (`git push -u origin <branch>`): after each working step, and at
   least every 30–45 minutes, so nothing is lost if a session ends. Never push to `gate` or `main`.
 - Keep your handoff file current **in every commit**: a checklist of what's done and what's next, decisions you made,
