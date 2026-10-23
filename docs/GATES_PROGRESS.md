@@ -35,6 +35,41 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## START HERE — handoff for the next agent (2026-10-23, after release 2.1.43)
+
+**State.** `gate` = everything; `main` = 2.1.43 (1bb88d63, release files only). 2.1.43 fixes a client startup crash in
+2.1.41/2.1.42: the trial trophy, statue and return portal were registered from raw `RegisterEvent` subscribers, which on
+clients with Connector made `mdvlcraft:gate_trophy` an ownerless override and Forge's registry sync aborted. They now use
+`GateItems`' DeferredRegisters (43a9ef5e). **Rule: register everything through DeferredRegister.** The test rig's client
+has Connector/fabric-api removed for memory, so it can't catch this class of bug — first thing: confirm with the user
+that 2.1.43 starts, or add Connector back to the rig's client for one boot.
+
+**Not yet run in game** (all on `gate`, steps in `docs/gates/tests/`; run each on a fresh server+client with
+`scratchpad/tools/gfresh.sh <part> [file]`; it now restarts Xvfb if missing and refuses to run steps if the client
+never joined):
+- `portal.txt` (return portal, roaming hostiles), `minimap.txt` (Xaero minimap/world map off in gates).
+- DQ9 quest log by eye: Gates chapter after Legend, numbered 001G–074G, First Steps still 001 (open with M → Quests).
+- `tower.txt` new sections (Castle Sigil start menu choices, start refusals, farm-floor half drops; status-page tower
+  line and the forge seal trades shot by eye).
+- `builder.txt` (boss-floor steps fixed), `themes.txt` split at `redhidden always` (new lair/camp variants, redpick),
+  `red.txt`, `late.txt`'s REROLL_PAID (forge aim fixed).
+- Already passing in game: phase 1/2, spawner, combat, rewards, red (before the new lair variants), themes (before),
+  late (all sections), tower (before round 4), quests (13/14; the miss was test-world tower progress).
+
+**Still to build** (from the plan and the parts' handoffs; small):
+- Red gates: the 96-block playable boundary; retune the lair/camp templates after looking at the shots; seeded camp
+  rotation.
+- Rewards: tempering's small general bonus at A–S; trophies / rank gear materials in boss chests; JER listing of the
+  stone drops; (the forge uses merchant trades, not its own recipe type — fine unless the user wants otherwise).
+- Quests: count-based clear quests, a key-reroll quest, quests for the round-4 tower features.
+- Xaero waypoints (deathpoints) still show inside gates (would need a mixin).
+- Not testable in the rig: the Narrowing Door shut-out of a returning member (needs two players).
+
+**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.44**. Build: rebuild `base/`
+from the latest committed mrpacks if stale, `./gradlew build`, `python3 binder/tools/build_packs.py <ver> .`,
+`skill_tree_doc.py` for the PDF, copy the Java-args files; push only the release files to `main` from a worktree of
+`origin/main` (`git push origin HEAD:main`). Usage-limit wrap-up rule below applies to every agent.
+
 ## Release 2.1.42 (2026-10-23)
 
 main 8995aa74 (release files only). Adds on top of 2.1.41: return portal in normal gates' entrance rooms and roaming
