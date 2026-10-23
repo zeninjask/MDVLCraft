@@ -75,6 +75,9 @@ public final class GateCombat {
     private static final double PARTY_BONUS = 0.25;
     /** When each instance was cleared (game time of its world); a restart closes every instance, so this needn't persist. */
     private static final Map<Integer, Long> CLEARED_AT = new HashMap<>();
+    /** Who stood on each cleared gate's exit at the last check: the exit takes only players who step onto it, so one
+     * standing where the boss fell isn't sent home (and the gate closed on its chest) the moment it opens. */
+    private static final Map<Integer, Set<UUID>> ON_EXIT = new HashMap<>();
     /** How long someone must be in the boss room before it seals, so the rest of the party can follow (3 s). */
     private static final int SEAL_DELAY = 60;
     /** How far inside the boss room's walls a player must be to start the seal. */
@@ -326,13 +329,20 @@ public final class GateCombat {
         double z = exit.getZ() + 0.5;
         level.sendParticles(ParticleTypes.REVERSE_PORTAL, x, exit.getY() + 1.0, z, 30, 0.4, 0.9, 0.4, 0.05);
         level.sendParticles(ParticleTypes.END_ROD, x, exit.getY() + 0.2, z, 4, 0.5, 0.0, 0.5, 0.01);
+        Set<UUID> before = ON_EXIT.get(instance.id);
+        Set<UUID> now = new HashSet<>();
         for (ServerPlayer player : present(level, instance)) {
             double dy = player.getY() - exit.getY();
             if (Math.abs(player.getX() - x) < 1.0 && Math.abs(player.getZ() - z) < 1.0 && dy > -1.0 && dy < 2.0) {
-                level.playSound(null, exit, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.8F, 1.0F);
-                GateTravel.leave(player, instance, false);
+                now.add(player.getUUID());
+                if (before != null && !before.contains(player.getUUID())) {   // stepped on; the first check only notes who stands there
+                    level.playSound(null, exit, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.8F, 1.0F);
+                    GateTravel.leave(player, instance, false);
+                    now.remove(player.getUUID());
+                }
             }
         }
+        ON_EXIT.put(instance.id, now);
     }
 
     /** The cleared gate's time is up: everyone inside goes home, the cell is cleared and the instance closed. */
@@ -343,6 +353,7 @@ public final class GateCombat {
             }
         }
         CLEARED_AT.remove(instance.id);
+        ON_EXIT.remove(instance.id);
         GateBuilder.clear(level, instance);
         gates.close(instance);
     }
