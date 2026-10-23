@@ -177,6 +177,10 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate ea29f24e jar, `builder.txt`, fresh Tester: **11/12**. Only BUILDER_S_BOSS_FLOOR misses: the step
+  expects blackstone under the S boss marker, but since themes the S gate uses the large boss room (different floor;
+  Tester was also lifted to y 69 on its dais). Stale step, the E boss floor check passes. Next agent: read the large
+  forge boss room's floor block at its boss marker and update the step.
 - 2026-10-23, gate ea29f24e jar, `combat.txt` (refreshed + late2 wipe), fresh Tester: **all PASS** — boss-room seal /
   unseal / reseal / clear (EXPECT lines with the gate states printed), BOSS, ELITE_PRESENT (C crypt), GATE_LIVE_BEFORE_
   WIPE, RESPAWN_OUTSIDE, WIPE (a downed player now fails the gate inside the 20 s wait).
