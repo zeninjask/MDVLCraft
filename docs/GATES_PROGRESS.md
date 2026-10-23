@@ -177,6 +177,10 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate-fix jar (b7e83e18), `tower.txt` rerun: **22/23**; the "Display entity Not a string" error is gone
+  (0 in the log). HIDDEN_BLACK_DROP still missed: `GateRewards.onDrops` only dropped black stones for mobs with the gate
+  "boss" role, and the tower's hidden boss has the tower's own boss tag. Fixed in 0ffad579 (black flag alone decides);
+  tower rerun queued after the build.
 - 2026-10-23, gate-fix jar (b7e83e18), `themes.txt` rerun: **17/25**. New since the first run: RED_B_NO_HIDDEN and
   RED_B_HOME PASS. The client was killed again (no error in its log, so the machine's memory limit) right after
   placing the red A forge gate, so the 7 red A/forge checks never ran; BOSS_MEDIUM_ROOM missed this time (passed
