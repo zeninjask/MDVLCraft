@@ -200,6 +200,7 @@ public final class RuleGates {
         tag.putString("id", "minecraft:text_display");
         tag.putString("text", Component.Serializer.toJson(text));
         tag.putString("billboard", "center");
+        tag.putString("alignment", "center");   // read unconditionally in 1.20.1: without it the load logs "Not a string"
         ListTag pos = new ListTag();
         pos.add(DoubleTag.valueOf(spot.getX() + 0.5));
         pos.add(DoubleTag.valueOf(spot.getY() + 0.2));

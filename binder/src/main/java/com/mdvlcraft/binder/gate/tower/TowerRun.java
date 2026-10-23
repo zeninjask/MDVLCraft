@@ -78,7 +78,7 @@ import org.slf4j.Logger;
  *
  * Each floor carries its tower modifiers (TowerModifiers, handed to GateModifiers for the instance), listed on a text
  * tablet over the landing. From floor 55 a boss floor has a HIDDEN_CHANCE chance that a hidden boss rises when its boss
- * falls (another theme's S boss, x1.5 health, glowing; it drops black essence stones through HiddenBoss.TAG); the stairs
+ * falls (another theme's S boss, x1.5 health, glowing; it drops black essence stones through HiddenBoss.BLACK_TAG); the stairs
  * open when it dies. Mobs that other code adds to a run (Swarming's copies) get the floor tag and scaling on joining.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
@@ -372,6 +372,7 @@ public final class TowerRun {
         tag.putString("id", "minecraft:text_display");
         tag.putString("text", Component.Serializer.toJson(text));
         tag.putString("billboard", "center");
+        tag.putString("alignment", "center");   // read unconditionally in 1.20.1: without it the load logs "Not a string"
         ListTag pos = new ListTag();
         pos.add(DoubleTag.valueOf(at.getX() + 0.5));
         pos.add(DoubleTag.valueOf(at.getY() + 0.2));
@@ -658,7 +659,8 @@ public final class TowerRun {
         modify(boss.getAttribute(Attributes.MAX_HEALTH), HIDDEN_HEALTH_ID, HIDDEN_HEALTH - 1.0);   // before the floor scaling, which reads max health
         this.made(boss);
         boss.getPersistentData().putBoolean(BOSS_TAG, true);
-        boss.getPersistentData().putBoolean(HiddenBoss.TAG, true);   // black essence stones (GateRewards.onDrops)
+        boss.getPersistentData().putBoolean(HiddenBoss.TAG, true);
+        boss.getPersistentData().putBoolean(HiddenBoss.BLACK_TAG, true);   // black essence stones (GateRewards.onDrops)
         boss.addTag(BOSS_TAG);
         boss.addTag(HIDDEN_TAG);
         boss.setGlowingTag(true);
