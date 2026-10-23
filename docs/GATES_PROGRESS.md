@@ -35,6 +35,14 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Release 2.1.48 (2026-10-23)
+
+Fixes on top of 2.1.47: the boss chest went to the gate's first "chest" marker, which bigger gates have in another room,
+so it never appeared by the boss (2.1.46's exit fix was real but not the whole cause). Now a chest marker in the boss's
+room, else beside the boss marker, on the nearest open floor. A gate boss removed as KILLED also counts as dead. Every
+hostile mob without an Epic Fight patch gets a passive one (`integration/PassiveMobPatch`), so Cataclysm's mobs can be
+assassinated; humanoid player-sized bosses can be too. Tested in game (see the commit). Next release: 2.1.49.
+
 ## Release 2.1.47 (2026-10-23)
 
 On top of 2.1.46 (not gate work, released from `gate`): Inner Growth regenerates 10 innate charge a second and charges
@@ -106,7 +114,7 @@ never joined):
   yet merged or run in game.
 - Not testable in the rig: the Narrowing Door shut-out of a returning member (needs two players).
 
-**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.48**. Build: rebuild `base/`
+**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.49**. Build: rebuild `base/`
 from the latest committed mrpacks if stale, `./gradlew build`, `python3 binder/tools/build_packs.py <ver> .`,
 `skill_tree_doc.py` for the PDF, copy the Java-args files; push only the release files to `main` from a worktree of
 `origin/main` (`git push origin HEAD:main`). Usage-limit wrap-up rule below applies to every agent.
