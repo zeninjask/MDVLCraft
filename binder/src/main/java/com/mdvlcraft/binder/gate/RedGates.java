@@ -168,6 +168,7 @@ public final class RedGates {
                 continue;
             }
             List<ServerPlayer> inside = inside(server, instance);
+            boundary(level, layout, inside);
             if (instance.state == GateInstances.State.ACTIVE) {
                 advance(level, instance, layout, inside);
             } else if (instance.state == GateInstances.State.CLEARED) {
@@ -199,6 +200,26 @@ public final class RedGates {
             if (layout.bossSpawned) {
                 inside.forEach(p -> p.playNotifySound(SoundEvents.RAVAGER_ROAR, SoundSource.HOSTILE, 1.0F, 0.6F));
             }
+        }
+    }
+
+    /** The invisible boundary (plan 7.2): a roster player more than PLAY_RADIUS from the lair is put back on the ground 4
+     * blocks inside it, on the same line from the lair, with a short message. */
+    private static void boundary(ServerLevel level, Layout layout, List<ServerPlayer> inside) {
+        double cx = layout.lair.getX() + 0.5;
+        double cz = layout.lair.getZ() + 0.5;
+        for (ServerPlayer player : inside) {
+            double dx = player.getX() - cx;
+            double dz = player.getZ() - cz;
+            double distance = Math.sqrt(dx * dx + dz * dz);
+            if (distance <= RedLandscape.PLAY_RADIUS || !player.isAlive() || player.isSpectator()) {
+                continue;
+            }
+            double scale = (RedLandscape.PLAY_RADIUS - 4) / distance;
+            BlockPos back = RedLandscape.surface(level, BlockPos.containing(cx + dx * scale, 0, cz + dz * scale));
+            GateTravel.moveTo(player, back);
+            player.displayClientMessage(Component.translatableWithFallback("gate.mdvlcraft.red.edge",
+                "The red gate's edge pushes you back"), true);
         }
     }
 
