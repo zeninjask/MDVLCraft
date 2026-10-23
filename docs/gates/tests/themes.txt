@@ -14,6 +14,18 @@ cmd execute store result score #pick mdvlt run mdvl gate themepick B
 cmd execute if score #pick mdvlt matches 1 run say THEMES_PICK_B_OK
 cmd execute store result score #pick mdvlt run mdvl gate themepick S
 cmd execute if score #pick mdvlt matches 1 run say THEMES_PICK_S_OK
+cmd execute store result score #pick mdvlt run mdvl gate redpick crypt
+cmd execute if score #pick mdvlt matches 1 run say THEMES_RED_PICK_CRYPT_OK
+cmd execute store result score #pick mdvlt run mdvl gate redpick warren
+cmd execute if score #pick mdvlt matches 1 run say THEMES_RED_PICK_WARREN_OK
+cmd execute store result score #pick mdvlt run mdvl gate redpick frozen
+cmd execute if score #pick mdvlt matches 1 run say THEMES_RED_PICK_FROZEN_OK
+cmd execute store result score #pick mdvlt run mdvl gate redpick warcamp
+cmd execute if score #pick mdvlt matches 1 run say THEMES_RED_PICK_WARCAMP_OK
+cmd execute store result score #pick mdvlt run mdvl gate redpick spire
+cmd execute if score #pick mdvlt matches 1 run say THEMES_RED_PICK_SPIRE_OK
+cmd execute store result score #pick mdvlt run mdvl gate redpick forge
+cmd execute if score #pick mdvlt matches 1 run say THEMES_RED_PICK_FORGE_OK
 cmd execute as Tester run mdvl gate open E crypt
 wait 10
 cmd execute as Tester at @s if biome ~ ~ ~ mdvlcraft:gate_crypt run say THEMES_E_CRYPT_BUILT_OK
@@ -100,7 +112,8 @@ cmd execute as Tester run mdvl gate redarena
 wait 20
 cmd execute as Tester at @s if block ~-5 ~-1 ~ minecraft:chiseled_deepslate if block ~-1 ~-1 ~ minecraft:polished_deepslate run say THEMES_RED_LAIR_TEMPLATE_OK
 cmd execute as Tester at @s if block ~4 ~ ~ minecraft:soul_campfire run say THEMES_RED_LAIR_BRAZIER_OK
-cmd execute as Tester at @s run tp @s ~6 ~4 ~ 90 25
+cmd execute as Tester run mdvl gate redinfo
+cmd execute as Tester at @s run tp @s ~3 ~6 ~ 90 25
 wait 20
 shot themes_7_red_lair
 cmd execute as Tester run mdvl gate red boss

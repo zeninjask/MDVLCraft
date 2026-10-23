@@ -1,13 +1,47 @@
 # Themes (phase 6): handoff
 
 > Always applies: near the usage limit (~95%) or on "wrap up", stop, commit everything (WIP is fine; say if the build is
-> broken), push `gate-themes2` (round 3; round 2 was `gate-themes`), and update this file with where work stopped and the
-> next step.
+> broken), push `gate-themes3` (round 4; round 3 was `gate-themes2`, round 2 `gate-themes`), and update this file with
+> where work stopped and the next step.
 
 Branch `gate-themes`, cut from `gate` at d7ff686 (the worktree first started on main; the branch was reset to d7ff686
 before any work, so it holds no main-only commits). Owns `data/mdvlcraft/gate_themes/`, `gate/GateThemes` (loader),
 `gate/GateBuilder`, `gate/DungeonPlanner`, the room templates `data/mdvlcraft/structures/gate/` and their generator
 `tools/gates/gen_gate_rooms.py`, theme hazards (`gate/GateHazards`). GateMobs' data source (its public API unchanged).
+
+## Round 4 (`gate-themes3`, cut from 77a73a79 = release 2.1.40): checklist
+
+- [x] More red lairs and camps (`gen_red_lairs.py`), listed in every theme file: `lair_2` amphitheatre (the round floor
+      sunk among three rows of stair benches rising outward, crenellated rim, gateways E/S/W, throne terrace cut into the
+      north benches, four obelisks with fires on the diagonals, lamp posts on the top row), `lair_3` cloister (square
+      court, roofed colonnade walk c 10–12 with a partly fallen roof and hanging lanterns, outer wall with crenels and
+      gateways E/S/W, corner towers with a fire or light, throne under the north wing). Both keep lair_1's middle: the
+      emblem disc, ring 4 and the lanes in floor2 (`court_top`), braziers 9 E/W (`braziers`), radius 8.5 cleared
+      (`keep_middle_clear`), floor top at y 3, theme furniture on the diagonals at 7. `camp_4` lookout (log platform on
+      posts, ladder, railing, light; cloth lean-to with a crate), `camp_5` boulder heap (an ellipsoid of wall blocks at
+      the north with a light on top, crate stockpile, drying rack). lair_1 output unchanged; camp_1–3 blocks unchanged
+      (their spawn melee/ranged split now matches the generator: 3 melee + 2 ranged; the committed files were older).
+- [x] RedLandscape picks by seed, not level.random: `pick(pool, seed)` (mixed hash), lair seed `lairSeed(instance id)`,
+      camp seed `campSeed(instance id, camp column)` (so camps of one gate differ). Layout keeps `lairTemplate` and
+      `campTemplates`; `/mdvl gate redinfo` prints them. Camp rotation still random.
+- [x] `/mdvl gate redpick <theme>`: draws the picks of ids 1–300, lists counts, result 1 only if every listed template
+      loads and is drawn. themes.txt: THEMES_RED_PICK_<THEME>_OK for all 6 (right after the themepick checks), a redinfo
+      line before the lair shot, lair shot spot moved to 8 east / 6 up (lair_3's colonnade roof is over 11 east).
+- [x] builder.txt boss floor steps: the floor under the boss marker is blackstone in every forge boss room (small,
+      medium, large: centre of the 'rings' pattern = floor2; read back from the NBT) and polished_deepslate in every crypt
+      one, so the block was right; the miss was the Tester being moved off the marker (lifted 3) before the check. The
+      E/S floor checks now test the absolute floor y 65 (`positioned ~ 65 ~`: rooms are placed with template y 0 at 64,
+      floor at y 1) under the Tester's x/z, the E marker-removed check y 66. Note: forge S boss size is "medium" in
+      forge.json, not large (both rooms have blackstone there).
+- Build: `flock /tmp/mdvl-gradle.lock ./gradlew build --offline -q` passes. `gen_red_lairs.py`: 6 x 8 templates written
+  and parsed back (lair_2 ~4.8k blocks, lair_3 ~4.2k, camp_4 ~210, camp_5 ~250; camps 3 melee + 2 ranged + 2 crystal).
+  Pick spread checked offline (ids 1–300: lairs 109/98/93, camps 50–72 each).
+- [ ] Next: look at the shots (themes_6_red_camp, themes_7_red_lair) for the new layouts; the lair test spot in
+      themes.txt depends on which lair the instance id draws (all three share the checked blocks).
+
+## Where I stopped (round 4)
+
+All three items done, build passes, pushed. Not run in game.
 
 ## Round 3 (`gate-themes2`, cut from `gate` 4cc49214): checklist
 
@@ -95,6 +129,11 @@ before any work, so it holds no main-only commits). Owns `data/mdvlcraft/gate_th
   (exit pad centre, chest 4 north, boss 6 south, hidden boss 6 north), which the lair keeps clear.
 
 ## Hooks into other files
+
+Round 4:
+- `RedLandscape` (red part's file): `pick`, `lairSeed`, `campSeed`, `template(level, id)` replaces `template(level, pool)`;
+  `Layout.lairTemplate`, `Layout.campTemplates`; Javadoc paragraph.
+- `docs/gates/tests/builder.txt`: three boss-room checks use `positioned ~ 65|66 ~`.
 
 Round 3:
 - `GateEntity.open`: the random theme is `GateThemes.randomFor(rank, here.random)` (one line).
