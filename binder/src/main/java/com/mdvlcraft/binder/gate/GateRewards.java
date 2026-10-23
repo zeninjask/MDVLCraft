@@ -158,9 +158,10 @@ public final class GateRewards {
         stones = scaled(stones, GateModifiers.rewardFactor(instance), random);   // modifiers and trial gates
         if (role.equals("boss")) {
             event.getDrops().clear();
-            if (HiddenBoss.dropsBlack(mob)) {   // black stones only from red S gates' hidden bosses (plan 9.2)
-                drop(event, mob, new ItemStack(GateItems.BLACK_ESSENCE_STONE.get(), 1 + random.nextInt(2)));
-            }
+        }
+        // black stones only from red S gates' hidden bosses and the tower's (plan 9.2); the tower's carries no gate role
+        if (HiddenBoss.dropsBlack(mob)) {
+            drop(event, mob, new ItemStack(GateItems.BLACK_ESSENCE_STONE.get(), 1 + random.nextInt(2)));
         }
         if (stones > 0) {
             drop(event, mob, new ItemStack(GateItems.ESSENCE_STONES.get(instance.rank).get(), stones));
