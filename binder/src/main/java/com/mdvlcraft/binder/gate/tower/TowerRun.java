@@ -568,9 +568,9 @@ public final class TowerRun {
         }
         double party = 1.0 + PARTY_BONUS * Math.max(0, partySize - 1);
         int count = (int)Math.round(normal.size() * GateMobs.countFactor(instance.rank) * party);
-        for (int i = 0; i < count; i++) {
+        for (int i = 0, used = 0; used < count; i++) {
             TowerFloor.Spawn spawn = normal.get(i % normal.size());
-            this.spawnOne(level, instance, spawn.ranged() ? GateMobs.Kind.RANGED : GateMobs.Kind.MELEE, spawn.pos(), null);
+            used += GateMobs.cost(this.spawnOne(level, instance, spawn.ranged() ? GateMobs.Kind.RANGED : GateMobs.Kind.MELEE, spawn.pos(), null));
         }
     }
 

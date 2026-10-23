@@ -48,7 +48,8 @@ import org.slf4j.Logger;
  * per extra roster member in the cell), one elite per elite marker) and its boss marker gets the theme's boss; the room
  * goes into triggeredRooms. Mobs stay when the party walks off, and one that strays out of its room (or cell) is put back
  * where it spawned. When the last boss dies the instance is CLEARED: the roster is told, an exit opens at the exit marker
- * (or where the boss fell) that sends whoever steps in home via GateTravel.leave, and after COLLAPSE_TICKS the gate
+ * (or where the boss fell) that sends whoever steps in home via GateTravel.leave, and after COLLAPSE_TICKS (or once nobody
+ * is left inside) the gate
  * collapses (everyone out, cell cleared, instance closed). Nothing else spawns in the gate worlds: natural, structure and
  * patrol spawns there are cancelled.
  *
@@ -182,10 +183,12 @@ public final class GateCombat {
         if (!normal.isEmpty()) {
             double party = 1.0 + PARTY_BONUS * Math.max(0, partySize - 1);
             int count = (int)Math.round(normal.size() * GateMobs.countFactor(instance.rank) * party);
-            for (int i = 0; i < count; i++) {
+            for (int i = 0, used = 0; used < count; i++) {
                 Marker marker = normal.get(i % normal.size());
                 GateMobs.Kind kind = marker.kind().equals("spawn:ranged") ? GateMobs.Kind.RANGED : GateMobs.Kind.MELEE;
-                made += spawnOne(level, instance, kind, marker, null) ? 1 : 0;
+                EntityType<?> type = GateMobs.pick(instance.theme, instance.rank, kind, level.random);
+                used += GateMobs.cost(type);   // a Weapons of Miracles mob counts as three
+                made += type != null && GateSpawner.spawn(level, instance, type, marker.pos(), null, marker.room()) != null ? 1 : 0;
             }
         }
         return made;
@@ -307,10 +310,11 @@ public final class GateCombat {
         return null;
     }
 
-    /** A cleared gate: the exit glows and sends whoever steps in home; at the end of the collapse timer, the gate closes. */
+    /** A cleared gate: the exit glows and sends whoever steps in home; at the end of the collapse timer, or as soon as nobody
+     * is left inside, the gate closes (its overworld gate goes with it). */
     private static void tickExit(ServerLevel level, GateInstances gates, Instance instance) {
         long clearedAt = CLEARED_AT.computeIfAbsent(instance.id, id -> level.getGameTime());
-        if (level.getGameTime() >= clearedAt + COLLAPSE_TICKS) {
+        if (level.getGameTime() >= clearedAt + COLLAPSE_TICKS || present(level, instance).isEmpty()) {
             collapse(level, gates, instance);
             return;
         }
@@ -481,7 +485,7 @@ public final class GateCombat {
     }
 
     /** True if PlayerRevive has this player downed (bleeding out, waiting for a revive). */
-    static boolean downed(Player player) {
+    public static boolean downed(Player player) {
         lookUpRevive();
         try {
             return isBleeding != null && (boolean)isBleeding.invoke(null, player);

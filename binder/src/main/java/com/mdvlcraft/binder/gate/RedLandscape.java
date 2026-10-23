@@ -307,9 +307,9 @@ public final class RedLandscape {
             set(level, post.above(2), palette.light());
         }
         int count = 3 + level.random.nextInt(3);
-        for (int n = 0; n < count; n++) {
+        for (int n = 0; n < count; ) {
             double a = Math.PI * 2.0 * n / count;
-            spawnMob(level, instance, surface(level, centre.offset((int)(Math.cos(a) * 4), 0, (int)(Math.sin(a) * 4))));
+            n += GateMobs.cost(spawnMob(level, instance, surface(level, centre.offset((int)(Math.cos(a) * 4), 0, (int)(Math.sin(a) * 4)))));
         }
     }
 
@@ -340,8 +340,8 @@ public final class RedLandscape {
             order.add(n);
         }
         Collections.shuffle(order, new java.util.Random(level.random.nextLong()));
-        for (int n = 0; n < count; n++) {
-            spawnMob(level, instance, spawns.get(order.get(n)), kinds.get(order.get(n)));
+        for (int n = 0; n < count; ) {
+            n += GateMobs.cost(spawnMob(level, instance, spawns.get(order.get(n)), kinds.get(order.get(n))));   // Weapons of Miracles: three
         }
     }
 

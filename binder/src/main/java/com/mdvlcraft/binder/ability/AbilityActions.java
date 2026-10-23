@@ -38,6 +38,9 @@ public final class AbilityActions {
     }
 
     public static void press(ServerPlayer player, int slot) {
+        if (com.mdvlcraft.binder.gate.GateCombat.downed(player)) {
+            return;   // no skills while downed (combat/DownedNoSkills)
+        }
         if (RaijuForm.in(player)) {
             // Yakusanoikazuchi's wheel: Transform Back only.
             GauntAbility.raijuSlot(slot).ifPresent(raiju -> castSpell(player, SpellRegistry.getSpell(ResourceLocation.parse(RaijuForm.SPELL)), 1));

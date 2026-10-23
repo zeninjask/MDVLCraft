@@ -132,13 +132,14 @@ public final class GateRoamers {
             return;
         }
         int n = count(instance.rank, random);
-        for (int i = 0; i < n; i++) {
+        for (int used = 0; used < n; ) {
             BlockPos pos = spot(level, instance.rooms.get(room), doors, random);
             GateMobs.Kind kind = random.nextInt(10) < 3 ? GateMobs.Kind.RANGED : GateMobs.Kind.MELEE;
             EntityType<?> type = GateMobs.pick(instance.theme, instance.rank, kind, random);
             if (type == null) {
                 type = GateMobs.pick(instance.theme, instance.rank, GateMobs.Kind.MELEE, random);
             }
+            used += GateMobs.cost(type);   // a Weapons of Miracles mob counts as three
             Mob mob = pos == null || type == null ? null : GateSpawner.spawn(level, instance, type, pos, null, room);
             if (mob != null) {
                 mob.getPersistentData().putBoolean(TAG, true);
