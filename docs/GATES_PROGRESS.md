@@ -174,6 +174,9 @@ closed on start anyway, so their blocks are garbage; wiping means a cell never n
 
 (newest first; each entry: date, build, what was run, result)
 
+- 2026-10-23, gate ea29f24e jar, `combat.txt` (refreshed + late2 wipe), fresh Tester: **all PASS** — boss-room seal /
+  unseal / reseal / clear (EXPECT lines with the gate states printed), BOSS, ELITE_PRESENT (C crypt), GATE_LIVE_BEFORE_
+  WIPE, RESPAWN_OUTSIDE, WIPE (a downed player now fails the gate inside the 20 s wait).
 - 2026-10-23, gate ea29f24e jar, `late.txt` (late2 steps): **25/28**, no crash (the Dead King fix holds). Misses:
   NO_HEALING, REROLL_PAID, STATUE_MOVES_UNSEEN → `gate-fix`.
 - 2026-10-23, gate ea29f24e jar, `themes.txt` (themes2 steps): **16/25**. Theme picks per rank, boss rooms by size,
