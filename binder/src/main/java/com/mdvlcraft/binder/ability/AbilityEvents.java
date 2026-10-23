@@ -23,6 +23,7 @@ public final class AbilityEvents {
         if (event.phase == Phase.END) {
             AbilityGrants.flush(event.getServer());
             TechniqueRunner.tick(event.getServer());
+            PhantomRush.tick(event.getServer());
             DomainUpkeep.tick(event.getServer());
             SilentAppraisal.tick(event.getServer());
         }
