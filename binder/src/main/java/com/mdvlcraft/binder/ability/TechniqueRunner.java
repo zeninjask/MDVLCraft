@@ -91,6 +91,11 @@ final class TechniqueRunner {
             return false;
         }
 
+        if (technique == Technique.PHANTOM_MOVEMENT && PhantomRush.handles(player)) {
+            PhantomRush.press(player, cost(player, technique));
+            return false;
+        }
+
         long cooldown = TechniqueCooldowns.remaining(player, technique);
         if (cooldown > 0L) {
             player.connection
