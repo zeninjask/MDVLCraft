@@ -1,4 +1,5 @@
 """Generates the pack's FTB Quests book: six chapters, one per boss tier (First Steps, then Wanderer to Legend).
+Last comes the Gates chapter (gates_chapter): its own thing, open from the start, numbered 001G... in the quest log.
 
 Each tier chapter has a top row of progress quests (kill counts, an experience level, places to find) ending in a
 capstone that opens the next chapter, and below it one column per boss: three lead-up quests themed on that boss, the
@@ -8,6 +9,7 @@ structure (a Boss Sigil to an arena, integration/BossArena, when the pack doesn'
 Writes:
   base/{client,server}/overrides/config/ftbquests/quests/  the quest book (SNBT, read by FTB Quests on the server)
   src/main/resources/data/mdvlcraft/advancements/quests/   hidden "reach experience level N" advancements
+  src/main/resources/data/mdvlcraft/advancements/quests/gates/  hidden gate-progress advancements (gate/GateAdvancements)
   src/main/resources/data/mdvlcraft/loot_tables/quests/    the boss reward crates, one per tier
 
 Usage: python3 binder/tools/generate_quests.py   (build_packs.py also writes the book into its base before packing)
@@ -420,6 +422,292 @@ def tier_chapter(tier, gate):
     return dict(file=t['file'], title=f'{tier}. {t["name"]}', icon=t['icon'], subtitle=t['subtitle'], quests=q), cap.id
 
 
+# ---------------------------------------------------------------------------------------------------------------
+# Gates chapter: its own thing, open from the start, after the tier chapters. The DQ9 quest log
+# (client/QuestLogScreen) numbers it on its own (001G, 002G, ...) in the order written here, which is the order of
+# difficulty. Gate events FTB Quests can't see are hidden advancements mdvlcraft:quests/gates/<name> with an
+# impossible criterion, granted by gate/GateAdvancements; the attuned/tempered ones are plain inventory_changed ones.
+# ---------------------------------------------------------------------------------------------------------------
+RANKS = 'edcbas'
+THEMES = ['crypt', 'warren', 'frozen', 'warcamp', 'spire', 'forge']
+THEME_NAMES = {'crypt': 'Gravekeeper Crypt', 'warren': 'Goblin Warren', 'frozen': 'Frozen Hollow', 'warcamp': 'Orc War Camp',
+               'spire': 'Mage Spire', 'forge': 'Infernal Forge'}
+RULES = ['no_potions', 'no_healing', 'statues', 'narrowing_door']
+GATE_EVENTS = (['open_gate', 'gate_kill', 'elite_kill', 'enter_red', 'enter_red_s', 'enter_trial', 'enter_modified', 'clear_red',
+                'clear_red_s', 'clear_modified', 'break', 'boss_chest', 'forge', 'return_stone', 'tower_enter', 'tower_boss_5',
+                'tower_hidden']
+               + [f'{kind}_{r}' for kind in ('enter', 'clear', 'vein') for r in RANKS]
+               + [f'enter_theme_{t}' for t in THEMES] + [f'clear_trial_{r}' for r in RULES]
+               + [f'tower_floor_{n}' for n in (5, 10, 25, 50, 55, 100)])
+GATE_DATA_ADVANCEMENTS = ['attuned', 'tempered', 'tempered_s']
+
+
+def gadv(name):
+    assert name in GATE_EVENTS or name in GATE_DATA_ADVANCEMENTS, name
+    return advancement(f'mdvlcraft:quests/gates/{name}')
+
+
+def skill_xp(n):
+    return command(f'/mdvl gate quest skillxp {{p}} {n}', f'{n} Skill Experience', 'minecraft:experience_bottle')
+
+
+def give_key(rank, theme):
+    """An attuned key (NBT theme, as the attunement recipes make it)."""
+    return {'type': 'item', 'item': {'id': f'mdvlcraft:gate_key_{rank}', 'Count': ('b', 1), 'tag': {'theme': theme}}, 'count': 1}
+
+
+def g(item_id):
+    return f'mdvlcraft:{item_id}'
+
+
+# (key, title, tasks, rewards, description, deps (keys; None = the quest before), icon, shape). One row per stage.
+GATE_ROWS = [
+    ('Your first gate (E)', [
+        ('first_key', 'Your First Key', [item(g('gate_key_e'))], [give(g('gate_key_e')), xp(50)],
+         'Gates are portals to dungeons, ranked E (weakest) to S. Each needs a key of its rank. Craft an E-Rank Gate Key: '
+         '4 iron ingots, 4 amethyst shards and an ender pearl. The reward is a spare.', [], g('gate_key_e'), 'gear'),
+        ('open_gate', 'Open the Way', [gadv('open_gate')], [xp(50)],
+         'Right-click the top of a block with the key, where the gate has room to stand. The key is used up and the gate '
+         'stabilises for a few seconds. A gate nobody clears breaks after two hours.', None, 'minecraft:ender_eye', None),
+        ('enter_e', 'Step Inside', [gadv('enter_e')], [skill_xp(100)],
+         'Walk into the gate. You and your party (up to the gate\'s cap) arrive in its dungeon; each room fills with monsters '
+         'when you step in. You can walk back out of a normal gate.', None, g('gate_key_e'), None),
+        ('gate_kill', 'First Blood', [gadv('gate_kill')], [xp(100)],
+         'Kill a gate monster. They grow stronger with the gate\'s rank.', None, 'minecraft:iron_sword', None),
+        ('essence_e', 'Essence of the Fallen', [item(g('essence_stone_e'))], [give(g('mana_crystal_e'))],
+         'Gate monsters sometimes drop essence stones of the gate\'s rank; elites and bosses drop more. Stones craft keys '
+         'and pay the Gate Forge.', None, g('essence_stone_e'), None),
+        ('vein_e', 'Crystal Vein', [gadv('vein_e')], [give(g('essence_stone_e'))],
+         'Glowing mana crystal veins grow in gate rooms. Mine one for crystals: E and D veins need a stone pickaxe, C iron, '
+         'B diamond, A and S netherite. Fortune helps.', None, g('mana_crystal_ore_e'), None),
+        ('elite_kill', 'Elite Hunter', [gadv('elite_kill')], [give(g('essence_stone_e'), 2)],
+         'Elites wait in the rooms before the boss: tougher than the rest and worth one or two stones.', None, 'minecraft:golden_sword', None),
+        ('clear_e', 'E-Rank Cleared', [gadv('clear_e')], [skill_xp(200), give(g('gate_key_e'))],
+         'Kill the gate\'s boss to clear it. Everyone present earns skill experience (E 200, up to S 6000) and the way out '
+         'opens where the boss fell.', None, g('gate_key_e'), 'hexagon'),
+        ('boss_chest', 'Spoils of the Gate', [gadv('boss_chest')], [give(g('essence_stone_e'), 2)],
+         'A boss chest appears after the clear. Each player sees only their own roll: stones, crystals, treasure, sometimes '
+         'a Return Stone or a key of the next rank. Whatever you leave in it comes to you once you are out.', None, 'minecraft:chest', None),
+    ]),
+    ('Forge and tools (E)', [
+        ('forge_item', 'The Gate Forge', [item(g('gate_forge'))], [xp(100)],
+         'Craft a Gate Forge from iron ingots, amethyst shards, an E essence stone and iron blocks.', ['boss_chest'], g('gate_forge'), None),
+        ('forge', 'Open for Business', [gadv('forge')], [give(g('essence_stone_e'), 2)],
+         'Place the forge and use it. It trades stones and crystals for Return Stones and Temper Runes, rerolls the modifiers '
+         'of A and S keys, and later takes Tower Seals.', None, g('gate_forge'), None),
+        ('return_item', 'A Way Home', [item(g('return_stone'))], [give(g('mana_crystal_e'))],
+         'Trade 2 E essence stones and an E mana crystal at the forge for a Return Stone.', None, g('return_stone'), None),
+        ('return_use', 'Emergency Exit', [gadv('return_stone')], [give(g('return_stone'))],
+         'Use a Return Stone inside a normal gate to leave it at once. It does nothing in red gates or the Demon Castle.', None, g('return_stone'), None),
+        ('rune_e', 'Temper Rune', [item(g('temper_rune_e'))], [give(g('mana_crystal_e'))],
+         'Trade 6 E essence stones and 2 E mana crystals at the forge for an E Temper Rune.', ['forge'], g('temper_rune_e'), None),
+        ('tempered', 'Tempered Steel', [gadv('tempered')], [give(g('essence_stone_e'), 2)],
+         'In an anvil, gear on the left and a rune on the right. A tempered weapon hits gate monsters harder (+2% at E, up to '
+         '+12% at S); tempered armour takes less from them. A higher rune replaces a lower one.', None, 'minecraft:anvil', None),
+        ('attune', 'Attunement', [gadv('attuned')], [give_key('e', 'frozen')],
+         'Craft a key with a catalyst to choose its theme: bone block (Gravekeeper Crypt), torch (Goblin Warren), packed ice '
+         '(Frozen Hollow), iron axe (Orc War Camp), lapis block (Mage Spire), magma block (Infernal Forge). Unattuned keys '
+         'pick a theme that suits their rank.', ['clear_e'], 'minecraft:bone_block', None),
+        ('silk', 'Keep the Ore', [item(g('mana_crystal_ore_e'))], [xp(100)],
+         'Mine a crystal vein with Silk Touch to keep the ore block itself.', ['vein_e'], g('mana_crystal_ore_e'), None),
+        ('stock_e', 'Stockpile', [item(g('essence_stone_e'), 4), item(g('mana_crystal_e'), 4)], [skill_xp(150)],
+         'Gather 4 E essence stones and 4 E mana crystals: with a gold block, that is a D key.', ['clear_e'], g('mana_crystal_e'), None),
+    ]),
+    ('Rank D', [
+        ('key_d', 'A Darker Key', [item(g('gate_key_d'))], [xp(150)],
+         'Craft a D-Rank Gate Key: 4 E stones, 4 E crystals and a gold block. Every key above E is made from the stones and '
+         'crystals of the rank below.', ['stock_e'], g('gate_key_d'), None),
+        ('enter_d', 'Rank D', [gadv('enter_d')], [skill_xp(200)],
+         'Open and enter a D-rank gate: more rooms, more monsters, harder hits.', None, g('gate_key_d'), None),
+        ('clear_d', 'D-Rank Cleared', [gadv('clear_d')], [skill_xp(400), give_key('d', 'warren')],
+         'Clear a D-rank gate.', None, g('gate_key_d'), 'hexagon'),
+        ('stock_d', 'D Stockpile', [item(g('essence_stone_d'), 4), item(g('mana_crystal_d'), 4)], [xp(200)],
+         'Gather 4 D essence stones and 4 D mana crystals: with a diamond, that is a C key.', None, g('essence_stone_d'), None),
+        ('rune_d', 'D Temper Rune', [item(g('temper_rune_d'))], [give(g('essence_stone_d'), 2)],
+         'Trade 6 D stones and 2 D crystals at the forge for a D Temper Rune and temper your gear again.', ['clear_d'], g('temper_rune_d'), None),
+        ('tourist', 'Gate Tourist', [gadv(f'enter_theme_{t}') for t in THEMES], [give(g('return_stone'), 2), skill_xp(300)],
+         'Enter a gate of each of the six themes: ' + ', '.join(THEME_NAMES[t] for t in THEMES) + '. Attuned keys of any '
+         'rank choose the theme.', ['enter_d'], 'minecraft:filled_map', None),
+        ('break', 'Dungeon Break', [gadv('break')], [xp(200)],
+         'A gate nobody clears breaks two hours after it opens: its monsters pour out around it and the gate is gone. '
+         'Be within 128 blocks when one breaks.', ['enter_d'], 'minecraft:tnt', None),
+    ]),
+    ('Rank C', [
+        ('key_c', 'Diamond Key', [item(g('gate_key_c'))], [xp(250)],
+         'Craft a C-Rank Gate Key: 4 D stones, 4 D crystals and a diamond.', ['stock_d'], g('gate_key_c'), None),
+        ('enter_c', 'Rank C', [gadv('enter_c')], [skill_xp(400)],
+         'Enter a C-rank gate. Elites are common now; bring tempered gear.', None, g('gate_key_c'), None),
+        ('vein_c', 'Iron Bites Deeper', [gadv('vein_c')], [give(g('essence_stone_c'))],
+         'Mine a C crystal vein. It needs an iron pickaxe or better.', None, g('mana_crystal_ore_c'), None),
+        ('clear_c', 'C-Rank Cleared', [gadv('clear_c')], [skill_xp(800), give_key('c', 'spire')],
+         'Clear a C-rank gate.', None, g('gate_key_c'), 'hexagon'),
+        ('stock_c', 'C Stockpile', [item(g('essence_stone_c'), 4), item(g('mana_crystal_c'), 3)], [xp(300)],
+         'Gather 4 C essence stones and 3 C mana crystals: with 2 blaze rods, that is a B key.', None, g('essence_stone_c'), None),
+        ('rune_c', 'C Temper Rune', [item(g('temper_rune_c'))], [give(g('essence_stone_c'), 2)],
+         'Trade 6 C stones and 2 C crystals at the forge for a C Temper Rune.', ['clear_c'], g('temper_rune_c'), None),
+    ]),
+    ('Rank B and red gates', [
+        ('key_b', 'Blazing Key', [item(g('gate_key_b'))], [xp(400)],
+         'Craft a B-Rank Gate Key: 4 C stones, 3 C crystals and 2 blaze rods.', ['stock_c'], g('gate_key_b'), None),
+        ('enter_b', 'Rank B', [gadv('enter_b')], [skill_xp(800)],
+         'Enter a B-rank gate. From B up, a gate may turn red the first time someone steps in.', None, g('gate_key_b'), None),
+        ('vein_b', 'Diamond Edge', [gadv('vein_b')], [give(g('essence_stone_b'))],
+         'Mine a B crystal vein. It needs a diamond pickaxe or better.', None, g('mana_crystal_ore_b'), None),
+        ('clear_b', 'B-Rank Cleared', [gadv('clear_b')], [skill_xp(1500), give(g('return_stone'))],
+         'Clear a B-rank gate.', None, g('gate_key_b'), 'hexagon'),
+        ('enter_red', 'Seeing Red', [gadv('enter_red')], [give(g('return_stone'))],
+         'B, A and S gates can turn red on first entry (B 5%, A 8%, S 12%). A red gate seals behind you: no leaving, no '
+         'Return Stones, nobody new gets in. Inside is a wild land with camps around a boss\'s lair. Die and you are out.',
+         ['enter_b'], 'minecraft:crying_obsidian', None),
+        ('clear_red', 'Survive the Red', [gadv('clear_red')], [skill_xp(2000), give(g('essence_stone_b'), 2)],
+         'Kill the lair\'s boss: the seal breaks and an exit pad of crying obsidian appears. Red gates pay half again in '
+         'stones and experience.', None, 'minecraft:crying_obsidian', 'hexagon'),
+        ('stock_b', 'B Stockpile', [item(g('essence_stone_b'), 4), item(g('mana_crystal_b'), 3)], [xp(400)],
+         'Gather 4 B essence stones and 3 B mana crystals: with 2 netherite scrap, that is an A key.', ['clear_b'], g('essence_stone_b'), None),
+        ('rune_b', 'B Temper Rune', [item(g('temper_rune_b'))], [give(g('essence_stone_b'), 2)],
+         'Trade 6 B stones and 2 B crystals at the forge for a B Temper Rune.', ['clear_b'], g('temper_rune_b'), None),
+    ]),
+    ('Rank A and modifiers', [
+        ('key_a', 'Netherite Key', [item(g('gate_key_a'))], [xp(500)],
+         'Craft an A-Rank Gate Key: 4 B stones, 3 B crystals and 2 netherite scrap. A and S keys roll gate modifiers when '
+         'made (A up to 1, S 1 to 3); hover over the key to see them.', ['stock_b'], g('gate_key_a'), None),
+        ('enter_a', 'Rank A', [gadv('enter_a')], [skill_xp(1500)],
+         'Enter an A-rank gate.', None, g('gate_key_a'), None),
+        ('vein_a', 'Netherite Pick', [gadv('vein_a')], [give(g('essence_stone_a'))],
+         'Mine an A crystal vein. It needs a netherite pickaxe.', None, g('mana_crystal_ore_a'), None),
+        ('enter_modified', 'Twisted Gate', [gadv('enter_modified')], [give(g('essence_stone_a'))],
+         'Enter a gate with modifiers: Enraged, Swarming, Cursed, Volatile, Silenced, Elite Pack, Crimson or Ironclad. Each '
+         'makes it harder and adds 20% stones and 15% clear experience. Use the Gate Forge with a key in hand to reroll it '
+         'for 4 A stones.', ['enter_a'], 'minecraft:fermented_spider_eye', None),
+        ('clear_a', 'A-Rank Cleared', [gadv('clear_a')], [skill_xp(3000), give(g('gate_key_a'))],
+         'Clear an A-rank gate.', ['enter_a'], g('gate_key_a'), 'hexagon'),
+        ('clear_modified', 'Against the Odds', [gadv('clear_modified')], [skill_xp(1500)],
+         'Clear a gate that has modifiers.', ['enter_modified'], 'minecraft:fermented_spider_eye', None),
+        ('stock_a', 'A Stockpile', [item(g('essence_stone_a'), 4), item(g('mana_crystal_a'), 3)], [xp(500)],
+         'Gather 4 A essence stones and 3 A mana crystals: with a netherite ingot and a nether star, that is an S key.',
+         ['clear_a'], g('essence_stone_a'), None),
+        ('rune_a', 'A Temper Rune', [item(g('temper_rune_a'))], [give(g('essence_stone_a'), 2)],
+         'Trade 6 A stones and 2 A crystals at the forge for an A Temper Rune.', ['clear_a'], g('temper_rune_a'), None),
+    ]),
+    ('Rank S', [
+        ('key_s', 'The Highest Key', [item(g('gate_key_s'))], [xp(800)],
+         'Craft an S-Rank Gate Key: 4 A stones, 3 A crystals, a netherite ingot and a nether star.', ['stock_a'], g('gate_key_s'), None),
+        ('enter_s', 'Rank S', [gadv('enter_s')], [skill_xp(3000)],
+         'Enter an S-rank gate.', None, g('gate_key_s'), None),
+        ('vein_s', 'Heart of the Gate', [gadv('vein_s')], [give(g('essence_stone_s'))],
+         'Mine an S crystal vein.', None, g('mana_crystal_ore_s'), None),
+        ('clear_s', 'S-Rank Cleared', [gadv('clear_s')], [skill_xp(6000), give(g('essence_stone_s'), 2)],
+         'Clear an S-rank gate.', None, g('gate_key_s'), 'hexagon'),
+        ('rune_s', 'S Temper Rune', [item(g('temper_rune_s'))], [give(g('mana_crystal_s'), 2)],
+         'Trade 6 S stones and 2 S crystals at the forge for an S Temper Rune, the top tier. Later, Tower Seals buy them too.',
+         ['clear_s'], g('temper_rune_s'), None),
+        ('tempered_s', 'Masterwork', [gadv('tempered_s')], [xp(1000)],
+         'Temper a piece of gear with an S rune.', None, 'minecraft:netherite_sword', None),
+    ]),
+    ('Trials and the hidden boss', [
+        ('enter_trial', 'Trial by Rule', [gadv('enter_trial')], [give(g('return_stone'), 2)],
+         'Some S gates that don\'t turn red become trial gates, with a rule shown as you enter and on a stone tablet: No '
+         'Potions, No Healing, Statues or The Narrowing Door.', ['enter_s'], 'minecraft:chiseled_stone_bricks', None),
+        ('trial_trophy', 'Trial Trophy', [item(g('gate_trophy'))], [skill_xp(3000)],
+         'Clear a trial gate. Everyone present earns a Trial Trophy; trials pay half again in stones, veins and experience, '
+         'and the boss chest often rolls twice.', None, g('gate_trophy'), 'hexagon'),
+        ('trial_no_potions', 'No Potions', [gadv('clear_trial_no_potions')], [give(g('essence_stone_s'))],
+         'Clear a No Potions trial: no potion can be drunk or thrown.', ['trial_trophy'], 'minecraft:glass_bottle', None),
+        ('trial_no_healing', 'No Healing', [gadv('clear_trial_no_healing')], [give(g('essence_stone_s'))],
+         'Clear a No Healing trial: only food heals you.', ['trial_trophy'], 'minecraft:cooked_beef', None),
+        ('trial_statues', 'Statues', [gadv('clear_trial_statues')], [give(g('essence_stone_s'))],
+         'Clear a Statues trial: stone statues hunt you room by room and move only while nobody looks at them. They '
+         'can\'t be hurt.', ['trial_trophy'], 'minecraft:armor_stand', None),
+        ('trial_door', 'The Narrowing Door', [gadv('clear_trial_narrowing_door')], [give(g('essence_stone_s'))],
+         'Clear a Narrowing Door trial: whoever leaves can\'t come back in, and if nobody stays inside, the gate fails.',
+         ['trial_trophy'], 'minecraft:iron_door', None),
+        ('enter_red_s', 'Crimson Crown', [gadv('enter_red_s')], [give(g('mana_crystal_s'), 2)],
+         'Enter a red S gate.', ['clear_s', 'clear_red'], 'minecraft:redstone_block', None),
+        ('clear_red_s', 'The Hidden Boss', [gadv('clear_red_s')], [skill_xp(9000)],
+         'In a red S gate the lair boss is not the end: a hidden boss rises in the arena, stronger and glowing. Only its '
+         'death breaks the seal.', None, 'minecraft:wither_skeleton_skull', 'hexagon'),
+        ('black', 'Black Essence', [item(g('essence_stone_black'))], [give(g('castle_sigil'))],
+         'Hidden bosses are the only source of Black Essence Stones. With 4 of them, 4 S stones and a netherite ingot you '
+         'could craft a Castle Sigil; this quest gives you one.', None, g('essence_stone_black'), None),
+    ]),
+    ('The Demon Castle', [
+        ('tower_enter', 'The Demon Castle', [gadv('tower_enter')], [give(g('tower_seal'), 2)],
+         'Use the Castle Sigil on the top of a block to open the castle (the sigil is kept). The tower has no top; your floor '
+         'is saved. Leave by a landing\'s lever and you keep it; die and you drop to the first floor of your block of five. '
+         'Sneak-use the sigil to start from your checkpoint. Allies who reached your floor may join.', ['black'], g('castle_sigil'), 'gear'),
+        ('floor_5', 'Floor 5', [gadv('tower_floor_5')], [give(g('essence_stone_s'), 2)],
+         'Climb to floor 5. Clear a floor\'s rooms and its chest opens; every fifth floor is a boss floor.', None, 'minecraft:ladder', None),
+        ('boss_5', 'First Warden', [gadv('tower_boss_5')], [skill_xp(3000)],
+         'Beat the floor 5 boss. The bars open, its chest waits in the arena, you earn Tower Seals (more the first time) '
+         'and your checkpoint moves to floor 6.', None, g('tower_seal'), 'hexagon'),
+        ('seals', 'Seal Collector', [item(g('tower_seal'), 6)], [give(g('essence_stone_black'))],
+         'Hold 6 Tower Seals. With 2 S mana crystals they buy an S Temper Rune at the Gate Forge.', None, g('tower_seal'), None),
+        ('floor_10', 'Floor 10', [gadv('tower_floor_10')], [give(g('tower_seal'), 2)],
+         'Climb to floor 10. From floor 11 tower modifiers join in, one more every ten floors.', ['boss_5'], 'minecraft:ladder', None),
+        ('floor_25', 'Floor 25', [gadv('tower_floor_25')], [give(g('tower_seal'), 4), give(g('essence_stone_black'))],
+         'Climb to floor 25. Its bosses are A-rank now.', None, 'minecraft:ladder', None),
+        ('floor_50', 'Floor 50', [gadv('tower_floor_50')], [give(g('tower_seal'), 4), skill_xp(8000)],
+         'Climb to floor 50.', None, 'minecraft:ladder', 'hexagon'),
+        ('floor_55', 'Legend Floors', [gadv('tower_floor_55')], [give(g('tower_seal'), 4)],
+         'Climb to floor 55. From here the bosses are S-rank with two extra modifiers.', None, 'minecraft:ladder', None),
+        ('tower_hidden', 'Hidden in the Castle', [gadv('tower_hidden')], [give(g('essence_stone_black'), 2), skill_xp(10000)],
+         'On boss floors from 55 a hidden boss may rise when the boss dies. Defeat it.', None, 'minecraft:wither_skeleton_skull', 'hexagon'),
+        ('floor_100', 'The Hundredth Floor', [gadv('tower_floor_100')], [give(g('tower_seal'), 8), skill_xp(15000)],
+         'Climb to floor 100.', ['floor_55'], 'minecraft:nether_star', 'hexagon'),
+        ('castle_trophy', 'Castle Trophy', [item(g('castle_trophy'))], [xp(1000)],
+         'Trade 16 Tower Seals at the Gate Forge for a Castle Trophy.', ['seals'], g('castle_trophy'), None),
+        ('master', 'Master of Gates', [gadv('tower_floor_100'), item(g('castle_trophy'))], [skill_xp(20000), give(g('castle_trophy'))],
+         'Reach floor 100 and hold a Castle Trophy. Every rank, every red gate, every trial: you have seen them all.',
+         ['floor_100', 'castle_trophy', 'clear_red_s', 'trial_trophy'], g('castle_trophy'), 'gear'),
+    ]),
+]
+
+
+def gates_chapter():
+    q, ids, prev = [], {}, None
+    for row, (_, quests) in enumerate(GATE_ROWS):
+        for col, (key, title, tasks, rewards, desc, deps, icon, shape) in enumerate(quests):
+            dep_ids = [prev] if deps is None else [ids[d] for d in deps]
+            qu = Quest(f'gates_{key}', title, col * 2, row * 2.5, tasks, rewards, [desc], dep_ids, icon=icon, shape=shape,
+                       size=1.5 if shape else None)
+            q.append(qu)
+            ids[key] = prev = qu.id
+    check_gate_rewards(q)
+    return dict(file='gates', title='Gates', icon='mdvlcraft:gate_key_s', subtitle='Keys, gates, red gates, trials and the Demon Castle.', quests=q)
+
+
+def check_gate_rewards(quests):
+    """No reward may finish a later quest's item task by itself, so a reward never skips a step."""
+    for i, qu in enumerate(quests):
+        for r in qu.rewards:
+            if r['type'] != 'item' or not isinstance(r['item'], str):
+                continue
+            for later in quests[i + 1:]:
+                for t in later.tasks:
+                    if t['type'] == 'item' and t['item'] == r['item']:
+                        assert r['count'] < t['count'][1], f'{qu.title} gives {r["item"]}, finishing {later.title}'
+
+
+def write_gate_advancements():
+    out = f'{RES}/advancements/quests/gates'
+    if os.path.isdir(out):
+        shutil.rmtree(out)
+    os.makedirs(out)
+    advs = {name: {'criteria': {'done': {'trigger': 'minecraft:impossible'}}} for name in GATE_EVENTS}
+    keys = [f'mdvlcraft:gate_key_{r}' for r in RANKS]
+    advs['attuned'] = {'criteria': {t: {'trigger': 'minecraft:inventory_changed', 'conditions': {'items': [
+        {'items': keys, 'nbt': '{theme:"%s"}' % t}]}} for t in THEMES}, 'requirements': [THEMES]}
+    levels = [f'level_{n}' for n in range(1, 7)]
+    advs['tempered'] = {'criteria': {f'level_{n}': {'trigger': 'minecraft:inventory_changed', 'conditions': {'items': [
+        {'nbt': '{mdvlcraft_temper:%d}' % n}]}} for n in range(1, 7)}, 'requirements': [levels]}
+    advs['tempered_s'] = {'criteria': {'level_6': {'trigger': 'minecraft:inventory_changed', 'conditions': {'items': [
+        {'nbt': '{mdvlcraft_temper:6}'}]}}}}
+    for name, adv in sorted(advs.items()):
+        with open(f'{out}/{name}.json', 'w') as f:
+            json.dump(adv, f, indent=2)
+            f.write('\n')
+
+
 def strip_article(name):
     return name[4:].title() if name.startswith('the ') else name
 
@@ -537,11 +825,13 @@ def main(base=os.path.join(REPO, 'base')):
     for tier in range(1, 6):
         ch, gate = tier_chapter(tier, gate)
         chapters.append(ch)
+    chapters.append(gates_chapter())   # last, after Legend; no dependency on the other chapters
     ids = [qu.id for c in chapters for qu in c['quests']]
     assert len(ids) == len(set(ids)), 'duplicate quest ids'
     for side in ('client', 'server'):
         write_book(chapters, os.path.join(base, side, 'overrides', 'config', 'ftbquests', 'quests'))
     write_level_advancements()
+    write_gate_advancements()
     write_crates()
     print(f'{len(chapters)} chapters, {len(ids)} quests, {sum(1 for b in B if b["lair"] and not arena_lair(b["lair"][0]) and b["lair"][0] not in CATACLYSM_EYES)} lair compasses')
 

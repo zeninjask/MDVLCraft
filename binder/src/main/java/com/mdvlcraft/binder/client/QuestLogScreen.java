@@ -24,7 +24,8 @@ import org.lwjgl.glfw.GLFW;
 /**
  * The quest book as a Dragon Quest IX quest list, opened from the MDVLCraft menu: the chapter's numbered quests on the
  * left with a slowly flashing arrow on the selected one, its request, reward and description on the right, and Accept /
- * Abandon (compat/ftbquests/ActiveQuest decides what they do on the server). Numbers run through the whole book.
+ * Abandon (compat/ftbquests/ActiveQuest decides what they do on the server). Numbers run through the whole book, except
+ * the Gates chapter (filename "gates"), which numbers its own quests 001G, 002G, … so the others never shift.
  */
 public class QuestLogScreen extends Screen {
     private static final int ROW = 11;
@@ -34,7 +35,9 @@ public class QuestLogScreen extends Screen {
     private static final int GREEN = 0xFF6FD36A;
     private final Screen parent;
     private final List<Chapter> chapters;
-    private final Map<Quest, Integer> numbers = new HashMap<>();
+    private static final String GATES = "gates";
+    /** Each quest's number as shown ("007", or "007G" in the Gates chapter). */
+    private final Map<Quest, String> numbers = new HashMap<>();
     private int chapter;
     private int selected;
     private int scroll;
@@ -50,8 +53,13 @@ public class QuestLogScreen extends Screen {
         super(Component.translatable("screen.mdvlcraft.quests"));
         this.parent = parent;
         this.chapters = ClientQuestFile.INSTANCE.getAllChapters().stream().filter(c -> !c.getQuests().isEmpty()).toList();
+        int book = 0;
         for (Chapter c : this.chapters) {
-            c.getQuests().forEach(q -> this.numbers.put(q, this.numbers.size() + 1));
+            boolean gates = GATES.equals(c.getFilename());
+            List<Quest> quests = c.getQuests();
+            for (int i = 0; i < quests.size(); i++) {
+                this.numbers.put(quests.get(i), gates ? String.format("%03dG", i + 1) : String.format("%03d", ++book));
+            }
         }
 
         // Open on the active quest, else the first one that can be taken.
@@ -241,7 +249,7 @@ public class QuestLogScreen extends Screen {
                 g.drawString(this.font, "▶", this.x + 6, ry, DqGui.TEXT, false);
             }
 
-            String number = String.format("%03d", this.numbers.get(quest));
+            String number = this.numbers.get(quest);
             g.drawString(this.font, number, this.x + 16, ry, DqGui.MUTED, false);
             String badge = switch (state) {
                 case CLEAR -> "CLEAR";
@@ -277,7 +285,7 @@ public class QuestLogScreen extends Screen {
         Quest quest = this.quest();
         State state = state(team, quest);
         DqGui.window(g, dx, this.y, dw, this.h);
-        String heading = "No. " + String.format("%03d", this.numbers.get(quest)) + " · " + quest.getRawTitle();
+        String heading = "No. " + this.numbers.get(quest) + " · " + quest.getRawTitle();
         g.drawString(this.font, this.font.plainSubstrByWidth(heading, dw - 16), dx + 8, this.y + 8, DqGui.TEXT, false);
         DqGui.rule(g, dx + 3, dx + dw - 3, this.y + 22);
         int labelW = 52;

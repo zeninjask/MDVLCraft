@@ -1,0 +1,40 @@
+wait 120
+cmd gamemode survival Tester
+cmd effect give Tester minecraft:resistance 99999 4 true
+cmd advancement revoke Tester from mdvlcraft:quests/gates/clear_e
+cmd ftbquests change_progress Tester reset 20429024DD94D07E
+wait 2
+cmd execute unless entity @a[name=Tester,advancements={mdvlcraft:quests/gates/enter_e=true}] run say NOT_ENTERED_YET_OK
+cmd execute as Tester run mdvl gate open E crypt
+wait 20
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/enter_e=true}] run say ENTER_E_OK
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/enter_theme_crypt=true}] run say ENTER_THEME_CRYPT_OK
+cmd execute unless entity @a[name=Tester,advancements={mdvlcraft:quests/gates/enter_d=true}] run say NO_ENTER_D_OK
+cmd execute as Tester at @s run mdvl gate reward clear
+wait 3
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/clear_e=true}] run say CLEAR_E_OK
+cmd execute unless entity @a[name=Tester,advancements={mdvlcraft:quests/gates/clear_red=true}] run say NO_CLEAR_RED_OK
+cmd execute as Tester run mdvl gate leave
+wait 15
+cmd give Tester mdvlcraft:gate_key_e{theme:"crypt"}
+cmd give Tester minecraft:iron_sword{mdvlcraft_temper:1}
+wait 2
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/attuned=true}] run say ATTUNED_OK
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/tempered=true}] run say TEMPERED_OK
+cmd execute unless entity @a[name=Tester,advancements={mdvlcraft:quests/gates/tempered_s=true}] run say NO_TEMPERED_S_OK
+cmd scoreboard objectives add gq dummy
+cmd execute store result score Tester gq run mdvl gate quest skillxp Tester 100
+cmd execute if score Tester gq matches 1 run say SKILLXP_OK
+cmd mdvl gate tower progress Tester set 25
+cmd execute as Tester run mdvl gate tower open
+wait 20
+wait 3
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/tower_enter=true}] run say TOWER_ENTER_OK
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/tower_floor_25=true}] run say TOWER_FLOOR_25_OK
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/tower_floor_5=true}] run say TOWER_FLOOR_5_OK
+cmd execute unless entity @a[name=Tester,advancements={mdvlcraft:quests/gates/tower_floor_50=true}] run say NO_TOWER_FLOOR_50_OK
+cmd ftbquests change_progress Tester complete 425677EDBB4C2094
+wait 2
+cmd say GATES_CHAPTER_LOADED_IF_NO_ERROR_ABOVE
+cmd execute as Tester run mdvl gate tower info
+shot quests_end

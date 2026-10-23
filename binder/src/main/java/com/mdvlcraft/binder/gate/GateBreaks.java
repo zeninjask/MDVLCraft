@@ -86,6 +86,7 @@ public final class GateBreaks {
         ServerLevel world = instance.gateDimension == null ? null : server.getLevel(instance.gateDimension);
         if (world != null && world.isLoaded(instance.gatePos)) {
             int spawned = wave(world, instance);
+            GateAdvancements.onBreak(world, instance);   // the quest book's Gates chapter
             announce(server, world, instance, Component.translatableWithFallback("gate.mdvlcraft.break", "A %s-rank gate has broken! %s monsters pour out.",
                 instance.rank.name(), spawned));
             world.playSound(null, instance.gatePos, SoundEvents.WITHER_BREAK_BLOCK, SoundSource.HOSTILE, 2.0F, 0.6F);
