@@ -3,7 +3,8 @@ mana crystal ore, Gate Forge and boss chest loot tables, the mining tags, the Ga
 (merged). The Java side is gate/GateRewards.java and friends; rank colours match gen_gate_textures.py.
 
 Boss chest tables (loot_tables/gates/<rank>/boss.json) are rolled once per player present at the clear: 0-2 essence
-stones and mana crystals of the rank, 1-2 rank treasures, a 25% Return Stone and a 15% next-rank key (not at S).
+stones and mana crystals of the rank, 1-2 rank treasures, one rank gear material, a 10-25% boss trophy of the rank, a 25%
+Return Stone and a 15% next-rank key (not at S).
 """
 import json
 import random
@@ -30,6 +31,17 @@ TREASURE = {
     's': [('minecraft:netherite_scrap', 2, 3, 8), ('minecraft:netherite_ingot', 1, 1, 3), ('minecraft:totem_of_undying', 1, 1, 2),
           ('minecraft:experience_bottle', 10, 16, 6)],
 }
+# rank gear materials (plan 6 boss chest): one roll every time, vanilla gear tiers by rank: (item, min, max, weight)
+GEAR = {
+    'e': [('minecraft:leather', 3, 6, 1), ('minecraft:iron_ingot', 2, 4, 1)],
+    'd': [('minecraft:iron_ingot', 4, 7, 2), ('minecraft:chain', 4, 8, 1)],
+    'c': [('minecraft:iron_block', 1, 1, 2), ('minecraft:diamond', 1, 2, 1)],
+    'b': [('minecraft:diamond', 2, 4, 1)],
+    'a': [('minecraft:netherite_scrap', 2, 3, 2), ('minecraft:netherite_upgrade_smithing_template', 1, 1, 1)],
+    's': [('minecraft:netherite_ingot', 1, 2, 2), ('minecraft:netherite_upgrade_smithing_template', 1, 2, 1)],
+}
+# boss trophy chance per player roll, E to S
+TROPHY_CHANCE = {'e': 0.10, 'd': 0.12, 'c': 0.15, 'b': 0.18, 'a': 0.22, 's': 0.25}
 BOOK_LEVELS = {'e': 10, 'd': 15, 'c': 20, 'b': 25, 'a': 30, 's': 30}
 LANG = {
     'block.mdvlcraft.gate_forge': 'Gate Forge',
@@ -38,6 +50,7 @@ LANG = {
     'item.mdvlcraft.return_stone.desc': 'Use inside a normal gate to leave it at once',
     'item.mdvlcraft.temper_rune.desc': 'Anvil it onto gear: +%s%% against gate mobs',
     'gate.mdvlcraft.tempered': 'Gate-tempered (%s): +%s%% against gate mobs',
+    'gate.mdvlcraft.tempered.general': '+%s%% against everything',
     'gate.mdvlcraft.cleared': 'Gate cleared! +%s skill experience. Your boss chest is waiting.',
     'gate.mdvlcraft.chest.not_yours': 'There is nothing in this chest for you',
     'gate.mdvlcraft.return_stone.outside': 'The Return Stone only works inside a gate',
@@ -96,6 +109,24 @@ STONE = [
     '..#soooooooss#..',
     '...#ssoooss##...',
     '....########....',
+    '................',
+    '................',
+    '................',
+]
+TROPHY = [
+    '................',
+    '..##########....',
+    '.#hhhhhhhhos#...',
+    '#h#hooggooo#s#..',
+    '#h#hoggggoo#s#..',
+    '.##hooggoos##...',
+    '...#hoooos#.....',
+    '....#hoos#......',
+    '.....#os#.......',
+    '.....#os#.......',
+    '....#hoos#......',
+    '...#hhooss#.....',
+    '...########.....',
     '................',
     '................',
     '................',
@@ -160,6 +191,7 @@ def textures():
     for n, (r, colour) in enumerate(COLOURS.items()):
         ore_texture(colour, 100 + n).save(block / f'mana_crystal_ore_{r}.png')
         draw(RUNE, (70, 70, 80), colour).save(item / f'temper_rune_{r}.png')
+        draw(TROPHY, (214, 170, 60), colour).save(item / f'boss_trophy_{r}.png')
     iron, dark, glow, gold, wood = (150, 150, 158), (52, 50, 58), (90, 200, 255), (214, 170, 60), (96, 62, 36)
     framed(dark, iron, 1, glow).save(block / 'gate_forge_top.png')
     framed(dark, iron, 2).save(block / 'gate_forge_bottom.png')
@@ -186,6 +218,7 @@ def models_and_states():
         write(ASSETS / f'blockstates/{name}.json', {'variants': {'': {'model': f'mdvlcraft:block/{name}'}}})
         write(ASSETS / f'models/item/{name}.json', {'parent': f'mdvlcraft:block/{name}'})
         write(ASSETS / f'models/item/temper_rune_{r}.json', {'parent': 'item/generated', 'textures': {'layer0': f'mdvlcraft:item/temper_rune_{r}'}})
+        write(ASSETS / f'models/item/boss_trophy_{r}.json', {'parent': 'item/generated', 'textures': {'layer0': f'mdvlcraft:item/boss_trophy_{r}'}})
     for name, bottom in [('gate_forge', 'gate_forge_bottom'), ('gate_reward_chest', 'gate_reward_chest_top')]:
         write(ASSETS / f'models/block/{name}.json', {'parent': 'minecraft:block/cube_bottom_top', 'textures': {
             'top': f'mdvlcraft:block/{name}_top', 'side': f'mdvlcraft:block/{name}_side', 'bottom': f'mdvlcraft:block/{bottom}'}})
@@ -219,6 +252,9 @@ def loot_tables():
             {'rolls': 1, 'entries': [{'type': 'minecraft:item', 'name': f'mdvlcraft:essence_stone_{r}', 'functions': [count(0, 2)]}]},
             {'rolls': 1, 'entries': [{'type': 'minecraft:item', 'name': f'mdvlcraft:mana_crystal_{r}', 'functions': [count(0, 2)]}]},
             {'rolls': {'type': 'minecraft:uniform', 'min': 1, 'max': 2}, 'entries': treasure},
+            {'rolls': 1, 'entries': [{'type': 'minecraft:item', 'name': item, 'weight': w, 'functions': [count(lo, hi)]} for item, lo, hi, w in GEAR[r]]},
+            {'rolls': 1, 'conditions': [{'condition': 'minecraft:random_chance', 'chance': TROPHY_CHANCE[r]}],
+             'entries': [{'type': 'minecraft:item', 'name': f'mdvlcraft:boss_trophy_{r}'}]},
             {'rolls': 1, 'conditions': [{'condition': 'minecraft:random_chance', 'chance': 0.25}],
              'entries': [{'type': 'minecraft:item', 'name': 'mdvlcraft:return_stone'}]},
         ]
@@ -253,6 +289,7 @@ def lang():
         R = r.upper()
         entries[f'block.mdvlcraft.mana_crystal_ore_{r}'] = f'{R}-Rank Mana Crystal Vein'
         entries[f'item.mdvlcraft.temper_rune_{r}'] = f'{R}-Rank Temper Rune'
+        entries[f'item.mdvlcraft.boss_trophy_{r}'] = f'{R}-Rank Boss Trophy'
     path = ASSETS / 'lang/en_us.json'
     merged = json.loads(path.read_text())
     merged.update(entries)

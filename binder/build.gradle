@@ -91,7 +91,7 @@ dependencies {
     // Sword Soaring: the Vatansever's flight and the mod's flight keys are switched off (mixin/swordsoaring).
     compileOnly files('libs/sword_soaring-20.14.2.8-mc1.20.1-forge.jar')
     // Projection Sorcery (Cursed Fate addon) and Epic Fight Nightfall: abilities cast from the wheel (ability/).
-    compileOnly files('libs/BaldasProjectionSorcery-2.0.1.2.jar', 'libs/EpicFightNightfall-3.4.2-all.jar')
+    compileOnly files('libs/BaldasProjectionSorcery-2.0.1.2.jar', 'libs/EpicFightNightfall-3.4.2-all.jar', 'libs/CombatEvolution-2.3.0-Forge-1.20.1.jar')
     // Distant Horizons and Chunky (only the classes the binder touches): DH binds to Chunky only once it is loaded (mixin/distanthorizons).
     compileOnly files('libs/DistantHorizons-3.3.3-chunky-classes.jar', 'libs/Chunky-1.3.146-provider-classes.jar')
     // Weapons of Miracles, Villager Recruits / Village Recruits, Cursed Fate Meimei and Calio (inside Origins): compat (compat/, mixin/).

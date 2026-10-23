@@ -35,7 +35,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *   /mdvl gate redinfo                the caller's red layout: camps built, their crystal spots and how many hold ore
  *                                     (the result), lair built or not, and which lair/camp templates were used
  *   /mdvl gate redpick &lt;theme&gt;   draws the lair and camp picks of 300 instance ids (RedLandscape.pick) and lists the
- *                                  counts; succeeds (result 1) only if every listed template loads and is drawn
+ *                                  counts (and the camp rotations); succeeds (result 1) only if every listed template loads and is drawn and all
+ *                                  four camp rotations are drawn
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class GateThemeCommand {
@@ -203,12 +204,15 @@ public final class GateThemeCommand {
         }
         TreeMap<String, Integer> lairs = new TreeMap<>();
         TreeMap<String, Integer> camps = new TreeMap<>();
+        TreeMap<String, Integer> turns = new TreeMap<>();
         for (int id = 1; id <= 300; id++) {
             ResourceLocation lair = RedLandscape.pick(data.lairs(), RedLandscape.lairSeed(id));
             if (lair != null) {
                 lairs.merge(lair.getPath(), 1, Integer::sum);
             }
-            ResourceLocation camp = RedLandscape.pick(data.camps(), RedLandscape.campSeed(id, new BlockPos(id * 37 - 4000, 0, id * 53 - 6000)));
+            BlockPos column = new BlockPos(id * 37 - 4000, 0, id * 53 - 6000);
+            ResourceLocation camp = RedLandscape.pick(data.camps(), RedLandscape.campSeed(id, column));
+            turns.merge(RedLandscape.campRotation(id, column).name(), 1, Integer::sum);
             if (camp != null) {
                 camps.merge(camp.getPath(), 1, Integer::sum);
             }
@@ -222,8 +226,8 @@ public final class GateThemeCommand {
             }
         }
         boolean ok = !data.lairs().isEmpty() && !data.camps().isEmpty() && missing.isEmpty()
-            && lairs.size() == new HashSet<>(data.lairs()).size() && camps.size() == new HashSet<>(data.camps()).size();
-        String text = theme.key() + " red picks: lairs " + lairs + ", camps " + camps + (missing.isEmpty() ? "" : ", MISSING " + missing)
+            && lairs.size() == new HashSet<>(data.lairs()).size() && camps.size() == new HashSet<>(data.camps()).size() && turns.size() == 4;
+        String text = theme.key() + " red picks: lairs " + lairs + ", camps " + camps + ", camp rotations " + turns + (missing.isEmpty() ? "" : ", MISSING " + missing)
             + (ok ? " (all drawn)" : " (NOT all drawn or loaded)");
         context.getSource().sendSuccess(() -> Component.literal(text), false);
         return ok ? 1 : 0;

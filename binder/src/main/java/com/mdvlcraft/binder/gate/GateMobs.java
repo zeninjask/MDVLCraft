@@ -30,6 +30,26 @@ public final class GateMobs {
     private GateMobs() {
     }
 
+    /** Weapons of Miracles' mobs: far stronger than the rest of the pools, so they spawn only in S-rank gates (bosses too)
+     * and each one takes HEAVY_COST of a spawn budget (a room's, a camp's, a hall's). */
+    private static final String HEAVY_MOD = "wom";
+    public static final int HEAVY_COST = 3;
+
+    static boolean heavy(ResourceLocation id) {
+        return HEAVY_MOD.equals(id.getNamespace());
+    }
+
+    /** How much of a spawn budget a mob of this type uses: HEAVY_COST for a Weapons of Miracles mob, else 1 (also for null,
+     * a failed spawn, so budget loops always end). */
+    public static int cost(@Nullable EntityType<?> type) {
+        ResourceLocation id = type == null ? null : ForgeRegistries.ENTITY_TYPES.getKey(type);
+        return id != null && heavy(id) ? HEAVY_COST : 1;
+    }
+
+    public static int cost(@Nullable net.minecraft.world.entity.Entity mob) {
+        return cost(mob == null ? null : mob.getType());
+    }
+
     /** 0 for E–D, 1 for C–B, 2 for A–S. */
     static int band(GateRank rank) {
         return rank.ordinal() / 2;
@@ -55,7 +75,7 @@ public final class GateMobs {
         List<Integer> weights = new ArrayList<>();
         int total = 0;
         for (GateThemes.Weighted entry : data.mobs()[band(rank)][kind.ordinal()]) {
-            EntityType<?> type = type(entry.id());
+            EntityType<?> type = heavy(entry.id()) && rank != GateRank.S ? null : type(entry.id());
             if (type != null) {
                 types.add(type);
                 weights.add(entry.weight());
@@ -81,7 +101,7 @@ public final class GateMobs {
             return NO_BOSS;
         }
         GateThemes.BossEntry entry = data.bosses()[rank.ordinal()];
-        return new Boss(entry.id(), entry.count());
+        return heavy(entry.id()) && rank != GateRank.S ? NO_BOSS : new Boss(entry.id(), entry.count());
     }
 
     @Nullable

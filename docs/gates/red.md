@@ -85,3 +85,15 @@ noise settings / surface rules in `tools/gates/gen_gate_data.py` (+ its output),
 ## State / next step
 
 All parts written. Next: in-game run of `tests/red.txt` (coordinator), then hazards / hidden boss / GateMobs switch.
+
+## Round 4 (gate-red3): boundary and camp rotation
+
+- **96-block boundary** (plan 7.2): `RedGates.boundary` runs every red-gate tick; a roster player more than
+  `RedLandscape.PLAY_RADIUS` (96) from the lair is put back on the ground 4 blocks inside, on the same line, with
+  "The red gate's edge pushes you back" (`gate.mdvlcraft.red.edge`). Camps now sit at most `CAMP_MAX` (88) from the lair
+  so a whole camp fits inside (arrival is 60–90 out, already inside).
+- **Seeded camp rotation**: `RedLandscape.campRotation(instance, column)` replaces the random rotation, so a gate's camps
+  look the same whoever walks up first. `/mdvl gate redpick <theme>` also lists the rotations drawn and passes only if all
+  four turn up (themes.txt's redpick steps cover it).
+- Test: red.txt RED_EDGE_PUSHBACK_OK / RED_EDGE_STILL_INSIDE_OK (tp 200 blocks out, expect to be pulled back), shot
+  `red_edge`. Template retune skipped: no concrete problems listed.

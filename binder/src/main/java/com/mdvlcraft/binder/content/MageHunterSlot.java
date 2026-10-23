@@ -2,6 +2,8 @@ package com.mdvlcraft.binder.content;
 
 import com.mdvlcraft.binder.ability.Ability;
 import com.mdvlcraft.binder.ability.AbilityGrants;
+import com.mdvlcraft.binder.shadow.ShadowWeapons;
+import com.mdvlcraft.binder.skills.Respec;
 import java.util.Collection;
 import java.util.Set;
 import net.minecraft.resources.ResourceLocation;
@@ -37,10 +39,14 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * desummoned. The sword isn't dropped on death.
  * A Mage Hunter is anyone with a demon sword summon unlocked (no tree grants one since the vocations rework). The client
  * knows it for the local player from its granted abilities (client/ClientAbilities, set by setClientCheck).
+ * A samurai (the archetype picked) has the same slot for Formless Sword's shadow weapons (shadow/ShadowArsenal): only
+ * shadow weapons go in, from the moment the archetype is picked.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class MageHunterSlot {
     public static final int SLOT = 0;
+    /** The archetype whose pick gives the slot (for shadow weapons). */
+    public static final String SAMURAI = "samurai";
     /** The spells that summon a demon sword; whoever has one of them unlocked has the sword slot. */
     private static final Set<ResourceLocation> SWORD_SUMMONS = Set.of(
         ResourceLocation.fromNamespaceAndPath("antimagic", "summon_demon_slayer"),
@@ -59,7 +65,7 @@ public final class MageHunterSlot {
 
     public static boolean isMageHunter(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
-            return summonsSwords(AbilityGrants.of(serverPlayer).keySet());
+            return summonsSwords(AbilityGrants.of(serverPlayer).keySet()) || Respec.isPicked(serverPlayer, SAMURAI);
         }
         return player != null && player.level().isClientSide && clientCheck.test(player);
     }
@@ -76,6 +82,11 @@ public final class MageHunterSlot {
 
     public static boolean isSword(ItemStack stack) {
         return stack.getItem() instanceof AbstractAntiMagicSwordItem;
+    }
+
+    /** What the slot holds: a demon sword or a shadow weapon (shadow/ShadowArsenal). */
+    public static boolean belongs(ItemStack stack) {
+        return isSword(stack) || ShadowWeapons.is(stack);
     }
 
     /**
@@ -106,7 +117,7 @@ public final class MageHunterSlot {
     private static void enforce(ServerPlayer player) {
         Inventory inventory = player.getInventory();
         ItemStack first = inventory.getItem(SLOT);
-        if (!first.isEmpty() && !isSword(first)) {
+        if (!first.isEmpty() && !belongs(first)) {
             inventory.setItem(SLOT, ItemStack.EMPTY);
             if (!inventory.add(first)) {
                 player.drop(first, false);
@@ -115,7 +126,7 @@ public final class MageHunterSlot {
 
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack stack = inventory.getItem(i);
-            if (i != SLOT && isSword(stack)) {
+            if (i != SLOT && belongs(stack)) {
                 inventory.setItem(i, ItemStack.EMPTY);
                 if (inventory.getItem(SLOT).isEmpty()) {
                     inventory.setItem(SLOT, stack);
@@ -142,7 +153,7 @@ public final class MageHunterSlot {
     @SubscribeEvent
     public static void onDrops(LivingDropsEvent event) {
         if (event.getEntity() instanceof ServerPlayer player && isMageHunter(player)) {
-            event.getDrops().removeIf(drop -> isSword(drop.getItem()));
+            event.getDrops().removeIf(drop -> belongs(drop.getItem()));
         }
     }
 }

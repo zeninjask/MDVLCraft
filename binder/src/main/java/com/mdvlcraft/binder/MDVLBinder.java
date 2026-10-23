@@ -83,6 +83,7 @@ public final class MDVLBinder {
         ReturnCrystal.register(modBus, forgeBus);
         GateItems.register(modBus);
         GateRewards.register(modBus);
+        com.mdvlcraft.binder.gate.GateAdvancements.register(modBus);
         com.mdvlcraft.binder.gate.tower.TowerItems.register(modBus);
         BossArena.register(modBus, forgeBus);
         PartyTravel.register(forgeBus);
@@ -94,6 +95,7 @@ public final class MDVLBinder {
         BinderNetwork.register();
         event.enqueueWork(() -> {
             AbilityReward.register();
+            com.mdvlcraft.binder.shadow.ShadowEnchantReward.register();
             EpicSkillReward.register();
             ArchetypeTabs.register();
             MageExperience.register();

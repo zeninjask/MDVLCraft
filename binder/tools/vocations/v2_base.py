@@ -71,6 +71,7 @@ MOD = {}
 def mod(key, name, base, desc):
     MOD[key] = (name, base, desc)
 
+mod('formless_sword', 'Formless Sword', 'Magic Blade: Absorb', 'Three modes, cycled by sneaking as you activate it. Absorb: take the weapon in your off hand into your Shadow Arsenal (each weapon once, without its enchantments). Select: bind arsenal weapons to the sword wheel. Form: hold to pick a weapon on the sword wheel, tap to summon its shadow into your first hotbar slot (2 mana a second; tap again to dismiss).')
 mod('shield_bash', 'Shield Bash', 'Knockout', 'With a shield in the off hand, slam it into the target in reach: stuns and knocks it back.')
 mod('rally', 'Rallying Banner', 'Healing Circle', 'Plant a banner that gives allies around it Resistance I and slow regeneration.')
 mod('provoke', 'Provoke', 'Scapegoat', 'Instead of a decoy goat, every mob nearby targets you and you gain Resistance I while it lasts.')
@@ -158,7 +159,7 @@ BASE = {
               ['wom:buster_parade', 'wom:bull_charge', 'wom:avatar_of_might', 'epicfightx:combat_mastery_ii', 'wom:punishment_kick']),
     'samurai': (['B:stance', 'B:blitz', 'B:myriad_blades', 'W:iron_slash', 'E:element_slash', 'E:magic_blade_enchant_slash',
                  'E:echanted_burst', 'E:union_sword', 'E:limit_break', 'E:cast_barrier', 'S:soulfall_judgment', 'M:calamity_cut',
-                 'E:magic_blade_absorb', 'Z:iaido'],
+                 'Z:formless_sword', 'Z:iaido'],
                 ['cdmoveset:fatalfalsh', 'efn:parry_master', 'wom:dancing_blade', 'wom:manipulator', 'epicfight:swordmaster',
                  'epicfight:technician']),
     'berserker': (['N:demonic_assimilation', 'S:spectral_rondo', 'S:render_rush', 'M:dragon_glide', 'E:dual_bringer', 'C:ruin_slash',

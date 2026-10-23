@@ -32,6 +32,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -48,7 +49,8 @@ import org.slf4j.Logger;
  * per extra roster member in the cell), one elite per elite marker) and its boss marker gets the theme's boss; the room
  * goes into triggeredRooms. Mobs stay when the party walks off, and one that strays out of its room (or cell) is put back
  * where it spawned. When the last boss dies the instance is CLEARED: the roster is told, an exit opens at the exit marker
- * (or where the boss fell) that sends whoever steps in home via GateTravel.leave, and after COLLAPSE_TICKS the gate
+ * (or where the boss fell) that sends whoever steps in home via GateTravel.leave, and after COLLAPSE_TICKS (or once nobody
+ * is left inside) the gate
  * collapses (everyone out, cell cleared, instance closed). Nothing else spawns in the gate worlds: natural, structure and
  * patrol spawns there are cancelled.
  *
@@ -74,6 +76,9 @@ public final class GateCombat {
     private static final double PARTY_BONUS = 0.25;
     /** When each instance was cleared (game time of its world); a restart closes every instance, so this needn't persist. */
     private static final Map<Integer, Long> CLEARED_AT = new HashMap<>();
+    /** Who stood on each cleared gate's exit at the last check: the exit takes only players who step onto it, so one
+     * standing where the boss fell isn't sent home (and the gate closed on its chest) the moment it opens. */
+    private static final Map<Integer, Set<UUID>> ON_EXIT = new HashMap<>();
     /** How long someone must be in the boss room before it seals, so the rest of the party can follow (3 s). */
     private static final int SEAL_DELAY = 60;
     /** How far inside the boss room's walls a player must be to start the seal. */
@@ -182,10 +187,12 @@ public final class GateCombat {
         if (!normal.isEmpty()) {
             double party = 1.0 + PARTY_BONUS * Math.max(0, partySize - 1);
             int count = (int)Math.round(normal.size() * GateMobs.countFactor(instance.rank) * party);
-            for (int i = 0; i < count; i++) {
+            for (int i = 0, used = 0; used < count; i++) {
                 Marker marker = normal.get(i % normal.size());
                 GateMobs.Kind kind = marker.kind().equals("spawn:ranged") ? GateMobs.Kind.RANGED : GateMobs.Kind.MELEE;
-                made += spawnOne(level, instance, kind, marker, null) ? 1 : 0;
+                EntityType<?> type = GateMobs.pick(instance.theme, instance.rank, kind, level.random);
+                used += GateMobs.cost(type);   // a Weapons of Miracles mob counts as three
+                made += type != null && GateSpawner.spawn(level, instance, type, marker.pos(), null, marker.room()) != null ? 1 : 0;
             }
         }
         return made;
@@ -260,6 +267,22 @@ public final class GateCombat {
             playerDied(level, player);
             return;
         }
+        bossDown(level, dead);
+    }
+
+    /** Some modded bosses (Cataclysm's, after their death animation) can leave the world killed without the death event
+     * reaching here; a gate boss removed as KILLED counts as dead too. */
+    @SubscribeEvent
+    public static void onLeave(EntityLeaveLevelEvent event) {
+        Entity gone = event.getEntity();
+        if (gone.getRemovalReason() == Entity.RemovalReason.KILLED && gone.level() instanceof ServerLevel level
+            && GateDimensions.isGate(level.dimension())) {
+            bossDown(level, gone);
+        }
+    }
+
+    /** A gate boss died: once the last one of an ACTIVE gate is down, CLEARED. */
+    private static void bossDown(ServerLevel level, Entity dead) {
         if (!GateSpawner.isBoss(dead)) {
             return;
         }
@@ -273,7 +296,7 @@ public final class GateCombat {
             return;
         }
         for (Entity other : level.getAllEntities()) {
-            if (other != dead && other.isAlive() && GateSpawner.isBoss(other) && GateSpawner.instanceOf(other) == instance.id) {
+            if (other != dead && other.isAlive() && !other.isRemoved() && GateSpawner.isBoss(other) && GateSpawner.instanceOf(other) == instance.id) {
                 return;   // its twin still stands
             }
         }
@@ -307,10 +330,11 @@ public final class GateCombat {
         return null;
     }
 
-    /** A cleared gate: the exit glows and sends whoever steps in home; at the end of the collapse timer, the gate closes. */
+    /** A cleared gate: the exit glows and sends whoever steps in home; at the end of the collapse timer, or as soon as nobody
+     * is left inside, the gate closes (its overworld gate goes with it). */
     private static void tickExit(ServerLevel level, GateInstances gates, Instance instance) {
         long clearedAt = CLEARED_AT.computeIfAbsent(instance.id, id -> level.getGameTime());
-        if (level.getGameTime() >= clearedAt + COLLAPSE_TICKS) {
+        if (level.getGameTime() >= clearedAt + COLLAPSE_TICKS || present(level, instance).isEmpty()) {
             collapse(level, gates, instance);
             return;
         }
@@ -322,13 +346,20 @@ public final class GateCombat {
         double z = exit.getZ() + 0.5;
         level.sendParticles(ParticleTypes.REVERSE_PORTAL, x, exit.getY() + 1.0, z, 30, 0.4, 0.9, 0.4, 0.05);
         level.sendParticles(ParticleTypes.END_ROD, x, exit.getY() + 0.2, z, 4, 0.5, 0.0, 0.5, 0.01);
+        Set<UUID> before = ON_EXIT.get(instance.id);
+        Set<UUID> now = new HashSet<>();
         for (ServerPlayer player : present(level, instance)) {
             double dy = player.getY() - exit.getY();
             if (Math.abs(player.getX() - x) < 1.0 && Math.abs(player.getZ() - z) < 1.0 && dy > -1.0 && dy < 2.0) {
-                level.playSound(null, exit, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.8F, 1.0F);
-                GateTravel.leave(player, instance, false);
+                now.add(player.getUUID());
+                if (before != null && !before.contains(player.getUUID())) {   // stepped on; the first check only notes who stands there
+                    level.playSound(null, exit, SoundEvents.ENDERMAN_TELEPORT, SoundSource.PLAYERS, 0.8F, 1.0F);
+                    GateTravel.leave(player, instance, false);
+                    now.remove(player.getUUID());
+                }
             }
         }
+        ON_EXIT.put(instance.id, now);
     }
 
     /** The cleared gate's time is up: everyone inside goes home, the cell is cleared and the instance closed. */
@@ -339,6 +370,7 @@ public final class GateCombat {
             }
         }
         CLEARED_AT.remove(instance.id);
+        ON_EXIT.remove(instance.id);
         GateBuilder.clear(level, instance);
         gates.close(instance);
     }
@@ -481,7 +513,7 @@ public final class GateCombat {
     }
 
     /** True if PlayerRevive has this player downed (bleeding out, waiting for a revive). */
-    static boolean downed(Player player) {
+    public static boolean downed(Player player) {
         lookUpRevive();
         try {
             return isBleeding != null && (boolean)isBleeding.invoke(null, player);

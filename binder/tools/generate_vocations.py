@@ -255,6 +255,11 @@ def ability_body(code, live, cost):
     if code.startswith('Z:'):
         key = code[2:]
         name, base, desc = D.MOD[key]
+        if key in OWN_ABILITIES:   # built in Java as its own ability type, not a spell
+            return {"title": name, "description": f"Unlocks {name} on the ability wheel ({OWN_ABILITIES[key]})",
+                    "extra_description": desc, "icon": tex(f"{ICON}ability/mdvlcraft_{key}.png"),
+                    "rewards": [{"type": "mdvlcraft:ability", "data": {"ability": f"mdvlcraft:{key}", "level": 1}}],
+                    "cost": cost, **frame("challenge")}
         if key in BUILT:
             b = BUILT[key]
             return {"title": name, "description": f"Unlocks {name} ({b['mana']} mana, {b['cooldown']:g} s cooldown) on the ability wheel",
@@ -294,6 +299,96 @@ def ability_body(code, live, cost):
     body["icon"] = tex(f"{ICON}ability/{sid.replace(':', '_')}.png")
     body.update({"rewards": [{"type": "mdvlcraft:ability", "data": {"ability": sid, "level": 1}}], "cost": cost, **frame("challenge")})
     return body
+
+
+# Modified abilities built as their own Java ability types (not Iron's spells): key -> cost note for the node text.
+OWN_ABILITIES = {'formless_sword': "shadow weapons drain 2 mana a second"}
+
+# Shadow Arsenal branch (samurai, off Formless Sword): every node costs SHADOW_COST and adds an enchantment level to
+# shadow weapons (ability/ShadowEnchantReward). Each enchantment is a chain, level I first.
+SHADOW_COST = 5
+SHADOW_ENCHANTS = [("minecraft:sharpness", "Sharpness", 5), ("minecraft:looting", "Looting", 3),
+                   ("minecraft:sweeping", "Sweeping Edge", 3), ("majruszsenchantments:death_wish", "Death Wish", 1),
+                   ("majruszsenchantments:leech", "Leech", 1), ("combat_evolution:massacre", "Massacre", 5)]
+ROMAN = ["I", "II", "III", "IV", "V"]
+
+
+def connected(lines, without):
+    """Whether the graph of `lines` stays in one piece without the line `without`."""
+    adj = collections.defaultdict(set)
+    for a, b in lines:
+        if (a, b) != without:
+            adj[a].add(b)
+            adj[b].add(a)
+    start = next(iter(adj))
+    seen, queue = {start}, [start]
+    while queue:
+        for w in adj[queue.pop()]:
+            if w not in seen:
+                seen.add(w)
+                queue.append(w)
+    return len(seen) == len({n for line in lines for n in line})
+
+
+def shadow_branch(defs, lines, pos, anchor):
+    """Adds the Shadow Arsenal chains to a base's layout, fanned out from `anchor` (the Formless Sword node), away from
+    the node it hangs off; tries rotations and spacings until nothing crosses or overlaps."""
+    cx = sum(x for x, _ in pos.values()) / len(pos)
+    cy = sum(y for _, y in pos.values()) / len(pos)
+    # move the anchor to the outermost ability cluster (swapping places with that ability), so the branch has room
+    centres = [n for n, body in defs.items() if n != anchor and body.get("size") == G.SIZES["challenge"]
+               and sum(1 for line in lines if n in line) == 1]
+    outer = max(centres, key=lambda n: math.dist(pos[n], (cx, cy)))
+    if math.dist(pos[outer], (cx, cy)) > math.dist(pos[anchor], (cx, cy)):
+        pos[anchor], pos[outer] = pos[outer], pos[anchor]
+        swap = {anchor: outer, outer: anchor}
+        lines[:] = [(swap.get(a, a), swap.get(b, b)) for a, b in lines]
+    ax, ay = pos[anchor]
+    out = math.atan2(ay - cy, ax - cx)   # away from the middle of the tree
+    hub = "samurai__shadow_arsenal"
+    for spacing in (62, 58, 66, 54, 70, 76):
+        for turn in sorted(range(-180, 180, 10), key=abs):
+            for spread in (22, 18, 26, 30, 34, 14):
+                d, l, p = dict(defs), list(lines), dict(pos)
+                a0 = out + math.radians(turn)
+                hx, hy = ax + 140 * math.cos(a0), ay + 140 * math.sin(a0)
+                p[hub] = (round(hx), round(hy))
+                d[hub] = {"title": "Shadow Arsenal",
+                          "description": "Opens the Shadow Arsenal: enchantments for the shadow weapons Formless Sword summons",
+                          "extra_description": "Each node beyond costs 5 points; shadow weapons carry the highest level of each enchantment unlocked here.",
+                          "icon": tex(f"{ICON}ability/mdvlcraft_formless_sword.png"), "rewards": [], "cost": 0, **frame("task")}
+                l.append((anchor, hub))
+                for c, (ench, title, top) in enumerate(SHADOW_ENCHANTS):
+                    a = a0 + math.radians((c - (len(SHADOW_ENCHANTS) - 1) / 2) * spread)
+                    prev = hub
+                    for lvl in range(1, top + 1):
+                        nid = f"samurai__shadow_{ench.split(':')[1]}_{lvl}"
+                        r = spacing * (lvl + 0.4)
+                        p[nid] = (round(hx + r * math.cos(a)), round(hy + r * math.sin(a)))
+                        level = f" {ROMAN[lvl - 1]}" if top > 1 else ""
+                        d[nid] = {"title": f"Shadow {title}{level}",
+                                  "description": f"Your shadow weapons get {title}{level}",
+                                  "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
+                                  "icon": tex(f"{ICON}ability/mdvlcraft_formless_sword.png"),
+                                  "rewards": [{"type": "mdvlcraft:shadow_enchant", "data": {"enchantment": ench, "level": lvl}}],
+                                  "cost": SHADOW_COST, **frame("task")}
+                        l.append((prev, nid))
+                        prev = nid
+                half = {n: L.HALF * d[n].get("size", 1.0) for n in p}
+                problem = check_lines(l, p, half)
+                while problem and problem[0] == "cross":   # the stem leaving the ability's ring: open the ring there
+                    first, second = (problem[1], problem[2]), (problem[3], problem[4])
+                    ring = second if first == (anchor, hub) else first if second == (anchor, hub) else None
+                    if ring is None or ring not in lines or not connected(l, ring):
+                        break
+                    l.remove(ring)
+                    problem = check_lines(l, p, half)
+                if problem is None:
+                    defs.clear(); defs.update(d)
+                    lines[:] = l
+                    pos.clear(); pos.update(p)
+                    return
+    raise SystemExit("shadow branch: no room")
 
 
 def ef_body(skill, live, cost):
@@ -651,6 +746,8 @@ def build_bases(live):
             try:
                 defs, lines, pos, root = base_tree(arch, live, seed)
                 balance_base(arch, defs, lines, pos, root)
+                if arch == "samurai":
+                    shadow_branch(defs, lines, pos, "samurai__planned_formless_sword")
                 break
             except SystemExit as e:
                 print(f"{arch} seed {seed}: {e}")
@@ -840,7 +937,7 @@ def write_shared(index, origin_index=()):
 
 def write_planned():
     entries = {key: {"name": name, "base": base, "description": desc} for key, (name, base, desc) in sorted(D.MOD.items())
-               if key not in BUILT}
+               if key not in BUILT and key not in OWN_ABILITIES}
     write(PLANNED, entries)
     unknown = set(BUILT) - set(D.MOD)
     if unknown:
@@ -862,6 +959,9 @@ def write_lang(index):
         if key in BUILT:   # an Iron's spell: Iron's reads spell.<namespace>.<path> and .guide
             lang[f"spell.mdvlcraft.{key}"] = name
             lang[f"spell.mdvlcraft.{key}.guide"] = desc
+        elif key in OWN_ABILITIES:   # its own ability type: ability.mdvlcraft.<key>
+            lang[f"ability.mdvlcraft.{key}"] = name
+            lang[f"ability.mdvlcraft.{key}.desc"] = desc
         else:
             lang[f"ability.mdvlcraft.planned_{key}"] = name
             lang[f"ability.mdvlcraft.planned_{key}.desc"] = desc

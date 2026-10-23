@@ -118,3 +118,22 @@ shot rewards_forge_trades
 key Escape
 cmd execute as Tester at @s run setblock ~2 ~ ~ minecraft:air
 cmd mdvl gate list
+cmd clear Tester
+cmd loot give Tester loot mdvlcraft:gates/s/boss
+cmd loot give Tester loot mdvlcraft:gates/e/boss
+wait 1
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"minecraft:netherite_ingot"}]}] run say GEAR_S_OK
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"minecraft:netherite_upgrade_smithing_template"}]}] run say GEAR_S_OK
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"minecraft:leather"}]}] run say GEAR_E_OK
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"minecraft:iron_ingot"}]}] run say GEAR_E_OK
+cmd clear Tester
+cmd give Tester mdvlcraft:boss_trophy_s
+cmd execute if entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:boss_trophy_s"}]}] run say TROPHY_ITEM_OK
+cmd give Tester minecraft:diamond_sword{mdvlcraft_temper:6}
+cmd item replace entity Tester hotbar.0 with minecraft:diamond_sword{mdvlcraft_temper:6}
+cmd execute as Tester at @s run tp @s ~ ~ ~ 0 0
+wait 2
+key e
+wait 3
+shot rewards_trophy_and_tempered_tooltip
+key Escape

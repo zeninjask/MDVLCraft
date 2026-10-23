@@ -14,6 +14,7 @@ import net.minecraft.advancements.AdvancementProgress;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -28,8 +29,10 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.level.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
+import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
 
 /**
@@ -39,6 +42,9 @@ import net.minecraftforge.registries.RegistryObject;
  * gate, entering one, kills, veins, the forge, boss chests, Return Stones, tower floors); two need a call from their
  * owner: {@link #onCleared} (GateRewards.onCleared) and {@link #onBreak} (GateBreaks.breakGate). Also
  * `/mdvl gate quest skillxp <targets> <amount>`, the chapter's skill-experience reward (same as the clear bonus).
+ * Counts for the clear-N quests live in the custom stat `mdvlcraft:gates_cleared` (an FTB stat task reads it). A few
+ * grants come from their owners: `reroll` (GateModifiers.reroll), `seal_trade` (GateForgeBlock's trader),
+ * `tower_pick` (CastleSigilItem.start below the reached floor); `tower_farm` is a kill on a farm floor (here).
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class GateAdvancements {
@@ -47,7 +53,19 @@ public final class GateAdvancements {
     /** Players this close to a breaking gate saw it break (GateBreaks' announce range). */
     private static final double BREAK_RANGE = 128.0;
 
+    private static final DeferredRegister<ResourceLocation> STATS = DeferredRegister.create(Registries.CUSTOM_STAT, "mdvlcraft");
+    /** Gates cleared by the player (counted for everyone present at the clear). */
+    public static final ResourceLocation GATES_CLEARED = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates_cleared");
+
+    static {
+        STATS.register(GATES_CLEARED.getPath(), () -> GATES_CLEARED);
+    }
+
     private GateAdvancements() {
+    }
+
+    public static void register(IEventBus modBus) {
+        STATS.register(modBus);
     }
 
     /** Completes the hidden advancement `quests/gates/<name>` for the player (nothing if it is missing or done). */
@@ -71,6 +89,7 @@ public final class GateAdvancements {
         RuleGates.Rule rule = RuleGates.rule(instance.id);
         boolean modified = !GateModifiers.ids(instance.id).isEmpty();
         for (ServerPlayer player : present) {
+            player.awardStat(GATES_CLEARED);
             grant(player, "clear_" + key(instance.rank));
             if (instance.red) {
                 grant(player, "clear_red");
@@ -154,6 +173,9 @@ public final class GateAdvancements {
                     grant(player, "tower_hidden");
                 }
             }
+        }
+        if (event.getSource().getEntity() instanceof ServerPlayer farmer && TowerRun.dropFactor(dead) < 1.0) {
+            grant(farmer, "tower_farm");   // a castle mob on a floor more than 10 below the killer's best
         }
         if (GateSpawner.instanceOf(dead) >= 0 && event.getSource().getEntity() instanceof ServerPlayer killer) {
             grant(killer, "gate_kill");

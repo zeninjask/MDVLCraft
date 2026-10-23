@@ -61,6 +61,8 @@
     "villagerecruits.VillageJoinGuideMixin",
     "efn.EFNParryingSkillMixin",
     "efn.CullableUtilMixin",
+    "ce.AssassinationTargetsMixin",
+    "ce.ExecutionTaskMixin",
     "efn.YamatoInnateMixin",
     "efn.RuinsGreatSwordInnateMixin",
     "efn.RuinGreatSwordPassiveMixin",
@@ -70,6 +72,7 @@
     "efsiss.AutoHealSkillMixin",
     "efsiss.AgainstMagicSkillMixin",
     "wom.HeartShieldSkillMixin",
+    "wom.InnerGrowthSkillMixin",
     "wom.VampirizeSkillMixin",
     "wom.ShootingStyleSkillMixin",
     "calio.HolderCodecMixin",
@@ -131,6 +134,7 @@
     "TargetingConditionsMixin"
   ],
   "client": [
+    "ShadowTintMixin",
     "irons.ClientSpellCastHelperMixin",
     "seraph.CameraMixin",
     "origins.ChooseOriginScreenMixin",
@@ -189,7 +193,8 @@
     "jer.VillagersHelperMixin",
     "jer.DungeonWrapperMixin",
     "tje.CompatibilityEventMixin",
-    "raiju.RaijuSkinMixin"
+    "raiju.RaijuSkinMixin",
+    "xaero.WaypointsIngameRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1

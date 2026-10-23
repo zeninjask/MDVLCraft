@@ -35,6 +35,63 @@ Design notes that differ from or refine the PDF:
 - `red_realm` uses `minecraft:overworld` noise settings for now (terrain with plain surfaces); phase 5 gives it its
   own surface rules (snow, sand, ash per theme).
 
+## Release 2.1.49 (2026-10-23)
+
+On top of 2.1.48 (not gate work, released from `gate`): the samurai's Formless Sword replaces Magic Blade: Absorb
+(`shadow/ShadowArsenal`, `ability/FormlessSwordAbility`, client `ArsenalScreen` / `SwordWheelScreen`), shadow weapons
+drawn black (`mixin/ShadowTintMixin`), the samurai's locked first hotbar slot (`content/MageHunterSlot`), and the Shadow
+Arsenal enchantment branch (generator `shadow_branch`, reward `mdvlcraft:shadow_enchant`). Network protocol 21. Tested in
+game (11/11 plus the mana drain). Rig: gfresh now restores a Tester template (origins picked) instead of wiping the
+playerdata. Next release: 2.1.50.
+
+## Release 2.1.48 (2026-10-23)
+
+Fixes on top of 2.1.47: the boss chest went to the gate's first "chest" marker, which bigger gates have in another room,
+so it never appeared by the boss (2.1.46's exit fix was real but not the whole cause). Now a chest marker in the boss's
+room, else beside the boss marker, on the nearest open floor. A gate boss removed as KILLED also counts as dead. Every
+hostile mob without an Epic Fight patch gets a passive one (`integration/PassiveMobPatch`), so Cataclysm's mobs can be
+assassinated; humanoid player-sized bosses can be too. Tested in game (see the commit). Next release: 2.1.49.
+
+## Release 2.1.47 (2026-10-23)
+
+On top of 2.1.46 (not gate work, released from `gate`): Inner Growth regenerates 10 innate charge a second and charges
+Antitheus's Demonic Ascension (`mixin/wom/InnerGrowthSkillMixin`); Dummmmmmy's target dummy has an Epic Fight patch so
+it can be assassinated (`integration/TargetDummyPatch`) and counts as human for Misanthropy (tag `mdvlcraft:humans`).
+**Not tested in game** (the user asked for no testing); the gate test run was stopped before builder finished. Rig fix
+pending a rerun: `gtest.sh` now pre-picks Tester's three origins (`origins_pick.py`), since the wiped playerdata made the
+origin picker swallow phase 2's key click. Next release: 2.1.48.
+
+## Release 2.1.46 (2026-10-23)
+
+Fix on top of 2.1.45: boss chests were lost. With no exit marker the exit opens where the boss fell, so a player standing
+there was sent home at once, and 2.1.45's close-when-empty then closed the gate on its chest. The exit now takes only
+players who step onto it (`GateCombat.ON_EXIT`). Checked in game: Tester on the boss when it died stayed inside, the
+chest was placed ("Your boss chest is waiting"), stepping onto the exit sent Tester home and the gate closed. Next
+release: 2.1.47.
+
+## Release 2.1.45 (2026-10-23)
+
+Adds on top of 2.1.44 (all on `gate`): red gates' 96-block boundary and seeded camp rotation (`gate-red3`); tempering's
+A–S general bonus, boss chest gear materials and Boss Trophies (`gate-rewards3`); 7 quests 075G–081G (clear 10/50/100,
+reroll, seal trade, tower pick, tower farm; `gate-quests2`); Weapons of Miracles mobs only in S gates, each counting as
+three mobs (war camp E–C boss now Ravager / Ignited Revenant); a gate timer boss bar at the top of the screen inside a
+gate; cleared gates close (overworld gate too) as soon as nobody is left inside; downed players can't use spells, the
+ability wheel or Epic Fight skills (`combat/DownedNoSkills`); any non-boss mob with an Epic Fight patch can be
+assassinated (`mixin/ce`, CE jar compileOnly). Checked in game (scratchpad newstuff steps): spider assassinated and
+killed, gate-boss refused, timer bar shows "E-Rank Gate · breaks in 1:59:37", cleared gate gone after leaving. Not yet
+checked in game: downed skill block, WOM S-only spawning. The full steps-file rerun follows this release. Network
+protocol 20 (unchanged). Next release: 2.1.46 (done).
+
+## Release 2.1.44 (2026-10-23)
+
+Adds on top of 2.1.43: Xaero waypoints/deathpoints hidden inside gates (`gate-waypoints`, `docs/gates/minimap.md`);
+the Spirit-to-Jade bug fixed (`skills/JadeRename` re-ran after every death because its once-only flag sat in the root
+persistent data, which Forge drops on respawn; removed); `/mdvl respec <players>` opens a free respec (the archetype
+picker; the confirmed respec keeps the whole level), checked in game. **Network protocol 20**, clients must update.
+Still building when released (next release, 2.1.45): `gate-red3` (96-block red boundary, seeded camp rotation),
+`gate-rewards3` (tempering bonus A–S, boss chest trophies/materials, JER), `gate-quests2` (count, reroll and tower
+quests). Then every steps file runs in game.
+
 ## START HERE — handoff for the next agent (2026-10-23, after release 2.1.43)
 
 **State.** `gate` = everything; `main` = 2.1.43 (1bb88d63, release files only). 2.1.43 fixes a client startup crash in
@@ -62,10 +119,11 @@ never joined):
 - Rewards: tempering's small general bonus at A–S; trophies / rank gear materials in boss chests; JER listing of the
   stone drops; (the forge uses merchant trades, not its own recipe type — fine unless the user wants otherwise).
 - Quests: count-based clear quests, a key-reroll quest, quests for the round-4 tower features.
-- Xaero waypoints (deathpoints) still show inside gates (would need a mixin).
+- ~~Xaero waypoints (deathpoints) still show inside gates~~ — done on `gate-waypoints` (`docs/gates/minimap.md`), not
+  yet merged or run in game.
 - Not testable in the rig: the Narrowing Door shut-out of a returning member (needs two players).
 
-**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.44**. Build: rebuild `base/`
+**Releases.** CLAUDE.md rules + the user's choice of 2.1.x for gates: next release is **2.1.50**. Build: rebuild `base/`
 from the latest committed mrpacks if stale, `./gradlew build`, `python3 binder/tools/build_packs.py <ver> .`,
 `skill_tree_doc.py` for the PDF, copy the Java-args files; push only the release files to `main` from a worktree of
 `origin/main` (`git push origin HEAD:main`). Usage-limit wrap-up rule below applies to every agent.

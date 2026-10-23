@@ -23,6 +23,7 @@ wait 1
 click 3
 wait 2
 cmd execute unless entity @a[name=Tester,nbt={Inventory:[{id:"mdvlcraft:essence_stone_a"}]}] run say REROLL_PAID_OK
+cmd execute if entity @a[name=Tester,advancements={mdvlcraft:quests/gates/reroll=true}] run say REROLL_QUEST_OK
 cmd execute if entity @a[name=Tester,nbt={SelectedItem:{id:"mdvlcraft:gate_key_s"}}] run say REROLL_KEY_KEPT_OK
 cmd data get entity Tester SelectedItem.tag.modifiers
 cmd execute as Tester at @s run setblock ^ ^ ^2 minecraft:air

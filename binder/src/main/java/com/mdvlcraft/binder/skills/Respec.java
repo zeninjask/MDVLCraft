@@ -6,9 +6,13 @@ import com.mdvlcraft.binder.music.Jingles;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import com.mdvlcraft.binder.network.BinderNetwork;
+import com.mdvlcraft.binder.network.OpenArchetypePickPacket;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.player.Player;
 import net.puffish.skillsmod.api.Category;
 import net.puffish.skillsmod.api.Skill;
 import net.puffish.skillsmod.api.SkillsAPI;
@@ -40,6 +44,30 @@ public final class Respec {
     private Respec() {
     }
 
+    /** Set by /mdvl respec: the player's next respec keeps their whole level. In the persisted tag, so a death keeps it. */
+    private static final String FREE = "mdvlcraft_free_respec";
+
+    /** Opens the archetype picker for a free respec; false if the player has no vocation yet. */
+    public static boolean offerFree(ServerPlayer player) {
+        if (picked(player).size() != 2) {
+            return false;
+        }
+
+        persisted(player).putBoolean(FREE, true);
+        int level = vocation(player).flatMap(tab -> tab.getExperience().map(e -> e.getLevel(player))).orElse(0);
+        BinderNetwork.sendTo(player, new OpenArchetypePickPacket(level, true));
+        return true;
+    }
+
+    private static CompoundTag persisted(ServerPlayer player) {
+        CompoundTag data = player.getPersistentData();
+        if (!data.contains(Player.PERSISTED_NBT_TAG)) {
+            data.put(Player.PERSISTED_NBT_TAG, new CompoundTag());
+        }
+
+        return data.getCompound(Player.PERSISTED_NBT_TAG);
+    }
+
     public static int keptLevel(int level) {
         return level * 3 / 4;
     }
@@ -55,7 +83,10 @@ public final class Respec {
         }
 
         Category oldTab = vocation(player).orElseThrow(() -> new IllegalStateException("Two archetypes but no vocation tab"));
-        int level = keptLevel(oldTab.getExperience().map(e -> e.getLevel(player)).orElse(0));
+        int oldLevel = oldTab.getExperience().map(e -> e.getLevel(player)).orElse(0);
+        boolean free = persisted(player).getBoolean(FREE);
+        persisted(player).remove(FREE);
+        int level = free ? oldLevel : keptLevel(oldLevel);
         String oldName = vocationName(player);
         oldTab.erase(player);
         picked.forEach(a -> node(a).lock(player));

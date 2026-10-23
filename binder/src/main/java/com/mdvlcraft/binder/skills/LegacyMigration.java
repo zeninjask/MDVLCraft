@@ -60,7 +60,7 @@ public final class LegacyMigration {
             .max()
             .orElse(0);
         data.putInt(PENDING_LEVEL, level);
-        BinderNetwork.sendTo(player, new OpenArchetypePickPacket(level));
+        BinderNetwork.sendTo(player, new OpenArchetypePickPacket(level, false));
     }
 
     /** The old trees' level for this much earned experience (their curve: 25 + 5 x level to go from level to level + 1). */

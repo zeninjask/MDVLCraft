@@ -123,9 +123,10 @@ public final class GateBreaks {
             }
         }
         int spawned = 0;
-        for (int n = 0; n < count; n++) {
+        for (int n = 0; n < count; ) {
             BlockPos pos = spots.isEmpty() ? gate : spots.get(n % spots.size());
             Mob mob = RedLandscape.spawnMob(world, instance, pos);
+            n += GateMobs.cost(mob);   // a Weapons of Miracles mob counts as three
             if (mob != null) {
                 mob.getPersistentData().putBoolean(BREAK_TAG, true);
                 spawned++;

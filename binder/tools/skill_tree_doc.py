@@ -341,7 +341,7 @@ def archetype_page(arch, cls, title, role, classes_defs, pack, halved_note):
                 efskills.append((f"{d['title']} ({slot})", d.get('cost', 0), text))
         if kinds & {'mdvlcraft:ability', 'mdvlcraft:epicfight_skill'}:
             continue
-        if not rewards:
+        if not rewards or 'mdvlcraft:shadow_enchant' in kinds:   # the Shadow Arsenal hub and its enchantment nodes
             group = ('signature', family(d['title']))
             families.setdefault(group, []).append((d['title'], d.get('cost', 0), [], d['description']))
             continue
