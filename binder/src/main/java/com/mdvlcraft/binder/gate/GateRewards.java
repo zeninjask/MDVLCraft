@@ -250,6 +250,7 @@ public final class GateRewards {
         }
         present.forEach(player -> player.sendSystemMessage(Component.translatable("gate.mdvlcraft.cleared", experience)));
         RuleGates.onCleared(instance, present);   // trial gates: a trophy each
+        GateAdvancements.onCleared(instance, present);   // the quest book's Gates chapter
     }
 
     private static BlockPos chestPos(Instance instance) {
