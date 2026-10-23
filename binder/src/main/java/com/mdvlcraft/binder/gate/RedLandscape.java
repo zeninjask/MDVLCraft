@@ -36,14 +36,14 @@ import org.slf4j.Logger;
 /**
  * A red gate's landscape (plan 7.2): the red realm's own generated land, themed by its biome's surface rules
  * (tools/gates/gen_gate_data.py). The lair sits at the cell centre and the party arrives 60–90 blocks from it in a random
- * direction, with 6–10 mob camps scattered around. Nothing but the arrival point is built up front, so opening a red gate
+ * direction, with 6–10 mob camps scattered around; players are kept within PLAY_RADIUS of the lair (RedGates.boundary). Nothing but the arrival point is built up front, so opening a red gate
  * generates only one chunk: a camp is built and its mobs spawned when a roster player comes within CAMP_RANGE of it, the
  * boss arena when one comes within ARENA_RANGE, and the boss when one steps near the arena (RedGates ticks this).
  * Each instance's layout is kept in memory only: every gate closes on a server restart anyway (GateCleanup).
  *
  * The lair and the camps are hand-built templates from the theme file's "red" section ("lairs", "camps"; written by
  * tools/gates/gen_red_lairs.py): the lair is pasted on the flattened arena (its (MID, 3, MID) on the arena floor's top), a
- * camp on the ground at its spot with a random rotation; a camp's "spawn:*" markers place its mobs and its "crystal"
+ * camp on the ground at its spot with a rotation drawn from its seed (campRotation); a camp's "spawn:*" markers place its mobs and its "crystal"
  * markers are kept for the red gate veins (HiddenBoss.veins). A theme without templates gets the old procedural ones.
  * Which lair and which camp (several layouts per theme) is drawn from the instance id (and the camp's spot), so a gate's
  * look doesn't depend on who walks where first; Layout keeps the picks for /mdvl gate redinfo.
@@ -52,6 +52,10 @@ public final class RedLandscape {
     /** Persistent NBT boolean on a gate boss; whoever sees it die decides the clear (for red gates: RedGates). */
     public static final String BOSS_TAG = "mdvlcraft_gate_boss";
     static final int CAMP_RANGE = 40;
+    /** The playable radius around the lair (plan 7.2's 96-block boundary): arrival, camps and the lair all fit inside. */
+    static final int PLAY_RADIUS = 96;
+    /** Farthest a camp's centre is from the lair, so a whole camp (15 wide) stays inside PLAY_RADIUS. */
+    static final int CAMP_MAX = 88;
     static final int ARENA_RANGE = 72;
     static final int BOSS_RANGE = 28;
     static final int ARENA_RADIUS = 14;
@@ -111,7 +115,7 @@ public final class RedLandscape {
         int count = 6 + random.nextInt(5);
         for (int tries = 0; camps.size() < count && tries < count * 10; tries++) {
             double a = random.nextDouble() * Math.PI * 2.0;
-            int d = 25 + random.nextInt(86);
+            int d = 25 + random.nextInt(CAMP_MAX - 24);
             BlockPos camp = centre.offset((int)(Math.cos(a) * d), 0, (int)(Math.sin(a) * d));
             if (horizontal(camp, arrival) > 24 * 24 && camps.stream().noneMatch(c -> horizontal(c, camp) < 20 * 20)) {
                 camps.add(camp);
@@ -221,6 +225,13 @@ public final class RedLandscape {
         return ((long)instanceId << 32) ^ column.asLong();
     }
 
+    /** Rotation of the camp at a camp's column of an instance (from its seed, mixed apart from the template pick). */
+    static Rotation campRotation(int instanceId, BlockPos column) {
+        long h = (campSeed(instanceId, column) ^ 0x5DEECE66DL) * 0xBF58476D1CE4E5B9L;
+        h ^= h >>> 31;
+        return Rotation.values()[(int)Math.floorMod(h, 4L)];
+    }
+
     /** The template with that id, or null (logged) if it doesn't load. */
     @Nullable
     static StructureTemplate template(ServerLevel level, @Nullable ResourceLocation id) {
@@ -310,7 +321,7 @@ public final class RedLandscape {
         List<BlockPos> spawns = new ArrayList<>();
         List<GateMobs.Kind> kinds = new ArrayList<>();
         List<BlockPos> crystals = new ArrayList<>();
-        for (StructureTemplate.StructureBlockInfo info : paste(level, camp, ground, 0, Rotation.getRandom(level.random))) {
+        for (StructureTemplate.StructureBlockInfo info : paste(level, camp, ground, 0, campRotation(instance.id, column))) {
             String kind = info.nbt() != null ? info.nbt().getString("metadata") : "";
             if (kind.equals("crystal")) {
                 crystals.add(info.pos());

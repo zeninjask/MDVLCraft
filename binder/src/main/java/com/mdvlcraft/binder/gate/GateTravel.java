@@ -92,6 +92,11 @@ public final class GateTravel {
         move(player, player.serverLevel(), entry.getX() + 0.5, entry.getY(), entry.getZ() + 0.5, player.getYRot(), player.getXRot());
     }
 
+    /** To a spot in the player's own world (a player pushed back from a red gate's edge). */
+    static void moveTo(ServerPlayer player, BlockPos pos) {
+        move(player, player.serverLevel(), pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, player.getYRot(), player.getXRot());
+    }
+
     private static void move(ServerPlayer player, ServerLevel level, double x, double y, double z, float yaw, float pitch) {
         moving = true;
         try {
