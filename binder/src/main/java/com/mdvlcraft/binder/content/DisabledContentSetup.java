@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.content;
 import com.cursedfate_roslon_meimei.procedures.OnPlayerJoinProcedure;
 import com.cursedfate_roslon_meimei.procedures.TechniqueNameProcedure;
 import com.mojang.serialization.Codec;
+import cursedfate.network.CursedfateModVariables;
 import cursedfate.procedures.OnEntityDeathMProcedure;
 import cursedfate.procedures.OnEntityDeathProcedure;
 import cursedfate.procedures.OpenChestProcedure;
@@ -14,6 +15,7 @@ import cursedfate.procedures.SetTechniqueOnJoinProcedure;
 import java.util.List;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.world.BiomeModifier;
+import net.minecraftforge.event.server.ServerStartedEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.registries.DeferredRegister;
@@ -42,6 +44,14 @@ public final class DisabledContentSetup {
     public static void register(IEventBus modBus) {
         BIOME_MODIFIERS.register(modBus);
         modBus.addListener(DisabledContentSetup::onCommonSetup);
+        MinecraftForge.EVENT_BUS.addListener(DisabledContentSetup::onServerStarted);
+    }
+
+    /** Cursed Fate's WorldDestruction (a world variable, default on) stays off, on new and existing worlds. */
+    private static void onServerStarted(ServerStartedEvent event) {
+        CursedfateModVariables.MapVariables vars = CursedfateModVariables.MapVariables.get(event.getServer().overworld());
+        vars.WorldDestruction = false;
+        vars.syncData(event.getServer().overworld());
     }
 
     private static void onCommonSetup(FMLCommonSetupEvent event) {

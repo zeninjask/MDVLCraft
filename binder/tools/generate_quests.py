@@ -454,7 +454,7 @@ THEME_NAMES = {'crypt': 'Gravekeeper Crypt', 'warren': 'Goblin Warren', 'frozen'
                'spire': 'Mage Spire', 'forge': 'Infernal Forge'}
 RULES = ['no_potions', 'no_healing', 'statues', 'narrowing_door']
 GATE_EVENTS = (['open_gate', 'gate_kill', 'elite_kill', 'enter_red', 'enter_red_s', 'enter_trial', 'enter_modified', 'clear_red',
-                'clear_red_s', 'clear_modified', 'break', 'boss_chest', 'forge', 'return_stone', 'tower_enter', 'tower_boss_5',
+                'clear_red_s', 'clear_modified', 'break', 'boss_chest', 'forge', 'tower_enter', 'tower_boss_5',
                 'tower_hidden', 'reroll', 'seal_trade', 'tower_pick', 'tower_farm']
                + [f'{kind}_{r}' for kind in ('enter', 'clear', 'vein') for r in RANKS]
                + [f'enter_theme_{t}' for t in THEMES] + [f'clear_trial_{r}' for r in RULES]
@@ -512,18 +512,14 @@ GATE_ROWS = [
          'opens where the boss fell.', None, g('gate_key_e'), 'hexagon'),
         ('boss_chest', 'Spoils of the Gate', [gadv('boss_chest')], [give(g('essence_stone_e'), 2)],
          'A boss chest appears after the clear. Each player sees only their own roll: stones, crystals, treasure, sometimes '
-         'a Return Stone or a key of the next rank. Whatever you leave in it comes to you once you are out.', None, 'minecraft:chest', None),
+         'a key of the next rank. Whatever you leave in it comes to you once you are out.', None, 'minecraft:chest', None),
     ]),
     ('Forge and tools (E)', [
         ('forge_item', 'The Gate Forge', [item(g('gate_forge'))], [xp(100)],
          'Craft a Gate Forge from iron ingots, amethyst shards, an E essence stone and iron blocks.', ['boss_chest'], g('gate_forge'), None),
         ('forge', 'Open for Business', [gadv('forge')], [give(g('essence_stone_e'), 2)],
-         'Place the forge and use it. It trades stones and crystals for Return Stones and Temper Runes, rerolls the modifiers '
+         'Place the forge and use it. It trades stones and crystals for Temper Runes, rerolls the modifiers '
          'of A and S keys, and later takes Tower Seals.', None, g('gate_forge'), None),
-        ('return_item', 'A Way Home', [item(g('return_stone'))], [give(g('mana_crystal_e'))],
-         'Trade 2 E essence stones and an E mana crystal at the forge for a Return Stone.', None, g('return_stone'), None),
-        ('return_use', 'Emergency Exit', [gadv('return_stone')], [give(g('return_stone'))],
-         'Use a Return Stone inside a normal gate to leave it at once. It does nothing in red gates or the Demon Castle.', None, g('return_stone'), None),
         ('rune_e', 'Temper Rune', [item(g('temper_rune_e'))], [give(g('mana_crystal_e'))],
          'Trade 6 E essence stones and 2 E mana crystals at the forge for an E Temper Rune.', ['forge'], g('temper_rune_e'), None),
         ('tempered', 'Tempered Steel', [gadv('tempered')], [give(g('essence_stone_e'), 2)],
@@ -550,7 +546,7 @@ GATE_ROWS = [
          'Gather 4 D essence stones and 4 D mana crystals: with a diamond, that is a C key.', None, g('essence_stone_d'), None),
         ('rune_d', 'D Temper Rune', [item(g('temper_rune_d'))], [give(g('essence_stone_d'), 2)],
          'Trade 6 D stones and 2 D crystals at the forge for a D Temper Rune and temper your gear again.', ['clear_d'], g('temper_rune_d'), None),
-        ('tourist', 'Gate Tourist', [gadv(f'enter_theme_{t}') for t in THEMES], [give(g('return_stone'), 2), skill_xp(300)],
+        ('tourist', 'Gate Tourist', [gadv(f'enter_theme_{t}') for t in THEMES], [give(g('essence_stone_d'), 2), skill_xp(300)],
          'Enter a gate of each of the six themes: ' + ', '.join(THEME_NAMES[t] for t in THEMES) + '. Attuned keys of any '
          'rank choose the theme.', ['enter_d'], 'minecraft:filled_map', None),
         ('break', 'Dungeon Break', [gadv('break')], [xp(200)],
@@ -578,11 +574,11 @@ GATE_ROWS = [
          'Enter a B-rank gate. From B up, a gate may turn red the first time someone steps in.', None, g('gate_key_b'), None),
         ('vein_b', 'Diamond Edge', [gadv('vein_b')], [give(g('essence_stone_b'))],
          'Mine a B crystal vein. It needs a diamond pickaxe or better.', None, g('mana_crystal_ore_b'), None),
-        ('clear_b', 'B-Rank Cleared', [gadv('clear_b')], [skill_xp(1500), give(g('return_stone'))],
+        ('clear_b', 'B-Rank Cleared', [gadv('clear_b')], [skill_xp(1500), give(g('essence_stone_b'))],
          'Clear a B-rank gate.', None, g('gate_key_b'), 'hexagon'),
-        ('enter_red', 'Seeing Red', [gadv('enter_red')], [give(g('return_stone'))],
-         'B, A and S gates can turn red on first entry (B 5%, A 8%, S 12%). A red gate seals behind you: no leaving, no '
-         'Return Stones, nobody new gets in. Inside is a wild land with camps around a boss\'s lair. Die and you are out.',
+        ('enter_red', 'Seeing Red', [gadv('enter_red')], [give(g('essence_stone_c'))],
+         'B, A and S gates can turn red on first entry (B 5%, A 8%, S 12%). A red gate seals behind you: no leaving, '
+         'nobody new gets in. Inside is a wild land with camps around a boss\'s lair. Die and you are out.',
          ['enter_b'], 'minecraft:crying_obsidian', None),
         ('clear_red', 'Survive the Red', [gadv('clear_red')], [skill_xp(2000), give(g('essence_stone_b'), 2)],
          'Kill the lair\'s boss: the seal breaks and an exit pad of crying obsidian appears. Red gates pay half again in '
@@ -630,7 +626,7 @@ GATE_ROWS = [
          'Temper a piece of gear with an S rune.', None, 'minecraft:netherite_sword', None),
     ]),
     ('Trials and the hidden boss', [
-        ('enter_trial', 'Trial by Rule', [gadv('enter_trial')], [give(g('return_stone'), 2)],
+        ('enter_trial', 'Trial by Rule', [gadv('enter_trial')], [give(g('essence_stone_b'), 2)],
          'Some S gates that don\'t turn red become trial gates, with a rule shown as you enter and on a stone tablet: No '
          'Potions, No Healing, Statues or The Narrowing Door.', ['enter_s'], 'minecraft:chiseled_stone_bricks', None),
         ('trial_trophy', 'Trial Trophy', [item(g('gate_trophy'))], [skill_xp(3000)],
@@ -686,7 +682,7 @@ GATE_ROWS = [
          ['floor_100', 'castle_trophy', 'clear_red_s', 'trial_trophy'], g('castle_trophy'), 'gear'),
     ]),
     ('Veteran and castle extras', [
-        ('clears_10', 'Gate Regular', [gates_cleared(10)], [skill_xp(1000), give(g('return_stone'), 2)],
+        ('clears_10', 'Gate Regular', [gates_cleared(10)], [skill_xp(1000), give(g('essence_stone_c'), 2)],
          'Clear 10 gates, any rank. Red gates and trials count too; everyone present at a clear counts it.', ['clear_e'],
          g('gate_key_d'), None),
         ('clears_50', 'Gate Veteran', [gates_cleared(50)], [skill_xp(4000), give(g('essence_stone_a'), 2)],

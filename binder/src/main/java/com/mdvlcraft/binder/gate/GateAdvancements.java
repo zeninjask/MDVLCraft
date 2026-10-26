@@ -39,7 +39,7 @@ import net.minecraftforge.registries.RegistryObject;
  * Gate progress for the quest book's Gates chapter (tools/generate_quests.py). FTB Quests can't see gate events, so each
  * one grants a hidden advancement `mdvlcraft:quests/gates/<name>` (a single `minecraft:impossible` criterion, written by
  * the generator) that a quest's advancement task waits for. Most events are caught here from Forge events (opening a
- * gate, entering one, kills, veins, the forge, boss chests, Return Stones, tower floors); two need a call from their
+ * gate, entering one, kills, veins, the forge, boss chests, tower floors); two need a call from their
  * owner: {@link #onCleared} (GateRewards.onCleared) and {@link #onBreak} (GateBreaks.breakGate). Also
  * `/mdvl gate quest skillxp <targets> <amount>`, the chapter's skill-experience reward (same as the clear bonus).
  * Counts for the clear-N quests live in the custom stat `mdvlcraft:gates_cleared` (an FTB stat task reads it). A few
@@ -208,15 +208,6 @@ public final class GateAdvancements {
             grant(player, "forge");
         } else if (state.is(GateRewards.REWARD_CHEST.get())) {
             grant(player, "boss_chest");
-        }
-    }
-
-    /** A Return Stone used inside a normal gate (the only place it works). */
-    @SubscribeEvent
-    public static void onRightClickItem(PlayerInteractEvent.RightClickItem event) {
-        if (event.getEntity() instanceof ServerPlayer player && event.getItemStack().is(GateRewards.RETURN_STONE.get())
-            && player.level().dimension() == GateDimensions.GATE_REALM && GateInstances.get(player.server).ofPlayer(player.getUUID()) != null) {
-            grant(player, "return_stone");
         }
     }
 

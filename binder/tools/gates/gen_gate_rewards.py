@@ -3,8 +3,8 @@ mana crystal ore, Gate Forge and boss chest loot tables, the mining tags, the Ga
 (merged). The Java side is gate/GateRewards.java and friends; rank colours match gen_gate_textures.py.
 
 Boss chest tables (loot_tables/gates/<rank>/boss.json) are rolled once per player present at the clear: 0-2 essence
-stones and mana crystals of the rank, 1-2 rank treasures, one rank gear material, a 10-25% boss trophy of the rank, a 25%
-Return Stone and a 15% next-rank key (not at S).
+stones and mana crystals of the rank, 1-2 rank treasures, one rank gear material, a 10-25% boss trophy of the rank and a
+15% next-rank key (not at S).
 """
 import json
 import random
@@ -46,15 +46,11 @@ BOOK_LEVELS = {'e': 10, 'd': 15, 'c': 20, 'b': 25, 'a': 30, 's': 30}
 LANG = {
     'block.mdvlcraft.gate_forge': 'Gate Forge',
     'block.mdvlcraft.gate_reward_chest': 'Boss Chest',
-    'item.mdvlcraft.return_stone': 'Return Stone',
-    'item.mdvlcraft.return_stone.desc': 'Use inside a normal gate to leave it at once',
     'item.mdvlcraft.temper_rune.desc': 'Anvil it onto gear: +%s%% against gate mobs',
     'gate.mdvlcraft.tempered': 'Gate-tempered (%s): +%s%% against gate mobs',
     'gate.mdvlcraft.tempered.general': '+%s%% against everything',
     'gate.mdvlcraft.cleared': 'Gate cleared! +%s skill experience. Your boss chest is waiting.',
     'gate.mdvlcraft.chest.not_yours': 'There is nothing in this chest for you',
-    'gate.mdvlcraft.return_stone.outside': 'The Return Stone only works inside a gate',
-    'gate.mdvlcraft.return_stone.red': 'A red gate holds you: the Return Stone is silent',
 }
 
 
@@ -208,7 +204,6 @@ def textures():
         for x in range(7, 9):
             chest.putpixel((x, y), shade(gold, 1.2))
     chest.save(block / 'gate_reward_chest_side.png')
-    draw(STONE, (70, 120, 200), (210, 240, 255)).save(item / 'return_stone.png')
 
 
 def models_and_states():
@@ -224,7 +219,6 @@ def models_and_states():
             'top': f'mdvlcraft:block/{name}_top', 'side': f'mdvlcraft:block/{name}_side', 'bottom': f'mdvlcraft:block/{bottom}'}})
         write(ASSETS / f'blockstates/{name}.json', {'variants': {'': {'model': f'mdvlcraft:block/{name}'}}})
     write(ASSETS / 'models/item/gate_forge.json', {'parent': 'mdvlcraft:block/gate_forge'})
-    write(ASSETS / 'models/item/return_stone.json', {'parent': 'item/generated', 'textures': {'layer0': 'mdvlcraft:item/return_stone'}})
 
 
 def count(lo, hi):
@@ -255,8 +249,6 @@ def loot_tables():
             {'rolls': 1, 'entries': [{'type': 'minecraft:item', 'name': item, 'weight': w, 'functions': [count(lo, hi)]} for item, lo, hi, w in GEAR[r]]},
             {'rolls': 1, 'conditions': [{'condition': 'minecraft:random_chance', 'chance': TROPHY_CHANCE[r]}],
              'entries': [{'type': 'minecraft:item', 'name': f'mdvlcraft:boss_trophy_{r}'}]},
-            {'rolls': 1, 'conditions': [{'condition': 'minecraft:random_chance', 'chance': 0.25}],
-             'entries': [{'type': 'minecraft:item', 'name': 'mdvlcraft:return_stone'}]},
         ]
         if i + 1 < len(RANKS):
             pools.append({'rolls': 1, 'conditions': [{'condition': 'minecraft:random_chance', 'chance': 0.15}],

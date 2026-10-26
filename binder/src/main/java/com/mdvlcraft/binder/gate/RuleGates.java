@@ -69,7 +69,7 @@ import net.minecraftforge.registries.RegisterEvent;
  *   No Healing          every heal is cancelled except natural regeneration from food (FoodData.tick)
  *   Statues             every room but the entrance gets a GateStatue when it triggers: it hunts the players in its room
  *                       but moves only while nobody looks at it, and can't be hurt
- *   The Narrowing Door  the way in narrows each time a member leaves before the clear (by any way: death, Return Stone,
+ *   The Narrowing Door  the way in narrows each time a member leaves before the clear (by any way: death or
  *                       command): whoever leaves is taken off the roster and can't come back in, and when nobody of the
  *                       roster is left inside the gate fails (GateCombat.fail). Someone must stay behind; logging out
  *                       keeps a player's place

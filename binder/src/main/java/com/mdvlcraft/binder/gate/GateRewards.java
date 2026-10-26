@@ -47,7 +47,7 @@ import net.puffish.skillsmod.api.SkillsAPI;
 /**
  * Gate rewards (plan section 6): essence stones from gate mobs, mana crystal veins at the dungeon's crystal markers, the
  * per-player boss chest and the clear-bonus skill experience. Also registers the reward blocks and items (veins, chest,
- * Gate Forge, Return Stone, tempering runes).
+ * Gate Forge, tempering runes).
  *
  * Amounts are tuned so one clear yields about what the next key costs (4 stones + 3-4 crystals): a normal mob drops a
  * stone 15% of the time, an elite 1-2, the boss 2-3, a vein holds 3-4 ore blocks (one crystal each before Fortune), and
@@ -78,7 +78,6 @@ public final class GateRewards {
         () -> BlockEntityType.Builder.of(GateRewardChestBlockEntity::new, REWARD_CHEST.get()).build(null));
     public static final RegistryObject<Block> FORGE = BLOCKS.register("gate_forge", GateForgeBlock::new);
     public static final RegistryObject<Item> FORGE_ITEM = ITEMS.register("gate_forge", () -> new BlockItem(FORGE.get(), new Item.Properties()));
-    public static final RegistryObject<Item> RETURN_STONE = ITEMS.register("return_stone", ReturnStoneItem::new);
 
     /** Instances whose clear has been rewarded (all instances close on restart, so this needn't be saved). */
     private static final Set<Integer> REWARDED = new HashSet<>();
@@ -112,7 +111,6 @@ public final class GateRewards {
         } else if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
             event.accept(FORGE_ITEM);
         } else if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
-            event.accept(RETURN_STONE);
             BOSS_TROPHIES.values().forEach(event::accept);
         } else if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             TEMPER_RUNES.values().forEach(event::accept);
