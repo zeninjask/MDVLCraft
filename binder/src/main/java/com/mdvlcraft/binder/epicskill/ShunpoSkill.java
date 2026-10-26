@@ -25,7 +25,7 @@ import yesman.epicfight.world.entity.eventlistener.TakeDamageEvent;
  * Shunpo (the Shinigami's guard skill): its owner cannot guard or block (no guard stance, no shield). Holding any weapon,
  * pressing the guard key with Parrying's timing (an attack landing within Parrying's window after the press, the
  * same window Parrying uses, parry-window bonuses included) instead dodges it with Dodge Master's sidestep, afterimage and
- * all, for no stamina. One dodge per press; a press that dodges nothing in its window costs 10 stamina. Registered and kept off shields by ShunpoSetup (not here: Forge's event scan
+ * all, for no stamina, only on the ground. One dodge per press; a press that dodges nothing in its window costs 10 stamina. Registered and kept off shields by ShunpoSetup (not here: Forge's event scan
  * of a GuardSkill subclass touches its client-only methods on a dedicated server).
  */
 public class ShunpoSkill extends GuardSkill {
@@ -105,7 +105,8 @@ public class ShunpoSkill extends GuardSkill {
         ServerPlayerPatch patch = event.getPlayerPatch();
         ServerPlayer player = patch.getOriginal();
         Integer pressed = PRESSED.get(player.getUUID());
-        if (pressed == null || player.tickCount - pressed >= window(player) || !dodgeable(event.getDamageSource())) {
+        // no dodging off the ground, like every Epic Fight dodge (mixin/epicfight/GroundedDodgeMixin)
+        if (pressed == null || player.tickCount - pressed >= window(player) || !player.onGround() || !dodgeable(event.getDamageSource())) {
             return;
         }
 

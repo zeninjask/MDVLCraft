@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.mixin.attributeslib;
 
+import com.mdvlcraft.binder.combat.KatanaWeapons;
 import com.mdvlcraft.binder.combat.WeakerArmour;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
@@ -13,11 +14,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /**
  * Apothic Attributes replaces vanilla's armour and protection maths (LivingEntity calls these instead of CombatRules),
  * so the weaker armour of CombatRulesMixin is applied here too: a player's armour and protection enchantments block 35%
- * less. Other creatures keep their full armour.
+ * less. Other creatures keep their full armour. The Split Soul Katana's hits ignore armour on anything.
  */
 @Pseudo
 @Mixin(targets = "dev.shadowsoffire.attributeslib.api.ALCombatRules", remap = false)
 public abstract class ALCombatRulesMixin {
+    @Inject(method = "getDamageAfterArmor", at = @At("HEAD"), cancellable = true, require = 1)
+    private static void mdvlcraft$splitSoul(LivingEntity target, DamageSource source, float damage, float armor, float toughness,
+                                            CallbackInfoReturnable<Float> cir) {
+        if (KatanaWeapons.splitSoulHit(source)) {
+            cir.setReturnValue(damage);
+        }
+    }
+
     @Inject(method = "getDamageAfterArmor", at = @At("RETURN"), cancellable = true, require = 1)
     private static void mdvlcraft$weakerArmour(LivingEntity target, DamageSource source, float damage, float armor, float toughness,
                                                CallbackInfoReturnable<Float> cir) {
