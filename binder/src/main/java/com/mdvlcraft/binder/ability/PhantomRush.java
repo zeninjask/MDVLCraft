@@ -23,6 +23,10 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.targeting.TargetingConditions;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.shelmarow.combat_evolution.ai.util.BehaviorUtils;
@@ -100,8 +104,8 @@ public final class PhantomRush {
             return;
         }
 
-        LivingEntity target = ExecutionHandler.getEntityLookedAt(player, RANGE);
-        if (target == null || rush.targets.contains(target)) {
+        LivingEntity target = lookedAt(player, rush.targets);
+        if (target == null) {
             return;
         }
 
@@ -213,6 +217,22 @@ public final class PhantomRush {
         }
 
         return true;
+    }
+
+    /**
+     * The creature under the crosshair within RANGE, skipping those already picked. CE's getEntityLookedAt (made for its
+     * 2-block assassination reach) returns the nearest creature on the ray, so a picked one standing near the line of sight
+     * hid the next, and it also needed a clear line to the creature's eyes; here the ray just stops at the first block.
+     */
+    private static LivingEntity lookedAt(ServerPlayer player, List<LivingEntity> picked) {
+        Vec3 eye = player.getEyePosition();
+        Vec3 end = player.level().clip(new ClipContext(eye, eye.add(player.getViewVector(1.0F).scale(RANGE)), ClipContext.Block.COLLIDER,
+            ClipContext.Fluid.NONE, player)).getLocation();
+        EntityHitResult hit = ExecutionHandler.getEntityHitResult(player, eye, end, new AABB(eye, end).inflate(1.0),
+            entity -> entity instanceof LivingEntity living && !picked.contains(living) && living.isAlive() && !living.isInvulnerable()
+                && player.canAttack(living, TargetingConditions.DEFAULT),
+            eye.distanceToSqr(end), 1.0);
+        return hit == null ? null : (LivingEntity)hit.getEntity();
     }
 
     private static boolean valid(ServerPlayer player, LivingEntity target) {
