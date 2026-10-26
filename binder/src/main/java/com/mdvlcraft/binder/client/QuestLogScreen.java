@@ -35,7 +35,8 @@ public class QuestLogScreen extends Screen {
     private static final int GREEN = 0xFF6FD36A;
     private final Screen parent;
     private final List<Chapter> chapters;
-    private static final String GATES = "gates";
+    /** Chapters numbered on their own, with a letter: Gates 001G..., Food 001F..., Brewing 001B.... */
+    private static final Map<String, String> LETTERED = Map.of("gates", "G", "food", "F", "brewing", "B");
     /** Each quest's number as shown ("007", or "007G" in the Gates chapter). */
     private final Map<Quest, String> numbers = new HashMap<>();
     private int chapter;
@@ -55,10 +56,10 @@ public class QuestLogScreen extends Screen {
         this.chapters = ClientQuestFile.INSTANCE.getAllChapters().stream().filter(c -> !c.getQuests().isEmpty()).toList();
         int book = 0;
         for (Chapter c : this.chapters) {
-            boolean gates = GATES.equals(c.getFilename());
+            String letter = LETTERED.get(c.getFilename());
             List<Quest> quests = c.getQuests();
             for (int i = 0; i < quests.size(); i++) {
-                this.numbers.put(quests.get(i), gates ? String.format("%03dG", i + 1) : String.format("%03d", ++book));
+                this.numbers.put(quests.get(i), letter != null ? String.format("%03d", i + 1) + letter : String.format("%03d", ++book));
             }
         }
 
@@ -295,6 +296,8 @@ public class QuestLogScreen extends Screen {
         ty += ROW + 2;
         g.drawString(this.font, Component.translatable("screen.mdvlcraft.quests.request"), dx + 8, ty, GOLD, false);
         Optional<Task> accept = ActiveQuest.acceptTask(quest);
+        // With several objectives, a cleared one is struck through (abandoning resets the progress, so the lines go too).
+        boolean several = quest.getTasksAsList().size() - (accept.isPresent() ? 1 : 0) > 1;
         for (Task task : quest.getTasksAsList()) {
             if (accept.isPresent() && accept.get() == task) {
                 continue;
@@ -303,7 +306,9 @@ public class QuestLogScreen extends Screen {
             String progress = team.isCompleted(task) ? "✔"
                 : task.getMaxProgress() > 1 ? task.formatProgress(team, team.getProgress(task)) + "/" + task.formatProgress(team, task.getMaxProgress()) : "";
             int pw = this.font.width(progress);
-            g.drawString(this.font, this.font.plainSubstrByWidth(task.getTitle().getString(), dw - labelW - 24 - pw), dx + 8 + labelW, ty, DqGui.TEXT, false);
+            Component title = Component.literal(this.font.plainSubstrByWidth(task.getTitle().getString(), dw - labelW - 24 - pw))
+                .withStyle(style -> style.withStrikethrough(several && team.isCompleted(task)));
+            g.drawString(this.font, title, dx + 8 + labelW, ty, DqGui.TEXT, false);
             g.drawString(this.font, progress, dx + dw - 10 - pw, ty, team.isCompleted(task) ? GREEN : DqGui.MUTED, false);
             ty += ROW;
         }
