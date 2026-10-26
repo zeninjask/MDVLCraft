@@ -20,6 +20,7 @@ import java.nio.file.Path;
 import javax.annotation.Nullable;
 import net.createmod.ponder.enums.PonderKeybinds;
 import net.minecraft.Util;
+import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
@@ -42,6 +43,9 @@ public final class SpellPreviews {
     private static SpellPreviews.Spell hovered;
     private static long hoveredAt;
     private static int held;
+    /** The menu the open (or opening) spell preview was requested from; closing the preview goes back to it. */
+    @Nullable
+    private static Screen openedFrom;
 
     private SpellPreviews() {
     }
@@ -76,6 +80,17 @@ public final class SpellPreviews {
 
     public static Component prompt() {
         return Component.translatable("tooltip.iss_ponder.hold_to_preview", PonderKeybinds.PONDER.message());
+    }
+
+    public static void openedFrom(@Nullable Screen screen) {
+        openedFrom = screen;
+    }
+
+    @Nullable
+    public static Screen takeOpenedFrom() {
+        Screen screen = openedFrom;
+        openedFrom = null;
+        return screen;
     }
 
     static void onClientTick(ClientTickEvent event) {

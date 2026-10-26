@@ -1,5 +1,6 @@
 """Generates the pack's FTB Quests book: six chapters, one per boss tier (First Steps, then Wanderer to Legend).
-Last comes the Gates chapter (gates_chapter): its own thing, open from the start, numbered 001G... in the quest log.
+Then come the Gates, Food (Farmer's Delight) and Brewing (Ars Elixirum) chapters (row_chapter): each its own thing, open from
+the start, numbered on its own in the quest log with a letter (001G..., 001F..., 001B...).
 
 Each tier chapter has a top row of progress quests (kill counts, an experience level, places to find) ending in a
 capstone that opens the next chapter, and below it one column per boss: three lead-up quests themed on that boss, the
@@ -76,6 +77,23 @@ def xp(points):
 def command(cmd, title, icon):
     """A command reward named and drawn as what it gives (FTB Quests otherwise shows it as "Command")."""
     return {'type': 'command', 'command': cmd, 'elevate_perms': True, 'silent': True, 'title': title, 'icon': icon}
+
+
+# Permanent stat bonuses, small: a custom reward that only shows the bonus; compat/ftbquests/QuestBonuses reads the tag
+# and adds the attribute modifier for every completed quest at login, respawn and completion, so it is retroactive and
+# never stacks.
+BONUS_NAMES = {'minecraft:generic.max_health': ('Max Health', 'minecraft:golden_apple', '%g'),
+               'irons_spellbooks:max_mana': ('Max Mana', 'minecraft:lapis_lazuli', '%g'),
+               'irons_spellbooks:cooldown_reduction': ('Cooldown Reduction', 'minecraft:clock', 'pct')}
+
+
+def bonus(attribute, amount):
+    name, icon, fmt = BONUS_NAMES[attribute]
+    shown = f'{amount * 100:g}%' if fmt == 'pct' else fmt % amount
+    return {'type': 'custom', 'title': f'+{shown} {name} (permanent)', 'icon': icon, 'tags': [f'mdvlcraft_bonus={attribute}={amount}']}
+
+
+HEALTH, MANA, COOLDOWN = 'minecraft:generic.max_health', 'irons_spellbooks:max_mana', 'irons_spellbooks:cooldown_reduction'
 
 
 def crate(tier):
@@ -406,9 +424,11 @@ def tier_chapter(tier, gate):
     cap_x = max(2 + len(PROGRESS[tier]) * 2 + 2, len(bosses) * 2)
     cap_tasks = [level(t['level']), mob_kills(t['kills'])]
     cap_title = {1: 'Proven', 2: 'Into the Fire', 3: 'Forged in Flame', 4: 'Dragonslayer', 5: 'Living Legend'}[tier]
-    cap_rewards = {1: [give('minecraft:diamond', 2)], 2: [give('minecraft:obsidian', 10), give('minecraft:flint_and_steel')],
-                   3: [give('minecraft:netherite_upgrade_smithing_template')], 4: [give('minecraft:enchanted_golden_apple')],
-                   5: [give('minecraft:nether_star'), crate(5)]}[tier]
+    cap_rewards = {1: [give('minecraft:diamond', 2), bonus(HEALTH, 2)],
+                   2: [give('minecraft:obsidian', 10), give('minecraft:flint_and_steel'), bonus(MANA, 10)],
+                   3: [give('minecraft:netherite_upgrade_smithing_template'), bonus(COOLDOWN, 0.02)],
+                   4: [give('minecraft:enchanted_golden_apple'), bonus(HEALTH, 2)],
+                   5: [give('minecraft:nether_star'), crate(5), bonus(MANA, 15), bonus(COOLDOWN, 0.03)]}[tier]
     if tier == 2:
         cap_tasks.append(dimension(NETHER))
     if tier == 4:
@@ -544,7 +564,7 @@ GATE_ROWS = [
          'Enter a C-rank gate. Elites are common now; bring tempered gear.', None, g('gate_key_c'), None),
         ('vein_c', 'Iron Bites Deeper', [gadv('vein_c')], [give(g('essence_stone_c'))],
          'Mine a C crystal vein. It needs an iron pickaxe or better.', None, g('mana_crystal_ore_c'), None),
-        ('clear_c', 'C-Rank Cleared', [gadv('clear_c')], [skill_xp(800), give_key('c', 'spire')],
+        ('clear_c', 'C-Rank Cleared', [gadv('clear_c')], [skill_xp(800), give_key('c', 'spire'), bonus(MANA, 10)],
          'Clear a C-rank gate.', None, g('gate_key_c'), 'hexagon'),
         ('stock_c', 'C Stockpile', [item(g('essence_stone_c'), 4), item(g('mana_crystal_c'), 3)], [xp(300)],
          'Gather 4 C essence stones and 3 C mana crystals: with 2 blaze rods, that is a B key.', None, g('essence_stone_c'), None),
@@ -601,7 +621,7 @@ GATE_ROWS = [
          'Enter an S-rank gate.', None, g('gate_key_s'), None),
         ('vein_s', 'Heart of the Gate', [gadv('vein_s')], [give(g('essence_stone_s'))],
          'Mine an S crystal vein.', None, g('mana_crystal_ore_s'), None),
-        ('clear_s', 'S-Rank Cleared', [gadv('clear_s')], [skill_xp(6000), give(g('essence_stone_s'), 2)],
+        ('clear_s', 'S-Rank Cleared', [gadv('clear_s')], [skill_xp(6000), give(g('essence_stone_s'), 2), bonus(COOLDOWN, 0.02)],
          'Clear an S-rank gate.', None, g('gate_key_s'), 'hexagon'),
         ('rune_s', 'S Temper Rune', [item(g('temper_rune_s'))], [give(g('mana_crystal_s'), 2)],
          'Trade 6 S stones and 2 S crystals at the forge for an S Temper Rune, the top tier. Later, Tower Seals buy them too.',
@@ -661,7 +681,7 @@ GATE_ROWS = [
          'Climb to floor 100.', ['floor_55'], 'minecraft:nether_star', 'hexagon'),
         ('castle_trophy', 'Castle Trophy', [item(g('castle_trophy'))], [xp(1000)],
          'Trade 16 Tower Seals at the Gate Forge for a Castle Trophy.', ['seals'], g('castle_trophy'), None),
-        ('master', 'Master of Gates', [gadv('tower_floor_100'), item(g('castle_trophy'))], [skill_xp(20000), give(g('castle_trophy'))],
+        ('master', 'Master of Gates', [gadv('tower_floor_100'), item(g('castle_trophy'))], [skill_xp(20000), give(g('castle_trophy')), bonus(HEALTH, 2)],
          'Reach floor 100 and hold a Castle Trophy. Every rank, every red gate, every trial: you have seen them all.',
          ['floor_100', 'castle_trophy', 'clear_red_s', 'trial_trophy'], g('castle_trophy'), 'gear'),
     ]),
@@ -689,17 +709,145 @@ GATE_ROWS = [
 ]
 
 
-def gates_chapter():
+# ---------------------------------------------------------------------------------------------------------------
+# Food chapter (Farmer's Delight), numbered 001F... in the quest log. Rows as in GATE_ROWS.
+# ---------------------------------------------------------------------------------------------------------------
+def fd(item_id):
+    return f'farmersdelight:{item_id}'
+
+
+FOOD_ROWS = [
+    ('Tools of the kitchen', [
+        ('knife', 'A Sharp Edge', [item(fd('flint_knife'))], [give('minecraft:bread', 4), xp(50)],
+         'Craft a Flint Knife: a flint and a stick. Knives cut food on a cutting board and harvest straw from grass and wheat.',
+         [], fd('flint_knife'), 'gear'),
+        ('board', 'Cutting Board', [item(fd('cutting_board'))], [xp(50)],
+         'Craft a Cutting Board from planks and sticks. Place an item on it and use a knife on it to slice it.', None, fd('cutting_board'), None),
+        ('wild', 'Wild Harvest', [item(fd('cabbage')), item(fd('tomato')), item(fd('onion')), item(fd('rice'))],
+         [give('minecraft:bone_meal', 8), xp(100)],
+         'Wild crops grow in the open: cabbages and beetroots by beaches, tomatoes in hot places, onions and carrots in '
+         'temperate ones, rice by water. Break them to gather the crop and its seeds. Crops only grow in their seasons.',
+         None, fd('wild_cabbages'), None),
+        ('straw', 'Straw Gatherer', [item(fd('straw'), 8)], [give('minecraft:string', 8)],
+         'Break grass or wheat with a knife in your main hand to gather straw.', ['knife'], fd('straw'), None),
+        ('pot', 'The Cooking Pot', [item(fd('cooking_pot'))], [xp(100)],
+         'Craft a Cooking Pot: bricks, iron ingots, a wooden shovel and a water bucket. It cooks meals over heat.', ['board'],
+         fd('cooking_pot'), None),
+        ('stove', 'Heat Source', [item(fd('stove'))], [xp(100)],
+         'Craft a Stove: iron ingots, bricks and a campfire. Set the pot on it (a campfire under the pot works too).',
+         None, fd('stove'), None),
+    ]),
+    ('Meals', [
+        ('soup', 'Hearty Soup', [item(fd('vegetable_soup'))], [give('minecraft:bowl', 4), xp(150)],
+         'Cook a Vegetable Soup in the pot: a carrot, a potato, a beetroot and a leafy green, served in a bowl.', ['stove'],
+         fd('vegetable_soup'), None),
+        ('stew', 'Stew Day', [item(fd('beef_stew'))], [xp(150)],
+         'Cook a Beef Stew: raw beef, a carrot and a potato, served in a bowl. Hearty meals grant Nourishment, which stops '
+         'hunger from draining.', None, fd('beef_stew'), None),
+        ('skillet', 'The Skillet', [item(fd('skillet'))], [xp(150)],
+         'Craft a Skillet: iron ingots and a brick. Place it over heat to cook food on it, or swing it: it is a weapon too.', ['stove'], fd('skillet'), None),
+        ('fried_rice', 'Fried Rice', [item(fd('fried_rice'))], [xp(150)],
+         'Cook Fried Rice: rice, an egg, a carrot and an onion.', ['soup'], fd('fried_rice'), None),
+        ('pasta', 'Pasta Night', [item(fd('raw_pasta')), item(fd('pasta_with_meatballs'))], [xp(200)],
+         'Make wheat dough (wheat with water or an egg), cut it into raw pasta on the cutting board, then cook Pasta with '
+         'Meatballs: pasta, minced beef and tomato sauce.',
+         None, fd('pasta_with_meatballs'), None),
+        ('sandwiches', 'Lunch Break', [item(fd('hamburger')), item(fd('chicken_sandwich'))], [xp(200)],
+         'Assemble a Hamburger and a Chicken Sandwich at a crafting table. Bread, cooked meat and greens.', None, fd('hamburger'), None),
+    ]),
+    ('The farm', [
+        ('compost', 'Rich Soil', [item(fd('organic_compost')), item(fd('rich_soil'))], [give('minecraft:bone_meal', 16)],
+         'Craft Organic Compost from dirt, straw, bone meal and rotten flesh (or tree bark). Placed, it slowly turns into Rich Soil, faster '
+         'next to light and water. Crops grow faster on rich soil, and mushrooms planted on it grow into colonies.',
+         ['straw'], fd('organic_compost'), None),
+        ('crates', 'Crate Stacker', [item(fd('cabbage_crate')), item(fd('tomato_crate')), item(fd('onion_crate'))], [xp(200)],
+         'Pack nine of a crop into a crate to store it.', ['wild'], fd('cabbage_crate'), None),
+        ('rope', 'Learning the Ropes', [item(fd('rope'), 16)], [give('minecraft:lead', 2)],
+         'Craft Rope from straw. Tomatoes climb it; you can climb it too.', ['straw'], fd('rope'), None),
+        ('comfort', 'Comfort Food', [item(fd('chicken_soup')), item(fd('baked_cod_stew'))], [xp(200)],
+         'Cook a Chicken Soup and a Baked Cod Stew. Warm soups grant Comfort: no slowness from the cold, and regeneration '
+         'while you are fed.', ['stew'], fd('chicken_soup'), None),
+    ]),
+    ('Feasts', [
+        ('roast_chicken', 'Roast Chicken', [item(fd('roast_chicken_block'))], [xp(300)],
+         'Craft a Roast Chicken feast: cooked chicken, baked potatoes, bread, an egg, carrots, an onion and a bowl. Place it, '
+         'then use a bowl on it to serve a portion; it feeds several.',
+         ['pasta'], fd('roast_chicken_block'), None),
+        ('shepherds_pie', "Shepherd's Pie", [item(fd('shepherds_pie_block'))], [xp(300)],
+         "Craft a Shepherd's Pie feast: cooked mutton, baked potatoes, milk, onions and a bowl.", None, fd('shepherds_pie_block'), None),
+        ('ham', 'Honey Glazed Ham', [item(fd('honey_glazed_ham_block'))], [xp(300)],
+         'Craft a Honey Glazed Ham feast: smoked ham, cooked rice, sweet berries, a honey bottle and a bowl.', None, fd('honey_glazed_ham_block'), None),
+        ('grand_feast', 'The Grand Feast', [item(fd('stuffed_pumpkin_block')), item(fd('rice_roll_medley_block'))],
+         [give('minecraft:golden_carrot', 16), bonus(HEALTH, 2)],
+         'Cook a Stuffed Pumpkin in the pot (served in a pumpkin) and craft a Rice Roll Medley from kelp, salmon and cod rolls. '
+         'A well-fed adventurer is a tougher one.', ['ham', 'comfort', 'compost'],
+         fd('stuffed_pumpkin_block'), 'hexagon'),
+    ]),
+]
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Brewing chapter (Ars Elixirum), numbered 001B... in the quest log. Rows as in GATE_ROWS.
+# ---------------------------------------------------------------------------------------------------------------
+def ex(item_id):
+    return f'elixirum:{item_id}'
+
+
+BREWING_ROWS = [
+    ('The alchemist\'s bench', [
+        ('cauldron', 'The Glass Cauldron', [item(ex('glass_cauldron'))], [xp(50)],
+         'Craft a Glass Cauldron: gray stained glass and two iron ingots. Fill it with water and place it over a heat source '
+         '(a campfire, fire or magma) to bring it to a boil.', [], ex('glass_cauldron'), 'gear'),
+        ('solvent', 'Honey Solvent', [item(ex('honey_solvent'))], [give('minecraft:honeycomb', 2)],
+         'Craft Honey Solvent: eight glass bottles around a honeycomb.', None, ex('honey_solvent'), None),
+        ('extract', 'Essence Extraction', [item('minecraft:brewing_stand'), item(ex('extract'))], [xp(100)],
+         'At a Brewing Stand, brew Honey Solvent with any ingredient. It draws out one of its essences as an Extract, and '
+         'you learn what the ingredient is made of.', None, ex('extract'), None),
+        ('elixir', 'Your First Elixir', [item(ex('elixir'))], [give('minecraft:glass_bottle', 4), xp(150)],
+         'Drop ingredients into the boiling cauldron; their essences decide the effects. Then fill a glass bottle from it. '
+         'Open the Collection to see what you have brewed and save the recipe.', None, ex('elixir'), None),
+        ('eye', "Alchemist's Eye", [item(ex('alchemist_eye'))], [xp(150)],
+         "Craft an Alchemist's Eye: an eye of ender, iron and string. Equipped, it shows the composition of ingredients "
+         'you have discovered.', None, ex('alchemist_eye'), None),
+    ]),
+    ('Mastery', [
+        ('shelf', 'Potion Shelf', [item(ex('potion_shelf'))], [xp(100)],
+         'Craft Potion Shelves from planks and a stick to show off your elixirs.', ['elixir'], ex('potion_shelf'), None),
+        ('apothecary', 'Apothecary', [item(ex('elixir'), 4)], [xp(300)],
+         'Hold four elixirs. Brewing a saved recipe again raises its mastery and your overall alchemy mastery.', ['elixir'],
+         ex('elixir'), None),
+        ('witch_totem', 'Witch Totem', [item('minecraft:totem_of_undying'), item(ex('witch_totem_of_undying'))],
+         [xp(500), bonus(MANA, 10), bonus(COOLDOWN, 0.02)],
+         'Get a Totem of Undying (evokers drop them), then craft it with an elixir into a Witch Totem of Undying, which '
+         'carries the elixir\'s effects.', ['apothecary'], ex('witch_totem_of_undying'), 'hexagon'),
+    ]),
+]
+
+
+def row_chapter(file, title, icon, subtitle, rows):
+    """A chapter laid out in rows, one quest per column; a quest needs the one before unless it names its deps."""
     q, ids, prev = [], {}, None
-    for row, (_, quests) in enumerate(GATE_ROWS):
-        for col, (key, title, tasks, rewards, desc, deps, icon, shape) in enumerate(quests):
+    for row, (_, quests) in enumerate(rows):
+        for col, (key, qtitle, tasks, rewards, desc, deps, qicon, shape) in enumerate(quests):
             dep_ids = [prev] if deps is None else [ids[d] for d in deps]
-            qu = Quest(f'gates_{key}', title, col * 2, row * 2.5, tasks, rewards, [desc], dep_ids, icon=icon, shape=shape,
+            qu = Quest(f'{file}_{key}', qtitle, col * 2, row * 2.5, tasks, rewards, [desc], dep_ids, icon=qicon, shape=shape,
                        size=1.5 if shape else None)
             q.append(qu)
             ids[key] = prev = qu.id
     check_gate_rewards(q)
-    return dict(file='gates', title='Gates', icon='mdvlcraft:gate_key_s', subtitle='Keys, gates, red gates, trials and the Demon Castle.', quests=q)
+    return dict(file=file, title=title, icon=icon, subtitle=subtitle, quests=q)
+
+
+def gates_chapter():
+    return row_chapter('gates', 'Gates', 'mdvlcraft:gate_key_s', 'Keys, gates, red gates, trials and the Demon Castle.', GATE_ROWS)
+
+
+def food_chapter():
+    return row_chapter('food', 'Food', fd('cooking_pot'), "Farmer's Delight: knives, pots, meals and feasts.", FOOD_ROWS)
+
+
+def brewing_chapter():
+    return row_chapter('brewing', 'Brewing', ex('glass_cauldron'), 'Ars Elixirum: essences, elixirs and mastery.', BREWING_ROWS)
 
 
 def check_gate_rewards(quests):
@@ -851,7 +999,9 @@ def main(base=os.path.join(REPO, 'base')):
     for tier in range(1, 6):
         ch, gate = tier_chapter(tier, gate)
         chapters.append(ch)
-    chapters.append(gates_chapter())   # last, after Legend; no dependency on the other chapters
+    chapters.append(gates_chapter())   # after Legend; no dependency on the other chapters
+    chapters.append(food_chapter())    # Food and Brewing likewise stand on their own
+    chapters.append(brewing_chapter())
     ids = [qu.id for c in chapters for qu in c['quests']]
     assert len(ids) == len(set(ids)), 'duplicate quest ids'
     for side in ('client', 'server'):

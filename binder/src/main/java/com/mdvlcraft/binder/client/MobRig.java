@@ -1,6 +1,8 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.integration.PassiveMobPatch;
 import com.mojang.blaze3d.vertex.PoseStack;
+import java.util.Map;
 import java.util.function.Function;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.model.PlayerModel;
@@ -31,6 +33,10 @@ import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
  * (mixin/geckolib/GeoEntityRendererMixin) takes them the way GeckoLib's GeoArmorRenderer copies vanilla parts onto its
  * armour bones: rootMotion once GeckoLib has turned the model to the mob's facing (every pass, layers included) and
  * bones once GeckoLib's own animations have run.
+ *
+ * Every hostile mob of other mods gets a PassiveMobPatch with the same biped armature (integration/EpicFightIntegration),
+ * whatever its model's shape: its GeckoLib model takes the bones only when it has all six (under RENAMED's names), else
+ * only the root motion. A mage patched in data (always a biped) must have all six.
  */
 public final class MobRig {
     /** A GeckoLib bone and vanilla part, the joint they follow, the part's rest offset and the bone's pivot (pixels). */
@@ -45,6 +51,10 @@ public final class MobRig {
         new Part("right_leg", model -> model.rightLeg, "Thigh_R", -1.9F, 12.0F, -2.0F, 12.0F),
         new Part("left_leg", model -> model.leftLeg, "Thigh_L", 1.9F, 12.0F, 2.0F, 12.0F)
     };
+    /** GeckoLib models (by entity type) whose biped bones go by other names: a part's bone name -> the model's, matched by pivot. */
+    private static final Map<String, Map<String, String>> RENAMED = Map.of(
+        // its sides are swapped against the casting mobs' model (right_arm pivots at x 5, where their left_arm does) and "left _arm" has a space
+        "iss_magicfromtheeast:jiangshi", Map.of("right_arm", "left _arm", "left_arm", "right_arm", "right_leg", "left_leg", "left_leg", "right_leg"));
     /** Vanilla model space: up 1.501 blocks, x and y flipped (LivingEntityRenderer's scale(-1, -1, 1)). */
     private static final OpenMatrix4f VANILLA_SPACE = vanillaSpace();
     private static final OpenMatrix4f FROM_VANILLA_SPACE = OpenMatrix4f.invert(VANILLA_SPACE, null);
@@ -52,6 +62,8 @@ public final class MobRig {
     /** The entity posed last (weakly held: it must not keep a left world alive). */
     private static java.lang.ref.WeakReference<Entity> posed = new java.lang.ref.WeakReference<>(null);
     private static Armature armature;
+    /** Whether the mob posed last has a PassiveMobPatch (its model may not be a biped). */
+    private static boolean passive;
     private static OpenMatrix4f[] poses;
     private static OpenMatrix4f rootDelta;
 
@@ -69,9 +81,23 @@ public final class MobRig {
             return;
         }
 
-        for (Part part : PARTS) {
-            GeoBone bone = model.getBone(part.bone()).orElseThrow(() -> new IllegalStateException(
-                "The model of " + ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()) + " has no " + part.bone() + " bone for its Epic Fight skeleton"));
+        String type = String.valueOf(ForgeRegistries.ENTITY_TYPES.getKey(entity.getType()));
+        Map<String, String> names = RENAMED.getOrDefault(type, Map.of());
+        GeoBone[] bones = new GeoBone[PARTS.length];
+        for (int i = 0; i < PARTS.length; i++) {
+            String name = names.getOrDefault(PARTS[i].bone(), PARTS[i].bone());
+            bones[i] = model.getBone(name).orElse(null);
+            if (bones[i] == null) {
+                if (passive) {
+                    return;   // not a biped model: it keeps its own limb poses
+                }
+                throw new IllegalStateException("The model of " + type + " has no " + name + " bone for its Epic Fight skeleton");
+            }
+        }
+
+        for (int i = 0; i < PARTS.length; i++) {
+            Part part = PARTS[i];
+            GeoBone bone = bones[i];
             float[] pose = partPose(part);
             bone.setRotX(-pose[3]);
             bone.setRotY(-pose[4]);
@@ -118,6 +144,7 @@ public final class MobRig {
         }
 
         armature = patch.getArmature();
+        passive = patch instanceof PassiveMobPatch;
         poses = armature.getPoseAsTransformMatrix(patch.<Animator>getAnimator().getPose(partialTick), false);
         Joint root = armature.searchJointByName("Root");
         rootDelta = OpenMatrix4f.mul(poses[root.getId()], root.getToOrigin(), null);
