@@ -100,6 +100,11 @@ public class CharacterScreen extends Screen {
                 right - 66, bottom - 18, 56, 14, Component.translatable("screen.mdvlcraft.menu.back"), () -> Minecraft.getInstance().setScreen(this.parent)
             )
         );
+        this.addRenderableWidget(
+            new DqGui.Button(
+                right - 128, bottom - 18, 56, 14, Component.translatable("screen.mdvlcraft.settings"), () -> Minecraft.getInstance().setScreen(new SettingsScreen(this))
+            )
+        );
     }
 
     private float scale() {
@@ -290,7 +295,7 @@ public class CharacterScreen extends Screen {
                 font, Component.translatable("screen.mdvlcraft.character.footer", AbilityKeys.MENU.getTranslatedKeyMessage()), 14, 239, DqGui.MUTED, false
             );
             Component tower = com.mdvlcraft.binder.gate.tower.client.TowerClient.statusLine();   // tower leaderboard line
-            g.drawString(font, tower, 426 - font.width(tower), 239, DqGui.MUTED, false);
+            g.drawString(font, tower, 426 - font.width(tower), 26, DqGui.MUTED, false);   // on the name's line, clear of the footer's buttons
             g.pose().popPose();
             super.render(g, mouseX, mouseY, partialTick);
             if (tooltip != null) {

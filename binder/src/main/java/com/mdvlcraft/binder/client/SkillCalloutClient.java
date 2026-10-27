@@ -17,23 +17,34 @@ import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.phys.Vec3;
 
 /**
  * Skill callouts (ability/SkillCallout) look exactly like Cursed Fate's chant words: its own Photon effect
- * (photon:scales_of_the_dragon, glowing, jittering, shrinking away at the end, 2.1 blocks above the caster's feet), with a
- * texture of the skill's name drawn here in Minecraft's pixel font, tinted the skill's colour as dark as the chant's red,
- * and up 1.5 times as long (38 ticks, not 25). Each name's texture is made once and kept.
+ * (photon:scales_of_the_dragon, glowing, jittering, shrinking away at the end) at a random spot to the left or right of the
+ * caster's head (beside), with a
+ * texture of the skill's name drawn here in Minecraft's pixel font, large and in the skill's full colour so a short name
+ * reads as well as a long chant, and up 1.5 times as long (38 ticks, not 25). Each name's texture is made once and kept.
  */
 public final class SkillCalloutClient {
     private static final ResourceLocation TEMPLATE = new ResourceLocation("photon", "fx/scales_of_the_dragon.fx");
     private static final ResourceLocation FONT = new ResourceLocation("minecraft", "textures/font/ascii.png");
     private static final int LIFETIME = 38;
-    /** The chant's tint is 0x8A0000: each skill's colour is darkened the same way. */
-    private static final float TINT = 0x8A / 255.0F;
     private static final int SIZE = 512;
-    /** Texture pixels per font pixel: the chant's "SCALES OF THE DRAGON" fills about the texture's width at this. */
-    private static final int PIXEL = 4;
+    /** The most texture pixels per font pixel: a short name is drawn large, up to about the texture's width. */
+    private static final int PIXEL = 12;
+    /** Share of the texture's width a name may fill. */
+    private static final float FILL = 0.9F;
+    /** How far out to the side of the head a name is centred, in blocks: past the face, never far. */
+    private static final double SIDE_MIN = 0.8;
+    private static final double SIDE_MAX = 1.1;
+    /** How far behind the face a name may sit; never in front. */
+    private static final double BEHIND_MAX = 0.3;
+    /** The head's height, down from the top of the entity. */
+    private static final double HEAD = 0.45;
     private static final Map<String, ResourceLocation> TEXTURES = new HashMap<>();
     private static ListTag template;
     private static NativeImage font;
@@ -42,7 +53,6 @@ public final class SkillCalloutClient {
     }
 
     public static void show(int entityId, Component name, int colour) {
-        org.apache.logging.log4j.LogManager.getLogger().info("DEBUGCALLOUT client {} {}", entityId, name.getString());   // temporary
         Minecraft minecraft = Minecraft.getInstance();
         ClientLevel level = minecraft.level;
         Entity entity = level == null ? null : level.getEntity(entityId);
@@ -54,7 +64,7 @@ public final class SkillCalloutClient {
             ListTag emitters = template().copy();
             CompoundTag config = emitters.getCompound(0).getCompound("config");
             config.getCompound("material").getCompound("material").putString("texture", texture(text).toString());
-            config.getCompound("startColor").putInt("number", 0xFF000000 | darken(colour));
+            config.getCompound("startColor").putInt("number", 0xFF000000 | colour);
             config.getCompound("startLifetime").putFloat("number", LIFETIME);
             CompoundTag main = new CompoundTag();
             main.put("fxObjects", emitters);
@@ -62,23 +72,30 @@ public final class SkillCalloutClient {
             fx.setFxLocation(new ResourceLocation("mdvlcraft", "callout/" + Integer.toHexString(text.hashCode())));
             fx.getMainFX().deserializeNBT(main);
             EntityEffect effect = new EntityEffect(fx, level, entity, EntityEffect.AutoRotate.NONE);
-            effect.setOffset(0.0, 2.1, 0.0);
+            Vec3 offset = beside(entity);
+            effect.setOffset(offset.x, offset.y, offset.z);
             effect.setForcedDeath(true);
             effect.setAllowMulti(true);
             effect.start();
-            org.apache.logging.log4j.LogManager.getLogger().info("DEBUGCALLOUT started {}", texture(text));   // temporary
-        } catch (RuntimeException e) {
-            org.apache.logging.log4j.LogManager.getLogger().error("DEBUGCALLOUT failed", e);   // temporary
         } catch (IOException e) {
             throw new IllegalStateException("Cannot read Cursed Fate's chant effect", e);
         }
     }
 
-    private static int darken(int colour) {
-        int r = Math.round(((colour >> 16) & 0xFF) * TINT);
-        int g = Math.round(((colour >> 8) & 0xFF) * TINT);
-        int b = Math.round((colour & 0xFF) * TINT);
-        return r << 16 | g << 8 | b;
+    /**
+     * A random spot beside the head, from the entity's feet: left or right, out to the side far enough that the name
+     * clears the face, level with it or a little behind (never in front), between the bottom and the top of the head.
+     */
+    private static Vec3 beside(Entity entity) {
+        RandomSource random = entity.level().getRandom();
+        float yaw = entity.getYHeadRot() * Mth.DEG_TO_RAD;
+        Vec3 forward = new Vec3(-Mth.sin(yaw), 0.0, Mth.cos(yaw));
+        Vec3 side = new Vec3(-forward.z, 0.0, forward.x).scale(random.nextBoolean() ? 1.0 : -1.0);
+        double out = Mth.nextDouble(random, SIDE_MIN, SIDE_MAX);
+        double along = Mth.nextDouble(random, -BEHIND_MAX, 0.0);
+        double top = entity.getBbHeight();
+        double height = Mth.nextDouble(random, top - HEAD, top);
+        return side.scale(out).add(forward.scale(along)).add(0.0, height, 0.0);
     }
 
     private static ListTag template() throws IOException {
@@ -106,7 +123,7 @@ public final class SkillCalloutClient {
         for (char c : text.toCharArray()) {
             width += advance(glyph(c), cell);
         }
-        int pixel = Math.max(1, Math.min(PIXEL, SIZE / Math.max(1, width)));
+        int pixel = Math.max(1, Math.min(PIXEL, (int)(SIZE * FILL) / Math.max(1, width)));
         NativeImage image = new NativeImage(SIZE, SIZE, true);
         int x = (SIZE - width * pixel) / 2;
         int y = (SIZE - cell * pixel) / 2;

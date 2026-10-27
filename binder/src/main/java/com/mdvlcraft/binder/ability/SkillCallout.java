@@ -3,6 +3,7 @@ package com.mdvlcraft.binder.ability;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.network.SkillCalloutPacket;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
+import io.redspace.ironsspellbooks.api.events.SpellPreCastEvent;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
 import io.redspace.ironsspellbooks.api.spells.AbstractSpell;
 import java.util.EnumSet;
@@ -18,7 +19,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * The name of every skill and spell a player uses, called out above their head in the colour of its school or theme, like
- * Cursed Fate's chant words (client/SkillCalloutClient): Iron's spells (whatever casts them), the wheel's other abilities
+ * Cursed Fate's chant words (client/SkillCalloutClient), seen by the caster and everyone near them: Iron's spells (as their
+ * cast starts, whatever casts them), the wheel's other abilities
  * (AbilityActions) and Epic Fight's own skills (mixin/epicfight/SkillCastCalloutMixin). Attacks, evocation and anything
  * without a theme are white. A second callout within half a second of the last is dropped (a technique that runs a spell
  * shows once).
@@ -62,13 +64,14 @@ public final class SkillCallout {
     private static final Set<Technique> BLOOD_TECHNIQUES = EnumSet.of(Technique.BLOOD_METEORITE, Technique.SLICING_EXORCISM, Technique.CONVERGENCE,
         Technique.PIERCING_BLOOD, Technique.CRIMSON_BINDING);
     private static final Map<UUID, Long> LAST = new HashMap<>();
+    private static final Map<UUID, Started> STARTED = new HashMap<>();
+    /** Slack after a cast's own time before its finishing cast counts as a new one. */
+    private static final int CAST_MARGIN_TICKS = 20;
 
     private SkillCallout() {
     }
 
     public static void announce(ServerPlayer player, Component name, int colour) {
-        // DEBUGCALLOUT (temporary): callouts don't appear in the test client yet; see docs/AGENT_HANDOFF.md
-        org.apache.logging.log4j.LogManager.getLogger().info("DEBUGCALLOUT server {} {}", name.getString(), Integer.toHexString(colour));
         long now = player.level().getGameTime();
         Long last = LAST.put(player.getUUID(), now);
         if (last == null || now - last >= GAP_TICKS || now < last) {
@@ -90,13 +93,39 @@ public final class SkillCallout {
         announce(player, ability.displayName(), colour);
     }
 
+    /** A spell starting its cast (after Iron's mana and cooldown checks): called out now, not when a long cast finishes. */
     @SubscribeEvent(priority = EventPriority.LOWEST)
-    public static void onCast(SpellOnCastEvent event) {
+    public static void onPreCast(SpellPreCastEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
             AbstractSpell spell = SpellRegistry.getSpell(event.getSpellId());
             if (spell != SpellRegistry.none()) {
-                announce(player, spell.getDisplayName(player), SCHOOLS.getOrDefault(spell.getSchoolType().getId().toString(), WHITE));
+                long now = player.level().getGameTime();
+                STARTED.put(player.getUUID(), new Started(event.getSpellId(), now + spell.getEffectiveCastTime(event.getSpellLevel(), player) + CAST_MARGIN_TICKS));
+                announce(player, spell, event.getSpellLevel());
             }
         }
+    }
+
+    /** A spell cast without a cast start (commands, some other mods' casts); one already called out at its start is skipped. */
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onCast(SpellOnCastEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            Started started = STARTED.get(player.getUUID());
+            if (started != null && started.spellId.equals(event.getSpellId()) && player.level().getGameTime() <= started.until) {
+                return;
+            }
+            AbstractSpell spell = SpellRegistry.getSpell(event.getSpellId());
+            if (spell != SpellRegistry.none()) {
+                announce(player, spell, event.getSpellLevel());
+            }
+        }
+    }
+
+    private static void announce(ServerPlayer player, AbstractSpell spell, int level) {
+        announce(player, spell.getDisplayName(player), SCHOOLS.getOrDefault(spell.getSchoolType().getId().toString(), WHITE));
+    }
+
+    /** The spell whose cast start was called out, and the tick its cast has surely ended by. */
+    private record Started(String spellId, long until) {
     }
 }

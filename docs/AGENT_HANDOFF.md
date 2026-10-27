@@ -462,18 +462,41 @@ The user approved every change in `docs/MDVLCraft-Balance-Report.pdf`. The ratin
 - **Known intermittent issue:** one test client start crashed inside VanillaBackport with "Registry is already frozen". Blackgear Platform unfreezes and refreezes the root registry. It couldn't be reproduced, so it's left alone.
 - **Client tests here:** the full client needs about 10 GB and is OOM-killed next to a server. Move JEI out of both the test client's and the test server's mods folders (its recipe loading is the spike; the server refuses a client without it).
 
-## Open bug: skill callouts don't show (2.1.60)
+## Skill callouts (fixed after 2.1.60)
 
-Every skill and spell a player uses should call out its name above them the way Cursed Fate's chant words look
-(`ability/SkillCallout` on the server, `network/SkillCalloutPacket`, `client/SkillCalloutClient`). The client builds
-Photon's own chant effect (`photon:fx/scales_of_the_dragon.fx`, shipped in Cursed Fate) with a runtime texture of the
-skill's name and the skill's colour as `startColor`, then starts it as an `EntityEffect` 2.1 blocks above the caster.
+Every skill and spell a player uses calls out its name beside their head the way Cursed Fate's chant words look
+(`ability/SkillCallout` on the server, `network/SkillCalloutPacket`, `client/SkillCalloutClient`), seen by the caster
+and everyone tracking them.
 
-- What works: the chant effect itself draws in the test client (`/photon fx photon:scales_of_the_dragon entity <player> 0 2.1 0 0 0 0 0 true true`);
-  Iron's `/cast <player> <spell>` fires `SpellOnCastEvent`. Builds, server boots, no errors in either log.
-- What fails: after `/cast Tester irons_spellbooks:heal` (third person) nothing appears above the player.
-- Next step: the `DEBUGCALLOUT` log lines (temporary, in both classes) say how far it gets: `server` (event caught and
-  packet sent), `client` (packet arrived), `started` (Photon effect started, with the texture's id) or `failed`
-  (exception). Suspects, in order: the packet not reaching the client; Photon's `TextureMaterial` not finding a
-  `DynamicTexture` registered at `mdvlcraft:callout/<n>` (it may want a real resource path, or the texture to be
-  uploaded on the render thread); the effect's `fxLocation`. Remove the DEBUGCALLOUT lines once it works.
+- The pipeline always worked. It looked broken because the name was drawn tiny (4 texture pixels per font pixel) and
+  darkened to the chant's red, under Smart Particles' camera culling on test clients (`smartCameraCulling: false` in
+  the client packs' `config/smart_particles/config.json` shows every Photon effect).
+- Now: names fill up to 90% of the texture at up to 12 pixels per font pixel, in the school's full colour.
+- They appear at a random spot left or right of the head, between its bottom and top, 0.8–1.1 blocks out and never in
+  front (`SkillCalloutClient.beside`).
+- Iron's spells are called out at cast start (`SpellPreCastEvent`, after Iron's mana and cooldown checks). The
+  `SpellOnCastEvent` of a spell already called out is skipped; casts with no start (`/cast`, some mods) still call out
+  on cast.
+
+## Keep Slot Open setting
+
+The Status page has a Settings button (`client/SettingsScreen`) with one setting, Keep Slot Open
+(`content/KeepSlotOpen`, off by default, kept in the player's persisted NBT).
+
+- When on, hotbar slot 1 stays empty through the Samurai slot's guards (`MageHunterSlot.isSwordSlot`): no clicks,
+  number-key swaps, pickups or F.
+- Anything in the slot moves to the bag, or drops if the bag is full: when the setting is turned on, and every tick
+  after.
+- It does nothing for Samurai or Mage Hunters, who keep their own slot.
+- Packets: `SettingsPacket` (client to server), `SettingsSyncPacket` (sent on login and on change).
+
+## Open: Frying Pan & Spatula attacks don't play
+
+The server gets each Invincible combo request and fires the attack's BEGIN event, but the attack never reaches the
+animator and the client never plays it (the camera tips straight down). Epic Fight's `ServerAnimator.playAnimation`
+calls `begin`, then `setLinkAnimation`. If that throws inside the packet's `enqueueWork`, Forge swallows the
+exception, which fits everything seen so far.
+
+- Next step: call `ServerPlayerPatch.playAnimationSynchronized(ChefAnimations.A, 0.1F)` from a test command inside a
+  try/catch and log the throwable.
+- The ComboNode convert-time change in `SuperChefSetup.node` is in; it didn't fix this on its own.

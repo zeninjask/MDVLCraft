@@ -76,12 +76,16 @@ public final class MageHunterSlot {
         return granted.stream().anyMatch(ability -> SWORD_SUMMONS.contains(ability.id()));
     }
 
-    /** Whether the container slot is a Mage Hunter's sword slot, or the off hand holding a shadow weapon (creative mode leaves both open). */
+    /**
+     * Whether the container slot is a Mage Hunter's sword slot, a first slot kept empty by Keep Slot Open (content/KeepSlotOpen),
+     * or the off hand holding a shadow weapon (creative mode leaves all open).
+     */
     public static boolean isSwordSlot(Container container, int index) {
         if (!(container instanceof Inventory inventory) || inventory.player.isCreative()) {
             return false;
         }
-        return index == SLOT ? isMageHunter(inventory.player) : index == Inventory.SLOT_OFFHAND && ShadowWeapons.is(inventory.getItem(index));
+        return index == SLOT ? isMageHunter(inventory.player) || KeepSlotOpen.applies(inventory.player)
+            : index == Inventory.SLOT_OFFHAND && ShadowWeapons.is(inventory.getItem(index));
     }
 
     public static boolean isSword(ItemStack stack) {

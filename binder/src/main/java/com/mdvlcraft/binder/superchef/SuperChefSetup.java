@@ -13,7 +13,9 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import yesman.epicfight.api.animation.AnimationManager;
 import yesman.epicfight.api.animation.LivingMotions;
+import yesman.epicfight.api.animation.types.StaticAnimation;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
 import yesman.epicfight.gameasset.Animations;
@@ -39,6 +41,7 @@ public final class SuperChefSetup {
     public static final RegistryObject<Item> CHEF_WOK_PAN = ITEMS.register("chef_wok_pan", () -> new Item(new Item.Properties().stacksTo(1)));
     public static final RegistryObject<Item> CHEF_WOK_SPATULA = ITEMS.register("chef_wok_spatula", () -> new Item(new Item.Properties().stacksTo(1)));
     public static Skill CHEF_COMBO;
+    private static final float CONVERT_TIME = 0.1F;
 
     private SuperChefSetup() {
     }
@@ -51,32 +54,32 @@ public final class SuperChefSetup {
 
     private static void onSkillBuild(SkillBuildEvent event) {
         ComboNode root = ComboNode.create();
-        ComboNode a = ComboNode.createNode(ChefAnimations.A);
-        ComboNode ja = ComboNode.createNode(ChefAnimations.Y_A).addCondition(new JumpCondition()).setPriority(1);
-        ComboNode da = ComboNode.createNode(ChefAnimations.Y_A).addCondition(new SprintingCondition()).setPriority(2);
-        ComboNode b = ComboNode.createNode(ChefAnimations.B);
-        ComboNode jb = ComboNode.createNode(ChefAnimations.Y_B).addCondition(new JumpCondition()).setPriority(1);
-        ComboNode db = ComboNode.createNode(ChefAnimations.Y_B).addCondition(new SprintingCondition()).setPriority(2);
-        ComboNode aB = ComboNode.createNode(ChefAnimations.A_B);
-        ComboNode aBA = ComboNode.createNode(ChefAnimations.A_B_A);
-        ComboNode aBB = ComboNode.createNode(ChefAnimations.A_B_B);
+        ComboNode a = node(ChefAnimations.A);
+        ComboNode ja = node(ChefAnimations.Y_A).addCondition(new JumpCondition()).setPriority(1);
+        ComboNode da = node(ChefAnimations.Y_A).addCondition(new SprintingCondition()).setPriority(2);
+        ComboNode b = node(ChefAnimations.B);
+        ComboNode jb = node(ChefAnimations.Y_B).addCondition(new JumpCondition()).setPriority(1);
+        ComboNode db = node(ChefAnimations.Y_B).addCondition(new SprintingCondition()).setPriority(2);
+        ComboNode aB = node(ChefAnimations.A_B);
+        ComboNode aBA = node(ChefAnimations.A_B_A);
+        ComboNode aBB = node(ChefAnimations.A_B_B);
         ComboNode aBC = ComboNode.create()
-            .addConditionNode(ComboNode.createNode(ChefAnimations.A_B_C).setPriority(1))
-            .addConditionNode(ComboNode.createNode(ChefAnimations.Y_C).setPriority(2).addCondition(new StackCondition(1, 2)));
-        ComboNode aA = ComboNode.createNode(ChefAnimations.A_A);
-        ComboNode aAA = ComboNode.createNode(ChefAnimations.A_A_A);
-        ComboNode aAB = ComboNode.createNode(ChefAnimations.A_A_B);
-        ComboNode aAC = ComboNode.createNode(ChefAnimations.A_A_C);
-        ComboNode bB = ComboNode.createNode(ChefAnimations.B_B);
-        ComboNode bBA = ComboNode.createNode(ChefAnimations.B_B_A);
-        ComboNode bBB = ComboNode.createNode(ChefAnimations.B_B_B);
-        ComboNode bBC = ComboNode.createNode(ChefAnimations.B_B_C);
-        ComboNode bA = ComboNode.createNode(ChefAnimations.B_A);
-        ComboNode bAA = ComboNode.createNode(ChefAnimations.B_A_A);
-        ComboNode bAB = ComboNode.createNode(ChefAnimations.B_A_B);
-        ComboNode bAC = ComboNode.createNode(ChefAnimations.B_A_C);
-        ComboNode yA = ComboNode.createNode(ChefAnimations.Y_A);
-        ComboNode yB = ComboNode.createNode(ChefAnimations.Y_B);
+            .addConditionNode(node(ChefAnimations.A_B_C).setPriority(1))
+            .addConditionNode(node(ChefAnimations.Y_C).setPriority(2).addCondition(new StackCondition(1, 2)));
+        ComboNode aA = node(ChefAnimations.A_A);
+        ComboNode aAA = node(ChefAnimations.A_A_A);
+        ComboNode aAB = node(ChefAnimations.A_A_B);
+        ComboNode aAC = node(ChefAnimations.A_A_C);
+        ComboNode bB = node(ChefAnimations.B_B);
+        ComboNode bBA = node(ChefAnimations.B_B_A);
+        ComboNode bBB = node(ChefAnimations.B_B_B);
+        ComboNode bBC = node(ChefAnimations.B_B_C);
+        ComboNode bA = node(ChefAnimations.B_A);
+        ComboNode bAA = node(ChefAnimations.B_A_A);
+        ComboNode bAB = node(ChefAnimations.B_A_B);
+        ComboNode bAC = node(ChefAnimations.B_A_C);
+        ComboNode yA = node(ChefAnimations.Y_A);
+        ComboNode yB = node(ChefAnimations.Y_B);
 
         root.key1(ComboNode.create().addConditionNode(a).addConditionNode(ja).addConditionNode(da));
         root.key2(ComboNode.create().addConditionNode(b).addConditionNode(jb).addConditionNode(db));
@@ -98,6 +101,14 @@ public final class SuperChefSetup {
         }
         CHEF_COMBO = event.createRegistryWorker("mdvlcraft").build("chef_combo", ChefComboAttack::new,
             ChefComboAttack.createComboBasicAttack().setCombo(root).setShouldDrawGui(true));
+    }
+
+    /**
+     * A combo step. Invincible plays each step with its node's convert time, 0 unless set, and a 0-length link animation
+     * leaves the server's animator on NaN time: the step then only plays on the client and never hits.
+     */
+    private static ComboNode node(AnimationManager.AnimationAccessor<? extends StaticAnimation> animation) {
+        return ComboNode.createNode(animation).setConvertTime(CONVERT_TIME);
     }
 
     private static void onWeaponPresets(WeaponCapabilityPresetRegistryEvent event) {
