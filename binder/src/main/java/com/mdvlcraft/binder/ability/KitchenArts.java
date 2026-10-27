@@ -17,12 +17,10 @@ import net.minecraft.server.level.ServerPlayer;
  *   (DomainUpkeep), holding the cast key cuts every mob nearby, and sneak-casting closes it.
  * - Sear: Cursed Fate's Fuga, held to charge (its fire-arrow animation) and loosed on release where the chef looks: Fuga, or
  *   Divine Flame inside the chef's own open shrine.
- * Chop (Dismantle, the chanted Calamitous Shrine Dismantle when sneaking), Mince (Cleave) and Dicing Board (the Calamitous
+ * Chop (Dismantle), Mince (Cleave) and Dicing Board (the Calamitous
  * Shrine's Enhanced Spiderweb) are Cursed Fate abilities cast by TechniqueRunner.
  */
 final class KitchenArts {
-    /** The Calamitous Shrine's Dismantle (its chanted form when Chant is set). */
-    static final int CALAMITOUS_DISMANTLE = 95;
     private static final double MAX_OUTPUT = 100.0;
     private static final String SHRINE_TECHNIQUE = "Shrine";
     private static final double SEAR_ENERGY = 1.0E9;

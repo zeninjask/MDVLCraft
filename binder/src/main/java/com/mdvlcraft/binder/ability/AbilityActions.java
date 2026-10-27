@@ -62,6 +62,7 @@ public final class AbilityActions {
                         default -> {
                         }
                     }
+                    SkillCallout.announce(player, gaunt);
                 }
             });
             return;
@@ -79,22 +80,38 @@ public final class AbilityActions {
             } else if (SeraphForm.in(player) && !(ability.get() instanceof SpellAbility)) {
                 SeraphForm.refuse(player);
             } else if (ability.get() instanceof SpellAbility spellAbility) {
-                castSpell(player, spellAbility.spell(), level);
-            } else if (ability.get() instanceof Technique technique) {
-                TechniqueRunner.press(player, technique);
-            } else if (ability.get() instanceof SlotSkillAbility slotSkill) {
-                slotSkill.cast(player);
-            } else if (ability.get() instanceof StanceAbility) {
-                Stances.press(player);
-            } else if (ability.get() instanceof DoppelgangerAbility) {
-                Doppelgangers.press(player);
-            } else if (ability.get() instanceof SustenanceAbility sustenance) {
-                sustenance.cast(player);
-            } else if (ability.get() instanceof FormlessSwordAbility) {
-                com.mdvlcraft.binder.shadow.ShadowArsenal.press(player);
-            } else if (ability.get() instanceof PlannedAbility planned) {
-                planned.cast(player);
+                castSpell(player, spellAbility.spell(), level);   // SkillCallout calls it out when Iron's casts it
+            } else {
+                cast(player, ability.get());
             }
+        }
+    }
+
+    /** A wheel ability other than an Iron's spell; it is called out (SkillCallout) when the press spent mana or started a cooldown. */
+    private static void cast(ServerPlayer player, Ability ability) {
+        float mana = MagicData.getPlayerMagicData(player).getMana();
+        long cooldown = ability instanceof Technique technique ? TechniqueCooldowns.remaining(player, technique) : 0L;
+        if (ability instanceof Technique technique) {
+            TechniqueRunner.press(player, technique);
+        } else if (ability instanceof SlotSkillAbility slotSkill) {
+            slotSkill.cast(player);
+        } else if (ability instanceof StanceAbility) {
+            Stances.press(player);
+        } else if (ability instanceof DoppelgangerAbility) {
+            Doppelgangers.press(player);
+        } else if (ability instanceof SustenanceAbility sustenance) {
+            sustenance.cast(player);
+        } else if (ability instanceof FormlessSwordAbility) {
+            com.mdvlcraft.binder.shadow.ShadowArsenal.press(player);
+        } else if (ability instanceof PlannedAbility planned) {
+            planned.cast(player);
+            return;
+        }
+        boolean used = ability instanceof StanceAbility ? Stances.active(player).isPresent()
+            : player.isCreative() || MagicData.getPlayerMagicData(player).getMana() < mana
+                || ability instanceof Technique technique && TechniqueCooldowns.remaining(player, technique) > cooldown;
+        if (used) {
+            SkillCallout.announce(player, ability);
         }
     }
 
