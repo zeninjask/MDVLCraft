@@ -19,7 +19,8 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.registries.ForgeRegistries;
 
 /**
- * Follows a binder player's Malevolent Shrine (closed or open) from cast to close. While it stands it costs
+ * Follows a binder player's Malevolent Shrine (closed or open, whichever Cursed Fate's domain picker settled on) from cast
+ * to close. While it stands it costs
  * {@link #manaPerSecond} mana a second (10, closed or open) and Cursed Fate's cursed energy is kept topped up; it closes
  * when the owner sneak-casts it again ({@link #close}) or cannot pay the next second. The closed shrine's cooldown
  * restarts in full when it closes, however it closes.
@@ -74,18 +75,28 @@ final class DomainUpkeep {
             } else {
                 DomainUpkeep.Domain domain = entry.getValue();
                 long now = player.level().getGameTime();
-                boolean up = domain.shrine() == Technique.MALEVOLENT_SHRINE ? !ownedClosedDomains(player).isEmpty() : ownsOpenShrine(player);
                 if (domain.openedTick() < 0L) {
-                    if (up) {
-                        entry.setValue(new DomainUpkeep.Domain(domain.shrine(), domain.castTick(), now));
-                    } else if (now - domain.castTick() > 100L) {
+                    // Which shrine opens is only settled when Cursed Fate's domain picker closes
+                    Technique opened = !ownedClosedDomains(player).isEmpty() ? Technique.MALEVOLENT_SHRINE
+                        : ownsOpenShrine(player) ? Technique.OPEN_MALEVOLENT_SHRINE : null;
+                    if (opened != null) {
+                        entry.setValue(new DomainUpkeep.Domain(opened, domain.castTick(), now));
+                    } else if (now - domain.castTick() > WIND_UP_TICKS) {
                         entries.remove();
                     }
-                } else if (up) {
+                    continue;
+                }
+
+                boolean up = domain.shrine() == Technique.MALEVOLENT_SHRINE ? !ownedClosedDomains(player).isEmpty() : ownsOpenShrine(player);
+                if (up) {
                     if ((now - domain.openedTick()) % 20L == 0L && !pay(player, domain.shrine())) {
                         entries.remove();
                         shut(player, domain);
                         continue;
+                    }
+
+                    if (domain.shrine() == Technique.MALEVOLENT_SHRINE && TechniqueRunner.isSlashing(player)) {
+                        ownedClosedDomains(player).forEach(ShrineSlashes::fillDome);
                     }
 
                     PlayerVariables variables = TechniqueRunner.variables(player);
@@ -136,7 +147,7 @@ final class DomainUpkeep {
             );
     }
 
-    private static boolean ownsOpenShrine(ServerPlayer player) {
+    static boolean ownsOpenShrine(ServerPlayer player) {
         EntityType<?> shrineType = ForgeRegistries.ENTITY_TYPES.getValue(OPEN_SHRINE);
         if (shrineType != null && OPEN_SHRINE.equals(ForgeRegistries.ENTITY_TYPES.getKey(shrineType))) {
             String owner = player.getStringUUID();

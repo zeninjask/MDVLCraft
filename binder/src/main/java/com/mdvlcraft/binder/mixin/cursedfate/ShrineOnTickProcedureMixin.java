@@ -17,8 +17,8 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * The open Malevolent Shrine (the Master Chef's Malevolent Kitchen) only cuts while its owner holds the cast key, and
- * never shows its slashes (Cursed Fate's cleave effects and sweep sounds); it cuts only out to 20 blocks (Cursed Fate: 45).
+ * The open Malevolent Shrine (the Master Chef's Malevolent Kitchen) only cuts while its owner holds the cast key, and its
+ * slashes (Cursed Fate's cleave effects and sweep sounds) show only while it cuts; it cuts out to 20 blocks (Cursed Fate: 45).
  */
 @Mixin(value = ShrineOnTickProcedure.class, remap = false)
 public abstract class ShrineOnTickProcedureMixin {
@@ -31,17 +31,17 @@ public abstract class ShrineOnTickProcedureMixin {
         return 20.0;
     }
 
-    /** The domain-wide slash effects and sweep sounds (once domainnum passes 35) never play: it cuts unseen. */
+    /** The domain-wide slash effects and sweep sounds (once domainnum passes 35) play only while the shrine cuts. */
     @ModifyConstant(method = "execute", constant = @Constant(doubleValue = 35.0), require = 1)
-    private static double mdvlcraft$noSlashEffects(double ticks) {
-        return Double.MAX_VALUE;
+    private static double mdvlcraft$slashEffectsWhileCutting(double ticks) {
+        return mdvlcraft$slashing ? ticks : Double.MAX_VALUE;
     }
 
-    /** Its per-target cleave effects (photon commands) don't play either. */
+    /** So do its per-target cleave effects (photon commands). */
     @Redirect(method = "execute", at = @At(value = "INVOKE",
         target = "Lnet/minecraft/commands/Commands;m_230957_(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)I"), require = 1)
-    private static int mdvlcraft$noCleaveEffects(Commands commands, CommandSourceStack source, String command) {
-        return 0;
+    private static int mdvlcraft$cleaveEffectsWhileCutting(Commands commands, CommandSourceStack source, String command) {
+        return mdvlcraft$slashing ? commands.performPrefixedCommand(source, command) : 0;
     }
 
     @Inject(method = "execute", at = @At("HEAD"))

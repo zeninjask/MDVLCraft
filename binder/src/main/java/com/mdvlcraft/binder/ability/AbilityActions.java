@@ -41,6 +41,9 @@ public final class AbilityActions {
         if (com.mdvlcraft.binder.gate.GateCombat.downed(player)) {
             return;   // no skills while downed (combat/DownedNoSkills)
         }
+        if (ShrineSign.signing(player)) {
+            return;   // holding the shrine's hand sign (ShrineSign)
+        }
         if (RaijuForm.in(player)) {
             // Yakusanoikazuchi's wheel: Transform Back only.
             GauntAbility.raijuSlot(slot).ifPresent(raiju -> castSpell(player, SpellRegistry.getSpell(ResourceLocation.parse(RaijuForm.SPELL)), 1));

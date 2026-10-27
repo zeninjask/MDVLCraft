@@ -65,7 +65,6 @@ public final class MonkArts {
         return switch (technique) {
             case FOCUS -> focus(player);
             case KNOCKOUT -> knockout(player);
-            case SEAR -> KitchenArts.sear(player);
             case SPARKING_BLOODLUST -> BerserkerArts.sparkingBloodlust(player);
             case BULL_RUSH -> BerserkerArts.bullRush(player);
             default -> false;

@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.ability.AbilityIcons;
+import com.mdvlcraft.binder.client.picker.VocationPicker;
 import com.mdvlcraft.binder.network.ArchetypePickPacket;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.network.ResetSkillsPacket;
@@ -106,33 +107,14 @@ public class RespecScreen extends Screen {
                 break;
             case FIRST:
             case SECOND:
-                boolean first = this.step == RespecScreen.Step.FIRST;
-                text = first
-                    ? (this.migrationLevel >= 0
-                        ? Component.translatable("screen.mdvlcraft.migration.desc", this.migrationLevel)
-                        : this.freeLevel >= 0
-                        ? Component.translatable("screen.mdvlcraft.respec.desc.free", this.freeLevel)
-                        : Component.translatable("screen.mdvlcraft.respec.desc.first"))
-                    : Component.translatable("screen.mdvlcraft.respec.desc.second", title(this.from));
-                for (String id : Respec.ARCHETYPES) {
-                    if (!first && id.equals(this.from)) {
-                        continue;
-                    }
-
-                    choices.add(new RespecScreen.Choice(Component.literal(title(id)), id, () -> {
-                        if (first) {
-                            this.from = id;
-                            this.go(RespecScreen.Step.SECOND);
-                        } else {
-                            this.to = id;
-                            this.go(RespecScreen.Step.CONFIRM);
-                        }
-                    }, true));
-                }
-
-                columns = 3;
-                buttonW = 100;
-                break;
+                // The two archetypes are picked on the vocation picker; its choice comes back here to be confirmed.
+                Minecraft.getInstance().tell(() -> VocationPicker.open(pair -> {
+                    this.from = pair[0];
+                    this.to = pair[1];
+                    this.step = RespecScreen.Step.CONFIRM;
+                    Minecraft.getInstance().setScreen(this);
+                }));
+                return;
             default:
                 text = this.migrationLevel >= 0
                     ? Component.translatable(
@@ -196,7 +178,7 @@ public class RespecScreen extends Screen {
                 this.go(RespecScreen.Step.FIRST);
                 break;
             case CONFIRM:
-                this.go(RespecScreen.Step.SECOND);
+                this.go(RespecScreen.Step.FIRST);
         }
     }
 

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -22,13 +23,22 @@ import net.minecraft.world.item.ItemStack;
 /**
  * The vocation picker (PickerScreen) a player without a vocation gets: every archetype as a heading with all its vocations
  * under it, so each vocation shows twice, once under each of its archetypes. The panel lists the pair and the vocation's
- * own abilities (the centre column of its tab). Confirming picks both archetypes (network/VocationPickPacket).
+ * own abilities (the centre column of its tab). Confirming picks both archetypes (network/VocationPickPacket); a respec or
+ * the legacy migration uses the same picker and confirms on its own page (client/RespecScreen).
  */
 public final class VocationPicker {
     private VocationPicker() {
     }
 
     public static void open() {
+        open(pair -> {
+            BinderNetwork.sendToServer(new VocationPickPacket(pair[0], pair[1]));
+            Minecraft.getInstance().setScreen(null);
+        });
+    }
+
+    /** The picker, handing the confirmed pair {a, b} to onPick (a respec confirms it on its own page, client/RespecScreen). */
+    public static void open(Consumer<String[]> onPick) {
         List<PickerScreen.Entry> entries = new ArrayList<>();
         List<Map.Entry<String, JsonElement>> vocations = VocationParts.all().entrySet().stream()
             .filter(e -> e.getKey().startsWith("voc_"))
@@ -46,11 +56,8 @@ public final class VocationPicker {
                 }
             }
         }
-        Minecraft.getInstance().setScreen(new PickerScreen(Component.translatable("gui.mdvlcraft.picker.vocation"), entries, true, picked -> {
-            String[] pair = picked.id().split(",");
-            BinderNetwork.sendToServer(new VocationPickPacket(pair[0], pair[1]));
-            Minecraft.getInstance().setScreen(null);
-        }));
+        Minecraft.getInstance().setScreen(new PickerScreen(Component.translatable("gui.mdvlcraft.picker.vocation"), entries, true,
+            picked -> onPick.accept(picked.id().split(","))));
     }
 
     /** The pair, the vocation's summary and its playstyle (vocation_parts/vocations.json). */

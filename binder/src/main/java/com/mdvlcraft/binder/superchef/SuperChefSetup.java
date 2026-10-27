@@ -5,7 +5,14 @@ import com.p1nero.invincible.conditions.JumpCondition;
 import com.p1nero.invincible.conditions.SprintingCondition;
 import com.p1nero.invincible.conditions.StackCondition;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
+import net.minecraft.world.item.SwordItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.registries.DeferredRegister;
+import net.minecraftforge.registries.ForgeRegistries;
+import net.minecraftforge.registries.RegistryObject;
 import yesman.epicfight.api.animation.LivingMotions;
 import yesman.epicfight.api.forgeevent.SkillBuildEvent;
 import yesman.epicfight.api.forgeevent.WeaponCapabilityPresetRegistryEvent;
@@ -18,17 +25,26 @@ import yesman.epicfight.world.capabilities.item.CapabilityItem.WeaponCategories;
 import yesman.epicfight.world.capabilities.item.WeaponCapability;
 
 /**
- * Epic Fight - Super Chef in the binder: weapon type mdvlcraft:skillet (given to Farmer's Delight's skillet by
- * kubejs/data/farmersdelight/capabilities/weapons/skillet.json), its animations (ChefAnimations) and its innate skill
- * mdvlcraft:chef_combo, Invincible's key combo: key 1 swings the spatula, key 2 the skillet, key 3 finishes.
+ * Epic Fight - Super Chef in the binder: the Frying Pan & Spatula (item mdvlcraft:chef_wok, drawn as a spatula in the right
+ * hand and a pan in the left by client/ChefWokRenderer) with weapon type mdvlcraft:skillet
+ * (data/mdvlcraft/capabilities/weapons/chef_wok.json), its animations (ChefAnimations) and its innate skill
+ * mdvlcraft:chef_combo, Invincible's key combo: key 1 swings the spatula, key 2 the pan, key 3 finishes. Its own item, as
+ * Epic Delight gives Farmer's Delight's skillet a moveset of its own.
  */
 public final class SuperChefSetup {
+    private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "mdvlcraft");
+    public static final RegistryObject<Item> CHEF_WOK = ITEMS.register("chef_wok",
+        () -> new SwordItem(Tiers.NETHERITE, 3, -2.4F, new Item.Properties().stacksTo(1).fireResistant().rarity(Rarity.RARE)));
+    /** The two halves ChefWokRenderer draws in the hands; not obtainable. */
+    public static final RegistryObject<Item> CHEF_WOK_PAN = ITEMS.register("chef_wok_pan", () -> new Item(new Item.Properties().stacksTo(1)));
+    public static final RegistryObject<Item> CHEF_WOK_SPATULA = ITEMS.register("chef_wok_spatula", () -> new Item(new Item.Properties().stacksTo(1)));
     public static Skill CHEF_COMBO;
 
     private SuperChefSetup() {
     }
 
     public static void register(IEventBus modBus) {
+        ITEMS.register(modBus);
         modBus.addListener(SuperChefSetup::onSkillBuild);
         modBus.addListener(SuperChefSetup::onWeaponPresets);
     }
