@@ -776,9 +776,9 @@ def trap(n, seed, large):
 
 
 def maze(n, seed, large):
-    """A hedge of walls four high filling the room: a perfect maze of two-wide paths (every cell reachable, one way
-    between any two) with straight runs in from each doorway. Mobs wait in random cells; the loot marker is at the dead
-    end farthest from the south doorway."""
+    """A hedge of walls from floor to ceiling filling the room (nothing to dash or leap over): a perfect maze of two-wide
+    paths (every cell reachable, one way between any two) with straight runs in from each doorway. Mobs wait in random
+    cells; the loot marker is at the dead end farthest from the south doorway."""
     inset, height = (2, 11) if large else (8, 10)
     r = Room(height, seed)
     inner = shell(r, inset, ALL)
@@ -787,14 +787,15 @@ def maze(n, seed, large):
     cells = 13 if large else 9
     start = MID - (3 * cells) // 2
     lo, hi = inset + 1, SIZE - 2 - inset
+    hedge = range(WALK, r.height - 1)   # up to the ceiling (r.height - 1)
     for (x, z) in inner:
-        for y in range(WALK, WALK + 4):
+        for y in hedge:
             r.set(x, y, z, 'wall2' if r.rng.random() < 0.2 else 'wall')
 
     def carve(x0, z0, x1, z1):
         for x in range(min(x0, x1), max(x0, x1) + 1):
             for z in range(min(z0, z1), max(z0, z1) + 1):
-                for y in range(WALK, WALK + 4):
+                for y in hedge:
                     r.air(x, y, z)
 
     def cell_xz(i, j):
@@ -843,7 +844,7 @@ def maze(n, seed, large):
         x, z = cell_xz(*c)
         r.marker(x, WALK, z, 'spawn:ranged' if k == 0 else 'spawn:melee')
     for x in range(start, start + 3 * cells + 1, 6):
-        if lo <= x <= hi:
+        if lo <= x <= hi and r.get(x, r.height - 2, MID) is None:   # lanterns hang over paths, not inside the hedge
             r.set(x, r.height - 2, MID, 'hang')
     return r
 

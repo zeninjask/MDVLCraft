@@ -34,7 +34,6 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
-import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 
 /**
  * Formless Sword (the samurai's ability, in place of Magic Blade: Absorb) and the Shadow Arsenal. Activating the ability
@@ -183,10 +182,9 @@ public final class ShadowArsenal {
         }
     }
 
-    /** Whether the weapon can be held in one hand (Epic Fight's one-handed style), so it also has an off-hand version. */
+    /** Whether the weapon can be held in one hand (ShadowWeapons.oneHanded), so it also has an off-hand version. */
     public static boolean oneHanded(Item item) {
-        ItemStack stack = new ItemStack(item);
-        return ShadowWeapons.absorbable(stack) && EpicFightCapabilities.getItemStackCapability(stack).canBePlacedOffhand();
+        return ShadowWeapons.oneHanded(new ItemStack(item));
     }
 
     private static Item item(String id) {

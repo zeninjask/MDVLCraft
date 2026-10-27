@@ -37,6 +37,12 @@ public final class GateSpawner {
     private static final UUID DAMAGE = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0002");
     private static final UUID ARMOUR = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0003");
     private static final UUID ELITE_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0004");
+    private static final UUID BOSS_ARMOUR = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0005");
+    private static final UUID BOSS_TOUGHNESS = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0006");
+    /** The share of the rank's health bonus a boss keeps. */
+    private static final double BOSS_HEALTH_SHARE = 0.5;
+    /** The share of a boss's own armour and toughness taken off. */
+    private static final double BOSS_DEFENCE_CUT = 0.5;
 
     private GateSpawner() {
     }
@@ -57,6 +63,9 @@ public final class GateSpawner {
         mob.setPersistenceRequired();
         mob.finalizeSpawn(level, level.getCurrentDifficultyAt(pos), MobSpawnType.EVENT, null, null);
         scale(mob, instance.rank);
+        if (BOSS.equals(role)) {
+            soften(mob);
+        }
         if (ELITE.equals(role)) {
             modify(mob.getAttribute(Attributes.MAX_HEALTH), ELITE_HEALTH, "gate elite", 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL);
             mob.setHealth(mob.getMaxHealth());
@@ -94,6 +103,26 @@ public final class GateSpawner {
         modify(mob.getAttribute(Attributes.MAX_HEALTH), HEALTH, "gate health", (rank.health - 1.0) * SCALING, AttributeModifier.Operation.MULTIPLY_TOTAL);
         modify(mob.getAttribute(Attributes.ATTACK_DAMAGE), DAMAGE, "gate damage", (rank.damage - 1.0) * SCALING, AttributeModifier.Operation.MULTIPLY_TOTAL);
         modify(mob.getAttribute(Attributes.ARMOR), ARMOUR, "gate armour", rank.armour * SCALING, AttributeModifier.Operation.ADDITION);
+        mob.setHealth(mob.getMaxHealth());
+    }
+
+    /**
+     * A boss's own defences are already a boss's (and most carry their mod's own damage and DPS caps): the rank's armour bonus
+     * is dropped, its health bonus halved, and its own armour and toughness halved, so a fitting party can wear it down.
+     */
+    private static void soften(Mob mob) {
+        AttributeInstance health = mob.getAttribute(Attributes.MAX_HEALTH);
+        AttributeModifier bonus = health == null ? null : health.getModifier(HEALTH);
+        if (bonus != null) {
+            health.removeModifier(HEALTH);
+            health.addPermanentModifier(new AttributeModifier(HEALTH, "gate health", bonus.getAmount() * BOSS_HEALTH_SHARE, bonus.getOperation()));
+        }
+        AttributeInstance armour = mob.getAttribute(Attributes.ARMOR);
+        if (armour != null) {
+            armour.removeModifier(ARMOUR);
+        }
+        modify(armour, BOSS_ARMOUR, "gate boss armour", -BOSS_DEFENCE_CUT, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        modify(mob.getAttribute(Attributes.ARMOR_TOUGHNESS), BOSS_TOUGHNESS, "gate boss toughness", -BOSS_DEFENCE_CUT, AttributeModifier.Operation.MULTIPLY_TOTAL);
         mob.setHealth(mob.getMaxHealth());
     }
 

@@ -18,6 +18,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetActionBarTextPacket;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.phys.Vec3;
 
 final class TechniqueRunner {
     private static final Map<UUID, Technique> HELD = new HashMap<>();
@@ -27,6 +28,9 @@ final class TechniqueRunner {
     private static final double FREE_FOCUS = 3.0;
     /** Cursed Fate's highest technique mastery. */
     private static final double FULL_MASTERY = 100.0;
+    /** Sneak Chop's back-hop (about 4 blocks). */
+    private static final double DODGE_SPEED = 0.9;
+    private static final double DODGE_LIFT = 0.42;
 
     private TechniqueRunner() {
     }
@@ -168,14 +172,23 @@ final class TechniqueRunner {
             // Cursed Fate's own mastery levelling is off for binder players: they cast at full mastery (its damage bonus is mastery / 8)
             variables.InnateMastery = FULL_MASTERY;
             variables.InnateMasteryXp = 0.0;
-            variables.Chant = false;   // binder casts are never Cursed Fate's chanted forms
+            variables.Chant = false;   // binder casts are never Cursed Fate's chanted forms (bar sneak Chop's below)
+            // Cursed Fate's own keys can leave these set, and each makes its dispatcher run another slot or skip the cast:
+            // Flow (Dismantle needs it off), the preset swap (reads AbilityNum8, not 1) and a held copied technique
+            variables.Flow = false;
+            variables.PresetSwich = false;
+            variables.CopyNumHeld = 0.0;
             if (technique.blackBird()) {
-                variables.Flow = false;
                 variables.MaximumOutput = false;
             }
 
             int abilityId = technique.abilityId;
-            if (technique == Technique.DICING_BOARD) {
+            boolean calamitous = technique == Technique.CHOP && player.isShiftKeyDown();
+            if (calamitous) {
+                abilityId = KitchenArts.CALAMITOUS_DISMANTLE;   // the chanted Heian-era Dismantle, sent with a flip
+                variables.Chant = true;
+                variables.MaximumOutput = false;   // the chant only runs at normal output
+            } else if (technique == Technique.DICING_BOARD) {
                 variables.MaximumOutput = false;   // the plain branch of the Calamitous Shrine's web is the Enhanced Spiderweb
                 variables.Flow = false;
             }
@@ -194,12 +207,30 @@ final class TechniqueRunner {
                 KitchenArts.startSear(player);
             }
 
-            Runnable execute = () -> runFree(player, () -> AbilitysProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ(), player));
+            boolean[] spent = new boolean[1];
+            Runnable execute = () -> spent[0] = runFree(player, () -> AbilitysProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ(), player));
             MonkArts.noteCast(player, technique);
+            SlashPierce.noteCast(player, technique);
             if (technique.weaponFree()) {
                 WeaponFreeCasts.run(execute);
             } else {
                 execute.run();
+            }
+
+            if (technique.isSlash() && !calamitous && !spent[0]) {
+                // a slash spends cursed energy whenever it fires: none spent means Cursed Fate refused it, so it costs nothing
+                if (!player.isCreative()) {
+                    magic.setMana(magic.getMana() + cost);
+                    PacketDistributor.sendToPlayer(player, new SyncManaPacket(magic));
+                }
+                return false;
+            }
+
+            if (calamitous) {
+                // Cursed Fate's back-dodge is set on the server only and throws the caster ~17 blocks: a short hop back instead
+                Vec3 back = player.getLookAngle().multiply(1.0, 0.0, 1.0).normalize().scale(-DODGE_SPEED);
+                player.setDeltaMovement(back.x, DODGE_LIFT, back.z);
+                player.hurtMarked = true;
             }
 
             TechniqueCooldowns.start(player, technique);
@@ -229,21 +260,25 @@ final class TechniqueRunner {
         runFree(player, () -> AbilitysProcedure.execute(player.level(), player.getX(), player.getY(), player.getZ(), player));
     }
 
-    static void runFree(ServerPlayer player, Runnable cast) {
+    /** @return whether the cast spent any cursed energy (Cursed Fate takes its cost whenever an ability fires) */
+    static boolean runFree(ServerPlayer player, Runnable cast) {
         PlayerVariables before = variables(player);
         double energy = Math.max(before.CursedEnegry, before.CursedEnegryMax);
         double focus = before.Focus;
         before.CursedEnegry = FREE_ENERGY;
         before.Focus = FREE_FOCUS;
         before.syncPlayerVariables(player);
+        boolean spent = false;
         try {
             cast.run();
         } finally {
             PlayerVariables after = variables(player);
+            spent = after.CursedEnegry < FREE_ENERGY;
             after.CursedEnegry = energy;
             after.Focus = focus;
             after.syncPlayerVariables(player);
         }
+        return spent;
     }
 
     private static int cost(ServerPlayer player, Technique technique) {

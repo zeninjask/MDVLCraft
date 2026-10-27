@@ -490,6 +490,33 @@ The Status page has a Settings button (`client/SettingsScreen`) with one setting
 - It does nothing for Samurai or Mage Hunters, who keep their own slot.
 - Packets: `SettingsPacket` (client to server), `SettingsSyncPacket` (sent on login and on change).
 
+## 2.1.62 fixes
+
+- **Cursed Fate casts that paid but did nothing:** Cursed Fate's dispatcher reads another slot when `PresetSwich` is set
+  and replays a copied technique when `CopyNumHeld` is set. Dismantle also needs `Flow` off. `TechniqueRunner.cast` now
+  clears all three on every binder cast. A slash (Dismantle, Cleave, Chop, Mince) that spends no cursed energy didn't
+  fire, so its mana is refunded and no cooldown or callout follows (`runFree` reports the spend).
+- **Sneak Chop** is the chanted Calamitous Dismantle (ability 95) with the binder's short back-hop again (2.1.59 had
+  made it plain Dismantle).
+- **Sear** (`mixin/cursedfate/SearHitMixin`, on Fuga's and Divine Flame's hit procedures):
+  - deals double damage;
+  - never hits or sets alight the caster's allies (party members via `isAlliedTo`). Cursed Fate set everything within
+    4.5 blocks on fire with no ally check.
+- **Slash armour pierce** (`ability/SlashPierce`, applied in `ALCombatRulesMixin`): armour blocks half what it would
+  against Cursed Fate damage from a player within 2 s of a slash cast or while their Malevolent Shrine stands.
+- **Gate bosses** (`GateSpawner.soften`): half the rank's health bonus, no rank armour, their own armour and toughness
+  halved. A-rank bosses include Netherite Monstrosity, Maledictus and the Nightwarden, which also carry their mods'
+  damage and DPS caps.
+- **Gates:** Fading Mages are out of every theme's pools. Maze hedges run floor to ceiling (`tools/gates/gen_gate_rooms.py`
+  `maze`, regenerated; only the 5 maze templates per theme changed).
+- **Formless Sword:**
+  - absorbs fist weapons with a real weapon capability (Feral Claw, `efn:nf_claw`);
+  - a weapon counts as one-handed (gets an off-hand entry) if Epic Fight allows it in the off hand or its category is
+    sword, axe, dagger, hoe, pickaxe or shovel.
+- **PhotonPatch** (`photonpatchbeta-1.20.1-1.0.0.jar`, CurseForge file 8727547, GPL-3.0, client-only, by Cursed Fate's
+  author) is in the client packs' overrides. It fixes Photon's framebuffer handling under Oculus shaderpacks, for
+  blurry or broken Cursed Fate effects.
+
 ## Open: Frying Pan & Spatula attacks don't play
 
 The server gets each Invincible combo request and fires the attack's BEGIN event, but the attack never reaches the

@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.mixin.attributeslib;
 
+import com.mdvlcraft.binder.ability.SlashPierce;
 import com.mdvlcraft.binder.combat.KatanaWeapons;
 import com.mdvlcraft.binder.combat.WeakerArmour;
 import net.minecraft.world.damagesource.DamageSource;
@@ -14,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 /**
  * Apothic Attributes replaces vanilla's armour and protection maths (LivingEntity calls these instead of CombatRules),
  * so the weaker armour of CombatRulesMixin is applied here too: a player's armour and protection enchantments block 35%
- * less. Other creatures keep their full armour. The Split Soul Katana's hits ignore armour on anything.
+ * less. Other creatures keep their full armour. The Split Soul Katana's hits ignore armour on anything, and slashing
+ * techniques' hits (ability/SlashPierce) go half through it.
  */
 @Pseudo
 @Mixin(targets = "dev.shadowsoffire.attributeslib.api.ALCombatRules", remap = false)
@@ -32,6 +34,9 @@ public abstract class ALCombatRulesMixin {
                                                CallbackInfoReturnable<Float> cir) {
         if (target instanceof Player) {
             cir.setReturnValue(WeakerArmour.scale(damage, cir.getReturnValue()));
+        }
+        if (SlashPierce.slashHit(source)) {
+            cir.setReturnValue(SlashPierce.scale(damage, cir.getReturnValue()));
         }
     }
 

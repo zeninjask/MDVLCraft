@@ -1,12 +1,15 @@
 package com.mdvlcraft.binder.shadow;
 
 import java.util.Map;
+import java.util.Set;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
+import yesman.epicfight.world.capabilities.item.WeaponCapability;
+import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
 /**
  * Shadow weapons: Formless Sword's summons (ShadowArsenal). A shadow weapon is the base item of an absorbed weapon, so it
@@ -24,15 +27,36 @@ public final class ShadowWeapons {
         return !stack.isEmpty() && stack.getTag() != null && stack.getTag().getBoolean(TAG);
     }
 
-    /** Whether the stack is a weapon Formless Sword can absorb: anything Epic Fight treats as a weapon, not a shadow. */
+    /**
+     * Whether the stack is a weapon Formless Sword can absorb: anything Epic Fight treats as a weapon, not a shadow. Fist
+     * weapons (claws, gauntlets: a weapon capability of their own) count; the bare-hand default doesn't.
+     */
     public static boolean absorbable(ItemStack stack) {
         if (stack.isEmpty() || is(stack)) {
             return false;
         }
         CapabilityItem capability = EpicFightCapabilities.getItemStackCapability(stack);
-        return capability != null && capability.getWeaponCategory() != CapabilityItem.WeaponCategories.NOT_WEAPON
-            && capability.getWeaponCategory() != CapabilityItem.WeaponCategories.FIST;
+        if (capability == null || capability.getWeaponCategory() == CapabilityItem.WeaponCategories.NOT_WEAPON) {
+            return false;
+        }
+        return capability.getWeaponCategory() != CapabilityItem.WeaponCategories.FIST || capability instanceof WeaponCapability;
     }
+
+    /**
+     * Whether the weapon is one-handed, so its shadow also has an off-hand version: Epic Fight lets it go in the off hand,
+     * or it is of a one-handed category (many mods' swords, axes and daggers don't set the off-hand flag).
+     */
+    public static boolean oneHanded(ItemStack stack) {
+        if (!absorbable(stack)) {
+            return false;
+        }
+        CapabilityItem capability = EpicFightCapabilities.getItemStackCapability(stack);
+        return capability.canBePlacedOffhand() || ONE_HANDED.contains(capability.getWeaponCategory());
+    }
+
+    private static final Set<WeaponCategory> ONE_HANDED = Set.of(CapabilityItem.WeaponCategories.SWORD, CapabilityItem.WeaponCategories.AXE,
+        CapabilityItem.WeaponCategories.DAGGER, CapabilityItem.WeaponCategories.HOE, CapabilityItem.WeaponCategories.PICKAXE,
+        CapabilityItem.WeaponCategories.SHOVEL);
 
     public static ItemStack make(Item item, Map<Enchantment, Integer> enchantments) {
         ItemStack stack = new ItemStack(item);
