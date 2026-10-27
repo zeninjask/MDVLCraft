@@ -87,10 +87,13 @@ public final class GateSpawner {
         return BOSS.equals(entity.getPersistentData().getString(ROLE));
     }
 
+    /** Every rank's bonus (health, damage, armour above an unscaled mob) is taken at four fifths. */
+    private static final double SCALING = 0.8;
+
     static void scale(Mob mob, GateRank rank) {
-        modify(mob.getAttribute(Attributes.MAX_HEALTH), HEALTH, "gate health", rank.health - 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL);
-        modify(mob.getAttribute(Attributes.ATTACK_DAMAGE), DAMAGE, "gate damage", rank.damage - 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL);
-        modify(mob.getAttribute(Attributes.ARMOR), ARMOUR, "gate armour", rank.armour, AttributeModifier.Operation.ADDITION);
+        modify(mob.getAttribute(Attributes.MAX_HEALTH), HEALTH, "gate health", (rank.health - 1.0) * SCALING, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        modify(mob.getAttribute(Attributes.ATTACK_DAMAGE), DAMAGE, "gate damage", (rank.damage - 1.0) * SCALING, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        modify(mob.getAttribute(Attributes.ARMOR), ARMOUR, "gate armour", rank.armour * SCALING, AttributeModifier.Operation.ADDITION);
         mob.setHealth(mob.getMaxHealth());
     }
 

@@ -497,6 +497,7 @@ public final class TowerRun {
         for (ServerPlayer player : present) {
             player.teleportTo(level, landing.getX() + 0.5, landing.getY(), landing.getZ() + 0.5, player.getYRot(), 0.0F);
             player.fallDistance = 0.0F;
+            com.mdvlcraft.binder.gate.GateProtection.forget(player);
             TowerProgress.get(level.getServer()).reach(player.getUUID(), this.floor);
             this.announceFloor(player);
         }

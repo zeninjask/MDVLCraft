@@ -102,6 +102,7 @@ public final class GateTravel {
         try {
             player.teleportTo(level, x, y, z, yaw, pitch);
             player.fallDistance = 0.0F;
+            GateProtection.forget(player);
         } finally {
             moving = false;
         }

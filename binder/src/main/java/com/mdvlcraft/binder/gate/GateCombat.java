@@ -24,6 +24,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.Block;
@@ -47,15 +48,15 @@ import org.slf4j.Logger;
  * Combat inside a gate (plan 5.3–5.4). Room triggers: the first time a roster member steps into one of an instance's room
  * boxes, that room's spawn markers fill with mobs from GateMobs (melee/ranged markers × the rank's count factor × (1 + 0.25
  * per extra roster member in the cell), one elite per elite marker) and its boss marker gets the theme's boss; the room
- * goes into triggeredRooms. Mobs stay when the party walks off, and one that strays out of its room (or cell) is put back
- * where it spawned. When the last boss dies the instance is CLEARED: the roster is told, an exit opens at the exit marker
+ * goes into triggeredRooms. Mobs stay when the party walks off and may chase out of their room; one that leaves the gate's
+ * cell is put back where it spawned. When the last boss dies the instance is CLEARED: the roster is told, an exit opens at the exit marker
  * (or where the boss fell) that sends whoever steps in home via GateTravel.leave, and after COLLAPSE_TICKS (or once nobody
  * is left inside) the gate
  * collapses (everyone out, cell cleared, instance closed). Nothing else spawns in the gate worlds: natural, structure and
  * patrol spawns there are cancelled.
  *
- * Boss room (plan 5.4): a few seconds after a roster member is well inside the boss room (and nobody stands in its
- * doorway), its doorways are walled up with their frame block; they open again when the gate is cleared, or as soon as
+ * Boss room (plan 5.4): its boss spawns only once every roster member still in the gate is inside the room, and a few
+ * seconds after they are all well inside (and nobody stands in its doorway), its doorways are walled up with their frame block; they open again when the gate is cleared, or as soon as
  * no roster member is left in the room, so a party whose fighters fell can come back in. Death (plan 5.5): a player who
  * dies in a normal gate respawns outside, in front of the gate, and stays on the roster; when the last roster member alive
  * in the gate dies, the gate fails and closes (its key was used up on opening). A player downed by PlayerRevive (bleeding,
@@ -70,10 +71,9 @@ public final class GateCombat {
     private static final int LEASH_TICKS = 40;
     /** How long a cleared gate stays open before it collapses (2 minutes). */
     public static final int COLLAPSE_TICKS = 2400;
-    /** How far a mob may go past its room's box before it is pulled back; and from home when it has no room. */
-    private static final int ROOM_SLACK = 2;
-    private static final double HOMELESS_RANGE = 32.0;
     private static final double PARTY_BONUS = 0.25;
+    /** How near a gate mob's nearest player must be for it to go after them (it hunts through the rooms from there). */
+    private static final double HUNT_RANGE = 24.0;
     /** When each instance was cleared (game time of its world); a restart closes every instance, so this needn't persist. */
     private static final Map<Integer, Long> CLEARED_AT = new HashMap<>();
     /** Who stood on each cleared gate's exit at the last check: the exit takes only players who step onto it, so one
@@ -155,9 +155,15 @@ public final class GateCombat {
 
     private static void triggerRooms(ServerLevel level, GateInstances gates, Instance instance) {
         List<ServerPlayer> present = present(level, instance);
+        int bossRoom = bossRoom(instance);
         for (ServerPlayer player : present) {
             BlockPos at = player.blockPosition();
             for (int room = 0; room < instance.rooms.size(); room++) {
+                if (room == bossRoom && !instance.triggeredRooms.contains(room) && instance.rooms.get(room).isInside(at)
+                    && !allInside(present, instance.rooms.get(room))) {
+                    waitForParty(present, instance.rooms.get(room));   // the boss waits for everyone still in the gate
+                    continue;
+                }
                 if (!instance.triggeredRooms.contains(room) && instance.rooms.get(room).isInside(at)) {
                     instance.triggeredRooms.add(room);
                     gates.setDirty();
@@ -220,7 +226,7 @@ public final class GateCombat {
         return made;
     }
 
-    /** Gate mobs of closed gates go; the rest are put back at their spawn point when they leave their room or cell. */
+    /** Gate mobs of closed gates go; the rest are put back at their spawn point when they leave the gate's cell. */
     private static void leash(ServerLevel level, GateInstances gates) {
         List<Entity> gone = new ArrayList<>();
         for (Entity entity : level.getAllEntities()) {
@@ -236,17 +242,10 @@ public final class GateCombat {
             if (instance.red || entity.getPersistentData().getBoolean(GateBreaks.BREAK_TAG)) {
                 continue;   // red camps and break waves roam (RedGates and GateBreaks keep them in bounds)
             }
-            BlockPos home = BlockPos.of(entity.getPersistentData().getLong(GateSpawner.HOME));
-            int room = entity.getPersistentData().getInt(GateSpawner.ROOM);
-            boolean stray;
+            hunt(level, instance, (Mob)entity);
+            // Mobs may chase out of their room; only one that leaves the gate's cell is put back.
             if (!GateDimensions.bounds(instance.cellX, instance.cellZ).contains(entity.position())) {
-                stray = true;
-            } else if (room >= 0 && room < instance.rooms.size()) {
-                stray = !instance.rooms.get(room).inflatedBy(ROOM_SLACK).isInside(entity.blockPosition());
-            } else {
-                stray = entity.position().distanceToSqr(home.getCenter()) > HOMELESS_RANGE * HOMELESS_RANGE;
-            }
-            if (stray) {
+                BlockPos home = BlockPos.of(entity.getPersistentData().getLong(GateSpawner.HOME));
                 Mob mob = (Mob)entity;
                 mob.getNavigation().stop();
                 mob.teleportTo(home.getX() + 0.5, home.getY(), home.getZ() + 0.5);
@@ -254,6 +253,28 @@ public final class GateCombat {
             }
         }
         gone.forEach(Entity::discard);
+    }
+
+    /** Everything in a gate is hostile at once: a mob without a target takes the nearest player of the gate within
+     * HUNT_RANGE, and a neutral one (wolf, piglin, enderman...) is angered at them. */
+    private static void hunt(ServerLevel level, Instance instance, Mob mob) {
+        if (mob.getTarget() != null && mob.getTarget().isAlive()) {
+            return;
+        }
+        ServerPlayer nearest = null;
+        for (ServerPlayer player : present(level, instance)) {
+            if (player.distanceToSqr(mob) <= HUNT_RANGE * HUNT_RANGE && (nearest == null || player.distanceToSqr(mob) < nearest.distanceToSqr(mob))) {
+                nearest = player;
+            }
+        }
+        if (nearest == null) {
+            return;
+        }
+        mob.setTarget(nearest);
+        if (mob instanceof NeutralMob neutral) {
+            neutral.setPersistentAngerTarget(nearest.getUUID());
+            neutral.startPersistentAngerTimer();
+        }
     }
 
     /** The last boss of an ACTIVE gate has died: CLEARED. */
@@ -405,6 +426,17 @@ public final class GateCombat {
 
     /** Seals the boss room once someone has been well inside it for SEAL_DELAY with its doorways clear; opens it again when
      * no roster member is left in it. */
+    private static boolean allInside(List<ServerPlayer> present, BoundingBox box) {
+        return present.stream().allMatch(p -> box.isInside(p.blockPosition()));
+    }
+
+    private static void waitForParty(List<ServerPlayer> present, BoundingBox box) {
+        long inside = present.stream().filter(p -> box.isInside(p.blockPosition())).count();
+        Component message = Component.translatableWithFallback("gate.mdvlcraft.boss_waits",
+            "The boss waits for your whole party: %s/%s here", inside, present.size()).withStyle(ChatFormatting.GOLD);
+        present.stream().filter(p -> box.isInside(p.blockPosition())).forEach(p -> p.displayClientMessage(message, true));
+    }
+
     private static void tickBossRoom(ServerLevel level, Instance instance) {
         int room = bossRoom(instance);
         if (room < 0) {
@@ -421,8 +453,8 @@ public final class GateCombat {
         // well inside horizontally (the floor is only 2 above the box's bottom, so y just needs to be in the box)
         BoundingBox deep = new BoundingBox(box.minX() + SEAL_DEPTH, box.minY(), box.minZ() + SEAL_DEPTH,
             box.maxX() - SEAL_DEPTH, box.maxY(), box.maxZ() - SEAL_DEPTH);
-        if (present.stream().noneMatch(p -> deep.isInside(p.blockPosition()))) {
-            SEAL_AT.remove(instance.id);
+        if (present.isEmpty() || !present.stream().allMatch(p -> deep.isInside(p.blockPosition()))) {
+            SEAL_AT.remove(instance.id);   // it seals only once everyone still in the gate is well inside
             return;
         }
         long now = level.getGameTime();
