@@ -67,6 +67,8 @@ public final class SkillCallout {
     }
 
     public static void announce(ServerPlayer player, Component name, int colour) {
+        // DEBUGCALLOUT (temporary): callouts don't appear in the test client yet; see docs/AGENT_HANDOFF.md
+        org.apache.logging.log4j.LogManager.getLogger().info("DEBUGCALLOUT server {} {}", name.getString(), Integer.toHexString(colour));
         long now = player.level().getGameTime();
         Long last = LAST.put(player.getUUID(), now);
         if (last == null || now - last >= GAP_TICKS || now < last) {

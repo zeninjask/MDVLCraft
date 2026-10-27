@@ -42,6 +42,7 @@ public final class SkillCalloutClient {
     }
 
     public static void show(int entityId, Component name, int colour) {
+        org.apache.logging.log4j.LogManager.getLogger().info("DEBUGCALLOUT client {} {}", entityId, name.getString());   // temporary
         Minecraft minecraft = Minecraft.getInstance();
         ClientLevel level = minecraft.level;
         Entity entity = level == null ? null : level.getEntity(entityId);
@@ -65,6 +66,9 @@ public final class SkillCalloutClient {
             effect.setForcedDeath(true);
             effect.setAllowMulti(true);
             effect.start();
+            org.apache.logging.log4j.LogManager.getLogger().info("DEBUGCALLOUT started {}", texture(text));   // temporary
+        } catch (RuntimeException e) {
+            org.apache.logging.log4j.LogManager.getLogger().error("DEBUGCALLOUT failed", e);   // temporary
         } catch (IOException e) {
             throw new IllegalStateException("Cannot read Cursed Fate's chant effect", e);
         }
