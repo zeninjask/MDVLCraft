@@ -71,6 +71,17 @@ public final class LogNoise extends AbstractFilter {
         "^File alexscaves:sounds/.* does not exist",
         "^Item Group has no display items",
         "^Failed to load texture: .*:textures/models/armor/",
+        // resource and network chatter seen in the 2.1.51 logs (docs/LOG_FILTERS.md)
+        "^Failed to load model cursedfate:models/custom/",
+        "^Unable to load model: '",
+        "^Unknown block '.*' in 'connectBlocks'",
+        "^Registering (recipes|Runtime): .* is running and has taken",
+        "^A mod is calling registerReloadListener at the wrong time",
+        "^Can not return client level proxy",
+        "^Not all defined tags for registry ",
+        "^Failed to handle Data response: java\\.net\\.http\\.HttpTimeoutException",
+        "^Hanging entity at invalid position",
+        "^Received unknown attacker",
         // vanilla chatter
         "^Received passengers for unknown entity",
         "^Mismatch in destroy block pos",

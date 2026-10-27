@@ -43,6 +43,7 @@ import org.slf4j.Logger;
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class LootViews {
+    private static final String PONDER_ACTORS = "epic_fight_ponder";
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final int VIEWS_PER_PACKET = 64;
     /** Chests are rolled without a position, so exploration maps don't search the world for a structure. */
@@ -122,7 +123,8 @@ public final class LootViews {
 
         for (EntityType<?> type : ForgeRegistries.ENTITY_TYPES) {
             ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
-            if (!type.isEnabled(overworld.enabledFeatures())) {
+            // Epic Fight Ponder's scene actors patch themselves with client classes: making one on a server logs an error
+            if (!type.isEnabled(overworld.enabledFeatures()) || PONDER_ACTORS.equals(id.getNamespace())) {
                 continue;
             }
 
