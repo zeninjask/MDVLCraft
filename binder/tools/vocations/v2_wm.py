@@ -100,7 +100,7 @@ v('samurai', 'druid', ['Kodama'],
   ['Z:stance_nature', 'C:blight_step', 'X:sand_maelstrom', 'C:rotting_rain'],
   'dodge_parry_reward:damage_boost1', ['KAT', 'NSP', 'ASH'])
 v('samurai', 'jade', ['Spirit Blade'],
-  ['Z:stance_spirit', 'M:phantom_charge', 'S:soul_latch', 'S:winged_ruin'],
+  ['Z:stance_spirit', 'M:phantom_charge', 'S:soul_latch', 'S:spiral_of_ruin'],
   'wom:dodge_master', ['KAT', 'SYM', 'IMP'])
 
 # Berserker + Mage

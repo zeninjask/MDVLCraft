@@ -134,7 +134,7 @@ v('jade', 'thief', ['Tanuki'],
   ['Z:fox_glamour', 'A:default_note', 'A:music_bolt', 'M:kitsune_pack'],
   'wom:dodge_master', ['SYM', 'LUCK', 'DROP'])
 v('jade', 'stalker', ['Jade Archer'],
-  ['Z:arrow_spirit', 'R:glintblade_phalanx', 'E:echanted_spell', 'S:winged_ruin'],
+  ['Z:arrow_spirit', 'R:glintblade_phalanx', 'E:echanted_spell', 'R:magic_glintblade'],
   'wom:inner_growth', ['SYM', 'RNG', 'ARSP'])
 v('jade', 'wanderer', ['Xian'],
   ['Z:river_dragon', 'Z:spirit_tiger', 'Z:immortal_peach', 'R:terra_magica'],
