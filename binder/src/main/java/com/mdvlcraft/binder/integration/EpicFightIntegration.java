@@ -29,14 +29,14 @@ public final class EpicFightIntegration {
         modBus.addListener(EpicFightIntegration::onCommonSetup);
     }
 
-    /** Every hostile mob (and the target dummy) that no mod patches gets a PassiveMobPatch, so it can be assassinated. A
-     * non-mob of those types falls back to Epic Fight's own global patch. */
+    /** Every mob that no mod patches (hostile or not: animals, villagers, summons, NPCs of any category) gets a
+     * PassiveMobPatch, so it can be assassinated and is staggered by hits; the target dummy gets its own. An entity of
+     * those types that isn't a mob (projectiles, items, ...) gets no patch, as Epic Fight gives it none itself. */
     private static void onEntityPatchRegistry(EntityPatchRegistryEvent event) {
         for (EntityType<?> type : ForgeRegistries.ENTITY_TYPES) {
             ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
-            boolean wanted = type.getCategory() == MobCategory.MONSTER || TARGET_DUMMY.equals(id);
-            if (wanted && !event.getTypeEntry().containsKey(type)) {
-                event.getTypeEntry().put(type, entity -> !(entity instanceof Mob) ? GlobalMobPatch::new : TARGET_DUMMY.equals(id) ? TargetDummyPatch::new : PassiveMobPatch::new);
+            if (!event.getTypeEntry().containsKey(type)) {
+                event.getTypeEntry().put(type, entity -> !(entity instanceof Mob) ? () -> null : TARGET_DUMMY.equals(id) ? TargetDummyPatch::new : PassiveMobPatch::new);
                 PASSIVE.add(type);
             }
         }

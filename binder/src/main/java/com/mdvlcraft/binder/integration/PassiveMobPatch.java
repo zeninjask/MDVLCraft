@@ -12,8 +12,8 @@ import yesman.epicfight.world.damagesource.StunType;
 
 /**
  * A bare Epic Fight patch (registered in EpicFightIntegration) for mobs Epic Fight doesn't patch itself: Dummmmmmy's
- * target dummy and every hostile mob of other mods (Cataclysm's, ...). Combat Evolution can only assassinate a mob with a
- * patch. The mob keeps its own renderer and AI (initAI does nothing) and isn't staggered by Epic Fight.
+ * target dummy and every other mob no mod patches (Cataclysm's, summons, NPCs, animals, ...). Combat Evolution can only
+ * assassinate a mob with a patch. The mob keeps its own renderer and AI (initAI does nothing); hits stagger it.
  */
 public class PassiveMobPatch extends MobPatch<Mob> {
     public PassiveMobPatch() {
@@ -36,9 +36,15 @@ public class PassiveMobPatch extends MobPatch<Mob> {
         this.currentLivingMotion = LivingMotions.IDLE;
     }
 
+    /** Staggered like a biped (a GeckoLib biped shows it through MobRig; other models just lose their footing). */
     @Override
     public AssetAccessor<? extends StaticAnimation> getHitAnimation(StunType stunType) {
-        return null;
+        return switch (stunType) {
+            case SHORT -> Animations.BIPED_HIT_SHORT;
+            case LONG, HOLD -> Animations.BIPED_HIT_LONG;
+            case KNOCKDOWN -> Animations.BIPED_KNOCKDOWN;
+            default -> null;
+        };
     }
 
     @Override
