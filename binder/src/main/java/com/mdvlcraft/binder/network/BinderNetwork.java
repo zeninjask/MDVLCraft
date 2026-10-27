@@ -186,6 +186,14 @@ public final class BinderNetwork {
         CHANNEL.registerMessage(
             id++, PhantomRushPacket.class, PhantomRushPacket::encode, PhantomRushPacket::decode, PhantomRushPacket::handle, Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
+        CHANNEL.registerMessage(
+            id++, VocationPickPacket.class, VocationPickPacket::encode, VocationPickPacket::decode, VocationPickPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+        CHANNEL.registerMessage(
+            id++, OpenVocationPickerPacket.class, OpenVocationPickerPacket::encode, OpenVocationPickerPacket::decode, OpenVocationPickerPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
         com.mdvlcraft.binder.gate.tower.TowerItems.registerPackets(CHANNEL, id);   // castle sigil menu, tower status line
     }
 
