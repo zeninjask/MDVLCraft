@@ -1,103 +1,152 @@
 package com.mdvlcraft.binder.client;
 
-import com.mojang.blaze3d.vertex.PoseStack;
+import com.lowdragmc.photon.client.fx.EntityEffect;
+import com.lowdragmc.photon.client.fx.FX;
+import com.mojang.blaze3d.platform.NativeImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import net.minecraft.client.Camera;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Font;
 import net.minecraft.client.multiplayer.ClientLevel;
-import net.minecraft.client.renderer.LightTexture;
-import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.texture.DynamicTexture;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.NbtIo;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.phys.Vec3;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.RenderGuiEvent;
-import net.minecraftforge.client.event.RenderLevelStageEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
- * Skill callouts (ability/SkillCallout): the skill's name in capitals and its colour, outlined, above the caster's head for
- * 1.5 times as long as Cursed Fate's chant words stay up (25 ticks). Your own shows near the top of the screen while you
- * look through your own eyes, where the one above your head can't be seen.
+ * Skill callouts (ability/SkillCallout) look exactly like Cursed Fate's chant words: its own Photon effect
+ * (photon:scales_of_the_dragon, glowing, jittering, shrinking away at the end, 2.1 blocks above the caster's feet), with a
+ * texture of the skill's name drawn here in Minecraft's pixel font, tinted the skill's colour as dark as the chant's red,
+ * and up 1.5 times as long (38 ticks, not 25). Each name's texture is made once and kept.
  */
-@EventBusSubscriber(modid = "mdvlcraft", value = Dist.CLIENT)
 public final class SkillCalloutClient {
-    private static final int TICKS = 38;
-    private static final float SCALE = 0.03F;
-    private static final double ABOVE_HEAD = 0.7;
-    private static final float SCREEN_SCALE = 2.0F;
-    private static final Map<Integer, Callout> SHOWN = new HashMap<>();
+    private static final ResourceLocation TEMPLATE = new ResourceLocation("photon", "fx/scales_of_the_dragon.fx");
+    private static final ResourceLocation FONT = new ResourceLocation("minecraft", "textures/font/ascii.png");
+    private static final int LIFETIME = 38;
+    /** The chant's tint is 0x8A0000: each skill's colour is darkened the same way. */
+    private static final float TINT = 0x8A / 255.0F;
+    private static final int SIZE = 512;
+    /** Texture pixels per font pixel: the chant's "SCALES OF THE DRAGON" fills about the texture's width at this. */
+    private static final int PIXEL = 4;
+    private static final Map<String, ResourceLocation> TEXTURES = new HashMap<>();
+    private static ListTag template;
+    private static NativeImage font;
 
     private SkillCalloutClient() {
     }
 
     public static void show(int entityId, Component name, int colour) {
-        ClientLevel level = Minecraft.getInstance().level;
-        if (level != null) {
-            SHOWN.put(entityId, new Callout(Component.literal(name.getString().toUpperCase(Locale.ROOT)).getVisualOrderText(), colour, level.getGameTime()));
-        }
-    }
-
-    @SubscribeEvent
-    public static void onRenderLevel(RenderLevelStageEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         ClientLevel level = minecraft.level;
-        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_PARTICLES || level == null || SHOWN.isEmpty()) {
+        Entity entity = level == null ? null : level.getEntity(entityId);
+        if (entity == null) {
             return;
         }
-        SHOWN.values().removeIf(callout -> level.getGameTime() - callout.start >= TICKS || level.getGameTime() < callout.start);
-        Camera camera = event.getCamera();
-        Vec3 view = camera.getPosition();
-        PoseStack pose = event.getPoseStack();
-        MultiBufferSource.BufferSource buffers = minecraft.renderBuffers().bufferSource();
-        Font font = minecraft.font;
-        SHOWN.forEach((id, callout) -> {
-            Entity entity = level.getEntity(id);
-            if (entity == null || entity.isInvisibleTo(minecraft.player) || (entity == camera.getEntity() && !camera.isDetached())) {
-                return;
+        try {
+            String text = name.getString().toUpperCase(Locale.ROOT);
+            ListTag emitters = template().copy();
+            CompoundTag config = emitters.getCompound(0).getCompound("config");
+            config.getCompound("material").getCompound("material").putString("texture", texture(text).toString());
+            config.getCompound("startColor").putInt("number", 0xFF000000 | darken(colour));
+            config.getCompound("startLifetime").putFloat("number", LIFETIME);
+            CompoundTag main = new CompoundTag();
+            main.put("fxObjects", emitters);
+            FX fx = new FX();
+            fx.setFxLocation(new ResourceLocation("mdvlcraft", "callout/" + Integer.toHexString(text.hashCode())));
+            fx.getMainFX().deserializeNBT(main);
+            EntityEffect effect = new EntityEffect(fx, level, entity, EntityEffect.AutoRotate.NONE);
+            effect.setOffset(0.0, 2.1, 0.0);
+            effect.setForcedDeath(true);
+            effect.setAllowMulti(true);
+            effect.start();
+        } catch (IOException e) {
+            throw new IllegalStateException("Cannot read Cursed Fate's chant effect", e);
+        }
+    }
+
+    private static int darken(int colour) {
+        int r = Math.round(((colour >> 16) & 0xFF) * TINT);
+        int g = Math.round(((colour >> 8) & 0xFF) * TINT);
+        int b = Math.round((colour & 0xFF) * TINT);
+        return r << 16 | g << 8 | b;
+    }
+
+    private static ListTag template() throws IOException {
+        if (template == null) {
+            try (InputStream in = Minecraft.getInstance().getResourceManager().open(TEMPLATE)) {
+                template = NbtIo.readCompressed(in).getList("emitters", Tag.TAG_COMPOUND);
             }
-            Vec3 at = entity.getPosition(event.getPartialTick()).add(0.0, entity.getBbHeight() + ABOVE_HEAD, 0.0);
-            pose.pushPose();
-            pose.translate(at.x - view.x, at.y - view.y, at.z - view.z);
-            pose.mulPose(camera.rotation());
-            pose.scale(-SCALE, -SCALE, SCALE);
-            font.drawInBatch8xOutline(callout.text, -font.width(callout.text) / 2.0F, 0.0F, callout.colour, outline(callout.colour),
-                pose.last().pose(), buffers, LightTexture.FULL_BRIGHT);
-            pose.popPose();
-        });
-        buffers.endBatch();
-    }
-
-    @SubscribeEvent
-    public static void onRenderGui(RenderGuiEvent.Post event) {
-        Minecraft minecraft = Minecraft.getInstance();
-        if (minecraft.player == null || !minecraft.options.getCameraType().isFirstPerson() || minecraft.options.hideGui) {
-            return;
         }
-        Callout callout = SHOWN.get(minecraft.player.getId());
-        if (callout == null || minecraft.level.getGameTime() - callout.start >= TICKS) {
-            return;
+        return template;
+    }
+
+    /** The name in white capitals on a clear square, centred, as Cursed Fate's chant textures are. */
+    private static ResourceLocation texture(String text) throws IOException {
+        ResourceLocation known = TEXTURES.get(text);
+        if (known != null) {
+            return known;
         }
-        PoseStack pose = event.getGuiGraphics().pose();
-        pose.pushPose();
-        pose.translate(event.getWindow().getGuiScaledWidth() / 2.0F, event.getWindow().getGuiScaledHeight() * 0.28F, 0.0F);
-        pose.scale(SCREEN_SCALE, SCREEN_SCALE, 1.0F);
-        minecraft.font.drawInBatch8xOutline(callout.text, -minecraft.font.width(callout.text) / 2.0F, 0.0F, callout.colour, outline(callout.colour),
-            pose.last().pose(), event.getGuiGraphics().bufferSource(), LightTexture.FULL_BRIGHT);
-        event.getGuiGraphics().flush();
-        pose.popPose();
+        if (font == null) {
+            try (InputStream in = Minecraft.getInstance().getResourceManager().open(FONT)) {
+                font = NativeImage.read(in);
+            }
+        }
+        int cell = font.getWidth() / 16;
+        int width = 0;
+        for (char c : text.toCharArray()) {
+            width += advance(glyph(c), cell);
+        }
+        int pixel = Math.max(1, Math.min(PIXEL, SIZE / Math.max(1, width)));
+        NativeImage image = new NativeImage(SIZE, SIZE, true);
+        int x = (SIZE - width * pixel) / 2;
+        int y = (SIZE - cell * pixel) / 2;
+        for (char c : text.toCharArray()) {
+            int glyph = glyph(c);
+            int gx = glyph % 16 * cell;
+            int gy = glyph / 16 * cell;
+            for (int px = 0; px < cell; px++) {
+                for (int py = 0; py < cell; py++) {
+                    if ((font.getPixelRGBA(gx + px, gy + py) >>> 24) > 0 && x + (px + 1) * pixel <= SIZE && x >= 0) {
+                        for (int dx = 0; dx < pixel; dx++) {
+                            for (int dy = 0; dy < pixel; dy++) {
+                                image.setPixelRGBA(x + px * pixel + dx, y + py * pixel + dy, 0xFFFFFFFF);
+                            }
+                        }
+                    }
+                }
+            }
+            x += advance(glyph, cell) * pixel;
+        }
+        ResourceLocation location = new ResourceLocation("mdvlcraft", "callout/" + TEXTURES.size());
+        Minecraft.getInstance().getTextureManager().register(location, new DynamicTexture(image));
+        TEXTURES.put(text, location);
+        return location;
     }
 
-    /** The colour at a quarter brightness, for the outline. */
-    private static int outline(int colour) {
-        return (colour >> 2) & 0x3F3F3F;
+    private static int glyph(char c) {
+        return c < 256 && c > ' ' ? c : c == ' ' ? ' ' : '?';
     }
 
-    private record Callout(FormattedCharSequence text, int colour, long start) {
+    /** A glyph's width in font pixels plus one for the gap; a space is four. */
+    private static int advance(int glyph, int cell) {
+        if (glyph == ' ') {
+            return 4;
+        }
+        int gx = glyph % 16 * cell;
+        int gy = glyph / 16 * cell;
+        for (int px = cell - 1; px >= 0; px--) {
+            for (int py = 0; py < cell; py++) {
+                if ((font.getPixelRGBA(gx + px, gy + py) >>> 24) > 0) {
+                    return px + 2;
+                }
+            }
+        }
+        return 4;
     }
 }
