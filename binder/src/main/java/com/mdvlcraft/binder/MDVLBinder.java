@@ -34,6 +34,7 @@ import com.mdvlcraft.binder.music.Jingles;
 import com.mdvlcraft.binder.skills.ArchetypeTabs;
 import com.mdvlcraft.binder.skills.MageExperience;
 import com.mdvlcraft.binder.skills.ClassTitles;
+import com.mdvlcraft.binder.superchef.SuperChefSetup;
 import com.mdvlcraft.binder.wukong.WukongStaffSetup;
 import com.mojang.logging.LogUtils;
 import net.minecraftforge.api.distmarker.Dist;
@@ -64,6 +65,7 @@ public final class MDVLBinder {
         UnarmedParry.register(modBus);
         AddItemModifier.register(modBus);
         WukongStaffSetup.register(modBus);
+        SuperChefSetup.register(modBus);
         ModifiedSpells.register(modBus);
         HauntedSetup.register(modBus);
         modBus.addListener(MDVLBinder::onCommonSetup);
