@@ -4,15 +4,13 @@ import app.sedu.mc.parties.common.group.ClientGroupManager;
 import app.sedu.mc.parties.common.group.GroupType;
 import app.sedu.mc.parties.common.group.TrackedGroup;
 import com.mdvlcraft.binder.client.PartyLeader;
-import java.util.ArrayList;
-import java.util.List;
+import com.mdvlcraft.binder.client.PartyRowButtons;
 import java.util.UUID;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
-import net.minecraft.client.gui.components.events.GuiEventListener;
 import net.minecraft.client.gui.screens.social.PlayerEntry;
 import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
@@ -23,15 +21,14 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Party controls on the Social Interactions screen's rows (beside Parties' own invite button): the party leader's name
  * has a gold crown; the leader sees a red X on each other member's row to remove them (/party kick); a player in a party
- * sees Leave on their own row (/party leave).
+ * sees Leave on their own row (/party leave). Clicks arrive through SocialEntryClickMixin.
  */
 @Mixin(PlayerEntry.class)
-public abstract class SocialPlayerEntryPartyMixin {
+public abstract class SocialPlayerEntryPartyMixin implements PartyRowButtons {
     @Shadow
     @Final
     private UUID id;
@@ -87,12 +84,9 @@ public abstract class SocialPlayerEntryPartyMixin {
         }
     }
 
-    @Inject(method = "children", at = @At("RETURN"), cancellable = true)
-    private void mdvlcraft$partyChildren(CallbackInfoReturnable<List<? extends GuiEventListener>> cir) {
-        if (this.mdvlcraft$kick.visible || this.mdvlcraft$leave.visible) {
-            List<GuiEventListener> children = new ArrayList<>(cir.getReturnValue());
-            children.add(this.mdvlcraft$kick.visible ? this.mdvlcraft$kick : this.mdvlcraft$leave);
-            cir.setReturnValue(children);
-        }
+    @Override
+    public boolean mdvlcraft$clickParty(double mouseX, double mouseY, int button) {
+        return this.mdvlcraft$kick.visible && this.mdvlcraft$kick.mouseClicked(mouseX, mouseY, button)
+            || this.mdvlcraft$leave.visible && this.mdvlcraft$leave.mouseClicked(mouseX, mouseY, button);
     }
 }

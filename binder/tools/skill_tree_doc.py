@@ -7,7 +7,7 @@ parts (tools/generate_vocations.py) and the pack.
 Usage: python3 skill_tree_doc.py <version> <out.pdf> <mods dir> <pack kubejs dir>
   mods dir: the server pack's mods folder (origin data and names come from the jars); pack kubejs dir: its overrides/kubejs
 """
-import glob, html, json, os, re, subprocess, sys, tempfile, zipfile
+import glob, html, json, os, pathlib, re, subprocess, sys, tempfile, zipfile
 
 TOOLS = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, TOOLS)
@@ -17,7 +17,8 @@ ROOT = os.path.dirname(TOOLS)
 RES = os.path.join(ROOT, 'src/main/resources')
 CAT = os.path.join(RES, 'data/mdvlcraft/puffish_skills/vocation_parts')
 PICK = os.path.join(RES, 'data/mdvlcraft/puffish_skills/categories/archetypes')
-CHROME = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome'
+# Any Chromium-based browser; set CHROME to override (e.g. msedge.exe on Windows)
+CHROME = os.environ.get('CHROME', '/opt/pw-browsers/chromium-1194/chrome-linux/chrome')
 EF_SLOTS = json.load(open(os.path.join(TOOLS, 'ef_skill_slots.json')))
 EF_NAMES = json.load(open(os.path.join(TOOLS, 'ef_skill_names.json')))
 SLOT_NAMES = {'DODGE': 'Dodge', 'GUARD': 'Guard', 'MOVER': 'Mobility', 'IDENTITY': 'Identity', 'PASSIVE': 'Passive'}
@@ -604,11 +605,11 @@ def main():
         parts.append("</table>")
     parts.append("</div></body></html>")
 
-    with tempfile.NamedTemporaryFile('w', suffix='.html', delete=False) as f:
+    with tempfile.NamedTemporaryFile('w', suffix='.html', delete=False, encoding='utf-8') as f:
         f.write("".join(parts))
         page = f.name
     subprocess.run([CHROME, '--headless', '--no-sandbox', '--disable-gpu', '--no-pdf-header-footer',
-                    f'--print-to-pdf={os.path.abspath(out_pdf)}', f'file://{page}'], check=True, capture_output=True)
+                    f'--print-to-pdf={os.path.abspath(out_pdf)}', pathlib.Path(page).as_uri()], check=True, capture_output=True)
     print(out_pdf, os.path.getsize(out_pdf), 'bytes')
 
 

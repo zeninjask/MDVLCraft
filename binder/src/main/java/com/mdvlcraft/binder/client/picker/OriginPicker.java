@@ -57,9 +57,10 @@ public final class OriginPicker {
         }));
     }
 
-    /** The origin's visible powers, each with its description on hover. */
+    /** The origin's visible powers, each with its description on hover. Unbound ones (not synced yet) are skipped. */
     private static List<PickerScreen.Detail> powers(Origin origin) {
         return origin.getValidPowers()
+            .filter(Holder::isBound)
             .map(Holder::value)
             .filter(power -> !power.getData().hidden())
             .map(power -> new PickerScreen.Detail(power.getData().getName(), power.getData().getDescription()))

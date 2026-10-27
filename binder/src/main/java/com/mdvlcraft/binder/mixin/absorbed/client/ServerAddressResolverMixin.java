@@ -19,10 +19,10 @@ import org.spongepowered.asm.mixin.Overwrite;
 public interface ServerAddressResolverMixin {
     /**
      * @author Fallen_Breath (Fast IP Ping)
-     * @reason no reverse lookup for IP-only addresses
+     * @reason no reverse lookup for IP-only addresses (m_171877_ is the SRG name of SYSTEM's lambda$static$0)
      */
     @Overwrite(remap = false)
-    static Optional<ResolvedServerAddress> lambda$static$0(ServerAddress address) {
+    static Optional<ResolvedServerAddress> m_171877_(ServerAddress address) {
         try {
             InetAddress resolved = InetAddress.getByName(address.getHost());
             if (InetAddresses.isInetAddress(address.getHost())) {

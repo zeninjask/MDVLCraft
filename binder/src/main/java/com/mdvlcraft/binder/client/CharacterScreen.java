@@ -368,7 +368,7 @@ public class CharacterScreen extends Screen {
     private List<FormattedCharSequence> powerLines(Origin origin) {
         List<FormattedCharSequence> lines = new ArrayList<>();
         lines.add(origin.getName().copy().withStyle(ChatFormatting.GOLD).getVisualOrderText());
-        origin.getValidPowers().map(holder -> holder.value().getData()).filter(power -> !power.hidden()).forEach(power -> {
+        origin.getValidPowers().filter(net.minecraft.core.Holder::isBound).map(holder -> holder.value().getData()).filter(power -> !power.hidden()).forEach(power -> {
             lines.add(power.getName().copy().withStyle(ChatFormatting.YELLOW).getVisualOrderText());
             lines.addAll(this.font.split(power.getDescription().copy().withStyle(ChatFormatting.GRAY), TOOLTIP_WIDTH));
         });
