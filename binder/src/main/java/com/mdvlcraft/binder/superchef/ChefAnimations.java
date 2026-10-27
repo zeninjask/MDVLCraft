@@ -1,6 +1,8 @@
 package com.mdvlcraft.binder.superchef;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -146,10 +148,11 @@ public final class ChefAnimations {
         }, both(50, 85, 180));
     }
 
+    @SafeVarargs
     private static AnimationAccessor<AttackAnimation> attack(AnimationBuilder builder, String name, float convert, float speed,
-                                                            java.util.function.Consumer<AttackAnimation> extra, Phase... phases) {
+                                                            java.util.function.Consumer<AttackAnimation> extra, Supplier<Phase>... phases) {
         return builder.nextAccessor("biped/super_chef/" + name, accessor -> {
-            AttackAnimation animation = new AttackAnimation(convert, accessor, Armatures.BIPED, phases);
+            AttackAnimation animation = new AttackAnimation(convert, accessor, Armatures.BIPED, Arrays.stream(phases).map(Supplier::get).toArray(Phase[]::new));
             animation.addProperty(StaticAnimationProperty.PLAY_SPEED_MODIFIER, (self, entitypatch, current, prev, elapsed) -> speed);
             extra.accept(animation);
             return animation;
@@ -169,40 +172,40 @@ public final class ChefAnimations {
             .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(damage));
     }
 
-    private static Phase spatula(int start, int end) {
-        return phase(start, end, false, InteractionHand.MAIN_HAND, biped().toolR, 0.7F);
+    private static Supplier<Phase> spatula(int start, int end) {
+        return () -> phase(start, end, false, InteractionHand.MAIN_HAND, biped().toolR, 0.7F);
     }
 
-    private static Phase spatulaEnd(int start, int end) {
-        return phase(start, end, true, InteractionHand.MAIN_HAND, biped().toolR, 1.1F);
+    private static Supplier<Phase> spatulaEnd(int start, int end) {
+        return () -> phase(start, end, true, InteractionHand.MAIN_HAND, biped().toolR, 1.1F);
     }
 
-    private static Phase skillet(int start, int end) {
-        return phase(start, end, false, InteractionHand.OFF_HAND, biped().toolL, 1.3F);
+    private static Supplier<Phase> skillet(int start, int end) {
+        return () -> phase(start, end, false, InteractionHand.OFF_HAND, biped().toolL, 1.3F);
     }
 
-    private static Phase skilletEnd(int start, int end) {
-        return phase(start, end, true, InteractionHand.OFF_HAND, biped().toolL, 1.3F);
+    private static Supplier<Phase> skilletEnd(int start, int end) {
+        return () -> phase(start, end, true, InteractionHand.OFF_HAND, biped().toolL, 1.3F);
     }
 
-    private static Phase flurry(Phase phase) {
-        return phase.addProperty(AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLUNT_HIT_HARD.get())
+    private static Supplier<Phase> flurry(Supplier<Phase> phase) {
+        return () -> phase.get().addProperty(AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLUNT_HIT_HARD.get())
             .addProperty(AttackPhaseProperty.MAX_STRIKES_MODIFIER, ValueModifier.multiplier(10.0F));
     }
 
     /** The long dash cut that strikes everything along a 20-block line ahead. */
-    private static Phase iaido(int contactFrame, int recoveryFrame) {
+    private static Supplier<Phase> iaido(int contactFrame, int recoveryFrame) {
         float contact = contactFrame / 60.0F;
         float recovery = recoveryFrame / 60.0F;
-        return new Phase(0.0F, contact, contact, recovery, recovery, Float.MAX_VALUE, false, InteractionHand.MAIN_HAND, biped().toolR, IAIDO)
+        return () -> new Phase(0.0F, contact, contact, recovery, recovery, Float.MAX_VALUE, false, InteractionHand.MAIN_HAND, biped().toolR, IAIDO)
             .addProperty(AttackPhaseProperty.SWING_SOUND, EpicFightSounds.WHOOSH_SHARP.get())
             .addProperty(AttackPhaseProperty.HIT_SOUND, EpicFightSounds.BLADE_RUSH_FINISHER.get());
     }
 
     /** Both hands at once (the leaping slams). */
-    private static Phase both(int startFrame, int contactFrame, int recoveryFrame) {
+    private static Supplier<Phase> both(int startFrame, int contactFrame, int recoveryFrame) {
         float start = startFrame / 60.0F;
-        return new Phase(0.0F, start, start, contactFrame / 60.0F, recoveryFrame / 60.0F, Float.MAX_VALUE, false, InteractionHand.MAIN_HAND,
+        return () -> new Phase(0.0F, start, start, contactFrame / 60.0F, recoveryFrame / 60.0F, Float.MAX_VALUE, false, InteractionHand.MAIN_HAND,
             JointColliderPair.of(biped().toolR, null), JointColliderPair.of(biped().toolL, null))
             .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(1.8F));
     }

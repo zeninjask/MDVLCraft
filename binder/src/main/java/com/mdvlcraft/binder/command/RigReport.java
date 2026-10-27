@@ -20,19 +20,14 @@ final class RigReport {
     static List<String> build(ServerLevel level) {
         List<String> lines = new ArrayList<>(List.of("entity\tpatch\tclass"));
         ForgeRegistries.ENTITY_TYPES.getEntries().forEach(entry -> {
-            Entity entity;
             try {
-                entity = entry.getValue().create(level);
-            } catch (RuntimeException e) {
-                lines.add(entry.getKey().location() + "\tcreate failed: " + e + "\t-");
-                return;
-            }
-            if (entity instanceof LivingEntity living) {
-                EntityPatch<?> patch = EpicFightCapabilities.getEntityPatch(living, EntityPatch.class);
-                lines.add(entry.getKey().location() + "\t" + (patch == null ? "-" : patch.getClass().getName()) + "\t" + living.getClass().getName());
-            }
-            if (entity != null) {
-                entity.discard();
+                Entity entity = entry.getValue().create(level);
+                if (entity instanceof LivingEntity living) {
+                    EntityPatch<?> patch = EpicFightCapabilities.getEntityPatch(living, EntityPatch.class);
+                    lines.add(entry.getKey().location() + "\t" + (patch == null ? "-" : patch.getClass().getName()) + "\t" + living.getClass().getName());
+                }
+            } catch (RuntimeException e) {   // some modded entities can't exist outside the world
+                lines.add(entry.getKey().location() + "\terror: " + e + "\t-");
             }
         });
         return lines;
