@@ -29,7 +29,6 @@ public final class SuperChefSetup {
     }
 
     public static void register(IEventBus modBus) {
-        modBus.addListener(ChefAnimations::onRegistry);
         modBus.addListener(SuperChefSetup::onSkillBuild);
         modBus.addListener(SuperChefSetup::onWeaponPresets);
     }

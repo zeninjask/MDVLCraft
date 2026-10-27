@@ -2,7 +2,6 @@ package com.mdvlcraft.binder.wukong;
 
 import yesman.epicfight.api.animation.AnimationManager.AnimationAccessor;
 import yesman.epicfight.api.animation.AnimationManager.AnimationBuilder;
-import yesman.epicfight.api.animation.AnimationManager.AnimationRegistryEvent;
 import yesman.epicfight.api.animation.property.AnimationProperty.ActionAnimationProperty;
 import yesman.epicfight.api.animation.property.AnimationProperty.AttackPhaseProperty;
 import yesman.epicfight.api.animation.property.AnimationProperty.StaticAnimationProperty;
@@ -60,15 +59,12 @@ public final class WukongAnimations {
     private WukongAnimations() {
     }
 
-    static void onRegistry(AnimationRegistryEvent event) {
-        event.newBuilder("mdvlcraft", WukongAnimations::build);
-    }
-
     private static HumanoidArmature biped() {
         return (HumanoidArmature)Armatures.BIPED.get();
     }
 
-    private static void build(AnimationBuilder builder) {
+    /** Called by integration/BinderAnimations, the binder's one Epic Fight animation builder. */
+    public static void build(AnimationBuilder builder) {
         IDLE = builder.nextAccessor("biped/wukong/idle", accessor -> new StaticAnimation(true, accessor, Armatures.BIPED));
         WALK = builder.nextAccessor("biped/wukong/walk", accessor -> new MovementAnimation(true, accessor, Armatures.BIPED));
         RUN = builder.nextAccessor("biped/wukong/run", accessor -> new MovementAnimation(true, accessor, Armatures.BIPED));

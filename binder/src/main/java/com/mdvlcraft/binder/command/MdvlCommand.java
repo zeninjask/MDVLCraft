@@ -77,6 +77,7 @@ public final class MdvlCommand {
                         ))
                     .then(Commands.literal("release").then(Commands.argument("player", EntityArgument.player()).executes(MdvlCommand::release))))
                 .then(Commands.literal("weapons").executes(MdvlCommand::weapons))
+                .then(Commands.literal("rigs").executes(MdvlCommand::rigs))
                 .then(Commands.literal("obtainable").executes(MdvlCommand::obtainable))
                 .then(Commands.literal("respec").then(Commands.argument("players", EntityArgument.players()).executes(MdvlCommand::respec)))
         );
@@ -96,6 +97,19 @@ public final class MdvlCommand {
         int count = offered;
         ((CommandSourceStack)context.getSource()).sendSuccess(() -> Component.literal("Free respec offered to " + count + " player(s)"), true);
         return count;
+    }
+
+    private static int rigs(CommandContext<CommandSourceStack> context) {
+        List<String> lines = RigReport.build(context.getSource().getServer().overworld());
+        Path file = context.getSource().getServer().getServerDirectory().toPath().resolve("rigs.tsv");
+        try {
+            Files.write(file, lines);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        long none = lines.stream().filter(line -> line.split("\t")[1].equals("-")).count();
+        context.getSource().sendSuccess(() -> Component.literal((lines.size() - 1) + " living entities, " + none + " without a patch; written to " + file), false);
+        return (int)none;
     }
 
     private static int weapons(CommandContext<CommandSourceStack> context) {

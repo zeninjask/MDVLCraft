@@ -41,7 +41,6 @@ public final class WukongStaffSetup {
     public static void register(IEventBus modBus) {
         WeaponCategory.ENUM_MANAGER.registerEnumCls("mdvlcraft", WukongCategories.class);
         ITEMS.register(modBus);
-        modBus.addListener(WukongAnimations::onRegistry);
         modBus.addListener(WukongStaffSetup::onSkillBuild);
         modBus.addListener(WukongStaffSetup::onWeaponPresets);
     }

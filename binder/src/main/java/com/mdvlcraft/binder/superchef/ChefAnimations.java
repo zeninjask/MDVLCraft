@@ -16,7 +16,6 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.fml.loading.FMLEnvironment;
 import yesman.epicfight.api.animation.AnimationManager.AnimationAccessor;
 import yesman.epicfight.api.animation.AnimationManager.AnimationBuilder;
-import yesman.epicfight.api.animation.AnimationManager.AnimationRegistryEvent;
 import yesman.epicfight.api.animation.Joint;
 import yesman.epicfight.api.animation.Pose;
 import yesman.epicfight.api.animation.property.AnimationEvent;
@@ -72,15 +71,12 @@ public final class ChefAnimations {
     private ChefAnimations() {
     }
 
-    static void onRegistry(AnimationRegistryEvent event) {
-        event.newBuilder("mdvlcraft", ChefAnimations::build);
-    }
-
     private static HumanoidArmature biped() {
         return (HumanoidArmature)Armatures.BIPED.get();
     }
 
-    private static void build(AnimationBuilder builder) {
+    /** Called by integration/BinderAnimations, the binder's one Epic Fight animation builder. */
+    public static void build(AnimationBuilder builder) {
         IDLE = builder.nextAccessor("biped/super_chef/idle", accessor -> new StaticAnimation(true, accessor, Armatures.BIPED));
         WALK = builder.nextAccessor("biped/super_chef/walk", accessor -> new ChefMovementAnimation(accessor, Armatures.BIPED, 1.2F));
         RUN = builder.nextAccessor("biped/super_chef/run", accessor -> new ChefMovementAnimation(accessor, Armatures.BIPED, 1.6F));
