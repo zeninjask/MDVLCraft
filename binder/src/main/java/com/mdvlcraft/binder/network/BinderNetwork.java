@@ -191,6 +191,10 @@ public final class BinderNetwork {
             Optional.of(NetworkDirection.PLAY_TO_SERVER)
         );
         CHANNEL.registerMessage(
+            id++, PickerOpenPacket.class, PickerOpenPacket::encode, PickerOpenPacket::decode, PickerOpenPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
+        CHANNEL.registerMessage(
             id++, OpenVocationPickerPacket.class, OpenVocationPickerPacket::encode, OpenVocationPickerPacket::decode, OpenVocationPickerPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );

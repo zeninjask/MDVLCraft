@@ -1,5 +1,7 @@
 package com.mdvlcraft.binder.client.picker;
 
+import com.mdvlcraft.binder.network.BinderNetwork;
+import com.mdvlcraft.binder.network.PickerOpenPacket;
 import java.util.List;
 import java.util.function.Consumer;
 import net.minecraft.Util;
@@ -81,6 +83,12 @@ public class PickerScreen extends Screen {
         this.confirmX = this.panelLeft + (this.panelW - 120) / 2;
         this.confirmY = this.listBottom - 22;
         this.scroll = Mth.clamp(this.scroll, 0.0F, maxScroll());
+        BinderNetwork.sendToServer(new PickerOpenPacket(true));   // invulnerable while picking (skills/PickerShield)
+    }
+
+    @Override
+    public void removed() {
+        BinderNetwork.sendToServer(new PickerOpenPacket(false));
     }
 
     @Override
