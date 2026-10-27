@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.mixin;
 
 import com.mdvlcraft.binder.ability.WeaponFreeCasts;
+import com.mdvlcraft.binder.content.GearTiers;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -24,6 +25,14 @@ public abstract class ItemStackMixin {
     private void mdvlcraft$noGearFoil(CallbackInfoReturnable<Boolean> cir) {
         if (((ItemStack)(Object)this).isEnchanted()) {
             cir.setReturnValue(false);
+        }
+    }
+
+    /** Godsmithed gear (GearTiers) lasts four times as long. */
+    @Inject(method = "getMaxDamage", at = @At("RETURN"), cancellable = true)
+    private void mdvlcraft$godsmithed(CallbackInfoReturnable<Integer> cir) {
+        if ("godsmithed".equals(GearTiers.tier((ItemStack)(Object)this))) {
+            cir.setReturnValue(cir.getReturnValue() * 4);
         }
     }
 }
