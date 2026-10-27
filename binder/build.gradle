@@ -148,6 +148,8 @@ dependencies {
     compileOnly files('libs/Reforged-1.20.1-1.1.0-Forge.jar', 'libs/UnionLib-1.20.1-13.1-Forge-all.jar')
     // Epic Fight Invincible: superchef/ builds the Super Chef key combo on it (the pack's jar)
     compileOnly files('libs/epic-fight-invincible-lib-20.14.8.2-mc1.20.1-forge.jar')
+    // Epic Fight Bow: shadow/ShadowBows gives shadow bows its bow preset (the pack's jar)
+    compileOnly files('libs/p1nero_bow-forge1.20.1-20.14.1.6.jar')
 
     // Their required dependencies, only needed at runtime in the dev environment.
     runtimeOnly fg.deobf(cf('irons_lib'))

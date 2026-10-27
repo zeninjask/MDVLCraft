@@ -34,6 +34,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * - mixin/InventoryMixin: picked-up items skip it.
  * - mixin/ServerPlayerDropMixin and mixin/LocalPlayerDropMixin: no Q.
  * - Here: no F.
+ * A shadow weapon in the off hand (ShadowArsenal's off-hand weapons) is guarded the same way: no clicks, no swap keys, no F.
  * A check twice a second also catches what other mods put in or take out: an item in the slot goes back into the bag
  * (or on the ground if the bag is full). A demon sword anywhere else goes into the slot if it is empty, else it is
  * desummoned. The sword isn't dropped on death.
@@ -75,9 +76,12 @@ public final class MageHunterSlot {
         return granted.stream().anyMatch(ability -> SWORD_SUMMONS.contains(ability.id()));
     }
 
-    /** Whether the container slot is a Mage Hunter's sword slot (creative mode leaves it open). */
+    /** Whether the container slot is a Mage Hunter's sword slot, or the off hand holding a shadow weapon (creative mode leaves both open). */
     public static boolean isSwordSlot(Container container, int index) {
-        return index == SLOT && container instanceof Inventory inventory && !inventory.player.isCreative() && isMageHunter(inventory.player);
+        if (!(container instanceof Inventory inventory) || inventory.player.isCreative()) {
+            return false;
+        }
+        return index == SLOT ? isMageHunter(inventory.player) : index == Inventory.SLOT_OFFHAND && ShadowWeapons.is(inventory.getItem(index));
     }
 
     public static boolean isSword(ItemStack stack) {
@@ -126,7 +130,7 @@ public final class MageHunterSlot {
 
         for (int i = 0; i < inventory.getContainerSize(); i++) {
             ItemStack stack = inventory.getItem(i);
-            if (i != SLOT && belongs(stack)) {
+            if (i != SLOT && belongs(stack) && !(i == Inventory.SLOT_OFFHAND && ShadowWeapons.is(stack))) {   // the off-hand shadow stays (ShadowArsenal)
                 inventory.setItem(i, ItemStack.EMPTY);
                 if (inventory.getItem(SLOT).isEmpty()) {
                     inventory.setItem(SLOT, stack);
@@ -145,7 +149,8 @@ public final class MageHunterSlot {
 
     @SubscribeEvent
     public static void onSwapHands(LivingSwapItemsEvent.Hands event) {
-        if (event.getEntity() instanceof Player player && !player.isCreative() && player.getInventory().selected == SLOT && isMageHunter(player)) {
+        if (event.getEntity() instanceof Player player && !player.isCreative()
+            && (player.getInventory().selected == SLOT && isMageHunter(player) || ShadowWeapons.is(player.getOffhandItem()))) {
             event.setCanceled(true);
         }
     }

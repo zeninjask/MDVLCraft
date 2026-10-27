@@ -8,8 +8,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.FormattedCharSequence;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 
 /**
  * The Shadow Arsenal (Formless Sword's Select mode): the absorbed weapons above, the sword wheel's 8 slots below. Click a
@@ -19,7 +17,7 @@ public final class ArsenalScreen extends Screen {
     private static final int WIDTH = 194;
     private static final int HEIGHT = 172;   // fits a 180-high screen (720p at GUI scale 4)
     private static final int ROWS = 3;
-    private Item picked;
+    private ClientArsenal.Entry picked;
 
     public ArsenalScreen() {
         super(Component.translatable("screen.mdvlcraft.arsenal"));
@@ -59,7 +57,7 @@ public final class ArsenalScreen extends Screen {
         this.renderBackground(graphics);
         int textX = this.left() + 10;
         DqGui.panel(graphics, this.font, this.title, this.left(), this.top(), WIDTH, HEIGHT);
-        List<Item> arsenal = ClientArsenal.arsenal();
+        List<ClientArsenal.Entry> arsenal = ClientArsenal.arsenal();
         if (arsenal.isEmpty()) {
             List<FormattedCharSequence> none = this.font.split(Component.translatable("screen.mdvlcraft.arsenal.none"), 174);
             for (int line = 0; line < none.size(); line++) {
@@ -67,14 +65,14 @@ public final class ArsenalScreen extends Screen {
             }
         }
         for (int i = 0; i < Math.min(ROWS * 8, arsenal.size()); i++) {
-            DqGui.slot(graphics, this.itemX(i), this.itemY(i), 20, arsenal.get(i) == this.picked ? DqGui.Slot.PICKED : DqGui.Slot.FILLED);
-            graphics.renderItem(new ItemStack(arsenal.get(i)), this.itemX(i) + 2, this.itemY(i) + 2);
+            DqGui.slot(graphics, this.itemX(i), this.itemY(i), 20, arsenal.get(i).equals(this.picked) ? DqGui.Slot.PICKED : DqGui.Slot.FILLED);
+            entry(graphics, arsenal.get(i), this.itemX(i), this.itemY(i));
         }
         graphics.drawString(this.font, Component.translatable("screen.mdvlcraft.arsenal.wheel"), textX, this.slotY() - 12, DqGui.MUTED, false);
         for (int slot = 0; slot < 8; slot++) {
             int x = this.slotX(slot);
             DqGui.slot(graphics, x, this.slotY(), 20, ClientArsenal.wheel(slot).isPresent() ? DqGui.Slot.FILLED : DqGui.Slot.EMPTY);
-            ClientArsenal.wheel(slot).ifPresent(item -> graphics.renderItem(new ItemStack(item), x + 2, this.slotY() + 2));
+            ClientArsenal.wheel(slot).ifPresent(entry -> entry(graphics, entry, x, this.slotY()));
             String number = String.valueOf(slot + 1);
             graphics.drawString(this.font, number, x + (20 - this.font.width(number)) / 2 + 1, this.slotY() + 23, DqGui.MUTED, false);
         }
@@ -86,11 +84,25 @@ public final class ArsenalScreen extends Screen {
             graphics.drawString(this.font, lines.get(line), textX, hintTop + line * 10, DqGui.MUTED, false);
         }
         super.render(graphics, mouseX, mouseY, partialTick);
-        this.hovered(mouseX, mouseY).ifPresent(item -> graphics.renderTooltip(this.font, new ItemStack(item), mouseX, mouseY));
+        this.hovered(mouseX, mouseY).ifPresent(entry -> graphics.renderTooltip(this.font, entry.name(), mouseX, mouseY));
     }
 
-    private Optional<Item> hovered(double mouseX, double mouseY) {
-        List<Item> arsenal = ClientArsenal.arsenal();
+    /** An entry in a 20-pixel slot: off-hand versions carry an "L" mark and are greyed out while they can't be used. */
+    private void entry(GuiGraphics graphics, ClientArsenal.Entry entry, int x, int y) {
+        graphics.renderItem(entry.stack(), x + 2, y + 2);
+        if (entry.offhand()) {
+            graphics.pose().pushPose();
+            graphics.pose().translate(0.0F, 0.0F, 200.0F);
+            graphics.drawString(this.font, "L", x + 13, y + 11, DqGui.TEXT, true);
+            if (!entry.usable()) {
+                graphics.fill(x + 1, y + 1, x + 19, y + 19, 0xA0000000);
+            }
+            graphics.pose().popPose();
+        }
+    }
+
+    private Optional<ClientArsenal.Entry> hovered(double mouseX, double mouseY) {
+        List<ClientArsenal.Entry> arsenal = ClientArsenal.arsenal();
         for (int i = 0; i < Math.min(ROWS * 8, arsenal.size()); i++) {
             if (inside(mouseX, mouseY, this.itemX(i), this.itemY(i))) {
                 return Optional.of(arsenal.get(i));
@@ -110,10 +122,10 @@ public final class ArsenalScreen extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        List<Item> arsenal = ClientArsenal.arsenal();
+        List<ClientArsenal.Entry> arsenal = ClientArsenal.arsenal();
         for (int i = 0; i < Math.min(ROWS * 8, arsenal.size()); i++) {
             if (inside(mouseX, mouseY, this.itemX(i), this.itemY(i))) {
-                this.picked = arsenal.get(i) == this.picked ? null : arsenal.get(i);
+                this.picked = arsenal.get(i).equals(this.picked) ? null : arsenal.get(i);
                 return true;
             }
         }
@@ -122,7 +134,7 @@ public final class ArsenalScreen extends Screen {
                 if (button == 1) {
                     BinderNetwork.sendToServer(new BindArsenalPacket(slot, Optional.empty()));
                 } else if (this.picked != null) {
-                    BinderNetwork.sendToServer(new BindArsenalPacket(slot, Optional.of(ClientArsenal.id(this.picked))));
+                    BinderNetwork.sendToServer(new BindArsenalPacket(slot, Optional.of(this.picked.id())));
                     this.picked = null;
                 }
                 return true;

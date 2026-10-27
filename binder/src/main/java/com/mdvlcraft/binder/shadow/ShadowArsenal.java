@@ -34,6 +34,7 @@ import net.minecraftforge.event.entity.player.PlayerEvent.PlayerLoggedInEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.registries.ForgeRegistries;
+import yesman.epicfight.world.capabilities.EpicFightCapabilities;
 
 /**
  * Formless Sword (the samurai's ability, in place of Magic Blade: Absorb) and the Shadow Arsenal. Activating the ability
@@ -44,6 +45,9 @@ import net.minecraftforge.registries.ForgeRegistries;
  * - Form: holding the ability key opens the sword wheel (client/SwordWheelScreen) to pick a weapon; a tap summons its
  *   shadow (ShadowWeapons) into the first hotbar slot, or dismisses the one out. A shadow weapon drains MANA_PER_SECOND
  *   and fades when the mana runs out, on death, or if the player loses Formless Sword.
+ * - A one-handed weapon in the arsenal also shows as "weapon - offhand" (id + OFFHAND_SUFFIX). Picking that on the
+ *   wheel puts its shadow in the off hand while a one-handed shadow weapon is out in the shadow slot (whatever was in the
+ *   off hand goes to the bag); it costs no extra mana and goes when the main one goes or stops being one-handed.
  * The first hotbar slot is the samurai's shadow slot (content/MageHunterSlot): only shadow weapons go in, and they can't
  * be moved, dropped or swapped out. One that is taken anyway (a disarm) comes back at the next check.
  * Saved in the player's persisted data; the client gets it through ArsenalSyncPacket.
@@ -59,6 +63,9 @@ public final class ShadowArsenal {
     private static final String MODE = "mdvlcraft:formless_mode";
     private static final String PICK = "mdvlcraft:formless_pick";
     private static final String OUT = "mdvlcraft:formless_out";
+    private static final String OFFHAND = "mdvlcraft:formless_offhand";
+    /** Marks an arsenal or wheel entry as the off-hand version of the weapon. */
+    public static final String OFFHAND_SUFFIX = "#offhand";
 
     private ShadowArsenal() {
     }
@@ -134,7 +141,7 @@ public final class ShadowArsenal {
     /** The shadow of `item` in the shadow slot; whatever else was there goes to the bag (or the ground). */
     private static void place(ServerPlayer player, Item item) {
         Inventory inventory = player.getInventory();
-        removeShadows(inventory);
+        removeShadows(inventory, false);
         ItemStack there = inventory.getItem(MageHunterSlot.SLOT);
         if (!there.isEmpty()) {
             inventory.setItem(MageHunterSlot.SLOT, ItemStack.EMPTY);
@@ -145,25 +152,56 @@ public final class ShadowArsenal {
         inventory.setItem(MageHunterSlot.SLOT, ShadowWeapons.make(item, ShadowEnchantReward.of(player)));
     }
 
-    public static void dismiss(ServerPlayer player) {
-        data(player).putString(OUT, "");
-        removeShadows(player.getInventory());
+    /** The shadow of `item` in the off hand; whatever else was there goes to the bag (or the ground). */
+    private static void placeOffhand(ServerPlayer player, Item item) {
+        Inventory inventory = player.getInventory();
+        ItemStack there = inventory.getItem(Inventory.SLOT_OFFHAND);
+        inventory.setItem(Inventory.SLOT_OFFHAND, ShadowWeapons.make(item, ShadowEnchantReward.of(player)));
+        if (!there.isEmpty() && !ShadowWeapons.is(there) && !inventory.add(there)) {
+            player.drop(there, false);
+        }
     }
 
-    private static void removeShadows(Inventory inventory) {
+    public static void dismiss(ServerPlayer player) {
+        data(player).putString(OUT, "");
+        data(player).putString(OFFHAND, "");
+        removeShadows(player.getInventory(), true);
+    }
+
+    private static void dismissOffhand(ServerPlayer player) {
+        data(player).putString(OFFHAND, "");
+        if (ShadowWeapons.is(player.getOffhandItem())) {
+            player.getInventory().setItem(Inventory.SLOT_OFFHAND, ItemStack.EMPTY);
+        }
+    }
+
+    private static void removeShadows(Inventory inventory, boolean offhandToo) {
         for (int i = 0; i < inventory.getContainerSize(); i++) {
-            if (ShadowWeapons.is(inventory.getItem(i))) {
+            if (ShadowWeapons.is(inventory.getItem(i)) && (offhandToo || i != Inventory.SLOT_OFFHAND)) {
                 inventory.setItem(i, ItemStack.EMPTY);
             }
         }
     }
 
+    /** Whether the weapon can be held in one hand (Epic Fight's one-handed style), so it also has an off-hand version. */
+    public static boolean oneHanded(Item item) {
+        ItemStack stack = new ItemStack(item);
+        return ShadowWeapons.absorbable(stack) && EpicFightCapabilities.getItemStackCapability(stack).canBePlacedOffhand();
+    }
+
+    private static Item item(String id) {
+        return id.isEmpty() ? null : ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(id));
+    }
+
     /** New enchantments (a Shadow Arsenal node unlocked or lost) reach the shadow weapon that is out. */
     static void refresh(ServerPlayer player) {
-        String out = out(player);
-        Item item = out.isEmpty() ? null : ForgeRegistries.ITEMS.getValue(ResourceLocation.parse(out));
+        Item item = item(out(player));
         if (item != null) {
             place(player, item);
+        }
+        Item offhand = item(data(player).getString(OFFHAND));
+        if (offhand != null) {
+            placeOffhand(player, offhand);
         }
     }
 
@@ -171,6 +209,10 @@ public final class ShadowArsenal {
     /** The sword wheel's choice: the weapon Form summons; a shadow weapon out is swapped for it. */
     public static void pick(ServerPlayer player, String id) {
         if (!wheel(player).contains(id) || !granted(player)) {
+            return;
+        }
+        if (id.endsWith(OFFHAND_SUFFIX)) {
+            pickOffhand(player, id.substring(0, id.length() - OFFHAND_SUFFIX.length()));
             return;
         }
         data(player).putString(PICK, id);
@@ -185,9 +227,23 @@ public final class ShadowArsenal {
         sync(player);
     }
 
+    /** An off-hand entry of the wheel: its shadow goes in the off hand, if a one-handed shadow weapon is out. */
+    private static void pickOffhand(ServerPlayer player, String id) {
+        Item main = item(out(player));
+        Item item = item(id);
+        if (item == null || !oneHanded(item) || main == null || !oneHanded(main)) {
+            tell(player, Component.translatable("ability.mdvlcraft.formless_sword.no_offhand"), ChatFormatting.GRAY);
+            return;
+        }
+        data(player).putString(OFFHAND, id);
+        placeOffhand(player, item);
+        player.level().playSound(null, player.blockPosition(), SoundEvents.ILLUSIONER_MIRROR_MOVE, SoundSource.PLAYERS, 0.8F, 0.7F);
+        tell(player, Component.translatable("ability.mdvlcraft.formless_sword.picked_offhand", item.getDescription()), ChatFormatting.DARK_PURPLE);
+    }
+
     /** The arsenal screen binds an arsenal weapon to a sword wheel slot (or clears it). */
     public static void bind(ServerPlayer player, int slot, Optional<String> id) {
-        if (slot < 0 || slot >= WHEEL || id.isPresent() && !arsenal(player).contains(id.get())) {
+        if (slot < 0 || slot >= WHEEL || id.isPresent() && !entries(player).contains(id.get())) {
             return;
         }
         List<String> wheel = wheel(player);
@@ -225,6 +281,14 @@ public final class ShadowArsenal {
         ItemStack held = player.getInventory().getItem(MageHunterSlot.SLOT);
         if (!ShadowWeapons.is(held) || held.getItem() != item) {
             place(player, item);   // taken away (a disarm): it comes back
+        }
+        Item offhand = item(data(player).getString(OFFHAND));
+        if (offhand != null) {
+            if (!oneHanded(item)) {
+                dismissOffhand(player);
+            } else if (!ShadowWeapons.is(player.getOffhandItem()) || player.getOffhandItem().getItem() != offhand) {
+                placeOffhand(player, offhand);   // taken away (a disarm): it comes back
+            }
         }
     }
 
@@ -279,8 +343,21 @@ public final class ShadowArsenal {
         return wheel;
     }
 
+    /** The arsenal as the screen lists it: each weapon, followed by its off-hand version if it is one-handed. */
+    private static List<String> entries(Player player) {
+        List<String> entries = new ArrayList<>();
+        for (String id : arsenal(player)) {
+            entries.add(id);
+            Item item = item(id);
+            if (item != null && oneHanded(item)) {
+                entries.add(id + OFFHAND_SUFFIX);
+            }
+        }
+        return entries;
+    }
+
     public static void sync(ServerPlayer player) {
-        BinderNetwork.sendTo(player, new ArsenalSyncPacket(mode(player).ordinal(), data(player).getString(PICK), arsenal(player), wheel(player)));
+        BinderNetwork.sendTo(player, new ArsenalSyncPacket(mode(player).ordinal(), data(player).getString(PICK), entries(player), wheel(player)));
     }
 
     private static void tell(ServerPlayer player, Component message, ChatFormatting colour) {

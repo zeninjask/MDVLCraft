@@ -26,7 +26,7 @@ final class RigReport {
                     EntityPatch<?> patch = EpicFightCapabilities.getEntityPatch(living, EntityPatch.class);
                     lines.add(entry.getKey().location() + "\t" + (patch == null ? "-" : patch.getClass().getName()) + "\t" + living.getClass().getName());
                 }
-            } catch (RuntimeException e) {   // some modded entities can't exist outside the world
+            } catch (RuntimeException | LinkageError e) {   // some modded entities can't exist outside the world, or link against missing mods
                 lines.add(entry.getKey().location() + "\terror: " + e + "\t-");
             }
         });

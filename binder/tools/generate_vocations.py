@@ -309,7 +309,10 @@ OWN_ABILITIES = {'formless_sword': "shadow weapons drain 2 mana a second"}
 SHADOW_COST = 5
 SHADOW_ENCHANTS = [("minecraft:sharpness", "Sharpness", 5), ("minecraft:looting", "Looting", 3),
                    ("minecraft:sweeping", "Sweeping Edge", 3), ("majruszsenchantments:death_wish", "Death Wish", 1),
-                   ("majruszsenchantments:leech", "Leech", 1), ("combat_evolution:massacre", "Massacre", 5)]
+                   ("majruszsenchantments:leech", "Leech", 1), ("combat_evolution:massacre", "Massacre", 5),
+                   ("minecraft:power", "Power", 5), ("minecraft:punch", "Punch", 2)]
+# Bow enchantments: the node text says shadow bows.
+SHADOW_BOW_ENCHANTS = {"minecraft:power", "minecraft:punch"}
 ROMAN = ["I", "II", "III", "IV", "V"]
 
 
@@ -367,7 +370,7 @@ def shadow_branch(defs, lines, pos, anchor):
                         p[nid] = (round(hx + r * math.cos(a)), round(hy + r * math.sin(a)))
                         level = f" {ROMAN[lvl - 1]}" if top > 1 else ""
                         d[nid] = {"title": f"Shadow {title}{level}",
-                                  "description": f"Your shadow weapons get {title}{level}",
+                                  "description": f"Your shadow {'bows' if ench in SHADOW_BOW_ENCHANTS else 'weapons'} get {title}{level}",
                                   "extra_description": "Shadow Arsenal: shadow weapons summoned by Formless Sword carry the highest level of each enchantment you have unlocked here.",
                                   "icon": tex(f"{ICON}ability/mdvlcraft_formless_sword.png"),
                                   "rewards": [{"type": "mdvlcraft:shadow_enchant", "data": {"enchantment": ench, "level": lvl}}],

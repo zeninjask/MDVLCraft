@@ -10,14 +10,14 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * The number key of a Mage Hunter's sword slot swaps nothing: the swap writes the hotbar slot directly, past
- * Slot.mayPlace and mayPickup (content/MageHunterSlot).
+ * The number key of a Mage Hunter's sword slot, and the off-hand key while a shadow weapon is there, swap nothing: the
+ * swap writes the slot directly, past Slot.mayPlace and mayPickup (content/MageHunterSlot).
  */
 @Mixin(AbstractContainerMenu.class)
 public abstract class AbstractContainerMenuMixin {
     @Inject(method = "doClick", at = @At("HEAD"), cancellable = true)
     private void mdvlcraft$noSwordSlotSwap(int slotId, int button, ClickType clickType, Player player, CallbackInfo ci) {
-        if (clickType == ClickType.SWAP && button == MageHunterSlot.SLOT && !player.isCreative() && MageHunterSlot.isMageHunter(player)) {
+        if (clickType == ClickType.SWAP && MageHunterSlot.isSwordSlot(player.getInventory(), button)) {
             ci.cancel();
         }
     }

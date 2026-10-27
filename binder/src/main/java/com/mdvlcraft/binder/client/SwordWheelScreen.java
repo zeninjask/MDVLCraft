@@ -5,7 +5,6 @@ import com.mdvlcraft.binder.network.PickShadowPacket;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.ItemStack;
 
 /** Formless Sword's sword wheel: the weapons bound in the Shadow Arsenal; release the cast key (or click) on one to pick it. */
 public final class SwordWheelScreen extends Screen {
@@ -42,14 +41,25 @@ public final class SwordWheelScreen extends Screen {
             int x = this.width / 2 + (int)Math.round(RADIUS * Math.cos(angle(slot))) - 12;
             int y = this.height / 2 + (int)Math.round(RADIUS * Math.sin(angle(slot))) - 12;
             boolean bound = ClientArsenal.wheel(slot).isPresent();
-            boolean picked = ClientArsenal.wheel(slot).map(item -> ClientArsenal.id(item).equals(ClientArsenal.pick())).orElse(false);
+            boolean picked = ClientArsenal.wheel(slot).map(entry -> entry.id().equals(ClientArsenal.pick())).orElse(false);
             DqGui.slot(graphics, x, y, 24, slot == hovered || hovered < 0 && picked ? DqGui.Slot.PICKED : bound ? DqGui.Slot.FILLED : DqGui.Slot.EMPTY);
-            ClientArsenal.wheel(slot).ifPresent(item -> graphics.renderItem(new ItemStack(item), x + 4, y + 4));
+            ClientArsenal.wheel(slot).ifPresent(entry -> {
+                graphics.renderItem(entry.stack(), x + 4, y + 4);
+                if (entry.offhand()) {
+                    graphics.pose().pushPose();
+                    graphics.pose().translate(0.0F, 0.0F, 200.0F);
+                    graphics.drawString(this.font, "L", x + 15, y + 14, DqGui.TEXT, true);
+                    if (!entry.usable()) {   // greyed out until a one-handed shadow weapon is out
+                        graphics.fill(x + 1, y + 1, x + 23, y + 23, 0xA0000000);
+                    }
+                    graphics.pose().popPose();
+                }
+            });
         }
         DqGui.disc(graphics, this.width / 2, this.height / 2, 18, true);
-        ClientArsenal.wheel(hovered).ifPresent(item -> {
-            graphics.renderItem(new ItemStack(item), this.width / 2 - 8, this.height / 2 - 8);
-            Component name = item.getDescription();
+        ClientArsenal.wheel(hovered).ifPresent(entry -> {
+            graphics.renderItem(entry.stack(), this.width / 2 - 8, this.height / 2 - 8);
+            Component name = entry.name();
             int textWidth = this.font.width(name);
             int bannerTop = this.height / 2 + RADIUS + 26;
             DqGui.window(graphics, this.width / 2 - textWidth / 2 - 6, bannerTop, textWidth + 12, 18);
@@ -59,8 +69,8 @@ public final class SwordWheelScreen extends Screen {
     }
 
     private void choose(double mouseX, double mouseY) {
-        ClientArsenal.wheel(this.hovered(mouseX, mouseY))
-            .ifPresent(item -> BinderNetwork.sendToServer(new PickShadowPacket(ClientArsenal.id(item))));
+        ClientArsenal.wheel(this.hovered(mouseX, mouseY)).filter(ClientArsenal.Entry::usable)
+            .ifPresent(entry -> BinderNetwork.sendToServer(new PickShadowPacket(entry.id())));
         this.onClose();
     }
 

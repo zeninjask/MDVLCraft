@@ -6,7 +6,6 @@ import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.Screen;
-import net.minecraft.client.gui.screens.inventory.InventoryScreen;
 import net.minecraft.client.resources.sounds.SimpleSoundInstance;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -31,8 +30,8 @@ public class PickerScreen extends Screen {
     private static final int TEXT_DIM = 0x6E6C94;
     private static final int ACCENT = 0x9AA3C4;
     private static final int ROW = 22;
-    private static final int LIST_W = 170;
-    private static final int PANEL_W = 220;
+    private static final int MAX_LIST_W = 170;
+    private static final int MAX_PANEL_W = 220;
     private static final long HOLD_MS = 1000L;
 
     /** A row of the list: a heading (option == null) or a choice. */
@@ -52,6 +51,8 @@ public class PickerScreen extends Screen {
     private Entry selected;
     private float scroll;
     private long holdStart = -1L;
+    private int listW;
+    private int panelW;
     private int listLeft;
     private int listTop;
     private int listBottom;
@@ -68,12 +69,16 @@ public class PickerScreen extends Screen {
 
     @Override
     protected void init() {
-        int groupW = LIST_W + 40 + PANEL_W;
-        this.listLeft = (this.width - groupW) / 2;
-        this.panelLeft = this.listLeft + LIST_W + 40;
-        this.listTop = 40;
-        this.listBottom = this.height - 40;
-        this.confirmX = this.panelLeft + (PANEL_W - 120) / 2;
+        // narrow screens (high gui scale) shrink both columns so neither runs off the edge
+        int gap = Math.min(40, this.width / 20);
+        int room = this.width - 16 - gap;
+        this.listW = Math.min(MAX_LIST_W, room * 2 / 5);
+        this.panelW = Math.min(MAX_PANEL_W, room - this.listW);
+        this.listLeft = (this.width - this.listW - gap - this.panelW) / 2;
+        this.panelLeft = this.listLeft + this.listW + gap;
+        this.listTop = 32;
+        this.listBottom = this.height - 16;
+        this.confirmX = this.panelLeft + (this.panelW - 120) / 2;
         this.confirmY = this.listBottom - 22;
         this.scroll = Mth.clamp(this.scroll, 0.0F, maxScroll());
     }
@@ -97,7 +102,7 @@ public class PickerScreen extends Screen {
         g.fill(0, 0, this.width, this.height, INK);
         g.drawCenteredString(this.font, this.title, this.width / 2, 16, TEXT_HI);
 
-        g.enableScissor(this.listLeft, this.listTop, this.listLeft + LIST_W, this.listBottom);
+        g.enableScissor(this.listLeft, this.listTop, this.listLeft + this.listW, this.listBottom);
         for (int i = 0; i < this.entries.size(); i++) {
             Entry entry = this.entries.get(i);
             int y = this.listTop + i * ROW - (int)this.scroll;
@@ -106,14 +111,14 @@ public class PickerScreen extends Screen {
             }
             if (entry.isHeading()) {
                 g.drawString(this.font, entry.name(), this.listLeft + 4, y + 9, ACCENT, false);
-                g.fill(this.listLeft + 4, y + 19, this.listLeft + LIST_W - 4, y + 20, LINE);
+                g.fill(this.listLeft + 4, y + 19, this.listLeft + this.listW - 4, y + 20, LINE);
                 continue;
             }
-            boolean hovered = mouseX >= this.listLeft && mouseX < this.listLeft + LIST_W && mouseY >= y && mouseY < y + ROW - 2
+            boolean hovered = mouseX >= this.listLeft && mouseX < this.listLeft + this.listW && mouseY >= y && mouseY < y + ROW - 2
                 && mouseY >= this.listTop && mouseY < this.listBottom;
             boolean isSelected = entry == this.selected;
-            g.fill(this.listLeft, y, this.listLeft + LIST_W, y + ROW - 2, isSelected ? SURFACE_HI : SURFACE);
-            g.renderOutline(this.listLeft, y, LIST_W, ROW - 2, isSelected || hovered ? LINE_HI : LINE);
+            g.fill(this.listLeft, y, this.listLeft + this.listW, y + ROW - 2, isSelected ? SURFACE_HI : SURFACE);
+            g.renderOutline(this.listLeft, y, this.listW, ROW - 2, isSelected || hovered ? LINE_HI : LINE);
             if (!entry.icon().isEmpty()) {
                 g.renderItem(entry.icon(), this.listLeft + 3, y + 2);
             }
@@ -125,31 +130,26 @@ public class PickerScreen extends Screen {
         if (shown != null) {
             renderPanel(g, shown, mouseX, mouseY);
         } else {
-            g.drawCenteredString(this.font, Component.translatable("gui.mdvlcraft.picker.choose"), this.panelLeft + PANEL_W / 2, this.height / 2, TEXT_DIM);
+            g.drawCenteredString(this.font, Component.translatable("gui.mdvlcraft.picker.choose"), this.panelLeft + this.panelW / 2, this.height / 2, TEXT_DIM);
         }
         super.render(g, mouseX, mouseY, partialTick);
     }
 
     private void renderPanel(GuiGraphics g, Entry entry, int mouseX, int mouseY) {
-        g.fill(this.panelLeft, this.listTop, this.panelLeft + PANEL_W, this.listBottom, SURFACE);
-        g.renderOutline(this.panelLeft, this.listTop, PANEL_W, this.listBottom - this.listTop, LINE);
+        g.fill(this.panelLeft, this.listTop, this.panelLeft + this.panelW, this.listBottom, SURFACE);
+        g.renderOutline(this.panelLeft, this.listTop, this.panelW, this.listBottom - this.listTop, LINE);
         if (!entry.icon().isEmpty()) {
             g.renderItem(entry.icon(), this.panelLeft + 8, this.listTop + 8);
         }
         g.drawString(this.font, entry.name(), this.panelLeft + 30, this.listTop + 12, TEXT_HI, false);
-        g.fill(this.panelLeft + 8, this.listTop + 28, this.panelLeft + PANEL_W - 8, this.listTop + 29, LINE);
+        g.fill(this.panelLeft + 8, this.listTop + 28, this.panelLeft + this.panelW - 8, this.listTop + 29, LINE);
         int y = this.listTop + 34;
-        int textBottom = this.confirmY - 70;
-        for (FormattedCharSequence line : this.font.split(entry.description(), PANEL_W - 16)) {
-            if (y > textBottom) {
+        for (FormattedCharSequence line : this.font.split(entry.description(), this.panelW - 16)) {
+            if (y + 10 > this.confirmY - 4) {
                 break;
             }
             g.drawString(this.font, line, this.panelLeft + 8, y, TEXT_BODY, false);
             y += 10;
-        }
-        if (this.minecraft != null && this.minecraft.player != null) {
-            InventoryScreen.renderEntityInInventoryFollowsMouse(g, this.panelLeft + PANEL_W / 2, this.confirmY - 6, 28,
-                this.panelLeft + PANEL_W / 2 - mouseX, this.confirmY - 50 - mouseY, this.minecraft.player);
         }
 
         float progress = this.holdStart < 0 ? 0.0F : Math.min(1.0F, (Util.getMillis() - this.holdStart) / (float)HOLD_MS);
@@ -179,7 +179,7 @@ public class PickerScreen extends Screen {
             this.holdStart = Util.getMillis();
             return true;
         }
-        if (button == 0 && mouseX >= this.listLeft && mouseX < this.listLeft + LIST_W && mouseY >= this.listTop && mouseY < this.listBottom) {
+        if (button == 0 && mouseX >= this.listLeft && mouseX < this.listLeft + this.listW && mouseY >= this.listTop && mouseY < this.listBottom) {
             int index = (int)((mouseY - this.listTop + this.scroll) / ROW);
             if (index >= 0 && index < this.entries.size() && !this.entries.get(index).isHeading() && this.entries.get(index) != this.selected) {
                 this.selected = this.entries.get(index);
