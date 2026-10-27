@@ -19,6 +19,8 @@ THEMES = {
     'spire':   (0x3a2a5a, 0x4a3a6a, 0x3a3aaa, 'minecraft:enchant', 0.004, False, 0.7, 'minecraft:music.end', None),
     'forge':   (0x5a1a0a, 0x6a2410, 0x8a2a0a, 'minecraft:lava', 0.002, False, 2.0, 'minecraft:music.nether.nether_wastes', 'minecraft:ambient.nether_wastes.loop'),
 }
+from new_themes import NEW_THEMES
+THEMES.update({k: t['look'] for k, t in NEW_THEMES.items()})
 # the theme files (data/mdvlcraft/gate_themes/<theme>.json) own the music
 for _key, _look in list(THEMES.items()):
     _file = ROOT / 'gate_themes' / f'{_key}.json'
@@ -34,6 +36,7 @@ RED_GROUND = {
     'spire':   ('minecraft:calcite', 'minecraft:moss_block', 'minecraft:tuff', 'minecraft:tuff', None),
     'forge':   ('minecraft:basalt', 'minecraft:soul_soil', 'minecraft:blackstone', 'minecraft:basalt', 'minecraft:blackstone'),
 }
+RED_GROUND.update({k: t['ground'] for k, t in NEW_THEMES.items()})
 CELL_SCALE = 6   # checkerboard: biome index = ((quartX >> (scale + 2)) + (quartZ >> (scale + 2))) mod n, so cells are 2^(6 + 4) = 1024 blocks
 
 

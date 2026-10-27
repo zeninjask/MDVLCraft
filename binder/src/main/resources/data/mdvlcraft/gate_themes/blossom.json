@@ -1,0 +1,246 @@
+{
+  "name": "gate.mdvlcraft.theme.blossom",
+  "biome": "mdvlcraft:gate_blossom",
+  "music": "minecraft:music.overworld.cherry_grove",
+  "catalyst": "minecraft:cherry_sapling",
+  "hazard": {},
+  "ranks": {
+    "min": "D",
+    "max": "A"
+  },
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/blossom/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/blossom/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/blossom/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/blossom/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/blossom/combat_small_1",
+      "mdvlcraft:gate/blossom/combat_small_2",
+      "mdvlcraft:gate/blossom/combat_small_3",
+      "mdvlcraft:gate/blossom/combat_small_4",
+      "mdvlcraft:gate/blossom/combat_small_5",
+      "mdvlcraft:gate/blossom/combat_small_6",
+      "mdvlcraft:gate/blossom/combat_small_7",
+      "mdvlcraft:gate/blossom/combat_small_8",
+      "mdvlcraft:gate/blossom/combat_small_9",
+      "mdvlcraft:gate/blossom/combat_small_10",
+      "mdvlcraft:gate/blossom/combat_small_11",
+      "mdvlcraft:gate/blossom/combat_small_12"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/blossom/combat_large_1",
+      "mdvlcraft:gate/blossom/combat_large_2",
+      "mdvlcraft:gate/blossom/combat_large_3",
+      "mdvlcraft:gate/blossom/combat_large_4",
+      "mdvlcraft:gate/blossom/combat_large_5",
+      "mdvlcraft:gate/blossom/combat_large_6",
+      "mdvlcraft:gate/blossom/combat_large_7",
+      "mdvlcraft:gate/blossom/combat_large_8",
+      "mdvlcraft:gate/blossom/combat_large_9"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/blossom/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/blossom/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/blossom/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/blossom/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/blossom/boss_large_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_ashigaru",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:taoist",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_ashigaru",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:necromancer",
+          "weight": 1
+        },
+        {
+          "id": "iss_elden_ring:astrologer",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:onmyoji",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        },
+        {
+          "id": "iss_elden_ring:astrologer",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:fading_mage",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:aquamancer",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "esoteric_spell:esoteric_sorcerer",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:aqua_grandmaster",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "D": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "C": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "B": {
+      "id": "iss_magicfromtheeast:jade_executioner",
+      "count": 1,
+      "size": "medium"
+    },
+    "A": {
+      "id": "traveloptics:the_nightwarden",
+      "count": 1,
+      "size": "large"
+    },
+    "S": {
+      "id": "traveloptics:the_nightwarden",
+      "count": 1,
+      "size": "large"
+    }
+  },
+  "red": {
+    "landscape": "ruined city",
+    "palette": {
+      "floor": "minecraft:purpur_block",
+      "pillar": "minecraft:purpur_pillar",
+      "light": "minecraft:sea_lantern",
+      "campfire": "minecraft:soul_campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:witch",
+      "minecraft:vindicator",
+      "minecraft:pillager"
+    ],
+    "stand_in_boss": "minecraft:evoker",
+    "lairs": [
+      "mdvlcraft:gate/red/blossom/lair_1",
+      "mdvlcraft:gate/red/blossom/lair_2",
+      "mdvlcraft:gate/red/blossom/lair_3"
+    ],
+    "camps": [
+      "mdvlcraft:gate/red/blossom/camp_1",
+      "mdvlcraft:gate/red/blossom/camp_2",
+      "mdvlcraft:gate/red/blossom/camp_3",
+      "mdvlcraft:gate/red/blossom/camp_4",
+      "mdvlcraft:gate/red/blossom/camp_5"
+    ]
+  }
+}

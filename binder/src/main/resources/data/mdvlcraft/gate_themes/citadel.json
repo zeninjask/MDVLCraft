@@ -1,0 +1,213 @@
+{
+  "name": "gate.mdvlcraft.theme.citadel",
+  "biome": "mdvlcraft:gate_citadel",
+  "music": "minecraft:music.overworld.old_growth_taiga",
+  "catalyst": "minecraft:iron_sword",
+  "hazard": {},
+  "ranks": {
+    "min": "C",
+    "max": "A"
+  },
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/citadel/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/citadel/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/citadel/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/citadel/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/citadel/combat_small_1",
+      "mdvlcraft:gate/citadel/combat_small_2",
+      "mdvlcraft:gate/citadel/combat_small_3",
+      "mdvlcraft:gate/citadel/combat_small_4",
+      "mdvlcraft:gate/citadel/combat_small_5",
+      "mdvlcraft:gate/citadel/combat_small_6",
+      "mdvlcraft:gate/citadel/combat_small_7",
+      "mdvlcraft:gate/citadel/combat_small_8",
+      "mdvlcraft:gate/citadel/combat_small_9",
+      "mdvlcraft:gate/citadel/combat_small_10",
+      "mdvlcraft:gate/citadel/combat_small_11",
+      "mdvlcraft:gate/citadel/combat_small_12"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/citadel/combat_large_1",
+      "mdvlcraft:gate/citadel/combat_large_2",
+      "mdvlcraft:gate/citadel/combat_large_3",
+      "mdvlcraft:gate/citadel/combat_large_4",
+      "mdvlcraft:gate/citadel/combat_large_5",
+      "mdvlcraft:gate/citadel/combat_large_6",
+      "mdvlcraft:gate/citadel/combat_large_7",
+      "mdvlcraft:gate/citadel/combat_large_8",
+      "mdvlcraft:gate/citadel/combat_large_9"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/citadel/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/citadel/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/citadel/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/citadel/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/citadel/boss_large_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "minecraft:vindicator",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:pillager",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:magehunter_vindicator",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "minecraft:vindicator",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:magehunter_vindicator",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:pillager",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:evoker",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "minecraft:ravager",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "irons_spellbooks:magehunter_vindicator",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:vindicator",
+          "weight": 1
+        },
+        {
+          "id": "wom:lycanth",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:evoker",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:pillager",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "minecraft:ravager",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "minecraft:ravager",
+      "count": 1,
+      "size": "large"
+    },
+    "D": {
+      "id": "minecraft:ravager",
+      "count": 1,
+      "size": "large"
+    },
+    "C": {
+      "id": "cataclysm:ignited_revenant",
+      "count": 1,
+      "size": "medium"
+    },
+    "B": {
+      "id": "cataclysm:ignited_revenant",
+      "count": 1,
+      "size": "medium"
+    },
+    "A": {
+      "id": "legendary_monsters:posessed_paladin",
+      "count": 1,
+      "size": "medium"
+    },
+    "S": {
+      "id": "legendary_monsters:posessed_paladin",
+      "count": 1,
+      "size": "medium"
+    }
+  },
+  "red": {
+    "landscape": "badlands",
+    "palette": {
+      "floor": "minecraft:coarse_dirt",
+      "pillar": "minecraft:spruce_log",
+      "light": "minecraft:lantern",
+      "campfire": "minecraft:campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:pillager",
+      "minecraft:vindicator"
+    ],
+    "stand_in_boss": "minecraft:ravager",
+    "lairs": [
+      "mdvlcraft:gate/red/citadel/lair_1",
+      "mdvlcraft:gate/red/citadel/lair_2",
+      "mdvlcraft:gate/red/citadel/lair_3"
+    ],
+    "camps": [
+      "mdvlcraft:gate/red/citadel/camp_1",
+      "mdvlcraft:gate/red/citadel/camp_2",
+      "mdvlcraft:gate/red/citadel/camp_3",
+      "mdvlcraft:gate/red/citadel/camp_4",
+      "mdvlcraft:gate/red/citadel/camp_5"
+    ]
+  }
+}

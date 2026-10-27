@@ -1,0 +1,218 @@
+{
+  "name": "gate.mdvlcraft.theme.sunken",
+  "biome": "mdvlcraft:gate_sunken",
+  "music": "minecraft:music.overworld.lush_caves",
+  "catalyst": "minecraft:prismarine_shard",
+  "hazard": {},
+  "ranks": {
+    "min": "D",
+    "max": "A"
+  },
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/sunken/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/sunken/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/sunken/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/sunken/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/sunken/combat_small_1",
+      "mdvlcraft:gate/sunken/combat_small_2",
+      "mdvlcraft:gate/sunken/combat_small_3",
+      "mdvlcraft:gate/sunken/combat_small_4",
+      "mdvlcraft:gate/sunken/combat_small_5",
+      "mdvlcraft:gate/sunken/combat_small_6",
+      "mdvlcraft:gate/sunken/combat_small_7",
+      "mdvlcraft:gate/sunken/combat_small_8",
+      "mdvlcraft:gate/sunken/combat_small_9",
+      "mdvlcraft:gate/sunken/combat_small_10",
+      "mdvlcraft:gate/sunken/combat_small_11",
+      "mdvlcraft:gate/sunken/combat_small_12"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/sunken/combat_large_1",
+      "mdvlcraft:gate/sunken/combat_large_2",
+      "mdvlcraft:gate/sunken/combat_large_3",
+      "mdvlcraft:gate/sunken/combat_large_4",
+      "mdvlcraft:gate/sunken/combat_large_5",
+      "mdvlcraft:gate/sunken/combat_large_6",
+      "mdvlcraft:gate/sunken/combat_large_7",
+      "mdvlcraft:gate/sunken/combat_large_8",
+      "mdvlcraft:gate/sunken/combat_large_9"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/sunken/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/sunken/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/sunken/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/sunken/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/sunken/boss_large_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "minecraft:stray",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:draugr",
+          "weight": 1
+        },
+        {
+          "id": "wom:lycanth",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:stray",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "cataclysm:draugr",
+          "weight": 1
+        },
+        {
+          "id": "wom:lycanth",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:royal_draugr",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:stray",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:elite_draugr",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:frostbitten_golem",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "cataclysm:royal_draugr",
+          "weight": 1
+        },
+        {
+          "id": "wom:lycanth",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:elite_draugr",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:frostbitten_golem",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "legendary_monsters:frostbitten_golem",
+      "count": 1,
+      "size": "large"
+    },
+    "D": {
+      "id": "legendary_monsters:frostbitten_golem",
+      "count": 1,
+      "size": "large"
+    },
+    "C": {
+      "id": "legendary_monsters:frostbitten_golem",
+      "count": 1,
+      "size": "large"
+    },
+    "B": {
+      "id": "cataclysm:maledictus",
+      "count": 1,
+      "size": "large"
+    },
+    "A": {
+      "id": "cataclysm:maledictus",
+      "count": 1,
+      "size": "large"
+    },
+    "S": {
+      "id": "cataclysm:maledictus",
+      "count": 1,
+      "size": "large"
+    }
+  },
+  "red": {
+    "landscape": "snowfield",
+    "palette": {
+      "floor": "minecraft:snow_block",
+      "pillar": "minecraft:packed_ice",
+      "light": "minecraft:sea_lantern",
+      "campfire": "minecraft:campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:stray",
+      "minecraft:skeleton",
+      "minecraft:zombie"
+    ],
+    "stand_in_boss": "minecraft:ravager",
+    "lairs": [
+      "mdvlcraft:gate/red/sunken/lair_1",
+      "mdvlcraft:gate/red/sunken/lair_2",
+      "mdvlcraft:gate/red/sunken/lair_3"
+    ],
+    "camps": [
+      "mdvlcraft:gate/red/sunken/camp_1",
+      "mdvlcraft:gate/red/sunken/camp_2",
+      "mdvlcraft:gate/red/sunken/camp_3",
+      "mdvlcraft:gate/red/sunken/camp_4",
+      "mdvlcraft:gate/red/sunken/camp_5"
+    ]
+  }
+}

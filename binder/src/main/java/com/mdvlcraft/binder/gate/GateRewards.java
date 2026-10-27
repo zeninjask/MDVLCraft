@@ -12,6 +12,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
@@ -81,6 +84,7 @@ public final class GateRewards {
 
     /** Instances whose clear has been rewarded (all instances close on restart, so this needn't be saved). */
     private static final Set<Integer> REWARDED = new HashSet<>();
+    private static final float LOOT_CHANCE = 0.6F;
 
     static {
         for (GateRank rank : GateRank.values()) {
@@ -198,6 +202,24 @@ public final class GateRewards {
         }
     }
 
+    /**
+     * Minor chests: each `loot` marker (parkour islands, trap corners, maze dead ends) has a LOOT_CHANCE of a plain chest
+     * filled from the rank below's boss table (E gates use their own). Call after building.
+     */
+    public static void placeLootChests(ServerLevel level, Instance instance) {
+        GateRank below = GateRank.values()[Math.max(0, instance.rank.ordinal() - 1)];
+        ResourceLocation table = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/" + below.name().toLowerCase(Locale.ROOT) + "/boss");
+        for (Marker marker : instance.markers) {
+            if (marker.kind().equals("loot") && level.random.nextFloat() < LOOT_CHANCE) {
+                level.setBlock(marker.pos(), Blocks.CHEST.defaultBlockState()
+                    .setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(level.random)), Block.UPDATE_CLIENTS);
+                if (level.getBlockEntity(marker.pos()) instanceof RandomizableContainerBlockEntity chest) {
+                    chest.setLootTable(table, level.random.nextLong());
+                }
+            }
+        }
+    }
+
     static void vein(ServerLevel level, BlockPos centre, BlockState ore, int size, RandomSource random) {
         List<BlockPos> spots = new ArrayList<>();
         for (BlockPos pos : BlockPos.betweenClosed(centre.offset(-2, -1, -2), centre.offset(2, 2, 2))) {
@@ -240,7 +262,7 @@ public final class GateRewards {
         present.forEach(player -> giveExperience(player, experience));
 
         BlockPos pos = open(level, chestPos(instance));
-        level.setBlockAndUpdate(pos, REWARD_CHEST.get().defaultBlockState());
+        level.setBlockAndUpdate(pos, ((GateRewardChestBlock)REWARD_CHEST.get()).of(instance.rank));
         if (level.getBlockEntity(pos) instanceof GateRewardChestBlockEntity chest) {
             ResourceLocation table = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/" + instance.rank.name().toLowerCase(Locale.ROOT) + "/boss");
             present.forEach(player -> {

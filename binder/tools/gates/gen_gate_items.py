@@ -18,6 +18,8 @@ THEMES = {
     'spire': ('Mage Spire', 'minecraft:lapis_block'),
     'forge': ('Infernal Forge', 'minecraft:magma_block'),
 }
+from new_themes import NEW_THEMES
+THEMES.update({k: (t['name'], t['catalyst']) for k, t in NEW_THEMES.items()})
 # the theme files (data/mdvlcraft/gate_themes/<theme>.json) own the catalysts
 for _theme, (_name, _catalyst) in list(THEMES.items()):
     _file = DATA / 'gate_themes' / f'{_theme}.json'

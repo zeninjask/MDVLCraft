@@ -278,19 +278,27 @@ def lair(key, seed):
 
 
 def p_hang(key):
-    return 'soul_lantern[hanging=true]' if key in ('crypt', 'forge') else 'lantern[hanging=true]'
+    return 'soul_lantern[hanging=true]' if LIKE.get(key, key) in ('crypt', 'forge') else 'lantern[hanging=true]'
 
 
 def p_seat(key):
     return {'crypt': 'polished_deepslate_stairs[facing=north]', 'warren': 'spruce_stairs[facing=north]',
             'frozen': 'spruce_stairs[facing=north]', 'warcamp': 'dark_oak_stairs[facing=north]',
-            'spire': 'purpur_stairs[facing=north]', 'forge': 'polished_blackstone_stairs[facing=north]'}[key]
+            'spire': 'purpur_stairs[facing=north]', 'forge': 'polished_blackstone_stairs[facing=north]'}[LIKE.get(key, key)]
 
 
 # stairs for the bowl's benches and the throne steps (facing added where placed)
 STEPS = dict(crypt='polished_deepslate_stairs', warren='mud_brick_stairs', frozen='spruce_stairs',
              warcamp='smooth_red_sandstone_stairs', spire='purpur_stairs', forge='polished_blackstone_brick_stairs')
 
+
+# the 2.1.53 themes (new_themes.py): their palettes and stairs, the lair features of their feature theme, and the
+# lights and thrones of their parent theme
+from new_themes import NEW_THEMES
+PALETTES.update({k: t['lair'] for k, t in NEW_THEMES.items()})
+STEPS.update({k: t['steps'] for k, t in NEW_THEMES.items()})
+FEATURES.update({k: FEATURES[t.get('feature', t['parent'])] for k, t in NEW_THEMES.items()})
+LIKE = {k: t['parent'] for k, t in NEW_THEMES.items()}
 
 def outward(x, z, mid):
     """The horizontal direction pointing away from the centre (for stairs rising outward)."""

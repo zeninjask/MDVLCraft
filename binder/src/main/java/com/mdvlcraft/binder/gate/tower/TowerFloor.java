@@ -61,6 +61,18 @@ public final class TowerFloor {
         PALETTES.put(GateTheme.WARCAMP, new Palette(Blocks.DARK_OAK_PLANKS, Blocks.COARSE_DIRT, Blocks.STRIPPED_SPRUCE_LOG, Blocks.GLOWSTONE));
         PALETTES.put(GateTheme.SPIRE, new Palette(Blocks.QUARTZ_BRICKS, Blocks.SMOOTH_QUARTZ, Blocks.PURPUR_PILLAR, Blocks.PEARLESCENT_FROGLIGHT));
         PALETTES.put(GateTheme.FORGE, new Palette(Blocks.NETHER_BRICKS, Blocks.POLISHED_BLACKSTONE, Blocks.POLISHED_BASALT, Blocks.OCHRE_FROGLIGHT));
+        PALETTES.put(GateTheme.SUNKEN, new Palette(Blocks.PRISMARINE_BRICKS, Blocks.DARK_PRISMARINE, Blocks.PRISMARINE, Blocks.SEA_LANTERN));
+        PALETTES.put(GateTheme.TOMB, new Palette(Blocks.SANDSTONE, Blocks.SMOOTH_SANDSTONE, Blocks.CUT_SANDSTONE, Blocks.SHROOMLIGHT));
+        PALETTES.put(GateTheme.JUNGLE, new Palette(Blocks.MOSSY_STONE_BRICKS, Blocks.MOSSY_COBBLESTONE, Blocks.JUNGLE_LOG, Blocks.OCHRE_FROGLIGHT));
+        PALETTES.put(GateTheme.GROTTO, new Palette(Blocks.MUSHROOM_STEM, Blocks.MYCELIUM, Blocks.BROWN_MUSHROOM_BLOCK, Blocks.SHROOMLIGHT));
+        PALETTES.put(GateTheme.AMETHYST, new Palette(Blocks.SMOOTH_BASALT, Blocks.CALCITE, Blocks.AMETHYST_BLOCK, Blocks.PEARLESCENT_FROGLIGHT));
+        PALETTES.put(GateTheme.FORTRESS, new Palette(Blocks.NETHER_BRICKS, Blocks.RED_NETHER_BRICKS, Blocks.CHISELED_NETHER_BRICKS, Blocks.SHROOMLIGHT));
+        PALETTES.put(GateTheme.SCULK, new Palette(Blocks.DEEPSLATE_BRICKS, Blocks.DEEPSLATE_TILES, Blocks.POLISHED_DEEPSLATE, Blocks.OCHRE_FROGLIGHT));
+        PALETTES.put(GateTheme.BLOSSOM, new Palette(Blocks.WHITE_TERRACOTTA, Blocks.CHERRY_PLANKS, Blocks.CHERRY_LOG, Blocks.PEARLESCENT_FROGLIGHT));
+        PALETTES.put(GateTheme.MIRE, new Palette(Blocks.MUD_BRICKS, Blocks.MANGROVE_PLANKS, Blocks.MANGROVE_LOG, Blocks.VERDANT_FROGLIGHT));
+        PALETTES.put(GateTheme.CLOCKWORK, new Palette(Blocks.COPPER_BLOCK, Blocks.CUT_COPPER, Blocks.OXIDIZED_COPPER, Blocks.GLOWSTONE));
+        PALETTES.put(GateTheme.CRIMSON, new Palette(Blocks.RED_NETHER_BRICKS, Blocks.CRIMSON_PLANKS, Blocks.CRIMSON_STEM, Blocks.SHROOMLIGHT));
+        PALETTES.put(GateTheme.CITADEL, new Palette(Blocks.STONE_BRICKS, Blocks.POLISHED_ANDESITE, Blocks.CHISELED_STONE_BRICKS, Blocks.SHROOMLIGHT));
     }
 
     private TowerFloor() {

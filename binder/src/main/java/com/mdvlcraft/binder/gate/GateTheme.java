@@ -8,7 +8,8 @@ import javax.annotation.Nullable;
  * red realms, so the cell (i, j) (1024 blocks a side) has the theme {@code values()[(i + j) mod count]}. Never reorder.
  */
 public enum GateTheme {
-    CRYPT, WARREN, FROZEN, WARCAMP, SPIRE, FORGE;
+    CRYPT, WARREN, FROZEN, WARCAMP, SPIRE, FORGE,
+    SUNKEN, TOMB, JUNGLE, GROTTO, AMETHYST, FORTRESS, SCULK, BLOSSOM, MIRE, CLOCKWORK, CRIMSON, CITADEL;
 
     public String key() {
         return this.name().toLowerCase(Locale.ROOT);

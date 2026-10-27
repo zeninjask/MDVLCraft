@@ -148,6 +148,7 @@ public final class RedLandscape {
             case WARCAMP -> new Palette(Blocks.COARSE_DIRT, Blocks.SPRUCE_LOG, Blocks.LANTERN, Blocks.CAMPFIRE);
             case SPIRE -> new Palette(Blocks.PURPUR_BLOCK, Blocks.PURPUR_PILLAR, Blocks.SEA_LANTERN, Blocks.SOUL_CAMPFIRE);
             case FORGE -> new Palette(Blocks.POLISHED_BLACKSTONE, Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.SHROOMLIGHT, Blocks.SOUL_CAMPFIRE);
+            default -> throw new IllegalStateException("Gate theme " + theme.key() + " has no red section in its theme file");
         };
     }
 
@@ -164,6 +165,7 @@ public final class RedLandscape {
             case WARCAMP -> List.of("minecraft:pillager", "minecraft:vindicator");
             case SPIRE -> List.of("minecraft:witch", "minecraft:vindicator", "minecraft:pillager");
             case FORGE -> List.of("minecraft:blaze", "minecraft:magma_cube", "minecraft:wither_skeleton");
+            default -> throw new IllegalStateException("Gate theme " + theme.key() + " has no red section in its theme file");
         };
     }
 
@@ -178,6 +180,7 @@ public final class RedLandscape {
             case WARREN, FROZEN, WARCAMP -> "minecraft:ravager";
             case SPIRE -> "minecraft:evoker";
             case FORGE -> "minecraft:blaze";
+            default -> throw new IllegalStateException("Gate theme " + theme.key() + " has no red section in its theme file");
         };
     }
 

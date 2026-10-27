@@ -8,6 +8,7 @@ import com.mdvlcraft.binder.gate.GateInstances.Marker;
 import com.mdvlcraft.binder.gate.GateMobs;
 import com.mdvlcraft.binder.gate.GateModifiers;
 import com.mdvlcraft.binder.gate.GateRank;
+import com.mdvlcraft.binder.gate.GateRewardChestBlock;
 import com.mdvlcraft.binder.gate.GateRewardChestBlockEntity;
 import com.mdvlcraft.binder.gate.GateRewards;
 import com.mdvlcraft.binder.gate.GateSpawner;
@@ -738,7 +739,7 @@ public final class TowerRun {
      */
     private void reward(ServerLevel level, List<ServerPlayer> present, boolean boss) {
         BlockPos pos = boss ? this.current.boss() : this.current.chest();
-        level.setBlockAndUpdate(pos, GateRewards.REWARD_CHEST.get().defaultBlockState());
+        level.setBlockAndUpdate(pos, ((GateRewardChestBlock)GateRewards.REWARD_CHEST.get()).of(this.instance(level.getServer()).rank));
         GateRewardChestBlockEntity chest = level.getBlockEntity(pos) instanceof GateRewardChestBlockEntity c ? c : null;
         TowerProgress progress = TowerProgress.get(level.getServer());
         for (ServerPlayer player : present) {

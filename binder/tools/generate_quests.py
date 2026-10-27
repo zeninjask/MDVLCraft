@@ -15,7 +15,8 @@ Writes:
 
 Usage: python3 binder/tools/generate_quests.py   (build_packs.py also writes the book into its base before packing)
 """
-import hashlib, json, os, shutil
+import hashlib, json, os, shutil, sys
+from pathlib import Path
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.join(HERE, '..', '..')
@@ -452,6 +453,10 @@ RANKS = 'edcbas'
 THEMES = ['crypt', 'warren', 'frozen', 'warcamp', 'spire', 'forge']
 THEME_NAMES = {'crypt': 'Gravekeeper Crypt', 'warren': 'Goblin Warren', 'frozen': 'Frozen Hollow', 'warcamp': 'Orc War Camp',
                'spire': 'Mage Spire', 'forge': 'Infernal Forge'}
+sys.path.insert(0, str(Path(__file__).resolve().parent / 'gates'))
+from new_themes import NEW_THEMES   # the 2.1.53 themes, after the first six
+THEMES += list(NEW_THEMES)
+THEME_NAMES.update({k: t['name'] for k, t in NEW_THEMES.items()})
 RULES = ['no_potions', 'no_healing', 'statues', 'narrowing_door']
 GATE_EVENTS = (['open_gate', 'gate_kill', 'elite_kill', 'enter_red', 'enter_red_s', 'enter_trial', 'enter_modified', 'clear_red',
                 'clear_red_s', 'clear_modified', 'break', 'boss_chest', 'forge', 'tower_enter', 'tower_boss_5',

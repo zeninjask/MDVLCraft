@@ -67,6 +67,8 @@ PALETTES = {
                   web=None, litter=None, pool='lava', pool_base='blackstone', fence='nether_brick_fence'),
 }
 
+from new_themes import NEW_THEMES
+PALETTES.update({k: t['rooms'] for k, t in NEW_THEMES.items()})
 
 # ---- NBT writing and reading (just the tags a structure template uses) ----
 
@@ -185,6 +187,7 @@ class Room:
         self.height = height
         self.blocks = {}
         self.markers = {}
+        self.data = {}   # block entity data by position (trap dispensers' arrows)
         self.rng = random.Random(seed)
 
     def set(self, x, y, z, block):
@@ -669,6 +672,182 @@ def theme_combat(theme, large, seed):
     return r
 
 
+# ---- 2.1.53 room variants: parkour, traps and mazes (combat rooms of either size, so the planner picks them like any
+# combat variant; each keeps a few spawn markers and has a "loot" marker, where GateRewards may put a minor chest) ----
+
+def parkour(n, seed, large):
+    """The floor burns (magma); stepping stones lead from every doorway to a safe platform in the middle, where the mobs
+    wait. A harder line of stones (gaps of two) leads to a raised island in a corner with the loot marker. Stones step up
+    and down by one; falling only costs health. n sets the gaps: 1 = one-block gaps, 2 = two-block gaps, 3 = mixed."""
+    inset, height = (2, 20) if large else (8, 14)
+    r = Room(height, seed)
+    inner = shell(r, inset, ALL)
+    if not large:
+        arm_lights(r, inset, ALL)
+    wall_lights(r, inset, r.height)
+    lo, hi = inset, SIZE - 1 - inset
+    for x in range(lo, hi + 1):
+        for z in range(lo, hi + 1):
+            in_arm = (ARM_LO <= x <= ARM_HI and z in (lo, hi)) or (ARM_LO <= z <= ARM_HI and x in (lo, hi))
+            if r.get(x, FLOOR, z) is not None and r.get(x, WALK, z) is None and not in_arm:
+                r.set(x, FLOOR, z, 'magma_block')
+    for x in range(MID - 2, MID + 3):
+        for z in range(MID - 2, MID + 3):
+            r.set(x, FLOOR, z, 'floor2')
+
+    def stone(x, z, h):
+        for y in range(FLOOR, FLOOR + h + 1):
+            r.set(x, y, z, 'floor2' if y == FLOOR + h else 'pillar')
+
+    for d in ALL:
+        step = {'N': (0, 1), 'S': (0, -1), 'W': (1, 0), 'E': (-1, 0)}[d]
+        start = {'N': (MID, lo + 1), 'S': (MID, hi - 1), 'W': (lo + 1, MID), 'E': (hi - 1, MID)}[d]
+        x, z, h = start[0], start[1], 0
+        while abs(x - MID) > 3 or abs(z - MID) > 3:
+            stone(x, z, h)
+            gap = {1: 1, 2: 2}.get(n, r.rng.choice((1, 2)))
+            h = h if gap == 2 else max(0, min(1, h + r.rng.choice((-1, 0, 1))))
+            x, z = x + step[0] * (gap + 1), z + step[1] * (gap + 1)
+    # the loot island in the north-east quarter, reached from the platform by two-block gaps
+    ix, iz = MID + 9, MID - 9 if not large else MID - 14
+    x, z = MID + 3, MID - 3
+    while x < ix - 1:
+        x, z = x + 3, max(iz + 1, z - 3)
+        stone(x, z, 1)
+    for dx in (0, 1):
+        for dz in (0, 1):
+            stone(ix + dx, iz + dz, 1)
+    r.marker(ix, FLOOR + 2, iz, 'loot')
+    spread(r, 'spawn:melee', ((MID - 2, MID - 2), (MID + 2, MID + 2), (MID - 2, MID + 2)))
+    spread(r, 'spawn:ranged', ((MID + 2, MID - 2),))
+    if large:
+        spread(r, 'spawn:elite', ((MID, MID),))
+    hang(r, MID, MID, 4)
+    return r
+
+
+def trap(n, seed, large):
+    """A plain hall with pressure plates hidden in its floor pattern: plates on dispensers that shoot an arrow up through
+    whoever stands on them, and (n = 2) plates on TNT. n = 3 adds cobweb patches. A loot marker sits in a corner ringed
+    by plates. Gate worlds keep their blocks through explosions (GateProtection)."""
+    inset, height = (2, 20) if large else (8, 14)
+    r = Room(height, seed)
+    inner = shell(r, inset, ALL)
+    if not large:
+        arm_lights(r, inset, ALL)
+    wall_lights(r, inset, r.height)
+    floor_pattern(r, inner, inset, ('checker', 'cross', 'rings')[n - 1])
+    lo, hi = inset + 1, SIZE - 2 - inset
+    corner = (hi - 2, lo + 2)
+    r.marker(corner[0], WALK, corner[1], 'loot')
+    if large:
+        spread(r, 'spawn:melee', ((MID, 8), (8, MID), (38, MID), (MID, 38)))
+        spread(r, 'spawn:ranged', ((6, 40), (40, 40)))
+        spread(r, 'spawn:elite', ((MID, MID),))
+    else:
+        spread(r, 'spawn:melee', ((MID, 13), (13, MID), (33, MID)))
+        spread(r, 'spawn:ranged', ((12, 34),))
+    spots = [(corner[0] + dx, corner[1] + dz) for dx in (-2, 0, 2) for dz in (-2, 0, 2) if (dx, dz) != (0, 0)]
+    count = 22 if large else 12
+    while len(spots) < count + 8:
+        x, z = r.rng.randrange(lo + 2, hi - 1), r.rng.randrange(lo + 2, hi - 1)
+        if abs(x - MID) > 2 or abs(z - MID) > 2:
+            spots.append((x, z))
+    for i, (x, z) in enumerate(spots):
+        if not (lo <= x <= hi and lo <= z <= hi) or r.get(x, WALK, z) is not None or (x, WALK, z) in r.markers:
+            continue
+        if n == 2 and i % 3 == 2:
+            r.set(x, FLOOR, z, 'tnt')
+        else:
+            r.set(x, FLOOR, z, 'dispenser[facing=up,triggered=false]')
+            r.data[(x, FLOOR, z)] = {'id': 'minecraft:dispenser', 'Items': TagList(10, [
+                {'Slot': Byte(0), 'id': 'minecraft:arrow', 'Count': Byte(8)}])}
+        r.set(x, WALK, z, 'stone_pressure_plate')
+    if n == 3:
+        for _ in range(8 if large else 4):
+            cx, cz = r.rng.randrange(lo + 3, hi - 2), r.rng.randrange(lo + 3, hi - 2)
+            for x in range(cx - 1, cx + 2):
+                for z in range(cz - 1, cz + 2):
+                    if r.get(x, WALK, z) is None and (x, WALK, z) not in r.markers and r.rng.random() < 0.6:
+                        r.set(x, WALK, z, 'cobweb')
+    hang(r, MID, MID, 4)
+    props(r, inset, 6)
+    return r
+
+
+def maze(n, seed, large):
+    """A hedge of walls four high filling the room: a perfect maze of two-wide paths (every cell reachable, one way
+    between any two) with straight runs in from each doorway. Mobs wait in random cells; the loot marker is at the dead
+    end farthest from the south doorway."""
+    inset, height = (2, 11) if large else (8, 10)
+    r = Room(height, seed)
+    inner = shell(r, inset, ALL)
+    wall_lights(r, inset, r.height)
+    floor_pattern(r, inner, inset, 'cross')
+    cells = 13 if large else 9
+    start = MID - (3 * cells) // 2
+    lo, hi = inset + 1, SIZE - 2 - inset
+    for (x, z) in inner:
+        for y in range(WALK, WALK + 4):
+            r.set(x, y, z, 'wall2' if r.rng.random() < 0.2 else 'wall')
+
+    def carve(x0, z0, x1, z1):
+        for x in range(min(x0, x1), max(x0, x1) + 1):
+            for z in range(min(z0, z1), max(z0, z1) + 1):
+                for y in range(WALK, WALK + 4):
+                    r.air(x, y, z)
+
+    def cell_xz(i, j):
+        return start + 1 + 3 * i, start + 1 + 3 * j
+
+    rng = random.Random(seed * 7 + n)
+    seen = {(0, 0)}
+    stack = [(0, 0)]
+    links = {(0, 0): []}
+    carve(*cell_xz(0, 0), *(c + 1 for c in cell_xz(0, 0)))
+    while stack:
+        i, j = stack[-1]
+        options = [(i + di, j + dj) for di, dj in ((1, 0), (-1, 0), (0, 1), (0, -1))
+                   if 0 <= i + di < cells and 0 <= j + dj < cells and (i + di, j + dj) not in seen]
+        if not options:
+            stack.pop()
+            continue
+        ni, nj = rng.choice(options)
+        x0, z0 = cell_xz(i, j)
+        x1, z1 = cell_xz(ni, nj)
+        carve(min(x0, x1), min(z0, z1), max(x0, x1) + 1, max(z0, z1) + 1)
+        seen.add((ni, nj))
+        links.setdefault((i, j), []).append((ni, nj))
+        links.setdefault((ni, nj), []).append((i, j))
+        stack.append((ni, nj))
+    # runs in from the doorways to the edge cells they face
+    mid_cell = (MID - start - 1) // 3
+    carve(MID - 1, lo, MID + 1, start + 2)
+    carve(MID - 1, start + 1 + 3 * (cells - 1), MID + 1, hi)
+    carve(lo, MID - 1, start + 2, MID + 1)
+    carve(start + 1 + 3 * (cells - 1), MID - 1, hi, MID + 1)
+    # farthest dead end from the south doorway's cell
+    origin = (mid_cell, cells - 1)
+    dist = {origin: 0}
+    queue = [origin]
+    for c in queue:
+        for nxt in links.get(c, []):
+            if nxt not in dist:
+                dist[nxt] = dist[c] + 1
+                queue.append(nxt)
+    ends = [c for c, ls in links.items() if len(ls) == 1 and c != origin]
+    far = max(ends, key=lambda c: dist.get(c, 0))
+    r.marker(cell_xz(*far)[0], WALK, cell_xz(*far)[1], 'loot')
+    picks = rng.sample([c for c in links if c not in (far, origin)], 5 if large else 4)
+    for k, c in enumerate(picks):
+        x, z = cell_xz(*c)
+        r.marker(x, WALK, z, 'spawn:ranged' if k == 0 else 'spawn:melee')
+    for x in range(start, start + 3 * cells + 1, 6):
+        if lo <= x <= hi:
+            r.set(x, r.height - 2, MID, 'hang')
+    return r
+
+
 def layouts(theme):
     """kind_n -> Room for one theme: the shared layouts plus the theme's own combat rooms (variant 3 of each size).
     Corridors are named corridor_<shape>_n, boss rooms boss_<size class>_n."""
@@ -689,6 +868,21 @@ def layouts(theme):
         'boss_small_1': boss('small', 72),
         'boss_medium_1': boss('medium', 71),
         'boss_large_1': boss('large', 73),
+        'combat_small_4': parkour(1, 101 + salt, False),
+        'combat_small_5': parkour(2, 102 + salt, False),
+        'combat_small_6': parkour(3, 103 + salt, False),
+        'combat_small_7': trap(1, 111 + salt, False),
+        'combat_small_8': trap(2, 112 + salt, False),
+        'combat_small_9': trap(3, 113 + salt, False),
+        'combat_small_10': maze(1, 121 + salt, False),
+        'combat_small_11': maze(2, 122 + salt, False),
+        'combat_small_12': maze(3, 123 + salt, False),
+        'combat_large_4': parkour(1, 131 + salt, True),
+        'combat_large_5': parkour(3, 132 + salt, True),
+        'combat_large_6': trap(2, 141 + salt, True),
+        'combat_large_7': trap(3, 142 + salt, True),
+        'combat_large_8': maze(1, 151 + salt, True),
+        'combat_large_9': maze(2, 152 + salt, True),
     }
 
 
@@ -721,7 +915,10 @@ def template(room, palette):
         block = palette[role] if role in palette else role
         if block is None:
             continue
-        blocks.append({'pos': TagList(3, [Int(x), Int(y), Int(z)]), 'state': Int(idx(block))})
+        entry = {'pos': TagList(3, [Int(x), Int(y), Int(z)]), 'state': Int(idx(block))}
+        if (x, y, z) in room.data:
+            entry['nbt'] = room.data[(x, y, z)]
+        blocks.append(entry)
     for (x, y, z), kind in sorted(room.markers.items()):
         blocks.append({'pos': TagList(3, [Int(x), Int(y), Int(z)]), 'state': Int(idx(MARKER_STATE)), 'nbt': {
             'id': 'minecraft:structure_block', 'mode': 'DATA', 'metadata': kind, 'name': '', 'author': '',
@@ -765,6 +962,16 @@ def check_themes(written):
             print(f'warning: {path.name} lists none of', ', '.join(unlisted))
 
 
+def list_rooms(names):
+    """Each theme file's room pools are every template of that theme, by kind (kind_n -> kind); other content kept."""
+    for path in sorted((ROOT.parents[1] / 'gate_themes').glob('*.json')):
+        data = json.loads(path.read_text())
+        pools = {}
+        for name in names:
+            pools.setdefault(name.rsplit('_', 1)[0], []).append(f'mdvlcraft:gate/{path.stem}/{name}')
+        data['rooms'] = pools
+        path.write_text(json.dumps(data, indent=2) + '\n')
+
 def main():
     written = {}
     for key, palette in PALETTES.items():
@@ -782,6 +989,7 @@ def main():
                 for kind in markers.values():
                     kinds[kind] = kinds.get(kind, 0) + 1
                 print(f'{key:8} {name:22} {count:6} blocks, h {room.height:2}, markers {kinds}')
+    list_rooms(rooms)
     check_themes(written)
     print('gate rooms written:', len(PALETTES), 'themes x', len(rooms), 'templates ->', ROOT)
 

@@ -1,0 +1,246 @@
+{
+  "name": "gate.mdvlcraft.theme.amethyst",
+  "biome": "mdvlcraft:gate_amethyst",
+  "music": "minecraft:music.overworld.dripstone_caves",
+  "catalyst": "minecraft:amethyst_shard",
+  "hazard": {},
+  "ranks": {
+    "min": "D",
+    "max": "A"
+  },
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/amethyst/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/amethyst/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/amethyst/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/amethyst/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/amethyst/combat_small_1",
+      "mdvlcraft:gate/amethyst/combat_small_2",
+      "mdvlcraft:gate/amethyst/combat_small_3",
+      "mdvlcraft:gate/amethyst/combat_small_4",
+      "mdvlcraft:gate/amethyst/combat_small_5",
+      "mdvlcraft:gate/amethyst/combat_small_6",
+      "mdvlcraft:gate/amethyst/combat_small_7",
+      "mdvlcraft:gate/amethyst/combat_small_8",
+      "mdvlcraft:gate/amethyst/combat_small_9",
+      "mdvlcraft:gate/amethyst/combat_small_10",
+      "mdvlcraft:gate/amethyst/combat_small_11",
+      "mdvlcraft:gate/amethyst/combat_small_12"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/amethyst/combat_large_1",
+      "mdvlcraft:gate/amethyst/combat_large_2",
+      "mdvlcraft:gate/amethyst/combat_large_3",
+      "mdvlcraft:gate/amethyst/combat_large_4",
+      "mdvlcraft:gate/amethyst/combat_large_5",
+      "mdvlcraft:gate/amethyst/combat_large_6",
+      "mdvlcraft:gate/amethyst/combat_large_7",
+      "mdvlcraft:gate/amethyst/combat_large_8",
+      "mdvlcraft:gate/amethyst/combat_large_9"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/amethyst/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/amethyst/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/amethyst/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/amethyst/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/amethyst/boss_large_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_ashigaru",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:taoist",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_ashigaru",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:cryomancer",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:necromancer",
+          "weight": 1
+        },
+        {
+          "id": "iss_elden_ring:astrologer",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:onmyoji",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "iss_magicfromtheeast:spirit_samurai",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:knights_armor",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "irons_spellbooks:archevoker",
+          "weight": 1
+        },
+        {
+          "id": "iss_elden_ring:astrologer",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:fading_mage",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:aquamancer",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "esoteric_spell:esoteric_sorcerer",
+          "weight": 1
+        },
+        {
+          "id": "traveloptics:aqua_grandmaster",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "D": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "C": {
+      "id": "irons_spellbooks:citadel_keeper",
+      "count": 1,
+      "size": "medium"
+    },
+    "B": {
+      "id": "iss_magicfromtheeast:jade_executioner",
+      "count": 1,
+      "size": "medium"
+    },
+    "A": {
+      "id": "traveloptics:the_nightwarden",
+      "count": 1,
+      "size": "large"
+    },
+    "S": {
+      "id": "traveloptics:the_nightwarden",
+      "count": 1,
+      "size": "large"
+    }
+  },
+  "red": {
+    "landscape": "ruined city",
+    "palette": {
+      "floor": "minecraft:purpur_block",
+      "pillar": "minecraft:purpur_pillar",
+      "light": "minecraft:sea_lantern",
+      "campfire": "minecraft:soul_campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:witch",
+      "minecraft:vindicator",
+      "minecraft:pillager"
+    ],
+    "stand_in_boss": "minecraft:evoker",
+    "lairs": [
+      "mdvlcraft:gate/red/amethyst/lair_1",
+      "mdvlcraft:gate/red/amethyst/lair_2",
+      "mdvlcraft:gate/red/amethyst/lair_3"
+    ],
+    "camps": [
+      "mdvlcraft:gate/red/amethyst/camp_1",
+      "mdvlcraft:gate/red/amethyst/camp_2",
+      "mdvlcraft:gate/red/amethyst/camp_3",
+      "mdvlcraft:gate/red/amethyst/camp_4",
+      "mdvlcraft:gate/red/amethyst/camp_5"
+    ]
+  }
+}
