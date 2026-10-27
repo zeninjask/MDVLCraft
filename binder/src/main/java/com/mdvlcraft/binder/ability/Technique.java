@@ -8,8 +8,8 @@ import net.minecraft.resources.ResourceLocation;
 public enum Technique implements Ability {
     DISMANTLE("dismantle", 26, 12, 1, true),
     CLEAVE("cleave", 27, 20, 3, true),
-    MALEVOLENT_SHRINE("malevolent_shrine", 31, 100, 120, false),
-    OPEN_MALEVOLENT_SHRINE("open_malevolent_shrine", 31, 100, 120, false),
+    MALEVOLENT_SHRINE("malevolent_shrine", 31, 100, 180, false),
+    OPEN_MALEVOLENT_SHRINE("open_malevolent_shrine", 31, 100, 180, false),
     BOOGIE_WOOGIE("boogie_woogie", 32, 10, 2, false),
     BLOCK_CLAP("block_clap", 33, 10, 2, false),
     BLITZ("blitz", 60, 15, 8, false),
@@ -31,7 +31,14 @@ public enum Technique implements Ability {
     SLICING_EXORCISM("slicing_exorcism", 88, 30, 10, false),
     CONVERGENCE("convergence", 90, 25, 20, false),
     PIERCING_BLOOD("piercing_blood", 92, 15, 2, true),
-    CRIMSON_BINDING("crimson_binding", 93, 25, 12, false);
+    CRIMSON_BINDING("crimson_binding", 93, 25, 12, false),
+    MALEVOLENT_KITCHEN("malevolent_kitchen", -1, 0, 180, false),
+    CHOP("chop", 26, 12, 1, true),
+    MINCE("mince", 27, 20, 5, true),
+    SEAR("sear", -1, 25, 20, false),
+    DICING_BOARD("dicing_board", 97, 30, 20, false),
+    SPARKING_BLOODLUST("sparking_bloodlust", -1, 30, 45, false),
+    BULL_RUSH("bull_rush", -1, 20, 10, false);
 
     private final ResourceLocation id;
     final int abilityId;
@@ -80,7 +87,7 @@ public enum Technique implements Ability {
     }
 
     boolean isSlash() {
-        return this == DISMANTLE || this == CLEAVE;
+        return this == DISMANTLE || this == CLEAVE || this == CHOP || this == MINCE;
     }
 
     public static Optional<Technique> byId(ResourceLocation id) {

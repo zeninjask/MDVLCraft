@@ -49,7 +49,7 @@ CHOSEN = {
     ('samurai', 'stalker'): 'Kyudo',
     ('samurai', 'wanderer'): 'Musashi',
     ('berserker', 'monk'): 'Brawler',
-    ('berserker', 'blaze'): 'Hellraiser',
+    ('berserker', 'blaze'): 'Master Chef',
     ('berserker', 'frost'): 'Draugr',
     ('berserker', 'water'): 'Maelstrom',
     ('berserker', 'lightning'): 'Stormbreaker',

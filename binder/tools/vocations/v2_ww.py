@@ -30,7 +30,7 @@ v('brute', 'monk', ['Sumo'],
   ['I:gust', 'E:blast_magic', 'Z:iron_body', 'R:rock_sling'],
   'epicfight:forbidden_strength', ['UNA', 'MHP', 'KBR'])
 v('samurai', 'berserker', ['Hitokiri'],
-  ['B:dismantle', 'B:cleave', 'R:carian_slicer', 'I:heartstop'],
+  ['S:render_rush', 'I:blood_slash', 'R:carian_slicer', 'I:heartstop'],
   'epicfight:revelation', ['KAT', 'ATK', 'LST'])
 v('samurai', 'monk', ['Kensei'],
   ['H:borrowed_time', 'H:speedup', 'E:magic_blade_conversion', 'I:slow'],

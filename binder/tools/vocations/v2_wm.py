@@ -91,7 +91,7 @@ v('samurai', 'holy', ['Amaterasu'],
   ['Z:stance_holy', 'I:divine_smite', 'T:nullflare', 'E:magic_blade_enchanting'],
   'dodge_parry_reward:heal2', ['KAT', 'HSP', 'HEAL'])
 v('samurai', 'warlock', ['King of Curses'],
-  ['B:malevolent_shrine', 'B:open_malevolent_shrine', 'Z:stance_eldritch', 'B:dismantle'],
+  ['I:abyssal_shroud', 'T:psychic_bolt', 'Z:stance_eldritch', 'I:blood_slash'],
   'wom:lethal_focus', ['KAT', 'ESP', 'TMC'])
 v('samurai', 'necromancer', ['Revenant Ronin'],
   ['Z:stance_blood', 'X:crimson_laceration', 'M:revenant_of_honor', 'S:bloodbound_blade'],
@@ -104,8 +104,8 @@ v('samurai', 'jade', ['Spirit Blade'],
   'wom:dodge_master', ['KAT', 'SYM', 'IMP'])
 
 # Berserker + Mage
-v('berserker', 'blaze', ['Hellraiser'],
-  ['S:damned_demomans', 'Z:flame_rush', 'Z:brand_fire', 'I:burning_dash'],
+v('berserker', 'blaze', ['Master Chef'],
+  ['B:malevolent_kitchen', 'B:chop', 'B:mince', 'B:sear'],
   'epicfight:berserker', ['ATK', 'FSP', 'LST'])
 v('berserker', 'frost', ['Draugr'],
   ['T:axe_of_the_doomed', 'Z:brand_ice', 'X:frostwhirl_slash', 'T:cursed_revenants'],

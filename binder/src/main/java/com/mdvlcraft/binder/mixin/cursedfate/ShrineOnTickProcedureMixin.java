@@ -2,6 +2,8 @@ package com.mdvlcraft.binder.mixin.cursedfate;
 
 import com.mdvlcraft.binder.ability.ShrineSlashes;
 import cursedfate.procedures.ShrineOnTickProcedure;
+import net.minecraft.commands.CommandSourceStack;
+import net.minecraft.commands.Commands;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.LevelAccessor;
@@ -11,11 +13,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyConstant;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 /**
- * The open Malevolent Shrine only cuts, and only shows its slashes (the cleave effects and sweep sounds Cursed Fate plays
- * once it has stood 35 ticks), while its owner holds the cast key; it cuts only out to 20 blocks (Cursed Fate: 45).
+ * The open Malevolent Shrine (the Master Chef's Malevolent Kitchen) only cuts while its owner holds the cast key, and
+ * never shows its slashes (Cursed Fate's cleave effects and sweep sounds); it cuts only out to 20 blocks (Cursed Fate: 45).
  */
 @Mixin(value = ShrineOnTickProcedure.class, remap = false)
 public abstract class ShrineOnTickProcedureMixin {
@@ -28,10 +31,17 @@ public abstract class ShrineOnTickProcedureMixin {
         return 20.0;
     }
 
-    /** The slash effects start once domainnum passes 35; never while the shrine isn't cutting. */
+    /** The domain-wide slash effects and sweep sounds (once domainnum passes 35) never play: it cuts unseen. */
     @ModifyConstant(method = "execute", constant = @Constant(doubleValue = 35.0), require = 1)
-    private static double mdvlcraft$slashEffectsAfter(double ticks) {
-        return mdvlcraft$slashing ? ticks : Double.MAX_VALUE;
+    private static double mdvlcraft$noSlashEffects(double ticks) {
+        return Double.MAX_VALUE;
+    }
+
+    /** Its per-target cleave effects (photon commands) don't play either. */
+    @Redirect(method = "execute", at = @At(value = "INVOKE",
+        target = "Lnet/minecraft/commands/Commands;m_230957_(Lnet/minecraft/commands/CommandSourceStack;Ljava/lang/String;)I"), require = 1)
+    private static int mdvlcraft$noCleaveEffects(Commands commands, CommandSourceStack source, String command) {
+        return 0;
     }
 
     @Inject(method = "execute", at = @At("HEAD"))

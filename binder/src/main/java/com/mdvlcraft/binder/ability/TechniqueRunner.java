@@ -32,7 +32,9 @@ final class TechniqueRunner {
     }
 
     static void press(ServerPlayer player, Technique technique) {
-        if (technique.isShrine()) {
+        if (technique == Technique.MALEVOLENT_KITCHEN) {
+            KitchenArts.press(player);
+        } else if (technique.isShrine()) {
             pressShrine(player, technique);
         } else if (!technique.held) {
             cast(player, technique);
@@ -45,7 +47,7 @@ final class TechniqueRunner {
     }
 
     /** Malevolent Shrine: cast to open it, hold while it stands to cut, sneak and cast to close it. */
-    private static void pressShrine(ServerPlayer player, Technique shrine) {
+    static void pressShrine(ServerPlayer player, Technique shrine) {
         if (!DomainUpkeep.isActive(player)) {
             cast(player, shrine);
         } else if (player.isShiftKeyDown()) {
@@ -68,6 +70,7 @@ final class TechniqueRunner {
     }
 
     static void tick(MinecraftServer server) {
+        KitchenArts.tick(server);
         Iterator<Entry<UUID, Technique>> entries = HELD.entrySet().iterator();
 
         while (entries.hasNext()) {
@@ -85,7 +88,7 @@ final class TechniqueRunner {
         }
     }
 
-    private static boolean cast(ServerPlayer player, Technique technique) {
+    static boolean cast(ServerPlayer player, Technique technique) {
         if (technique == Technique.FOLLOW_UP_KICK && player.isShiftKeyDown()) {
             ProjectionSorcery.toggleFlow(player);
             return false;
@@ -161,7 +164,16 @@ final class TechniqueRunner {
                 variables.MaximumOutput = false;
             }
 
-            variables.AbilityNum1 = technique.abilityId;
+            int abilityId = technique.abilityId;
+            if (technique == Technique.CHOP && player.isShiftKeyDown()) {
+                abilityId = KitchenArts.CALAMITOUS_DISMANTLE;   // the chanted Heian-era Dismantle, sent with a flip
+                variables.Chant = true;
+                variables.Flow = false;
+            } else if (technique == Technique.DICING_BOARD) {
+                variables.MaximumOutput = false;   // the plain branch of the Calamitous Shrine's web is the Enhanced Spiderweb
+                variables.Flow = false;
+            }
+            variables.AbilityNum1 = abilityId;
             variables.holdability1 = true;
             variables.holdability = true;
             variables.syncPlayerVariables(player);

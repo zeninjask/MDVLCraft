@@ -397,7 +397,7 @@ NEW = {
     ('samurai', 'stalker'): ['yabusame', 'hikime_arrow'],
     ('samurai', 'wanderer'): ['two_heavens', 'road_onigiri'],
     ('berserker', 'monk'): ['hundred_fists', 'iron_gut'],
-    ('berserker', 'blaze'): ['firebrand_flask', 'pyre_rage'],
+    ('berserker', 'blaze'): ['B:dicing_board', 'B:focus'],
     ('berserker', 'frost'): ['hurled_rimeaxe', 'barrow_howl'],
     ('berserker', 'water'): ['undertow', 'brine_frenzy'],
     ('berserker', 'lightning'): ['thunderhide', 'bolt_drop'],

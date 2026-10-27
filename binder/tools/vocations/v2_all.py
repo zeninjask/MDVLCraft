@@ -19,7 +19,7 @@ EFC = {
  'druid': 'dodge_parry_reward:heal3 epicfight:meteor_slam cdmoveset:wolf_dodge epicfight:adaptive_skin wom:natural_sprinter wom:spider_techniques',
  'jade': 'dodge_parry_reward:damage_boost1 wom:inner_growth wom:dodge_master wom:soul_protection',
  'spirit': 'wom:soul_protection wom:inner_growth efs_iss:blood_into_mana wom:voodoo_magic epicfight:death_harvest wom:dodge_master',
- 'assassin': 'epicfight:bonebreaker wom:ender_obscuris wom:shadow_step wom:spider_techniques cdmoveset:fatalfalsh wom:lethal_focus',
+ 'assassin': 'epicfight:bonebreaker wom:inner_growth wom:shadow_step wom:spider_techniques cdmoveset:fatalfalsh wom:lethal_focus',
  'thief': 'wom:ender_step epicfight:stamina_pillager wom:time_travel wom:dodge_master wom:proximity_exploiter epicfight:phantom_ascent',
  'stalker': 'wom:arrow_tenacity wom:critical_knowledge epicfight:revelation wom:dancing_blade wom:natural_sprinter epicfight:phantom_ascent',
  'wanderer': 'epicfight:adrenaline_fiend wom:proximity_exploiter wom:natural_sprinter epicfight:phantom_ascent wom:spider_techniques epicfight:stamina_pillager',

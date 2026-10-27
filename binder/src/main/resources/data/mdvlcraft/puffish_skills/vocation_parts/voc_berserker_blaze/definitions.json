@@ -1,6 +1,6 @@
 {
  "voc__0": {
-  "title": "Hellraiser: Attack Damage",
+  "title": "Master Chef: Attack Damage",
   "description": "+1.5 Attack Damage",
   "icon": {
    "type": "texture",
@@ -30,10 +30,10 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Hellraiser vocation bonus (Berserker + Blaze)."
+  "extra_description": "Master Chef vocation bonus (Berserker + Blaze)."
  },
  "voc__1": {
-  "title": "Hellraiser: Fire Spell Power",
+  "title": "Master Chef: Fire Spell Power",
   "description": "+15% Fire Spell Power",
   "icon": {
    "type": "texture",
@@ -63,10 +63,10 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Hellraiser vocation bonus (Berserker + Blaze)."
+  "extra_description": "Master Chef vocation bonus (Berserker + Blaze)."
  },
  "voc__2": {
-  "title": "Hellraiser: Life Steal",
+  "title": "Master Chef: Life Steal",
   "description": "+4% Life Steal",
   "icon": {
    "type": "texture",
@@ -96,24 +96,24 @@
    }
   },
   "size": 1.5,
-  "extra_description": "Hellraiser vocation bonus (Berserker + Blaze)."
+  "extra_description": "Master Chef vocation bonus (Berserker + Blaze)."
  },
  "voc__3": {
-  "title": "Damned Demoman's",
-  "description": "Unlocks Damned Demoman's (Level 2) (60 mana, 89.78 s cooldown) on the ability wheel",
-  "extra_description": "Applies the Demned Demomans effect to yourself, arming an effect that makes you explode in flames. Hellraiser vocation skill.",
+  "title": "Malevolent Kitchen",
+  "description": "Unlocks Malevolent Kitchen (10 mana a second, 180 s cooldown) on the ability wheel",
+  "extra_description": "Cast, then cast again within 3 s to switch between the closed and open Malevolent Shrine; it opens at maximum output. It costs 10 mana a second while it stands. Hold the cast key to cut every mob nearby (unseen slashes); sneak and cast to close it. Master Chef vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_damned_demomans.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_malevolent_kitchen.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "somakespells:damned_demomans",
-     "level": 2
+     "ability": "mdvlcraft:malevolent_kitchen",
+     "level": 1
     }
    }
   ],
@@ -131,20 +131,20 @@
   "size": 2.0
  },
  "voc__4": {
-  "title": "Flame Rush",
-  "description": "Unlocks Flame Rush (30 mana, 15 s cooldown) on the ability wheel",
-  "extra_description": "A burning dash that you can chain up to three times. Hellraiser vocation skill.",
+  "title": "Chop",
+  "description": "Unlocks Chop (14 mana, 1 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
+  "extra_description": "Dismantle: a fast cutting slash at what you look at. Cast while sneaking for the chanted Calamitous Shrine Dismantle, a flip that sends a great cut. Master Chef vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_flame_rush.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_chop.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:flame_rush",
+     "ability": "mdvlcraft:chop",
      "level": 1
     }
    }
@@ -163,20 +163,20 @@
   "size": 2.0
  },
  "voc__5": {
-  "title": "Flamebrand",
-  "description": "Unlocks Flamebrand (25 mana, 40 s cooldown) on the ability wheel",
-  "extra_description": "For 20 s your weapon hits deal extra fire damage and set foes alight. One brand at a time. Hellraiser vocation skill.",
+  "title": "Mince",
+  "description": "Unlocks Mince (24 mana, 5 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
+  "extra_description": "Cleave: a cut that adapts to the target's toughness and strength. Master Chef vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_brand_fire.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_mince.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:brand_fire",
+     "ability": "mdvlcraft:mince",
      "level": 1
     }
    }
@@ -195,25 +195,25 @@
   "size": 2.0
  },
  "voc__6": {
-  "title": "Burning Dash",
-  "description": "Unlocks Burning Dash (Level 3) (20 mana, 14.96 s cooldown) on the ability wheel",
-  "extra_description": "Quickly launch yourself forward in a haze of fire, searing creatures you pass through while in a blaze. Hellraiser vocation skill.",
+  "title": "Sear",
+  "description": "Unlocks Sear (30 mana, 20 s cooldown) on the ability wheel",
+  "extra_description": "Divine Flame: loose Cursed Fate's flaming arrow where you look; it bursts into fire on what it hits. Master Chef vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_burning_dash.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_sear.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "irons_spellbooks:burning_dash",
-     "level": 3
+     "ability": "mdvlcraft:sear",
+     "level": 1
     }
    }
   ],
-  "cost": 1,
+  "cost": 2,
   "frame": {
    "type": "texture",
    "data": {
@@ -227,20 +227,20 @@
   "size": 2.0
  },
  "voc__7": {
-  "title": "Firebrand Flask",
-  "description": "Unlocks Firebrand Flask (30 mana, 12 s cooldown) on the ability wheel",
-  "extra_description": "Throw a flask that bursts into flames, burning the ground in a 3-block radius for 4 seconds. Hellraiser vocation skill.",
+  "title": "Dicing Board",
+  "description": "Unlocks Dicing Board (36 mana, 20 s cooldown) on the ability wheel",
+  "extra_description": "The Calamitous Shrine's Enhanced Spiderweb: a web of cuts spreads across the ground around you, slicing everything caught in it. Master Chef vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_firebrand_flask.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_dicing_board.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:firebrand_flask",
+     "ability": "mdvlcraft:dicing_board",
      "level": 1
     }
    }
@@ -259,20 +259,20 @@
   "size": 2.0
  },
  "voc__8": {
-  "title": "Pyre Rage",
-  "description": "Unlocks Pyre Rage (35 mana, 30 s cooldown) on the ability wheel",
-  "extra_description": "For 10 seconds, creatures you kill explode in a 3-block fire burst dealing 5 damage. Hellraiser vocation skill.",
+  "title": "Focus",
+  "description": "Unlocks Focus (36 mana, 30 s cooldown) on the ability wheel",
+  "extra_description": "Your next strike within 10 s (a punch, a kick or one of your arts) is a guaranteed Black Flash: 2.5x damage and a short stun. Master Chef vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_pyre_rage.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_focus.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:pyre_rage",
+     "ability": "mdvlcraft:focus",
      "level": 1
     }
    }
@@ -319,6 +319,6 @@
    }
   },
   "size": 2.0,
-  "extra_description": "Hellraiser vocation skill."
+  "extra_description": "Master Chef vocation skill."
  }
 }

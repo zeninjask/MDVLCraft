@@ -20,13 +20,13 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 /**
  * Follows a binder player's Malevolent Shrine (closed or open) from cast to close. While it stands it costs
- * {@link #manaPerSecond} mana a second (closed 20, open 25) and Cursed Fate's cursed energy is kept topped up; it closes
+ * {@link #manaPerSecond} mana a second (10, closed or open) and Cursed Fate's cursed energy is kept topped up; it closes
  * when the owner sneak-casts it again ({@link #close}) or cannot pay the next second. The closed shrine's cooldown
  * restarts in full when it closes, however it closes.
  */
 final class DomainUpkeep {
     static float manaPerSecond(Technique shrine) {
-        return shrine == Technique.MALEVOLENT_SHRINE ? 20.0F : 25.0F;
+        return 10.0F;
     }
     private static final int WIND_UP_TICKS = 100;
     private static final double DOMAIN_RADIUS = 27.0;

@@ -65,6 +65,9 @@ public final class MonkArts {
         return switch (technique) {
             case FOCUS -> focus(player);
             case KNOCKOUT -> knockout(player);
+            case SEAR -> KitchenArts.sear(player);
+            case SPARKING_BLOODLUST -> BerserkerArts.sparkingBloodlust(player);
+            case BULL_RUSH -> BerserkerArts.bullRush(player);
             default -> false;
         };
     }
@@ -177,7 +180,7 @@ public final class MonkArts {
         return hit != null && hit.getEntity() instanceof LivingEntity living ? living : null;
     }
 
-    private static boolean isStrike(DamageSource source, ServerPlayer player) {
+    static boolean isStrike(DamageSource source, ServerPlayer player) {
         return source.getDirectEntity() != player
             ? false
             : source.is(DamageTypes.PLAYER_ATTACK) || source.typeHolder().unwrapKey().map(key -> key.location().equals(CURSED_FATE_MELEE)).orElse(false);
@@ -206,7 +209,7 @@ public final class MonkArts {
     }
 
     /** The Soul Shrine charged punch landed inside its domain (SoulpunchStopProcedure), without the music. */
-    private static void blackFlash(ServerPlayer player, LivingEntity target, LivingHurtEvent event) {
+    static void blackFlash(ServerPlayer player, LivingEntity target, LivingHurtEvent event) {
         event.setAmount(event.getAmount() * 2.5F);
         target.addEffect(new MobEffectInstance((MobEffect)CursedfateModMobEffects.MOVEMENT_STUN.get(), 23, 1, false, false), player);
         play(target, sound("cursedfate", "blackflash", SoundEvents.GENERIC_EXPLODE), 1.0F, 1.0F);

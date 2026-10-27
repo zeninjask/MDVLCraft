@@ -99,20 +99,20 @@
   "extra_description": "King of Curses vocation bonus (Samurai + Warlock)."
  },
  "voc__3": {
-  "title": "Malevolent Shrine",
-  "description": "Unlocks Malevolent Shrine (20 mana a second, 120 s cooldown) on the ability wheel",
-  "extra_description": "Closed domain: a black barrier dome; only what is inside is cut, and only while you hold the cast key on the shrine. Drains 20 mana a second and closes when you run out; sneak and cast to close it. Its 120 s cooldown starts when it closes. King of Curses vocation skill.",
+  "title": "Abyssal Shroud",
+  "description": "Unlocks Abyssal Shroud (Level 1) (255 mana, 199.5 s cooldown) on the ability wheel",
+  "extra_description": "Cloak yourself with the shadows of the abyss, granting the ability to evade any attack for a short duration of time. King of Curses vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_malevolent_shrine.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_abyssal_shroud.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:malevolent_shrine",
+     "ability": "irons_spellbooks:abyssal_shroud",
      "level": 1
     }
    }
@@ -131,25 +131,25 @@
   "size": 2.0
  },
  "voc__4": {
-  "title": "Malevolent Shrine: Open",
-  "description": "Unlocks Malevolent Shrine: Open (25 mana a second, 120 s cooldown) on the ability wheel",
-  "extra_description": "Open domain: no barrier, cuts everything within 20 blocks while you hold the cast key on the shrine. Drains 25 mana a second and closes when you run out; sneak and cast to close it. Its 120 s cooldown starts when you open it. King of Curses vocation skill.",
+  "title": "Psychic Bolt",
+  "description": "Unlocks Psychic Bolt (Level 3) (76 mana, 59.85 s cooldown) on the ability wheel",
+  "extra_description": "Select multiple targets on cast. On recast end, fires small projectiles that confuse targets on hit, making them prioritize attacking nearby non-player entities. King of Curses vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_open_malevolent_shrine.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_psychic_bolt.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:open_malevolent_shrine",
-     "level": 1
+     "ability": "traveloptics:psychic_bolt",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -195,24 +195,25 @@
   "size": 2.0
  },
  "voc__6": {
-  "title": "Dismantle",
-  "description": "Unlocks Dismantle (14 mana, 1 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
+  "title": "Blood Slash",
+  "description": "Unlocks Blood Slash (Level 3) (30 mana, 14.96 s cooldown) on the ability wheel",
+  "extra_description": "Slash forward to send out a concentrated blade of blood, slicing through creatures and healing for 15% of damage done. King of Curses vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_dismantle.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_slash.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:dismantle",
-     "level": 1
+     "ability": "irons_spellbooks:blood_slash",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -223,8 +224,7 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
    }
   },
-  "size": 2.0,
-  "extra_description": "King of Curses vocation skill."
+  "size": 2.0
  },
  "voc__7": {
   "title": "Cleaving Hex",

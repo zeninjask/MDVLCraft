@@ -99,24 +99,25 @@
   "extra_description": "Hitokiri vocation bonus (Samurai + Berserker)."
  },
  "voc__3": {
-  "title": "Dismantle",
-  "description": "Unlocks Dismantle (14 mana, 1 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
+  "title": "Render Rush",
+  "description": "Unlocks Render Rush (Level 3) (26 mana, 11.97 s cooldown) on the ability wheel",
+  "extra_description": "Performs a frontal dash, dealing damage to anyone in the path. Hitokiri vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_dismantle.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_render_rush.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:dismantle",
-     "level": 1
+     "ability": "somakespells:render_rush",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -127,28 +128,28 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
    }
   },
-  "size": 2.0,
-  "extra_description": "Hitokiri vocation skill."
+  "size": 2.0
  },
  "voc__4": {
-  "title": "Cleave",
-  "description": "Unlocks Cleave (24 mana, 3 s cooldown) on the ability wheel. Hold the cast key to keep casting each time it is ready",
+  "title": "Blood Slash",
+  "description": "Unlocks Blood Slash (Level 3) (30 mana, 14.96 s cooldown) on the ability wheel",
+  "extra_description": "Slash forward to send out a concentrated blade of blood, slicing through creatures and healing for 15% of damage done. Hitokiri vocation skill.",
   "icon": {
    "type": "texture",
    "data": {
-    "texture": "mdvlcraft:textures/gui/icons18/ability/mdvlcraft_cleave.png"
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_slash.png"
    }
   },
   "rewards": [
    {
     "type": "mdvlcraft:ability",
     "data": {
-     "ability": "mdvlcraft:cleave",
-     "level": 1
+     "ability": "irons_spellbooks:blood_slash",
+     "level": 3
     }
    }
   ],
-  "cost": 2,
+  "cost": 1,
   "frame": {
    "type": "texture",
    "data": {
@@ -159,8 +160,7 @@
     "excluded": "mdvlcraft:textures/gui/skills/frame_challenge_excluded.png"
    }
   },
-  "size": 2.0,
-  "extra_description": "Hitokiri vocation skill."
+  "size": 2.0
  },
  "voc__5": {
   "title": "Carian Slicer",
