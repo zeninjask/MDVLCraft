@@ -126,6 +126,17 @@ public final class DqGui {
         g.fill(x + 2, y + 2, x + w - 2, y + h - 2, hovered ? 0xFF5A9CF7 : BLUE);
     }
 
+    /** A thin scroll bar for a list showing `visible` of `total` rows from row `first`; nothing when everything fits. */
+    public static void scrollbar(GuiGraphics g, int x, int y, int h, int first, int visible, int total) {
+        if (total <= visible) {
+            return;
+        }
+        g.fill(x, y, x + 2, y + h, RULE_FAINT);
+        int thumb = Math.max(6, h * visible / total);
+        int thumbY = y + (h - thumb) * first / (total - visible);
+        g.fill(x, thumbY, x + 2, thumbY + thumb, MUTED);
+    }
+
     public static void rule(GuiGraphics g, int x0, int x1, int y) {
         g.fill(x0, y, x1, y + 1, RULE);
     }

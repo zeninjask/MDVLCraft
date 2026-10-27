@@ -18,6 +18,8 @@ public final class ArsenalScreen extends Screen {
     private static final int HEIGHT = 172;   // fits a 180-high screen (720p at GUI scale 4)
     private static final int ROWS = 3;
     private ClientArsenal.Entry picked;
+    /** The first arsenal row in view (the arsenal scrolls a row at a time). */
+    private int scrollRow;
 
     public ArsenalScreen() {
         super(Component.translatable("screen.mdvlcraft.arsenal"));
@@ -41,7 +43,26 @@ public final class ArsenalScreen extends Screen {
     }
 
     private int itemY(int index) {
-        return this.top() + 28 + index / 8 * 22;
+        return this.top() + 28 + (index / 8 - this.scrollRow) * 22;
+    }
+
+    /** Whether the entry at this index is on one of the ROWS rows scrolled into view. */
+    private boolean shown(int index) {
+        int row = index / 8;
+        return row >= this.scrollRow && row < this.scrollRow + ROWS;
+    }
+
+    private int rows() {
+        return (ClientArsenal.arsenal().size() + 7) / 8;
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        if (mouseY >= this.top() + 28 && mouseY < this.top() + 28 + ROWS * 22) {
+            this.scrollRow = Math.max(0, Math.min(this.rows() - ROWS, this.scrollRow - (int)Math.signum(delta)));
+            return true;
+        }
+        return super.mouseScrolled(mouseX, mouseY, delta);
     }
 
     private int slotX(int slot) {
@@ -64,7 +85,12 @@ public final class ArsenalScreen extends Screen {
                 graphics.drawString(this.font, none.get(line), textX, this.itemY(0) + 4 + line * 10, DqGui.MUTED, false);
             }
         }
-        for (int i = 0; i < Math.min(ROWS * 8, arsenal.size()); i++) {
+        this.scrollRow = Math.max(0, Math.min(this.rows() - ROWS, this.scrollRow));
+        DqGui.scrollbar(graphics, this.left() + 188, this.top() + 28, ROWS * 22 - 2, this.scrollRow, ROWS, this.rows());
+        for (int i = 0; i < arsenal.size(); i++) {
+            if (!this.shown(i)) {
+                continue;
+            }
             DqGui.slot(graphics, this.itemX(i), this.itemY(i), 20, arsenal.get(i).equals(this.picked) ? DqGui.Slot.PICKED : DqGui.Slot.FILLED);
             entry(graphics, arsenal.get(i), this.itemX(i), this.itemY(i));
         }
@@ -103,8 +129,8 @@ public final class ArsenalScreen extends Screen {
 
     private Optional<ClientArsenal.Entry> hovered(double mouseX, double mouseY) {
         List<ClientArsenal.Entry> arsenal = ClientArsenal.arsenal();
-        for (int i = 0; i < Math.min(ROWS * 8, arsenal.size()); i++) {
-            if (inside(mouseX, mouseY, this.itemX(i), this.itemY(i))) {
+        for (int i = 0; i < arsenal.size(); i++) {
+            if (this.shown(i) && inside(mouseX, mouseY, this.itemX(i), this.itemY(i))) {
                 return Optional.of(arsenal.get(i));
             }
         }
@@ -123,8 +149,8 @@ public final class ArsenalScreen extends Screen {
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
         List<ClientArsenal.Entry> arsenal = ClientArsenal.arsenal();
-        for (int i = 0; i < Math.min(ROWS * 8, arsenal.size()); i++) {
-            if (inside(mouseX, mouseY, this.itemX(i), this.itemY(i))) {
+        for (int i = 0; i < arsenal.size(); i++) {
+            if (this.shown(i) && inside(mouseX, mouseY, this.itemX(i), this.itemY(i))) {
                 this.picked = arsenal.get(i).equals(this.picked) ? null : arsenal.get(i);
                 return true;
             }

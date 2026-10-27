@@ -2,8 +2,10 @@ package com.mdvlcraft.binder.client.picker;
 
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.network.PickerOpenPacket;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
@@ -37,14 +39,18 @@ public class PickerScreen extends Screen {
     private static final long HOLD_MS = 1000L;
 
     /** A row of the list: a heading (option == null) or a choice. */
-    public record Entry(Component name, Component description, ItemStack icon, String id) {
+    public record Entry(Component name, Component description, List<Detail> details, ItemStack icon, String id) {
         public static Entry heading(Component name) {
-            return new Entry(name, Component.empty(), ItemStack.EMPTY, null);
+            return new Entry(name, Component.empty(), List.of(), ItemStack.EMPTY, null);
         }
 
         boolean isHeading() {
             return id == null;
         }
+    }
+
+    /** A skill, spell or ability listed under the description; hovering its name shows its description. */
+    public record Detail(Component name, Component description) {
     }
 
     private final List<Entry> entries;
@@ -159,6 +165,7 @@ public class PickerScreen extends Screen {
             g.drawString(this.font, line, this.panelLeft + 8, y, TEXT_BODY, false);
             y += 10;
         }
+        Detail hovered = this.renderDetails(g, entry.details(), y + 4, mouseX, mouseY);
 
         float progress = this.holdStart < 0 ? 0.0F : Math.min(1.0F, (Util.getMillis() - this.holdStart) / (float)HOLD_MS);
         boolean overConfirm = overConfirm(mouseX, mouseY);
@@ -166,10 +173,52 @@ public class PickerScreen extends Screen {
         g.fill(this.confirmX, this.confirmY, this.confirmX + (int)(120 * progress), this.confirmY + 18, 0xFF2E3A66);
         g.renderOutline(this.confirmX, this.confirmY, 120, 18, overConfirm ? LINE_HI : LINE);
         g.drawCenteredString(this.font, Component.translatable("gui.mdvlcraft.picker.confirm"), this.confirmX + 60, this.confirmY + 5, TEXT_HI);
+        if (hovered != null) {
+            List<FormattedCharSequence> lines = new ArrayList<>();
+            lines.add(hovered.name().copy().withStyle(ChatFormatting.BOLD).getVisualOrderText());
+            lines.addAll(this.font.split(hovered.description(), 200));
+            g.renderTooltip(this.font, lines, mouseX, mouseY);
+        }
         if (progress >= 1.0F) {
             this.holdStart = -1L;
             confirm(entry);
         }
+    }
+
+    /** The details' names after an "Abilities:" heading, flowed into lines like words; returns the one under the mouse. */
+    private Detail renderDetails(GuiGraphics g, List<Detail> details, int top, int mouseX, int mouseY) {
+        int left = this.panelLeft + 8;
+        int right = this.panelLeft + this.panelW - 8;
+        int bottom = this.confirmY - 4;
+        if (details.isEmpty() || top + 20 > bottom) {
+            return null;
+        }
+        g.drawString(this.font, Component.translatable("gui.mdvlcraft.picker.abilities"), left, top, ACCENT, false);
+        int x = left;
+        int y = top + 10;
+        Detail hovered = null;
+        for (int i = 0; i < details.size(); i++) {
+            Detail detail = details.get(i);
+            int width = this.font.width(detail.name());
+            if (x > left && x + width > right) {
+                x = left;
+                y += 10;
+            }
+            if (y + 10 > bottom) {
+                break;
+            }
+            boolean over = mouseX >= x && mouseX < x + width && mouseY >= y - 1 && mouseY < y + 9;
+            g.drawString(this.font, detail.name().copy().withStyle(over ? ChatFormatting.UNDERLINE : ChatFormatting.RESET), x, y, over ? TEXT_HI : TEXT_BODY, false);
+            if (over) {
+                hovered = detail;
+            }
+            x += width;
+            if (i < details.size() - 1) {
+                g.drawString(this.font, ",", x, y, TEXT_DIM, false);
+                x += this.font.width(", ");
+            }
+        }
+        return hovered;
     }
 
     private boolean overConfirm(double mouseX, double mouseY) {

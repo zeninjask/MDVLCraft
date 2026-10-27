@@ -25,6 +25,8 @@ public final class AbilityScreen extends Screen {
     private static final int SLOT_OFFSET = 112;
     private static final int HINT_OFFSET = 152;
     private Ability picked;
+    /** The first list row in view (the list scrolls a row at a time). */
+    private int scrollRow;
     private CombatSkillsPanel combatSkills;
 
     public AbilityScreen() {
@@ -75,7 +77,26 @@ public final class AbilityScreen extends Screen {
     }
 
     private int abilityY(int index) {
-        return this.listTop() + index / 8 * 22;
+        return this.listTop() + (index / COLUMNS - this.scrollRow) * 22;
+    }
+
+    /** Whether the ability at this index is on one of the LIST_ROWS rows scrolled into view. */
+    private boolean shown(int index) {
+        int row = index / COLUMNS;
+        return row >= this.scrollRow && row < this.scrollRow + LIST_ROWS;
+    }
+
+    private int rows() {
+        return (this.abilities().size() + COLUMNS - 1) / COLUMNS;
+    }
+
+    @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        if (mouseY >= this.listTop() && mouseY < this.listTop() + LIST_ROWS * 22) {
+            this.scrollRow = Math.max(0, Math.min(this.rows() - LIST_ROWS, this.scrollRow - (int)Math.signum(delta)));
+            return true;
+        }
+        return super.mouseScrolled(mouseX, mouseY, delta);
     }
 
     private int slotX(int slot) {
@@ -104,7 +125,12 @@ public final class AbilityScreen extends Screen {
             }
         }
 
+        this.scrollRow = Math.max(0, Math.min(this.rows() - LIST_ROWS, this.scrollRow));
+        DqGui.scrollbar(graphics, this.left() + 188, this.listTop(), LIST_ROWS * 22 - 2, this.scrollRow, LIST_ROWS, this.rows());
         for (int i = 0; i < abilities.size(); i++) {
+            if (!this.shown(i)) {
+                continue;
+            }
             Ability ability = abilities.get(i);
             int x = this.abilityX(i);
             int y = this.abilityY(i);
@@ -148,7 +174,7 @@ public final class AbilityScreen extends Screen {
         List<Ability> abilities = this.abilities();
 
         for (int i = 0; i < abilities.size(); i++) {
-            if (inside(mouseX, mouseY, this.abilityX(i), this.abilityY(i))) {
+            if (this.shown(i) && inside(mouseX, mouseY, this.abilityX(i), this.abilityY(i))) {
                 return Optional.of(abilities.get(i));
             }
         }
@@ -171,7 +197,7 @@ public final class AbilityScreen extends Screen {
         List<Ability> abilities = this.abilities();
 
         for (int i = 0; i < abilities.size(); i++) {
-            if (inside(mouseX, mouseY, this.abilityX(i), this.abilityY(i))) {
+            if (this.shown(i) && inside(mouseX, mouseY, this.abilityX(i), this.abilityY(i))) {
                 this.picked = abilities.get(i) == this.picked ? null : abilities.get(i);
                 return true;
             }

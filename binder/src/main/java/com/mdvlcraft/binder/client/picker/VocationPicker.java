@@ -41,8 +41,8 @@ public final class VocationPicker {
                 String a = v.get("a").getAsString();
                 String b = v.get("b").getAsString();
                 if (a.equals(archetype) || b.equals(archetype)) {
-                    entries.add(new PickerScreen.Entry(Component.literal(v.get("name").getAsString()), description(vocation.getKey(), a, b),
-                        ItemStack.EMPTY, a + "," + b));
+                    entries.add(new PickerScreen.Entry(Component.literal(v.get("name").getAsString()), description(v, a, b),
+                        abilities(vocation.getKey()), ItemStack.EMPTY, a + "," + b));
                 }
             }
         }
@@ -53,9 +53,15 @@ public final class VocationPicker {
         }));
     }
 
-    private static Component description(String tab, String a, String b) {
-        StringBuilder text = new StringBuilder(Respec.title(a)).append(" + ").append(Respec.title(b)).append("\n\n");
-        List<String> abilities = new ArrayList<>();
+    /** The pair, the vocation's summary and its playstyle (vocation_parts/vocations.json). */
+    private static Component description(JsonObject vocation, String a, String b) {
+        return Component.literal(Respec.title(a) + " + " + Respec.title(b) + "\n\n" + vocation.get("summary").getAsString() + "\n\n"
+            + Component.translatable("gui.mdvlcraft.picker.playstyle").getString() + " " + vocation.get("playstyle").getAsString());
+    }
+
+    /** The vocation's own abilities (the centre column of its tab), each with its node's texts as the hover description. */
+    private static List<PickerScreen.Detail> abilities(String tab) {
+        List<PickerScreen.Detail> abilities = new ArrayList<>();
         String path = "/data/mdvlcraft/puffish_skills/" + VocationParts.PARTS + "/" + tab + "/definitions.json";
         try (InputStream in = VocationPicker.class.getResourceAsStream(path)) {
             if (in == null) {
@@ -65,13 +71,13 @@ public final class VocationPicker {
                 JsonObject definition = d.getAsJsonObject();
                 String description = definition.get("description").getAsString();
                 if (description.startsWith("Unlocks") || description.startsWith("Teaches")) {
-                    abilities.add(definition.get("title").getAsString());
+                    String text = definition.has("extra_description") ? definition.get("extra_description").getAsString() + "\n" + description : description;
+                    abilities.add(new PickerScreen.Detail(Component.literal(definition.get("title").getAsString()), Component.literal(text)));
                 }
             });
         } catch (IOException e) {
             throw new IllegalStateException("Cannot read " + path, e);
         }
-        text.append(Component.translatable("gui.mdvlcraft.picker.abilities").getString()).append(' ').append(String.join(", ", abilities));
-        return Component.literal(text.toString());
+        return abilities;
     }
 }

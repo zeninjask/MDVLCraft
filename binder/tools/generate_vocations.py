@@ -46,6 +46,7 @@ import generate_skill_trees as G  # noqa: E402  (stat spokes, texts, frames)
 import relayout_trees as L  # noqa: E402  (line and overlap checks)
 import tree_edit as T  # noqa: E402  (spell mana, levels, cooldowns, spell config)
 import v2_all  # noqa: E402
+from vocation_text import text as vocation_text  # noqa: E402  (picker summary and playstyle)
 from built import BUILT  # noqa: E402  (the Modified abilities that are built)
 import profiles as P  # noqa: E402  (each archetype's class spokes and twigs)
 
@@ -885,7 +886,8 @@ def build_vocations(live, roots):
         write(part / "skills.json", skills)
         write(part / "connections.json", {"normal": {"bidirectional": conns}})
         index[vid] = {"a": a, "b": b, "name": r["names"][0],
-                      "description": f"{D.TITLE[a]} + {D.TITLE[b]}. Left: the {D.TITLE[a]} base. Right: the {D.TITLE[b]} base. Centre column: the {r['names'][0]} vocation's own skills and bonuses."}
+                      "description": f"{D.TITLE[a]} + {D.TITLE[b]}. Left: the {D.TITLE[a]} base. Right: the {D.TITLE[b]} base. Centre column: the {r['names'][0]} vocation's own skills and bonuses.",
+                      **dict(zip(("summary", "playstyle"), vocation_text(a, b)))}
     write(PARTS / "vocations.json", index)
     return index
 

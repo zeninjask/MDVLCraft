@@ -44,7 +44,7 @@ public final class OriginPicker {
         List<PickerScreen.Entry> entries = layer.origins(Minecraft.getInstance().player).stream()
             .filter(o -> o.isBound() && o.value().isChoosable())
             .sorted(ORDER)
-            .map(o -> new PickerScreen.Entry(o.value().getName(), o.value().getDescription(), o.value().getIcon(), key(o).toString()))
+            .map(o -> new PickerScreen.Entry(o.value().getName(), o.value().getDescription(), powers(o.value()), o.value().getIcon(), key(o).toString()))
             .toList();
         if (entries.isEmpty()) {
             return;   // Origins skips a layer with nothing to choose
@@ -55,6 +55,15 @@ public final class OriginPicker {
             Minecraft.getInstance().setScreen(new WaitForNextLayerScreen(layers, index, false) {
             });
         }));
+    }
+
+    /** The origin's visible powers, each with its description on hover. */
+    private static List<PickerScreen.Detail> powers(Origin origin) {
+        return origin.getValidPowers()
+            .map(Holder::value)
+            .filter(power -> !power.getData().hidden())
+            .map(power -> new PickerScreen.Detail(power.getData().getName(), power.getData().getDescription()))
+            .toList();
     }
 
     private static ResourceLocation key(Holder<Origin> origin) {
