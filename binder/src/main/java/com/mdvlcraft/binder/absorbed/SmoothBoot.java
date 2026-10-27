@@ -8,7 +8,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinWorkerThread;
-import net.minecraft.util.Mth;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -48,12 +47,12 @@ public final class SmoothBoot {
         void validate() {
             threadCount.bootstrap = Math.max(threadCount.bootstrap, 1);
             threadCount.main = Math.max(threadCount.main, 1);
-            threadPriority.game = Mth.clamp(threadPriority.game, 1, 10);
-            threadPriority.integratedServer = Mth.clamp(threadPriority.integratedServer, 1, 10);
-            threadPriority.bootstrap = Mth.clamp(threadPriority.bootstrap, 1, 10);
-            threadPriority.main = Mth.clamp(threadPriority.main, 1, 10);
-            threadPriority.io = Mth.clamp(threadPriority.io, 1, 10);
-            threadPriority.modLoading = Mth.clamp(threadPriority.modLoading, 1, 10);
+            threadPriority.game = Math.max(1, Math.min(10, threadPriority.game));
+            threadPriority.integratedServer = Math.max(1, Math.min(10, threadPriority.integratedServer));
+            threadPriority.bootstrap = Math.max(1, Math.min(10, threadPriority.bootstrap));
+            threadPriority.main = Math.max(1, Math.min(10, threadPriority.main));
+            threadPriority.io = Math.max(1, Math.min(10, threadPriority.io));
+            threadPriority.modLoading = Math.max(1, Math.min(10, threadPriority.modLoading));
         }
     }
 
