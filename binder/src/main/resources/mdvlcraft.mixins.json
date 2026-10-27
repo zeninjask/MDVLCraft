@@ -5,6 +5,18 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "mdvlcraft.refmap.json",
   "mixins": [
+    "absorbed.ItemEntityMergeMixin",
+    "absorbed.Vec3iHashMixin",
+    "absorbed.gravestone.GraveStoneCuriosMixin",
+    "absorbed.ExperienceOrbClumpMixin",
+    "absorbed.UtilWorkerMixin",
+    "absorbed.ModWorkManagerMixin",
+    "absorbed.RangedAttributeAccessor",
+    "absorbed.StructureSetSpreadMixin",
+    "absorbed.LocateDistanceMixin",
+    "absorbed.SpreadLimitMixin",
+    "absorbed.MobLookControlAccessor",
+    "absorbed.LookControlAccessor",
     "reforged.ItemVerifierMixin",
     "reforged.ReforgedShadowMixin",
     "irons.AbstractSpellSwingMixin",
@@ -143,6 +155,13 @@
     "TargetingConditionsMixin"
   ],
   "client": [
+    "parties.SocialPlayerEntryPartyMixin",
+    "parties.SocialScreenPartyTabMixin",
+    "tips.TipsPauseScreenMixin",
+    "absorbed.client.ClientMainPriorityMixin",
+    "absorbed.client.IntegratedServerPriorityMixin",
+    "absorbed.client.WindowGlErrorMixin",
+    "absorbed.client.ServerAddressResolverMixin",
     "origins.ChooseOriginScreenAccessor",
     "irons.EnergySwirlLayerAccessor",
     "ShadowTintMixin",
@@ -215,6 +234,7 @@
     "defaultRequire": 1
   },
   "server": [
+    "absorbed.server.ServerMainPriorityMixin",
     "epicfight.ServerSkillTextureMixin",
     "epicfight.ServerPlayerAnimatorCompatMixin"
   ]

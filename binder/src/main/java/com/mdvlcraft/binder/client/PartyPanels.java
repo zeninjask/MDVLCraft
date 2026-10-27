@@ -92,7 +92,7 @@ final class PartyPanels implements IGuiOverlay {
         List<Member> members = members(minecraft.player);
         // The header leaves 7 px each side for the blue tabs and 1 px of space inside them; a name's last column is spacing.
         int w = Math.max(MIN_WIDTH, members.stream().mapToInt(m -> Math.max(
-            minecraft.font.width(m.name()) - 1 + 16,
+            minecraft.font.width(m.name()) - 1 + 16 + (m.leader() ? 2 * minecraft.font.width(PartyLeader.MARK) : 0),
             LEVEL_LEFT + minecraft.font.width("Lv. ") + 7 + minecraft.font.width(String.valueOf(m.archetypes().level()))
         )).max().getAsInt());
         int perRow = Math.max(1, (screenWidth - 2 * MARGIN + GAP) / (w + GAP));
@@ -117,9 +117,10 @@ final class PartyPanels implements IGuiOverlay {
     private static List<Member> members(LocalPlayer self) {
         List<Member> members = new ArrayList<>();
         double maxMana = self.getAttributeValue((Attribute)AttributeRegistry.MAX_MANA.get());
-        members.add(new Member(self.getUUID(), self.getGameProfile().getName(), self.getHealth(), self.getMaxHealth(),
-            ClientMagicData.getPlayerMana(), (float)maxMana, ClientArchetypes.get(self.getUUID()), true));
         TrackedGroup party = ClientGroupManager.getGroup(GroupType.PARTY);
+        members.add(new Member(self.getUUID(), self.getGameProfile().getName(), self.getHealth(), self.getMaxHealth(),
+            ClientMagicData.getPlayerMana(), (float)maxMana, ClientArchetypes.get(self.getUUID()), true,
+            party != null && self.getUUID().equals(party.getLeader())));
         if (party == null) {
             return members;
         }
@@ -131,7 +132,7 @@ final class PartyPanels implements IGuiOverlay {
                 PlayerData data = ClientDataHandler.getPlayerData(id);
                 others.add(new Member(id, data.getData(DataTypes.NAME), data.getData(DataTypes.HEALTH),
                     data.getData(DataTypes.MAX_HEALTH).floatValue(), data.getData(ManaModule.MANA),
-                    data.getData(ManaModule.MAX_MANA).floatValue(), ClientArchetypes.get(id), data.isOnline()));
+                    data.getData(ManaModule.MAX_MANA).floatValue(), ClientArchetypes.get(id), data.isOnline(), id.equals(party.getLeader())));
             }
         }
 
@@ -145,7 +146,11 @@ final class PartyPanels implements IGuiOverlay {
         Font font = minecraft.font;
         window(g, x, y, w);
         int text = !member.online() ? DqGui.MUTED : member.hp() <= 0.0F ? DOWN : member.hp() <= member.maxHp() / 4.0F ? LOW : DqGui.TEXT;
-        g.drawString(font, member.name(), x + (w - font.width(member.name()) + 1) / 2, y + 5, text, false);
+        int nameX = x + (w - font.width(member.name()) + 1) / 2;
+        g.drawString(font, member.name(), nameX, y + 5, text, false);
+        if (member.leader()) {   // the party leader's crown, left of the name
+            g.drawString(font, PartyLeader.MARK, nameX - font.width(PartyLeader.MARK) - 1, y + 5, PartyLeader.COLOUR, false);
+        }
         g.drawString(font, "HP", x + 7, y + 18, text, false);
         number(g, font, Mth.ceil(member.hp()), x + w - 10, y + 18, text);
         bar(g, x + 6, y + 26, w - 12, member.hp() / member.maxHp(), HP_SHINE, HP_FILL);
@@ -238,6 +243,7 @@ final class PartyPanels implements IGuiOverlay {
         g.drawString(font, s, right + 1 - font.width(s), y, colour, false);
     }
 
-    private record Member(UUID id, String name, float hp, float maxHp, float mana, float maxMana, ClientArchetypes.Entry archetypes, boolean online) {
+    private record Member(UUID id, String name, float hp, float maxHp, float mana, float maxMana, ClientArchetypes.Entry archetypes, boolean online,
+                          boolean leader) {
     }
 }
