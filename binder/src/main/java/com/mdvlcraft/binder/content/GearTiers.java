@@ -32,7 +32,8 @@ import net.minecraftforge.registries.ForgeRegistries;
  * anything that deals attack damage in the main hand except pickaxes, shovels and hoes; a bow is any projectile weapon;
  * armour is any armour piece; a tool is a pickaxe, shovel or hoe. Each kind rolls the same seven tiers (mdvlcraft:<kind>/<tier>);
  * the tier files carry no attributes: the tier scales the item's own attack damage, armour or arrow damage here, so four
- * armour pieces add up instead of compounding. Godsmithed gear has four times the durability (ItemStackMixin).
+ * armour pieces add up instead of compounding, and adds half that share of attack speed or draw speed, and 5x it as flat
+ * armour toughness per piece (Godsmithed +25%: +12.5% attack speed, +12.5% draw speed, +1.25 toughness). Godsmithed gear has four times the durability (ItemStackMixin).
  * Reforged itself tiers the main inventory and open containers; on login the armour and off-hand slots are rolled too.
  * A tier from before this table (any id outside the four kinds) is dropped first, so old gear rerolls on the new table.
  */
@@ -44,6 +45,14 @@ public final class GearTiers {
         "fine", 0.05, "mastercrafted", 0.10, "godsmithed", 0.25);
     private static final UUID BASE_ATTACK_DAMAGE = UUID.fromString("CB3F55D3-645C-4F38-A497-9C13A33DB5CF");
     private static final UUID ARROW_DAMAGE = UUID.fromString("5d1c7f2e-3b8a-4e61-9f0c-2a7d4b6e8c13");
+    private static final UUID DRAW_SPEED = UUID.fromString("5d1c7f2e-3b8a-4e61-9f0c-2a7d4b6e8c14");
+    private static final UUID ATTACK_SPEED = UUID.fromString("5d1c7f2e-3b8a-4e61-9f0c-2a7d4b6e8c15");
+    /** One per armour slot, so a full set's toughness bonuses all count. */
+    private static final Map<EquipmentSlot, UUID> TOUGHNESS = Map.of(
+        EquipmentSlot.HEAD, UUID.fromString("5d1c7f2e-3b8a-4e61-9f0c-2a7d4b6e8c16"),
+        EquipmentSlot.CHEST, UUID.fromString("5d1c7f2e-3b8a-4e61-9f0c-2a7d4b6e8c17"),
+        EquipmentSlot.LEGS, UUID.fromString("5d1c7f2e-3b8a-4e61-9f0c-2a7d4b6e8c18"),
+        EquipmentSlot.FEET, UUID.fromString("5d1c7f2e-3b8a-4e61-9f0c-2a7d4b6e8c19"));
 
     private GearTiers() {
     }
@@ -95,12 +104,23 @@ public final class GearTiers {
         if (scale == null || scale == 0) {
             return;
         }
-        boolean added = scale(event, Attributes.ARMOR, scale);
-        if (event.getSlotType() == EquipmentSlot.MAINHAND) {
-            added |= scale(event, Attributes.ATTACK_DAMAGE, scale);
+        AttributeModifier.Operation add = AttributeModifier.Operation.ADDITION;
+        if (scale(event, Attributes.ARMOR, scale) && TOUGHNESS.containsKey(event.getSlotType())) {
+            event.addModifier(Attributes.ARMOR_TOUGHNESS, new AttributeModifier(TOUGHNESS.get(event.getSlotType()), "Gear tier", scale * 5, add));
+        }
+        if (event.getSlotType() != EquipmentSlot.MAINHAND) {
+            return;
+        }
+        if (scale(event, Attributes.ATTACK_DAMAGE, scale)) {
+            event.addModifier(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED, "Gear tier", scale / 2, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        } else if (event.getItemStack().getItem() instanceof ProjectileWeaponItem) {
             Attribute arrows = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation("attributeslib", "arrow_damage"));
-            if (!added && arrows != null && event.getItemStack().getItem() instanceof ProjectileWeaponItem) {
-                event.addModifier(arrows, new AttributeModifier(ARROW_DAMAGE, "Gear tier", scale, AttributeModifier.Operation.ADDITION));
+            Attribute draw = ForgeRegistries.ATTRIBUTES.getValue(new ResourceLocation("attributeslib", "draw_speed"));
+            if (arrows != null) {
+                event.addModifier(arrows, new AttributeModifier(ARROW_DAMAGE, "Gear tier", scale, add));
+            }
+            if (draw != null) {
+                event.addModifier(draw, new AttributeModifier(DRAW_SPEED, "Gear tier", scale / 2, add));
             }
         }
     }
