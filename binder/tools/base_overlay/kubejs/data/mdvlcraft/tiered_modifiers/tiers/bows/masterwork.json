@@ -1,0 +1,35 @@
+{
+  "weight": 2,
+  "reforge_experience_cost": 6,
+  "reforge_durability_cost": 4,
+  "reforge_item": "reforged:weaponsmiths_hammer",
+  "style": {
+    "color": "gold"
+  },
+  "attributes": [
+    {
+      "type": "attributeslib:arrow_damage",
+      "modifier": {
+        "id": "mdvlcraft:bows_masterwork_0",
+        "operation": "ADD_VALUE",
+        "amount": 0.04
+      },
+      "optional_equipment_slots": [
+        "MAINHAND",
+        "OFFHAND"
+      ]
+    },
+    {
+      "type": "attributeslib:draw_speed",
+      "modifier": {
+        "id": "mdvlcraft:bows_masterwork_1",
+        "operation": "ADD_VALUE",
+        "amount": 0.02
+      },
+      "optional_equipment_slots": [
+        "MAINHAND",
+        "OFFHAND"
+      ]
+    }
+  ]
+}
