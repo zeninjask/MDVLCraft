@@ -19,3 +19,18 @@ Always use these skills, in every session, without being asked:
 # Terms
 
 - **Execute / execution / assassinate / assassination** always means Combat Evolution's execution: right click while behind a target that hasn't noticed you, for a big-damage attack (its damage carries the `combat_evolution` EXECUTION damage type tag). It never means Epic Fight Nightfall's Execution skill unless the user names Nightfall.
+
+# Testing without running out of memory
+
+The sandbox has about 14 GB in total; a Forge server plus a client plus Gradle goes over it and the kernel kills one of
+them (it was the client, and once the shell). Step by step:
+
+1. Only test in game when the user asks for it. Otherwise build (`./gradlew -q build --offline`) and stop.
+2. Before a test, stop Gradle: `cd binder && ./gradlew --stop`, and check `free -g` shows at least 10 GB available.
+3. Server alone first, with `-Xmx5G` written into the test server's `user_jvm_args.txt` *after* the pack is copied in
+   (the pack's own file sets 8 GB and overwrites it).
+4. Client with `-Xmx4G` at most, and only one client. Never a second server or client at the same time.
+5. Watch memory every 5 minutes (`free -g`, `ps -o rss,cmd -p <pid>`); if available memory drops under 1.5 GB, stop
+   the client first.
+6. Stop processes by PID (`kill <pid>`), never with `pkill -f` on a pattern that can match your own shell.
+7. After the test, kill both and delete their worlds and logs you no longer need.
