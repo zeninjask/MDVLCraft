@@ -28,7 +28,7 @@ ORIGINS = [
     ("martial", "zealot", "mdvlcraft:zealot", (1, 2, 4), ("LST", "ATK", "STRG", "FRES")),
     ("job", "blacksmith", "origins-classes:blacksmith", (3, 4, 5), ("ARM", "ATG", "ASH", "FRES")),
     ("job", "cleric", "origins-classes:cleric", (2, 3, 4), ("HEAL", "HSP", "MANA", "MREG")),
-    ("job", "cook", "origins-classes:cook", (2, 4, 5), ("SAT", "NATR", "MHP", "FRES")),
+    ("job", "cook", "origins-classes:cook", (2, 4, 5), ("SAT", "NATR", "MHP", "FSP")),
     ("job", "farmer", "origins-classes:farmer", (1, 2, 6), ("NATR", "SAT", "NREG", "FORT")),
     ("job", "merchant", "origins-classes:merchant", (2, 3, 5), ("LUCK", "DROP", "FORT", "MSP")),
     ("job", "rancher", "origins-classes:rancher", (2, 5, 6), ("PET", "MNT", "DROP", "MHP")),
@@ -45,7 +45,7 @@ ORIGINS = [
 ]
 
 # ability names whose snake case is already an ability key elsewhere
-KEY_OVERRIDE = {"Shield Bash": "warrior_shield_bash", "Smoke Bomb": "rogue_smoke_bomb", "Caltrops": "rogue_caltrops",
+KEY_OVERRIDE = {"Wild Cooking": "spice_mix", "Shield Bash": "warrior_shield_bash", "Smoke Bomb": "rogue_smoke_bomb", "Caltrops": "rogue_caltrops",
                 "Pavise": "crossbow_pavise", "Net Throw": "fisher_net_throw"}
 
 

@@ -10,7 +10,7 @@ PART = {
     'turn_undead': spell(HOLY, 35, 30),
     'feast': spell(NATURE, 40, 90),
     'iron_stomach': spell(NATURE, 20, 60),
-    'spice_mix': spell(NATURE, 25, 120),
+    'spice_mix': spell(NATURE, 10, 0),
     'bountiful_harvest': spell(NATURE, 30, 60),
     'scarecrow': spell(NATURE, 35, 90),
     'compost': spell(NATURE, 15, 60),

@@ -14,6 +14,7 @@ import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ItemParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
+import com.mdvlcraft.binder.content.WildCooking;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -76,7 +77,6 @@ public final class OriginJobA {
     private static final String SHRED = "hammer_shred";
     private static final String TURNED = "turned_undead";
     private static final String IRON_STOMACH = "iron_stomach";
-    private static final String SPICE = "spice_mix";
     private static final String BRIBED = "bribed";
     private static final String BRAND = "branding_iron";
     private static final String SCARECROW_SEEN = "scarecrow_seen";
@@ -343,7 +343,7 @@ public final class OriginJobA {
         }
     }
 
-    /** Spice Mix: for 5 minutes every food the caster eats also gives Speed I and Regeneration I for 10 s. */
+    /** Wild Cooking (Spice Mix's spell): opens the caster's own cooking pot screen anywhere (content/WildCooking). */
     public static class SpiceMix extends ModifiedSpell {
         SpiceMix() {
             super("spice_mix", 0);
@@ -351,12 +351,10 @@ public final class OriginJobA {
 
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
-            Buffs.give(caster, SPICE, 6000);
-            if (level instanceof ServerLevel server) {
-                server.sendParticles(new ItemParticleOption(ParticleTypes.ITEM, new ItemStack(Items.REDSTONE)), caster.getX(), caster.getY(1.0),
-                    caster.getZ(), 20, 0.3, 0.3, 0.3, 0.05);
+            if (caster instanceof ServerPlayer player) {
+                WildCooking.open(player);
             }
-            level.playSound(null, caster.blockPosition(), SoundEvents.BREWING_STAND_BREW, SoundSource.PLAYERS, 1.0F, 1.4F);
+            level.playSound(null, caster.blockPosition(), SoundEvents.CAMPFIRE_CRACKLE, SoundSource.PLAYERS, 1.0F, 1.0F);
             super.onCast(level, spellLevel, caster, source, data);
         }
     }
@@ -675,16 +673,6 @@ public final class OriginJobA {
     public static void onEffect(MobEffectEvent.Applicable event) {
         if (STOMACH_PROOF.contains(event.getEffectInstance().getEffect()) && Buffs.has(event.getEntity(), IRON_STOMACH)) {
             event.setResult(Result.DENY);
-        }
-    }
-
-    /** Spice Mix: food eaten while spiced gives Speed I and Regeneration I for 10 s. */
-    @SubscribeEvent
-    public static void onEaten(LivingEntityUseItemEvent.Finish event) {
-        LivingEntity eater = event.getEntity();
-        if (event.getItem().isEdible() && Buffs.has(eater, SPICE)) {
-            eater.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0));
-            eater.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0));
         }
     }
 
