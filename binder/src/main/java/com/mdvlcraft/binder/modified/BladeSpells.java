@@ -120,7 +120,7 @@ public final class BladeSpells {
                     server.playSound(null, start.x, start.y, start.z, SoundEvents.PLAYER_ATTACK_SWEEP, SoundSource.PLAYERS, 1.0F, 0.6F);
                 };
                 if (caster instanceof ServerPlayer player) {
-                    DoppelgangerEntity.spawnCopy(player, start, 15, true, copy -> echo.run());
+                    DoppelgangerEntity.spawnCopy(player, start, 1, 15, true, copy -> echo.run());
                 } else {
                     Zones.start(server, start, caster, damage, 15, 1000, zone -> {
                     }, echo, null);

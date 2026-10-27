@@ -56,7 +56,7 @@ public final class CloneSpells {
             if (caster instanceof ServerPlayer player && level instanceof ServerLevel server) {
                 for (int side : new int[] {-1, 1}) {
                     Vec3 at = player.position().add(player.getLookAngle().yRot((float)Math.toRadians(90 * side)).multiply(1.0, 0.0, 1.0).normalize().scale(1.5));
-                    DoppelgangerEntity copy = DoppelgangerEntity.spawnCopy(player, at, 160, false, c -> puff((ServerLevel)c.level(), c.position()));
+                    DoppelgangerEntity copy = DoppelgangerEntity.spawnCopy(player, at, -side, 160, false, c -> puff((ServerLevel)c.level(), c.position()));
                     taunt(player, copy, 12.0);
                     puff(server, at);
                 }
@@ -88,7 +88,7 @@ public final class CloneSpells {
             if (caster instanceof ServerPlayer player && level instanceof ServerLevel server) {
                 for (int side : new int[] {-1, 1}) {
                     Vec3 at = player.position().add(player.getLookAngle().yRot((float)Math.toRadians(90 * side)).multiply(1.0, 0.0, 1.0).normalize().scale(1.5));
-                    DoppelgangerEntity.spawnCopy(player, at, 400, false, c -> puff((ServerLevel)c.level(), c.position()));
+                    DoppelgangerEntity.spawnCopy(player, at, -side, 400, false, c -> puff((ServerLevel)c.level(), c.position()));
                     puff(server, at);
                 }
                 level.playSound(null, player.blockPosition(), SoundEvents.ILLUSIONER_PREPARE_MIRROR, SoundSource.PLAYERS, 1.0F, 1.0F);
@@ -116,7 +116,7 @@ public final class CloneSpells {
             if (caster instanceof ServerPlayer player && level instanceof ServerLevel server) {
                 float damage = this.getSpellPower(spellLevel, caster);
                 Vec3 from = player.position();
-                DoppelgangerEntity copy = DoppelgangerEntity.spawnCopy(player, from, 60, true, c -> {
+                DoppelgangerEntity copy = DoppelgangerEntity.spawnCopy(player, from, 1, 60, true, c -> {
                     ServerLevel at = (ServerLevel)c.level();
                     for (LivingEntity enemy : Targets.enemies(player, c.position(), 3.0)) {
                         DamageSources.applyDamage(enemy, damage, this.getDamageSource(c, player));

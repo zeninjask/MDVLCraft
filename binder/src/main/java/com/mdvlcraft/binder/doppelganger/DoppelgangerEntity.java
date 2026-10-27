@@ -40,7 +40,6 @@ public class DoppelgangerEntity extends PathfinderMob {
     private static final int HOLD_TICKS = 60;
     private static final double SENT_CATCH_UP_DISTANCE = 40.0;
     private int side = 1;
-    private int sideCheck;
     @Nullable
     private LivingEntity sentTarget;
     private int sentTicks;
@@ -105,8 +104,9 @@ public class DoppelgangerEntity extends PathfinderMob {
     /**
      * A temporary copy of `owner` at `at` for `ticks` (Mirror Images, Shadow Clone, Spirit Step): it fights like the
      * Doppelganger ability's copy but is not tied to it; `stay` keeps it where it was spawned, `onExpire` runs when it runs out.
+     * A following copy keeps to its `side` of the owner (sideOffset's sign, the opposite of Vec3.yRot's), so a pair never stacks.
      */
-    public static DoppelgangerEntity spawnCopy(ServerPlayer owner, Vec3 at, int ticks, boolean stay, @Nullable Consumer<DoppelgangerEntity> onExpire) {
+    public static DoppelgangerEntity spawnCopy(ServerPlayer owner, Vec3 at, int side, int ticks, boolean stay, @Nullable Consumer<DoppelgangerEntity> onExpire) {
         ServerLevel level = owner.serverLevel();
         DoppelgangerEntity copy = DoppelgangerSetup.DOPPELGANGER.get().create(level);
         if (copy == null) {
@@ -114,6 +114,7 @@ public class DoppelgangerEntity extends PathfinderMob {
         }
         copy.moveTo(at.x, at.y, at.z, owner.getYRot(), owner.getXRot());
         copy.setOwner(owner);
+        copy.side = side;
         copy.lifetime = ticks;
         copy.holdForever = stay;
         copy.onExpire = onExpire;
@@ -123,7 +124,6 @@ public class DoppelgangerEntity extends PathfinderMob {
 
     void setOwner(Player owner) {
         this.entityData.set(OWNER, Optional.of(owner.getUUID()));
-        this.side = this.random.nextBoolean() ? 1 : -1;
         this.copyGear(owner);
     }
 
@@ -186,13 +186,6 @@ public class DoppelgangerEntity extends PathfinderMob {
     }
 
     private void follow(Player owner) {
-        if (--this.sideCheck <= 0) {
-            this.sideCheck = 10;
-            if (this.blocked(owner.position().add(this.sideOffset(owner, this.side)))) {
-                this.side = -this.side;
-            }
-        }
-
         DoppelgangerPatch patch = (DoppelgangerPatch)EpicFightCapabilities.getEntityPatch(this, DoppelgangerPatch.class);
         boolean busy = patch != null && patch.getEntityState().inaction();
         LivingEntity target = this.getTarget();

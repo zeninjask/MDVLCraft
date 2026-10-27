@@ -250,7 +250,7 @@ public final class FormSpells {
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             if (caster instanceof ServerPlayer player) {
-                DoppelgangerEntity copy = DoppelgangerEntity.spawnCopy(player, player.position(), 200, true,
+                DoppelgangerEntity copy = DoppelgangerEntity.spawnCopy(player, player.position(), 1, 200, true,
                     c -> CloneSpells.puff((ServerLevel)c.level(), c.position()));
                 copy.getPersistentData().putBoolean(HAUNTING, true);
                 copy.addEffect(new MobEffectInstance(MobEffects.INVISIBILITY, 200, 0, false, false, false));

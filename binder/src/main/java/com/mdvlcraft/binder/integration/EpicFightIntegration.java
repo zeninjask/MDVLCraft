@@ -36,7 +36,7 @@ public final class EpicFightIntegration {
             ResourceLocation id = ForgeRegistries.ENTITY_TYPES.getKey(type);
             boolean wanted = type.getCategory() == MobCategory.MONSTER || TARGET_DUMMY.equals(id);
             if (wanted && !event.getTypeEntry().containsKey(type)) {
-                event.getTypeEntry().put(type, entity -> entity instanceof Mob ? PassiveMobPatch::new : GlobalMobPatch::new);
+                event.getTypeEntry().put(type, entity -> !(entity instanceof Mob) ? GlobalMobPatch::new : TARGET_DUMMY.equals(id) ? TargetDummyPatch::new : PassiveMobPatch::new);
                 PASSIVE.add(type);
             }
         }

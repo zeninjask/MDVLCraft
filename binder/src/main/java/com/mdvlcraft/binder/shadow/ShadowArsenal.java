@@ -38,7 +38,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 /**
  * Formless Sword (the samurai's ability, in place of Magic Blade: Absorb) and the Shadow Arsenal. Activating the ability
  * while sneaking cycles its mode: Absorb, Form, Select.
- * - Absorb takes the weapon in the off hand into the player's arsenal: the item type only (enchantments are lost), each
+ * - Absorb takes the weapon in the main hand (else the off hand) into the player's arsenal: the item type only (enchantments are lost), each
  *   type once; the stack is used up.
  * - Select opens the arsenal screen (client/ArsenalScreen), where arsenal weapons are bound to the sword wheel's 8 slots.
  * - Form: holding the ability key opens the sword wheel (client/SwordWheelScreen) to pick a weapon; a tap summons its
@@ -90,19 +90,21 @@ public final class ShadowArsenal {
     }
 
     private static void absorb(ServerPlayer player) {
-        ItemStack offhand = player.getOffhandItem();
-        if (!ShadowWeapons.absorbable(offhand)) {
+        // the main hand's weapon first, else the off hand's
+        InteractionHand hand = ShadowWeapons.absorbable(player.getMainHandItem()) ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+        ItemStack weapon = player.getItemInHand(hand);
+        if (!ShadowWeapons.absorbable(weapon)) {
             tell(player, Component.translatable("ability.mdvlcraft.formless_sword.no_weapon"), ChatFormatting.GRAY);
             return;
         }
-        String id = ForgeRegistries.ITEMS.getKey(offhand.getItem()).toString();
+        String id = ForgeRegistries.ITEMS.getKey(weapon.getItem()).toString();
         List<String> arsenal = arsenal(player);
         if (arsenal.contains(id)) {
-            tell(player, Component.translatable("ability.mdvlcraft.formless_sword.already", offhand.getItem().getDescription()), ChatFormatting.GRAY);
+            tell(player, Component.translatable("ability.mdvlcraft.formless_sword.already", weapon.getItem().getDescription()), ChatFormatting.GRAY);
             return;
         }
-        Component name = offhand.getItem().getDescription();
-        player.setItemInHand(InteractionHand.OFF_HAND, ItemStack.EMPTY);
+        Component name = weapon.getItem().getDescription();
+        player.setItemInHand(hand, ItemStack.EMPTY);
         arsenal.add(id);
         ListTag tag = new ListTag();
         arsenal.forEach(entry -> tag.add(StringTag.valueOf(entry)));
