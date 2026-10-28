@@ -546,13 +546,16 @@ The Status page has a Settings button (`client/SettingsScreen`) with one setting
 - **Generators on Windows:** pass `encoding='utf-8'` to `read_text` and `write_text`. `gen_gate_items` wrote `en_us.json`
   in Windows-1252 once (fixed).
 
-## Open: Frying Pan & Spatula attacks don't play
+## Frying Pan & Spatula (fixed in 2.1.65)
 
-The server gets each Invincible combo request and fires the attack's BEGIN event, but the attack never reaches the
-animator and the client never plays it (the camera tips straight down). Epic Fight's `ServerAnimator.playAnimation`
-calls `begin`, then `setLinkAnimation`. If that throws inside the packet's `enqueueWork`, Forge swallows the
-exception, which fits everything seen so far.
-
-- Next step: call `ServerPlayerPatch.playAnimationSynchronized(ChefAnimations.A, 0.1F)` from a test command inside a
-  try/catch and log the throwable.
-- The ComboNode convert-time change in `SuperChefSetup.node` is in; it didn't fix this on its own.
+- **Why the attacks never played:** `AttackAnimation.begin` fires Epic Fight's action event. `BasicAttack` then asks the
+  weapon's combo-counter handler, whose default reads the last two entries of the weapon's `newStyleCombo` list. That
+  list held only the dash, so the handler threw `IndexOutOfBounds -1` inside the packet's `enqueueWork`, which Forge
+  swallows without logging.
+- The skillet preset now sets `.comboCounterHandler(... -> 0)`: Invincible runs the combos.
+- To find this kind of failure, call `playAnimationSynchronized` from a debug command inside a try/catch.
+- **Testing:** clicking through computer use moves the mouse, which turns the camera; press buttons in place.
+- **Hands and damage:** every phase uses `MAIN_HAND` (an off-hand phase hits with the empty off hand). The pan is drawn
+  in the right hand (`toolR`, ×1.3) and the spatula in the left (`toolL`, ×0.7).
+- **Finishers:** `key1_2` (both buttons). Farmer's Delight's skillet has no Super Chef moveset any more.
+- Players with Keep Slot Open on can't hold anything in slot 1, so give test weapons in slot 2.
