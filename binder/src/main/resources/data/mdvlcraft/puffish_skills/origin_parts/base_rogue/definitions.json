@@ -820,5 +820,104 @@
   },
   "size": 0.75,
   "extra_description": "Rogue bonus."
+ },
+ "rogue__spec_ambusher": {
+  "title": "Ambusher",
+  "description": "Your first hit after leaving Vanish deals 30% more.",
+  "extra_description": "Specialisation: take one of the Rogue's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_origin.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_ambusher",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "rogue__spec_choking_smoke": {
+  "title": "Choking Smoke",
+  "description": "Enemies inside your Smoke Bomb are slowed.",
+  "extra_description": "Specialisation: take one of the Rogue's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_origin.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_choking_smoke",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "rogue__spec_pickpocket": {
+  "title": "Pickpocket",
+  "description": "Sneaking up to a villager and using it gives one random trade item, once a day per villager.",
+  "extra_description": "Specialisation: take one of the Rogue's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_origin.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_pickpocket",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
  }
 }

@@ -320,5 +320,67 @@
   },
   "size": 2.0,
   "extra_description": "Tide Monk vocation skill."
+ },
+ "voc__6__rank1": {
+  "title": "Cycle Aura III",
+  "description": "Raises Cycle Aura to level 3 (105 mana, 89.78 s cooldown), replacing level 2",
+  "extra_description": "Creates a moving aura that grants Cycle to allies. The aura vanishes when its owner takes actual damage. Tide Monk vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_cycle_aura.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:cycle_aura",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "voc__6__rank2": {
+  "title": "Cycle Aura IV",
+  "description": "Raises Cycle Aura to level 4 (116 mana, 89.78 s cooldown), replacing level 3",
+  "extra_description": "Creates a moving aura that grants Cycle to allies. The aura vanishes when its owner takes actual damage. Tide Monk vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_cycle_aura.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:cycle_aura",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
  }
 }

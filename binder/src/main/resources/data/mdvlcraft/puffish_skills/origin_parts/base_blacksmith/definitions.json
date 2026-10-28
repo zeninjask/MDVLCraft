@@ -820,5 +820,104 @@
   },
   "size": 0.75,
   "extra_description": "Blacksmith bonus."
+ },
+ "blacksmith__spec_field_repairs": {
+  "title": "Field Repairs",
+  "description": "Repairing gear at an anvil or in a crafting grid restores 25% more durability.",
+  "extra_description": "Specialisation: take one of the Blacksmith's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_origin.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_field_repairs",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "blacksmith__spec_ringing_blow": {
+  "title": "Ringing Blow",
+  "description": "Hammer Strike stuns for 0.5 s longer.",
+  "extra_description": "Specialisation: take one of the Blacksmith's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_origin.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_ringing_blow",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "blacksmith__spec_well_made": {
+  "title": "Well Made",
+  "description": "Gear you craft loses durability 15% slower.",
+  "extra_description": "Specialisation: take one of the Blacksmith's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_origin.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_well_made",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
  }
 }

@@ -6470,5 +6470,879 @@
    }
   },
   "size": 1.5
+ },
+ "brute__spec_aftershock": {
+  "title": "Aftershock",
+  "description": "Your slams crack the ground, which erupts 1 s later for 40% of the slam's damage.",
+  "extra_description": "Specialisation: take one of the Brute's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_brute.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_aftershock",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "brute__spec_hooked": {
+  "title": "Hooked",
+  "description": "Spear and halberd hits on an enemy running away from you pull it 2 blocks back toward you.",
+  "extra_description": "Specialisation: take one of the Brute's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_brute.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_hooked",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "brute__spec_unyielding": {
+  "title": "Unyielding",
+  "description": "Once every 8 s, the next knockback or stun on you is ignored, and you gain 2 armour toughness for 5 s.",
+  "extra_description": "Specialisation: take one of the Brute's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_brute.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_unyielding",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "brute__axe_cleave__rank1": {
+  "title": "Axe Cleave IV",
+  "description": "Raises Axe Cleave to level 4 (51 mana, 14.96 s cooldown), replacing level 3",
+  "extra_description": "Summons spectral axe cleaves to cut targets in front.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_axe_cleave.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:axe_cleave",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__axe_cleave__rank2": {
+  "title": "Axe Cleave V",
+  "description": "Raises Axe Cleave to level 5 (60 mana, 14.96 s cooldown), replacing level 4",
+  "extra_description": "Summons spectral axe cleaves to cut targets in front.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_axe_cleave.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:axe_cleave",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__brave_aura__rank1": {
+  "title": "Brave Aura IV",
+  "description": "Raises Brave Aura to level 4 (94 mana, 59.85 s cooldown), replacing level 3",
+  "extra_description": "Creates a moving aura that grants Brave to allies. The aura vanishes when its owner takes actual damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_brave_aura.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:brave_aura",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__brave_aura__rank2": {
+  "title": "Brave Aura V",
+  "description": "Raises Brave Aura to level 5 (102 mana, 59.85 s cooldown), replacing level 4",
+  "extra_description": "Creates a moving aura that grants Brave to allies. The aura vanishes when its owner takes actual damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_brave_aura.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:brave_aura",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__ether_barrier__rank1": {
+  "title": "Ether Barrier III",
+  "description": "Raises Ether Barrier to level 3 (85 mana, 89.78 s cooldown), replacing level 2",
+  "extra_description": "Creates a barrier that grants allies Ether, increasing knockback resistance, movement speed and cast speed.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_ether_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:ether_barrier",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__ether_barrier__rank2": {
+  "title": "Ether Barrier IV",
+  "description": "Raises Ether Barrier to level 4 (94 mana, 89.78 s cooldown), replacing level 3",
+  "extra_description": "Creates a barrier that grants allies Ether, increasing knockback resistance, movement speed and cast speed.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_ether_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:ether_barrier",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__fortify__rank1": {
+  "title": "Fortify III",
+  "description": "Raises Fortify to level 3 (85 mana, 179.55 s cooldown), replacing level 2",
+  "extra_description": "Upon casting, fortify every friendly creature within a radius around you, giving them temporary HP.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_fortify.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:fortify",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__fortify__rank2": {
+  "title": "Fortify IV",
+  "description": "Raises Fortify to level 4 (94 mana, 179.55 s cooldown), replacing level 3",
+  "extra_description": "Upon casting, fortify every friendly creature within a radius around you, giving them temporary HP.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_fortify.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:fortify",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__gavel_of_haima__rank1": {
+  "title": "Gavel of Haima IV",
+  "description": "Raises Gavel of Haima to level 4 (40 mana, 3.99 s cooldown), replacing level 3",
+  "extra_description": "Swings a giant glintstone hammer down on the ground ahead, hitting what it strikes directly and sending out a damaging shockwave.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_elden_ring_gavel_of_haima.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_elden_ring:gavel_of_haima",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__gavel_of_haima__rank2": {
+  "title": "Gavel of Haima V",
+  "description": "Raises Gavel of Haima to level 5 (43 mana, 3.99 s cooldown), replacing level 4",
+  "extra_description": "Swings a giant glintstone hammer down on the ground ahead, hitting what it strikes directly and sending out a damaging shockwave.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_elden_ring_gavel_of_haima.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_elden_ring:gavel_of_haima",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__guardian_barrier__rank1": {
+  "title": "Guardian Barrier II",
+  "description": "Raises Guardian Barrier to level 2 (119 mana, 89.78 s cooldown), replacing level 1",
+  "extra_description": "Creates a barrier that grants Guarding to its caster and redirects enemies targeting allies inside it.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_guardian_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:guardian_barrier",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__guardian_barrier__rank2": {
+  "title": "Guardian Barrier III",
+  "description": "Raises Guardian Barrier to level 3 (136 mana, 89.78 s cooldown), replacing level 2",
+  "extra_description": "Creates a barrier that grants Guarding to its caster and redirects enemies targeting allies inside it.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_guardian_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:guardian_barrier",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__halberd_horizon__rank1": {
+  "title": "Halberd Horizon IV",
+  "description": "Raises Halberd Horizon to level 4 (128 mana, 29.93 s cooldown), replacing level 3",
+  "extra_description": "Summons Phantom Halberds in the battlefield around the caster, damaging entities caught in it. Can only be obtained by defeating Maledictus.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_halberd_horizon.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:halberd_horizon",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__halberd_horizon__rank2": {
+  "title": "Halberd Horizon V",
+  "description": "Raises Halberd Horizon to level 5 (162 mana, 29.93 s cooldown), replacing level 4",
+  "extra_description": "Summons Phantom Halberds in the battlefield around the caster, damaging entities caught in it. Can only be obtained by defeating Maledictus.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_halberd_horizon.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:halberd_horizon",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__halberd_strike__rank1": {
+  "title": "Halberd Strike IV",
+  "description": "Raises Halberd Strike to level 4 (38 mana, 17.96 s cooldown), replacing level 3",
+  "extra_description": "Summons 3 frontal columns of phantom halberds to strike distant enemies.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_halberd_strike.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:halberd_strike",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__halberd_strike__rank2": {
+  "title": "Halberd Strike V",
+  "description": "Raises Halberd Strike to level 5 (42 mana, 17.96 s cooldown), replacing level 4",
+  "extra_description": "Summons 3 frontal columns of phantom halberds to strike distant enemies.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_halberd_strike.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:halberd_strike",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__impact_magic__rank1": {
+  "title": "Impact Shock IV",
+  "description": "Raises Impact Shock to level 4 (68 mana, 22.45 s cooldown), replacing level 3",
+  "extra_description": "Unleashes a shockwave that damages enemies and knocks them back with force increasing with distance.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_impact_magic.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:impact_magic",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__impact_magic__rank2": {
+  "title": "Impact Shock V",
+  "description": "Raises Impact Shock to level 5 (76 mana, 22.45 s cooldown), replacing level 4",
+  "extra_description": "Unleashes a shockwave that damages enemies and knocks them back with force increasing with distance.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_impact_magic.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:impact_magic",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__root__rank1": {
+  "title": "Stomp IV",
+  "description": "Raises Stomp to level 4 (68 mana, 23.94 s cooldown), replacing level 3",
+  "extra_description": "With a magic force, stomp the ground in front of you and send a short tremor forward through the ground, damaging creatures in its path. The first skill of the Brute base.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_stomp.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:stomp",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__root__rank2": {
+  "title": "Stomp V",
+  "description": "Raises Stomp to level 5 (76 mana, 23.94 s cooldown), replacing level 4",
+  "extra_description": "With a magic force, stomp the ground in front of you and send a short tremor forward through the ground, damaging creatures in its path. The first skill of the Brute base.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_stomp.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:stomp",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__severed_tithe__rank1": {
+  "title": "Severed Tithe IV",
+  "description": "Raises Severed Tithe to level 4 (53 mana, 17.96 s cooldown), replacing level 3",
+  "extra_description": "Heavy strike that refunds mana and healing if it kills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_severed_tithe.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:severed_tithe",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__severed_tithe__rank2": {
+  "title": "Severed Tithe V",
+  "description": "Raises Severed Tithe to level 5 (56 mana, 17.96 s cooldown), replacing level 4",
+  "extra_description": "Heavy strike that refunds mana and healing if it kills.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_severed_tithe.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:severed_tithe",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__soul_grab__rank1": {
+  "title": "Soul Grab IV",
+  "description": "Raises Soul Grab to level 4 (38 mana, 22.45 s cooldown), replacing level 3",
+  "extra_description": "Maledictus Charge: upon selecting a target, you grab the enemy, launch yourself upward, and slam down with full force, dealing impact damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_soul_grab.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:soul_grab",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__soul_grab__rank2": {
+  "title": "Soul Grab V",
+  "description": "Raises Soul Grab to level 5 (42 mana, 22.45 s cooldown), replacing level 4",
+  "extra_description": "Maledictus Charge: upon selecting a target, you grab the enemy, launch yourself upward, and slam down with full force, dealing impact damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_soul_grab.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:soul_grab",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "brute__time_debt__rank1": {
+  "title": "Time Debt III",
+  "description": "Raises Time Debt to level 3 (38 mana, 134.66 s cooldown), replacing level 2",
+  "extra_description": "For 30 seconds, take 50% of incoming mitigated damage immediately and borrow the other half. Over the following 30 seconds, repay 70% of that debt in six payments, five seconds apart. New damage is normal during repayment.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_chronomancy_time_debt.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_chronomancy:time_debt",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
  }
 }

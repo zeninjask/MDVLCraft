@@ -6192,5 +6192,941 @@
   },
   "size": 0.75,
   "extra_description": "Twig bonus."
+ },
+ "necromancer__spec_corpse_blast": {
+  "title": "Corpse Blast",
+  "description": "Your summons explode when they die, dealing 30% of their max health as blood damage within 3 blocks.",
+  "extra_description": "Specialisation: take one of the Necromancer's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_necromancer.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_corpse_blast",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "necromancer__spec_grave_feast": {
+  "title": "Grave Feast",
+  "description": "When one of your summons dies, you heal 2 health.",
+  "extra_description": "Specialisation: take one of the Necromancer's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_necromancer.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_grave_feast",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "necromancer__spec_rise_again": {
+  "title": "Rise Again",
+  "description": "Enemies you kill have a 10% chance to rise as a zombie that fights for you for 20 s, up to 2 at a time.",
+  "extra_description": "Specialisation: take one of the Necromancer's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_necromancer.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_rise_again",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "necromancer__acupuncture__rank1": {
+  "title": "Acupuncture IV",
+  "description": "Raises Acupuncture to level 4 (34 mana, 29.93 s cooldown), replacing level 3",
+  "extra_description": "Around a targeted creature, create a field of blood needles in every direction, shooting down and healing you for 25% of damage done",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_acupuncture.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:acupuncture",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__acupuncture__rank2": {
+  "title": "Acupuncture V",
+  "description": "Raises Acupuncture to level 5 (38 mana, 29.93 s cooldown), replacing level 4",
+  "extra_description": "Around a targeted creature, create a field of blood needles in every direction, shooting down and healing you for 25% of damage done",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_acupuncture.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:acupuncture",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__ash_guard__rank1": {
+  "title": "Ash Guard IV",
+  "description": "Raises Ash Guard to level 4 (29 mana, 23.94 s cooldown), replacing level 3",
+  "extra_description": "Wraps you in an ash shell that blocks incoming projectiles.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_ash_guard.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:ash_guard",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__ash_guard__rank2": {
+  "title": "Ash Guard V",
+  "description": "Raises Ash Guard to level 5 (31 mana, 23.94 s cooldown), replacing level 4",
+  "extra_description": "Wraps you in an ash shell that blocks incoming projectiles.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_ash_guard.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:ash_guard",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__ash_pack__rank1": {
+  "title": "Ash Pack III",
+  "description": "Raises Ash Pack to level 3 (58 mana, 300 s cooldown), replacing level 2",
+  "extra_description": "Summon ash hounds that bite with Wither for 10 minutes.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_ash_pack.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:ash_pack",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__ash_pack__rank2": {
+  "title": "Ash Pack IV",
+  "description": "Raises Ash Pack to level 4 (61 mana, 300 s cooldown), replacing level 3",
+  "extra_description": "Summon ash hounds that bite with Wither for 10 minutes.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_ash_pack.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:ash_pack",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__blood_needles__rank1": {
+  "title": "Blood Needles IV",
+  "description": "Raises Blood Needles to level 4 (34 mana, 14.96 s cooldown), replacing level 3",
+  "extra_description": "Create a ring of needles made from blood and fire them forward, skewering targets and healing you for 25% of damage done",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_needles.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:blood_needles",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__blood_needles__rank2": {
+  "title": "Blood Needles V",
+  "description": "Raises Blood Needles to level 5 (38 mana, 14.96 s cooldown), replacing level 4",
+  "extra_description": "Create a ring of needles made from blood and fire them forward, skewering targets and healing you for 25% of damage done",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_needles.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:blood_needles",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__blood_slash__rank1": {
+  "title": "Blood Slash IV",
+  "description": "Raises Blood Slash to level 4 (34 mana, 14.96 s cooldown), replacing level 3",
+  "extra_description": "Slash forward to send out a concentrated blade of blood, slicing through creatures and healing for 15% of damage done.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:blood_slash",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__blood_slash__rank2": {
+  "title": "Blood Slash V",
+  "description": "Raises Blood Slash to level 5 (38 mana, 14.96 s cooldown), replacing level 4",
+  "extra_description": "Slash forward to send out a concentrated blade of blood, slicing through creatures and healing for 15% of damage done.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:blood_slash",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__blood_step__rank1": {
+  "title": "Blood Step IV",
+  "description": "Raises Blood Step to level 4 (51 mana, 17.96 s cooldown), replacing level 3",
+  "extra_description": "Instantaneously teleport to where you are looking, or directly behind any targeted creature. Gain a short duration of true invisibility upon reaching your destination.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_step.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:blood_step",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__blood_step__rank2": {
+  "title": "Blood Step V",
+  "description": "Raises Blood Step to level 5 (60 mana, 17.96 s cooldown), replacing level 4",
+  "extra_description": "Instantaneously teleport to where you are looking, or directly behind any targeted creature. Gain a short duration of true invisibility upon reaching your destination.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_blood_step.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:blood_step",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__hemovaporize__rank1": {
+  "title": "Hemovaporize IV",
+  "description": "Raises Hemovaporize to level 4 (6 mana, 22.45 s cooldown), replacing level 3",
+  "extra_description": "Curses the target, causing their blood to magically vaporize, inflicting continuous life loss.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_csw_hemovaporize.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_csw:hemovaporize",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__hemovaporize__rank2": {
+  "title": "Hemovaporize V",
+  "description": "Raises Hemovaporize to level 5 (7 mana, 22.45 s cooldown), replacing level 4",
+  "extra_description": "Curses the target, causing their blood to magically vaporize, inflicting continuous life loss.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_csw_hemovaporize.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_csw:hemovaporize",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__leech_thread__rank1": {
+  "title": "Leech Thread IV",
+  "description": "Raises Leech Thread to level 4 (33 mana, 17.96 s cooldown), replacing level 3",
+  "extra_description": "Channels a siphon thread that heals you and restores mana each tick.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_leech_thread.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:leech_thread",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__leech_thread__rank2": {
+  "title": "Leech Thread V",
+  "description": "Raises Leech Thread to level 5 (36 mana, 17.96 s cooldown), replacing level 4",
+  "extra_description": "Channels a siphon thread that heals you and restores mana each tick.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_leech_thread.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:leech_thread",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__ray_of_siphoning__rank1": {
+  "title": "Ray of Siphoning IV",
+  "description": "Raises Ray of Siphoning to level 4 (9 mana, 22.45 s cooldown), replacing level 3",
+  "extra_description": "Hold to cast a ray of necrotic energy that siphons health from creatures it hits, damaging them and healing you for 100% of damage done.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_ray_of_siphoning.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:ray_of_siphoning",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__ray_of_siphoning__rank2": {
+  "title": "Ray of Siphoning V",
+  "description": "Raises Ray of Siphoning to level 5 (10 mana, 22.45 s cooldown), replacing level 4",
+  "extra_description": "Hold to cast a ray of necrotic energy that siphons health from creatures it hits, damaging them and healing you for 100% of damage done.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_ray_of_siphoning.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:ray_of_siphoning",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__root__rank1": {
+  "title": "Raise Dead IV",
+  "description": "Raises Raise Dead to level 4 (68 mana, 149.62 s cooldown), replacing level 3",
+  "extra_description": "Cast to summon undead minions from the earth beneath you. The higher the power, the better equipment they will have. The first skill of the Necromancer base.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_raise_dead.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:raise_dead",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__root__rank2": {
+  "title": "Raise Dead V",
+  "description": "Raises Raise Dead to level 5 (76 mana, 149.62 s cooldown), replacing level 4",
+  "extra_description": "Cast to summon undead minions from the earth beneath you. The higher the power, the better equipment they will have. The first skill of the Necromancer base.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_raise_dead.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:raise_dead",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__sacrifice__rank1": {
+  "title": "Sacrifice IV",
+  "description": "Raises Sacrifice to level 4 (34 mana, 3.99 s cooldown), replacing level 3",
+  "extra_description": "Target one of your magic summons to cause them to explode, killing them instantly, and dealing large damage in the area around them. The summon's remaining health boosts the damage dealt and radius of explosion.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_sacrifice.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:sacrifice",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__sacrifice__rank2": {
+  "title": "Sacrifice V",
+  "description": "Raises Sacrifice to level 5 (38 mana, 3.99 s cooldown), replacing level 4",
+  "extra_description": "Target one of your magic summons to cause them to explode, killing them instantly, and dealing large damage in the area around them. The summon's remaining health boosts the damage dealt and radius of explosion.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_sacrifice.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:sacrifice",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__summon_vex__rank1": {
+  "title": "Summon Vex III",
+  "description": "Raises Summon Vex to level 3 (60 mana, 149.62 s cooldown), replacing level 2",
+  "extra_description": "Cast to conjure vexes that will follow, protect, and fight for you.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_summon_vex.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:summon_vex",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__summon_vex__rank2": {
+  "title": "Summon Vex IV",
+  "description": "Raises Summon Vex to level 4 (68 mana, 149.62 s cooldown), replacing level 3",
+  "extra_description": "Cast to conjure vexes that will follow, protect, and fight for you.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_summon_vex.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:summon_vex",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__vigor_siphon__rank1": {
+  "title": "Vigor Siphon III",
+  "description": "Raises Vigor Siphon to level 3 (136 mana, 299.25 s cooldown), replacing level 2",
+  "extra_description": "Cast to connect with your nearest summon. Damage dealt by the summon heals you, and your damage heals the summon in return. If you die while tethered, the linked summon is sacrificed to restore you with 8hp",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_vigor_siphon.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:vigor_siphon",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__wither_skull__rank1": {
+  "title": "Wither Skull IV",
+  "description": "Raises Wither Skull to level 4 (22 mana, 3.99 s cooldown), replacing level 3",
+  "extra_description": "Launch a wither skull forward that explodes in a small radius around the impact. The higher the level, the faster the projectile.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_wither_skull.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:wither_skull",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "necromancer__wither_skull__rank2": {
+  "title": "Wither Skull V",
+  "description": "Raises Wither Skull to level 5 (24 mana, 3.99 s cooldown), replacing level 4",
+  "extra_description": "Launch a wither skull forward that explodes in a small radius around the impact. The higher the level, the faster the projectile.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_wither_skull.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:wither_skull",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
  }
 }

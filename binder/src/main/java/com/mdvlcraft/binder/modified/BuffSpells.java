@@ -153,6 +153,19 @@ public final class BuffSpells {
         }
     }
 
+    /** Puts Death Mark on `target` for `ticks`, as cast by `by` (the Assassin's Contagious Mark passes it on). */
+    public static void deathMark(LivingEntity target, LivingEntity by, int ticks) {
+        target.addEffect(new MobEffectInstance(BinderEffects.DEATH_MARK.get(), ticks, 0), by);
+        target.addEffect(new MobEffectInstance(MobEffects.GLOWING, ticks, 0), by);
+        MARKED_BY.put(target.getUUID(), by.getUUID());
+    }
+
+    /** Whoever put Death Mark on `target`, by id. */
+    @javax.annotation.Nullable
+    public static java.util.UUID deathMarkedBy(LivingEntity target) {
+        return MARKED_BY.get(target.getUUID());
+    }
+
     /** Death Mark: marks the creature looked at for 15 s; the caster's melee hits on it deal 30% more and refund stamina. */
     public static class DeathMark extends ModifiedSpell {
         public DeathMark() {

@@ -40,6 +40,9 @@ public final class BinderAttributes {
     public static final RegistryObject<Attribute> AFFLICTION_IMMUNITY = fraction("affliction_immunity", 1.0);
     /** Master Chef's Shrine Mastery nodes: extra damage on shrine techniques (ability/SlashPierce, combat/TechniqueScaling). */
     public static final RegistryObject<Attribute> SHRINE_DAMAGE = fraction("shrine_damage", 5.0);
+    /** One per specialisation (specs/Specs): spec_<id>, 1 while it is taken. */
+    public static final java.util.Map<String, RegistryObject<Attribute>> SPECS = com.mdvlcraft.binder.specs.Specs.ids().stream()
+        .collect(java.util.stream.Collectors.toMap(id -> id, id -> fraction("spec_" + id, 1.0), (x, y) -> x, java.util.LinkedHashMap::new));
 
     private BinderAttributes() {
     }

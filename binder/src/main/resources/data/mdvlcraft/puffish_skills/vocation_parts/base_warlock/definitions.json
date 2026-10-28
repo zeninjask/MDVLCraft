@@ -6144,5 +6144,910 @@
   },
   "size": 1.5,
   "extra_description": "Core bonus (every archetype has this spoke)."
+ },
+ "warlock__spec_void_echo": {
+  "title": "Void Echo",
+  "description": "Your eldritch and ender spells have a 10% chance to cast again for free at half power.",
+  "extra_description": "Specialisation: take one of the Warlock's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_warlock.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_void_echo",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "warlock__spec_soul_debt": {
+  "title": "Soul Debt",
+  "description": "Killing an enemy restores mana equal to 5% of its max health, up to 15.",
+  "extra_description": "Specialisation: take one of the Warlock's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_warlock.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_soul_debt",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "warlock__spec_sculk_whispers": {
+  "title": "Sculk Whispers",
+  "description": "Enemies hit by your spells show through walls for 6 s.",
+  "extra_description": "Specialisation: take one of the Warlock's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_warlock.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_sculk_whispers",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "warlock__abyssal_orbs__rank1": {
+  "title": "Abyssal Orbs IV",
+  "description": "Raises Abyssal Orbs to level 4 (38 mana, 14.96 s cooldown), replacing level 3",
+  "extra_description": "Summons several abyssal orbs that fall from the sky and hit enemies with direct impact.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_abyssal_orbs.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:abyssal_orbs",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__abyssal_orbs__rank2": {
+  "title": "Abyssal Orbs V",
+  "description": "Raises Abyssal Orbs to level 5 (42 mana, 14.96 s cooldown), replacing level 4",
+  "extra_description": "Summons several abyssal orbs that fall from the sky and hit enemies with direct impact.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_abyssal_orbs.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:abyssal_orbs",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__abyssal_shroud__rank1": {
+  "title": "Abyssal Shroud II",
+  "description": "Raises Abyssal Shroud to level 2 (272 mana, 199.5 s cooldown), replacing level 1",
+  "extra_description": "Cloak yourself with the shadows of the abyss, granting the ability to evade any attack for a short duration of time.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_abyssal_shroud.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:abyssal_shroud",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__abyssal_shroud__rank2": {
+  "title": "Abyssal Shroud III",
+  "description": "Raises Abyssal Shroud to level 3 (289 mana, 199.5 s cooldown), replacing level 2",
+  "extra_description": "Cloak yourself with the shadows of the abyss, granting the ability to evade any attack for a short duration of time.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_abyssal_shroud.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:abyssal_shroud",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__black_hole__rank1": {
+  "title": "Black Hole II",
+  "description": "Raises Black Hole to level 2 (340 mana, 119.7 s cooldown), replacing level 1",
+  "extra_description": "Around a targeted location, create a fissure into the void, manifesting a black hole that will suck in nearby creatures and slowly crush them to death",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_black_hole.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:black_hole",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__black_hole__rank2": {
+  "title": "Black Hole III",
+  "description": "Raises Black Hole to level 3 (425 mana, 119.7 s cooldown), replacing level 2",
+  "extra_description": "Around a targeted location, create a fissure into the void, manifesting a black hole that will suck in nearby creatures and slowly crush them to death",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_black_hole.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:black_hole",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__end_mayhem__rank1": {
+  "title": "End's Mayhem III",
+  "description": "Raises End's Mayhem to level 3 (76 mana, 119.7 s cooldown), replacing level 2",
+  "extra_description": "This spell allows you to become the ruler of the end while casting it, allowing you to use the full power of the end dimension to kill your target.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/alshanex_familiars_end_mayhem.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "alshanex_familiars:end_mayhem",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__end_mayhem__rank2": {
+  "title": "End's Mayhem IV",
+  "description": "Raises End's Mayhem to level 4 (85 mana, 119.7 s cooldown), replacing level 3",
+  "extra_description": "This spell allows you to become the ruler of the end while casting it, allowing you to use the full power of the end dimension to kill your target.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/alshanex_familiars_end_mayhem.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "alshanex_familiars:end_mayhem",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__gravity_fissure__rank1": {
+  "title": "Gravity Fissure II",
+  "description": "Raises Gravity Fissure to level 2 (149 mana, 67.33 s cooldown), replacing level 1",
+  "extra_description": "Split from the air a miniature Black Hole that moves forward in a line, pulling nearby creatures into its gravity well, but dealing no damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_gravity_fissure.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:gravity_fissure",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__gravity_fissure__rank2": {
+  "title": "Gravity Fissure III",
+  "description": "Raises Gravity Fissure to level 3 (170 mana, 67.33 s cooldown), replacing level 2",
+  "extra_description": "Split from the air a miniature Black Hole that moves forward in a line, pulling nearby creatures into its gravity well, but dealing no damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_gravity_fissure.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:gravity_fissure",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__orbital_void__rank1": {
+  "title": "Orbital Void III",
+  "description": "Raises Orbital Void to level 3 (102 mana, 37.4 s cooldown), replacing level 2",
+  "extra_description": "Shoots Abyssal Orb projectiles in a circular pattern around the player, damaging entities. On the initial cast, Abyssal Orbs home in on nearby entities.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_orbital_void.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:orbital_void",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__orbital_void__rank2": {
+  "title": "Orbital Void IV",
+  "description": "Raises Orbital Void to level 4 (136 mana, 37.4 s cooldown), replacing level 3",
+  "extra_description": "Shoots Abyssal Orb projectiles in a circular pattern around the player, damaging entities. On the initial cast, Abyssal Orbs home in on nearby entities.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_orbital_void.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:orbital_void",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__planar_sight__rank1": {
+  "title": "Planar Sight II",
+  "description": "Raises Planar Sight to level 2 (170 mana, 199.5 s cooldown), replacing level 1",
+  "extra_description": "Shift your vision in between planes, gaining the ability to see creatures through solid material.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_planar_sight.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:planar_sight",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__planar_sight__rank2": {
+  "title": "Planar Sight III",
+  "description": "Raises Planar Sight to level 3 (212 mana, 199.5 s cooldown), replacing level 2",
+  "extra_description": "Shift your vision in between planes, gaining the ability to see creatures through solid material.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_planar_sight.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:planar_sight",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__reversal__rank1": {
+  "title": "Reversal III",
+  "description": "Raises Reversal to level 3 (128 mana, 30 s cooldown), replacing level 2",
+  "extra_description": "Reverses any incoming damage with increased power. Additionally, it can copy incoming projectiles.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_reversal.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:reversal",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__root__rank1": {
+  "title": "Eldritch Blast III",
+  "description": "Raises Eldritch Blast to level 3 (102 mana, 22.45 s cooldown), replacing level 2",
+  "extra_description": "Fire rays of pure, devastating energy. The first skill of the Warlock base.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_eldritch_blast.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:eldritch_blast",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__root__rank2": {
+  "title": "Eldritch Blast IV",
+  "description": "Raises Eldritch Blast to level 4 (115 mana, 22.45 s cooldown), replacing level 3",
+  "extra_description": "Fire rays of pure, devastating energy. The first skill of the Warlock base.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_eldritch_blast.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:eldritch_blast",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__sculk_tentacles__rank1": {
+  "title": "Sculk Tentacles II",
+  "description": "Raises Sculk Tentacles to level 2 (142 mana, 44.89 s cooldown), replacing level 1",
+  "extra_description": "From where you look, erupt a mass of sculk energy in the form of wailing tentacles, damaging and blinding creatures caught in the chaos.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_sculk_tentacles.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:sculk_tentacles",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__sculk_tentacles__rank2": {
+  "title": "Sculk Tentacles III",
+  "description": "Raises Sculk Tentacles to level 3 (177 mana, 44.89 s cooldown), replacing level 2",
+  "extra_description": "From where you look, erupt a mass of sculk energy in the form of wailing tentacles, damaging and blinding creatures caught in the chaos.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_sculk_tentacles.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:sculk_tentacles",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__shadowed_miasma__rank1": {
+  "title": "Shadowed Miasma III",
+  "description": "Raises Shadowed Miasma to level 3 (68 mana, 67.33 s cooldown), replacing level 2",
+  "extra_description": "Inflicts nearby enemies with the abyssal curse effect and infuses your weapon with the same curse. Dealing damage to an enemy during the effect has a chance to spread the effect to nearby enemies.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_shadowed_miasma.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:shadowed_miasma",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__sonic_boom__rank1": {
+  "title": "Sonic Boom II",
+  "description": "Raises Sonic Boom to level 2 (113 mana, 37.4 s cooldown), replacing level 1",
+  "extra_description": "Blast forth a sonic boom of immense power, passing through solid material and harming all creatures in its path.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_sonic_boom.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:sonic_boom",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__sonic_boom__rank2": {
+  "title": "Sonic Boom III",
+  "description": "Raises Sonic Boom to level 3 (149 mana, 37.4 s cooldown), replacing level 2",
+  "extra_description": "Blast forth a sonic boom of immense power, passing through solid material and harming all creatures in its path.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_spellbooks_sonic_boom.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_spellbooks:sonic_boom",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__violent_skreech__rank1": {
+  "title": "Paralyzing Skreech IV",
+  "description": "Raises Paralyzing Skreech to level 4 (49 mana, 37.4 s cooldown), replacing level 3",
+  "extra_description": "Continuously pulsate sound blast to Shred Armor, Damage Nearby enemies and Applying Chilled effect. 2% of damage deal converted into lifesteal.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_violent_skreech.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:violent_skreech",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__violent_skreech__rank2": {
+  "title": "Paralyzing Skreech V",
+  "description": "Raises Paralyzing Skreech to level 5 (56 mana, 37.4 s cooldown), replacing level 4",
+  "extra_description": "Continuously pulsate sound blast to Shred Armor, Damage Nearby enemies and Applying Chilled effect. 2% of damage deal converted into lifesteal.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_violent_skreech.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:violent_skreech",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__void_eruption__rank1": {
+  "title": "Void Eruption II",
+  "description": "Raises Void Eruption to level 2 (106 mana, 37.4 s cooldown), replacing level 1",
+  "extra_description": "Shoots Void Howitzer Projectiles that explode and summon void runes in a radius. This spell can be recast.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_void_eruption.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:void_eruption",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "warlock__void_eruption__rank2": {
+  "title": "Void Eruption III",
+  "description": "Raises Void Eruption to level 3 (153 mana, 37.4 s cooldown), replacing level 2",
+  "extra_description": "Shoots Void Howitzer Projectiles that explode and summon void runes in a radius. This spell can be recast.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_void_eruption.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:void_eruption",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
  }
 }

@@ -69,7 +69,7 @@ public final class MartialSpells {
     }
 
     /** Epic Fight's stun on a creature that has a patch. */
-    static void stun(LivingEntity target, StunType type, float seconds) {
+    public static void stun(LivingEntity target, StunType type, float seconds) {
         LivingEntityPatch<?> patch = EpicFightCapabilities.getEntityPatch(target, LivingEntityPatch.class);
         if (patch != null) {
             patch.applyStun(type, seconds);
@@ -83,7 +83,7 @@ public final class MartialSpells {
         entity.setYBodyRot(yaw);
     }
 
-    static void root(LivingEntity target, int ticks) {
+    public static void root(LivingEntity target, int ticks) {
         target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, ticks, 6, false, true));
         target.addEffect(new MobEffectInstance(MobEffects.JUMP, ticks, 128, false, false));
     }

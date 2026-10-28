@@ -7269,5 +7269,662 @@
    }
   },
   "size": 1.5
+ },
+ "samurai__spec_severing_wind": {
+  "title": "Severing Wind",
+  "description": "Fully charged katana swings send out a short wind slash that travels 6 blocks and deals 30% of the hit's damage.",
+  "extra_description": "Specialisation: take one of the Samurai's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_samurai.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_severing_wind",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__spec_counter_draw": {
+  "title": "Counter Draw",
+  "description": "After a parry, your next attack within 1.5 s dashes you 3 blocks through the attacker, cutting it as you pass.",
+  "extra_description": "Specialisation: take one of the Samurai's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_samurai.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_counter_draw",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__spec_crimson_edge": {
+  "title": "Crimson Edge",
+  "description": "Katana critical hits make the target bleed for 1 damage per second for 4 s.",
+  "extra_description": "Specialisation: take one of the Samurai's three.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/tab/tab_samurai.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "puffish_skills:attribute",
+    "data": {
+     "attribute": "mdvlcraft:spec_crimson_edge",
+     "value": 1,
+     "operation": "addition"
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_goal_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_goal_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_goal_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_goal_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_goal_excluded.png"
+   }
+  },
+  "size": 1.5
+ },
+ "samurai__calamity_cut__rank1": {
+  "title": "Devastating Cut IV",
+  "description": "Raises Devastating Cut to level 4 (71 mana, 37.4 s cooldown), replacing level 3",
+  "extra_description": "Swing your weapon and strike down a deadly cut, the stronger your weapon, the more powerful the cut is",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_calamity_cut.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_magicfromtheeast:calamity_cut",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__calamity_cut__rank2": {
+  "title": "Devastating Cut V",
+  "description": "Raises Devastating Cut to level 5 (87 mana, 37.4 s cooldown), replacing level 4",
+  "extra_description": "Swing your weapon and strike down a deadly cut, the stronger your weapon, the more powerful the cut is",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/iss_magicfromtheeast_calamity_cut.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "iss_magicfromtheeast:calamity_cut",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__cast_barrier__rank1": {
+  "title": "Cast Barrier III",
+  "description": "Raises Cast Barrier to level 3 (26 mana, 119.7 s cooldown), replacing level 2",
+  "extra_description": "Creates a barrier that continuously grants the Iron's Spells Haste status to the caster and their summons, boosting movement, attack and cast speed.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_cast_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:cast_barrier",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__cast_barrier__rank2": {
+  "title": "Cast Barrier IV",
+  "description": "Raises Cast Barrier to level 4 (26 mana, 119.7 s cooldown), replacing level 3",
+  "extra_description": "Creates a barrier that continuously grants the Iron's Spells Haste status to the caster and their summons, boosting movement, attack and cast speed.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_cast_barrier.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:cast_barrier",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__echanted_burst__rank1": {
+  "title": "Magic Blade: Enchanted Burst II",
+  "description": "Raises Magic Blade: Enchanted Burst to level 2 (128 mana, 37.4 s cooldown), replacing level 1",
+  "extra_description": "Bursts the locked target and grants Magic Blade Enhancement, increasing Enchant Slash and Element Slash damage by 25%.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_echanted_burst.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:echanted_burst",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__echanted_burst__rank2": {
+  "title": "Magic Blade: Enchanted Burst III",
+  "description": "Raises Magic Blade: Enchanted Burst to level 3 (149 mana, 37.4 s cooldown), replacing level 2",
+  "extra_description": "Bursts the locked target and grants Magic Blade Enhancement, increasing Enchant Slash and Element Slash damage by 25%.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_echanted_burst.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:echanted_burst",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__element_slash__rank1": {
+  "title": "Magic Blade: Element Slash IV",
+  "description": "Raises Magic Blade: Element Slash to level 4 (76 mana, 22.45 s cooldown), replacing level 3",
+  "extra_description": "Launches a slower slash along the view direction. Damage benefits from current attack damage and main-hand enchantments, but cannot trigger Conversion or Enchanting.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_element_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:element_slash",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__element_slash__rank2": {
+  "title": "Magic Blade: Element Slash V",
+  "description": "Raises Magic Blade: Element Slash to level 5 (89 mana, 22.45 s cooldown), replacing level 4",
+  "extra_description": "Launches a slower slash along the view direction. Damage benefits from current attack damage and main-hand enchantments, but cannot trigger Conversion or Enchanting.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_element_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:element_slash",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__iron_slash__rank1": {
+  "title": "Iron Slash IV",
+  "description": "Raises Iron Slash to level 4 (64 mana, 11.97 s cooldown), replacing level 3",
+  "extra_description": "Focus yourself before doing a big dash that slash your enemies",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/wind_spellbooks_iron_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "wind_spellbooks:iron_slash",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__iron_slash__rank2": {
+  "title": "Iron Slash V",
+  "description": "Raises Iron Slash to level 5 (76 mana, 11.97 s cooldown), replacing level 4",
+  "extra_description": "Focus yourself before doing a big dash that slash your enemies",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/wind_spellbooks_iron_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "wind_spellbooks:iron_slash",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__limit_break__rank1": {
+  "title": "Limit Break III",
+  "description": "Raises Limit Break to level 3 (68 mana, 179.55 s cooldown), replacing level 2",
+  "extra_description": "Grants Limit Break. Each level grants 2.5% spell power and 5% cast-time and cooldown reduction.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_limit_break.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:limit_break",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__limit_break__rank2": {
+  "title": "Limit Break IV",
+  "description": "Raises Limit Break to level 4 (81 mana, 179.55 s cooldown), replacing level 3",
+  "extra_description": "Grants Limit Break. Each level grants 2.5% spell power and 5% cast-time and cooldown reduction.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_limit_break.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:limit_break",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__magic_blade_enchant_slash__rank1": {
+  "title": "Magic Blade: Enchant Slash IV",
+  "description": "Raises Magic Blade: Enchant Slash to level 4 (94 mana, 22.45 s cooldown), replacing level 3",
+  "extra_description": "Slashes forward. Conversion and Enchanting effects each add a separate hit at 50% of their normal damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_magic_blade_enchant_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:magic_blade_enchant_slash",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__magic_blade_enchant_slash__rank2": {
+  "title": "Magic Blade: Enchant Slash V",
+  "description": "Raises Magic Blade: Enchant Slash to level 5 (110 mana, 22.45 s cooldown), replacing level 4",
+  "extra_description": "Slashes forward. Conversion and Enchanting effects each add a separate hit at 50% of their normal damage.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_magic_blade_enchant_slash.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:magic_blade_enchant_slash",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__soulfall_judgment__rank1": {
+  "title": "Soulfall Judgment IV",
+  "description": "Raises Soulfall Judgment to level 4 (62 mana, 35.91 s cooldown), replacing level 3",
+  "extra_description": "Unleashes a soul-charged impact around the caster and calls down a cyan-green formation of spectral blades.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_soulfall_judgment.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:soulfall_judgment",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__soulfall_judgment__rank2": {
+  "title": "Soulfall Judgment V",
+  "description": "Raises Soulfall Judgment to level 5 (68 mana, 35.91 s cooldown), replacing level 4",
+  "extra_description": "Unleashes a soul-charged impact around the caster and calls down a cyan-green formation of spectral blades.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/somakespells_soulfall_judgment.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "somakespells:soulfall_judgment",
+     "level": 5
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__union_sword__rank1": {
+  "title": "Magic Blade: Union Sword II",
+  "description": "Raises Magic Blade: Union Sword to level 2 (170 mana, 37.4 s cooldown), replacing level 1",
+  "extra_description": "Requires more than 15 seconds of Magic Blade Enhancement. Releases a horizontal slash and consumes 15 seconds, then consumes up to 15 more seconds and releases a vertical slash after 0.5 seconds.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_union_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:union_sword",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "samurai__union_sword__rank2": {
+  "title": "Magic Blade: Union Sword III",
+  "description": "Raises Magic Blade: Union Sword to level 3 (212 mana, 37.4 s cooldown), replacing level 2",
+  "extra_description": "Requires more than 15 seconds of Magic Blade Enhancement. Releases a horizontal slash and consumes 15 seconds, then consumes up to 15 more seconds and releases a vertical slash after 0.5 seconds.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/esoteric_spell_union_sword.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "esoteric_spell:union_sword",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
  }
 }

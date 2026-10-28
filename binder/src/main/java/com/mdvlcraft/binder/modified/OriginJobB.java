@@ -1,5 +1,8 @@
 package com.mdvlcraft.binder.modified;
 
+import com.mdvlcraft.binder.specs.JobSpecs;
+import com.mdvlcraft.binder.specs.Specs;
+import com.mdvlcraft.binder.specs.SpecKit;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.damage.DamageSources;
@@ -154,6 +157,11 @@ public final class OriginJobB {
             this.sound = sound;
         }
 
+        /** How long the effects last on `caster`. */
+        int ticks(LivingEntity caster) {
+            return this.ticks;
+        }
+
         /** Anything more the tonic does, after the effects. */
         void more(ServerLevel level, LivingEntity caster) {
         }
@@ -161,7 +169,7 @@ public final class OriginJobB {
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             for (int i = 0; i < this.effects.size(); i++) {
-                caster.addEffect(new MobEffectInstance(this.effects.get(i), this.ticks, this.amplifiers.get(i)));
+                caster.addEffect(new MobEffectInstance(this.effects.get(i), this.ticks(caster), this.amplifiers.get(i)));
             }
             if (level instanceof ServerLevel server) {
                 this.more(server, caster);
@@ -211,6 +219,7 @@ public final class OriginJobB {
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             caster.addEffect(new MobEffectInstance(MobEffects.NIGHT_VISION, 3600, 0));
+            BlockState light = Specs.has(caster, "bright_lamp") ? LIGHT.setValue(LightBlock.LEVEL, 15) : LIGHT;
             if (level instanceof ServerLevel server) {
                 List<BlockPos> lit = new ArrayList<>();
                 Zones.start(server, caster.position(), caster, 0.0F, 3600, 2, zone -> {
@@ -222,10 +231,10 @@ public final class OriginJobB {
                     if (lit.size() == 1 && lit.get(0).equals(head)) {
                         return;
                     }
-                    WallSpells.clear(server, lit, LIGHT);
+                    WallSpells.clear(server, lit, light);
                     lit.clear();
-                    lit.addAll(WallSpells.place(server, List.of(head), LIGHT));
-                }, () -> WallSpells.clear(server, lit, LIGHT), null);
+                    lit.addAll(WallSpells.place(server, List.of(head), light));
+                }, () -> WallSpells.clear(server, lit, light), null);
                 server.sendParticles(ParticleTypes.FLAME, caster.getX(), caster.getEyeY() + 0.3, caster.getZ(), 8, 0.2, 0.1, 0.2, 0.01);
             }
             level.playSound(null, caster.blockPosition(), SoundEvents.FLINTANDSTEEL_USE, SoundSource.PLAYERS, 1.0F, 1.0F);
@@ -328,8 +337,13 @@ public final class OriginJobB {
         }
 
         @Override
+        int ticks(LivingEntity caster) {
+            return Specs.has(caster, "forest_friend_s_call") ? 900 : 600;
+        }
+
+        @Override
         void more(ServerLevel level, LivingEntity caster) {
-            modify(caster, Attributes.MOVEMENT_SPEED, FOREST_SPEED_ID, "forest_friend_speed", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL, 600);
+            modify(caster, Attributes.MOVEMENT_SPEED, FOREST_SPEED_ID, "forest_friend_speed", 0.1, AttributeModifier.Operation.MULTIPLY_TOTAL, this.ticks(caster));
         }
     }
 
@@ -347,6 +361,9 @@ public final class OriginJobB {
                 BuffSpells.restoreStamina(player, 1.0F);
                 player.getFoodData().setFoodLevel(20);
                 player.getFoodData().setSaturation(20.0F);
+                if (Specs.has(player, "deep_reserves")) {
+                    SpecKit.addMana(player, SpecKit.maxMana(player) * 0.2F);
+                }
             }
             if (level instanceof ServerLevel server) {
                 server.sendParticles(ParticleTypes.CLOUD, caster.getX(), caster.getY(0.5), caster.getZ(), 20, 0.4, 0.5, 0.4, 0.05);
@@ -375,7 +392,15 @@ public final class OriginJobB {
             if (caster.level() instanceof ServerLevel level) {
                 SmiteSpells.beam(level, caster.getEyePosition().subtract(0.0, 0.3, 0.0), target.getEyePosition(), ParticleTypes.CRIT);
             }
-        }, null).speed(2.0F).gravity(0.02).sound(SoundEvents.FISHING_BOBBER_THROW);
+        }, null) {
+            @Override
+            void release(Level level, LivingEntity caster, float power) {
+                BoltProjectile rope = this.launch(level, caster, power, caster.getEyePosition(), caster.getLookAngle());
+                if (Specs.has(caster, "long_rope")) {
+                    rope.setDeltaMovement(rope.getDeltaMovement().scale(1.5));
+                }
+            }
+        }.speed(2.0F).gravity(0.02).sound(SoundEvents.FISHING_BOBBER_THROW);
     }
 
     // ---- Alchemist ----
@@ -572,6 +597,9 @@ public final class OriginJobB {
     static BoltSpells.Bolt hookAndReel() {
         return new BoltSpells.Bolt("hook_and_reel", 0, Items.FISHING_ROD, ParticleTypes.SPLASH, (bolt, caster, target, power) -> {
             pull(caster, target, 6.0);
+            if (Specs.has(caster, "barbed_hook")) {
+                JobSpecs.bleed(caster, target, 3);
+            }
             if (caster.level() instanceof ServerLevel level) {
                 SmiteSpells.beam(level, caster.getEyePosition().subtract(0.0, 0.3, 0.0), target.getEyePosition(), ParticleTypes.SPLASH);
                 level.playSound(null, caster.blockPosition(), SoundEvents.FISHING_BOBBER_RETRIEVE, SoundSource.PLAYERS, 1.2F, 1.0F);
@@ -600,16 +628,16 @@ public final class OriginJobB {
                         GroundSpells.ring(server, at, 8.0, ParticleTypes.BUBBLE_POP);
                         server.sendParticles(ParticleTypes.FISHING, at.x, at.y + 0.1, at.z, 12, 3.0, 0.0, 3.0, 0.02);
                     }
+                    int steps = zone.age() < 600 && Specs.has(caster, "feeding_frenzy") ? 3 : 1;
                     for (FishingHook hook : server.getEntitiesOfClass(FishingHook.class, new AABB(at, at).inflate(8.0), h -> h.distanceToSqr(at) <= 64.0)) {
-                        if (field(NIBBLE, hook) > 0) {
-                            continue;
-                        }
-                        int hooked = field(TIME_UNTIL_HOOKED, hook);
-                        int lured = field(TIME_UNTIL_LURED, hook);
-                        if (hooked > 1) {
-                            field(TIME_UNTIL_HOOKED, hook, hooked - 1);
-                        } else if (hooked <= 0 && lured > 1) {
-                            field(TIME_UNTIL_LURED, hook, lured - 1);
+                        for (int s = 0; s < steps && field(NIBBLE, hook) <= 0; s++) {
+                            int hooked = field(TIME_UNTIL_HOOKED, hook);
+                            int lured = field(TIME_UNTIL_LURED, hook);
+                            if (hooked > 1) {
+                                field(TIME_UNTIL_HOOKED, hook, hooked - 1);
+                            } else if (hooked <= 0 && lured > 1) {
+                                field(TIME_UNTIL_LURED, hook, lured - 1);
+                            }
                         }
                     }
                 }, () -> {

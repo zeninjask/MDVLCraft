@@ -106,7 +106,7 @@ public final class Wave2Guardian {
     }
 
     /** Throws `target` about `blocks` blocks away from `from` (horizontally, with a little lift). */
-    static void knock(Vec3 from, LivingEntity target, double blocks) {
+    public static void knock(Vec3 from, LivingEntity target, double blocks) {
         Vec3 away = target.position().subtract(from).multiply(1.0, 0.0, 1.0);
         if (away.lengthSqr() < 1.0E-4) {
             away = new Vec3(0.0, 0.0, 1.0);

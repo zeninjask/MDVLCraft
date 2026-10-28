@@ -1,5 +1,8 @@
 package com.mdvlcraft.binder.modified;
 
+import com.mdvlcraft.binder.specs.SpecKit;
+import com.mdvlcraft.binder.specs.Specs;
+
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
@@ -171,6 +174,9 @@ public final class OriginMartialB {
                     mob.setTarget(caster);
                 }
             }
+            if (Specs.has(caster, "iron_will")) {
+                caster.addEffect(new MobEffectInstance(MobEffects.DAMAGE_RESISTANCE, 80, 0));
+            }
             if (level instanceof ServerLevel server) {
                 GroundSpells.ring(server, caster.position(), 10.0, ParticleTypes.ANGRY_VILLAGER);
             }
@@ -293,12 +299,13 @@ public final class OriginMartialB {
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             ItemStack crossbow = loadedCrossbow(caster);
             if (crossbow != null) {
-                for (int i = -1; i <= 1; i++) {
+                boolean saturation = Specs.has(caster, "saturation");
+                for (int i = -1; i <= (saturation ? 2 : 1); i++) {
                     Arrow bolt = new Arrow(level, caster);
                     bolt.setShotFromCrossbow(true);
                     bolt.setSoundEvent(SoundEvents.CROSSBOW_HIT);
                     bolt.pickup = AbstractArrow.Pickup.DISALLOWED;
-                    bolt.shootFromRotation(caster, caster.getXRot(), caster.getYRot() + i * 6.0F, 0.0F, 3.15F, 0.5F);
+                    bolt.shootFromRotation(caster, caster.getXRot(), caster.getYRot() + (saturation ? (i - 0.5F) * 6.0F : i * 6.0F), 0.0F, 3.15F, 0.5F);
                     level.addFreshEntity(bolt);
                 }
                 CrossbowItem.setCharged(crossbow, false);
@@ -403,15 +410,16 @@ public final class OriginMartialB {
                 float power = this.getSpellPower(spellLevel, caster);
                 Vec3 look = flatLook(caster);
                 Vec3 start = caster.position();
-                for (LivingEntity enemy : Targets.enemies(caster, start, 6.0)) {
+                double reach = Specs.has(caster, "kebab") ? 7.0 : 5.0;
+                for (LivingEntity enemy : Targets.enemies(caster, start, reach + 1.0)) {
                     Vec3 to = enemy.position().subtract(start).multiply(1.0, 0.0, 1.0);
                     double along = to.dot(look);
-                    if (enemy != caster && along >= 0.0 && along <= 5.0 + enemy.getBbWidth() / 2 && to.subtract(look.scale(along)).length() <= 1.0 + enemy.getBbWidth() / 2) {
+                    if (enemy != caster && along >= 0.0 && along <= reach + enemy.getBbWidth() / 2 && to.subtract(look.scale(along)).length() <= 1.0 + enemy.getBbWidth() / 2) {
                         Wave2Guardian.hurt(this, caster, enemy, power);
                     }
                 }
                 Vec3 eye = caster.getEyePosition().subtract(0.0, 0.3, 0.0);
-                for (double i = 0.5; i <= 5.0; i += 0.5) {
+                for (double i = 0.5; i <= reach; i += 0.5) {
                     Vec3 at = eye.add(look.scale(i));
                     server.sendParticles(ParticleTypes.CRIT, at.x, at.y, at.z, 2, 0.05, 0.05, 0.05, 0.0);
                 }
@@ -545,6 +553,11 @@ public final class OriginMartialB {
         return new BoltSpells.Bolt("bola", 0, Items.LEAD, ParticleTypes.CRIT, (bolt, caster, target, power) -> {
             MartialSpells.root(target, 60);
             Buffs.give(target, BOLA, 30);
+            if (Specs.has(caster, "weighted_bola")) {
+                Vec3 pull = caster.position().subtract(target.position()).multiply(1.0, 0.0, 1.0).normalize();
+                target.setDeltaMovement(pull.scale(0.55).add(0.0, 0.2, 0.0));
+                target.hurtMarked = true;
+            }
             if (target.level() instanceof ServerLevel server) {
                 server.sendParticles(ParticleTypes.CRIT, target.getX(), target.getY(0.3), target.getZ(), 20, 0.4, 0.3, 0.4, 0.05);
             }
@@ -587,6 +600,14 @@ public final class OriginMartialB {
         @Override
         protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
             this.spawn(level, caster, power, EntityType.VINDICATOR, 1, castData, vindicator -> {
+                if (Specs.has(caster, "better_pay")) {
+                    AttributeInstance health = vindicator.getAttribute(Attributes.MAX_HEALTH);
+                    if (health != null) {
+                        health.addPermanentModifier(new AttributeModifier(UUID.fromString("3b8e1d5a-7c24-4f9e-b061-2d4a8c6e9f17"),
+                            "Better Pay", 0.3, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                        vindicator.setHealth(vindicator.getMaxHealth());
+                    }
+                }
             });
         }
     }
@@ -630,6 +651,9 @@ public final class OriginMartialB {
             Set<UUID> harried = HARRIED.get(attacker.getUUID());
             if (Buffs.has(attacker, HARRIER) && harried != null && harried.add(victim.getUUID()) && Buffs.count(attacker, HARRIER) < 5) {
                 int stacks = Buffs.add(attacker, HARRIER, 1);
+                if (Specs.has(attacker, "kite")) {
+                    Buffs.give(attacker, "kite", 100);
+                }
                 AttributeInstance speed = attacker.getAttribute(Attributes.MOVEMENT_SPEED);
                 if (speed != null) {
                     speed.removeModifier(HARRIER_ID);

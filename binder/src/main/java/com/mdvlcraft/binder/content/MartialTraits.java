@@ -186,10 +186,14 @@ public final class MartialTraits {
 
             AttributeInstance reach = player.getAttribute(ForgeMod.ENTITY_REACH.get());
             boolean extended = holdingSpear(player) && has(player, LONG_REACH);
-            if (extended && reach.getModifier(SPEAR_REACH) == null) {
-                reach.addTransientModifier(new AttributeModifier(SPEAR_REACH, "Long Reach", 0.5, Operation.ADDITION));
-            } else if (!extended && reach.getModifier(SPEAR_REACH) != null) {
+            double blocks = com.mdvlcraft.binder.specs.Specs.has(player, "long_haft") ? 1.0 : 0.5;
+            AttributeModifier current = reach.getModifier(SPEAR_REACH);
+            if (current != null && (!extended || current.getAmount() != blocks)) {
                 reach.removeModifier(SPEAR_REACH);
+                current = null;
+            }
+            if (extended && current == null) {
+                reach.addTransientModifier(new AttributeModifier(SPEAR_REACH, "Long Reach", blocks, Operation.ADDITION));
             }
         }
     }

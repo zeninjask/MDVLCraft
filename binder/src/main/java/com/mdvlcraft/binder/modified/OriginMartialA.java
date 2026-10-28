@@ -1,5 +1,8 @@
 package com.mdvlcraft.binder.modified;
 
+import com.mdvlcraft.binder.specs.SpecKit;
+import com.mdvlcraft.binder.specs.Specs;
+
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
@@ -129,6 +132,16 @@ public final class OriginMartialA {
 
         @Override
         void strike(ServerLevel level, LivingEntity caster, LivingEntity target, float power, MagicData data) {
+            this.bash(level, caster, target, power);
+            if (Specs.has(caster, "bash_echo")) {
+                // Bash Echo: the enemy nearest behind the first (up to 3 blocks on) is bashed too
+                Vec3 on = target.position().subtract(caster.position()).multiply(1.0, 0.0, 1.0).normalize();
+                Targets.enemies(caster, target.position().add(on.scale(1.5)), 2.0).stream().filter(e -> e != target)
+                    .min(Comparator.comparingDouble(e -> e.distanceToSqr(target))).ifPresent(next -> this.bash(level, caster, next, power));
+            }
+        }
+
+        private void bash(ServerLevel level, LivingEntity caster, LivingEntity target, float power) {
             DamageSources.ignoreNextKnockback(target);
             this.hurt(caster, target, power);
             Wave2Guardian.knock(caster.position(), target, 3.0);
@@ -178,9 +191,21 @@ public final class OriginMartialA {
             if (level instanceof ServerLevel server) {
                 Vec3 at = VolleySpells.lookedPoint(caster, 24.0);
                 float power = this.getSpellPower(spellLevel, caster);
+                this.rain(level, server, caster, at, power, 10);
+                if (Specs.has(caster, "storm_of_arrows")) {
+                    // Storm of Arrows: a second, smaller wave a second later
+                    SpecKit.later(server, 20, () -> this.rain(level, server, caster, at, power, 5));
+                }
+            }
+            level.playSound(null, caster.blockPosition(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, 0.8F);
+            super.onCast(level, spellLevel, caster, source, data);
+        }
+
+        private void rain(Level level, ServerLevel server, LivingEntity caster, Vec3 at, float power, int count) {
+            {
                 // two in three fall on the enemies in the patch (a scatter alone mostly misses), the rest anywhere in it
                 List<LivingEntity> enemies = Targets.enemies(caster, at, 2.5);
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < count; i++) {
                     double angle = caster.getRandom().nextDouble() * Math.PI * 2.0;
                     double r = 2.0 * Math.sqrt(caster.getRandom().nextDouble());
                     Vec3 aim = !enemies.isEmpty() && i % 3 != 2 ? enemies.get(i % enemies.size()).getBoundingBox().getCenter()
@@ -198,8 +223,6 @@ public final class OriginMartialA {
                 }
                 server.sendParticles(ParticleTypes.CLOUD, at.x, at.y + 14.0, at.z, 30, 2.0, 0.4, 2.0, 0.02);
             }
-            level.playSound(null, caster.blockPosition(), SoundEvents.CROSSBOW_SHOOT, SoundSource.PLAYERS, 1.0F, 0.8F);
-            super.onCast(level, spellLevel, caster, source, data);
         }
     }
 
@@ -246,6 +269,9 @@ public final class OriginMartialA {
                 level.sendParticles(ParticleTypes.LARGE_SMOKE, at.x, at.y + 0.5, at.z, 20, 2.0, 0.5, 2.0, 0.01);
                 for (LivingEntity enemy : Targets.enemies(caster, at, 4.0)) {
                     enemy.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 30, 0), caster);
+                    if (Specs.has(caster, "choking_smoke")) {
+                        enemy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 30, 1), caster);
+                    }
                     if (enemy instanceof Mob mob && mob.getTarget() == caster) {
                         mob.setTarget(null);
                     }
@@ -395,7 +421,11 @@ public final class OriginMartialA {
                                 double side = enemy.position().subtract(boar.position()).dot(across) >= 0.0 ? 1.0 : -1.0;
                                 DamageSources.ignoreNextKnockback(enemy);
                                 DamageSources.applyDamage(enemy, zone.power, this.getDamageSource(caster));
-                                Wave2Guardian.knock(enemy.position().subtract(across.scale(side)), enemy, 2.0);
+                                boolean rolling = Specs.has(caster, "rolling_herd");
+                                Wave2Guardian.knock(enemy.position().subtract(across.scale(side)), enemy, rolling ? 3.5 : 2.0);
+                                if (rolling) {
+                                    enemy.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 60, 1), caster);
+                                }
                             }
                         }
                         server.sendParticles(ParticleTypes.POOF, boar.getX(), boar.getY() + 0.2, boar.getZ(), 3, 0.4, 0.1, 0.4, 0.01);
@@ -525,7 +555,7 @@ public final class OriginMartialA {
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             float damage = MartialSpells.attack(caster) * 1.5F;
             Vec3 start = caster.position();
-            MartialSpells.dash(caster, 4.0).stream().min(Comparator.comparingDouble(e -> e.distanceToSqr(start))).ifPresent(first -> {
+            MartialSpells.dash(caster, Specs.has(caster, "long_lunge") ? 6.0 : 4.0).stream().min(Comparator.comparingDouble(e -> e.distanceToSqr(start))).ifPresent(first -> {
                 DamageSources.applyDamage(first, damage, this.getDamageSource(caster));
                 if (level instanceof ServerLevel server) {
                     server.sendParticles(ParticleTypes.CRIT, first.getX(), first.getY(0.6), first.getZ(), 20, 0.3, 0.4, 0.3, 0.2);
@@ -631,6 +661,9 @@ public final class OriginMartialA {
         LivingEntity attacker = Wave2Samurai.meleeAttacker(event.getSource());
         if (attacker != null && attacker != victim && Buffs.has(victim, RIPOSTE)) {
             Wave2Samurai.hurt(RIPOSTE, victim, attacker, MartialSpells.attack(victim) * 0.75F);
+            if (Specs.has(victim, "perfect_riposte")) {
+                SpecKit.stun(attacker, 20);
+            }
             level.sendParticles(ParticleTypes.ENCHANTED_HIT, attacker.getX(), attacker.getY(0.6), attacker.getZ(), 15, 0.3, 0.4, 0.3, 0.2);
             level.playSound(null, attacker.blockPosition(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 1.3F);
         }

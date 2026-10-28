@@ -94,4 +94,23 @@ public abstract class StaminaHandlerMixin {
     private static int delay(int ticks) {
         return Math.round(ticks * REGEN_DELAY) + EXTRA_DELAY;
     }
+
+    /**
+     * Berserker's Blood Price: with no stamina left an attack goes ahead anyway (the listener cancels it at 0 stamina) and
+     * costs 1 health instead, on the server.
+     */
+    @Redirect(method = "lambda$ensureEventListenersInitialized$0", at = @At(value = "INVOKE",
+        target = "Lyesman/epicfight/world/capabilities/entitypatch/player/PlayerPatch;getStamina()F", ordinal = 0), require = 1)
+    private static float mdvlcraft$bloodPrice(PlayerPatch<?> patch) {
+        float stamina = patch.getStamina();
+        Player player = (Player)patch.getOriginal();
+        if (stamina <= 0.0F && com.mdvlcraft.binder.specs.Specs.has(player, "blood_price") && player.getHealth() > 1.0F) {
+            if (!player.level().isClientSide) {
+                player.invulnerableTime = 0;
+                player.hurt(player.damageSources().magic(), 1.0F);
+            }
+            return 0.01F;
+        }
+        return stamina;
+    }
 }

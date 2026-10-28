@@ -95,15 +95,25 @@ public final class VocationParts {
                 yield Optional.of(merged);
             }
             case "connections.json" -> {
+                // normal links, and the exclusive ones between each base's three specialisations (one may be taken)
                 JsonArray links = new JsonArray();
+                JsonArray exclusive = new JsonArray();
                 for (String part : new String[]{own, "base_" + a, "base_" + b}) {
-                    links.addAll(read.apply(Path.of(parts, part, file)).getAsJsonObject()
-                        .getAsJsonObject("normal").getAsJsonArray("bidirectional"));
+                    JsonObject partLinks = read.apply(Path.of(parts, part, file)).getAsJsonObject();
+                    links.addAll(partLinks.getAsJsonObject("normal").getAsJsonArray("bidirectional"));
+                    if (partLinks.has("exclusive")) {
+                        exclusive.addAll(partLinks.getAsJsonObject("exclusive").getAsJsonArray("bidirectional"));
+                    }
                 }
                 JsonObject normal = new JsonObject();
                 normal.add("bidirectional", links);
                 JsonObject connections = new JsonObject();
                 connections.add("normal", normal);
+                if (!exclusive.isEmpty()) {
+                    JsonObject exclusiveGroup = new JsonObject();
+                    exclusiveGroup.add("bidirectional", exclusive);
+                    connections.add("exclusive", exclusiveGroup);
+                }
                 yield Optional.of(connections);
             }
             default -> Optional.empty();

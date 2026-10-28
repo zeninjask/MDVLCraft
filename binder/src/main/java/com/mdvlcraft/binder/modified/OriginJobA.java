@@ -1,5 +1,8 @@
 package com.mdvlcraft.binder.modified;
 
+import com.mdvlcraft.binder.specs.JobSpecs;
+import com.mdvlcraft.binder.specs.Specs;
+import com.mdvlcraft.binder.specs.SpecKit;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
@@ -181,6 +184,9 @@ public final class OriginJobA {
         void strike(ServerLevel level, LivingEntity caster, LivingEntity target, float power, MagicData data) {
             this.hurt(caster, target, MartialSpells.attack(caster) * 1.5F);
             Wave2Guardian.armour(target, SHRED_ID, SHRED, -3.0, 160);
+            if (Specs.has(caster, "ringing_blow")) {
+                SpecKit.stun(target, 10);
+            }
             level.sendParticles(ParticleTypes.CRIT, target.getX(), target.getY(0.6), target.getZ(), 25, 0.3, 0.4, 0.3, 0.1);
             level.playSound(null, target.blockPosition(), SoundEvents.ANVIL_LAND, SoundSource.PLAYERS, 0.8F, 0.8F);
         }
@@ -286,6 +292,9 @@ public final class OriginJobA {
             for (LivingEntity undead : turned) {
                 Buffs.mark(undead, TURNED, caster, 120);
                 undead.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 120, 1), caster);
+                if (Specs.has(caster, "rebuke")) {
+                    undead.setSecondsOnFire(5);
+                }
             }
             if (level instanceof ServerLevel server) {
                 Zones.start(server, caster.position(), caster, 0.0F, 120, 10, zone -> {
@@ -475,6 +484,9 @@ public final class OriginJobA {
             if (caster instanceof ServerPlayer player && level instanceof ServerLevel server) {
                 int count = take(player.getInventory(), Compost::compostable);
                 player.getInventory().placeItemBackInInventory(new ItemStack(Items.BONE_MEAL, count));
+                if (Specs.has(caster, "rich_soil")) {
+                    JobSpecs.richSoil(server, caster.blockPosition());
+                }
                 server.sendParticles(ParticleTypes.COMPOSTER, caster.getX(), caster.getY(0.6), caster.getZ(), 20, 0.4, 0.5, 0.4, 0.0);
                 level.playSound(null, caster.blockPosition(), SoundEvents.COMPOSTER_READY, SoundSource.PLAYERS, 1.0F, 1.0F);
             }
@@ -555,7 +567,7 @@ public final class OriginJobA {
 
         @Override
         protected void summon(ServerLevel level, LivingEntity caster, float power, SummonedEntitiesCastData castData) {
-            this.spawn(level, caster, power, EntityType.IRON_GOLEM, 1, castData, (IronGolem golem) -> golem.setPlayerCreated(true));
+            this.spawn(level, caster, power, EntityType.IRON_GOLEM, Specs.has(caster, "hired_swords") ? 2 : 1, castData, (IronGolem golem) -> golem.setPlayerCreated(true));
         }
     }
 
@@ -570,8 +582,9 @@ public final class OriginJobA {
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             if (level instanceof ServerLevel server) {
-                List<Animal> herd = server.getEntitiesOfClass(Animal.class, caster.getBoundingBox().inflate(24.0),
-                    a -> a.isAlive() && !(a instanceof TamableAnimal) && a.distanceToSqr(caster) <= 576.0);
+                double reach = Specs.has(caster, "long_call") ? 48.0 : 24.0;
+                List<Animal> herd = server.getEntitiesOfClass(Animal.class, caster.getBoundingBox().inflate(reach),
+                    a -> a.isAlive() && !(a instanceof TamableAnimal) && a.distanceToSqr(caster) <= reach * reach);
                 Zones.start(server, caster.position(), caster, 0.0F, 200, 20, zone -> {
                     for (Animal animal : herd) {
                         if (animal.isAlive() && animal.distanceToSqr(caster) > 9.0) {

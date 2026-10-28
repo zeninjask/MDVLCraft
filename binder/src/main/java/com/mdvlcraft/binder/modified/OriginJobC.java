@@ -1,5 +1,7 @@
 package com.mdvlcraft.binder.modified;
 
+import com.mdvlcraft.binder.specs.Specs;
+import com.mdvlcraft.binder.specs.SpecKit;
 import com.mdvlcraft.binder.modified.SummonSpells.SummonSpell;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.spells.CastSource;
@@ -76,12 +78,13 @@ public final class OriginJobC {
 
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
+            double reach = Specs.has(caster, "anthem") ? 15.0 : 10.0;
             if (level instanceof ServerLevel server) {
-                for (LivingEntity ally : Targets.allies(caster, caster.position(), 10.0)) {
+                for (LivingEntity ally : Targets.allies(caster, caster.position(), reach)) {
                     inspire(server, ally, 400);
                     server.sendParticles(ParticleTypes.NOTE, ally.getX(), ally.getY() + ally.getBbHeight() + 0.4, ally.getZ(), 4, 0.4, 0.2, 0.4, 0.5);
                 }
-                GroundSpells.ring(server, caster.position(), 10.0, ParticleTypes.NOTE);
+                GroundSpells.ring(server, caster.position(), reach, ParticleTypes.NOTE);
             }
             level.playSound(null, caster.blockPosition(), SoundEvents.GOAT_HORN_SOUND_VARIANTS.get(0).value(), SoundSource.PLAYERS, 2.0F, 1.2F);
             super.onCast(level, spellLevel, caster, source, data);
@@ -431,7 +434,7 @@ public final class OriginJobC {
 
         @Override
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
-            Buffs.give(caster, VEIL, 300);
+            Buffs.give(caster, VEIL, Specs.has(caster, "deep_veil") ? 340 : 300);
             for (Mob mob : level.getEntitiesOfClass(Mob.class, caster.getBoundingBox().inflate(32.0), m -> m.getTarget() == caster && BoltSpells.undead(m))) {
                 mob.setTarget(null);
             }
@@ -469,6 +472,10 @@ public final class OriginJobC {
             return;
         }
         if (Buffs.has(victim, LULLABY)) {
+            LivingEntity singer = Buffs.markedBy(victim, LULLABY);
+            if (singer != null && Specs.has(singer, "deep_sleep")) {
+                event.setAmount(event.getAmount() * 1.2F);
+            }
             wake(victim);
         }
         if (event.getSource().getEntity() instanceof LivingEntity attacker && Buffs.has(attacker, VEIL) && BoltSpells.undead(victim)) {

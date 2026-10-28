@@ -320,5 +320,36 @@
   },
   "size": 2.0,
   "extra_description": "Voyager vocation skill."
+ },
+ "voc__3__rank1": {
+  "title": "Echo Of The Abyss II",
+  "description": "Raises Echo Of The Abyss to level 2 (468 mana, 538.65 s cooldown), replacing level 1",
+  "extra_description": "Summons a Hullbreaker to fight and protect the caster. Can be used as an underwater mount, granting water breathing while ridden. Can only be obtained from defeating Hullbreaker. Voyager vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/traveloptics_echo_of_the_abyss.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "traveloptics:echo_of_the_abyss",
+     "level": 2
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
  }
 }

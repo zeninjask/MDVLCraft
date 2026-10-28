@@ -320,5 +320,67 @@
   },
   "size": 2.0,
   "extra_description": "Earthshaker vocation skill."
+ },
+ "voc__5__rank1": {
+  "title": "Hatch Cysts III",
+  "description": "Raises Hatch Cysts to level 3 (68 mana, 360 s cooldown), replacing level 2",
+  "extra_description": "Hatch a swarm of Cyst Mites that stack Rot for 20 minutes. Earthshaker vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_hatch_cysts.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:hatch_cysts",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
+ },
+ "voc__5__rank2": {
+  "title": "Hatch Cysts IV",
+  "description": "Raises Hatch Cysts to level 4 (72 mana, 360 s cooldown), replacing level 3",
+  "extra_description": "Hatch a swarm of Cyst Mites that stack Rot for 20 minutes. Earthshaker vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/cursed_school_hatch_cysts.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "cursed_school:hatch_cysts",
+     "level": 4
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
  }
 }

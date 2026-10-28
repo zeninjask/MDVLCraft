@@ -1,0 +1,938 @@
+{
+ "interception": {
+  "tree": "vocation",
+  "class": "guardian",
+  "name": "Interception",
+  "text": "When a party member within 6 blocks is hit, 20% of the damage is moved to you instead, reduced by your own armour."
+ },
+ "bursting_ward": {
+  "tree": "vocation",
+  "class": "guardian",
+  "name": "Bursting Ward",
+  "text": "When one of your barriers breaks, it bursts: enemies within 4 blocks are knocked back and take 25% of the barrier's strength as damage."
+ },
+ "iron_answer": {
+  "tree": "vocation",
+  "class": "guardian",
+  "name": "Iron Answer",
+  "text": "Blocking a hit within 0.5 s of it landing staggers the attacker for 1 s."
+ },
+ "aftershock": {
+  "tree": "vocation",
+  "class": "brute",
+  "name": "Aftershock",
+  "text": "Your slams crack the ground, which erupts 1 s later for 40% of the slam's damage."
+ },
+ "hooked": {
+  "tree": "vocation",
+  "class": "brute",
+  "name": "Hooked",
+  "text": "Spear and halberd hits on an enemy running away from you pull it 2 blocks back toward you."
+ },
+ "unyielding": {
+  "tree": "vocation",
+  "class": "brute",
+  "name": "Unyielding",
+  "text": "Once every 8 s, the next knockback or stun on you is ignored, and you gain 2 armour toughness for 5 s."
+ },
+ "severing_wind": {
+  "tree": "vocation",
+  "class": "samurai",
+  "name": "Severing Wind",
+  "text": "Fully charged katana swings send out a short wind slash that travels 6 blocks and deals 30% of the hit's damage."
+ },
+ "counter_draw": {
+  "tree": "vocation",
+  "class": "samurai",
+  "name": "Counter Draw",
+  "text": "After a parry, your next attack within 1.5 s dashes you 3 blocks through the attacker, cutting it as you pass."
+ },
+ "crimson_edge": {
+  "tree": "vocation",
+  "class": "samurai",
+  "name": "Crimson Edge",
+  "text": "Katana critical hits make the target bleed for 1 damage per second for 4 s."
+ },
+ "blood_price": {
+  "tree": "vocation",
+  "class": "berserker",
+  "name": "Blood Price",
+  "text": "You can keep attacking with no stamina left, paying 1 health per swing."
+ },
+ "scent_of_fear": {
+  "tree": "vocation",
+  "class": "berserker",
+  "name": "Scent of Fear",
+  "text": "Enemies below 25% health take 15% more damage from you."
+ },
+ "thick_skull": {
+  "tree": "vocation",
+  "class": "berserker",
+  "name": "Thick Skull",
+  "text": "Stuns on you last half as long."
+ },
+ "afterimage": {
+  "tree": "vocation",
+  "class": "monk",
+  "name": "Afterimage",
+  "text": "A perfect dodge leaves an afterimage of you that enemies within 6 blocks attack for 2 s."
+ },
+ "silencing_palm": {
+  "tree": "vocation",
+  "class": "monk",
+  "name": "Silencing Palm",
+  "text": "Every fifth unarmed hit on the same enemy silences it for 2 s: no spells and no ranged attacks."
+ },
+ "ki_wave": {
+  "tree": "vocation",
+  "class": "monk",
+  "name": "Ki Wave",
+  "text": "Unarmed hits build Ki; after 12 hits, your next punch releases a 5-block shockwave for 100% of its damage."
+ },
+ "wildfire": {
+  "tree": "vocation",
+  "class": "blaze",
+  "name": "Wildfire",
+  "text": "When a burning enemy takes damage from your spell, its fire spreads to one enemy within 3 blocks."
+ },
+ "fuel_the_flames": {
+  "tree": "vocation",
+  "class": "blaze",
+  "name": "Fuel the Flames",
+  "text": "Hitting a burning enemy with a fire spell restores 3 mana."
+ },
+ "smoulder": {
+  "tree": "vocation",
+  "class": "blaze",
+  "name": "Smoulder",
+  "text": "Fire you start keeps burning in rain and water."
+ },
+ "shatter": {
+  "tree": "vocation",
+  "class": "frost",
+  "name": "Shatter",
+  "text": "Enemies killed while frozen shatter into ice shards that hit enemies within 4 blocks for 15% of the dead enemy's max health and slow them."
+ },
+ "glacial_step": {
+  "tree": "vocation",
+  "class": "frost",
+  "name": "Glacial Step",
+  "text": "Water freezes under your feet as you walk, and you take no fall damage landing on ice or snow."
+ },
+ "cold_snap": {
+  "tree": "vocation",
+  "class": "frost",
+  "name": "Cold Snap",
+  "text": "Every third ice spell you cast freezes the first enemy it hits for 1 s."
+ },
+ "undertow": {
+  "tree": "vocation",
+  "class": "water",
+  "name": "Undertow",
+  "text": "Your water spells pull the enemies they hit 1 block toward you."
+ },
+ "drenched": {
+  "tree": "vocation",
+  "class": "water",
+  "name": "Drenched",
+  "text": "Water spells soak enemies for 5 s: soaked enemies take 15% more lightning and ice damage and can't stay on fire."
+ },
+ "rising_tide": {
+  "tree": "vocation",
+  "class": "water",
+  "name": "Rising Tide",
+  "text": "Each water spell cast within 5 s of the last costs 5% less mana, up to 25%."
+ },
+ "thunderclap": {
+  "tree": "vocation",
+  "class": "lightning",
+  "name": "Thunderclap",
+  "text": "A kill with a lightning spell sets off a thunderclap that stuns enemies within 3 blocks for 0.5 s."
+ },
+ "static_skin": {
+  "tree": "vocation",
+  "class": "lightning",
+  "name": "Static Skin",
+  "text": "When you are hit in melee, there is a 20% chance the attacker is shocked for 3 damage."
+ },
+ "surge_step": {
+  "tree": "vocation",
+  "class": "lightning",
+  "name": "Surge Step",
+  "text": "For 2 s after a lightning spell, your next dodge or step goes twice as far."
+ },
+ "martyr_s_grace": {
+  "tree": "vocation",
+  "class": "holy",
+  "name": "Martyr's Grace",
+  "text": "Healing a party member heals you for 30% of the amount."
+ },
+ "sanctified_ground": {
+  "tree": "vocation",
+  "class": "holy",
+  "name": "Sanctified Ground",
+  "text": "Your healing spells leave holy light on the ground for 4 s that burns undead standing in it."
+ },
+ "last_light": {
+  "tree": "vocation",
+  "class": "holy",
+  "name": "Last Light",
+  "text": "Your heals on a target below 30% health heal 40% more."
+ },
+ "void_echo": {
+  "tree": "vocation",
+  "class": "warlock",
+  "name": "Void Echo",
+  "text": "Your eldritch and ender spells have a 10% chance to cast again for free at half power."
+ },
+ "soul_debt": {
+  "tree": "vocation",
+  "class": "warlock",
+  "name": "Soul Debt",
+  "text": "Killing an enemy restores mana equal to 5% of its max health, up to 15."
+ },
+ "sculk_whispers": {
+  "tree": "vocation",
+  "class": "warlock",
+  "name": "Sculk Whispers",
+  "text": "Enemies hit by your spells show through walls for 6 s."
+ },
+ "corpse_blast": {
+  "tree": "vocation",
+  "class": "necromancer",
+  "name": "Corpse Blast",
+  "text": "Your summons explode when they die, dealing 30% of their max health as blood damage within 3 blocks."
+ },
+ "grave_feast": {
+  "tree": "vocation",
+  "class": "necromancer",
+  "name": "Grave Feast",
+  "text": "When one of your summons dies, you heal 2 health."
+ },
+ "rise_again": {
+  "tree": "vocation",
+  "class": "necromancer",
+  "name": "Rise Again",
+  "text": "Enemies you kill have a 10% chance to rise as a zombie that fights for you for 20 s, up to 2 at a time."
+ },
+ "venomous_thorns": {
+  "tree": "vocation",
+  "class": "druid",
+  "name": "Venomous Thorns",
+  "text": "Enemies that hit you in melee are poisoned (Poison I) for 3 s."
+ },
+ "pack_howl": {
+  "tree": "vocation",
+  "class": "druid",
+  "name": "Pack Howl",
+  "text": "When you take damage, your summoned wolves and beasts howl and deal 20% more damage for 5 s."
+ },
+ "seed_burst": {
+  "tree": "vocation",
+  "class": "druid",
+  "name": "Seed Burst",
+  "text": "An enemy killed by your nature spell leaves a flowering bush that heals allies beside it 1 health per second for 5 s."
+ },
+ "jade_mirror": {
+  "tree": "vocation",
+  "class": "jade",
+  "name": "Jade Mirror",
+  "text": "Projectiles that hit you have a 15% chance to be reflected back."
+ },
+ "perfect_symmetry": {
+  "tree": "vocation",
+  "class": "jade",
+  "name": "Perfect Symmetry",
+  "text": "Alternate a weapon hit and a spell: each one after the other deals 15% more."
+ },
+ "celestial_seal": {
+  "tree": "vocation",
+  "class": "jade",
+  "name": "Celestial Seal",
+  "text": "Every eighth spell you cast draws a seal beneath you for 5 s: enemies in it are slowed, and you take 15% less damage while inside."
+ },
+ "soul_harvest": {
+  "tree": "vocation",
+  "class": "spirit",
+  "name": "Soul Harvest",
+  "text": "Kills leave a soul wisp for 10 s that restores 5% mana when you touch it."
+ },
+ "ghost_lanterns": {
+  "tree": "vocation",
+  "class": "spirit",
+  "name": "Ghost Lanterns",
+  "text": "Your summoned spirits light the ground around them and reveal invisible enemies within 8 blocks."
+ },
+ "possession": {
+  "tree": "vocation",
+  "class": "spirit",
+  "name": "Possession",
+  "text": "Hits from your summoned spirits have a 5% chance to turn the enemy to your side for 3 s."
+ },
+ "venomblade": {
+  "tree": "vocation",
+  "class": "assassin",
+  "name": "Venomblade",
+  "text": "Dagger hits poison the target (Poison I) for 3 s."
+ },
+ "vanish": {
+  "tree": "vocation",
+  "class": "assassin",
+  "name": "Vanish",
+  "text": "A Combat Evolution execution (from behind, on an unaware target) makes you invisible for 2 s and resets Shadow Step."
+ },
+ "contagious_mark": {
+  "tree": "vocation",
+  "class": "assassin",
+  "name": "Contagious Mark",
+  "text": "When an enemy under Death Mark dies, the mark jumps to the nearest enemy within 8 blocks."
+ },
+ "light_fingers": {
+  "tree": "vocation",
+  "class": "thief",
+  "name": "Light Fingers",
+  "text": "Your melee hits have a 5% chance to knock loot from the enemy's drop table, once per enemy."
+ },
+ "smoke_and_mirrors": {
+  "tree": "vocation",
+  "class": "thief",
+  "name": "Smoke and Mirrors",
+  "text": "Using an escape skill leaves a decoy that enemies attack for 3 s."
+ },
+ "pocket_sand": {
+  "tree": "vocation",
+  "class": "thief",
+  "name": "Pocket Sand",
+  "text": "Enemies you roll past are blinded for 2 s."
+ },
+ "hunter_s_mark": {
+  "tree": "vocation",
+  "class": "stalker",
+  "name": "Hunter's Mark",
+  "text": "Your first arrow on an enemy marks it for 8 s: it glows and takes 10% more damage from everyone."
+ },
+ "ricochet": {
+  "tree": "vocation",
+  "class": "stalker",
+  "name": "Ricochet",
+  "text": "Arrows that hit have a 20% chance to bounce to another enemy within 6 blocks for half damage."
+ },
+ "retrieval": {
+  "tree": "vocation",
+  "class": "stalker",
+  "name": "Retrieval",
+  "text": "Arrows that hit an enemy come back to your quiver 40% of the time."
+ },
+ "scavenger": {
+  "tree": "vocation",
+  "class": "wanderer",
+  "name": "Scavenger",
+  "text": "Mobs drop 15% more experience and have a 10% chance to drop an extra piece of food."
+ },
+ "horse_whisperer": {
+  "tree": "vocation",
+  "class": "wanderer",
+  "name": "Horse Whisperer",
+  "text": "Your mounts move 15% faster and take half fall damage."
+ },
+ "night_eyes": {
+  "tree": "vocation",
+  "class": "wanderer",
+  "name": "Night Eyes",
+  "text": "In places with light level 4 or lower, you see as if you had Night Vision."
+ },
+ "bash_echo": {
+  "tree": "origin",
+  "class": "warrior",
+  "name": "Bash Echo",
+  "text": "Shield Bash hits one more enemy behind the first."
+ },
+ "hold_the_gate": {
+  "tree": "origin",
+  "class": "warrior",
+  "name": "Hold the Gate",
+  "text": "While enemies are taunted by Challenge, you can't be knocked back."
+ },
+ "bloodied_banner": {
+  "tree": "origin",
+  "class": "warrior",
+  "name": "Bloodied Banner",
+  "text": "Kills give allies within 8 blocks 5% attack damage for 6 s."
+ },
+ "storm_of_arrows": {
+  "tree": "origin",
+  "class": "archer",
+  "name": "Storm of Arrows",
+  "text": "Arrow Rain lasts 1 s longer."
+ },
+ "running_shot": {
+  "tree": "origin",
+  "class": "archer",
+  "name": "Running Shot",
+  "text": "Firing a bow while sprinting no longer slows you."
+ },
+ "quick_draw": {
+  "tree": "origin",
+  "class": "archer",
+  "name": "Quick Draw",
+  "text": "A bow kill makes your next draw 50% faster."
+ },
+ "ambusher": {
+  "tree": "origin",
+  "class": "rogue",
+  "name": "Ambusher",
+  "text": "Your first hit after leaving Vanish deals 30% more."
+ },
+ "choking_smoke": {
+  "tree": "origin",
+  "class": "rogue",
+  "name": "Choking Smoke",
+  "text": "Enemies inside your Smoke Bomb are slowed."
+ },
+ "pickpocket": {
+  "tree": "origin",
+  "class": "rogue",
+  "name": "Pickpocket",
+  "text": "Sneaking up to a villager and using it gives one random trade item, once a day per villager."
+ },
+ "shared_meal": {
+  "tree": "origin",
+  "class": "beastmaster",
+  "name": "Shared Meal",
+  "text": "Eating food also heals your pets within 10 blocks for half as much."
+ },
+ "rolling_herd": {
+  "tree": "origin",
+  "class": "beastmaster",
+  "name": "Rolling Herd",
+  "text": "Stampede knocks enemies back further and slows them."
+ },
+ "whisperer": {
+  "tree": "origin",
+  "class": "beastmaster",
+  "name": "Whisperer",
+  "text": "Animals tame on the first try."
+ },
+ "barding": {
+  "tree": "origin",
+  "class": "cavalry",
+  "name": "Barding",
+  "text": "Your mount takes 30% less damage."
+ },
+ "fighting_retreat": {
+  "tree": "origin",
+  "class": "cavalry",
+  "name": "Fighting Retreat",
+  "text": "Being knocked off your mount gives you Speed II for 3 s."
+ },
+ "whistle": {
+  "tree": "origin",
+  "class": "cavalry",
+  "name": "Whistle",
+  "text": "You can call your last horse to you from up to 64 blocks away."
+ },
+ "honour_duel": {
+  "tree": "origin",
+  "class": "duelist",
+  "name": "Honour Duel",
+  "text": "Against an enemy with no other enemy within 8 blocks, you take 10% less damage."
+ },
+ "perfect_riposte": {
+  "tree": "origin",
+  "class": "duelist",
+  "name": "Perfect Riposte",
+  "text": "Riposte Stance counters also stagger the attacker."
+ },
+ "long_lunge": {
+  "tree": "origin",
+  "class": "duelist",
+  "name": "Long Lunge",
+  "text": "Lunge travels 2 blocks further."
+ },
+ "iron_will": {
+  "tree": "origin",
+  "class": "guardian",
+  "name": "Iron Will",
+  "text": "Taunting Shout also gives you Resistance I for 4 s."
+ },
+ "counterweight": {
+  "tree": "origin",
+  "class": "guardian",
+  "name": "Counterweight",
+  "text": "Blocking a melee hit knocks the attacker back."
+ },
+ "second_guard": {
+  "tree": "origin",
+  "class": "guardian",
+  "name": "Second Guard",
+  "text": "After your shield is disabled, it recovers twice as fast."
+ },
+ "kite": {
+  "tree": "origin",
+  "class": "skirmisher",
+  "name": "Kite",
+  "text": "Your speed boost on hit also makes your next dodge free."
+ },
+ "scavenged_blades": {
+  "tree": "origin",
+  "class": "skirmisher",
+  "name": "Scavenged Blades",
+  "text": "A kill returns one Throwing Knife charge."
+ },
+ "light_feet": {
+  "tree": "origin",
+  "class": "skirmisher",
+  "name": "Light Feet",
+  "text": "You take no fall damage from falls of up to 6 blocks."
+ },
+ "heavy_bolts": {
+  "tree": "origin",
+  "class": "crossbowman",
+  "name": "Heavy Bolts",
+  "text": "Crossbow bolts knock the target back."
+ },
+ "saturation": {
+  "tree": "origin",
+  "class": "crossbowman",
+  "name": "Saturation",
+  "text": "Volley Fire fires one more bolt."
+ },
+ "practised_hands": {
+  "tree": "origin",
+  "class": "crossbowman",
+  "name": "Practised Hands",
+  "text": "A kill instantly reloads your crossbow."
+ },
+ "kebab": {
+  "tree": "origin",
+  "class": "spearman",
+  "name": "Kebab",
+  "text": "Skewer can pierce two more enemies."
+ },
+ "long_haft": {
+  "tree": "origin",
+  "class": "spearman",
+  "name": "Long Haft",
+  "text": "Your spear reach bonus rises from 0.5 to 1 block."
+ },
+ "return_to_hand": {
+  "tree": "origin",
+  "class": "spearman",
+  "name": "Return to Hand",
+  "text": "Thrown spears come back to you."
+ },
+ "long_lasting_oil": {
+  "tree": "origin",
+  "class": "monster_hunter",
+  "name": "Long-Lasting Oil",
+  "text": "Silver Oil lasts twice as long."
+ },
+ "giant_slayer": {
+  "tree": "origin",
+  "class": "monster_hunter",
+  "name": "Giant Slayer",
+  "text": "You deal 10% more damage to bosses."
+ },
+ "skinning_knife": {
+  "tree": "origin",
+  "class": "monster_hunter",
+  "name": "Skinning Knife",
+  "text": "Monsters you kill have a 10% chance to drop a second set of loot."
+ },
+ "weighted_bola": {
+  "tree": "origin",
+  "class": "bounty_hunter",
+  "name": "Weighted Bola",
+  "text": "Bola also pulls the target 2 blocks toward you."
+ },
+ "better_pay": {
+  "tree": "origin",
+  "class": "bounty_hunter",
+  "name": "Better Pay",
+  "text": "Your hired muscle has 30% more health."
+ },
+ "bring_them_in_alive": {
+  "tree": "origin",
+  "class": "bounty_hunter",
+  "name": "Bring Them In Alive",
+  "text": "Enemies below 20% health that you hit are slowed for 2 s."
+ },
+ "controlled_channel": {
+  "tree": "origin",
+  "class": "battle_mage",
+  "name": "Controlled Channel",
+  "text": "Overchannel costs 20% less health."
+ },
+ "mana_shockwave": {
+  "tree": "origin",
+  "class": "battle_mage",
+  "name": "Mana Shockwave",
+  "text": "Mana Burst knocks enemies back."
+ },
+ "mana_ward": {
+  "tree": "origin",
+  "class": "battle_mage",
+  "name": "Mana Ward",
+  "text": "When you are hit, 10% of the damage is taken from your mana instead."
+ },
+ "rooted": {
+  "tree": "origin",
+  "class": "sentinel",
+  "name": "Rooted",
+  "text": "Your standing-still Resistance also gives knockback immunity."
+ },
+ "high_post": {
+  "tree": "origin",
+  "class": "sentinel",
+  "name": "High Post",
+  "text": "While on Watchtower, your ranged attacks deal 15% more."
+ },
+ "night_watch": {
+  "tree": "origin",
+  "class": "sentinel",
+  "name": "Night Watch",
+  "text": "You see enemies within 12 blocks through walls at night."
+ },
+ "chain_of_light": {
+  "tree": "origin",
+  "class": "paladin",
+  "name": "Chain of Light",
+  "text": "Holy Smite jumps to one more undead within 6 blocks."
+ },
+ "holy_ground": {
+  "tree": "origin",
+  "class": "paladin",
+  "name": "Holy Ground",
+  "text": "Allies standing on Consecrate get Regeneration I."
+ },
+ "shared_shield": {
+  "tree": "origin",
+  "class": "paladin",
+  "name": "Shared Shield",
+  "text": "Divine Shield also shields the nearest ally for half as much."
+ },
+ "grapple": {
+  "tree": "origin",
+  "class": "corsair",
+  "name": "Grapple",
+  "text": "Boarding Hook can pull you to blocks as well as boats."
+ },
+ "rousing_shanty": {
+  "tree": "origin",
+  "class": "corsair",
+  "name": "Rousing Shanty",
+  "text": "Sea Shanty also gives allies 10% attack speed."
+ },
+ "sea_legs": {
+  "tree": "origin",
+  "class": "corsair",
+  "name": "Sea Legs",
+  "text": "Fighting in water no longer slows your attacks."
+ },
+ "field_repairs": {
+  "tree": "origin",
+  "class": "blacksmith",
+  "name": "Field Repairs",
+  "text": "Repairing gear at an anvil or in a crafting grid restores 25% more durability."
+ },
+ "ringing_blow": {
+  "tree": "origin",
+  "class": "blacksmith",
+  "name": "Ringing Blow",
+  "text": "Hammer Strike stuns for 0.5 s longer."
+ },
+ "well_made": {
+  "tree": "origin",
+  "class": "blacksmith",
+  "name": "Well Made",
+  "text": "Gear you craft loses durability 15% slower."
+ },
+ "rebuke": {
+  "tree": "origin",
+  "class": "cleric",
+  "name": "Rebuke",
+  "text": "Turn Undead also sets them alight."
+ },
+ "blessed_brew": {
+  "tree": "origin",
+  "class": "cleric",
+  "name": "Blessed Brew",
+  "text": "Healing potions you drink heal 25% more."
+ },
+ "divine_insight": {
+  "tree": "origin",
+  "class": "cleric",
+  "name": "Divine Insight",
+  "text": "Enchanting costs one level less."
+ },
+ "rich_soil": {
+  "tree": "origin",
+  "class": "farmer",
+  "name": "Rich Soil",
+  "text": "Compost also makes crops near it grow 20% faster for 5 minutes."
+ },
+ "scythe_swing": {
+  "tree": "origin",
+  "class": "farmer",
+  "name": "Scythe Swing",
+  "text": "Hoes hit every enemy in front of you."
+ },
+ "farmhand": {
+  "tree": "origin",
+  "class": "farmer",
+  "name": "Farmhand",
+  "text": "Breeding animals gives one more experience orb."
+ },
+ "haggler": {
+  "tree": "origin",
+  "class": "merchant",
+  "name": "Haggler",
+  "text": "Villager trades cost one emerald less, never below one."
+ },
+ "hired_swords": {
+  "tree": "origin",
+  "class": "merchant",
+  "name": "Hired Swords",
+  "text": "Caravan Guard calls one more guard."
+ },
+ "regular_customer": {
+  "tree": "origin",
+  "class": "merchant",
+  "name": "Regular Customer",
+  "text": "Wandering traders find you twice as often."
+ },
+ "long_call": {
+  "tree": "origin",
+  "class": "rancher",
+  "name": "Long Call",
+  "text": "Herd Call reaches twice as far."
+ },
+ "quick_breeding": {
+  "tree": "origin",
+  "class": "rancher",
+  "name": "Quick Breeding",
+  "text": "Animals you breed can breed again 50% sooner."
+ },
+ "shearer": {
+  "tree": "origin",
+  "class": "rancher",
+  "name": "Shearer",
+  "text": "Shearing gives one more wool."
+ },
+ "bright_lamp": {
+  "tree": "origin",
+  "class": "miner",
+  "name": "Bright Lamp",
+  "text": "Miner's Lamp lights twice as far."
+ },
+ "cave_dweller": {
+  "tree": "origin",
+  "class": "miner",
+  "name": "Cave Dweller",
+  "text": "Below sea level you mine 10% faster."
+ },
+ "gem_cutter": {
+  "tree": "origin",
+  "class": "miner",
+  "name": "Gem Cutter",
+  "text": "Diamond and emerald ore has a 10% chance to drop one more."
+ },
+ "long_rope": {
+  "tree": "origin",
+  "class": "explorer",
+  "name": "Long Rope",
+  "text": "Grappling Rope reaches 50% further."
+ },
+ "deep_reserves": {
+  "tree": "origin",
+  "class": "explorer",
+  "name": "Deep Reserves",
+  "text": "Second Wind also restores 20% stamina."
+ },
+ "climber": {
+  "tree": "origin",
+  "class": "explorer",
+  "name": "Climber",
+  "text": "You climb ladders and vines 50% faster."
+ },
+ "double_batch": {
+  "tree": "origin",
+  "class": "alchemist",
+  "name": "Double Batch",
+  "text": "Brewing has a 15% chance to make one more potion."
+ },
+ "strong_arm": {
+  "tree": "origin",
+  "class": "alchemist",
+  "name": "Strong Arm",
+  "text": "Splash and lingering potions are thrown 50% further."
+ },
+ "tolerance": {
+  "tree": "origin",
+  "class": "alchemist",
+  "name": "Tolerance",
+  "text": "Harmful potion effects on you last 25% shorter."
+ },
+ "pearl_diver": {
+  "tree": "origin",
+  "class": "sailor",
+  "name": "Pearl Diver",
+  "text": "Deep Breath also gives Night Vision underwater."
+ },
+ "strong_stroke": {
+  "tree": "origin",
+  "class": "sailor",
+  "name": "Strong Stroke",
+  "text": "You swim 15% faster."
+ },
+ "sea_bounty": {
+  "tree": "origin",
+  "class": "sailor",
+  "name": "Sea Bounty",
+  "text": "Fishing from a boat catches treasure more often."
+ },
+ "barbed_hook": {
+  "tree": "origin",
+  "class": "fisher",
+  "name": "Barbed Hook",
+  "text": "Hook and Reel makes the target bleed for 1 damage a second for 3 s."
+ },
+ "feeding_frenzy": {
+  "tree": "origin",
+  "class": "fisher",
+  "name": "Feeding Frenzy",
+  "text": "Chum the Water also draws in fish twice as fast for 30 s."
+ },
+ "lucky_line": {
+  "tree": "origin",
+  "class": "fisher",
+  "name": "Lucky Line",
+  "text": "Treasure catches are 25% more likely."
+ },
+ "anthem": {
+  "tree": "origin",
+  "class": "bard",
+  "name": "Anthem",
+  "text": "Song of Courage reaches 50% further."
+ },
+ "deep_sleep": {
+  "tree": "origin",
+  "class": "bard",
+  "name": "Deep Sleep",
+  "text": "Enemies put to sleep by Lullaby take 20% more damage from the first hit that wakes them."
+ },
+ "inspiring_tale": {
+  "tree": "origin",
+  "class": "bard",
+  "name": "Inspiring Tale",
+  "text": "Nearby players gain 15% more experience, up from 10%."
+ },
+ "forager_s_eye": {
+  "tree": "origin",
+  "class": "herbalist",
+  "name": "Forager's Eye",
+  "text": "Herbs and flowers within 8 blocks glow when you sneak."
+ },
+ "antidote": {
+  "tree": "origin",
+  "class": "herbalist",
+  "name": "Antidote",
+  "text": "You are immune to Poison I."
+ },
+ "master_stew": {
+  "tree": "origin",
+  "class": "herbalist",
+  "name": "Master Stew",
+  "text": "Suspicious stew you make always gives the best effect for its flower."
+ },
+ "angry_swarm": {
+  "tree": "origin",
+  "class": "beekeeper",
+  "name": "Angry Swarm",
+  "text": "Swarm's bees poison what they sting."
+ },
+ "royal_jelly": {
+  "tree": "origin",
+  "class": "beekeeper",
+  "name": "Royal Jelly",
+  "text": "Eating honey also gives Regeneration I for 5 s."
+ },
+ "pollinator": {
+  "tree": "origin",
+  "class": "beekeeper",
+  "name": "Pollinator",
+  "text": "Crops and flowers near you grow 15% faster."
+ },
+ "deep_veil": {
+  "tree": "origin",
+  "class": "gravedigger",
+  "name": "Deep Veil",
+  "text": "Mourner's Veil lasts 2 s longer."
+ },
+ "grave_robber": {
+  "tree": "origin",
+  "class": "gravedigger",
+  "name": "Grave Robber",
+  "text": "Graves and tombs you dig up have one more item."
+ },
+ "soul_lantern": {
+  "tree": "origin",
+  "class": "gravedigger",
+  "name": "Soul Lantern",
+  "text": "Your lantern makes undead within 8 blocks glow."
+ },
+ "penance": {
+  "tree": "origin",
+  "class": "zealot",
+  "name": "Penance",
+  "text": "Damage you deal to yourself with skills is returned to the nearest enemy within 6 blocks."
+ },
+ "shared_suffering": {
+  "tree": "origin",
+  "class": "zealot",
+  "name": "Shared Suffering",
+  "text": "During Martyrdom, 15% of the damage you take is also dealt to your attacker."
+ },
+ "pyre_of_faith": {
+  "tree": "origin",
+  "class": "zealot",
+  "name": "Pyre of Faith",
+  "text": "Enemies killed while burning from Burning Faith explode in holy fire for 4 damage within 3 blocks."
+ },
+ "spice_rack": {
+  "tree": "origin",
+  "class": "cook",
+  "name": "Spice Rack",
+  "text": "Food you cook gives 10% more saturation."
+ },
+ "hearty_meal": {
+  "tree": "origin",
+  "class": "cook",
+  "name": "Hearty Meal",
+  "text": "Food effects from meals (Nourishment, Comfort) last 25% longer."
+ },
+ "kitchen_knife": {
+  "tree": "origin",
+  "class": "cook",
+  "name": "Kitchen Knife",
+  "text": "Knives and cleavers deal 15% more damage."
+ },
+ "forest_friend_s_call": {
+  "tree": "origin",
+  "class": "lumberjack",
+  "name": "Forest Friend's Call",
+  "text": "Forest Friend lasts 50% longer."
+ },
+ "orchard_keeper": {
+  "tree": "origin",
+  "class": "lumberjack",
+  "name": "Orchard Keeper",
+  "text": "Leaves you break drop apples twice as often."
+ },
+ "sawmill": {
+  "tree": "origin",
+  "class": "lumberjack",
+  "name": "Sawmill",
+  "text": "Logs give one more plank when crafted."
+ }
+}

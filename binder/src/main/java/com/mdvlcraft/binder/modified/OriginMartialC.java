@@ -1,5 +1,8 @@
 package com.mdvlcraft.binder.modified;
 
+import com.mdvlcraft.binder.specs.SpecKit;
+import com.mdvlcraft.binder.specs.Specs;
+
 import io.redspace.ironsspellbooks.api.events.SpellDamageEvent;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -61,7 +64,13 @@ public final class OriginMartialC {
     /** Mana Burst: an arcane blast within 5 blocks of the caster deals 6 damage and knocks enemies back 4 blocks (its 30 mana is the spell's cost). */
     static ConeSpells.Cone manaBurst() {
         return new ConeSpells.Cone("mana_burst", 6, 5.0, 180.0, ParticleTypes.ENCHANTED_HIT, SoundEvents.ILLUSIONER_CAST_SPELL,
-            (caster, target, dealt) -> Wave2Guardian.knock(caster.position(), target, 4.0));
+            (caster, target, dealt) -> {
+                boolean shock = Specs.has(caster, "mana_shockwave");
+                Wave2Guardian.knock(caster.position(), target, shock ? 6.0 : 4.0);
+                if (shock) {
+                    target.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 40, 1), caster);
+                }
+            });
     }
 
     /**
@@ -176,6 +185,14 @@ public final class OriginMartialC {
             SmiteSpells.flash(level, target.position());
             this.hurt(caster, target, BoltSpells.undead(target) ? power * 2.0F : power);
             target.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0), caster);
+            if (Specs.has(caster, "chain_of_light")) {
+                Targets.enemies(caster, target.position(), 6.0).stream().filter(e -> e != target && BoltSpells.undead(e))
+                    .min(Comparator.comparingDouble(e -> e.distanceToSqr(target))).ifPresent(next -> {
+                        SmiteSpells.flash(level, next.position());
+                        this.hurt(caster, next, power * 2.0F);
+                        next.addEffect(new MobEffectInstance(MobEffects.BLINDNESS, 40, 0), caster);
+                    });
+            }
             level.sendParticles(ParticleTypes.END_ROD, target.getX(), target.getY(0.5), target.getZ(), 30, 0.3, 1.5, 0.3, 0.02);
         }
     }
@@ -183,10 +200,15 @@ public final class OriginMartialC {
     /** Consecrate: 8 s of blessed ground within 4 blocks of the caster; undead enemies in it take 3 damage a second and burn. */
     static GroundSpells.Area consecrate() {
         return new GroundSpells.Area("consecrate", 3, 4.0, 8, 20, false, ParticleTypes.END_ROD, SoundEvents.BEACON_ACTIVATE,
-            (area, zone, allies, enemies) -> enemies.stream().filter(BoltSpells::undead).forEach(e -> {
-                area.hurt(zone.caster, e, zone.power);
-                e.setSecondsOnFire(2);
-            }));
+            (area, zone, allies, enemies) -> {
+                enemies.stream().filter(BoltSpells::undead).forEach(e -> {
+                    area.hurt(zone.caster, e, zone.power);
+                    e.setSecondsOnFire(2);
+                });
+                if (Specs.has(zone.caster, "holy_ground")) {
+                    allies.forEach(a -> a.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 30, 0), zone.caster));
+                }
+            });
     }
 
     /** Divine Shield: the caster is immune to damage for 2 s, but deals 50% less damage for 6 s. */
@@ -199,6 +221,10 @@ public final class OriginMartialC {
         public void onCast(Level level, int spellLevel, LivingEntity caster, CastSource source, MagicData data) {
             Buffs.give(caster, SHIELD, 40);
             Buffs.give(caster, SHIELD_WEAK, 120);
+            if (Specs.has(caster, "shared_shield")) {
+                Targets.allies(caster, caster.position(), 8.0).stream().filter(a -> a != caster)
+                    .min(Comparator.comparingDouble(a -> a.distanceToSqr(caster))).ifPresent(ally -> Buffs.give(ally, SHIELD, 20));
+            }
             if (level instanceof ServerLevel server) {
                 server.sendParticles(ParticleTypes.WAX_OFF, caster.getX(), caster.getY() + 1.0, caster.getZ(), 40, 0.5, 0.8, 0.5, 0.1);
             }
@@ -216,7 +242,16 @@ public final class OriginMartialC {
             target.setDeltaMovement(in.normalize().scale(Math.min(1.8, in.length() * 0.18)).add(0.0, 0.3, 0.0));   // stops just short of the caster
             target.hurtMarked = true;
             caster.level().playSound(null, target.blockPosition(), SoundEvents.CHAIN_HIT, SoundSource.PLAYERS, 1.0F, 0.8F);
-        }, null).speed(2.0F).gravity(0.02).sound(SoundEvents.FISHING_BOBBER_THROW);
+        }, (bolt, level, caster, at, power) -> {
+            if (Specs.has(caster, "grapple")) {
+                // Grapple: a hook in a block pulls the caster to it
+                Vec3 in = at.subtract(caster.position());
+                caster.setDeltaMovement(in.normalize().scale(Math.min(2.2, in.length() * 0.2)).add(0.0, 0.4, 0.0));
+                caster.hurtMarked = true;
+                caster.fallDistance = 0.0F;
+                level.playSound(null, net.minecraft.core.BlockPos.containing(at), SoundEvents.CHAIN_HIT, SoundSource.PLAYERS, 1.0F, 1.2F);
+            }
+        }).speed(2.0F).gravity(0.02).sound(SoundEvents.FISHING_BOBBER_THROW);
     }
 
     /** Sea Shanty: for 15 s the caster and allies within 10 blocks get +20% attack speed and Water Breathing. */
@@ -235,7 +270,8 @@ public final class OriginMartialC {
                         continue;
                     }
                     speed.removeModifier(SHANTY_ID);
-                    speed.addTransientModifier(new AttributeModifier(SHANTY_ID, "mdvlcraft sea shanty", 0.2, AttributeModifier.Operation.MULTIPLY_TOTAL));
+                    speed.addTransientModifier(new AttributeModifier(SHANTY_ID, "mdvlcraft sea shanty", Specs.has(caster, "rousing_shanty") ? 0.3 : 0.2,
+                        AttributeModifier.Operation.MULTIPLY_TOTAL));
                     Buffs.give(ally, SHANTY, 300);
                     Zones.start(server, ally.position(), caster, 0.0F, 300, 301, zone -> {
                     }, () -> {
@@ -291,6 +327,13 @@ public final class OriginMartialC {
                 throw new IllegalStateException("Flagellate cast at " + caster.getHealth() + " health");
             }
             caster.setHealth(caster.getHealth() - 4.0F);
+            if (Specs.has(caster, "penance") && level instanceof ServerLevel server) {
+                LivingEntity near = SpecKit.nearestEnemy(caster, caster.position(), 6.0, null);
+                if (near != null) {
+                    near.hurt(caster.damageSources().indirectMagic(caster, caster), 4.0F);
+                    server.sendParticles(ParticleTypes.DAMAGE_INDICATOR, near.getX(), near.getY(0.6), near.getZ(), 6, 0.2, 0.3, 0.2, 0.1);
+                }
+            }
             caster.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 200, 1));
             caster.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 200, 0));
             if (level instanceof ServerLevel server) {
@@ -346,7 +389,7 @@ public final class OriginMartialC {
     @SubscribeEvent
     public static void onCast(SpellOnCastEvent event) {
         if (Buffs.has(event.getEntity(), OVERCHANNEL)) {
-            event.setManaCost(Math.round(event.getManaCost() * 1.3F));
+            event.setManaCost(Math.round(event.getManaCost() * (Specs.has(event.getEntity(), "controlled_channel") ? 1.1F : 1.3F)));
         }
     }
 
@@ -418,7 +461,7 @@ public final class OriginMartialC {
             return;
         }
         if (source.getDirectEntity() instanceof Projectile && Buffs.has(attacker, WATCHTOWER)) {
-            event.setAmount(event.getAmount() * 1.3F);
+            event.setAmount(event.getAmount() * (Specs.has(attacker, "high_post") ? 1.45F : 1.3F));
         }
         if (Buffs.has(attacker, SHIELD_WEAK)) {
             event.setAmount(event.getAmount() * 0.5F);
@@ -428,6 +471,9 @@ public final class OriginMartialC {
         }
         if (Buffs.has(attacker, BURNING_FAITH)) {
             victim.setSecondsOnFire(6);
+            if (Specs.has(attacker, "pyre_of_faith")) {
+                Buffs.mark(victim, "pyre_of_faith", attacker, 120);
+            }
         }
         if (Buffs.has(attacker, RUNIC)) {
             LivingEntity next = Targets.enemies(attacker, victim.position(), 16.0).stream().filter(e -> e != victim && e != attacker)
@@ -451,6 +497,9 @@ public final class OriginMartialC {
             return;
         }
         float heal = event.getAmount() * 0.5F;
+        if (Specs.has(martyr, "shared_suffering") && event.getSource().getEntity() instanceof LivingEntity attacker && attacker != martyr) {
+            attacker.hurt(martyr.damageSources().indirectMagic(martyr, martyr), event.getAmount() * 0.15F);
+        }
         for (LivingEntity ally : Targets.allies(martyr, martyr.position(), 8.0)) {
             if (ally != martyr) {
                 ally.heal(heal);

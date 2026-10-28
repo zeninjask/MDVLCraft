@@ -320,5 +320,36 @@
   },
   "size": 2.0,
   "extra_description": "Outlaw vocation skill."
+ },
+ "voc__6__rank1": {
+  "title": "Target Rewind III",
+  "description": "Raises Target Rewind to level 3 (42 mana, 67.33 s cooldown), replacing level 2",
+  "extra_description": "First cast marks one eligible entity and its current position. The second cast returns that same entity, not a new target. The native return timer and world echo show the active mark. Outlaw vocation skill.",
+  "icon": {
+   "type": "texture",
+   "data": {
+    "texture": "mdvlcraft:textures/gui/icons18/ability/irons_chronomancy_target_rewind.png"
+   }
+  },
+  "rewards": [
+   {
+    "type": "mdvlcraft:ability",
+    "data": {
+     "ability": "irons_chronomancy:target_rewind",
+     "level": 3
+    }
+   }
+  ],
+  "cost": 5,
+  "frame": {
+   "type": "texture",
+   "data": {
+    "locked": "mdvlcraft:textures/gui/skills/frame_task_locked.png",
+    "available": "mdvlcraft:textures/gui/skills/frame_task_available.png",
+    "affordable": "mdvlcraft:textures/gui/skills/frame_task_affordable.png",
+    "unlocked": "mdvlcraft:textures/gui/skills/frame_task_unlocked.png",
+    "excluded": "mdvlcraft:textures/gui/skills/frame_task_excluded.png"
+   }
+  }
  }
 }
