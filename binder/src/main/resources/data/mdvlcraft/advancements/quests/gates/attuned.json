@@ -395,6 +395,24 @@
           }
         ]
       }
+    },
+    "jjk": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mdvlcraft:gate_key_e",
+              "mdvlcraft:gate_key_d",
+              "mdvlcraft:gate_key_c",
+              "mdvlcraft:gate_key_b",
+              "mdvlcraft:gate_key_a",
+              "mdvlcraft:gate_key_s"
+            ],
+            "nbt": "{theme:\"jjk\"}"
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -420,7 +438,8 @@
       "caldera",
       "ossuary",
       "abyss",
-      "jade"
+      "jade",
+      "jjk"
     ]
   ]
 }
