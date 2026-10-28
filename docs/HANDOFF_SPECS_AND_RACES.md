@@ -49,7 +49,13 @@ has the general project brief; its "Needs testing after 2.1.69" list still appli
   that makes the next dodge free and clears the buff); **pyre_of_faith** (victims get a `pyre_of_faith` mark; still needs
   a LivingDeathEvent: if marked and burning, 4 damage to the marker's enemies within 3 blocks).
 
-### Still to code (origin specs), with the planned approach
+**Update (2026-10-28, 348a290b):** every origin spec below is now coded: `specs/MartialSpecs.java`, the events in
+`specs/JobSpecs.java`, and the mixins `RunningShotMixin`, `NightWatchGlowMixin` (client), `ThrownTridentAccessor`,
+`WellMadeMixin`, `DivineInsightMixin`. Kite and Pyre of Faith are finished too. Soul Lantern: a held lantern makes undead
+within 8 blocks glow. Clean build passes (refmap present) and a server boots on 2.1.69's server mods plus the new jar;
+nothing has been run in game. The text changes below still wait for the user's OK.
+
+### Origin specs (all coded now), with the approach used
 
 Planned home: a new `specs/MartialSpecs.java` and the existing `specs/JobSpecs.java` (both `@EventBusSubscriber`).
 
@@ -192,8 +198,8 @@ Fate techniques or cursed objects (players no longer get techniques), and Shrine
 
 ## 7. Suggested order
 
-1. Finish the origin specs (§3), then `cd binder && ./gradlew clean build` and check the jar has `mdvlcraft.refmap.json`.
-2. Boot a server alone on the new jar (CLAUDE.md step 9). Test in game only if the user asks: rank nodes, exclusive
+1. ~~Finish the origin specs (§3), clean build, refmap check.~~ Done.
+2. ~~Boot a server alone on the new jar (CLAUDE.md step 9).~~ Done (2.1.69 mods + new jar). Test in game only if the user asks: rank nodes, exclusive
    specs, a sample of specs, Changeling → Human.
 3. Get the user's OK on the spec text changes; update the JSON; re-run `tools/add_ranks_specs.py`.
 4. Race abilities for existing races, then the new races (ask about traits and Uraume first).
