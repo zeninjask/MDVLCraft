@@ -5,6 +5,9 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "mdvlcraft.refmap.json",
   "mixins": [
+    "ThrownTridentAccessor",
+    "WellMadeMixin",
+    "DivineInsightMixin",
     "guard.EntityTickGuardMixin",
     "guard.PlayerTickGuardMixin",
     "guard.BlockEntityTickGuardMixin",
@@ -165,6 +168,8 @@
     "TargetingConditionsMixin"
   ],
   "client": [
+    "RunningShotMixin",
+    "NightWatchGlowMixin",
     "guard.EntityRenderGuardMixin",
     "guard.OverlayRenderGuardMixin",
     "ResolutionPopupMixin",

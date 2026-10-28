@@ -86,7 +86,7 @@ public final class OriginJobB {
     // ---- shared helpers ----
 
     /** Changes `target`'s `attribute` by `amount` (`operation`) for `ticks` (a transient modifier, taken off when the last one runs out). */
-    static void modify(LivingEntity target, Attribute attribute, UUID id, String key, double amount, AttributeModifier.Operation operation, int ticks) {
+    public static void modify(LivingEntity target, Attribute attribute, UUID id, String key, double amount, AttributeModifier.Operation operation, int ticks) {
         AttributeInstance instance = target.getAttribute(attribute);
         if (instance == null) {
             throw new IllegalStateException(target + " has no " + attribute.getDescriptionId());
