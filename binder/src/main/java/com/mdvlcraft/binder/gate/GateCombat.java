@@ -268,14 +268,14 @@ public final class GateCombat {
         gone.forEach(Entity::discard);
     }
 
-    /** Everything in a gate is hostile at once: a mob without a target takes the nearest player of the gate within
-     * HUNT_RANGE, and a neutral one (wolf, piglin, enderman...) is angered at them. */
-    /** A boss never leaves its fight: outside its boss room (a red gate's: more than BOSS_LEASH from where it rose) it is
-     * put back where it spawned. */
+    /** A boss never leaves its fight: outside its boss room (a red gate's: the play area players are kept in, as it hunts
+     * them anywhere; no room: more than BOSS_LEASH from where it rose) it is put back where it spawned. */
     private static void keepHome(Instance instance, Mob boss) {
         BlockPos home = BlockPos.of(boss.getPersistentData().getLong(GateSpawner.HOME));
         int room = boss.getPersistentData().getInt(GateSpawner.ROOM);
-        boolean out = instance.red || room < 0 || room >= instance.rooms.size()
+        RedLandscape.Layout layout = instance.red ? RedLandscape.LAYOUTS.get(instance.id) : null;
+        boolean out = layout != null ? RedLandscape.horizontal(boss.blockPosition(), layout.lair) > RedLandscape.PLAY_RADIUS
+            : instance.red || room < 0 || room >= instance.rooms.size()
             ? boss.blockPosition().distSqr(home) > BOSS_LEASH * BOSS_LEASH
             : !instance.rooms.get(room).inflatedBy(2).isInside(boss.blockPosition());
         if (out) {
@@ -308,6 +308,8 @@ public final class GateCombat {
         }
     }
 
+    /** Everything in a gate is hostile at once: a mob without a target takes the nearest player of the gate within
+     * HUNT_RANGE, and a neutral one (wolf, piglin, enderman...) is angered at them. */
     private static void hunt(ServerLevel level, Instance instance, Mob mob) {
         // Tameable mod animals as gate mobs (Legendary Monsters' Skeloraptor) only use their own attacks in reach and never walk
         // to a target: they get a plain melee attack, which brings them to it and hits with their attack damage.

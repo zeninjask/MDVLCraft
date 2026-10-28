@@ -248,7 +248,7 @@ public final class RedGates {
         bar.setName(Component.translatableWithFallback("gate.mdvlcraft.red.tally", "Monsters slain: %s / %s", Math.min(layout.kills, need), need));
         bar.setProgress(Math.min(1.0F, layout.kills / (float)need));
         new ArrayList<>(bar.getPlayers()).stream().filter(p -> !inside.contains(p)).forEach(bar::removePlayer);
-        inside.forEach(bar::addPlayer);
+        inside.stream().filter(GateTimerBar::shownOrOff).forEach(bar::addPlayer);
     }
 
     static void dropTallyBar(int id) {

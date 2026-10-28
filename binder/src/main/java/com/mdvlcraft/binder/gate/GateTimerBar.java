@@ -63,6 +63,12 @@ public final class GateTimerBar {
         BARS.putAll(shown);
     }
 
+    /** Whether the player sees a time bar now, or never will (breaks off): bars shown under it wait for it (RedGates). */
+    static boolean shownOrOff(ServerPlayer player) {
+        ServerBossEvent bar = BARS.get(player.getUUID());
+        return bar != null && bar.getPlayers().contains(player) || !BinderConfig.gateBreaks() || GateBreaks.breakTicks() <= 0;
+    }
+
     @SubscribeEvent
     public static void onServerStopped(ServerStoppedEvent event) {
         BARS.values().forEach(ServerBossEvent::removeAllPlayers);
