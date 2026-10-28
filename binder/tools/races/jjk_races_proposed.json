@@ -1,60 +1,56 @@
 [
  {
   "id": "vessel",
-  "name": "Vessel",
-  "source": "Yuji Itadori, Sukuna's fingers",
-  "gap": "A body that can hold a curse",
-  "desc": "Someone who swallowed what should have killed them. A curse sleeps inside, and the body has grown tough enough to hold it.",
-  "traits": [
-   "Eating a cursed finger or cursed object gives Strength I for 60 s instead of poisoning you",
-   "+4 max health and fast natural healing",
-   "Below 20% health the curse stirs: Nausea for 3 s (once a minute)"
+  "names": [
+   "Vessel",
+   "Hollowheart",
+   "Bearer"
+  ],
+  "inspo": "Yuji Itadori; Black Flash, Divergent Fist",
+  "desc": "A body built to hold something that should have killed it. Tough beyond reason, quick to recover, and always a little hungry.",
+  "effects": [
+   {
+    "name": "Iron Constitution",
+    "text": "+4 max health."
+   },
+   {
+    "name": "Fast Mender",
+    "text": "Natural regeneration is 50% faster."
+   },
+   {
+    "name": "Iron Gut",
+    "text": "Rotten flesh, raw meat and spider eyes never poison you."
+   },
+   {
+    "name": "Hard Landing",
+    "text": "Fall damage is reduced by 40%."
+   },
+   {
+    "name": "Second Wind",
+    "text": "Below 25% health, gain Speed I (once a minute)."
+   },
+   {
+    "name": "Stubborn",
+    "text": "Stuns and knockdowns last 25% shorter."
+   },
+   {
+    "name": "Big Eater",
+    "text": "Food gives 20% more saturation."
+   },
+   {
+    "name": "Thick Skin",
+    "text": "+2 armour toughness."
+   },
+   {
+    "name": "Steady Stance",
+    "text": "Knockback taken is halved."
+   }
   ],
   "abilities": [
    {
     "kind": "Utility",
-    "name": "Iron Gut",
-    "text": "Eat any cursed or rotten item safely and gain food from it for 5 minutes. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Inner Voice",
-    "text": "The curse inside points to the nearest special-grade object or boss within 128 blocks for 30 s. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
     "name": "Superhuman Leap",
-    "text": "Jump 6 blocks high and take no fall damage from it. 20 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Swap Out",
-    "text": "For 10 s the curse takes over: you can't be stunned or slowed, but you can't use items. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Shrug Off",
-    "text": "Remove every harmful effect and heal 4. 2 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Divergent Fist",
-    "text": "A punch that hits twice: once on contact and a cursed-energy echo 0.5 s later. 30 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Finger Hunger",
-    "text": "Sense every cursed finger and cursed object within 64 blocks as markers for 15 s. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Steel Will",
-    "text": "For 20 s you can't be charmed, possessed, blinded or made to flee. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Brute Carry",
-    "text": "Pick up and throw a heavy block or a downed ally 6 blocks. 30 s cooldown."
+    "text": "Jump 6 blocks high with no fall damage. 20 s cooldown."
    },
    {
     "kind": "Utility",
@@ -63,72 +59,118 @@
    },
    {
     "kind": "Utility",
-    "name": "Cursed Digestion",
-    "text": "Turn a cursed item in your hand into 20% mana and 4 health. 2 min cooldown."
+    "name": "Shrug Off",
+    "text": "Remove every harmful effect and heal 4. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Brute Carry",
+    "text": "Pick up a downed ally or a block entity and carry it for 20 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Wall Kick",
+    "text": "Kick off a wall you're touching for a second jump. 10 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Unbreakable",
+    "text": "For 6 s you can't drop below 1 health. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Heavy Lift",
+    "text": "Throw the block you look at (not bedrock or containers) 8 blocks as a falling block. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Deep Breath",
+    "text": "Hold your breath 3x longer and swim 30% faster for 60 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Bracing Shout",
+    "text": "You and allies within 8 get Resistance I for 8 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Never Quit",
+    "text": "If you'd die, stand back up 3 s later with 4 health (once every 30 minutes)."
+   },
+   {
+    "kind": "Combat",
+    "name": "Divergent Fist",
+    "text": "Your next punch hits twice: on contact and as an echo 0.5 s later. 30 s cooldown."
    },
    {
     "kind": "Combat",
     "name": "Black Flash",
-    "text": "Your next hit within 5 s that lands deals 2.5x damage with black sparks. 90 s cooldown."
+    "text": "Your next hit within 5 s deals 2.5x damage with black sparks. 90 s cooldown."
    }
   ]
  },
  {
-  "id": "cursed_spirit",
-  "name": "Cursed Spirit",
-  "source": "Cursed Fate cursed spirits, Mahito, Jogo",
-  "gap": "Born from human fear",
-  "desc": "Not born but condensed out of human fear. Sorcerers hunt them, ordinary people can't see them, and they don't truly die while the fear remains.",
-  "traits": [
-   "Players without cursed energy (no Cursed Fate technique) can't see you clearly: you're shown faded",
-   "Immune to poison and hunger drains 50% slower",
-   "Healing from food and potions is halved; you heal by absorbing fear (kills heal 2)"
+  "id": "fearborn",
+  "names": [
+   "Fearborn",
+   "Cursed Spirit",
+   "Dreadling"
+  ],
+  "inspo": "Mahito, Jogo, Hanami; Idle Transfiguration, Soul Punch",
+  "desc": "Condensed out of human fear rather than born. Hard to see, harder to kill, and fed by the dread of everything around them.",
+  "effects": [
+   {
+    "name": "Faded",
+    "text": "Mobs notice you at half the usual distance."
+   },
+   {
+    "name": "Fear Feeder",
+    "text": "Kills heal you 2."
+   },
+   {
+    "name": "Deathless Body",
+    "text": "Immune to poison and wither."
+   },
+   {
+    "name": "No Breath",
+    "text": "You never drown."
+   },
+   {
+    "name": "Light Hunger",
+    "text": "Hunger drains 40% slower."
+   },
+   {
+    "name": "Shadow Mend",
+    "text": "Regenerate 1 health every 4 s while in darkness (light below 7)."
+   },
+   {
+    "name": "Dread Aura",
+    "text": "Hostile mobs below 6 health won't attack you."
+   },
+   {
+    "name": "Night Stalker",
+    "text": "+10% speed at night."
+   },
+   {
+    "name": "Ethereal",
+    "text": "Take 20% less damage from projectiles."
+   }
   ],
   "abilities": [
    {
     "kind": "Utility",
     "name": "Unseen",
-    "text": "Become invisible to mobs and to players without a technique for 15 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Feed on Fear",
-    "text": "Villagers and passive mobs within 12 blocks panic; you heal 1 for each one for 10 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Reform",
-    "text": "When you'd die, reform from your cursed energy at 4 health instead (once every 20 minutes)."
+    "text": "Become invisible to mobs for 15 s; it ends when you attack. 90 s cooldown."
    },
    {
     "kind": "Utility",
     "name": "Phase Through",
-    "text": "Pass through one block-thick walls for 4 s. 60 s cooldown."
+    "text": "Walk through one block-thick walls for 4 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Curse Sense",
-    "text": "See every cursed spirit, sorcerer and cursed object within 48 blocks for 10 s. 2 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Idle Transfiguration Touch",
-    "text": "Your next hit within 10 s twists the target: Slowness III and Weakness II for 4 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Fear Aura",
-    "text": "Villagers and animals avoid you, and hostile mobs below 10 health flee from you for 20 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Curse Womb",
-    "text": "Leave a cursed womb that hatches a weak curse ally after 30 s, lasting 2 minutes. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Lurk in Shadows",
-    "text": "Become invisible while standing in light below 7 for 30 s. 60 s cooldown."
+    "name": "Haunt",
+    "text": "Watch a marked block from anywhere in the world for 10 s. 5 min cooldown."
    },
    {
     "kind": "Utility",
@@ -137,37 +179,103 @@
    },
    {
     "kind": "Utility",
-    "name": "Haunt",
-    "text": "Mark a block; you see what happens there for 10 s from any distance in the same world. 5 min cooldown."
+    "name": "Panic",
+    "text": "Villagers and animals within 12 blocks flee; you heal 1 for each, up to 6. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Lurk",
+    "text": "Become invisible while still in darkness for 60 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Dread Sense",
+    "text": "See every living creature within 32 blocks through walls for 8 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Reform",
+    "text": "When you'd die, reform at 4 health 2 blocks away instead (once every 20 minutes)."
+   },
+   {
+    "kind": "Utility",
+    "name": "Possess Beast",
+    "text": "Take control of an animal you look at for 20 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Spawn Curse",
+    "text": "Leave a small curse ally that fights for you for 60 s. 5 min cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Soul Grip",
+    "name": "Soul Punch",
+    "text": "Your next hit ignores armour and gives Slowness III for 3 s. 45 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Twist Soul",
     "text": "Grab the enemy you look at (6 blocks): it's rooted and takes 2 damage a second for 3 s. 60 s cooldown."
    }
   ]
  },
  {
-  "id": "heavenly_restricted",
-  "name": "Heavenly Restricted",
-  "source": "Toji and Maki Zen'in",
-  "gap": "No cursed energy, a perfect body",
-  "desc": "Born with no cursed energy at all. The universe paid them back in flesh: senses, speed and strength beyond any sorcerer.",
-  "traits": [
-   "+15% movement and attack speed, +2 armour",
-   "Can see cursed spirits and invisible creatures within 16 blocks",
-   "Can't use Cursed Fate techniques or domains, and mana is capped at 20%"
+  "id": "restricted",
+  "names": [
+   "Restricted",
+   "Ironblood",
+   "Zeroed"
+  ],
+  "inspo": "Toji and Maki Zen'in; Inventory Curse, Blitz, Killing Slash",
+  "desc": "Born with no cursed energy and paid back in flesh: senses, speed and strength no sorcerer can match. They carry their arsenal in a curse coiled around their waist.",
+  "effects": [
+   {
+    "name": "Perfect Body",
+    "text": "+15% movement speed."
+   },
+   {
+    "name": "Weapon Master",
+    "text": "+10% attack speed."
+   },
+   {
+    "name": "Keen Eyes",
+    "text": "See invisible creatures within 16 blocks."
+   },
+   {
+    "name": "Hard Hide",
+    "text": "+2 armour."
+   },
+   {
+    "name": "Iron Lungs",
+    "text": "Sprinting costs half the hunger."
+   },
+   {
+    "name": "Light Feet",
+    "text": "Take no fall damage from falls up to 8 blocks."
+   },
+   {
+    "name": "Spell Blind",
+    "text": "Take 20% less damage from spells."
+   },
+   {
+    "name": "Sharp Ears",
+    "text": "Mobs sneaking up within 8 blocks glow."
+   },
+   {
+    "name": "Quick Recovery",
+    "text": "Stamina regenerates 20% faster."
+   }
   ],
   "abilities": [
    {
     "kind": "Utility",
-    "name": "Keen Senses",
-    "text": "Every creature within 32 blocks shows through walls for 8 s. 60 s cooldown."
+    "name": "Weapon Pocket",
+    "text": "Open a 9-slot pocket that only holds weapons and tools. 10 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Inventory Curse",
-    "text": "Open a 9-slot pocket that holds weapons (a cursed spirit you carry). 10 s cooldown."
+    "name": "Keen Senses",
+    "text": "See every creature within 32 blocks through walls for 8 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
@@ -176,33 +284,18 @@
    },
    {
     "kind": "Utility",
-    "name": "Domain Blind Spot",
-    "text": "For 10 s, domain expansions and sure-hit effects can't find you. 5 min cooldown."
+    "name": "Silent Step",
+    "text": "Your steps make no sound for 30 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
     "name": "Hunter's Nose",
-    "text": "Track the player or mob you name: a pointer for 60 s. 5 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Flash Step",
-    "text": "Dash 10 blocks forward, hitting the first enemy for your weapon's damage. 20 s cooldown."
+    "text": "Point to the player or mob type you name for 60 s. 5 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Cursed Tool Mastery",
-    "text": "Cursed tools and weapons deal 20% more for 30 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Silent Step",
-    "text": "Your footsteps make no sound and mobs don't hear you for 30 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Iron Body",
-    "text": "Immune to poison, hunger and slowness for 60 s. 3 min cooldown."
+    "name": "Weapon Catch",
+    "text": "Catch the next arrow or thrown weapon that hits you within 5 s. 30 s cooldown."
    },
    {
     "kind": "Utility",
@@ -211,38 +304,79 @@
    },
    {
     "kind": "Utility",
-    "name": "Weapon Catch",
-    "text": "Catch the next arrow or thrown weapon that would hit you within 5 s, keeping it. 30 s cooldown."
+    "name": "Field Dressing",
+    "text": "Heal 6 over 3 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Spell Ward",
+    "text": "For 10 s, spell zones and area spells don't affect you. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Fast Hands",
+    "text": "Swap, eat and drink twice as fast for 30 s. 2 min cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Killing Intent",
-    "text": "Enemies within 8 blocks are stunned with fear for 1.5 s. 90 s cooldown."
+    "name": "Blitz",
+    "text": "Dash 10 blocks, hitting the first enemy for your weapon's damage. 20 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Killing Slash",
+    "text": "A wide slash that hits every enemy in front within 4 blocks for 150% weapon damage. 60 s cooldown."
    }
   ]
  },
  {
-  "id": "death_painting",
-  "name": "Death Painting",
-  "source": "Choso and the Death Painting wombs",
-  "gap": "Blood manipulation",
-  "desc": "A cursed womb made flesh, half-human and half-curse. Their blood is a weapon and their brothers are everything.",
-  "traits": [
-   "Immune to bleeding and poison",
-   "Blood regenerates: heal 1 every 5 s while above half hunger",
-   "Fire deals 25% more damage (blood boils)"
+  "id": "sanguine",
+  "names": [
+   "Bloodwright",
+   "Death Painting",
+   "Sanguine"
+  ],
+  "inspo": "Choso, Noritoshi Kamo; Piercing Blood, Supernova, Blood Meteorite, Flowing Red Scale",
+  "desc": "Half-human, half-curse, with blood that obeys them. They spend their own health as a weapon and get it back faster than anyone.",
+  "effects": [
+   {
+    "name": "Clotting",
+    "text": "Immune to bleeding."
+   },
+   {
+    "name": "Iron Blood",
+    "text": "Immune to poison."
+   },
+   {
+    "name": "Blood Regen",
+    "text": "Heal 1 every 5 s while above half hunger."
+   },
+   {
+    "name": "Blood Sense",
+    "text": "Wounded creatures (below half health) within 16 blocks glow."
+   },
+   {
+    "name": "Thick Blood",
+    "text": "+2 max health."
+   },
+   {
+    "name": "Haemorrhage",
+    "text": "Your melee hits make targets bleed for 1 damage a second for 2 s."
+   },
+   {
+    "name": "Blood Price",
+    "text": "Abilities that cost health cost 25% less."
+   },
+   {
+    "name": "Kinship",
+    "text": "Allies within 8 blocks heal 10% faster."
+   },
+   {
+    "name": "Red Rush",
+    "text": "Below half health, +10% attack damage."
+   }
   ],
   "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Blood Sense",
-    "text": "Sense every wounded creature (below full health) within 32 blocks for 10 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Coagulate",
-    "text": "Stop all bleeding on you and allies within 6, healing each 4. 90 s cooldown."
-   },
    {
     "kind": "Utility",
     "name": "Flowing Red Scale",
@@ -250,18 +384,13 @@
    },
    {
     "kind": "Utility",
-    "name": "Brother's Bond",
-    "text": "Mark one ally: you always know where they are, and you feel it when they're hurt, for 20 minutes. 20 min cooldown."
+    "name": "Coagulate",
+    "text": "Stop bleeding on you and allies within 6, healing each 4. 90 s cooldown."
    },
    {
     "kind": "Utility",
     "name": "Blood Bridge",
-    "text": "Harden your blood into a 6-block bridge ahead that lasts 20 s. 60 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Piercing Blood",
-    "text": "Fire a compressed blood beam in a line (16 blocks), 8 damage, costing 2 health. 45 s cooldown."
+    "text": "Harden blood into a 6-block bridge ahead for 20 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
@@ -271,416 +400,107 @@
    {
     "kind": "Utility",
     "name": "Blood Trail",
-    "text": "Leave a blood trail for 60 s that you can follow back. 3 min cooldown."
+    "text": "Leave a glowing trail for 3 minutes you can follow back. 3 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Supernova",
-    "text": "Stop a fall: burst blood under you to land without damage. 30 s cooldown."
+    "name": "Supernova Landing",
+    "text": "Burst blood under you to stop a fall. 30 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Rot Touch",
-    "text": "Rot the crop, food or wooden block you touch into bone meal. 30 s cooldown."
+    "name": "Brother's Bond",
+    "text": "Mark an ally: you always know where they are and when they're hurt, for 20 minutes. 20 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Brothers' Rally",
-    "text": "Allies within 10 blocks get Regeneration I for 10 s. 3 min cooldown."
+    "name": "Red Rain",
+    "text": "Allies within 8 get Regeneration I for 8 s, costing you 4 health. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Blood Lock",
+    "text": "Seal a door or chest with blood: only you can open it, for 20 minutes. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hemo Sight",
+    "text": "See every creature's health within 24 blocks for 20 s. 60 s cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Slicing Exorcism",
-    "text": "Two blood blades fly out and cut every enemy in a 6-block arc for 6 damage. 60 s cooldown."
+    "name": "Piercing Blood",
+    "text": "A compressed blood beam in a 20-block line, 8 damage, costing 2 health. 45 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Blood Meteorite",
+    "text": "Throw a hardened blood ball that homes in and bursts for 6 damage in 3 blocks. 90 s cooldown."
    }
   ]
  },
  {
-  "id": "cursed_corpse",
-  "name": "Cursed Corpse",
-  "source": "Panda and Masamichi Yaga's corpses",
-  "gap": "A puppet with a soul",
-  "desc": "A stitched-together body with a cursed core instead of a heart. Some have more than one core, and more than one personality.",
-  "traits": [
-   "Don't need to breathe; immune to poison and hunger effects",
-   "+4 max health and +2 armour",
-   "Can't eat cooked food for effects: you're fed by cursed energy (eat bones, wool and cursed objects)"
+  "id": "stitchling",
+  "names": [
+   "Stitchling",
+   "Cursed Corpse",
+   "Puppetkin"
+  ],
+  "inspo": "Panda, Masamichi Yaga, Ultimate Mechamaru",
+  "desc": "A stitched or built body run by a core instead of a heart. Some carry spare cores; some carry entire workshops in their limbs.",
+  "effects": [
+   {
+    "name": "No Breath",
+    "text": "You never drown."
+   },
+   {
+    "name": "Sewn Tough",
+    "text": "+4 max health."
+   },
+   {
+    "name": "Plated",
+    "text": "+2 armour."
+   },
+   {
+    "name": "Plush",
+    "text": "Fall damage is halved."
+   },
+   {
+    "name": "No Poison",
+    "text": "Immune to poison and nausea."
+   },
+   {
+    "name": "Spare Core",
+    "text": "Once every 20 minutes, a fatal hit leaves you at 4 health."
+   },
+   {
+    "name": "Wool Mend",
+    "text": "Using wool or string heals 2 (10 s cooldown)."
+   },
+   {
+    "name": "Steady Core",
+    "text": "Immune to knockback while sneaking."
+   },
+   {
+    "name": "Workshop Limbs",
+    "text": "Mine and chop 10% faster."
+   }
   ],
   "abilities": [
    {
     "kind": "Utility",
     "name": "Core Swap",
-    "text": "Switch between two cores: one gives Speed I, one gives Resistance I. 30 s cooldown."
+    "text": "Switch cores: one gives Speed I, the other Resistance I. 30 s cooldown."
    },
    {
     "kind": "Utility",
     "name": "Stitch Up",
-    "text": "Repair yourself with string or wool: heal 6. 30 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Plush Body",
-    "text": "Take no fall damage for 30 s and bounce off the ground. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Hibernate Core",
-    "text": "Stand still to heal 2 a second for 10 s, but you can't move. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Puppet Friend",
-    "text": "Sew a small cursed corpse that follows you and carries 9 items for 10 minutes. 15 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Drumming Beat",
-    "text": "Your next hit within 10 s ignores armour and knocks back hard. 45 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Gorilla Core",
-    "text": "For 20 s your hits break blocks like a pickaxe. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Cuddle",
-    "text": "Hug an ally: both heal 1 a second for 5 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Patch Armour",
-    "text": "Repair your armour by 10% using wool or leather. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Spare Core",
-    "text": "Store a spare core; the next death within 30 minutes leaves you at 6 health. 30 min cooldown."
+    "text": "Heal 6 using string or wool. 30 s cooldown."
    },
    {
     "kind": "Utility",
     "name": "Rolling",
     "text": "Curl up and roll 10 blocks forward, immune to knockback. 30 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Bear Slam",
-    "text": "Slam the ground: enemies within 3 blocks are knocked down for 1 s. 60 s cooldown."
-   }
-  ]
- },
- {
-  "id": "disaster_spirit",
-  "name": "Disaster Spirit",
-  "source": "Jogo, Hanami and Dagon",
-  "gap": "Born from fear of nature",
-  "desc": "A curse born from humanity's fear of the earth, the forest or the sea. Choose which disaster you embody when you pick the race (fire, forest or ocean); one ability follows it.",
-  "traits": [
-   "Immune to the damage of your element (fire, thorns and poison plants, or drowning)",
-   "Your element's biome heals you 1 every 5 s",
-   "The opposite element hurts you 25% more (water, fire or lightning)"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Elemental Body",
-    "text": "Fire: walk on lava. Forest: plants grow under your feet. Ocean: swim like a fish. For 30 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Nature's Ear",
-    "text": "Feel every creature touching your element within 32 blocks (in fire, in plants, in water) for 10 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Calamity Weather",
-    "text": "Fire: clear skies. Forest: rain. Ocean: rain and high waves. 20 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Shape the Land",
-    "text": "Fire: turn stone to magma. Forest: grow a tree or vines. Ocean: make a water pool. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Disaster Shell",
-    "text": "Gain 8 absorption made of your element for 15 s. 3 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Elemental Burst",
-    "text": "Fire: a volcano erupts under the target. Forest: a cursed bud drains it. Ocean: a fish swarm hits it. 8 damage. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Element Walk",
-    "text": "Leave a trail of your element (embers, grass or water) for 20 s that speeds you up. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Calamity Sense",
-    "text": "Know when a storm, raid or boss spawns within 128 blocks, for 10 minutes. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Disaster Shelter",
-    "text": "Raise a dome of your element (stone, wood or water) around you for 20 s. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Feed the Land",
-    "text": "Grow, melt or flood a 6-block area to your element's shape. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Elemental Mount",
-    "text": "Ride a creature of your element (a magma cube, a wooden beast or a fish) for 60 s. 10 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Maximum Disaster",
-    "text": "A 6-block field of your element for 6 s: burning, choking vines or crushing water. 3 min cooldown."
-   }
-  ]
- },
- {
-  "id": "incarnate",
-  "name": "Incarnate",
-  "source": "Culling Game reincarnated sorcerers",
-  "gap": "An old soul in a new body",
-  "desc": "A sorcerer from a thousand years ago, sleeping in a body that once belonged to someone else. They remember techniques no one alive knows.",
-  "traits": [
-   "Gain 25% more experience from killing sorcerers and bosses",
-   "Speak the old tongue: read enchantment and spell scrolls without a lectern",
-   "Villagers don't trust you: trades cost 15% more"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Ancient Memory",
-    "text": "Learn: the next spell scroll or skill book you read gives double experience. 20 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Possess",
-    "text": "Take control of a weaker mob you look at (below 20 health) for 20 s, seeing through it. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Old Ways",
-    "text": "Craft one cursed tool or talisman without a crafting table. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Barrier",
-    "text": "Raise a simple barrier (a curtain) around a 10-block area for 60 s: mobs can't see in. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Host's Instinct",
-    "text": "For 10 s, see the last 3 places you died or were badly hurt. 10 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Forgotten Technique",
-    "text": "Cast a random technique from a past life: a lightning strike, a fire burst or a gravity slam. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Old Sword Style",
-    "text": "Swords and spears gain +1 reach for 30 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Curse Contract",
-    "text": "Make a deal with a cursed spirit mob: it won't attack you for 5 minutes. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Culling Points",
-    "text": "Each player-like enemy kill gives a Culling Point; spend 5 to heal fully. Passive with 60 s cooldown on spending."
-   },
-   {
-    "kind": "Utility",
-    "name": "Heian Lore",
-    "text": "Identify the item in your hand: see its full stats and hidden effects. 10 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Body Hop",
-    "text": "Swap your health with a tame animal's you look at. 10 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Reversed Cursed Technique",
-    "text": "Heal 10 health over 2 s. 3 min cooldown."
-   }
-  ]
- },
- {
-  "id": "six_eyes",
-  "name": "Six Eyes Heir",
-  "source": "Gojo clan",
-  "gap": "Perfect cursed energy sight",
-  "desc": "Born with the Six Eyes, which see cursed energy to the atom. Their techniques waste almost nothing, but the eyes tire quickly.",
-  "traits": [
-   "Spells cost 10% less mana",
-   "See invisible creatures and cursed energy (all spells' projectiles glow)",
-   "Bright light gives Blindness for 1 s every 30 s unless you wear a blindfold or helmet"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Blindfold",
-    "text": "Put the blindfold on: lose the light penalty and see every living thing within 24 blocks through walls for 30 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Efficient Flow",
-    "text": "Your next 3 spells cost no mana. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Read the Technique",
-    "text": "Look at a mob or player: learn its health, armour and what it's weak to. 30 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Infinity Step",
-    "text": "Teleport to the block you look at (12 blocks). 20 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Float",
-    "text": "Hover in place for 6 s. 45 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Lapse: Blue",
-    "text": "Pull every enemy within 8 blocks of the spot you look at into its centre. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Insight",
-    "text": "See every hidden block (traps, chests, spawners) within 16 blocks for 10 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Infinity",
-    "text": "For 3 s, nothing can touch you: attacks and projectiles stop just short. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Spell Echo",
-    "text": "Repeat the last spell you cast at half power, free. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Mana Sight",
-    "text": "See every player and mob's mana and spell cooldowns within 24 blocks for 20 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Detached",
-    "text": "Ignore gravity for 4 s and walk on air. 90 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Reversal: Red",
-    "text": "Push every enemy within 6 blocks away hard. 60 s cooldown."
-   }
-  ]
- },
- {
-  "id": "shadow_clan",
-  "name": "Shadow Clan Heir",
-  "source": "Megumi Fushiguro, the Zen'in Ten Shadows",
-  "gap": "Shikigami from shadows",
-  "desc": "Heir to a technique that draws shikigami from shadow. They start with dogs and frogs, and some never find out what the tenth shadow is.",
-  "traits": [
-   "Shadows are pockets: 9 extra storage slots while in light below 8",
-   "Dogs and wolves are friendly",
-   "Must have both hands free (no shield) to summon"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Divine Dogs",
-    "text": "Summon two shadow dogs that track and fight for 60 s. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Toad",
-    "text": "Summon a toad that pulls you or an item to safety with its tongue. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Nue",
-    "text": "Summon a great owl that carries you through the air for 8 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Shadow Sink",
-    "text": "Sink into your own shadow and move through the ground for 5 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Max Elephant",
-    "text": "Summon an elephant that floods a 6-block area with water. 3 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Rabbit Escape",
-    "text": "A swarm of shadow rabbits hides you: enemies lose their target and you're invisible for 3 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Great Serpent",
-    "text": "Summon a serpent that rises under the enemy you look at and holds it for 2 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Shadow Garden",
-    "text": "Fill a 5-block area with shadow for 10 s; you can sink and resurface anywhere in it. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Round Deer",
-    "text": "Summon a deer that heals you and allies 1 a second for 6 s. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Piercing Ox",
-    "text": "Summon an ox that charges forward 12 blocks, breaking soft blocks. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Shadow Stash",
-    "text": "Store a whole stack in your shadow; take it out later anywhere. 10 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Chimera Shadow",
-    "text": "Merge your dogs and nue for 10 s: you gain Speed II and Strength I. 5 min cooldown."
-   }
-  ]
- },
- {
-  "id": "puppet_shell",
-  "name": "Puppet Shell",
-  "source": "Kokichi Muta's Ultimate Mechamaru",
-  "gap": "A sorcerer through a machine",
-  "desc": "A frail body that can't leave its bed, piloting a cursed puppet across the world. Every limb is a gun, a blade or a tool.",
-  "traits": [
-   "Your body is the puppet: +6 armour, immune to poison and drowning",
-   "Use iron and redstone to heal (2 per item)",
-   "Can't eat for food (hunger is always full, saturation never rises): no food buffs"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Remote Eye",
-    "text": "Send a tiny drone up to 32 blocks to scout for 15 s. 2 min cooldown."
    },
    {
     "kind": "Utility",
@@ -689,664 +509,318 @@
    },
    {
     "kind": "Utility",
+    "name": "Remote Eye",
+    "text": "Send a tiny drone up to 32 blocks to scout for 15 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
     "name": "Built-in Tools",
-    "text": "Your arm becomes any tool (pickaxe, axe, shovel) of iron grade for 60 s. 2 min cooldown."
+    "text": "Your arm becomes an iron pickaxe, axe or shovel for 60 s. 2 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Puppet Repair",
-    "text": "Repair the item in your hand by 20% with iron. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Signal Relay",
-    "text": "Talk to any player in the same world through chat, even far away, and see their direction for 30 s. 5 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Ultra Cannon",
-    "text": "Charge 2 s and fire a beam 16 blocks for 10 damage. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Magnet Arm",
-    "text": "Pull an item or block entity to you from 16 blocks. 15 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Spare Parts",
-    "text": "Turn iron in your inventory into armour repair: fix all worn armour by 10%. 3 min cooldown."
+    "name": "Puppet Friend",
+    "text": "Sew a small puppet that follows you and carries 9 items for 10 minutes. 15 min cooldown."
    },
    {
     "kind": "Utility",
     "name": "Searchlight",
-    "text": "A beam of light from your eyes lights the way 24 blocks for 60 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Rocket Jump",
-    "text": "Blast up 8 blocks, slow fall after. 45 s cooldown."
+    "text": "Light the way 24 blocks ahead for 60 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
     "name": "Defence Mode",
-    "text": "Resistance II for 6 s but you can't move. 90 s cooldown."
+    "text": "Resistance II for 6 s, but you can't move. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Cuddle",
+    "text": "Hug an ally: both heal 1 a second for 5 s. 90 s cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Sword Arm",
-    "text": "Your arm becomes a blade for 20 s: +4 damage and sweeping hits. 2 min cooldown."
+    "name": "Drumming Beat",
+    "text": "Your next hit ignores armour and knocks back hard. 45 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Ultra Cannon",
+    "text": "Charge 2 s and fire a 16-block beam for 10 damage. 90 s cooldown."
    }
   ]
  },
  {
-  "id": "vow_sworn",
-  "name": "Vow-Sworn",
-  "source": "Binding vows, Kenjaku and Kusakabe",
-  "gap": "Power through self-restriction",
-  "desc": "Folk who live by binding vows. They give something up and get more back. They are the most dangerous when they make a promise.",
-  "traits": [
-   "Each day you choose a vow at dawn: 10% more damage, or 10% less damage taken",
-   "Ring of Promises and vow items work twice as strongly",
-   "Breaking a vow (dying) costs 10% of your experience"
+  "id": "emberkin",
+  "names": [
+   "Emberkin",
+   "Disaster Flame",
+   "Volcano Curse"
+  ],
+  "inspo": "Jogo; Disaster Flames, Flame Pillar, Maximum Meteor, Lava Hand, Coffin of the Iron Mountain",
+  "desc": "Curses born from the fear of the earth's fire. Lava is a warm bath, the ground smokes under their feet, and water is their only real enemy.",
+  "effects": [
+   {
+    "name": "Fireproof",
+    "text": "Immune to fire damage (lava still hurts)."
+   },
+   {
+    "name": "Lava Swimmer",
+    "text": "Swim in lava at normal speed."
+   },
+   {
+    "name": "Ember Skin",
+    "text": "Attackers that hit you in melee catch fire for 2 s."
+   },
+   {
+    "name": "Warm Blood",
+    "text": "Immune to freezing."
+   },
+   {
+    "name": "Heat Haze",
+    "text": "Nether biomes give you Speed I."
+   },
+   {
+    "name": "Smelter's Touch",
+    "text": "Furnaces you use smelt 25% faster."
+   },
+   {
+    "name": "Cinder Mend",
+    "text": "Standing in fire or near lava (4 blocks) heals 1 every 3 s."
+   },
+   {
+    "name": "Sun Fed",
+    "text": "Hunger drains 25% slower in the day."
+   },
+   {
+    "name": "Firestarter",
+    "text": "Your fire spells deal 10% more."
+   }
   ],
   "abilities": [
    {
     "kind": "Utility",
-    "name": "Sworn Restriction",
-    "text": "For 30 s, you can't sprint, but your spells deal 30% more. 2 min cooldown."
+    "name": "Lava Walk",
+    "text": "Walk on lava for 10 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Reveal Technique",
-    "text": "Tell the mob you're fighting your technique: your next 3 attacks deal 20% more. 60 s cooldown."
+    "name": "Lava Hand",
+    "text": "Turn the stone you touch into magma or lava, or lava into obsidian. 20 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Pact",
-    "text": "Bind an ally: while within 16 blocks of each other, both heal 1 every 5 s for 5 minutes. 10 min cooldown."
+    "name": "Hearth",
+    "text": "Light a fire anywhere that heals allies 1 every 3 s for 60 s. 3 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Oath of Return",
-    "text": "Promise to come back: mark a spot, and after you die you respawn there once within 30 minutes. 30 min cooldown."
+    "name": "Smelt",
+    "text": "Smelt the ores in your inventory. 3 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Give and Take",
-    "text": "Spend 4 health to refill 30% mana, or 30% mana to heal 4. 30 s cooldown."
+    "name": "Volcanic Vent",
+    "text": "Launch yourself 10 blocks up on a burst of smoke. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Heat Sense",
+    "text": "See every warm-blooded creature within 24 blocks through walls for 8 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Clear Skies",
+    "text": "Stop rain in your area. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Fire Ward",
+    "text": "You and allies within 6 are immune to fire for 30 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Ember Light",
+    "text": "Float an ember that lights your way for 2 minutes. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Coffin Shelter",
+    "text": "Raise a dome of stone around you for 20 s. 3 min cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Simple Domain",
-    "text": "For 6 s, enemies within 3 blocks that you haven't hit yet are struck back when they swing. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Vow of Silence",
-    "text": "You can't chat for 2 minutes, but you're invisible to mobs while sneaking. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Debt",
-    "text": "Borrow 6 health now; lose 8 over the next minute. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Witnessed Vow",
-    "text": "Make a vow with an ally: both get 10% more damage while within 8 blocks for 5 minutes. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Overtime",
-    "text": "After sunset, your next 2 minutes give 15% more damage and speed. 20 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Price of Knowledge",
-    "text": "Pay 5 levels to see every structure within 128 blocks on your map. 20 min cooldown."
+    "name": "Flame Pillar",
+    "text": "A pillar of fire bursts from the ground at the spot you look at, 8 damage. 45 s cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Hollow Wicker Basket",
-    "text": "For 5 s, domains, sure-hit attacks and spells can't affect you, but you can't move. 3 min cooldown."
+    "name": "Maximum Meteor",
+    "text": "Drop a meteor on the spot you look at: 12 damage in 5 blocks. 5 min cooldown."
    }
   ]
  },
  {
-  "id": "angelborn",
-  "name": "Angelborn",
-  "source": "Hana Kurusu and the Angel",
-  "gap": "The light that erases techniques",
-  "desc": "Hosts of a being that hunts techniques. Their light unmakes cursed energy, and they have little patience for anything unholy.",
-  "traits": [
-   "Undead and cursed spirits take 15% more damage from you",
-   "Wings: slow falling while sneaking",
-   "Your own Cursed Fate techniques cost 25% more"
+  "id": "voidsighted",
+  "names": [
+   "Six Eyes",
+   "Voidsighted",
+   "Limitless Heir"
+  ],
+  "inspo": "Satoru Gojo; Infinity, Lapse Blue, Reversal Red, Hollow Purple",
+  "desc": "Born with eyes that see energy down to the atom. Space bends a little around them: things fall toward them, or never quite reach them.",
+  "effects": [
+   {
+    "name": "Efficient Flow",
+    "text": "Spells cost 10% less mana."
+   },
+   {
+    "name": "Six Eyes",
+    "text": "See invisible creatures."
+   },
+   {
+    "name": "Mana Sight",
+    "text": "See every mob's health within 16 blocks."
+   },
+   {
+    "name": "Mana Well",
+    "text": "+15% max mana."
+   },
+   {
+    "name": "Quick Flow",
+    "text": "Mana regenerates 15% faster."
+   },
+   {
+    "name": "Near Infinity",
+    "text": "Projectiles deal 15% less damage to you."
+   },
+   {
+    "name": "Featherweight",
+    "text": "Fall damage is halved."
+   },
+   {
+    "name": "Spatial Sense",
+    "text": "Mobs that would hit you from behind glow 1 s before."
+   },
+   {
+    "name": "Calm Mind",
+    "text": "Cooldowns are 5% shorter."
+   }
   ],
   "abilities": [
    {
     "kind": "Utility",
-    "name": "Jacob's Ladder",
-    "text": "A beam of light from the sky erases every active effect on the target, good or bad. 90 s cooldown."
+    "name": "Infinity",
+    "text": "For 3 s nothing touches you: attacks and projectiles stop just short. 2 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Wings",
-    "text": "Fly freely for 6 s. 60 s cooldown."
+    "name": "Blink",
+    "text": "Teleport to the block you look at (12 blocks). 20 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Halo of Truth",
-    "text": "Reveal every invisible or disguised creature within 24 blocks for 15 s. 90 s cooldown."
+    "name": "Float",
+    "text": "Hover in place for 6 s. 45 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Purify",
-    "text": "Cure an ally of every curse and harmful effect, healing 4. 60 s cooldown."
+    "name": "Blindfold",
+    "text": "See every living thing within 24 blocks through walls for 30 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Sanctum",
-    "text": "Mark a 6-block area for 2 minutes where domains and barriers can't open. 10 min cooldown."
+    "name": "Pull Items",
+    "text": "Pull every dropped item within 16 blocks to you. 15 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Detached",
+    "text": "Walk on air for 4 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Insight",
+    "text": "See hidden blocks (traps, chests, spawners) within 16 blocks for 10 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Read",
+    "text": "Look at a creature: learn its health, armour and resistances. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Spell Echo",
+    "text": "Repeat the last spell you cast at half power, free. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Unlimited Calm",
+    "text": "Your next 3 spells cost no mana. 5 min cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Technique Erasure",
-    "text": "The enemy you look at can't cast spells or techniques for 5 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Light of Heaven",
-    "text": "Light a 12-block area for 2 minutes and burn undead slowly in it. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Feather Shield",
-    "text": "Absorb the next spell that hits you within 10 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Choir",
-    "text": "Allies within 10 blocks get Regeneration I and Resistance I for 8 s. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Judgement Sight",
-    "text": "See everything that has hurt you or an ally in the last minute, glowing, for 10 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Ascend",
-    "text": "Rise 12 blocks straight up and glide down. 60 s cooldown."
+    "name": "Lapse: Blue",
+    "text": "Pull every enemy within 8 blocks of the spot you look at into its centre. 60 s cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Holy Lance",
-    "text": "Throw a lance of light that deals 8, doubled against undead and curses. 45 s cooldown."
+    "name": "Reversal: Red",
+    "text": "Blast every enemy within 6 blocks away for 6 damage. 60 s cooldown."
    }
   ]
  },
  {
-  "id": "projection_heir",
-  "name": "Projection Heir",
-  "source": "Naoya and Naobito Zen'in",
-  "gap": "Speed in 24 frames",
-  "desc": "Zen'in heirs who split each second into 24 frames and move through them. Fast beyond reason, and arrogant to match.",
-  "traits": [
-   "+20% movement speed",
-   "Sprinting costs no extra hunger",
-   "Being stunned or knocked down lasts 50% longer"
+  "id": "fiend",
+  "names": [
+   "Heian Fiend",
+   "Shrinekin",
+   "Four-Armed"
   ],
-  "abilities": [
+  "inspo": "Ryomen Sukuna; Cleave, Dismantle, Fuga, Shrine",
+  "desc": "Descended from the four-armed demon of the Heian era. Two faces, four arms, and a hunger for everything that walks.",
+  "effects": [
    {
-    "kind": "Utility",
-    "name": "Frame Dash",
-    "text": "Dash 12 blocks in a straight line in an instant. 20 s cooldown."
+    "name": "Four Arms",
+    "text": "Your offhand works as a full main hand for tools."
    },
    {
-    "kind": "Utility",
-    "name": "24 Frames",
-    "text": "For 8 s, you move 50% faster and climb blocks without jumping. 60 s cooldown."
+    "name": "Rear Face",
+    "text": "Mobs behind you within 8 blocks glow."
    },
    {
-    "kind": "Utility",
-    "name": "Afterimage",
-    "text": "Leave an afterimage that mobs attack for 4 s. 60 s cooldown."
+    "name": "Gourmand",
+    "text": "Eat raw and rotten food safely, with 20% more food from it."
    },
    {
-    "kind": "Utility",
-    "name": "Momentum",
-    "text": "The longer you sprint, the faster you go: up to +30% after 10 s. Passive while sprinting, 60 s cooldown after stopping."
+    "name": "King's Weight",
+    "text": "Mobs with less than half your max health won't approach unless you attack."
    },
    {
-    "kind": "Utility",
-    "name": "Quick Hands",
-    "text": "Swap items, eat and drink twice as fast for 30 s. 2 min cooldown."
+    "name": "Swift Butcher",
+    "text": "+10% attack speed."
    },
    {
-    "kind": "Utility",
-    "name": "Speed Read",
-    "text": "Your next 5 block breaks are instant. 3 min cooldown."
+    "name": "Thick Hide",
+    "text": "+2 armour."
    },
    {
-    "kind": "Utility",
-    "name": "Water Run",
-    "text": "Run across water for 10 s. 60 s cooldown."
+    "name": "Hearty",
+    "text": "+4 max health."
    },
    {
-    "kind": "Utility",
-    "name": "Clan Pride",
-    "text": "Villagers trade with you at 10% less for 5 minutes. 20 min cooldown."
+    "name": "Fire Born",
+    "text": "Take 25% less fire damage."
    },
    {
-    "kind": "Utility",
-    "name": "Escape Plan",
-    "text": "When you drop below 4 health, gain Speed III for 3 s (once every 2 minutes)."
-   },
-   {
-    "kind": "Utility",
-    "name": "Mapped Route",
-    "text": "Mark a path while sprinting; it glows for 5 minutes. 5 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Frame Lock",
-    "text": "The enemy you hit next is frozen in a frame for 1 s. 45 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Supersonic Strike",
-    "text": "Dash through every enemy in a 10-block line, 6 damage each. 90 s cooldown."
+    "name": "Contempt",
+    "text": "Slowness and weakness last half as long on you."
    }
-  ]
- },
- {
-  "id": "speech_bound",
-  "name": "Speech-Bound",
-  "source": "Toge Inumaki and the Inumaki clan",
-  "gap": "Cursed Speech",
-  "desc": "Heirs of Cursed Speech, whose words become commands. They talk only in rice-ball fillings so they don't hurt anyone by accident.",
-  "traits": [
-   "Your commands hit harder when your throat is healthy: honey or cough syrup restores 20% mana",
-   "Mobs can hear your voice through walls (they come investigate sooner)",
-   "Each command used gives you a sore throat: 1 damage"
   ],
   "abilities": [
    {
     "kind": "Utility",
-    "name": "Stop",
-    "text": "Mobs within 8 blocks freeze in place for 2 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Don't Move",
-    "text": "The mob you look at is rooted for 4 s. 45 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Sleep",
-    "text": "Passive or neutral mobs within 8 blocks fall asleep for 30 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Come Here",
-    "text": "The animal or ally you look at walks straight to you. 30 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Get Lost",
-    "text": "Hostile mobs within 10 blocks walk away from you for 4 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Be Quiet",
-    "text": "Sculk sensors, wardens and alarm mobs don't hear anything within 8 blocks for 30 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Run",
-    "text": "You and allies within 8 blocks get Speed II for 6 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Megaphone",
-    "text": "Your next command reaches twice as far. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Onigiri Code",
-    "text": "Send a coded message to any player in the world; only they can read it. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Throat Remedy",
-    "text": "Heal your throat: your next 3 commands cost no health. 5 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Explode",
-    "text": "The mob you look at takes 8 damage from a burst inside it. 90 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Twist",
-    "text": "The enemy you look at takes 5 damage and Weakness II for 5 s. 60 s cooldown."
-   }
-  ]
- },
- {
-  "id": "curse_bonded",
-  "name": "Curse-Bonded",
-  "source": "Yuta Okkotsu and Rika",
-  "gap": "Bound to a vengeful spirit",
-  "desc": "Someone a loving curse refused to leave. It follows them everywhere, saves them from death, and terrifies everyone else.",
-  "traits": [
-   "A spirit watches over you: once every 20 minutes, a fatal hit is blocked",
-   "Copy: 10% chance to learn the next spell that hits you for 60 s",
-   "Mobs within 4 blocks feel dread: animals won't breed near you"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Manifest",
-    "text": "The spirit appears and carries you 10 blocks forward. 45 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Spirit Storage",
-    "text": "Store up to 27 items in the spirit. 10 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Love Shield",
-    "text": "The spirit takes the next hit for you within 10 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Copy Technique",
-    "text": "Copy the last spell an enemy cast near you and cast it once. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Healing Output",
-    "text": "Heal yourself or an ally you look at for 8. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Spirit Watch",
-    "text": "The spirit stands guard where you leave it for 2 minutes, alerting you to mobs. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Ring of Promises",
-    "text": "Wearing a ring, your spells cost 15% less for 60 s. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Hold Tight",
-    "text": "The spirit grabs a falling ally or you, preventing fall damage for 10 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Gentle Fear",
-    "text": "Hostile mobs below 20 health won't target you for 20 s. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Promise Kept",
-    "text": "Mark an ally; if they die within 10 minutes, the spirit drags them back with 4 health. 20 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Rika's Grip",
-    "text": "The spirit crushes the enemy you look at for 10 damage. 90 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Pure Love Beam",
-    "text": "A beam of cursed energy, 20 blocks long, 12 damage. 5 min cooldown."
-   }
-  ]
- },
- {
-  "id": "spirit_tamer",
-  "name": "Spirit Tamer",
-  "source": "Suguru Geto and Cursed Spirit Manipulation",
-  "gap": "Absorbing and commanding curses",
-  "desc": "Sorcerers who swallow defeated curses and call them back as servants. The taste is foul; the army is worth it.",
-  "traits": [
-   "Cursed Fate cursed spirits you kill drop a cursed orb you can absorb",
-   "Mobs you summon last 25% longer",
-   "Eating anything after absorbing a curse gives Nausea for 3 s"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Absorb Curse",
-    "text": "Absorb a weakened cursed spirit or hostile mob (below 25% health) to summon later. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Release",
-    "text": "Summon your strongest absorbed mob as an ally for 60 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Flying Curse",
-    "text": "Summon a flying curse that carries you for 10 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Scout Curse",
-    "text": "Release a small curse that wanders 32 blocks and shows you what it sees for 15 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Curse Swarm",
-    "text": "Summon 4 weak curses that distract mobs for 10 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Pack Mule Curse",
-    "text": "Summon a curse that carries 27 items for 5 minutes. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Dig Curse",
-    "text": "Summon a curse that tunnels a 2x1 passage 16 blocks forward. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Hold Curse",
-    "text": "Store a block-sized structure (up to 3x3x3) in a curse and place it later. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Curse Bargain",
-    "text": "Release an absorbed curse to gain 30% mana. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Leader's Presence",
-    "text": "Your summons get Speed I and Strength I for 20 s. 3 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Uzumaki",
-    "text": "Release every absorbed curse at once as a spiral blast, 2 damage per curse stored. 5 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Rainbow Dragon",
-    "text": "Summon a curse dragon that charges in a line for 10 damage. 3 min cooldown."
-   }
-  ]
- },
- {
-  "id": "transfigured",
-  "name": "Transfigured",
-  "source": "Mahito's transfigured humans",
-  "gap": "Twisted flesh",
-  "desc": "Humans whose souls were reshaped by a curse and somehow survived. Their bodies are wrong in useful ways.",
-  "traits": [
-   "Your body bends: you can crawl through 1-block gaps at full speed",
-   "Immune to poison and nausea",
-   "Healing potions heal 25% less"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Stretch",
-    "text": "Reach 3 blocks further for breaking and using blocks for 30 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Extra Arms",
-    "text": "Use a second tool or weapon at the same time for 20 s (offhand acts as a full hand). 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Wings of Flesh",
-    "text": "Glide for 8 s. 45 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Gills",
-    "text": "Breathe underwater for 2 minutes. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Spring Legs",
-    "text": "Jump 5 blocks high for 20 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Hard Shell",
-    "text": "+4 armour for 30 s, but -10% speed. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Mouth Pocket",
-    "text": "Store 9 items in a second mouth. 10 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Reshape Face",
-    "text": "Look like a villager to mobs and illagers for 60 s. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Sticky Palms",
-    "text": "Climb walls for 10 s. 45 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Regrow",
-    "text": "Heal 6 health over 3 s. 90 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Flesh Spike",
-    "text": "A spike shoots out at the enemy in front, 6 damage. 30 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Polymorphic Soul Isomer",
-    "text": "Throw a transfigured body that bursts for 8 damage in 3 blocks. 2 min cooldown."
-   }
-  ]
- },
- {
-  "id": "lightning_born",
-  "name": "Lightning-Born",
-  "source": "Hajime Kashimo",
-  "gap": "Cursed energy as electricity",
-  "desc": "Their cursed energy behaves like electricity. Metal sings near them, and their reflexes run at the speed of a spark.",
-  "traits": [
-   "Immune to lightning damage",
-   "+10% attack speed",
-   "Water: touching it while charged gives you 1 damage"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Charge",
-    "text": "Store a charge: your next tool use or hit acts 50% faster. 20 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Spark Jump",
-    "text": "Jump on a bolt 8 blocks forward. 30 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Power Up",
-    "text": "Power every redstone component within 6 blocks for 10 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Static Sense",
-    "text": "Feel every creature moving within 24 blocks for 8 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Recharge",
-    "text": "Restore 25% mana when struck by lightning, or 10% at once. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Magnetise",
-    "text": "Pull every metal item within 12 blocks to you. 30 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Light Up",
-    "text": "Your body glows as a light source for 2 minutes. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Bolt Messenger",
-    "text": "Send a lightning bolt to mark a spot for allies to see for 30 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Reflex",
-    "text": "For 5 s, dodges cost no stamina. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Thunder Call",
-    "text": "Call a storm (thunder) over your area. 30 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Electric Staff",
-    "text": "Your next 3 hits chain lightning to one nearby enemy for 3 damage. 60 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Mythical Beast Amber",
-    "text": "Become living lightning for 10 s: Speed II, hits deal +4 lightning damage, then Weakness for 10 s. 10 min cooldown."
-   }
-  ]
- },
- {
-  "id": "heian_fiend",
-  "name": "Heian Fiend",
-  "source": "Sukuna's true form",
-  "gap": "Four arms, two faces",
-  "desc": "Descended from the four-armed demon of the Heian era. Two faces, four arms, and an appetite for everything.",
-  "traits": [
-   "Four arms: hold a second shield or tool (offhand works as main hand for tools)",
-   "A second face sees behind you: mobs sneaking up on you are revealed within 8 blocks",
-   "Villagers and golems are wary: golems start hostile"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Second Mouth",
-    "text": "A mouth on your stomach chants: your next spell casts instantly. 2 min cooldown."
+    "name": "Shrine",
+    "text": "Place a shrine for 5 minutes: no mobs spawn within 12 blocks. 10 min cooldown."
    },
    {
     "kind": "Utility",
@@ -1356,27 +830,12 @@
    {
     "kind": "Utility",
     "name": "Rear Gaze",
-    "text": "See behind you (the second face) for 30 s: mobs behind you glow. 60 s cooldown."
+    "text": "Everything behind you glows for 30 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "King's Presence",
-    "text": "Mobs weaker than you (below half your max health) won't approach for 30 s. 3 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Gourmet",
-    "text": "Eat anything (rotten, raw, cursed) safely for 5 minutes, gaining 50% more food. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Shrine",
-    "text": "Place a shrine for 5 minutes: mobs can't spawn within 12 blocks. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Fire Arrow Craft",
-    "text": "Make 16 flame arrows from 16 arrows and coal. 60 s cooldown."
+    "name": "Feast Sense",
+    "text": "Sense every animal and cooked food within 32 blocks for 10 s. 90 s cooldown."
    },
    {
     "kind": "Utility",
@@ -1385,13 +844,28 @@
    },
    {
     "kind": "Utility",
-    "name": "Two Voices",
-    "text": "Talk to two players at once from any distance for 60 s. 5 min cooldown."
+    "name": "Second Mouth",
+    "text": "Your next spell casts instantly. 2 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Feast Sense",
-    "text": "Smell every cooked food and animal within 32 blocks for 10 s. 90 s cooldown."
+    "name": "Butcher",
+    "text": "Animals you kill drop double meat for 60 s. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Cut Through",
+    "text": "Slash a 3x3 hole through wood, leaves and soft blocks ahead. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Royal Fear",
+    "text": "Hostile mobs below 20 health flee from you for 6 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Fuga Torch",
+    "text": "Light every torch, campfire and candle within 12 blocks. 30 s cooldown."
    },
    {
     "kind": "Combat",
@@ -1401,56 +875,197 @@
    {
     "kind": "Combat",
     "name": "Cleave",
-    "text": "The enemy you hit next takes extra damage scaling with its max health (8%). 60 s cooldown."
+    "text": "Your next hit deals 8% of the target's max health extra. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "umbral",
+  "names": [
+   "Shadow Clan",
+   "Umbral",
+   "Shikigami Heir"
+  ],
+  "inspo": "Megumi Fushiguro and the Ten Shadows",
+  "desc": "Heirs who draw animal spirits out of shadow. Their shadow is a door, a pocket and a kennel.",
+  "effects": [
+   {
+    "name": "Shadow Pocket",
+    "text": "9 extra storage slots, only while in light below 8."
+   },
+   {
+    "name": "Dog Friend",
+    "text": "Wolves and dogs are friendly."
+   },
+   {
+    "name": "Dark Eyes",
+    "text": "Night vision in light below 4."
+   },
+   {
+    "name": "Pack Bond",
+    "text": "Your pets and summons take 15% less damage."
+   },
+   {
+    "name": "Quiet",
+    "text": "Mobs hear you at half distance in the dark."
+   },
+   {
+    "name": "Long Summons",
+    "text": "Your summons last 25% longer."
+   },
+   {
+    "name": "Shade Mend",
+    "text": "Regenerate 1 every 6 s in darkness."
+   },
+   {
+    "name": "Shadow Step",
+    "text": "Sneaking in darkness makes you invisible to mobs after 2 s."
+   },
+   {
+    "name": "Night Speed",
+    "text": "+10% speed at night."
+   }
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Divine Dogs",
+    "text": "Two shadow dogs track and fight for you for 60 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Toad",
+    "text": "A toad pulls you or an item to you with its tongue (16 blocks). 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Nue",
+    "text": "A great owl carries you through the air for 8 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Shadow Sink",
+    "text": "Sink into your shadow and move through the ground for 5 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Max Elephant",
+    "text": "Flood a 6-block area with water for 10 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Round Deer",
+    "text": "Heal you and allies within 6 for 1 a second for 6 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Rabbit Escape",
+    "text": "Shadow rabbits hide you: mobs lose your target, invisible 3 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Shadow Garden",
+    "text": "Fill 5 blocks with shadow for 10 s; sink and resurface anywhere in it. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Piercing Ox",
+    "text": "An ox charges 12 blocks ahead, breaking soft blocks. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Shadow Stash",
+    "text": "Store a whole stack in your shadow and take it out anywhere. 10 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Great Serpent",
+    "text": "A serpent rises under the enemy you look at and holds it for 2 s. 90 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Chimera Shadow",
+    "text": "Merge your shikigami into you for 10 s: Speed II and Strength I. 5 min cooldown."
    }
   ]
  },
  {
   "id": "gambler",
-  "name": "Gambler",
-  "source": "Kinji Hakari and Idle Death Gamble",
-  "gap": "Luck and jackpots",
-  "desc": "Sorcerers whose power runs on luck. When the reels line up they're unstoppable; when they don't, they keep spinning.",
-  "traits": [
-   "Luck +1",
-   "Every hour you can spin once: a random good effect for 5 minutes",
-   "Bad luck streaks: 5% of the time, a spin gives a harmful effect instead"
+  "names": [
+   "Gambler",
+   "Fortune-Touched",
+   "Jackpot Born"
+  ],
+  "inspo": "Kinji Hakari; Idle Death Gamble, Pachinko Ball, Jackpot",
+  "desc": "Their power runs on luck. When the reels line up they're unstoppable; when they don't, they keep spinning.",
+  "effects": [
+   {
+    "name": "Lucky",
+    "text": "+1 Luck."
+   },
+   {
+    "name": "Hot Hand",
+    "text": "Crits deal 10% more."
+   },
+   {
+    "name": "Fever",
+    "text": "After a kill, +10% speed for 5 s."
+   },
+   {
+    "name": "Big Win",
+    "text": "Ores have a 5% chance to drop double."
+   },
+   {
+    "name": "Loaded Dice",
+    "text": "Your random rolls (crits, drops) get one reroll a minute."
+   },
+   {
+    "name": "Rough Skin",
+    "text": "+2 armour."
+   },
+   {
+    "name": "Never Bust",
+    "text": "Once every 30 minutes, a fatal hit misses instead."
+   },
+   {
+    "name": "Comp Meals",
+    "text": "Food has a 10% chance not to be used up."
+   },
+   {
+    "name": "House Rules",
+    "text": "Villager trades cost 5% less."
+   }
   ],
   "abilities": [
    {
     "kind": "Utility",
     "name": "Spin the Reels",
-    "text": "Roll a random buff (Speed, Strength, Regeneration, Haste or Luck II) for 60 s. 60 s cooldown."
+    "text": "A random buff (Speed, Strength, Regeneration, Haste or Luck II) for 60 s. 60 s cooldown."
    },
    {
     "kind": "Utility",
     "name": "Jackpot",
-    "text": "1 in 4 chance: for 30 s, heal to full and regenerate any damage taken instantly. 5 min cooldown."
+    "text": "1 in 4 chance: for 30 s, heal instantly from any damage. 5 min cooldown."
    },
    {
     "kind": "Utility",
     "name": "Double or Nothing",
-    "text": "Bet an item stack: 50% chance to double it, 50% to lose it. 10 min cooldown."
+    "text": "Bet a stack: 50% to double it, 50% to lose it. 10 min cooldown."
    },
    {
     "kind": "Utility",
     "name": "Lucky Dig",
-    "text": "Your next 20 ores have a 30% chance of double drops. 10 min cooldown."
+    "text": "Next 20 ores have a 30% chance of double drops. 10 min cooldown."
    },
    {
     "kind": "Utility",
     "name": "Pachinko Balls",
-    "text": "Drop a handful of balls that make mobs slip and fall for 5 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Hot Streak",
-    "text": "Each kill within 60 s raises your damage by 5%, up to 25%. 3 min cooldown."
+    "text": "Drop balls that make mobs slip and fall for 5 s. 90 s cooldown."
    },
    {
     "kind": "Utility",
     "name": "Coin Flip",
-    "text": "Heads: teleport 8 blocks back. Tails: teleport 8 blocks forward. 30 s cooldown."
+    "text": "Heads: blink 8 blocks back. Tails: 8 forward. 30 s cooldown."
    },
    {
     "kind": "Utility",
@@ -1460,318 +1075,247 @@
    {
     "kind": "Utility",
     "name": "Fever Mode",
-    "text": "For 20 s, every ability you use has a 50% chance not to go on cooldown. 20 min cooldown."
+    "text": "For 20 s, abilities have a 50% chance to skip their cooldown. 20 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hot Streak",
+    "text": "Each kill within 60 s adds 5% damage, up to 25%. 3 min cooldown."
    },
    {
     "kind": "Utility",
     "name": "House Edge",
-    "text": "Villager trades have a 25% chance to give double results for 5 minutes. 20 min cooldown."
+    "text": "Trades have a 25% chance of a double result for 5 minutes. 20 min cooldown."
    },
    {
     "kind": "Combat",
     "name": "Rough Energy",
-    "text": "Fire a spray of rough cursed energy that knocks back for 4 damage. 30 s cooldown."
+    "text": "A spray of rough energy: 4 damage and knockback. 30 s cooldown."
    },
    {
     "kind": "Combat",
     "name": "Lucky Shot",
-    "text": "Your next attack is a guaranteed critical with 50% more damage. 45 s cooldown."
+    "text": "Your next attack is a guaranteed crit with 50% more damage. 45 s cooldown."
    }
   ]
  },
  {
-  "id": "straw_doll",
-  "name": "Straw Doll Witch",
-  "source": "Nobara Kugisaki",
-  "gap": "Hammer, nails and resonance",
-  "desc": "Witches who use straw dolls and nails to hurt from afar. Anything that has left a piece of itself behind can be struck.",
-  "traits": [
-   "Collect a piece of any mob you hit (its resonance) for 60 s",
-   "Hammers and nails count as weapons (+2 damage with a hammer)",
-   "Can't use bows or crossbows well (draw 25% slower)"
+  "id": "massborn",
+  "names": [
+   "Massborn",
+   "Star Rage",
+   "Gravitykin"
+  ],
+  "inspo": "Yuki Tsukumo; Star Rage, Garuda, Black Hole, Saturn",
+  "desc": "They can give their body imaginary mass. Light as a feather one moment, heavy as a falling star the next.",
+  "effects": [
+   {
+    "name": "Heavy",
+    "text": "Immune to knockback while standing still."
+   },
+   {
+    "name": "Light",
+    "text": "Fall damage is halved."
+   },
+   {
+    "name": "Dense",
+    "text": "+2 armour."
+   },
+   {
+    "name": "Momentum",
+    "text": "Sprinting builds up to +20% melee damage over 3 s."
+   },
+   {
+    "name": "Anchor",
+    "text": "Water currents and pistons don't move you."
+   },
+   {
+    "name": "Big Frame",
+    "text": "+4 max health."
+   },
+   {
+    "name": "Steady",
+    "text": "Stuns last 25% shorter."
+   },
+   {
+    "name": "Orbit",
+    "text": "Dropped items within 4 blocks drift to you."
+   },
+   {
+    "name": "Impact",
+    "text": "Falling more than 4 blocks onto enemies damages them."
+   }
   ],
   "abilities": [
    {
     "kind": "Utility",
-    "name": "Resonance",
-    "text": "Strike a doll to hurt a mob you have resonance with, anywhere within 64 blocks, for 4. 60 s cooldown."
+    "name": "Featherweight",
+    "text": "Become weightless for 6 s: jump 4 blocks, fall slowly. 45 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Nail Ladder",
-    "text": "Hammer nails into a wall to make a 8-block climbable ladder for 60 s. 60 s cooldown."
+    "name": "Heavyweight",
+    "text": "For 10 s, you can't be moved and you sink in water. 60 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Pin Down",
-    "text": "Nail a dropped item or door in place so nothing can take or open it for 5 minutes. 60 s cooldown."
+    "name": "Garuda",
+    "text": "A shikigami that carries 27 items and follows you for 5 minutes. 10 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Hairpin",
-    "text": "Nails you've fired explode for 3 damage each when you trigger them. 60 s cooldown."
+    "name": "Orbit Pull",
+    "text": "Pull every item and XP orb within 16 blocks into orbit around you. 15 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Doll Decoy",
-    "text": "Leave a straw doll that mobs attack for 5 s. 90 s cooldown."
+    "name": "Mass Drop",
+    "text": "Drop straight down at great speed, breaking soft blocks below. 30 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Effigy Ward",
-    "text": "A doll takes the next harmful effect put on you within 60 s. 2 min cooldown."
+    "name": "Ground Breaker",
+    "text": "Break a 3x3 area of soft blocks in front. 30 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Find Owner",
-    "text": "Hold an item a creature dropped: point to that creature for 60 s. 5 min cooldown."
+    "name": "Gravity Well",
+    "text": "Allies within 6 can't be knocked back for 10 s. 2 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Fix It",
-    "text": "Nail broken blocks back: repair cracked or broken doors, trapdoors and fences within 6. 3 min cooldown."
+    "name": "Saturn's Ring",
+    "text": "A ring of debris orbits you, blocking projectiles for 6 s. 90 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Shared Pain",
-    "text": "For 10 s, half of the damage you take is sent to a mob you have resonance with. 3 min cooldown."
+    "name": "Weight Throw",
+    "text": "Throw an ally or animal 10 blocks safely. 30 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Strawman",
-    "text": "Make a scarecrow that keeps crows and phantoms away from 16 blocks for 10 minutes. 10 min cooldown."
+    "name": "Star Light",
+    "text": "Light a 10-block area for 2 minutes. 2 min cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Nail Shot",
-    "text": "Hammer 3 nails at the target, 3 damage each. 20 s cooldown."
+    "name": "Star Rage",
+    "text": "Your next hit carries huge mass: 2x damage and a big knockback. 60 s cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Black Flash Nail",
-    "text": "Your next nail deals 3x damage. 2 min cooldown."
+    "name": "Black Hole",
+    "text": "Open a small black hole for 4 s that pulls enemies in and deals 2 damage a second. 5 min cooldown."
    }
   ]
  },
  {
-  "id": "crow_caller",
-  "name": "Crow Caller",
-  "source": "Mei Mei and her crows",
-  "gap": "Seeing through birds",
-  "desc": "Mercenary sorcerers who see through the eyes of crows. They always know where the money is.",
-  "traits": [
-   "Crows and parrots are friendly and follow you",
-   "Emeralds drop 10% more often from mobs",
-   "Water birds and chickens are scared of you"
+  "id": "switchkin",
+  "names": [
+   "Switchkin",
+   "Boogie-Born",
+   "Clapper"
   ],
-  "abilities": [
+  "inspo": "Aoi Todo; Boogie Woogie, Clap",
+  "desc": "One clap and two things trade places. They fight like a shell game and never stand where you expect.",
+  "effects": [
    {
-    "kind": "Utility",
-    "name": "Bird's Eye",
-    "text": "See through a crow circling above you for 15 s. 90 s cooldown."
+    "name": "Quick Reflexes",
+    "text": "+10% attack speed."
    },
    {
-    "kind": "Utility",
-    "name": "Scout Crow",
-    "text": "Send a crow 64 blocks ahead; it reports mobs, villages and chests. 2 min cooldown."
+    "name": "Big Hands",
+    "text": "+0.5 block reach."
    },
    {
-    "kind": "Utility",
-    "name": "Crow Courier",
-    "text": "Send an item to any player in the same world by crow. 2 min cooldown."
+    "name": "Brawler",
+    "text": "Unarmed hits deal +2 damage."
    },
    {
-    "kind": "Utility",
-    "name": "Murder",
-    "text": "Release 6 crows that distract mobs for 6 s. 90 s cooldown."
+    "name": "Showman",
+    "text": "Allies within 8 get +5% damage."
    },
    {
-    "kind": "Utility",
-    "name": "Bounty Sense",
-    "text": "See every mob worth a reward (bosses, rare mobs) within 128 blocks for 10 s. 10 min cooldown."
+    "name": "Shell Game",
+    "text": "After you teleport, mobs lose track of you for 1 s."
    },
    {
-    "kind": "Utility",
-    "name": "Fee",
-    "text": "Charge a villager: get 2 emeralds once per villager per day. 60 s cooldown."
+    "name": "Sturdy",
+    "text": "+2 armour."
    },
    {
-    "kind": "Utility",
-    "name": "Glide on Wings",
-    "text": "Crows carry you down slowly for 10 s. 60 s cooldown."
+    "name": "Hype",
+    "text": "Kills give Speed I for 5 s."
    },
    {
-    "kind": "Utility",
-    "name": "Crow's Hoard",
-    "text": "Crows bring you a random shiny item (nugget, gem or coin). 10 min cooldown."
+    "name": "Light Step",
+    "text": "Dodges cost 15% less stamina."
    },
    {
-    "kind": "Utility",
-    "name": "Night Patrol",
-    "text": "Crows circle your bed and wake you if mobs come within 16 blocks while you sleep. 20 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Contract",
-    "text": "Hire a crow to watch a chest: you're told when it's opened, for 30 minutes. 30 min cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Bird Strike",
-    "text": "A crow dives at full speed into the target for 10 damage. 90 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Peck",
-    "text": "Crows peck the enemy you look at for 1 damage a second for 6 s. 45 s cooldown."
+    "name": "Muscle Memory",
+    "text": "Cooldowns are 5% shorter."
    }
-  ]
- },
- {
-  "id": "adaptive",
-  "name": "Mahoraga-Blooded",
-  "source": "Eight-Handled Sword Divergent Sila Divine General Mahoraga",
-  "gap": "Adapting to everything",
-  "desc": "Distant kin of the shikigami that adapts to anything. A wheel turns above their heads, and nothing hurts them the same way twice.",
-  "traits": [
-   "Adaptation: each time a damage type hurts you, you take 5% less from it (up to 30%) until you rest",
-   "The wheel above your head is visible to everyone",
-   "Healing from others is 25% weaker"
   ],
   "abilities": [
    {
     "kind": "Utility",
-    "name": "Turn the Wheel",
-    "text": "Instantly adapt fully (30%) to the last damage type that hit you, for 60 s. 3 min cooldown."
+    "name": "Clap Swap",
+    "text": "Swap places with the creature you look at (24 blocks). 20 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Adapt to Terrain",
-    "text": "Adapt to the ground: no slowdown from snow, soul sand, mud or cobwebs for 60 s. 2 min cooldown."
+    "name": "Item Swap",
+    "text": "Swap places with a dropped item or arrow you look at. 15 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Adapt to Air",
-    "text": "Breathe in water, lava smoke and void air for 60 s. 3 min cooldown."
+    "name": "Ally Rescue",
+    "text": "Swap an ally with yourself from anywhere within 32 blocks. 60 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Adapt to Cold",
-    "text": "Immune to freezing and cold for 5 minutes. 5 min cooldown."
+    "name": "Swap Two",
+    "text": "Swap two creatures you've marked within 24 blocks. 45 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Adapt to Heat",
-    "text": "Immune to fire and lava for 6 s. 3 min cooldown."
+    "name": "Feint Clap",
+    "text": "Clap without swapping: mobs within 8 blocks are confused for 2 s. 45 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Adapt to Hunger",
-    "text": "Hunger doesn't drop for 5 minutes. 10 min cooldown."
+    "name": "Anchor Point",
+    "text": "Mark a spot; clap to swap with it within 2 minutes. 2 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Adapt to Dark",
-    "text": "Night vision for 3 minutes. 3 min cooldown."
+    "name": "Mob Shuffle",
+    "text": "Swap the places of every mob within 8 blocks at random. 90 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Adapt to Height",
-    "text": "No fall damage for 30 s. 60 s cooldown."
+    "name": "Best Friend",
+    "text": "Mark an ally: you always see where they are, for 20 minutes. 20 min cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Adapt to Poison",
-    "text": "Immune to poison and wither for 60 s. 2 min cooldown."
+    "name": "Boulder Swap",
+    "text": "Swap with a block you look at (up to 16 blocks), placing it where you stood. 30 s cooldown."
    },
    {
     "kind": "Utility",
-    "name": "Reset Wheel",
-    "text": "Clear your adaptation and heal 6. 2 min cooldown."
+    "name": "Stance",
+    "text": "For 10 s you can't be knocked back and your punches knock back hard. 90 s cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Sword of Extermination",
-    "text": "Your next hit deals double damage to undead and curses. 60 s cooldown."
+    "name": "Clap Strike",
+    "text": "Swap behind the enemy you look at and hit it for 150% damage. 45 s cooldown."
    },
    {
     "kind": "Combat",
-    "name": "Adapted Strike",
-    "text": "Your hits deal 25% more to the last creature that hurt you, for 20 s. 90 s cooldown."
-   }
-  ]
- },
- {
-  "id": "barrier_monk",
-  "name": "Barrier Monk",
-  "source": "Master Tengen and the barrier technique",
-  "gap": "Barriers and curtains",
-  "desc": "Barrier keepers in Tengen's line who wall off the world. They protect, hide and seal, and they never truly leave a place they've warded.",
-  "traits": [
-   "Your placed barriers last 25% longer",
-   "Hostile mobs can't spawn within 8 blocks of your bed or respawn point",
-   "Leaving a barrier you made gives you Slowness I for 3 s"
-  ],
-  "abilities": [
-   {
-    "kind": "Utility",
-    "name": "Curtain",
-    "text": "Drop a curtain over a 12-block area for 2 minutes: people outside can't see in, mobs inside don't flee. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Ward Door",
-    "text": "Seal a door so only you and allies can open it, for 20 minutes. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Barrier Wall",
-    "text": "Raise a see-through wall 5 wide, 3 tall for 20 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Safe Room",
-    "text": "Mark a room: you're told when anything enters it, for 30 minutes. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Bubble",
-    "text": "A small barrier around you blocks projectiles for 6 s. 90 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Fold Space",
-    "text": "Link two marked spots within 64 blocks; walk from one to the other for 60 s. 10 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Seal",
-    "text": "Seal a spawner or chest so nothing comes out for 10 minutes. 5 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Mobile Barrier",
-    "text": "Allies within 6 take 10% less damage for 20 s. 2 min cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Barrier Floor",
-    "text": "Create a 5x5 floor in the air under you for 30 s. 60 s cooldown."
-   },
-   {
-    "kind": "Utility",
-    "name": "Sense the Ward",
-    "text": "See every barrier, domain and spell zone within 48 blocks for 10 s. 90 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Cage",
-    "text": "Trap the enemy you look at in a barrier for 3 s: it can't move or attack. 90 s cooldown."
-   },
-   {
-    "kind": "Combat",
-    "name": "Collapse",
-    "text": "A barrier collapses on enemies within 4 blocks for 6 damage. 60 s cooldown."
+    "name": "Brother's Combo",
+    "text": "Swap an ally behind an enemy: both your next hits deal 30% more. 90 s cooldown."
    }
   ]
  }
