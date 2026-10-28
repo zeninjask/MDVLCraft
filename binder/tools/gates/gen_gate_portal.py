@@ -1,53 +1,62 @@
-"""Draws the gate portal's textures (client/GateRenderer tints them: blue, or red for a red gate) into
-binder/src/main/resources/assets/mdvlcraft/textures/entity: gate_swirl.png, a vortex of spiral arms brightening outward
-from a dark eye, and gate_halo.png, a soft ring of glow for the light around the rift. Greyscale, alpha shaped to a disc.
+"""Draws the gate portal (client/GateRenderer) as pixel art, like the gates of the Solo Leveling mods: a tall rounded rift
+in a few flat shades of blue (red for a red gate), lighter towards the middle, its spiral arms turning, inside a ragged
+dark outline. FRAMES frames of W x H pixels stacked top to bottom in one texture, played in order: gate_portal.png
+and gate_portal_red.png in binder/src/main/resources/assets/mdvlcraft/textures/entity.
 usage: gen_gate_portal.py"""
 import math
+import random
 from pathlib import Path
 
 from PIL import Image
 
 OUT = Path(__file__).resolve().parents[2] / 'src/main/resources/assets/mdvlcraft/textures/entity'
-SIZE = 128
+W, H = 40, 48          # one frame; the renderer draws it 0.85 times as wide as the gate is tall, so pixels stay square
+FRAMES = 16
+# darkest (the outline) to lightest (the middle)
+BLUE = [(8, 18, 64), (18, 46, 140), (30, 82, 196), (52, 122, 228), (104, 168, 244), (176, 214, 255)]
+RED = [(52, 6, 10), (120, 16, 22), (176, 32, 36), (214, 64, 56), (240, 120, 96), (255, 196, 170)]
 
 
-def smooth(a, b, x):
-    t = max(0.0, min(1.0, (x - a) / (b - a)))
-    return t * t * (3 - 2 * t)
+def edge_noise(seed):
+    """A fixed ragged outline: how far in the edge sits at each of 64 angle steps (smoothed a little)."""
+    rng = random.Random(seed)
+    raw = [rng.random() for _ in range(64)]
+    return [(raw[i - 1] + 2 * raw[i] + raw[(i + 1) % 64]) / 4 for i in range(64)]
 
 
-def swirl():
-    im = Image.new('RGBA', (SIZE, SIZE))
-    for py in range(SIZE):
-        for px in range(SIZE):
-            x, y = (px + 0.5) / SIZE * 2 - 1, (py + 0.5) / SIZE * 2 - 1
+def frame(palette, phase, edge):
+    im = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    for py in range(H):
+        for px in range(W):
+            x = (px + 0.5) / W * 2 - 1
+            y = (py + 0.5) / H * 2 - 1
             r = math.hypot(x, y)
-            if r > 1:
-                im.putpixel((px, py), (0, 0, 0, 0))
-                continue
             theta = math.atan2(y, x)
-            arms = 0.5 + 0.5 * math.sin(4 * theta + 9 * math.log(r + 0.06))          # four spiral arms
-            fine = 0.5 + 0.5 * math.sin(11 * theta + 22 * math.log(r + 0.06) + 1.3)   # thin streaks between them
-            light = (0.25 + 0.75 * r ** 1.3) * (0.55 + 0.35 * arms + 0.1 * fine)
-            light *= 0.35 + 0.65 * smooth(0.05, 0.55, r)                              # the dark eye
-            alpha = 255 * smooth(1.0, 0.86, r) if r > 0.86 else 255
-            v = int(255 * min(1.0, light))
-            im.putpixel((px, py), (v, v, v, int(alpha)))
+            step = int((theta + math.pi) / (2 * math.pi) * 64) % 64
+            rim = 1.0 - 0.09 * edge[step] - 0.02 * math.sin(theta * 9 + phase * 2)   # ragged, and it shimmers a little
+            if r > rim:
+                continue
+            if r > rim - 0.1:
+                im.putpixel((px, py), palette[0] + (255,))
+                continue
+            arms = math.sin(3 * theta - phase + 5.5 * math.log(r + 0.12))   # three arms winding in
+            v = 0.85 - 0.75 * r + 0.22 * arms                              # light in the middle, dark out by the rim
+            shade = max(1, min(len(palette) - 1, 1 + int(v * (len(palette) - 1))))
+            im.putpixel((px, py), palette[shade] + (255,))
     return im
 
 
-def halo():
-    im = Image.new('RGBA', (SIZE, SIZE))
-    for py in range(SIZE):
-        for px in range(SIZE):
-            x, y = (px + 0.5) / SIZE * 2 - 1, (py + 0.5) / SIZE * 2 - 1
-            r = math.hypot(x, y)
-            glow = max(0.0, 1 - abs(r - 0.72) / 0.28) ** 2   # brightest a little inside the edge, fading both ways
-            im.putpixel((px, py), (255, 255, 255, int(255 * glow)))
-    return im
+def sheet(palette, seed):
+    edge = edge_noise(seed)
+    out = Image.new('RGBA', (W, H * FRAMES), (0, 0, 0, 0))
+    for i in range(FRAMES):
+        out.paste(frame(palette, 2 * math.pi * i / FRAMES, edge), (0, i * H))
+    return out
 
 
 OUT.mkdir(parents=True, exist_ok=True)
-swirl().save(OUT / 'gate_swirl.png')
-halo().save(OUT / 'gate_halo.png')
-print('gate portal textures written ->', OUT)
+sheet(BLUE, 7).save(OUT / 'gate_portal.png')
+sheet(RED, 7).save(OUT / 'gate_portal_red.png')
+for old in ('gate_swirl.png', 'gate_halo.png'):   # the smooth 2.1.63 portal's textures
+    (OUT / old).unlink(missing_ok=True)
+print('gate portal frames written ->', OUT)

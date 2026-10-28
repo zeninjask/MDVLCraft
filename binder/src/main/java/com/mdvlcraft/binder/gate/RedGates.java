@@ -1,5 +1,8 @@
 package com.mdvlcraft.binder.gate;
 
+import app.sedu.mc.parties.common.group.GroupType;
+import app.sedu.mc.parties.common.group.ServerGroupManager;
+import app.sedu.mc.parties.common.group.TrackedGroup;
 import com.mdvlcraft.binder.config.BinderConfig;
 import com.mdvlcraft.binder.gate.GateInstances.Instance;
 import com.mdvlcraft.binder.gate.RedLandscape.Layout;
@@ -28,8 +31,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 /**
  * Red gates (plan 7.1): the first time a party steps into a B, A or S gate, it may turn red (chance per rank in the binder
  * config, GateRank.redChance before it loads). A red gate drops its room dungeon (the old instance is closed and its cell
- * cleared) and becomes a new instance in the red realm, same theme and rank, which its gate entity now points at. The party
- * standing at the gate is pulled in together and the roster freezes: GateEntity turns away anyone not on it and
+ * cleared) and becomes a new instance in the red realm, same theme and rank, which its gate entity now points at. The
+ * entering player's party (Parties) within PARTY_PULL blocks of the portal, and anyone standing at it, are pulled in
+ * together (up to the rank's party cap) and the roster freezes: GateEntity turns away anyone not on it and
  * GateProtection keeps everyone in until the lair boss dies. Then the seal breaks (CLEARED), an exit pad opens in the arena
  * and the gate collapses COLLAPSE_TICKS later, sending whoever is left home. A player who dies in a sealed gate loses their
  * place; if nobody is left, the gate closes. Which instances have rolled is kept in memory only, since every gate closes
@@ -38,6 +42,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class RedGates {
     private static final int TICK_EVERY = 20;
+    /** How far from the portal the entering player's party members are pulled in from when it turns red. */
+    private static final double PARTY_PULL = 25.0;
     static final int COLLAPSE_TICKS = 2 * 60 * 20;
     /** Instances that have had their roll (or were made red), so a gate rolls once. */
     private static final Set<Integer> ROLLED = new HashSet<>();
@@ -67,13 +73,23 @@ public final class RedGates {
         }
         List<ServerPlayer> party = new ArrayList<>();
         party.add(player);
-        AABB around = gate.getBoundingBox().inflate(2.0);
-        for (ServerPlayer other : gate.level().getEntitiesOfClass(ServerPlayer.class, around)) {
+        // the entering player's party within PARTY_PULL blocks of the portal comes too, then anyone standing at it
+        TrackedGroup group = ServerGroupManager.getGroup(player.getUUID(), GroupType.PARTY);
+        List<ServerPlayer> nearby = new ArrayList<>();
+        if (group != null) {
+            for (ServerPlayer other : gate.level().getEntitiesOfClass(ServerPlayer.class, gate.getBoundingBox().inflate(PARTY_PULL))) {
+                if (group.getMembers().contains(other.getUUID()) && other.distanceTo(gate) <= PARTY_PULL) {
+                    nearby.add(other);
+                }
+            }
+        }
+        nearby.addAll(gate.level().getEntitiesOfClass(ServerPlayer.class, gate.getBoundingBox().inflate(2.0)));
+        for (ServerPlayer other : nearby) {
             if (party.size() >= red.rank.partyCap) {
                 break;
             }
             Instance theirs = gates.ofPlayer(other.getUUID());
-            if (other != player && other.isAlive() && !other.isSpectator() && theirs == null && gate.mayJoin(other, instance)) {
+            if (!party.contains(other) && other.isAlive() && !other.isSpectator() && theirs == null && gate.mayJoin(other, instance)) {
                 party.add(other);
             }
         }
