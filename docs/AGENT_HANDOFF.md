@@ -517,6 +517,35 @@ The Status page has a Settings button (`client/SettingsScreen`) with one setting
   author) is in the client packs' overrides. It fixes Photon's framebuffer handling under Oculus shaderpacks, for
   blurry or broken Cursed Fate effects.
 
+## 2.1.63: gates with levels, new rooms and themes; quick-cast keys
+
+- **Levels:**
+  - `DungeonPlanner` gives each node a level.
+  - About 35% of the main path's straight corridors become `corridor_stairs` or `corridor_ladder`. Their low door is
+    south in the template, and they climb or drop `RISE` = 8 blocks, at most two levels from the entrance's.
+  - `Piece.y` is the height `GateBuilder` places a room at.
+  - Branches never hang off a vertical corridor.
+- **New templates** (`tools/gates/gen_gate_rooms.py`, 2.1.63 section):
+  - `combat_small_13`–`16` and `combat_large_10`–`13` are round, octagonal, cross, ring and cavern rooms
+    (`shaped_shell`), with statues, `painting` markers and lore signs.
+  - `vault_1` has 4–6 `loot:vault` markers (always a chest, `GateRewards.placeLootChests`).
+  - `library_1` has lecterns with written books, signs and paintings.
+  - Vaults and libraries are branch ends.
+  - `GateDecor` hangs a painting at each `painting` marker; `GateBuilder.clearBox` removes them.
+  - Palette roles take block-state properties (`steps[facing=north]`, `sign[facing=…]`).
+- **Themes:** Molten Caldera, Bone Ossuary, Void Abyss and Jade Pagoda.
+  - Defined in `new_themes.py`. Run `new_themes.py <keys>` for new ones only: rewriting an existing theme's file undoes
+    edits made to it since.
+  - Then `gen_gate_data`, `gen_gate_items`, `gen_gate_rooms`, `gen_red_lairs` and `generate_quests`.
+  - Add the enum value in `GateTheme` and a tower palette in `TowerFloor`.
+  - `gen_red_lairs.first_theme` follows parent chains down to the first six themes.
+- **Portal:** `GateRenderer` draws `textures/entity/gate_swirl.png` and `gate_halo.png` (`tools/gates/gen_gate_portal.py`)
+  as a halo, a vortex, a counter-rotating layer and a wavering rim. `GateEntity` adds rim sparks.
+- **Quick Cast:** `AbilityKeys.QUICK` keys 1–8 send `CastPacket` for their wheel slot without changing the selected one.
+  `RemovedKeys` drops `key.hotbar.1`–`8`.
+- **Generators on Windows:** pass `encoding='utf-8'` to `read_text` and `write_text`. `gen_gate_items` wrote `en_us.json`
+  in Windows-1252 once (fixed).
+
 ## Open: Frying Pan & Spatula attacks don't play
 
 The server gets each Invincible combo request and fires the attack's BEGIN event, but the attack never reaches the
