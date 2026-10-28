@@ -43,6 +43,7 @@ public final class GateSpawner {
     private static final double BOSS_HEALTH_SHARE = 0.5;
     /** The share of a boss's own armour and toughness taken off. */
     private static final double BOSS_DEFENCE_CUT = 0.5;
+    private static final UUID BOSS_EXTRA_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0007");
 
     private GateSpawner() {
     }
@@ -65,6 +66,7 @@ public final class GateSpawner {
         scale(mob, instance.rank);
         if (BOSS.equals(role)) {
             soften(mob);
+            bossHealth(mob, instance);
         }
         if (ELITE.equals(role)) {
             modify(mob.getAttribute(Attributes.MAX_HEALTH), ELITE_HEALTH, "gate elite", 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL);
@@ -124,6 +126,16 @@ public final class GateSpawner {
         modify(armour, BOSS_ARMOUR, "gate boss armour", -BOSS_DEFENCE_CUT, AttributeModifier.Operation.MULTIPLY_TOTAL);
         modify(mob.getAttribute(Attributes.ARMOR_TOUGHNESS), BOSS_TOUGHNESS, "gate boss toughness", -BOSS_DEFENCE_CUT, AttributeModifier.Operation.MULTIPLY_TOTAL);
         mob.setHealth(mob.getMaxHealth());
+    }
+
+    /** The theme file's per-boss health multiplier for this rank, when it is not 1. */
+    private static void bossHealth(Mob mob, Instance instance) {
+        GateThemes.Theme data = GateThemes.get(instance.theme);
+        double health = data == null ? 1.0 : data.bosses()[instance.rank.ordinal()].health();
+        if (health != 1.0 && GateMobs.type(data.bosses()[instance.rank.ordinal()].id()) == mob.getType()) {
+            modify(mob.getAttribute(Attributes.MAX_HEALTH), BOSS_EXTRA_HEALTH, "gate boss health", health - 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL);
+            mob.setHealth(mob.getMaxHealth());
+        }
     }
 
     private static void modify(@Nullable AttributeInstance attribute, UUID id, String name, double amount, AttributeModifier.Operation operation) {

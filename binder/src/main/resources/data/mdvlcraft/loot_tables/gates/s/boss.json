@@ -169,6 +169,93 @@
           "name": "mdvlcraft:boss_trophy_s"
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.2
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:crow_sorcerer_axe",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:dragon_bone",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:hiten",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:naginata",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:nanamis_cleaver",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:jet_black_blade",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:slaughter_demon",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:inverted_spearof_heaven",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:kamutoke",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:split_soul_katana",
+          "weight": 1
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.3
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "cursedfate:cursed_amethyst_bottle",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        }
+      ]
     }
   ]
 }

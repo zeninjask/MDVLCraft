@@ -203,15 +203,18 @@ public final class GateRewards {
     }
 
     /**
-     * Minor chests: each `loot` marker (parkour islands, trap corners, maze dead ends) has a LOOT_CHANCE of a plain chest
-     * filled from the rank below's boss table (E gates use their own); a vault's `loot:vault` markers always get one. Call
-     * after building.
+     * Minor chests: each `loot` marker (parkour islands, trap corners, maze dead ends) has a LOOT_CHANCE of a plain chest; a
+     * vault's `loot:vault` markers always get one. Each is filled from a lower rank's boss table: one rank below 10% of the
+     * time, two below 60%, three below 30%, never below E (so lower gates lean to E, and E gates use their own). Call after
+     * building.
      */
     public static void placeLootChests(ServerLevel level, Instance instance) {
-        GateRank below = GateRank.values()[Math.max(0, instance.rank.ordinal() - 1)];
-        ResourceLocation table = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/" + below.name().toLowerCase(Locale.ROOT) + "/boss");
         for (Marker marker : instance.markers) {
             if (marker.kind().equals("loot") && level.random.nextFloat() < LOOT_CHANCE || marker.kind().equals("loot:vault")) {
+                float roll = level.random.nextFloat();
+                int down = roll < 0.1F ? 1 : roll < 0.7F ? 2 : 3;
+                GateRank below = GateRank.values()[Math.max(0, instance.rank.ordinal() - down)];
+                ResourceLocation table = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/" + below.name().toLowerCase(Locale.ROOT) + "/boss");
                 level.setBlock(marker.pos(), Blocks.CHEST.defaultBlockState()
                     .setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(level.random)), Block.UPDATE_CLIENTS);
                 if (level.getBlockEntity(marker.pos()) instanceof RandomizableContainerBlockEntity chest) {

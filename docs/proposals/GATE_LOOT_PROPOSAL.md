@@ -6,7 +6,7 @@ Nothing here is built yet. Edit the tables (items, chances, counts), then tell m
 
 | Chest | Where | What fills it now |
 |---|---|---|
-| Minor chest | Parkour islands, trap corners, maze dead ends (60% of `loot` spots) | The boss table of the rank **below** (E uses its own) |
+| Minor chest | Parkour islands, trap corners, maze dead ends (60% of `loot` spots) | A lower rank's boss table: 1 below 10%, 2 below 60%, 3 below 30%, never below E (since 2.1.68 work) |
 | Vault chest | Vault rooms (`loot:vault`, always) | Same as minor |
 | Boss reward chest | After the boss | The rank's boss table |
 

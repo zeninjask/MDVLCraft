@@ -216,6 +216,18 @@ NEW_THEMES = {
                   seat='dark_oak_log[axis=z]', post='dark_oak_log[axis=y]', cloth='lime_wool', cloth2='red_wool', crate='bamboo_block[axis=y]',
                   fence='dark_oak_fence', litter='fern', flora='fern'),
         steps='dark_oak_stairs'),
+    'jjk': dict(parent='crypt', name='Cursed Shibuya', catalyst='cursedfate:curse_residue',
+        look=(0x2a1418, 0x3a1a20, 0x3a3a4a, 'minecraft:ash', 0.006, False, 0.7, 'minecraft:music.overworld.deep_dark', 'minecraft:ambient.soul_sand_valley.loop'),
+        ground=('minecraft:gray_concrete_powder', 'minecraft:gravel', 'minecraft:gray_concrete', 'minecraft:deepslate_tiles', None),
+        rooms=dict(floor='polished_deepslate', floor2='gray_concrete', floor3='deepslate_tiles', wall='gray_concrete', wall2='black_concrete',
+                   pillar='polished_blackstone_bricks', ceiling='smooth_stone', glow='redstone_lamp[lit=true]', hang='soul_lantern[hanging=true]',
+                   chain='chain[axis=y]', prop='iron_block', web='cobweb', litter='redstone_wire', pool='lava', pool_base='blackstone', fence='iron_bars'),
+        lair=dict(base='polished_deepslate', floor='gray_concrete', floor2='deepslate_tiles', floor3='polished_deepslate', emblem='redstone_block',
+                  wall='gray_concrete', wall2='black_concrete', pillar='polished_blackstone_bricks', cap='smooth_stone', light='redstone_lamp[lit=true]',
+                  fire='soul_campfire', ground='gray_concrete_powder', ground2='gravel', ground3='deepslate_tiles', ring='polished_deepslate_slab',
+                  seat='stripped_dark_oak_log[axis=z]', post='iron_bars', cloth='red_wool', cloth2='black_wool', crate='barrel[facing=up]',
+                  fence='iron_bars', litter=None, flora='redstone_wire'),
+        steps='polished_deepslate_stairs'),
 }
 
 

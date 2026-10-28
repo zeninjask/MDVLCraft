@@ -77,6 +77,7 @@ public final class TowerFloor {
         PALETTES.put(GateTheme.OSSUARY, new Palette(Blocks.BONE_BLOCK, Blocks.CALCITE, Blocks.POLISHED_DIORITE, Blocks.SEA_LANTERN));
         PALETTES.put(GateTheme.ABYSS, new Palette(Blocks.OBSIDIAN, Blocks.PURPUR_BLOCK, Blocks.PURPUR_PILLAR, Blocks.PEARLESCENT_FROGLIGHT));
         PALETTES.put(GateTheme.JADE, new Palette(Blocks.GREEN_TERRACOTTA, Blocks.POLISHED_ANDESITE, Blocks.STRIPPED_DARK_OAK_LOG, Blocks.PEARLESCENT_FROGLIGHT));
+        PALETTES.put(GateTheme.JJK, new Palette(Blocks.GRAY_CONCRETE, Blocks.POLISHED_DEEPSLATE, Blocks.POLISHED_BLACKSTONE_BRICKS, Blocks.REDSTONE_LAMP));
     }
 
     private TowerFloor() {

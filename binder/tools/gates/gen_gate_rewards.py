@@ -225,6 +225,12 @@ def count(lo, hi):
     return {'function': 'minecraft:set_count', 'count': {'type': 'minecraft:uniform', 'min': lo, 'max': hi}}
 
 
+CURSED_WEAPONS = ['crow_sorcerer_axe', 'dragon_bone', 'hiten', 'naginata', 'nanamis_cleaver', 'jet_black_blade', 'slaughter_demon',
+                  'inverted_spearof_heaven']
+CURSED_WEAPONS_S = ['kamutoke', 'split_soul_katana']
+CURSED_WEAPON_CHANCE = {'a': 0.10, 's': 0.20}
+
+
 def loot_tables():
     for r in RANKS:
         name = f'mana_crystal_ore_{r}'
@@ -253,6 +259,13 @@ def loot_tables():
         if i + 1 < len(RANKS):
             pools.append({'rolls': 1, 'conditions': [{'condition': 'minecraft:random_chance', 'chance': 0.15}],
                           'entries': [{'type': 'minecraft:item', 'name': f'mdvlcraft:gate_key_{RANKS[i + 1]}'}]})
+        if r in CURSED_WEAPON_CHANCE:   # Cursed Fate weapons in A and S gates (S chests also get its two strongest)
+            pools.append({'rolls': 1, 'conditions': [{'condition': 'minecraft:random_chance', 'chance': CURSED_WEAPON_CHANCE[r]}],
+                          'entries': [{'type': 'minecraft:item', 'name': f'cursedfate:{w}', 'weight': 2} for w in CURSED_WEAPONS]
+                          + ([{'type': 'minecraft:item', 'name': f'cursedfate:{w}', 'weight': 1} for w in CURSED_WEAPONS_S] if r == 's' else [])})
+        if r == 's':   # cursed energy bottles
+            pools.append({'rolls': 1, 'conditions': [{'condition': 'minecraft:random_chance', 'chance': 0.30}],
+                          'entries': [{'type': 'minecraft:item', 'name': 'cursedfate:cursed_amethyst_bottle', 'weight': 1, 'functions': [count(1, 2)]}]})
         write(DATA / f'loot_tables/gates/{r}/boss.json', {'type': 'minecraft:chest', 'pools': pools})
 
 
