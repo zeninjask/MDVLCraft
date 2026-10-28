@@ -46,12 +46,17 @@ public final class WildCooking {
         return pot;
     }
 
-    public static void open(ServerPlayer player) {
-        CookingPotBlockEntity pot = POTS.computeIfAbsent(player.getUUID(), id -> {
+    /** The player's pot, loaded from their saved data the first time it is needed. */
+    private static CookingPotBlockEntity pot(ServerPlayer player) {
+        return POTS.computeIfAbsent(player.getUUID(), id -> {
             CookingPotBlockEntity made = virtualPot(player.level(), player.blockPosition());
             made.load(player.getPersistentData().getCompound(SAVED));
             return made;
         });
+    }
+
+    public static void open(ServerPlayer player) {
+        CookingPotBlockEntity pot = pot(player);
         BlockPos pos = player.blockPosition();
         pot.setLevel(player.level());
         NetworkHooks.openScreen(player, pot, buf -> buf.writeBlockPos(pos));
@@ -62,7 +67,8 @@ public final class WildCooking {
         if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer player)) {
             return;
         }
-        CookingPotBlockEntity pot = POTS.get(player.getUUID());
+        // a pot left cooking keeps cooking after a relog, before its screen is opened again
+        CookingPotBlockEntity pot = POTS.containsKey(player.getUUID()) || player.getPersistentData().contains(SAVED) ? pot(player) : null;
         if (pot != null) {
             pot.setLevel(player.level());
             CookingPotBlockEntity.cookingTick(player.level(), pot.getBlockPos(), pot.getBlockState(), pot);
