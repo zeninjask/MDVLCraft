@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.UUID;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.Entity;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -72,11 +73,26 @@ public final class SkillCallout {
     }
 
     public static void announce(ServerPlayer player, Component name, int colour) {
-        long now = player.level().getGameTime();
-        Long last = LAST.put(player.getUUID(), now);
+        announce((Entity)player, name, colour);
+    }
+
+    /** Any caster: players see their own, everyone near sees it (mobs: mixin/irons/SpellCastingMobCalloutMixin). */
+    public static void announce(Entity caster, Component name, int colour) {
+        long now = caster.level().getGameTime();
+        Long last = LAST.put(caster.getUUID(), now);
         if (last == null || now - last >= GAP_TICKS || now < last) {
-            BinderNetwork.sendToTrackingAndSelf(player, new SkillCalloutPacket(player.getId(), name, colour));
+            SkillCalloutPacket packet = new SkillCalloutPacket(caster.getId(), name, colour);
+            if (caster instanceof ServerPlayer player) {
+                BinderNetwork.sendToTrackingAndSelf(player, packet);
+            } else {
+                BinderNetwork.sendToTracking(caster, packet);
+            }
         }
+    }
+
+    /** A spell's colour: its school's (SCHOOLS), white for none. */
+    public static int colour(AbstractSpell spell) {
+        return SCHOOLS.getOrDefault(spell.getSchoolType().getId().toString(), WHITE);
     }
 
     /** A wheel ability other than an Iron's spell (those are called out when Iron's casts them). */

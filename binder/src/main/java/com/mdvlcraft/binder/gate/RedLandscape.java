@@ -35,10 +35,12 @@ import org.slf4j.Logger;
 
 /**
  * A red gate's landscape (plan 7.2): the red realm's own generated land, themed by its biome's surface rules
- * (tools/gates/gen_gate_data.py). The lair sits at the cell centre and the party arrives 60–90 blocks from it in a random
- * direction, with 6–10 mob camps scattered around; players are kept within PLAY_RADIUS of the lair (RedGates.boundary). Nothing but the arrival point is built up front, so opening a red gate
- * generates only one chunk: a camp is built and its mobs spawned when a roster player comes within CAMP_RANGE of it, the
- * boss arena when one comes within ARENA_RANGE, and the boss when one steps near the arena (RedGates ticks this).
+ * (tools/gates/gen_gate_data.py). The lair sits at the cell centre and the party arrives 90–130 blocks from it in a random
+ * direction, with 12–16 mob camps spread around; players are kept within PLAY_RADIUS of the lair (RedGates.boundary). Nothing but the arrival point is built up front, so opening a red gate
+ * generates only one chunk: a camp is built and its mobs spawned when a roster player comes within CAMP_RANGE of it, and the
+ * arena when one comes within ARENA_RANGE (RedGates ticks this). The boss only comes once the party has slain the rank's
+ * tally of gate mobs (RedGates.tally, shown under the time bar); until then emptied camps refill every 3 minutes, and then
+ * every gate mob goes and the boss rises at the arrival point.
  * Each instance's layout is kept in memory only: every gate closes on a server restart anyway (GateCleanup).
  *
  * The lair and the camps are hand-built templates from the theme file's "red" section ("lairs", "camps"; written by
@@ -52,17 +54,17 @@ public final class RedLandscape {
     /** Persistent NBT boolean on a gate boss; whoever sees it die decides the clear (for red gates: RedGates). */
     public static final String BOSS_TAG = "mdvlcraft_gate_boss";
     static final int CAMP_RANGE = 40;
-    /** The playable radius around the lair (plan 7.2's 96-block boundary): arrival, camps and the lair all fit inside. */
-    static final int PLAY_RADIUS = 96;
+    /** The playable radius around the lair: arrival, camps and the lair all fit inside. */
+    static final int PLAY_RADIUS = 160;
     /** Farthest a camp's centre is from the lair, so a whole camp (15 wide) stays inside PLAY_RADIUS. */
-    static final int CAMP_MAX = 88;
+    static final int CAMP_MAX = 150;
     static final int ARENA_RANGE = 72;
-    static final int BOSS_RANGE = 28;
     static final int ARENA_RADIUS = 14;
     /** Height of the lair template's floor top above its bottom (tools/gates/gen_red_lairs.py FY). */
     static final int LAIR_FLOOR = 3;
     private static final Logger LOGGER = LogUtils.getLogger();
     private static final UUID BOSS_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0101");
+    private static final UUID BOSS_FOLLOW = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0102");
     /** Extra boss health for the vanilla stand-in bosses, which are far weaker than the planned theme bosses. */
     private static final double STAND_IN_BOSS_HEALTH = 4.0;
 
@@ -77,6 +79,10 @@ public final class RedLandscape {
         @Nullable
         BlockPos lairFloor;
         boolean bossSpawned;
+        /** Gate mobs slain so far; the boss comes once it reaches RedGates.tally. */
+        int kills;
+        /** Game time camps were last refilled (RedGates.refill). */
+        long refilledAt;
         /** Game time the boss died at, or -1. */
         long clearedAt = -1;
         /** Crystal vein spots of each built camp (its "crystal" markers), by camp column. */
@@ -108,16 +114,16 @@ public final class RedLandscape {
         RandomSource random = level.random;
         BlockPos centre = GateDimensions.centre(instance.cellX, instance.cellZ, 0);
         double angle = random.nextDouble() * Math.PI * 2.0;
-        int distance = 60 + random.nextInt(31);
+        int distance = 90 + random.nextInt(41);
         BlockPos arrival = centre.offset((int)(Math.cos(angle) * distance), 0, (int)(Math.sin(angle) * distance));
         instance.entry = surface(level, arrival);
         List<BlockPos> camps = new ArrayList<>();
-        int count = 6 + random.nextInt(5);
+        int count = 12 + random.nextInt(5);
         for (int tries = 0; camps.size() < count && tries < count * 10; tries++) {
             double a = random.nextDouble() * Math.PI * 2.0;
             int d = 25 + random.nextInt(CAMP_MAX - 24);
             BlockPos camp = centre.offset((int)(Math.cos(a) * d), 0, (int)(Math.sin(a) * d));
-            if (horizontal(camp, arrival) > 24 * 24 && camps.stream().noneMatch(c -> horizontal(c, camp) < 20 * 20)) {
+            if (horizontal(camp, arrival) > 30 * 30 && camps.stream().noneMatch(c -> horizontal(c, camp) < 30 * 30)) {
                 camps.add(camp);
             }
         }
@@ -316,6 +322,17 @@ public final class RedLandscape {
         }
     }
 
+    /** New mobs for an emptied camp (RedGates.refill while the tally isn't met): 3-5 around its middle. */
+    static void respawnCamp(ServerLevel level, Instance instance, BlockPos column) {
+        BlockPos centre = surface(level, column);
+        int count = 3 + level.random.nextInt(3);
+        for (int n = 0; n < count; ) {
+            double a = Math.PI * 2.0 * n / count;
+            int made = GateMobs.cost(spawnMob(level, instance, surface(level, centre.offset((int)(Math.cos(a) * 4), 0, (int)(Math.sin(a) * 4)))));
+            n += made;
+        }
+    }
+
     /** A camp from a template: pasted on the ground at the camp's spot, mobs on its spawn markers, its crystal spots kept. */
     private static void buildCamp(ServerLevel level, Instance instance, BlockPos column, StructureTemplate camp) {
         BlockPos ground = surface(level, column).below();
@@ -405,7 +422,11 @@ public final class RedLandscape {
             if (standIn && health != null && health.getModifier(BOSS_HEALTH) == null) {   // a vanilla stand-in needs the bulk
                 health.addPermanentModifier(new AttributeModifier(BOSS_HEALTH, "red gate boss", STAND_IN_BOSS_HEALTH - 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL));
             }
-            boss.setHealth(boss.getMaxHealth());
+            GateSpawner.bossTargets(boss, instance.rank);
+            AttributeInstance follow = boss.getAttribute(Attributes.FOLLOW_RANGE);
+            if (follow != null && follow.getModifier(BOSS_FOLLOW) == null) {   // it hunts the party anywhere in the gate (GateCombat.hunt)
+                follow.addPermanentModifier(new AttributeModifier(BOSS_FOLLOW, "red gate boss sight", 2048.0, AttributeModifier.Operation.ADDITION));
+            }
         }
         return boss;
     }

@@ -1,0 +1,647 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 6,
+        "max": 8
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:diamond",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:emerald",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:experience_bottle",
+          "weight": 12,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 3,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:arcane_essence",
+          "weight": 10,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 5
+              }
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:golden_apple",
+          "weight": 4,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:steel_ingot",
+          "weight": 8,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 4
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_shortsword",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_katzbalger",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_stylet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_estoc",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_claymore",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_zweihander",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_flamebladedsword",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_bastardsword",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_pike",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_ranseur",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_ahlspiess",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_lochaberaxe",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_concavehalberd",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_guisarme",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_heavymace",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_heavywarhammer",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_lucernhammer",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_morgenstern",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_chainmorgenstern",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_buckler",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_target",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_heatershield",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_roundshield",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_kiteshield",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_rondache",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_tartsche",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_ellipticalshield",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:diamond_pavese",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:platemail_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:platemail_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:platemail_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:gothic_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:gothic_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:gothic_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:maximilian_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:maximilian_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:maximilian_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:maximilian_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:bascinet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "magistuarmory:greathelm",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:silver_knight_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:silver_knight_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:silver_knight_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:silver_knight_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:fog_guard_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:fog_guard_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:fog_guard_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:fog_guard_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:ronin_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:ronin_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:ronin_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:ronin_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:grave_sentinel_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:grave_sentinel_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:grave_sentinel_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:grave_sentinel_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_weapons:weapon_nagakiba",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_weapons:weapon_knight_greatsword",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_weapons:weapon_fog_guard_sword",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_weapons:weapon_black_katana",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_weapons:weapon_great_katana",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_weapons:weapon_knight_halberd",
+          "weight": 1
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.75
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "alexscaves:desolate_dagger",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "alexscaves:galena_gauntlet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "alexscaves:frostmint_spear",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:affinity_ring",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:mana_ring",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cooldown_ring",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cast_time_ring",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:eclipse_soldier_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:eclipse_soldier_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:eclipse_soldier_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "fantasy_armor:eclipse_soldier_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:pyromancer_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:pyromancer_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:pyromancer_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:pyromancer_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cryomancer_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cryomancer_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cryomancer_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cryomancer_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:electromancer_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:electromancer_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:electromancer_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:electromancer_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:archevoker_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:archevoker_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:archevoker_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:archevoker_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:priest_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:priest_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:priest_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:priest_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:shadowwalker_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:shadowwalker_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:shadowwalker_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:shadowwalker_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:plagued_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:plagued_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:plagued_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:plagued_boots",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cultist_helmet",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cultist_chestplate",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cultist_leggings",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "irons_spellbooks:cultist_boots",
+          "weight": 1
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.2
+        }
+      ]
+    }
+  ]
+}

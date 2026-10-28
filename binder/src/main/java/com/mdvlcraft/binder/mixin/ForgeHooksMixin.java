@@ -23,6 +23,7 @@ public abstract class ForgeHooksMixin {
     ) {
         ObjectArrayList<ItemStack> loot = cir.getReturnValue();
         loot.replaceAll(RuneSwap::swap);
-        loot.removeIf(DisabledContent::isForbidden);
+        boolean gate = lootTableId != null && lootTableId.getNamespace().equals("mdvlcraft") && lootTableId.getPath().startsWith("gates/");
+        loot.removeIf(stack -> !stack.isEmpty() && DisabledContent.isForbidden(stack.getItem(), gate));
     }
 }

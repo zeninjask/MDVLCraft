@@ -228,6 +228,10 @@ public final class BinderNetwork {
         CHANNEL.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player), packet);
     }
 
+    public static void sendToTracking(net.minecraft.world.entity.Entity entity, Object packet) {
+        CHANNEL.send(PacketDistributor.TRACKING_ENTITY.with(() -> entity), packet);
+    }
+
     public static void sendToServer(Object packet) {
         CHANNEL.sendToServer(packet);
     }

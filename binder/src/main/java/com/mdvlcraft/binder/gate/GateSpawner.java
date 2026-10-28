@@ -44,6 +44,12 @@ public final class GateSpawner {
     /** The share of a boss's own armour and toughness taken off. */
     private static final double BOSS_DEFENCE_CUT = 0.5;
     private static final UUID BOSS_EXTRA_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0007");
+    private static final UUID BOSS_TARGET_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0008");
+    private static final UUID BOSS_MIN_DAMAGE = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0009");
+    /** Each boss is brought up to its rank's health (E..S) whatever its own base health, so weak bosses aren't pushovers. */
+    private static final double[] BOSS_HEALTH = {150.0, 300.0, 550.0, 900.0, 1500.0, 2500.0};
+    /** And hits at least this hard (E..S). */
+    private static final double[] BOSS_DAMAGE = {6.0, 9.0, 12.0, 16.0, 22.0, 30.0};
 
     private GateSpawner() {
     }
@@ -66,6 +72,7 @@ public final class GateSpawner {
         scale(mob, instance.rank);
         if (BOSS.equals(role)) {
             soften(mob);
+            bossTargets(mob, instance.rank);
             bossHealth(mob, instance);
         }
         if (ELITE.equals(role)) {
@@ -125,6 +132,21 @@ public final class GateSpawner {
         }
         modify(armour, BOSS_ARMOUR, "gate boss armour", -BOSS_DEFENCE_CUT, AttributeModifier.Operation.MULTIPLY_TOTAL);
         modify(mob.getAttribute(Attributes.ARMOR_TOUGHNESS), BOSS_TOUGHNESS, "gate boss toughness", -BOSS_DEFENCE_CUT, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        mob.setHealth(mob.getMaxHealth());
+    }
+
+    /** A boss below its rank's health or damage (BOSS_HEALTH, BOSS_DAMAGE) is raised to it; stronger bosses keep theirs. */
+    public static void bossTargets(Mob mob, GateRank rank) {
+        AttributeInstance health = mob.getAttribute(Attributes.MAX_HEALTH);
+        double target = BOSS_HEALTH[rank.ordinal()];
+        if (health != null && health.getValue() < target) {
+            modify(health, BOSS_TARGET_HEALTH, "gate boss rank health", target / health.getValue() - 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        }
+        AttributeInstance damage = mob.getAttribute(Attributes.ATTACK_DAMAGE);
+        double least = BOSS_DAMAGE[rank.ordinal()];
+        if (damage != null && damage.getValue() < least) {
+            modify(damage, BOSS_MIN_DAMAGE, "gate boss rank damage", least - damage.getValue(), AttributeModifier.Operation.ADDITION);
+        }
         mob.setHealth(mob.getMaxHealth());
     }
 

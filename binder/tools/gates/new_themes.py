@@ -216,7 +216,7 @@ NEW_THEMES = {
                   seat='dark_oak_log[axis=z]', post='dark_oak_log[axis=y]', cloth='lime_wool', cloth2='red_wool', crate='bamboo_block[axis=y]',
                   fence='dark_oak_fence', litter='fern', flora='fern'),
         steps='dark_oak_stairs'),
-    'jjk': dict(parent='crypt', name='Cursed Shibuya', catalyst='cursedfate:curse_residue',
+    'jjk': dict(parent='crypt', name='Cursed Shibuya', catalyst='cursedfate:sukunas_finger',
         look=(0x2a1418, 0x3a1a20, 0x3a3a4a, 'minecraft:ash', 0.006, False, 0.7, 'minecraft:music.overworld.deep_dark', 'minecraft:ambient.soul_sand_valley.loop'),
         ground=('minecraft:gray_concrete_powder', 'minecraft:gravel', 'minecraft:gray_concrete', 'minecraft:deepslate_tiles', None),
         rooms=dict(floor='polished_deepslate', floor2='gray_concrete', floor3='deepslate_tiles', wall='gray_concrete', wall2='black_concrete',

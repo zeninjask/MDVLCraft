@@ -16,7 +16,9 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket;
 import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerBossEvent;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.BossEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -42,6 +44,11 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class RedGates {
     private static final int TICK_EVERY = 20;
+    /** Gate mobs to slay before a red gate's boss comes (E..S). */
+    private static final int[] TALLY = {20, 25, 30, 40, 50, 60};
+    /** How often camps whose mobs are all gone get new ones while the tally isn't met (3 minutes). */
+    private static final long REFILL_TICKS = 3 * 60 * 20;
+    private static final java.util.Map<Integer, ServerBossEvent> TALLY_BARS = new java.util.HashMap<>();
     /** How far from the portal the entering player's party members are pulled in from when it turns red. */
     private static final double PARTY_PULL = 25.0;
     static final int COLLAPSE_TICKS = 2 * 60 * 20;
@@ -181,6 +188,7 @@ public final class RedGates {
             ServerLevel level = instance == null ? null : server.getLevel(instance.dimension);
             if (instance == null || !instance.live() || level == null) {
                 RedLandscape.LAYOUTS.remove(layout.instanceId);
+                dropTallyBar(layout.instanceId);
                 continue;
             }
             List<ServerPlayer> inside = inside(server, instance);
@@ -211,11 +219,66 @@ public final class RedGates {
         if (layout.lairFloor == null && near(inside, layout.lair, RedLandscape.ARENA_RANGE) && level.isLoaded(layout.lair)) {
             layout.lairFloor = RedLandscape.buildArena(level, instance, layout.lair);
         }
-        if (layout.lairFloor != null && !layout.bossSpawned && near(inside, layout.lairFloor, RedLandscape.BOSS_RANGE)) {
-            layout.bossSpawned = RedLandscape.spawnBoss(level, instance, layout.lairFloor) != null;
-            if (layout.bossSpawned) {
-                inside.forEach(p -> p.playNotifySound(SoundEvents.RAVAGER_ROAR, SoundSource.HOSTILE, 1.0F, 0.6F));
+        if (!layout.bossSpawned) {
+            tallyBar(instance, layout, inside);
+            long now = level.getGameTime();
+            if (layout.kills >= tally(instance.rank)) {
+                summonBoss(level, instance, layout, inside);
+            } else if (layout.refilledAt == 0L) {
+                layout.refilledAt = now;
+            } else if (now - layout.refilledAt >= REFILL_TICKS) {
+                layout.refilledAt = now;
+                refill(level, instance, layout);
             }
+        } else {
+            dropTallyBar(instance.id);
+        }
+    }
+
+    /** Gate mobs to slay before the boss comes, by rank (E..S). */
+    static int tally(GateRank rank) {
+        return TALLY[rank.ordinal()];
+    }
+
+    /** The slain tally, under the gate's time bar, for every roster player in the gate. */
+    private static void tallyBar(Instance instance, Layout layout, List<ServerPlayer> inside) {
+        ServerBossEvent bar = TALLY_BARS.computeIfAbsent(instance.id, id -> new ServerBossEvent(Component.empty(),
+            BossEvent.BossBarColor.RED, BossEvent.BossBarOverlay.NOTCHED_10));
+        int need = tally(instance.rank);
+        bar.setName(Component.translatableWithFallback("gate.mdvlcraft.red.tally", "Monsters slain: %s / %s", Math.min(layout.kills, need), need));
+        bar.setProgress(Math.min(1.0F, layout.kills / (float)need));
+        new ArrayList<>(bar.getPlayers()).stream().filter(p -> !inside.contains(p)).forEach(bar::removePlayer);
+        inside.forEach(bar::addPlayer);
+    }
+
+    static void dropTallyBar(int id) {
+        ServerBossEvent bar = TALLY_BARS.remove(id);
+        if (bar != null) {
+            bar.removeAllPlayers();
+        }
+    }
+
+    /** Every REFILL_TICKS while the tally isn't met, each built camp with no gate mob left near it gets new ones. */
+    private static void refill(ServerLevel level, Instance instance, Layout layout) {
+        for (int n : layout.campsDone) {
+            BlockPos camp = layout.camps.get(n);
+            if (level.isLoaded(camp) && level.getEntitiesOfClass(Mob.class, new AABB(camp).inflate(24.0, 64.0, 24.0),
+                    mob -> GateSpawner.instanceOf(mob) == instance.id).isEmpty()) {
+                RedLandscape.respawnCamp(level, instance, camp);
+            }
+        }
+    }
+
+    /** The tally is met: every gate mob goes and the boss rises where the party came in. */
+    private static void summonBoss(ServerLevel level, Instance instance, Layout layout, List<ServerPlayer> inside) {
+        discardMobs(level, instance);
+        dropTallyBar(instance.id);
+        BlockPos floor = instance.entry.below();
+        layout.lairFloor = floor;   // the exit and the boss chest go here when it falls (breakSeal)
+        layout.bossSpawned = RedLandscape.spawnBoss(level, instance, floor) != null;
+        for (ServerPlayer player : inside) {
+            player.connection.send(new ClientboundSetTitleTextPacket(Component.translatableWithFallback("gate.mdvlcraft.red.boss", "The gate's master has come")));
+            player.playNotifySound(SoundEvents.RAVAGER_ROAR, SoundSource.HOSTILE, 1.0F, 0.6F);
         }
     }
 
@@ -284,11 +347,25 @@ public final class RedGates {
         int id = GateSpawner.instanceOf(dead);
         Instance instance = id < 0 ? null : gates.byId(id);
         Layout layout = RedLandscape.LAYOUTS.get(id);
+        if (instance != null && instance.red && layout != null && instance.state == GateInstances.State.ACTIVE && !layout.bossSpawned
+            && !dead.getPersistentData().getBoolean(RedLandscape.BOSS_TAG)) {
+            layout.kills++;   // the tally
+        }
         if (instance != null && instance.red && layout != null && instance.state == GateInstances.State.ACTIVE
             && dead.getPersistentData().getBoolean(RedLandscape.BOSS_TAG)) {
             if (HiddenBoss.rise(level, instance, layout, dead)) {
                 return;   // a red S gate's hidden boss rises; the seal holds until it dies
             }
+            breakSeal(level, gates, instance, layout);
+        }
+    }
+
+    /** A red gate's boss was removed without dying (its own mod discarded it): the gate counts as cleared anyway. */
+    static void bossGone(ServerLevel level, net.minecraft.world.entity.Entity boss) {
+        GateInstances gates = GateInstances.get(level.getServer());
+        Instance instance = gates.byId(GateSpawner.instanceOf(boss));
+        Layout layout = instance == null ? null : RedLandscape.LAYOUTS.get(instance.id);
+        if (instance != null && instance.red && layout != null && instance.state == GateInstances.State.ACTIVE) {
             breakSeal(level, gates, instance, layout);
         }
     }

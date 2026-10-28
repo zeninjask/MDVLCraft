@@ -24,6 +24,10 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.TamableAnimal;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.world.entity.ai.goal.MeleeAttackGoal;
 import net.minecraft.world.entity.NeutralMob;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.player.Player;
@@ -74,6 +78,8 @@ public final class GateCombat {
     private static final double PARTY_BONUS = 0.25;
     /** How near a gate mob's nearest player must be for it to go after them (it hunts through the rooms from there). */
     private static final double HUNT_RANGE = 24.0;
+    /** How far a red gate's boss may stray from where it rose before it is put back. */
+    private static final int BOSS_LEASH = 40;
     /** When each instance was cleared (game time of its world); a restart closes every instance, so this needn't persist. */
     private static final Map<Integer, Long> CLEARED_AT = new HashMap<>();
     /** Who stood on each cleared gate's exit at the last check: the exit takes only players who step onto it, so one
@@ -243,6 +249,10 @@ public final class GateCombat {
                 continue;   // break waves roam (GateBreaks keeps them in bounds)
             }
             hunt(level, instance, (Mob)entity);   // neutral mobs (Skeloraptors, wolves...) attack in red gates too
+            boolean boss = GateSpawner.isBoss(entity) || entity.getPersistentData().getBoolean(RedLandscape.BOSS_TAG);
+            if (boss) {
+                keepHome(instance, (Mob)entity);
+            }
             if (instance.red) {
                 continue;   // red camps roam (RedGates keeps them in bounds)
             }
@@ -260,13 +270,59 @@ public final class GateCombat {
 
     /** Everything in a gate is hostile at once: a mob without a target takes the nearest player of the gate within
      * HUNT_RANGE, and a neutral one (wolf, piglin, enderman...) is angered at them. */
+    /** A boss never leaves its fight: outside its boss room (a red gate's: more than BOSS_LEASH from where it rose) it is
+     * put back where it spawned. */
+    private static void keepHome(Instance instance, Mob boss) {
+        BlockPos home = BlockPos.of(boss.getPersistentData().getLong(GateSpawner.HOME));
+        int room = boss.getPersistentData().getInt(GateSpawner.ROOM);
+        boolean out = instance.red || room < 0 || room >= instance.rooms.size()
+            ? boss.blockPosition().distSqr(home) > BOSS_LEASH * BOSS_LEASH
+            : !instance.rooms.get(room).inflatedBy(2).isInside(boss.blockPosition());
+        if (out) {
+            boss.getNavigation().stop();
+            boss.teleportTo(home.getX() + 0.5, home.getY(), home.getZ() + 0.5);
+            boss.fallDistance = 0.0F;
+        }
+    }
+
+    /**
+     * A gate boss removed without dying (some mods' bosses discard themselves, e.g. after a supernova and black hole) would
+     * leave the gate impossible to clear: it counts as slain instead. Chunk unloads and our own discards of closed gates
+     * don't count (the gate is no longer active then).
+     */
+    @SubscribeEvent
+    public static void onBossRemoved(EntityLeaveLevelEvent event) {
+        Entity entity = event.getEntity();
+        Entity.RemovalReason reason = entity.getRemovalReason();
+        if (!(event.getLevel() instanceof ServerLevel level) || !GateDimensions.isGate(level.dimension()) || reason == null
+            || reason == Entity.RemovalReason.KILLED || reason == Entity.RemovalReason.UNLOADED_TO_CHUNK
+            || reason == Entity.RemovalReason.UNLOADED_WITH_PLAYER || entity instanceof LivingEntity living && living.isDeadOrDying()) {
+            return;
+        }
+        if (GateSpawner.isBoss(entity)) {
+            LOGGER.warn("Gate boss {} was removed ({}) without dying; its gate counts it as slain", entity.getType(), reason);
+            bossDown(level, entity);
+        }
+        if (entity.getPersistentData().getBoolean(RedLandscape.BOSS_TAG)) {
+            RedGates.bossGone(level, entity);
+        }
+    }
+
     private static void hunt(ServerLevel level, Instance instance, Mob mob) {
+        // Tameable mod animals as gate mobs (Legendary Monsters' Skeloraptor) only use their own attacks in reach and never walk
+        // to a target: they get a plain melee attack, which brings them to it and hits with their attack damage.
+        if (mob instanceof TamableAnimal pet && mob.getAttribute(Attributes.ATTACK_DAMAGE) != null
+            && pet.goalSelector.getAvailableGoals().stream().noneMatch(g -> g.getGoal() instanceof MeleeAttackGoal)) {
+            pet.goalSelector.addGoal(2, new MeleeAttackGoal(pet, 1.2, true));
+        }
         if (mob.getTarget() != null && mob.getTarget().isAlive()) {
             return;
         }
+        // a red gate's boss finds the party anywhere in the gate
+        double range = instance.red && mob.getPersistentData().getBoolean(RedLandscape.BOSS_TAG) ? Double.MAX_VALUE : HUNT_RANGE * HUNT_RANGE;
         ServerPlayer nearest = null;
         for (ServerPlayer player : present(level, instance)) {
-            if (player.distanceToSqr(mob) <= HUNT_RANGE * HUNT_RANGE && (nearest == null || player.distanceToSqr(mob) < nearest.distanceToSqr(mob))) {
+            if (player.distanceToSqr(mob) <= range && (nearest == null || player.distanceToSqr(mob) < nearest.distanceToSqr(mob))) {
                 nearest = player;
             }
         }

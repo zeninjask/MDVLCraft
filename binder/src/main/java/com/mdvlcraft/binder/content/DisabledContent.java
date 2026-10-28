@@ -91,11 +91,16 @@ public final class DisabledContent {
     }
 
     public static boolean isForbidden(Item item) {
+        return isForbidden(item, false);
+    }
+
+    /** As above; gate chests (loot_tables/gates) may hold gear from the disabled addons' namespaces, nothing else forbidden. */
+    public static boolean isForbidden(Item item, boolean gateLoot) {
         ResourceLocation id = ForgeRegistries.ITEMS.getKey(item);
         if (ALLOWED_ITEMS.contains(id)) {
             return false;
         }
-        return isContentDisabled(id)
+        return !gateLoot && isContentDisabled(id)
             || RuneSwap.isRemoved(id)
             || item instanceof ISpellbook
             || item instanceof IScroll
