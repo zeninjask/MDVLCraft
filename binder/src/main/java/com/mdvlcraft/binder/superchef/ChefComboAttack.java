@@ -20,8 +20,8 @@ public class ChefComboAttack extends ComboBasicAttack {
     public List<Component> getTooltipOnItem(ItemStack stack, CapabilityItem capability, PlayerPatch<?> playerpatch) {
         Component k1 = InvincibleKeyMappings.getTranslatableKey1();
         Component k2 = InvincibleKeyMappings.getTranslatableKey2();
-        Component k3 = InvincibleKeyMappings.getTranslatableKey3();
-        Object[][] args = {{k1, k2, k3}, {k2, k2, k2, k2, k1, k2}, {k1, k2, k3}, {k1, k1, k3}, {k1, k2, k3}, {k2, k2, k3}, {k2, k1, k3}, {k1, k2, k3}};
+        Component both = Component.translatable("item.mdvlcraft.super_chef.both", k1, k2);   // the finisher: both keys at once
+        Object[][] args = {{k1, k2, both}, {k1, k2}, {k1, k2, both}, {k1, k1, both}, {k1, k2, both}, {k2, k2, both}, {k2, k1, both}, {k1, k2, both}};
         List<Component> list = new ArrayList<>();
         for (int i = 0; i < args.length; i++) {
             list.add(Component.translatable("item.mdvlcraft.super_chef.tip" + (i + 1), args[i]).withStyle(ChatFormatting.GRAY));

@@ -67,7 +67,8 @@ public final class ShrineSign {
         }
     }
 
-    private static void animate(ServerPlayer player, String animation) {
+    /** Plays one of Cursed Fate's player animations (by its name) on the player, for them and everyone watching. */
+    static void animate(ServerPlayer player, String animation) {
         CursedfateMod.PACKET_HANDLER.send(PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player),
             new CursedfateModAnimationMessage(Component.literal(animation), player.getId(), true));
     }

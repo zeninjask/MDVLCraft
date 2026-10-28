@@ -13,6 +13,9 @@ import net.minecraft.world.damagesource.DamageSource;
  */
 public final class SlashPierce {
     public static final float SCALE = 0.5F;
+    /** Shrine attacks deal this share of their damage. */
+    public static final float SHRINE_DAMAGE = 0.85F;
+    private static final ThreadLocal<Boolean> SEARING = ThreadLocal.withInitial(() -> false);
     /** How long a slash's cuts land after its cast (2 s). */
     private static final long WINDOW = 40L;
     private static final Map<UUID, Long> UNTIL = new HashMap<>();
@@ -26,9 +29,22 @@ public final class SlashPierce {
         }
     }
 
-    /** Whether this hit is a slash: Cursed Fate damage from a player who just slashed or whose shrine stands. */
+    /** Runs a hit of Sear's (mixin/cursedfate/SearHitMixin): it isn't a shrine attack, even inside the chef's shrine. */
+    public static <T> T searing(java.util.function.Supplier<T> hit) {
+        SEARING.set(true);
+        try {
+            return hit.get();
+        } finally {
+            SEARING.set(false);
+        }
+    }
+
+    /**
+     * Whether this hit is a shrine attack: Cursed Fate damage from a player who just slashed or whose shrine stands
+     * (not Sear's). Shrine attacks pierce armour (SCALE) and deal SHRINE_DAMAGE (combat/TechniqueScaling).
+     */
     public static boolean slashHit(DamageSource source) {
-        if (!(source.getEntity() instanceof ServerPlayer player)
+        if (SEARING.get() || !(source.getEntity() instanceof ServerPlayer player)
             || !source.typeHolder().unwrapKey().map(key -> key.location().getNamespace().equals("cursedfate")).orElse(false)) {
             return false;
         }

@@ -53,7 +53,7 @@ import yesman.epicfight.world.damagesource.StunType;
 
 /**
  * Epic Fight - Super Chef (merlin204 and P1nero), ported to Epic Fight 20.14: the skillet-and-spatula idle, walk, run,
- * sneak and kneel, and every attack of its key combo (ChefSkills). The left hand swings the skillet, the right the spatula.
+ * sneak and kneel, and every attack of its key combo (ChefSkills). The right hand swings the pan, the left the spatula.
  * Files under assets/mdvlcraft/animmodels/animations/biped/super_chef/; frame numbers are at 60 per second.
  */
 public final class ChefAnimations {
@@ -85,52 +85,52 @@ public final class ChefAnimations {
         SNEAK = builder.nextAccessor("biped/super_chef/sneak", accessor -> new ChefMovementAnimation(accessor, Armatures.BIPED, 1.2F));
         KNEE = builder.nextAccessor("biped/super_chef/knee", accessor -> new ChefMovementAnimation(accessor, Armatures.BIPED, 1.2F));
 
-        A = attack(builder, "a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(26, 36))), spatula(27, 35));
-        A_A = attack(builder, "a_a", 0.15F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(21, 32))), spatula(22, 30));
-        A_A_A = attack(builder, "a_a_a", 0.15F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(26, 34))), spatulaEnd(25, 33));
-        A_A_B = attack(builder, "a_a_b", 0.15F, 1.0F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.skillet(30, 42))), skillet(32, 40));
+        A = attack(builder, "a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.right(26, 36))), right(27, 35));
+        A_A = attack(builder, "a_a", 0.15F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.right(21, 32))), right(22, 30));
+        A_A_A = attack(builder, "a_a_a", 0.15F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.right(26, 34))), rightEnd(25, 33));
+        A_A_B = attack(builder, "a_a_b", 0.15F, 1.0F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.left(30, 42))), left(32, 40));
         A_A_C = attack(builder, "a_a_c", 0.05F, 1.1F, a -> {
             a.addProperty(AttackAnimationProperty.FIXED_MOVE_DISTANCE, true);
             a.addEvents(InTimeEvent.create(0.75F, (AnimationEvent.E0)(patch, self, params) ->
                 patch.getOriginal().playSound(EpicFightSounds.ENTITY_MOVE.get(), 1.0F, 1.0F), Side.SERVER));
-            trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(26, 50).endPos(new Vec3(0.0, 0.1, -2.5)), ChefTrails.skillet(26, 50).endPos(new Vec3(0.0, 0.1, -2.5))));
-        }, flurry(skillet(40, 48)), flurry(spatula(45, 50)));
-        B = attack(builder, "b", 0.05F, 1.1F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.skillet(30, 42))), skillet(30, 40));
-        B_A = attack(builder, "b_a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(30, 42))), spatula(32, 40));
-        B_A_A = attack(builder, "b_a_a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(26, 36))), spatula(28, 35));
-        B_A_B = attack(builder, "b_a_b", 0.05F, 1.0F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.skillet(30, 42))), skillet(32, 40));
+            trails(a, () -> ChefTrails.add(a, ChefTrails.right(26, 50).endPos(new Vec3(0.0, 0.1, -2.5)), ChefTrails.left(26, 50).endPos(new Vec3(0.0, 0.1, -2.5))));
+        }, flurry(left(40, 48)), flurry(right(45, 50)));
+        B = attack(builder, "b", 0.05F, 1.1F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.left(30, 42))), left(30, 40));
+        B_A = attack(builder, "b_a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.right(30, 42))), right(32, 40));
+        B_A_A = attack(builder, "b_a_a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.right(26, 36))), right(28, 35));
+        B_A_B = attack(builder, "b_a_b", 0.05F, 1.0F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.left(30, 42))), left(32, 40));
         B_A_C = attack(builder, "b_a_c", 0.05F, 1.0F, a -> {
             a.addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(2.5F));
             a.addProperty(ActionAnimationProperty.CANCELABLE_MOVE, false);
-            trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(30, 50).startPos(new Vec3(0.0, 0.1, 10.0)).endPos(new Vec3(0.0, -0.1, -100.0))));
+            trails(a, () -> ChefTrails.add(a, ChefTrails.right(30, 50).startPos(new Vec3(0.0, 0.1, 10.0)).endPos(new Vec3(0.0, -0.1, -100.0))));
         }, iaido(40, 45));
-        A_B = attack(builder, "a_b", 0.15F, 1.0F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.skillet(30, 42))), skillet(32, 40));
-        A_B_A = attack(builder, "a_b_a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(24, 36))), spatula(26, 35));
-        A_B_B = attack(builder, "a_b_b", 0.05F, 1.0F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.skillet(30, 42))), skillet(31, 40));
+        A_B = attack(builder, "a_b", 0.15F, 1.0F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.left(30, 42))), left(32, 40));
+        A_B_A = attack(builder, "a_b_a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.right(24, 36))), right(26, 35));
+        A_B_B = attack(builder, "a_b_b", 0.05F, 1.0F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.left(30, 42))), left(31, 40));
         A_B_C = attack(builder, "a_b_c", 0.05F, 1.0F, a -> {
             a.addProperty(AttackPhaseProperty.STUN_TYPE, StunType.FALL);
             a.addProperty(AttackPhaseProperty.IMPACT_MODIFIER, ValueModifier.multiplier(6.0F));
             a.addProperty(ActionAnimationProperty.MOVE_VERTICAL, true);
             a.addEvents(groundSplit(58, 1.5, 0.0, 6.0F));
-            trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(20, 60).endPos(new Vec3(0.0, 0.1, -2.5)), ChefTrails.skillet(20, 60).endPos(new Vec3(0.0, 0.1, -2.5))));
-        }, skillet(28, 35), skilletEnd(54, 57));
-        B_B = attack(builder, "b_b", 0.05F, 1.1F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.skillet(30, 46))), skillet(35, 45));
-        B_B_A = attack(builder, "b_b_a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(45, 37))), spatula(26, 35));
+            trails(a, () -> ChefTrails.add(a, ChefTrails.right(20, 60).endPos(new Vec3(0.0, 0.1, -2.5)), ChefTrails.left(20, 60).endPos(new Vec3(0.0, 0.1, -2.5))));
+        }, left(28, 35), leftEnd(54, 57));
+        B_B = attack(builder, "b_b", 0.05F, 1.1F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.left(30, 46))), left(35, 45));
+        B_B_A = attack(builder, "b_b_a", 0.05F, 1.2F, a -> trails(a, () -> ChefTrails.add(a, ChefTrails.right(45, 37))), right(26, 35));
         B_B_B = attack(builder, "b_b_b", 0.05F, 0.9F, a -> {
             a.addEvents(groundSplit(35, 1.2, 0.0, 3.0F));
-            trails(a, () -> ChefTrails.add(a, ChefTrails.skillet(30, 37)));
-        }, skillet(31, 35));
+            trails(a, () -> ChefTrails.add(a, ChefTrails.left(30, 37)));
+        }, left(31, 35));
         B_B_C = attack(builder, "b_b_c", 0.05F, 0.8F, a ->
-            trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(25, 40).startPos(new Vec3(0.0, 0.1, 10.0)).endPos(new Vec3(0.0, 0.1, -100.0)))), iaido(25, 35));
+            trails(a, () -> ChefTrails.add(a, ChefTrails.right(25, 40).startPos(new Vec3(0.0, 0.1, 10.0)).endPos(new Vec3(0.0, 0.1, -100.0)))), iaido(25, 35));
         Y_A = attack(builder, "y_a", 0.15F, 0.8F, a -> {
             a.addProperty(ActionAnimationProperty.MOVE_VERTICAL, true);
             a.addEvents(groundSplit(23, 0.0, 0.0, 5.0F), fire(0.05F), fire(0.1F), fire(0.15F));
-            trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(3, 20).endPos(new Vec3(0.0, 0.1, -2.5)), ChefTrails.skillet(3, 20).endPos(new Vec3(0.0, 0.1, -2.5))));
+            trails(a, () -> ChefTrails.add(a, ChefTrails.right(3, 20).endPos(new Vec3(0.0, 0.1, -2.5)), ChefTrails.left(3, 20).endPos(new Vec3(0.0, 0.1, -2.5))));
         }, both(3, 15, 33));
         Y_B = attack(builder, "y_b", 0.15F, 0.8F, a -> {
             a.addProperty(ActionAnimationProperty.MOVE_VERTICAL, true);
             a.addEvents(groundSplit(25, 0.0, 0.0, 5.0F), fire(0.05F), fire(0.1F), fire(0.15F));
-            trails(a, () -> ChefTrails.add(a, ChefTrails.spatula(3, 20).endPos(new Vec3(0.0, 0.1, -2.5)), ChefTrails.skillet(3, 20).endPos(new Vec3(0.0, 0.1, -2.5))));
+            trails(a, () -> ChefTrails.add(a, ChefTrails.right(3, 20).endPos(new Vec3(0.0, 0.1, -2.5)), ChefTrails.left(3, 20).endPos(new Vec3(0.0, 0.1, -2.5))));
         }, both(3, 15, 33));
         // Wok of Passion: untouchable while it plays, and it spends the skill's stack
         Y_C = attack(builder, "y_c", 0.15F, 1.0F, a -> {
@@ -144,7 +144,7 @@ public final class ChefAnimations {
                     innate.getSkill().setStackSynchronize(innate, 0);
                 }
             }, Side.SERVER));
-            trails(a, () -> ChefTrails.add(a, ChefTrails.skillet(3, 85).startPos(new Vec3(0.0, 0.1, 20.0)).endPos(new Vec3(0.0, 0.1, -70.0))));
+            trails(a, () -> ChefTrails.add(a, ChefTrails.left(3, 85).startPos(new Vec3(0.0, 0.1, 20.0)).endPos(new Vec3(0.0, 0.1, -70.0))));
         }, both(50, 85, 180));
     }
 
@@ -172,20 +172,25 @@ public final class ChefAnimations {
             .addProperty(AttackPhaseProperty.DAMAGE_MODIFIER, ValueModifier.multiplier(damage));
     }
 
-    private static Supplier<Phase> spatula(int start, int end) {
-        return () -> phase(start, end, false, InteractionHand.MAIN_HAND, biped().toolR, 0.7F);
+    // Every phase hits as the main hand's item (the Frying Pan & Spatula: an off-hand phase would hit as the empty off
+    // hand, a fist); which tool swings only sets the multiplier. The pan is in the right hand, the spatula in the left.
+
+    /** A right-hand swing: the pan. */
+    private static Supplier<Phase> right(int start, int end) {
+        return () -> phase(start, end, false, InteractionHand.MAIN_HAND, biped().toolR, 1.3F);
     }
 
-    private static Supplier<Phase> spatulaEnd(int start, int end) {
-        return () -> phase(start, end, true, InteractionHand.MAIN_HAND, biped().toolR, 1.1F);
+    private static Supplier<Phase> rightEnd(int start, int end) {
+        return () -> phase(start, end, true, InteractionHand.MAIN_HAND, biped().toolR, 1.3F);
     }
 
-    private static Supplier<Phase> skillet(int start, int end) {
-        return () -> phase(start, end, false, InteractionHand.OFF_HAND, biped().toolL, 1.3F);
+    /** A left-hand swing: the spatula. */
+    private static Supplier<Phase> left(int start, int end) {
+        return () -> phase(start, end, false, InteractionHand.MAIN_HAND, biped().toolL, 0.7F);
     }
 
-    private static Supplier<Phase> skilletEnd(int start, int end) {
-        return () -> phase(start, end, true, InteractionHand.OFF_HAND, biped().toolL, 1.3F);
+    private static Supplier<Phase> leftEnd(int start, int end) {
+        return () -> phase(start, end, true, InteractionHand.MAIN_HAND, biped().toolL, 1.1F);
     }
 
     private static Supplier<Phase> flurry(Supplier<Phase> phase) {

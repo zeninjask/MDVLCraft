@@ -12,7 +12,7 @@ import yesman.epicfight.gameasset.Armatures;
 import yesman.epicfight.model.armature.HumanoidArmature;
 import yesman.epicfight.particle.EpicFightParticles;
 
-/** The spatula (right hand) and skillet (left hand) swing trails; frames are at 60 per second. */
+/** The pan (right hand) and spatula (left hand) swing trails; frames are at 60 per second. */
 @OnlyIn(Dist.CLIENT)
 final class ChefTrails {
     private ChefTrails() {
@@ -22,12 +22,12 @@ final class ChefTrails {
         animation.addProperty(ClientAnimationProperties.TRAIL_EFFECT, Arrays.stream(trails).map(TrailInfo.Builder::create).toList());
     }
 
-    static TrailInfo.Builder spatula(float startFrame, float endFrame) {
-        return trail(startFrame, endFrame, -1.25, ((HumanoidArmature)Armatures.BIPED.get()).toolR.getName(), "spatula_base");
+    static TrailInfo.Builder right(float startFrame, float endFrame) {
+        return trail(startFrame, endFrame, -1.95, ((HumanoidArmature)Armatures.BIPED.get()).toolR.getName(), "skillet_base");
     }
 
-    static TrailInfo.Builder skillet(float startFrame, float endFrame) {
-        return trail(startFrame, endFrame, -1.95, ((HumanoidArmature)Armatures.BIPED.get()).toolL.getName(), "skillet_base");
+    static TrailInfo.Builder left(float startFrame, float endFrame) {
+        return trail(startFrame, endFrame, -1.25, ((HumanoidArmature)Armatures.BIPED.get()).toolL.getName(), "spatula_base");
     }
 
     private static TrailInfo.Builder trail(float startFrame, float endFrame, double length, String joint, String texture) {

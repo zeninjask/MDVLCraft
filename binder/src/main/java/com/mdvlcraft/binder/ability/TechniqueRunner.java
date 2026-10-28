@@ -28,6 +28,8 @@ final class TechniqueRunner {
     private static final double FREE_FOCUS = 3.0;
     /** Cursed Fate's highest technique mastery. */
     private static final double FULL_MASTERY = 100.0;
+    /** Cursed Fate's backflip from its Calamitous Shrine's evasive Dismantle, played on sneak Chop. */
+    private static final String EVASIVE_FLIP = "evasivedismantle";
     /** Sneak Chop's back-hop (about 4 blocks). */
     private static final double DODGE_SPEED = 0.9;
     private static final double DODGE_LIFT = 0.42;
@@ -172,7 +174,7 @@ final class TechniqueRunner {
             // Cursed Fate's own mastery levelling is off for binder players: they cast at full mastery (its damage bonus is mastery / 8)
             variables.InnateMastery = FULL_MASTERY;
             variables.InnateMasteryXp = 0.0;
-            variables.Chant = false;   // binder casts are never Cursed Fate's chanted forms (bar sneak Chop's below)
+            variables.Chant = false;   // binder casts are never Cursed Fate's chanted forms
             // Cursed Fate's own keys can leave these set, and each makes its dispatcher run another slot or skip the cast:
             // Flow (Dismantle needs it off), the preset swap (reads AbilityNum8, not 1) and a held copied technique
             variables.Flow = false;
@@ -183,12 +185,9 @@ final class TechniqueRunner {
             }
 
             int abilityId = technique.abilityId;
-            boolean calamitous = technique == Technique.CHOP && player.isShiftKeyDown();
-            if (calamitous) {
-                abilityId = KitchenArts.CALAMITOUS_DISMANTLE;   // the chanted Heian-era Dismantle, sent with a flip
-                variables.Chant = true;
-                variables.MaximumOutput = false;   // the chant only runs at normal output
-            } else if (technique == Technique.DICING_BOARD) {
+            // sneak Chop: a plain Dismantle, then Cursed Fate's evasive Dismantle flip and a short hop back (below)
+            boolean evasive = technique == Technique.CHOP && player.isShiftKeyDown();
+            if (technique == Technique.DICING_BOARD) {
                 variables.MaximumOutput = false;   // the plain branch of the Calamitous Shrine's web is the Enhanced Spiderweb
                 variables.Flow = false;
             }
@@ -217,7 +216,7 @@ final class TechniqueRunner {
                 execute.run();
             }
 
-            if (technique.isSlash() && !calamitous && !spent[0]) {
+            if (technique.isSlash() && !spent[0]) {
                 // a slash spends cursed energy whenever it fires: none spent means Cursed Fate refused it, so it costs nothing
                 if (!player.isCreative()) {
                     magic.setMana(magic.getMana() + cost);
@@ -226,8 +225,9 @@ final class TechniqueRunner {
                 return false;
             }
 
-            if (calamitous) {
-                // Cursed Fate's back-dodge is set on the server only and throws the caster ~17 blocks: a short hop back instead
+            if (evasive) {
+                ShrineSign.animate(player, EVASIVE_FLIP);
+                // Cursed Fate's own back-dodge is set on the server only and throws the caster ~17 blocks: a short hop back instead
                 Vec3 back = player.getLookAngle().multiply(1.0, 0.0, 1.0).normalize().scale(-DODGE_SPEED);
                 player.setDeltaMovement(back.x, DODGE_LIFT, back.z);
                 player.hurtMarked = true;

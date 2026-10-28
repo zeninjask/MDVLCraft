@@ -91,10 +91,11 @@ public final class SuperChefSetup {
         for (ComboNode leap : new ComboNode[] {jb, db, yB}) {
             leap.key1(bA).key2(bB);
         }
-        aA.key1(aAA).key2(aAB).key3(aAC);
-        aB.key1(aBA).key2(aBB).key3(aBC);
-        bA.key1(bAA).key2(bAB).key3(bAC);
-        bB.key1(bBA).key2(bBB).key3(bBC);
+        // after any two-hit chain, both buttons together (Invincible's KEY_1_2) finish it
+        aA.key1(aAA).key2(aAB).key1_2(aAC);
+        aB.key1(aBA).key2(aBB).key1_2(aBC);
+        bA.key1(bAA).key2(bAB).key1_2(bAC);
+        bB.key1(bBA).key2(bBB).key1_2(bBC);
         // after any three-hit chain, either key leaps into Whirling Blade
         for (ComboNode third : new ComboNode[] {aAA, aAB, aBA, aBB, bAA, bAB, bBA, bBB}) {
             third.key1(yA).key2(yB);
@@ -121,6 +122,9 @@ public final class SuperChefSetup {
             .hitParticle(EpicFightParticles.HIT_BLADE.get())
             .canBePlacedOffhand(false)
             .newStyleCombo(Styles.TWO_HAND, Animations.LONGSWORD_DASH)
+            // Invincible runs this weapon's combos. Epic Fight's default counter handler reads the last two entries of the
+            // combo list above (it has one), threw on every attack's begin and so stopped every attack from playing
+            .comboCounterHandler((capability, causal, patch, next, counter) -> 0)
             .innateSkill(Styles.TWO_HAND, stack -> CHEF_COMBO)
             .livingMotionModifier(Styles.TWO_HAND, LivingMotions.IDLE, ChefAnimations.IDLE)
             .livingMotionModifier(Styles.TWO_HAND, LivingMotions.WALK, ChefAnimations.WALK)

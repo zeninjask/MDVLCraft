@@ -20,7 +20,7 @@ import yesman.epicfight.client.renderer.patched.item.RenderItemBase;
 import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 
 /**
- * The Frying Pan & Spatula in Epic Fight's third person: the spatula in the right hand and the pan in the left, as
+ * The Frying Pan & Spatula in Epic Fight's third person: the pan in the right hand and the spatula in the left, as
  * Epic Fight draws a katana with its sheath (renderer mdvlcraft:chef_wok, named by assets/mdvlcraft/item_skins/chef_wok.json).
  */
 @EventBusSubscriber(modid = "mdvlcraft", bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -37,8 +37,8 @@ public class ChefWokRenderer extends RenderItemBase {
     @Override
     public void renderItemInHand(ItemStack stack, LivingEntityPatch<?> patch, InteractionHand hand, OpenMatrix4f[] poses,
             MultiBufferSource buffers, PoseStack poseStack, int light, float partialTicks) {
-        draw(new ItemStack(SuperChefSetup.CHEF_WOK_SPATULA.get()), patch, InteractionHand.MAIN_HAND, poses, buffers, poseStack, light);
-        draw(new ItemStack(SuperChefSetup.CHEF_WOK_PAN.get()), patch, InteractionHand.OFF_HAND, poses, buffers, poseStack, light);
+        draw(new ItemStack(SuperChefSetup.CHEF_WOK_PAN.get()), patch, InteractionHand.MAIN_HAND, poses, buffers, poseStack, light);
+        draw(new ItemStack(SuperChefSetup.CHEF_WOK_SPATULA.get()), patch, InteractionHand.OFF_HAND, poses, buffers, poseStack, light);
     }
 
     private void draw(ItemStack part, LivingEntityPatch<?> patch, InteractionHand hand, OpenMatrix4f[] poses, MultiBufferSource buffers,

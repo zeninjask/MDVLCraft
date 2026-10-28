@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.mixin.cursedfate;
 
+import com.mdvlcraft.binder.ability.SlashPierce;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -34,7 +35,7 @@ public abstract class SearHitMixin {
             return false;
         }
         mdvlcraft$spared.remove();
-        return target.hurt(source, amount * SEAR_DAMAGE);
+        return SlashPierce.searing(() -> target.hurt(source, amount * SEAR_DAMAGE));
     }
 
     @Redirect(method = "execute", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;m_20254_(I)V"), require = 2)
