@@ -6,6 +6,20 @@ Copy everything below the line into a new Claude Code session that has the `so1g
 
 You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its own Forge mod, the **MDVLCraft Binder**. Read this whole brief before you change anything.
 
+## Needs testing after 2.1.68 (28 Oct 2026)
+
+Released untested or partly tested; check these in game:
+
+- **Red gate boss reach**: the boss has 2048 follow range and is leashed to the play area (160 from the lair), not 40 blocks. In a test Sukuna rose ~48 blocks from the player, 14 lower, and did not walk over; at close range it attacked. Check whether bosses path to players across the map.
+- **Normal gate boss leash**: a boss pushed out of its boss room (inflated by 2) should be teleported back. Untested (the test client ran out of memory entering the gate).
+- **Recruits kept out of gates** (`GateCombat.onJoin`): entities from `recruits`, `village_recruits`, `epicrecruits` are refused in gate worlds, and a recruit's mount is discarded. A server-only summon test was inconclusive; check a patrol or `/summon recruits:horseman` inside a gate with a player present. A horse that joins before its rider may stay behind.
+- **Sneak Mince** (Cleave Flow at double mana): untested. Cursed Fate refused the cast on Tester because Tester's Cursed Fate technique is the stale `ProjectionSorcery` (from old test data; join-time random techniques are already disabled in `DisabledContentSetup`). The user says players should have no innate technique: clear it (e.g. on login) and retest plain and sneak Mince.
+- **Sear**: damage multiplier doubled (`SearHitMixin.SEAR_DAMAGE` 2 to 4). Untested.
+- **Tally**: 30/38/45/60/75/90 kills (E..S). Tally bar under the timer, camp refill every 3 min per empty camp, boss summon at the arrival point and the leave-the-world clear fallback were tested and work.
+- **Hidden boss**: killing the red boss can roll the hidden boss ("Something else stirs"); it now rises at the arrival point too.
+- **Skeloraptor**: still not hostile in gates (its `ITamableMobAttackGoal` needs a target within 4 blocks; the added `MeleeAttackGoal` did not help) and its particle texture is missing. Left for later on request.
+- **Not started**: triple Piercing Blood's beam range (Cursed Fate `PiercingBloodStopProcedure`: hit points at `PiercingBloodNumLocation` from 24 down in steps of 4 over 7 points; the photon beam visual would need scaling too).
+
 ## The project
 
 - **Game:** Minecraft **1.20.1**, Forge **47.4.10**, Java **17**. About 250 mods: Epic Fight and its addons, Iron's Spells and addons, Cursed Fate, Origins with Origins Classes, Medieval Origins and Origins++, Pufferfish's Skills, Villager Recruits, Bountiful, Cataclysm, Lootr, alekiships, Farmer's Delight, Xaero's maps, Distant Horizons, Embeddium, Oculus and others.
