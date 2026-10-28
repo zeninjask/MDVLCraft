@@ -18,7 +18,8 @@ import org.apache.logging.log4j.core.filter.AbstractFilter;
  * Drops warnings and errors the pack's mods log on every start or every few ticks that are known to be harmless (a
  * mixin aimed at a mod the pack doesn't have, an optional Epic Fight datapack field, a tag entry for an absent mod,
  * vanilla's chatter about passengers of unloaded entities, ...), so the logs show what matters. Each rule is a pattern
- * found in the pack's own client and server logs; anything else, and anything below WARN, is untouched. Installed as
+ * found in the pack's own client and server logs; anything else, and anything below WARN, is untouched, except a few INFO
+ * lines that flood the logs (CHATTER). Installed as
  * early as possible (EarlyLogPlugin, before most mixin configs are read) and again when the mod is built.
  */
 public final class LogNoise extends AbstractFilter {
@@ -87,7 +88,40 @@ public final class LogNoise extends AbstractFilter {
         "^Mismatch in destroy block pos",
         "^Couldn't set damage of loot item",
         "^Couldn't find a compatible enchantment for",
-        "^LanServerPinger: Network is unreachable"
+        "^LanServerPinger: Network is unreachable",
+        // seen in the 2.1.68 client and server logs
+        "^Error parsing recipe naoyaaddon:old_sorcerer_",
+        "^Error while deserializing datapack for magistuarmory:silver_morgenstern",
+        "^[a-z_]+ was referenced as an attribute type in reforged:",
+        "^\\[sky\\] could not raise the compat's cruise altitude",
+        "^Injection error: LVT in net/minecraft/world/entity/npc/VillagerTrades",
+        "^Method overwrite conflict for ",
+        "^defineId called for: class ",
+        "^Missing textures in model ",
+        "^Unknown block '.*' in 'matchBlocks'",
+        "^Unused frames in sprite ",
+        "^Unknown geometry json version found for model ",
+        "^Texture .* limits mip level from",
+        "^Missing, or failed to load, enchanted book models",
+        "^Configuration file SimpleCommentedConfig:\\{Recruits=",
+        "^Unable to read property: .* for blockstate: \\{Name:\"minecraft:(mossy_)?cobblestone_wall\"",
+        "^Shader .* could not find (uniform|sampler) named ",
+        "^Unknown custom packet identifier: gravestone:",
+        "^Unable to play empty soundEvent: ",
+        "^\\[Asset Finder\\] Directory not found",
+        "^\\[Computer Shader Acceleration\\]",
+        "^\\[voicechat\\] Failed to bind to address .* binding to wildcard IP"
+    ).stream().map(Pattern::compile).toList();
+    /** Chatter below WARN that floods the logs: dropped at any level. */
+    private static final List<Pattern> CHATTER = List.of(
+        "^Data keys \\[",
+        "^Loading shader with type: ",
+        "^Shader loaded sucessfully",
+        "^Vertex Attribute \\(GL43\\+\\) completed",
+        "Sound Keyframe found for .* but no keyframe",
+        "\\[VR DEBUG\\]",
+        "^Received acknowledgment for login packet with id",
+        "^\\[com\\.stereowalker\\.unionlib\\.supporter\\.Cosmetics"
     ).stream().map(Pattern::compile).toList();
     private static final LogNoise INSTANCE = new LogNoise();
 
@@ -146,13 +180,21 @@ public final class LogNoise extends AbstractFilter {
 
     @Override
     public Filter.Result filter(LogEvent event) {
-        return event.getMessage() == null ? Filter.Result.NEUTRAL : this.check(event.getLevel(), event.getMessage().getFormattedMessage());
+        if (event.getMessage() == null) {
+            return Filter.Result.NEUTRAL;
+        }
+        // Xaero's maps log their expired supporter data as a full stack trace on every start
+        Throwable thrown = event.getThrown();
+        if (thrown != null && thrown.getMessage() != null && thrown.getMessage().startsWith("Online mod data expired")) {
+            return Filter.Result.DENY;
+        }
+        return this.check(event.getLevel(), event.getMessage().getFormattedMessage());
     }
 
     // a configuration filter is asked through these before any event exists
     @Override
     public Filter.Result filter(Logger logger, Level level, Marker marker, String message, Object... params) {
-        if (message == null || !level.isMoreSpecificThan(Level.WARN)) {
+        if (message == null || !level.isMoreSpecificThan(Level.INFO)) {
             return Filter.Result.NEUTRAL;
         }
         return this.check(level, params == null || params.length == 0 ? message : ParameterizedMessage.format(message, params));
@@ -169,6 +211,11 @@ public final class LogNoise extends AbstractFilter {
     }
 
     private Filter.Result check(Level level, String message) {
+        for (Pattern rule : CHATTER) {
+            if (rule.matcher(message).find()) {
+                return Filter.Result.DENY;
+            }
+        }
         if (!level.isMoreSpecificThan(Level.WARN)) {
             return Filter.Result.NEUTRAL;
         }

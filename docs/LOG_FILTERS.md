@@ -79,6 +79,15 @@ If something breaks and the logs look too quiet, check this list first: a real e
 - `Hanging entity at invalid position`: Distant Horizons generates far-away chunks and drops item frames and paintings that land outside the chunk it is building. It logged hundreds of these per session.
 - `Received unknown attacker`: the client gets a damage packet that names an entity it hasn't loaded, for example a mob out of view. Logged about 50 times per session.
 
+## 2.1.70 (from the 2.1.68 client and server logs)
+
+Neither log had a crash or a runtime error from the pack's own code. What was fixed or hidden:
+
+- **Fixed**: `Configuration file ... mdvlcraft-common.toml / village_recruits/general.toml / politics.toml is not correct. Correcting`. The pack shipped configs older than the mods. Corrected copies are now in `binder/tools/base_overlay/config`.
+- **Hidden (WARN/ERROR)**: Naoya addon `old_sorcerer_*` smithing recipes that fail to parse (their template item is gone), Epic Fight's `silver_morgenstern` weapon type, Reforged naming 1.21 attributes, Village Recruits' aircraft compat note, the Fabric API villager-trade mixin LVT error, mixin overwrite conflicts, `defineId called for`, missing item textures and models, OptiFine CTM `matchBlocks` entries for 1.21 blocks, unused sprite frames, GeckoLib geometry version notes, mip-level notes, enchanted book models, the Recruits config sync line, cobblestone wall blockstate properties, shader uniforms not found, `gravestone:` packets, empty sound events, SLM's asset finder and compute shader notes, Simple Voice Chat's wildcard bind, and Xaero's `Online mod data expired` stack traces.
+- **Hidden (INFO chatter)**: Epic Fight `Data keys [...]` (100+ per session), shader loading lines, GeckoLib's Giraffe sound keyframe, Village Recruits `[VR DEBUG]`, Calio login acknowledgements, and UnionLib's cosmetics download stack trace.
+- **Left**: `Mixin config ... does not specify "minVersion"` and refmap notes are logged before the filter can be installed.
+
 ## Fixed rather than hidden
 
 - **Server crash** `NoClassDefFoundError: io/redspace/ironsspellbooks/entity/mobs/goals/OwnerGetter` when Primal Pack or any other Traveler's Optics summon spawned. Iron's Spells 3.16 removed that interface. The pack's patched `traveloptics-5.5.0-1.20.1-mdvlcraft.jar` is now re-patched by `binder/tools/jarpatch/OwnerGetterPatch.java`: 22 summon classes now build their goals with `Supplier`.
