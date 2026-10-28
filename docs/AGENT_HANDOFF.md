@@ -6,6 +6,10 @@ Copy everything below the line into a new Claude Code session that has the `so1g
 
 You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its own Forge mod, the **MDVLCraft Binder**. Read this whole brief before you change anything.
 
+## Specialisations, spell ranks and races (branch `claude/clever-babbage-t08qqj`)
+
+Read `docs/HANDOFF_SPECS_AND_RACES.md`: what is built, what is still to code, and the race picks waiting to be implemented.
+
 ## Needs testing after 2.1.69 (28 Oct 2026)
 
 - **2.1.69, untested**: sneak Mince now clears Flow right after its cast (no flow aura); Cursed Fate's flow aura is off (`FlowAuraOnTickProcedureMixin`) and Flow is cleared on login (`AbilityEvents`); shrine armour pierce 50% to 60% (`SlashPierce.SCALE` 0.4). Released without a boot test, on request.
