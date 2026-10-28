@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.gate.tower;
 
+import com.mdvlcraft.binder.util.CrashGuard;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -100,7 +101,10 @@ public final class TowerProgress extends SavedData {
             entry.checkpoint = Math.max(1, p.getInt("checkpoint"));
             entry.best = p.getInt("best");
             entry.bestBoss = p.getInt("bestBoss");
-            data.players.put(UUID.fromString(key), entry);
+            UUID id = CrashGuard.uuid(key, "tower progress load");
+            if (id != null) {
+                data.players.put(id, entry);
+            }
         }
         return data;
     }

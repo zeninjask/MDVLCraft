@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.util.CrashGuard;
 import com.mdvlcraft.binder.ability.Technique;
 import com.mdvlcraft.binder.ability.TechniqueCooldowns;
 import java.util.HashMap;
@@ -15,9 +16,13 @@ public final class ClientTechniqueCooldowns {
     }
 
     public static void update(Map<ResourceLocation, Integer> remaining) {
-        long now = Minecraft.getInstance().level.getGameTime();
         ENDS.clear();
-        remaining.forEach((id, ticks) -> ENDS.put(Technique.byId(id).orElseThrow(), now + ticks.intValue()));
+        if (Minecraft.getInstance().level == null) {
+            return;
+        }
+        long now = Minecraft.getInstance().level.getGameTime();
+        remaining.forEach((id, ticks) -> Technique.byId(id).ifPresentOrElse(technique -> ENDS.put(technique, now + ticks.intValue()),
+            () -> CrashGuard.caught("technique cooldown sync", "unknown technique " + id, new IllegalArgumentException(id.toString()))));
     }
 
     public static void reset() {
@@ -26,7 +31,7 @@ public final class ClientTechniqueCooldowns {
 
     static float percent(Technique technique) {
         Long end = ENDS.get(technique);
-        if (end == null) {
+        if (end == null || Minecraft.getInstance().level == null || Minecraft.getInstance().player == null) {
             return 0.0F;
         }
 

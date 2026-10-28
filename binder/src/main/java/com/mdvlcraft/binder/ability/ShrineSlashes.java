@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.ability;
 
+import com.mdvlcraft.binder.util.CrashGuard;
 import java.util.UUID;
 import java.util.function.Supplier;
 import javax.annotation.Nullable;
@@ -22,11 +23,8 @@ public final class ShrineSlashes {
     @Nullable
     public static ServerPlayer owner(Entity domain, String key) {
         String uuid = domain.getPersistentData().getString(key);
-        if (uuid.isEmpty()) {
-            return null;
-        } else {
-            return domain.level().getPlayerByUUID(UUID.fromString(uuid)) instanceof ServerPlayer player ? player : null;
-        }
+        UUID id = uuid.isEmpty() ? null : CrashGuard.uuid(uuid, "shrine owner");
+        return id != null && domain.level().getPlayerByUUID(id) instanceof ServerPlayer player ? player : null;
     }
 
     public static boolean held(ServerPlayer owner) {

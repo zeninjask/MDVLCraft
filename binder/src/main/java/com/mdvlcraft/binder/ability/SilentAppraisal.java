@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.ability;
 
+import com.mdvlcraft.binder.util.CrashGuard;
 import com.cursedfate_roslon_meimei.CursedfateRoslonMeimeiMod;
 import com.cursedfate_roslon_meimei.network.MeiMeiCrowCameraViewPacket;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
@@ -32,7 +33,8 @@ public final class SilentAppraisal {
         for (ServerPlayer player : server.getPlayerList().getPlayers()) {
             String active = player.getPersistentData().getString(ACTIVE_CAMERA);
             if (!active.isEmpty()) {
-                Entity crow = player.serverLevel().getEntity(UUID.fromString(active));
+                UUID crowId = CrashGuard.uuid(active, "Silent Appraisal camera");
+                Entity crow = crowId == null ? null : player.serverLevel().getEntity(crowId);
                 if (crow == null || crow.isRemoved()) {
                     end(player, null);
                 } else if (outOfSight(player, crow) || crow.getPersistentData().getInt(LIFE_TICKS) % 20 == 0 && !pay(player)) {

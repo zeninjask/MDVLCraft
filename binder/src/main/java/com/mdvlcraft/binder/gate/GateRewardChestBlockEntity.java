@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.gate;
 
+import com.mdvlcraft.binder.util.CrashGuard;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -121,7 +122,11 @@ public class GateRewardChestBlockEntity extends BlockEntity {
         this.loot.clear();
         CompoundTag players = tag.getCompound("players");
         for (String key : players.getAllKeys()) {
-            SimpleContainer container = this.container(UUID.fromString(key));
+            UUID id = CrashGuard.uuid(key, "gate reward chest load");
+            if (id == null) {
+                continue;
+            }
+            SimpleContainer container = this.container(id);
             NonNullList<ItemStack> items = NonNullList.withSize(SIZE, ItemStack.EMPTY);
             ContainerHelper.loadAllItems(players.getCompound(key), items);
             for (int i = 0; i < SIZE; i++) {

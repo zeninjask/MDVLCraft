@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.compat.ftbquests;
 
+import com.mdvlcraft.binder.util.CrashGuard;
 import dev.architectury.event.EventResult;
 import dev.ftb.mods.ftbquests.events.ObjectCompletedEvent;
 import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
@@ -58,7 +59,11 @@ public final class QuestBonuses {
                     for (String tag : reward.getTags()) {
                         if (tag.startsWith(TAG)) {
                             String[] parts = tag.substring(TAG.length()).split("=");
-                            totals.merge(parts[0], Double.parseDouble(parts[1]), Double::sum);
+                            try {
+                                totals.merge(parts[0], Double.parseDouble(parts[1]), Double::sum);
+                            } catch (RuntimeException error) {
+                                CrashGuard.caught("quest bonus", "bad reward tag '" + tag + "'", error);
+                            }
                         }
                     }
                 }

@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.util.CrashGuard;
 import java.util.Map;
 import java.util.UUID;
 import java.util.WeakHashMap;
@@ -14,9 +15,10 @@ public final class ClientSummonOwners {
     }
 
     public static void set(int summonId, UUID owner) {
-        Entity summon = Minecraft.getInstance().level.getEntity(summonId);
+        Entity summon = Minecraft.getInstance().level == null ? null : Minecraft.getInstance().level.getEntity(summonId);
         if (summon == null) {
-            throw new IllegalStateException("Summon " + summonId + " is not on the client");
+            CrashGuard.caught("summon owner sync", "summon " + summonId + " is not on the client", new IllegalStateException());
+            return;
         }
         OWNERS.put(summon, owner);
     }

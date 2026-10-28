@@ -5,6 +5,10 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "mdvlcraft.refmap.json",
   "mixins": [
+    "guard.EntityTickGuardMixin",
+    "guard.PlayerTickGuardMixin",
+    "guard.BlockEntityTickGuardMixin",
+    "guard.TickEventGuardMixin",
     "unionlib.ConfigBuilderRaceMixin",
     "absorbed.ItemEntityMergeMixin",
     "absorbed.Vec3iHashMixin",
@@ -159,6 +163,8 @@
     "TargetingConditionsMixin"
   ],
   "client": [
+    "guard.EntityRenderGuardMixin",
+    "guard.OverlayRenderGuardMixin",
     "ResolutionPopupMixin",
     "photon.MinecraftResizeMixin",
     "photon.BloomEffectMixin",
