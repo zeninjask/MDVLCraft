@@ -196,6 +196,18 @@ Fate techniques or cursed objects (players no longer get techniques), and Shrine
 - Jujutsu races remade: https://claude.ai/artifact/VTaHju5W3bL5CstuGaRFRn
 - Shrinekin picker: https://claude.ai/artifact/CLW1YVCpshyBoddbht8oJw
 
+## 6b. Status after 2.1.70 (2026-10-28)
+
+- Released 2.1.70 to main: 14 new races (`tools/races/build_races.py`), every race's 2 abilities as "(Modified)"
+  placeholders (`ability/RaceAbilities`, granted by race, listed on the origin picker), Miscellaneous quest chapter
+  (Brewing B, Food F, Familiars S), one Orb of Origin per player on first login (`content/OrbGift`).
+- Tested in game: race swap grants/removes the abilities, the picker lists them, the orb gift, new race powers load.
+  All 156 spec attributes on at once in a short fight: no errors (a smoke test, not a check of each spec).
+- Not tested: Changeling -> Human on login, each spec's effect, the Misc quest chapter in the quest log.
+- Text-only race powers (need code): Waterlogged, Sand Strider, Silent Steps, Banner Bearer, Outcast, Ember Skin,
+  Zombify, Fox Friend, Illager Ire, Watched Over, Copy, Dread, Long Summons, Black Flash Instinct, Mouth on the Palm.
+- Uraume: snow fox; spells picked on the artifact picker (db doc `picks/uraume`).
+
 ## 7. Suggested order
 
 1. ~~Finish the origin specs (§3), clean build, refmap check.~~ Done.
