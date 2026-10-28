@@ -10,7 +10,7 @@ import net.minecraftforge.network.PacketDistributor;
 import net.minecraftforge.network.simple.SimpleChannel;
 
 public final class BinderNetwork {
-    private static final String PROTOCOL = "26";
+    private static final String PROTOCOL = "27";
     private static final SimpleChannel CHANNEL = NetworkRegistry.newSimpleChannel(
         ResourceLocation.fromNamespaceAndPath("mdvlcraft", "main"), () -> PROTOCOL, PROTOCOL::equals, PROTOCOL::equals
     );
@@ -207,6 +207,10 @@ public final class BinderNetwork {
         );
         CHANNEL.registerMessage(
             id++, SettingsSyncPacket.class, SettingsSyncPacket::encode, SettingsSyncPacket::decode, SettingsSyncPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, FriendlySummonsPacket.class, FriendlySummonsPacket::encode, FriendlySummonsPacket::decode, FriendlySummonsPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
         com.mdvlcraft.binder.gate.tower.TowerItems.registerPackets(CHANNEL, id);   // castle sigil menu, tower status line
