@@ -1,0 +1,1410 @@
+[
+ {
+  "id": "frostborn",
+  "name": "Frostborn",
+  "source": "Iron's Spellbooks frozen humanoids, ice spiders",
+  "gap": "Cold biomes and ice",
+  "desc": "Pale, blue-lipped folk of the high glaciers. Their blood runs cold enough that snow feels like a blanket and summer like a fever.",
+  "traits": [
+   "Immune to freezing in powder snow",
+   "Take 20% less damage from ice spells",
+   "Hot biomes (desert, badlands, nether) drain hunger 30% faster"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Ice Bridge",
+    "text": "Freeze a 3-wide path of water ahead of you, 16 blocks long, for 30 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Snow Shelter",
+    "text": "Raise a dome of packed snow around you (radius 3) that melts after 5 minutes. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Frost Walk",
+    "text": "For 30 s, water freezes under your feet and you don't sink in powder snow. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Cold Storage",
+    "text": "Food in your inventory stops spoiling and raw fish and meat give full saturation for 10 minutes. 20 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Whiteout",
+    "text": "A 6-block snowstorm around you for 8 s: enemies inside lose track of you and are slowed. 2 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Glacial Shell",
+    "text": "Gain 6 absorption for 10 s; anything that hits you while it lasts is frozen for 1 s. 90 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "stormkin",
+  "name": "Stormkin",
+  "source": "Wind Spellbooks, lightning mobs",
+  "gap": "Weather and lightning",
+  "desc": "Born in the eye of a storm, Stormkin crackle with static and hear the weather turn before anyone else.",
+  "traits": [
+   "Immune to lightning damage",
+   "10% more speed while it rains",
+   "Take 25% more damage from water-based spells"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Updraft",
+    "text": "Launch yourself 8 blocks straight up and fall slowly for 4 s. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Call the Rain",
+    "text": "Start rain (or stop it) in your area. 20 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Static Charge",
+    "text": "Your next 5 tools or weapons used work 20% faster for 30 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Lightning Rod",
+    "text": "Mark a block: for 60 s any lightning in 64 blocks strikes there instead. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Gale Step",
+    "text": "Dash 8 blocks in the direction you're moving, through air or water. 15 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Thunderhead",
+    "text": "Call a lightning bolt on the spot you look at (24 blocks). 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "dunekin",
+  "name": "Dunekin",
+  "source": "Cataclysm Ancient Remnant, YUNG's desert temples",
+  "gap": "Deserts and heat",
+  "desc": "Sun-dark nomads of the great dunes, keepers of buried tombs. Sand is their road and thirst a stranger.",
+  "traits": [
+   "Never slowed by sand or soul sand",
+   "Hunger drains 25% slower in deserts",
+   "Take 20% more damage from cold and ice"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Sandswim",
+    "text": "Sink into sand and move through it for 6 s. 45 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Mirage",
+    "text": "Leave an illusion of yourself that draws mobs for 6 s while you become invisible for 3 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Tomb Sense",
+    "text": "Show the nearest buried structure (temple, ruin, tomb) within 200 blocks as a compass pointer for 60 s. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Water Finder",
+    "text": "Turn a block of sand you look at into a water source. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Sun Ward",
+    "text": "For 2 minutes you are immune to fire from the sun and hunger from heat; allies within 6 get the same. 10 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Sandstorm",
+    "text": "A 5-block whirl of sand on you for 6 s that blinds and pushes back enemies. 90 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "enderling",
+  "name": "Enderling",
+  "source": "Endermen, Cataclysm Ender Guardian",
+  "gap": "The End and teleportation",
+  "desc": "Tall, quiet wanderers touched by the void. Their steps skip through space, but water burns them like acid.",
+  "traits": [
+   "Ender pearls cost no damage and have half the cooldown",
+   "Endermen are neutral even when looked at",
+   "Water deals 1 damage a second"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Blink",
+    "text": "Teleport to the block you look at (16 blocks). 20 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Void Pocket",
+    "text": "Open a personal ender chest anywhere. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Recall Point",
+    "text": "Set a point; using it again within 10 minutes teleports you back there. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Swap",
+    "text": "Swap places with the creature you look at (24 blocks). 45 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Phase",
+    "text": "For 3 s, projectiles pass through you. 60 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Displace",
+    "text": "Teleport the enemy you look at 8 blocks straight up. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "wraith",
+  "name": "Wraith",
+  "source": "Wraithon",
+  "gap": "Spirits and incorporeality",
+  "desc": "Half-faded souls who never quite left. They drift where the living walk, cold to the touch and hard to pin down.",
+  "traits": [
+   "No fall damage",
+   "Undead are neutral unless attacked",
+   "Healing from food is 25% weaker"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Pass Through",
+    "text": "Walk through one block-thick walls for 4 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Drift",
+    "text": "Hover and glide slowly for 10 s. 45 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Possess Item",
+    "text": "Make a dropped item float to you from up to 24 blocks. 10 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Spirit Sight",
+    "text": "See every living creature within 32 blocks through walls for 10 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Fade",
+    "text": "Become invisible and silent for 8 s; it ends when you attack. 90 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Chilling Touch",
+    "text": "Your next hit within 10 s drains 4 health from the target to you. 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "sculkborn",
+  "name": "Sculkborn",
+  "source": "Warden, Super Warden",
+  "gap": "Sculk and the Deep Dark",
+  "desc": "Blind children of the Deep Dark who see by sound. Footsteps paint the world for them; silence is their armour.",
+  "traits": [
+   "Sculk sensors and shriekers ignore you",
+   "Immune to Darkness",
+   "Daylight on open sky gives Weakness I"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Echolocation",
+    "text": "Pulse sound out 24 blocks: every creature and chest glows for you for 8 s. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Muffle",
+    "text": "You make no vibrations or sound for 30 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Sculk Bloom",
+    "text": "Spread sculk on blocks within 4 blocks, collecting the experience of nearby kills there. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Soul Siphon",
+    "text": "Draw all experience orbs within 16 blocks to you and gain 25% more from them for 30 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Deep Calm",
+    "text": "Wardens and sculk mobs ignore you for 60 s. 10 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Sonic Boom",
+    "text": "A short sonic blast in a line (10 blocks) that ignores armour for 8 damage. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "deepling",
+  "name": "Deepling",
+  "source": "Cataclysm Deepling and Leviathan, Alex's Caves Abyssal Chasm",
+  "gap": "Deep ocean",
+  "desc": "Pressure-forged dwellers of the abyss, with lantern eyes and gills. On land they dry and tire.",
+  "traits": [
+   "Breathe underwater and see clearly in it",
+   "Swim 20% faster",
+   "On land out of rain, regeneration is halved"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Pressure Dive",
+    "text": "Sink fast and walk on the sea floor for 30 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Lantern Eyes",
+    "text": "Light up water around you (8 blocks) and see through murk for 2 minutes. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Bubble",
+    "text": "Give an ally you look at water breathing for 2 minutes. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Current",
+    "text": "Create a 16-block water current in the direction you look for 10 s that carries you and boats. 45 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Tidal Sense",
+    "text": "Show every treasure chest and shipwreck within 64 blocks underwater for 10 s. 5 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Abyssal Grip",
+    "text": "Pull the creature you look at (16 blocks) down and root it for 3 s if it's in water. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "ferrous",
+  "name": "Ferrous",
+  "source": "Alex's Caves Magnetic Caves (Magnetron, Teletor)",
+  "gap": "Magnetism and metal",
+  "desc": "Iron-blooded folk from the magnetic caverns. Metal leans toward them; compasses spin in their presence.",
+  "traits": [
+   "Iron and metal blocks mine 20% faster",
+   "Can't drown in lava for the first 2 s",
+   "Lightning deals double damage"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Magnetise",
+    "text": "Pull every dropped item and metal object within 16 blocks to you. 15 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Metal Sense",
+    "text": "Show every iron, gold and copper ore within 16 blocks through walls for 10 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Mag-Lift",
+    "text": "Hover above metal blocks and rails for 20 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Repulse",
+    "text": "Push every arrow and thrown weapon away from you for 5 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Polarity Walk",
+    "text": "Walk on walls and ceilings made of metal blocks for 30 s. 2 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Disarm",
+    "text": "Pull the main-hand weapon from the mob you look at (16 blocks). 90 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "irradiated",
+  "name": "Irradiated",
+  "source": "Alex's Caves Toxic Caves (Nucleeper, Raycat)",
+  "gap": "Toxins and radiation",
+  "desc": "Glowing survivors of the toxic depths. They shrug off poison and light the dark, but animals avoid them.",
+  "traits": [
+   "Immune to Poison and Alex's Caves Irradiated",
+   "Glow faintly (light level 6 around you)",
+   "Passive animals flee from you"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Glow",
+    "text": "Light up a 12-block area around you for 2 minutes. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Decay",
+    "text": "Instantly compost the plant matter in your inventory into bone meal and grow crops within 4 blocks one stage. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hazmat",
+    "text": "You and allies within 6 are immune to poison, wither and gas for 30 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Half-Life",
+    "text": "Rotten flesh, spider eyes and poisonous potatoes feed you normally for 5 minutes. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Geiger Sense",
+    "text": "Show every hostile mob within 32 blocks through walls for 8 s. 90 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Fallout",
+    "text": "Leave a toxic cloud (4 blocks) for 8 s that poisons enemies. 90 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "saurian",
+  "name": "Saurian",
+  "source": "Alex's Caves Primordial Caves dinosaurs",
+  "gap": "Reptiles and prehistory",
+  "desc": "Scaled, tailed folk from the primordial caves, with old instincts and strong jaws. Cold slows them.",
+  "traits": [
+   "Eat raw meat without hunger",
+   "Take 10% less fall damage and jump higher",
+   "Slowness I in cold biomes"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Ancient Call",
+    "text": "Calm and lead nearby dinosaurs and reptiles to follow you for 60 s. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Sun Bask",
+    "text": "Stand still in sunlight for 5 s to heal 8 health and fill hunger by 4. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Shed Skin",
+    "text": "Remove every harmful effect from yourself. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Tail Sweep",
+    "text": "Knock items and small mobs within 3 blocks away from you. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Egg Clutch",
+    "text": "Lay an egg that hatches a tame baby lizard companion that follows you. 20 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Roar",
+    "text": "Mobs within 8 blocks are frightened and flee for 4 s. 90 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "gloomkin",
+  "name": "Gloomkin",
+  "source": "Alex's Caves Forlorn Hollows (Gloomoth, Underzealot, Watcher)",
+  "gap": "Darkness and moths",
+  "desc": "Moth-winged people of the forlorn hollows, drawn to light and hiding from it at once.",
+  "traits": [
+   "See in the dark (no darkness penalty below light 4)",
+   "Slow fall while sneaking",
+   "Bright light (15) gives Weakness I"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Dust Wings",
+    "text": "Glide for 8 s with wing dust that leaves a trail. 45 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Darken",
+    "text": "Put out every light within 8 blocks for 30 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Moth to Flame",
+    "text": "Sense every light source within 48 blocks, shown as markers for 10 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Gloom Veil",
+    "text": "Become invisible while standing in darkness for 30 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Lantern Swarm",
+    "text": "Summon 6 moths that light your way and follow you for 2 minutes. 5 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Blinding Dust",
+    "text": "Enemies within 4 blocks are blinded for 4 s. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "gingerbread",
+  "name": "Gingerbread",
+  "source": "Alex's Caves Candy Cavity (gingerbread men)",
+  "gap": "Sweets and whimsy",
+  "desc": "Baked, iced and very much alive. Gingerbread folk are cheerful, crumbly and dangerously tasty to everything else.",
+  "traits": [
+   "Sugar, cake and sweets give double food",
+   "Immune to Slowness from honey and sticky blocks",
+   "Take 25% more damage from water"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Icing Patch",
+    "text": "Repair a crumbled body: heal 6 by eating sugar or a sweet. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Sugar Rush",
+    "text": "Speed II and Haste II for 15 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Candy Trail",
+    "text": "Leave a trail of candy for 20 s that heals allies who walk over it. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Bake",
+    "text": "Turn wheat, sugar and eggs in your inventory into cake and cookies. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Crumb Decoy",
+    "text": "Drop a gingerbread decoy that mobs chase for 6 s. 90 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Peppermint Burst",
+    "text": "A minty burst (4 blocks) that knocks enemies back and slows them for 3 s. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "geodeborn",
+  "name": "Geodeborn",
+  "source": "Cataclysm Amethyst Crab, geodes",
+  "gap": "Crystals and resonance",
+  "desc": "Crystalline folk grown from geodes, humming with resonance. They chime when they walk and shatter loud.",
+  "traits": [
+   "Amethyst and gems mine twice as fast",
+   "Gain 2 armour",
+   "Take 25% more damage from explosions"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Resonate",
+    "text": "Ring out: every geode, amethyst cluster and gem ore within 32 blocks glows for 10 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Crystal Light",
+    "text": "Grow a glowing crystal on a surface that gives light 12, lasting until broken. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Gem Cutting",
+    "text": "Turn a stack of shards in your inventory into blocks, or blocks back to shards. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Prism Shield",
+    "text": "Reflect the next spell projectile that hits you within 8 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Harmonic Grow",
+    "text": "Make amethyst buds within 8 blocks grow to full clusters. 5 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Shard Spray",
+    "text": "Fire a fan of 5 crystal shards, 3 damage each. 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "ursine",
+  "name": "Ursine",
+  "source": "Naturalist bears",
+  "gap": "Strength and foraging",
+  "desc": "Big-shouldered bear folk who love honey, fish and long sleep. Slow to anger, impossible to stop once angry.",
+  "traits": [
+   "+4 max health",
+   "Honey and berries give double saturation",
+   "10% slower movement"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Hibernate",
+    "text": "Sleep at any time to skip to morning if alone, or heal fully over 10 s. 20 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Forage",
+    "text": "Search the ground: get berries, honeycomb or fish depending on the biome. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Bear Hug",
+    "text": "Pick up a passive animal or ally and carry it for 20 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Thick Fur",
+    "text": "Immune to cold and freezing and +2 armour for 2 minutes. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Scent Trail",
+    "text": "Track the nearest animal or player you name: a pointer for 60 s. 5 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Maul",
+    "text": "Your next hit deals 50% more and knocks back. 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "faun",
+  "name": "Faun",
+  "source": "Naturalist deer, Epic Knights forests",
+  "gap": "Forest grace and speed",
+  "desc": "Antlered, light-footed woodland folk. They outrun everything in the trees and hear a twig snap at fifty paces.",
+  "traits": [
+   "15% faster in forests",
+   "Jump half a block higher",
+   "Take 15% more damage from melee"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Bound",
+    "text": "Leap 8 blocks forward and up. 20 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Startle Sense",
+    "text": "Mobs targeting you within 32 blocks glow for 6 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Antler Rack",
+    "text": "Hang items: a shrine stand that holds 4 items and grants Luck I nearby. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Herd Speed",
+    "text": "You and allies within 8 get Speed II for 10 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Woodwalk",
+    "text": "Leaves and bushes don't slow or block you for 30 s. 90 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Antler Charge",
+    "text": "Charge 6 blocks and toss the first enemy hit. 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "naga",
+  "name": "Naga",
+  "source": "Naturalist snakes, Cataclysm Scylla",
+  "gap": "Serpents and coils",
+  "desc": "Serpent-tailed folk who move in silence and strike in a blink. They feel warmth and tremor through the ground.",
+  "traits": [
+   "Sense heat: warm-blooded creatures glow within 12 blocks at night",
+   "Immune to poison",
+   "Can't wear boots"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Shed",
+    "text": "Remove every harmful effect and gain 4 absorption. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Coil",
+    "text": "Wrap around the ally you look at: both take 30% less damage for 8 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Slither",
+    "text": "Move at full speed while crawling and through one-block gaps for 20 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hypnotic Gaze",
+    "text": "The mob you look at stops and stares for 5 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Swallow Whole",
+    "text": "Eat an entire food stack's worth: fill hunger and saturation fully. 10 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Venom Fangs",
+    "text": "Your next 3 hits poison for 4 s. 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "gatorkin",
+  "name": "Gatorkin",
+  "source": "Naturalist alligators",
+  "gap": "Swamps and ambush",
+  "desc": "Armoured swamp-dwellers who lie still in murky water for hours. Their bite is legend; their patience more so.",
+  "traits": [
+   "+3 armour",
+   "Hold breath twice as long",
+   "Slower on land (-10%)"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Lurk",
+    "text": "Become invisible while still in water for 60 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Swamp Stride",
+    "text": "Mud, swamp water and lily pads speed you up for 30 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Bask",
+    "text": "Stand in sun to gain Resistance I for 60 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Death Roll",
+    "text": "Spin in water: break free of any root, web or grab. 45 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Fisher's Jaws",
+    "text": "Catch a fish from water you stand in. 60 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Clamp",
+    "text": "Bite the enemy you face: it is rooted for 3 s and takes 6 damage. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "fae",
+  "name": "Fae",
+  "source": "Naturalist fireflies and butterflies",
+  "gap": "Tiny flight and glamour",
+  "desc": "Small winged folk of glades and lights. Fragile, fickle and full of tricks, with a glamour to hide behind.",
+  "traits": [
+   "Pehkui scale 0.6 (small)",
+   "Slow falling always",
+   "-6 max health"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Flutter",
+    "text": "Fly freely for 6 s. 45 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Glamour",
+    "text": "Look like a different creature to mobs for 30 s: they ignore you unless hit. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Firefly Lights",
+    "text": "Release 8 fireflies that light the area for 2 minutes. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Pollen Charm",
+    "text": "Every crop and flower within 8 blocks grows one stage. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Fairy Ring",
+    "text": "Plant a ring of mushrooms: a waypoint you can teleport back to once within 20 minutes. 20 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Pixie Dust",
+    "text": "Enemies within 4 blocks float helplessly for 2 s. 90 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "apini",
+  "name": "Apini",
+  "source": "Bees, Beekeeper class",
+  "gap": "Hives and community",
+  "desc": "Bee-folk with gossamer wings and a hive mind. They work hard, sting once, and never forget the queen.",
+  "traits": [
+   "Bees are friendly and follow you",
+   "Flowers heal you 1 health when walked through (5 s cooldown)",
+   "Lose 1 health when you hit an enemy for the first time each fight"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Buzz",
+    "text": "Hover and fly upward slowly for 6 s. 45 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hive Mind",
+    "text": "Mark a hive; see through it (a short camera view) and know when it's full. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Pollinate",
+    "text": "Crops within 10 blocks grow one stage. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Royal Jelly",
+    "text": "Make a honey bottle from nothing. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Waggle Dance",
+    "text": "Show allies within 16 blocks the way to the nearest flower biome or village for 30 s. 5 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Sting",
+    "text": "A fast jab that poisons and slows for 4 s. 30 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "forged",
+  "name": "Forged",
+  "source": "Super Golem, iron golems, Cataclysm Netherite Monstrosity",
+  "gap": "Constructs and machines",
+  "desc": "Built, not born. Forged are animated armour of iron and runes. They don't eat, but they rust.",
+  "traits": [
+   "Don't need food (hunger stays full); heal by using iron ingots",
+   "+4 armour",
+   "Can't drink potions (effects 50% weaker)"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Self-Repair",
+    "text": "Use an iron ingot to heal 8. 10 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Furnace Core",
+    "text": "Smelt the ore in your inventory using your own heat. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Overclock",
+    "text": "Haste II and Speed I for 20 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Anchor",
+    "text": "Become immovable for 10 s: no knockback, no pull. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Golem Bond",
+    "text": "Iron golems and village guards follow and defend you for 5 minutes. 15 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Iron Slam",
+    "text": "Slam the ground: enemies within 4 blocks are tossed up. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "mimic",
+  "name": "Mimic",
+  "source": "Mimic mod",
+  "gap": "Disguise and greed",
+  "desc": "Shapeless hoarders who pretend to be furniture. They'll eat your loot, and sometimes your fingers.",
+  "traits": [
+   "Carry 9 more inventory slots (a mouth pocket)",
+   "Mobs don't notice you while you're standing still and sneaking",
+   "Take 20% more fire damage"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Chest Form",
+    "text": "Turn into a chest until you move; mobs ignore you. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Swallow",
+    "text": "Store a whole block (with its contents) in your mouth and spit it out later. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Treasure Nose",
+    "text": "Show every chest within 32 blocks through walls for 10 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Copycat",
+    "text": "Take the shape of the mob you look at for 60 s: its kind ignore you. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Gorge",
+    "text": "Eat any one item to gain food equal to its stack size (max 10). 10 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Snap Shut",
+    "text": "Bite the enemy in front for 6 damage and root it for 2 s. 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "dhampir",
+  "name": "Dhampir",
+  "source": "Gap: blood and night",
+  "gap": "Blood and the night",
+  "desc": "Half-vampire wanderers. They walk in daylight, but their strength wakes with the moon and their hunger never quite fades.",
+  "traits": [
+   "Night vision at night",
+   "Melee hits heal 5% of damage dealt",
+   "Golden apples and healing potions heal half as much"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Blood Sense",
+    "text": "See every creature that is below half health within 32 blocks for 10 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Mist Form",
+    "text": "Turn to mist for 4 s: you can't be hit and pass through mobs. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Bat Swarm",
+    "text": "Turn into a swarm of bats and fly for 6 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Thrall",
+    "text": "Charm the passive mob or villager you look at to follow you for 5 minutes. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Night Walker",
+    "text": "For 60 s at night, Speed I and Jump Boost I. 3 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Drain",
+    "text": "Drain the enemy you look at (8 blocks): 2 damage a second for 4 s, healing you the same. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "aasimar",
+  "name": "Aasimar",
+  "source": "Gap: celestial light (Iron's priests, Seraph)",
+  "gap": "Light and healing",
+  "desc": "Mortals with an angel somewhere in the bloodline. Faint halos, warm hands, and a bad habit of telling the truth.",
+  "traits": [
+   "Undead deal 10% less damage to you",
+   "Glow faintly at night",
+   "Take 15% more damage from fire"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Halo",
+    "text": "Light a 10-block area around you for 2 minutes. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Lay on Hands",
+    "text": "Heal the ally you look at for 8 and cure poison. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Wings of Light",
+    "text": "Glide on shining wings for 10 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Sanctify",
+    "text": "Mark a 6-block area for 5 minutes where hostile mobs can't spawn. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "True Sight",
+    "text": "See invisible creatures and through illusions within 24 blocks for 20 s. 2 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Radiant Flash",
+    "text": "A burst of light (5 blocks): enemies are blinded 3 s, undead take 6 damage. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "centaur",
+  "name": "Centaur",
+  "source": "Gap: mounted travel (Horseman, Astikor Carts)",
+  "gap": "Speed and travel",
+  "desc": "Half-horse plains people who are their own mount. They carry carts, cover ground and can't sit in a boat.",
+  "traits": [
+   "+20% movement speed, +1 step height",
+   "Can be ridden by one ally",
+   "Can't ride boats or mounts; can't sleep in beds"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Gallop",
+    "text": "Speed III for 10 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Carry Rider",
+    "text": "Let the ally you look at ride on your back. 10 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Pack Saddle",
+    "text": "Open a 27-slot saddlebag. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hitch Cart",
+    "text": "Pull a cart or plough without a horse for 10 minutes. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Long Leap",
+    "text": "Jump 3 blocks high and 6 forward. 20 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Rear Up",
+    "text": "Kick: enemies in front within 3 blocks take 5 damage and are knocked back. 30 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "minotaur",
+  "name": "Minotaur",
+  "source": "Gap: labyrinths, YUNG's dungeons",
+  "gap": "Mazes and stubborn strength",
+  "desc": "Horned and heavy, minotaurs never lose their way underground and never turn from a charge.",
+  "traits": [
+   "Always know which way is out: a compass to your spawn",
+   "Pickaxes and shovels dig 15% faster",
+   "Can't fit through one-block-high gaps easily (crawl slower)"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Pathmind",
+    "text": "Mark your trail for 5 minutes: glowing hoofprints show where you've been. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Bulldoze",
+    "text": "Break the 3x3 wall of soft blocks (dirt, stone, gravel) in front of you. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Thread",
+    "text": "Set a thread anchor; using it again within 10 minutes guides you back with a particle line. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Stubborn",
+    "text": "Immune to Slowness and Mining Fatigue for 60 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Heavy Load",
+    "text": "Carry a full chest block (with contents) for as long as you like. 60 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Gore",
+    "text": "Charge 8 blocks; the first enemy hit takes 8 damage and is thrown. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "gnome",
+  "name": "Gnome",
+  "source": "Gap: tinkering and crafting",
+  "gap": "Gadgets and cleverness",
+  "desc": "Small, bright-eyed tinkerers forever building something that almost works. Brilliant, tiny and easily stepped on.",
+  "traits": [
+   "Pehkui scale 0.7",
+   "Crafting tools and armour sometimes (10%) gives one Unbreaking level",
+   "-4 max health"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Pocket Workshop",
+    "text": "Open a crafting table, anvil or smithing table anywhere. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Gadget Turret",
+    "text": "Place a small turret that shoots arrows at hostile mobs for 30 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Tinker",
+    "text": "Repair the item in your hand by 15% of its durability. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Spring Boots",
+    "text": "Your next jump within 10 s goes 6 blocks high, no fall damage. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Clockwork Helper",
+    "text": "A small clockwork helper follows you and picks up items for 2 minutes. 5 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Flash Bang",
+    "text": "A pop of light and noise: enemies within 4 blocks are dazed for 2 s. 60 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "halfling",
+  "name": "Halfling",
+  "source": "Gap: luck, food and stealth",
+  "gap": "Luck and comfort",
+  "desc": "Small, cheerful and lucky. Halflings eat six meals a day and somehow always land on their feet.",
+  "traits": [
+   "Luck +1",
+   "Food heals 1 extra health",
+   "Pehkui scale 0.75"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Second Breakfast",
+    "text": "Eat any food instantly with double effect. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Lucky Break",
+    "text": "The next fatal hit within 2 minutes leaves you at 1 health instead. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hide",
+    "text": "Become invisible while sneaking and still for 30 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hearth",
+    "text": "Place a cosy hearth: allies within 6 regenerate and don't get hungry for 2 minutes. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Found It",
+    "text": "Your next block broken or chest opened has a 50% chance of an extra item. 5 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Stone Throw",
+    "text": "Throw a stone that dazes the enemy hit for 2 s. 20 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "hagborn",
+  "name": "Hagborn",
+  "source": "YUNG's Witch Huts, witches",
+  "gap": "Potions and hexes",
+  "desc": "Children of the swamp witches, with green fingers and an eye for an ingredient. Curses come as easy as cures.",
+  "traits": [
+   "Potions you brew last 25% longer",
+   "Witches are neutral",
+   "Villagers charge 10% more"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Cauldron",
+    "text": "Brew a potion anywhere: open a portable brewing stand. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hex",
+    "text": "Curse the mob you look at: it deals 30% less damage for 15 s. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Familiar",
+    "text": "Summon a black cat that follows you and scares away phantoms and creepers for 5 minutes. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Herb Lore",
+    "text": "Every herb and flower within 16 blocks glows for 10 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Broom",
+    "text": "Ride a broom for 10 s of slow flight. 2 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Toss Brew",
+    "text": "Throw a random harmful splash potion. 30 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "illagerkin",
+  "name": "Illagerkin",
+  "source": "Pillagers, Evokers, Iron's Archevoker, Recruits",
+  "gap": "Raiders and spellcraft",
+  "desc": "Grey-skinned outcasts of the illager clans. Raiders trust them, villagers don't, and every banner tells a story.",
+  "traits": [
+   "Illagers are neutral",
+   "Wear an ominous banner to command 2 recruits",
+   "Iron golems and villagers start hostile"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Rally Banner",
+    "text": "Plant a banner: allies within 10 get Strength I and Speed I for 20 s. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Vex Scout",
+    "text": "Send a vex to scout ahead and show mobs it sees for 20 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Totem Craft",
+    "text": "Make a Totem of Undying from 8 emeralds and a gold block. 1 day cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Raid Horn",
+    "text": "Call 2 pillager allies for 60 s. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Plunder",
+    "text": "The next chest you open drops one extra loot roll. 10 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Fangs",
+    "text": "Evoker fangs erupt in a line toward the target. 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "piglinborn",
+  "name": "Piglin-born",
+  "source": "Piglins, Hoglins",
+  "gap": "Gold and the Nether",
+  "desc": "Tusked nether folk who love gold more than life. Piglins treat them as kin; the overworld treats them as trouble.",
+  "traits": [
+   "Piglins are neutral without gold armour",
+   "Immune to fire for 3 s after entering fire or lava",
+   "Zombify (Nausea and Weakness) for 10 s when entering the overworld from the nether"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Barter",
+    "text": "Trade a gold ingot for a piglin barter roll. 30 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Gold Sense",
+    "text": "Show every gold ore and gold item within 24 blocks for 10 s. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Hoglin Call",
+    "text": "Call a tame hoglin to ride for 5 minutes. 15 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Lava Wade",
+    "text": "Walk through lava for 6 s without harm. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Nether Nose",
+    "text": "Point to the nearest nether fortress or bastion for 60 s. 10 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Tusk Charge",
+    "text": "Charge 6 blocks, tossing enemies upward. 45 s cooldown."
+   }
+  ]
+ },
+ {
+  "id": "chronokin",
+  "name": "Chronokin",
+  "source": "Chronomancy mod",
+  "gap": "Time",
+  "desc": "Out-of-step folk who remember tomorrow. Clocks run strangely near them, and they are always a little early.",
+  "traits": [
+   "Crops near you grow 10% faster",
+   "Cooldowns of other abilities are 5% shorter",
+   "Can't sleep in beds (time doesn't let them)"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Rewind",
+    "text": "Return to where you were 5 s ago, with that health. 2 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Haste Field",
+    "text": "Furnaces, brewing stands and crops within 6 blocks work 4x faster for 30 s. 5 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Stop Clock",
+    "text": "Freeze the mob you look at in time for 4 s (it can't be hurt either). 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Age",
+    "text": "Grow babies, saplings and crops within 6 blocks to full instantly. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Foresight",
+    "text": "For 10 s, see the arc of every incoming projectile and the next mob attack. 90 s cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Slow Time",
+    "text": "Enemies within 8 blocks are slowed to half speed for 5 s. 2 min cooldown."
+   }
+  ]
+ },
+ {
+  "id": "kitsune",
+  "name": "Kitsune",
+  "source": "Magic from the East",
+  "gap": "Foxfire and illusion",
+  "desc": "Fox spirits of the eastern woods, with more tails as they age. Tricksters, guardians and very good at hiding.",
+  "traits": [
+   "Foxes are friendly; sweet berries heal 2",
+   "Night vision when sneaking",
+   "Hostile to illagers' ire: illagers target you first"
+  ],
+  "abilities": [
+   {
+    "kind": "Utility",
+    "name": "Foxfire",
+    "text": "Float 3 blue flames that light your way for 2 minutes. 60 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Illusion",
+    "text": "Create 2 copies of yourself that run off for 5 s. 90 s cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Shapeshift",
+    "text": "Turn into a fox for 60 s: small, fast, silent. 3 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Spirit Mark",
+    "text": "Mark a spot; using it again within 10 minutes teleports you there. 10 min cooldown."
+   },
+   {
+    "kind": "Utility",
+    "name": "Trickster's Pocket",
+    "text": "Steal one random item from the mob or villager you look at. 10 min cooldown."
+   },
+   {
+    "kind": "Combat",
+    "name": "Foxfire Bolt",
+    "text": "Throw homing foxfire for 6 damage. 30 s cooldown."
+   }
+  ]
+ }
+]
