@@ -73,9 +73,9 @@ def main():
         write(ASSETS / f'models/item/{item}.json', {'parent': 'item/generated', 'textures': {'layer0': f'mdvlcraft:item/{item}'}})
 
     lang_path = ASSETS / 'lang/en_us.json'
-    merged = json.loads(lang_path.read_text())
+    merged = json.loads(lang_path.read_text(encoding='utf-8'))   # UTF-8 both ways: the system default (Windows-1252) garbles '·'
     merged.update(lang)
-    lang_path.write_text(json.dumps(merged, indent=2, ensure_ascii=False) + '\n')
+    lang_path.write_text(json.dumps(merged, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 
     write(DATA / 'recipes/gate/gate_key_e.json', {
         'type': 'minecraft:crafting_shaped', 'category': 'misc',
