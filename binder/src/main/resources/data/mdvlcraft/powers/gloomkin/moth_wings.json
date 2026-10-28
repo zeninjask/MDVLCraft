@@ -1,0 +1,19 @@
+{
+  "type": "origins:action_over_time",
+  "name": "Moth Wings",
+  "description": "You fall slowly while sneaking.",
+  "interval": 20,
+  "condition": {
+    "type": "origins:sneaking"
+  },
+  "entity_action": {
+    "type": "origins:apply_effect",
+    "effect": {
+      "effect": "minecraft:slow_falling",
+      "duration": 30,
+      "amplifier": 0,
+      "show_particles": false,
+      "show_icon": true
+    }
+  }
+}

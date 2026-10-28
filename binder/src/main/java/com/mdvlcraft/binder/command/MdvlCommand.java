@@ -79,6 +79,7 @@ public final class MdvlCommand {
                 .then(Commands.literal("weapons").executes(MdvlCommand::weapons))
                 .then(Commands.literal("rigs").executes(MdvlCommand::rigs))
                 .then(Commands.literal("obtainable").executes(MdvlCommand::obtainable))
+                .then(Commands.literal("dump").executes(MdvlCommand::dump))
                 .then(Commands.literal("respec").then(Commands.argument("players", EntityArgument.players()).executes(MdvlCommand::respec)))
         );
     }
@@ -110,6 +111,39 @@ public final class MdvlCommand {
         long none = lines.stream().filter(line -> line.split("\t")[1].equals("-")).count();
         context.getSource().sendSuccess(() -> Component.literal((lines.size() - 1) + " living entities, " + none + " without a patch; written to " + file), false);
         return (int)none;
+    }
+
+    /** Writes entities.tsv (every entity type's id, size, category and class) and spells.tsv (every Iron's spell id and school). */
+    private static int dump(CommandContext<CommandSourceStack> context) {
+        CommandSourceStack source = context.getSource();
+        net.minecraft.server.level.ServerLevel level = source.getLevel();
+        List<String> entities = new ArrayList<>(List.of("id\twidth\theight\tcategory\tclass"));
+        for (net.minecraft.world.entity.EntityType<?> type : net.minecraftforge.registries.ForgeRegistries.ENTITY_TYPES) {
+            String cls = "?";
+            try {
+                net.minecraft.world.entity.Entity entity = type.create(level);
+                if (entity != null) {
+                    cls = entity.getClass().getName() + (entity instanceof net.minecraft.world.entity.Mob ? " mob" : "");
+                    entity.discard();
+                }
+            } catch (RuntimeException | LinkageError e) {
+                cls = "error";
+            }
+            entities.add(net.minecraftforge.registries.ForgeRegistries.ENTITY_TYPES.getKey(type) + "\t" + type.getWidth() + "\t" + type.getHeight()
+                + "\t" + type.getCategory() + "\t" + cls);
+        }
+        List<String> spells = new ArrayList<>(List.of("id\tschool"));
+        io.redspace.ironsspellbooks.api.registry.SpellRegistry.REGISTRY.get().getValues()
+            .forEach(spell -> spells.add(spell.getSpellId() + "\t" + spell.getSchoolType().getId()));
+        try {
+            Path dir = source.getServer().getServerDirectory().toPath();
+            Files.write(dir.resolve("entities.tsv"), entities);
+            Files.write(dir.resolve("spells.tsv"), spells);
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+        source.sendSuccess(() -> Component.literal(entities.size() - 1 + " entity types, " + (spells.size() - 1) + " spells written"), false);
+        return entities.size();
     }
 
     private static int weapons(CommandContext<CommandSourceStack> context) {

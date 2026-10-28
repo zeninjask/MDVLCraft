@@ -1,0 +1,31 @@
+{
+  "type": "origins:modify_damage_taken",
+  "name": "Soft Hide",
+  "description": "You take 15% more damage from melee attacks.",
+  "damage_condition": {
+    "type": "origins:and",
+    "conditions": [
+      {
+        "type": "origins:attacker"
+      },
+      {
+        "type": "origins:projectile",
+        "inverted": true
+      },
+      {
+        "type": "origins:in_tag",
+        "tag": "irons_spellbooks:ice_magic",
+        "inverted": true
+      },
+      {
+        "type": "origins:in_tag",
+        "tag": "minecraft:is_explosion",
+        "inverted": true
+      }
+    ]
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.15
+  }
+}

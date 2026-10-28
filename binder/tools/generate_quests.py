@@ -1,6 +1,7 @@
 """Generates the pack's FTB Quests book: six chapters, one per boss tier (First Steps, then Wanderer to Legend).
-Then come the Gates, Food (Farmer's Delight) and Brewing (Ars Elixirum) chapters (row_chapter): each its own thing, open from
-the start, numbered on its own in the quest log with a letter (001G..., 001F..., 001B...).
+Then come the Gates chapter (row_chapter) and Miscellaneous (misc_chapter: one row per smaller mod, Brewing, Food and
+Familiars): each its own thing, open from the start, numbered on its own in the quest log with a letter (001G..., and in
+Miscellaneous one letter per group: 001B..., 001F..., 001S...).
 
 Each tier chapter has a top row of progress quests (kill counts, an experience level, places to find) ending in a
 capstone that opens the next chapter, and below it one column per boss: three lead-up quests themed on that boss, the
@@ -140,8 +141,10 @@ class Quest:
     """A quest; unless accept=False its first task is the Accept Quest checkmark and its tasks count in order, so only one
     quest is in progress at a time (compat/ftbquests/ActiveQuest)."""
 
-    def __init__(self, key, title, x, y, tasks, rewards, desc=(), deps=(), icon=None, min_deps=0, shape=None, size=None, accept=True):
+    def __init__(self, key, title, x, y, tasks, rewards, desc=(), deps=(), icon=None, min_deps=0, shape=None, size=None, accept=True,
+                 tags=()):
         self.id = qid(key)
+        self.tags = list(tags)
         self.title, self.x, self.y = title, x, y
         self.accept = accept
         self.tasks, self.rewards, self.desc = ([ACCEPT] if accept else []) + list(tasks), rewards, list(desc)
@@ -711,7 +714,7 @@ GATE_ROWS = [
 
 
 # ---------------------------------------------------------------------------------------------------------------
-# Food chapter (Farmer's Delight), numbered 001F... in the quest log. Rows as in GATE_ROWS.
+# Food group (Farmer's Delight) of Miscellaneous, numbered 001F... in the quest log. Rows as in GATE_ROWS (deps unused).
 # ---------------------------------------------------------------------------------------------------------------
 def fd(item_id):
     return f'farmersdelight:{item_id}'
@@ -779,7 +782,7 @@ FOOD_ROWS = [
         ('ham', 'Honey Glazed Ham', [item(fd('honey_glazed_ham_block'))], [xp(300)],
          'Craft a Honey Glazed Ham feast: smoked ham, cooked rice, sweet berries, a honey bottle and a bowl.', None, fd('honey_glazed_ham_block'), None),
         ('grand_feast', 'The Grand Feast', [item(fd('stuffed_pumpkin_block')), item(fd('rice_roll_medley_block'))],
-         [give('minecraft:golden_carrot', 16), bonus(HEALTH, 2)],
+         [give('minecraft:golden_carrot', 16), xp(500)],
          'Cook a Stuffed Pumpkin in the pot (served in a pumpkin) and craft a Rice Roll Medley from kelp, salmon and cod rolls. '
          'A well-fed adventurer is a tougher one.', ['ham', 'comfort', 'compost'],
          fd('stuffed_pumpkin_block'), 'hexagon'),
@@ -788,7 +791,7 @@ FOOD_ROWS = [
 
 
 # ---------------------------------------------------------------------------------------------------------------
-# Brewing chapter (Ars Elixirum), numbered 001B... in the quest log. Rows as in GATE_ROWS.
+# Brewing group (Ars Elixirum) of Miscellaneous, numbered 001B... in the quest log. Rows as in GATE_ROWS (deps unused).
 # ---------------------------------------------------------------------------------------------------------------
 def ex(item_id):
     return f'elixirum:{item_id}'
@@ -818,11 +821,107 @@ BREWING_ROWS = [
          'Hold four elixirs. Brewing a saved recipe again raises its mastery and your overall alchemy mastery.', ['elixir'],
          ex('elixir'), None),
         ('witch_totem', 'Witch Totem', [item('minecraft:totem_of_undying'), item(ex('witch_totem_of_undying'))],
-         [xp(500), bonus(MANA, 10), bonus(COOLDOWN, 0.02)],
+         [give('minecraft:experience_bottle', 8), xp(500)],
          'Get a Totem of Undying (evokers drop them), then craft it with an elixir into a Witch Totem of Undying, which '
          'carries the elixir\'s effects.', ['apothecary'], ex('witch_totem_of_undying'), 'hexagon'),
     ]),
 ]
+
+
+# ---------------------------------------------------------------------------------------------------------------
+# Familiars group (Alshanex's Familiars), numbered 001S... in the quest log.
+# ---------------------------------------------------------------------------------------------------------------
+def af(item_id):
+    return f'alshanex_familiars:{item_id}'
+
+
+TAME_TRIGGERS = ['familiarslib:' + n + '_taming' for n in ('archmage', 'bard', 'cleric', 'druid', 'frostling', 'hunter',
+                 'illusionist', 'mage', 'necromancer', 'plague', 'scorcher', 'summoner')] + ['alshanex_familiars:dragoon_taming']
+
+FAMILIAR_ROWS = [
+    ('Familiars', [
+        ('tame', 'A Small Friend', [advancement('mdvlcraft:quests/misc/tame_any')], [give('irons_spellbooks:arcane_essence', 4), xp(100)],
+         'Wild Familiars roam the world: Druids and Hunters in forests (Hunters in jungles and taigas too), Lightning Mages on '
+         'mountains, Frostlings in snowy lands, Scorchers in the Nether. Use Arcane Essence on one that has no owner: each '
+         'try costs one and works about 4 times in 10. You can carry up to 10 Familiars.', [], 'irons_spellbooks:arcane_essence', 'gear'),
+        ('summon', 'At Your Call', [checkmark()], [xp(50)],
+         'Press X to summon or send back your selected Familiar, and H to open the selection screen and pick which one. '
+         'Use a stick on your Familiar to make it sit or follow. Feed it food to heal it.', None, 'minecraft:stick', None),
+        ('bed', 'A Place to Recuperate', [item(af('pet_bed'))], [give('minecraft:white_wool', 3)],
+         'Craft a Familiar Bed: wool, magic cloth and planks. Your Familiars rest on it.', None, af('pet_bed'), None),
+        ('upgrade', "A Lil' Boost", [advancement('alshanex_familiars:upgrade_familiar')], [give('minecraft:apple', 4), xp(150)],
+         'Give your Familiar an upgrade item: a Life Fruit (an apple and an Arcane Essence) raises its health; platings, '
+         'essences and its own trinket raise armour, magic and spell level. Each kind has three tiers.', None,
+         af('life_fruit_tier_1'), None),
+        ('monocle', 'Magic Eye', [item(af('monocle'))], [xp(100)],
+         'Craft a Magic Eye: a spyglass and four Arcane Essence. Use it on a Familiar to see the upgrades it has taken.', None,
+         af('monocle'), None),
+        ('shrink', 'The Shrink-inator', [item(af('shrinking_station'))], [xp(150)],
+         'Craft the Shrinkinator: Arcane Essence, glass, lightning rods, a log and stone. It shrinks things down to Familiar '
+         'size: a Totem of Undying into a Tiny Totem, armour into platings.', None, af('shrinking_station'), None),
+        ('house', 'Miniature Village', [item(af('familiar_storage'))], [xp(200)],
+         'Craft a Familiar House: a red mushroom, logs, a Familiar Bed, stone and an ender chest. Store Familiars in it to '
+         'free carry slots. In Store mode they stay inside; in Wander mode they roam around it.', None, af('familiar_storage'), None),
+        ('berry', 'A Berry From the Past', [item(af('crystal_berry'))], [give('minecraft:torchflower_seeds', 2), xp(200)],
+         'Sniffers dig up ancient seeds, and sometimes a Crystal Berry. Hatch a sniffer egg (found in warm ocean ruins) and '
+         'let it sniff on grass and dirt.', None, af('crystal_berry'), None),
+        ('fragment', 'Tastes Like Home', [item(af('memory_fragment'))], [xp(150)],
+         'Feed the Crystal Berry to one of your Familiars. It remembers home and drops a Memory Fragment.', None,
+         af('memory_fragment'), None),
+        ('island', 'Where It All Began', [structure('alshanex_familiars:origin_island')], [give('minecraft:glass_bottle', 4), xp(300)],
+         'Throw the Memory Fragment like an eye of ender: it flies towards Origin Island, out in the deep ocean. Rituals are '
+         'performed on its Ritual Core.', None, af('memory_fragment'), None),
+        ('soul', 'Bottle of Spirit', [item(af('pet_soul'))], [xp(200)],
+         'Lost Souls drift around Origin Island. Use an empty glass bottle on one to catch it.', None, af('pet_soul'), None),
+        ('shard', 'Reincarnation', [advancement('alshanex_familiars:reincarnation')], [give('irons_spellbooks:arcane_essence', 8), xp(400)],
+         'Set a Bottled Soul on the Ritual Core and the ritual items around it to make a Familiar Shard (the recipes are in '
+         'the recipe viewer under Origin Island Ritual). Use the shard to create that Familiar.', None, af('archmage_shard'), None),
+        ('plague', 'Toxic Relationship', [advancement('alshanex_familiars:tame/plague')], [xp(300)],
+         "Brew a Poison Vial in Iron's Alchemist Cauldron: a Venomous Spider Fang (from spiders) into a strong poison "
+         'potion. Use it on a Druid Familiar to turn it into a Plague Doctor.', None, af('poison_vial'), None),
+        ('cleric', 'Looking for Salvation', [advancement('alshanex_familiars:tame/cleric')], [xp(300)],
+         'Wild Necromancer Familiars haunt graveyards. Cast the Cleanse spell next to one without an owner and it becomes a '
+         'Cleric. Then tame it.', None, 'irons_spellbooks:holy_rune', None),
+        ('impostor', 'Impostor!', [advancement('alshanex_familiars:impostor')], [xp(300)],
+         'Illusionist Familiars disguise themselves as other creatures. Make a Mirror of Truth in a ritual and use it to '
+         'reveal one.', None, af('truth_mirror'), None),
+        ('revive', 'Learn Necromancy', [advancement('alshanex_familiars:learn_necromancy')], [give('minecraft:experience_bottle', 8), xp(500)],
+         'Defeat the Dead King. From then on your Familiars can be brought back when they die.', None, 'minecraft:wither_skeleton_skull', None),
+        ('tome', 'We Act Together as One', [item(af('familiar_spellbook'))], [give('minecraft:experience_bottle', 16), xp(500)],
+         'Craft the Tome of Familiar Alignment: a diamond spell book, mithril, magic cloth, Memory Fragments and Familiar '
+         'Shards. It is a spell book that works with your Familiars.', None, af('familiar_spellbook'), 'hexagon'),
+    ]),
+]
+
+
+def write_misc_advancements():
+    """Hidden "tamed any Familiar" advancement: any one of the taming triggers."""
+    out = f'{RES}/advancements/quests/misc'
+    os.makedirs(out, exist_ok=True)
+    adv = {'criteria': {t.split(':')[1]: {'trigger': t} for t in TAME_TRIGGERS},
+           'requirements': [[t.split(':')[1] for t in TAME_TRIGGERS]]}
+    with open(f'{out}/tame_any.json', 'w') as f:
+        json.dump(adv, f, indent=2)
+        f.write('\n')
+
+
+def misc_chapter():
+    """Miscellaneous: one row per mod group, each numbered on its own with its letter (001B, 001F, 001S ...). A quest
+    needs only the quest before it in its own row; no group depends on another. Rewards are items and experience only."""
+    q = []
+    for row, (file, letter, rows) in enumerate([('brewing', 'B', BREWING_ROWS), ('food', 'F', FOOD_ROWS),
+                                                ('familiars', 'S', FAMILIAR_ROWS)]):
+        prev = None
+        quests = [qu for _, qs in rows for qu in qs]
+        for col, (key, qtitle, tasks, rewards, desc, _, qicon, shape) in enumerate(quests):
+            assert all(r['type'] in ('item', 'xp') for r in rewards), f'{qtitle}: items and experience only'
+            qu = Quest(f'{file}_{key}', qtitle, col * 2, row * 3, tasks, rewards, [desc], [prev] if prev else [], icon=qicon,
+                       shape=shape, size=1.5 if shape else None, tags=[f'mdvl_group_{letter}'])
+            q.append(qu)
+            prev = qu.id
+    check_gate_rewards(q)
+    return dict(file='misc', title='Miscellaneous', icon='minecraft:book', subtitle='How the smaller mods work: cooking, brewing, Familiars.',
+                quests=q)
 
 
 def row_chapter(file, title, icon, subtitle, rows):
@@ -841,14 +940,6 @@ def row_chapter(file, title, icon, subtitle, rows):
 
 def gates_chapter():
     return row_chapter('gates', 'Gates', 'mdvlcraft:gate_key_s', 'Keys, gates, red gates, trials and the Demon Castle.', GATE_ROWS)
-
-
-def food_chapter():
-    return row_chapter('food', 'Food', fd('cooking_pot'), "Farmer's Delight: knives, pots, meals and feasts.", FOOD_ROWS)
-
-
-def brewing_chapter():
-    return row_chapter('brewing', 'Brewing', ex('glass_cauldron'), 'Ars Elixirum: essences, elixirs and mastery.', BREWING_ROWS)
 
 
 def check_gate_rewards(quests):
@@ -929,6 +1020,8 @@ def quest_nbt(qu, key):
         out['description'] = qu.desc
     if qu.deps:
         out['dependencies'] = qu.deps
+    if qu.tags:
+        out['tags'] = qu.tags
     if qu.min_deps:
         out['min_required_dependencies'] = qu.min_deps
     if qu.accept:
@@ -1001,14 +1094,14 @@ def main(base=os.path.join(REPO, 'base')):
         ch, gate = tier_chapter(tier, gate)
         chapters.append(ch)
     chapters.append(gates_chapter())   # after Legend; no dependency on the other chapters
-    chapters.append(food_chapter())    # Food and Brewing likewise stand on their own
-    chapters.append(brewing_chapter())
+    chapters.append(misc_chapter())    # Brewing, Food and Familiars likewise stand on their own
     ids = [qu.id for c in chapters for qu in c['quests']]
     assert len(ids) == len(set(ids)), 'duplicate quest ids'
     for side in ('client', 'server'):
         write_book(chapters, os.path.join(base, side, 'overrides', 'config', 'ftbquests', 'quests'))
     write_level_advancements()
     write_gate_advancements()
+    write_misc_advancements()
     write_crates()
     print(f'{len(chapters)} chapters, {len(ids)} quests, {sum(1 for b in B if b["lair"] and not arena_lair(b["lair"][0]) and b["lair"][0] not in CATACLYSM_EYES)} lair compasses')
 

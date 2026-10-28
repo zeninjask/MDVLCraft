@@ -163,6 +163,8 @@ ATTR_INFO = {
     'esoteric_spell:esoteric_spell_power': 'Esoteric barrier spells are stronger.',
     'wind_spellbooks:wind_spell_power': 'Wind spells hit harder.',
 }
+# Specialisation attributes (mdvlcraft:spec_<id>): the spec's own text, from specialisations.json.
+ATTR_INFO.update({f'mdvlcraft:spec_{k}': v['text'] for k, v in json.load(open(os.path.join(TOOLS, '..', 'src', 'main', 'resources', 'data', 'mdvlcraft', 'specialisations.json'))).items()})
 
 
 

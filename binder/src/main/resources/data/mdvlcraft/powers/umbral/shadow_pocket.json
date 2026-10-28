@@ -1,0 +1,16 @@
+{
+  "type": "origins:inventory",
+  "name": "Shadow Pocket",
+  "description": "9 extra item slots in your shadow, only while the light is below 8 (secondary ability key).",
+  "title": "Shadow Pocket",
+  "container_type": "dropper",
+  "drop_on_death": false,
+  "key": {
+    "key": "key.origins.secondary_active"
+  },
+  "condition": {
+    "type": "origins:brightness",
+    "comparison": "<",
+    "compare_to": 0.53
+  }
+}

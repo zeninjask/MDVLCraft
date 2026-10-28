@@ -1,0 +1,24 @@
+{
+  "type": "origins:conditioned_attribute",
+  "name": "Forest Runner",
+  "description": "You are 15% faster in forests.",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "multiply_base",
+      "value": 0.15
+    }
+  ],
+  "condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:biome",
+        "condition": {
+          "type": "origins:in_tag",
+          "tag": "minecraft:is_forest"
+        }
+      }
+    ]
+  }
+}

@@ -16,3 +16,7 @@ The user picked **Call Uraume** for Shrinekin. Before it is built they want to c
 
 Current placeholder text in the picker: "An ice servant follows you for 30 s, freezing water ahead and slowing enemies
 within 6 blocks. 5 min cooldown." Treat that as a draft only.
+
+## Decisions (user, 2026-10-28)
+- Model: vanilla snow fox (`minecraft:fox`, `Type:"snow"`, 0.7 blocks tall, not resized), named "Uraume" when summoned.
+- Spells: picked on the "Uraume's Ice Spells" picker (claude.ai artifact Lrmtr7jogbrd7hfqSVsQEk, db doc `picks/uraume`).

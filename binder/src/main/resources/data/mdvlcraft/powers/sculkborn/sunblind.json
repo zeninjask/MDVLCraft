@@ -1,0 +1,19 @@
+{
+  "type": "origins:action_over_time",
+  "name": "Sunblind",
+  "description": "Daylight on open sky gives you Weakness I.",
+  "interval": 20,
+  "condition": {
+    "type": "origins:exposed_to_sun"
+  },
+  "entity_action": {
+    "type": "origins:apply_effect",
+    "effect": {
+      "effect": "minecraft:weakness",
+      "duration": 40,
+      "amplifier": 0,
+      "show_particles": false,
+      "show_icon": true
+    }
+  }
+}

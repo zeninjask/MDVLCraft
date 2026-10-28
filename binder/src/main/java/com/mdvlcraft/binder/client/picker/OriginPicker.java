@@ -1,5 +1,7 @@
 package com.mdvlcraft.binder.client.picker;
 
+import com.mdvlcraft.binder.ability.PlannedAbility;
+import com.mdvlcraft.binder.ability.RaceAbilities;
 import com.mdvlcraft.binder.mixin.origins.ChooseOriginScreenAccessor;
 import io.github.apace100.origins.screen.ChooseOriginScreen;
 import io.github.apace100.origins.screen.WaitForNextLayerScreen;
@@ -12,6 +14,7 @@ import java.util.Comparator;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.Holder;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.ScreenEvent;
@@ -44,7 +47,7 @@ public final class OriginPicker {
         List<PickerScreen.Entry> entries = layer.origins(Minecraft.getInstance().player).stream()
             .filter(o -> o.isBound() && o.value().isChoosable())
             .sorted(ORDER)
-            .map(o -> new PickerScreen.Entry(o.value().getName(), o.value().getDescription(), powers(o.value()), o.value().getIcon(), key(o).toString()))
+            .map(o -> new PickerScreen.Entry(o.value().getName(), o.value().getDescription(), details(o), o.value().getIcon(), key(o).toString()))
             .toList();
         if (entries.isEmpty()) {
             return;   // Origins skips a layer with nothing to choose
@@ -55,6 +58,15 @@ public final class OriginPicker {
             Minecraft.getInstance().setScreen(new WaitForNextLayerScreen(layers, index, false) {
             });
         }));
+    }
+
+    /** The origin's powers, then its race abilities (ability/RaceAbilities), each with its description on hover. */
+    private static List<PickerScreen.Detail> details(Holder<Origin> origin) {
+        List<PickerScreen.Detail> details = new java.util.ArrayList<>(powers(origin.value()));
+        for (PlannedAbility ability : RaceAbilities.of(key(origin))) {
+            details.add(new PickerScreen.Detail(Component.translatable("screen.mdvlcraft.picker.ability", ability.displayName()), ability.description()));
+        }
+        return details;
     }
 
     /** The origin's visible powers, each with its description on hover. Unbound ones (not synced yet) are skipped. */

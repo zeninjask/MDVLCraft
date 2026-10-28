@@ -53,6 +53,10 @@ public final class AbilityGrants {
             granted.merge(reward.ability, reward.level, Math::max);
         }
 
+        for (PlannedAbility ability : RaceAbilities.of(player)) {
+            granted.putIfAbsent(ability, 1);
+        }
+
         return granted;
     }
 

@@ -1,0 +1,22 @@
+{
+  "type": "origins:modify_damage_taken",
+  "name": "Cold Blooded",
+  "description": "You take 20% more damage from cold and ice.",
+  "damage_condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:in_tag",
+        "tag": "irons_spellbooks:ice_magic"
+      },
+      {
+        "type": "origins:in_tag",
+        "tag": "minecraft:is_freezing"
+      }
+    ]
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": 0.2
+  }
+}

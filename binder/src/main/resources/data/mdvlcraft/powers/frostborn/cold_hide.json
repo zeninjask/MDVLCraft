@@ -1,0 +1,13 @@
+{
+  "type": "origins:modify_damage_taken",
+  "name": "Cold Hide",
+  "description": "You take 20% less damage from ice spells.",
+  "damage_condition": {
+    "type": "origins:in_tag",
+    "tag": "irons_spellbooks:ice_magic"
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": -0.2
+  }
+}

@@ -25,7 +25,8 @@ import org.lwjgl.glfw.GLFW;
  * The quest book as a Dragon Quest IX quest list, opened from the MDVLCraft menu: the chapter's numbered quests on the
  * left with a slowly flashing arrow on the selected one, its request, reward and description on the right, and Accept /
  * Abandon (compat/ftbquests/ActiveQuest decides what they do on the server). Numbers run through the whole book, except
- * the Gates chapter (filename "gates"), which numbers its own quests 001G, 002G, … so the others never shift.
+ * the Gates chapter (filename "gates"), which numbers its own quests 001G, 002G, … so the others never shift, and quests
+ * tagged mdvl_group_X (the Miscellaneous chapter's mod groups), numbered on their own per group: 001B, 001F, 001S ….
  */
 public class QuestLogScreen extends Screen {
     private static final int ROW = 11;
@@ -35,8 +36,9 @@ public class QuestLogScreen extends Screen {
     private static final int GREEN = 0xFF6FD36A;
     private final Screen parent;
     private final List<Chapter> chapters;
-    /** Chapters numbered on their own, with a letter: Gates 001G..., Food 001F..., Brewing 001B.... */
-    private static final Map<String, String> LETTERED = Map.of("gates", "G", "food", "F", "brewing", "B");
+    /** Chapters numbered on their own, with a letter: Gates 001G.... */
+    private static final Map<String, String> LETTERED = Map.of("gates", "G");
+    private static final String GROUP_TAG = "mdvl_group_";
     /** Each quest's number as shown ("007", or "007G" in the Gates chapter). */
     private final Map<Quest, String> numbers = new HashMap<>();
     private int chapter;
@@ -55,11 +57,14 @@ public class QuestLogScreen extends Screen {
         this.parent = parent;
         this.chapters = ClientQuestFile.INSTANCE.getAllChapters().stream().filter(c -> !c.getQuests().isEmpty()).toList();
         int book = 0;
+        Map<String, Integer> lettered = new HashMap<>();
         for (Chapter c : this.chapters) {
-            String letter = LETTERED.get(c.getFilename());
-            List<Quest> quests = c.getQuests();
-            for (int i = 0; i < quests.size(); i++) {
-                this.numbers.put(quests.get(i), letter != null ? String.format("%03d", i + 1) + letter : String.format("%03d", ++book));
+            String chapterLetter = LETTERED.get(c.getFilename());
+            for (Quest quest : c.getQuests()) {
+                String letter = quest.getTags().stream().filter(t -> t.startsWith(GROUP_TAG)).map(t -> t.substring(GROUP_TAG.length()))
+                    .findFirst().orElse(chapterLetter);
+                this.numbers.put(quest, letter != null ? String.format("%03d", lettered.merge(letter, 1, Integer::sum)) + letter
+                    : String.format("%03d", ++book));
             }
         }
 

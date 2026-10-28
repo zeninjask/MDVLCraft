@@ -1,0 +1,21 @@
+{
+  "type": "origins:modify_exhaustion",
+  "name": "Desert Hardy",
+  "description": "Your hunger drains 25% slower in deserts.",
+  "condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:biome",
+        "condition": {
+          "type": "origins:in_tag",
+          "tag": "forge:is_desert"
+        }
+      }
+    ]
+  },
+  "modifier": {
+    "operation": "multiply_base",
+    "value": -0.25
+  }
+}

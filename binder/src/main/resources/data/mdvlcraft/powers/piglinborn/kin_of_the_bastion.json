@@ -1,0 +1,18 @@
+{
+  "type": "apugli:mobs_ignore",
+  "name": "Kin of the Bastion",
+  "description": "Piglins are neutral to you, even without gold armour.",
+  "mob_condition": {
+    "type": "origins:or",
+    "conditions": [
+      {
+        "type": "origins:entity_type",
+        "entity_type": "minecraft:piglin"
+      },
+      {
+        "type": "origins:entity_type",
+        "entity_type": "minecraft:piglin_brute"
+      }
+    ]
+  }
+}
