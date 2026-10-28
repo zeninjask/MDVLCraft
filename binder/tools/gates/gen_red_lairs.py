@@ -297,8 +297,16 @@ STEPS = dict(crypt='polished_deepslate_stairs', warren='mud_brick_stairs', froze
 from new_themes import NEW_THEMES
 PALETTES.update({k: t['lair'] for k, t in NEW_THEMES.items()})
 STEPS.update({k: t['steps'] for k, t in NEW_THEMES.items()})
-FEATURES.update({k: FEATURES[t.get('feature', t['parent'])] for k, t in NEW_THEMES.items()})
-LIKE = {k: t['parent'] for k, t in NEW_THEMES.items()}
+def first_theme(key, field):
+    """Follows a theme's `field` (else its parent) down to one of the first six themes: a later theme's parent may itself
+    be a later theme (2.1.63's Jade Pagoda is Blossom Shrine's child)."""
+    while key in NEW_THEMES:
+        key = NEW_THEMES[key].get(field) or NEW_THEMES[key]['parent']
+    return key
+
+
+FEATURES.update({k: FEATURES[first_theme(k, 'feature')] for k in NEW_THEMES})
+LIKE = {k: first_theme(k, 'parent') for k in NEW_THEMES}
 
 def outward(x, z, mid):
     """The horizontal direction pointing away from the centre (for stairs rising outward)."""

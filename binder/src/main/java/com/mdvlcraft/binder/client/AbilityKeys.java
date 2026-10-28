@@ -6,12 +6,15 @@ import com.mdvlcraft.binder.network.CastPacket;
 import com.mojang.blaze3d.platform.InputConstants.Type;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.client.settings.KeyConflictContext;
 import net.minecraftforge.event.TickEvent.ClientTickEvent;
 import net.minecraftforge.event.TickEvent.Phase;
+import org.lwjgl.glfw.GLFW;
 
 public final class AbilityKeys {
     private static final String CATEGORY = "key.categories.mdvlcraft";
@@ -19,7 +22,12 @@ public final class AbilityKeys {
     public static final KeyMapping WHEEL = key("ability_wheel", 96);
     public static final KeyMapping CAST = key("cast_ability", 280);
     public static final KeyMapping GIVE_UP = key("give_up", 90);
-    private static final List<KeyMapping> ALL = List.of(MENU, WHEEL, CAST, GIVE_UP);
+    /** Quick Cast 1-8 (default keys 1-8, in place of the hotbar keys, RemovedKeys): each casts its wheel slot, held like the
+     * cast key, without changing the slot the cast key uses. */
+    private static final KeyMapping[] QUICK = IntStream.range(0, 8)
+        .mapToObj(i -> key("quick_cast_" + (i + 1), GLFW.GLFW_KEY_1 + i)).toArray(KeyMapping[]::new);
+    private static final List<KeyMapping> ALL = Stream.concat(Stream.of(MENU, WHEEL, CAST, GIVE_UP), Arrays.stream(QUICK)).toList();
+    private static final boolean[] quickDown = new boolean[QUICK.length];
     private static boolean castDown;
     /** How long the cast key has been held (Formless Sword's Form mode opens the sword wheel at HOLD_TICKS). */
     private static int holdTicks;
@@ -46,6 +54,22 @@ public final class AbilityKeys {
         }
     }
 
+    /** A Quick Cast key: pressing casts the slot's ability (a held ability goes on while the key is held), releasing lets go. */
+    private static void quickCast(Minecraft minecraft, int slot) {
+        boolean tapped = false;
+        while (QUICK[slot].consumeClick()) {
+            tapped = true;
+        }
+        boolean down = QUICK[slot].isDown() && minecraft.screen == null;
+        if (tapped && !down && !quickDown[slot]) {
+            BinderNetwork.sendToServer(new CastPacket(true, slot));   // pressed and let go within a tick
+            BinderNetwork.sendToServer(new CastPacket(false, slot));
+        } else if (down != quickDown[slot]) {
+            quickDown[slot] = down;
+            BinderNetwork.sendToServer(new CastPacket(down, slot));
+        }
+    }
+
     static void onClientTick(ClientTickEvent event) {
         Minecraft minecraft = Minecraft.getInstance();
         if (event.phase == Phase.END && minecraft.player != null) {
@@ -55,6 +79,10 @@ public final class AbilityKeys {
 
             while (WHEEL.consumeClick()) {
                 minecraft.setScreen(new WheelScreen());
+            }
+
+            for (int slot = 0; slot < QUICK.length; slot++) {
+                quickCast(minecraft, slot);
             }
 
             boolean tapped = false;

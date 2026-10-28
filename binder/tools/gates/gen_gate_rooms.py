@@ -849,6 +849,428 @@ def maze(n, seed, large):
     return r
 
 
+# ---- 2.1.63: rooms that aren't squares, stair and ladder corridors between levels, statues, paintings, lore books and
+# signs, vaults of chests and libraries of lore ----
+
+RISE = 8   # blocks between dungeon levels (gate/DungeonPlanner.RISE)
+STEPS = dict(crypt='deepslate_tile_stairs', warren='mud_brick_stairs', frozen='spruce_stairs', warcamp='spruce_stairs',
+             spire='quartz_stairs', forge='polished_blackstone_brick_stairs')
+SIGNS = dict(crypt='dark_oak_wall_sign', frozen='spruce_wall_sign', spire='birch_wall_sign', forge='crimson_wall_sign',
+             jungle='jungle_wall_sign', blossom='cherry_wall_sign', mire='mangrove_wall_sign', fortress='crimson_wall_sign',
+             crimson='crimson_wall_sign', grotto='warped_wall_sign')
+for _key, _palette in PALETTES.items():
+    _palette.setdefault('steps', NEW_THEMES.get(_key, {}).get('steps') or STEPS.get(_key, 'stone_brick_stairs'))
+    _palette.setdefault('sign', SIGNS.get(_key, 'spruce_wall_sign'))
+
+
+def segment(r, z0, z1, h):
+    """A straight run of corridor from row z0 to z1 (inclusive) with its floor raised h: walls on both sides, floor and
+    ceiling (6 above the floor, as in corridor())."""
+    for z in range(min(z0, z1), max(z0, z1) + 1):
+        top = FLOOR + h + ARM_H - 2
+        for x in range(ARM_LO, ARM_HI + 1):
+            if x in (ARM_LO, ARM_HI):
+                for y in range(FLOOR + h - 1 if h else 0, top + 1):
+                    r.set(x, y, z, 'wall2' if r.rng.random() < 0.15 else 'wall')
+            else:
+                r.set(x, FLOOR + h, z, 'floor2' if x == MID else ('floor3' if r.rng.random() < 0.1 else 'floor'))
+                if h:
+                    r.set(x, FLOOR + h - 1, z, 'wall')
+                else:
+                    r.set(x, 0, z, 'wall')
+                r.set(x, top, z, 'ceiling')
+
+
+def face_door(r, z, h):
+    """The face wall across the corridor at row z (0 north, SIZE-1 south) with a door whose sill is h up, and its marker."""
+    for x in range(ARM_LO, ARM_HI + 1):
+        for y in range(FLOOR + h - 1 if h else 0, FLOOR + h + ARM_H - 1):
+            r.set(x, y, z, 'wall')
+    for x in range(DOOR_LO, DOOR_HI + 1):
+        for y in range(WALK + h, WALK + h + 4):
+            r.air(x, y, z)
+    r.marker(MID, WALK + h, z, 'door')
+
+
+def stairs_corridor(seed):
+    """A straight corridor that climbs RISE blocks from its south door (low) to its north door (high): landings at both
+    ends and a stair every three blocks between, lit at head height. The builder turns it to climb or descend."""
+    r = Room(ARM_H + RISE, seed)
+    land, step = 8, 3
+
+    def h(z):
+        return max(0, min(RISE, (SIZE - 1 - z - land) // step + 1))
+
+    for z in range(SIZE):
+        segment(r, z, z, h(z))
+        if h(z) > h(min(SIZE - 1, z + 1)) and z < SIZE - 1:   # the first block of a new height: a stair up into it
+            for x in range(ARM_LO + 1, ARM_HI):
+                r.set(x, FLOOR + h(z), z, 'steps[facing=north,half=bottom]')
+                r.set(x, FLOOR + h(z) - 1, z, 'wall')
+        if z % 6 == 3:
+            r.set(ARM_LO, WALK + h(z) + 2, z, 'glow')
+            r.set(ARM_HI, WALK + h(z) + 2, z, 'glow')
+    face_door(r, SIZE - 1, 0)
+    face_door(r, 0, RISE)
+    return r
+
+
+def ladder_corridor(seed):
+    """A corridor in two runs RISE blocks apart, joined by a lit shaft with a ladder up its north wall: in low from the
+    south, out high to the north."""
+    r = Room(ARM_H + RISE, seed)
+    lo, hi = MID - 3, MID + 3   # the shaft's walls
+    segment(r, hi + 1, SIZE - 1, 0)
+    segment(r, 0, lo - 1, RISE)
+    top = FLOOR + RISE + ARM_H - 2
+    for x in range(lo, hi + 1):
+        for z in range(lo, hi + 1):
+            if x in (lo, hi) or z in (lo, hi):
+                for y in range(0, top + 1):
+                    r.set(x, y, z, 'wall2' if r.rng.random() < 0.15 else 'wall')
+            else:
+                r.set(x, 0, z, 'wall')
+                r.set(x, FLOOR, z, 'floor2')
+                r.set(x, top, z, 'ceiling')
+    for x in range(DOOR_LO, DOOR_HI + 1):   # the shaft's openings: low to the south, high to the north
+        for y in range(WALK, WALK + 4):
+            r.air(x, y, hi)
+        for y in range(WALK + RISE, WALK + RISE + 4):
+            r.air(x, y, lo)
+    for y in range(WALK, WALK + RISE):   # up to the high opening's sill, each rung against the wall
+        r.set(MID - 1, y, lo + 1, 'ladder[facing=south]')
+        r.set(MID + 1, y, lo + 1, 'ladder[facing=south]')
+    for y in (WALK + 3, WALK + RISE - 1):
+        r.set(lo, y, MID, 'glow')
+        r.set(hi, y, MID, 'glow')
+    r.set(MID, top - 1, MID, 'hang')
+    face_door(r, SIZE - 1, 0)
+    face_door(r, 0, RISE)
+    return r
+
+
+SHAPES = ('round', 'octagon', 'cross', 'ring', 'cave')
+
+
+def shape_cols(shape, radius, rng):
+    """The columns of a room of `shape` within `radius` of the middle (doors are joined on by arms)."""
+    cols = set()
+    if shape == 'cave':   # overlapping blobs around a few points: a cavern
+        centres = [(MID, MID)] + [(MID + rng.randint(-radius // 2, radius // 2), MID + rng.randint(-radius // 2, radius // 2))
+                                  for _ in range(5)]
+        for cx, cz in centres:
+            rr = rng.randint(radius // 2, radius * 3 // 4)
+            for x in range(cx - rr, cx + rr + 1):
+                for z in range(cz - rr, cz + rr + 1):
+                    if (x - cx) ** 2 + (z - cz) ** 2 <= rr * rr + rng.randint(-rr, rr):
+                        cols.add((x, z))
+    else:
+        for x in range(MID - radius, MID + radius + 1):
+            for z in range(MID - radius, MID + radius + 1):
+                dx, dz = abs(x - MID), abs(z - MID)
+                inside = {'round': dx * dx + dz * dz <= radius * radius + radius,
+                          'octagon': dx + dz <= radius * 3 // 2,
+                          'cross': dx <= radius // 2 or dz <= radius // 2,
+                          'ring': dx * dx + dz * dz <= radius * radius + radius}[shape]
+                if inside:
+                    cols.add((x, z))
+    return {(x, z) for (x, z) in cols if 1 <= x < SIZE - 1 and 1 <= z < SIZE - 1}
+
+
+def shaped_shell(r, room, doors):
+    """shell() for a room of any outline: `room` is its columns. Walls follow the outline at full height, arms join the
+    doors to it, and the room's wall goes on above where an arm meets it. Returns the interior columns."""
+    arms = set()
+    for d in doors:
+        for a in range(ARM_LO, ARM_HI + 1):
+            for b in range(0, MID + 1):
+                col = {'N': (a, b), 'S': (a, SIZE - 1 - b), 'W': (b, a), 'E': (SIZE - 1 - b, a)}[d]
+                if col in room:
+                    break
+                arms.add(col)
+    cols = room | arms
+    inner = set()
+    for (x, z) in cols:
+        is_room = (x, z) in room
+        top = r.height - 1 if is_room else ARM_H - 1
+        near = [(x + dx, z + dz) for dx in (-1, 0, 1) for dz in (-1, 0, 1)]
+        interior = 0 < x < SIZE - 1 and 0 < z < SIZE - 1 and all(c in cols for c in near)
+        r.set(x, 0, z, 'wall2' if r.rng.random() < 0.3 else 'wall')
+        if not interior:
+            for y in range(1, top + 1):
+                r.set(x, y, z, 'wall2' if r.rng.random() < 0.15 else 'wall')
+            continue
+        r.set(x, FLOOR, z, 'floor')
+        if not is_room:
+            r.set(x, ARM_H - 1, z, 'ceiling')
+        elif any(c in arms for c in near):   # over an arm's mouth the room's wall goes on up
+            for y in range(ARM_H - 1, top + 1):
+                r.set(x, y, z, 'wall')
+        else:
+            r.set(x, top, z, 'ceiling')
+            inner.add((x, z))
+    for d in doors:
+        for a in range(DOOR_LO, DOOR_HI + 1):
+            for y in range(WALK, WALK + 4):
+                r.air(*FACES[d](a, y))
+        for a in (DOOR_LO - 1, DOOR_HI + 1):
+            for y in range(WALK, WALK + 5):
+                r.set(*FACES[d](a, y), 'pillar')
+        for a in range(DOOR_LO - 1, DOOR_HI + 2):
+            r.set(*FACES[d](a, WALK + 4), 'pillar')
+        r.marker(*FACES[d](MID, WALK), 'door')
+    return inner
+
+
+def lanes(cols):
+    """Interior columns off the lanes from the doors to the middle, for furniture."""
+    return {(x, z) for (x, z) in cols if not (ARM_LO <= x <= ARM_HI or ARM_LO <= z <= ARM_HI)}
+
+
+def statue(r, x, z):
+    """A figure on a plinth: legs, body, shoulders and head of the theme's stone, about three blocks tall."""
+    r.set(x, WALK, z, 'floor2')
+    r.set(x, WALK + 1, z, 'wall')
+    r.set(x, WALK + 2, z, 'pillar')
+    for dx in (-1, 1):
+        if r.get(x + dx, WALK + 2, z) is None and (x + dx, WALK + 2, z) not in r.markers:
+            r.set(x + dx, WALK + 2, z, 'wall2')
+    r.set(x, WALK + 3, z, 'pillar')
+    r.set(x, WALK + 4, z, 'glow' if r.rng.random() < 0.3 else 'wall2')
+
+
+def place_statues(r, spots, count):
+    """Up to `count` statues on free spots (each with room around it)."""
+    placed = 0
+    for x, z in r.rng.sample(sorted(spots), len(spots)):
+        if placed == count:
+            break
+        if all(r.get(x + dx, y, z + dz) is None and (x + dx, y, z + dz) not in r.markers
+               for dx in (-1, 0, 1) for dz in (-1, 0, 1) for y in (WALK, WALK + 2)):
+            statue(r, x, z)
+            placed += 1
+
+
+def wall_spots(r, inner, y=WALK + 1):
+    """Air spots against the room's own walls (for paintings and signs): (x, z, side the wall is on)."""
+    spots = []
+    for (x, z) in inner:
+        if r.get(x, y, z) is not None or (x, y, z) in r.markers or ARM_LO - 1 <= x <= ARM_HI + 1 or ARM_LO - 1 <= z <= ARM_HI + 1:
+            continue
+        for side, (dx, dz) in (('north', (0, -1)), ('south', (0, 1)), ('west', (-1, 0)), ('east', (1, 0))):
+            if r.get(x + dx, y, z + dz) is not None and (x + dx, z + dz) not in inner:
+                spots.append((x, z, side))
+                break
+    return spots
+
+
+def paintings(r, inner, count):
+    """`painting` markers hung against the walls (gate/GateDecor hangs a fitting painting at each)."""
+    taken = set()
+    for x, z, _ in r.rng.sample(wall_spots(r, inner, WALK + 1), min(count * 4, len(wall_spots(r, inner, WALK + 1)))):
+        if count == 0:
+            break
+        if any(abs(x - tx) + abs(z - tz) < 5 for tx, tz in taken):
+            continue
+        r.marker(x, WALK + 1, z, 'painting')
+        taken.add((x, z))
+        count -= 1
+
+
+OPPOSITE = dict(north='south', south='north', west='east', east='west')
+
+
+def text(line):
+    return json.dumps({'text': line})
+
+
+def sign(r, x, y, z, wall_side, lines):
+    """A wall sign hung on the wall to its `wall_side`, its front facing away, with up to four lines (waxed)."""
+    lines = (list(lines) + ['', '', '', ''])[:4]
+    r.set(x, y, z, f'sign[facing={OPPOSITE[wall_side]}]')
+    blank = {'messages': TagList(8, [text('')] * 4), 'color': 'black', 'has_glowing_text': Byte(0)}
+    r.data[(x, y, z)] = {'id': 'minecraft:sign', 'is_waxed': Byte(1), 'back_text': blank,
+                         'front_text': {'messages': TagList(8, [text(l) for l in lines]), 'color': 'black', 'has_glowing_text': Byte(0)}}
+
+
+def lectern(r, x, z, facing, book):
+    """A lectern holding a written book of lore."""
+    title, pages = book
+    r.set(x, WALK, z, f'lectern[facing={facing},has_book=true,powered=false]')
+    r.data[(x, WALK, z)] = {'id': 'minecraft:lectern', 'Page': Int(0), 'Book': {
+        'id': 'minecraft:written_book', 'Count': Byte(1),
+        'tag': {'title': title, 'author': 'A fallen hunter', 'resolved': Byte(1), 'pages': TagList(8, [text(p) for p in pages])}}}
+
+
+THEME_NAMES = dict(crypt='Gravekeeper Crypt', warren='Goblin Warren', frozen='Frozen Hollow', warcamp='Orc War Camp',
+                   spire='Mage Spire', forge='Infernal Forge')
+THEME_NAMES.update({k: t['name'] for k, t in NEW_THEMES.items()})
+
+BOOKS = [
+    ('Hunter\'s Log', ['Day one. The gate opened over the old road at dawn. The Association rated it {rank}, but the mana '
+                       'reading kept climbing while we watched.', 'We went in anyway. The air inside tastes of iron. '
+                       'Something in the walls is breathing.', 'If you are reading this, the boss is still alive. Do '
+                       'not let the timer run out.']),
+    ('On Gates', ['A gate is a wound in the world. Behind each one lies a dungeon that was never built by any hand we know.',
+                  'Close it by killing what rules inside. Leave it open too long and it breaks, and what lives here walks out.',
+                  'The scholars say each dungeon remembers a place. This one remembers the {theme}.']),
+    ('Last Words', ['They came out of the dark between the pillars. Ranged ones first, then the brutes.', 'Kenji held the '
+                    'door. I ran. I should not have run.', 'Leave the crystals. They are not worth it. Leave.']),
+    ('A Healer\'s Notes', ['Mana regenerates slower in here. Ration it.', 'Bind wounds before the boss room. The doors seal '
+                           'once the fight begins and nobody comes back out to help.', 'Bring more potions than you '
+                           'think. Then bring more.']),
+    ('The System', ['A voice spoke to me when I woke inside the gate. It said I had been chosen.', 'It gave me a quest: '
+                    'clear the dungeon, grow stronger, or die.', 'I do not know who set the quest. I only know the '
+                    'rewards are real.']),
+    ('Ledger of the {theme}', ['Tribute received: gold, iron, the bones of three adventurers.', 'Tribute owed: everything '
+                               'that walks in through the gate.', 'Balance: unpaid. The master is hungry.']),
+    ('Climbing', ['The halls here rise and fall. Some stairs climb a full storey; some shafts drop straight down with only '
+                  'a ladder.', 'Mark your way. The rooms below are older, and the things in them are older too.']),
+    ('To My Party', ['If the vault is open, take what you can carry and go.', 'The guardians wake when you touch the gold. '
+                     'They always wake.', 'I am sorry. I could not hold them.']),
+]
+SIGNS_LORE = [
+    ['Turn back', 'while you', 'still can'], ['Here fell', 'a C-rank', 'party'], ['The boss', 'sleeps', 'to the north'],
+    ['Do not', 'touch the', 'crystals'], ['Mana runs', 'thin below'], ['Vault', 'sealed by', 'order of the', 'master'],
+    ['Rest', 'here'], ['The {theme}', 'remembers'],
+]
+
+
+def lore_book(rng, theme, rank='unknown'):
+    title, pages = rng.choice(BOOKS)
+    name = THEME_NAMES.get(theme, theme.title())
+    return title.format(theme=name), [p.format(theme=name, rank=rank) for p in pages]
+
+
+def lore_sign(rng, theme):
+    name = THEME_NAMES.get(theme, theme.title())
+    return [l.format(theme=name) for l in rng.choice(SIGNS_LORE)]
+
+
+def signs(r, inner, theme, count):
+    """Lore signs on the walls at eye height."""
+    spots = wall_spots(r, inner, WALK + 1)
+    for x, z, side in r.rng.sample(spots, min(count, len(spots))):
+        if r.get(x, WALK + 1, z) is None and (x, WALK + 1, z) not in r.markers:
+            sign(r, x, WALK + 1, z, side, lore_sign(r.rng, theme))
+
+
+def spawn_spots(r, inner, count, kind, gap=5):
+    """`count` spawn markers on free floor in the room, apart from each other."""
+    taken = [p for p in r.markers if r.markers[p].startswith('spawn')]
+    cells = [(x, z) for (x, z) in sorted(inner) if r.get(x, WALK, z) is None and r.get(x, WALK + 1, z) is None
+             and (x, WALK, z) not in r.markers]
+    r.rng.shuffle(cells)
+    for x, z in cells:
+        if count == 0:
+            return
+        if all(abs(x - tx) + abs(z - tz) >= gap for tx, _, tz in taken):
+            r.marker(x, WALK, z, kind)
+            taken.append((x, WALK, z))
+            count -= 1
+
+
+def shaped_combat(shape, large, theme, seed):
+    """A combat room of a shape other than a square: round, octagonal, cross-shaped, a ring around a great pillar, or a
+    rough cavern. Statues stand about, paintings hang on the walls, a lore sign or two; the usual spawns."""
+    radius, height = (21, 20) if large else (14, 14)
+    r = Room(height, seed)
+    room = shape_cols(shape, radius, r.rng)
+    inner = shaped_shell(r, room, ALL)
+    for (x, z) in inner:
+        if r.rng.random() < 0.08:
+            r.set(x, FLOOR, z, 'floor3')
+        elif max(abs(x - MID), abs(z - MID)) % 5 == 0:
+            r.set(x, FLOOR, z, 'floor2')
+    if shape == 'ring':   # a great pillar in the middle, the fight goes round it
+        core = radius // 3
+        for x in range(MID - core, MID + core + 1):
+            for z in range(MID - core, MID + core + 1):
+                if (x - MID) ** 2 + (z - MID) ** 2 <= core * core:
+                    for y in range(WALK, r.height - 1):
+                        r.set(x, y, z, 'pillar' if (x + z) % 3 else 'wall2')
+        for x, z in ((MID - core - 1, MID), (MID + core + 1, MID), (MID, MID - core - 1), (MID, MID + core + 1)):
+            r.set(x, WALK + 3, z, 'glow')
+    elif shape == 'cave':   # stone columns and hanging spikes
+        for _ in range(12 if large else 6):
+            x, z = r.rng.choice(sorted(lanes(inner)))
+            cone(r, x, z, 1, r.rng.randint(2, height - 4), 'wall', r.rng.random() < 0.5)
+    else:
+        for x, z in (((MID - 8, MID - 8), (MID + 8, MID - 8), (MID - 8, MID + 8), (MID + 8, MID + 8)) if large else ()):
+            if (x, z) in inner:
+                pillar(r, x, z)
+        hang(r, MID, MID, 4)
+    for (x, z) in room:   # glow blocks set into the outline's walls at head height, clear of the doorways
+        edge = any((x + dx, z + dz) not in room for dx, dz in ((1, 0), (-1, 0), (0, 1), (0, -1)))
+        if edge and (x + z) % 7 == 0 and r.get(x, WALK + 3, z) is not None and not (ARM_LO - 1 <= x <= ARM_HI + 1 or ARM_LO - 1 <= z <= ARM_HI + 1):
+            r.set(x, WALK + 3, z, 'glow')
+    spawn_spots(r, inner, 6 if large else 4, 'spawn:melee')
+    spawn_spots(r, inner, 3 if large else 2, 'spawn:ranged')
+    if large:
+        spawn_spots(r, inner, 1, 'spawn:elite')
+    place_statues(r, lanes(inner), 4 if large else 2)
+    paintings(r, inner, 3 if large else 2)
+    signs(r, inner, theme, 1)
+    clutter(r, inner)
+    return r
+
+
+def vault(theme, seed):
+    """A treasure vault: a sealed hall with chests all round its walls (each always filled, `loot:vault`), heaps of the
+    theme's riches, statues standing guard, paintings, and a few guardians."""
+    inset = 11
+    r = Room(11, seed)
+    inner = shell(r, inset, ALL)
+    floor_pattern(r, inner, inset, 'checker')
+    arm_lights(r, inset, ALL)
+    wall_lights(r, inset, r.height, 5)
+    lo, hi = inset + 1, SIZE - 2 - inset
+    chests = [(MID - 6, lo), (MID + 6, lo), (lo, MID - 6), (lo, MID + 6), (hi, MID - 6), (hi, MID + 6)]
+    for x, z in r.rng.sample(chests, r.rng.randint(4, 6)):
+        r.marker(x, WALK, z, 'loot:vault')
+    for x, z in ((MID - 3, lo + 1), (MID + 3, lo + 1), (lo + 1, lo + 1), (hi - 1, lo + 1)):
+        if r.get(x, WALK, z) is None and (x, WALK, z) not in r.markers:
+            r.set(x, WALK, z, 'gold_block' if r.rng.random() < 0.5 else 'prop')
+    for x, z in ((MID - 4, hi - 2), (MID + 4, hi - 2), (MID - 4, lo + 3), (MID + 4, lo + 3)):
+        statue(r, x, z)
+    hang(r, MID, MID, 3)
+    paintings(r, inner, 3)
+    sign(r, MID, WALK + 2, lo, 'north', lore_sign(r.rng, theme)) if r.get(MID, WALK + 2, lo) is None else None
+    spread(r, 'spawn:melee', ((MID - 2, MID), (MID + 2, MID)))
+    clutter(r, inner)
+    return r
+
+
+def library(theme, seed):
+    """A lore room: rows of bookshelves, lecterns with the journals of hunters who came before, signs, paintings and
+    statues; a couple of keepers."""
+    inset = 8
+    r = Room(14, seed)
+    inner = shell(r, inset, ALL)
+    floor_pattern(r, inner, inset, 'rings')
+    arm_lights(r, inset, ALL)
+    wall_lights(r, inset, r.height)
+    lo, hi = inset + 1, SIZE - 2 - inset
+    free = lanes(inner)
+    for z in range(lo + 2, hi - 1, 4):   # shelf rows, two high, with a gap in the middle of each
+        for x in range(lo + 2, hi - 1):
+            if (x, z) in free and abs(x - MID) > 5:
+                for y in range(WALK, WALK + 2):
+                    r.set(x, y, z, 'bookshelf')
+                if r.rng.random() < 0.15:
+                    r.set(x, WALK + 2, z, 'candle[candles=2,lit=true]')
+    for x, z, facing in ((MID - 3, MID - 3, 'south'), (MID + 3, MID - 3, 'south'), (MID - 3, MID + 3, 'north'), (MID + 3, MID + 3, 'north')):
+        lectern(r, x, z, facing, lore_book(r.rng, theme))
+    for x, z in ((MID, lo + 1), (MID, hi - 1)):
+        statue(r, x, z)
+    hang(r, MID, MID, 3)
+    paintings(r, inner, 4)
+    signs(r, inner, theme, 3)
+    spread(r, 'spawn:ranged', ((MID - 6, MID + 2), (MID + 6, MID - 2)))   # between the shelf rows
+    clutter(r, inner)
+    return r
+
+
 def layouts(theme):
     """kind_n -> Room for one theme: the shared layouts plus the theme's own combat rooms (variant 3 of each size).
     Corridors are named corridor_<shape>_n, boss rooms boss_<size class>_n."""
@@ -884,6 +1306,18 @@ def layouts(theme):
         'combat_large_7': trap(3, 142 + salt, True),
         'combat_large_8': maze(1, 151 + salt, True),
         'combat_large_9': maze(2, 152 + salt, True),
+        'corridor_stairs_1': stairs_corridor(24),
+        'corridor_ladder_1': ladder_corridor(25),
+        'combat_small_13': shaped_combat('round', False, theme, 161 + salt),
+        'combat_small_14': shaped_combat('octagon', False, theme, 162 + salt),
+        'combat_small_15': shaped_combat('cross', False, theme, 163 + salt),
+        'combat_small_16': shaped_combat('cave', False, theme, 164 + salt),
+        'combat_large_10': shaped_combat('round', True, theme, 171 + salt),
+        'combat_large_11': shaped_combat('ring', True, theme, 172 + salt),
+        'combat_large_12': shaped_combat('cave', True, theme, 173 + salt),
+        'combat_large_13': shaped_combat('octagon', True, theme, 174 + salt),
+        'vault_1': vault(theme, 181 + salt),
+        'library_1': library(theme, 191 + salt),
     }
 
 
@@ -913,7 +1347,13 @@ def template(room, palette):
 
     blocks = TagList(10)
     for (x, y, z), role in sorted(room.blocks.items()):
-        block = palette[role] if role in palette else role
+        base, bracket, props = role.partition('[')
+        if role in palette:
+            block = palette[role]
+        elif bracket and base in palette and palette[base] is not None:   # a palette role with block state properties
+            block = palette[base].partition('[')[0] + '[' + props
+        else:
+            block = role
         if block is None:
             continue
         entry = {'pos': TagList(3, [Int(x), Int(y), Int(z)]), 'state': Int(idx(block))}

@@ -1,0 +1,246 @@
+{
+  "name": "gate.mdvlcraft.theme.caldera",
+  "biome": "mdvlcraft:gate_caldera",
+  "music": "minecraft:music.nether.basalt_deltas",
+  "catalyst": "minecraft:magma_cream",
+  "hazard": {},
+  "ranks": {
+    "min": "B",
+    "max": "S"
+  },
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/caldera/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/caldera/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/caldera/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/caldera/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/caldera/combat_small_1",
+      "mdvlcraft:gate/caldera/combat_small_2",
+      "mdvlcraft:gate/caldera/combat_small_3",
+      "mdvlcraft:gate/caldera/combat_small_4",
+      "mdvlcraft:gate/caldera/combat_small_5",
+      "mdvlcraft:gate/caldera/combat_small_6",
+      "mdvlcraft:gate/caldera/combat_small_7",
+      "mdvlcraft:gate/caldera/combat_small_8",
+      "mdvlcraft:gate/caldera/combat_small_9",
+      "mdvlcraft:gate/caldera/combat_small_10",
+      "mdvlcraft:gate/caldera/combat_small_11",
+      "mdvlcraft:gate/caldera/combat_small_12",
+      "mdvlcraft:gate/caldera/combat_small_13",
+      "mdvlcraft:gate/caldera/combat_small_14",
+      "mdvlcraft:gate/caldera/combat_small_15",
+      "mdvlcraft:gate/caldera/combat_small_16"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/caldera/combat_large_1",
+      "mdvlcraft:gate/caldera/combat_large_2",
+      "mdvlcraft:gate/caldera/combat_large_3",
+      "mdvlcraft:gate/caldera/combat_large_4",
+      "mdvlcraft:gate/caldera/combat_large_5",
+      "mdvlcraft:gate/caldera/combat_large_6",
+      "mdvlcraft:gate/caldera/combat_large_7",
+      "mdvlcraft:gate/caldera/combat_large_8",
+      "mdvlcraft:gate/caldera/combat_large_9",
+      "mdvlcraft:gate/caldera/combat_large_10",
+      "mdvlcraft:gate/caldera/combat_large_11",
+      "mdvlcraft:gate/caldera/combat_large_12",
+      "mdvlcraft:gate/caldera/combat_large_13"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/caldera/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/caldera/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/caldera/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/caldera/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/caldera/boss_large_1"
+    ],
+    "corridor_stairs": [
+      "mdvlcraft:gate/caldera/corridor_stairs_1"
+    ],
+    "corridor_ladder": [
+      "mdvlcraft:gate/caldera/corridor_ladder_1"
+    ],
+    "vault": [
+      "mdvlcraft:gate/caldera/vault_1"
+    ],
+    "library": [
+      "mdvlcraft:gate/caldera/library_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "minecraft:magma_cube",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:flameborn_warrior",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:blaze",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:flameborn_guard",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "legendary_monsters:flameborn_warrior",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:wither_skeleton",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:blaze",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:flame_drifter",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:flameborn_guard",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:ignited_berserker",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "legendary_monsters:flameborn_warrior",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:ignited_berserker",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:wither_skeleton",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "legendary_monsters:flame_drifter",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:pyromancer",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:blaze",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "cataclysm:ignited_berserker",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:flameborn_guard",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "legendary_monsters:lava_eater",
+      "count": 1,
+      "size": "large"
+    },
+    "D": {
+      "id": "legendary_monsters:lava_eater",
+      "count": 1,
+      "size": "large"
+    },
+    "C": {
+      "id": "legendary_monsters:lava_eater",
+      "count": 1,
+      "size": "large"
+    },
+    "B": {
+      "id": "legendary_monsters:lava_eater",
+      "count": 1,
+      "size": "large"
+    },
+    "A": {
+      "id": "cataclysm:netherite_monstrosity",
+      "count": 1,
+      "size": "large"
+    },
+    "S": {
+      "id": "irons_spellbooks:fire_boss",
+      "count": 1,
+      "size": "medium"
+    }
+  },
+  "red": {
+    "landscape": "lava fields",
+    "palette": {
+      "floor": "minecraft:polished_blackstone",
+      "pillar": "minecraft:polished_blackstone_bricks",
+      "light": "minecraft:shroomlight",
+      "campfire": "minecraft:soul_campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:blaze",
+      "minecraft:magma_cube",
+      "minecraft:wither_skeleton"
+    ],
+    "stand_in_boss": "minecraft:blaze",
+    "lairs": [
+      "mdvlcraft:gate/red/caldera/lair_1",
+      "mdvlcraft:gate/red/caldera/lair_2",
+      "mdvlcraft:gate/red/caldera/lair_3"
+    ],
+    "camps": [
+      "mdvlcraft:gate/red/caldera/camp_1",
+      "mdvlcraft:gate/red/caldera/camp_2",
+      "mdvlcraft:gate/red/caldera/camp_3",
+      "mdvlcraft:gate/red/caldera/camp_4",
+      "mdvlcraft:gate/red/caldera/camp_5"
+    ]
+  }
+}

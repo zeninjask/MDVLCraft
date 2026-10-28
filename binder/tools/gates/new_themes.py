@@ -166,11 +166,65 @@ NEW_THEMES = {
                   ring='stone_brick_slab', seat='spruce_log[axis=z]', post='spruce_log[axis=y]', cloth='blue_wool', cloth2='white_wool',
                   crate='barrel[facing=up]', fence='stone_brick_wall', litter='skeleton_skull', flora=None),
         steps='stone_brick_stairs'),
+    # 2.1.63
+    'caldera': dict(parent='forge', name='Molten Caldera', catalyst='minecraft:magma_cream',
+        look=(0x3a1a0a, 0x5a2a10, 0x8a3a10, 'minecraft:lava', 0.01, False, 2.0, 'minecraft:music.nether.basalt_deltas', 'minecraft:ambient.basalt_deltas.loop'),
+        ground=('minecraft:basalt', 'minecraft:magma_block', 'minecraft:blackstone', 'minecraft:smooth_basalt', 'minecraft:blackstone'),
+        rooms=dict(floor='smooth_basalt', floor2='polished_basalt[axis=y]', floor3='magma_block', wall='basalt[axis=y]', wall2='blackstone',
+                   pillar='polished_basalt[axis=y]', ceiling='blackstone', glow='ochre_froglight[axis=y]', hang='lantern[hanging=true]',
+                   chain='chain[axis=y]', prop='magma_block', web=None, litter=None, pool='lava', pool_base='magma_block', fence='blackstone_wall'),
+        lair=dict(base='blackstone', floor='smooth_basalt', floor2='polished_basalt[axis=y]', floor3='magma_block', emblem='ochre_froglight[axis=y]',
+                  wall='basalt[axis=y]', wall2='blackstone', pillar='polished_basalt[axis=y]', cap='blackstone', light='lantern', fire='campfire',
+                  ground='basalt', ground2='magma_block', ground3='smooth_basalt', ring='blackstone_slab', seat='crimson_stem[axis=z]',
+                  post='crimson_stem[axis=y]', cloth='orange_wool', cloth2='black_wool', crate='magma_block', fence='blackstone_wall',
+                  litter=None, flora=None),
+        steps='blackstone_stairs'),
+    'ossuary': dict(parent='crypt', name='Bone Ossuary', catalyst='minecraft:bone_block',
+        look=(0xb8b0a0, 0xc8c0b0, 0x5a7a8a, 'minecraft:white_ash', 0.006, False, 0.6, 'minecraft:music.overworld.deep_dark', 'minecraft:ambient.soul_sand_valley.loop'),
+        ground=('minecraft:soul_soil', 'minecraft:bone_block', 'minecraft:calcite', 'minecraft:calcite', 'minecraft:deepslate'),
+        rooms=dict(floor='calcite', floor2='bone_block[axis=y]', floor3='soul_soil', wall='bone_block[axis=y]', wall2='calcite',
+                   pillar='bone_block[axis=y]', ceiling='polished_diorite', glow='sea_lantern', hang='soul_lantern[hanging=true]',
+                   chain='chain[axis=y]', prop='bone_block[axis=y]', web='cobweb', litter='skeleton_skull', pool='soul_fire', pool_base='soul_soil',
+                   fence='diorite_wall'),
+        lair=dict(base='calcite', floor='calcite', floor2='bone_block[axis=y]', floor3='soul_soil', emblem='bone_block[axis=y]',
+                  wall='bone_block[axis=y]', wall2='calcite', pillar='bone_block[axis=y]', cap='polished_diorite', light='soul_lantern', fire='soul_campfire',
+                  ground='soul_soil', ground2='bone_block', ground3='calcite', ring='diorite_slab', seat='bone_block[axis=z]', post='bone_block[axis=y]',
+                  cloth='white_wool', cloth2='gray_wool', crate='bone_block[axis=y]', fence='diorite_wall', litter='skeleton_skull', flora=None),
+        steps='diorite_stairs'),
+    'abyss': dict(parent='sculk', feature='spire', name='Void Abyss', catalyst='minecraft:ender_eye',
+        look=(0x0a0614, 0x140a24, 0x2a1a4a, 'minecraft:reverse_portal', 0.02, False, 0.5, 'minecraft:music.end', 'minecraft:ambient.basalt_deltas.mood'),
+        ground=('minecraft:end_stone', 'minecraft:obsidian', 'minecraft:end_stone', 'minecraft:obsidian', 'minecraft:obsidian'),
+        rooms=dict(floor='obsidian', floor2='purpur_block', floor3='crying_obsidian', wall='obsidian', wall2='crying_obsidian',
+                   pillar='purpur_pillar[axis=y]', ceiling='end_stone_bricks', glow='pearlescent_froglight[axis=y]', hang='end_rod[facing=down]',
+                   chain='chain[axis=y]', prop='end_stone_bricks', web=None, litter=None, pool='lava', pool_base='obsidian', fence='end_stone_brick_wall'),
+        lair=dict(base='obsidian', floor='obsidian', floor2='purpur_block', floor3='crying_obsidian', emblem='crying_obsidian',
+                  wall='obsidian', wall2='crying_obsidian', pillar='purpur_pillar[axis=y]', cap='end_stone_bricks', light='end_rod[facing=up]',
+                  fire='soul_campfire', ground='end_stone', ground2='obsidian', ground3='end_stone_bricks', ring='purpur_slab',
+                  seat='stripped_warped_stem[axis=z]', post='stripped_warped_stem[axis=y]', cloth='purple_wool', cloth2='black_wool',
+                  crate='end_stone_bricks', fence='end_stone_brick_wall', litter=None, flora='chorus_flower'),
+        steps='purpur_stairs'),
+    'jade': dict(parent='blossom', name='Jade Pagoda', catalyst='minecraft:emerald',
+        look=(0x4a7a5a, 0x5a8a6a, 0x3a8a8a, 'minecraft:cherry_leaves', 0.006, True, 0.8, 'minecraft:music.overworld.bamboo_jungle', None),
+        ground=('minecraft:moss_block', 'minecraft:grass_block', 'minecraft:dirt', 'minecraft:mossy_cobblestone', None),
+        rooms=dict(floor='polished_andesite', floor2='green_terracotta', floor3='andesite', wall='green_terracotta', wall2='lime_terracotta',
+                   pillar='stripped_dark_oak_log[axis=y]', ceiling='dark_oak_planks', glow='pearlescent_froglight[axis=y]',
+                   hang='lantern[hanging=true]', chain='chain[axis=y]', prop='bamboo_block[axis=y]', web=None, litter='fern', pool='water',
+                   pool_base='clay', fence='dark_oak_fence'),
+        lair=dict(base='green_terracotta', floor='polished_andesite', floor2='green_terracotta', floor3='andesite', emblem='emerald_block',
+                  wall='green_terracotta', wall2='lime_terracotta', pillar='stripped_dark_oak_log[axis=y]', cap='dark_oak_planks', light='lantern',
+                  fire='campfire', ground='moss_block', ground2='grass_block', ground3='mossy_cobblestone', ring='dark_oak_slab',
+                  seat='dark_oak_log[axis=z]', post='dark_oak_log[axis=y]', cloth='lime_wool', cloth2='red_wool', crate='bamboo_block[axis=y]',
+                  fence='dark_oak_fence', litter='fern', flora='fern'),
+        steps='dark_oak_stairs'),
 }
 
 
-def write_theme_files():
+def write_theme_files(keys=None):
+    """Writes the theme files of `keys` (default: every theme here) from their parents'. Rewriting a theme undoes any edit
+    made to its file since (pool changes, removed mobs), so name only the new ones."""
     for key, t in NEW_THEMES.items():
+        if keys and key not in keys:
+            continue
         theme = json.loads((DATA / 'gate_themes' / f"{t['parent']}.json").read_text())
         theme['name'] = f'gate.mdvlcraft.theme.{key}'
         theme['biome'] = f'mdvlcraft:gate_{key}'
@@ -181,8 +235,9 @@ def write_theme_files():
         theme['red']['lairs'] = [rid.replace(f"/{t['parent']}/", f'/{key}/') for rid in theme['red']['lairs']]
         theme['red']['camps'] = [rid.replace(f"/{t['parent']}/", f'/{key}/') for rid in theme['red']['camps']]
         (DATA / 'gate_themes' / f'{key}.json').write_text(json.dumps(theme, indent=2) + '\n')
-    print('gate theme files written:', ', '.join(NEW_THEMES))
+    print('gate theme files written:', ', '.join(keys or NEW_THEMES))
 
 
 if __name__ == '__main__':
-    write_theme_files()
+    import sys
+    write_theme_files(sys.argv[1:] or None)

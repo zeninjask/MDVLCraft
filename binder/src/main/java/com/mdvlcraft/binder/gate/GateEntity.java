@@ -242,6 +242,10 @@ public class GateEntity extends Entity {
                 this.level().addParticle(this.stable() ? ParticleTypes.PORTAL : ParticleTypes.REVERSE_PORTAL, x, y, z,
                     (this.getX() - x) * 0.3, 0.0, (this.getZ() - z) * 0.3);
             }
+            if (this.stable() && this.random.nextInt(4) == 0) {   // the rim crackles
+                this.level().addParticle(this.red() ? ParticleTypes.FLAME : ParticleTypes.ELECTRIC_SPARK, x, y, z,
+                    (this.random.nextDouble() - 0.5) * 0.2, (this.random.nextDouble() - 0.5) * 0.2, (this.random.nextDouble() - 0.5) * 0.2);
+            }
         }
         if (this.random.nextInt(80) == 0) {
             this.level().playLocalSound(this.getX(), this.getY() + halfHeight, this.getZ(), SoundEvents.PORTAL_AMBIENT, SoundSource.BLOCKS,

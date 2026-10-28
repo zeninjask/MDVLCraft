@@ -13,6 +13,9 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.decoration.Painting;
+import net.minecraft.world.phys.AABB;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Mirror;
@@ -87,6 +90,7 @@ public final class GateBuilder {
         QUEUE.add(new Step(instance.id, true, () -> {
             GateRewards.placeCrystals(level, instance);
             GateRewards.placeLootChests(level, instance);
+            GateDecor.place(level, instance);
             instance.built = true;
             GateInstances.get(level.getServer()).setDirty();
             LOGGER.info("Gate {} built: {} rooms, {} markers", instance.id, instance.rooms.size(), instance.markers.size());
@@ -178,7 +182,7 @@ public final class GateBuilder {
             return;
         }
         StructureTemplate template = found.get();
-        BlockPos slot = centre.offset(piece.gx() * SLOT - SLOT / 2, 0, piece.gz() * SLOT - SLOT / 2);
+        BlockPos slot = centre.offset(piece.gx() * SLOT - SLOT / 2, piece.y(), piece.gz() * SLOT - SLOT / 2);
         // rotating about the template's corner moves it; this puts the rotated room back on its slot
         BlockPos origin = StructureTemplate.getZeroPositionWithTransform(slot, Mirror.NONE, piece.rotation(), SLOT, SLOT);
         StructurePlaceSettings settings = new StructurePlaceSettings().setRotation(piece.rotation()).setIgnoreEntities(true)
@@ -240,6 +244,8 @@ public final class GateBuilder {
     }
 
     private static void clearBox(ServerLevel level, BoundingBox box) {
+        // the room's paintings (GateDecor) go first, so they don't pop off as items when their walls do
+        level.getEntitiesOfClass(Painting.class, AABB.of(box)).forEach(Entity::discard);
         BlockState air = Blocks.AIR.defaultBlockState();
         for (BlockPos pos : BlockPos.betweenClosed(box.minX(), box.minY(), box.minZ(), box.maxX(), box.maxY(), box.maxZ())) {
             if (!level.getBlockState(pos).isAir()) {

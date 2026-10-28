@@ -1,0 +1,266 @@
+{
+  "name": "gate.mdvlcraft.theme.ossuary",
+  "biome": "mdvlcraft:gate_ossuary",
+  "music": "minecraft:music.overworld.deep_dark",
+  "catalyst": "minecraft:bone_block",
+  "hazard": {},
+  "ranks": {
+    "min": "E",
+    "max": "S"
+  },
+  "rooms": {
+    "entrance": [
+      "mdvlcraft:gate/ossuary/entrance_1"
+    ],
+    "corridor_straight": [
+      "mdvlcraft:gate/ossuary/corridor_straight_1"
+    ],
+    "corridor_turn": [
+      "mdvlcraft:gate/ossuary/corridor_turn_1"
+    ],
+    "corridor_t": [
+      "mdvlcraft:gate/ossuary/corridor_t_1"
+    ],
+    "combat_small": [
+      "mdvlcraft:gate/ossuary/combat_small_1",
+      "mdvlcraft:gate/ossuary/combat_small_2",
+      "mdvlcraft:gate/ossuary/combat_small_3",
+      "mdvlcraft:gate/ossuary/combat_small_4",
+      "mdvlcraft:gate/ossuary/combat_small_5",
+      "mdvlcraft:gate/ossuary/combat_small_6",
+      "mdvlcraft:gate/ossuary/combat_small_7",
+      "mdvlcraft:gate/ossuary/combat_small_8",
+      "mdvlcraft:gate/ossuary/combat_small_9",
+      "mdvlcraft:gate/ossuary/combat_small_10",
+      "mdvlcraft:gate/ossuary/combat_small_11",
+      "mdvlcraft:gate/ossuary/combat_small_12",
+      "mdvlcraft:gate/ossuary/combat_small_13",
+      "mdvlcraft:gate/ossuary/combat_small_14",
+      "mdvlcraft:gate/ossuary/combat_small_15",
+      "mdvlcraft:gate/ossuary/combat_small_16"
+    ],
+    "combat_large": [
+      "mdvlcraft:gate/ossuary/combat_large_1",
+      "mdvlcraft:gate/ossuary/combat_large_2",
+      "mdvlcraft:gate/ossuary/combat_large_3",
+      "mdvlcraft:gate/ossuary/combat_large_4",
+      "mdvlcraft:gate/ossuary/combat_large_5",
+      "mdvlcraft:gate/ossuary/combat_large_6",
+      "mdvlcraft:gate/ossuary/combat_large_7",
+      "mdvlcraft:gate/ossuary/combat_large_8",
+      "mdvlcraft:gate/ossuary/combat_large_9",
+      "mdvlcraft:gate/ossuary/combat_large_10",
+      "mdvlcraft:gate/ossuary/combat_large_11",
+      "mdvlcraft:gate/ossuary/combat_large_12",
+      "mdvlcraft:gate/ossuary/combat_large_13"
+    ],
+    "crystal": [
+      "mdvlcraft:gate/ossuary/crystal_1"
+    ],
+    "treasure": [
+      "mdvlcraft:gate/ossuary/treasure_1"
+    ],
+    "boss_small": [
+      "mdvlcraft:gate/ossuary/boss_small_1"
+    ],
+    "boss_medium": [
+      "mdvlcraft:gate/ossuary/boss_medium_1"
+    ],
+    "boss_large": [
+      "mdvlcraft:gate/ossuary/boss_large_1"
+    ],
+    "corridor_stairs": [
+      "mdvlcraft:gate/ossuary/corridor_stairs_1"
+    ],
+    "corridor_ladder": [
+      "mdvlcraft:gate/ossuary/corridor_ladder_1"
+    ],
+    "vault": [
+      "mdvlcraft:gate/ossuary/vault_1"
+    ],
+    "library": [
+      "mdvlcraft:gate/ossuary/library_1"
+    ]
+  },
+  "mobs": {
+    "low": {
+      "melee": [
+        {
+          "id": "minecraft:zombie",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:husk",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:catacombs_zombie",
+          "weight": 1
+        },
+        {
+          "id": "wom:evil_skeleton",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "minecraft:skeleton",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:stray",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:haunted_guard",
+          "weight": 1
+        }
+      ]
+    },
+    "mid": {
+      "melee": [
+        {
+          "id": "cataclysm:draugr",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:catacombs_zombie",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:haunted_guard",
+          "weight": 1
+        },
+        {
+          "id": "wom:hollow",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "cataclysm:elite_draugr",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:skeleton",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:necromancer",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:haunted_knight",
+          "weight": 1
+        },
+        {
+          "id": "cataclysm:royal_draugr",
+          "weight": 1
+        }
+      ]
+    },
+    "high": {
+      "melee": [
+        {
+          "id": "cataclysm:royal_draugr",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:haunted_guard",
+          "weight": 1
+        },
+        {
+          "id": "iss_magicfromtheeast:jiangshi",
+          "weight": 1
+        },
+        {
+          "id": "minecraft:wither_skeleton",
+          "weight": 1
+        }
+      ],
+      "ranged": [
+        {
+          "id": "cataclysm:elite_draugr",
+          "weight": 1
+        },
+        {
+          "id": "irons_spellbooks:necromancer",
+          "weight": 1
+        }
+      ],
+      "elite": [
+        {
+          "id": "legendary_monsters:haunted_knight",
+          "weight": 1
+        },
+        {
+          "id": "legendary_monsters:beheaded_knight",
+          "weight": 1
+        }
+      ]
+    }
+  },
+  "bosses": {
+    "E": {
+      "id": "cataclysm:royal_draugr",
+      "count": 1,
+      "size": "small"
+    },
+    "D": {
+      "id": "legendary_monsters:haunted_knight",
+      "count": 1,
+      "size": "small"
+    },
+    "C": {
+      "id": "cataclysm:aptrgangr",
+      "count": 1,
+      "size": "large"
+    },
+    "B": {
+      "id": "irons_spellbooks:dead_king",
+      "count": 1,
+      "size": "medium"
+    },
+    "A": {
+      "id": "traveloptics:enraged_dead_king",
+      "count": 1,
+      "size": "medium"
+    },
+    "S": {
+      "id": "traveloptics:enraged_dead_king",
+      "count": 1,
+      "size": "medium"
+    }
+  },
+  "red": {
+    "landscape": "cursed marsh",
+    "palette": {
+      "floor": "minecraft:cobbled_deepslate",
+      "pillar": "minecraft:deepslate_bricks",
+      "light": "minecraft:soul_lantern",
+      "campfire": "minecraft:soul_campfire"
+    },
+    "stand_in_mobs": [
+      "minecraft:zombie",
+      "minecraft:skeleton",
+      "minecraft:husk"
+    ],
+    "stand_in_boss": "minecraft:wither_skeleton",
+    "lairs": [
+      "mdvlcraft:gate/red/ossuary/lair_1",
+      "mdvlcraft:gate/red/ossuary/lair_2",
+      "mdvlcraft:gate/red/ossuary/lair_3"
+    ],
+    "camps": [
+      "mdvlcraft:gate/red/ossuary/camp_1",
+      "mdvlcraft:gate/red/ossuary/camp_2",
+      "mdvlcraft:gate/red/ossuary/camp_3",
+      "mdvlcraft:gate/red/ossuary/camp_4",
+      "mdvlcraft:gate/red/ossuary/camp_5"
+    ]
+  }
+}

@@ -9,7 +9,8 @@ import javax.annotation.Nullable;
  */
 public enum GateTheme {
     CRYPT, WARREN, FROZEN, WARCAMP, SPIRE, FORGE,
-    SUNKEN, TOMB, JUNGLE, GROTTO, AMETHYST, FORTRESS, SCULK, BLOSSOM, MIRE, CLOCKWORK, CRIMSON, CITADEL;
+    SUNKEN, TOMB, JUNGLE, GROTTO, AMETHYST, FORTRESS, SCULK, BLOSSOM, MIRE, CLOCKWORK, CRIMSON, CITADEL,
+    CALDERA, OSSUARY, ABYSS, JADE;
 
     public String key() {
         return this.name().toLowerCase(Locale.ROOT);

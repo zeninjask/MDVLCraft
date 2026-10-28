@@ -323,6 +323,78 @@
           }
         ]
       }
+    },
+    "caldera": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mdvlcraft:gate_key_e",
+              "mdvlcraft:gate_key_d",
+              "mdvlcraft:gate_key_c",
+              "mdvlcraft:gate_key_b",
+              "mdvlcraft:gate_key_a",
+              "mdvlcraft:gate_key_s"
+            ],
+            "nbt": "{theme:\"caldera\"}"
+          }
+        ]
+      }
+    },
+    "ossuary": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mdvlcraft:gate_key_e",
+              "mdvlcraft:gate_key_d",
+              "mdvlcraft:gate_key_c",
+              "mdvlcraft:gate_key_b",
+              "mdvlcraft:gate_key_a",
+              "mdvlcraft:gate_key_s"
+            ],
+            "nbt": "{theme:\"ossuary\"}"
+          }
+        ]
+      }
+    },
+    "abyss": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mdvlcraft:gate_key_e",
+              "mdvlcraft:gate_key_d",
+              "mdvlcraft:gate_key_c",
+              "mdvlcraft:gate_key_b",
+              "mdvlcraft:gate_key_a",
+              "mdvlcraft:gate_key_s"
+            ],
+            "nbt": "{theme:\"abyss\"}"
+          }
+        ]
+      }
+    },
+    "jade": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mdvlcraft:gate_key_e",
+              "mdvlcraft:gate_key_d",
+              "mdvlcraft:gate_key_c",
+              "mdvlcraft:gate_key_b",
+              "mdvlcraft:gate_key_a",
+              "mdvlcraft:gate_key_s"
+            ],
+            "nbt": "{theme:\"jade\"}"
+          }
+        ]
+      }
     }
   },
   "requirements": [
@@ -344,7 +416,11 @@
       "mire",
       "clockwork",
       "crimson",
-      "citadel"
+      "citadel",
+      "caldera",
+      "ossuary",
+      "abyss",
+      "jade"
     ]
   ]
 }

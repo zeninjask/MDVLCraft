@@ -32,7 +32,9 @@ final class RemovedKeys {
         "key.esoteric_spell.toggle_hidden_ring",
         "soundsbegone.config",   // B by default, the backpack key
         "key.saveToolbarActivator",
-        "key.loadToolbarActivator"
+        "key.loadToolbarActivator",
+        // 1-8 quick-cast the ability wheel's slots instead (AbilityKeys.QUICK); slot 9 and the scroll wheel still pick items
+        "key.hotbar.1", "key.hotbar.2", "key.hotbar.3", "key.hotbar.4", "key.hotbar.5", "key.hotbar.6", "key.hotbar.7", "key.hotbar.8"
     );
     /** Every key of these categories goes, except the KEEP ones. */
     private static final Set<String> CATEGORIES = Set.of(

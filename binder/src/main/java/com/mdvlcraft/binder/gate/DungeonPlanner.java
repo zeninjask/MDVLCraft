@@ -13,9 +13,11 @@ import net.minecraft.world.level.block.Rotation;
 /**
  * Lays out a gate dungeon on a grid of room slots (plan section 5.2), before anything is placed: a main path from the
  * entrance to the boss room with GateRank.minRooms..maxRooms rooms on it (entrance and boss included), corridors between
- * some of them (the path only turns inside corridors, unless it is boxed in), and one or two side branches: the first
- * always ends in the crystal room, the second (half the time) in a treasure alcove. The seed is the instance id, so a
- * rebuild gives the same dungeon.
+ * some of them (the path only turns inside corridors, unless it is boxed in), and side branches: the first always ends in
+ * the crystal room, a second (half the time) in a treasure alcove or a vault of chests, a third (sometimes) in a library
+ * of lore. About a third of the straight corridors on the main path are stairs or ladder shafts that climb or drop one
+ * level (RISE blocks, at most MAX_LEVEL from the entrance's); the rooms after one are built that much higher or lower.
+ * The seed is the instance id, so a rebuild gives the same dungeon.
  *
  * Templates (tools/gates/gen_gate_rooms.py) all share one square footprint; doors sit in the middle of each face, so any
  * two neighbouring slots line up. Corridors have exactly the doors they need (straight, turn or T); every other room has
@@ -27,8 +29,16 @@ public final class DungeonPlanner {
     private static final int ATTEMPTS = 64;
     private static final Direction[] HORIZONTAL = {Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST};
 
-    /** One placed room: its template name (kind_n), slot, rotation, and the doors it connects through (world sides). */
-    public record Piece(String template, int gx, int gz, Rotation rotation, EnumSet<Direction> doors) {
+    /** Blocks between one dungeon level and the next: a stair or ladder corridor's doors are this far apart. */
+    public static final int RISE = 8;
+    /** Levels stay within this many of the entrance's (both ways). */
+    private static final int MAX_LEVEL = 2;
+    /** A straight main-path corridor's chance to climb or drop a level (stairs or a ladder shaft). */
+    private static final int VERTICAL_PERCENT = 35;
+
+    /** One placed room: its template name (kind_n), slot, rotation, the doors it connects through (world sides), and the
+     * height of its bottom above the entrance's (a level times RISE). */
+    public record Piece(String template, int gx, int gz, Rotation rotation, EnumSet<Direction> doors, int y) {
     }
 
     private DungeonPlanner() {
@@ -61,12 +71,17 @@ public final class DungeonPlanner {
         /** The side the path comes in by (null for the entrance). */
         Direction entry;
         final List<Node> branch = new ArrayList<>();
+        /** The level the path comes in at (0: the entrance's). */
+        final int level;
+        /** For a stair or ladder corridor, the level change on the way out (+1 up, -1 down); 0 for every other piece. */
+        int climb;
 
-        Node(int gx, int gz, String kind, Direction entry) {
+        Node(int gx, int gz, String kind, Direction entry, int level) {
             this.gx = gx;
             this.gz = gz;
             this.kind = kind;
             this.entry = entry;
+            this.level = level;
             if (entry != null) {
                 this.doors.add(entry);
             }
@@ -74,6 +89,11 @@ public final class DungeonPlanner {
 
         boolean corridor() {
             return this.kind.equals("corridor");
+        }
+
+        /** The level the path leaves at. */
+        int exitLevel() {
+            return this.level + this.climb;
         }
     }
 
@@ -89,7 +109,7 @@ public final class DungeonPlanner {
     private static List<Piece> attempt(Random random, GateRank rank, String bossKind, ToIntFunction<String> variants) {
         Map<Long, Node> slots = new HashMap<>();
         List<Node> path = new ArrayList<>();
-        Node here = new Node(0, 0, "entrance", null);
+        Node here = new Node(0, 0, "entrance", null, 0);
         slots.put(key(0, 0), here);
         path.add(here);
         Direction heading = HORIZONTAL[random.nextInt(4)];
@@ -117,22 +137,33 @@ public final class DungeonPlanner {
                     return null;
                 }
                 here.doors.add(out);
-                Node next = new Node(here.gx + out.getStepX(), here.gz + out.getStepZ(), corridor ? "corridor" : kind, out.getOpposite());
+                if (here.corridor() && here.doors.size() == 2 && here.doors.contains(here.entry.getOpposite())
+                    && random.nextInt(100) < VERTICAL_PERCENT) {
+                    // a straight corridor climbs or drops a level, inside the level bounds
+                    int climb = random.nextBoolean() ? 1 : -1;
+                    if (Math.abs(here.level + climb) > MAX_LEVEL) {
+                        climb = -climb;
+                    }
+                    here.climb = climb;
+                }
+                Node next = new Node(here.gx + out.getStepX(), here.gz + out.getStepZ(), corridor ? "corridor" : kind, out.getOpposite(),
+                    here.exitLevel());
                 slots.put(key(next.gx, next.gz), next);
                 path.add(next);
                 here = next;
                 heading = out;
             }
         }
-        // side branches from a straight corridor (which becomes a T) or a combat room
-        int branches = 1 + random.nextInt(2);
-        String[] ends = {"crystal", "treasure"};
-        for (int b = 0; b < branches; b++) {
-            if (!branch(random, slots, path, ends[b])) {
-                if (b == 0) {
-                    return null;   // the crystal room must fit
-                }
-            }
+        // side branches from a straight corridor (which becomes a T) or a combat room: the crystal room always, then
+        // half the time a treasure alcove or a vault of chests, and sometimes a library of lore
+        if (!branch(random, slots, path, "crystal")) {
+            return null;   // the crystal room must fit
+        }
+        if (random.nextBoolean()) {
+            branch(random, slots, path, random.nextInt(3) == 0 ? "vault" : "treasure");
+        }
+        if (random.nextInt(10) < 4) {
+            branch(random, slots, path, "library");
         }
         List<Piece> pieces = new ArrayList<>();
         for (Node node : path) {
@@ -183,7 +214,7 @@ public final class DungeonPlanner {
     private static boolean branch(Random random, Map<Long, Node> slots, List<Node> path, String end) {
         List<Node> hosts = new ArrayList<>();
         for (Node node : path) {
-            boolean straightCorridor = node.corridor() && node.doors.size() == 2 && node.doors.contains(node.entry.getOpposite());
+            boolean straightCorridor = node.corridor() && node.doors.size() == 2 && node.doors.contains(node.entry.getOpposite()) && node.climb == 0;
             boolean room = node.kind.startsWith("combat");
             if ((straightCorridor || room) && node.branch.isEmpty()) {
                 hosts.add(node);
@@ -205,13 +236,13 @@ public final class DungeonPlanner {
             Node at = host;
             // half the time a corridor first, if the slot past it is free too
             if (random.nextBoolean() && free(slots, host.gx + 2 * d.getStepX(), host.gz + 2 * d.getStepZ())) {
-                Node corridor = new Node(host.gx + d.getStepX(), host.gz + d.getStepZ(), "corridor", d.getOpposite());
+                Node corridor = new Node(host.gx + d.getStepX(), host.gz + d.getStepZ(), "corridor", d.getOpposite(), host.level);
                 corridor.doors.add(d);
                 slots.put(key(corridor.gx, corridor.gz), corridor);
                 host.branch.add(corridor);
                 at = corridor;
             }
-            Node room = new Node(at.gx + d.getStepX(), at.gz + d.getStepZ(), end, d.getOpposite());
+            Node room = new Node(at.gx + d.getStepX(), at.gz + d.getStepZ(), end, d.getOpposite(), host.level);
             slots.put(key(room.gx, room.gz), room);
             host.branch.add(room);
             return true;
@@ -222,7 +253,14 @@ public final class DungeonPlanner {
     private static Piece piece(Random random, Node node, String bossKind, ToIntFunction<String> variants) {
         String kind = node.kind.equals("boss") ? bossKind : node.kind;
         Rotation rotation;
-        if (node.corridor()) {
+        int y = node.level * RISE;
+        if (node.corridor() && node.climb != 0) {
+            // stairs or a ladder shaft: the template's low door is south; going up, that is the side the path comes in by
+            kind = random.nextBoolean() ? "corridor_stairs" : "corridor_ladder";
+            Direction low = node.climb > 0 ? node.entry : node.entry.getOpposite();
+            rotation = rotationMapping(EnumSet.of(Direction.SOUTH), EnumSet.of(low));
+            y = Math.min(node.level, node.exitLevel()) * RISE;
+        } else if (node.corridor()) {
             EnumSet<Direction> canonical;
             if (node.doors.size() == 3) {
                 kind = "corridor_t";
@@ -241,7 +279,7 @@ public final class DungeonPlanner {
             rotation = rotationMapping(EnumSet.of(Direction.SOUTH), EnumSet.of(entry));
         }
         int count = Math.max(1, variants.applyAsInt(kind));
-        return new Piece(kind + "_" + (1 + random.nextInt(count)), node.gx, node.gz, rotation, node.doors);
+        return new Piece(kind + "_" + (1 + random.nextInt(count)), node.gx, node.gz, rotation, node.doors, y);
     }
 
     /** The rotation that turns the template's door sides `canonical` into `wanted`. */
