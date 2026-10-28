@@ -12,7 +12,7 @@ import net.minecraft.world.damagesource.DamageSource;
  * Shrine stands (its cuts). Applied in mixin/attributeslib/ALCombatRulesMixin, after the pack's own armour rules.
  */
 public final class SlashPierce {
-    public static final float SCALE = 0.5F;
+    public static final float SCALE = 0.4F;   // 60% pierce (50% x 1.2)
     /** Shrine attacks deal this share of their damage. */
     public static final float SHRINE_DAMAGE = 0.85F * 0.75F;   // -15%, then -25%; Shrine Mastery nodes add back (BinderAttributes.SHRINE_DAMAGE)
     private static final ThreadLocal<Boolean> SEARING = ThreadLocal.withInitial(() -> false);

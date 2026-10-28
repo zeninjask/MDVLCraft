@@ -6,14 +6,16 @@ Copy everything below the line into a new Claude Code session that has the `so1g
 
 You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its own Forge mod, the **MDVLCraft Binder**. Read this whole brief before you change anything.
 
-## Needs testing after 2.1.68 (28 Oct 2026)
+## Needs testing after 2.1.69 (28 Oct 2026)
+
+- **2.1.69, untested**: sneak Mince now clears Flow right after its cast (no flow aura); Cursed Fate's flow aura is off (`FlowAuraOnTickProcedureMixin`) and Flow is cleared on login (`AbilityEvents`); shrine armour pierce 50% to 60% (`SlashPierce.SCALE` 0.4). Released without a boot test, on request.
 
 Released untested or partly tested; check these in game:
 
 - **Red gate boss reach**: the boss has 2048 follow range and is leashed to the play area (160 from the lair), not 40 blocks. In a test Sukuna rose ~48 blocks from the player, 14 lower, and did not walk over; at close range it attacked. Check whether bosses path to players across the map.
 - **Normal gate boss leash**: a boss pushed out of its boss room (inflated by 2) should be teleported back. Untested (the test client ran out of memory entering the gate).
 - **Recruits kept out of gates** (`GateCombat.onJoin`): entities from `recruits`, `village_recruits`, `epicrecruits` are refused in gate worlds, and a recruit's mount is discarded. A server-only summon test was inconclusive; check a patrol or `/summon recruits:horseman` inside a gate with a player present. A horse that joins before its rider may stay behind.
-- **Sneak Mince** (Cleave Flow at double mana): untested. Cursed Fate refused the cast on Tester because Tester's Cursed Fate technique is the stale `ProjectionSorcery` (from old test data; join-time random techniques are already disabled in `DisabledContentSetup`). The user says players should have no innate technique: clear it (e.g. on login) and retest plain and sneak Mince.
+- **Sneak Mince** (Cleave Flow at double mana): works in play per the user. The cast does not depend on an innate technique (Cursed Fate's Shrine abilities only gate on Vessel). Tester's refusal in testing is unexplained; Tester carries a stale `ProjectionSorcery` technique from old test data.
 - **Sear**: damage multiplier doubled (`SearHitMixin.SEAR_DAMAGE` 2 to 4). Untested.
 - **Tally**: 30/38/45/60/75/90 kills (E..S). Tally bar under the timer, camp refill every 3 min per empty camp, boss summon at the arrival point and the leave-the-world clear fallback were tested and work.
 - **Hidden boss**: killing the red boss can roll the hidden boss ("Something else stirs"); it now rises at the arrival point too.

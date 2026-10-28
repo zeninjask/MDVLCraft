@@ -16,6 +16,14 @@ public final class AbilityEvents {
     public static void onLogin(PlayerLoggedInEvent event) {
         AbilityGrants.markDirty((ServerPlayer)event.getEntity());
         BlackBirdManipulation.deactivate((ServerPlayer)event.getEntity());
+        // Cursed Fate's flow aura is off in the pack (mixin/cursedfate/FlowAuraOnTickProcedureMixin): anyone left in it is let out
+        ServerPlayer player = (ServerPlayer)event.getEntity();
+        cursedfate.network.CursedfateModVariables.PlayerVariables variables = TechniqueRunner.variables(player);
+        if (variables.Flow || variables.FlowAuraActivated) {
+            variables.Flow = false;
+            variables.FlowAuraActivated = false;
+            variables.syncPlayerVariables(player);
+        }
     }
 
     @SubscribeEvent

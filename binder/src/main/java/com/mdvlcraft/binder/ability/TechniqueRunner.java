@@ -221,6 +221,13 @@ final class TechniqueRunner {
                 execute.run();
             }
 
+            if (flowMince) {
+                // Flow only picks Cleave's Flow form for this cast: left on, it would be Cursed Fate's flow aura
+                PlayerVariables after = variables(player);
+                after.Flow = false;
+                after.syncPlayerVariables(player);
+            }
+
             if (technique.isSlash() && !spent[0]) {
                 // a slash spends cursed energy whenever it fires: none spent means Cursed Fate refused it, so it costs nothing
                 if (!player.isCreative()) {
