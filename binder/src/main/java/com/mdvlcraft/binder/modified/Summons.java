@@ -87,9 +87,9 @@ public final class Summons {
         AllianceAPI.registerResolver(context -> context instanceof Entity entity && !kind(entity).isEmpty() ? owner(entity) : null);
     }
 
-    /** The Modified ability that summoned this entity, or "" for anything else. */
-    public static String kind(Entity entity) {
-        return entity.getPersistentData().getString(KIND);
+    /** The Modified ability that summoned this entity, or "" for anything else (or no entity). */
+    public static String kind(@Nullable Entity entity) {
+        return entity == null ? "" : entity.getPersistentData().getString(KIND);
     }
 
     @Nullable

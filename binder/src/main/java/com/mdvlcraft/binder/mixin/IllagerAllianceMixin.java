@@ -20,6 +20,9 @@ public abstract class IllagerAllianceMixin {
     @Inject(method = "isAlliedTo(Lnet/minecraft/world/entity/Entity;)Z", at = @At("HEAD"), cancellable = true)
     private void mdvlcraft$summonSide(Entity other, CallbackInfoReturnable<Boolean> cir) {
         Entity self = (Entity)(Object)this;
+        if (other == null) {
+            return;   // evoker fangs ask about a null target; vanilla answers false
+        }
         if (!Summons.kind(self).isEmpty() || !Summons.kind(other).isEmpty()) {
             cir.setReturnValue(Summons.allied(self, other));
         }

@@ -311,7 +311,10 @@ public final class OriginJobA {
 
     // ---- Cook ----
 
-    /** Feast: a feast (a cake marker) for 20 s; players within 4 blocks get Regeneration, 1 hunger a second and Strength I for 60 s. */
+    /**
+     * Feast: a feast (a cake marker) for 20 s; players within 4 blocks get Regeneration, Saturation I, 1 hunger a second and
+     * Strength I for 60 s. Saturation acts every tick it lasts, so each second's pulse gives one tick of it.
+     */
     static GroundSpells.Area feast() {
         return new GroundSpells.Area("feast", 0, 4.0, 20, 20, false, ParticleTypes.HAPPY_VILLAGER, SoundEvents.GENERIC_EAT,
             (area, zone, allies, enemies) -> {
@@ -319,6 +322,7 @@ public final class OriginJobA {
                     if (ally instanceof Player player) {
                         player.getFoodData().eat(1, 0.5F);
                         player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 50, 0, true, true), zone.caster);
+                        player.addEffect(new MobEffectInstance(MobEffects.SATURATION, 1, 0, true, true), zone.caster);
                         player.addEffect(new MobEffectInstance(MobEffects.DAMAGE_BOOST, 1200, 0), zone.caster);
                     }
                 }
