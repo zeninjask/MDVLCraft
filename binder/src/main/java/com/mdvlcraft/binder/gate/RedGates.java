@@ -45,7 +45,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 public final class RedGates {
     private static final int TICK_EVERY = 20;
     /** Gate mobs to slay before a red gate's boss comes (E..S). */
-    private static final int[] TALLY = {20, 25, 30, 40, 50, 60};
+    private static final int[] TALLY = {30, 38, 45, 60, 75, 90};
     /** How often camps whose mobs are all gone get new ones while the tally isn't met (3 minutes). */
     private static final long REFILL_TICKS = 3 * 60 * 20;
     private static final java.util.Map<Integer, ServerBossEvent> TALLY_BARS = new java.util.HashMap<>();

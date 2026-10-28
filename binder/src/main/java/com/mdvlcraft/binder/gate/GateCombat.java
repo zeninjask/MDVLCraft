@@ -37,6 +37,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.structure.BoundingBox;
 import net.minecraft.world.phys.AABB;
 import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.EntityLeaveLevelEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.MobSpawnEvent;
@@ -688,6 +689,22 @@ public final class GateCombat {
             || type == MobSpawnType.PATROL || type == MobSpawnType.SPAWNER;
         if (ambient && GateDimensions.isGate(event.getLevel().getLevel().dimension())) {
             event.setSpawnCancelled(true);
+        }
+    }
+
+    /** Recruits mods' units (their patrols, villages and companies spawn outside the vanilla spawn events) never enter a gate,
+     * and the horse one rides goes with it. */
+    private static final Set<String> RECRUITS = Set.of("recruits", "village_recruits", "epicrecruits");
+
+    @SubscribeEvent
+    public static void onJoin(EntityJoinLevelEvent event) {
+        Entity entity = event.getEntity();
+        if (event.getLevel() instanceof ServerLevel level && GateDimensions.isGate(level.dimension())
+            && RECRUITS.contains(EntityType.getKey(entity.getType()).getNamespace()) && GateSpawner.instanceOf(entity) < 0) {
+            event.setCanceled(true);
+            if (entity.getVehicle() != null) {
+                entity.getVehicle().discard();
+            }
         }
     }
 }
