@@ -85,3 +85,10 @@ If something breaks and the logs look too quiet, check this list first: a real e
 - **Server crash** `NoSuchMethodError: ... MagicSummon.getSummoner()` from Traveler's Optics' Vigor Siphon when a summoned Vesper hit a player. Iron's 3.16 changed `getSummoner()` to return `Entity`. The jar is now also patched by `binder/tools/jarpatch/SummonerPatch.java` (run after OwnerGetterPatch): calls are cast from the new method, and the 42 summon classes get a `getSummoner()Entity` bridge.
 - **Client crash** `The model of iss_magicfromtheeast:jiangshi has no left_arm bone`: the Jiangshi's bones have other names (one with a space), and `client/MobRig` now maps them. A passive-patched mob whose model isn't a biped keeps its own pose instead of crashing.
 - **Server error at start** `Attempted to load class ... SoundInstance for invalid dist DEDICATED_SERVER` (32 times): the loot viewer (`loot/LootViews`) created Epic Fight Ponder's client-only scene actors. Those are now skipped.
+
+## CrashGuard (2.1.66)
+
+Errors that would crash the game are caught and logged with lines starting `[CrashGuard]`. This covers an entity tick, a server player tick, a block entity tick, a Forge tick event (server, level, client, render, player), an entity renderer and a HUD overlay (`binder/.../mixin/guard`, `util/CrashGuard`). Search a log for `[CrashGuard]` to find them.
+- The first time an error happens at a place, its full stack trace is logged. Repeats are counted every 200.
+- An entity that fails 100 ticks in a row is removed. Players are never removed.
+- These are real bugs to patch, so they are not filtered.
