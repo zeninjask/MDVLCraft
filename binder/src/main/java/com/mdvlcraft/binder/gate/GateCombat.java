@@ -239,10 +239,13 @@ public final class GateCombat {
                 gone.add(entity);
                 continue;
             }
-            if (instance.red || entity.getPersistentData().getBoolean(GateBreaks.BREAK_TAG)) {
-                continue;   // red camps and break waves roam (RedGates and GateBreaks keep them in bounds)
+            if (entity.getPersistentData().getBoolean(GateBreaks.BREAK_TAG)) {
+                continue;   // break waves roam (GateBreaks keeps them in bounds)
             }
-            hunt(level, instance, (Mob)entity);
+            hunt(level, instance, (Mob)entity);   // neutral mobs (Skeloraptors, wolves...) attack in red gates too
+            if (instance.red) {
+                continue;   // red camps roam (RedGates keeps them in bounds)
+            }
             // Mobs may chase out of their room; only one that leaves the gate's cell is put back.
             if (!GateDimensions.bounds(instance.cellX, instance.cellZ).contains(entity.position())) {
                 BlockPos home = BlockPos.of(entity.getPersistentData().getLong(GateSpawner.HOME));

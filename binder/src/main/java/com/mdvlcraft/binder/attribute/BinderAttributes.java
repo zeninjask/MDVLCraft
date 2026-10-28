@@ -38,6 +38,8 @@ public final class BinderAttributes {
     public static final RegistryObject<Attribute> FIST_MASTERY = fraction("fist_mastery", 5.0);
     public static final RegistryObject<Attribute> UNARMED_PARRY = fraction("unarmed_parry", 1.0);
     public static final RegistryObject<Attribute> AFFLICTION_IMMUNITY = fraction("affliction_immunity", 1.0);
+    /** Master Chef's Shrine Mastery nodes: extra damage on shrine techniques (ability/SlashPierce, combat/TechniqueScaling). */
+    public static final RegistryObject<Attribute> SHRINE_DAMAGE = fraction("shrine_damage", 5.0);
 
     private BinderAttributes() {
     }

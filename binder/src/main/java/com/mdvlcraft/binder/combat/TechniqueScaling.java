@@ -1,5 +1,6 @@
 package com.mdvlcraft.binder.combat;
 
+import com.mdvlcraft.binder.attribute.BinderAttributes;
 import com.mdvlcraft.binder.ability.Ability;
 import com.mdvlcraft.binder.ability.MonkArts;
 import com.mdvlcraft.binder.ability.SlashPierce;
@@ -22,7 +23,8 @@ public final class TechniqueScaling {
             && event.getSource().typeHolder().unwrapKey().map(key -> key.location().getNamespace().equals("cursedfate")).orElse(false)
 ) {
             float factor = MonkArts.artActive(caster) ? 1.0F : factor(caster, event);
-            float shrine = SlashPierce.slashHit(event.getSource()) ? SlashPierce.SHRINE_DAMAGE : 1.0F;
+            float shrine = SlashPierce.slashHit(event.getSource())
+                ? SlashPierce.SHRINE_DAMAGE * (1.0F + (float)caster.getAttributeValue(BinderAttributes.SHRINE_DAMAGE.get())) : 1.0F;
             event.setAmount(event.getAmount() * factor * shrine * Ability.DAMAGE_SCALE);
         }
     }

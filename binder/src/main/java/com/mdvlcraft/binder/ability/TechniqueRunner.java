@@ -127,7 +127,9 @@ final class TechniqueRunner {
         }
 
         MagicData magic = MagicData.getPlayerMagicData(player);
-        int cost = cost(player, technique);
+        // sneak Mince: Cursed Fate's Cleave in its Flow form (a cut all around the caster), at twice the mana
+        boolean flowMince = technique == Technique.MINCE && player.isShiftKeyDown();
+        int cost = cost(player, technique) * (flowMince ? 2 : 1);
         if (technique.custom()) {
             if (!player.isCreative() && magic.getMana() < cost) {
                 player.connection
@@ -187,6 +189,9 @@ final class TechniqueRunner {
             int abilityId = technique.abilityId;
             // sneak Chop: a plain Dismantle, then Cursed Fate's evasive Dismantle flip and a short hop back (below)
             boolean evasive = technique == Technique.CHOP && player.isShiftKeyDown();
+            if (flowMince) {
+                variables.Flow = true;
+            }
             if (technique == Technique.DICING_BOARD) {
                 variables.MaximumOutput = false;   // the plain branch of the Calamitous Shrine's web is the Enhanced Spiderweb
                 variables.Flow = false;
