@@ -22,6 +22,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * The Cook job's cooking pot perks. Leftovers: what a cook takes out of a Farmer's Delight cooking pot comes out twice
  * over. Good Meals: it also comes out Perfect ("Perfect Bread"), and a Perfect meal gives 1.5x its saturation. Origins:
  * Classes reports the pot's result through ModifyCraftResultEvent, so its own crafted-food bonus still applies.
+ * The event fires on every read of the output slot, on both sides; the meal is doubled on the server only.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class CookJob {
@@ -43,9 +44,11 @@ public final class CookJob {
     public static void onPotResult(ModifyCraftResultEvent event) {
         ItemStack crafted = event.getCrafted();
         if (event.getType() != ModifyCraftResultEvent.CraftingResultType.COOKING_POT || crafted.isEmpty() || !crafted.isEdible()
-            || event.getEntity() == null || !isCook(event.getEntity())) {
+            || event.getEntity() == null || event.getEntity().level().isClientSide() || !isCook(event.getEntity())) {
             return;
         }
+        // Only on the server: the pot's output slot runs this every time it is read, and the client's copy of the slot
+        // already holds the server's doubled meal, so doubling it there too showed twice what was taken out.
         ItemStack meal = crafted.copy();
         meal.setCount(Math.min(meal.getMaxStackSize(), meal.getCount() * 2));
         if (!meal.getOrCreateTag().getBoolean(PERFECT)) {
