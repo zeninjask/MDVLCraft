@@ -80,7 +80,8 @@ public final class RaceNeutrality {
             return;
         }
         for (Mob mob : player.level().getEntitiesOfClass(Mob.class, player.getBoundingBox().inflate(32.0),
-            m -> m.getTarget() == player || m.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null) == player)) {
+            m -> m.getTarget() == player || m.getBrain().hasMemoryValue(MemoryModuleType.ATTACK_TARGET)
+                && m.getBrain().getMemory(MemoryModuleType.ATTACK_TARGET).orElse(null) == player)) {
             if (ignores(mob, player)) {
                 mob.setTarget(null);
                 mob.getBrain().eraseMemory(MemoryModuleType.ATTACK_TARGET);
