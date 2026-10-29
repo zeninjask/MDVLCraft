@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.mixin.antimagic;
 
 import com.mdvlcraft.binder.content.DemonSwordArts;
+import com.mdvlcraft.binder.epicskill.WeaponArts;
 import com.tiago.antimagic.item.DemonDestroyerSword;
 import com.tiago.antimagic.item.DemonDwellerSword;
 import com.tiago.antimagic.item.DemonSlayerSword;
@@ -16,13 +17,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * Right-click on a demon sword is Epic Fight's guard, so the sword's own right-click art (Anti-Magic Shroud, Anti-Magic
- * Slash, Causality Break) only runs when DemonSwordArts casts it on holding both mouse buttons.
+ * Slash, Causality Break) only runs from its innate skill (DemonSwordArts, epicskill/WeaponArts).
  */
 @Mixin(value = {DemonSlayerSword.class, DemonDwellerSword.class, DemonDestroyerSword.class}, remap = false)
 public abstract class DemonSwordUseMixin {
     @Inject(method = {"use", "m_7203_"}, at = @At("HEAD"), cancellable = true)
-    private void mdvlcraft$onlyBothButtons(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
-        if (!DemonSwordArts.casting()) {
+    private void mdvlcraft$onlyFromSkill(Level level, Player player, InteractionHand hand, CallbackInfoReturnable<InteractionResultHolder<ItemStack>> cir) {
+        if (!DemonSwordArts.casting() && !WeaponArts.firing()) {
             cir.setReturnValue(InteractionResultHolder.pass(player.getItemInHand(hand)));
         }
     }

@@ -9,6 +9,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class AbilityEvents {
+    /** Cursed Fate's own "no technique" value: a string of two quote marks. */
+    private static final String NO_TECHNIQUE = "\"\"";
+
     private AbilityEvents() {
     }
 
@@ -19,9 +22,19 @@ public final class AbilityEvents {
         // Cursed Fate's flow aura is off in the pack (mixin/cursedfate/FlowAuraOnTickProcedureMixin): anyone left in it is let out
         ServerPlayer player = (ServerPlayer)event.getEntity();
         cursedfate.network.CursedfateModVariables.PlayerVariables variables = TechniqueRunner.variables(player);
+        boolean changed = false;
         if (variables.Flow || variables.FlowAuraActivated) {
             variables.Flow = false;
             variables.FlowAuraActivated = false;
+            changed = true;
+        }
+        // Players get no Cursed Fate innate technique any more (its join roll is off, DisabledContentSetup); one left in an
+        // old save is taken away. The binder only sets a technique for the length of a cast (KitchenArts) and restores it.
+        if (!NO_TECHNIQUE.equals(variables.Technique)) {
+            variables.Technique = NO_TECHNIQUE;
+            changed = true;
+        }
+        if (changed) {
             variables.syncPlayerVariables(player);
         }
     }

@@ -15,9 +15,9 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
- * A demon sword's own art. The Demon Slayer's Anti-Magic Shroud and the Demon Destroyer's Causality Break are cast when
- * the client reports both mouse buttons held; the Demon Dweller's Anti-Magic Slash is its innate skill
- * (DemonDwellerSlashSkill), which fires the slash here once its swing reaches the hit.
+ * A demon sword's own art. The Demon Dweller's Anti-Magic Slash is its innate skill (DemonDwellerSlashSkill), which fires
+ * the slash here once its swing reaches the hit; the Demon Slayer's and Demon Destroyer's arts are their innate skills
+ * through epicskill/WeaponArts.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class DemonSwordArts {
@@ -33,25 +33,9 @@ public final class DemonSwordArts {
         return item instanceof DemonSlayerSword || item instanceof DemonDwellerSword || item instanceof DemonDestroyerSword;
     }
 
-    /** Swords whose art is cast with both mouse buttons. */
-    public static boolean hasBothButtonArt(ItemStack stack) {
-        Item item = stack.getItem();
-        return item instanceof DemonSlayerSword || item instanceof DemonDestroyerSword;
-    }
-
     /** True while cast runs the sword's use, which DemonSwordUseMixin otherwise blocks. */
     public static boolean casting() {
         return casting;
-    }
-
-    public static void cast(ServerPlayer player) {
-        ItemStack stack = player.getMainHandItem();
-        Item item = stack.getItem();
-        if (!hasBothButtonArt(stack) || player.getCooldowns().isOnCooldown(item)) {
-            return;
-        }
-
-        use(player, item);
     }
 
     /** Fires the Demon Dweller's slash after the given ticks, if it is still in hand. */

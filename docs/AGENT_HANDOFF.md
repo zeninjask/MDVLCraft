@@ -6,6 +6,32 @@ Copy everything below the line into a new Claude Code session that has the `so1g
 
 You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its own Forge mod, the **MDVLCraft Binder**. Read this whole brief before you change anything.
 
+## Weapon arts, armour flight, cooldown reduction (29 Oct 2026, after 2.1.79, not released)
+
+- **Weapon arts** (`epicskill/WeaponArts`, `WeaponArtSkill`, `mixin/epicfight/WeaponArtInnateMixin`): 33 arts for about
+  60 weapons whose right-click or hold-right-click ability was not part of their combo (Legendary Monsters, Cataclysm,
+  Alex's Caves, T.O Magic 'n Extras with every weapon level, Twilight Gale, Spellbane Greatblade, Demon Slayer and Demon
+  Destroyer). Right click on them is blocked (it stays Epic Fight's guard); their innate skill plays a borrowed Epic
+  Fight attack animation and at its hit runs the item's own `use` / `useOn` / `onUseTick` / `releaseUsing`, with the
+  item cooldown cleared around the call (weapon charge is the cost: `skill_parameters/art_*.json`, 20-60). The Demon
+  Slayer and Destroyer's both-mouse-buttons trigger is gone. Weapons that had no Epic Fight type got one (9 JSONs under
+  `data/<ns>/capabilities/weapons`). Left alone on purpose: weapons Epic Fight Cataclysm (p1nero_ec) already turns into
+  innates, casting staves, mode toggles (Thorns of Oblivion, Abyssal Tidecaller, Spellblade), Epic Knights lance/block,
+  Sword Soaring's flight, the admin-only Gu Ding Dao. Item tooltips from the source mods may still say "right click".
+- **No armour flight** (`mixin/flight`): T.O's Forlorn Harbinger armour and Mechanized Exoskeleton and Cataclysm's
+  Ignitium Elytra Chestplate can't glide; Alex's Caves' Cloak of Darkness no longer grants Darkness Incarnate. The
+  mixins are `require = 0`: if a mod renames the method, they silently do nothing.
+- **Cooldown reduction** from armour and weapons (not curios) is a quarter (`content/MagicGearScaling`).
+- **Cursed Fate technique** left in an old save is cleared on login (`ability/AbilityEvents`).
+- **Mage Hunter swords**: `compat/antimagic/SwordLooting` and `MageHunterSwords` threw "Skill tab mdvlcraft:magehunter
+  is missing" every 10 ticks while a demon sword was held (the tab went in the vocations rework), which broke other
+  player-tick handlers; they now do nothing without the tab.
+- **Tested in game** (one server, one client): every art fires at its hit (a test log, since removed); right click on
+  the Mossy Hammer does nothing; the three flight chestplates can't glide (vanilla elytra still can); +0.4 cooldown
+  reduction on a chestplate or sword gives +0.1; Tester's technique is `""` after login; Changeling becomes Human on
+  relog. Not tested in game: the Cloak of Darkness key. The test player holding a demon sword needs it in hotbar slot 1
+  (the Mage Hunter / samurai slot moves it there).
+
 ## Specialisations, spell ranks and races (branch `claude/clever-babbage-t08qqj`)
 
 Read `docs/HANDOFF_SPECS_AND_RACES.md`: what is built, what is still to code, and the race picks waiting to be implemented.

@@ -44,13 +44,20 @@ public final class SwordLooting {
                 if (level < 0) {
                     level = level(player);
                 }
+                if (level < 0) {
+                    return;
+                }
                 apply(stack, level);
             }
         }
     }
 
+    /** The Looting level the Mage Hunter tree gives, or -1 without that tree (the vocation rework removed it). */
     private static int level(ServerPlayer player) {
-        Category tree = SkillsAPI.getCategory(TREE).orElseThrow(() -> new IllegalStateException("Skill tab " + TREE + " is missing"));
+        Category tree = SkillsAPI.getCategory(TREE).orElse(null);
+        if (tree == null) {
+            return -1;
+        }
         int level = 0;
         for (int i = 0; i < NODES.length; i++) {
             String node = NODES[i];

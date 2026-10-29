@@ -20,7 +20,8 @@ import net.puffish.skillsmod.api.SkillsAPI;
 /**
  * The summoned demon swords hit like the Epic Fight weapon whose moveset they use: the Demon Slayer like a greatsword, the
  * Demon Dweller and Demon Destroyer like a longsword. Iron for a fresh Mage Hunter, netherite once about half the Mage
- * Hunter tree's points are spent, scaling in between.
+ * Hunter tree's points are spent, scaling in between. Without that tree (the vocation rework removed it) the swords hit
+ * with their own damage.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class MageHunterSwords {
@@ -39,7 +40,7 @@ public final class MageHunterSwords {
     public static void onHurt(LivingHurtEvent event) {
         if (event.getSource().getEntity() instanceof ServerPlayer player && event.getSource().getDirectEntity() == player) {
             ItemStack held = player.getMainHandItem();
-            if (held.getItem() instanceof AbstractAntiMagicSwordItem) {
+            if (held.getItem() instanceof AbstractAntiMagicSwordItem && SkillsAPI.getCategory(TREE).isPresent()) {
                 double sword = damage(held);
                 double target = targetDamage(player, held.getItem() instanceof DemonSlayerSword);
                 event.setAmount((float)(event.getAmount() * (1.0 + target) / (1.0 + sword)));

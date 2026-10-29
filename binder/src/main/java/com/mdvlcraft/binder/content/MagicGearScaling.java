@@ -24,6 +24,7 @@ import top.theillusivec4.curios.api.event.CurioAttributeModifierEvent;
  * (any school's included), rounded up to 0.1%. Penalties stay as they are. Runs last, after other changes to an item's
  * attributes, such as content/TarnishedCrown.
  * Armour pieces (worn in their own slot) give a quarter of the attack speed and half the attack damage they add.
+ * Armour and weapons (any item but a curio) give a quarter of the cooldown reduction they add.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class MagicGearScaling {
@@ -31,6 +32,7 @@ public final class MagicGearScaling {
     private static final double SPELL_POWER_SCALE = 0.5;
     private static final double ARMOUR_ATTACK_SPEED_SCALE = 0.25;
     private static final double ARMOUR_ATTACK_DAMAGE_SCALE = 0.5;
+    private static final double COOLDOWN_REDUCTION_SCALE = 0.25;
 
     private MagicGearScaling() {
     }
@@ -38,14 +40,15 @@ public final class MagicGearScaling {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onItemAttributes(ItemAttributeModifierEvent event) {
         rescale(event.getModifiers(), event::removeModifier, event::addModifier);
+        bonus(event, AttributeRegistry.COOLDOWN_REDUCTION.get(), COOLDOWN_REDUCTION_SCALE);
         if (event.getSlotType().getType() == EquipmentSlot.Type.ARMOR && LivingEntity.getEquipmentSlotForItem(event.getItemStack()) == event.getSlotType()) {
-            armour(event, Attributes.ATTACK_SPEED, ARMOUR_ATTACK_SPEED_SCALE);
-            armour(event, Attributes.ATTACK_DAMAGE, ARMOUR_ATTACK_DAMAGE_SCALE);
+            bonus(event, Attributes.ATTACK_SPEED, ARMOUR_ATTACK_SPEED_SCALE);
+            bonus(event, Attributes.ATTACK_DAMAGE, ARMOUR_ATTACK_DAMAGE_SCALE);
         }
     }
 
-    /** An armour piece's bonus (not penalty) to one attribute, scaled down. */
-    private static void armour(ItemAttributeModifierEvent event, Attribute attribute, double scale) {
+    /** An item's bonus (not penalty) to one attribute, scaled down. */
+    private static void bonus(ItemAttributeModifierEvent event, Attribute attribute, double scale) {
         for (AttributeModifier modifier : new ArrayList<>(event.getModifiers().get(attribute))) {
             if (modifier.getAmount() > 0.0) {
                 event.removeModifier(attribute, modifier);

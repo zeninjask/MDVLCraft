@@ -123,14 +123,6 @@ public final class BinderNetwork {
         );
         CHANNEL.registerMessage(
             id++,
-            DemonSwordArtPacket.class,
-            DemonSwordArtPacket::encode,
-            DemonSwordArtPacket::decode,
-            DemonSwordArtPacket::handle,
-            Optional.of(NetworkDirection.PLAY_TO_SERVER)
-        );
-        CHANNEL.registerMessage(
-            id++,
             DismissAssimilationPacket.class,
             DismissAssimilationPacket::encode,
             DismissAssimilationPacket::decode,
