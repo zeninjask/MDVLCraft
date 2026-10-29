@@ -35,7 +35,7 @@ public enum Technique implements Ability {
     MALEVOLENT_KITCHEN("malevolent_kitchen", -1, 0, 180, false),
     CHOP("chop", 26, 12, 1, true),
     MINCE("mince", 27, 20, 5, true),
-    SEAR("sear", 29, 25, 40, true),
+    SEAR("sear", 29, 25, 120, true),
     DICING_BOARD("dicing_board", 97, 30, 20, false),
     SPARKING_BLOODLUST("sparking_bloodlust", -1, 30, 45, false),
     BULL_RUSH("bull_rush", -1, 20, 10, false);

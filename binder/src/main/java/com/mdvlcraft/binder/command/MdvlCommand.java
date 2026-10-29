@@ -137,10 +137,16 @@ public final class MdvlCommand {
         List<String> spells = new ArrayList<>(List.of("id\tschool"));
         io.redspace.ironsspellbooks.api.registry.SpellRegistry.REGISTRY.get().getValues()
             .forEach(spell -> spells.add(spell.getSpellId() + "\t" + spell.getSchoolType().getId()));
+        List<String> enchantments = new ArrayList<>(List.of("id\tcategory\tcurse"));
+        for (net.minecraft.world.item.enchantment.Enchantment enchantment : net.minecraftforge.registries.ForgeRegistries.ENCHANTMENTS) {
+            enchantments.add(net.minecraftforge.registries.ForgeRegistries.ENCHANTMENTS.getKey(enchantment) + "\t"
+                + (enchantment.category == null ? "none" : enchantment.category.name()) + "\t" + enchantment.isCurse());
+        }
         try {
             Path dir = source.getServer().getServerDirectory().toPath();
             Files.write(dir.resolve("entities.tsv"), entities);
             Files.write(dir.resolve("spells.tsv"), spells);
+            Files.write(dir.resolve("enchantments.tsv"), enchantments);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
