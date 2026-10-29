@@ -11,12 +11,18 @@ import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 import yesman.epicfight.world.capabilities.item.CapabilityItem;
 import yesman.epicfight.world.capabilities.item.WeaponCapability;
 
-/** A weapon with a weapon art (epicskill/WeaponArts) has that art as its innate skill, whatever its weapon type gives. */
+/**
+ * A weapon with a weapon art (epicskill/WeaponArts) or a JJK skill (jjk/JjkSkill) has it as its innate skill, whatever its
+ * weapon type gives.
+ */
 @Mixin(value = {CapabilityItem.class, WeaponCapability.class}, remap = false)
 public abstract class WeaponArtInnateMixin {
     @Inject(method = "getInnateSkill", at = @At("RETURN"), cancellable = true)
     private void mdvlcraft$weaponArt(PlayerPatch<?> playerpatch, ItemStack itemstack, CallbackInfoReturnable<Skill> cir) {
         Skill art = WeaponArtSkill.of(itemstack);
+        if (art == null) {
+            art = com.mdvlcraft.binder.jjk.JjkSkill.of(itemstack);
+        }
         if (art != null) {
             cir.setReturnValue(art);
         }
