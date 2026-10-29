@@ -40,7 +40,7 @@ import org.slf4j.Logger;
  * generates only one chunk: a camp is built and its mobs spawned when a roster player comes within CAMP_RANGE of it, and the
  * arena when one comes within ARENA_RANGE (RedGates ticks this). The boss only comes once the party has slain the rank's
  * tally of gate mobs (RedGates.tally, shown under the time bar); until then emptied camps refill every 3 minutes, and then
- * every gate mob goes and the boss rises at the arrival point.
+ * every gate mob goes and the party is taken to the boss arena (RedGates.enterArena, RedArena).
  * Each instance's layout is kept in memory only: every gate closes on a server restart anyway (GateCleanup).
  *
  * The lair and the camps are hand-built templates from the theme file's "red" section ("lairs", "camps"; written by
@@ -85,6 +85,8 @@ public final class RedLandscape {
         long refilledAt;
         /** Game time the boss died at, or -1. */
         long clearedAt = -1;
+        /** Game time the boss comes into the arena (RedGates.enterArena), or -1 before the party is taken there. */
+        long bossAt = -1;
         /** Crystal vein spots of each built camp (its "crystal" markers), by camp column. */
         final Map<BlockPos, List<BlockPos>> campCrystals = new ConcurrentHashMap<>();
         /** The lair template used, once built from one. */
@@ -407,7 +409,7 @@ public final class RedLandscape {
         return floor;
     }
 
-    /** The theme's boss in the arena, a few blocks from its centre, flagged with BOSS_TAG. */
+    /** The theme's boss in the middle of the arena, flagged with BOSS_TAG. */
     @Nullable
     static Mob spawnBoss(ServerLevel level, Instance instance, BlockPos floor) {
         EntityType<?> type = GateMobs.type(GateMobs.boss(instance.theme, instance.rank).id());
@@ -415,7 +417,7 @@ public final class RedLandscape {
         if (standIn) {
             type = type(standInBoss(instance.theme));
         }
-        Mob boss = type == null ? null : GateSpawner.spawn(level, instance, type, floor.offset(0, 1, 6));
+        Mob boss = type == null ? null : GateSpawner.spawn(level, instance, type, floor.above());
         if (boss != null) {
             boss.getPersistentData().putBoolean(BOSS_TAG, true);
             AttributeInstance health = boss.getAttribute(Attributes.MAX_HEALTH);

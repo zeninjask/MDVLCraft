@@ -34,6 +34,12 @@ EXISTING = {'human': 'origins:human', 'feline': 'origins:feline', 'merling': 'or
             'shadow': 'origins-plus-plus:shadow', 'sporeling': 'origins-plus-plus:sporeling'}
 
 
+# Dragon Quest IX icons on mdvlcraft:origin_icon (tools/origin_icons18.py OWN_CMD, textures by tools/dq9_icons.py ORIGINS)
+ICON = {race: {'item': 'mdvlcraft:origin_icon', 'tag': '{CustomModelData:%d}' % (58 + n)} for n, race in enumerate([
+    'frostborn', 'stormkin', 'dunekin', 'sculkborn', 'gloomkin', 'faun', 'mimic', 'illagerkin', 'piglinborn', 'kitsune',
+    'curse_bonded', 'vessel', 'umbral', 'shrinekin'])}
+
+
 def slug(name):
     return re.sub(r'[^a-z0-9]+', '_', name.lower()).strip('_')
 
@@ -255,7 +261,7 @@ def main():
         os.makedirs(f'{DATA}/powers/{rid}', exist_ok=True)
         for key, power in powers.items():
             json.dump(power, open(f'{DATA}/powers/{rid}/{key}.json', 'w'), indent=2)
-        origin = {'name': name, 'description': desc, 'powers': [f'mdvlcraft:{rid}/{k}' for k in powers], 'icon': {'item': icon},
+        origin = {'name': name, 'description': desc, 'powers': [f'mdvlcraft:{rid}/{k}' for k in powers], 'icon': ICON.get(rid, {'item': icon}),
                   'order': 0, 'impact': 1, 'loading_priority': 100}
         json.dump(origin, open(f'{DATA}/origins/{rid}.json', 'w'), indent=2)
 

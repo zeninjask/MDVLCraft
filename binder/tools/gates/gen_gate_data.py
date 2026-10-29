@@ -99,17 +99,15 @@ def slide(inner):
 
 
 def red_noise_settings(zeros):
-    """Overworld-shaped land (vanilla's own continents, erosion, ridges and sloped_cheese) without caves, water, ores or
-    natural mobs, under red_surface_rule."""
+    """Gentle rolling land (about y 72, a few blocks up and down; the overworld's own shape was too hilly to fight on)
+    without caves, water, ores or natural mobs, under red_surface_rule."""
     router = dict(zeros)
-    router.update({'continents': 'minecraft:overworld/continents', 'erosion': 'minecraft:overworld/erosion', 'depth': 'minecraft:overworld/depth',
-                   'ridges': 'minecraft:overworld/ridges',
-                   'initial_density_without_jaggedness': slide({'type': 'minecraft:clamp', 'min': -64.0, 'max': 64.0, 'input': {
-                       'type': 'minecraft:add', 'argument1': -0.703125, 'argument2': {'type': 'minecraft:mul', 'argument1': 4.0, 'argument2': {
-                           'type': 'minecraft:quarter_negative', 'argument': {'type': 'minecraft:mul', 'argument1': 'minecraft:overworld/depth',
-                                                                              'argument2': {'type': 'minecraft:cache_2d', 'argument': 'minecraft:overworld/factor'}}}}}}),
-                   'final_density': {'type': 'minecraft:squeeze', 'argument': {'type': 'minecraft:mul', 'argument1': 0.64, 'argument2': {
-                       'type': 'minecraft:interpolated', 'argument': {'type': 'minecraft:blend_density', 'argument': slide('minecraft:overworld/sloped_cheese')}}}}})
+    land = {'type': 'minecraft:add',
+            'argument1': {'type': 'minecraft:y_clamped_gradient', 'from_y': 56, 'to_y': 88, 'from_value': 1.0, 'to_value': -1.0},
+            'argument2': {'type': 'minecraft:mul', 'argument1': 0.3,
+                          'argument2': {'type': 'minecraft:noise', 'noise': 'minecraft:gravel', 'xz_scale': 0.6, 'y_scale': 0.0}}}
+    router.update({'initial_density_without_jaggedness': land,
+                   'final_density': {'type': 'minecraft:squeeze', 'argument': {'type': 'minecraft:interpolated', 'argument': land}}})
     return {'aquifers_enabled': False, 'default_block': {'Name': 'minecraft:stone'}, 'default_fluid': {'Name': 'minecraft:water', 'Properties': {'level': '0'}},
             'disable_mob_generation': True, 'legacy_random_source': False, 'noise': {'height': 384, 'min_y': -64, 'size_horizontal': 1, 'size_vertical': 2},
             'noise_router': router, 'ore_veins_enabled': False, 'sea_level': -64, 'spawn_target': [], 'surface_rule': red_surface_rule()}

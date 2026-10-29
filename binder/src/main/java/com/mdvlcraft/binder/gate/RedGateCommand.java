@@ -29,6 +29,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *   red place <rank> <theme>  opens a gate (as a key would) 4 blocks in front of the caller; its first entry rolls red for sure
  *   red force [id]            turns an open gate (default: the caller's) red now; its roster inside moves to the red realm
  *   red lair                  puts the caller (inside a red gate) at the edge of their lair, or on the exit once it's open
+ *   red tally                 meets the caller's red gate tally, so the party is taken to the boss arena
  *   red boss                  kills the caller's red gate boss (spawning it first if needed), breaking the seal
  *   break now [id]            breaks a gate now
  *   break in <seconds> [id]   sets a gate's timer so it breaks in that many seconds (the warning comes first if due)
@@ -53,6 +54,7 @@ public final class RedGateCommand {
                     .then(Commands.literal("force").executes(c -> force(c, false))
                         .then(Commands.argument("id", IntegerArgumentType.integer(1)).executes(c -> force(c, true))))
                     .then(Commands.literal("lair").executes(RedGateCommand::lair))
+                    .then(Commands.literal("tally").executes(RedGateCommand::tally))
                     .then(Commands.literal("boss").executes(RedGateCommand::boss)))
                 .then(Commands.literal("break")
                     .then(Commands.literal("now").executes(c -> breakGate(c, false, -1))
@@ -108,6 +110,17 @@ public final class RedGateCommand {
         BlockPos spot = layout.clearedAt >= 0 && layout.lairFloor != null ? layout.lairFloor.above()
             : RedLandscape.surface(player.serverLevel(), layout.lair.offset(RedLandscape.ARENA_RADIUS + 4, 0, 0));
         player.teleportTo(player.serverLevel(), spot.getX() + 0.5, spot.getY(), spot.getZ() + 0.5, 90.0F, 0.0F);
+        return 1;
+    }
+
+    private static int tally(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        Layout layout = layoutOf(context, player);
+        if (layout == null) {
+            return 0;
+        }
+        layout.kills = RedGates.tally(GateInstances.get(player.server).byId(layout.instanceId).rank);
+        context.getSource().sendSuccess(() -> Component.literal("Tally met"), true);
         return 1;
     }
 

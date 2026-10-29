@@ -21,7 +21,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *   cold    Slowness I, and 1 freezing damage unless the player wears something warm (the vanilla freeze_immune_wearables
  *           tag: leather armour) or stands within FIRE_RANGE of a lit campfire
  *   hunger  that much food exhaustion (4 = one hunger point): heat, and the snowfield's scarce food
- *   spores  Poison I for 3 s while standing on or in one of the listed blocks
+ * (The theme files' "spores" poison is no longer applied: it caught players wherever they stood.)
  * Normal (room) gates have no hazards; creative and spectator players are left alone.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
@@ -67,12 +67,6 @@ public final class GateHazards {
         }
         if (hazard.hunger() > 0f) {
             player.causeFoodExhaustion(hazard.hunger());
-        }
-        if (!hazard.spores().isEmpty()) {
-            BlockPos feet = player.blockPosition();
-            if (hazard.spores().contains(level.getBlockState(feet).getBlock()) || hazard.spores().contains(level.getBlockState(feet.below()).getBlock())) {
-                player.addEffect(new MobEffectInstance(MobEffects.POISON, 60, 0));
-            }
         }
     }
 

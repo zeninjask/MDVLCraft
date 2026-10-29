@@ -36,8 +36,10 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * cleared) and becomes a new instance in the red realm, same theme and rank, which its gate entity now points at. The
  * entering player's party (Parties) within PARTY_PULL blocks of the portal, and anyone standing at it, are pulled in
  * together (up to the rank's party cap) and the roster freezes: GateEntity turns away anyone not on it and
- * GateProtection keeps everyone in until the lair boss dies. Then the seal breaks (CLEARED), an exit pad opens in the arena
- * and the gate collapses COLLAPSE_TICKS later, sending whoever is left home. A player who dies in a sealed gate loses their
+ * GateProtection keeps everyone in until the lair boss dies. Once the party has slain the tally, everyone is taken to the
+ * theme's arena (RedArena) high above the lair; ARENA_WAIT later the boss rises in its middle. When it dies (and any hidden
+ * boss after it, HiddenBoss) the seal breaks (CLEARED), the boss chest stands in the middle, and COLLAPSE_TICKS later
+ * ("Teleporting out in") everyone is sent back to where they entered the gate. A player who dies in a sealed gate loses their
  * place; if nobody is left, the gate closes. Which instances have rolled is kept in memory only, since every gate closes
  * on restart.
  */
@@ -51,7 +53,11 @@ public final class RedGates {
     private static final java.util.Map<Integer, ServerBossEvent> TALLY_BARS = new java.util.HashMap<>();
     /** How far from the portal the entering player's party members are pulled in from when it turns red. */
     private static final double PARTY_PULL = 25.0;
-    static final int COLLAPSE_TICKS = 2 * 60 * 20;
+    static final int COLLAPSE_TICKS = 60 * 20;
+    /** The wait in the arena before the boss comes. */
+    static final int ARENA_WAIT = 20 * 20;
+    /** "The boss arrives in" / "Teleporting out in" bars, by instance. */
+    private static final java.util.Map<Integer, ServerBossEvent> COUNT_BARS = new java.util.HashMap<>();
     /** Instances that have had their roll (or were made red), so a gate rolls once. */
     private static final Set<Integer> ROLLED = new HashSet<>();
     /** Instances whose roll is forced red (debug command). */
@@ -189,6 +195,7 @@ public final class RedGates {
             if (instance == null || !instance.live() || level == null) {
                 RedLandscape.LAYOUTS.remove(layout.instanceId);
                 dropTallyBar(layout.instanceId);
+                dropCountBar(layout.instanceId);
                 continue;
             }
             List<ServerPlayer> inside = inside(server, instance);
@@ -219,11 +226,16 @@ public final class RedGates {
         if (layout.lairFloor == null && near(inside, layout.lair, RedLandscape.ARENA_RANGE) && level.isLoaded(layout.lair)) {
             layout.lairFloor = RedLandscape.buildArena(level, instance, layout.lair);
         }
-        if (!layout.bossSpawned) {
-            tallyBar(instance, layout, inside);
-            long now = level.getGameTime();
-            if (layout.kills >= tally(instance.rank)) {
+        long now = level.getGameTime();
+        if (!layout.bossSpawned && layout.bossAt >= 0) {
+            countBar(instance, inside, "gate.mdvlcraft.red.arrives", "The boss arrives in %s", layout.bossAt - now, ARENA_WAIT);
+            if (now >= layout.bossAt) {
                 summonBoss(level, instance, layout, inside);
+            }
+        } else if (!layout.bossSpawned) {
+            tallyBar(instance, layout, inside);
+            if (layout.kills >= tally(instance.rank)) {
+                enterArena(level, instance, layout, inside);
             } else if (layout.refilledAt == 0L) {
                 layout.refilledAt = now;
             } else if (now - layout.refilledAt >= REFILL_TICKS) {
@@ -269,22 +281,63 @@ public final class RedGates {
         }
     }
 
-    /** The tally is met: every gate mob goes and the boss rises where the party came in. */
-    private static void summonBoss(ServerLevel level, Instance instance, Layout layout, List<ServerPlayer> inside) {
+    /** The tally is met: every gate mob goes, the theme's arena is built above the lair (RedArena) and the whole party is
+     * taken to its middle; the boss comes ARENA_WAIT later. */
+    private static void enterArena(ServerLevel level, Instance instance, Layout layout, List<ServerPlayer> inside) {
         discardMobs(level, instance);
         dropTallyBar(instance.id);
-        BlockPos floor = instance.entry.below();
-        layout.lairFloor = floor;   // the exit and the boss chest go here when it falls (breakSeal)
-        layout.bossSpawned = RedLandscape.spawnBoss(level, instance, floor) != null;
+        BlockPos floor = RedArena.build(level, instance, layout.lair);
+        layout.lairFloor = floor;   // the boss, its chest (breakSeal) and the hidden boss come here
+        layout.bossAt = level.getGameTime() + ARENA_WAIT;
+        for (int n = 0; n < inside.size(); n++) {
+            double a = Math.PI * 2.0 / Math.max(1, inside.size()) * n;
+            GateTravel.moveTo(inside.get(n), floor.offset((int)Math.round(Math.cos(a) * 4), 1, (int)Math.round(Math.sin(a) * 4)));
+            inside.get(n).connection.send(new ClientboundSetTitleTextPacket(Component.translatableWithFallback("gate.mdvlcraft.red.arena", "The arena")));
+            inside.get(n).playNotifySound(SoundEvents.END_PORTAL_SPAWN, SoundSource.HOSTILE, 0.6F, 1.2F);
+        }
+    }
+
+    /** The wait is over: the boss rises in the middle of the arena. */
+    private static void summonBoss(ServerLevel level, Instance instance, Layout layout, List<ServerPlayer> inside) {
+        dropCountBar(instance.id);
+        layout.bossSpawned = RedLandscape.spawnBoss(level, instance, layout.lairFloor) != null;
         for (ServerPlayer player : inside) {
             player.connection.send(new ClientboundSetTitleTextPacket(Component.translatableWithFallback("gate.mdvlcraft.red.boss", "The gate's master has come")));
             player.playNotifySound(SoundEvents.RAVAGER_ROAR, SoundSource.HOSTILE, 1.0F, 0.6F);
         }
     }
 
+    /** A countdown bar at the top of the screen for every roster player in the gate: `ticks` left of `total`. */
+    private static void countBar(Instance instance, List<ServerPlayer> inside, String key, String fallback, long ticks, int total) {
+        ServerBossEvent bar = COUNT_BARS.computeIfAbsent(instance.id, id -> new ServerBossEvent(Component.empty(),
+            BossEvent.BossBarColor.WHITE, BossEvent.BossBarOverlay.PROGRESS));
+        long seconds = Math.max(0L, (ticks + 19) / 20);
+        bar.setName(Component.translatableWithFallback(key, fallback, String.format("%d:%02d", seconds / 60, seconds % 60)));
+        bar.setProgress(Math.max(0.0F, Math.min(1.0F, ticks / (float)total)));
+        new ArrayList<>(bar.getPlayers()).stream().filter(p -> !inside.contains(p)).forEach(bar::removePlayer);
+        inside.forEach(bar::addPlayer);
+    }
+
+    static void dropCountBar(int id) {
+        ServerBossEvent bar = COUNT_BARS.remove(id);
+        if (bar != null) {
+            bar.removeAllPlayers();
+        }
+    }
+
     /** The invisible boundary (plan 7.2): a roster player more than PLAY_RADIUS from the lair is put back on the ground 4
      * blocks inside it, on the same line from the lair, with a short message. */
     private static void boundary(ServerLevel level, Layout layout, List<ServerPlayer> inside) {
+        if (layout.bossAt >= 0 && layout.lairFloor != null) {   // in the arena: whoever leaves it is put back in its middle
+            BlockPos floor = layout.lairFloor;
+            for (ServerPlayer player : inside) {
+                if (player.isAlive() && !player.isSpectator() && (RedLandscape.horizontal(player.blockPosition(), floor) > (RedArena.RADIUS + 1) * (RedArena.RADIUS + 1)
+                    || player.getY() < floor.getY() - 3 || player.getY() > floor.getY() + RedArena.HEIGHT + 12)) {
+                    GateTravel.moveTo(player, floor.above());
+                }
+            }
+            return;
+        }
         double cx = layout.lair.getX() + 0.5;
         double cz = layout.lair.getZ() + 0.5;
         for (ServerPlayer player : inside) {
@@ -309,7 +362,10 @@ public final class RedGates {
     /** After the boss: the exit pad sends whoever steps on it home; after COLLAPSE_TICKS, or once nobody is left inside,
      * the rest go home and the instance closes (red realm cells aren't cleared, see GateInstances). */
     private static void collapse(MinecraftServer server, ServerLevel level, GateInstances gates, Instance instance, Layout layout, List<ServerPlayer> inside) {
-        BlockPos exit = layout.lairFloor;
+        BlockPos exit = layout.bossAt >= 0 ? null : layout.lairFloor;   // the arena has no exit pad: the countdown takes everyone home
+        if (layout.bossAt >= 0 && layout.clearedAt >= 0) {
+            countBar(instance, inside, "gate.mdvlcraft.red.leaving", "Teleporting out in %s", layout.clearedAt + COLLAPSE_TICKS - level.getGameTime(), COLLAPSE_TICKS);
+        }
         if (exit != null) {
             level.sendParticles(ParticleTypes.END_ROD, exit.getX() + 0.5, exit.getY() + 1.5, exit.getZ() + 0.5, 12, 0.6, 0.8, 0.6, 0.02);
             for (ServerPlayer player : inside) {
@@ -321,6 +377,7 @@ public final class RedGates {
         boolean timeUp = layout.clearedAt >= 0 && level.getGameTime() >= layout.clearedAt + COLLAPSE_TICKS;
         if (timeUp || inside(server, instance).isEmpty()) {
             inside(server, instance).forEach(p -> GateTravel.leave(p, instance, true));
+            dropCountBar(instance.id);
             gates.close(instance);
         }
     }
@@ -378,14 +435,18 @@ public final class RedGates {
         if (layout.lairFloor == null) {
             layout.lairFloor = RedLandscape.buildArena(level, instance, layout.lair);
         }
-        RedLandscape.buildExit(level, layout.lairFloor);
-        // clear bonus and boss chest, as for a normal gate: the chest stands in the arena beside the exit pad
-        instance.markers.add(new GateInstances.Marker("chest", layout.lairFloor.offset(0, 1, -4), -1));
+        boolean arena = layout.bossAt >= 0;
+        if (!arena) {
+            RedLandscape.buildExit(level, layout.lairFloor);
+        }
+        // clear bonus and boss chest, as for a normal gate: in the arena's middle (else beside the exit pad)
+        instance.markers.add(0, new GateInstances.Marker("chest", arena ? layout.lairFloor.above() : layout.lairFloor.offset(0, 1, -4), -1));
         GateRewards.onCleared(level, instance);
         for (ServerPlayer player : inside(level.getServer(), instance)) {
             player.connection.send(new ClientboundSetTitleTextPacket(Component.translatableWithFallback("gate.mdvlcraft.red.broken", "The seal is broken")));
-            player.sendSystemMessage(Component.translatableWithFallback("gate.mdvlcraft.red.exit",
-                "Step on the crying obsidian in the arena to leave. The gate collapses in 2 minutes."));
+            player.sendSystemMessage(arena ? Component.translatableWithFallback("gate.mdvlcraft.red.arena_exit",
+                "Take your reward from the chest. You'll be taken back in 1 minute.")
+                : Component.translatableWithFallback("gate.mdvlcraft.red.exit", "Step on the crying obsidian in the arena to leave. The gate collapses in 1 minute."));
             player.playNotifySound(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, SoundSource.MASTER, 1.0F, 1.0F);
         }
     }

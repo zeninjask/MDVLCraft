@@ -126,7 +126,7 @@ public final class HiddenBoss {
         if (type == null) {
             type = RedLandscape.type(RedLandscape.standInBoss(instance.theme));
         }
-        Mob boss = type == null ? null : GateSpawner.spawn(level, instance, type, floor.offset(0, 1, -6), GateSpawner.BOSS, -1);
+        Mob boss = type == null ? null : GateSpawner.spawn(level, instance, type, floor.above(), GateSpawner.BOSS, -1);
         if (boss == null) {
             return null;
         }

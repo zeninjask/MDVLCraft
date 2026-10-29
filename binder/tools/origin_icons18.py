@@ -299,7 +299,23 @@ OWN_CMD = {oid: 30 + i for i, oid in enumerate([
     'mdvlcraft:beekeeper', 'mdvlcraft:gravedigger', 'mdvlcraft:duelist', 'mdvlcraft:guardian', 'mdvlcraft:skirmisher',
     'mdvlcraft:crossbowman', 'mdvlcraft:spearman', 'mdvlcraft:monster_hunter', 'mdvlcraft:bounty_hunter', 'mdvlcraft:battle_mage',
     'mdvlcraft:sentinel', 'mdvlcraft:paladin', 'mdvlcraft:corsair', 'mdvlcraft:zealot', 'mdvlcraft:wolf_blooded',
-    'mdvlcraft:changeling'])}
+    'mdvlcraft:changeling',
+    # the races added in 2.1.70 (Dragon Quest IX icons, tools/dq9_icons.py ORIGINS)
+    'mdvlcraft:frostborn',
+    'mdvlcraft:stormkin',
+    'mdvlcraft:dunekin',
+    'mdvlcraft:sculkborn',
+    'mdvlcraft:gloomkin',
+    'mdvlcraft:faun',
+    'mdvlcraft:mimic',
+    'mdvlcraft:illagerkin',
+    'mdvlcraft:piglinborn',
+    'mdvlcraft:kitsune',
+    'mdvlcraft:curse_bonded',
+    'mdvlcraft:vessel',
+    'mdvlcraft:umbral',
+    'mdvlcraft:shrinekin',
+    ])}
 MODELS = os.path.join(I.ROOT, 'src/main/resources/assets/mdvlcraft/models/item')
 
 

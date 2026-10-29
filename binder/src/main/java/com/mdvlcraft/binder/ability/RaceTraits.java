@@ -86,9 +86,9 @@ public final class RaceTraits {
         if (is(victim, "stormkin") && SpecKit.school(source, "aqua", "water")) {
             event.setAmount(event.getAmount() * 1.25F);
         }
-        // Shrinekin, Black Flash Instinct: critical hits deal 15% more
-        if (source.getDirectEntity() instanceof Player player && source.getEntity() == player && !source.is(DamageTypes.INDIRECT_MAGIC)
-            && SpecKit.critical(player) && is(player, "shrinekin")) {
+        // Shrinekin, Black Flash Instinct: critical hits (combat/Crits) deal 15% more
+        if (source.getEntity() instanceof Player player
+            && com.mdvlcraft.binder.combat.Crits.critical(victim) && is(player, "shrinekin")) {
             event.setAmount(event.getAmount() * 1.15F);
         }
         // Curse-Bonded, Copy: 10% chance to learn the spell that hit you, for 60 s

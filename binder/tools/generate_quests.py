@@ -301,11 +301,6 @@ boss(5, 'warden', 'the Warden', 'minecraft:warden', 'minecraft:sculk_shrieker', 
     ('Soft Steps', [item('minecraft:white_wool', 16)], [give('minecraft:golden_carrot', 16)], 'Wool muffles your steps around sculk.'),
     ('Echoes', [item('minecraft:echo_shard', 4)], [xp(600)], 'Echo shards are found in ancient cities.'),
 ], ('minecraft:ancient_city', OVERWORLD), 'It rises in Ancient Cities in the deep dark.')
-boss(5, 'nightwarden', 'the Nightwarden', 'traveloptics:the_nightwarden', 'minecraft:crying_obsidian', [
-    ('The Far End', [dimension(END)], [give('minecraft:cooked_beef', 16)], 'The Nightwarden is imprisoned beyond the End.'),
-    ('Cathedral Watch', [kill('minecraft:enderman', 30)], [give('minecraft:ender_pearl', 16)], 'Clear the endermen of the End.'),
-    ('Netherite Blade', [item('minecraft:netherite_sword')], [xp(600)], 'Nothing less than netherite.'),
-], ('traveloptics:void_cathedral', END), 'It is imprisoned in the Void Cathedral on the End highlands.')
 boss(5, 'wraithon', 'the Wraithon', 'wraithon:wraithon', 'minecraft:netherite_ingot', [
     ('Star of the Wither', [item('minecraft:nether_star')], [give('minecraft:netherite_scrap', 2)], 'The Wither drops a nether star.'),
     ('Egg of the Dragon', [item('minecraft:dragon_egg')], [give('minecraft:golden_apple', 4)], 'Take the egg from the End fountain.'),

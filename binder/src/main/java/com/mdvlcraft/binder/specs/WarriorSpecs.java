@@ -190,14 +190,13 @@ public final class WarriorSpecs {
         }
     }
 
-    /** Samurai, Crimson Edge: katana critical hits make the target bleed. Epic Fight's battle-mode swings never fire
-     *  CriticalHitEvent, so the hit itself is checked (SpecKit.critical). */
+    /** Samurai, Crimson Edge: katana critical hits (combat/Crits) make the target bleed. */
     @SubscribeEvent
     public static void onCrit(LivingHurtEvent event) {
         LivingEntity target = event.getEntity();
         if (event.getSource().getDirectEntity() instanceof Player player && event.getSource().getEntity() == player
             && !event.getSource().is(net.minecraft.world.damagesource.DamageTypes.INDIRECT_MAGIC)
-            && SpecKit.critical(player) && Specs.has(player, "crimson_edge") && SpecKit.katana(player)
+            && com.mdvlcraft.binder.combat.Crits.critical(target) && Specs.has(player, "crimson_edge") && SpecKit.katana(player)
             && player.level() instanceof ServerLevel level) {
             for (int s = 1; s <= 4; s++) {
                 SpecKit.later(level, s * 20, () -> {

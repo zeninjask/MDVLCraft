@@ -69,6 +69,21 @@ ORIGINS = {
     "origins_plus_plus_kirin": "magic_beast_horn", "origins_plus_plus_land_shark": "drakulords_tooth",
     "origins_plus_plus_raptus": "dragon_claws", "origins_plus_plus_rat": "dirtbag", "origins_plus_plus_shadow": "silken_veil",
     "origins_plus_plus_sporeling": "moonwort_bulb",
+    # the races added in 2.1.70
+    "mdvlcraft_frostborn": "winter_sky_hat",
+    "mdvlcraft_stormkin": "lightning_conductor",
+    "mdvlcraft_dunekin": "sandstorm_spear",
+    "mdvlcraft_sculkborn": "skull_ring",
+    "mdvlcraft_gloomkin": "butterfly_wing",
+    "mdvlcraft_faun": "pixie_boots",
+    "mdvlcraft_mimic": "pot_lid",
+    "mdvlcraft_illagerkin": "oh_no_bow",
+    "mdvlcraft_piglinborn": "gold_ring",
+    "mdvlcraft_kitsune": "lunar_fan",
+    "mdvlcraft_curse_bonded": "goddess_ring",
+    "mdvlcraft_vessel": "tough_guy_tattoo",
+    "mdvlcraft_umbral": "dead_mans_dagger",
+    "mdvlcraft_shrinekin": "dragonlord_claws",
 }
 STANCES = {"stance": "silver_orb", "stance_earth": "yellow_orb", "stance_fire": "red_orb", "stance_water": "blue_orb",
            "stance_wind": "green_orb"}
