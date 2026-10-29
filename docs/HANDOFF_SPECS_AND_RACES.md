@@ -1,7 +1,9 @@
 # Handoff: specialisations, spell ranks and race abilities
 
-Branch: `claude/clever-babbage-t08qqj` (repo `zeninjask/MDVLCraft`). Last release on `main`: **2.1.69**. Nothing below has been
-released. The next release is **2.1.70** (bump the patch number, see `CLAUDE.md`).
+Branch: `claude/clever-babbage-t08qqj` (repo `zeninjask/MDVLCraft`; `gate` points at the same commit). Last release on
+`main`: **2.1.79**; the next is **2.1.80** (bump the patch number, see `CLAUDE.md`). Every other branch is merged into
+this one. The sections below were written up to 2.1.70; `git log` has what 2.1.71 to 2.1.79 changed. `base/` (ignored)
+must be the latest release's three mrpacks unpacked, with `server-icon.png` removed from their overrides.
 
 Read `CLAUDE.md` first: the release rules, the memory-safe test procedure (server `-Xmx4G`, client `-Xmx3G`, one of each,
 stop Gradle first, kill by PID only), and the terms (Execute = Combat Evolution's execution). `docs/AGENT_HANDOFF.md`
