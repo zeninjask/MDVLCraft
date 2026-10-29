@@ -125,9 +125,15 @@ public abstract class SkillsScreenMixin {
     private Component mdvlcraft$descriptionWithPreview(ClientSkillDefinitionConfig definition) {
         Component description = definition.description();
         boolean spell = this.optActiveCategoryData.map(category -> SpellPreviews.isSpellDefinition(category.getConfig().id(), definition.id())).orElse(false);
-        return spell
+        Component shown = spell
             ? Component.empty().append(description).append("\n").append(SpellPreviews.prompt().copy().withStyle(ChatFormatting.DARK_GRAY))
             : description;
+        // nodes with more to say show it while shift is held (Pufferfish's extra description): say so
+        if (!net.minecraft.client.gui.screens.Screen.hasShiftDown() && !definition.extraDescription().getString().isBlank()) {
+            shown = Component.empty().append(shown).append("\n").append(Component.translatable("screen.mdvlcraft.skills.shift_hint")
+                .withStyle(ChatFormatting.DARK_GRAY));
+        }
+        return shown;
     }
 
     @Redirect(
@@ -155,5 +161,15 @@ public abstract class SkillsScreenMixin {
         java.util.List<net.puffish.skillsmod.client.config.skill.ClientSkillConnectionConfig> all = new java.util.ArrayList<>(category.normalConnections());
         all.addAll(category.exclusiveConnections());
         return all;
+    }
+
+    /** The node's id under its tooltip (Pufferfish shows it with advanced tooltips, F3+H) is never shown. */
+    @Redirect(
+        method = "lambda$drawContentWithCategory$21",
+        at = @At(value = "FIELD", target = "Lnet/minecraft/client/Options;advancedItemTooltips:Z", remap = true),
+        require = 0
+    )
+    private boolean mdvlcraft$noSkillId(net.minecraft.client.Options options) {
+        return false;
     }
 }
