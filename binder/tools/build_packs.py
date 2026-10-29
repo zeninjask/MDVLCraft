@@ -1,7 +1,7 @@
-"""Builds MDVLCraft-<version>-client.mrpack, -client-performance.mrpack and -server.mrpack from an unpacked base (default:
+"""Builds MDVLCraft-<version>-client.mrpack and -server.mrpack from an unpacked base (default:
 <repo>/base/{client,server}, each a modrinth.index.json plus overrides/), with the newest binder jar from binder/build/libs
-in place of the base's own. The quest book is written into the base first (generate_quests.py), then the performance
-client is derived from base/client (make_performance_pack.py).
+in place of the base's own. The quest book is written into the base first (generate_quests.py). The client-performance
+pack is no longer made (the client's Render Scale default does that job); make_performance_pack.py is kept but unused.
 The pack icon (<repo>/icon.png) goes at the root of every pack and, at 64x64, in the server pack as server-icon.png.
 Recreate the base by unzipping the latest committed MDVLCraft-<version>-client/server.mrpack into base/client and base/server.
 binder/tools/base_overlay/ (tracked) is copied into both sides' overrides first: KubeJS data the repository keeps; and
@@ -14,7 +14,6 @@ from PIL import Image
 
 import apply_mod_updates
 import generate_quests
-import make_performance_pack
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = sys.argv[3] if len(sys.argv) > 3 else os.path.join(HERE, '..', '..', 'base')
@@ -68,6 +67,5 @@ for root, _, files in os.walk(OVERLAY):
 for side in ('client', 'server'):   # mod updates the repository keeps (mod_updates.json)
     apply_mod_updates.apply(os.path.join(BASE, side, 'modrinth.index.json'))
 generate_quests.main(BASE)
-make_performance_pack.make(BASE)
-for pack in ('client', make_performance_pack.PACK, 'server'):
+for pack in ('client', 'server'):
     build(pack)

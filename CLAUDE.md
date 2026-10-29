@@ -1,7 +1,10 @@
 # Release rules
 
-- Every rebuild of the packs gets a new version: bump the patch number (1.9.23 → 1.9.24) and use it for all three `.mrpack` files (client, client-performance, server), the skill-tree PDF, the Java argument files and the README links. Never rebuild under an existing version.
-- After every rebuild, push the client, client-performance and server packs, the client Java arguments, the server `user_jvm_args.txt`, the skill-tree PDF and the README to `main`, replacing the previous version's files there.
+- Every rebuild of the packs gets a new version: bump the patch number (1.9.23 → 1.9.24) and use it for both `.mrpack` files (client, server), the skill-tree PDF, the Java argument files and the README links. Never rebuild under an existing version.
+- After every rebuild, push the client and server packs, the client Java arguments, the server `user_jvm_args.txt`, the skill-tree PDF and the README to `main`, replacing the previous version's files there.
+
+- Don't make client-performance packs any more (build_packs.py no longer does). When releasing, delete the old
+  `-client-performance.mrpack` from `main` and drop its README row.
 
 # Skills
 
