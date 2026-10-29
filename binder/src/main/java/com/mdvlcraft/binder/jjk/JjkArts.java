@@ -77,6 +77,10 @@ public final class JjkArts {
     private static final List<Bleed> BLEEDS = new ArrayList<>();
     /** Ratio 7:3: the share of the armour-blocked damage put back, for the hit being dealt. */
     private static final Map<LivingEntity, Float> PIERCE = new HashMap<>();
+    /** Miwa's Simple Domain: until when each player's circle holds. */
+    private static final Map<UUID, Long> DOMAINS = new HashMap<>();
+    /** Inked (G-Warstaff): creatures whose moves a player can read, and until when. */
+    private static final Map<LivingEntity, Ink> INKED = new java.util.WeakHashMap<>();
     private static boolean dealing;
 
     private JjkArts() {
@@ -97,6 +101,7 @@ public final class JjkArts {
         dealing = true;
         try {
             target.invulnerableTime = 0;
+            org.slf4j.LoggerFactory.getLogger("mdvlcraft").info("TESTLOG jjk deal {} {} to {}", source.getMsgId(), amount, target.getName().getString());
             target.hurt(source, amount);
         } finally {
             dealing = was;
@@ -107,6 +112,7 @@ public final class JjkArts {
 
     static void start(ServerPlayer player, Kind kind) {
         ServerLevel level = player.serverLevel();
+        org.slf4j.LoggerFactory.getLogger("mdvlcraft").info("TESTLOG jjk start {}", kind);
         int contact = kind.contactTicks();
         Active active = new Active(kind, level.getGameTime() + contact + 8);
         ACTIVE.put(player.getUUID(), active);
@@ -199,8 +205,89 @@ public final class JjkArts {
                     SpecKit.later(level, 4 + i * 3, () -> blink(player, target));
                 }
             }
+            case CLOUD_CRUSHER -> SpecKit.later(level, contact, () -> {
+                for (LivingEntity e : SpecKit.enemies(player, player.position(), 4.0)) {
+                    deal(e, source(player, PUNCTURE, player), 8.0F);
+                    SpecKit.stun(e, 30);
+                }
+                level.sendParticles(ParticleTypes.EXPLOSION, player.getX(), player.getY() + 0.1, player.getZ(), 8, 1.8, 0.1, 1.8, 0.0);
+                sound(player, SoundEvents.GENERIC_EXPLODE, 0.9F, 0.8F);
+            });
+            case DISPEL_FIELD -> SpecKit.later(level, contact, () -> {
+                net.minecraft.world.phys.AABB box = player.getBoundingBox().inflate(5.0);
+                for (Entity e : level.getEntities(player, box)) {
+                    boolean foreignProjectile = e instanceof net.minecraft.world.entity.projectile.Projectile projectile && projectile.getOwner() != player;
+                    LivingEntity owner = e instanceof LivingEntity living ? SpecKit.owner(living) : null;
+                    boolean foreignSummon = owner != null && owner != player && !com.mdvlcraft.binder.modified.Summons.allied(player, owner);
+                    if (foreignProjectile || foreignSummon) {
+                        level.sendParticles(ParticleTypes.SMOKE, e.getX(), e.getY(0.5), e.getZ(), 8, 0.2, 0.3, 0.2, 0.02);
+                        e.discard();
+                    }
+                }
+                for (LivingEntity e : SpecKit.enemies(player, player.position(), 5.0)) {
+                    e.knockback(1.0, player.getX() - e.getX(), player.getZ() - e.getZ());
+                }
+                sound(player, SoundEvents.ILLUSIONER_CAST_SPELL, 1.0F, 0.6F);
+            });
+            case SIMPLE_DOMAIN -> {
+                DOMAINS.put(player.getUUID(), level.getGameTime() + 60);
+                sound(player, SoundEvents.ARMOR_EQUIP_IRON, 1.0F, 1.4F);
+            }
+            case EVENING_MOON -> SpecKit.later(level, contact, () -> {
+                float damage = (float)player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 1.3F;
+                for (LivingEntity e : inArc(player, 4.0, 60.0)) {
+                    deal(e, source(player, PUNCTURE, player), damage);
+                }
+                arcParticles(level, player, 4.0, ParticleTypes.SWEEP_ATTACK);
+            });
+            case PILLAR -> SpecKit.later(level, contact, () -> {
+                for (LivingEntity e : SpecKit.enemies(player, player.position(), 3.0)) {
+                    deal(e, player.damageSources().playerAttack(player), 6.0F);
+                    e.setDeltaMovement(e.getDeltaMovement().x, 1.2, e.getDeltaMovement().z);
+                    e.hurtMarked = true;
+                }
+                Vec3 ahead = player.position().add(player.getLookAngle().multiply(1.0, 0.0, 1.0).normalize().scale(1.5));
+                for (int i = 0; i < 16; i++) {
+                    level.sendParticles(ParticleTypes.CRIT, ahead.x, ahead.y + i * 0.4, ahead.z, 2, 0.15, 0.1, 0.15, 0.0);
+                }
+                sound(player, SoundEvents.ANVIL_LAND, 0.6F, 1.4F);
+            });
+            case BLAZING_DRAW -> SpecKit.later(level, contact, () -> {
+                for (LivingEntity e : inArc(player, 4.0, 60.0)) {
+                    e.setSecondsOnFire(5);
+                }
+                arcParticles(level, player, 4.0, ParticleTypes.FLAME);
+                sound(player, SoundEvents.FIRECHARGE_USE, 1.0F, 1.0F);
+            });
+            case BLIGHT -> SpecKit.later(level, contact, () -> {
+                for (LivingEntity e : SpecKit.enemies(player, player.position(), 4.0)) {
+                    e.addEffect(new MobEffectInstance(MobEffects.POISON, 100, 1), player);
+                    e.addEffect(new MobEffectInstance(MobEffects.WEAKNESS, 100, 0), player);
+                }
+                level.sendParticles(ParticleTypes.SPORE_BLOSSOM_AIR, player.getX(), player.getY(0.5), player.getZ(), 40, 2.0, 0.5, 2.0, 0.0);
+                level.sendParticles(ParticleTypes.MYCELIUM, player.getX(), player.getY(0.3), player.getZ(), 40, 2.0, 0.3, 2.0, 0.0);
+            });
             default -> {
             }
+        }
+    }
+
+    /** Creatures within `reach` blocks and `halfAngle` degrees of where the player faces. */
+    private static List<LivingEntity> inArc(ServerPlayer player, double reach, double halfAngle) {
+        Vec3 look = player.getLookAngle().multiply(1.0, 0.0, 1.0).normalize();
+        double cos = Math.cos(Math.toRadians(halfAngle));
+        return SpecKit.enemies(player, player.position(), reach).stream().filter(e -> {
+            Vec3 to = e.position().subtract(player.position()).multiply(1.0, 0.0, 1.0);
+            return to.lengthSqr() < 1.0E-4 || to.normalize().dot(look) >= cos;
+        }).toList();
+    }
+
+    private static void arcParticles(ServerLevel level, ServerPlayer player, double reach, ParticleOptions particle) {
+        float yaw = player.getYRot() * ((float)Math.PI / 180F);
+        for (int i = -6; i <= 6; i++) {
+            double a = yaw + i * Math.toRadians(10.0);
+            level.sendParticles(particle, player.getX() - Math.sin(a) * reach * 0.8, player.getY(0.6), player.getZ() + Math.cos(a) * reach * 0.8,
+                1, 0.0, 0.0, 0.0, 0.0);
         }
     }
 
@@ -237,6 +324,66 @@ public final class JjkArts {
     /** The player's own weapon hit (an Epic Fight animation hit or a vanilla swing), not skill damage. */
     private static boolean ownHit(DamageSource source, Entity attacker) {
         return !dealing && source.getDirectEntity() == attacker && !source.is(TRUE_CUT) && !source.is(PUNCTURE) && !source.is(BLEED);
+    }
+
+    @SubscribeEvent(priority = EventPriority.HIGH)
+    public static void onAttacked(LivingAttackEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player) || !(event.getSource().getEntity() instanceof LivingEntity attacker) || dealing) {
+            return;
+        }
+        // Inked: half the attacks of a creature the player has read miss
+        Ink ink = INKED.get(attacker);
+        if (ink != null && ink.by.equals(player.getUUID()) && player.level().getGameTime() <= ink.until && player.getRandom().nextBoolean()) {
+            event.setCanceled(true);
+            player.serverLevel().sendParticles(ParticleTypes.CLOUD, player.getX(), player.getY(1.0), player.getZ(), 6, 0.3, 0.4, 0.3, 0.02);
+            return;
+        }
+        // Simple Domain: an attacker within reach is cut first
+        Long until = DOMAINS.get(player.getUUID());
+        if (until != null && player.level().getGameTime() <= until && attacker.distanceToSqr(player) <= 36.0) {
+            event.setCanceled(true);
+            counter(player, attacker);
+        }
+    }
+
+    /** Simple Domain's draw: double the weapon's damage on the creature that came in, and the circle is spent. */
+    private static void counter(ServerPlayer player, LivingEntity target) {
+        DOMAINS.remove(player.getUUID());
+        yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch patch =
+            yesman.epicfight.world.capabilities.EpicFightCapabilities.getEntityPatch(player, yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch.class);
+        if (patch != null) {
+            patch.playAnimationSynchronized(yesman.epicfight.gameasset.Animations.BATTOJUTSU, 0.0F);
+        }
+        player.serverLevel().sendParticles(ParticleTypes.SWEEP_ATTACK, target.getX(), target.getY(0.6), target.getZ(), 3, 0.3, 0.2, 0.3, 0.0);
+        sound(player, SoundEvents.PLAYER_ATTACK_SWEEP, 1.0F, 1.5F);
+        deal(target, player.damageSources().playerAttack(player), (float)player.getAttributeValue(Attributes.ATTACK_DAMAGE) * 2.0F);
+    }
+
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer player)) {
+            return;
+        }
+        Long until = DOMAINS.get(player.getUUID());
+        if (until == null) {
+            return;
+        }
+        ServerLevel level = player.serverLevel();
+        if (level.getGameTime() > until) {
+            DOMAINS.remove(player.getUUID());
+            return;
+        }
+        if (player.tickCount % 4 == 0) {
+            for (int i = 0; i < 16; i++) {
+                double a = i * Math.PI / 8.0;
+                level.sendParticles(ParticleTypes.ENCHANTED_HIT, player.getX() + Math.cos(a) * 3.0, player.getY() + 0.1, player.getZ() + Math.sin(a) * 3.0,
+                    1, 0.0, 0.0, 0.0, 0.0);
+            }
+        }
+        LivingEntity intruder = SpecKit.nearestEnemy(player, player.position(), 3.0, player);
+        if (intruder != null && intruder instanceof net.minecraft.world.entity.monster.Enemy) {
+            counter(player, intruder);
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.HIGHEST)
@@ -304,6 +451,27 @@ public final class JjkArts {
                 AttributeInstance speed = player.getAttribute(Attributes.ATTACK_SPEED);
                 if (speed != null && speed.getModifier(ZONE_SPEED) == null) {
                     speed.addTransientModifier(new AttributeModifier(ZONE_SPEED, "Into the Zone", 0.2, AttributeModifier.Operation.MULTIPLY_BASE));
+                }
+            }
+            case POSITIVE_FLAME -> {
+                if (victim.getMobType() == MobType.UNDEAD) {
+                    event.setAmount(event.getAmount() * 2.0F);
+                }
+                player.heal(event.getAmount() * 0.2F);
+                level.sendParticles(ParticleTypes.END_ROD, victim.getX(), victim.getY(0.6), victim.getZ(), 12, 0.3, 0.4, 0.3, 0.05);
+            }
+            case INKED -> {
+                INKED.put(victim, new Ink(player.getUUID(), level.getGameTime() + 160));
+                victim.addEffect(new MobEffectInstance(MobEffects.GLOWING, 160, 0, false, false));
+                level.sendParticles(ParticleTypes.SQUID_INK, victim.getX(), victim.getY(0.6), victim.getZ(), 15, 0.3, 0.4, 0.3, 0.02);
+            }
+            case TSUKKOMI -> {
+                if (active.struck.add(victim.getUUID())) {
+                    event.setAmount(Math.min(event.getAmount(), 1.0F));
+                    victim.knockback(2.5, player.getX() - victim.getX(), player.getZ() - victim.getZ());
+                    SpecKit.stun(victim, 40);
+                    sound(victim, SoundEvents.NOTE_BLOCK_COW_BELL.value(), 1.0F, 1.6F);
+                    sound(victim, SoundEvents.SLIME_SQUISH, 1.0F, 1.2F);
                 }
             }
             case RATIO -> {
@@ -397,6 +565,7 @@ public final class JjkArts {
         ACTIVE.remove(id);
         STORED.remove(id);
         NO_FALL.remove(id);
+        DOMAINS.remove(id);
         Zone zone = ZONES.remove(id);
         if (zone != null) {
             AttributeInstance speed = event.getEntity().getAttribute(Attributes.ATTACK_SPEED);
@@ -414,6 +583,8 @@ public final class JjkArts {
         NO_FALL.clear();
         BLEEDS.clear();
         PIERCE.clear();
+        DOMAINS.clear();
+        INKED.clear();
     }
 
     // ---- helpers ----
@@ -458,6 +629,9 @@ public final class JjkArts {
             this.kind = kind;
             this.until = until;
         }
+    }
+
+    private record Ink(UUID by, long until) {
     }
 
     private static final class Zone {

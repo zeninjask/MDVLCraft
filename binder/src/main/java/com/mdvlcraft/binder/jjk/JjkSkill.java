@@ -44,7 +44,18 @@ public class JjkSkill extends WeaponInnateSkill {
         BIRD_STRIKE("jjk_bird_strike", () -> Animations.AXE_AUTO2, "cursedfate:crow_sorcerer_axe"),
         RIKAS_ARM("jjk_rikas_arm", () -> Animations.BATTOJUTSU, "cursedfate:mutual_love_katana_weapon"),
         JACOBS_LADDER("jjk_jacobs_ladder", () -> Animations.WRATHFUL_LIGHTING, "cursedfate:mutual_love_katana_jacobs_ladder_weapon"),
-        FPS_24("jjk_24_fps", () -> Animations.RUSHING_TEMPO1, "naoyaaddon:tanto");
+        FPS_24("jjk_24_fps", () -> Animations.RUSHING_TEMPO1, "naoyaaddon:tanto"),
+        // JujutsuCraft weapons (orca/OrcaWeapons)
+        CLOUD_CRUSHER("jjk_cloud_crusher", () -> com.mdvlcraft.binder.wukong.WukongAnimations.SMASHES.get(1), "mdvlcraft:playful_cloud"),
+        DISPEL_FIELD("jjk_dispel_field", () -> Animations.STEEL_WHIRLWIND, "mdvlcraft:black_rope"),
+        POSITIVE_FLAME("jjk_positive_flame", () -> Animations.SWEEPING_EDGE, "mdvlcraft:sword_of_extermination"),
+        SIMPLE_DOMAIN("jjk_simple_domain", null, "mdvlcraft:sword_miwa_kasumi"),
+        EVENING_MOON("jjk_evening_moon", () -> Animations.BATTOJUTSU, "mdvlcraft:sword_kusakabe"),
+        PILLAR("jjk_pillar", () -> com.mdvlcraft.binder.wukong.WukongAnimations.SMASHES.get(1), "mdvlcraft:nyoi_staff"),
+        INKED("jjk_inked", () -> Animations.TRIDENT_AUTO1, "mdvlcraft:g_staff"),
+        TSUKKOMI("jjk_tsukkomi", () -> Animations.AXE_AUTO2, "mdvlcraft:harisen"),
+        BLAZING_DRAW("jjk_blazing_draw", () -> Animations.BATTOJUTSU, "mdvlcraft:blazing_courage"),
+        BLIGHT("jjk_blight", () -> Animations.STEEL_WHIRLWIND, "mdvlcraft:fester_life_blade");
 
         final String name;
         final Supplier<AnimationAccessor<? extends AttackAnimation>> animation;
@@ -56,8 +67,11 @@ public class JjkSkill extends WeaponInnateSkill {
             this.items = java.util.Arrays.stream(items).map(ResourceLocation::parse).toList();
         }
 
-        /** Ticks from the start of the animation to its last hit. */
+        /** Ticks from the start of the animation to its last hit (1 for a skill with no opening animation). */
         int contactTicks() {
+            if (this.animation == null) {
+                return 1;
+            }
             AttackAnimation animation = this.animation.get().get();
             AttackAnimation.Phase last = animation.phases[animation.phases.length - 1];
             return Math.max(1, Math.round(last.contact * 20.0F));
@@ -97,13 +111,15 @@ public class JjkSkill extends WeaponInnateSkill {
 
     @Override
     public void executeOnServer(SkillContainer container, FriendlyByteBuf args) {
-        container.getExecutor().playAnimationSynchronized(this.kind.animation.get(), 0.0F);
+        if (this.kind.animation != null) {
+            container.getExecutor().playAnimationSynchronized(this.kind.animation.get(), 0.0F);
+        }
         super.executeOnServer(container, args);
         JjkArts.start((ServerPlayer)container.getExecutor().getOriginal(), this.kind);
     }
 
     @Override
     public ResourceLocation getSkillTexture() {
-        return WeaponArtSkill.icon(this.kind.animation.get().registryName().getPath());
+        return WeaponArtSkill.icon(this.kind.animation == null ? "battojutsu" : this.kind.animation.get().registryName().getPath());
     }
 }

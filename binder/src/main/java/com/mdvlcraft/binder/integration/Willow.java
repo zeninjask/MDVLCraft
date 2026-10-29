@@ -40,7 +40,8 @@ import net.minecraftforge.registries.RegistryObject;
 /**
  * Willow, Cursed Fate's jujutsu trader, only comes when called. Willow's Call (a gold ingot ringed by curse residue) works
  * for 10 minutes after it is crafted, then fades; using it brings Willow beside you for 10 minutes. She never spawns on her
- * own. Talking to her opens a vanilla trading screen (it scrolls) with all her trades that are kept: every weapon, curse
+ * own. Talking to her opens a vanilla trading screen (it scrolls) with all her trades that are kept: every weapon (and the
+ * JujutsuCraft weapons, orca/OrcaWeapons: 10 tokens, Playful Cloud 25), curse
  * residue into jujutsu tokens, and the inventory cursed spirit. Her Epic Fight patch (WillowPatch) animates her model.
  */
 public final class Willow {
@@ -82,6 +83,9 @@ public final class Willow {
         for (String weapon : WEAPONS) {
             offers.add(new MerchantOffer(stack("jujutsu_token", 10), stack(weapon, 1), Integer.MAX_VALUE, 0, 0.0F));
         }
+        // JujutsuCraft's weapons (orca/OrcaWeapons), at their own prices
+        com.mdvlcraft.binder.orca.OrcaWeapons.PRICES.forEach((weapon, price) ->
+            offers.add(new MerchantOffer(stack("jujutsu_token", price), new ItemStack(weapon.get()), Integer.MAX_VALUE, 0, 0.0F)));
         offers.removeIf(offer -> offer.getBaseCostA().isEmpty() || offer.getResult().isEmpty());
         return offers;
     }

@@ -28,9 +28,9 @@ import net.minecraft.world.item.Items;
  * heartbeat. Then the trait shows with a button per slot and a Discard button (closing the window discards too).
  */
 public class TraitSlotScreen extends Screen {
-    private static final int W = 314;
-    private static final int H = 252;
-    private static final int CELL = 34;
+    private static final int W = 288;
+    private static final int H = 214;
+    private static final int CELL = 28;
     private static final int GAP = 6;
     private static final int REELS = TraitSlots.REELS;
     private static final ItemStack[] SYMBOLS = {new ItemStack(Items.IRON_INGOT), new ItemStack(Items.DIAMOND), new ItemStack(Items.NETHERITE_INGOT)};
@@ -100,7 +100,7 @@ public class TraitSlotScreen extends Screen {
         this.choices.clear();
         int count = this.slots.size() + 1;
         int bw = (W - 24 - (count - 1) * 6) / count;
-        int y = this.top() + H - 32;
+        int y = this.top() + H - 26;
         for (int i = 0; i < count; i++) {
             int slot = i < this.slots.size() ? i : -1;
             Component label;
@@ -111,7 +111,7 @@ public class TraitSlotScreen extends Screen {
             } else {
                 label = Component.translatable("screen.mdvlcraft.trait_slots.discard");
             }
-            DqGui.Button button = new DqGui.Button(this.left() + 12 + i * (bw + 6), y, bw, 20, label, () -> this.choose(slot));
+            DqGui.Button button = new DqGui.Button(this.left() + 12 + i * (bw + 6), y, bw, 18, label, () -> this.choose(slot));
             button.visible = this.done;
             this.choices.add(this.addRenderableWidget(button));
         }
@@ -163,7 +163,7 @@ public class TraitSlotScreen extends Screen {
         int top = this.top();
         DqGui.window(g, this.font, this.title, left, top, W, H);
         int reelX = left + 16;
-        int reelY = top + 32;
+        int reelY = top + 30;
 
         for (int reel = 0; reel < REELS; reel++) {
             int x = reelX + reel * (CELL + GAP);
@@ -175,8 +175,8 @@ public class TraitSlotScreen extends Screen {
             for (int k = first; k <= first + 3 && k < strip.length; k++) {
                 float y = reelY + (k - q) * CELL;
                 g.pose().pushPose();
-                g.pose().translate(x + 1, y + 1, 0.0F);
-                g.pose().scale(2.0F, 2.0F, 1.0F);
+                g.pose().translate(x + 2, y + 2, 0.0F);
+                g.pose().scale(1.5F, 1.5F, 1.0F);
                 g.renderItem(SYMBOLS[strip[k]], 0, 0);
                 g.pose().popPose();
             }
@@ -199,9 +199,9 @@ public class TraitSlotScreen extends Screen {
             g.renderOutline(reelX - 3, lineY - 2, lineRight - reelX + 6, CELL + 4, flash ? 0xFFFFD84A : DqGui.BLUE);
         }
 
-        this.paytable(g, lineRight + 22, reelY);
+        this.paytable(g, lineRight + 18, reelY);
         if (this.done) {
-            this.result(g, left, reelY + 3 * CELL + 10);
+            this.result(g, left, reelY + 3 * CELL + 8);
         } else if (this.twoNetherite && now - this.start > this.stopAt[1]) {
             g.drawCenteredString(this.font, Component.translatable("screen.mdvlcraft.trait_slots.suspense"), left + W / 2,
                 reelY + 3 * CELL + 16, (now / 250) % 2 == 0 ? 0xFFFFD84A : DqGui.HEADING);
@@ -256,11 +256,11 @@ public class TraitSlotScreen extends Screen {
     /** What each payline gives, with the symbols drawn small. */
     private void paytable(GuiGraphics g, int x, int y) {
         g.drawString(this.font, Component.translatable("screen.mdvlcraft.trait_slots.paytable"), x, y, DqGui.HEADING, false);
-        DqGui.rule(g, x, x + 100, y + 11);
+        DqGui.rule(g, x, x + 96, y + 11);
         int[][] lines = {{2, 2, 2, 2}, {2, 2, 2}, {1, 1, 1}, {2, 2}, {}};
         Trait.Tier[] tiers = {Trait.Tier.MYTHIC, Trait.Tier.CURSED, Trait.Tier.RARE, Trait.Tier.RARE, Trait.Tier.COMMON};
         for (int i = 0; i < lines.length; i++) {
-            int rowY = y + 16 + i * 18;
+            int rowY = y + 15 + i * 16;
             for (int s = 0; s < lines[i].length; s++) {
                 g.renderItem(SYMBOLS[lines[i][s]], x + s * 11, rowY);
             }
@@ -268,7 +268,7 @@ public class TraitSlotScreen extends Screen {
                 g.drawString(this.font, Component.translatable("screen.mdvlcraft.trait_slots.anything_else"), x, rowY + 4, DqGui.MUTED, false);
             }
             Component tier = Component.translatable("trait.mdvlcraft.tier." + tiers[i].name().toLowerCase(Locale.ROOT)).withStyle(tiers[i].colour);
-            g.drawString(this.font, tier, x + 100 - this.font.width(tier), rowY + 4, DqGui.TEXT, false);
+            g.drawString(this.font, tier, x + 96 - this.font.width(tier), rowY + 4, DqGui.TEXT, false);
         }
     }
 
@@ -279,7 +279,7 @@ public class TraitSlotScreen extends Screen {
         Component tier = Component.translatable("trait.mdvlcraft.tier." + this.trait.tier.name().toLowerCase(Locale.ROOT));
         g.drawCenteredString(this.font, tier, left + W / 2, y + 11, DqGui.MUTED);
         List<FormattedCharSequence> lines = this.font.split(Component.translatable(this.trait.descKey()), W - 28);
-        for (int i = 0; i < Math.min(4, lines.size()); i++) {
+        for (int i = 0; i < Math.min(3, lines.size()); i++) {
             g.drawCenteredString(this.font, lines.get(i), left + W / 2, y + 25 + i * 10, DqGui.TEXT);
         }
     }
