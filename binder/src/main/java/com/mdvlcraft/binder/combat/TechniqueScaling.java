@@ -22,9 +22,10 @@ public final class TechniqueScaling {
         if (event.getSource().getEntity() instanceof ServerPlayer caster
             && event.getSource().typeHolder().unwrapKey().map(key -> key.location().getNamespace().equals("cursedfate")).orElse(false)
 ) {
-            float factor = MonkArts.artActive(caster) ? 1.0F : factor(caster, event);
-            float shrine = SlashPierce.slashHit(event.getSource())
-                ? SlashPierce.SHRINE_DAMAGE * (1.0F + (float)caster.getAttributeValue(BinderAttributes.SHRINE_DAMAGE.get())) : 1.0F;
+            boolean slash = SlashPierce.slashHit(event.getSource());
+            // Shrine's slashes don't scale with the held weapon, only with Shrine Damage
+            float factor = MonkArts.artActive(caster) || slash ? 1.0F : factor(caster, event);
+            float shrine = slash ? SlashPierce.SHRINE_DAMAGE * (1.0F + (float)caster.getAttributeValue(BinderAttributes.SHRINE_DAMAGE.get())) : 1.0F;
             event.setAmount(event.getAmount() * factor * shrine * Ability.DAMAGE_SCALE);
         }
     }
