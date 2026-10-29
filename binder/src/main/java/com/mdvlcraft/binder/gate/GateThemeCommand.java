@@ -23,8 +23,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * Debug commands for the theme files:
- *   /mdvl gate themes                 one line per theme: loaded or not, room templates per kind, boss size per rank, hazard
- *   /mdvl gate hazard &lt;theme&gt;   applies that theme's red-gate hazard to the caller once (as GateHazards does every 5 s)
+ *   /mdvl gate themes                 one line per theme: loaded or not, room templates per kind, boss size per rank
  *   /mdvl gate themepick &lt;rank&gt;  draws 200 random themes for an unattuned key of that rank (GateThemes.randomFor) and
  *                                  lists the counts; succeeds (result 1) only if every draw is valid for the rank
  *   /mdvl gate redhidden always|never|roll   overrides the 50% hidden boss roll of red gates below S (HiddenBoss)
@@ -49,10 +48,7 @@ public final class GateThemeCommand {
         event.getDispatcher().register(Commands.literal("mdvl").requires(source -> source.hasPermission(2))
             .then(Commands.literal("gate")
                 .then(Commands.literal("themes").executes(GateThemeCommand::list))
-                .then(Commands.literal("hazard")
-                    .then(Commands.argument("theme", StringArgumentType.word())
-                        .suggests((c, b) -> SharedSuggestionProvider.suggest(themes, b))
-                        .executes(GateThemeCommand::hazard)))
+
                 .then(Commands.literal("themepick")
                     .then(Commands.argument("rank", StringArgumentType.word())
                         .suggests((c, b) -> SharedSuggestionProvider.suggest(Arrays.stream(GateRank.values()).map(Enum::name), b))
@@ -85,9 +81,7 @@ public final class GateThemeCommand {
                 for (GateRank rank : GateRank.values()) {
                     bosses.append(rank.name()).append('=').append(data.bosses()[rank.ordinal()].size().charAt(0));
                 }
-                GateThemes.Hazard h = data.hazard();
-                line = theme.key() + ": rooms " + rooms + ", boss sizes " + bosses + ", hazard cold=" + h.cold() + " hunger=" + h.hunger()
-                    + " spores=" + h.spores().size() + ", catalyst " + data.catalyst() + ", ranks " + data.minRank() + "-" + data.maxRank()
+                line = theme.key() + ": rooms " + rooms + ", boss sizes " + bosses + ", catalyst " + data.catalyst() + ", ranks " + data.minRank() + "-" + data.maxRank()
                     + ", red lairs " + data.lairs().size() + " camps " + data.camps().size();
             }
             String text = line;
@@ -231,18 +225,5 @@ public final class GateThemeCommand {
             + (ok ? " (all drawn)" : " (NOT all drawn or loaded)");
         context.getSource().sendSuccess(() -> Component.literal(text), false);
         return ok ? 1 : 0;
-    }
-
-    private static int hazard(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
-        ServerPlayer player = context.getSource().getPlayerOrException();
-        GateTheme theme = GateTheme.byKey(StringArgumentType.getString(context, "theme"));
-        GateThemes.Theme data = theme == null ? null : GateThemes.get(theme);
-        if (data == null) {
-            context.getSource().sendFailure(Component.literal("Unknown theme or no data"));
-            return 0;
-        }
-        GateHazards.apply(player.serverLevel(), player, data.hazard());
-        context.getSource().sendSuccess(() -> Component.literal("Applied the " + theme.key() + " hazard once"), false);
-        return data.hazard().any() ? 1 : 0;
     }
 }

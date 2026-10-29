@@ -32,7 +32,7 @@ import org.slf4j.Logger;
  * mid C–B, high A–S) and spawn-marker kind with weights, its boss per rank with a size class (which picks the boss room),
  * its red-gate hazard, catalyst, red landscape palette, lair and camp templates and stand-in mobs, its biome and music,
  * and the rank range an unattuned key may open it at. GateMobs, GateBuilder,
- * RedLandscape and GateHazards read it, so retuning a theme or giving it new rooms or mobs is a data change, and so is a
+ * RedLandscape reads it, so retuning a theme or giving it new rooms or mobs is a data change, and so is a
  * datapack override. The list of themes itself stays GateTheme (it is the checkerboard order the generated dimensions
  * bake in), so a file whose name isn't a GateTheme key is skipped with a warning.
  *
@@ -54,9 +54,8 @@ public final class GateThemes extends SimpleJsonResourceReloadListener {
     public record BossEntry(ResourceLocation id, int count, String size, double health) {
     }
 
-    /** Red-gate hazards, applied every 5 seconds by GateHazards: cold (slowness, freezing without warm armour or a fire),
-     * extra hunger (food exhaustion added per tick of the hazard; heat and the snowfield's scarce food), spores (poison
-     * while standing on one of `spores`). */
+    /** Red-gate hazards (cold, hunger, spores): still read from the theme files, but no longer applied (red gates have
+     * no hazards since 2.1.72). */
     public record Hazard(boolean cold, float hunger, List<Block> spores) {
         static final Hazard NONE = new Hazard(false, 0f, List.of());
 
