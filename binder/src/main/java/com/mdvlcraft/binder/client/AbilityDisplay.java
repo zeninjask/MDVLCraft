@@ -81,7 +81,9 @@ final class AbilityDisplay {
         } else if (ability instanceof PlannedAbility planned) {
             lines.add(planned.displayName().copy().withStyle(ChatFormatting.GOLD));
             lines.add(planned.description().copy().withStyle(ChatFormatting.GRAY));
-            lines.add(Component.translatable("ability.mdvlcraft.planned.tooltip").withStyle(ChatFormatting.YELLOW));
+            if (!com.mdvlcraft.binder.ability.RaceArts.built(planned.id().getPath().substring("planned_".length()))) {
+                lines.add(Component.translatable("ability.mdvlcraft.planned.tooltip").withStyle(ChatFormatting.YELLOW));
+            }
         } else if (ability instanceof StanceAbility stance) {
             int self = minecraft.player.getId();
             StanceElement element = ClientStances.element(self);

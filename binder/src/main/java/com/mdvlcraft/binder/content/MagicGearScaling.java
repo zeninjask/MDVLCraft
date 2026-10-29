@@ -7,8 +7,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.BiPredicate;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraftforge.event.ItemAttributeModifierEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,11 +23,14 @@ import top.theillusivec4.curios.api.event.CurioAttributeModifierEvent;
  * Gear from every mod (armour, weapons and curios) gives a fifth of the max mana it adds, and half the spell power it adds
  * (any school's included), rounded up to 0.1%. Penalties stay as they are. Runs last, after other changes to an item's
  * attributes, such as content/TarnishedCrown.
+ * Armour pieces (worn in their own slot) give a quarter of the attack speed and half the attack damage they add.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class MagicGearScaling {
     private static final double MANA_SCALE = 0.2;
     private static final double SPELL_POWER_SCALE = 0.5;
+    private static final double ARMOUR_ATTACK_SPEED_SCALE = 0.25;
+    private static final double ARMOUR_ATTACK_DAMAGE_SCALE = 0.5;
 
     private MagicGearScaling() {
     }
@@ -32,6 +38,20 @@ public final class MagicGearScaling {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onItemAttributes(ItemAttributeModifierEvent event) {
         rescale(event.getModifiers(), event::removeModifier, event::addModifier);
+        if (event.getSlotType().getType() == EquipmentSlot.Type.ARMOR && LivingEntity.getEquipmentSlotForItem(event.getItemStack()) == event.getSlotType()) {
+            armour(event, Attributes.ATTACK_SPEED, ARMOUR_ATTACK_SPEED_SCALE);
+            armour(event, Attributes.ATTACK_DAMAGE, ARMOUR_ATTACK_DAMAGE_SCALE);
+        }
+    }
+
+    /** An armour piece's bonus (not penalty) to one attribute, scaled down. */
+    private static void armour(ItemAttributeModifierEvent event, Attribute attribute, double scale) {
+        for (AttributeModifier modifier : new ArrayList<>(event.getModifiers().get(attribute))) {
+            if (modifier.getAmount() > 0.0) {
+                event.removeModifier(attribute, modifier);
+                event.addModifier(attribute, new AttributeModifier(modifier.getId(), modifier.getName(), modifier.getAmount() * scale, modifier.getOperation()));
+            }
+        }
     }
 
     @SubscribeEvent(priority = EventPriority.LOWEST)

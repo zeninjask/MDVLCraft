@@ -8,6 +8,7 @@ import io.redspace.ironsspellbooks.capabilities.magic.SummonManager;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
 import java.util.Comparator;
 import java.util.UUID;
+import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
@@ -70,6 +71,22 @@ public final class SummonModes {
                 summon.setTarget(null);
             }
         }
+    }
+
+    /** Whether the owner's summons may fight `target` in the owner's mode. */
+    public static boolean wants(ServerPlayer owner, LivingEntity target) {
+        return allows(owner, mode(owner), target);
+    }
+
+    /** What a summon that attacks from afar (a spellcaster) should aim at: its target if the mode still allows it, else one the mode wants. */
+    @Nullable
+    public static LivingEntity target(ServerPlayer owner, Mob summon) {
+        LivingEntity current = summon.getTarget();
+        if (current != null && current.isAlive() && wants(owner, current)) {
+            return current;
+        }
+        Mode mode = mode(owner);
+        return mode == Mode.PASSIVE ? null : pick(owner, mode, summon);
     }
 
     private static boolean allows(ServerPlayer owner, Mode mode, LivingEntity target) {

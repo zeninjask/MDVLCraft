@@ -2,10 +2,19 @@ package com.mdvlcraft.binder.mixin.efn;
 
 import com.hm.efn.gameasset.animations.EFNYamatoAnimations;
 import com.hm.efn.skill.weapon_innate.YamatoInnate;
+import java.util.ArrayList;
+import java.util.List;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
+import net.minecraft.world.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import yesman.epicfight.api.animation.AnimationManager.AnimationAccessor;
+import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
+import yesman.epicfight.world.capabilities.item.CapabilityItem;
 
 @Mixin(value = YamatoInnate.class, remap = false)
 public abstract class YamatoInnateMixin {
@@ -59,5 +68,14 @@ public abstract class YamatoInnateMixin {
     )
     private AnimationAccessor<?> mdvlcraft$chargeAnim() {
         return EFNYamatoAnimations.YAMATO_JUDEMENCUT_CHARGE;
+    }
+
+    /** The skill tooltip leaves out Judgement Cut End and the Doppelganger, which the pack removed (integration/YamatoUnbound). */
+    @Inject(method = "getTooltipOnItem", at = @At("RETURN"), cancellable = true)
+    private void mdvlcraft$noRemovedLines(ItemStack stack, CapabilityItem item, PlayerPatch<?> patch, CallbackInfoReturnable<List<Component>> cir) {
+        List<Component> lines = new ArrayList<>(cir.getReturnValue());
+        lines.removeIf(line -> line.getContents() instanceof TranslatableContents text
+            && (text.getKey().equals("skill.efn.yamato.tooltip13") || text.getKey().equals("skill.efn.yamato.tooltip14")));
+        cir.setReturnValue(lines);
     }
 }

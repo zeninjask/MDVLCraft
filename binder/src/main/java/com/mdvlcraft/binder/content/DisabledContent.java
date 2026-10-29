@@ -32,8 +32,12 @@ public final class DisabledContent {
         ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "inscription_table"),
         ResourceLocation.fromNamespaceAndPath("irons_spellbooks", "legendary_ink"),
         ResourceLocation.fromNamespaceAndPath("cursedfate", "cursed_shards"),
-        ResourceLocation.fromNamespaceAndPath("minecraft", "elytra")
+        ResourceLocation.fromNamespaceAndPath("minecraft", "elytra"),
+        ResourceLocation.fromNamespaceAndPath("efn", "yamato_dmc4"),   // Yamato - Exiled (integration/YamatoUnbound)
+        ResourceLocation.fromNamespaceAndPath("efn", "yamato_dmc4_in_sheath")
     );
+    /** Recipes replaced by the pack's own: Nightfall's Yamato - Unbound (data/mdvlcraft/recipes/yamato_unbound). */
+    private static final Set<ResourceLocation> REPLACED_RECIPES = Set.of(ResourceLocation.fromNamespaceAndPath("efn", "yamato_dmc_in_sheath"));
     /** Items of the spell addons above that are in the game anyway, with the materials their recipes need. */
     private static final Set<ResourceLocation> ALLOWED_ITEMS = Stream.of(
         armour("hazennstuff", "alchemist_supreme", "atlas", "blazeborne", "creaking_sorcerer", "cryogenic_ruler", "ender_dragon",
@@ -111,7 +115,7 @@ public final class DisabledContent {
 
     /** A recipe from a disabled addon's own data still loads when it makes an item that is in the game. */
     public static boolean dropsRecipe(ResourceLocation id, JsonElement recipe) {
-        return isContentDisabled(id) && !producesAllowedItem(recipe) || producesForbiddenItem(recipe);
+        return isContentDisabled(id) && !producesAllowedItem(recipe) || producesForbiddenItem(recipe) || REPLACED_RECIPES.contains(id);
     }
 
     private static boolean producesAllowedItem(JsonElement recipe) {

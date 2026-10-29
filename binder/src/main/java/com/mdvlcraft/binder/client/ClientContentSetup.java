@@ -31,6 +31,7 @@ public final class ClientContentSetup {
             PonderHold.register();
             BackpackAugmentIcons.register();
             VoidFilterMenu.register();
+            BeltSpiritRenderer.register();
             MageHunterSlot.setClientCheck(player -> player == Minecraft.getInstance().player
                 && (MageHunterSlot.summonsSwords(ClientAbilities.granted().keySet()) || ClientVocation.archetypes().contains(MageHunterSlot.SAMURAI)));
         });

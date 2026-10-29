@@ -91,6 +91,7 @@ public final class MDVLBinder {
         com.mdvlcraft.binder.gate.tower.TowerItems.register(modBus);
         BossArena.register(modBus, forgeBus);
         com.mdvlcraft.binder.integration.Willow.register(modBus, forgeBus);
+        com.mdvlcraft.binder.integration.YamatoUnbound.register(modBus);
         PartyTravel.register(forgeBus);
         HerobrineLook.register();
         HerobrineInvitation.register();

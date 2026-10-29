@@ -1,11 +1,13 @@
 package com.mdvlcraft.binder.ability;
 
+import com.mdvlcraft.binder.content.SummonModes;
 import com.mdvlcraft.binder.modified.Buffs;
 import com.mdvlcraft.binder.modified.MartialSpells;
 import com.mdvlcraft.binder.modified.Summons;
 import com.mdvlcraft.binder.modified.Targets;
 import com.mdvlcraft.binder.specs.SpecKit;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
+import io.redspace.ironsspellbooks.capabilities.magic.SummonManager;
 import io.redspace.ironsspellbooks.capabilities.magic.SummonedEntitiesCastData;
 import io.redspace.ironsspellbooks.damage.SpellDamageSource;
 import io.redspace.ironsspellbooks.entity.spells.icicle.IcicleProjectile;
@@ -101,6 +103,8 @@ public final class RaceArts {
 
     private static final Map<String, Art> ARTS = new HashMap<>();
     private static final String COOLDOWN = "mdvlcraft_race_cd_";
+    private static final String URAUME_ART = "race_shrinekin_call_uraume";
+    private static final String URAUME_KIND = "race_uraume";
     private static final String NO_FALL = "race_no_fall";
     private static final String LANTERN = "race_lantern";
     private static final UUID SKITTER = UUID.fromString("0f6c3f43-8a3e-4b5e-9d0c-6b1c1a8e2f11");
@@ -116,11 +120,20 @@ public final class RaceArts {
         ARTS.put(key, new Art(seconds * 20, cast));
     }
 
+    /** Whether the race ability `key` (race_<race>_<name>) is built, not a placeholder. */
+    public static boolean built(String key) {
+        return ARTS.containsKey(key);
+    }
+
     /** Casts the race ability `key` (race_<race>_<name>); false if `key` has no art (still a placeholder). */
     static boolean cast(ServerPlayer player, String key, Component name) {
         Art art = ARTS.get(key);
         if (art == null) {
             return false;
+        }
+        if (key.equals(URAUME_ART) && uraumeOut(player)) {   // casting again while Uraume is out cycles its targeting mode
+            SummonModes.cycle(player);
+            return true;
         }
         long now = player.level().getGameTime();
         long ready = player.getPersistentData().getLong(COOLDOWN + key);
@@ -917,8 +930,8 @@ public final class RaceArts {
             sound(p, SoundEvents.WARDEN_ROAR, 1.6F);
             return true;
         });
-        art("race_shrinekin_call_uraume", 300, p -> {
-            summon(p, EntityType.FOX, 1, 30, "race_uraume", fox -> {
+        art(URAUME_ART, 300, p -> {
+            summon(p, EntityType.FOX, 1, 30, URAUME_KIND, fox -> {
                 ((Fox)fox).setVariant(Fox.Type.SNOW);
                 fox.setCustomName(Component.literal("Uraume"));
                 fox.setCustomNameVisible(true);
@@ -932,13 +945,22 @@ public final class RaceArts {
         });
     }
 
-    /** Uraume casts one of the four ice spells picked for it (cone of cold, icicle, frostwave, ray of frost) at the nearest enemy. */
+    private static boolean uraumeOut(ServerPlayer player) {
+        return SummonManager.getSummons(player).stream()
+            .anyMatch(id -> player.serverLevel().getEntity(id) instanceof Mob mob && mob.isAlive() && URAUME_KIND.equals(Summons.kind(mob)));
+    }
+
+    /**
+     * Uraume casts one of the four ice spells picked for it (cone of cold, icicle, frostwave, ray of frost) at the target its
+     * owner's summon mode picks (content/SummonModes: nothing when passive, never a harmless animal); the area spells only
+     * hit what that mode lets summons fight.
+     */
     private static void uraumeCast(ServerPlayer owner, Mob fox) {
         if (!fox.isAlive() || !(fox.level() instanceof ServerLevel level)) {
             return;
         }
-        LivingEntity target = SpecKit.nearestEnemy(owner, fox.position(), 16.0, fox);
-        if (target == null || target == owner) {
+        LivingEntity target = SummonModes.target(owner, fox);
+        if (target == null || target == owner || fox.distanceToSqr(target) > 16.0 * 16.0) {
             return;
         }
         fox.getLookControl().setLookAt(target);
@@ -962,7 +984,7 @@ public final class RaceArts {
             }
             case 2 -> {   // Frostwave: every enemy within 4 of Uraume
                 level.sendParticles(ParticleTypes.SNOWFLAKE, fox.getX(), fox.getY(0.5), fox.getZ(), 80, 2.0, 0.3, 2.0, 0.05);
-                Targets.enemies(owner, fox.position(), 4.0).stream().filter(e -> e != fox)
+                Targets.enemies(owner, fox.position(), 4.0).stream().filter(e -> e != fox && (e == target || SummonModes.wants(owner, e)))
                     .forEach(e -> frost(e, SpellDamageSource.source(fox, SpellRegistry.FROSTWAVE_SPELL.get()), 4.0F));
             }
             default -> {   // Cone of Cold: enemies in front within 6
@@ -972,7 +994,7 @@ public final class RaceArts {
                     level.sendParticles(ParticleTypes.SNOWFLAKE, at.x, at.y, at.z, 6, 0.12 * i, 0.12 * i, 0.12 * i, 0.01);
                 }
                 Targets.enemies(owner, fox.position(), 6.0).stream()
-                    .filter(e -> e != fox && e.getBoundingBox().getCenter().subtract(from).normalize().dot(dir) > 0.75)
+                    .filter(e -> e != fox && (e == target || SummonModes.wants(owner, e)) && e.getBoundingBox().getCenter().subtract(from).normalize().dot(dir) > 0.75)
                     .forEach(e -> frost(e, SpellDamageSource.source(fox, SpellRegistry.CONE_OF_COLD_SPELL.get()), 5.0F));
             }
         }

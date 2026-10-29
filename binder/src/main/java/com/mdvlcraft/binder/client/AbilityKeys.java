@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.client;
 
 import com.mdvlcraft.binder.MDVLBinder;
+import com.mdvlcraft.binder.network.ActivateBeltPacket;
 import com.mdvlcraft.binder.network.BinderNetwork;
 import com.mdvlcraft.binder.network.CastPacket;
 import com.mojang.blaze3d.platform.InputConstants.Type;
@@ -22,11 +23,13 @@ public final class AbilityKeys {
     public static final KeyMapping WHEEL = key("ability_wheel", 96);
     public static final KeyMapping CAST = key("cast_ability", 280);
     public static final KeyMapping GIVE_UP = key("give_up", 90);
+    /** Opens the Inventory Cursed Spirit worn on the belt (content/LanternBelt). */
+    public static final KeyMapping ACTIVATE_BELT = key("activate_belt", GLFW.GLFW_KEY_N);
     /** Quick Cast 1-8 (default keys 1-8, in place of the hotbar keys, RemovedKeys): each casts its wheel slot, held like the
      * cast key, without changing the slot the cast key uses. */
     private static final KeyMapping[] QUICK = IntStream.range(0, 8)
         .mapToObj(i -> key("quick_cast_" + (i + 1), GLFW.GLFW_KEY_1 + i)).toArray(KeyMapping[]::new);
-    private static final List<KeyMapping> ALL = Stream.concat(Stream.of(MENU, WHEEL, CAST, GIVE_UP), Arrays.stream(QUICK)).toList();
+    private static final List<KeyMapping> ALL = Stream.concat(Stream.of(MENU, WHEEL, CAST, GIVE_UP, ACTIVATE_BELT), Arrays.stream(QUICK)).toList();
     private static final boolean[] quickDown = new boolean[QUICK.length];
     private static boolean castDown;
     /** How long the cast key has been held (Formless Sword's Form mode opens the sword wheel at HOLD_TICKS). */
@@ -79,6 +82,10 @@ public final class AbilityKeys {
 
             while (WHEEL.consumeClick()) {
                 minecraft.setScreen(new WheelScreen());
+            }
+
+            while (ACTIVATE_BELT.consumeClick()) {
+                BinderNetwork.sendToServer(new ActivateBeltPacket());
             }
 
             for (int slot = 0; slot < QUICK.length; slot++) {

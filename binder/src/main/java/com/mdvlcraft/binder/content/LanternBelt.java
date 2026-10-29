@@ -1,20 +1,26 @@
 package com.mdvlcraft.binder.content;
 
+import cursedfate.item.InventoryCursedSpiritItemItem;
 import java.util.function.Predicate;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraftforge.registries.ForgeRegistries;
 import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 /**
- * The Curios belt slot holds a lantern or a soul lantern and nothing else (mixin/curios/CuriosImplMixinHooksMixin; the lantern validator
- * lists the slot in the lantern's tooltip), and a worn lantern lights up its wearer like a held one (mixin/dynamiclights/LanternBeltLightMixin).
+ * The Curios belt slot holds a lantern, a soul lantern or Cursed Fate's Inventory Cursed Spirit and nothing else
+ * (mixin/curios/CuriosImplMixinHooksMixin; the validator lists the slot in their tooltips). A worn lantern lights up its
+ * wearer like a held one (mixin/dynamiclights/LanternBeltLightMixin); a worn spirit opens its 9-slot storage on the
+ * Activate Belt key (client/AbilityKeys) and is drawn at the hip (client/BeltSpiritRenderer).
  */
 public final class LanternBelt {
     public static final String SLOT = "belt";
     private static final ResourceLocation VALIDATOR = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "lantern");
+    public static final ResourceLocation SPIRIT = ResourceLocation.fromNamespaceAndPath("cursedfate", "inventory_cursed_spirit_item");
 
     private LanternBelt() {
     }
@@ -24,7 +30,26 @@ public final class LanternBelt {
     }
 
     public static boolean fits(ItemStack stack) {
-        return stack.is(Items.LANTERN) || stack.is(Items.SOUL_LANTERN);
+        return stack.is(Items.LANTERN) || stack.is(Items.SOUL_LANTERN) || spirit(stack);
+    }
+
+    public static boolean spirit(ItemStack stack) {
+        return SPIRIT.equals(ForgeRegistries.ITEMS.getKey(stack.getItem()));
+    }
+
+    /** Activate Belt: opens the worn spirit's storage, as Cursed Fate does from its own accessory slot. */
+    public static void activate(ServerPlayer player) {
+        CuriosApi.getCuriosInventory(player).resolve()
+            .flatMap(inventory -> inventory.getStacksHandler(SLOT))
+            .ifPresent(handler -> {
+                IDynamicStackHandler stacks = handler.getStacks();
+                for (int i = 0; i < stacks.getSlots(); i++) {
+                    if (spirit(stacks.getStackInSlot(i))) {
+                        InventoryCursedSpiritItemItem.openCursedInventory(player, stacks.getStackInSlot(i));
+                        return;
+                    }
+                }
+            });
     }
 
     public static boolean wearsLantern(LivingEntity entity) {

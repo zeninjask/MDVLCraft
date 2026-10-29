@@ -213,6 +213,10 @@ public final class BinderNetwork {
             id++, FriendlySummonsPacket.class, FriendlySummonsPacket::encode, FriendlySummonsPacket::decode, FriendlySummonsPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
+        CHANNEL.registerMessage(
+            id++, ActivateBeltPacket.class, ActivateBeltPacket::encode, ActivateBeltPacket::decode, ActivateBeltPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
         com.mdvlcraft.binder.gate.tower.TowerItems.registerPackets(CHANNEL, id);   // castle sigil menu, tower status line
     }
 

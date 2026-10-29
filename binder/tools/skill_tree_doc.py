@@ -590,6 +590,10 @@ def main():
                              + "<div class='cols vocs'>" + ''.join(vocation_block(vid, info, pack) for vid, info in chunk) + "</div></div>")
 
     tab_skills = origin_tab_skills(pack)
+    # Each race's 2 abilities (ability wheel), as RaceAbilities grants them.
+    race_arts = {race: [(pack.lang.get(f'ability.mdvlcraft.planned_{k}', k), clean(pack.lang.get(f'ability.mdvlcraft.planned_{k}.desc', '')))
+                        for k in keys]
+                 for race, keys in json.load(open(os.path.join(TOOLS, '..', 'src', 'main', 'resources', 'data', 'mdvlcraft', 'race_abilities.json'))).items()}
     parts.append("<div class='page'><h2>Origins</h2><p class='lead'>Picked on first joining, separately from the archetype trees: one race and one "
                  "class. A race or class can be changed later with an Orb of Origin (an enchanted golden apple surrounded by eight gold ingots). "
                  "Each Martial class and Job pair also has its own <b>Origin</b> skill tab: the Martial class's three skills on one half, the Job's "
@@ -599,11 +603,12 @@ def main():
                                         ('Jobs', 'Job', ('origins-classes', 'class'))):
         tabbed = column != 'Race'
         parts.append(f"<h3>{heading}</h3><table class='origins'><tr><th>{column}</th><th>Powers</th>"
-                     + ("<th>Origin tab skills</th>" if tabbed else "") + "</tr>")
+                     + ("<th>Origin tab skills</th>" if tabbed else "<th>Abilities</th>") + "</tr>")
         for name, powers, oid in origin_rows(pack, ns, path):
             body = "<br>".join(f"<b>{e(n)}</b> {e(d)}" for n, d in powers) or "–"
-            skills = "<br>".join(f"<b>{e(n)}</b> {e(d)}" for n, d in tab_skills.get(oid, [])) or "–"
-            parts.append(f"<tr><td>{e(name)}</td><td>{body}</td>" + (f"<td>{skills}</td>" if tabbed else "") + "</tr>")
+            extra = tab_skills.get(oid, []) if tabbed else race_arts.get(oid, [])
+            skills = "<br>".join(f"<b>{e(n)}</b> {e(d)}" for n, d in extra) or "–"
+            parts.append(f"<tr><td>{e(name)}</td><td>{body}</td><td>{skills}</td></tr>")
         parts.append("</table>")
     parts.append("</div></body></html>")
 
