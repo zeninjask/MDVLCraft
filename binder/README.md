@@ -17,6 +17,13 @@ The pack's own mod (Forge 1.20.1 / 47.4.10, Java 17). It:
 
 10. **Gives the Wukong vocation (Monk + Spirit) Sun Wukong's staff moveset.** The first node of the Monk + Spirit tree teaches Monkey King (`mdvlcraft:wukong`), an Epic Fight identity skill; while it is equipped, the Ruyi Jingu Bang (`mdvlcraft:ruyi_jingu_bang`, crafted from a gold block, a blaze rod and a netherite ingot; unbreakable, netherite tier) carries a core of Epic Fight - Wukong Moveset (p1nero, LGPL) ported to Epic Fight 20.14: its idle, walk, run, jump and fall poses, the five-hit combo, the dash and jump attacks, the innate Wukong Smash (hold the weapon-skill key to charge up to five levels, release to smash) and the Wukong Dodge, which the Wukong tree teaches. Without Monkey King equipped the staff is a plain item with no Epic Fight moveset (`wukong/WukongGate`, read from the identity slot that Epic Fight syncs to every player); equipping or removing it while holding the staff takes effect at the next item switch. Its model and texture are the staff of the "BATEX Sun Wukong" resource pack by Refa Store (`tools/wukong/BATEX_Sun_Wukong.zip`), without the pack's OptiFine emissive layer.
 
+## Credits
+
+- **Orca** (Orca_san), author of **JujutsuCraft** (Jujutsu Craft / Sorcery Fight): the JujutsuCraft weapons in the
+  binder are taken from that mod, with Orca's permission.
+- **Jason**, author of **Jujutsu Epic (Jujutsu Craft x Epic Fight)**: those weapons' Epic Fight movesets and weapon
+  types are taken from that add-on, with his permission.
+
 ## Controls (defaults, rebindable under *MDVLCraft Abilities*)
 Every letter key is already used by some mod in the pack, so the defaults avoid letters. The log warns at startup if a binding shares a key with another mod.
 | Key | Action |

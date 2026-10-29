@@ -89,6 +89,7 @@ public final class MDVLBinder {
         GateRewards.register(modBus);
         com.mdvlcraft.binder.gate.GateAdvancements.register(modBus);
         com.mdvlcraft.binder.gate.tower.TowerItems.register(modBus);
+        com.mdvlcraft.binder.traits.TraitSlots.register(modBus);
         BossArena.register(modBus, forgeBus);
         com.mdvlcraft.binder.integration.Willow.register(modBus, forgeBus);
         com.mdvlcraft.binder.integration.YamatoUnbound.register(modBus);

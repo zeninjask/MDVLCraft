@@ -213,6 +213,14 @@ public final class BinderNetwork {
             id++, SyncTraitsPacket.class, SyncTraitsPacket::encode, SyncTraitsPacket::decode, SyncTraitsPacket::handle,
             Optional.of(NetworkDirection.PLAY_TO_CLIENT)
         );
+        CHANNEL.registerMessage(
+            id++, OpenTraitSlotsPacket.class, OpenTraitSlotsPacket::encode, OpenTraitSlotsPacket::decode, OpenTraitSlotsPacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_CLIENT)
+        );
+        CHANNEL.registerMessage(
+            id++, TraitChoicePacket.class, TraitChoicePacket::encode, TraitChoicePacket::decode, TraitChoicePacket::handle,
+            Optional.of(NetworkDirection.PLAY_TO_SERVER)
+        );
         com.mdvlcraft.binder.gate.tower.TowerItems.registerPackets(CHANNEL, id);   // castle sigil menu, tower status line
     }
 
