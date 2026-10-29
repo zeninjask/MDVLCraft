@@ -1,5 +1,19 @@
 {
-  "type": "origins:simple",
+  "type": "origins:conditioned_attribute",
   "name": "Sand Strider",
-  "description": "Sand and soul sand never slow you."
+  "description": "Sand and soul sand never slow you.",
+  "modifiers": [
+    {
+      "attribute": "minecraft:generic.movement_speed",
+      "operation": "multiply_total",
+      "value": 1.5
+    }
+  ],
+  "condition": {
+    "type": "origins:on_block",
+    "block_condition": {
+      "type": "origins:block",
+      "block": "minecraft:soul_sand"
+    }
+  }
 }

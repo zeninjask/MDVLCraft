@@ -27,7 +27,6 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.LivingKnockBackEvent;
 import net.minecraftforge.event.entity.living.MobEffectEvent;
 import net.minecraftforge.event.entity.living.ShieldBlockEvent;
-import net.minecraftforge.event.entity.player.CriticalHitEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
@@ -125,9 +124,12 @@ public final class WarriorSpecs {
         // Brute, Hooked: a spear hit on an enemy moving away pulls it back
         if (Specs.has(attacker, "hooked") && SpecKit.spear(attacker)) {
             Vec3 away = victim.position().subtract(attacker.position()).multiply(1.0, 0.0, 1.0).normalize();
-            if (victim.getDeltaMovement().multiply(1.0, 0.0, 1.0).dot(away) > 0.03) {
-                victim.setDeltaMovement(away.scale(-0.6).add(0.0, 0.15, 0.0));
-                victim.hurtMarked = true;
+            if (victim.getDeltaMovement().multiply(1.0, 0.0, 1.0).dot(away) > 0.03 && attacker.level() instanceof ServerLevel level) {
+                // a tick later, so the hit's own knockback doesn't cancel the pull
+                SpecKit.later(level, 1, () -> {
+                    victim.setDeltaMovement(away.scale(-0.6).add(0.0, 0.15, 0.0));
+                    victim.hurtMarked = true;
+                });
             }
         }
         // Samurai, Severing Wind: a wind slash on from the katana hit, once a second
@@ -188,12 +190,14 @@ public final class WarriorSpecs {
         }
     }
 
-    /** Samurai, Crimson Edge: katana critical hits make the target bleed. */
+    /** Samurai, Crimson Edge: katana critical hits make the target bleed. Epic Fight's battle-mode swings never fire
+     *  CriticalHitEvent, so the hit itself is checked (SpecKit.critical). */
     @SubscribeEvent
-    public static void onCrit(CriticalHitEvent event) {
-        Player player = event.getEntity();
-        if ((event.isVanillaCritical() || event.getResult() == net.minecraftforge.eventbus.api.Event.Result.ALLOW)
-            && event.getTarget() instanceof LivingEntity target && Specs.has(player, "crimson_edge") && SpecKit.katana(player)
+    public static void onCrit(LivingHurtEvent event) {
+        LivingEntity target = event.getEntity();
+        if (event.getSource().getDirectEntity() instanceof Player player && event.getSource().getEntity() == player
+            && !event.getSource().is(net.minecraft.world.damagesource.DamageTypes.INDIRECT_MAGIC)
+            && SpecKit.critical(player) && Specs.has(player, "crimson_edge") && SpecKit.katana(player)
             && player.level() instanceof ServerLevel level) {
             for (int s = 1; s <= 4; s++) {
                 SpecKit.later(level, s * 20, () -> {

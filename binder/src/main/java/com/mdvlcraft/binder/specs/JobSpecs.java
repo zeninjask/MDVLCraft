@@ -399,7 +399,7 @@ public final class JobSpecs {
             return;
         }
         float chance = (Specs.has(player, "sea_bounty") && player.getVehicle() instanceof Boat ? 0.05F : 0.0F)
-            + (Specs.has(player, "lucky_line") ? 0.03F : 0.0F);
+            + (Specs.has(player, "lucky_line") ? 0.013F : 0.0F);
         if (chance <= 0.0F || level.random.nextFloat() >= chance) {
             return;
         }

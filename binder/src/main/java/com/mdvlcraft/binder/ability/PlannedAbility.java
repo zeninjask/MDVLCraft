@@ -47,6 +47,9 @@ public record PlannedAbility(ResourceLocation id) implements Ability {
     }
 
     void cast(ServerPlayer player) {
+        if (RaceArts.cast(player, this.id.getPath().substring(PREFIX.length()), this.displayName())) {
+            return;
+        }
         player.connection.send(new ClientboundSetActionBarTextPacket(
             Component.translatable("ability.mdvlcraft.planned", this.displayName()).withStyle(ChatFormatting.YELLOW)));
     }

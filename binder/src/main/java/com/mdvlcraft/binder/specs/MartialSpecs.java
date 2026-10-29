@@ -310,7 +310,8 @@ public final class MartialSpecs {
         }
     }
 
-    @SubscribeEvent
+    /** Highest priority: other mods (Recruits) take sneak-clicks on villagers before a normal listener would see them. */
+    @SubscribeEvent(priority = EventPriority.HIGHEST)
     public static void onInteract(PlayerInteractEvent.EntityInteract event) {
         Player player = event.getEntity();
         if (player.level().isClientSide) {
@@ -323,7 +324,7 @@ public final class MartialSpecs {
             event.setCancellationResult(InteractionResult.SUCCESS);
         } else if (Specs.has(player, "whisperer")) {
             ItemStack held = event.getItemStack();
-            if (target instanceof TamableAnimal animal && !animal.isTame() && animal.isFood(held)) {
+            if (target instanceof TamableAnimal animal && !animal.isTame() && tamesWith(animal, held)) {
                 animal.tame(player);
                 animal.level().broadcastEntityEvent(animal, (byte)7);
                 if (!player.getAbilities().instabuild) {
@@ -336,6 +337,17 @@ public final class MartialSpecs {
                 horse.level().broadcastEntityEvent(horse, (byte)7);
             }
         }
+    }
+
+    /** Whether `held` is what tames `animal`: a bone for wolves, seeds for parrots, otherwise its food (fish for cats). */
+    private static boolean tamesWith(TamableAnimal animal, ItemStack held) {
+        if (animal instanceof net.minecraft.world.entity.animal.Wolf) {
+            return held.is(Items.BONE);
+        }
+        if (animal instanceof net.minecraft.world.entity.animal.Parrot) {
+            return held.is(Items.WHEAT_SEEDS) || held.is(Items.MELON_SEEDS) || held.is(Items.PUMPKIN_SEEDS) || held.is(Items.BEETROOT_SEEDS);
+        }
+        return animal.isFood(held);
     }
 
     /** Pickpocket: one random trade result, once a day per villager. */

@@ -24,7 +24,7 @@ public sealed interface Ability permits SpellAbility, Technique, SlotSkillAbilit
 
     int manaCost(int var1);
 
-    static Optional<Ability> byId(ResourceLocation id) {
+    public static Optional<Ability> byId(ResourceLocation id) {
         Optional<Ability> technique = Technique.byId(id).map(t -> (Ability)t);
         if (technique.isPresent()) {
             return technique;

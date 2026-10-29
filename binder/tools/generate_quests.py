@@ -905,12 +905,117 @@ def write_misc_advancements():
         f.write('\n')
 
 
+SHIP_ROWS = [
+    ("aleki's Nifty Ships", [
+        ('scaffold', "Shipwright's Scaffolding", [item('alekiships:watercraft_frame_flat'), item('alekiships:watercraft_frame_angled')],
+         [give('minecraft:oak_planks', 16), xp(50)],
+         "Ships are built, not crafted. Craft Flat and Sloped Shipwright's Scaffolding, then lay them on the water's edge in "
+         'the shape of a hull. A wrong shape says "No Valid Hull Structure Found".', [], 'alekiships:watercraft_frame_angled', 'gear'),
+        ('rowboat', 'The Montlake Cut', [advancement('alekiships:rowboat_completed')], [give('alekiships:oar', 2), xp(100)],
+         'Fill the scaffolding with planks to finish a Rowboat. Fit oarlocks and oars to row it; it carries more than a boat.',
+         None, 'alekiships:oar', None),
+        ('anchor', 'Drop Anchor', [item('alekiships:anchor'), item('alekiships:cleat')], [xp(100)],
+         'Craft an Anchor and a Cleat. With no anchor down, the wind pushes your ship about.', None, 'alekiships:anchor', None),
+        ('sloop', "Yesler's Wharf", [advancement('alekiships:sloop_completed')], [give('minecraft:white_wool', 8), xp(250)],
+         'Build a Sloop: a bigger hull of scaffolding with a sail. Put chests, furnaces and other blocks in its compartments.',
+         None, 'alekiships:sloop_icon_only', None),
+        ('cannon', 'Incoming Cannon Event', [advancement('alekiships:cannon')], [give('alekiships:cannonball', 8), xp(150)],
+         'Craft a Cannon and mount it on your ship.', None, 'alekiships:cannon', None),
+        ('broadside', 'Master and Commander', [advancement('alekiships:full_broadside')], [give('minecraft:gunpowder', 8), xp(300)],
+         'Load the cannons with cannonballs and gunpowder and fire a full broadside.', None, 'alekiships:cannonball', 'gear'),
+    ]),
+]
+
+CART_ROWS = [
+    ('Astikor Carts', [
+        ('wheel', 'Reinventing the Wheel', [item('astikorcartsredux:wheel', 2)], [give('minecraft:stick', 8), xp(50)],
+         'Craft two Wheels: sticks around planks. Every cart needs them. Carts come in every wood; the oak ones count here.',
+         [], 'astikorcartsredux:wheel', 'gear'),
+        ('supply', 'Pack Animal', [item('astikorcartsredux:oak_supply_cart')], [give('minecraft:lead', 2), xp(100)],
+         'Craft a Supply Cart and hitch it to a horse, donkey or mule (or pull it yourself) with the Action key. It holds '
+         'as much as a double chest.', None, 'astikorcartsredux:oak_supply_cart', None),
+        ('plow', 'Breaking Ground', [item('astikorcartsredux:oak_plow')], [give('minecraft:wheat_seeds', 16), xp(100)],
+         'Craft a Plow and pull it with a horse: it tills the ground behind it. Put hoes in it.', None, 'astikorcartsredux:oak_plow', None),
+        ('drill', 'Row by Row', [item('astikorcartsredux:oak_seed_drill')], [give('minecraft:bone_meal', 16), xp(100)],
+         'Craft a Seed Drill: pulled over farmland, it plants the seeds you put in it.', None, 'astikorcartsredux:oak_seed_drill', None),
+        ('reaper', 'Harvest Time', [item('astikorcartsredux:oak_reaper')], [xp(150)],
+         'Craft a Reaper: it harvests ripe crops as it is pulled over them.', None, 'astikorcartsredux:oak_reaper', None),
+        ('animal', 'Carriage Ride', [item('astikorcartsredux:oak_animal_cart')], [give('minecraft:saddle'), xp(150)],
+         'Craft an Animal Cart: two seats for players or animals, and it takes a banner.', None,
+         'astikorcartsredux:oak_animal_cart', 'gear'),
+    ]),
+]
+
+RECRUIT_ROWS = [
+    ('Recruits, Workers and Siege', [
+        ('hire', 'Men at Arms', [checkmark()], [give('minecraft:emerald', 6), xp(100)],
+         "Recruits stand at their tables in villages. Talk to one and pay its price in emeralds to hire it. Give it a weapon "
+         'and armour from its inventory screen, and food to keep it fed.', [], 'recruits:recruit_block', 'gear'),
+        ('command', 'Form Up', [checkmark()], [xp(100)],
+         'Press R to open the command screen: follow, hold position, move, attack, and set formations. Press U for the '
+         'faction screen.', None, 'minecraft:iron_sword', None),
+        ('worker', 'An Honest Day', [checkmark()], [give('minecraft:chest', 2), xp(100)],
+         'Workers are hired the same way: farmers, miners, lumberjacks, fishermen, cooks, couriers, builders and merchants. '
+         'Give each a work area and a chest nearby to put its goods in.', None, 'minecraft:iron_hoe', None),
+        ('bench', 'Siege Workbench', [item('siegemachines:siege_workbench')], [give('minecraft:iron_ingot', 8), xp(100)],
+         'Craft a Siege Workbench. Siege engines are made on it from beams, wheels, barrels and counterweights.', None,
+         'siegemachines:siege_workbench', None),
+        ('ladder', 'Over the Wall', [advancement('siegemachines:siege_ladder')], [xp(150)],
+         'Build a Siege Ladder and wheel it up to a wall.', None, 'siegemachines:siege_ladder', None),
+        ('ram', 'Knock Knock', [advancement('siegemachines:battering_ram')], [xp(150)],
+         'Build a Battering Ram.', None, 'siegemachines:battering_ram', None),
+        ('ballista', 'Bolt Thrower', [advancement('siegemachines:ballista')], [give('siegemachines:giant_arrow', 8), xp(200)],
+         'Build a Ballista. It fires Giant Arrows.', None, 'siegemachines:ballista', None),
+        ('trebuchet', 'Heavy Artillery', [advancement('siegemachines:trebuchet')], [give('siegemachines:stone', 8), xp(300)],
+         'Build a Trebuchet. It throws stones far over walls.', None, 'siegemachines:trebuchet', None),
+        ('engineer', 'Master Engineer', [advancement('siegemachines:master_engineer')], [give('minecraft:emerald', 16), xp(500)],
+         'Build every kind of siege engine.', None, 'siegemachines:counterweight', 'gear'),
+    ]),
+]
+
+BOUNTY_ROWS = [
+    ('Bountiful', [
+        ('board', 'Wanted', [item('bountiful:bountyboard')], [xp(50)],
+         'Bounty Boards stand in villages, or craft your own from planks, logs, paper and a diamond. Open one to see the '
+         'bounties on offer.', [], 'bountiful:bountyboard', 'gear'),
+        ('take', 'Work for Hire', [item('bountiful:bounty')], [give('minecraft:emerald', 2), xp(50)],
+         'Take a bounty from the board. It lists what to bring or do, the reward, and how long you have.', None, 'bountiful:bounty', None),
+        ('complete', 'Honest Pay for Honest Work', [checkmark()], [give('minecraft:emerald', 4), xp(150)],
+         'Do what the bounty asks, then right-click the board with it to turn it in. Bounties expire if you wait too long.',
+         None, 'minecraft:emerald', None),
+        ('decree', 'Town Crier', [item('bountiful:decree')], [xp(150)],
+         'Craft a Decree: paper, sticks, a gold ingot and purple dye. Put it in a bounty board to choose which trades its '
+         'bounties come from.', None, 'bountiful:decree', None),
+    ]),
+]
+
+DOMESTIC_ROWS = [
+    ('Domestication Innovation', [
+        ('collar', 'Collar Tag', [item('domesticationinnovation:collar_tag')], [give('minecraft:lapis_lazuli', 8), xp(50)],
+         'Craft a Collar Tag: a chain over a copper ingot. Enchant it at an enchanting table with pet enchantments, then use '
+         'it on a tamed animal to give them to it.', [], 'domesticationinnovation:collar_tag', 'gear'),
+        ('bed', 'Home Sweet Home', [item('domesticationinnovation:pet_bed_red')], [give('minecraft:white_wool', 3), xp(100)],
+         'Craft a Pet Bed and give it to your pet: a pet with a bed respawns at it when it dies.', None,
+         'domesticationinnovation:pet_bed_red', None),
+        ('drum', 'Command Drum', [item('domesticationinnovation:drum')], [xp(100)],
+         'Craft a Command Drum: leather over planks. Beat it to have all your pets nearby follow, stay or wander.', None, 'domesticationinnovation:drum', None),
+        ('feather', 'Playtime', [item('domesticationinnovation:feather_on_a_stick')], [give('minecraft:cod', 4), xp(50)],
+         'Craft a Feather on a Stick. Cats chase it.', None, 'domesticationinnovation:feather_on_a_stick', None),
+        ('enchanted', 'A Gifted Pet', [checkmark()], [give('minecraft:experience_bottle', 4), xp(150)],
+         'Enchant a Collar Tag and use it on your pet. Health, speed, fire immunity, chain lightning and many more: each '
+         'enchantment works for as long as the pet wears the tag.', None, 'minecraft:enchanting_table', 'gear'),
+    ]),
+]
+
+
 def misc_chapter():
     """Miscellaneous: one row per mod group, each numbered on its own with its letter (001B, 001F, 001S ...). A quest
     needs only the quest before it in its own row; no group depends on another. Rewards are items and experience only."""
     q = []
     for row, (file, letter, rows) in enumerate([('brewing', 'B', BREWING_ROWS), ('food', 'F', FOOD_ROWS),
-                                                ('familiars', 'S', FAMILIAR_ROWS)]):
+                                                ('familiars', 'S', FAMILIAR_ROWS), ('ships', 'N', SHIP_ROWS),
+                                                ('carts', 'C', CART_ROWS), ('recruits', 'R', RECRUIT_ROWS),
+                                                ('bounties', 'Y', BOUNTY_ROWS), ('pets', 'D', DOMESTIC_ROWS)]):
         prev = None
         quests = [qu for _, qs in rows for qu in qs]
         for col, (key, qtitle, tasks, rewards, desc, _, qicon, shape) in enumerate(quests):
@@ -920,7 +1025,7 @@ def misc_chapter():
             q.append(qu)
             prev = qu.id
     check_gate_rewards(q)
-    return dict(file='misc', title='Miscellaneous', icon='minecraft:book', subtitle='How the smaller mods work: cooking, brewing, Familiars.',
+    return dict(file='misc', title='Miscellaneous', icon='minecraft:book', subtitle='How the smaller mods work: cooking, brewing, Familiars, ships, carts, recruits, bounties and pets.',
                 quests=q)
 
 

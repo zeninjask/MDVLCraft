@@ -80,6 +80,8 @@ public final class MdvlCommand {
                 .then(Commands.literal("rigs").executes(MdvlCommand::rigs))
                 .then(Commands.literal("obtainable").executes(MdvlCommand::obtainable))
                 .then(Commands.literal("dump").executes(MdvlCommand::dump))
+                .then(Commands.literal("grant").then(Commands.argument("player", EntityArgument.player()).then(Commands.argument("ability", ResourceLocationArgument.id())
+                    .then(Commands.argument("level", IntegerArgumentType.integer(0, 10)).executes(MdvlCommand::grant)))))
                 .then(Commands.literal("respec").then(Commands.argument("players", EntityArgument.players()).executes(MdvlCommand::respec)))
         );
     }
@@ -198,6 +200,21 @@ public final class MdvlCommand {
         ((CommandSourceStack)context.getSource())
             .sendSuccess(() -> Component.literal("Granted: [" + granted + "] Wheel: [" + wheel + "] Mana: " + mana + "/" + maxMana), false);
         return AbilityGrants.of(player).size();
+    }
+
+    /** Gives an ability at a level (0 takes it back), outside the skill trees: for testing. */
+    private static int grant(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = EntityArgument.getPlayer(context, "player");
+        ResourceLocation id = ResourceLocationArgument.getId(context, "ability");
+        int level = IntegerArgumentType.getInteger(context, "level");
+        return Ability.byId(id).map(ability -> {
+            AbilityGrants.give(player, ability, level);
+            context.getSource().sendSuccess(() -> Component.literal((level > 0 ? "Granted " : "Took back ") + id), false);
+            return 1;
+        }).orElseGet(() -> {
+            context.getSource().sendFailure(Component.literal("Unknown ability " + id));
+            return 0;
+        });
     }
 
     private static int assign(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {

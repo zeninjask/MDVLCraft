@@ -13,6 +13,8 @@ import net.minecraft.server.level.ServerPlayer;
 public final class AbilityGrants {
     private static final Map<UUID, Set<AbilityReward>> ACTIVE = new HashMap<>();
     private static final Set<UUID> DIRTY = new HashSet<>();
+    /** Abilities given by /mdvl grant (testing), until the server stops. */
+    private static final Map<UUID, Map<Ability, Integer>> GIVEN = new HashMap<>();
 
     private AbilityGrants() {
     }
@@ -53,6 +55,7 @@ public final class AbilityGrants {
             granted.merge(reward.ability, reward.level, Math::max);
         }
 
+        GIVEN.getOrDefault(player.getUUID(), Map.of()).forEach((ability, level) -> granted.merge(ability, level, Math::max));
         for (PlannedAbility ability : RaceAbilities.of(player)) {
             granted.putIfAbsent(ability, 1);
         }
@@ -62,6 +65,20 @@ public final class AbilityGrants {
 
     public static int level(ServerPlayer player, Ability ability) {
         return of(player).getOrDefault(ability, 0);
+    }
+
+    /** Gives (level > 0) or takes back (0) an ability outside the skill trees, for testing (/mdvl grant). */
+    public static void give(ServerPlayer player, Ability ability, int level) {
+        Map<Ability, Integer> given = GIVEN.computeIfAbsent(player.getUUID(), uuid -> new HashMap<>());
+        if (level > 0) {
+            given.put(ability, level);
+            if (ability instanceof SpellAbility spellAbility && spellAbility.spell().requiresLearning()) {
+                MagicData.getPlayerMagicData(player).getSyncedData().learnSpell(spellAbility.spell());
+            }
+        } else {
+            given.remove(ability);
+        }
+        DIRTY.add(player.getUUID());
     }
 
     /** Re-sends the player's abilities (something outside the skill trees changed what they are granted). */

@@ -1,8 +1,9 @@
-"""Writes the race abilities (as "(Modified)" placeholders, ability/PlannedAbility) and the new races.
+"""Writes the race abilities (PlannedAbility ids, built in ability/RaceArts) and the new races.
 
 Every race keeps 2 abilities, granted while the player has that race (ability/RaceAbilities) and listed on the origin
-picker. They are not built yet: casting one only says so. New races get their origin file, their passive powers (built
-on Origins power types where one fits; the rest are text only, marked TEXT_ONLY below), and an entry in the race layer.
+picker; ability/RaceArts casts them. New races get their origin file, their passive powers (built
+on Origins power types where one fits; the rest, text() below, are binder code in ability/RaceTraits), and an entry in
+the race layer.
 
 Writes:
   src/main/resources/data/mdvlcraft/planned_abilities.json     race_<race>_<ability> entries (name, description)
@@ -105,7 +106,7 @@ def pocket(name, desc, title, condition=None):
 
 
 def text(name, desc):
-    """TEXT_ONLY: shown on the picker, not built yet (needs binder code)."""
+    """A power Origins has no type for: only its name and text here, the effect is binder code (ability/RaceTraits)."""
     return {'type': 'origins:simple', 'name': name, 'description': desc}
 
 
@@ -140,7 +141,8 @@ NEW = [
          ('Call the Rain', 'Start rain (or stop it) in your area. 20 min cooldown.')]),
     ('dunekin', 'Dunekin', 'Sun-dark nomads of the great dunes, keepers of buried tombs. Sand is their road and thirst a stranger.',
      'minecraft:sand', {
-         'sand_strider': text('Sand Strider', 'Sand and soul sand never slow you.'),
+         'sand_strider': attribute('Sand Strider', 'Sand and soul sand never slow you.', 'minecraft:generic.movement_speed', 1.5,
+                                   'multiply_total', {'type': 'origins:on_block', 'block_condition': {'type': 'origins:block', 'block': 'minecraft:soul_sand'}}),
          'desert_hardy': exhaustion('Desert Hardy', 'Your hunger drains 25% slower in deserts.', -0.25, biome('forge:is_desert')),
          'cold_blooded': damage_taken('Cold Blooded', 'You take 20% more damage from cold and ice.', ICE, 0.2),
      }, [('Mirage', 'Leave an illusion of yourself that draws mobs for 6 s while you become invisible for 3 s. 90 s cooldown.'),
@@ -269,7 +271,7 @@ def main():
             key = f'race_{rid}_{slug(name)}'
             keys.append(key)
             planned[key] = {'name': name, 'description': desc}
-            lang[f'ability.mdvlcraft.planned_{key}'] = f'{name} (Modified)'
+            lang[f'ability.mdvlcraft.planned_{key}'] = name
             lang[f'ability.mdvlcraft.planned_{key}.desc'] = desc
             shutil.copyfile(os.path.join(ICONS, icon_for(key, name, icon_names)), os.path.join(ICONS, f'mdvlcraft_planned_{key}.png'))
         by_origin[origin] = keys

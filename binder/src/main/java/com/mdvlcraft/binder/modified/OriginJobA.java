@@ -587,8 +587,10 @@ public final class OriginJobA {
                     a -> a.isAlive() && !(a instanceof TamableAnimal) && a.distanceToSqr(caster) <= reach * reach);
                 Zones.start(server, caster.position(), caster, 0.0F, 200, 20, zone -> {
                     for (Animal animal : herd) {
-                        if (animal.isAlive() && animal.distanceToSqr(caster) > 9.0) {
-                            animal.getNavigation().moveTo(caster, 1.2);
+                        if (animal.isAlive() && animal.distanceToSqr(caster) > 9.0 && !animal.getNavigation().moveTo(caster, 1.2)) {
+                            // too far to path to in one go (beyond its follow range): walk 12 blocks toward the caster, re-aimed each second
+                            net.minecraft.world.phys.Vec3 step = caster.position().subtract(animal.position()).normalize().scale(12.0).add(animal.position());
+                            animal.getNavigation().moveTo(step.x, step.y, step.z, 1.2);
                         }
                     }
                 }, () -> {

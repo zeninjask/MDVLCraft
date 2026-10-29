@@ -45,6 +45,8 @@ public final class SpecKit {
     private static final List<Zone> ZONES = new ArrayList<>();
     /** Mobs pinned on a decoy (or a forced target), until a game time. */
     private static final Map<UUID, Pin> PINNED = new HashMap<>();
+    /** Last game time each player was falling (off the ground, falling), for critical hits (critical). */
+    private static final Map<UUID, Long> FALLING = new HashMap<>();
 
     private SpecKit() {
     }
@@ -100,6 +102,7 @@ public final class SpecKit {
     @SubscribeEvent
     public static void onStopped(ServerStoppedEvent event) {
         TASKS.clear();
+        FALLING.clear();
         ZONES.clear();
         PINNED.clear();
     }
@@ -203,6 +206,24 @@ public final class SpecKit {
     }
 
     // ---- hits ----
+
+    /**
+     * Whether a melee hit by `player` now is a critical hit: they were falling within the last 10 ticks. Vanilla checks
+     * the moment of the swing, but an Epic Fight attack lands at its animation's contact frame, often after touching down.
+     */
+    public static boolean critical(Player player) {
+        Long at = FALLING.get(player.getUUID());
+        return at != null && player.level().getGameTime() - at <= 10;
+    }
+
+    @SubscribeEvent
+    public static void onPlayerTick(TickEvent.PlayerTickEvent event) {
+        Player player = event.player;
+        if (event.phase == TickEvent.Phase.END && !player.level().isClientSide && !player.onGround() && player.fallDistance > 0.0F
+            && !player.onClimbable() && !player.isInWater()) {
+            FALLING.put(player.getUUID(), player.level().getGameTime());
+        }
+    }
 
     /** The school of the Iron's spell that dealt `source`, or null if no spell did. */
     @Nullable
