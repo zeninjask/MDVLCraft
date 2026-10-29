@@ -90,6 +90,7 @@ public final class MDVLBinder {
         com.mdvlcraft.binder.gate.GateAdvancements.register(modBus);
         com.mdvlcraft.binder.gate.tower.TowerItems.register(modBus);
         BossArena.register(modBus, forgeBus);
+        com.mdvlcraft.binder.integration.Willow.register(modBus, forgeBus);
         PartyTravel.register(forgeBus);
         HerobrineLook.register();
         HerobrineInvitation.register();

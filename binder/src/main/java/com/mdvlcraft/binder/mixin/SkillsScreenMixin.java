@@ -143,4 +143,17 @@ public abstract class SkillsScreenMixin {
         String key = cost == 0 ? "screen.mdvlcraft.skills.cost_free" : (cost == 1 ? "screen.mdvlcraft.skills.cost_one" : "screen.mdvlcraft.skills.cost");
         return Component.empty().append(definition.title()).append(Component.translatable(key, cost).withStyle(ChatFormatting.GOLD));
     }
+
+    /** Exclusive links (the three specialisations of a base, one may be taken) are always drawn, not only on hover. */
+    @Redirect(
+        method = "drawContentWithCategory",
+        at = @At(value = "INVOKE", target = "Lnet/puffish/skillsmod/client/config/ClientCategoryConfig;normalConnections()Ljava/util/Collection;"),
+        require = 0
+    )
+    private java.util.Collection<net.puffish.skillsmod.client.config.skill.ClientSkillConnectionConfig> mdvlcraft$withExclusive(
+            net.puffish.skillsmod.client.config.ClientCategoryConfig category) {
+        java.util.List<net.puffish.skillsmod.client.config.skill.ClientSkillConnectionConfig> all = new java.util.ArrayList<>(category.normalConnections());
+        all.addAll(category.exclusiveConnections());
+        return all;
+    }
 }

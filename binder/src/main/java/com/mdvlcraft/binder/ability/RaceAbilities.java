@@ -26,8 +26,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * Each race's 2 abilities (data/mdvlcraft/race_abilities.json, written by tools/races/build_races.py): granted while the
- * player has that race, so they leave with it (an Orb of Origin, a new race). Not built yet, they are PlannedAbility
- * placeholders ("(Modified)"). Once a second the player's race is checked, and their abilities re-sent when it changed.
+ * player has that race, so they leave with it (an Orb of Origin, a new race). They are PlannedAbility ids, cast by
+ * RaceArts. Once a second the player's race is checked; when it changed their abilities are re-sent and the old ones
+ * leave the wheel.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class RaceAbilities {
@@ -64,6 +65,7 @@ public final class RaceAbilities {
             ResourceLocation race = race(player);
             if (!java.util.Objects.equals(SEEN.put(player.getUUID(), race), race)) {
                 AbilityGrants.refresh(player);
+                AbilityActions.dropUngranted(player);   // the old race's abilities leave the wheel too
             }
         }
     }

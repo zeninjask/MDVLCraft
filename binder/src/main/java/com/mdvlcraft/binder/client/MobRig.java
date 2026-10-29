@@ -54,7 +54,10 @@ public final class MobRig {
     /** GeckoLib models (by entity type) whose biped bones go by other names: a part's bone name -> the model's, matched by pivot. */
     private static final Map<String, Map<String, String>> RENAMED = Map.of(
         // its sides are swapped against the casting mobs' model (right_arm pivots at x 5, where their left_arm does) and "left _arm" has a space
-        "iss_magicfromtheeast:jiangshi", Map.of("right_arm", "left _arm", "left_arm", "right_arm", "right_leg", "left_leg", "left_leg", "right_leg"));
+        "iss_magicfromtheeast:jiangshi", Map.of("right_arm", "left _arm", "left_arm", "right_arm", "right_leg", "left_leg", "left_leg", "right_leg"),
+        // Cursed Fate's Willow (integration/Willow): Blockbench's default biped names
+        "cursedfate:willow_the_jujutsu_trader", Map.of("head", "Head", "torso", "Body", "right_arm", "Right Arm", "left_arm", "Left Arm",
+            "right_leg", "Right Leg", "left_leg", "Left Leg"));
     /** Vanilla model space: up 1.501 blocks, x and y flipped (LivingEntityRenderer's scale(-1, -1, 1)). */
     private static final OpenMatrix4f VANILLA_SPACE = vanillaSpace();
     private static final OpenMatrix4f FROM_VANILLA_SPACE = OpenMatrix4f.invert(VANILLA_SPACE, null);
@@ -157,14 +160,15 @@ public final class MobRig {
         return true;
     }
 
-    /** The patch of a mob Epic Fight doesn't draw itself, in the middle of an action, or null. */
+    /** The patch of a mob Epic Fight doesn't draw itself, in the middle of an action (Willow always), or null. */
     private static LivingEntityPatch<?> acting(Entity entity) {
         if (!(entity instanceof LivingEntity living) || ClientEngine.getInstance().renderEngine.hasRendererFor(entity)) {
             return null;
         }
 
         LivingEntityPatch<?> patch = EpicFightCapabilities.getEntityPatch(living, LivingEntityPatch.class);
-        return patch != null && patch.getArmature() instanceof HumanoidArmature && patch.getEntityState().inaction() ? patch : null;
+        return patch != null && patch.getArmature() instanceof HumanoidArmature
+            && (patch.getEntityState().inaction() || patch instanceof com.mdvlcraft.binder.integration.WillowPatch) ? patch : null;
     }
 
     /** A part's vanilla pose under the current joints: x, y, z (pixels), xRot, yRot, zRot. */

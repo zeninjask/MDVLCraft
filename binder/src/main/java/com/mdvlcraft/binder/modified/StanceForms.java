@@ -130,14 +130,16 @@ public final class StanceForms {
             }
             case THUNDER -> {
                 MartialSpells.stun(victim, StunType.SHORT, 0.3F);
-                Targets.enemies(player, victim.position(), 5.0).stream().filter(e -> e != victim)
-                    .min(Comparator.comparingDouble(e -> e.distanceToSqr(victim))).ifPresent(next -> {
-                        next.invulnerableTime = 0;   // the same swing may have just hit it
-                        next.hurt(new DamageSource(player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE)
-                            .getHolderOrThrow(DamageTypes.LIGHTNING_BOLT), null, player), amount / 3.0F);
-                        MartialSpells.stun(next, StunType.SHORT, 0.3F);
-                        arc((ServerLevel)player.level(), victim.getEyePosition(), next.getEyePosition());
-                    });
+                // a tick later: a sweep that hits the next foe too would otherwise swallow the arc in its hurt cooldown
+                com.mdvlcraft.binder.specs.SpecKit.later((ServerLevel)player.level(), 1, () ->
+                    Targets.enemies(player, victim.position(), 5.0).stream().filter(e -> e != victim)
+                        .min(Comparator.comparingDouble(e -> e.distanceToSqr(victim))).ifPresent(next -> {
+                            next.invulnerableTime = 0;   // the same swing may have just hit it
+                            next.hurt(new DamageSource(player.level().registryAccess().registryOrThrow(Registries.DAMAGE_TYPE)
+                                .getHolderOrThrow(DamageTypes.LIGHTNING_BOLT), null, player), amount / 3.0F);
+                            MartialSpells.stun(next, StunType.SHORT, 0.3F);
+                            arc((ServerLevel)player.level(), victim.getEyePosition(), next.getEyePosition());
+                        }));
             }
             case FLOWING -> {
                 Vec3 push = victim.position().subtract(player.position()).multiply(1.0, 0.0, 1.0).normalize();
