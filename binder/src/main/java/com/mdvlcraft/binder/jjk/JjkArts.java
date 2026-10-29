@@ -205,6 +205,14 @@ public final class JjkArts {
                     SpecKit.later(level, 4 + i * 3, () -> blink(player, target));
                 }
             }
+            case THROUGH_INFINITY -> SpecKit.later(level, contact, () -> {
+                // a thrust no guard, shield or immunity frame stops (mdvlcraft:puncture)
+                LivingEntity target = target(player, active);
+                if (target != null) {
+                    level.sendParticles(ParticleTypes.CRIT, target.getX(), target.getY(0.6), target.getZ(), 12, 0.2, 0.3, 0.2, 0.3);
+                    deal(target, source(player, PUNCTURE, player), (float)player.getAttributeValue(Attributes.ATTACK_DAMAGE));
+                }
+            });
             case CLOUD_CRUSHER -> SpecKit.later(level, contact, () -> {
                 for (LivingEntity e : SpecKit.enemies(player, player.position(), 4.0)) {
                     deal(e, source(player, PUNCTURE, player), 8.0F);
@@ -383,18 +391,6 @@ public final class JjkArts {
         LivingEntity intruder = SpecKit.nearestEnemy(player, player.position(), 3.0, player);
         if (intruder != null && intruder instanceof net.minecraft.world.entity.monster.Enemy) {
             counter(player, intruder);
-        }
-    }
-
-    @SubscribeEvent(priority = EventPriority.HIGHEST)
-    public static void onAttack(LivingAttackEvent event) {
-        // Through Infinity: the hit is dealt again as a puncture, which no guard, shield or immunity frame stops
-        if (event.getSource().getEntity() instanceof ServerPlayer player && ownHit(event.getSource(), player)) {
-            Active active = active(player);
-            if (active != null && active.kind == Kind.THROUGH_INFINITY) {
-                event.setCanceled(true);
-                deal(event.getEntity(), source(player, PUNCTURE, player), event.getAmount());
-            }
         }
     }
 

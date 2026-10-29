@@ -189,7 +189,7 @@ public class CharacterScreen extends Screen {
                 Component.translatable("screen.mdvlcraft.character.experience"),
                 archetype.<String>map(a -> a.getCurrentExperience() + " / " + (a.getCurrentExperience() + a.getExperienceToNextLevel())).orElse("n/a")
             );
-            y += 8;
+            y += 1;
             y = this.heading(g, left, y, "screen.mdvlcraft.character.attributes");
             y = this.attr(g, player, left, colW, y, "minecraft:generic.attack_damage", v -> fixed(v, 1));
             y = this.attr(g, player, left, colW, y, "minecraft:generic.attack_speed", v -> fixed(v, 2));
@@ -377,13 +377,9 @@ public class CharacterScreen extends Screen {
         return lines;
     }
 
-    /** The Trait row: none, the one trait, or the first and how many more. */
+    /** The Traits row: how many the player has (the tooltip names them). */
     private static String traitValue(List<Trait> traits) {
-        if (traits.isEmpty()) {
-            return Component.translatable("screen.mdvlcraft.character.trait.none").getString();
-        }
-        String first = Component.translatable(traits.get(0).nameKey()).getString();
-        return traits.size() == 1 ? first : first + " +" + (traits.size() - 1);
+        return traits.isEmpty() ? Component.translatable("screen.mdvlcraft.character.trait.none").getString() : String.valueOf(traits.size());
     }
 
     /** Each trait's name (in its tier's colour) and what it does. */

@@ -106,8 +106,11 @@ public class TraitSlotScreen extends Screen {
             Component label;
             if (slot >= 0) {
                 Trait there = Trait.byId(this.slots.get(slot));
-                label = Component.translatable("screen.mdvlcraft.trait_slots.slot", slot + 1,
-                    there == null ? Component.translatable("screen.mdvlcraft.character.trait.none") : Component.translatable(there.nameKey()));
+                Component name = there == null ? Component.translatable("screen.mdvlcraft.character.trait.none") : Component.translatable(there.nameKey());
+                label = Component.translatable("screen.mdvlcraft.trait_slots.slot", slot + 1, name);
+                if (this.font.width(label) > bw - 8) {
+                    label = Component.literal(this.font.plainSubstrByWidth(label.getString(), bw - 8 - this.font.width("..")) + "..");
+                }
             } else {
                 label = Component.translatable("screen.mdvlcraft.trait_slots.discard");
             }
