@@ -1,10 +1,11 @@
 package com.mdvlcraft.binder.combat;
 
-import com.mdvlcraft.binder.attribute.BinderAttributes;
 import com.mdvlcraft.binder.ability.Ability;
 import com.mdvlcraft.binder.ability.MonkArts;
 import com.mdvlcraft.binder.ability.SlashPierce;
+import com.mdvlcraft.binder.attribute.BinderAttributes;
 import com.mdvlcraft.binder.config.BinderConfig;
+import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -23,9 +24,14 @@ public final class TechniqueScaling {
             && event.getSource().typeHolder().unwrapKey().map(key -> key.location().getNamespace().equals("cursedfate")).orElse(false)
 ) {
             boolean slash = SlashPierce.slashHit(event.getSource());
-            // Shrine's slashes don't scale with the held weapon, only with Shrine Damage
-            float factor = MonkArts.artActive(caster) || slash ? 1.0F : factor(caster, event);
+            boolean sear = SlashPierce.searingNow();
+            // Shrine's techniques (its slashes and Sear) don't scale with the held weapon, but with fire spell power;
+            // the slashes also with Shrine Damage
+            float factor = MonkArts.artActive(caster) || slash || sear ? 1.0F : factor(caster, event);
             float shrine = slash ? SlashPierce.SHRINE_DAMAGE * (1.0F + (float)caster.getAttributeValue(BinderAttributes.SHRINE_DAMAGE.get())) : 1.0F;
+            if (slash || sear) {
+                shrine *= (float)caster.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER.get());
+            }
             event.setAmount(event.getAmount() * factor * shrine * Ability.DAMAGE_SCALE);
         }
     }

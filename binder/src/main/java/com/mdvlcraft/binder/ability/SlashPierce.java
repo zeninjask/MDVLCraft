@@ -29,6 +29,11 @@ public final class SlashPierce {
         }
     }
 
+    /** Whether the hit being dealt now is one of Sear's (searing). */
+    public static boolean searingNow() {
+        return SEARING.get();
+    }
+
     /** Runs a hit of Sear's (mixin/cursedfate/SearHitMixin): it isn't a shrine attack, even inside the chef's shrine. */
     public static <T> T searing(java.util.function.Supplier<T> hit) {
         SEARING.set(true);

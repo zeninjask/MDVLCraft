@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 /**
  * Sear's flame (Cursed Fate's Fuga, and Divine Flame inside the chef's own open shrine) where it lands: everything within
  * 4.5 blocks is hit and set alight for 15 s. Party members and other allies of the caster (Entity.isAlliedTo, which asks
- * Parties, mixin/parties/EntityAllianceMixin) are neither hit nor set alight; everything else takes four times the damage.
+ * Parties, mixin/parties/EntityAllianceMixin) are neither hit nor set alight; everything else takes eight times the damage.
  */
 @Mixin(targets = {
     "cursedfate.procedures.FugaProjectileHitsBlockProcedure",
@@ -21,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 }, remap = false)
 public abstract class SearHitMixin {
     @Unique
-    private static final float SEAR_DAMAGE = 4.0F;
+    private static final float SEAR_DAMAGE = 8.0F;
     /** The ally whose hit was just skipped: its fire is skipped too (each hit is followed by its setSecondsOnFire). */
     @Unique
     private static final ThreadLocal<Entity> mdvlcraft$spared = new ThreadLocal<>();
