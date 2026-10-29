@@ -32,6 +32,20 @@ You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its ow
   relog. Not tested in game: the Cloak of Darkness key. The test player holding a demon sword needs it in hotbar slot 1
   (the Mage Hunter / samurai slot moves it there).
 
+## JJK weapon skills and traits (29 Oct 2026, not released, untested in game)
+
+- **JJK weapon skills** (`jjk/JjkSkill`, `jjk/JjkArts`): 13 innate skills for the Cursed Fate and Projection Sorcery weapons,
+  picked by the user: Splintered Soul (Split Soul Katana), Through Infinity, Stored Impact, Hemorrhage, Thunderclap,
+  Heian Sky Dance, Into the Zone, Full Moon Sweep, Ratio 7:3, Bird Strike, Rika's Arm, Jacob's Ladder, 24 FPS. Damage
+  types `mdvlcraft:true_cut`, `puncture`, `bleed` (data/mdvlcraft/damage_type, tagged in data/minecraft and data/epicfight).
+- **Traits** (`traits/`): 46 traits the user picked, up to 2 slots, kept in the player's persisted data and shown as a
+  Trait row (with a tooltip) on the Status page (SyncTraitsPacket, network protocol 28). **They can't be obtained yet**
+  (the user said so: no item, no rolls); ops set them with `/mdvl trait set <player> <slot> <trait>`, `clear`, `slots`.
+  Mixins in `mixin/traits` (regen rate, hunger drain, durability, Blood Price's cast check).
+- **Not wanted:** a Fate Shard item or random rolls (removed on request).
+- **JujutsuCraft (Orca) weapons:** not copied in. JujutsuCraft is All Rights Reserved (Modrinth), and the Epic Fight patch's
+  licence couldn't be checked (CurseForge is blocked here).
+
 ## Specialisations, spell ranks and races (branch `claude/clever-babbage-t08qqj`)
 
 Read `docs/HANDOFF_SPECS_AND_RACES.md`: what is built, what is still to code, and the race picks waiting to be implemented.

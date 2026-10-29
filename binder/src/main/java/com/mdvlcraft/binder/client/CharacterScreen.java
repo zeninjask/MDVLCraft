@@ -1,5 +1,7 @@
 package com.mdvlcraft.binder.client;
 
+import com.mdvlcraft.binder.traits.Trait;
+import com.mdvlcraft.binder.traits.Traits;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonObject;
@@ -172,6 +174,12 @@ public class CharacterScreen extends Screen {
 
                 y = this.row(g, left, colW, y, Component.translatable(ROW_KEYS.get(layer)), origin == null ? "n/a" : origin.getName().getString());
             }
+
+            List<Trait> traits = Traits.clientTraits();
+            if (!traits.isEmpty() && hovering(localX, localY, left, colW, y)) {
+                tooltip = this.traitLines(traits);
+            }
+            y = this.row(g, left, colW, y, Component.translatable("screen.mdvlcraft.character.trait"), traitValue(traits));
 
             y = this.row(
                 g,
@@ -366,6 +374,27 @@ public class CharacterScreen extends Screen {
             lines.addAll(this.font.split(Component.translatable("screen.mdvlcraft.archetype." + archetype + ".desc").withStyle(ChatFormatting.GRAY), TOOLTIP_WIDTH));
         }
 
+        return lines;
+    }
+
+    /** The Trait row: none, the one trait, or the first and how many more. */
+    private static String traitValue(List<Trait> traits) {
+        if (traits.isEmpty()) {
+            return Component.translatable("screen.mdvlcraft.character.trait.none").getString();
+        }
+        String first = Component.translatable(traits.get(0).nameKey()).getString();
+        return traits.size() == 1 ? first : first + " +" + (traits.size() - 1);
+    }
+
+    /** Each trait's name (in its tier's colour) and what it does. */
+    private List<FormattedCharSequence> traitLines(List<Trait> traits) {
+        List<FormattedCharSequence> lines = new ArrayList<>();
+        for (Trait trait : traits) {
+            lines.add(Component.translatable(trait.nameKey()).withStyle(trait.tier.colour)
+                .append(Component.literal(" (").append(Component.translatable("trait.mdvlcraft.tier." + trait.tier.name().toLowerCase(java.util.Locale.ROOT)))
+                    .append(")").withStyle(ChatFormatting.DARK_GRAY)).getVisualOrderText());
+            lines.addAll(this.font.split(Component.translatable(trait.descKey()).withStyle(ChatFormatting.GRAY), TOOLTIP_WIDTH));
+        }
         return lines;
     }
 
