@@ -54,7 +54,7 @@ public class OrcaGeoWeapon extends SwordItem implements GeoItem {
     }
 
     public ResourceLocation texture() {
-        return ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/jjc/" + this.texture + ".png");
+        return ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/item/jjc/" + this.texture.replace("item/", "") + ".png");
     }
 
     @Override

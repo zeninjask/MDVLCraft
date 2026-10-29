@@ -15,7 +15,7 @@ import yesman.epicfight.world.capabilities.item.WeaponCapability;
  * A weapon with a weapon art (epicskill/WeaponArts) or a JJK skill (jjk/JjkSkill) has it as its innate skill, whatever its
  * weapon type gives.
  */
-@Mixin(value = {CapabilityItem.class, WeaponCapability.class, yesman.epicfight.world.capabilities.item.TridentCapability.class}, remap = false)
+@Mixin(value = {CapabilityItem.class, WeaponCapability.class}, remap = false)
 public abstract class WeaponArtInnateMixin {
     @Inject(method = "getInnateSkill", at = @At("RETURN"), cancellable = true)
     private void mdvlcraft$weaponArt(PlayerPatch<?> playerpatch, ItemStack itemstack, CallbackInfoReturnable<Skill> cir) {

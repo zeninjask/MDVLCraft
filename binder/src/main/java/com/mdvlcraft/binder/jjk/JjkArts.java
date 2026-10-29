@@ -101,7 +101,6 @@ public final class JjkArts {
         dealing = true;
         try {
             target.invulnerableTime = 0;
-            org.slf4j.LoggerFactory.getLogger("mdvlcraft").info("TESTLOG jjk deal {} {} to {}", source.getMsgId(), amount, target.getName().getString());
             target.hurt(source, amount);
         } finally {
             dealing = was;
@@ -112,7 +111,6 @@ public final class JjkArts {
 
     static void start(ServerPlayer player, Kind kind) {
         ServerLevel level = player.serverLevel();
-        org.slf4j.LoggerFactory.getLogger("mdvlcraft").info("TESTLOG jjk start {}", kind);
         int contact = kind.contactTicks();
         Active active = new Active(kind, level.getGameTime() + contact + 8);
         ACTIVE.put(player.getUUID(), active);

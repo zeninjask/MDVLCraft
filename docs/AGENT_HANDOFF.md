@@ -32,19 +32,28 @@ You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its ow
   relog. Not tested in game: the Cloak of Darkness key. The test player holding a demon sword needs it in hotbar slot 1
   (the Mage Hunter / samurai slot moves it there).
 
-## JJK weapon skills and traits (29 Oct 2026, not released, untested in game)
+## JJK weapons, JujutsuCraft weapons, traits and the trait slot machine (29-30 Oct 2026, release 2.1.80)
 
-- **JJK weapon skills** (`jjk/JjkSkill`, `jjk/JjkArts`): 13 innate skills for the Cursed Fate and Projection Sorcery weapons,
-  picked by the user: Splintered Soul (Split Soul Katana), Through Infinity, Stored Impact, Hemorrhage, Thunderclap,
-  Heian Sky Dance, Into the Zone, Full Moon Sweep, Ratio 7:3, Bird Strike, Rika's Arm, Jacob's Ladder, 24 FPS. Damage
-  types `mdvlcraft:true_cut`, `puncture`, `bleed` (data/mdvlcraft/damage_type, tagged in data/minecraft and data/epicfight).
-- **Traits** (`traits/`): 46 traits the user picked, up to 2 slots, kept in the player's persisted data and shown as a
-  Trait row (with a tooltip) on the Status page (SyncTraitsPacket, network protocol 28). **They can't be obtained yet**
-  (the user said so: no item, no rolls); ops set them with `/mdvl trait set <player> <slot> <trait>`, `clear`, `slots`.
-  Mixins in `mixin/traits` (regen rate, hunger drain, durability, Blood Price's cast check).
-- **Not wanted:** a Fate Shard item or random rolls (removed on request).
-- **JujutsuCraft (Orca) weapons:** not copied in. JujutsuCraft is All Rights Reserved (Modrinth), and the Epic Fight patch's
-  licence couldn't be checked (CurseForge is blocked here).
+- **JJK weapon skills** (`jjk/JjkSkill`, `jjk/JjkArts`): 23 innate skills. 13 for the Cursed Fate and Projection
+  Sorcery weapons (Splintered Soul, Through Infinity, Stored Impact, Hemorrhage, Thunderclap, Heian Sky Dance, Into the
+  Zone, Full Moon Sweep, Ratio 7:3, Bird Strike, Rika's Arm, Jacob's Ladder, 24 FPS) and 10 for the JujutsuCraft weapons
+  (Cloud Crusher, Dispel Field, Positive Flame, Simple Domain, Evening Moon, Pillar, Inked, Tsukkomi!, Blazing Draw,
+  Blight), all picked by the user. Damage types `mdvlcraft:true_cut`, `puncture`, `bleed`. The Mutual Love katanas only
+  stay in a player's hand under Cursed Fate's Mutual Love effect (Cursed Fate's own rule).
+- **JujutsuCraft weapons** (`orca/`): 10 weapons from Orca's JujutsuCraft with Jason's Jujutsu Epic movesets, both with
+  permission (credits in `binder/README.md`; they must stay there). Assets under `assets/mdvlcraft/{models,geo,animations}/jjc/`
+  and `textures/item/jjc/` (item and block textures must sit under `textures/item` or `textures/block` to be stitched).
+  Willow sells them: 10 jujutsu tokens, Playful Cloud 25 (18 attack damage; the others 9-10 like Cursed Fate's tools).
+  G-Warstaff uses the spear type, not the patch's trident type (Epic Fight's TridentCapability never refreshes the innate).
+  JujutsuCraft itself is not a dependency and must not become one (Orca's request).
+- **Traits** (`traits/`): 46 traits, 2 slots, Status page row "Traits" with a tooltip, ops: `/mdvl trait set|clear|slots`.
+- **Trait slot machine** (`traits/TraitSlots`, `client/TraitSlotScreen`): the Trait Token (not obtainable in survival:
+  no recipe or loot, hidden from JEI; `/give` only) spins 4 reels (iron, diamond, netherite). Tier 52/33/12/3, then a
+  matching payline: 4 netherite Mythic, 3 netherite Cursed, 3+ diamonds or 2 netherite Rare, otherwise Common.
+- **Tested in game** (one server, one client): every one of the 23 skills fires; the damaging ones deal their damage
+  (logged during the test); all 46 traits ran with hits and no exceptions; Mana Overflow/Heavy Hands attributes; the
+  slot machine spins, pays and stores the choice; the Status row; weapon damage values; Kusabimaru's VIX effects with
+  Render Scale on draw full screen. Not opened in game: Willow's trade list (she walked off).
 
 ## Specialisations, spell ranks and races (branch `claude/clever-babbage-t08qqj`)
 
