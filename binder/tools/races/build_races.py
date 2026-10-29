@@ -97,10 +97,9 @@ def night_vision(name, desc, condition):
 
 
 def ignored_by(name, desc, mob_condition, condition=None):
-    p = {'type': 'apugli:mobs_ignore', 'name': name, 'description': desc, 'mob_condition': mob_condition}
-    if condition:
-        p['condition'] = condition
-    return p
+    """Mobs leaving the player alone: Apugli's mobs_ignore isn't in the pack, so this is text and the effect is binder code
+    (ability/RaceNeutrality); mob_condition and condition only document it here."""
+    return {'type': 'origins:simple', 'name': name, 'description': desc}
 
 
 def pocket(name, desc, title, condition=None):

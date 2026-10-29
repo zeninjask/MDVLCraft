@@ -127,8 +127,7 @@ public final class Summons {
         }
 
         if (mob instanceof TamableAnimal) {   // keeps its own owner AI; still goes for hostile mobs on its own
-            mob.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(mob, Mob.class, 10, true, false,
-                target -> target instanceof Enemy && !allied(mob, target)));
+            mob.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(mob, Mob.class, 10, true, false, target -> foe(mob, target)));
             return;
         }
         if (!(mob instanceof PathfinderMob pathfinder)) {
@@ -140,9 +139,16 @@ public final class Summons {
         mob.targetSelector.addGoal(2, new GenericOwnerHurtTargetGoal(mob, () -> owner(mob)));
         mob.targetSelector.addGoal(3, new GenericCopyOwnerTargetGoal(pathfinder, () -> owner(mob)));
         mob.targetSelector.addGoal(4, new HurtByTargetGoal(pathfinder));
-        mob.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(mob, Mob.class, 10, true, false,
-            target -> target instanceof Enemy && !allied(mob, target)));
+        mob.targetSelector.addGoal(5, new NearestAttackableTargetGoal<>(mob, Mob.class, 10, true, false, target -> foe(mob, target)));
         mob.goalSelector.addGoal(3, new GenericFollowOwnerGoal(pathfinder, () -> owner(mob), 1.1, 10.0F, 3.0F, mob.isNoGravity(), 24.0F));
+    }
+
+    /** What a summon goes for by itself: monsters, and any other mob that is after its owner or the owner's side. */
+    static boolean foe(Mob summon, LivingEntity target) {
+        if (allied(summon, target)) {
+            return false;
+        }
+        return target instanceof Enemy || target instanceof Mob other && other.getTarget() != null && allied(summon, other.getTarget());
     }
 
     @SubscribeEvent

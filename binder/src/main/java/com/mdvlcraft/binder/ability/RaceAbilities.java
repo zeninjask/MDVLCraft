@@ -50,7 +50,7 @@ public final class RaceAbilities {
     }
 
     /** The player's race (origin on the race layer), or null. */
-    public static ResourceLocation race(ServerPlayer player) {
+    public static ResourceLocation race(net.minecraft.world.entity.player.Player player) {
         ResourceKey<OriginLayer> layer = ResourceKey.create(OriginsAPI.getLayersRegistry().key(), RACE_LAYER);
         ResourceKey<Origin> origin = IOriginContainer.get(player).map(container -> container.getOrigin(layer)).orElse(null);
         return origin == null ? null : origin.location();

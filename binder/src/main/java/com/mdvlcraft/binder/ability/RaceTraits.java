@@ -37,7 +37,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.UseAnim;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.event.TickEvent;
-import net.minecraftforge.event.VanillaGameEvent;
 import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
@@ -65,8 +64,8 @@ public final class RaceTraits {
     private RaceTraits() {
     }
 
-    static boolean is(Entity entity, String race) {
-        return entity instanceof ServerPlayer player
+    public static boolean is(Entity entity, String race) {
+        return entity instanceof Player player
             && ResourceLocation.fromNamespaceAndPath("mdvlcraft", race).equals(RaceAbilities.race(player));
     }
 
@@ -217,14 +216,6 @@ public final class RaceTraits {
             .forEach(illager -> SpecKit.pin(illager, enemy, 60));
     }
 
-    /** Silent Steps (Sculkborn): sculk sensors and shriekers never hear the player. */
-    @SubscribeEvent
-    public static void onGameEvent(VanillaGameEvent event) {
-        if (event.getCause() != null && is(event.getCause(), "sculkborn")) {
-            event.setCanceled(true);
-        }
-    }
-
     /** Piglin-born, Zombify: back in the overworld from the nether, Nausea and Weakness for 10 s. */
     @SubscribeEvent
     public static void onDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
@@ -243,8 +234,8 @@ public final class RaceTraits {
         }
     }
 
-    /** Shrinekin, Mouth on the Palm: eating and drinking take half as long. */
-    @SubscribeEvent
+    /** Shrinekin, Mouth on the Palm: eating and drinking take half as long (on both sides, so the client's use count agrees). */
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onUseStart(LivingEntityUseItemEvent.Start event) {
         UseAnim anim = event.getItem().getUseAnimation();
         if ((anim == UseAnim.EAT || anim == UseAnim.DRINK) && is(event.getEntity(), "shrinekin")) {

@@ -1,20 +1,5 @@
 {
-  "type": "apugli:mobs_ignore",
+  "type": "origins:simple",
   "name": "Furniture",
-  "description": "Mobs don't notice you while you stand still and sneak.",
-  "mob_condition": {
-    "type": "origins:living"
-  },
-  "condition": {
-    "type": "origins:and",
-    "conditions": [
-      {
-        "type": "origins:sneaking"
-      },
-      {
-        "type": "origins:moving",
-        "inverted": true
-      }
-    ]
-  }
+  "description": "Mobs don't notice you while you stand still and sneak."
 }
