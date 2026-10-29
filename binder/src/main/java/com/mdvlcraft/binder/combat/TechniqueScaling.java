@@ -25,12 +25,12 @@ public final class TechniqueScaling {
 ) {
             boolean slash = SlashPierce.slashHit(event.getSource());
             boolean sear = SlashPierce.searingNow();
-            // Shrine's techniques (its slashes and Sear) don't scale with the held weapon, but with fire spell power;
+            // Shrine's techniques (its slashes and Sear) don't scale with the held weapon, but with half of fire spell power;
             // the slashes also with Shrine Damage
             float factor = MonkArts.artActive(caster) || slash || sear ? 1.0F : factor(caster, event);
             float shrine = slash ? SlashPierce.SHRINE_DAMAGE * (1.0F + (float)caster.getAttributeValue(BinderAttributes.SHRINE_DAMAGE.get())) : 1.0F;
-            if (slash || sear) {
-                shrine *= (float)caster.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER.get());
+            if (slash || sear) {   // fire spell power counts half: +25% of it is +12.5% here
+                shrine *= 1.0F + ((float)caster.getAttributeValue(AttributeRegistry.FIRE_SPELL_POWER.get()) - 1.0F) * 0.5F;
             }
             event.setAmount(event.getAmount() * factor * shrine * Ability.DAMAGE_SCALE);
         }

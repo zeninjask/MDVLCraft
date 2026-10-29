@@ -10,12 +10,14 @@ import java.util.Locale;
 import java.util.Map;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
+import net.minecraft.client.resources.language.I18n;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.contents.TranslatableContents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
@@ -52,6 +54,20 @@ public final class SkillCalloutClient {
     private SkillCalloutClient() {
     }
 
+    /**
+     * The name to call out. A skill some mod left without a translation would read as its raw key
+     * (skill.epicfight.battojutsu): the key's last word stands in for it instead, underscores as spaces.
+     */
+    private static String label(Component name) {
+        String text = name.getString();
+        boolean untranslated = name.getContents() instanceof TranslatableContents key && !I18n.exists(key.getKey());
+        if (untranslated || !text.contains(" ") && text.matches("[a-z0-9_]+(\\.[a-z0-9_]+)+")) {
+            String word = text.substring(text.lastIndexOf('.') + 1).replace('_', ' ');
+            return word.isEmpty() ? text : word;
+        }
+        return text;
+    }
+
     public static void show(int entityId, Component name, int colour) {
         Minecraft minecraft = Minecraft.getInstance();
         ClientLevel level = minecraft.level;
@@ -60,7 +76,7 @@ public final class SkillCalloutClient {
             return;
         }
         try {
-            String text = name.getString().toUpperCase(Locale.ROOT);
+            String text = label(name).toUpperCase(Locale.ROOT);
             ListTag emitters = template().copy();
             CompoundTag config = emitters.getCompound(0).getCompound("config");
             config.getCompound("material").getCompound("material").putString("texture", texture(text).toString());
