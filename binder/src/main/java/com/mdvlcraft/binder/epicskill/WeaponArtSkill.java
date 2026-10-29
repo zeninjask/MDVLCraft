@@ -57,8 +57,16 @@ public class WeaponArtSkill extends WeaponInnateSkill {
 
     @Override
     public ResourceLocation getSkillTexture() {
-        String animation = this.art.animation().get().registryName().getPath();
-        String icon = animation.contains("smash") ? "the_guillotine"
+        return icon(this.art.animation().get().registryName().getPath());
+    }
+
+    /** One of Epic Fight's innate icons, picked by the path of the animation the skill plays. */
+    public static ResourceLocation icon(String animation) {
+        String icon = animation.contains("smash") || animation.contains("guillotine") ? "the_guillotine"
+            : animation.contains("battojutsu") ? "battojutsu"
+            : animation.contains("steel_whirlwind") ? "steel_whirlwind"
+            : animation.contains("rushing_tempo") ? "rushing_tempo"
+            : animation.contains("liechtenauer") || animation.contains("longsword") ? "liechtenauer"
             : animation.contains("wrathful") ? "wrathful_lighting"
             : animation.contains("spear") ? "everlasting_allegiance"
             : animation.contains("grasping") ? "grasping_spire"
