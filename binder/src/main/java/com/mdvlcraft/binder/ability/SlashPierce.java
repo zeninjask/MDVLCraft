@@ -14,7 +14,7 @@ import net.minecraft.world.damagesource.DamageSource;
 public final class SlashPierce {
     public static final float SCALE = 0.4F;   // 60% pierce (50% x 1.2)
     /** Shrine attacks deal this share of their damage. */
-    public static final float SHRINE_DAMAGE = 0.85F * 0.75F;   // -15%, then -25%; Shrine Mastery nodes add back (BinderAttributes.SHRINE_DAMAGE)
+    public static final float SHRINE_DAMAGE = 0.85F * 0.75F * 0.7F;   // -15%, then -25%, then -30%; Shrine Mastery nodes add back (BinderAttributes.SHRINE_DAMAGE)
     private static final ThreadLocal<Boolean> SEARING = ThreadLocal.withInitial(() -> false);
     /** How long a slash's cuts land after its cast (2 s). */
     private static final long WINDOW = 40L;
