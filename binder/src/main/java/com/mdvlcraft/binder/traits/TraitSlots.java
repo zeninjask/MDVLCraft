@@ -153,8 +153,27 @@ public final class TraitSlots {
         return pool.isEmpty() ? null : pool.get(player.getRandom().nextInt(pool.size()));
     }
 
-    /** TraitChoicePacket: the rolled trait goes in `slot` (0-based), or is thrown away (-1). */
+    /** TraitChoicePacket's "spin again" answer: the roll is thrown away and another Trait Token spent on a new spin. */
+    public static final int SPIN_AGAIN = -2;
+
+    /** TraitChoicePacket: the rolled trait goes in `slot` (0-based), or is thrown away (-1), or SPIN_AGAIN. */
     public static void choose(ServerPlayer player, int slot) {
+        if (slot == SPIN_AGAIN && OFFERS.containsKey(player.getUUID())) {
+            int token = -1;
+            for (int i = 0; i < player.getInventory().getContainerSize() && token < 0; i++) {   // main inventory, armour or offhand
+                token = player.getInventory().getItem(i).is(TRAIT_TOKEN.get()) ? i : -1;
+            }
+            if (token < 0) {   // the roll stays on offer
+                player.sendSystemMessage(Component.translatable("trait.mdvlcraft.no_token").withStyle(ChatFormatting.GRAY));
+                return;
+            }
+            OFFERS.remove(player.getUUID());
+            if (!player.getAbilities().instabuild) {
+                player.getInventory().getItem(token).shrink(1);
+            }
+            spin(player);
+            return;
+        }
         Trait trait = OFFERS.remove(player.getUUID());
         if (trait == null) {
             return;
@@ -178,10 +197,10 @@ public final class TraitSlots {
         OFFERS.remove(event.getEntity().getUUID());
     }
 
-    /** The Trait Token: using it spins the reels. Crafted from netherite scrap above an amethyst shard (data/mdvlcraft/recipes/trait_token.json). */
+    /** The Trait Token: using it spins the reels. Four are crafted from netherite scrap above an amethyst shard (data/mdvlcraft/recipes/trait_token.json). */
     public static class TraitTokenItem extends Item {
         public TraitTokenItem() {
-            super(new Item.Properties().rarity(Rarity.EPIC).stacksTo(16));
+            super(new Item.Properties().rarity(Rarity.EPIC).stacksTo(64));
         }
 
         @Override

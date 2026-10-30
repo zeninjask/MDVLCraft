@@ -79,6 +79,15 @@ public final class MdvlCommand {
                 .then(Commands.literal("weapons").executes(MdvlCommand::weapons))
                 .then(Commands.literal("rigs").executes(MdvlCommand::rigs))
                 .then(Commands.literal("obtainable").executes(MdvlCommand::obtainable))
+                .then(Commands.literal("packets").executes(context -> {   // util/PacketStats, with -Dmdvlcraft.packetstats=true
+                    com.mdvlcraft.binder.util.PacketStats.top(40).forEach(line -> com.mdvlcraft.binder.MDVLBinder.LOGGER.info("Packets: {}", line));
+                    context.getSource().sendSuccess(() -> Component.literal(com.mdvlcraft.binder.util.PacketStats.ON
+                        ? "Packet totals written to the log" : "Start the server with -Dmdvlcraft.packetstats=true first"), false);
+                    return 1;
+                }).then(Commands.literal("reset").executes(context -> {
+                    com.mdvlcraft.binder.util.PacketStats.reset();
+                    return 1;
+                })))
                 .then(Commands.literal("dump").executes(MdvlCommand::dump))
                 .then(Commands.literal("grant").then(Commands.argument("player", EntityArgument.player()).then(Commands.argument("ability", ResourceLocationArgument.id())
                     .then(Commands.argument("level", IntegerArgumentType.integer(0, 10)).executes(MdvlCommand::grant)))))

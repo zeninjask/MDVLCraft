@@ -52,6 +52,7 @@ public class TraitSlotScreen extends Screen {
     private boolean done;
     private boolean chosen;
     private final List<DqGui.Button> choices = new ArrayList<>();
+    private DqGui.Button again;
 
     private TraitSlotScreen(int[] grid, Trait trait, List<String> slots) {
         super(Component.translatable("screen.mdvlcraft.trait_slots"));
@@ -117,6 +118,23 @@ public class TraitSlotScreen extends Screen {
             DqGui.Button button = new DqGui.Button(this.left() + 12 + i * (bw + 6), y, bw, 18, label, () -> this.choose(slot));
             button.visible = this.done;
             this.choices.add(this.addRenderableWidget(button));
+        }
+        // spends another Trait Token (one must be in the inventory) on a new spin; this roll is thrown away
+        this.again = this.addRenderableWidget(new DqGui.Button(this.left() + W - 92, this.top() + 6, 84, 16,
+            Component.translatable("screen.mdvlcraft.trait_slots.spin_again"), () -> this.choose(TraitSlots.SPIN_AGAIN)));
+        this.again.visible = this.done;
+        this.again.active = this.hasToken();
+    }
+
+    private boolean hasToken() {
+        return Minecraft.getInstance().player != null
+            && Minecraft.getInstance().player.getInventory().contains(new ItemStack(TraitSlots.TRAIT_TOKEN.get()));
+    }
+
+    @Override
+    public void tick() {
+        if (this.again != null) {
+            this.again.active = this.hasToken();
         }
     }
 
@@ -245,6 +263,7 @@ public class TraitSlotScreen extends Screen {
     private void finish() {
         this.done = true;
         this.choices.forEach(button -> button.visible = true);
+        this.again.visible = true;
         switch (this.trait.tier) {
             case MYTHIC -> {
                 this.play(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F);
