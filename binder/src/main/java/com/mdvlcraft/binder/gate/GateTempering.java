@@ -3,12 +3,14 @@ package com.mdvlcraft.binder.gate;
 import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.AnvilUpdateEvent;
+import net.minecraftforge.event.entity.player.AnvilRepairEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -62,6 +64,18 @@ public final class GateTempering {
         event.setOutput(out);
         event.setCost(2 + rune.rank().ordinal() * 2);
         event.setMaterialCost(1);
+    }
+
+    /** Awards the tempering quest advancements in code: their nbt-only inventory_changed criterion fires unreliably. */
+    @SubscribeEvent
+    public static void onTempered(AnvilRepairEvent event) {
+        GateRank rank = temper(event.getOutput());
+        if (rank != null && event.getEntity() instanceof ServerPlayer player && rank != temper(event.getLeft())) {
+            GateAdvancements.grant(player, "tempered");
+            if (rank == GateRank.S) {
+                GateAdvancements.grant(player, "tempered_s");
+            }
+        }
     }
 
     @SubscribeEvent

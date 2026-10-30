@@ -844,7 +844,7 @@ FAMILIAR_ROWS = [
          'Use a stick on your Familiar to make it sit or follow. Feed it food to heal it.', None, 'minecraft:stick', None),
         ('bed', 'A Place to Recuperate', [item(af('pet_bed'))], [give('minecraft:white_wool', 3)],
          'Craft a Familiar Bed: wool, magic cloth and planks. Your Familiars rest on it.', None, af('pet_bed'), None),
-        ('upgrade', "A Lil' Boost", [advancement('alshanex_familiars:upgrade_familiar')], [give('minecraft:apple', 4), xp(150)],
+        ('upgrade', "A Lil' Boost", [advancement('alshanex_familiars:alshanex_familiars/upgrade_familiar')], [give('minecraft:apple', 4), xp(150)],
          'Give your Familiar an upgrade item: a Life Fruit (an apple and an Arcane Essence) raises its health; platings, '
          'essences and its own trinket raise armour, magic and spell level. Each kind has three tiers.', None,
          af('life_fruit_tier_1'), None),
@@ -868,19 +868,19 @@ FAMILIAR_ROWS = [
          'performed on its Ritual Core.', None, af('memory_fragment'), None),
         ('soul', 'Bottle of Spirit', [item(af('pet_soul'))], [xp(200)],
          'Lost Souls drift around Origin Island. Use an empty glass bottle on one to catch it.', None, af('pet_soul'), None),
-        ('shard', 'Reincarnation', [advancement('alshanex_familiars:reincarnation')], [give('irons_spellbooks:arcane_essence', 8), xp(400)],
+        ('shard', 'Reincarnation', [advancement('alshanex_familiars:alshanex_familiars/reincarnation')], [give('irons_spellbooks:arcane_essence', 8), xp(400)],
          'Set a Bottled Soul on the Ritual Core and the ritual items around it to make a Familiar Shard (the recipes are in '
          'the recipe viewer under Origin Island Ritual). Use the shard to create that Familiar.', None, af('archmage_shard'), None),
-        ('plague', 'Toxic Relationship', [advancement('alshanex_familiars:tame/plague')], [xp(300)],
+        ('plague', 'Toxic Relationship', [advancement('alshanex_familiars:alshanex_familiars/tame/plague')], [xp(300)],
          "Brew a Poison Vial in Iron's Alchemist Cauldron: a Venomous Spider Fang (from spiders) into a strong poison "
          'potion. Use it on a Druid Familiar to turn it into a Plague Doctor.', None, af('poison_vial'), None),
-        ('cleric', 'Looking for Salvation', [advancement('alshanex_familiars:tame/cleric')], [xp(300)],
+        ('cleric', 'Looking for Salvation', [advancement('alshanex_familiars:alshanex_familiars/tame/cleric')], [xp(300)],
          'Wild Necromancer Familiars haunt graveyards. Cast the Cleanse spell next to one without an owner and it becomes a '
          'Cleric. Then tame it.', None, 'irons_spellbooks:holy_rune', None),
-        ('impostor', 'Impostor!', [advancement('alshanex_familiars:impostor')], [xp(300)],
+        ('impostor', 'Impostor!', [advancement('alshanex_familiars:alshanex_familiars/impostor')], [xp(300)],
          'Illusionist Familiars disguise themselves as other creatures. Make a Mirror of Truth in a ritual and use it to '
          'reveal one.', None, af('truth_mirror'), None),
-        ('revive', 'Learn Necromancy', [advancement('alshanex_familiars:learn_necromancy')], [give('minecraft:experience_bottle', 8), xp(500)],
+        ('revive', 'Learn Necromancy', [advancement('alshanex_familiars:alshanex_familiars/learn_necromancy')], [give('minecraft:experience_bottle', 8), xp(500)],
          'Defeat the Dead King. From then on your Familiars can be brought back when they die.', None, 'minecraft:wither_skeleton_skull', None),
         ('tome', 'We Act Together as One', [item(af('familiar_spellbook'))], [give('minecraft:experience_bottle', 16), xp(500)],
          'Craft the Tome of Familiar Alignment: a diamond spell book, mithril, magic cloth, Memory Fragments and Familiar '
