@@ -1,6 +1,7 @@
 package com.mdvlcraft.binder.mixin.efn;
 
 import com.hm.efn.skill.dodge.EFNDodgeSkill;
+import com.mdvlcraft.binder.orca.PlayfulCloudSetup;
 import com.mdvlcraft.binder.wukong.WukongAnimations;
 import com.mdvlcraft.binder.wukong.WukongCategories;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,7 +15,8 @@ import yesman.epicfight.world.capabilities.item.WeaponCategory;
 
 /**
  * The Soulslike dodges (efn:efn_dodge, efn_step) play the Wukong dodges with the Ruyi Jingu Bang in hand. Its category is the
- * Wukong staff only for a Monkey King (WukongGate), so nobody else gets them. Standing still dodges backwards.
+ * Wukong staff only for a Monkey King (WukongGate), so nobody else gets them. Playful Cloud rolls (PS roll). Standing
+ * still dodges backwards.
  */
 @Mixin(value = EFNDodgeSkill.class, remap = false)
 public abstract class EFNDodgeSkillMixin {
@@ -28,6 +30,13 @@ public abstract class EFNDodgeSkillMixin {
                 case EFNDodgeSkill.DIRECTION_RIGHT -> WukongAnimations.DODGE_RIGHT;
                 default -> WukongAnimations.DODGE_BACKWARD;
             });
+        } else if (category == PlayfulCloudSetup.Category.PLAYFUL_CLOUD) {
+            cir.setReturnValue(PlayfulCloudSetup.roll(switch (direction) {
+                case EFNDodgeSkill.DIRECTION_FORWARD -> "forward";
+                case EFNDodgeSkill.DIRECTION_LEFT -> "left";
+                case EFNDodgeSkill.DIRECTION_RIGHT -> "right";
+                default -> "backward";
+            }));
         }
     }
 }

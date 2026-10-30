@@ -66,6 +66,7 @@ public final class MDVLBinder {
         UnarmedParry.register(modBus);
         AddItemModifier.register(modBus);
         WukongStaffSetup.register(modBus);
+        com.mdvlcraft.binder.orca.PlayfulCloudSetup.register(modBus);
         SuperChefSetup.register(modBus);
         BinderAnimations.register(modBus);
         ModifiedSpells.register(modBus);
