@@ -37,13 +37,16 @@ import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 public class PlayfulCloudRenderer extends RenderItemBase {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/item/playful_cloud_parts.png");
     private static final double SEC = 0.76, HALF = SEC / 2, CHAIN = 0.18, MAX_CHAIN = 0.3, LEAN = 0.35, LOW = 0.32;
-    private static final double BODY = 0.3, SIDE = 0.42, EASE = 0.06, HAND_EASE = 0.05;
+    private static final double LET_GO = 0.8, FREE_RATE = 3.0;
+    private static final double FIST = 0.27, BODY = 0.3, SIDE = 0.42, EASE = 0.06, HAND_EASE = 0.05;
     private static final Map<LivingEntity, State> STATES = new WeakHashMap<>();
 
     /** Where the eased parts were last frame. */
     private static final class State {
         Vec3 aR, aL, m0, m1;
         long last;
+        /** How far the left section has swung out of the hand: 0 held, 1 in line with its chain. */
+        double free;
     }
 
     public PlayfulCloudRenderer(JsonElement json) {
@@ -82,9 +85,12 @@ public class PlayfulCloudRenderer extends RenderItemBase {
 
         // the held sections: [chain end, free end]
         Vec3 want = up.add(fwd.scale(LEAN));
-        Vec3 pR = at(arm, poses, "Tool_R"), pL = at(arm, poses, "Tool_L");
-        Vec3 aR = grip(want, fwd, pR.subtract(at(arm, poses, "Hand_R")).normalize());
-        Vec3 aL = grip(want, fwd, pL.subtract(at(arm, poses, "Hand_L")).normalize());
+        // the fist and forearm come from the forearm bone (Hand_*, which starts at the elbow), not from Tool_*: animations
+        // move and turn the Tool joint to place their own weapon (the staff idle holds it out in front, the walk swings it)
+        Vec3 fR = forearm(arm, poses, "Hand_R", fwd), fL = forearm(arm, poses, "Hand_L", fwd);
+        Vec3 pR = at(arm, poses, "Hand_R").add(fR.scale(FIST)), pL = at(arm, poses, "Hand_L").add(fL.scale(FIST));
+        Vec3 aR = grip(want, fwd, fR, st.aR);
+        Vec3 aL = grip(want, fwd, fL, st.aL);
         // ease the grip so a hand that turns sharply doesn't make its section flick
         double hk = 1 - Math.exp(-dt / HAND_EASE);
         st.aR = st.aR == null ? aR : st.aR.add(aR.subtract(st.aR).scale(hk)).normalize();
@@ -124,23 +130,47 @@ public class PlayfulCloudRenderer extends RenderItemBase {
         m0 = m0.add(fwd.scale(clear));
         m1 = m1.add(fwd.scale(clear));
 
+        // A one-handed swing lets go of the left section (the hands far apart, where a two-handed hold keeps them close):
+        // it then swings out in line with its chain, and back into the hand when the hands meet again. FREE_RATE caps how
+        // fast it goes either way, so a hand that is off the staff only briefly doesn't make it snap straight.
+        double target = pL.distanceTo(pR) > LET_GO ? 1 : 0;
+        st.free += Math.max(-FREE_RATE * dt, Math.min(FREE_RATE * dt, target - st.free));
+        Vec3 lq = Q, le = Q.add(st.aL.scale(SEC));
+        if (st.free > 0) {
+            double f = st.free * st.free * (3 - 2 * st.free);
+            Vec3 chain = Q.subtract(m1);
+            chain = chain.lengthSqr() < 1e-6 ? m1.subtract(m0).normalize() : chain.normalize();
+            Vec3 fq = m1.add(chain.scale(CHAIN));
+            lq = Q.lerp(fq, f);
+            Vec3 along = le.lerp(fq.add(chain.scale(SEC)), f).subtract(lq);
+            le = lq.add((along.lengthSqr() < 1e-6 ? chain : along.normalize()).scale(SEC));
+        }
+
         VertexConsumer vc = buffers.getBuffer(RenderType.entityCutoutNoCull(TEXTURE));
         PoseStack.Pose pose = poseStack.last();
         section(vc, pose, P, P.add(st.aR.scale(SEC)), light);
-        section(vc, pose, Q, Q.add(st.aL.scale(SEC)), light);
+        section(vc, pose, lq, le, light);
         section(vc, pose, m0, m1, light);
         box(vc, pose, P, m0, 0.0175, STEEL, light);
-        box(vc, pose, Q, m1, 0.0175, STEEL, light);
+        box(vc, pose, lq, m1, 0.0175, STEEL, light);
     }
 
-    private static Vec3 grip(Vec3 want, Vec3 fwd, Vec3 forearm) {
+    /** The section's direction: "want" square to the forearm; where the forearm lines up with it, the last direction (else forward) holds it steady. */
+    private static Vec3 grip(Vec3 want, Vec3 fwd, Vec3 forearm, Vec3 last) {
         Vec3 a = want.subtract(forearm.scale(want.dot(forearm)));
         double l = a.length();
         if (l < 0.5) {
-            // forearm pointing straight up or down: fall back on forward, still square to the forearm
-            a = a.add(fwd.subtract(forearm.scale(fwd.dot(forearm))).scale((0.5 - l) * 2));
+            Vec3 keep = last == null ? fwd : last;
+            a = a.add(keep.subtract(forearm.scale(keep.dot(forearm))).scale((0.5 - l) * 2));
         }
-        return a.lengthSqr() < 1e-8 ? fwd : a.normalize();
+        return a.lengthSqr() < 1e-8 ? (last == null ? fwd : last) : a.normalize();
+    }
+
+    /** Down the forearm bone: its local Y axis in the pose (the biped puts the fist FIST along it). */
+    private static Vec3 forearm(Armature arm, OpenMatrix4f[] poses, String joint, Vec3 fallback) {
+        OpenMatrix4f m = poses[arm.searchJointByName(joint).getId()];
+        Vec3 v = new Vec3(m.m10, m.m11, m.m12);
+        return v.lengthSqr() < 1e-8 ? fallback : v.normalize();
     }
 
     private static Vec3 tie(Vec3 m, Vec3 anchor) {
