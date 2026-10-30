@@ -214,7 +214,7 @@ public final class JjkArts {
             case CLOUD_CRUSHER -> SpecKit.later(level, contact, () -> {
                 for (LivingEntity e : SpecKit.enemies(player, player.position(), 4.0)) {
                     deal(e, source(player, PUNCTURE, player), 8.0F);
-                    SpecKit.stun(e, 30);
+                    launch(player, e);
                 }
                 level.sendParticles(ParticleTypes.EXPLOSION, player.getX(), player.getY() + 0.1, player.getZ(), 8, 1.8, 0.1, 1.8, 0.0);
                 sound(player, SoundEvents.GENERIC_EXPLODE, 0.9F, 0.8F);
@@ -313,6 +313,18 @@ public final class JjkArts {
         level.sendParticles(ParticleTypes.ELECTRIC_SPARK, target.getX(), target.getY(0.6), target.getZ(), 10, 0.3, 0.3, 0.3, 0.1);
         sound(target, SoundEvents.PLAYER_ATTACK_SWEEP, 1.0F, 1.6F);
         deal(target, player.damageSources().playerAttack(player), (float)player.getAttributeValue(Attributes.ATTACK_DAMAGE));
+    }
+
+    /** Cloud Crusher's hits send an enemy flying away, as hard as Follow Up Kick (the Projection Sorcery add-on's kick). */
+    private static void launch(ServerPlayer player, LivingEntity victim) {
+        if (!victim.isAlive()) {
+            return;
+        }
+        Vec3 away = victim.position().subtract(player.position()).multiply(1.0, 0.0, 1.0);
+        away = away.lengthSqr() < 1.0E-4 ? player.getLookAngle().multiply(1.0, 0.0, 1.0) : away;
+        Vec3 push = away.normalize().scale(4.8);
+        victim.setDeltaMovement(push.x, 0.3, push.z);
+        victim.hurtMarked = true;
     }
 
     // ---- the skills' hits ----
@@ -421,6 +433,7 @@ public final class JjkArts {
             active.first = victim;
         }
         switch (active.kind) {
+            case CLOUD_CRUSHER -> SpecKit.later(level, 1, () -> launch(player, victim));
             case SPLINTERED_SOUL -> {
                 if (active.struck.add(victim.getUUID())) {
                     float amount = event.getAmount() * 0.7F;

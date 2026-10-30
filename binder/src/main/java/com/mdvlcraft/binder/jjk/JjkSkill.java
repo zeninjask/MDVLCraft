@@ -46,7 +46,7 @@ public class JjkSkill extends WeaponInnateSkill {
         JACOBS_LADDER("jjk_jacobs_ladder", () -> Animations.WRATHFUL_LIGHTING, "cursedfate:mutual_love_katana_jacobs_ladder_weapon"),
         FPS_24("jjk_24_fps", () -> Animations.RUSHING_TEMPO1, "naoyaaddon:tanto"),
         // JujutsuCraft weapons (orca/OrcaWeapons)
-        CLOUD_CRUSHER("jjk_cloud_crusher", () -> reascer.wom.gameasset.WOMAnimations.TORMENT_BERSERK_AIRSLAM, "mdvlcraft:playful_cloud"),
+        CLOUD_CRUSHER("jjk_cloud_crusher", () -> com.mdvlcraft.binder.orca.PlayfulCloudSetup.anim("efn:biped/nf_dual/nf_dual_stormatk"), "mdvlcraft:playful_cloud"),
         DISPEL_FIELD("jjk_dispel_field", () -> Animations.STEEL_WHIRLWIND, "mdvlcraft:black_rope"),
         POSITIVE_FLAME("jjk_positive_flame", () -> Animations.SWEEPING_EDGE, "mdvlcraft:sword_of_extermination"),
         SIMPLE_DOMAIN("jjk_simple_domain", null, "mdvlcraft:sword_miwa_kasumi"),
@@ -120,6 +120,9 @@ public class JjkSkill extends WeaponInnateSkill {
 
     @Override
     public ResourceLocation getSkillTexture() {
+        if (this.kind == Kind.CLOUD_CRUSHER) {
+            return ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/gui/skills/weapon_innate/cloud_crusher.png");
+        }
         return WeaponArtSkill.icon(this.kind.animation == null ? "battojutsu" : this.kind.animation.get().registryName().getPath());
     }
 }

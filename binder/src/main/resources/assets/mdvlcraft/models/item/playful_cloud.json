@@ -1,6 +1,18 @@
 {
- "parent": "mdvlcraft:jjc/displaysettings/playful_cloud",
- "textures": {
-  "layer0": "mdvlcraft:item/jjc/playful_cloud"
+ "loader": "forge:separate_transforms",
+ "gui_light": "front",
+ "base": {
+  "parent": "mdvlcraft:jjc/displaysettings/playful_cloud",
+  "textures": {
+   "layer0": "mdvlcraft:item/jjc/playful_cloud"
+  }
+ },
+ "perspectives": {
+  "gui": {
+   "parent": "minecraft:item/generated",
+   "textures": {
+    "layer0": "mdvlcraft:item/playful_cloud_icon"
+   }
+  }
  }
 }

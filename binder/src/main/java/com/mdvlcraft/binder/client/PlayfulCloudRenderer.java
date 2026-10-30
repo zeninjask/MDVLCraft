@@ -37,7 +37,7 @@ import yesman.epicfight.world.capabilities.entitypatch.LivingEntityPatch;
 public class PlayfulCloudRenderer extends RenderItemBase {
     private static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "textures/item/playful_cloud_parts.png");
     private static final double SEC = 0.76, HALF = SEC / 2, CHAIN = 0.18, MAX_CHAIN = 0.3, LEAN = 0.35, LOW = 0.32;
-    private static final double LET_GO = 0.8, FREE_RATE = 3.0;
+    private static final double LET_GO = 1.15, FREE_RATE = 3.0;
     private static final double FIST = 0.27, BODY = 0.3, SIDE = 0.42, EASE = 0.06, HAND_EASE = 0.05;
     private static final Map<LivingEntity, State> STATES = new WeakHashMap<>();
 
@@ -130,10 +130,10 @@ public class PlayfulCloudRenderer extends RenderItemBase {
         m0 = m0.add(fwd.scale(clear));
         m1 = m1.add(fwd.scale(clear));
 
-        // A one-handed swing lets go of the left section (the hands far apart, where a two-handed hold keeps them close):
+        // A one-handed swing lets go of the left section (in an attack, the hands far apart, where a two-handed hold keeps them close):
         // it then swings out in line with its chain, and back into the hand when the hands meet again. FREE_RATE caps how
         // fast it goes either way, so a hand that is off the staff only briefly doesn't make it snap straight.
-        double target = pL.distanceTo(pR) > LET_GO ? 1 : 0;
+        double target = patch.getEntityState().attacking() && pL.distanceTo(pR) > LET_GO ? 1 : 0;
         st.free += Math.max(-FREE_RATE * dt, Math.min(FREE_RATE * dt, target - st.free));
         Vec3 lq = Q, le = Q.add(st.aL.scale(SEC));
         if (st.free > 0) {
