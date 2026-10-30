@@ -183,7 +183,7 @@ Gradle with ForgeGradle; the mod id is `mdvlcraft`. Every dependency used only a
    - Unzip `MDVLCraft-<version>-server.mrpack` into `base/server`.
    - Each folder is a `modrinth.index.json` plus `overrides/`. `base/` is gitignored.
 2. Config and KubeJS changes go into `base/{client,server}/overrides/`, usually both sides. To change mods, edit `modrinth.index.json`.
-3. Build the binder, then run `python3 binder/tools/build_packs.py <new version> .`. It swaps the binder jar into the client and server packs and sets the version. **No client-performance pack any more** (user, 29 Oct 2026): don't make one; the client's Render Scale default (0.2) replaces it, and the next release removes the old one from `main` and the README.
+3. Build the binder, then run `python3 binder/tools/build_packs.py <new version> .`. It swaps the binder jar into the client and server packs and sets the version. **No client-performance pack any more** (user, 29 Oct 2026): don't make one; the client's Render Scale default (0.7, was 0.2) replaces it, and the next release removes the old one from `main` and the README.
 4. Regenerate the PDF: `python3 binder/tools/skill_tree_doc.py <version> MDVLCraft-<version>-Skill-Trees.pdf <server mods dir> base/server/overrides/kubejs`. You need a folder holding the server's mod jars; download them from the URLs in `base/server/modrinth.index.json`.
 5. Follow `CLAUDE.md`:
    - Only the `liam-agent` and `seb-agent` agents build releases and push to `main`, and `seb-agent` only when the user says so, unless the user tells you otherwise.

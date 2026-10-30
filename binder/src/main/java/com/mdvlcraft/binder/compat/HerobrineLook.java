@@ -21,8 +21,13 @@ public final class HerobrineLook {
         }
     }
 
+    private static net.minecraft.world.entity.EntityType<?> type;   // looked up once: this runs for every mob every tick
+
     private static void onLivingTick(LivingTickEvent event) {
-        if (event.getEntity() instanceof Mob mob && !mob.level().isClientSide && HEROBRINE.equals(ForgeRegistries.ENTITY_TYPES.getKey(mob.getType()))) {
+        if (type == null) {
+            type = ForgeRegistries.ENTITY_TYPES.getValue(HEROBRINE);
+        }
+        if (event.getEntity() instanceof Mob mob && mob.getType() == type && !mob.level().isClientSide) {
             Player player = mob.level().getNearestPlayer(mob, 256.0);
             if (player != null && !player.isSpectator()) {
                 mob.getLookControl().setLookAt(player, 30.0F, mob.getMaxHeadXRot());
