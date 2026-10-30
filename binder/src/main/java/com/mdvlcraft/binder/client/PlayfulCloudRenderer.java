@@ -19,7 +19,6 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import org.joml.Matrix3f;
 import org.joml.Matrix4f;
-import yesman.epicfight.api.animation.Joint;
 import yesman.epicfight.api.client.forgeevent.PatchedRenderersEvent;
 import yesman.epicfight.api.model.Armature;
 import yesman.epicfight.api.utils.math.OpenMatrix4f;
@@ -40,7 +39,6 @@ public class PlayfulCloudRenderer extends RenderItemBase {
     private static final double SEC = 0.76, HALF = SEC / 2, CHAIN = 0.18, MAX_CHAIN = 0.3, LEAN = 0.35, LOW = 0.32;
     private static final double BODY = 0.3, SIDE = 0.42, EASE = 0.06, HAND_EASE = 0.05;
     private static final Map<LivingEntity, State> STATES = new WeakHashMap<>();
-    private static final Map<Armature, Vec3> UPS = new WeakHashMap<>();
 
     /** Where the eased parts were last frame. */
     private static final class State {
@@ -70,7 +68,9 @@ public class PlayfulCloudRenderer extends RenderItemBase {
         double dt = st.last == 0 ? 1.0 : Math.min(0.1, (now - st.last) / 1e9);
         st.last = now;
 
-        Vec3 up = UPS.computeIfAbsent(arm, PlayfulCloudRenderer::restUp);
+        Vec3 root = at(arm, poses, "Root"), head = at(arm, poses, "Head");
+        // up is the model's Y axis; Epic Fight's render space may have it flipped, so its sign follows head over hips
+        Vec3 up = new Vec3(0, head.y < root.y ? -1 : 1, 0);
         Vec3 right = at(arm, poses, "Arm_R").subtract(at(arm, poses, "Arm_L"));
         right = right.subtract(up.scale(right.dot(up)));
         if (right.lengthSqr() < 1e-6) {
@@ -78,7 +78,6 @@ public class PlayfulCloudRenderer extends RenderItemBase {
         }
         right = right.normalize();
         Vec3 fwd = up.cross(right).normalize();
-        Vec3 root = at(arm, poses, "Root"), head = at(arm, poses, "Head");
         Vec3 low = root.subtract(up.scale(root.dot(up) - 0.05)), top = head.add(up.scale(0.3));
 
         // the held sections: [chain end, free end]
@@ -160,17 +159,6 @@ public class PlayfulCloudRenderer extends RenderItemBase {
 
     private static Vec3 at(Armature arm, OpenMatrix4f[] poses, String joint) {
         Vec3f v = poses[arm.searchJointByName(joint).getId()].toTranslationVector();
-        return new Vec3(v.x, v.y, v.z);
-    }
-
-    /** Up in the model's space: from the hips to the head in the armature's rest pose. */
-    private static Vec3 restUp(Armature arm) {
-        Vec3 up = rest(arm.searchJointByName("Head")).subtract(rest(arm.searchJointByName("Root")));
-        return up.lengthSqr() < 1e-6 ? new Vec3(0, 1, 0) : up.normalize();
-    }
-
-    private static Vec3 rest(Joint joint) {
-        Vec3f v = OpenMatrix4f.invert(joint.getToOrigin(), null).toTranslationVector();
         return new Vec3(v.x, v.y, v.z);
     }
 
