@@ -81,24 +81,26 @@ public final class DqGui {
     /** The thick blue frame around whatever is selected. */
     public static void selected(GuiGraphics g, int x, int y, int w, int h, int fill) {
         require(w, h, 2 * SELECTED_CORNER.length);
-        g.fill(x + SELECTED_EDGE, y + SELECTED_EDGE, x + w - SELECTED_EDGE, y + h - SELECTED_EDGE, fill);
-        int[] bands = {SELECTED_COLOURS.get('H'), SELECTED_COLOURS.get('I'), BLUE, BLUE, BLUE, BLUE};
-        int corner = SELECTED_CORNER.length;
-        for (int i = 0; i < SELECTED_EDGE; i++) {
-            g.fill(x + corner, y + i, x + w - corner, y + i + 1, bands[i]);
-            g.fill(x + corner, y + h - 1 - i, x + w - corner, y + h - i, bands[i]);
-            g.fill(x + i, y + corner, x + i + 1, y + h - corner, bands[i]);
-            g.fill(x + w - 1 - i, y + corner, x + w - i, y + h - corner, bands[i]);
-        }
+        g.drawManaged(() -> {
+            g.fill(x + SELECTED_EDGE, y + SELECTED_EDGE, x + w - SELECTED_EDGE, y + h - SELECTED_EDGE, fill);
+            int[] bands = {SELECTED_COLOURS.get('H'), SELECTED_COLOURS.get('I'), BLUE, BLUE, BLUE, BLUE};
+            int corner = SELECTED_CORNER.length;
+            for (int i = 0; i < SELECTED_EDGE; i++) {
+                g.fill(x + corner, y + i, x + w - corner, y + i + 1, bands[i]);
+                g.fill(x + corner, y + h - 1 - i, x + w - corner, y + h - i, bands[i]);
+                g.fill(x + i, y + corner, x + i + 1, y + h - corner, bands[i]);
+                g.fill(x + w - 1 - i, y + corner, x + w - i, y + h - corner, bands[i]);
+            }
 
-        for (int row = 0; row < corner; row++) {
-            String line = SELECTED_CORNER[row];
-            String mirrored = new StringBuilder(line).reverse().toString();
-            pattern(g, x, y + row, line, fill, SELECTED_COLOURS, 'G');
-            pattern(g, x + w - corner, y + row, mirrored, fill, SELECTED_COLOURS, 'G');
-            pattern(g, x, y + h - 1 - row, line, fill, SELECTED_COLOURS, 'G');
-            pattern(g, x + w - corner, y + h - 1 - row, mirrored, fill, SELECTED_COLOURS, 'G');
-        }
+            for (int row = 0; row < corner; row++) {
+                String line = SELECTED_CORNER[row];
+                String mirrored = new StringBuilder(line).reverse().toString();
+                pattern(g, x, y + row, line, fill, SELECTED_COLOURS, 'G');
+                pattern(g, x + w - corner, y + row, mirrored, fill, SELECTED_COLOURS, 'G');
+                pattern(g, x, y + h - 1 - row, line, fill, SELECTED_COLOURS, 'G');
+                pattern(g, x + w - corner, y + h - 1 - row, mirrored, fill, SELECTED_COLOURS, 'G');
+            }
+        });
     }
 
     /** Any size: other mods' buttons can be smaller than a window, and those get a thin frame. */
@@ -155,43 +157,47 @@ public final class DqGui {
 
     /** A filled circle with a ring: white on black, or blue for the centre of the ability wheel. */
     public static void disc(GuiGraphics g, int centerX, int centerY, int radius, boolean accent) {
-        int ring = accent ? BLUE : RULE;
-        for (int dy = -radius; dy < radius; dy++) {
-            double row = dy + 0.5;
-            int outer = (int)Math.round(Math.sqrt(radius * radius - row * row));
-            int inner = Math.abs(row) < radius - 2 ? (int)Math.round(Math.sqrt((radius - 2) * (radius - 2) - row * row)) : 0;
-            int y = centerY + dy;
-            if (inner == 0) {
-                g.fill(centerX - outer, y, centerX + outer, y + 1, ring);
-            } else {
-                g.fill(centerX - outer, y, centerX - inner, y + 1, ring);
-                g.fill(centerX - inner, y, centerX + inner, y + 1, BLACK);
-                g.fill(centerX + inner, y, centerX + outer, y + 1, ring);
+        g.drawManaged(() -> {
+            int ring = accent ? BLUE : RULE;
+            for (int dy = -radius; dy < radius; dy++) {
+                double row = dy + 0.5;
+                int outer = (int)Math.round(Math.sqrt(radius * radius - row * row));
+                int inner = Math.abs(row) < radius - 2 ? (int)Math.round(Math.sqrt((radius - 2) * (radius - 2) - row * row)) : 0;
+                int y = centerY + dy;
+                if (inner == 0) {
+                    g.fill(centerX - outer, y, centerX + outer, y + 1, ring);
+                } else {
+                    g.fill(centerX - outer, y, centerX - inner, y + 1, ring);
+                    g.fill(centerX - inner, y, centerX + inner, y + 1, BLACK);
+                    g.fill(centerX + inner, y, centerX + outer, y + 1, ring);
+                }
             }
-        }
+        });
     }
 
     private static void frame(GuiGraphics g, int x, int y, int w, int h, int fill, Map<Character, Integer> colours) {
         int corner = WINDOW_TOP_LEFT.length;
         require(w, h, 2 * corner);
-        g.fill(x + WINDOW_EDGE, y + WINDOW_EDGE, x + w - WINDOW_EDGE, y + h - WINDOW_EDGE, fill);
-        // Outermost first: light grey, white, dark grey on the top and left; reversed on the bottom and right.
-        char[] lit = {'B', 'D', 'E'};
-        for (int i = 0; i < WINDOW_EDGE; i++) {
-            int topLeft = colours.get(lit[i]);
-            int bottomRight = colours.get(lit[WINDOW_EDGE - 1 - i]);
-            g.fill(x + corner, y + i, x + w - corner, y + i + 1, topLeft);
-            g.fill(x + i, y + corner, x + i + 1, y + h - corner, topLeft);
-            g.fill(x + corner, y + h - 1 - i, x + w - corner, y + h - i, bottomRight);
-            g.fill(x + w - 1 - i, y + corner, x + w - i, y + h - corner, bottomRight);
-        }
+        g.drawManaged(() -> {
+            g.fill(x + WINDOW_EDGE, y + WINDOW_EDGE, x + w - WINDOW_EDGE, y + h - WINDOW_EDGE, fill);
+            // Outermost first: light grey, white, dark grey on the top and left; reversed on the bottom and right.
+            char[] lit = {'B', 'D', 'E'};
+            for (int i = 0; i < WINDOW_EDGE; i++) {
+                int topLeft = colours.get(lit[i]);
+                int bottomRight = colours.get(lit[WINDOW_EDGE - 1 - i]);
+                g.fill(x + corner, y + i, x + w - corner, y + i + 1, topLeft);
+                g.fill(x + i, y + corner, x + i + 1, y + h - corner, topLeft);
+                g.fill(x + corner, y + h - 1 - i, x + w - corner, y + h - i, bottomRight);
+                g.fill(x + w - 1 - i, y + corner, x + w - i, y + h - corner, bottomRight);
+            }
 
-        for (int row = 0; row < corner; row++) {
-            pattern(g, x, y + row, WINDOW_TOP_LEFT[row], fill, colours, 'F');
-            pattern(g, x + w - corner, y + row, WINDOW_TOP_RIGHT[row], fill, colours, 'F');
-            pattern(g, x, y + h - corner + row, WINDOW_BOTTOM_LEFT[row], fill, colours, 'F');
-            pattern(g, x + w - corner, y + h - corner + row, WINDOW_BOTTOM_RIGHT[row], fill, colours, 'F');
-        }
+            for (int row = 0; row < corner; row++) {
+                pattern(g, x, y + row, WINDOW_TOP_LEFT[row], fill, colours, 'F');
+                pattern(g, x + w - corner, y + row, WINDOW_TOP_RIGHT[row], fill, colours, 'F');
+                pattern(g, x, y + h - corner + row, WINDOW_BOTTOM_LEFT[row], fill, colours, 'F');
+                pattern(g, x + w - corner, y + h - corner + row, WINDOW_BOTTOM_RIGHT[row], fill, colours, 'F');
+            }
+        });
     }
 
     /** One row of a corner, drawn as runs of equal colour. */

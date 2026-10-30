@@ -190,16 +190,19 @@ final class PartyPanels implements IGuiOverlay {
         number(g, font, "+" + bar.counted(), x + w - 10, y + 15, DqGui.TEXT);
     }
 
+    /** Its dozens of fills go out as one draw (drawManaged), not one draw each. */
     private static void window(GuiGraphics g, int x, int y, int w) {
-        rows(g, x, y, w, 0, 0, 0);
-        rows(g, x, y, w, 1, 1, 1);
-        rows(g, x, y, w, 2, 2, 2);
-        rows(g, x, y, w, 3, 3, HEADER_END - 1);
-        rows(g, x, y, w, 4, HEADER_END, HEADER_END);
-        rows(g, x, y, w, 5, HEADER_END + 1, H - 5);
-        for (int i = 6; i < ROWS.length; i++) {
-            rows(g, x, y, w, i, H - 10 + i, H - 10 + i);
-        }
+        g.drawManaged(() -> {
+            rows(g, x, y, w, 0, 0, 0);
+            rows(g, x, y, w, 1, 1, 1);
+            rows(g, x, y, w, 2, 2, 2);
+            rows(g, x, y, w, 3, 3, HEADER_END - 1);
+            rows(g, x, y, w, 4, HEADER_END, HEADER_END);
+            rows(g, x, y, w, 5, HEADER_END + 1, H - 5);
+            for (int i = 6; i < ROWS.length; i++) {
+                rows(g, x, y, w, i, H - 10 + i, H - 10 + i);
+            }
+        });
     }
 
     /** Draws ROWS[pattern] on rows from..to of the window. */
@@ -220,12 +223,14 @@ final class PartyPanels implements IGuiOverlay {
     private static void bar(GuiGraphics g, int x, int y, int width, float fraction, int shine, int fill) {
         int inner = width - 2;
         int filled = Mth.clamp(Mth.ceil(fraction * inner), 0, inner);
-        g.fill(x, y, x + inner + 2, y + 1, BAR_TOP);
-        g.fill(x + 1, y, x + 1 + filled, y + 1, shine);
-        g.fill(x, y + 1, x + 1, y + 3, BAR_EDGE);
-        g.fill(x + inner + 1, y + 1, x + inner + 2, y + 3, BAR_EDGE);
-        g.fill(x + 1, y + 1, x + 1 + filled, y + 3, fill);
-        g.fill(x, y + 3, x + inner + 2, y + 4, BAR_EDGE);
+        g.drawManaged(() -> {
+            g.fill(x, y, x + inner + 2, y + 1, BAR_TOP);
+            g.fill(x + 1, y, x + 1 + filled, y + 1, shine);
+            g.fill(x, y + 1, x + 1, y + 3, BAR_EDGE);
+            g.fill(x + inner + 1, y + 1, x + inner + 2, y + 3, BAR_EDGE);
+            g.fill(x + 1, y + 1, x + 1 + filled, y + 3, fill);
+            g.fill(x, y + 3, x + inner + 2, y + 4, BAR_EDGE);
+        });
     }
 
     /**

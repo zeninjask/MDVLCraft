@@ -35,6 +35,20 @@ public final class PacketStats {
             key += " slot " + slot.getSlot() + " " + net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(slot.getItem().getItem());
         } else if (packet instanceof net.minecraft.network.protocol.game.ClientboundUpdateAttributesPacket attributes) {
             key += " " + attributes.getValues().stream().map(v -> String.valueOf(net.minecraftforge.registries.ForgeRegistries.ATTRIBUTES.getKey(v.getAttribute()))).sorted().toList();
+        } else if (packet instanceof ICustomPacket<?> custom && "fml:loginwrapper".equals(String.valueOf(custom.getName())) && custom.getInternalData() != null) {
+            // the login wrapper carries another channel; FML's handshake messages start with their index (3: a registry)
+            try {
+                net.minecraft.network.FriendlyByteBuf data = new net.minecraft.network.FriendlyByteBuf(custom.getInternalData().copy());
+                net.minecraft.resources.ResourceLocation inner = data.readResourceLocation();
+                data.readVarInt();
+                key += " > " + inner;
+                if ("fml:handshake".equals(inner.toString())) {
+                    int message = data.readUnsignedByte();
+                    key += " #" + message + (message == 3 ? " " + data.readResourceLocation() : "");
+                }
+            } catch (RuntimeException e) {
+                key += " ?";
+            }
         }
         LongAdder[] total = TOTALS.computeIfAbsent(key, k -> new LongAdder[] {new LongAdder(), new LongAdder()});
         total[0].add(index - START.get());
