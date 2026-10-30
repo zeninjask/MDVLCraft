@@ -29,6 +29,6 @@ On first join every player picks three origins, in this order (the Orb of Origin
 
 The status page (M menu → Status) shows Race, Martial and Job. Every power is listed in the skill-tree PDF.
 
-**Java:** 17. **RAM:** 6–8 GB client. **Dedicated server:** use the server `.mrpack`, or remove at least Oculus, Better Lock On, Dynamic Crosshair and Legendary Tooltips from the server's `mods` folder (they crash or error on a server — see MODLIST.md).
+**Java:** 17. **RAM:** 6–8 GB client. **Dedicated server:** use the server `.mrpack`, or remove at least Oculus, Better Lock On and Legendary Tooltips from the server's `mods` folder (they crash or error on a server — see MODLIST.md).
 
 > The pack contains `epic_fight_ponder-1.0.0.jar` extracted from TCR Core (All Rights Reserved) — keep this repository private.

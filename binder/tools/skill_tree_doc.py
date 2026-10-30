@@ -474,6 +474,18 @@ def origin_tab_skills(pack):
     return out
 
 
+def trait_rows():
+    """Every trait as (tier, name, description), in the order of Trait.Tier (rarity) and then of the Trait enum."""
+    src = os.path.join(TOOLS, '..', 'src', 'main')
+    java = open(os.path.join(src, 'java', 'com', 'mdvlcraft', 'binder', 'traits', 'Trait.java')).read()
+    tiers = re.findall(r'^\s+([A-Z]+)\(ChatFormatting', java[java.index('public enum Tier'):], re.M)
+    traits = re.findall(r'^\s+([A-Z0-9_]+)\(Tier\.([A-Z]+)', java[:java.index('public enum Tier')], re.M)
+    lang = json.load(open(os.path.join(src, 'resources', 'assets', 'mdvlcraft', 'lang', 'en_us.json')))
+    rows = [(tier, lang.get(f'trait.mdvlcraft.{t.lower()}', t.title()), clean(lang.get(f'trait.mdvlcraft.{t.lower()}.desc', '')))
+            for t, tier in traits]
+    return sorted(rows, key=lambda r: tiers.index(r[0]))
+
+
 # -- html -------------------------------------------------------------------------------------------------------------
 STYLE = """@page { size: A4 landscape; margin: 9mm; }
 body { font-family: 'DejaVu Sans', Arial, sans-serif; font-size: 8pt; color: #1b1e24; background: #fff; margin: 0; }
@@ -610,7 +622,15 @@ def main():
             skills = "<br>".join(f"<b>{e(n)}</b> {e(d)}" for n, d in extra) or "–"
             parts.append(f"<tr><td>{e(name)}</td><td>{body}</td><td>{skills}</td></tr>")
         parts.append("</table>")
-    parts.append("</div></body></html>")
+    parts.append("</div>")
+
+    rows = trait_rows()
+    parts.append(f"<div class='page'><h2>Traits</h2><p class='lead'>All {len(rows)} traits, by rarity. A Spin Token (four from netherite and "
+                 "amethyst) opens the trait machine; each spin offers traits of the rarity the reels land on.</p>"
+                 "<table class='origins'><tr><th>Rarity</th><th>Trait</th><th>What it does</th></tr>")
+    for tier, name, desc in rows:
+        parts.append(f"<tr><td>{e(tier.title())}</td><td><b>{e(name)}</b></td><td>{e(desc)}</td></tr>")
+    parts.append("</table></div></body></html>")
 
     with tempfile.NamedTemporaryFile('w', suffix='.html', delete=False, encoding='utf-8') as f:
         f.write("".join(parts))

@@ -211,6 +211,11 @@ public final class MonkArts {
     static void blackFlash(ServerPlayer player, LivingEntity target, LivingHurtEvent event) {
         event.setAmount(event.getAmount() * 2.5F);
         target.addEffect(new MobEffectInstance((MobEffect)CursedfateModMobEffects.MOVEMENT_STUN.get(), 23, 1, false, false), player);
+        blackFlashEffects(player, target);
+    }
+
+    /** What a Black Flash looks and sounds like (also the Black Flash trait's crits): sparks, Photon effects, screen flash, "BLACK FLASH". */
+    public static void blackFlashEffects(ServerPlayer player, LivingEntity target) {
         play(target, sound("cursedfate", "blackflash", SoundEvents.GENERIC_EXPLODE), 1.0F, 1.0F);
         play(target, SoundEvents.METAL_BREAK, 1.3F, 0.8F);
         if (player.level() instanceof ServerLevel level) {

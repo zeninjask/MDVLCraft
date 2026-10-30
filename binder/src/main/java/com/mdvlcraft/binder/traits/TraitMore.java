@@ -20,7 +20,6 @@ import java.util.UUID;
 import javax.annotation.Nullable;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.particles.DustParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -83,7 +82,6 @@ import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
-import org.joml.Vector3f;
 import yesman.epicfight.skill.SkillCategories;
 import yesman.epicfight.skill.guard.GuardSkill;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
@@ -101,8 +99,6 @@ import yesman.epicfight.world.entity.eventlistener.PlayerEventListener.EventType
 public final class TraitMore {
     private static final UUID LISTENER = UUID.fromString("8e3b0c57-2f6a-4d1e-9b84-6c1f0a7d3e52");
     private static final String PHOENIX = "mdvlcraft:trait_phoenix";
-    private static final DustParticleOptions BLACK = new DustParticleOptions(new Vector3f(0.05F, 0.0F, 0.05F), 1.6F);
-    private static final DustParticleOptions RED = new DustParticleOptions(new Vector3f(0.85F, 0.05F, 0.1F), 1.2F);
     private static final Map<UUID, State> STATES = new HashMap<>();
     /** Haggler: the discounts on the offers a player has open, taken back when the window closes. */
     private static final Map<UUID, List<Discount>> DISCOUNTS = new HashMap<>();
@@ -297,15 +293,11 @@ public final class TraitMore {
         }
     }
 
-    /** Black Flash (from Crits): the black lightning on a crit. */
+    /** Black Flash (from Crits): a crit looks and sounds like Focus's Black Flash. */
     public static void blackFlash(Player player, LivingEntity victim) {
         state(player).lastBlackFlash = victim.level().getGameTime();
-        if (victim.level() instanceof ServerLevel level) {
-            level.sendParticles(BLACK, victim.getX(), victim.getY(0.6), victim.getZ(), 30, 0.4, 0.6, 0.4, 0.0);
-            level.sendParticles(RED, victim.getX(), victim.getY(0.6), victim.getZ(), 16, 0.5, 0.7, 0.5, 0.0);
-            level.sendParticles(ParticleTypes.ELECTRIC_SPARK, victim.getX(), victim.getY(0.6), victim.getZ(), 20, 0.4, 0.6, 0.4, 0.4);
-            level.playSound(null, victim.blockPosition(), SoundEvents.LIGHTNING_BOLT_IMPACT, SoundSource.PLAYERS, 0.8F, 1.6F);
-            level.playSound(null, victim.blockPosition(), SoundEvents.PLAYER_ATTACK_CRIT, SoundSource.PLAYERS, 1.0F, 0.6F);
+        if (player instanceof ServerPlayer serverPlayer) {
+            com.mdvlcraft.binder.ability.MonkArts.blackFlashEffects(serverPlayer, victim);
         }
     }
 

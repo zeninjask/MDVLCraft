@@ -194,7 +194,6 @@ The server `.mrpack` leaves out the 28 client-only mods: the four below, which c
 |---|---|
 | Oculus | `Failed to create mod instance. ModID: oculus` |
 | Better Lock On | common mixin `LocalPlayerPatchMixin` pulls in `LocalPlayer` |
-| Dynamic Crosshair | `DynamicCrosshairBaseBlock` mixin into `Block` references `LocalPlayer` |
 | Legendary Tooltips | `LegendaryTooltipsConfig.<init>` loads `LocalPlayer` |
 
 ## Test results (v1.9.1)
@@ -337,7 +336,6 @@ Side: **client** = client and test packs only, **server** = server and test pack
 | 29 | [Curios API](https://www.curseforge.com/minecraft/mc-mods/curios) | both | both | `curios-forge-5.14.1+1.20.1.jar` |
 | 30 | [Distant Horizons](https://modrinth.com/project/uCdwusMi) | both | added in 1.8.0 | `DistantHorizons-3.3.3-1.20.1-fabric-forge.jar` |
 | 31 | [Domestication Innovation](https://www.curseforge.com/minecraft/mc-mods/domestication-innovation) | both | MDVL | `domesticationinnovation-1.7.1-1.20.1.jar` |
-| 32 | [Dynamic Crosshair](https://www.curseforge.com/minecraft/mc-mods/dynamic-crosshair) | client | MDVL | `dynamiccrosshair-9.10+1.20.1-forge.jar` |
 | 33 | [Easy Anvils](https://www.curseforge.com/minecraft/mc-mods/easy-anvils) | both | MDVL | `EasyAnvils-v8.0.2-1.20.1-Forge.jar` |
 | 34 | [Easy Magic](https://www.curseforge.com/minecraft/mc-mods/easy-magic) | both | MDVL | `EasyMagic-v8.0.1-1.20.1-Forge.jar` |
 | 35 | [Easy Shulker Boxes](https://www.curseforge.com/minecraft/mc-mods/easy-shulker-boxes) | both | MDVL | `EasyShulkerBoxes-v8.0.2-1.20.1-Forge.jar` |
