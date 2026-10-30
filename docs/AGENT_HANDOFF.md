@@ -54,6 +54,13 @@ You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its ow
   (logged during the test); all 46 traits ran with hits and no exceptions; Mana Overflow/Heavy Hands attributes; the
   slot machine spins, pays and stores the choice; the Status row; weapon damage values; Kusabimaru's VIX effects with
   Render Scale on draw full screen. Not opened in game: Willow's trade list (she walked off).
+- **2.1.81: party trackers from any distance** (`content/PartyPositions`, `network/PartyPositionsPacket`,
+  `client/PartyFarTrackers`, protocol 29): while the player-list key (` in the pack's options) is held, Parties' tracker square shows
+  for allies outside client render range, from positions the server sends every 10 ticks (same dimension only). Not
+  tested with two players.
+- **Orca's domains: research only, not built** (`docs/orca-domains/`): the PDF report (list, one domain per archetype,
+  swapping the opening while keeping Cursed Fate's shrine and slashes, domain clashing, mana cost) and the decompiled
+  JujutsuCraft domain sources. The user said not to implement it yet; keep it for later.
 
 ## Specialisations, spell ranks and races (branch `claude/clever-babbage-t08qqj`)
 
