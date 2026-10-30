@@ -62,6 +62,15 @@ public final class EarlyQuests {
         return client.contains(quest);
     }
 
+    /**
+     * Whether every quest before this one is completed with all of `player`'s rewards from it claimed. A quest done early
+     * can't be accepted (and so completed at once) until then, so its rewards come in the quest line's order.
+     */
+    public static boolean prerequisitesClaimed(TeamData data, Quest quest, UUID player) {
+        return quest.streamDependencies().allMatch(before -> data.isCompleted(before)
+            && !(before instanceof Quest earlier && data.hasUnclaimedRewards(player, earlier)));
+    }
+
     public static void setClient(Set<Long> quests) {
         client = Set.copyOf(quests);
     }
@@ -255,12 +264,16 @@ public final class EarlyQuests {
     }
 
     /** ActiveQuest: the quest was just accepted; done early by any member present, it completes (after FTB's own tick). */
-    static void onAccepted(TeamData data, Quest quest, Collection<ServerPlayer> members) {
-        boolean early = members.stream().anyMatch(player -> {
+    /** Whether one of the team's online members has already done everything the quest asks. */
+    static boolean doneEarly(TeamData data, Quest quest, Collection<ServerPlayer> members) {
+        return members.stream().anyMatch(player -> {
             Set<Long> seen = seen(player);
             return done(player, data, quest, seen) || update(player).contains(quest.id);
         });
-        if (!early) {
+    }
+
+    static void onAccepted(TeamData data, Quest quest, Collection<ServerPlayer> members) {
+        if (!doneEarly(data, quest, members)) {
             return;
         }
         MinecraftServer server = ServerLifecycleHooks.getCurrentServer();

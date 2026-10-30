@@ -117,7 +117,8 @@ public class QuestLogScreen extends Screen {
             this.command.setMessage(Component.translatable("screen.mdvlcraft.quests.abandon"));
         } else if (accept.isPresent() && state == State.OPEN) {
             this.command.setMessage(Component.translatable("screen.mdvlcraft.quests.accept"));
-            this.command.active = this.active(team).isEmpty();
+            boolean early = com.mdvlcraft.binder.compat.ftbquests.EarlyQuests.isEarly(quest.id);   // done early: it completes at once
+            this.command.active = early ? this.claimedBefore(team, quest) : this.active(team).isEmpty();
         } else if (accept.isEmpty() && state != State.CLEAR && state != State.LOCKED && this.checkmark(team, quest).isPresent()) {
             this.command.setMessage(Component.translatable("screen.mdvlcraft.quests.done"));
         } else {
@@ -341,13 +342,19 @@ public class QuestLogScreen extends Screen {
         }
 
         if (state == State.OPEN && accept.isPresent() && !this.command.active) {
-            Component busy = Component.translatable("screen.mdvlcraft.quests.busy");
+            Component busy = com.mdvlcraft.binder.compat.ftbquests.EarlyQuests.isEarly(quest.id) && !this.claimedBefore(team, quest)
+                ? Component.translatable("screen.mdvlcraft.quests.claim_first") : Component.translatable("screen.mdvlcraft.quests.busy");
             g.drawCenteredString(this.font, busy, dx + dw / 2, this.y + this.h - 36, DqGui.MUTED);
         }
 
         if (state == State.CLEAR) {
             this.stamp(g, dx + dw - 46, this.y + this.h - 46);
         }
+    }
+
+    private boolean claimedBefore(TeamData team, Quest quest) {
+        return this.minecraft.player != null
+            && com.mdvlcraft.binder.compat.ftbquests.EarlyQuests.prerequisitesClaimed(team, quest, this.minecraft.player.getUUID());
     }
 
     /** The red "cleared" seal, tilted, over the top right of the details. */

@@ -62,8 +62,16 @@ public final class ActiveQuest {
         }
 
         Quest quest = task.getQuest();
+        boolean early = EarlyQuests.doneEarly(data, quest, members);
+        if (early && !members.stream().allMatch(player -> EarlyQuests.prerequisitesClaimed(data, quest, player.getUUID()))) {
+            MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
+            server.tell(new TickTask(server.getTickCount() + 1, () -> data.setProgress(task, 0)));
+            members.forEach(player -> player.sendSystemMessage(Component.literal("Claim the rewards of the quests before ")
+                .append(title(quest)).append(" first.").withStyle(ChatFormatting.RED)));
+            return;
+        }
         Optional<Quest> other = active(data).stream().filter(found -> found != quest).findFirst();
-        if (other.isPresent()) {
+        if (other.isPresent() && !early) {   // a quest done early completes at once, so it may be taken alongside
             // FTB Quests marks the task complete after this event, so the undo waits a tick.
             MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
             server.tell(new TickTask(server.getTickCount() + 1, () -> data.setProgress(task, 0)));
