@@ -2,6 +2,7 @@ package com.mdvlcraft.binder.orca;
 
 import com.hm.efn.gameasset.EFNSkills;
 import com.mdvlcraft.binder.MDVLBinder;
+import com.mdvlcraft.binder.wukong.WukongCategories;
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -30,31 +31,14 @@ import yesman.epicfight.world.capabilities.item.WeaponCategory;
 /**
  * Playful Cloud's Epic Fight moveset (weapon type mdvlcraft:jjc_playful_cloud): other addons' animations, picked in the
  * Playful Cloud Moveset picker (tools/playful_cloud), with the staff drawn across both hands by client/PlayfulCloudRenderer.
- * Its own category lets the guard skills and the Soulslike dodge (EFNDodgeSkillMixin) give it its own guard, parries and
+ * Its own category (WukongCategories.PLAYFUL_CLOUD) lets the guard skills and the Soulslike dodge (EFNDodgeSkillMixin) give it its own guard, parries and
  * roll. The weapon art is JjkSkill's Cloud Crusher.
  */
 public final class PlayfulCloudSetup {
-    /** Playful Cloud's Epic Fight weapon category. */
-    public enum Category implements WeaponCategory {
-        PLAYFUL_CLOUD;
-
-        private final int id;
-
-        Category() {
-            this.id = WeaponCategory.ENUM_MANAGER.assign(this);
-        }
-
-        @Override
-        public int universalOrdinal() {
-            return this.id;
-        }
-    }
-
     private PlayfulCloudSetup() {
     }
 
     public static void register(IEventBus modBus) {
-        WeaponCategory.ENUM_MANAGER.registerEnumCls("mdvlcraft", Category.class);
         modBus.addListener(PlayfulCloudSetup::onWeaponPresets);
         modBus.addListener(PlayfulCloudSetup::onLoadComplete);
     }
@@ -77,7 +61,7 @@ public final class PlayfulCloudSetup {
                 anim(scythe + "auto1"), anim(scythe + "auto2"), anim(scythe + "auto3"), anim(scythe + "auto4"), anim(scythe + "auto5"),
                 anim(scythe + "dash"), anim(scythe + "airslash")};
             return WeaponCapability.builder()
-                .category(Category.PLAYFUL_CLOUD)
+                .category(WukongCategories.PLAYFUL_CLOUD)
                 .styleProvider(patch -> Styles.TWO_HAND)
                 .collider(new MultiOBBCollider(3, 0.4, 0.4, 0.8, 0.0, 0.0, -0.75))
                 .swingSound(EpicFightSounds.WHOOSH_ROD.get())
@@ -107,10 +91,10 @@ public final class PlayfulCloudSetup {
                 continue;
             }
             try {
-                motions(guard, "guardMotions").put(Category.PLAYFUL_CLOUD, (item, player) -> anim("wom:biped/skill/solar_guard_hit"));
-                motions(guard, "guardBreakMotions").put(Category.PLAYFUL_CLOUD, (item, player) -> Animations.BIPED_COMMON_NEUTRALIZED);
+                motions(guard, "guardMotions").put(WukongCategories.PLAYFUL_CLOUD, (item, player) -> anim("wom:biped/skill/solar_guard_hit"));
+                motions(guard, "guardBreakMotions").put(WukongCategories.PLAYFUL_CLOUD, (item, player) -> Animations.BIPED_COMMON_NEUTRALIZED);
                 if (skill != EpicFightSkills.GUARD) {
-                    motions(guard, "advancedGuardMotions").put(Category.PLAYFUL_CLOUD, (item, player) -> parries);
+                    motions(guard, "advancedGuardMotions").put(WukongCategories.PLAYFUL_CLOUD, (item, player) -> parries);
                 }
             } catch (ReflectiveOperationException | RuntimeException e) {
                 MDVLBinder.LOGGER.warn("Could not give {} Playful Cloud's guard", skill, e);

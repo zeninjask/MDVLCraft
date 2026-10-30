@@ -30,7 +30,7 @@ public abstract class EFNDodgeSkillMixin {
                 case EFNDodgeSkill.DIRECTION_RIGHT -> WukongAnimations.DODGE_RIGHT;
                 default -> WukongAnimations.DODGE_BACKWARD;
             });
-        } else if (category == PlayfulCloudSetup.Category.PLAYFUL_CLOUD) {
+        } else if (category == WukongCategories.PLAYFUL_CLOUD) {
             cir.setReturnValue(PlayfulCloudSetup.roll(switch (direction) {
                 case EFNDodgeSkill.DIRECTION_FORWARD -> "forward";
                 case EFNDodgeSkill.DIRECTION_LEFT -> "left";
