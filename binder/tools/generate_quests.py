@@ -882,9 +882,7 @@ FAMILIAR_ROWS = [
          'reveal one.', None, af('truth_mirror'), None),
         ('revive', 'Learn Necromancy', [advancement('alshanex_familiars:alshanex_familiars/learn_necromancy')], [give('minecraft:experience_bottle', 8), xp(500)],
          'Defeat the Dead King. From then on your Familiars can be brought back when they die.', None, 'minecraft:wither_skeleton_skull', None),
-        ('tome', 'We Act Together as One', [item(af('familiar_spellbook'))], [give('minecraft:experience_bottle', 16), xp(500)],
-         'Craft the Tome of Familiar Alignment: a diamond spell book, mithril, magic cloth, Memory Fragments and Familiar '
-         'Shards. It is a spell book that works with your Familiars.', None, af('familiar_spellbook'), 'hexagon'),
+        # no Tome of Familiar Alignment quest: it is crafted from a Diamond Spell Book, and the pack has no spell books
     ]),
 ]
 

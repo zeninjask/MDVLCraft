@@ -17,8 +17,11 @@ import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
+import com.mdvlcraft.binder.util.KillCredit;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Inventory;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.RegisterCommandsEvent;
@@ -174,10 +177,11 @@ public final class GateAdvancements {
                 }
             }
         }
-        if (event.getSource().getEntity() instanceof ServerPlayer farmer && TowerRun.dropFactor(dead) < 1.0) {
-            grant(farmer, "tower_farm");   // a castle mob on a floor more than 10 below the killer's best
+        ServerPlayer killer = KillCredit.of(dead, event.getSource());   // summons' and pets' kills count for their owner
+        if (killer != null && TowerRun.dropFactor(dead) < 1.0) {
+            grant(killer, "tower_farm");   // a castle mob on a floor more than 10 below the killer's best
         }
-        if (GateSpawner.instanceOf(dead) >= 0 && event.getSource().getEntity() instanceof ServerPlayer killer) {
+        if (killer != null && GateSpawner.instanceOf(dead) >= 0) {
             grant(killer, "gate_kill");
             if ("elite".equals(dead.getPersistentData().getString(GateRewards.ROLE))) {
                 grant(killer, "elite_kill");
@@ -226,6 +230,35 @@ public final class GateAdvancements {
         }
         if (entry.bestBoss >= 5) {
             grant(player, "tower_boss_5");
+        }
+    }
+
+    /**
+     * The held-item quests (an attuned gate key, tempered gear) every 5 seconds. Their advancements' inventory_changed
+     * criteria only test the slot that just changed, so an item already held when the quest opened, or when the advancement
+     * was reset, never counted until it moved.
+     */
+    @SubscribeEvent
+    public static void onHeldItems(TickEvent.PlayerTickEvent event) {
+        if (event.phase != TickEvent.Phase.END || !(event.player instanceof ServerPlayer player) || player.tickCount % 100 != 0) {
+            return;
+        }
+        Inventory inventory = player.getInventory();
+        for (int slot = 0; slot < inventory.getContainerSize(); slot++) {
+            ItemStack stack = inventory.getItem(slot);
+            if (stack.getTag() == null) {
+                continue;
+            }
+            if (stack.getItem() instanceof GateKeyItem && stack.getTag().contains("theme")) {
+                grant(player, "attuned");
+            }
+            GateRank rank = GateTempering.temper(stack);
+            if (rank != null) {
+                grant(player, "tempered");
+                if (rank == GateRank.S) {
+                    grant(player, "tempered_s");
+                }
+            }
         }
     }
 

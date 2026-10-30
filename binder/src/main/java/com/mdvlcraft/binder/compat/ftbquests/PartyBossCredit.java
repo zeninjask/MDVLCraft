@@ -6,6 +6,7 @@ import dev.ftb.mods.ftbquests.quest.ServerQuestFile;
 import dev.ftb.mods.ftbquests.quest.TeamData;
 import dev.ftb.mods.ftbquests.quest.task.KillTask;
 import net.minecraft.advancements.CriteriaTriggers;
+import com.mdvlcraft.binder.util.KillCredit;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraftforge.common.Tags;
@@ -15,7 +16,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
- * A boss (forge:bosses, or a gate's boss) killed by a player counts for their whole party: every online party member gets
+ * A boss (forge:bosses, or a gate's boss) killed by a player (or their summon, pet or damage over time: KillCredit) counts for their whole party: every online party member gets
  * the kill's advancements (player_killed_entity) and the FTB Quests kill-task progress, as if they had landed the blow.
  * Members of the killer's own FTB team already share its progress, so their team isn't counted twice.
  */
@@ -27,8 +28,8 @@ public final class PartyBossCredit {
     @SubscribeEvent(priority = EventPriority.LOWEST)
     public static void onDeath(LivingDeathEvent event) {
         LivingEntity dead = event.getEntity();
-        if (event.isCanceled() || !(event.getSource().getEntity() instanceof ServerPlayer killer)
-            || !(dead.getType().is(Tags.EntityTypes.BOSSES) || GateSpawner.isBoss(dead))) {
+        ServerPlayer killer = event.isCanceled() ? null : KillCredit.of(dead, event.getSource());
+        if (killer == null || !(dead.getType().is(Tags.EntityTypes.BOSSES) || GateSpawner.isBoss(dead))) {
             return;
         }
 
