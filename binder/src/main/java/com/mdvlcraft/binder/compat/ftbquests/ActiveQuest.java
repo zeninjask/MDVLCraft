@@ -73,6 +73,7 @@ public final class ActiveQuest {
             return;
         }
 
+        EarlyQuests.onAccepted(data, quest, members);   // done already: it completes at once
         members.forEach(player -> {
             Jingles.send(player, Jingle.QUEST_ACCEPT);
             player.sendSystemMessage(Component.literal("Quest accepted: ").withStyle(ChatFormatting.GOLD)

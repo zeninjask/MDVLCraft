@@ -266,7 +266,10 @@ public class QuestLogScreen extends Screen {
             int badgeW = badge.isEmpty() ? 0 : this.font.width(badge) + 4;
             int titleX = this.x + 18 + this.font.width(number);
             String title = this.font.plainSubstrByWidth(quest.getRawTitle(), this.x + LIST_W - 8 - badgeW - titleX);
-            g.drawString(this.font, title, titleX, ry, state == State.LOCKED ? DqGui.MUTED : DqGui.TEXT, false);
+            boolean early = state != State.CLEAR && state != State.ACTIVE && com.mdvlcraft.binder.compat.ftbquests.EarlyQuests.isEarly(quest.id);
+            // done before it was taken (locked ones too): struck through, and it completes the moment it's accepted
+            g.drawString(this.font, early ? Component.literal(title).withStyle(net.minecraft.ChatFormatting.STRIKETHROUGH) : Component.literal(title),
+                titleX, ry, state == State.LOCKED ? DqGui.MUTED : DqGui.TEXT, false);
             int bx = this.x + LIST_W - 6 - badgeW;
             if (state == State.ACTIVE) {
                 g.fill(bx, ry - 1, bx + badgeW, ry + 9, GOLD);

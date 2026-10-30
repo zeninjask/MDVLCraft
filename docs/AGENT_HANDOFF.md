@@ -72,6 +72,51 @@ You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its ow
   theme but jjk, and their boss rooms are now large. A bosses get +15% health and damage, S +20%
   (GateSpawner.hardRank). Player spell damage is 10% lower (`combat/PlayerSpellDamage`, SpellDamageEvent). Tested on a
   server: every id registered (`/mdvl gate pools`), each new boss summons; not fought in a gate.
+- **START HERE: where 2.1.84 left off (30 Oct 2026).** 2.1.84 was pushed to main at the user's request **without the
+  usual test**: the binder was clean-built (refmap present) but no server was booted on the final jar. Do these next, in
+  order:
+  1. **Boot a server alone** on 2.1.84 and run `/mdvl quests audit` (compat/ftbquests/EarlyQuests): it checks every
+     quest task against the game (items, kill targets, advancements, statistics, biomes, structures, dimensions) and logs
+     each broken one. Fix what it finds in `binder/tools/generate_quests.py` and regenerate.
+  2. **S-rank tempering quest ("Masterwork", gates chapter)**: the user says it doesn't complete. The quest, its
+     advancement (`advancements/quests/gates/tempered_s.json`: inventory_changed with nbt `{mdvlcraft_temper:6}`) and
+     GateTempering (anvil, cost 12 levels) all look right on paper. Test in game: give a sword tempered S
+     (`/give @s netherite_sword{mdvlcraft_temper:6}`) with the quest accepted, and check
+     `@a[advancements={mdvlcraft:quests/gates/tempered_s=true}]`; then try a real S rune in an anvil.
+  3. **Quests done early** (EarlyQuests, new): every 5 s a player's unaccepted quests (locked ones and locked chapters
+     too) are checked against what they've done (kill and item statistics, items held, statistics, and advancements,
+     biomes, dimensions, structures remembered once seen); those are struck through in the quest log (QuestLogScreen)
+     and complete as soon as they're accepted (ActiveQuest calls EarlyQuests.onAccepted). Untested: check the
+     strikethrough shows, and that accepting one completes it and pays its rewards.
+  4. **Party windows at half size** (client/PartyPanels, SCALE 0.5): untested; check they read well at GUI scale 3 and
+     that nothing else on the HUD was placed relative to them.
+  5. **Gate interior variety** (below): all 144 shared templates place with no placeholder left (`/mdvl gate place`
+     checked each), and gates build with them (an 18-room and a 15-room gate built fine). Not yet looked at in game:
+     how the rooms look (screenshots), the mechanics (flame vents, portcullis, lever puzzle, ritual/gauntlet, collapsing
+     deck, fountain/altar/cursed shrine, ghost merchant, champion, trapped chests, treasure goblin, ambush,
+     reinforcements, lights out), breakable rubble and graves in survival, loops and the descending floors. Test in
+     **spectator** to fly around (survival players can't teleport through gate walls: GateProtection sends them back).
+     Memory: the test client is about 9 GB; the server needed -Xmx3G (not 4G) to fit beside it, and teleporting the
+     client through many new chunks got it killed.
+  6. **Red gate arenas** (radius 54) and the boss changes: untested in game.
+  7. Network protocol is now 30 (EarlyQuestsPacket): players must update client and server together.
+- **2.1.84: gate bosses, red arenas, gate interior variety** (user picks from the gate interior picker):
+  - Bosses: the Nightwarden stays removed (`content/RemovedMobs`; GateMobs.boss skips removed ids); A boss rooms back to
+    their pre-2.1.83 sizes (the user said not to change A gates); every gate boss (GateSpawner.bossTargets) has armour
+    capped at 12, a melee boss with speed under 0.2 gets +20%, and Cursed Fate NPCs get `DomainUsed` (no Malevolent
+    Shrine rebuilding the arena). Damage caps (Cataclysm 30-37, LM 20-21) were checked and left.
+  - Red gate arenas (RedArena): radius 54 (was 18), pillars only in odd-numbered themes, set further out.
+  - Client pack defaults (base/client, released in the mrpack): render and simulation distance 8, Distant Horizons
+    `lodChunkRenderDistanceRadius = 50`.
+  - Gate interiors: `tools/gates/gen_gate_variety.py` writes 144 shared templates to `structures/gate/shared/` in
+    placeholder blocks (`data/mdvlcraft/gate_shared_roles.json`); `gate/GatePalettes` swaps them for the theme's palette
+    (theme files now carry "palette") and gives each gate a mood (ruined, flooded, overgrown, dark, haunted), lighting
+    set and decor set. `gate/GateFeatures` runs the marker mechanics (flame vents, portcullis bars, lever puzzle, ritual
+    and gauntlet waves, collapsing deck, fountain, altar, cursed shrine, ghost merchant, champion, spiders) and events
+    (trapped chests, treasure goblin, ceiling ambush, reinforcements, lights out, mood ambience). DungeonPlanner: new side
+    rooms (shrine, champion, secret, merchant), loops between neighbouring rooms, floors mostly descend (to 3 levels).
+    Breakable blocks ("crack:" roles, recorded as `breakable` markers) and GraveStone graves can be broken in gates.
+    `/mdvl gate place <theme> <template>` places any template for checking.
 - **Orca's domains: research only, not built** (`docs/orca-domains/`): the PDF report (list, one domain per archetype,
   swapping the opening while keeping Cursed Fate's shrine and slashes, domain clashing, mana cost) and the decompiled
   JujutsuCraft domain sources. The user said not to implement it yet; keep it for later.

@@ -43,6 +43,8 @@ final class PartyPanels implements IGuiOverlay {
     static final PartyPanels INSTANCE = new PartyPanels();
     private static final ResourceLocation PARTIES_HUD = ResourceLocation.fromNamespaceAndPath("parties", "parties_hud");
     private static final int MIN_WIDTH = 64;
+    /** The windows are drawn at half their pixel size. */
+    private static final float SCALE = 0.5F;
     /** Where "Lv." starts, right of the two vocation boxes. */
     private static final int LEVEL_LEFT = 39;
     private static final int H = 61;
@@ -95,6 +97,10 @@ final class PartyPanels implements IGuiOverlay {
             minecraft.font.width(m.name()) - 1 + 16 + (m.leader() ? 2 * minecraft.font.width(PartyLeader.MARK) : 0),
             LEVEL_LEFT + minecraft.font.width("Lv. ") + 7 + minecraft.font.width(String.valueOf(m.archetypes().level()))
         )).max().getAsInt());
+        // drawn at half size (user's request): everything below is in doubled coordinates
+        graphics.pose().pushPose();
+        graphics.pose().scale(SCALE, SCALE, 1.0F);
+        screenWidth = (int)(screenWidth / SCALE);
         int perRow = Math.max(1, (screenWidth - 2 * MARGIN + GAP) / (w + GAP));
         int y = MARGIN;
         for (int row = 0; row * perRow < members.size(); row++) {
@@ -112,6 +118,7 @@ final class PartyPanels implements IGuiOverlay {
 
             y += H + GAP + (bars ? EXP_GAP + EXP_H : 0);
         }
+        graphics.pose().popPose();
     }
 
     private static List<Member> members(LocalPlayer self) {
