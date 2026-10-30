@@ -67,6 +67,11 @@ You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its ow
   cap to raise); Ghost Walker has no dodge-distance bonus (Epic Fight's root motion overrides pushes). Tested: all 41
   set in game with hits and a hit taken, no exceptions; the reels and paytable; not tested: spells, parries, dodges,
   trades, two-player traits (Martyr, Field Medic, Pathfinder, Vow of the Shield, Bloodhound's party part).
+- **2.1.83: gate bosses and spell damage**: a theme's boss for a rank can list `"also"` ids (GateThemes.BossEntry.ids);
+  GateMobs.boss picks one at random each time (gate, hidden boss, Demon Castle floor). A and S got alternates in every
+  theme but jjk, and their boss rooms are now large. A bosses get +15% health and damage, S +20%
+  (GateSpawner.hardRank). Player spell damage is 10% lower (`combat/PlayerSpellDamage`, SpellDamageEvent). Tested on a
+  server: every id registered (`/mdvl gate pools`), each new boss summons; not fought in a gate.
 - **Orca's domains: research only, not built** (`docs/orca-domains/`): the PDF report (list, one domain per archetype,
   swapping the opening while keeping Cursed Fate's shrine and slashes, domain clashing, mana cost) and the decompiled
   JujutsuCraft domain sources. The user said not to implement it yet; keep it for later.

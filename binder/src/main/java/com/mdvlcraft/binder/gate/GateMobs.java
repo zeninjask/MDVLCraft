@@ -101,7 +101,9 @@ public final class GateMobs {
             return NO_BOSS;
         }
         GateThemes.BossEntry entry = data.bosses()[rank.ordinal()];
-        return heavy(entry.id()) && rank != GateRank.S ? NO_BOSS : new Boss(entry.id(), entry.count());
+        List<ResourceLocation> ids = entry.ids();
+        ResourceLocation id = ids.get(java.util.concurrent.ThreadLocalRandom.current().nextInt(ids.size()));   // a different one gate to gate
+        return heavy(id) && rank != GateRank.S ? NO_BOSS : new Boss(id, entry.count());
     }
 
     @Nullable
@@ -126,7 +128,9 @@ public final class GateMobs {
                 }
             }
             for (GateThemes.BossEntry boss : data.bosses()) {
-                add(missing, boss.id());
+                for (ResourceLocation id : boss.ids()) {
+                    add(missing, id);
+                }
             }
         }
         return missing;

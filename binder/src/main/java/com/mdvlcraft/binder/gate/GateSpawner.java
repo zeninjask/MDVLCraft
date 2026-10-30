@@ -46,6 +46,8 @@ public final class GateSpawner {
     private static final UUID BOSS_EXTRA_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0007");
     private static final UUID BOSS_TARGET_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0008");
     private static final UUID BOSS_MIN_DAMAGE = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0009");
+    private static final UUID BOSS_RANK_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a000a");
+    private static final UUID BOSS_RANK_DAMAGE = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a000b");
     /** Each boss is brought up to its rank's health (E..S) whatever its own base health, so weak bosses aren't pushovers. */
     private static final double[] BOSS_HEALTH = {150.0, 300.0, 550.0, 900.0, 1500.0, 2500.0};
     /** And hits at least this hard (E..S). */
@@ -74,6 +76,7 @@ public final class GateSpawner {
             soften(mob);
             bossTargets(mob, instance.rank);
             bossHealth(mob, instance);
+            hardRank(mob, instance.rank);
         }
         if (ELITE.equals(role)) {
             modify(mob.getAttribute(Attributes.MAX_HEALTH), ELITE_HEALTH, "gate elite", 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL);
@@ -150,11 +153,19 @@ public final class GateSpawner {
         mob.setHealth(mob.getMaxHealth());
     }
 
+    /** A and S bosses hit harder and last longer: +15% health and damage at A, +20% at S. */
+    private static void hardRank(Mob mob, GateRank rank) {
+        double extra = rank == GateRank.S ? 0.2 : rank == GateRank.A ? 0.15 : 0.0;
+        modify(mob.getAttribute(Attributes.MAX_HEALTH), BOSS_RANK_HEALTH, "gate boss A/S health", extra, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        modify(mob.getAttribute(Attributes.ATTACK_DAMAGE), BOSS_RANK_DAMAGE, "gate boss A/S damage", extra, AttributeModifier.Operation.MULTIPLY_TOTAL);
+        mob.setHealth(mob.getMaxHealth());
+    }
+
     /** The theme file's per-boss health multiplier for this rank, when it is not 1. */
     private static void bossHealth(Mob mob, Instance instance) {
         GateThemes.Theme data = GateThemes.get(instance.theme);
         double health = data == null ? 1.0 : data.bosses()[instance.rank.ordinal()].health();
-        if (health != 1.0 && GateMobs.type(data.bosses()[instance.rank.ordinal()].id()) == mob.getType()) {
+        if (health != 1.0 && data.bosses()[instance.rank.ordinal()].ids().stream().anyMatch(id -> GateMobs.type(id) == mob.getType())) {
             modify(mob.getAttribute(Attributes.MAX_HEALTH), BOSS_EXTRA_HEALTH, "gate boss health", health - 1.0, AttributeModifier.Operation.MULTIPLY_TOTAL);
             mob.setHealth(mob.getMaxHealth());
         }

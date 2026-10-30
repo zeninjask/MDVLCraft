@@ -51,7 +51,14 @@ public final class GateThemes extends SimpleJsonResourceReloadListener {
 
     /** A theme's boss for one rank: `count` copies of `id`, fought in the boss room of `size` (small, medium, large). */
     /** `health`: an extra multiplier on this boss's max health (theme file "health", default 1), for bosses weak for their rank. */
-    public record BossEntry(ResourceLocation id, int count, String size, double health) {
+    /** `also`: other bosses that may come instead (theme file "also"); each gate picks one of id and also at random. */
+    public record BossEntry(ResourceLocation id, int count, String size, double health, List<ResourceLocation> also) {
+        public List<ResourceLocation> ids() {
+            List<ResourceLocation> ids = new ArrayList<>();
+            ids.add(this.id);
+            ids.addAll(this.also);
+            return ids;
+        }
     }
 
     /** Red-gate hazards (cold, hunger, spores): still read from the theme files, but no longer applied (red gates have
@@ -169,7 +176,7 @@ public final class GateThemes extends SimpleJsonResourceReloadListener {
                 throw new IllegalArgumentException("boss size " + size + " is not small, medium or large");
             }
             bosses[rank.ordinal()] = new BossEntry(id(GsonHelper.getAsString(boss, "id")), GsonHelper.getAsInt(boss, "count", 1), size,
-                GsonHelper.getAsDouble(boss, "health", 1.0));
+                GsonHelper.getAsDouble(boss, "health", 1.0), ids(GsonHelper.getAsJsonArray(boss, "also", new JsonArray())));
         }
         JsonObject hazardJson = GsonHelper.getAsJsonObject(json, "hazard", new JsonObject());
         List<Block> spores = new ArrayList<>();
