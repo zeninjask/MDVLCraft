@@ -17,6 +17,11 @@ public final class RemovedMobs {
     private RemovedMobs() {
     }
 
+    /** Whether a mob is taken out of the pack (gate boss lists skip it). */
+    public static boolean removed(ResourceLocation id) {
+        return REMOVED.contains(id);
+    }
+
     @SubscribeEvent
     public static void onJoin(EntityJoinLevelEvent event) {
         if (!event.getLevel().isClientSide() && REMOVED.contains(ForgeRegistries.ENTITY_TYPES.getKey(event.getEntity().getType()))) {

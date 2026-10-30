@@ -10,13 +10,14 @@ import net.minecraft.world.level.block.Blocks;
  * A red gate's boss arena (RedGates.enterArena): once the tally is met the party is taken up to it, high above the lair,
  * and the boss comes in its middle. Every theme gets its own arena: its red palette (floor, pillar, light) and a layout
  * drawn from the theme's place in GateTheme, so no two themes share one: the outline (round, square or eight-sided), the
- * floor's pattern (plain, rings, checks or a cross), the number of pillars (4, 6 or 8) and the wall's top (flat or
- * crenellated). The walls are HEIGHT high and lit from inside; the middle is kept clear for the boss and, after, the chest.
+ * floor's pattern (plain, rings, checks or a cross), the number of pillars (none for half the themes, else 4, 6 or 8, far
+ * out near the wall) and the wall's top (flat or crenellated). The walls are HEIGHT high and lit from inside; the middle is kept clear for the boss and, after, the chest.
  */
 final class RedArena {
     /** Height of the arena floor's top: far above the red realm's land (about y 72). */
     static final int Y = 200;
-    static final int RADIUS = 18;
+    /** Three times the old 18, so big bosses have room to move and nobody is cornered. */
+    static final int RADIUS = 54;
     static final int HEIGHT = 10;
 
     private RedArena() {
@@ -28,7 +29,7 @@ final class RedArena {
         int style = instance.theme.ordinal();
         int shape = style % 3;
         int pattern = style / 3 % 4;
-        int pillars = 4 + 2 * (style / 2 % 3);
+        int pillars = style % 2 == 0 ? 0 : 4 + 2 * (style / 2 % 3);   // half the themes have none: bosses got stuck behind them
         boolean crenels = style % 2 == 0;
         BlockPos centre = lair.atY(Y);
         for (int dx = -RADIUS - 1; dx <= RADIUS + 1; dx++) {
@@ -53,7 +54,7 @@ final class RedArena {
         }
         for (int n = 0; n < pillars; n++) {
             double a = Math.PI * 2.0 / pillars * n + Math.PI / pillars;
-            BlockPos base = centre.offset((int)Math.round(Math.cos(a) * RADIUS * 0.6), 1, (int)Math.round(Math.sin(a) * RADIUS * 0.6));
+            BlockPos base = centre.offset((int)Math.round(Math.cos(a) * RADIUS * 0.75), 1, (int)Math.round(Math.sin(a) * RADIUS * 0.75));
             for (int dy = 0; dy < 6; dy++) {
                 set(level, base.above(dy), palette.pillar());
             }

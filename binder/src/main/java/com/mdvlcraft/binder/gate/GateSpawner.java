@@ -48,6 +48,8 @@ public final class GateSpawner {
     private static final UUID BOSS_MIN_DAMAGE = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a0009");
     private static final UUID BOSS_RANK_HEALTH = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a000a");
     private static final UUID BOSS_RANK_DAMAGE = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a000b");
+    private static final UUID BOSS_ARMOUR_CAP_ID = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a000c");
+    private static final UUID BOSS_SPEED_ID = UUID.fromString("6f1c2a52-6b0e-4a39-9a51-7c3c1f0a000d");
     /** Each boss is brought up to its rank's health (E..S) whatever its own base health, so weak bosses aren't pushovers. */
     private static final double[] BOSS_HEALTH = {150.0, 300.0, 550.0, 900.0, 1500.0, 2500.0};
     /** And hits at least this hard (E..S). */
@@ -138,8 +140,30 @@ public final class GateSpawner {
         mob.setHealth(mob.getMaxHealth());
     }
 
-    /** A boss below its rank's health or damage (BOSS_HEALTH, BOSS_DAMAGE) is raised to it; stronger bosses keep theirs. */
+    /** Most armour a boss keeps (after soften): above it hits barely land (Sukuna has 42). */
+    private static final double BOSS_ARMOUR_CAP = 12.0;
+    /** A melee boss slower than this walks 20% faster, so it can't simply be kited. */
+    private static final double SLOW_BOSS = 0.2;
+    /** Casters that keep their distance on purpose: not sped up. */
+    private static final java.util.Set<String> CASTERS = java.util.Set.of("irons_spellbooks:dead_king", "traveloptics:enraged_dead_king",
+        "irons_spellbooks:fire_boss", "traveloptics:aqua_grandmaster");
+
+    /**
+     * A boss below its rank's health or damage (BOSS_HEALTH, BOSS_DAMAGE) is raised to it; stronger bosses keep theirs. Every
+     * gate boss (normal, red, hidden, Demon Castle) also has its armour capped at BOSS_ARMOUR_CAP, a slow melee boss is sped
+     * up, and Cursed Fate's NPCs count their domain as used: a Malevolent Shrine would rebuild the arena around the fight.
+     */
     public static void bossTargets(Mob mob, GateRank rank) {
+        AttributeInstance armour = mob.getAttribute(Attributes.ARMOR);
+        if (armour != null && armour.getValue() > BOSS_ARMOUR_CAP) {
+            modify(armour, BOSS_ARMOUR_CAP_ID, "gate boss armour cap", BOSS_ARMOUR_CAP - armour.getValue(), AttributeModifier.Operation.ADDITION);
+        }
+        AttributeInstance speed = mob.getAttribute(Attributes.MOVEMENT_SPEED);
+        String id = String.valueOf(net.minecraftforge.registries.ForgeRegistries.ENTITY_TYPES.getKey(mob.getType()));
+        if (speed != null && speed.getBaseValue() < SLOW_BOSS && !CASTERS.contains(id)) {
+            modify(speed, BOSS_SPEED_ID, "gate boss speed", 0.2, AttributeModifier.Operation.MULTIPLY_BASE);
+        }
+        mob.getPersistentData().putBoolean("DomainUsed", true);
         AttributeInstance health = mob.getAttribute(Attributes.MAX_HEALTH);
         double target = BOSS_HEALTH[rank.ordinal()];
         if (health != null && health.getValue() < target) {

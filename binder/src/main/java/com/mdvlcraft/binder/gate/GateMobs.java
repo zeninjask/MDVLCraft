@@ -101,7 +101,11 @@ public final class GateMobs {
             return NO_BOSS;
         }
         GateThemes.BossEntry entry = data.bosses()[rank.ordinal()];
-        List<ResourceLocation> ids = entry.ids();
+        List<ResourceLocation> ids = new ArrayList<>(entry.ids());
+        ids.removeIf(com.mdvlcraft.binder.content.RemovedMobs::removed);   // a mob taken out of the pack never spawns
+        if (ids.isEmpty()) {
+            return NO_BOSS;
+        }
         ResourceLocation id = ids.get(java.util.concurrent.ThreadLocalRandom.current().nextInt(ids.size()));   // a different one gate to gate
         return heavy(id) && rank != GateRank.S ? NO_BOSS : new Boss(id, entry.count());
     }
