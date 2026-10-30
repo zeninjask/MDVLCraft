@@ -23,6 +23,7 @@ public final class ClientAbilitySetup {
         com.mdvlcraft.binder.client.antimagic.DemonicAssimilationLayers.register(modBus);
         com.mdvlcraft.binder.client.irons.SpellEffectLayers.register(modBus);
         MinecraftForge.EVENT_BUS.addListener(AbilityKeys::onClientTick);
+        MinecraftForge.EVENT_BUS.addListener(DefaultKeys::onClientTick);   // before RemovedKeys prunes the list
         MinecraftForge.EVENT_BUS.addListener(RemovedKeys::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(TracingDashAnimation::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(MenuNav::onScreenInit);
