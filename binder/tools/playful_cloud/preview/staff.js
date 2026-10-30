@@ -1,80 +1,89 @@
-// Playful Cloud staff: three sections A-B-C linked by short chains. Works in the armature's (Blender) space: z up.
-// Each section has ends e0, e1 (A.e1-B.e0 and B.e1-C.e1 are chained). Held sections follow the Tool joints (their -Z
-// axis), gripped at the pommel end; the middle one swings as a Verlet rod. The same rules go into the in-game renderer.
+// Playful Cloud staff: two end sections held at their middle (one per fist) and a middle section on chains between
+// them. Works in the armature's (Blender) space: z up. No free physics: the middle section takes a settled hanging
+// shape from where the two chain ends are, eased so it doesn't snap, and is kept in front of the body.
+// The same rules go into the in-game renderer.
 (function () {
-  const SEC = 0.76, BACK = 0.035, CHAIN = 0.1, G = -22, SUB = 8, ITER = 6;
+  const SEC = 0.76, HALF = SEC / 2, CHAIN = 0.18, MAX_CHAIN = 0.3, FRONT = 0.3, EASE = 0.06;
   const V = THREE.Vector3;
-  function Staff() {
-    this.s = [0, 1, 2].map(() => ({ e0: new V(), e1: new V(), p0: new V(), p1: new V(), held: false, blend: 0 }));
-    this.mode = 'ends'; this.init = false;
+  function Staff() { this.init = false; this.ends = [[new V(), new V()], [new V(), new V()], [new V(), new V()]]; this.p = [new V(), new V()]; this.sign = { R: 1, L: 1 }; }
+  function col(m, i) { const e = m.elements; return new V(e[i * 4], e[i * 4 + 1], e[i * 4 + 2]); }
+  function pos(m) { const e = m.elements; return new V(e[12], e[13], e[14]); }
+  // the body's frame: forward (horizontal), right, up
+  function body(w) {
+    const f = col(w.Root, 2).negate(); f.z = 0; if (f.lengthSq() < 1e-6) f.set(0, 1, 0); f.normalize();
+    const up = new V(0, 0, 1), r = new V().crossVectors(f, up);
+    return { f, r, up, o: pos(w.Root) };
   }
-  function toolOf(w, name) {
-    const m = w[name], e = m.elements;
-    return { pos: new V(e[12], e[13], e[14]), aim: new V(-e[8], -e[9], -e[10]).normalize() };
-  }
-  function grip(t) { return [t.pos.clone().addScaledVector(t.aim, -BACK), t.pos.clone().addScaledVector(t.aim, SEC - BACK)]; }
-  // held targets for this frame: {index: [e0, e1]}. Each hand holds an end section like a sword hilt; the middle one
-  // always dangles between them on its chains.
-  Staff.prototype.targets = function (R, L) {
-    this.mode = 'ends';
-    return { 0: grip(R), 2: grip(L) };
-  };
-  Staff.prototype.step = function (world, dt) {
-    const R = toolOf(world, 'Tool_R'), L = toolOf(world, 'Tool_L'), tg = this.targets(R, L);
-    if (!this.init) {
-      // start hanging straight down from wherever it's held
-      for (let i = 0; i < 3; i++) {
-        const s = this.s[i]; const g = tg[i] || grip(R);
-        s.e0.copy(g[0]); s.e1.copy(g[1]); s.p0.copy(g[0]); s.p1.copy(g[1]);
-      }
-      this.init = true;
+  function bvec(b, x, y, z) { return b.r.clone().multiplyScalar(x).addScaledVector(b.up, y).addScaledVector(b.f, z).normalize(); }
+  // which end of each blade-following section is chained to the middle: the one more often in front of the body
+  Staff.prototype.calibrate = function (rig, clips) {
+    let sR = 0, sL = 0;
+    for (const c of clips) for (let i = 0; i <= 12; i++) {
+      rig.poseLocal(c.sample(c.d.len * i / 12)); const w = rig.lastWorld, b = body(w);
+      sR += col(w.Tool_R, 2).negate().dot(b.f); sL += col(w.Tool_L, 2).negate().dot(b.f);
     }
-    dt = Math.min(dt, 1 / 20);
-    const h = dt / SUB;
-    for (let k = 0; k < SUB; k++) {
-      const f = (k + 1) / SUB;
-      for (let i = 0; i < 3; i++) {
-        const s = this.s[i];
-        if (tg[i]) {
-          // held: move towards the hand (blend in over ~0.12 s after a re-grab)
-          s.blend = s.held ? 1 : Math.min(1, s.blend + h / 0.12);
-          const a = tg[i][0], b = tg[i][1];
-          const n0 = s.e0.clone().lerp(a, s.held ? f : s.blend), n1 = s.e1.clone().lerp(b, s.held ? f : s.blend);
-          if (s.blend >= 1) s.held = true;
-          s.p0.copy(s.e0); s.p1.copy(s.e1); s.e0.copy(n0); s.e1.copy(n1);
-        } else {
-          if (s.held) { s.held = false; s.blend = 0; }
-          for (const [e, p] of [[s.e0, s.p0], [s.e1, s.p1]]) {
-            const v = e.clone().sub(p).multiplyScalar(0.995); p.copy(e); e.add(v); e.z += G * h * h;
-          }
-        }
-      }
-      for (let it = 0; it < ITER; it++) {
-        for (let i = 0; i < 3; i++) if (!tg[i]) rod(this.s[i].e0, this.s[i].e1, SEC, 0.5, 0.5);
-        link(this.s[0].e1, this.s[1].e0, tg[0], tg[1]);
-        link(this.s[1].e1, this.s[2].e1, tg[1], tg[2]);
-        for (let i = 0; i < 3; i++) if (!tg[i]) for (const e of [this.s[i].e0, this.s[i].e1]) if (e.z < 0.03) e.z = 0.03;
-      }
-    }
+    this.sign = { R: sR >= 0 ? 1 : -1, L: sL >= 0 ? 1 : -1 };
   };
-  function rod(a, b, len, wa, wb) {
-    const d = b.clone().sub(a), l = d.length() || 1e-6, c = (l - len) / l;
-    a.addScaledVector(d, c * wa); b.addScaledVector(d, -c * wb);
-  }
-  function link(a, b, ha, hb) {
-    const d = b.clone().sub(a), l = d.length();
-    if (l <= CHAIN || (ha && hb)) return;
-    const c = (l - CHAIN) / l, wa = ha ? 0 : hb ? 1 : 0.5, wb = hb ? 0 : ha ? 1 : 0.5;
-    a.addScaledVector(d, c * wa); b.addScaledVector(d, -c * wb);
-  }
-  // meshes
+  // held sections for this frame: [chainEnd, freeEnd] per hand
+  Staff.prototype.held = function (w, cfg) {
+    const b = body(w), out = { b };
+    const zR = col(w.Tool_R, 2).negate(), zL = col(w.Tool_L, 2).negate();
+    for (const s of ['R', 'L']) {
+      const p = pos(w['Tool_' + s]);
+      if (cfg.mode === 'toji') {
+        // reference pose: right section up and across, left section down; a little of the hand's turn shows through
+        const base = s === 'R' ? bvec(b, -0.35, 0.85, 0.3) : bvec(b, 0.1, -0.9, 0.35);
+        const a = base.multiplyScalar(0.75).addScaledVector(s === 'R' ? zR : zL, 0.25).normalize();
+        const up = a.z >= 0 ? a : a.clone().negate();
+        // right: chained at its lower end; left: at its upper end
+        out[s] = s === 'R' ? [p.clone().addScaledVector(up, -HALF), p.clone().addScaledVector(up, HALF)]
+          : [p.clone().addScaledVector(up, HALF), p.clone().addScaledVector(up, -HALF)];
+        continue;
+      }
+      const a = cfg.mode === 'paired' ? zR : (s === 'R' ? zR : zL);
+      const sg = (cfg.flip && cfg.flip[s] ? -1 : 1) * (cfg.mode === 'paired' ? this.sign.R : this.sign[s]);
+      out[s] = [p.clone().addScaledVector(a, sg * HALF), p.clone().addScaledVector(a, -sg * HALF)];
+    }
+    return out;
+  };
+  Staff.prototype.step = function (w, dt, cfg) {
+    const h = this.held(w, cfg), b = h.b, P = h.R[0], Q = h.L[0];
+    this.ends[0] = h.R; this.ends[2] = h.L;
+    // settled hang of the middle section between the chain ends
+    const D = P.distanceTo(Q), span = SEC + 2 * CHAIN;
+    let d = Q.clone().sub(P); if (d.lengthSq() < 1e-6) d = b.r.clone(); d.normalize();
+    const sag = Math.sqrt(Math.max(0, span * span - D * D)) * 0.42;
+    const c = P.clone().add(Q).multiplyScalar(0.5); c.z -= sag;
+    // tilted down a little rather than stiffly level
+    d.z -= 0.35; d.normalize();
+    const e0 = c.clone().addScaledVector(d, -HALF), e1 = c.clone().addScaledVector(d, HALF);
+    // never behind the body: push the rod forward until both ends are in front of the chest
+    const ahead = (x) => x.clone().sub(b.o).dot(b.f);
+    const push = Math.max(0, FRONT - Math.min(ahead(e0), ahead(e1)));
+    for (const x of [e0, e1]) { x.addScaledVector(b.f, push); if (x.z < 0.05) x.z = 0.05; }
+    if (!this.init) { this.p = [e0.clone(), e1.clone()]; this.init = true; }
+    const k = 1 - Math.exp(-dt / EASE);
+    this.p[0].lerp(e0, k); this.p[1].lerp(e1, k);
+    const mid = this.p[0].clone().add(this.p[1]).multiplyScalar(0.5), dir = this.p[1].clone().sub(this.p[0]).normalize();
+    let m0 = mid.clone().addScaledVector(dir, -HALF), m1 = mid.clone().addScaledVector(dir, HALF);
+    // the chains never stretch past MAX_CHAIN: pull the rod's ends in to them (the rod may give a little in length)
+    if (m0.distanceTo(P) + m1.distanceTo(Q) > m0.distanceTo(Q) + m1.distanceTo(P)) [m0, m1] = [m1, m0];
+    const tie = (m, a) => { const v = m.clone().sub(a), l = v.length(); return l > MAX_CHAIN ? a.clone().addScaledVector(v, MAX_CHAIN / l) : m; };
+    m0 = tie(m0, P); m1 = tie(m1, Q);
+    const len = m0.distanceTo(m1), want = Math.min(SEC * 1.15, Math.max(SEC * 0.8, len));
+    if (Math.abs(want - len) > 1e-4) {
+      const c2 = m0.clone().add(m1).multiplyScalar(0.5); let u = m1.clone().sub(m0); if (u.lengthSq() < 1e-8) u = b.r.clone(); u.normalize();
+      m0 = c2.clone().addScaledVector(u, -want / 2); m1 = c2.clone().addScaledVector(u, want / 2);
+    }
+    this.ends[1] = [m0, m1];
+  };
   Staff.prototype.build = function (group) {
-    const wood = new THREE.MeshLambertMaterial({ color: 0xb8322a }), gold = new THREE.MeshLambertMaterial({ color: 0x1b1b1f }),
+    const wood = new THREE.MeshLambertMaterial({ color: 0xb8322a }), cap = new THREE.MeshLambertMaterial({ color: 0x1b1b1f }),
       steel = new THREE.MeshLambertMaterial({ color: 0x8a8f99 });
-    this.rods = this.s.map(() => {
+    this.rods = [0, 1, 2].map(() => {
       const g = new THREE.Group();
-      const body = new THREE.Mesh(new THREE.BoxGeometry(0.085, 0.085, 1), wood); g.add(body);
-      for (const z of [-0.47, 0.47]) { const cap = new THREE.Mesh(new THREE.BoxGeometry(0.105, 0.105, 0.06), gold); cap.position.z = z; g.add(cap); }
+      g.add(new THREE.Mesh(new THREE.BoxGeometry(0.085, 0.085, 1), wood));
+      for (const z of [-0.47, 0.47]) { const m = new THREE.Mesh(new THREE.BoxGeometry(0.105, 0.105, 0.06), cap); m.position.z = z; g.add(m); }
       group.add(g); return g;
     });
     this.chains = [0, 1].map(() => { const m = new THREE.Mesh(new THREE.BoxGeometry(0.035, 0.035, 1), steel); group.add(m); return m; });
@@ -83,12 +92,13 @@
     obj.position.copy(a).add(b).multiplyScalar(0.5);
     const d = b.clone().sub(a), l = Math.max(d.length(), 1e-4);
     obj.quaternion.setFromUnitVectors(new V(0, 0, 1), d.divideScalar(l));
-    obj.scale.set(1, 1, len ? len / 1 : l);
+    obj.scale.set(1, 1, len || l);
   }
   Staff.prototype.sync = function () {
-    this.s.forEach((s, i) => place(this.rods[i], s.e0, s.e1, SEC));
-    place(this.chains[0], this.s[0].e1, this.s[1].e0);
-    place(this.chains[1], this.s[1].e1, this.s[2].e1);
+    this.ends.forEach((e, i) => place(this.rods[i], e[0], e[1], i === 1 ? 0 : SEC));
+    const [m0, m1] = this.ends[1], P = this.ends[0][0], Q = this.ends[2][0];
+    const swap = m0.distanceTo(P) + m1.distanceTo(Q) > m0.distanceTo(Q) + m1.distanceTo(P);
+    place(this.chains[0], P, swap ? m1 : m0); place(this.chains[1], Q, swap ? m0 : m1);
   };
   window.CloudStaff = Staff;
 })();

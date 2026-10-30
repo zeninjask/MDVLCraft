@@ -84,10 +84,10 @@
   window.EFRig = Rig;
 })();
 
-// compact clip: {len, loop, n, j: {joint: [qx,qy,qz,qw,px,py,pz, ...per frame]}} sampled at 30 fps
+// compact clip: {len, loop, n, j: {joint: [qx,qy,qz,qw,px,py,pz, ...per frame]}} sampled at d.fps (30 if not given)
 window.CloudClip = function (d) { this.d = d; };
 CloudClip.prototype.sample = function (t) {
-  const d = this.d, out = {}, f = Math.max(0, Math.min(d.n - 1, t * 30)), i = Math.min(d.n - 2, Math.floor(f)), a = f - i;
+  const d = this.d, out = {}, f = Math.max(0, Math.min(d.n - 1, t * (d.fps || 30))), i = Math.min(d.n - 2, Math.floor(f)), a = f - i;
   const q0 = new THREE.Quaternion(), q1 = new THREE.Quaternion(), p0 = new THREE.Vector3(), p1 = new THREE.Vector3(), one = new THREE.Vector3(1, 1, 1);
   for (const n in d.j) {
     const v = d.j[n];
