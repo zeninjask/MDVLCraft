@@ -20,6 +20,10 @@ public abstract class DurabilityMixin {
 
     @Inject(method = "hurt(ILnet/minecraft/util/RandomSource;Lnet/minecraft/server/level/ServerPlayer;)Z", at = @At("HEAD"), cancellable = true)
     private void mdvlcraft$luckyLooter(int amount, RandomSource random, @Nullable ServerPlayer player, CallbackInfoReturnable<Boolean> cir) {
+        if (player != null && amount > 0 && Traits.has(player, Trait.UNBREAKABLE) && random.nextFloat() < 0.4F) {
+            cir.setReturnValue(false);   // Unbreakable: 40% of wear is skipped
+            return;
+        }
         if (!mdvlcraft$doubling && player != null && amount > 0 && Traits.has(player, Trait.LUCKY_LOOTER) && random.nextFloat() < 0.05F) {
             mdvlcraft$doubling = true;
             try {

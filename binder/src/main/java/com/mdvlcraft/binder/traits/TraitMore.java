@@ -322,7 +322,7 @@ public final class TraitMore {
                 for (LivingEntity e : SpecKit.enemies(player, player.position(), 6.0)) {
                     e.setSecondsOnFire(5);
                 }
-                player.displayClientMessage(Component.translatable("trait.mdvlcraft.phoenix").withStyle(ChatFormatting.GOLD), true);
+                player.displayClientMessage(Component.translatable("trait.mdvlcraft.phoenix.rise").withStyle(ChatFormatting.GOLD), true);
                 return;
             }
         }
@@ -458,7 +458,7 @@ public final class TraitMore {
                 state.lustPenalty = false;
             } else if (now - state.lustClock > 1200 && !state.lustPenalty) {
                 state.lustPenalty = true;
-                player.displayClientMessage(Component.translatable("trait.mdvlcraft.bloodlust").withStyle(ChatFormatting.DARK_RED), true);
+                player.displayClientMessage(Component.translatable("trait.mdvlcraft.bloodlust.hunger").withStyle(ChatFormatting.DARK_RED), true);
             }
         } else if (state.lust > 0 || state.lustPenalty) {
             state.lust = 0;

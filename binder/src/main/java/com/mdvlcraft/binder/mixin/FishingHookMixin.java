@@ -20,6 +20,7 @@ public abstract class FishingHookMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/world/entity/player/Player;Lnet/minecraft/world/level/Level;II)V", at = @At("TAIL"))
     private void mdvlcraft$anglersPatience(Player player, Level level, int luck, int lureSpeed, CallbackInfo ci) {
-        this.lureSpeed = OriginTraits.lure(player, this.lureSpeed);
+        this.lureSpeed = OriginTraits.lure(player, this.lureSpeed)
+            + (com.mdvlcraft.binder.traits.Traits.has(player, com.mdvlcraft.binder.traits.Trait.ANGLERS_LUCK) ? 1 : 0);   // Angler's Luck: one more level of Lure
     }
 }

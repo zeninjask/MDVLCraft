@@ -100,6 +100,7 @@ public final class TraitWorld {
         modifier(player, Attributes.ARMOR_TOUGHNESS, "cursed_body_toughness", cursedBody ? 3.0 : 0.0, Operation.ADDITION);
         modifier(player, Attributes.MAX_HEALTH, "hollow_heart", Traits.has(player, Trait.HOLLOW_HEART) ? 10.0 : 0.0, Operation.ADDITION);
         modifier(player, Attributes.MAX_HEALTH, "quicksilver", Traits.has(player, Trait.QUICKSILVER) ? -2.0 : 0.0, Operation.ADDITION);
+        TraitPicks.refresh(player);
         everySecond(player);
     }
 
