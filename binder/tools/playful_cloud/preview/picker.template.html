@@ -321,7 +321,8 @@ window.INFO = /*INFO*/;
       db = window.claude && await window.claude.use('db');
       if (!db) return;
       const snap = await db.collection('picks').get();
-      snap.docs.forEach(d => { const v = d.data(); if (v && INFO.groups[d.id]) picks[d.id] = v; });
+      // picks for variants this version no longer has (an earlier version's) are left out
+      snap.docs.forEach(d => { const v = d.data(); const g = INFO.groups[d.id]; if (v && g && g.variants[v.variant]) picks[d.id] = v; });
       if (panes.length) { renderTabs(); renderSide(); renderSummary(); }
     } catch (e) { db = null; }
   })();
