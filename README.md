@@ -5,12 +5,12 @@ A Forge **1.20.1** (Forge **47.4.10**) modpack built around Epic Fight combat, v
 | File | What it is |
 |------|------------|
 | [`MDVLCraft-1.9.4-test.mrpack`](MDVLCraft-1.9.4-test.mrpack) | Modrinth pack (Modrinth App, Prism Launcher) with **every** mod (169): client-only, server-only and both-sides. For single-player and testing |
-| [`MDVLCraft-2.1.88-client.mrpack`](MDVLCraft-2.1.88-client.mrpack) | Modrinth pack for players (from the monarchy repo, server `monarchy.modrinth.gg`): 270 mods (258 downloaded, 12 in overrides, including MDVLCraft Binder 0.9.0), configs, resource packs and the pack's own music (21 tracks, played by the binder). Set 8 GB and the JVM line from [`MDVLCraft-2.1.88-Client-Java-Arguments.txt`](MDVLCraft-2.1.88-Client-Java-Arguments.txt) in the launcher. `binder/` holds the 0.9.0 source |
-| [`MDVLCraft-2.1.88-Server-user_jvm_args.txt`](MDVLCraft-2.1.88-Server-user_jvm_args.txt) | Dedicated server JVM arguments (Forge's `user_jvm_args.txt`) |
-| [`MDVLCraft-2.1.88-Skill-Trees.pdf`](MDVLCraft-2.1.88-Skill-Trees.pdf) | The vocation skill trees (2.1.88): the 19 archetypes' bases with their core stats, abilities, Epic Fight skills and bonuses, then under each archetype every vocation it is part of with that pair's own skills and bonuses; and every Origins race, Martial class and Job with their powers |
+| [`MDVLCraft-2.1.89-client.mrpack`](MDVLCraft-2.1.89-client.mrpack) | Modrinth pack for players (from the monarchy repo, server `monarchy.modrinth.gg`): 270 mods (258 downloaded, 12 in overrides, including MDVLCraft Binder 0.9.0), configs, resource packs and the pack's own music (21 tracks, played by the binder). Set 8 GB and the JVM line from [`MDVLCraft-2.1.89-Client-Java-Arguments.txt`](MDVLCraft-2.1.89-Client-Java-Arguments.txt) in the launcher. `binder/` holds the 0.9.0 source |
+| [`MDVLCraft-2.1.89-Server-user_jvm_args.txt`](MDVLCraft-2.1.89-Server-user_jvm_args.txt) | Dedicated server JVM arguments (Forge's `user_jvm_args.txt`) |
+| [`MDVLCraft-2.1.89-Skill-Trees.pdf`](MDVLCraft-2.1.89-Skill-Trees.pdf) | The vocation skill trees (2.1.89): the 19 archetypes' bases with their core stats, abilities, Epic Fight skills and bonuses, then under each archetype every vocation it is part of with that pair's own skills and bonuses; and every Origins race, Martial class and Job with their powers |
 | [`binder/RANKING_1922.md`](binder/RANKING_1922.md) | Clean-slate archetype ranking for 1.9.22 and balance recommendations |
 | [`MDVLCraft-1.9.21-Balance-Report.pdf`](MDVLCraft-1.9.21-Balance-Report.pdf) | Balance changes applied in 1.9.21, class ranking, next proposed changes, and every unused Epic Fight skill and spell with descriptions |
-| [`MDVLCraft-2.1.88-server.mrpack`](MDVLCraft-2.1.88-server.mrpack) | Modrinth pack for the dedicated server (matches the 2.1.88 client): 218 mods (207 downloaded, 11 in overrides, including MDVLCraft Binder 0.9.0), configs, KubeJS data and `user_jvm_args.txt` |
+| [`MDVLCraft-2.1.89-server.mrpack`](MDVLCraft-2.1.89-server.mrpack) | Modrinth pack for the dedicated server (matches the 2.1.89 client): 218 mods (207 downloaded, 11 in overrides, including MDVLCraft Binder 0.9.0), configs, KubeJS data and `user_jvm_args.txt` |
 | [`MDVLCraft-1.9.4.zip`](MDVLCraft-1.9.4.zip) | CurseForge-format pack (CurseForge app → *Create Custom Profile → Import*, or Prism Launcher → *Add Instance → Import*) with every mod: 155 CurseForge mods + 13 jars in overrides (EpicFight-Ponder, MDVLCraft Binder and eleven mods CurseForge doesn't host in the tested version), with your MDVL configs and KubeJS folder |
 | [`MODLIST.md`](MODLIST.md) | Full mod list with source of each mod, merge changes, server notes and test results |
 | [`MDVLCraft-Optimisation-and-Improvement-Mods.docx`](MDVLCraft-Optimisation-and-Improvement-Mods.docx) | Word document: optimisation mods in the pack, optimisation and improvement mods to add, what to avoid |
@@ -28,6 +28,6 @@ On first join every player picks three origins, in this order (the Orb of Origin
 
 The status page (M menu → Status) shows Race, Martial and Job. Every power is listed in the skill-tree PDF.
 
-**Java:** 17. **RAM:** 6–8 GB client. **Dedicated server:** use the server `.mrpack`, or remove at least Oculus, Better Lock On, Dynamic Crosshair and Legendary Tooltips from the server's `mods` folder (they crash or error on a server — see MODLIST.md).
+**Java:** 17. **RAM:** 6–8 GB client. **Dedicated server:** use the server `.mrpack`, or remove at least Oculus, Better Lock On and Legendary Tooltips from the server's `mods` folder (they crash or error on a server — see MODLIST.md).
 
 > The pack contains `epic_fight_ponder-1.0.0.jar` extracted from TCR Core (All Rights Reserved) — keep this repository private.
