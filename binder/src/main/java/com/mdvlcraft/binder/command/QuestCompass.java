@@ -72,7 +72,8 @@ public final class QuestCompass {
 
         BlockPos origin = searchOrigin(player, level);
         Pair<BlockPos, Holder<Structure>> found = level.getChunkSource().getGenerator()
-            .findNearestMapStructure(level, HolderSet.direct(structure), origin, SEARCH_RADIUS_CHUNKS, false);
+            .findNearestMapStructure(level, HolderSet.direct(structure), origin,
+                com.mdvlcraft.binder.traits.Traits.has(player, com.mdvlcraft.binder.traits.Trait.PATHFINDER) ? 2 * SEARCH_RADIUS_CHUNKS : SEARCH_RADIUS_CHUNKS, false);   // Pathfinder: twice as far
         if (found == null) {
             player.sendSystemMessage(Component.literal("The trail to " + name + " has gone cold: no lair within reach.").withStyle(ChatFormatting.RED));
             return 0;

@@ -1,5 +1,8 @@
 package com.mdvlcraft.binder.combat;
 
+import com.mdvlcraft.binder.traits.Trait;
+import com.mdvlcraft.binder.traits.TraitMore;
+import com.mdvlcraft.binder.traits.Traits;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -38,7 +41,8 @@ import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
  * - Apothic's crit chance and crit damage attributes above their defaults (gear, effects) add to the chance and damage;
  * - Lender's Delight's Crit Chance stat adds its percent;
  * - Critical Knowledge adds 20% (and 5% per Fire Protection level worn), and its crits deal 2x (+0.15x per Blast Protection);
- * - Rime Veil (Interlace Spellweaves) makes the next melee hit a sure crit.
+ * - Rime Veil (Interlace Spellweaves) and the Riposte trait make the next melee hit a sure crit;
+ * - the Black Flash trait turns every crit into a black flash (2.5 times the damage).
  * Effects that care about crits (Crimson Edge, Black Flash Instinct) ask critical(victim) during the same hit.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
@@ -53,6 +57,8 @@ public final class Crits {
     private static final Map<LivingEntity, Long> CRIT = new WeakHashMap<>();
     /** Players whose vanilla swing (Player.attack) started under Rime Veil: the mod's mixin takes the effect off before the hit. */
     private static final Map<Player, Long> VEILED = new WeakHashMap<>();
+    /** Players whose next melee hit is a sure crit until a game time (the Riposte trait). */
+    private static final Map<Player, Long> SURE_UNTIL = new WeakHashMap<>();
     private static Object lendersCapability;
     private static Method lendersStat;
     private static Object lendersCritType;
@@ -65,6 +71,11 @@ public final class Crits {
     public static boolean critical(LivingEntity victim) {
         Long at = CRIT.get(victim);
         return at != null && at == victim.level().getGameTime();
+    }
+
+    /** The player's next melee hit before game time `until` is a sure crit. */
+    public static void sureUntil(Player player, long until) {
+        SURE_UNTIL.put(player, until);
     }
 
     private static boolean rolls(LivingEntity attacker) {
@@ -113,7 +124,11 @@ public final class Crits {
             MobEffect veil = ForgeRegistries.MOB_EFFECTS.getValue(RIME_VEIL);
             boolean melee = source.getDirectEntity() == player;
             Long veiled = VEILED.remove(player);
-            if (melee && veiled != null && veiled == now) {
+            Long riposte = SURE_UNTIL.get(player);
+            if (melee && riposte != null && now <= riposte) {
+                SURE_UNTIL.remove(player);
+                sure = true;
+            } else if (melee && veiled != null && veiled == now) {
                 sure = true;
             } else if (melee && veil != null && player.hasEffect(veil)) {   // Epic Fight swings skip Player.attack, and the mod's mixin with it
                 player.removeEffect(veil);
@@ -124,6 +139,12 @@ public final class Crits {
             return;
         }
         CRIT.put(victim, now);
+        if (attacker instanceof Player player && Traits.has(player, Trait.BLACK_FLASH)) {
+            // Black Flash: every crit is a black flash instead, 2.5 times the damage
+            event.setAmount((float)(event.getAmount() * Math.max(damage, 2.5)));
+            TraitMore.blackFlash(player, victim);
+            return;
+        }
         event.setAmount((float)(event.getAmount() * damage));
         if (victim.level() instanceof ServerLevel level) {
             level.sendParticles(ParticleTypes.CRIT, victim.getX(), victim.getY(0.6), victim.getZ(), 14, 0.3, 0.4, 0.3, 0.3);

@@ -86,11 +86,17 @@ public final class TraitCombat {
         boolean vowKilled;
     }
 
+    /** Whether a trait's own extra hit is being dealt (other trait handlers skip it). */
+    static boolean dealing() {
+        return dealing;
+    }
+
     private static State state(Player player) {
         return STATES.computeIfAbsent(player.getUUID(), id -> new State());
     }
 
-    private static void deal(LivingEntity target, DamageSource source, float amount) {
+    /** Hurts `target` without the hit counting for the traits again. */
+    static void deal(LivingEntity target, DamageSource source, float amount) {
         boolean was = dealing;
         dealing = true;
         try {

@@ -250,28 +250,34 @@ public class TraitSlotScreen extends Screen {
                 this.play(SoundEvents.UI_TOAST_CHALLENGE_COMPLETE, 1.0F, 1.0F);
                 this.play(SoundEvents.TOTEM_USE, 1.2F, 0.5F);
             }
+            case BLESSED -> this.play(SoundEvents.BEACON_ACTIVATE, 1.4F, 0.8F);
             case CURSED -> this.play(SoundEvents.ELDER_GUARDIAN_CURSE, 1.0F, 0.5F);
             case RARE -> this.play(SoundEvents.PLAYER_LEVELUP, 1.2F, 0.8F);
             default -> this.play(SoundEvents.EXPERIENCE_ORB_PICKUP, 1.0F, 0.8F);
         }
     }
 
-    /** What each payline gives, with the symbols drawn small. */
+    /** What each payline gives, read from the left, with the symbols drawn small; the first row that matches pays. */
     private void paytable(GuiGraphics g, int x, int y) {
         g.drawString(this.font, Component.translatable("screen.mdvlcraft.trait_slots.paytable"), x, y, DqGui.HEADING, false);
-        DqGui.rule(g, x, x + 96, y + 11);
-        int[][] lines = {{2, 2, 2, 2}, {2, 2, 2}, {1, 1, 1}, {2, 2}, {}};
-        Trait.Tier[] tiers = {Trait.Tier.MYTHIC, Trait.Tier.CURSED, Trait.Tier.RARE, Trait.Tier.RARE, Trait.Tier.COMMON};
+        DqGui.rule(g, x, x + 100, y + 10);
+        int[][] lines = {{2, 2, 2, 2}, {2, 2, 2, 1}, {2, 2, 2, 0}, {1, 1, 1}, {2, 2}, {1, 1}, {}};
+        Trait.Tier[] tiers = {Trait.Tier.MYTHIC, Trait.Tier.BLESSED, Trait.Tier.CURSED, Trait.Tier.RARE, Trait.Tier.RARE,
+            Trait.Tier.UNCOMMON, Trait.Tier.COMMON};
         for (int i = 0; i < lines.length; i++) {
-            int rowY = y + 15 + i * 16;
+            int rowY = y + 13 + i * 11;
             for (int s = 0; s < lines[i].length; s++) {
-                g.renderItem(SYMBOLS[lines[i][s]], x + s * 11, rowY);
+                g.pose().pushPose();
+                g.pose().translate(x + s * 10, rowY, 0.0F);
+                g.pose().scale(0.625F, 0.625F, 1.0F);
+                g.renderItem(SYMBOLS[lines[i][s]], 0, 0);
+                g.pose().popPose();
             }
             if (lines[i].length == 0) {
-                g.drawString(this.font, Component.translatable("screen.mdvlcraft.trait_slots.anything_else"), x, rowY + 4, DqGui.MUTED, false);
+                g.drawString(this.font, Component.translatable("screen.mdvlcraft.trait_slots.anything_else"), x, rowY + 1, DqGui.MUTED, false);
             }
             Component tier = Component.translatable("trait.mdvlcraft.tier." + tiers[i].name().toLowerCase(Locale.ROOT)).withStyle(tiers[i].colour);
-            g.drawString(this.font, tier, x + 96 - this.font.width(tier), rowY + 4, DqGui.TEXT, false);
+            g.drawString(this.font, tier, x + 100 - this.font.width(tier), rowY + 1, DqGui.TEXT, false);
         }
     }
 

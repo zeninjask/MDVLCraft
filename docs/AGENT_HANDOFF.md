@@ -58,6 +58,15 @@ You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its ow
   `client/PartyFarTrackers`, protocol 29): while the player-list key (` in the pack's options) is held, Parties' tracker square shows
   for allies outside client render range, from positions the server sends every 10 ticks (same dimension only). Not
   tested with two players.
+- **2.1.82: traits batch 2** (`traits/TraitMore`, plus `combat/Crits` for Riposte and Black Flash, `mixin/traits/{EntityFlagsAccessor,
+  GhostWalkerPushMixin,SummonDurationMixin}`): 41 more traits picked by the user, two new tiers (Uncommon, Blessed; the user
+  said no Legendary and no Unique), one trait per player (`Traits.MAX_SLOTS = 1`; a stored second trait is ignored), and
+  the Trait Token is craftable (netherite scrap above an amethyst shard). Odds 38/22/25/7/5/3 (Common, Uncommon, Rare,
+  Cursed, Blessed, Mythic); paytable: 4 netherite Mythic, 3 netherite + diamond Blessed, 3 netherite + iron Cursed, 3
+  diamonds or 2 netherite Rare, 2 diamonds Uncommon. Lord of the Hunt only doubles summon time (the pack has no summon
+  cap to raise); Ghost Walker has no dodge-distance bonus (Epic Fight's root motion overrides pushes). Tested: all 41
+  set in game with hits and a hit taken, no exceptions; the reels and paytable; not tested: spells, parries, dodges,
+  trades, two-player traits (Martyr, Field Medic, Pathfinder, Vow of the Shield, Bloodhound's party part).
 - **Orca's domains: research only, not built** (`docs/orca-domains/`): the PDF report (list, one domain per archetype,
   swapping the opening while keeping Cursed Fate's shrine and slashes, domain clashing, mana cost) and the decompiled
   JujutsuCraft domain sources. The user said not to implement it yet; keep it for later.

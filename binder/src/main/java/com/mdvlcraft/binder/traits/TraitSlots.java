@@ -34,12 +34,15 @@ import net.minecraftforge.registries.RegistryObject;
  * trait and shows it on four reels of iron, diamond and netherite (client/TraitSlotScreen); the player then puts it in a
  * slot or throws it away (network/TraitChoicePacket).
  *
- * The tier is rolled first, 52 Common / 33 Rare / 12 Cursed / 3 Mythic, and the reels are then made to show a payline
- * (the middle row, read from the left) that the paytable gives that tier, so what the reels show always matches the odds:
+ * The tier is rolled first, 38 Common / 22 Uncommon / 25 Rare / 7 Cursed / 5 Blessed / 3 Mythic, and the reels are then
+ * made to show a payline (the middle row, read from the left) that the paytable gives that tier, so what the reels show
+ * always matches the odds:
  *   4 netherite                                      Mythic
- *   3 netherite, then iron or diamond                Cursed (the near miss)
- *   4 diamonds, or 3 diamonds then anything           Rare (60% of Rare rolls)
+ *   3 netherite, then a diamond                      Blessed
+ *   3 netherite, then iron                           Cursed (the near miss)
+ *   3 diamonds, then anything                        Rare (60% of Rare rolls)
  *   2 netherite, then iron or diamond, then anything  Rare (40%)
+ *   2 diamonds, then iron or netherite, then anything Uncommon
  *   anything else                                    Common
  * Two netherite in a row slow the third reel down, three slow the fourth further (the client does that from the result).
  * The top and bottom rows are random and pay nothing.
@@ -50,7 +53,7 @@ public final class TraitSlots {
     public static final int DIAMOND = 1;
     public static final int NETHERITE = 2;
     public static final int REELS = 4;
-    private static final int[] TIER_WEIGHTS = {52, 33, 12, 3};
+    private static final int[] TIER_WEIGHTS = {38, 22, 25, 7, 5, 3};   // by Trait.Tier order
     private static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "mdvlcraft");
     public static final RegistryObject<Item> TRAIT_TOKEN = ITEMS.register("trait_token", TraitTokenItem::new);
     /** The trait each player has rolled and not yet placed or thrown away. */
@@ -67,12 +70,12 @@ public final class TraitSlots {
     public static Trait.Tier pays(int[] line) {
         if (line[0] == NETHERITE && line[1] == NETHERITE) {
             if (line[2] == NETHERITE) {
-                return line[3] == NETHERITE ? Trait.Tier.MYTHIC : Trait.Tier.CURSED;
+                return line[3] == NETHERITE ? Trait.Tier.MYTHIC : line[3] == DIAMOND ? Trait.Tier.BLESSED : Trait.Tier.CURSED;
             }
             return Trait.Tier.RARE;
         }
-        if (line[0] == DIAMOND && line[1] == DIAMOND && line[2] == DIAMOND) {
-            return Trait.Tier.RARE;
+        if (line[0] == DIAMOND && line[1] == DIAMOND) {
+            return line[2] == DIAMOND ? Trait.Tier.RARE : Trait.Tier.UNCOMMON;
         }
         return Trait.Tier.COMMON;
     }
@@ -93,10 +96,8 @@ public final class TraitSlots {
         int[] line = new int[REELS];
         switch (tier) {
             case MYTHIC -> Arrays.fill(line, NETHERITE);
-            case CURSED -> {
-                Arrays.fill(line, NETHERITE);
-                line[3] = random.nextInt(2);
-            }
+            case BLESSED -> line = new int[] {NETHERITE, NETHERITE, NETHERITE, DIAMOND};
+            case CURSED -> line = new int[] {NETHERITE, NETHERITE, NETHERITE, IRON};
             case RARE -> {
                 if (random.nextFloat() < 0.6F) {
                     line = new int[] {DIAMOND, DIAMOND, DIAMOND, random.nextInt(3)};
@@ -104,6 +105,7 @@ public final class TraitSlots {
                     line = new int[] {NETHERITE, NETHERITE, random.nextInt(2), random.nextInt(3)};
                 }
             }
+            case UNCOMMON -> line = new int[] {DIAMOND, DIAMOND, random.nextBoolean() ? IRON : NETHERITE, random.nextInt(3)};
             default -> {
                 do {
                     for (int i = 0; i < REELS; i++) {

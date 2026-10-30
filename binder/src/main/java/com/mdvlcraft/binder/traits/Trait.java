@@ -6,7 +6,7 @@ import net.minecraft.ChatFormatting;
 
 /**
  * The traits a player can have (Traits). None can be obtained yet: /mdvl trait sets them. The names and texts are in the lang file
- * (trait.mdvlcraft.<id> and .desc); what each does is in TraitCombat, TraitWorld and TraitMagic.
+ * (trait.mdvlcraft.<id> and .desc); what each does is in TraitCombat, TraitWorld, TraitMagic and TraitMore.
  */
 public enum Trait {
     GRUDGE(Tier.COMMON),
@@ -54,12 +54,57 @@ public enum Trait {
     AFTERIMAGE(Tier.RARE),
     IRON_STOMACH(Tier.COMMON),
     SECOND_SHADOW(Tier.MYTHIC),
-    CURSED_BODY(Tier.CURSED);
+    CURSED_BODY(Tier.CURSED),
+    // the second batch
+    SECOND_BREAKFAST(Tier.COMMON),
+    LIGHT_SLEEPER(Tier.COMMON),
+    PACK_MULE(Tier.COMMON),
+    BRAWLER(Tier.COMMON),
+    STEADY_AIM(Tier.COMMON),
+    THICK_SKULL(Tier.COMMON),
+    SWIMMER(Tier.COMMON),
+    HAGGLER(Tier.COMMON),
+    GREEN_THUMB(Tier.COMMON),
+    SCAVENGER(Tier.COMMON),
+    FLEET_FOOT(Tier.COMMON),
+    SPITEFUL(Tier.COMMON),
+    KEEN_EARS(Tier.COMMON),
+    RIPOSTE(Tier.UNCOMMON),
+    LEECH_BLADE(Tier.UNCOMMON),
+    LAST_STAND(Tier.UNCOMMON),
+    GALE_RUNNER(Tier.UNCOMMON),
+    ARCANE_RHYTHM(Tier.UNCOMMON),
+    WARDED(Tier.UNCOMMON),
+    BLOODHOUND(Tier.RARE),
+    COUNTERWEIGHT(Tier.RARE),
+    OVERGUARD(Tier.RARE),
+    SPELL_WEAVER(Tier.RARE),
+    CHAIN_CASTER(Tier.RARE),
+    MARTYR(Tier.RARE),
+    FIELD_MEDIC(Tier.RARE),
+    PATHFINDER(Tier.RARE),
+    REAPERS_DUE(Tier.RARE),
+    QUICKSILVER(Tier.RARE),
+    BATTLE_TRANCE(Tier.RARE),
+    STORM_CALLER(Tier.RARE),
+    HOLLOW_HEART(Tier.CURSED),
+    BLOODLUST(Tier.CURSED),
+    GHOST_WALKER(Tier.CURSED),
+    VOW_OF_THE_SHIELD(Tier.BLESSED),
+    VOW_OF_NO_RETREAT(Tier.BLESSED),
+    TIME_SKIP(Tier.MYTHIC),
+    PHOENIX(Tier.MYTHIC),
+    OVERFLOWING_SOUL(Tier.MYTHIC),
+    LORD_OF_THE_HUNT(Tier.MYTHIC),
+    BLACK_FLASH(Tier.MYTHIC);
 
     public enum Tier {
         COMMON(ChatFormatting.WHITE),
+        UNCOMMON(ChatFormatting.GREEN),
         RARE(ChatFormatting.AQUA),
         CURSED(ChatFormatting.DARK_RED),
+        /** The mirror of Cursed: a strong bonus bound to a vow. */
+        BLESSED(ChatFormatting.YELLOW),
         MYTHIC(ChatFormatting.GOLD);
 
         public final ChatFormatting colour;
