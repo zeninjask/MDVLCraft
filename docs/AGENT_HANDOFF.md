@@ -34,12 +34,10 @@ Done:
   - **Not tested in game.**
 
 Still to do (asked by the user, not started or unfinished):
-1. **Closed Malevolent Shrine screen effect.** When a closed shrine opens, every nearby player (party or not) should get
-   the Sukuna takeover screen. Plan:
-   - Hook `EntityJoinLevelEvent` for `cursedfate.entity.ShrineClosedEntity`.
-   - For players within ~48 blocks, set Cursed Fate `PlayerVariables.SukunaTakeOverAnimBool=true` and
-     `SukunaTakeOverAnim=1`, then 2, 3 and 4 at two-tick steps (`CursedfateMod.queueServerWork`), then bool false and 0,
-     calling `syncPlayerVariables` each step. This is the sequence `VesselAbiltiyProcedure` uses.
+1. **Closed Malevolent Shrine screen effect.** Done, in 2.1.90, by a parallel session (`content/ShrineTakeover`).
+   - When a `ShrineClosedEntity` spawns, every player within 64 blocks gets the Sukuna takeover sound and frames 1-4,
+     two ticks each.
+   - **Not tested in game.**
 2. **Shadow Arsenal across respecs.** The code already keeps it: `mdvlcraft:arsenal` and `mdvlcraft:arsenal_wheel` live in
    persisted data and nothing removes them. The planned safety step was to call `ShadowArsenal.sync(player)` at the end
    of `Respec.respec`, so the client sees the arsenal straight away. Test: absorb a weapon as Samurai, respec away, then
