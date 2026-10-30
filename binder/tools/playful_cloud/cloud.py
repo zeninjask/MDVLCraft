@@ -2,7 +2,7 @@
 
 A move is a list of keys (time, channels). Channels left out of a key carry over from the previous key.
   p      root offset (right, up, forward) in blocks, ground frame
-  y      body yaw in degrees (positive turns to the character's left)
+  y      body yaw in degrees (positive turns to the character's left); rf, rt whole-body pitch and roll
   lean   torso forward lean, tilt torso side lean (to its right), tw chest twist (to its left), cf chest forward
   hd     head (turn, nod)
   R, L   hand (Tool joint) targets in the body frame, relative to the pelvis: (right, up, forward)
@@ -10,10 +10,8 @@ A move is a list of keys (time, channels). Channels left out of a key carry over
   fR, fL feet, body frame relative to the pelvis's ground point at that key: (right, up, forward);
          'keep' leaves the foot where it was (a planted foot while the body travels)
 
-The held section lies along the Tool joint's -Z axis. How the staff is held follows from where the hands are
-(see preview/staff.js and the in-game renderer): left hand on the right hand's section near the grip = both hands
-on one end (the other two sections flail), near its far end = both hands on the middle section, otherwise each
-hand holds an end section and the middle one hangs between them (the left hand lets go if they're too far apart).
+Each hand holds an end section like a sword (along the Tool joint's -Z axis, kept nearly square to the forearm);
+the middle section dangles between them on its chains. Keep the two free ends within about 0.95 blocks.
 """
 import math
 
@@ -21,12 +19,15 @@ import numpy as np
 
 from efanim import Armature, ProcClip, smooth, FPS
 
-CH = ("p", "y", "lean", "tilt", "tw", "cf", "hd", "R", "L", "aR", "aL", "fR", "fL")
-DEFAULT = {"p": (0, 0, 0), "y": 0.0, "lean": 0.0, "tilt": 0.0, "tw": 0.0, "cf": 0.0, "hd": (0, 0),
+CH = ("p", "y", "rf", "rt", "lean", "tilt", "tw", "cf", "hd", "R", "L", "aR", "aL", "fR", "fL")
+DEFAULT = {"p": (0, 0, 0), "y": 0.0, "rf": 0.0, "rt": 0.0, "lean": 0.0, "tilt": 0.0, "tw": 0.0, "cf": 0.0, "hd": (0, 0),
            "R": (0.3, 0.05, 0.15), "L": (-0.3, 0.05, 0.15), "aR": (0, -0.3, 1), "aL": (0, -0.3, 1),
            "fR": (0.14, 0, 0), "fL": (-0.14, 0, 0)}
 PELVIS = 0.764
 REACH = 0.555
+SEC, BACK = 0.76, 0.035   # section length, pommel behind the fist (preview/staff.js)
+SPAN = 0.9               # most the free ends may be apart (middle section + chains = 0.96)
+GRIP_SQUARE = 0.85   # 1 = the section always square to the forearm
 
 
 def yaw_vec(v, yaw):
@@ -37,8 +38,8 @@ def yaw_vec(v, yaw):
 
 
 class Move(ProcClip):
-    def __init__(self, name, length, keys, loop=False, lag=None):
-        self.name, self.length, self.loop = name, length, loop
+    def __init__(self, name, length, keys, loop=False, lag=None, hits=()):
+        self.name, self.length, self.loop, self.hits = name, length, loop, list(hits)
         self.lag = {"hd": 0.05, "aR": 0.02, "aL": 0.02}
         self.lag.update(lag or {})
         self.tracks_ = self._resolve(keys)
@@ -87,7 +88,7 @@ class Move(ProcClip):
         p = np.array(self.ch("p", t)); y = self.ch("y", t)
         pelvis = np.array([p[0], PELVIS + p[1], p[2]])
         hd = self.ch("hd", t)
-        pose = {"pos": tuple(p), "Root": {"turn": y},
+        pose = {"pos": tuple(p), "Root": {"turn": y, "fwd": self.ch("rf", t), "tilt": self.ch("rt", t)},
                 "Torso": {"fwd": self.ch("lean", t), "tilt": self.ch("tilt", t)},
                 "Chest": {"turn": self.ch("tw", t), "fwd": self.ch("cf", t)},
                 "Head": {"turn": hd[0], "fwd": hd[1]}}
@@ -97,6 +98,14 @@ class Move(ProcClip):
             h = pelvis + yaw_vec(self.ch(s, t), y)
             pose["hand_" + s] = (h[0], h[1], h[2])
         return pose
+
+    @staticmethod
+    def _square(a, fore, w, arm, s):
+        """Held like a sword: the section leaves the fist across the forearm, never along it like a spike."""
+        a = a - fore * (a @ fore) * GRIP_SQUARE
+        if np.linalg.norm(a) < 0.2:
+            a = -(w["Hand_" + s][:3, :3] @ arm.rest["Tool_" + s][:3, :3])[:, 2]
+        return a / np.linalg.norm(a)
 
     def pose_at(self, arm, t):
         fn = self.fn
@@ -118,10 +127,24 @@ class Move(ProcClip):
             self.fn = fn
         w = arm.world(arm.local(pose))
         y = self.ch("y", t)
+        fist, fore, aim = {}, {}, {}
         for s in "RL":
             a = yaw_vec(self.ch("a" + s, t), y)
-            a = a / (np.linalg.norm(a) or 1)
-            z = -np.array([a[0], a[2], a[1]])                       # ground (r,u,f) -> Blender (x=r, y=f, z=u)
+            fist[s] = w["Tool_" + s][:3, 3]
+            fore[s] = fist[s] - w["Hand_" + s][:3, 3]; fore[s] /= np.linalg.norm(fore[s])
+            aim[s] = self._square(np.array([a[0], a[2], a[1]]), fore[s], w, arm, s)   # ground -> Blender
+        # the middle section has to reach between the two free ends: turn the blades towards each other until it does
+        for _ in range(12):
+            tip = {s: fist[s] + aim[s] * (SEC - BACK) for s in "RL"}
+            d = np.linalg.norm(tip["R"] - tip["L"])
+            self.span = max(getattr(self, "span", 0), d)
+            if d <= SPAN:
+                break
+            for s, o in (("R", "L"), ("L", "R")):
+                to = tip[o] - fist[s]; to /= np.linalg.norm(to)
+                aim[s] = self._square(aim[s] + 0.3 * to, fore[s], w, arm, s)
+        for s in "RL":
+            z = -aim[s]
             hand = w["Hand_" + s][:3, :3]
             tool_rest = hand @ arm.rest["Tool_" + s][:3, :3]
             yv = tool_rest[:, 1] - z * (tool_rest[:, 1] @ z)

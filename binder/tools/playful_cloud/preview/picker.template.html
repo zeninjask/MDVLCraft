@@ -1,0 +1,326 @@
+<title>Playful Cloud Moveset</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #f4f1ec; --panel: #fffdf9; --ink: #1d1a1f; --muted: #6c6470; --line: #ddd5cc;
+  --red: #b8322a; --red-soft: #f3dcd8; --ok: #2f7d4f; --ok-soft: #dcefe3; --warn: #a2620e; --warn-soft: #f6e6cc;
+  --stage: #9aa8b8;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #131116; --panel: #1c1a20; --ink: #ece7e2; --muted: #9c93a0; --line: #2f2b35;
+  --red: #e0574d; --red-soft: #3a1d1c; --ok: #5cc28a; --ok-soft: #173225; --warn: #e2a24a; --warn-soft: #3a2a14;
+  --stage: #3d4654; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #131116; --panel: #1c1a20; --ink: #ece7e2; --muted: #9c93a0; --line: #2f2b35;
+  --red: #e0574d; --red-soft: #3a1d1c; --ok: #5cc28a; --ok-soft: #173225; --warn: #e2a24a; --warn-soft: #3a2a14;
+  --stage: #3d4654; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font: 15px/1.5 "IBM Plex Sans", system-ui, sans-serif; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 20px 48px; display: grid; gap: 16px; }
+header h1 { font: 700 28px/1.1 "Chakra Petch", sans-serif; margin: 0; letter-spacing: .01em; text-wrap: balance; }
+header h1 span { color: var(--red); }
+header p { margin: 6px 0 0; color: var(--muted); max-width: 70ch; }
+.tabs { display: flex; flex-wrap: wrap; gap: 6px; }
+.tab { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 999px; padding: 6px 12px;
+  font: 500 13px "IBM Plex Sans", sans-serif; cursor: pointer; display: inline-flex; gap: 6px; align-items: center; }
+.tab[aria-selected="true"] { border-color: var(--red); background: var(--red-soft); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+.dot.ok { background: var(--ok); } .dot.re { background: var(--warn); }
+.main { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 16px; align-items: start; }
+@media (max-width: 860px) { .main { grid-template-columns: minmax(0, 1fr); } }
+.stagebox { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.stage { position: relative; aspect-ratio: 2 / 1.15; max-width: 100%; background: var(--stage); }
+.stage canvas { width: 100%; height: 100%; display: block; }
+.pane-label { position: absolute; top: 8px; font: 500 12px "IBM Plex Mono", monospace; color: #fff; background: rgba(0,0,0,.45);
+  padding: 2px 8px; border-radius: 4px; }
+.clip-label { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font: 500 12px "IBM Plex Mono", monospace;
+  color: #fff; background: rgba(0,0,0,.45); padding: 2px 8px; border-radius: 4px; white-space: nowrap; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 10px 12px; border-top: 1px solid var(--line); }
+.bar label { font-size: 13px; color: var(--muted); display: inline-flex; gap: 6px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.seg button { border: 0; background: transparent; color: var(--ink); padding: 4px 10px; font: 500 12px "IBM Plex Mono", monospace; cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+input[type=range] { width: 120px; accent-color: var(--red); }
+.side { display: grid; gap: 12px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; display: grid; gap: 10px; min-width: 0; }
+.card h2 { margin: 0; font: 700 18px "Chakra Petch", sans-serif; }
+.card h3 { margin: 0; font: 600 12px "IBM Plex Sans", sans-serif; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+.variants { display: grid; gap: 8px; }
+.var { text-align: left; border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 8px; padding: 9px 11px;
+  cursor: pointer; font: inherit; display: grid; gap: 2px; }
+.var b { font: 600 14px "IBM Plex Sans", sans-serif; display: flex; justify-content: space-between; gap: 8px; }
+.var small { color: var(--muted); font-size: 13px; }
+.var[aria-current="true"] { border-color: var(--red); box-shadow: inset 0 0 0 1px var(--red); }
+.pill { font: 500 11px "IBM Plex Mono", monospace; padding: 1px 6px; border-radius: 4px; background: var(--ok-soft); color: var(--ok); }
+.clips { display: flex; flex-wrap: wrap; gap: 4px; }
+.clips button { border: 1px solid var(--line); background: transparent; color: var(--ink); border-radius: 5px; padding: 2px 8px;
+  font: 500 12px "IBM Plex Mono", monospace; cursor: pointer; }
+.clips button[aria-pressed="true"] { border-color: var(--red); color: var(--red); }
+.actions { display: grid; gap: 8px; }
+.btn { border: 0; border-radius: 8px; padding: 10px 12px; font: 600 14px "IBM Plex Sans", sans-serif; cursor: pointer; }
+.btn.pick { background: var(--red); color: #fff; }
+.btn.re { background: var(--warn-soft); color: var(--warn); border: 1px solid var(--warn); }
+.btn.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); }
+textarea { width: 100%; box-sizing: border-box; min-height: 64px; resize: vertical; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg); color: var(--ink); font: 14px "IBM Plex Sans", sans-serif; padding: 8px; }
+.status { font-size: 13px; color: var(--muted); min-height: 1.4em; }
+.status.ok { color: var(--ok); } .status.re { color: var(--warn); }
+.summary { font: 12px/1.55 "IBM Plex Mono", monospace; white-space: pre-wrap; background: var(--bg); border: 1px solid var(--line);
+  border-radius: 8px; padding: 8px; overflow-x: auto; margin: 0; }
+.legend { font-size: 13px; color: var(--muted); }
+.legend code { font: 12px "IBM Plex Mono", monospace; }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>Playful Cloud <span>Moveset</span></h1>
+    <p>Custom Epic Fight animations for the three-section staff. Each fist holds an end section like a sword hilt and the
+      middle section swings on its chains (physics, the same rules the in-game renderer will use). Left pane plays in slow
+      motion, right pane at the speed you choose. Pick one variant per animation, or ask for a remake with a note.</p>
+  </header>
+  <nav class="tabs" id="tabs" aria-label="Animations"></nav>
+  <div class="main">
+    <div class="stagebox">
+      <div class="stage" id="stage">
+        <canvas id="cv"></canvas>
+        <span class="pane-label" style="left:8px">SLOW-MO 0.35×</span>
+        <span class="pane-label" style="left:calc(50% + 8px)" id="fastLabel">GAME 1×</span>
+        <span class="clip-label" id="clipLabel"></span>
+      </div>
+      <div class="bar">
+        <label>View <span class="seg" id="views">
+          <button data-yaw="20" aria-pressed="true">Front</button><button data-yaw="90">Side</button>
+          <button data-yaw="160">Back</button><button data-yaw="orbit">Orbit</button></span></label>
+        <label>Game speed <span class="seg" id="speeds">
+          <button data-s="0.75">Slow 0.75×</button><button data-s="1" aria-pressed="true">Normal</button>
+          <button data-s="1.3">Fast 1.3×</button></span></label>
+        <label><input type="checkbox" id="pause"> Pause</label>
+      </div>
+    </div>
+    <aside class="side">
+      <section class="card">
+        <h2 id="catTitle"></h2>
+        <p class="legend" id="catNote"></p>
+        <h3>Variants</h3>
+        <div class="variants" id="variants"></div>
+        <h3>Clips</h3>
+        <div class="clips" id="clips"></div>
+      </section>
+      <section class="card">
+        <h3>Your choice</h3>
+        <div class="actions">
+          <button class="btn pick" id="pickBtn">Pick this variant</button>
+          <textarea id="note" placeholder="Note (what to change, or what the remake should do)"></textarea>
+          <button class="btn re" id="remakeBtn">Remake this animation</button>
+          <div class="status" id="status"></div>
+        </div>
+      </section>
+      <section class="card">
+        <h3>All picks</h3>
+        <pre class="summary" id="summary"></pre>
+        <button class="btn ghost" id="copyBtn">Copy picks</button>
+      </section>
+    </aside>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>/*RIG*/</script>
+<script>/*STAFF*/</script>
+<script>
+window.BIPED = /*BIPED*/;
+window.SKIN = "/*SKIN*/";
+window.ANIMS = /*ANIMS*/;
+window.INFO = /*INFO*/;
+</script>
+<script>
+(function () {
+  const CATS = INFO.order;
+  let cat = CATS[0], variant = null, clipMode = 'all', clipIdx = 0, speed = 1, viewYaw = 20, orbit = false;
+  const picks = {};       // cat -> {variant, speed, remake, note}
+  const $ = (id) => document.getElementById(id);
+
+  // ---------- scene: one renderer, two viewports
+  const cv = $('cv'), renderer = new THREE.WebGLRenderer({ canvas: cv, antialias: true });
+  renderer.setScissorTest(true);
+  const img = new Image(); let tex = null;
+  function makePane() {
+    const scene = new THREE.Scene(); scene.background = new THREE.Color(0x9aa8b8); scene.fog = new THREE.Fog(0x9aa8b8, 9, 22);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.62));
+    const d = new THREE.DirectionalLight(0xffffff, 0.6); d.position.set(1, 2, -1.5); scene.add(d);
+    const grid = new THREE.GridHelper(40, 160, 0x444a55, 0x6a7280); scene.add(grid);
+    const holder = new THREE.Group(); scene.add(holder);
+    const rig = new EFRig(BIPED, tex); holder.add(rig.group);
+    // the staff lives in world space (not under the holder) so it keeps swinging across clip changes
+    const sg = new THREE.Group(); sg.rotation.x = -Math.PI / 2; scene.add(sg);
+    const staff = new CloudStaff(); staff.build(sg);
+    const cam = new THREE.PerspectiveCamera(34, 1, 0.1, 80);
+    return { scene, holder, rig, staff, cam, t: 0, seq: 0, base: new THREE.Vector3(), camAt: null, grid };
+  }
+  let panes = [];
+
+  function clipsOf(c, v) { return INFO.groups[c].variants[v].clips; }
+  function seqList() { const cl = clipsOf(cat, variant); return clipMode === 'all' ? cl : [cl[clipIdx]]; }
+  function clipObj(name) { return new CloudClip(ANIMS[`${cat}/${variant}/${name}`]); }
+
+  function resetPanes() {
+    for (const p of panes) {
+      p.t = 0; p.seq = 0; p.base.set(0, 0, 0); p.holder.position.set(0, 0, 0); p.staff.init = false; p.camAt = null;
+      p.list = seqList().map(n => ({ name: n, clip: clipObj(n) }));
+      p.hold = 0;
+    }
+  }
+  // root offset at the end of a clip, in three's space (EF root motion moves the entity)
+  function endOffset(p, c) {
+    p.rig.poseLocal(c.sample(c.d.len)); const e = p.rig.lastWorld.Root.elements;
+    p.rig.poseLocal(c.sample(0)); const s = p.rig.lastWorld.Root.elements;
+    return new THREE.Vector3(e[12] - s[12], 0, -(e[13] - s[13]));
+  }
+  function step(p, dt) {
+    const cur = p.list[p.seq], c = cur.clip, L = c.d.len, loop = c.d.loop && p.list.length === 1;
+    if (p.hold > 0) { p.hold -= dt; if (p.hold <= 0) { p.seq = 0; p.t = 0; p.base.set(0, 0, 0); } }
+    else {
+      p.t += dt;
+      if (p.t >= L) {
+        if (loop) p.t -= L;
+        else if (p.seq < p.list.length - 1) { p.base.add(endOffset(p, c)); p.t -= L; p.seq++; }
+        else { p.t = L; p.hold = 0.6; }
+      }
+    }
+    const now = p.list[p.seq].clip;
+    p.holder.position.copy(p.base);
+    p.rig.poseLocal(now.sample(Math.min(p.t, now.d.len)));
+    p.staff.step(worldOf(p), dt);
+    p.staff.sync();
+    return p.list[p.seq].name;
+  }
+  // joint matrices in world space (armature axes): the holder's offset added, so chains stay continuous across clips
+  function worldOf(p) {
+    const w = {}, off = new THREE.Matrix4().makeTranslation(p.holder.position.x, -p.holder.position.z, 0);
+    for (const k in p.rig.lastWorld) w[k] = off.clone().multiply(p.rig.lastWorld[k]);
+    return w;
+  }
+
+  function resize() {
+    const r = $('stage').getBoundingClientRect();
+    renderer.setPixelRatio(Math.min(2, window.devicePixelRatio || 1));
+    renderer.setSize(r.width, r.height, false);
+  }
+  window.addEventListener('resize', resize);
+
+  let last = performance.now(), orbitA = 0;
+  function frame(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (panes.length && variant) {
+      const W = cv.width, H = cv.height, pause = $('pause').checked;
+      if (orbit && !pause) orbitA += dt * 25;
+      const yawDeg = orbit ? orbitA : viewYaw, yaw = yawDeg * Math.PI / 180;
+      panes.forEach((p, i) => {
+        const name = step(p, pause ? 0 : dt * (i === 0 ? 0.35 : speed));
+        if (i === 1) $('clipLabel').textContent = name + (clipMode === 'all' && p.list.length > 1 ? `  (${p.seq + 1}/${p.list.length})` : '');
+        const e = p.rig.lastWorld.Root.elements, tx = e[12] + p.holder.position.x, tz = -e[13] + p.holder.position.z;
+        const target = new THREE.Vector3(tx, 0.9 + Math.max(0, e[14] - 0.76) * 0.6, tz);
+        p.camAt = p.camAt ? p.camAt.lerp(target, Math.min(1, dt * 4 + 0.02)) : target.clone();
+        p.cam.aspect = (W / 2) / H; p.cam.updateProjectionMatrix();
+        p.cam.position.set(p.camAt.x + Math.sin(yaw) * 7, p.camAt.y + 0.9, p.camAt.z - Math.cos(yaw) * 7);
+        p.cam.lookAt(p.camAt);
+        const x = i * W / 2;
+        renderer.setViewport(x / renderer.getPixelRatio(), 0, W / 2 / renderer.getPixelRatio(), H / renderer.getPixelRatio());
+        renderer.setScissor(x / renderer.getPixelRatio(), 0, W / 2 / renderer.getPixelRatio(), H / renderer.getPixelRatio());
+        renderer.render(p.scene, p.cam);
+      });
+    }
+    requestAnimationFrame(frame);
+  }
+
+  // ---------- UI
+  function renderTabs() {
+    $('tabs').innerHTML = '';
+    for (const c of CATS) {
+      const b = document.createElement('button'); b.className = 'tab'; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', c === cat);
+      const d = document.createElement('span'); d.className = 'dot' + (picks[c] ? (picks[c].remake ? ' re' : ' ok') : '');
+      b.append(d, document.createTextNode(INFO.groups[c].title));
+      b.onclick = () => { cat = c; variant = (picks[c] && picks[c].variant) || Object.keys(INFO.groups[c].variants)[0]; clipMode = 'all'; clipIdx = 0; renderAll(); };
+      $('tabs').append(b);
+    }
+  }
+  function renderSide() {
+    const g = INFO.groups[cat];
+    $('catTitle').textContent = g.title; $('catNote').textContent = g.note;
+    $('variants').innerHTML = '';
+    for (const [k, v] of Object.entries(g.variants)) {
+      const b = document.createElement('button'); b.className = 'var'; b.setAttribute('aria-current', k === variant);
+      const t = document.createElement('b'); t.textContent = v.title;
+      if (picks[cat] && picks[cat].variant === k && !picks[cat].remake) { const s = document.createElement('span'); s.className = 'pill'; s.textContent = 'picked'; t.append(s); }
+      const sm = document.createElement('small'); sm.textContent = v.desc;
+      b.append(t, sm); b.onclick = () => { variant = k; clipMode = 'all'; clipIdx = 0; renderAll(); };
+      $('variants').append(b);
+    }
+    $('clips').innerHTML = '';
+    const cl = clipsOf(cat, variant);
+    const mk = (label, on, fn) => { const b = document.createElement('button'); b.textContent = label; b.setAttribute('aria-pressed', on); b.onclick = fn; $('clips').append(b); };
+    if (cl.length > 1) mk('play all', clipMode === 'all', () => { clipMode = 'all'; renderSide(); resetPanes(); });
+    cl.forEach((n, i) => mk(n, clipMode === 'one' && clipIdx === i || cl.length === 1, () => { clipMode = 'one'; clipIdx = i; renderSide(); resetPanes(); }));
+    const p = picks[cat];
+    $('note').value = p ? p.note || '' : '';
+    $('status').className = 'status' + (p ? (p.remake ? ' re' : ' ok') : '');
+    $('status').textContent = p ? (p.remake ? 'Marked for remake.' : `Picked: ${g.variants[p.variant].title} at ${p.speed}×.`) : 'Nothing chosen yet.';
+  }
+  function renderSummary() {
+    const lines = CATS.map(c => {
+      const p = picks[c], g = INFO.groups[c];
+      if (!p) return `${g.title}: -`;
+      const s = p.remake ? `REMAKE` : `${g.variants[p.variant].title} @ ${p.speed}x`;
+      return `${g.title}: ${s}${p.note ? '  - ' + p.note : ''}`;
+    });
+    $('summary').textContent = lines.join('\n');
+  }
+  function renderAll() { renderTabs(); renderSide(); renderSummary(); resetPanes(); }
+
+  document.querySelectorAll('#views button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#views button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    if (b.dataset.yaw === 'orbit') { orbit = true; orbitA = viewYaw; } else { orbit = false; viewYaw = +b.dataset.yaw; }
+  });
+  document.querySelectorAll('#speeds button').forEach(b => b.onclick = () => {
+    document.querySelectorAll('#speeds button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    speed = +b.dataset.s; $('fastLabel').textContent = `GAME ${speed}×`;
+  });
+
+  // ---------- picks: shared db so Claude can read them
+  let db = null;
+  async function save(c) {
+    renderAll();
+    if (!db) { $('status').textContent += ' (saved on this page only - use Copy picks)'; return; }
+    try { await db.collection('picks').doc(c).set(picks[c]); }
+    catch (e) { $('status').textContent += ' Could not save: ' + (e && e.message || e) + ' - use Copy picks.'; }
+  }
+  $('pickBtn').onclick = () => { picks[cat] = { variant, speed, remake: false, note: $('note').value.trim() }; save(cat); };
+  $('remakeBtn').onclick = () => { picks[cat] = { variant, speed, remake: true, note: $('note').value.trim() }; save(cat); };
+  $('copyBtn').onclick = () => {
+    const t = $('summary').textContent;
+    const sel = () => { const r = document.createRange(); r.selectNodeContents($('summary')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(t).then(() => { $('copyBtn').textContent = 'Copied'; }, sel); } catch (e) { sel(); }
+  };
+
+  img.onload = () => {
+    tex = new THREE.Texture(img); tex.magFilter = tex.minFilter = THREE.NearestFilter; tex.flipY = false; tex.needsUpdate = true;
+    panes = [makePane(), makePane()];
+    variant = Object.keys(INFO.groups[cat].variants)[0];
+    resize(); renderAll(); requestAnimationFrame(frame);
+  };
+  img.src = SKIN;
+
+  (async () => {
+    try {
+      db = window.claude && await window.claude.use('db');
+      if (!db) return;
+      const snap = await db.collection('picks').get();
+      snap.docs.forEach(d => { const v = d.data(); if (v && INFO.groups[d.id]) picks[d.id] = v; });
+      if (panes.length) { renderTabs(); renderSide(); renderSummary(); }
+    } catch (e) { db = null; }
+  })();
+})();
+</script>

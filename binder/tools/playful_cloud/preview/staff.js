@@ -1,8 +1,8 @@
 // Playful Cloud staff: three sections A-B-C linked by short chains. Works in the armature's (Blender) space: z up.
 // Each section has ends e0, e1 (A.e1-B.e0 and B.e1-C.e1 are chained). Held sections follow the Tool joints (their -Z
-// axis); the rest swing as Verlet rods. The same rules go into the in-game renderer.
+// axis), gripped at the pommel end; the middle one swings as a Verlet rod. The same rules go into the in-game renderer.
 (function () {
-  const SEC = 0.76, BACK = 0.08, CHAIN = 0.1, G = -22, SUB = 8, ITER = 6;
+  const SEC = 0.76, BACK = 0.035, CHAIN = 0.1, G = -22, SUB = 8, ITER = 6;
   const V = THREE.Vector3;
   function Staff() {
     this.s = [0, 1, 2].map(() => ({ e0: new V(), e1: new V(), p0: new V(), p1: new V(), held: false, blend: 0 }));
@@ -13,25 +13,11 @@
     return { pos: new V(e[12], e[13], e[14]), aim: new V(-e[8], -e[9], -e[10]).normalize() };
   }
   function grip(t) { return [t.pos.clone().addScaledVector(t.aim, -BACK), t.pos.clone().addScaledVector(t.aim, SEC - BACK)]; }
-  Staff.prototype.modeFor = function (R, L) {
-    const [a0] = grip(R), d = L.pos.clone().sub(a0), s = d.dot(R.aim);
-    const perp = d.clone().addScaledVector(R.aim, -s).length();
-    if (perp < 0.16 && s > -0.08 && s < SEC + 0.05) return s > 0.4 ? 'mid' : 'whip';
-    return 'ends';
-  };
-  // held targets for this frame: {index: [e0, e1]}
+  // held targets for this frame: {index: [e0, e1]}. Each hand holds an end section like a sword hilt; the middle one
+  // always dangles between them on its chains.
   Staff.prototype.targets = function (R, L) {
-    const m = this.modeFor(R, L), t = {};
-    if (m === 'mid') t[1] = grip(R);
-    else {
-      t[0] = grip(R);
-      if (m === 'ends') {
-        const c = grip(L);
-        if (c[1].distanceTo(t[0][1]) < SEC + 2 * CHAIN + 0.06) t[2] = c;
-      }
-    }
-    this.mode = m === 'ends' && !t[2] ? 'one hand' : m;
-    return t;
+    this.mode = 'ends';
+    return { 0: grip(R), 2: grip(L) };
   };
   Staff.prototype.step = function (world, dt) {
     const R = toolOf(world, 'Tool_R'), L = toolOf(world, 'Tool_L'), tg = this.targets(R, L);
@@ -83,7 +69,7 @@
   }
   // meshes
   Staff.prototype.build = function (group) {
-    const wood = new THREE.MeshLambertMaterial({ color: 0xb8322a }), gold = new THREE.MeshLambertMaterial({ color: 0xd9a63a }),
+    const wood = new THREE.MeshLambertMaterial({ color: 0xb8322a }), gold = new THREE.MeshLambertMaterial({ color: 0x1b1b1f }),
       steel = new THREE.MeshLambertMaterial({ color: 0x8a8f99 });
     this.rods = this.s.map(() => {
       const g = new THREE.Group();
