@@ -49,6 +49,27 @@ Still to do (asked by the user, not started or unfinished):
      gate; Iron Skin, Stout Heart, Lucky Charm, Reflex Parry.
 
 
+## Trait test pass and 2.1.91 (30 Oct 2026)
+
+- **Tested in game** (one server, one client; trace with `-Dmdvlcraft.traittest=true` on the server: `TRAITTEST <player>
+  <what>` lines from traits/TraitPicks): Decoy Dodge and Mirror Dance fire on an Epic Fight dodge (Alt, battle mode);
+  Mirror Dance's three echo hits land; Shield Slam and Invincible Guard fire on blocked hits (guard held against a
+  vindicator; Invincible Guard reflected 5 damage); Storm Lord fires on a hit; Apprentice, Overcharge and Volatile Mana
+  see real scroll casts; Vow of Poverty strips an enchanted helmet and Vow of Haste an iron chestplate; Light Fingers
+  marks up a villager's trades; Angler's Luck sees catches (its 7% treasure roll didn't come up in two). The closed
+  Malevolent Shrine shows the Sukuna takeover screen (content/ShrineTakeover); Black Flash has no screen flash.
+- **Fixed from the test:** Summoner's Pact never worked for most summons (Iron's SpellSummonEvent only fires for the
+  polar bear and summoned swords): it now runs from SummonManager.initSummon (mixin/traits/SummonDurationMixin ->
+  TraitPicks.onSummoned), checked with Raise Dead. Mirror Dance's echo was itself a melee hit and spent further echoes
+  (guarded). Light Fingers rounded 5% of small prices to nothing, and on closing a villager's trades (which the villager
+  had already reset) it took the markup off again, a permanent discount (both fixed). Unbound Summoner also counts Raise
+  Dead.
+- **Not confirmed:** Unbound Summoner's second cast: summon scrolls wouldn't cast in the test after the same spells had
+  been cast by command (most likely the recast/cooldown left by the command casts); the summon path itself works.
+- Test notes: in this pack the number keys are quick casts (switch hotbar slots with the scroll wheel), Epic Fight's
+  right click is guard in battle mode (`y` switches mode for scrolls), and a summon spell cast by command blocks its
+  scroll for a while. Never run Gradle while the test client is up (it was OOM-killed again).
+
 ## Weapon arts, armour flight, cooldown reduction (29 Oct 2026, after 2.1.79, not released)
 
 - **Weapon arts** (`epicskill/WeaponArts`, `WeaponArtSkill`, `mixin/epicfight/WeaponArtInnateMixin`): 33 arts for about

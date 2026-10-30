@@ -7,7 +7,6 @@ import io.redspace.ironsspellbooks.api.events.SpellDamageEvent;
 import io.redspace.ironsspellbooks.api.events.SpellHealEvent;
 import io.redspace.ironsspellbooks.api.events.SpellOnCastEvent;
 import io.redspace.ironsspellbooks.api.events.SpellPreCastEvent;
-import io.redspace.ironsspellbooks.api.events.SpellSummonEvent;
 import io.redspace.ironsspellbooks.api.magic.MagicData;
 import io.redspace.ironsspellbooks.api.registry.AttributeRegistry;
 import io.redspace.ironsspellbooks.api.registry.SpellRegistry;
@@ -113,7 +112,17 @@ public final class TraitPicks {
     /** Light Fingers: the price rises on the offers a player has open, taken back when the window closes. */
     private static final Map<UUID, List<MerchantOffer>> MARKUPS = new HashMap<>();
 
+    /** Mirror Dance's echo hit is being dealt. */
+    private static boolean echoing;
+
     private TraitPicks() {
+    }
+
+    /** A test trace (start the server with -Dmdvlcraft.traittest=true): "TRAITTEST <player> <what fired>" in the log. */
+    static void trace(net.minecraft.world.entity.Entity player, String what) {
+        if (Boolean.getBoolean("mdvlcraft.traittest")) {
+            com.mojang.logging.LogUtils.getLogger().info("TRAITTEST {} {}", player.getName().getString(), what);
+        }
     }
 
     private static final class State {
@@ -248,6 +257,7 @@ public final class TraitPicks {
                         player.drop(piece, false);
                     }
                     say(player, poverty && piece.isEnchanted() ? "trait.mdvlcraft.vow_of_poverty.broken" : "trait.mdvlcraft.vow_of_haste.broken");
+                    trace(player, "vow stripped " + slot);
                 }
             }
         }
@@ -443,6 +453,7 @@ public final class TraitPicks {
             }
             if (has(player, Trait.STORM_LORD) && now >= state.stormReady) {
                 state.stormReady = now + 160;
+                trace(player, "storm_lord");
                 LightningBolt bolt = EntityType.LIGHTNING_BOLT.create(player.level());
                 if (bolt != null) {
                     bolt.moveTo(victim.position());
@@ -451,14 +462,20 @@ public final class TraitPicks {
                 }
                 event.setAmount(event.getAmount() + 6.0F);
             }
-            if (melee && has(player, Trait.MIRROR_DANCE) && state.mirrorHits > 0 && now <= state.mirrorUntil) {
+            if (melee && !echoing && has(player, Trait.MIRROR_DANCE) && state.mirrorHits > 0 && now <= state.mirrorUntil) {
                 state.mirrorHits--;
+                trace(player, "mirror_dance echo");
                 float echo = event.getAmount() * 0.5F;
                 SpecKit.decoy(player.serverLevel(), player, player.position(), 0.0, 8);
                 SpecKit.later(player.serverLevel(), 6, () -> {
                     if (victim.isAlive()) {
                         victim.invulnerableTime = 0;
-                        victim.hurt(player.damageSources().playerAttack(player), echo);
+                        echoing = true;   // the echo is a hit of its own: it mustn't spend another echo
+                        try {
+                            victim.hurt(player.damageSources().playerAttack(player), echo);
+                        } finally {
+                            echoing = false;
+                        }
                     }
                 });
             }
@@ -813,7 +830,11 @@ public final class TraitPicks {
     @SubscribeEvent
     public static void onFished(ItemFishedEvent event) {
         // Angler's Luck: half again as much treasure (one more treasure roll, a third of the time)
+        if (event.getEntity() instanceof ServerPlayer angler) {
+            trace(angler, "fished " + has(angler, Trait.ANGLERS_LUCK));
+        }
         if (event.getEntity() instanceof ServerPlayer player && has(player, Trait.ANGLERS_LUCK) && player.getRandom().nextFloat() < 0.07F) {
+            trace(player, "anglers_luck treasure");
             FishingHook hook = event.getHookEntity();
             LootParams params = new LootParams.Builder(player.serverLevel())
                 .withParameter(LootContextParams.ORIGIN, hook.position())
@@ -851,10 +872,12 @@ public final class TraitPicks {
             Entity attacker = attack.getDamageSource().getEntity();
             if (has(player, Trait.SHIELD_SLAM) && now >= state.slamReady && attacker instanceof LivingEntity living) {
                 state.slamReady = now + 100;
+                trace(player, "shield_slam");
                 SpecKit.stun(living, 10);
             }
             if (has(player, Trait.INVINCIBLE_GUARD) && now >= state.reflectReady && attacker instanceof LivingEntity living) {
                 state.reflectReady = now + 200;
+                trace(player, "invincible_guard reflect " + attack.getDamage());
                 living.hurt(player.damageSources().thorns(player), attack.getDamage());
                 player.serverLevel().sendParticles(ParticleTypes.CRIT, living.getX(), living.getY(0.6), living.getZ(), 15, 0.3, 0.4, 0.3, 0.3);
             }
@@ -886,12 +909,14 @@ public final class TraitPicks {
             long now = player.level().getGameTime();
             if (has(player, Trait.DECOY_DODGE) && now >= state.decoyReady) {
                 state.decoyReady = now + 240;
+                trace(player, "decoy_dodge");
                 SpecKit.decoy(player.serverLevel(), player, player.position(), 8.0, 40);
             }
             if (has(player, Trait.MIRROR_DANCE) && now >= state.mirrorReady) {
                 state.mirrorReady = now + 500;
                 state.mirrorHits = 3;
                 state.mirrorUntil = now + 200;
+                trace(player, "mirror_dance armed");
                 player.serverLevel().sendParticles(ParticleTypes.END_ROD, player.getX(), player.getY(1.0), player.getZ(), 20, 0.3, 0.6, 0.3, 0.05);
             }
         });
@@ -905,13 +930,14 @@ public final class TraitPicks {
         }
         List<MerchantOffer> raised = new ArrayList<>();
         for (MerchantOffer offer : menu.getOffers()) {
-            int up = Math.round(offer.getBaseCostA().getCount() * 0.05F);
-            if (up > 0) {
+            int up = Math.max(1, Math.round(offer.getBaseCostA().getCount() * 0.05F));   // at least one more
+            {
                 offer.addToSpecialPriceDiff(up);
                 raised.add(offer);
             }
         }
         MARKUPS.put(event.getEntity().getUUID(), raised);
+        trace(event.getEntity(), "light_fingers " + raised.size() + " offers");
     }
 
     @SubscribeEvent
@@ -919,7 +945,9 @@ public final class TraitPicks {
         List<MerchantOffer> raised = MARKUPS.remove(event.getEntity().getUUID());
         if (raised != null) {
             for (MerchantOffer offer : raised) {
-                offer.addToSpecialPriceDiff(-Math.round(offer.getBaseCostA().getCount() * 0.05F));
+                if (offer.getSpecialPriceDiff() != 0) {   // a villager resets its own prices as trading stops
+                    offer.addToSpecialPriceDiff(-Math.max(1, Math.round(offer.getBaseCostA().getCount() * 0.05F)));
+                }
             }
         }
     }
@@ -942,6 +970,7 @@ public final class TraitPicks {
         AbstractSpell spell = SpellRegistry.getSpell(event.getSpellId());
         State state = state(player);
         long now = player.level().getGameTime();
+        trace(player, "cast " + event.getSpellId() + " mana " + event.getManaCost());
         if (has(player, Trait.APPRENTICE)) {
             SpellRarity rarity = spell.getRarity(event.getSpellLevel());
             if (rarity == SpellRarity.COMMON || rarity == SpellRarity.UNCOMMON) {
@@ -976,7 +1005,7 @@ public final class TraitPicks {
             player.serverLevel().sendParticles(VOID, player.getX(), player.getY(1.0), player.getZ(), 30, 0.5, 0.7, 0.5, 0.0);
         }
         // Unbound Summoner: a summoning spell summons twice
-        if (has(player, Trait.UNBOUND_SUMMONER) && event.getSpellId().contains("summon")) {
+        if (has(player, Trait.UNBOUND_SUMMONER) && (event.getSpellId().contains("summon") || event.getSpellId().contains("raise_dead"))) {
             int level = event.getSpellLevel();
             SpecKit.later(player.serverLevel(), 4, () -> {
                 if (player.isAlive()) {
@@ -1001,12 +1030,17 @@ public final class TraitPicks {
         }
     }
 
-    @SubscribeEvent
-    public static void onSummon(SpellSummonEvent<?> event) {
-        if (event.getCaster() instanceof ServerPlayer player && has(player, Trait.SUMMONERS_PACT)) {
-            LivingEntity creature = event.getCreature();
-            TraitWorld.modifier(creature, Attributes.MAX_HEALTH, "summoners_pact", 0.3, Operation.MULTIPLY_TOTAL);
-            creature.setHealth(creature.getMaxHealth());
+    /**
+     * Summoner's Pact: summons get 30% more health. Called for every summon registered with Iron's SummonManager
+     * (mixin/traits/SummonDurationMixin): Iron's own SpellSummonEvent only fires for a couple of spells.
+     */
+    public static void onSummoned(Entity owner, Entity summon) {
+        if (owner instanceof ServerPlayer player && summon instanceof LivingEntity creature) {
+            trace(player, "summon " + creature.getType().getDescriptionId());
+            if (has(player, Trait.SUMMONERS_PACT)) {
+                TraitWorld.modifier(creature, Attributes.MAX_HEALTH, "summoners_pact", 0.3, Operation.MULTIPLY_TOTAL);
+                creature.setHealth(creature.getMaxHealth());
+            }
         }
     }
 
