@@ -280,7 +280,12 @@ public final class GateCombat {
                 mob.fallDistance = 0.0F;
             }
         }
-        gone.forEach(Entity::discard);
+        for (Entity entity : gone) {
+            entity.discard();
+            if (!entity.isRemoved()) {
+                entity.setRemoved(Entity.RemovalReason.DISCARDED);   // mobs that veto removal (Esoteric Sorcerer) would tick on forever
+            }
+        }
     }
 
     /** A boss never leaves its fight: outside its boss room (a red gate's: its arena, RedArena; no room: more than
