@@ -1431,6 +1431,8 @@ def main():
                     kinds[kind] = kinds.get(kind, 0) + 1
                 print(f'{key:8} {name:22} {count:6} blocks, h {room.height:2}, markers {kinds}')
     list_rooms(rooms)
+    import gen_gate_variety
+    gen_gate_variety.write_shared(PALETTES)
     check_themes(written)
     print('gate rooms written:', len(PALETTES), 'themes x', len(rooms), 'templates ->', ROOT)
 

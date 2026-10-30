@@ -21,6 +21,9 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  *                              elite spawn marker 3 blocks around them (on the stand-in platform); the room trigger then
  *                              fills it on its next check, exactly as a built room would be
  *   /mdvl gate testroom boss   the same with a boss marker 3 blocks south and an exit marker 3 blocks north
+ *   /mdvl gate place <theme> <template>  places a room template (e.g. mdvlcraft:gate/shared/combat_small_101) with the
+ *                              theme's palette and a style, its corner at the caller's feet, and says if any placeholder
+ *                              block was left (for checking the shared rooms)
  *   /mdvl gate pools           lists pool and boss ids that aren't registered in this game
  *   /mdvl gate doors           says whether the caller's gate's boss room is sealed (SEALED / OPEN) and its state
  */
@@ -39,6 +42,10 @@ public final class GateSpawnCommand {
                 .then(Commands.literal("testroom")
                     .executes(c -> testRoom(c, false))
                     .then(Commands.literal("boss").executes(c -> testRoom(c, true))))
+                .then(Commands.literal("place")
+                    .then(Commands.argument("theme", com.mojang.brigadier.arguments.StringArgumentType.word())
+                        .then(Commands.argument("template", net.minecraft.commands.arguments.ResourceLocationArgument.id())
+                            .executes(GateSpawnCommand::place))))
                 .then(Commands.literal("pools").executes(GateSpawnCommand::pools))
                 .then(Commands.literal("doors").executes(GateSpawnCommand::doors))));
     }
@@ -82,6 +89,37 @@ public final class GateSpawnCommand {
         context.getSource().sendSuccess(() -> Component.literal("Gate " + instance.id + " " + instance.state + ": boss room "
             + GateCombat.bossRoom(instance) + " " + (sealed ? "SEALED" : "OPEN")), false);
         return sealed ? 1 : 0;
+    }
+
+    private static int place(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = context.getSource().getPlayerOrException();
+        GateTheme theme = GateTheme.byKey(com.mojang.brigadier.arguments.StringArgumentType.getString(context, "theme"));
+        net.minecraft.resources.ResourceLocation id = net.minecraft.commands.arguments.ResourceLocationArgument.getId(context, "template");
+        var found = player.serverLevel().getStructureManager().get(id);
+        if (theme == null || found.isEmpty()) {
+            context.getSource().sendFailure(Component.literal("Unknown theme or template"));
+            return 0;
+        }
+        Instance fake = new Instance(1000 + player.getRandom().nextInt(1000), player.level().dimension(), 0, 0, theme, GateRank.C);
+        var settings = new net.minecraft.world.level.levelgen.structure.templatesystem.StructurePlaceSettings().setIgnoreEntities(true)
+            .addProcessor(net.minecraft.world.level.levelgen.structure.templatesystem.BlockIgnoreProcessor.STRUCTURE_BLOCK)
+            .addProcessor(GatePalettes.processor(fake));
+        net.minecraft.core.BlockPos at = player.blockPosition();
+        found.get().placeInWorld(player.serverLevel(), at, at, settings, player.getRandom(), net.minecraft.world.level.block.Block.UPDATE_CLIENTS);
+        var box = found.get().getBoundingBox(settings, at);
+        GatePalettes.decorate(player.serverLevel(), fake, box);
+        int left = 0;
+        for (net.minecraft.core.BlockPos pos : net.minecraft.core.BlockPos.betweenClosed(box.minX(), box.minY(), box.minZ(), box.maxX(), box.maxY(), box.maxZ())) {
+            String name = String.valueOf(net.minecraftforge.registries.ForgeRegistries.BLOCKS.getKey(player.level().getBlockState(pos).getBlock()));
+            if (name.endsWith("_concrete") || name.endsWith("_glazed_terracotta") || name.endsWith("concrete_powder")) {
+                left++;
+            }
+        }
+        int placeholders = left;
+        GatePalettes.Style style = GatePalettes.style(fake);
+        context.getSource().sendSuccess(() -> Component.literal("Placed " + id + " as " + theme.key() + " (mood " + style.mood() + ", lights "
+            + style.lighting() + ", decor " + style.decor() + "); placeholders left: " + placeholders), true);
+        return 1;
     }
 
     private static int pools(CommandContext<CommandSourceStack> context) {

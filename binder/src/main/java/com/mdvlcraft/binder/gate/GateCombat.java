@@ -175,6 +175,7 @@ public final class GateCombat {
                     instance.triggeredRooms.add(room);
                     gates.setDirty();
                     spawnRoom(level, instance, room, present.size());
+                    GateFeatures.onRoomTriggered(level, instance, room, present.size());
                 }
             }
         }
@@ -193,6 +194,19 @@ public final class GateCombat {
                 case "spawn:melee", "spawn:ranged" -> normal.add(marker);
                 case "spawn:elite" -> made += spawnOne(level, instance, GateMobs.Kind.ELITE, marker, GateSpawner.ELITE) ? 1 : 0;
                 case "boss" -> made += spawnBoss(level, instance, marker);
+                case "spawn:champion" -> {
+                    EntityType<?> type = GateMobs.pick(instance.theme, instance.rank, GateMobs.Kind.ELITE, level.random);
+                    Mob champion = type == null ? null : GateSpawner.spawn(level, instance, type, marker.pos(), GateSpawner.ELITE, marker.room());
+                    if (champion != null) {
+                        GateFeatures.champion(champion);
+                        champion.getPersistentData().putBoolean("mdvlcraft_champion", true);
+                        made++;
+                    }
+                }
+                case "spawn:spider" -> {
+                    EntityType<?> type = level.random.nextBoolean() ? EntityType.CAVE_SPIDER : EntityType.SPIDER;
+                    made += GateSpawner.spawn(level, instance, type, marker.pos(), null, marker.room()) != null ? 1 : 0;
+                }
                 default -> {
                 }
             }

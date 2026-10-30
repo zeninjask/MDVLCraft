@@ -85,6 +85,8 @@ public final class GateRewards {
     /** Instances whose clear has been rewarded (all instances close on restart, so this needn't be saved). */
     private static final Set<Integer> REWARDED = new HashSet<>();
     private static final float LOOT_CHANCE = 0.6F;
+    /** Share of minor chests that are trapped (GateFeatures). */
+    private static final float TRAPPED_CHANCE = 0.15F;
 
     static {
         for (GateRank rank : GateRank.values()) {
@@ -211,17 +213,25 @@ public final class GateRewards {
     public static void placeLootChests(ServerLevel level, Instance instance) {
         for (Marker marker : instance.markers) {
             if (marker.kind().equals("loot") && level.random.nextFloat() < LOOT_CHANCE || marker.kind().equals("loot:vault")) {
-                float roll = level.random.nextFloat();
-                int down = roll < 0.1F ? 1 : roll < 0.7F ? 2 : 3;
-                GateRank below = GateRank.values()[Math.max(0, instance.rank.ordinal() - down)];
-                String kind = marker.kind().equals("loot:vault") ? "/vault" : "/chest";   // tools/gates/gen_gate_loot.py
-                ResourceLocation table = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/" + below.name().toLowerCase(Locale.ROOT) + kind);
-                level.setBlock(marker.pos(), Blocks.CHEST.defaultBlockState()
-                    .setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(level.random)), Block.UPDATE_CLIENTS);
-                if (level.getBlockEntity(marker.pos()) instanceof RandomizableContainerBlockEntity chest) {
-                    chest.setLootTable(table, level.random.nextLong());
+                lootChest(level, instance, marker.pos(), marker.kind().equals("loot:vault"));
+                if (level.random.nextFloat() < TRAPPED_CHANCE) {
+                    GateFeatures.trap(instance, marker.pos());   // a trapped chest: opening it springs an ambush
                 }
             }
+        }
+    }
+
+    /** A chest at `pos` filled from a lower rank's chest (or vault) table, as placeLootChests does. */
+    public static void lootChest(ServerLevel level, Instance instance, BlockPos pos, boolean vault) {
+        float roll = level.random.nextFloat();
+        int down = roll < 0.1F ? 1 : roll < 0.7F ? 2 : 3;
+        GateRank below = GateRank.values()[Math.max(0, instance.rank.ordinal() - down)];
+        String kind = vault ? "/vault" : "/chest";   // tools/gates/gen_gate_loot.py
+        ResourceLocation table = ResourceLocation.fromNamespaceAndPath("mdvlcraft", "gates/" + below.name().toLowerCase(Locale.ROOT) + kind);
+        level.setBlock(pos, Blocks.CHEST.defaultBlockState()
+            .setValue(ChestBlock.FACING, Direction.Plane.HORIZONTAL.getRandomDirection(level.random)), Block.UPDATE_CLIENTS);
+        if (level.getBlockEntity(pos) instanceof RandomizableContainerBlockEntity chest) {
+            chest.setLootTable(table, level.random.nextLong());
         }
     }
 

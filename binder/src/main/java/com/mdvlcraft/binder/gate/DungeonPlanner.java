@@ -32,9 +32,9 @@ public final class DungeonPlanner {
     /** Blocks between one dungeon level and the next: a stair or ladder corridor's doors are this far apart. */
     public static final int RISE = 8;
     /** Levels stay within this many of the entrance's (both ways). */
-    private static final int MAX_LEVEL = 2;
+    private static final int MAX_LEVEL = 3;
     /** A straight main-path corridor's chance to climb or drop a level (stairs or a ladder shaft). */
-    private static final int VERTICAL_PERCENT = 35;
+    private static final int VERTICAL_PERCENT = 40;
 
     /** One placed room: its template name (kind_n), slot, rotation, the doors it connects through (world sides), and the
      * height of its bottom above the entrance's (a level times RISE). */
@@ -140,7 +140,7 @@ public final class DungeonPlanner {
                 if (here.corridor() && here.doors.size() == 2 && here.doors.contains(here.entry.getOpposite())
                     && random.nextInt(100) < VERTICAL_PERCENT) {
                     // a straight corridor climbs or drops a level, inside the level bounds
-                    int climb = random.nextBoolean() ? 1 : -1;
+                    int climb = random.nextInt(4) == 0 ? 1 : -1;   // mostly down: the dungeon descends floor by floor
                     if (Math.abs(here.level + climb) > MAX_LEVEL) {
                         climb = -climb;
                     }
@@ -165,6 +165,21 @@ public final class DungeonPlanner {
         if (random.nextInt(10) < 4) {
             branch(random, slots, path, "library");
         }
+        // the variety set's side rooms (tools/gates/gen_gate_variety.py): a shrine, a champion's room, a secret stash,
+        // and now and then a ghost merchant
+        if (random.nextInt(100) < 45) {
+            branch(random, slots, path, "shrine");
+        }
+        if (random.nextInt(100) < 35) {
+            branch(random, slots, path, "champion");
+        }
+        if (random.nextInt(100) < 35) {
+            branch(random, slots, path, "secret");
+        }
+        if (random.nextInt(100) < 12) {
+            branch(random, slots, path, "merchant");
+        }
+        loops(random, path);
         List<Piece> pieces = new ArrayList<>();
         for (Node node : path) {
             pieces.add(piece(random, node, bossKind, variants));
@@ -173,6 +188,27 @@ public final class DungeonPlanner {
             }
         }
         return pieces;
+    }
+
+    /** Loops and alternate routes: two combat rooms side by side on one level that the path doesn't join get a door
+     * between them (30% of such pairs), so there is sometimes more than one way through. */
+    private static void loops(Random random, List<Node> path) {
+        Map<Long, Node> rooms = new HashMap<>();
+        for (Node node : path) {
+            if (node.kind.startsWith("combat")) {
+                rooms.put(key(node.gx, node.gz), node);
+            }
+        }
+        for (Node node : rooms.values()) {
+            for (Direction d : HORIZONTAL) {
+                Node other = rooms.get(key(node.gx + d.getStepX(), node.gz + d.getStepZ()));
+                if (other != null && other.level == node.level && !node.doors.contains(d) && node.hashCode() < other.hashCode()
+                    && random.nextInt(100) < 30) {
+                    node.doors.add(d);
+                    other.doors.add(d.getOpposite());
+                }
+            }
+        }
     }
 
     /** The side the path leaves `here` by: on along `heading`; a corridor turns now and then; anything turns when boxed in.

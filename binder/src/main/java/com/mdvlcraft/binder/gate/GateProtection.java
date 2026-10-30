@@ -26,7 +26,8 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
  * Inside the gate dimensions nothing is built or broken and nobody leaves the way they shouldn't (plan section 3.4):
- * players can't break (except mana crystal veins, GateRewards) or place blocks or use buckets, explosions and mobs (boss
+ * players can't break (except mana crystal veins, GateRewards; graves; and the blocks rooms were built to have broken)
+ * or place blocks or use buckets, explosions and mobs (boss
  * attacks, griefing) break nothing, ender pearls, chorus fruit and endermen can't teleport out of their cell, any other
  * jump of a player through a wall (spells, abilities) is undone, a red gate can't be left until its boss dies, and a player who is outside their own
  * cell (or has no live gate at all, e.g. logged in after it closed) is put back at the entry or sent home. Creative and
@@ -49,9 +50,25 @@ public final class GateProtection {
 
     @SubscribeEvent
     public static void onBreak(BlockEvent.BreakEvent event) {
-        if (guarded(event.getPlayer()) && !GateRewards.isVein(event.getState())) {
+        if (guarded(event.getPlayer()) && !GateRewards.isVein(event.getState()) && !grave(event.getState())
+            && !breakable(event.getPlayer(), event.getPos())) {
             event.setCanceled(true);
         }
+    }
+
+    /** A player's grave (the GraveStone mod) can always be broken, so a death inside a gate isn't the loss of its loot. */
+    private static boolean grave(net.minecraft.world.level.block.state.BlockState state) {
+        net.minecraft.resources.ResourceLocation id = net.minecraftforge.registries.ForgeRegistries.BLOCKS.getKey(state.getBlock());
+        return id != null && id.getNamespace().equals("gravestone");
+    }
+
+    /** A block the room was built to have broken (rubble, cracked walls, a secret bookshelf: GateBuilder's "breakable"). */
+    private static boolean breakable(Player player, net.minecraft.core.BlockPos pos) {
+        if (player.getServer() == null) {
+            return false;
+        }
+        GateInstances.Instance instance = GateInstances.get(player.getServer()).at(player.level().dimension(), pos.getX(), pos.getZ());
+        return instance != null && instance.markers.stream().anyMatch(m -> m.kind().equals("breakable") && m.pos().equals(pos));
     }
 
     @SubscribeEvent

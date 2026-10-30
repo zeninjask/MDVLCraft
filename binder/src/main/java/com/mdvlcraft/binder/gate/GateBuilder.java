@@ -91,6 +91,7 @@ public final class GateBuilder {
             GateRewards.placeCrystals(level, instance);
             GateRewards.placeLootChests(level, instance);
             GateDecor.place(level, instance);
+            GateFeatures.onBuilt(level, instance);
             instance.built = true;
             GateInstances.get(level.getServer()).setDirty();
             LOGGER.info("Gate {} built: {} rooms, {} markers", instance.id, instance.rooms.size(), instance.markers.size());
@@ -186,7 +187,7 @@ public final class GateBuilder {
         // rotating about the template's corner moves it; this puts the rotated room back on its slot
         BlockPos origin = StructureTemplate.getZeroPositionWithTransform(slot, Mirror.NONE, piece.rotation(), SLOT, SLOT);
         StructurePlaceSettings settings = new StructurePlaceSettings().setRotation(piece.rotation()).setIgnoreEntities(true)
-            .addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK);
+            .addProcessor(BlockIgnoreProcessor.STRUCTURE_BLOCK).addProcessor(GatePalettes.processor(instance));
         template.placeInWorld(level, origin, origin, settings, level.random, Block.UPDATE_CLIENTS);
         BoundingBox box = template.getBoundingBox(settings, origin);
         int room = instance.rooms.size();
@@ -208,6 +209,13 @@ public final class GateBuilder {
             }
             instance.markers.add(new Marker(kind, info.pos(), room));
         }
+        // blocks players may break (the shared rooms' "crack:" placeholders): recorded where they landed
+        for (Block block : GatePalettes.breakableSentinels()) {
+            for (StructureTemplate.StructureBlockInfo info : template.filterBlocks(origin, settings, block)) {
+                instance.markers.add(new Marker("breakable", info.pos(), room));
+            }
+        }
+        GatePalettes.decorate(level, instance, box);
         GateInstances.get(level.getServer()).setDirty();
     }
 
