@@ -76,10 +76,9 @@ textarea { width: 100%; box-sizing: border-box; min-height: 64px; resize: vertic
 <div class="wrap">
   <header>
     <h1>Playful Cloud <span>Moveset</span></h1>
-    <p>Existing Epic Fight animations, bodies untouched, with Playful Cloud placed in the hands: each fist grips an end
-      section at its middle and the middle section hangs on its chains, always in front of the body. Idle, walk, run, jump and
-      dodge use the reference pose (right section up and across, left section down). Left pane is slow motion, right pane
-      is game speed. Pick one variant per animation, or ask for a remake with a note.</p>
+    <p>Existing Epic Fight animations, bodies untouched, with Playful Cloud placed in the hands the way Maki and Toji
+      hold it: each section passes across the fist, upright and leaning a little forward, chained at its lower end, with
+      the middle section hanging in front. Left pane is slow motion, right pane is game speed. Your picks are marked.</p>
   </header>
   <nav class="tabs" id="tabs" aria-label="Animations"></nav>
   <div class="main">
@@ -171,7 +170,6 @@ window.INFO = /*INFO*/;
     for (const p of panes) {
       p.t = 0; p.seq = 0; p.base.set(0, 0, 0); p.holder.position.set(0, 0, 0); p.staff.init = false; p.camAt = null;
       p.list = seqList().map(n => ({ name: n, clip: clipObj(n) }));
-      p.staff.calibrate(p.rig, p.list.map(x => x.clip));
       p.hold = 0;
     }
   }

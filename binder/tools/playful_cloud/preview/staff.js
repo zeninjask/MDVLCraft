@@ -4,50 +4,46 @@
 // The same rules go into the in-game renderer.
 (function () {
   const SEC = 0.76, HALF = SEC / 2, CHAIN = 0.18, MAX_CHAIN = 0.3, FRONT = 0.3, EASE = 0.06;
+  const LEAN = 0.35, LOW = 0.32, BODY = 0.3, SIDE = 0.42;   // forward lean of the held sections; grip distance from their lower (chained) end
   const V = THREE.Vector3;
-  function Staff() { this.init = false; this.ends = [[new V(), new V()], [new V(), new V()], [new V(), new V()]]; this.p = [new V(), new V()]; this.sign = { R: 1, L: 1 }; }
+  function Staff() { this.init = false; this.ends = [[new V(), new V()], [new V(), new V()], [new V(), new V()]]; this.p = [new V(), new V()]; }
   function col(m, i) { const e = m.elements; return new V(e[i * 4], e[i * 4 + 1], e[i * 4 + 2]); }
   function pos(m) { const e = m.elements; return new V(e[12], e[13], e[14]); }
   // the body's frame: forward (horizontal), right, up
   function body(w) {
-    const f = col(w.Root, 2).negate(); f.z = 0; if (f.lengthSq() < 1e-6) f.set(0, 1, 0); f.normalize();
+    // the chest's facing: animations often turn the upper body away from the hips
+    const f = col(w.Chest, 2).negate(); f.z = 0; if (f.lengthSq() < 1e-6) f.set(0, 1, 0); f.normalize();
     const up = new V(0, 0, 1), r = new V().crossVectors(f, up);
-    return { f, r, up, o: pos(w.Root) };
+    const o = pos(w.Root), top = pos(w.Head); top.z += 0.3;
+    return { f, r, up, o, low: new V(o.x, o.y, 0.05), top };
   }
-  function bvec(b, x, y, z) { return b.r.clone().multiplyScalar(x).addScaledVector(b.up, y).addScaledVector(b.f, z).normalize(); }
-  // which end of each blade-following section is chained to the middle: the one more often in front of the body
-  Staff.prototype.calibrate = function (rig, clips) {
-    let sR = 0, sL = 0;
-    for (const c of clips) for (let i = 0; i <= 12; i++) {
-      rig.poseLocal(c.sample(c.d.len * i / 12)); const w = rig.lastWorld, b = body(w);
-      sR += col(w.Tool_R, 2).negate().dot(b.f); sL += col(w.Tool_L, 2).negate().dot(b.f);
-    }
-    this.sign = { R: sR >= 0 ? 1 : -1, L: sL >= 0 ? 1 : -1 };
-  };
-  // held sections for this frame: [chainEnd, freeEnd] per hand
-  Staff.prototype.held = function (w, cfg) {
+  // the body as a column from the feet to the top of the head: a point is clear if it's at least BODY in front of
+  // the column, or out to the side past it
+  function intrusion(b, x) {
+    const ax = b.top.clone().sub(b.low), t = Math.max(0, Math.min(1, x.clone().sub(b.low).dot(ax) / ax.lengthSq()));
+    const d = x.clone().sub(b.low.clone().addScaledVector(ax, t));
+    if (Math.abs(d.dot(b.r)) > SIDE) return 0;
+    return Math.max(0, BODY - d.dot(b.f));
+  }
+  // held sections for this frame: [chainEnd, freeEnd] per hand. Gripped like the anime/manga: the section passes
+  // across the fist (square to the forearm, never out past the fingers), as upright as the forearm allows and leaning
+  // a little forward; held a bit below its middle, chained at its lower end.
+  Staff.prototype.held = function (w) {
     const b = body(w), out = { b };
-    const zR = col(w.Tool_R, 2).negate(), zL = col(w.Tool_L, 2).negate();
+    const want = b.up.clone().addScaledVector(b.f, LEAN);
     for (const s of ['R', 'L']) {
-      const p = pos(w['Tool_' + s]);
-      if (cfg.mode === 'toji') {
-        // reference pose: right section up and across, left section down; a little of the hand's turn shows through
-        const base = s === 'R' ? bvec(b, -0.35, 0.85, 0.3) : bvec(b, 0.1, -0.9, 0.35);
-        const a = base.multiplyScalar(0.75).addScaledVector(s === 'R' ? zR : zL, 0.25).normalize();
-        const up = a.z >= 0 ? a : a.clone().negate();
-        // right: chained at its lower end; left: at its upper end
-        out[s] = s === 'R' ? [p.clone().addScaledVector(up, -HALF), p.clone().addScaledVector(up, HALF)]
-          : [p.clone().addScaledVector(up, HALF), p.clone().addScaledVector(up, -HALF)];
-        continue;
-      }
-      const a = cfg.mode === 'paired' ? zR : (s === 'R' ? zR : zL);
-      const sg = (cfg.flip && cfg.flip[s] ? -1 : 1) * (cfg.mode === 'paired' ? this.sign.R : this.sign[s]);
-      out[s] = [p.clone().addScaledVector(a, sg * HALF), p.clone().addScaledVector(a, -sg * HALF)];
+      const p = pos(w['Tool_' + s]), fa = p.clone().sub(pos(w['Hand_' + s])).normalize();
+      const a = want.clone().addScaledVector(fa, -want.dot(fa));
+      const l = a.length();
+      // forearm pointing straight up or down: fall back on forward, still square to the forearm
+      if (l < 0.5) a.addScaledVector(b.f.clone().addScaledVector(fa, -b.f.dot(fa)), (0.5 - l) * 2);
+      a.normalize();
+      out[s] = [p.clone().addScaledVector(a, -LOW), p.clone().addScaledVector(a, SEC - LOW)];
     }
     return out;
   };
   Staff.prototype.step = function (w, dt, cfg) {
-    const h = this.held(w, cfg), b = h.b, P = h.R[0], Q = h.L[0];
+    const h = this.held(w), b = h.b, P = h.R[0], Q = h.L[0];
     this.ends[0] = h.R; this.ends[2] = h.L;
     // settled hang of the middle section between the chain ends
     const D = P.distanceTo(Q), span = SEC + 2 * CHAIN;
@@ -75,6 +71,10 @@
       const c2 = m0.clone().add(m1).multiplyScalar(0.5); let u = m1.clone().sub(m0); if (u.lengthSq() < 1e-8) u = b.r.clone(); u.normalize();
       m0 = c2.clone().addScaledVector(u, -want / 2); m1 = c2.clone().addScaledVector(u, want / 2);
     }
+    // never inside or behind the body: slide the whole rod forward until every point along it is clear
+    let clear = 0;
+    for (let i = 0; i <= 6; i++) clear = Math.max(clear, intrusion(b, m0.clone().lerp(m1, i / 6)));
+    if (clear > 0) { m0.addScaledVector(b.f, clear); m1.addScaledVector(b.f, clear); }
     this.ends[1] = [m0, m1];
   };
   Staff.prototype.build = function (group) {

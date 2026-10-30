@@ -1,11 +1,8 @@
 """Playful Cloud variants: existing Epic Fight animations (unchanged bodies) with the staff placed in the hands.
 
-Each variant lists its source clips as animation ids (mod:path, as the addons register them) and how the staff sits:
-  toji    the reference pose: right section points up and across, left section points down, both gripped in the
-          middle; the middle section hangs in front between the right section's lower end and the left one's upper end
-  blade   each hand's section follows the hand like a sword blade (the Tool joint's -Z), gripped in the middle;
-          whichever end is more often in front is the one chained to the middle section
-  paired  the left section copies the right one's direction (for animations made for one two-handed weapon)
+Each variant lists its source clips as animation ids (mod:path, as the addons register them). The staff is placed
+the same way for all of them (preview/staff.js): each section across the fist, upright and leaning forward, chained at
+its lower end. `mode` is left from earlier placement rules and no longer used.
 """
 
 V = {}

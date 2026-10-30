@@ -12,7 +12,6 @@ TITLES = {"idle": ("Idle", "Standing with the weapon out."), "walk": ("Walk", "W
           "jump": ("Jump", "Jumping."), "dodge": ("Dodge", "Dodge set: every direction it has plays in turn."),
           "guard": ("Guard", "Block hold, then the hit reaction."), "parry": ("Parry", "The two parries that alternate."),
           "combo": ("5-hit combo", "Basic attack chain, all five hits in a row."), "skill": ("Skill", "Weapon art.")}
-MODES = {"toji": "Reference pose", "blade": "Sections follow each hand", "paired": "Both sections follow the right hand"}
 
 
 def info():
@@ -20,7 +19,7 @@ def info():
     for g, vs in V.items():
         groups[g] = {"title": TITLES[g][0], "note": TITLES[g][1], "variants": {
             k: {"title": v["title"], "clips": v["clips"], "mode": v["mode"],
-                "desc": MODES[v["mode"]] + ". From " + ", ".join(sorted({c.split(":")[0] for c in v["clips"]}))
+                "desc": "From " + ", ".join(sorted({c.split(":")[0] for c in v["clips"]}))
                 + ": " + v["clips"][0].split("/")[-1] + (" ..." if len(v["clips"]) > 1 else "")}
             for k, v in vs.items()}}
     return {"order": list(TITLES), "groups": groups}
