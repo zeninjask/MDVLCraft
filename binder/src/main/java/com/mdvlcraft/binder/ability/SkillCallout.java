@@ -81,12 +81,22 @@ public final class SkillCallout {
         long now = caster.level().getGameTime();
         Long last = LAST.put(caster.getUUID(), now);
         if (last == null || now - last >= GAP_TICKS || now < last) {
-            SkillCalloutPacket packet = new SkillCalloutPacket(caster.getId(), name, colour);
-            if (caster instanceof ServerPlayer player) {
-                BinderNetwork.sendToTrackingAndSelf(player, packet);
-            } else {
-                BinderNetwork.sendToTracking(caster, packet);
-            }
+            send(caster, name, colour);
+        }
+    }
+
+    /** A callout that shows even right after another one (a Black Flash landing just after its Focus was called out). */
+    public static void announceNow(Entity caster, Component name, int colour) {
+        LAST.put(caster.getUUID(), caster.level().getGameTime());
+        send(caster, name, colour);
+    }
+
+    private static void send(Entity caster, Component name, int colour) {
+        SkillCalloutPacket packet = new SkillCalloutPacket(caster.getId(), name, colour);
+        if (caster instanceof ServerPlayer player) {
+            BinderNetwork.sendToTrackingAndSelf(player, packet);
+        } else {
+            BinderNetwork.sendToTracking(caster, packet);
         }
     }
 

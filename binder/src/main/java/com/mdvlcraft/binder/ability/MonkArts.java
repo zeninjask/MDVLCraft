@@ -3,10 +3,8 @@ package com.mdvlcraft.binder.ability;
 import com.mdvlcraft.binder.attribute.BinderAttributes;
 import com.mdvlcraft.binder.compat.wom.WomBlackout;
 import com.mdvlcraft.binder.monk.Fists;
-import cursedfate.CursedfateMod;
 import cursedfate.init.CursedfateModMobEffects;
 import cursedfate.init.CursedfateModParticleTypes;
-import cursedfate.network.CursedfateModVariables;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +48,8 @@ import yesman.epicfight.world.capabilities.entitypatch.player.ServerPlayerPatch;
 public final class MonkArts {
     static final int FOCUS_TICKS = 200;
     static final float BLACK_FLASH_MULTIPLIER = 2.5F;
+    /** The Black Flash callout's colour: the red of its sparks. */
+    private static final int BLACK_FLASH_COLOUR = 0xC4142A;
     static final int KNOCKOUT_WINDOW_TICKS = 12;
     static final float KNOCKOUT_MULTIPLIER = 1.5F;
     private static final double REACH = 4.0;
@@ -214,7 +214,7 @@ public final class MonkArts {
         blackFlashEffects(player, target);
     }
 
-    /** What a Black Flash looks and sounds like (also the Black Flash trait's crits): sparks, Photon effects, screen flash, "BLACK FLASH". */
+    /** What a Black Flash looks and sounds like (also the Black Flash trait's crits): sparks, Photon effects and a "Black Flash" callout. */
     public static void blackFlashEffects(ServerPlayer player, LivingEntity target) {
         play(target, sound("cursedfate", "blackflash", SoundEvents.GENERIC_EXPLODE), 1.0F, 1.0F);
         play(target, SoundEvents.METAL_BREAK, 1.3F, 0.8F);
@@ -240,20 +240,7 @@ public final class MonkArts {
             }
         }
 
-        screenFlash(player, 1);
-        actionBar(player, Component.translatable("ability.mdvlcraft.focus.black_flash").withStyle(ChatFormatting.DARK_RED, ChatFormatting.BOLD));
-    }
-
-    /** Cursed Fate's three black flash screen frames, one a tick. */
-    private static void screenFlash(ServerPlayer player, int frame) {
-        player.getCapability(CursedfateModVariables.PLAYER_VARIABLES_CAPABILITY).ifPresent(variables -> {
-            variables.BlackFlashBool = frame <= 3;
-            variables.BlackFlashScreenNum = frame;
-            variables.syncPlayerVariables(player);
-        });
-        if (frame <= 3) {
-            CursedfateMod.queueServerWork(1, () -> screenFlash(player, frame + 1));
-        }
+        SkillCallout.announceNow(player, Component.translatable("ability.mdvlcraft.focus.black_flash"), BLACK_FLASH_COLOUR);
     }
 
     @SubscribeEvent

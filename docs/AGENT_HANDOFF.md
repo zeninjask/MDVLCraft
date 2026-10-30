@@ -6,6 +6,51 @@ Copy everything below the line into a new Claude Code session that has the `so1g
 
 You're joining work on **MDVLCraft**, a private Minecraft modpack, and on its own Forge mod, the **MDVLCraft Binder**. Read this whole brief before you change anything.
 
+## 2.1.87 – 2.1.90 handoff (30 Oct 2026)
+
+**Released to main:** 2.1.87, 2.1.88, 2.1.89, 2.1.90. Work branch `gate`, pushed to `claude/clever-babbage-t08qqj`.
+
+Done:
+- **Performance (2.1.87–2.1.88).**
+  - Packet fixes: SL-Library throttle, Caelus removeModifier, emptied origins-plus-plus loops.
+  - Textures: particle sprites over 384 px scaled down; Falling Leaves atlas only its leaf sprites (`mixin/FallingLeavesAtlasMixin`).
+  - Epic Fight JSON hash made lazily (`mixin/epicfight/JsonAssetHashMixin`).
+  - `tools/strip_unused_origins.py`: stand-ins for unreachable origins-plus-plus and Medieval Origins powers. Rerun it on
+    a test server with the release's mods whenever origin mods, layers or origins change.
+  - Batched GUI fills (PartyPanels, DqGui). Cursed Fate shared fallback PlayerVariables (`mixin/cursedfate/FallbackVarsMixin`).
+  - ModernFix dynamic_resources on, Render Scale 0.7 applied once (`client/DefaultKeys.renderScale`), client GC pause 50 ms.
+  - C2MEF benchmarked: 26% slower here, not used. Dynamic FPS must never be added (user rule).
+  - Clumps and AI Improvements are already absorbed into the binder; Dynamic Crosshair removed (2.1.89).
+- **Traits.**
+  - Spin tokens x4, stack 64, Spin Again button.
+  - 72 new traits picked by the user (`traits/TraitPicks.java`, enum entries after BLACK_FLASH). Wind Walker was
+    removed at the user's request. The picker page: https://claude.ai/artifact/JkcxwvKKrT5gG7TPuuEKje (db `picks/choice`).
+  - The skill-tree PDF has a Traits table by rarity (`skill_tree_doc.trait_rows`).
+  - Phoenix and Bloodlust names fixed: their messages now use `.rise` and `.hunger` keys.
+- **Black Flash (2.1.90).** The trait and Focus share `MonkArts.blackFlashEffects`: particles, Photon fx and sound.
+  - The Cursed Fate screen flash is removed.
+  - The red action-bar text is replaced by a chant callout ("Black Flash", `SkillCallout.announceNow`, which skips the
+    half-second gap).
+  - **Not tested in game.**
+
+Still to do (asked by the user, not started or unfinished):
+1. **Closed Malevolent Shrine screen effect.** When a closed shrine opens, every nearby player (party or not) should get
+   the Sukuna takeover screen. Plan:
+   - Hook `EntityJoinLevelEvent` for `cursedfate.entity.ShrineClosedEntity`.
+   - For players within ~48 blocks, set Cursed Fate `PlayerVariables.SukunaTakeOverAnimBool=true` and
+     `SukunaTakeOverAnim=1`, then 2, 3 and 4 at two-tick steps (`CursedfateMod.queueServerWork`), then bool false and 0,
+     calling `syncPlayerVariables` each step. This is the sequence `VesselAbiltiyProcedure` uses.
+2. **Shadow Arsenal across respecs.** The code already keeps it: `mdvlcraft:arsenal` and `mdvlcraft:arsenal_wheel` live in
+   persisted data and nothing removes them. The planned safety step was to call `ShadowArsenal.sync(player)` at the end
+   of `Respec.respec`, so the client sees the arsenal straight away. Test: absorb a weapon as Samurai, respec away, then
+   back, or keep Samurai and change the other archetype.
+3. **Test everything in game.**
+   - Black Flash callout with no screen flash.
+   - The 72 traits that were only smoke-tested: dodge, guard, spells, summons, fishing, trades, armour vows.
+   - In-game testing so far: every trait was hit and took a hit with no errors; damage multipliers checked; Haunted in a
+     gate; Iron Skin, Stout Heart, Lucky Charm, Reflex Parry.
+
+
 ## Weapon arts, armour flight, cooldown reduction (29 Oct 2026, after 2.1.79, not released)
 
 - **Weapon arts** (`epicskill/WeaponArts`, `WeaponArtSkill`, `mixin/epicfight/WeaponArtInnateMixin`): 33 arts for about
