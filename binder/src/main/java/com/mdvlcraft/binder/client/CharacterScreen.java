@@ -63,7 +63,6 @@ import net.puffish.skillsmod.client.SkillsClientMod;
 import net.puffish.skillsmod.client.data.ClientCategoryData;
 import yesman.epicfight.client.world.capabilites.entitypatch.player.LocalPlayerPatch;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
-import yesman.epicfight.world.entity.ai.attribute.EpicFightAttributes;
 import top.theillusivec4.curios.api.CuriosApi;
 
 public class CharacterScreen extends Screen {
@@ -198,7 +197,6 @@ public class CharacterScreen extends Screen {
             y = this.attr(g, player, left, colW, y, "attributeslib:life_steal", CharacterScreen::percent);
             y = this.attr(g, player, left, colW, y, "irons_spellbooks:spell_power", CharacterScreen::percent);
             y = this.attr(g, player, left, colW, y, "irons_spellbooks:cooldown_reduction", v -> signedPercent(v - 1.0));
-            y = this.attr(g, player, left, colW, y, "irons_spellbooks:mana_regen", CharacterScreen::percent);
             this.attr(g, player, left, colW, y, "minecraft:generic.movement_speed", v -> percent(v / 0.1));
             int var38 = 46;
             var38 = this.heading(g, mid, var38, "screen.mdvlcraft.character.base_stats");
@@ -218,6 +216,7 @@ public class CharacterScreen extends Screen {
                 Component.translatable("screen.mdvlcraft.character.mana"),
                 ClientMagicData.getPlayerMana() + " / " + fixed(player.getAttributeValue((Attribute)AttributeRegistry.MAX_MANA.get()), 0)
             );
+            var38 = this.attr(g, player, mid, colW, var38, "irons_spellbooks:mana_regen", CharacterScreen::percent);
             LocalPlayerPatch patch = EpicFightCapabilities.getLocalPlayerPatch(player);
             var38 = this.row(
                 g,
@@ -228,14 +227,6 @@ public class CharacterScreen extends Screen {
                 patch == null ? "–" : fixed(patch.getStamina(), 0) + " / " + fixed(patch.getMaxStamina(), 0)
             );
             var38 += 6;
-            var38 = this.row(
-                g,
-                mid,
-                colW,
-                var38,
-                Component.translatable("screen.mdvlcraft.character.poise"),
-                fixed(player.getAttributeValue((Attribute)EpicFightAttributes.STUN_ARMOR.get()), 1)
-            );
             var38 = this.row(g, mid, colW, var38, Component.translatable("screen.mdvlcraft.character.luck"), fixed(player.getAttributeValue(Attributes.LUCK), 1));
             this.row(g, mid, colW, var38, Component.translatable("screen.mdvlcraft.character.experience_gain"), signedPercent(experienceBonus(player)));
             g.blit(ASTROLABE, mid + 12, 128, 100, 100, 0.0F, 0.0F, 132, 132, 132, 132);
@@ -377,9 +368,9 @@ public class CharacterScreen extends Screen {
         return lines;
     }
 
-    /** The Traits row: how many the player has (the tooltip names them). */
+    /** The Trait row: the player's trait (a player holds one; the tooltip says what it does). */
     private static String traitValue(List<Trait> traits) {
-        return traits.isEmpty() ? Component.translatable("screen.mdvlcraft.character.trait.none").getString() : String.valueOf(traits.size());
+        return Component.translatable(traits.isEmpty() ? "screen.mdvlcraft.character.trait.none" : traits.get(0).nameKey()).getString();
     }
 
     /** Each trait's name (in its tier's colour) and what it does. */

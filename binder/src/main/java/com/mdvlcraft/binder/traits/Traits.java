@@ -24,12 +24,12 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 
 /**
- * The traits each player has: up to MAX_SLOTS, kept in the player's persisted data (they survive death), shown on the
- * Status page (client/CharacterScreen, from SyncTraitsPacket). Nothing hands them out yet; TraitCommands sets them.
+ * The traits each player has: one (MAX_SLOTS), kept in the player's persisted data (they survive death), shown on the
+ * Status page (client/CharacterScreen, from SyncTraitsPacket). The Trait Token (TraitSlots) and TraitCommands set them.
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class Traits {
-    public static final int MAX_SLOTS = 2;
+    public static final int MAX_SLOTS = 1;
     static final String KEY = "mdvlcraft:traits";
     static final String SLOTS = "mdvlcraft:trait_slots";
     private static final Map<UUID, Set<Trait>> CACHE = new HashMap<>();
@@ -67,7 +67,7 @@ public final class Traits {
     public static List<Trait> get(Player player) {
         List<Trait> traits = new ArrayList<>();
         ListTag list = data(player).getList(KEY, Tag.TAG_STRING);
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i < Math.min(MAX_SLOTS, list.size()); i++) {   // traits stored in a removed second slot don't count
             Trait trait = Trait.byId(list.getString(i));
             if (trait != null) {
                 traits.add(trait);

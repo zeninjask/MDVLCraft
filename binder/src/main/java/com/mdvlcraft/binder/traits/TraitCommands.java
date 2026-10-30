@@ -19,7 +19,7 @@ import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
  * Traits can't be obtained in play yet. For testing (ops):
  *   /mdvl trait set <player> <slot> <trait>   puts a trait in a slot (opening the slot if needed)
  *   /mdvl trait clear <player>                empties every slot
- *   /mdvl trait slots <player> <1-2>          how many slots the player has
+ *   /mdvl trait slots <player> <1>          how many slots the player has
  */
 @EventBusSubscriber(modid = "mdvlcraft")
 public final class TraitCommands {

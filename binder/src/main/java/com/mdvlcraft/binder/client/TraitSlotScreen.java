@@ -106,8 +106,8 @@ public class TraitSlotScreen extends Screen {
             Component label;
             if (slot >= 0) {
                 Trait there = Trait.byId(this.slots.get(slot));
-                Component name = there == null ? Component.translatable("screen.mdvlcraft.character.trait.none") : Component.translatable(there.nameKey());
-                label = Component.translatable("screen.mdvlcraft.trait_slots.slot", slot + 1, name);
+                label = there == null ? Component.translatable("screen.mdvlcraft.trait_slots.take")
+                    : Component.translatable("screen.mdvlcraft.trait_slots.replace", Component.translatable(there.nameKey()));
                 if (this.font.width(label) > bw - 8) {
                     label = Component.literal(this.font.plainSubstrByWidth(label.getString(), bw - 8 - this.font.width("..")) + "..");
                 }
@@ -282,8 +282,8 @@ public class TraitSlotScreen extends Screen {
         Component tier = Component.translatable("trait.mdvlcraft.tier." + this.trait.tier.name().toLowerCase(Locale.ROOT));
         g.drawCenteredString(this.font, tier, left + W / 2, y + 11, DqGui.MUTED);
         List<FormattedCharSequence> lines = this.font.split(Component.translatable(this.trait.descKey()), W - 28);
-        for (int i = 0; i < Math.min(3, lines.size()); i++) {
-            g.drawCenteredString(this.font, lines.get(i), left + W / 2, y + 25 + i * 10, DqGui.TEXT);
+        for (int i = 0; i < Math.min(4, lines.size()); i++) {
+            g.drawCenteredString(this.font, lines.get(i), left + W / 2, y + 25 + i * 9, DqGui.TEXT);
         }
     }
 }

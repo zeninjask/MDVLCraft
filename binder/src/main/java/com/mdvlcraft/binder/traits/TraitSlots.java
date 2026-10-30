@@ -30,7 +30,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 /**
- * The trait slot machine. Using a Trait Token (no recipe, loot or trade: survival players can't get one yet) rolls a
+ * The trait slot machine. Using a Trait Token (crafted from netherite scrap above an amethyst shard) rolls a
  * trait and shows it on four reels of iron, diamond and netherite (client/TraitSlotScreen); the player then puts it in a
  * slot or throws it away (network/TraitChoicePacket).
  *
@@ -176,7 +176,7 @@ public final class TraitSlots {
         OFFERS.remove(event.getEntity().getUUID());
     }
 
-    /** The Trait Token: using it spins the reels. Not obtainable in survival yet (unobtainable_items.txt hides it from JEI). */
+    /** The Trait Token: using it spins the reels. Crafted from netherite scrap above an amethyst shard (data/mdvlcraft/recipes/trait_token.json). */
     public static class TraitTokenItem extends Item {
         public TraitTokenItem() {
             super(new Item.Properties().rarity(Rarity.EPIC).stacksTo(16));
